@@ -504,6 +504,68 @@
           "description": "* Other essential workers"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Washington",
+      "fips": "53",
+      "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:20:38.277Z",
+          "description": "* High-risk workers in health care settings\n* High-risk first responders \n* Residents and staff of long-term care facilities",
+          "phase": "1A",
+          "tier": "1"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:20:38.615Z",
+          "phase": "1A",
+          "tier": "2",
+          "description": "* All other workers at risk in health care settings"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:20:39.031Z",
+          "phase": "1B",
+          "tier": "1",
+          "description": "* All people 65 years and older\n* People 50 years and older in multigenerational households"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:20:40.719Z",
+          "phase": "1B",
+          "tier": "2",
+          "description": "* High-risk critical workers 50 years and older who work in certain congregate settings"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:20:40.953Z",
+          "phase": "1B",
+          "tier": "3",
+          "description": "* People 16 years and older with 2 or more co-morbidities or underlying conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:20:41.312Z",
+          "phase": "1B",
+          "tier": "4",
+          "description": "* High risk critical workers under age 50 in certain congregate settings\n* People in congregate living settings"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:20:41.616Z",
+          "phase": "2",
+          "description": "* Critical workers in other settings who are in industries essential to the functioning of society and are at risk of exposure\n* People 16 years and older with 1 comorbidity or underlying condition\n* People with disabilities that prevent them from adopting protective measures"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:20:41.949Z",
+          "phase": "3",
+          "description": "* Other workers in industries and occupations essential to the functioning of society and at increased risk of exposure\n* Young adults/children under 16 years (if vaccine is authorized for those under 16 years)"
+        }
+      ]
     }
   ]
 }
