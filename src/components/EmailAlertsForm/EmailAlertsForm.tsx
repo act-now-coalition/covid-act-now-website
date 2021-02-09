@@ -218,6 +218,9 @@ const EmailAlertsForm: React.FC<{
               placeholder={emailInputLabel}
               type="email"
               name="cm-wurhhh-wurhhh"
+              required
+              autoComplete="email"
+              aria-invalid={!isValidEmail(email)}
             />
             <StyledButton
               onClick={() => subscribeToAlerts()}
