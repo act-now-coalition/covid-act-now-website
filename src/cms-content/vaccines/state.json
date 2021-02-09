@@ -75,7 +75,7 @@
     {
       "hidden": false,
       "stateCode": "FL",
-      "eligibilityInfoUrl": "https://floridahealthcovid19.gov/covid-19-vaccines-in-florida/",
+      "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
       "vaccinationSignupUrl": "https://floridahealthcovid19.gov/vaccines/vaccine-locator/",
       "locationName": "Florida",
       "fips": "12"
