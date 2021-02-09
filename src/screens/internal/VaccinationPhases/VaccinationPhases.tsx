@@ -14,7 +14,7 @@ interface StateVaccineDataProps {
   regionData: RegionVaccinePhaseInfo;
 }
 
-const PipeDelimatedRow = ({
+const PipeDelimitedRow = ({
   children,
 }: {
   children: (React.ReactElement | string | undefined)[];
@@ -40,7 +40,7 @@ const PipeDelimatedRow = ({
 };
 
 const StateHeader = ({ regionData }: StateVaccineDataProps) => (
-  <PipeDelimatedRow>
+  <PipeDelimitedRow>
     <Typography variant="body1">FIPS: {regionData.fips}</Typography>
     <ExternalLink href={regionData.eligibilityInfoUrl}>
       Eligibility URL
@@ -55,7 +55,7 @@ const StateHeader = ({ regionData }: StateVaccineDataProps) => (
     >
       Good RX
     </ExternalLink>
-  </PipeDelimatedRow>
+  </PipeDelimitedRow>
 );
 
 const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
@@ -68,7 +68,7 @@ const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <PipeDelimatedRow>
+        <PipeDelimitedRow>
           {data.currentlyEligible ? (
             <Typography color="secondary">Currently Eligible</Typography>
           ) : (
@@ -82,7 +82,7 @@ const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
               </ExternalLink>
             </Grid>
           )}
-        </PipeDelimatedRow>
+        </PipeDelimitedRow>
       </Grid>
       <Grid container item xs={12}>
         <Grid item xs={12}>
