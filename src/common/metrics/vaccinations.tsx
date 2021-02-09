@@ -6,6 +6,9 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
+import InfoTooltip from 'components/InfoTooltip/InfoTooltip';
+import { Metric } from 'common/metric';
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -13,6 +16,7 @@ export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: 'Vaccinated: 1st and 2nd shot',
   metricNameForCompare: 'Vaccinated (1st shot)',
@@ -103,4 +107,11 @@ function renderDisclaimer(): React.ReactElement {
 function renderThermometer(): React.ReactElement {
   // NOTE: We don't grade on vaccinations yet, so no thermometer.
   return <div />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const tooltipContent = metricToTooltipContentMap[Metric.VACCINATIONS];
+  const { body, cta } = tooltipContent;
+
+  return <InfoTooltip body={body} cta={cta} />;
 }

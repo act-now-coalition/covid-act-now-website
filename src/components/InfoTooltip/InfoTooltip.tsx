@@ -1,23 +1,27 @@
 import React from 'react';
-import { Content, Wrapper, ArrowUp, ArrowDown } from './InfoTooltip.style';
+import { InfoIcon, getTooltipStyles } from './InfoTooltip.style';
+import Tooltip from '@material-ui/core/Tooltip';
+import TooltipContent from './TooltipContent';
 
-export enum ArrowVariation {
-  UP,
-  DOWN,
-}
-
-const InfoTooltip: React.FC<{ content: string; variation: ArrowVariation }> = ({
-  content,
-  variation,
+const InfoTooltip: React.FC<{ body: string; cta: string }> = ({
+  body,
+  cta,
 }) => {
+  const styles = getTooltipStyles();
+
   return (
-    <>
-      <Wrapper>
-        {variation === ArrowVariation.DOWN && <ArrowUp />}
-        <Content>{content}</Content>
-        {variation === ArrowVariation.UP && <ArrowDown />}
-      </Wrapper>
-    </>
+    <Tooltip
+      title={<TooltipContent body={body} cta={cta} />}
+      placement="bottom"
+      arrow
+      open
+      classes={{
+        tooltip: styles.tooltip,
+        arrow: styles.arrow,
+      }}
+    >
+      <InfoIcon />
+    </Tooltip>
   );
 };
 

@@ -12,6 +12,7 @@ import {
   Metric,
   getMetricNameExtended,
   getMetricStatusText,
+  getMetricDefinition,
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
@@ -32,6 +33,9 @@ function ChartBlock(props: {
   const showBetaTag = metric === Metric.VACCINATIONS;
 
   const hasMetric = projections.hasMetric(metric);
+
+  const testtest = getMetricDefinition(metric).renderThermometer();
+  console.log('testtest', testtest);
 
   return (
     <Fragment>

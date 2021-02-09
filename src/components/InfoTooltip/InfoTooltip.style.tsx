@@ -1,40 +1,36 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import { COLOR_MAP } from 'common/colors';
+import { makeStyles } from '@material-ui/core/styles';
+import { MarkdownBody } from 'components/Markdown';
 
-const triangleSize = '7px';
+export const getTooltipStyles = makeStyles(theme => ({
+  tooltip: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: '.8125rem',
+    lineHeight: '1.4',
+    padding: '16px',
+    [theme.breakpoints.down('xs')]: {
+      padding: '16px 24px',
+    },
+  },
+  arrow: {
+    color: 'black',
+  },
+}));
 
-export const Wrapper = styled.div`
-  max-width: 300px;
-  width: 100%;
+export const InfoIcon = styled(InfoOutlinedIcon)`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
-export const Content = styled.div`
-  background-color: black;
-  color: white;
-  width: 100%;
-  padding: 16px 24px;
-  font-size: 0.8125rem;
-  line-height: 1.4;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    padding: 16px;
+export const StyledMarkdown = styled(MarkdownBody)`
+  p,
+  a {
+    color: white;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    margin: 0;
   }
-`;
-
-const SharedArrowStyles = css`
-  width: 0;
-  height: 0;
-  border-left: ${triangleSize} solid transparent;
-  border-right: ${triangleSize} solid transparent;
-  margin: auto;
-`;
-
-export const ArrowUp = styled.div`
-  ${SharedArrowStyles};
-  border-bottom: ${triangleSize} solid black;
-`;
-
-export const ArrowDown = styled.div`
-  ${SharedArrowStyles};
-  border-top: ${triangleSize} solid black;
 `;

@@ -9,4 +9,6 @@ export interface MetricDefinition {
   metricNameForCompare: string;
 
   renderThermometer: () => React.ReactElement;
+
+  renderInfoTooltip: () => React.ReactElement;
 }

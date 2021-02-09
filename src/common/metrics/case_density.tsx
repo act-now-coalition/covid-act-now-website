@@ -13,11 +13,14 @@ import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import moment from 'moment';
 import { Metric } from 'common/metric';
+import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
+import InfoTooltip from 'components/InfoTooltip/InfoTooltip';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: 'Daily new cases',
   extendedMetricName: 'Daily new cases per 100k population',
   metricNameForCompare: `Daily new cases per 100k`,
@@ -186,4 +189,11 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const tooltipContent = metricToTooltipContentMap[Metric.CASE_DENSITY];
+  const { body, cta } = tooltipContent;
+
+  return <InfoTooltip body={body} cta={cta} />;
 }

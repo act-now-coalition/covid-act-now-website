@@ -8,6 +8,8 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
+import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
+import InfoTooltip from 'components/InfoTooltip/InfoTooltip';
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -15,6 +17,7 @@ export const ICUCapacityUsed: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -205,4 +208,11 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const tooltipContent = metricToTooltipContentMap[Metric.HOSPITAL_USAGE];
+  const { body, cta } = tooltipContent;
+
+  return <InfoTooltip body={body} cta={cta} />;
 }

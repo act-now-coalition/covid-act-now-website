@@ -8,6 +8,8 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
+import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
+import InfoTooltip from 'components/InfoTooltip/InfoTooltip';
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -15,6 +17,7 @@ export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -239,4 +242,11 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const tooltipContent = metricToTooltipContentMap[Metric.POSITIVE_TESTS];
+  const { body, cta } = tooltipContent;
+
+  return <InfoTooltip body={body} cta={cta} />;
 }
