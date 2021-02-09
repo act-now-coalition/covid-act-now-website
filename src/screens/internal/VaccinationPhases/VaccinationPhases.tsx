@@ -4,10 +4,10 @@ import {
   RegionPhaseGroup,
   stateVaccinationPhases,
 } from 'cms-content/vaccines/phases';
-import { Grid, Typography } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import ExternalLink from 'components/ExternalLink';
 import { MarkdownContent } from 'components/Markdown';
-import PageContent from 'components/PageContent';
+
 import { sortBy } from 'lodash';
 
 interface StateVaccineDataProps {
@@ -119,7 +119,7 @@ const VaccinationPhases = () => {
   const data = sortBy(stateVaccinationPhases, item => item.locationName);
 
   return (
-    <PageContent sidebarItems={[]}>
+    <Container maxWidth="md">
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h2">State Vaccination Phases</Typography>
@@ -130,7 +130,7 @@ const VaccinationPhases = () => {
           ))}
         </Grid>
       </Grid>
-    </PageContent>
+    </Container>
   );
 };
 
