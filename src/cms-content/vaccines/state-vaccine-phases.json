@@ -601,6 +601,41 @@
           "description": "* General Public"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Wyoming",
+      "fips": "56",
+      "eligibilityInfoUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:42:02.161Z",
+          "phase": "1",
+          "tier": "a",
+          "description": "* Healthcare workers who are exposed to COVID\n* Staff and residents of long-term care facilities\n* Law enforcement\n* Workers who have exposure to infectious materials"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:42:02.556Z",
+          "phase": "1",
+          "tier": "b",
+          "description": "Note: Only some counties have started Phase 1b\n* Individuals 65 years of age and older \n* Some frontline essential workers who interact with the public \n* Individuals with specific medical conditions \n* Caregivers of medically vulnerable persons who are unable to get vaccinated"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:42:03.075Z",
+          "phase": "1",
+          "tier": "C",
+          "description": "* Critical infrastructure workers\n* Individuals who live in congregate settings"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:42:03.537Z",
+          "phase": "2",
+          "description": "* General public"
+        }
+      ]
     }
   ]
 }
