@@ -16,6 +16,59 @@
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Colorado",
+      "fips": "08",
+      "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T00:48:56.032Z",
+          "phase": "1A",
+          "startDate": "Winter 2020-2021",
+          "description": "* Highest-risk health care workers (Direct, prolonged COVID exposure)\n* Highest-risk individuals (Long-term care residents)"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T00:51:05.623Z",
+          "phase": "1B",
+          "tier": "1",
+          "description": "* Moderate risk health care workers (Less direct COVID exposure)\n* First responders\n* Coloradans age 70+",
+          "startDate": "Winter 2020-2021"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T00:54:46.759Z",
+          "phase": "1B",
+          "description": "* Pre-K-12 educators and child care workers\n* Coloradans ages 65-69",
+          "tier": "2",
+          "startDate": "2021-02-08"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T00:57:52.504Z",
+          "phase": "1B",
+          "tier": "3",
+          "description": "* Frontline essential workers\n* People age 16-64 with two or more high risk conditions",
+          "startDate": "Winter 2020-2021"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T00:58:58.520Z",
+          "phase": "2",
+          "description": "* People age 60-64\n* People age 16-59 with high risk conditions",
+          "startDate": "Spring 2021"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T00:58:59.659Z",
+          "phase": "3",
+          "description": "* General Public",
+          "startDate": "Summer 2021"
+        }
+      ]
     }
   ]
 }
