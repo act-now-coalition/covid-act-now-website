@@ -60,7 +60,7 @@ const StateHeader = ({ regionData }: StateVaccineDataProps) => (
 
 const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
   return (
-    <Grid container spacing={1}>
+    <Grid container>
       <Grid item xs={12}>
         <Typography variant="h6">
           Phase {data.phase}
@@ -84,31 +84,6 @@ const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
           )}
         </PipeDelimatedRow>
       </Grid>
-      {/*
-      <Grid container item xs={12}>
-        <Grid item xs={12}>
-          {data.currentlyEligible ? (
-            <Typography variant="body1" color="textPrimary">
-              Currently Eligible
-            </Typography>
-          ) : (
-            <Typography variant="body1" color="error">
-              Not eligible
-            </Typography>
-          )}
-        </Grid>
-
-        <Grid item xs={12}>
-          <Typography variant="body1">Start Date: {data.startDate}</Typography>
-        </Grid>
-        {data.expandedDefinitionUrl && (
-          <Grid item xs={12}>
-            <ExternalLink href={data.expandedDefinitionUrl}>
-              Detailed information
-            </ExternalLink>
-          </Grid>
-        )}
-      </Grid> */}
       <Grid container item xs={12}>
         <Grid item xs={12}>
           <Typography>Description:</Typography>{' '}
