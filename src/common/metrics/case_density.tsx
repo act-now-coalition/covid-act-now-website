@@ -14,7 +14,11 @@ import { MetricDefinition } from './interfaces';
 import moment from 'moment';
 import { Metric } from 'common/metric';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import InfoTooltip from 'components/InfoTooltip/InfoTooltip';
+import StyledTooltip from 'components/InfoTooltip/StyledTooltip';
+import {
+  StyledMarkdown,
+  InfoIcon,
+} from 'components/InfoTooltip/InfoTooltip.style';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -193,7 +197,11 @@ function renderThermometer(): React.ReactElement {
 
 function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.CASE_DENSITY];
-  const { body, cta } = tooltipContent;
+  const { body } = tooltipContent;
 
-  return <InfoTooltip body={body} cta={cta} />;
+  return (
+    <StyledTooltip title={<StyledMarkdown source={body} />}>
+      <InfoIcon />
+    </StyledTooltip>
+  );
 }
