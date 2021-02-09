@@ -33,6 +33,7 @@ function renderTags(value: any, getTagProps: any) {
         const isState = option.stateCode;
         return (
           <Chip
+            key={`key-${index}`}
             variant={isState ? 'outlined' : 'contained'}
             color={isState ? 'red' : 'blue'}
             label={option.fullName}
