@@ -297,6 +297,42 @@
           "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID-19"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "North Carolina",
+      "fips": "37",
+      "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/frequently-asked-questions-about-covid-19-vaccinations#who-is-being-vaccinated-first",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:23:34.119Z",
+          "phase": "1",
+          "description": "* Health care workers\n* Long-term care staff and residents",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-1"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:23:34.497Z",
+          "phase": "2",
+          "description": "* Persons 65 and older",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-2"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:24:47.274Z",
+          "phase": "3",
+          "description": "* Frontline Essential Workers",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-3"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:24:47.744Z",
+          "phase": "4",
+          "description": "* Adults at high risk for exposure and increased risk of severe illness",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-4"
+        }
+      ]
     }
   ]
 }
