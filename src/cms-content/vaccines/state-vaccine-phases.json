@@ -7,13 +7,48 @@
       "locationName": "Missouri",
       "phaseGroups": [
         {
-          "startDate": "2020-12-14T18:54:06.354Z",
+          "startDate": "2020-12-14",
           "updatedAt": "2021-02-02T18:54:06.376Z",
           "currentlyEligible": true,
           "phase": "1A",
           "tier": null,
-          "description": "* Healthcare Workers\n* Long-Term Care Facility Staff and Residents\n* Home Health\n* Urgent Care\n* Vaccination Staff\n* Congregate Community\n* School Nurses\n* Dental Office Staff\n* Mental/Behavior Health Providers\n* EMS/EMT/Paramedics",
+          "description": "* Patient-Facing Health Care Workers \n* Long-Term Care Facility Residents and Staff",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T17:22:07.094Z",
+          "phase": "1B",
+          "tier": "1",
+          "description": "* First responders\n* Emergency Services\n* Public Health Infrastructure",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-1"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T17:22:07.720Z",
+          "phase": "1B",
+          "tier": "2",
+          "description": "* Anyone aged 65 and older\n* Any adult with high-risk conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T17:22:08.292Z",
+          "phase": "1B",
+          "tier": "3",
+          "description": "* Teachers\n* Childcare Providers\n* Non-healthcare critical infrastructure workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T17:22:08.755Z",
+          "phase": "2",
+          "description": "Other frontline workers and high-risk groups",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase2"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T17:22:09.319Z",
+          "phase": "3",
+          "description": "* General Public"
         }
       ]
     },
