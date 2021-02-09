@@ -165,9 +165,6 @@ const EmailAlertsForm: React.FC<{
     );
   };
 
-  const hasRegionsWithVaccinationAlerts =
-    selectedRegions.filter(hasVaccinationAlerts).length > 0;
-
   return (
     <>
       <StyledForm
