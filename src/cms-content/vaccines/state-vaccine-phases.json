@@ -217,6 +217,60 @@
           "description": "* General Public"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Ohio",
+      "fips": "39",
+      "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:07:20.704Z",
+          "phase": "1A",
+          "description": "* Healthcare workers who are routinely involved in the care of COVID-19 patients.\n* Residents and staff in long-term care facilities.\n* Patients and staff at state psychiatric hospitals.\n* People with developmental disabilities and those with mental health disorders.\n* EMS responders."
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:07:21.072Z",
+          "phase": "1B",
+          "description": "* Persons 80 and older",
+          "tier": "1",
+          "startDate": "2021-01-19"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:07:21.241Z",
+          "phase": "1B",
+          "tier": "2",
+          "description": "* Persons 75 and older\n* Persons 16+ with a developmental or intellectual disability AND at least one severe co-morbidity\n",
+          "startDate": "2020-01-25"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:07:21.488Z",
+          "phase": "1B",
+          "tier": "3",
+          "description": "* Persons 70 and older\n* K-12 Teachers",
+          "startDate": "2021-02-01"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:15:12.990Z",
+          "phase": "1B",
+          "tier": "4",
+          "description": "* Persons aged 65 and older",
+          "startDate": "2020-02-08"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:15:13.981Z",
+          "phase": "1B",
+          "tier": "5",
+          "description": "* Persons with severe congenital, developmental, or early-onset, and inherited conditions",
+          "startDate": "2020-02-15"
+        }
+      ]
     }
   ]
 }
