@@ -271,6 +271,32 @@
           "startDate": "2020-02-15"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Georgia",
+      "fips": "13",
+      "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:19:38.593Z",
+          "phase": "1A+",
+          "description": "* Healthcare workers\n* Long-term care staff and residents\n* Adults 65 and older\n* Emergency services"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:19:39.240Z",
+          "phase": "1B",
+          "description": "* Essential workers (non-healthcare)"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:19:39.758Z",
+          "phase": "1C",
+          "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID-19"
+        }
+      ]
     }
   ]
 }
