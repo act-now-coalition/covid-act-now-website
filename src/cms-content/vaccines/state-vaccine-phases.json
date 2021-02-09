@@ -397,6 +397,55 @@
           "startDate": "2020-05-01"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Massachusetts",
+      "fips": "25",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:06:36.841Z",
+          "phase": "1",
+          "description": "* Healthcare workers\n* First responders\n* Long term care residents and staff"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:09:12.507Z",
+          "phase": "2",
+          "tier": "1",
+          "description": "* Individuals 75+"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:09:12.573Z",
+          "phase": "2",
+          "tier": "2",
+          "description": "* Individuals 65+\n* Adults with 2+ high risk conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:09:12.792Z",
+          "phase": "2",
+          "tier": "3",
+          "description": "* Teachers\n* Other essential workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:09:13.141Z",
+          "phase": "2",
+          "tier": "4",
+          "description": "* Individuals with at least one high risk conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:09:13.586Z",
+          "phase": "3",
+          "description": "* General public",
+          "startDate": "April 2021"
+        }
+      ],
+      "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases"
     }
   ]
 }
