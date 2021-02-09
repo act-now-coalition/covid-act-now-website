@@ -797,7 +797,7 @@ collections:
     files:
       - name: Info Tooltips
         label: Info Tooltips
-        file: src/cms-content/info-tooltips.json
+        file: src/cms-content/infoTooltips/info-tooltips.json
         fields:
           - label: Tooltip
             name: tooltip
