@@ -75,7 +75,6 @@ const ShareBlock = ({
 
   return (
     <ShareContainer>
-      {/* TODO: Add the default regions corresponding to the current page */}
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea

@@ -44,10 +44,6 @@ function trackSubscription(label: string, numLocations: number) {
   );
 }
 
-function hasVaccinationAlerts(region: Region) {
-  return region instanceof State;
-}
-
 const EmailAlertsForm: React.FC<{
   autocompleteRegions: Region[];
   defaultRegions: Region[];
