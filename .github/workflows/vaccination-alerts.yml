@@ -16,9 +16,10 @@ jobs:
           node-version: 12.x
       - run: yarn install
 
-      # Generate the vaccination alerts
       - name: Generate the vaccination info update
         run: yarn vaccinations-generate-alerts
-      # Setup list of emails to send
-      # Send the vaccination alerts to the users
+
+      - name: Generate the list of users and locations to email
+        run: yarn vaccinations-generate-users-to-email
+      # Send the email
       # Slack notifications

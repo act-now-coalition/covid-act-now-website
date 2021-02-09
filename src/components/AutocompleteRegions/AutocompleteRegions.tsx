@@ -1,8 +1,10 @@
 import React from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, {
+  AutocompleteGetTagProps,
+} from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
-import TextField from '@material-ui/core/TextField';
 import { Region, MetroArea } from 'common/regions';
+import { StyledTextField } from './AutocompleteRegions.style';
 /**
  * `createFilterOptions` creates a configuration object that defines how the
  * user input will be matched against the options in the Autocomplete
@@ -28,12 +30,19 @@ const AutocompleteRegions: React.FC<{
   onChangeRegions: (event: React.ChangeEvent<{}>, newRegions: Region[]) => void;
   ariaLabelledBy?: string;
   placeholder?: string;
+  renderTags?: (
+    regionItems: Region[],
+    getTagProps?: AutocompleteGetTagProps,
+  ) => React.ReactNode;
+  placeholderMinWidth?: string;
 }> = ({
   regions,
   onChangeRegions,
   selectedRegions,
   ariaLabelledBy,
   placeholder = '+ Add',
+  renderTags,
+  placeholderMinWidth = '0',
 }) => {
   const ariaLabelOptions = ariaLabelledBy
     ? { 'aria-labelledby': ariaLabelledBy }
@@ -45,6 +54,8 @@ const AutocompleteRegions: React.FC<{
     } else return region.shortName;
   };
 
+  const renderTagsOption = { renderTags };
+
   return (
     <Autocomplete
       multiple
@@ -55,16 +66,18 @@ const AutocompleteRegions: React.FC<{
       value={selectedRegions}
       filterOptions={createFilterOptions({ matchFrom: 'start' })}
       renderInput={params => (
-        <TextField
+        <StyledTextField
           {...params}
           variant="outlined"
           placeholder={placeholder}
+          $placeholderMinWidth={placeholderMinWidth}
           inputProps={{
             ...params.inputProps,
             ...ariaLabelOptions,
           }}
         />
       )}
+      {...renderTagsOption}
     />
   );
 };
