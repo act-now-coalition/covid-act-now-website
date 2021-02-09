@@ -636,6 +636,28 @@
           "description": "* General public"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Wisconsin",
+      "fips": "55",
+      "eligibilityInfoUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-about.htm",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T18:50:18.350Z",
+          "phase": "1",
+          "tier": "a",
+          "description": "* Frontline health care personnel\n* Residents in skilled nursing and long-term care facilities\n* Police and fire personnel, correctional staff\n* Adults ages 65 and over"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T18:50:18.999Z",
+          "phase": "1",
+          "tier": "b",
+          "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-frontline essential health care personnel\n* Facility staff and residents in congregate living settings"
+        }
+      ]
     }
   ]
 }
