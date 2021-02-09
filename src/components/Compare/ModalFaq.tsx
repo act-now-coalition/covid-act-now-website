@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import {
   Wrapper,
   Question,
@@ -9,21 +9,10 @@ import {
   CloseIcon,
 } from 'components/Compare/ModalFaq.style';
 import { LockBodyScroll } from 'components/Dialog';
+import { useEscCloseModal } from 'common/hooks';
 
 const ModalFaq = (props: { handleCloseModal: () => void }) => {
-  useEffect(() => {
-    const handleEsc = (e: any) => {
-      if (e.keyCode === 27) {
-        props.handleCloseModal();
-      }
-    };
-
-    window.addEventListener('keydown', handleEsc);
-
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [props, props.handleCloseModal]);
+  useEscCloseModal(props.handleCloseModal);
 
   return (
     <Fragment>
