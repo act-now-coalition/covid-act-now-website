@@ -185,6 +185,38 @@
           "description": "* General Public"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Illinois",
+      "fips": "17",
+      "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:00:23.580Z",
+          "phase": "1A",
+          "description": "* Health care workers\n* Long-term care residents"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:00:55.065Z",
+          "phase": "1B",
+          "description": "* Persons aged 75 and over\n* Non-health care frontline workers"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:03:20.024Z",
+          "phase": "1C",
+          "description": "* Persons aged 16 to 64 years with high-risk medical conditions\n* Other essential workers"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:03:20.625Z",
+          "phase": "2",
+          "description": "* General Public"
+        }
+      ]
     }
   ]
 }
