@@ -333,6 +333,35 @@
           "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-4"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Michigan",
+      "fips": "26",
+      "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:30:24.253Z",
+          "phase": "1A",
+          "description": "* Health care workers\n* Long-term care residents and staff",
+          "startDate": "2020-12-01"
+        },
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T02:30:24.822Z",
+          "phase": "1B",
+          "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
+          "startDate": "2020-01-15"
+        },
+        {
+          "currentlyEligible": "false",
+          "updatedAt": "2021-02-09T02:30:25.339Z",
+          "phase": "1C",
+          "description": "* People 16-64 with a health condition that puts them at high risk for serious COVID-19 complications\n* Other essential frontline workers",
+          "startDate": "2020-05-01"
+        }
+      ]
     }
   ]
 }
