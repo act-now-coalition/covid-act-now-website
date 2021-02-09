@@ -141,11 +141,7 @@ export const AlertsInfoBoxCopy = styled(Paragraph)`
 
 export const LearnMoreCopy = styled.span`
   cursor: pointer;
-  color: ${COLOR_MAP.BLUE};
-
-  &:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
 `;
 
 export const VaccinationIcon = styled(ImmunizationIcon)`
