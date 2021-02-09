@@ -141,6 +141,9 @@ export interface VaccinationsInfo {
 
   peopleVaccinated: number;
   ratioVaccinated: number;
+
+  dosesDistributed: number | null;
+  ratioDosesAdministered: number | null;
 }
 
 /**
@@ -433,6 +436,11 @@ export class Projection {
       row => row?.vaccinationsInitiatedRatio || null,
     );
 
+    const dosesDistributed = actuals.vaccinesDistributed ?? null;
+    const ratioDosesAdministered = dosesDistributed
+      ? (peopleInitiated + peopleVaccinated) / dosesDistributed
+      : null;
+
     return {
       peopleVaccinated,
       peopleInitiated,
@@ -440,6 +448,8 @@ export class Projection {
       ratioVaccinated,
       ratioCompletedSeries: vaccinationsCompletedSeries,
       ratioInitiatedSeries: vaccinationsInitiatedSeries,
+      dosesDistributed,
+      ratioDosesAdministered,
     };
   }
 
