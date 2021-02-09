@@ -62,7 +62,7 @@ const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Typography variant="h6">
+        <Typography variant="h6" style={{ margin: 0 }}>
           Phase {data.phase}
           {data.tier && <>, tier{data.tier}</>}
         </Typography>
@@ -99,7 +99,9 @@ const StateVaccinationData = ({ regionData }: StateVaccineDataProps) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="h4">{regionData.locationName}</Typography>
+        <Typography variant="h4" style={{ margin: 0 }}>
+          {regionData.locationName}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <StateHeader regionData={regionData} />

@@ -30,7 +30,7 @@ const typographyOptions: TypographyOptions = {
   },
   h4: {
     fontSize: '1.75rem',
-    // margin: '2rem 0 1.5rem',
+    margin: '2rem 0 1.5rem',
     fontWeight: 700,
   },
   h5: {
@@ -46,6 +46,7 @@ const typographyOptions: TypographyOptions = {
     fontWeight: 700,
     fontSize: '1.125rem',
     lineHeight: '1.75rem',
+    margin: '1.5rem 0',
   },
   subtitle1: {
     color: palette.text.primary,
@@ -63,7 +64,7 @@ const typographyOptions: TypographyOptions = {
   body1: {
     color: palette.text.primary,
     fontSize: '1rem',
-    // letterSpacing: '-0.05px',
+    letterSpacing: '-0.05px',
     lineHeight: '1.6',
   },
   body2: {
@@ -72,7 +73,7 @@ const typographyOptions: TypographyOptions = {
     '@media (min-width:600px)': {
       fontSize: '1rem',
     },
-    // letterSpacing: '-0.04px',
+    letterSpacing: '-0.04px',
     lineHeight: '1.4rem',
   },
   // @ts-ignore This seems like a bug?
