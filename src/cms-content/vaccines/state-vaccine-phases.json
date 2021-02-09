@@ -110,6 +110,20 @@
           "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Florida",
+      "fips": "12",
+      "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
+      "phaseGroups": [
+        {
+          "currentlyEligible": "true",
+          "updatedAt": "2021-02-09T01:39:03.616Z",
+          "phase": "1",
+          "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals deemed extremely vulnerable to COVID-19"
+        }
+      ]
     }
   ]
 }
