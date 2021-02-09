@@ -70,7 +70,7 @@ const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
       <Grid item xs={12}>
         <PipeDelimatedRow>
           {data.currentlyEligible ? (
-            <Typography color="textPrimary">Currently Eligible</Typography>
+            <Typography color="secondary">Currently Eligible</Typography>
           ) : (
             <Typography color="error">Not eligible</Typography>
           )}
