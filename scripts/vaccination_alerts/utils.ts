@@ -5,12 +5,18 @@ import * as Handlebars from 'handlebars';
 import html from 'remark-html';
 import remark from 'remark';
 import { getFirestore } from '../common/firebase';
+import { COLOR_MAP } from '../../src/common/colors';
+import { assert } from '../../src/common/utils';
 import regions, { getStateFips } from '../../src/common/regions';
 import {
+  getVaccineInfoByFips,
   RegionVaccinePhaseInfo,
   stateVaccinationPhases,
 } from '../../src/cms-content/vaccines/phases';
-import { COLOR_MAP } from '../../src/common/colors';
+import {
+  getVaccinationDataByRegion,
+  RegionVaccinationInfo,
+} from '../../src/cms-content/vaccines';
 
 export interface RegionVaccinePhaseInfoMap {
   [fipsCode: string]: RegionVaccinePhaseInfo;
@@ -163,6 +169,7 @@ const colors = {
 export function generateEmailContent(
   emailAddress: string,
   vaccinationInfo: RegionVaccinePhaseInfo,
+  vaccinationLinks: RegionVaccinationInfo | null,
 ): string {
   const fipsCode = vaccinationInfo.fips;
   const region = regions.findByFipsCodeStrict(fipsCode);
@@ -194,6 +201,7 @@ export function generateEmailContent(
     subtitle: 'People who are eligible to be vaccinated now include:',
     sourceName: `${region.fullName} Health Department`,
     sourceUrl: vaccinationInfo.eligibilityInfoUrl,
+    eligibilityUrl: vaccinationLinks?.eligibilityInfoUrl,
     locationName: region.fullName,
     currentPhases,
     colors,
@@ -206,11 +214,24 @@ function markdownToHtml(markdownContent: string): string {
   return remark().use(html).processSync(markdownContent).toString();
 }
 
-export function generateEmailData(
-  emailAddress: string,
-  subjectLine: string,
-  htmlContent: string,
-) {
+export function generateEmailData(emailAddress: string, fipsCode: string) {
+  const region = regions.findByFipsCode(fipsCode);
+  assert(region !== null, `Region with FIPS code ${fipsCode} not found.`);
+
+  const vaccineInfo = getVaccineInfoByFips(fipsCode);
+  const vaccineLinks = getVaccinationDataByRegion(region);
+  assert(
+    vaccineInfo !== null,
+    `Vaccination information for FIPS ${fipsCode} not found in the CMS`,
+  );
+
+  const subjectLine = `Who is currently eligible for vaccination in ${region.fullName}`;
+  const htmlContent = generateEmailContent(
+    emailAddress,
+    vaccineInfo,
+    vaccineLinks,
+  );
+
   return {
     Subject: subjectLine,
     To: [emailAddress],
