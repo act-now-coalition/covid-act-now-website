@@ -249,5 +249,10 @@ function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.POSITIVE_TESTS];
   const { body } = tooltipContent;
 
-  return <InfoTooltip title={<StyledMarkdown source={body} />} />;
+  return (
+    <InfoTooltip
+      title={<StyledMarkdown source={body} />}
+      description="test test"
+    />
+  );
 }

@@ -196,5 +196,10 @@ function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.CASE_DENSITY];
   const { body } = tooltipContent;
 
-  return <InfoTooltip title={<StyledMarkdown source={body} />} />;
+  return (
+    <InfoTooltip
+      title={<StyledMarkdown source={body} />}
+      description="test test"
+    />
+  );
 }

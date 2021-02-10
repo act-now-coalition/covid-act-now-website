@@ -28,6 +28,7 @@ export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
   arrow: true,
   interactive: true,
   TransitionComponent: Fade,
+  'aria-describedby': 'notifications-desc',
 }))``;
 
 export const InfoIcon = styled(InfoOutlinedIcon)<{ isOpen: boolean }>`
@@ -47,4 +48,14 @@ export const StyledMarkdown = styled(MarkdownBody)`
     line-height: 1.4;
     margin: 0;
   }
+`;
+
+export const HiddenDiv = styled.div`
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 `;
