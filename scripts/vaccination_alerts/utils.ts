@@ -196,3 +196,18 @@ export function generateEmailContent(
 function markdownToHtml(markdownContent: string): string {
   return remark().use(html).processSync(markdownContent).toString();
 }
+
+export function generateEmailData(
+  emailAddress: string,
+  subjectLine: string,
+  htmlContent: string,
+) {
+  return {
+    Subject: subjectLine,
+    To: [emailAddress],
+    Html: htmlContent,
+    From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
+    ReplyTo: 'noreply@covidactnow.org',
+    Group: 'VACCINATION_ALERTS',
+  };
+}
