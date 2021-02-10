@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { Heading2 as H2, Paragraph as P } from 'components/Markdown';
+import AlertIcon from 'assets/images/EmailAlertIcon';
 
 export const Container = styled.div`
   text-align: center;
-  background-color: ${COLOR_MAP.GREY_200};
+  background-color: ${COLOR_MAP.GREY_0};
 
   padding: 40px 16px;
   @media (min-width: ${mobileBreakpoint}) {
@@ -14,7 +15,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  max-width: 400px;
+  max-width: 440px;
   margin: 0 auto;
 `;
 
@@ -26,6 +27,7 @@ export const Section = styled.div`
 `;
 
 export const Heading2 = styled(H2)`
+  margin-top: 12px;
   margin-bottom: 16px;
 `;
 
@@ -34,10 +36,8 @@ export const Paragraph = styled(P)`
   margin-bottom: 0;
 `;
 
-export const EmailAlertIcon = styled.div`
+export const EmailAlertIcon = styled(AlertIcon)`
   margin: 0 auto;
-  width: 48px;
-  height: 48px;
-  background-color: white;
-  border: solid 1px black;
+  width: 40px;
+  height: 40px;
 `;

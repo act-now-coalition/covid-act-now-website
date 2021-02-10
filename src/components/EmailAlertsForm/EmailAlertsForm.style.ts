@@ -8,10 +8,11 @@ import { COLOR_MAP } from 'common/colors';
 import { BaseButton } from 'components/Button';
 import { Paragraph } from 'components/Markdown';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
+import { Chip } from '@material-ui/core';
 
-const ACCESSIBLE_BLUE = '#00819E';
-
-export const StyledForm = styled.form``;
+export const StyledForm = styled.form`
+  text-align: left;
+`;
 
 const fieldsetStyle = {
   borderRadius: '4px 0 0 4px',
@@ -31,22 +32,33 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
   variant: 'outlined',
 }))`
   width: 100%;
+  background-color: white;
 
   & label.Mui-focused {
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    color: ${COLOR_MAP.GREY_5};
+  }
+
+  & label {
+    color: ${COLOR_MAP.GREY_4};
+  }
+
+  input {
+    font-size: 14px;
   }
 `;
 
 export const StyledButton = styled(BaseButton).attrs(props => ({
   variant: 'contained',
-}))`
-  min-width: 90px;
-  background-color: ${ACCESSIBLE_BLUE};
+}))<{ $success: boolean }>`
+  min-width: 110px;
+  background-color: ${props =>
+    props.$success ? COLOR_MAP.GREEN.BASE : COLOR_MAP.BLUE};
   color: white;
   border-radius: 0 4px 4px 0;
 
   &:hover {
-    background-color: ${ACCESSIBLE_BLUE};
+    background-color: ${props =>
+      props.$success ? COLOR_MAP.GREEN.BASE : COLOR_MAP.BLUE};
   }
 `;
 
@@ -92,7 +104,7 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
   }
 
   svg {
-    color: ${ACCESSIBLE_BLUE};
+    color: ${COLOR_MAP.BLUE};
   }
 `;
 
@@ -100,7 +112,7 @@ export const AlertsInfoBox = styled.div`
   display: flex;
   align-items: flex-start;
   padding: 12px;
-  background: ${COLOR_MAP.GREY_100};
+  background: ${COLOR_MAP.GREY_1};
   border-radius: 4px;
 
   & > * {
@@ -111,8 +123,12 @@ export const AlertsInfoBox = styled.div`
   }
 `;
 
-export const AlertsInfoBoxIcon = styled(ImmunizationIcon)`
-  flex: 0 0 auto;
+export const AlertsInfoBoxIcon = styled(ImmunizationIcon).attrs(props => ({
+  width: 16,
+  height: 20,
+}))`
+  flex: 0 0 16px;
+  align-self: flex-start;
 `;
 
 export const AlertsInfoBoxCopy = styled(Paragraph)`
@@ -120,5 +136,25 @@ export const AlertsInfoBoxCopy = styled(Paragraph)`
   margin-bottom: 0;
   font-size: 14px;
   line-height: 1.4;
-  color: black;
+  color: ${COLOR_MAP.GREY_5};
+`;
+
+export const LearnMoreCopy = styled.span`
+  cursor: pointer;
+  text-decoration: underline;
+`;
+
+export const VaccinationIcon = styled(ImmunizationIcon)`
+  padding: 2px;
+  padding-left: 6px;
+`;
+
+export const LocationChip = styled(Chip)`
+  background-color: ${COLOR_MAP.GREY_1};
+  color: ${COLOR_MAP.GREY_5};
+  font-weight: 500;
+
+  span :not(:first-child) {
+    padding-left: 6px;
+  }
 `;
