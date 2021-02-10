@@ -89,18 +89,61 @@ const vaccinationAlert: RegionVaccinePhaseInfoMap = {
 const outputPath = path.join(__dirname, 'vaccination-alert.html');
 
 async function main(emailAddress: string) {
-  // const emailService = new EmailService();
+  const emailService = new EmailService();
+
   const fipsCode = '08';
   const vaccineInfo = vaccinationAlert[fipsCode];
   const emailContentHtml = generateEmailContent(emailAddress, vaccineInfo);
+  const emailData = generateEmailData(
+    emailAddress,
+    'Test Vaccination Email',
+    emailContentHtml,
+  );
+
+  try {
+    await emailService.sendEmail(emailData);
+    console.info(`Email sent to ${emailAddress}.`);
+  } catch (err) {
+    if (isInvalidEmailError(err)) {
+      console.log(`Invalid email: "${emailAddress}"`);
+    } else {
+      console.error(`Error sending email to "${emailAddress}"`, err);
+    }
+    process.exit(1);
+  }
 
   fs.writeFileSync(outputPath, emailContentHtml);
-  // use mock data
-  // use email template
-  // send the email
+}
+
+function generateEmailData(
+  emailAddress: string,
+  subjectLine: string,
+  htmlContent: string,
+) {
+  return {
+    Subject: subjectLine,
+    To: [emailAddress],
+    Html: htmlContent,
+    From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
+    ReplyTo: 'noreply@covidactnow.org',
+    Group: 'VACCINATION_ALERTS',
+  };
+}
+
+function printUsage() {
+  console.log('yarn vaccinations-send-test-email user@email.com');
+}
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  if (args.length !== 1) {
+    printUsage();
+    process.exit(1);
+  }
+  return args[0];
 }
 
 if (require.main === module) {
-  // parse input arguments
-  main('pablo@covidactnow.org');
+  const emailAddress = parseArgs();
+  main(emailAddress);
 }
