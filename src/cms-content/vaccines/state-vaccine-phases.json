@@ -2,18 +2,22 @@
   "regions": [
     {
       "emailAlertVersion": 0,
-      "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
-      "fips": "29",
-      "locationName": "Missouri",
+      "locationName": "California",
+      "fips": "06",
+      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
       "phaseGroups": [
         {
-          "startDate": "2020-12-14T18:54:06.354Z",
-          "updatedAt": "2021-02-02T18:54:06.376Z",
           "currentlyEligible": true,
-          "phase": "1A",
-          "tier": null,
-          "description": "* Healthcare Workers\n* Long-Term Care Facility Staff and Residents\n* Home Health\n* Urgent Care\n* Vaccination Staff\n* Congregate Community\n* School Nurses\n* Dental Office Staff\n* Mental/Behavior Health Providers\n* EMS/EMT/Paramedics",
-          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
+          "updatedAt": "2021-02-09T01:11:09.388Z",
+          "phase": "1a",
+          "description": "* Healthcare workers\n* Long-term care residents"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T01:11:55.153Z",
+          "phase": "1B",
+          "tier": "1",
+          "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
         }
       ]
     },
@@ -72,47 +76,6 @@
     },
     {
       "emailAlertVersion": 0,
-      "locationName": "California",
-      "fips": "06",
-      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
-      "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:11:09.388Z",
-          "phase": "1a",
-          "description": "* Healthcare workers\n* Long-term care residents"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:11:55.153Z",
-          "phase": "1B",
-          "tier": "1",
-          "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
-        }
-      ]
-    },
-    {
-      "emailAlertVersion": 0,
-      "locationName": "Texas",
-      "fips": "48",
-      "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
-      "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:21:28.971Z",
-          "phase": "1A",
-          "description": "* Frontline essential workers\n* Long-term care residents"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:23:20.387Z",
-          "phase": "1B",
-          "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition"
-        }
-      ]
-    },
-    {
-      "emailAlertVersion": 0,
       "locationName": "Florida",
       "fips": "12",
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
@@ -122,6 +85,110 @@
           "updatedAt": "2021-02-09T01:39:03.616Z",
           "phase": "1",
           "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals deemed extremely vulnerable to COVID-19"
+        }
+      ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Georgia",
+      "fips": "13",
+      "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T02:19:38.593Z",
+          "phase": "1A+",
+          "description": "* Healthcare workers\n* Long-term care staff and residents\n* Adults 65 and older\n* Emergency services"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:19:39.240Z",
+          "phase": "1B",
+          "description": "* Essential workers (non-healthcare)"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:19:39.758Z",
+          "phase": "1C",
+          "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID-19"
+        }
+      ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Illinois",
+      "fips": "17",
+      "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T02:00:23.580Z",
+          "phase": "1A",
+          "description": "* Health care workers\n* Long-term care residents"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T02:00:55.065Z",
+          "phase": "1B",
+          "description": "* Persons aged 75 and over\n* Non-health care frontline workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:03:20.024Z",
+          "phase": "1C",
+          "description": "* Persons aged 16 to 64 years with high-risk medical conditions\n* Other essential workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:03:20.625Z",
+          "phase": "2",
+          "description": "* General Public"
+        }
+      ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Michigan",
+      "fips": "26",
+      "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T02:30:24.253Z",
+          "phase": "1A",
+          "description": "* Health care workers\n* Long-term care residents and staff",
+          "startDate": "2020-12-01"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T02:30:24.822Z",
+          "phase": "1B",
+          "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
+          "startDate": "2020-01-15"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:30:25.339Z",
+          "phase": "1C",
+          "description": "* People 16-64 with a health condition that puts them at high risk for serious COVID-19 complications\n* Other essential frontline workers",
+          "startDate": "2020-05-01"
+        }
+      ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
+      "fips": "29",
+      "locationName": "Missouri",
+      "phaseGroups": [
+        {
+          "startDate": "2020-12-14T18:54:06.354Z",
+          "updatedAt": "2021-02-02T18:54:06.376Z",
+          "currentlyEligible": true,
+          "phase": "1A",
+          "tier": null,
+          "description": "* Healthcare Workers\n* Long-Term Care Facility Staff and Residents\n* Home Health\n* Urgent Care\n* Vaccination Staff\n* Congregate Community\n* School Nurses\n* Dental Office Staff\n* Mental/Behavior Health Providers\n* EMS/EMT/Paramedics",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
         }
       ]
     },
@@ -156,65 +223,37 @@
     },
     {
       "emailAlertVersion": 0,
-      "locationName": "Pennsylvania",
-      "fips": "42",
-      "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
+      "locationName": "North Carolina",
+      "fips": "37",
+      "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/frequently-asked-questions-about-covid-19-vaccinations#who-is-being-vaccinated-first",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:54:24.941Z",
-          "phase": "1A",
-          "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:54:25.435Z",
-          "phase": "1B",
-          "description": "* First Responders\n* Education workers\n* Frontline essential workers"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:54:25.936Z",
-          "phase": "1C",
-          "description": "* Additional Frontline Workers (Transportation, Food Service, etc.)"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:54:26.520Z",
-          "phase": "2",
-          "description": "* General Public"
-        }
-      ]
-    },
-    {
-      "emailAlertVersion": 0,
-      "locationName": "Illinois",
-      "fips": "17",
-      "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
-      "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:00:23.580Z",
-          "phase": "1A",
-          "description": "* Health care workers\n* Long-term care residents"
+          "updatedAt": "2021-02-09T02:23:34.119Z",
+          "phase": "1",
+          "description": "* Health care workers\n* Long-term care staff and residents",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-1"
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:00:55.065Z",
-          "phase": "1B",
-          "description": "* Persons aged 75 and over\n* Non-health care frontline workers"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:03:20.024Z",
-          "phase": "1C",
-          "description": "* Persons aged 16 to 64 years with high-risk medical conditions\n* Other essential workers"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:03:20.625Z",
+          "updatedAt": "2021-02-09T02:23:34.497Z",
           "phase": "2",
-          "description": "* General Public"
+          "description": "* Persons 65 and older",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-2"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:24:47.274Z",
+          "phase": "3",
+          "description": "* Frontline Essential Workers",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-3"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T02:24:47.744Z",
+          "phase": "4",
+          "description": "* Adults at high risk for exposure and increased risk of severe illness",
+          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-4"
         }
       ]
     },
@@ -274,92 +313,53 @@
     },
     {
       "emailAlertVersion": 0,
-      "locationName": "Georgia",
-      "fips": "13",
-      "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
+      "locationName": "Pennsylvania",
+      "fips": "42",
+      "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:19:38.593Z",
-          "phase": "1A+",
-          "description": "* Healthcare workers\n* Long-term care staff and residents\n* Adults 65 and older\n* Emergency services"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:19:39.240Z",
-          "phase": "1B",
-          "description": "* Essential workers (non-healthcare)"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:19:39.758Z",
-          "phase": "1C",
-          "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID-19"
-        }
-      ]
-    },
-    {
-      "emailAlertVersion": 0,
-      "locationName": "North Carolina",
-      "fips": "37",
-      "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/frequently-asked-questions-about-covid-19-vaccinations#who-is-being-vaccinated-first",
-      "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:23:34.119Z",
-          "phase": "1",
-          "description": "* Health care workers\n* Long-term care staff and residents",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-1"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:23:34.497Z",
-          "phase": "2",
-          "description": "* Persons 65 and older",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-2"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:24:47.274Z",
-          "phase": "3",
-          "description": "* Frontline Essential Workers",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-3"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:24:47.744Z",
-          "phase": "4",
-          "description": "* Adults at high risk for exposure and increased risk of severe illness",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-4"
-        }
-      ]
-    },
-    {
-      "emailAlertVersion": 0,
-      "locationName": "Michigan",
-      "fips": "26",
-      "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
-      "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:30:24.253Z",
+          "updatedAt": "2021-02-09T01:54:24.941Z",
           "phase": "1A",
-          "description": "* Health care workers\n* Long-term care residents and staff",
-          "startDate": "2020-12-01"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:30:24.822Z",
-          "phase": "1B",
-          "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
-          "startDate": "2020-01-15"
+          "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:30:25.339Z",
+          "updatedAt": "2021-02-09T01:54:25.435Z",
+          "phase": "1B",
+          "description": "* First Responders\n* Education workers\n* Frontline essential workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T01:54:25.936Z",
           "phase": "1C",
-          "description": "* People 16-64 with a health condition that puts them at high risk for serious COVID-19 complications\n* Other essential frontline workers",
-          "startDate": "2020-05-01"
+          "description": "* Additional Frontline Workers (Transportation, Food Service, etc.)"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-09T01:54:26.520Z",
+          "phase": "2",
+          "description": "* General Public"
+        }
+      ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Texas",
+      "fips": "48",
+      "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T01:21:28.971Z",
+          "phase": "1A",
+          "description": "* Frontline essential workers\n* Long-term care residents"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-09T01:23:20.387Z",
+          "phase": "1B",
+          "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition"
         }
       ]
     }
