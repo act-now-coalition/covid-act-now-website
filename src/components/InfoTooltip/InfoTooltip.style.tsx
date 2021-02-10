@@ -20,8 +20,9 @@ export const getTooltipStyles = makeStyles(theme => ({
   },
 }));
 
-export const InfoIcon = styled(InfoOutlinedIcon)`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
+export const InfoIcon = styled(InfoOutlinedIcon)<{ isOpen: boolean }>`
+  color: ${({ isOpen }) =>
+    isOpen ? COLOR_MAP.BLUE : COLOR_MAP.GRAY_BODY_COPY};
   cursor: pointer;
   margin-left: 0.5rem;
   height: 18px;

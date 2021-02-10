@@ -10,10 +10,7 @@ import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
 import StyledTooltip from 'components/InfoTooltip/StyledTooltip';
-import {
-  StyledMarkdown,
-  InfoIcon,
-} from 'components/InfoTooltip/InfoTooltip.style';
+import { StyledMarkdown } from 'components/InfoTooltip/InfoTooltip.style';
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -216,11 +213,7 @@ function renderThermometer(): React.ReactElement {
 
 function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.HOSPITAL_USAGE];
-  const { body, cta } = tooltipContent;
+  const { body } = tooltipContent;
 
-  return (
-    <StyledTooltip title={<StyledMarkdown source={body} />}>
-      <InfoIcon />
-    </StyledTooltip>
-  );
+  return <StyledTooltip title={<StyledMarkdown source={body} />} />;
 }
