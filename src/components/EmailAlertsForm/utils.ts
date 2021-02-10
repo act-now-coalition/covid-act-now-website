@@ -1,7 +1,10 @@
 import { getFirebase, firebase } from 'common/firebase';
-import { Region, County } from 'common/regions';
+import { Region, County, MetroArea } from 'common/regions';
 
 export function getDefaultRegions(region: Region): Region[] {
+  if (region instanceof MetroArea) {
+    return [region, ...region.states];
+  }
   if (region instanceof County) {
     return [region, region.state];
   } else {
