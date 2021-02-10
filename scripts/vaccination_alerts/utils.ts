@@ -184,7 +184,7 @@ export function generateEmailContent(
           ? `${phaseGroup.phase}, ${phaseGroup.tier}`
           : phaseGroup.phase,
         subtitle: isMostRecentlyEligible
-          ? 'most recently Eligible'
+          ? 'most recently eligible'
           : 'eligible',
         description: markdownToHtml(phaseGroup.description),
         isCurrentPhase: isMostRecentlyEligible,
