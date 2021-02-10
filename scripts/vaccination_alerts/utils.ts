@@ -167,7 +167,6 @@ const colors = {
 };
 
 export function generateEmailContent(
-  emailAddress: string,
   vaccinationInfo: RegionVaccinePhaseInfo,
   vaccinationLinks: RegionVaccinationInfo | null,
 ): string {
@@ -226,11 +225,7 @@ export function generateEmailData(emailAddress: string, fipsCode: string) {
   );
 
   const subjectLine = `Who is currently eligible for vaccination in ${region.fullName}`;
-  const htmlContent = generateEmailContent(
-    emailAddress,
-    vaccineInfo,
-    vaccineLinks,
-  );
+  const htmlContent = generateEmailContent(vaccineInfo, vaccineLinks);
 
   return {
     Subject: subjectLine,
