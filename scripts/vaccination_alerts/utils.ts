@@ -1,6 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import * as Handlebars from 'handlebars';
+import html from 'remark-html';
+import remark from 'remark';
 import { getFirestore } from '../common/firebase';
 import regions, { getStateFips } from '../../src/common/regions';
 import {
@@ -140,4 +143,56 @@ export function getUserLocationsToAlert(
     .uniq()
     .intersection(locationsToAlert)
     .value();
+}
+
+const alertTemplate = Handlebars.compile(
+  fs.readFileSync(
+    path.join(__dirname, 'vaccination-alert-template.html'),
+    'utf8',
+  ),
+);
+
+export function generateEmailContent(
+  emailAddress: string,
+  vaccinationInfo: RegionVaccinePhaseInfo,
+): string {
+  const fipsCode = vaccinationInfo.fips;
+  const region = regions.findByFipsCodeStrict(fipsCode);
+
+  const currentPhases = vaccinationInfo.phaseGroups
+    .filter(phaseGroup => phaseGroup.currentlyEligible)
+    .map((phaseGroup, index, allCurrentPhases) => {
+      const isMostRecentlyEligible = index === allCurrentPhases.length - 1;
+
+      return {
+        title: phaseGroup.tier
+          ? `${phaseGroup.phase}, ${phaseGroup.tier}`
+          : phaseGroup.phase,
+        subtitle: isMostRecentlyEligible
+          ? 'most recently Eligible'
+          : 'eligible',
+        description: markdownToHtml(phaseGroup.description),
+        isCurrentPhase: isMostRecentlyEligible,
+      };
+    });
+
+  const mostRecentPhase = _.last(currentPhases);
+  const title = mostRecentPhase?.title
+    ? `${region.fullName} is now in ${mostRecentPhase.title} of vaccination`
+    : 'FALLBACK TITLE';
+
+  const data = {
+    title,
+    subtitle: 'People who are eligible to be vaccinated now include:',
+    sourceName: `${region.fullName} Health Department`,
+    sourceUrl: vaccinationInfo.eligibilityInfoUrl,
+    locationName: region.fullName,
+    currentPhases,
+  };
+
+  return alertTemplate(data);
+}
+
+function markdownToHtml(markdownContent: string): string {
+  return remark().use(html).processSync(markdownContent).toString();
 }

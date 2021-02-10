@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family:Arial, Helvetica, sans-serif;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .section {
+        margin-top: 24px;
+      }
+
+      .section:first-child {
+        margin-top: 0;
+      }
+
+      .center-text {
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 24px;
+        line-height: 1.5;
+        margin-top: 40px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+        color: #4f4f4f;
+      }
+      
+      h2 {
+        margin-bottom: 3px;
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .eligibility-tag {
+        color: #00D474;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .description {
+        color: #4f4f4f;
+      }
+
+      .phase {
+        padding: 16px;
+      }
+
+      .phase-highlighted {
+        background-color: rgba(255, 201, 0, 0.12);
+      }
+
+      .description ul {
+        list-style-type: '✓';
+        padding-left: 10px;
+      }
+
+      .description ul li {
+        font-size: 15px;
+        margin-top: 12px;
+        padding-left: 10px;
+      }
+
+      .description ul li::marker {
+        color: #00D474;
+      }
+
+      .source {
+        color: #828282;
+        font-size: 13px;
+      }
+
+      .source a {
+        color: #828282;
+      }
+
+      .main-cta-link  {
+        text-decoration: none;
+      }
+
+      .main-cta-btn {
+        background-color: #5900EA;
+        color: white;
+        padding: 12px;
+        border-radius: 4px;
+      }
+
+      .note {
+        color: #4f4f4f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section center-text">
+      <h1>{{title}}</h1>
+      <p class="subtitle">{{subtitle}}</p>
+    </div>
+    
+    <div class="section">
+    {{#each currentPhases}}
+      <div class="phase {{#if isCurrentPhase}}phase-highlighted{{/if}}">
+        <div class="center-text">
+          <h2>{{title}}</h2>
+          <div class="eligibility-tag">{{subtitle}}</div>
+        </div>
+        <div class="description ">
+          {{{description}}}
+        </div>
+      </div>
+    {{/each}}
+    </div>
+
+    <div class="section source center-text">
+      Source: <a href="{{sourceUrl}}">{{sourceName}}</a>
+    </div>
+    
+    <div class="section main-cta">
+      <a href="{{sourceUrl}}" class="main-cta-link">
+        <div class="main-cta-btn center-text">
+          <strong>See where and how to get vaccinated</strong></br>
+          on the {{sourceName}} website
+        </div>
+      </a>
+    </div>    
+
+    <div class="section description center-text">
+      Because eligibility varies throughout {{locationName}}, you may also want to check your county or city’s health department website.
+    </div>
+    
+    {{!-- Footer --}}
+  </body>
+</html>
