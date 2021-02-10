@@ -64,7 +64,7 @@ const VaccinePhaseGroup = ({ data }: { data: RegionPhaseGroup }) => {
       <Grid item xs={12}>
         <Typography variant="h6" style={{ margin: 0 }}>
           Phase {data.phase}
-          {data.tier && <>, tier{data.tier}</>}
+          {data.tier && <>, Tier {data.tier}</>}
         </Typography>
       </Grid>
       <Grid item xs={12}>

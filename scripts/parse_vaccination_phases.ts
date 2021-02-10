@@ -1,8 +1,12 @@
 import fetch from 'node-fetch';
-import { groupBy, forOwn } from 'lodash';
+import { groupBy, forOwn, sortBy } from 'lodash';
 import path from 'path';
 import fs from 'fs-extra';
-import { RegionVaccinationGroups } from '../src/cms-content/vaccines';
+import {
+  stateVaccinationPhases,
+  RegionVaccinePhaseInfo,
+} from '../src/cms-content/vaccines/phases';
+
 import regions from '../src/common/regions/region_db';
 
 const parse = require('csv-parse/lib/sync');
@@ -36,7 +40,7 @@ const parseRow = (row: { [key: string]: string }): CsvRow => {
   return {
     state: row['State'],
     eligibilityUrl: row['Eligibility Information URL'],
-    currentlyEligible: row['Currently Eligible'] === 'x',
+    currentlyEligible: row['Currently Eligible'].trimRight() !== '',
     startDate: row['Estimated Start Date'],
     phase: row['Phase'],
     tier: row['Tier'],
@@ -50,9 +54,9 @@ const parseRow = (row: { [key: string]: string }): CsvRow => {
 const buildRegionGroup = (
   state: string,
   rows: CsvRow[],
-): RegionVaccinationGroups => {
+): RegionVaccinePhaseInfo => {
   const firstRow = rows[0];
-  console.log(state);
+
   return {
     locationName: state,
     fips: regions.findByFullName(state.trimRight())!.fipsCode,
@@ -61,9 +65,11 @@ const buildRegionGroup = (
     phaseGroups: rows.map(row => ({
       phase: row.phase,
       tier: row.tier,
+      currentlyEligible: row.currentlyEligible,
       description: row.generalGroup,
       expandedDefinitionUrl: row.descriptionUrl,
       startDate: row.startDate,
+      updatedAt: new Date().toISOString(),
     })),
   };
 };
@@ -75,11 +81,35 @@ async function main() {
   const records = rows.map(parseRow);
   const recordsByState = groupBy(records, value => value.state);
 
+  const existingFips = stateVaccinationPhases.map(phase => phase.fips);
+
   const groups = Object.keys(recordsByState).map(key => {
     return buildRegionGroup(key, recordsByState[key]);
   });
-  await fs.writeFile(PHASES_PATH, JSON.stringify(groups, null, 2));
-  console.log(groups);
+
+  const spreadsheetFips = groups.map(group => group.fips);
+
+  const existing = stateVaccinationPhases.filter(phase =>
+    spreadsheetFips.includes(phase.fips),
+  );
+
+  const newStates = groups.filter(group => !existingFips.includes(group.fips));
+
+  console.log(`Adding states: ${newStates.map(state => state.locationName)}`);
+  console.log(`Existing states: ${existing.map(state => state.locationName)}`);
+  await fs.writeFile(
+    PHASES_PATH,
+    JSON.stringify(
+      {
+        regions: sortBy(
+          [...existing, ...newStates],
+          state => state.locationName,
+        ),
+      },
+      null,
+      2,
+    ),
+  );
 }
 
 main().catch(e => {
