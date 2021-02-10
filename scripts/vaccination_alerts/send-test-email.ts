@@ -6,6 +6,10 @@ import EmailService, {
 } from '../alert_emails/email-service';
 import { RegionVaccinePhaseInfoMap, generateEmailContent } from './utils';
 
+/**
+ * https://get.foundation/emails/inliner.html
+ */
+
 const vaccinationAlert: RegionVaccinePhaseInfoMap = {
   '29': {
     emailAlertVersion: 0,
@@ -111,8 +115,6 @@ async function main(emailAddress: string) {
     }
     process.exit(1);
   }
-
-  fs.writeFileSync(outputPath, emailContentHtml);
 }
 
 function generateEmailData(
