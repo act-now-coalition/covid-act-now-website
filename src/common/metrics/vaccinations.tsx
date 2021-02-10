@@ -8,7 +8,7 @@ import ExternalLink from 'components/ExternalLink';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
 import { InfoTooltip } from 'components/InfoTooltip';
-import { StyledMarkdown } from 'components/InfoTooltip/Tooltip.style';
+import { renderTooltipContent } from 'components/InfoTooltip';
 import { Metric } from 'common/metric';
 
 const METRIC_NAME = 'Vaccinated';
@@ -112,11 +112,11 @@ function renderThermometer(): React.ReactElement {
 
 function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.VACCINATIONS];
-  const { body } = tooltipContent;
+  const { body, cta } = tooltipContent;
 
   return (
     <InfoTooltip
-      title={<StyledMarkdown source={body} />}
+      title={renderTooltipContent(body, cta)}
       description="test test"
     />
   );

@@ -10,7 +10,7 @@ import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
 import { InfoTooltip } from 'components/InfoTooltip';
-import { StyledMarkdown } from 'components/InfoTooltip/Tooltip.style';
+import { renderTooltipContent } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -247,11 +247,11 @@ function renderThermometer(): React.ReactElement {
 
 function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.POSITIVE_TESTS];
-  const { body } = tooltipContent;
+  const { body, cta } = tooltipContent;
 
   return (
     <InfoTooltip
-      title={<StyledMarkdown source={body} />}
+      title={renderTooltipContent(body, cta)}
       description="test test"
     />
   );

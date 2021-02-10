@@ -6,6 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
 import { withStyles } from '@material-ui/core/styles';
 import theme from 'assets/theme';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 const TooltipWithStyles = withStyles({
   tooltip: {
@@ -58,4 +59,18 @@ export const HiddenDiv = styled.div`
   position: absolute;
   white-space: nowrap;
   width: 1px;
+`;
+
+export const DesktopOnly = styled.div`
+  display: none;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: block;
+  }
+`;
+
+export const MobileOnly = styled.div`
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: none;
+  }
 `;
