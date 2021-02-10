@@ -28,8 +28,6 @@ class EmailService {
     minTime: 83, // Our rate limit is 14/sec so we aim for 12/sec (83ms delay).
   });
 
-  constructor() {}
-
   async sendEmail(
     sendData: EmailSendData,
     retriesLeft: number = 4,

@@ -4,7 +4,10 @@ import {
   getCmsVaccinationInfo,
   getFirebaseVaccinationInfo,
   getUpdatedVaccinationInfo,
+  DEFAULT_ALERTS_FILE_PATH,
 } from './utils';
+
+import * as yargs from 'yargs';
 
 /**
  * Generates the `vaccination-alerts.json` file with a map of locations that
@@ -13,24 +16,46 @@ import {
  * Run via: yarn vaccinations-generate-alerts
  */
 
-const alertsFilePath = path.join(__dirname, 'vaccination-alerts.json');
-
-async function main() {
+async function main(alertsFilePath: string) {
+  console.log('Loading latest alerts from cms data');
   const cmsInfo = getCmsVaccinationInfo();
+
+  console.log('Reading latest alerts sent from Firebase');
   const firebaseInfo = await getFirebaseVaccinationInfo();
 
+  console.log('Getting snapshot of alerts to send');
   const vaccinationAlertUpdates = getUpdatedVaccinationInfo(
     cmsInfo,
     firebaseInfo,
   );
 
-  fs.writeFileSync(alertsFilePath, JSON.stringify(vaccinationAlertUpdates));
+  for (const fips of Object.keys(vaccinationAlertUpdates)) {
+    const previous = firebaseInfo[fips];
+    const current = vaccinationAlertUpdates[fips];
+    console.log(
+      `New alert for ${current.locationName}: ${
+        previous?.emailAlertVersion ?? 'None'
+      } -> ${current.emailAlertVersion}`,
+    );
+  }
+  console.log(`Saving alert snapshot to ${alertsFilePath}`);
+  fs.writeFileSync(
+    alertsFilePath,
+    JSON.stringify(vaccinationAlertUpdates, null, 2),
+  );
 }
 
 if (require.main === module) {
-  main()
+  const argv = yargs.options({
+    path: {
+      default: DEFAULT_ALERTS_FILE_PATH,
+      description: 'Output path.',
+    },
+  }).argv;
+
+  main(argv.path)
     .then(() => {
-      console.log(`Done. Generated ${alertsFilePath}`);
+      console.log(`Done. Generated `);
       process.exit(0);
     })
     .catch(err => {
