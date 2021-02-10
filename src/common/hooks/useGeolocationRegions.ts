@@ -25,17 +25,14 @@ export default function useGeolocationRegions(): Region[] {
   const { countyToZipMap } = useCountyToZipMap();
 
   // combine these and stringify so that useEffect will detect changes
-  const geolocationDataString = JSON.stringify({
-    geolocationData,
-    countyToZipMap,
-  });
+  const geolocationDataString = JSON.stringify(geolocationData);
+  const zipDataString = JSON.stringify(countyToZipMap);
   useEffect(() => {
-    if (geolocationDataString) {
-      const { geolocationInfo, countyToZipMap } = JSON.parse(
-        geolocationDataString,
-      );
-      const userRegions =
-        countyToZipMap && getGeolocatedRegions(geolocationInfo, countyToZipMap);
+    if (geolocationDataString && zipDataString) {
+      const geolocationInfo = JSON.parse(geolocationDataString);
+      const countyToZipMap = JSON.parse(zipDataString);
+
+      const userRegions = getGeolocatedRegions(geolocationInfo, countyToZipMap);
       if (!isNull(userRegions)) {
         const regionValues = values(userRegions);
         const filteredUserRegions = filterUndefinedRegions(regionValues);
@@ -45,7 +42,7 @@ export default function useGeolocationRegions(): Region[] {
         }
       }
     }
-  }, [geolocationDataString]);
+  }, [geolocationDataString, zipDataString]);
 
   return geolocatedRegions;
 }
