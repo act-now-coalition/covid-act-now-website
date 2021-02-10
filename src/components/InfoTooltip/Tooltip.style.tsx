@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { COLOR_MAP } from 'common/colors';
-import { makeStyles } from '@material-ui/core/styles';
 import { MarkdownBody } from 'components/Markdown';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fade from '@material-ui/core/Fade';
+import { withStyles } from '@material-ui/core/styles';
+import theme from 'assets/theme';
 
-export const getTooltipStyles = makeStyles(theme => ({
+const TooltipWithStyles = withStyles({
   tooltip: {
     backgroundColor: 'black',
     color: 'white',
@@ -18,7 +21,14 @@ export const getTooltipStyles = makeStyles(theme => ({
   arrow: {
     color: 'black',
   },
-}));
+})(Tooltip);
+
+export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
+  placement: 'bottom',
+  arrow: true,
+  interactive: true,
+  TransitionComponent: Fade,
+}))``;
 
 export const InfoIcon = styled(InfoOutlinedIcon)<{ isOpen: boolean }>`
   color: ${({ isOpen }) =>

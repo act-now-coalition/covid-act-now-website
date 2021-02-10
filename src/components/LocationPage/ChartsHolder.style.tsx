@@ -66,7 +66,6 @@ export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
 
   @media (min-width: ${mobileBreakpoint}) {
     max-width: unset;
-    width: fit-content;
     line-height: 1;
   }
 `;

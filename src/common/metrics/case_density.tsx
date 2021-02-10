@@ -14,8 +14,8 @@ import { MetricDefinition } from './interfaces';
 import moment from 'moment';
 import { Metric } from 'common/metric';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import StyledTooltip from 'components/InfoTooltip/StyledTooltip';
-import { StyledMarkdown } from 'components/InfoTooltip/InfoTooltip.style';
+import { InfoTooltip } from 'components/InfoTooltip';
+import { StyledMarkdown } from 'components/InfoTooltip/Tooltip.style';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -196,5 +196,5 @@ function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.CASE_DENSITY];
   const { body } = tooltipContent;
 
-  return <StyledTooltip title={<StyledMarkdown source={body} />} />;
+  return <InfoTooltip title={<StyledMarkdown source={body} />} />;
 }

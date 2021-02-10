@@ -9,8 +9,8 @@ import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import StyledTooltip from 'components/InfoTooltip/StyledTooltip';
-import { StyledMarkdown } from 'components/InfoTooltip/InfoTooltip.style';
+import { InfoTooltip } from 'components/InfoTooltip';
+import { StyledMarkdown } from 'components/InfoTooltip/Tooltip.style';
 
 const METRIC_NAME = 'Infection rate';
 
@@ -173,5 +173,5 @@ function renderInfoTooltip(): React.ReactElement {
   const tooltipContent = metricToTooltipContentMap[Metric.CASE_GROWTH_RATE];
   const { body } = tooltipContent;
 
-  return <StyledTooltip title={<StyledMarkdown source={body} />} />;
+  return <InfoTooltip title={<StyledMarkdown source={body} />} />;
 }
