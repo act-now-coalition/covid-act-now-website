@@ -776,6 +776,46 @@
           "startDate": "Q3/Q4"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Oklahoma",
+      "fips": "40",
+      "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:37:35.653Z",
+          "phase": "1",
+          "description": "* Long-term care residents and staff \n* Healthcare workers supporting direct inpatient care \n* Frontline public health staff\n* EMTs"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:38:50.801Z",
+          "phase": "2",
+          "tier": "1",
+          "description": "* First responders \n* Other healthcare workers \n* Adults age 65 and older "
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:38:51.236Z",
+          "phase": "2",
+          "tier": "2",
+          "description": "* Adults of any age with comorbidities\n* Teachers and staff in PreK-12 educational settings\n* Staff and residents in congregate locations and worksites"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:38:51.529Z",
+          "phase": "3",
+          "description": "* Teachers, staff, and residents in other educational settings\n* Critical infrastructure personnel"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:38:52.125Z",
+          "phase": "4",
+          "description": "* General public"
+        }
+      ]
     }
   ]
 }
