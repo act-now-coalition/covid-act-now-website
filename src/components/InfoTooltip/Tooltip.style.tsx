@@ -30,6 +30,8 @@ export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
   interactive: true,
   TransitionComponent: Fade,
   'aria-describedby': 'notifications-desc',
+  enterDelay: 0,
+  enterTouchDelay: 0,
 }))``;
 
 export const InfoIcon = styled(InfoOutlinedIcon)<{ isOpen: boolean }>`
