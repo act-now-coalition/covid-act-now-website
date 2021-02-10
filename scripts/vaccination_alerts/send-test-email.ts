@@ -4,6 +4,7 @@ import EmailService, {
 } from '../alert_emails/email-service';
 import { generateEmailContent, generateEmailData } from './utils';
 import { vaccinationAlert } from './vaccination-data-mock';
+import regions from '../../src/common/regions';
 
 async function main(emailAddress: string) {
   const emailService = new EmailService();
@@ -11,7 +12,9 @@ async function main(emailAddress: string) {
   const fipsCode = '08';
   const vaccineInfo = vaccinationAlert[fipsCode];
 
-  const subjectLine = 'Test Vaccination Email';
+  const region = regions.findByFipsCodeStrict(fipsCode);
+
+  const subjectLine = `Who is currently eligible for vaccination in ${region.fullName}`;
   const emailContentHtml = generateEmailContent(emailAddress, vaccineInfo);
   const emailData = generateEmailData(
     emailAddress,

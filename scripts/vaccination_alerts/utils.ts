@@ -10,6 +10,7 @@ import {
   RegionVaccinePhaseInfo,
   stateVaccinationPhases,
 } from '../../src/cms-content/vaccines/phases';
+import { COLOR_MAP } from '../../src/common/colors';
 
 export interface RegionVaccinePhaseInfoMap {
   [fipsCode: string]: RegionVaccinePhaseInfo;
@@ -145,12 +146,19 @@ export function getUserLocationsToAlert(
     .value();
 }
 
-const alertTemplate = Handlebars.compile(
-  fs.readFileSync(
-    path.join(__dirname, 'vaccination-alert-template.html'),
-    'utf8',
-  ),
-);
+const templatePath = path.join(__dirname, 'vaccination-alert-template.html');
+
+const alertTemplate = Handlebars.compile(fs.readFileSync(templatePath, 'utf8'));
+
+const colors = {
+  GREY_0: COLOR_MAP.GREY_0,
+  GREY_1: COLOR_MAP.GREY_1,
+  GREY_4: COLOR_MAP.GREY_4,
+  GREY_5: COLOR_MAP.GREY_5,
+  GREEN: COLOR_MAP.GREEN.BASE,
+  LIGHT_YELLOW: 'rgba(255, 201, 0, 0.12)',
+  PURPLE: '#5900EA',
+};
 
 export function generateEmailContent(
   emailAddress: string,
@@ -179,7 +187,7 @@ export function generateEmailContent(
   const mostRecentPhase = _.last(currentPhases);
   const title = mostRecentPhase?.title
     ? `${region.fullName} is now in ${mostRecentPhase.title} of vaccination`
-    : 'FALLBACK TITLE';
+    : `${region.fullName} has updated vaccination information`;
 
   const data = {
     title,
@@ -188,6 +196,7 @@ export function generateEmailContent(
     sourceUrl: vaccinationInfo.eligibilityInfoUrl,
     locationName: region.fullName,
     currentPhases,
+    colors,
   };
 
   return alertTemplate(data);
