@@ -9,11 +9,11 @@ import React from 'react';
 import { HiddenDiv } from './Tooltip.style';
 
 const DescriptionDiv: React.FC<{
-  description: string;
-}> = ({ description }) => {
+  content: React.ReactNode;
+}> = ({ content }) => {
   return (
     <HiddenDiv role="tooltip" id="tooltip-description">
-      {description}
+      {content}
     </HiddenDiv>
   );
 };

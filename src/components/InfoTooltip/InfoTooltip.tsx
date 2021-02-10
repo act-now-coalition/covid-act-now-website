@@ -20,7 +20,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
           onClick={() => {}}
         />
       </StyledTooltip>
-      <DescriptionDiv description={props.description} />
+      <DescriptionDiv content={props.title} />
     </>
   );
 };
