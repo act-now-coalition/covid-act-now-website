@@ -719,6 +719,63 @@
           "description": "* General Public"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Tennessee",
+      "fips": "47",
+      "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:26:43.766Z",
+          "phase": "1A",
+          "tier": "1",
+          "description": "* Frontline healthcare workers and dependent disabled adults\n* Ages 75+ "
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:26:44.090Z",
+          "phase": "1A",
+          "tier": "2",
+          "description": "* Outpatient healthcare workers with direct patient exposure\n* Ages 70+"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:26:44.457Z",
+          "phase": "1B",
+          "startDate": "Feb/Mar",
+          "description": "* K-12, Child Care\n* Other First Responders\n* Ages 65+"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:26:44.883Z",
+          "phase": "1C",
+          "description": "* 16 years old or older with high-risk health conditions\n* Ages 55+",
+          "startDate": "March/April"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:26:45.249Z",
+          "phase": "2A",
+          "description": "* Critical infrastructure workers\n* Ages 45+",
+          "startDate": "Q2/Q3"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:26:45.818Z",
+          "phase": "2B",
+          "description": "* Employed in other certain critical infrastructure industries (transportation, public infrastructure, telecommunications, utilities/energy)\n* Ages 35+",
+          "startDate": "Q2/Q3"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:26:46.365Z",
+          "phase": "3",
+          "description": "* Tennesseans in other high-risk settings (congregate living facilities, grocery workers, corrections)\n* Ages 25+",
+          "startDate": "Q3/Q4"
+        }
+      ]
     }
   ]
 }
