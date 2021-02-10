@@ -658,6 +658,67 @@
           "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-frontline essential health care personnel\n* Facility staff and residents in congregate living settings"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Vermont",
+      "fips": "50",
+      "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:14:27.238Z",
+          "phase": "1",
+          "description": "* Long-term care residents and staff\n* Healthcare workers\n* First responders"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:14:47.108Z",
+          "phase": "2",
+          "description": "* Individuals aged 75+"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:14:54.656Z",
+          "phase": "Up Next",
+          "description": "Not yet eligible but will open in the following order:\n* Individuals 70+\n* Individuals 65+\n* People with certain high-risk health conditions\n\nEstimated completion by Spring 2021",
+          "startDate": ""
+        }
+      ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "Utah",
+      "fips": "49",
+      "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-10T01:19:05.468Z",
+          "phase": "1*",
+          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Utahns 70 years and older"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:19:05.828Z",
+          "phase": "2*",
+          "startDate": "March 1",
+          "description": "* People between the ages of 65-69 \n* Adults with high-risk medical conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:19:06.280Z",
+          "startDate": "April 2020",
+          "description": "* Other age groups\n* People with underlying medical conditions not already included\n* Those who live in congregate settings and are at higher risk for the virus that causes COVID-19.",
+          "phase": "3*"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-10T01:19:06.729Z",
+          "phase": "4*",
+          "description": "* General Public"
+        }
+      ]
     }
   ]
 }
