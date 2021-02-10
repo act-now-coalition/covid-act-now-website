@@ -42,7 +42,7 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
   [Metric.POSITIVE_TESTS]: new DisabledFipsList([
-    '47093', // https://trello.com/c/pmB5mGZU/883-disabled-knox-county-tn-test-positivity
+    '48113', // Dallas county - https://trello.com/c/WhNT8JfQ
   ]),
   [Metric.VACCINATIONS]: new DisabledFipsList([
     //https://trello.com/c/9OCK0e3O/878-maine-vaccination-metric-data-off-by-2-decimal-places-likely-ratio-vs-percentage-bug
@@ -63,7 +63,6 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
     '23029',
     '23031',
     '30340',
-    '30620',
     '38860',
   ]),
 };
