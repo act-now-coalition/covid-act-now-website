@@ -6,11 +6,14 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
-import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import { InfoTooltip } from 'components/InfoTooltip';
+
+import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
 import { renderTooltipContent } from 'components/InfoTooltip';
+import {
+  metricToTooltipContentMap,
+  metricToCalculationTooltipContentMap,
+} from 'cms-content/infoTooltips'; //Chelsi:consolidate
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -146,56 +149,23 @@ function renderStatus(projections: Projections) {
   );
 }
 
-function renderDisclaimer(projections: Projections): React.ReactElement {
-  const usingCMSData =
-    projections.primary.testPositiveRateSource === 'CMSTesting';
-  const usingCDCData =
-    projections.primary.testPositiveRateSource === 'CDCTesting';
-  const usingDefaultData = !(usingCDCData || usingCMSData);
-  const inCT = projections.locationName === 'Connecticut';
+function renderDisclaimer(): React.ReactElement {
+  const { body, cta } = metricToCalculationTooltipContentMap[
+    Metric.POSITIVE_TESTS
+  ];
 
   return (
     <Fragment>
-      {inCT ? (
-        <>
-          {' '}
-          There is a known discrepancy between the data above and the state
-          dashboard. The state dashboard includes antigen tests in the
-          calculation while we exclude antigen tests.
-          <br />
-          <br />{' '}
-        </>
-      ) : (
-        ''
-      )}
-      The White House Coronavirus Task Force grades a positive test rate of more
-      than 10% as red. The countries most successful in containing COVID have
-      rates of 3% or less.{' '}
-      {usingCMSData && (
-        <React.Fragment>
-          {METRIC_NAME} for {projections.locationName} comes from data
-          aggregated by the Centers for Medicare and Medicaid Services. It is
-          calculated as a 14-day trailing average and may take a week or more to
-          update.
-        </React.Fragment>
-      )}
-      {usingCDCData && (
-        <React.Fragment>
-          {METRIC_NAME} for {projections.locationName} comes from data
-          aggregated by the Centers for Disease Control and Prevention. It is
-          calculated as a 7-day trailing average and may take 3-4 days to
-          update.
-        </React.Fragment>
-      )}
-      {usingDefaultData && (
-        <React.Fragment>
-          We calculate the rate as a 7-day trailing average.
-        </React.Fragment>
-      )}{' '}
-      Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-        our data sources
-      </ExternalLink>
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={<>disclaimer tooltip</>}
+        mainCopy={'where our data comes from'}
+      />
+      <> and </>
+      <DisclaimerTooltip
+        title={renderTooltipContent(body, cta)}
+        mainCopy={'how we calculate our metrics'}
+      />
       .
     </Fragment>
   );
@@ -246,8 +216,7 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const tooltipContent = metricToTooltipContentMap[Metric.POSITIVE_TESTS];
-  const { body, cta } = tooltipContent;
+  const { body, cta } = metricToTooltipContentMap[Metric.POSITIVE_TESTS];
 
   return (
     <InfoTooltip

@@ -8,14 +8,17 @@ import {
   formatInteger,
   formatEstimate,
 } from 'common/utils';
-import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import moment from 'moment';
 import { Metric } from 'common/metric';
-import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import { InfoTooltip } from 'components/InfoTooltip';
+
+import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
 import { renderTooltipContent } from 'components/InfoTooltip';
+import {
+  metricToTooltipContentMap,
+  metricToCalculationTooltipContentMap,
+} from 'cms-content/infoTooltips'; //Chelsi:consolidate
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -132,16 +135,22 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderDisclaimer(): React.ReactElement {
+  const { body, cta } = metricToCalculationTooltipContentMap[
+    Metric.CASE_DENSITY
+  ];
+
   return (
     <Fragment>
-      Our risk levels for daily new cases are based on the{' '}
-      <ExternalLink href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf">
-        “Key Metrics for Covid Suppression”
-      </ExternalLink>{' '}
-      by Harvard Global Health Institute and others. Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-        our data sources
-      </ExternalLink>
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={<>disclaimer tooltip</>}
+        mainCopy={'where our data comes from'}
+      />
+      <> and </>
+      <DisclaimerTooltip
+        title={renderTooltipContent(body, cta)}
+        mainCopy={'how we calculate our metrics'}
+      />
       .
     </Fragment>
   );
@@ -193,8 +202,7 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const tooltipContent = metricToTooltipContentMap[Metric.CASE_DENSITY];
-  const { body, cta } = tooltipContent;
+  const { body, cta } = metricToTooltipContentMap[Metric.CASE_DENSITY];
 
   return (
     <InfoTooltip

@@ -4,12 +4,15 @@ import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from 'components/ExternalLink';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
-import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import { InfoTooltip } from 'components/InfoTooltip';
-import { renderTooltipContent } from 'components/InfoTooltip';
 import { Metric } from 'common/metric';
+
+import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
+import { renderTooltipContent } from 'components/InfoTooltip';
+import {
+  metricToTooltipContentMap,
+  metricToCalculationTooltipContentMap,
+} from 'cms-content/infoTooltips'; //Chelsi:consolidate
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -90,17 +93,23 @@ function trackClickVaccinationData() {
 }
 
 function renderDisclaimer(): React.ReactElement {
+  const { body, cta } = metricToCalculationTooltipContentMap[
+    Metric.VACCINATIONS
+  ];
+
   return (
     <Fragment>
-      Vaccination data is provided by the{' '}
-      <ExternalLink
-        href="https://covid.cdc.gov/covid-data-tracker/#vaccinations"
-        onClick={trackClickVaccinationData}
-      >
-        CDC
-      </ExternalLink>{' '}
-      or retrieved from state websites. Reporting may be delayed from the time
-      of vaccination.
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={<>disclaimer tooltip</>}
+        mainCopy={'where our data comes from'}
+      />
+      <> and </>
+      <DisclaimerTooltip
+        title={renderTooltipContent(body, cta)}
+        mainCopy={'how we calculate our metrics'}
+      />
+      .
     </Fragment>
   );
 }
@@ -111,8 +120,7 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const tooltipContent = metricToTooltipContentMap[Metric.VACCINATIONS];
-  const { body, cta } = tooltipContent;
+  const { body, cta } = metricToTooltipContentMap[Metric.VACCINATIONS];
 
   return (
     <InfoTooltip

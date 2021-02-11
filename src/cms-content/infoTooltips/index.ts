@@ -1,18 +1,19 @@
 import { Markdown } from '../utils';
-import toolTipContent from './info-tooltips.json';
+import infoToolTipContent from './info-tooltips.json';
+import metricCaculationTooltipContent from '../metric-calculation-tooltips.json';
 import { Metric } from 'common/metricEnum';
 import { assert } from 'common/utils';
 
-export interface InfoTooltip {
+export interface Tooltip {
   title: string;
   id: string;
   body: Markdown;
   cta: Markdown;
 }
 
-function findContentById(id: string): InfoTooltip {
-  const tooltipContent = toolTipContent.tooltip.find(
-    (item: InfoTooltip) => item.id === id,
+function findContentById(id: string): Tooltip {
+  const tooltipContent = infoToolTipContent.tooltip.find(
+    (item: Tooltip) => item.id === id,
   );
   assert(
     tooltipContent,
@@ -21,12 +22,23 @@ function findContentById(id: string): InfoTooltip {
   return tooltipContent;
 }
 
-export const locationPageHeaderTooltipContent: InfoTooltip = findContentById(
+function findCalculationContentById(id: string): Tooltip {
+  const tooltipContent = metricCaculationTooltipContent.tooltip.find(
+    (item: Tooltip) => item.id === id,
+  );
+  assert(
+    tooltipContent,
+    `Tooltip content unexpectedly not found for id: ${id}`,
+  );
+  return tooltipContent;
+}
+
+export const locationPageHeaderTooltipContent: Tooltip = findContentById(
   'location-page-header',
 );
 
 type MetricToTooltipContent = {
-  [key in Metric]: InfoTooltip;
+  [key in Metric]: Tooltip;
 };
 
 export const metricToTooltipContentMap: MetricToTooltipContent = {
@@ -35,4 +47,12 @@ export const metricToTooltipContentMap: MetricToTooltipContent = {
   [Metric.POSITIVE_TESTS]: findContentById('positive-test-rate'),
   [Metric.VACCINATIONS]: findContentById('percent-vaccinated'),
   [Metric.HOSPITAL_USAGE]: findContentById('icu-capacity-used'),
+};
+
+export const metricToCalculationTooltipContentMap: MetricToTooltipContent = {
+  [Metric.CASE_DENSITY]: findCalculationContentById('daily-new-cases'),
+  [Metric.CASE_GROWTH_RATE]: findCalculationContentById('infection-rate'),
+  [Metric.POSITIVE_TESTS]: findCalculationContentById('positive-test-rate'),
+  [Metric.VACCINATIONS]: findCalculationContentById('percent-vaccinated'),
+  [Metric.HOSPITAL_USAGE]: findCalculationContentById('icu-capacity-used'),
 };

@@ -6,11 +6,14 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger, assert } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
-import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import { InfoTooltip } from 'components/InfoTooltip';
+
+import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
 import { renderTooltipContent } from 'components/InfoTooltip';
+import {
+  metricToTooltipContentMap,
+  metricToCalculationTooltipContentMap,
+} from 'cms-content/infoTooltips'; //Chelsi:consolidate
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -150,17 +153,23 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(projections: Projections): React.ReactElement {
+function renderDisclaimer(): React.ReactElement {
+  const { body, cta } = metricToCalculationTooltipContentMap[
+    Metric.HOSPITAL_USAGE
+  ];
+
   return (
     <Fragment>
-      ICU data sourced from the{' '}
-      <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
-        Department of Health and Human Services (HHS)
-      </ExternalLink>
-      . Learn more about our{' '}
-      <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
-        ICU capacity methodology
-      </ExternalLink>
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={<>disclaimer tooltip</>}
+        mainCopy={'where our data comes from'}
+      />
+      <> and </>
+      <DisclaimerTooltip
+        title={renderTooltipContent(body, cta)}
+        mainCopy={'how we calculate our metrics'}
+      />
       .
     </Fragment>
   );
@@ -212,8 +221,7 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const tooltipContent = metricToTooltipContentMap[Metric.HOSPITAL_USAGE];
-  const { body, cta } = tooltipContent;
+  const { body, cta } = metricToTooltipContentMap[Metric.HOSPITAL_USAGE];
 
   return (
     <InfoTooltip

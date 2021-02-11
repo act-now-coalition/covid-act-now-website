@@ -6,11 +6,14 @@ import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
-import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
 import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
 import { renderTooltipContent } from 'components/InfoTooltip';
+
+import {
+  metricToTooltipContentMap,
+  metricToCalculationTooltipContentMap,
+} from 'cms-content/infoTooltips'; //Chelsi:consolidate
 
 const METRIC_NAME = 'Infection rate';
 
@@ -119,6 +122,10 @@ function renderStatus(projections: Projections): React.ReactElement {
 
 // title is content of tooltip
 function renderDisclaimer(): React.ReactElement {
+  const { body, cta } = metricToCalculationTooltipContentMap[
+    Metric.CASE_GROWTH_RATE
+  ];
+
   return (
     <Fragment>
       <>Learn more about </>
@@ -128,7 +135,7 @@ function renderDisclaimer(): React.ReactElement {
       />
       <> and </>
       <DisclaimerTooltip
-        title={<>disclaimer tooltip 2</>}
+        title={renderTooltipContent(body, cta)}
         mainCopy={'how we calculate our metrics'}
       />
       .
@@ -182,8 +189,7 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const tooltipContent = metricToTooltipContentMap[Metric.CASE_GROWTH_RATE];
-  const { body, cta } = tooltipContent;
+  const { body, cta } = metricToTooltipContentMap[Metric.CASE_GROWTH_RATE];
 
   return (
     <InfoTooltip
