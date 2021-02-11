@@ -31,9 +31,12 @@ export type FipsCode = string;
 export type Email = string;
 export type EmailFips = [Email, FipsCode];
 
-const alertsFilePath = path.join(__dirname, 'vaccination-alerts.json');
-
 const VACCINATION_VERSIONS_COLLECTION = 'vaccination-info-updates';
+
+export const DEFAULT_ALERTS_FILE_PATH = path.join(
+  __dirname,
+  'vaccination-alerts.json',
+);
 
 const emailTemplatePath = path.join(
   __dirname,
@@ -84,7 +87,9 @@ export function getUpdatedVaccinationInfo(
   return updatedInfoByFips;
 }
 
-export function readVaccinationAlerts(): RegionVaccinePhaseInfoMap {
+export function readVaccinationAlerts(
+  alertsFilePath: string,
+): RegionVaccinePhaseInfoMap {
   const data = fs.readFileSync(alertsFilePath, 'utf8');
   return JSON.parse(data);
 }
@@ -142,11 +147,9 @@ export function getLocationsToAlert(
  *
  * Note: Metro areas are not notified when using this logic.
  */
-export function getUserLocationsToAlert(
-  userLocations: FipsCode[],
-  locationsToAlert: FipsCode[],
-): FipsCode[] {
-  return _.chain(userLocations)
+export function getStateFipsCodesSet(fipsCodes: FipsCode[]) {
+  // All state fips codes that a user is subscribed to.
+  return _.chain(fipsCodes)
     .map(fipsCode => {
       const region = regions.findByFipsCode(fipsCode);
       const stateFips = region ? getStateFips(region) : null;
@@ -154,7 +157,6 @@ export function getUserLocationsToAlert(
     })
     .filter(stateFips => stateFips.length > 0)
     .uniq()
-    .intersection(locationsToAlert)
     .value();
 }
 
