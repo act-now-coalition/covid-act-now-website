@@ -11,26 +11,10 @@ export interface Tooltip {
   cta: Markdown;
 }
 
-function getInfoTooltipById(id: string): Tooltip {
-  const infoTooltip = infoToolTipContent.tooltip.find(
-    (item: Tooltip) => item.id === id,
-  );
-  assert(
-    infoTooltip,
-    `Info tooltip content unexpectedly not found for id: ${id}`,
-  );
-  return infoTooltip;
-}
-
-function getMetricCalculationTooltipById(id: string): Tooltip {
-  const metricCalculationTooltip = metricCaculationTooltipContent.tooltip.find(
-    (item: Tooltip) => item.id === id,
-  );
-  assert(
-    metricCalculationTooltip,
-    `Info tooltip content unexpectedly not found for id: ${id}`,
-  );
-  return metricCalculationTooltip;
+function getTooltipContentById(id: string, tooltipSet: Tooltip[]): Tooltip {
+  const content = tooltipSet.find((item: Tooltip) => item.id === id);
+  assert(content, `Info tooltip content unexpectedly not found for id: ${id}`);
+  return content;
 }
 
 interface MetricTooltipObj {
@@ -44,8 +28,11 @@ type MetricToTooltipContentMap = {
 
 function getMetricMapById(id: string): MetricTooltipObj {
   return {
-    metricDefinition: getInfoTooltipById(id),
-    metricCalculation: getMetricCalculationTooltipById(id),
+    metricDefinition: getTooltipContentById(id, infoToolTipContent.tooltip),
+    metricCalculation: getTooltipContentById(
+      id,
+      metricCaculationTooltipContent.tooltip,
+    ),
   };
 }
 
@@ -57,6 +44,7 @@ export const metricToTooltipMap: MetricToTooltipContentMap = {
   [Metric.HOSPITAL_USAGE]: getMetricMapById('icu-capacity-used'),
 };
 
-export const locationPageHeaderTooltipContent: Tooltip = getInfoTooltipById(
+export const locationPageHeaderTooltipContent: Tooltip = getTooltipContentById(
   'location-page-header',
+  infoToolTipContent.tooltip,
 );
