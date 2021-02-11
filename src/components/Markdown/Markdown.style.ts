@@ -165,3 +165,10 @@ export const CenterEmbed = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const EmbedLink = styled.span`
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: underline;
+`;

@@ -11,10 +11,8 @@ import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
-import { CenterEmbed } from './Markdown.style';
+import { CenterEmbed, EmbedLink } from './Markdown.style';
 import EmbedPreview from '../ShareBlock/EmbedPreview';
-import regions from 'common/regions';
-import { EmbedPrompt } from '../ShareBlock/ShareBlock.style';
 
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
@@ -30,34 +28,36 @@ export const scrollWithTimeout = (element: any, offset: number) => {
   }, 600);
 };
 
+const EmbedBox: React.FC<{ href: string }> = ({ href }) => {
+  return (
+    <CenterEmbed>
+      <iframe
+        src={href}
+        title="Covid Act Now"
+        width="400"
+        height="390"
+        frameBorder="0"
+        scrolling="no"
+      />
+    </CenterEmbed>
+  );
+};
+
 const CanEmbed: React.FC<{ href: string }> = ({ href }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const region =
-    href === 'https://covidactnow.org/embed/us/fips/19100'
-      ? regions.findByFipsCode('19100')!
-      : undefined;
-  return (
-    <div>
-      <CenterEmbed>
-        <iframe
-          src={href}
-          title="Covid Act Now"
-          width="400"
-          height="390"
-          frameBorder="0"
-          scrolling="no"
-        />
-        <EmbedPrompt>
-          <span onClick={() => setIsOpen(true)}>Embed on your website</span>
-        </EmbedPrompt>
-      </CenterEmbed>
-      <EmbedPreview
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        region={region}
-      />
-    </div>
-  );
+  if (href !== 'https://covidactnow.org/embed/us/') {
+    return <EmbedBox href={href} />;
+  } else {
+    return (
+      <>
+        <EmbedBox href={href} />
+        <EmbedLink tabIndex={0} role="button" onClick={() => setIsOpen(true)}>
+          Embed on your website
+        </EmbedLink>
+        <EmbedPreview open={isOpen} onClose={() => setIsOpen(false)} />
+      </>
+    );
+  }
 };
 
 const MarkdownLink: React.FC<{
