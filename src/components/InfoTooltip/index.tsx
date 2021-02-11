@@ -2,7 +2,7 @@ import React from 'react';
 import InfoTooltip from './InfoTooltip';
 import DisclaimerTooltip from './DisclaimerTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';
-import { StyledMarkdown, MobileOnly, DesktopOnly } from './Tooltip.style';
+import { StyledMarkdown } from './Tooltip.style';
 
 export { InfoTooltip, DisclaimerTooltip };
 
@@ -15,18 +15,7 @@ export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
  */
 export const renderTooltipContent = (body: string, cta?: string) => (
   <>
-    <MobileOnly>
-      <StyledMarkdown source={body} />
-      {cta && (
-        <>
-          <br />
-          <StyledMarkdown source={cta} />
-        </>
-      )}
-    </MobileOnly>
-
-    <DesktopOnly>
-      <StyledMarkdown source={cta ? `${body} ${cta}` : body} />
-    </DesktopOnly>
+    <StyledMarkdown source={body} />
+    <StyledMarkdown source={cta} />
   </>
 );

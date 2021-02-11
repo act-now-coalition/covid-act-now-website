@@ -65,6 +65,10 @@ export const StyledMarkdown = styled(MarkdownBody)`
     line-height: 1.4;
     margin: 0;
   }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 export const HiddenDiv = styled.div`
@@ -75,20 +79,6 @@ export const HiddenDiv = styled.div`
   position: absolute;
   white-space: nowrap;
   width: 1px;
-`;
-
-export const DesktopOnly = styled.div`
-  display: none;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    display: block;
-  }
-`;
-
-export const MobileOnly = styled.div`
-  @media (min-width: ${materialSMBreakpoint}) {
-    display: none;
-  }
 `;
 
 export const StyledSpan = styled.span<{ isOpen: boolean }>`

@@ -156,12 +156,12 @@ function renderDisclaimer(): React.ReactElement {
 
   return (
     <Fragment>
-      <>Learn more about </>
-      <DisclaimerTooltip
+      <>Learn more about where our data comes from and </>
+      {/* <DisclaimerTooltip
         title={<>disclaimer tooltip</>}
         mainCopy={'where our data comes from'}
       />
-      <> and </>
+      <> and </> */}
       <DisclaimerTooltip
         title={renderTooltipContent(body, cta)}
         mainCopy={'how we calculate our metrics'}

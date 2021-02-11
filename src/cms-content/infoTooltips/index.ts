@@ -1,5 +1,5 @@
 import { Markdown } from '../utils';
-import infoToolTipContent from './info-tooltips.json';
+import infoToolTipContent from '../info-tooltips.json';
 import metricCaculationTooltipContent from '../metric-calculation-tooltips.json';
 import { Metric } from 'common/metricEnum';
 import { assert } from 'common/utils';
@@ -33,9 +33,9 @@ function findCalculationContentById(id: string): Tooltip {
   return tooltipContent;
 }
 
-export const locationPageHeaderTooltipContent: Tooltip = findContentById(
-  'location-page-header',
-);
+// export const locationPageHeaderTooltipContent: Tooltip = findContentById(
+//   'location-page-header',
+// );
 
 type MetricToTooltipContent = {
   [key in Metric]: Tooltip;
