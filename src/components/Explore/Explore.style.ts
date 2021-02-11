@@ -356,3 +356,22 @@ export const NormalizeSubLabel = styled.div`
   margin-left: 2rem;
   transform: translateY(-0.75rem);
 `;
+
+export const DisclaimerWrapper = styled.div`
+  background: #fbfbfb;
+  max-width: 600px;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin: 0.5rem 0 1.5rem;
+  padding: 1rem;
+  flex: 1;
+
+  @media (max-width: 900px) {
+    margin: 0 1rem 1.5rem;
+  }
+`;
+
+export const DisclaimerBody = styled(Typography)`
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.7);
+`;

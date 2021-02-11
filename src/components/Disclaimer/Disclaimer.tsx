@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisclaimerWrapper, DisclaimerBody } from './Disclaimer.style';
+import { DisclaimerWrapper } from './Disclaimer.style';
 import { getMetricDisclaimer } from 'common/metric';
 import { Projections } from 'common/models/Projections';
 
@@ -12,9 +12,7 @@ const Disclaimer = ({
 }) => {
   return (
     <DisclaimerWrapper>
-      <DisclaimerBody>
-        {getMetricDisclaimer(metricName, projections)}
-      </DisclaimerBody>
+      {getMetricDisclaimer(metricName, projections)}
     </DisclaimerWrapper>
   );
 };

@@ -9,7 +9,7 @@ import { MetricDefinition } from './interfaces';
 import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { metricToTooltipContentMap } from 'cms-content/infoTooltips';
-import { InfoTooltip } from 'components/InfoTooltip';
+import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
 import { renderTooltipContent } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Infection rate';
@@ -117,19 +117,31 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
+// title is content of tooltip
 function renderDisclaimer(): React.ReactElement {
   return (
     <Fragment>
-      Each data point is a 14-day weighted average. We present the most recent
-      seven days of data as a dashed line, as data is often revised by states
-      several days after reporting. Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-        our data sources
-      </ExternalLink>
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={<>disclaimer tooltip</>}
+        mainCopy={'where our data comes from'}
+      />
+      <> and </>
+      <DisclaimerTooltip
+        title={<>disclaimer tooltip 2</>}
+        mainCopy={'how we calculate our metrics'}
+      />
       .
     </Fragment>
   );
 }
+
+// const renderDataSourceCopy () => {
+//   const body = 'This one is a bit complicated. To calculate infection growth, a mathematical model combines trends in daily new cases from the last ~14 day,  with estimates for other variables, such as how many days on average occur between infection and transmission.'
+//   const cta =
+//   title={renderTooltipContent(body, cta)}
+
+// }
 
 function renderThermometer(): React.ReactElement {
   const levelInfo = CASE_GROWTH_RATE_LEVEL_INFO_MAP;

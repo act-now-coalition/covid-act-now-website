@@ -90,3 +90,10 @@ export const MobileOnly = styled.div`
     display: none;
   }
 `;
+
+export const StyledSpan = styled.span<{ isOpen: boolean }>`
+  text-decoration: ${({ isOpen }) => !isOpen && 'underline'};
+  cursor: pointer;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.875rem;
+`;
