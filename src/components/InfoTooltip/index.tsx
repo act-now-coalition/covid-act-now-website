@@ -5,9 +5,7 @@ import { StyledMarkdown, MobileOnly, DesktopOnly } from './Tooltip.style';
 
 export { InfoTooltip };
 
-export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
-  description: string;
-};
+export type StyledTooltipProps = Omit<TooltipProps, 'children'>;
 
 /**
  * Mobile tooltip has a line break before the hyperlinked CTA. Desktop does not.

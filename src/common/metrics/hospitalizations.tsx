@@ -218,7 +218,7 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body, cta)}
-      description="test test"
+      aria-label={`Description of ${ICUCapacityUsed.metricName} metric`}
     />
   );
 }

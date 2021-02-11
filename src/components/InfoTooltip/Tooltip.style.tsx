@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import { withStyles } from '@material-ui/core/styles';
 import theme from 'assets/theme';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import CloseIcon from '@material-ui/icons/Close';
 
 const TooltipWithStyles = withStyles({
   tooltip: {
@@ -16,7 +17,7 @@ const TooltipWithStyles = withStyles({
     lineHeight: '1.4',
     padding: '16px',
     [theme.breakpoints.down('xs')]: {
-      padding: '16px 24px',
+      padding: '8px 24px 20px',
     },
   },
   arrow: {
@@ -33,6 +34,19 @@ export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
   enterDelay: 0,
   enterTouchDelay: 0,
 }))``;
+
+export const StyledCloseIcon = styled(CloseIcon)`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  margin-left: auto;
+  transform: translateX(16px);
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: none;
+  }
+`;
 
 export const InfoIcon = styled(InfoOutlinedIcon)<{ isOpen: boolean }>`
   color: ${({ isOpen }) =>
