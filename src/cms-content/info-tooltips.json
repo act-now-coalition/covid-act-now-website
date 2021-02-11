@@ -1,0 +1,34 @@
+{
+  "tooltip": [
+    {
+      "title": "Daily new cases",
+      "id": "daily-new-cases",
+      "body": "Daily new cases, also known as incidence, is the number of new COVID cases we are seeing emerge each day in a location. This is measured by the number of positive test results, and does not include individuals who are infected but asymptomatic or never get tested. \n\nWe generally see daily new cases of zero for several consecutive months in countries that have successfully contained COVID and are now operating at normal levels of activity, such as Taiwan, New Zealand, and Australia.",
+      "cta": "[Keep reading to learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+    },
+    {
+      "title": "Infection rate",
+      "id": "infection-rate",
+      "body": "Infection rate, also often referred to as R(t), represents how fast COVID is spreading in a given area right now. Specifically, it estimates the number of people that a single infected person goes on to infect.\n\nFor example, an infection rate of 3 estimates  that, in that location, one infected person will infect three other people, and each of those three people will each go on to infect three more people, bringing the total count of infections to 9 people. Eventually, 9 will become 27 and then 81, and so forth.\n\nDaily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future.\n\nWe generally see infection rates of zero for several consecutive months in countries that have successfully contained COVID and are now operating at normal levels of activity, such as Taiwan, New Zealand, and Australia.",
+      "cta": "[Keep reading to learn more about infection rate.](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)"
+    },
+    {
+      "title": "Positive test rate",
+      "id": "positive-test-rate",
+      "body": "Test Positivity is the percentage of COVID tests that come back positive.\n\nThe higher the Test Positivity , the more likely we are to be missing unknown infections which could lead to more outbreaks. A lower Test Positivity means either fewer people are infected or more people are being tested.\n\nWe generally see a Test Positivity of less than 1% in countries who have successfully contained COVID and are operating at normal levels of activity, such as Taiwan, New Zealand, and Australia.",
+      "cta": "[Keep reading to learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
+    },
+    {
+      "title": "ICU capacity used",
+      "id": "icu-capacity-used",
+      "body": "ICU capacity used measures the percentage of staffed intensive care unit (ICU) beds in a location’s healthcare system that are currently in use by both COVID and non-COVID patients.\n\nThe ICU is the part of a hospital for people who are really sick and each ICU bed is equipped with special equipment that regular hospitals don’t have, such as ventilators that may save the lives of the sickest patients. ICU beds are important because they may be the difference between life and death for people, including both COVID patients, and other patients, such as people who have had a heart attack or suffered an injury.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.",
+      "cta": "[Keep reading to learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)."
+    },
+    {
+      "title": "Percent vaccinated",
+      "id": "percent-vaccinated",
+      "body": "Percent vaccinated is the percentage of people in a given location that have started the vaccination process by receiving at least their first shot.",
+      "cta": "[Keep reading to learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated)."
+    }
+  ]
+}
