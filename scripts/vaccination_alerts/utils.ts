@@ -1,12 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import * as Handlebars from 'handlebars';
 import { getFirestore } from '../common/firebase';
+import { COLOR_MAP } from '../../src/common/colors';
 import regions, { getStateFips } from '../../src/common/regions';
 import {
   RegionVaccinePhaseInfo,
   stateVaccinationPhases,
 } from '../../src/cms-content/vaccines/phases';
+import {
+  getEmailAlertData,
+  VaccinationEmailAlertData,
+} from '../../src/cms-content/vaccines/email-alerts';
+import { toISO8601 } from '../alert_emails/utils';
 
 export interface RegionVaccinePhaseInfoMap {
   [fipsCode: string]: RegionVaccinePhaseInfo;
@@ -30,6 +37,16 @@ export const DEFAULT_ALERTS_FILE_PATH = path.join(
   __dirname,
   'vaccination-alerts.json',
 );
+
+const emailTemplatePath = path.join(
+  __dirname,
+  'vaccination-alert-template.html',
+);
+
+const emailTemplate = Handlebars.compile(
+  fs.readFileSync(emailTemplatePath, 'utf8'),
+);
+
 export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
   return _.chain(stateVaccinationPhases)
     .map(stateInfo => [stateInfo.fips, stateInfo])
@@ -140,4 +157,31 @@ export function getStateFipsCodesSet(fipsCodes: FipsCode[]) {
     })
     .filter(stateFips => stateFips.length > 0)
     .uniq();
+}
+
+/**
+ * Return a HTML string with the content of the email
+ */
+function renderEmail(data: VaccinationEmailAlertData) {
+  return emailTemplate({ ...data, colors: COLOR_MAP });
+}
+
+/**
+ * Generates the information that the email service needs to send the email
+ */
+export function generateEmailData(emailAddress: string, fipsCode: string) {
+  const emailData = getEmailAlertData(emailAddress, fipsCode);
+  const emailHtmlContent = renderEmail(emailData);
+
+  // Writing the file locally is useful while styling
+  // fs.writeFileSync('alert.html', emailHtmlContent);
+
+  return {
+    Subject: emailData.emailSubjectLine,
+    To: [emailAddress],
+    Html: emailHtmlContent,
+    From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
+    ReplyTo: 'noreply@covidactnow.org',
+    Group: `vaccination-alerts_${toISO8601(new Date())}`,
+  };
 }
