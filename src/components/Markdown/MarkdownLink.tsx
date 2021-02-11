@@ -20,10 +20,10 @@ import { CenterEmbed } from './Markdown.style';
  */
 
 /* Implementing lazy loading requires a short timeout to make scrollWithOffset scroll the page to the correct location */
-const scrollWithTimeout = (element: any, offset: number) => {
+export const scrollWithTimeout = (element: any, offset: number) => {
   return setTimeout(() => {
     scrollWithOffset(element, offset);
-  }, 400);
+  }, 600);
 };
 
 const MarkdownLink: React.FC<{

@@ -41,31 +41,8 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_DENSITY]: new DisabledFipsList([]),
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
-  [Metric.POSITIVE_TESTS]: new DisabledFipsList([
-    '47093', // https://trello.com/c/pmB5mGZU/883-disabled-knox-county-tn-test-positivity
-  ]),
-  [Metric.VACCINATIONS]: new DisabledFipsList([
-    //https://trello.com/c/9OCK0e3O/878-maine-vaccination-metric-data-off-by-2-decimal-places-likely-ratio-vs-percentage-bug
-    '23001',
-    '23003',
-    '23005',
-    '23007',
-    '23009',
-    '23011',
-    '23013',
-    '23015',
-    '23017',
-    '23019',
-    '23021',
-    '23023',
-    '23025',
-    '23027',
-    '23029',
-    '23031',
-    '30340',
-    '30620',
-    '38860',
-  ]),
+  [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
+  [Metric.VACCINATIONS]: new DisabledFipsList([]),
 };
 
 /**

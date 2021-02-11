@@ -66,6 +66,7 @@ export const COLOR_MAP = {
   LIGHTGRAY: GREY_0,
   LIGHTGRAY_BG: GREY_0,
   LIGHT_YELLOW: '#FFF1BF',
+  LIGHT_YELLOW_EMAIL: 'rgba(255, 201, 0, 0.12)',
   BLACK: '#000000',
 };
 

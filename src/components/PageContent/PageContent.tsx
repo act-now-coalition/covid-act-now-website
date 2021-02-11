@@ -9,11 +9,14 @@ import {
   Sticky,
   DesktopOnly,
 } from './PageContent.style';
+import { useScrollToElement } from 'common/hooks';
 
 const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
   children,
   sidebarItems,
 }) => {
+  useScrollToElement();
+
   return (
     <Fragment>
       <PageContainer>
