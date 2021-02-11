@@ -15,9 +15,15 @@
       "category": "Testing"
     },
     {
+      "term": "Antigen",
+      "termId": "antigen",
+      "definition": "Antigens are substances that can trigger your body’s immune response. There are two types of antigens: foreign antigens, which come from outside of the body, like from [viruses](#virus), and autoantigens, which come from inside the body. Usually, your immune system will not recognize autoantigens unless you have an autoimmune disease that causes your body to attack itself. Foreign antigens are the molecular structures found on the surface of viruses and include spike proteins. Your immune system responds to the presence of antigens by creating [antibodies](#antibodies) to recognize and fight the specific antigen. As the virus reproduces, mutations can occur in its spike proteins, which can make it more difficult for antibodies to recognize the virus. [Antigen tests](#antigen-test), also known as rapid tests, look for the presence of specific spike proteins to determine if someone is infected with COVID.",
+      "category": "Disease science"
+    },
+    {
       "term": "Antigen test",
       "termId": "antigen-test",
-      "definition": "An antigen test, also referred to as a rapid test, is one of many types of COVID tests. Like a [PCR test](#pcr-test), an antigen test identifies people who are currently infected with COVID. It looks for proteins of the virus in someone’s nose and throat secretions using the same technology as the rapid strep test you would take at your doctor’s office. \n\nAn antigen test is very different from an [antibody test](#antibody-test), which only helps identify people who have been infected with COVID in the past. \n\nAntigen tests can provide test results in minutes, unlike PCR tests which require between several hours and several days to process results in a lab. Due to their lower cost and quick result turnaround, antigen tests could be used to screen people in environments such as hospitals, workplaces, or schools, where it is important to quickly identify active infection. There is, however, concern about the accuracy of antigen testing, as the reported rate of [false negatives](#false-negative) has been [as high as 50 percent](https://www.sciencemag.org/news/2020/05/coronavirus-antigen-tests-quick-and-cheap-too-often-wrong).",
+      "definition": "An antigen test, also referred to as a rapid test, is one of many types of COVID tests. Like a [PCR test](#pcr-test), an antigen test identifies people who are currently infected with COVID. It looks for proteins of the virus ([antigens](#antigen)) in someone’s nose and throat secretions using the same technology as the rapid strep test you would take at your doctor’s office. \n\nAn antigen test is very different from an [antibody test](#antibody-test), which only helps identify people who have been infected with COVID in the past. \n\nAntigen tests can provide test results in minutes, unlike PCR tests which require between several hours and several days to process results in a lab. Due to their lower cost and quick result turnaround, antigen tests could be used to screen people in environments such as hospitals, workplaces, or schools, where it is important to quickly identify active infection. There is, however, concern about the accuracy of antigen testing, as the reported rate of [false negatives](#false-negative) has been [as high as 50 percent](https://www.sciencemag.org/news/2020/05/coronavirus-antigen-tests-quick-and-cheap-too-often-wrong).",
       "category": "Testing"
     },
     {
@@ -255,6 +261,12 @@
       "category": "Prevention and mitigation"
     },
     {
+      "term": "Mutation",
+      "termId": "mutation",
+      "definition": "Mutations are changes that occur in a virus’s genetic code. In order for a [virus](#virus) to reproduce, it needs to make all of the protein components in its RNA or DNA, and copy the RNA or DNA so that new viruses can continue to replicate. Each time that a virus replicates, its genes can undergo random copying errors, or mutations, that can lead to alterations in the virus’ antigens. Some mutations can help the virus spread more easily, like N501Y mutation, which is thought to make the virus more transmissible, and E484K, which can help the virus evade antibody detection. But, most mutations have little or no effect on the virus. When a virus accumulates mutations, it becomes a new version of the virus, known as a [variant](#variant).",
+      "category": "Disease science"
+    },
+    {
       "term": "Nowcasting",
       "termId": "nowcasting",
       "definition": "Nowcasting monitors the current state and trajectory of a disease. In the case of COVID, nowcasting provides an understanding of how COVID is evolving right now and in the near future. \n\nCovid Act Now’s five metrics — [daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases), [infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate), [positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate), [](https://covidactnow.org/covid-risk-levels-metrics#tracers-hired)[ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used), and [% vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated) — are nowcasting tools that help capture the impact of COVID on your community.",
@@ -312,6 +324,12 @@
       "term": "Polymerase Chain Reaction (PCR) test ",
       "termId": "pcr-test",
       "definition": "PCR tests look for the virus in the respiratory tract to determine if someone is actively infected with COVID. This type of test, usually performed with a nose or throat swab, is vital to identifying active cases and is used to determine [test positivity](#positive-test-rate). \n\nA PCR test is very different from an [antibody test](#antibody-test), also referred to as a serology test, which only helps identify people who have been infected with COVID in the past. PCR tests are currently used to find the majority of active COVID infections.",
+      "category": "Testing"
+    },
+    {
+      "term": "Pool testing",
+      "termId": "pool-testing",
+      "definition": "Pool testing, also referred to as pooling, is a process in which samples — such as [PCR nasal swabs](https://covidactnow.org/glossary#pcr-test) — are collected and tested in a batch, or pool, rather than individually. If the pool comes back positive, one or more of the people in the pool may be [infected](https://covidactnow.org/glossary#infection), and each sample must be tested again individually. The hope is that by pooling samples, there will be fewer overall tests, saving testing supplies and allowing more tests to be run at a time, according to the [FDA](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-issues-first-emergency-authorization-sample-pooling-diagnostic), which approved pooled testing for Quest Diagnostics in July.",
       "category": "Testing"
     },
     {
@@ -471,6 +489,12 @@
       "category": "Treatment"
     },
     {
+      "term": "Variant",
+      "termId": "variant",
+      "definition": "Variants are new versions of viruses that occur as the virus accumulates [mutations](#mutation). Each time a [virus](#virus) copies its genetic material in order to reproduce, there's a chance for an error, or mutation, to occur. Usually, mutations are random and have no significant impact on the virus’ behavior, leading the variant to die out. However, when a large number of helpful mutations changes the virus in a clinical or epidemiologically significant way, such as by making it more transmissible or more stable in its environment, the variant can become widespread. For more information on specific variants and their impact on vaccines, read our explainers on [Variants and the Science of Virus Mutations](https://covidactnow.org/covid-explained/variants-science-virus-mutations) and [Variants and Vaccines](https://covidactnow.org/covid-explained/covid-variants-vaccines).",
+      "category": "Disease science"
+    },
+    {
       "term": "Ventilator",
       "termId": "ventilator",
       "definition": "A ventilator is a machine that helps patients breathe when they cannot do so on their own.\n\n* People whose lungs are severely damaged by COVID may use a ventilator because they cannot get enough oxygen on their own.\n* While ventilators allow lungs to heal, they are not in and of themselves a treatment.\n\n[Intensive care unit](#icu-capacity) (ICU) beds are equipped with ventilators, which may save the lives of the sickest COVID patients.",
@@ -499,12 +523,6 @@
       "termId": "wave",
       "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.covidactnow.org/covid-explained/us-third-wave) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
-    },
-    {
-      "term": "Pool testing",
-      "termId": "pool-testing",
-      "definition": "Pool testing, also referred to as pooling, is a process in which samples — such as [PCR nasal swabs](https://covidactnow.org/glossary#pcr-test) — are collected and tested in a batch, or pool, rather than individually. If the pool comes back positive, one or more of the people in the pool may be [infected](https://covidactnow.org/glossary#infection), and each sample must be tested again individually. The hope is that by pooling samples, there will be fewer overall tests, saving testing supplies and allowing more tests to be run at a time, according to the [FDA](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-issues-first-emergency-authorization-sample-pooling-diagnostic), which approved pooled testing for Quest Diagnostics in July.",
-      "category": "Testing"
     }
   ],
   "metadataTitle": "Glossary of COVID-19 Terminology",
