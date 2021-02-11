@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 
-const ZIPCODE_JSON_URL = process.env.PUBLIC_URL + '/data/county-zipcode.json';
+const ZIPCODE_JSON_URL = '/data/county-zipcode.json';
 
 export interface CountyToZipMap {
   [fips: string]: string[];
