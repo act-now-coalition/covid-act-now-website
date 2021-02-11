@@ -791,14 +791,34 @@ collections:
                   - label: Updated at
                     name: updatedAt
                     widget: datetime
-  - label: Info Tooltips
-    name: infoTooltips
-    description: Content for information tooltips (short metric explainers, location page header info)
+  - label: Tooltips
+    name: tooltips
+    description: Content for location page tooltips (short metric explainers, location page header info, chart disclaimers)
     format: json
     files:
-      - name: Info Tooltips
-        label: Info Tooltips
-        file: src/cms-content/infoTooltips/info-tooltips.json
+      - name: Info tooltips
+        label: Info tooltips
+        file: src/cms-content/info-tooltips.json
+        fields:
+          - label: Tooltip
+            name: tooltip
+            widget: list
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: Id
+                name: id
+                widget: string
+              - label: Body
+                name: body
+                widget: markdown
+              - label: CTA
+                name: cta
+                widget: markdown
+      - name: Metric calculation tooltips
+        label: Metric calculation tooltips
+        file: src/cms-content/metric-calculation-tooltips.json
         fields:
           - label: Tooltip
             name: tooltip
