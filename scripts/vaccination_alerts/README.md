@@ -8,7 +8,7 @@ The workflow for sending the updates is:
 2. Generate a list of users and their locations to send the alerts
 3. Send the emails to the users
 
-## 1. generate-vaccine-alerts-info
+## 1. vaccinations-generate-alerts
 
 This script determines which locations have updated vaccination information by comparing the information in Firebase with the information from the CMS.
 
