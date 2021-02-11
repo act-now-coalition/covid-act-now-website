@@ -16,9 +16,11 @@ export interface VaccinationEmailAlertData {
   emailSubjectLine: string;
   title: string;
   subtitle: string;
+  locationName: string;
   sourceUrl: string;
   sourceName: string;
   eligibilityUrl: string;
+  unsubscribeUrl: string;
   vaccinationSignupUrl?: string;
   currentPhases: EmailPhaseInfo[];
 }
@@ -48,7 +50,10 @@ function formatVaccinationPhaseInfo(
  * to pass to the email template in
  * `scripts/vaccination_alerts/vaccination-alert-template.html`
  */
-export function getEmailAlertData(fipsCode: string): VaccinationEmailAlertData {
+export function getEmailAlertData(
+  emailAddress: string,
+  fipsCode: string,
+): VaccinationEmailAlertData {
   const region = regions.findByFipsCodeStrict(fipsCode);
 
   const vacinationInfo = getVaccineInfoByFips(fipsCode);
@@ -70,6 +75,11 @@ export function getEmailAlertData(fipsCode: string): VaccinationEmailAlertData {
       return formatVaccinationPhaseInfo(phaseInfo, isLastCurrentPhase);
     });
 
+  assert(
+    currentPhases.length > 0,
+    `There are no phases currently eligible for vaccination for ${region.fullName} (${region.fipsCode})`,
+  );
+
   const mostRecentPhase = currentPhases.find(
     phaseInfo => phaseInfo.isMostRecentPhase,
   );
@@ -85,9 +95,13 @@ export function getEmailAlertData(fipsCode: string): VaccinationEmailAlertData {
     emailSubjectLine: `Who is currently eligible for vaccination in ${region.fullName}`,
     title,
     subtitle: 'People who are eligible to be vaccinated now include:',
+    locationName: region.fullName,
     sourceName: `${region.fullName} Health Department`,
     sourceUrl: eligibilityInfoUrl,
     eligibilityUrl: eligibilityInfoUrl,
+    unsubscribeUrl: `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(
+      emailAddress,
+    )}`,
     vaccinationSignupUrl,
     currentPhases,
   };
