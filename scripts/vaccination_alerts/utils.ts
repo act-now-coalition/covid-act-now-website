@@ -13,6 +13,7 @@ import {
   getEmailAlertData,
   VaccinationEmailAlertData,
 } from '../../src/cms-content/vaccines/email-alerts';
+import { toISO8601 } from '../alert_emails/utils';
 
 export interface RegionVaccinePhaseInfoMap {
   [fipsCode: string]: RegionVaccinePhaseInfo;
@@ -180,6 +181,6 @@ export function generateEmailData(emailAddress: string, fipsCode: string) {
     Html: emailHtmlContent,
     From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
     ReplyTo: 'noreply@covidactnow.org',
-    Group: 'VACCINATION_ALERTS',
+    Group: `vaccination-alerts_${toISO8601(new Date())}`,
   };
 }
