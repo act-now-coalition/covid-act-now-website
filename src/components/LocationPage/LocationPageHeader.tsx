@@ -32,6 +32,27 @@ import {
 } from 'components/LocationPage/LocationPageHeader.style';
 import { MetroArea } from 'common/regions';
 
+import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
+import { renderTooltipContent } from 'components/InfoTooltip';
+import {
+  metricToTooltipContentMap,
+  metricToCalculationTooltipContentMap,
+} from 'cms-content/infoTooltips'; //Chelsi:consolidate
+
+function renderInfoTooltip(): React.ReactElement {
+  const body =
+    'Our 5 color COVID risk level looks at three things: daily new cases (per 100K), infection rate, and test positivity. Each is graded on a 5 color scale and the highest risk color becomes the location’s overall risk level.\n\nFor instance, if daily new cases and test positivity are both yellow, but infection rate is orange, then the overall risk level is orange.';
+  const cta =
+    '[Keep reading to learn more about risk levels and metrics](https://covidactnow.org/covid-risk-levels-metrics).';
+
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(body, cta)}
+      aria-label={`Description of risk levels`}
+    />
+  );
+}
+
 const noop = () => {};
 
 const LocationPageHeader = (props: {
@@ -66,6 +87,8 @@ const LocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
+  const tooltip = renderInfoTooltip();
+
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -92,7 +115,7 @@ const LocationPageHeader = (props: {
             <SectionHalf>
               <ThermometerImage currentLevel={alarmLevel} />
               <SectionColumn>
-                <ColumnTitle>Covid risk level</ColumnTitle>
+                <ColumnTitle>Covid risk level {tooltip}</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>
                   {levelInfo.detail(
