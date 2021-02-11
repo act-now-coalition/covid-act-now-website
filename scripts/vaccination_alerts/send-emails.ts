@@ -111,13 +111,7 @@ class SendVaccinationAlertsService {
  *
  * You can run via `yarn send-emails fipsToAlertFilename currentSnapshot [send]`
  */
-async function main(
-  alertPath: string,
-  batchSize: number,
-  dryRun: boolean,
-  singleEmail?: string,
-  fips?: string,
-) {
+async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
   const alertsByFips = readVaccinationAlerts(alertPath);
   const alerts = _.values(alertsByFips);
 
@@ -175,13 +169,10 @@ async function main(
 }
 
 if (require.main === module) {
-  const argv = yargs.options({
+  const { argv } = yargs.options({
     alertPath: {
       default: DEFAULT_ALERTS_FILE_PATH,
       description: 'alerts input path.',
-    },
-    batchSize: {
-      default: BATCH_SIZE,
     },
     dryRun: {
       default: true,
@@ -189,12 +180,9 @@ if (require.main === module) {
     email: {
       type: 'string',
     },
-    fips: {
-      default: 'string',
-    },
-  }).argv;
+  });
 
-  main(argv.alertPath, argv.batchSize, argv.dryRun, argv.email, argv.fips)
+  main(argv.alertPath, argv.dryRun, argv.email)
     .then(() => {
       console.log('Done.');
       process.exit(0);
