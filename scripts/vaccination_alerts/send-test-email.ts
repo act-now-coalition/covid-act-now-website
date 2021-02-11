@@ -8,17 +8,17 @@ async function main(email: string, fipsCode: string) {
   const emailService = new EmailService();
   const emailData = generateEmailData(email, fipsCode);
 
-  try {
-    await emailService.sendEmail(emailData);
-    console.info(`Email sent to ${email}.`);
-  } catch (err) {
-    if (isInvalidEmailError(err)) {
-      console.log(`Invalid email: "${email}"`);
-    } else {
-      console.error(`Error sending email to "${email}"`, err);
-    }
-    process.exit(-1);
-  }
+  // try {
+  //   await emailService.sendEmail(emailData);
+  //   console.info(`Email sent to ${email}.`);
+  // } catch (err) {
+  //   if (isInvalidEmailError(err)) {
+  //     console.log(`Invalid email: "${email}"`);
+  //   } else {
+  //     console.error(`Error sending email to "${email}"`, err);
+  //   }
+  //   process.exit(-1);
+  // }
 
   return true;
 }

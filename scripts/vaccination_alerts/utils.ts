@@ -2,21 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 import * as Handlebars from 'handlebars';
-import html from 'remark-html';
-import remark from 'remark';
 import { getFirestore } from '../common/firebase';
 import { COLOR_MAP } from '../../src/common/colors';
-import { assert } from '../../src/common/utils';
 import regions, { getStateFips } from '../../src/common/regions';
 import {
-  getVaccineInfoByFips,
   RegionVaccinePhaseInfo,
   stateVaccinationPhases,
 } from '../../src/cms-content/vaccines/phases';
 import {
-  getVaccinationDataByRegion,
-  RegionVaccinationInfo,
-} from '../../src/cms-content/vaccines';
+  getEmailAlertData,
+  VaccinationEmailAlertData,
+} from '../../src/cms-content/vaccines/email-alerts';
 
 export interface RegionVaccinePhaseInfoMap {
   [fipsCode: string]: RegionVaccinePhaseInfo;
@@ -37,6 +33,15 @@ export type EmailFips = [Email, FipsCode];
 const alertsFilePath = path.join(__dirname, 'vaccination-alerts.json');
 
 const VACCINATION_VERSIONS_COLLECTION = 'vaccination-info-updates';
+
+const emailTemplatePath = path.join(
+  __dirname,
+  'vaccination-alert-template.html',
+);
+
+const emailTemplate = Handlebars.compile(
+  fs.readFileSync(emailTemplatePath, 'utf8'),
+);
 
 export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
   return _.chain(stateVaccinationPhases)
@@ -152,85 +157,26 @@ export function getUserLocationsToAlert(
     .value();
 }
 
-const templatePath = path.join(__dirname, 'vaccination-alert-template.html');
-
-const alertTemplate = Handlebars.compile(fs.readFileSync(templatePath, 'utf8'));
-
-const colors = {
-  GREY_0: COLOR_MAP.GREY_0,
-  GREY_1: COLOR_MAP.GREY_1,
-  GREY_4: COLOR_MAP.GREY_4,
-  GREY_5: COLOR_MAP.GREY_5,
-  GREEN: COLOR_MAP.GREEN.BASE,
-  LIGHT_YELLOW: 'rgba(255, 201, 0, 0.12)',
-  PURPLE: '#5900EA',
-};
-
-export function generateEmailContent(
-  vaccinationInfo: RegionVaccinePhaseInfo,
-  vaccinationLinks: RegionVaccinationInfo | null,
-): string {
-  const fipsCode = vaccinationInfo.fips;
-  const region = regions.findByFipsCodeStrict(fipsCode);
-
-  const currentPhases = vaccinationInfo.phaseGroups
-    .filter(phaseGroup => phaseGroup.currentlyEligible)
-    .map((phaseGroup, index, allCurrentPhases) => {
-      const isMostRecentlyEligible = index === allCurrentPhases.length - 1;
-
-      return {
-        title: phaseGroup.tier
-          ? `${phaseGroup.phase}, ${phaseGroup.tier}`
-          : phaseGroup.phase,
-        subtitle: isMostRecentlyEligible
-          ? 'most recently eligible'
-          : 'eligible',
-        description: markdownToHtml(phaseGroup.description),
-        isCurrentPhase: isMostRecentlyEligible,
-      };
-    });
-
-  const mostRecentPhase = _.last(currentPhases);
-  const title = mostRecentPhase?.title
-    ? `${region.fullName} is now in ${mostRecentPhase.title} of vaccination`
-    : `${region.fullName} has updated vaccination information`;
-
-  const data = {
-    title,
-    subtitle: 'People who are eligible to be vaccinated now include:',
-    sourceName: `${region.fullName} Health Department`,
-    sourceUrl: vaccinationInfo.eligibilityInfoUrl,
-    eligibilityUrl: vaccinationLinks?.eligibilityInfoUrl,
-    locationName: region.fullName,
-    currentPhases,
-    colors,
-  };
-
-  return alertTemplate(data);
+/**
+ * Return a HTML string with the content of the email
+ */
+function renderEmail(data: VaccinationEmailAlertData) {
+  return emailTemplate({ ...data, colors: COLOR_MAP });
 }
 
-function markdownToHtml(markdownContent: string): string {
-  return remark().use(html).processSync(markdownContent).toString();
-}
-
+/**
+ * Generates the information that the email service needs to send the email
+ */
 export function generateEmailData(emailAddress: string, fipsCode: string) {
-  const region = regions.findByFipsCode(fipsCode);
-  assert(region !== null, `Region with FIPS code ${fipsCode} not found.`);
+  const emailData = getEmailAlertData(fipsCode);
+  const emailHtmlContent = renderEmail(emailData);
 
-  const vaccineInfo = getVaccineInfoByFips(fipsCode);
-  const vaccineLinks = getVaccinationDataByRegion(region);
-  assert(
-    vaccineInfo !== null,
-    `Vaccination information for FIPS ${fipsCode} not found in the CMS`,
-  );
-
-  const subjectLine = `Who is currently eligible for vaccination in ${region.fullName}`;
-  const htmlContent = generateEmailContent(vaccineInfo, vaccineLinks);
+  fs.writeFileSync('alert.html', emailHtmlContent);
 
   return {
-    Subject: subjectLine,
+    Subject: emailData.emailSubjectLine,
     To: [emailAddress],
-    Html: htmlContent,
+    Html: emailHtmlContent,
     From: 'Covid Act Now Alerts <noreply@covidactnow.org>',
     ReplyTo: 'noreply@covidactnow.org',
     Group: 'VACCINATION_ALERTS',

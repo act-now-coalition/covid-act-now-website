@@ -3,7 +3,7 @@
     <style type="text/css">
       body {
         font-family:Arial, Helvetica, sans-serif;
-        color: {{colors.GREY_5}};
+        color: #4f4f4f;
         font-size: 15px;
         padding: 0;
       }
@@ -34,7 +34,7 @@
 
       .subtitle {
         font-size: 15px;
-        color: {{colors.GREY_5}};
+        color: #4f4f4f;
       }
       
       h2 {
@@ -45,13 +45,13 @@
       }
 
       .eligibility-tag {
-        color: {{colors.GREEN.BASE}};
+        color: #00D474;
         font-size: 12px;
         text-transform: uppercase;
       }
 
       .description {
-        color: {{colors.GREY_5}};
+        color: #4f4f4f;
       }
 
       .phase {
@@ -59,7 +59,7 @@
       }
 
       .phase-highlighted {
-        background-color: {{colors.LIGHT_YELLOW_EMAIL}};
+        background-color: rgba(255, 201, 0, 0.12);
       }
 
       .description ul {
@@ -74,16 +74,16 @@
       }
 
       .description ul li::marker {
-        color: {{colors.GREEN}};
+        color: [object Object];
       }
 
       .source {
-        color: {{colors.GREY_4}};
+        color: #828282;
         font-size: 13px;
       }
 
       .source a {
-        color: {{colors.GREY_4}};
+        color: #828282;
       }
 
       .main-cta-link  {
@@ -91,24 +91,24 @@
       }
 
       .main-cta-btn {
-        background-color: {{colors.PURPLE}};
+        background-color: #5900EA;
         color: white;
         padding: 12px;
         border-radius: 4px;
       }
 
       .eligibility-options {
-        color: {{colors.PURPLE}};
+        color: #5900EA;
         padding: 12px;
-        border: solid 1px {{colors.GREY_1}};
+        border: solid 1px #f2f2f2;
       }
 
       .note {
-        color: {{colors.GREY_5}};
+        color: #4f4f4f;
       }
 
       .footer {
-        background-color: {{colors.GREY_1}};
+        background-color: #f2f2f2;
         margin-top: 50px;
         padding: 50px 24px;
         text-align: center;
@@ -133,7 +133,7 @@
       }
 
       .footer__link {
-        color: {{colors.GREY_5}};
+        color: #4f4f4f;
       }
 
     </style>
@@ -142,53 +142,64 @@
     <div class="centered-column">
 
       <div class="section center-text">
-        <h1>{{title}}</h1>
-        <p class="subtitle">{{subtitle}}</p>
+        <h1>Texas is now in 1B of vaccination</h1>
+        <p class="subtitle">People who are eligible to be vaccinated now include:</p>
       </div>
     
       <div class="section">
-      {{#each currentPhases}}
-        <div class="phase {{#if isMostRecentPhase}}phase-highlighted{{/if}}">
+        <div class="phase ">
           <div class="center-text">
-            <h2>{{title}}</h2>
-            <div class="eligibility-tag">{{subtitle}}</div>
+            <h2>1A</h2>
+            <div class="eligibility-tag">eligible</div>
           </div>
           <div class="description ">
-            {{{description}}}
+            <ul>
+<li>Frontline essential workers</li>
+<li>Long-term care residents</li>
+</ul>
+
           </div>
         </div>
-      {{/each}}
+        <div class="phase phase-highlighted">
+          <div class="center-text">
+            <h2>1B</h2>
+            <div class="eligibility-tag">most recently eligible</div>
+          </div>
+          <div class="description ">
+            <ul>
+<li>Persons 65 or older</li>
+<li>Persons 16+ with at least one chronic medical condition</li>
+</ul>
+
+          </div>
+        </div>
       </div>
 
       <div class="section source center-text">
-        Source: <a href="{{sourceUrl}}">{{sourceName}}</a>
+        Source: <a href="https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx">Texas Health Department</a>
       </div>
 
-      {{#if eligibilityUrl}}
       <div class="section">
-        <a href="{{eligibilityUrl}}" class="main-cta-link">
+        <a href="https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx" class="main-cta-link">
           <div class="eligibility-options center-text">
             See who is eligible next
           </div>
         </a>
       </div>
-      {{/if}}
 
-      {{#if vaccinationSignupUrl}}
       <div class="section main-cta">
-        <a href="{{vaccinationSignupUrl}}" class="main-cta-link">
+        <a href="https://www.dshs.state.tx.us/coronavirus/immunize/vaccine-hubs.aspx" class="main-cta-link">
           <div class="main-cta-btn center-text">
             <div>
               <strong>See where and how to get vaccinated</strong>
             </div>
-            <div>on the {{sourceName}} website</div>
+            <div>on the Texas Health Department website</div>
           </div>
         </a>
       </div>    
-      {{/if}}
 
       <div class="section description center-text">
-        Because eligibility varies throughout {{locationName}}, you may also want to check your county or city’s health department website.
+        Because eligibility varies throughout , you may also want to check your county or city’s health department website.
       </div>
       
     </div>
