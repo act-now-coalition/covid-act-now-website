@@ -171,6 +171,9 @@ export function generateEmailData(emailAddress: string, fipsCode: string) {
   const emailData = getEmailAlertData(fipsCode);
   const emailHtmlContent = renderEmail(emailData);
 
+  // Writing the file locally is useful while styling
+  // fs.writeFileSync('alert.html', emailHtmlContent);
+
   return {
     Subject: emailData.emailSubjectLine,
     To: [emailAddress],
