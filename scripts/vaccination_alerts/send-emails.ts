@@ -6,7 +6,11 @@ import EmailService, {
   isInvalidEmailError,
 } from '../alert_emails/email-service';
 import * as yargs from 'yargs';
-import { DEFAULT_ALERTS_FILE_PATH, readVaccinationAlerts } from './utils';
+import {
+  DEFAULT_ALERTS_FILE_PATH,
+  readVaccinationAlerts,
+  generateEmailData,
+} from './utils';
 import { RegionVaccinePhaseInfo } from '../../src/cms-content/vaccines/phases';
 
 const BATCH_SIZE = 20;
@@ -72,6 +76,13 @@ class SendVaccinationAlertsService {
     return querySnapshot.docs.map(emailDoc => emailDoc.id);
   }
 
+  public logEmailsToBeSentStats() {
+    const uniqueEmails = _.keys(this.uniqueEmailAddress);
+    console.info(`Total emails to be sent: ${this.emailSent}.`);
+    console.info(`Unique Email addresses: ${uniqueEmails.length}.`);
+    console.info(`Invalid emails removed: ${this.invalidEmailCount}.`);
+  }
+
   async sendAlertEmail(
     email: string,
     alert: RegionVaccinePhaseInfo,
@@ -82,8 +93,8 @@ class SendVaccinationAlertsService {
       return;
     }
 
-    // @ts-ignore
-    let sendData: EmailSendData = null; //  generateAlertEmailData(email, locationAlert);
+    let sendData: EmailSendData = generateEmailData(email, alert.fips);
+
     try {
       await this.emailService.sendEmail(sendData);
       await this.onEmailSent(email, alert);
@@ -136,8 +147,9 @@ async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
 
   const emailBatches = _.chunk(emailAlertTuples, BATCH_SIZE);
   console.log(
-    `Sending ${emailAlertTuples.length} emails/${emailBatches.length} batches.`,
+    `Sending ${emailAlertTuples.length} emails in ${emailBatches.length} batches.`,
   );
+
   for (const batch of emailBatches) {
     await Promise.all(
       batch.map((data: { email: string; alert: RegionVaccinePhaseInfo }) =>
@@ -145,27 +157,27 @@ async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
       ),
     );
   }
-  const emailsSent = alertEmailService.emailSent;
-  const errorCount = alertEmailService.errorCount;
-  const uniqueEmailAddresses = alertEmailService.uniqueEmailAddress;
-  const invalidEmailAddresses = alertEmailService.invalidEmailCount;
-  console.info(`Total emails to be sent: ${emailsSent}.`);
-  console.info(
-    `Unique Email addresses: ${Object.keys(uniqueEmailAddresses).length}.`,
-  );
-  console.info(`Invalid emails removed: ${invalidEmailAddresses}.`);
 
-  if (!dryRun) {
-    // setLastSnapshotNumber(db, `${currentSnapshot}`);
-    // If we aren't in a dry run but there's clearly some non trivial errors exit with error
-    if (emailsSent < 1 || errorCount > 1) {
-      console.log(
-        `Error count: ${errorCount}. Emails sent: ${emailsSent}. Invalid emails removed: ${invalidEmailAddresses}`,
-      );
-      process.exit(1);
-    }
+  alertEmailService.logEmailsToBeSentStats();
+
+  if (dryRun) {
+    return;
   }
-  console.info(`Done.`);
+
+  // Update the email alert version for each location
+  for (const alert of _.values(alertsByFips)) {
+    await updateLatestEmailVersion(db, alert.fips, alert.emailAlertVersion);
+  }
+}
+
+function updateLatestEmailVersion(
+  db: FirebaseFirestore.Firestore,
+  fipsCode: string,
+  emailVersion: number,
+) {
+  return db.doc(`vaccination-info-updates/${fipsCode}`).set({
+    emailAlertVersion: emailVersion,
+  });
 }
 
 if (require.main === module) {
