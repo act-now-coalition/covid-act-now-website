@@ -29,9 +29,9 @@ async function main(alertsFilePath: string) {
     firebaseInfo,
   );
 
-  for (const fips of Object.keys(vaccinationAlertUpdates)) {
+  for (const [fips, current] of Object.entries(vaccinationAlertUpdates)) {
     const previous = firebaseInfo[fips];
-    const current = vaccinationAlertUpdates[fips];
+
     console.log(
       `New alert for ${current.locationName}: ${
         previous?.emailAlertVersion ?? 'None'
@@ -55,7 +55,7 @@ if (require.main === module) {
 
   main(argv.path)
     .then(() => {
-      console.log(`Done. Generated `);
+      console.log(`Done. Generated ${argv.path}`);
       process.exit(0);
     })
     .catch(err => {

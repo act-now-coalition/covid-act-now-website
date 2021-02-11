@@ -29,9 +29,10 @@ const buildEmailsToAlertByFips = (
     // Currently only alerting on states, so pull state fips codes from subscribed locations.
     const subscribedStateFips = getStateFipsCodesSet(locations);
 
-    const userFipsToAlert = subscribedStateFips
-      .intersection(fipsCodesToAlert)
-      .value();
+    const userFipsToAlert = _.intersection(
+      subscribedStateFips,
+      fipsCodesToAlert,
+    );
 
     emailFipsList.push(
       ...userFipsToAlert.map(fips => [email, fips] as EmailFips),

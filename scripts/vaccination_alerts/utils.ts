@@ -139,5 +139,6 @@ export function getStateFipsCodesSet(fipsCodes: FipsCode[]) {
       return stateFips ? stateFips : '';
     })
     .filter(stateFips => stateFips.length > 0)
-    .uniq();
+    .uniq()
+    .value();
 }
