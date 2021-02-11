@@ -22,6 +22,7 @@ enum RecordSession {
 export function initFullStory() {
   initStorage();
 
+  // If we can't find the value in localStorage we won't enable recordings in FullStory
   if (localStorage.getItem(FULLSTORY_RECORD_KEY) === RecordSession.TRUE) {
     FullStory.init({ orgId: 'XEVN9' });
   }
@@ -32,8 +33,14 @@ function initStorage() {
     return;
   }
   const enableRecording = Math.random() < FULLSTORY_RECORD_PERCENT;
-  localStorage.setItem(
-    FULLSTORY_RECORD_KEY,
-    enableRecording ? RecordSession.TRUE : RecordSession.FALSE,
-  );
+  try {
+    localStorage.setItem(
+      FULLSTORY_RECORD_KEY,
+      enableRecording ? RecordSession.TRUE : RecordSession.FALSE,
+    );
+  } catch (err) {
+    // It doesn't matter if we can't write to localStorage, we only need this
+    // for 1% of the users.
+    console.warn(`Error writing to localStorage`, err);
+  }
 }
