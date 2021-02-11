@@ -161,8 +161,6 @@ export const Caption = styled.figcaption`
 
 export const CenterEmbed = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
 `;
 
