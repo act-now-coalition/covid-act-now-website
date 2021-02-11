@@ -7,13 +7,12 @@ import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import Thermometer from 'components/Thermometer';
-
-import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
-import { renderTooltipContent } from 'components/InfoTooltip';
 import {
-  metricToTooltipContentMap,
-  metricToCalculationTooltipContentMap,
-} from 'cms-content/infoTooltips'; //Chelsi:consolidate
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -150,9 +149,7 @@ function renderStatus(projections: Projections) {
 }
 
 function renderDisclaimer(): React.ReactElement {
-  const { body, cta } = metricToCalculationTooltipContentMap[
-    Metric.POSITIVE_TESTS
-  ];
+  const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricCalculation;
 
   return (
     <Fragment>
@@ -163,7 +160,7 @@ function renderDisclaimer(): React.ReactElement {
       />
       <> and </> */}
       <DisclaimerTooltip
-        title={renderTooltipContent(body, cta)}
+        title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
       />
       .
@@ -216,11 +213,11 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const { body, cta } = metricToTooltipContentMap[Metric.POSITIVE_TESTS];
+  const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricDefinition;
 
   return (
     <InfoTooltip
-      title={renderTooltipContent(body, cta)}
+      title={renderTooltipContent(body)}
       aria-label={`Description of ${PositiveTestRateMetric.metricName} metric`}
     />
   );

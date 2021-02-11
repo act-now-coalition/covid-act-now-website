@@ -12,13 +12,12 @@ import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import moment from 'moment';
 import { Metric } from 'common/metric';
-
-import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
-import { renderTooltipContent } from 'components/InfoTooltip';
 import {
-  metricToTooltipContentMap,
-  metricToCalculationTooltipContentMap,
-} from 'cms-content/infoTooltips'; //Chelsi:consolidate
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -135,9 +134,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderDisclaimer(): React.ReactElement {
-  const { body, cta } = metricToCalculationTooltipContentMap[
-    Metric.CASE_DENSITY
-  ];
+  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation;
 
   return (
     <Fragment>
@@ -148,7 +145,7 @@ function renderDisclaimer(): React.ReactElement {
       />
       <> and </> */}
       <DisclaimerTooltip
-        title={renderTooltipContent(body, cta)}
+        title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
       />
       .
@@ -202,11 +199,11 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const { body, cta } = metricToTooltipContentMap[Metric.CASE_DENSITY];
+  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition;
 
   return (
     <InfoTooltip
-      title={renderTooltipContent(body, cta)}
+      title={renderTooltipContent(body)}
       aria-label={`Description of ${CaseIncidenceMetric.metricName} metric`}
     />
   );

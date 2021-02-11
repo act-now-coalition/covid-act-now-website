@@ -10,12 +10,8 @@ export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   mainCopy?: string;
 };
 
-/**
- * Mobile tooltip has a line break before the hyperlinked CTA. Desktop does not.
- */
-export const renderTooltipContent = (body: string, cta?: string) => (
+export const renderTooltipContent = (body: string) => (
   <>
     <StyledMarkdown source={body} />
-    <StyledMarkdown source={cta} />
   </>
 );

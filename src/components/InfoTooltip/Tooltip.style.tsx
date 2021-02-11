@@ -66,7 +66,7 @@ export const StyledMarkdown = styled(MarkdownBody)`
     margin: 0;
   }
 
-  p {
+  p:not(:last-child) {
     margin-bottom: 0.5rem;
   }
 `;

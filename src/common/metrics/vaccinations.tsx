@@ -6,13 +6,12 @@ import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { Metric } from 'common/metric';
-
-import { InfoTooltip, DisclaimerTooltip } from 'components/InfoTooltip';
-import { renderTooltipContent } from 'components/InfoTooltip';
 import {
-  metricToTooltipContentMap,
-  metricToCalculationTooltipContentMap,
-} from 'cms-content/infoTooltips'; //Chelsi:consolidate
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -93,9 +92,7 @@ function trackClickVaccinationData() {
 }
 
 function renderDisclaimer(): React.ReactElement {
-  const { body, cta } = metricToCalculationTooltipContentMap[
-    Metric.VACCINATIONS
-  ];
+  const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
 
   return (
     <Fragment>
@@ -106,7 +103,7 @@ function renderDisclaimer(): React.ReactElement {
       />
       <> and </> */}
       <DisclaimerTooltip
-        title={renderTooltipContent(body, cta)}
+        title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
       />
       .
@@ -120,11 +117,11 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const { body, cta } = metricToTooltipContentMap[Metric.VACCINATIONS];
+  const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricDefinition;
 
   return (
     <InfoTooltip
-      title={renderTooltipContent(body, cta)}
+      title={renderTooltipContent(body)}
       aria-label={`Description of ${VaccinationsMetric.metricName} metric`}
     />
   );
