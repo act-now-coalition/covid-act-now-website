@@ -3,7 +3,7 @@ Example: covidactnow.org/glossary#npi will automatically scroll to the NPI secti
 
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { scrollWithOffset } from 'components/TableOfContents';
+import { scrollWithTimeout } from 'components/Markdown/MarkdownLink';
 
 export default function useScrollToElement(): void {
   const elementToScrollTo = useLocation().hash;
@@ -12,7 +12,7 @@ export default function useScrollToElement(): void {
       ? (document.querySelector(elementToScrollTo) as HTMLElement)
       : null;
     if (element) {
-      scrollWithOffset(element, -80);
+      scrollWithTimeout(element, -80);
     }
   }, [elementToScrollTo]);
 }

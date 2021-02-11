@@ -38,14 +38,10 @@ interface FipsCount {
 }
 
 async function main() {
-  try {
-    const db = getFirestore();
-    const subscriptions = await fetchAllAlertSubscriptions(db);
-    await updateSubscriptionsByLocation(subscriptions);
-    await updateSubscriptionsByDate(subscriptions);
-  } catch (err) {
-    console.error('Error updating subscription stats', err);
-  }
+  const db = getFirestore();
+  const subscriptions = await fetchAllAlertSubscriptions(db);
+  await updateSubscriptionsByLocation(subscriptions);
+  await updateSubscriptionsByDate(subscriptions);
 
   try {
     // TODO(michael): Get engagement stats from AWS.
@@ -104,7 +100,7 @@ async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
   for (const subscription of sortedSubscriptions) {
     const subscribedAt = moment(subscription.subscribedAt);
     const days = moment(subscribedAt).diff(curDate, 'days');
-    if (days > 1) {
+    if (days >= 1) {
       dateTotals.push([curDate.add(1, 'days').format('YYYY-MM-DD'), total]);
       curDate = subscribedAt.startOf('day');
     }
@@ -172,6 +168,6 @@ function formatGroupStats(groupName: string, stats: CampaignMonitorStats) {
 if (require.main === module) {
   main().catch(err => {
     console.error(err);
-    process.exit(1);
+    process.exit(-1);
   });
 }

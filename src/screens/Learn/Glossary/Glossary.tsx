@@ -14,7 +14,7 @@ import { learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
-import { useScrollToElement, useScrollToTopButton } from 'common/hooks';
+import { useScrollToTopButton } from 'common/hooks';
 import Footer from 'screens/Learn/Footer/Footer';
 import ExternalLink from 'components/ExternalLink';
 
@@ -57,8 +57,6 @@ const Glossary: React.FC = () => {
   );
 
   const date = formatMetatagDate();
-
-  useScrollToElement();
 
   return (
     <Fragment>
