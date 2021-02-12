@@ -86,7 +86,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
         fill: '#000',
       },
     },
-  ];
+  ].filter(series => series.data.length > 0);
 }
 
 function filterNull(points: Column[]) {

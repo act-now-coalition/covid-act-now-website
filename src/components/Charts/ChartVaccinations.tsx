@@ -56,15 +56,16 @@ const VaccinesTooltip: React.FC<{
   subtext: string;
 }> = ({ seriesList, left, top, date }) => {
   const [seriesInitiated, seriesCompleted] = seriesList;
-  const pointCompleted = findPointByDate(seriesCompleted.data, date);
+  const pointCompleted =
+    seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
 
-  return pointCompleted && pointInitiated ? (
+  return pointInitiated ? (
     <Tooltip
       width={'160px'}
       top={top(pointInitiated)}
-      left={left(pointCompleted)}
-      title={formatUtcDate(new Date(pointCompleted.x), 'MMM D, YYYY')}
+      left={left(pointCompleted ? pointCompleted : pointInitiated)}
+      title={formatUtcDate(new Date(pointInitiated.x), 'MMM D, YYYY')}
     >
       <Styles.TooltipLine>
         <Styles.TooltipLabel>
@@ -76,16 +77,18 @@ const VaccinesTooltip: React.FC<{
             : '-'}
         </Styles.TooltipValue>
       </Styles.TooltipLine>
-      <Styles.TooltipLine>
-        <Styles.TooltipLabel>
-          {seriesCompleted.tooltipLabel}
-        </Styles.TooltipLabel>{' '}
-        <Styles.TooltipValue>
-          {isNumber(pointCompleted.y)
-            ? formatPercent(pointCompleted.y, 1)
-            : '-'}
-        </Styles.TooltipValue>
-      </Styles.TooltipLine>
+      {seriesCompleted && pointCompleted && (
+        <Styles.TooltipLine>
+          <Styles.TooltipLabel>
+            {seriesCompleted.tooltipLabel}
+          </Styles.TooltipLabel>{' '}
+          <Styles.TooltipValue>
+            {isNumber(pointCompleted.y)
+              ? formatPercent(pointCompleted.y, 1)
+              : '-'}
+          </Styles.TooltipValue>
+        </Styles.TooltipLine>
+      )}
     </Tooltip>
   ) : null;
 };
