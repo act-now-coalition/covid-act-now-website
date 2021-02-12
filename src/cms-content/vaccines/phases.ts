@@ -15,6 +15,7 @@ export interface RegionVaccinePhaseInfo {
   eligibilityInfoUrl: string;
   locationName: string;
   fips: string;
+  notes?: string | null;
   phaseGroups: RegionPhaseGroup[];
 }
 

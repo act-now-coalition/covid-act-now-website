@@ -652,7 +652,7 @@ collections:
     format: json
     files:
       - name: Vaccine Information-State
-        label: State Vaccine Information 
+        label: State Vaccine Information
         file: src/cms-content/vaccines/state.json
         fields:
           - label: Regions
@@ -733,7 +733,7 @@ collections:
     format: json
     files:
       - name: Vaccine Information-State
-        label: State Vaccine Information 
+        label: State Vaccine Information
         file: src/cms-content/vaccines/state-vaccine-phases.json
         fields:
           - label: Regions
@@ -757,6 +757,10 @@ collections:
                 name: emailAlertVersion
                 default: 0
                 widget: number
+              - label: Notes
+                name: notes
+                required: false
+                widget: text
               - label: Phase Groups
                 name: phaseGroups
                 description: Each element describes a specific phase or phase + tier combination where available.
