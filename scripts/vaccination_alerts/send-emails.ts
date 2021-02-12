@@ -23,7 +23,6 @@ class SendVaccinationAlertsService {
   emailSent: number = 0;
 
   uniqueEmailAddress: { [email: string]: number } = {};
-  locationsWithEmails: { [fips: string]: number } = {};
 
   constructor() {
     this.firestoreSubscriptions = new FirestoreSubscriptions();
@@ -31,7 +30,7 @@ class SendVaccinationAlertsService {
   }
 
   private async onEmailSent(email: string, alert: RegionVaccinePhaseInfo) {
-    this.updateSentEmailCounters(email, alert);
+    this.updateSentEmailCounters(email);
     this.firestoreSubscriptions.markEmailAsSent(
       alert.fips,
       alert.emailAlertVersion,
@@ -44,15 +43,9 @@ class SendVaccinationAlertsService {
     this.firestoreSubscriptions.removeInvalidEmailFromAlerts(email);
   }
 
-  private updateSentEmailCounters(
-    email: string,
-    alert: RegionVaccinePhaseInfo,
-  ) {
+  private updateSentEmailCounters(email: string) {
     this.emailSent += 1;
     this.uniqueEmailAddress[email] = (this.uniqueEmailAddress[email] || 0) + 1;
-    // Todo don't make just fips
-    const key = (alert.fips, alert.emailAlertVersion);
-    this.locationsWithEmails[key] = (this.locationsWithEmails[key] || 0) + 1;
   }
 
   async fetchEmailsForAlert(alert: RegionVaccinePhaseInfo) {
@@ -89,7 +82,7 @@ class SendVaccinationAlertsService {
     dryRun: boolean = false,
   ): Promise<void> {
     if (dryRun) {
-      this.updateSentEmailCounters(email, alert);
+      this.updateSentEmailCounters(email);
       return;
     }
 
@@ -102,8 +95,9 @@ class SendVaccinationAlertsService {
       if (isInvalidEmailError(err)) {
         await this.onInvalidEmail(email);
       } else {
+        const { fips, emailAlertVersion } = alert;
         console.error(
-          `Error sending email ${email}, ${alert.fips} - ${alert.emailAlertVersion}.`,
+          `Error sending email to ${email}, FIPS: ${fips}, version: ${emailAlertVersion}.`,
           err,
         );
         this.errorCount += 1;
@@ -189,7 +183,8 @@ if (require.main === module) {
     },
   });
 
-  main(argv.alertPath, argv.dryRun, argv.email)
+  const { alertPath, dryRun, email } = argv;
+  main(alertPath, dryRun, email)
     .then(() => {
       console.log('Done.');
       process.exit(0);
