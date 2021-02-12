@@ -1,6 +1,8 @@
 import _ from 'lodash';
-import { getFirestore } from '../common/firebase';
+import * as yargs from 'yargs';
 import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
+import { FipsCode } from '../../src/common/regions';
+import { RegionVaccinePhaseInfo } from '../../src/cms-content/vaccines/phases';
 import {
   EmailFips,
   getLocationsToAlert,
@@ -9,10 +11,7 @@ import {
   DEFAULT_ALERTS_FILE_PATH,
   getStateFipsCodesSet,
 } from './utils';
-
-import * as yargs from 'yargs';
-import { FipsCode } from '../../src/common/regions';
-import { RegionVaccinePhaseInfo } from '../../src/cms-content/vaccines/phases';
+import FirestoreSubscriptions from './firestore-subscriptions';
 
 const buildEmailsToAlertByFips = (
   fipsCodesToAlert: FipsCode[],
@@ -45,18 +44,19 @@ const buildEmailsToAlertByFips = (
 
 // Adds blank sent records for each email for given alert to Firebase
 const commitUpdatedEmailAlertToSend = async (
-  db: FirebaseFirestore.Firestore,
+  firestoreSubscriptions: FirestoreSubscriptions,
   alert: RegionVaccinePhaseInfo,
   emails: string[],
 ) => {
+  const { fips, emailAlertVersion } = alert;
   return Promise.all(
     emails.map(async (email: string) => {
       try {
-        const docPath = `${alert.fips}/emailVersions/${alert.emailAlertVersion}/emails/${email}`;
-        await db
-          .collection('vaccination-alerts')
-          .doc(docPath)
-          .create({ sentAt: null });
+        await firestoreSubscriptions.createEmailToSend(
+          fips,
+          emailAlertVersion,
+          email,
+        );
       } catch (updateError) {
         // We don't want to overwrite existing emails for a location to avoid double-sending
         // alerts, in case this is a re-run of the vaccination alerts workflow
@@ -84,11 +84,11 @@ const commitUpdatedEmailAlertToSend = async (
  */
 
 async function main(alertsFilePath: string) {
-  const db = await getFirestore();
+  const firestoreSubscriptions = new FirestoreSubscriptions();
 
   const vaccinationAlertsInfo = readVaccinationAlerts(alertsFilePath);
   const locationsToAlert = getLocationsToAlert(vaccinationAlertsInfo);
-  const alertSubscriptions = await db.collection('alerts-subscriptions').get();
+  const alertSubscriptions = await firestoreSubscriptions.getAlertSubscriptions();
 
   const emailsToAlertByFips = buildEmailsToAlertByFips(
     locationsToAlert,
@@ -97,9 +97,12 @@ async function main(alertsFilePath: string) {
 
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
-
     try {
-      await commitUpdatedEmailAlertToSend(db, updatedAlert, emails);
+      await commitUpdatedEmailAlertToSend(
+        firestoreSubscriptions,
+        updatedAlert,
+        emails,
+      );
     } catch (err) {
       console.error(`Error updating emails for location ${fipsCode}`, err);
       process.exit(1);

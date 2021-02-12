@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 import * as Handlebars from 'handlebars';
-import { getFirestore } from '../common/firebase';
 import { COLOR_MAP } from '../../src/common/colors';
 import regions, { getStateFips } from '../../src/common/regions';
 import {
@@ -31,8 +30,6 @@ export type FipsCode = string;
 export type Email = string;
 export type EmailFips = [Email, FipsCode];
 
-const VACCINATION_VERSIONS_COLLECTION = 'vaccination-info-updates';
-
 export const DEFAULT_ALERTS_FILE_PATH = path.join(
   __dirname,
   'vaccination-alerts.json',
@@ -52,20 +49,6 @@ export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
     .map(stateInfo => [stateInfo.fips, stateInfo])
     .fromPairs()
     .value();
-}
-
-export async function getFirebaseVaccinationInfo(): Promise<
-  RegionVaccineVersionMap
-> {
-  const collection = await getFirestore()
-    .collection(VACCINATION_VERSIONS_COLLECTION)
-    .get();
-
-  const versionsByFips = await collection.docs.reduce((prev, curr) => {
-    return { ...prev, [curr.id]: curr.data() };
-  }, {});
-
-  return versionsByFips;
 }
 
 export function getUpdatedVaccinationInfo(

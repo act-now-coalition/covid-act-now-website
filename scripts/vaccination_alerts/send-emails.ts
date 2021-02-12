@@ -1,23 +1,22 @@
 import _ from 'lodash';
-import admin from 'firebase-admin';
-import { getFirestore } from '../common/firebase';
+import * as yargs from 'yargs';
 import EmailService, {
   EmailSendData,
   isInvalidEmailError,
 } from '../alert_emails/email-service';
-import * as yargs from 'yargs';
 import {
   DEFAULT_ALERTS_FILE_PATH,
   readVaccinationAlerts,
   generateEmailData,
 } from './utils';
 import { RegionVaccinePhaseInfo } from '../../src/cms-content/vaccines/phases';
+import FirestoreSubscriptions from './firestore-subscriptions';
 
 const BATCH_SIZE = 20;
 
 class SendVaccinationAlertsService {
-  db: FirebaseFirestore.Firestore;
-  emailService: EmailService;
+  private readonly firestoreSubscriptions: FirestoreSubscriptions;
+  private readonly emailService: EmailService;
 
   invalidEmailCount: number = 0;
   errorCount: number = 0;
@@ -26,34 +25,23 @@ class SendVaccinationAlertsService {
   uniqueEmailAddress: { [email: string]: number } = {};
   locationsWithEmails: { [fips: string]: number } = {};
 
-  constructor(db: FirebaseFirestore.Firestore, emailService: EmailService) {
-    this.db = db;
-    this.emailService = emailService;
+  constructor() {
+    this.firestoreSubscriptions = new FirestoreSubscriptions();
+    this.emailService = new EmailService();
   }
 
   private async onEmailSent(email: string, alert: RegionVaccinePhaseInfo) {
     this.updateSentEmailCounters(email, alert);
-    const docPath = `${alert.fips}/emailVersions/${alert.emailAlertVersion}/emails/${email}`;
-    return this.db
-      .collection('vaccination-alerts')
-      .doc(docPath)
-      .set({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
+    this.firestoreSubscriptions.markEmailAsSent(
+      alert.fips,
+      alert.emailAlertVersion,
+      email,
+    );
   }
 
   private async onInvalidEmail(email: string) {
     this.invalidEmailCount += 1;
-    const querySnapshot = await this.db
-      .collection('alerts-subscriptions')
-      .doc(email)
-      .get();
-    const currentData = querySnapshot.data();
-    if (currentData) {
-      await this.db
-        .collection('invalid-alert-subscriptions')
-        .doc(email)
-        .set(currentData);
-      await this.db.collection('alerts-subscriptions').doc(email).delete();
-    }
+    this.firestoreSubscriptions.removeInvalidEmailFromAlerts(email);
   }
 
   private updateSentEmailCounters(
@@ -68,12 +56,10 @@ class SendVaccinationAlertsService {
   }
 
   async fetchEmailsForAlert(alert: RegionVaccinePhaseInfo) {
-    const docPath = `${alert.fips}/emailVersions/${alert.emailAlertVersion}/emails/`;
-    const querySnapshot = await this.db
-      .collection(`vaccination-alerts/${docPath}`)
-      .where('sentAt', '==', null)
-      .get();
-    return querySnapshot.docs.map(emailDoc => emailDoc.id);
+    return this.firestoreSubscriptions.getEmailsToBeSentForVersion(
+      alert.fips,
+      alert.emailAlertVersion,
+    );
   }
 
   public logEmailsToBeSentStats() {
@@ -81,6 +67,20 @@ class SendVaccinationAlertsService {
     console.info(`Total emails to be sent: ${this.emailSent}.`);
     console.info(`Unique Email addresses: ${uniqueEmails.length}.`);
     console.info(`Invalid emails removed: ${this.invalidEmailCount}.`);
+  }
+
+  public logErrors() {
+    const { emailSent, invalidEmailCount } = this;
+    console.log('Errors sending vaccination alert emails');
+    console.log(`Emails sent: ${emailSent}`);
+    console.log(`Invalid emails removed: ${invalidEmailCount}`);
+  }
+
+  async updateVaccinationInfoVersion(alert: RegionVaccinePhaseInfo) {
+    return this.firestoreSubscriptions.updateVaccinationInfoVersion(
+      alert.fips,
+      alert.emailAlertVersion,
+    );
   }
 
   async sendAlertEmail(
@@ -126,10 +126,7 @@ async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
   const alertsByFips = readVaccinationAlerts(alertPath);
   const alerts = _.values(alertsByFips);
 
-  const emailService = new EmailService();
-  const db = getFirestore();
-
-  const alertEmailService = new SendVaccinationAlertsService(db, emailService);
+  const alertEmailService = new SendVaccinationAlertsService();
 
   const emailAlertTuples = _.flatten(
     await Promise.all(
@@ -164,20 +161,16 @@ async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
     return;
   }
 
-  // Update the email alert version for each location
-  for (const alert of _.values(alertsByFips)) {
-    await updateLatestEmailVersion(db, alert.fips, alert.emailAlertVersion);
+  // Exit with error if there is any errors sending the emails
+  if (alertEmailService.errorCount >= 1) {
+    alertEmailService.logErrors();
+    process.exit(1);
+  } else {
+    // Update the email alert version for each location
+    for (const alert of _.values(alertsByFips)) {
+      await alertEmailService.updateVaccinationInfoVersion(alert);
+    }
   }
-}
-
-function updateLatestEmailVersion(
-  db: FirebaseFirestore.Firestore,
-  fipsCode: string,
-  emailVersion: number,
-) {
-  return db.doc(`vaccination-info-updates/${fipsCode}`).set({
-    emailAlertVersion: emailVersion,
-  });
 }
 
 if (require.main === module) {

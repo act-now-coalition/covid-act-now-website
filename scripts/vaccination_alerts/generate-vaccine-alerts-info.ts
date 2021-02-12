@@ -1,13 +1,11 @@
-import path from 'path';
 import fs from 'fs';
+import * as yargs from 'yargs';
 import {
   getCmsVaccinationInfo,
-  getFirebaseVaccinationInfo,
   getUpdatedVaccinationInfo,
   DEFAULT_ALERTS_FILE_PATH,
 } from './utils';
-
-import * as yargs from 'yargs';
+import FirestoreSubscriptions from './firestore-subscriptions';
 
 /**
  * Generates the `vaccination-alerts.json` file with a map of locations that
@@ -17,11 +15,13 @@ import * as yargs from 'yargs';
  */
 
 async function main(alertsFilePath: string) {
+  const firestoreSubscriptions = new FirestoreSubscriptions();
+
   console.log('Loading latest alerts from cms data');
   const cmsInfo = getCmsVaccinationInfo();
 
   console.log('Reading latest alerts sent from Firebase');
-  const firebaseInfo = await getFirebaseVaccinationInfo();
+  const firebaseInfo = await firestoreSubscriptions.getVaccinationInfoByFips();
 
   console.log('Getting snapshot of alerts to send');
   const vaccinationAlertUpdates = getUpdatedVaccinationInfo(
