@@ -222,7 +222,8 @@
           "tier": "1",
           "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
         }
-      ]
+      ],
+      "notes": "Note, the state website has removed references to phase 1b tier 2 and phase 1C. An example of the changes are https://www.placer.ca.gov/DocumentCenter/View/49578/COVID-Vaccine-Infographic-11421."
     },
     {
       "emailAlertVersion": 0,
@@ -1105,7 +1106,8 @@
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         }
-      ]
+      ],
+      "notes": "WARNING: The Minnesota website has a very nice graphic, but it is completely outdated. They've changed who is in what phase and removed any information about what the next phases look like."
     },
     {
       "locationName": "Mississippi",
