@@ -2,6 +2,7 @@ import { concat } from 'lodash';
 import { SitemapItemLoose } from 'sitemap';
 import urlJoin from 'url-join';
 import regions from '../../src/common/regions';
+import { getMapImageUrl } from '../../src/common/urls';
 import { allCaseStudies } from '../../src/cms-content/learn';
 import articles from '../../src/cms-content/articles';
 
@@ -37,8 +38,18 @@ export function getLearnPageItems(): SitemapItemLoose[] {
 }
 
 export function getTopLevelPageItems(): SitemapItemLoose[] {
-  const relativeUrlList = [
-    '/',
+  const relativeUrlList: (SitemapItemLoose | string)[] = [
+    {
+      url: '/',
+      img: [
+        {
+          url: getMapImageUrl(),
+          title: 'Realtime U.S. COVID Risk Map',
+          caption:
+            'A map of the United States colored by the risk level of each county',
+        },
+      ],
+    },
     '/donate',
     '/about',
     '/tools',
@@ -49,6 +60,10 @@ export function getTopLevelPageItems(): SitemapItemLoose[] {
   return relativeUrlList.map(createSitemapItem);
 }
 
-function createSitemapItem(url: string) {
-  return { url };
+function createSitemapItem(entry: string | SitemapItemLoose): SitemapItemLoose {
+  if (typeof entry === 'string') {
+    return { url: entry };
+  } else {
+    return entry;
+  }
 }
