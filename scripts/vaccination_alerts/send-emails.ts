@@ -113,14 +113,16 @@ class SendVaccinationAlertsService {
 }
 
 /**
- * Given a list of users to email and a list of locations, email those
- * users with alert information about those locations.
+ * Send vaccination alerts to subscribers. Fetch the list of users to email from
+ * Firestore and send the emails in batches. It takes optional parameters:
  *
- * Takes in a file with {[fips: string]: {...data}} and file like {[fips: string]: [emails]}
+ * - `dryRun`: if true, it doesn't send the emails, just logs the number of
+ *   emails to be sent.
+ * - `emailAddress`: if given, it only send the email to that address, instead of
+ *   sending the emails to the subscribers in Firestore.
  *
- * Also takes in a parameter to actual send the email. Otherwise will just generate the files
+ * yarn vaccinations-send-alert-emails [dryRun] [emailAddress]
  *
- * You can run via `yarn send-emails fipsToAlertFilename currentSnapshot [send]`
  */
 async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
   const alertsByFips = readVaccinationAlerts(alertPath);
@@ -180,7 +182,7 @@ if (require.main === module) {
       description: 'alerts input path.',
     },
     dryRun: {
-      default: true,
+      default: false,
     },
     email: {
       type: 'string',
