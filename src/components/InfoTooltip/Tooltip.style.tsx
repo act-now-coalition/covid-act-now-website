@@ -16,6 +16,9 @@ const TooltipWithStyles = withStyles({
     fontSize: '.8125rem',
     lineHeight: '1.4',
     padding: '16px',
+    '& a': {
+      color: 'white',
+    },
     [theme.breakpoints.down('xs')]: {
       padding: '8px 24px 20px',
     },

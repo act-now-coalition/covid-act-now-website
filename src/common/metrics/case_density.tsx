@@ -18,6 +18,8 @@ import {
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -133,17 +135,17 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
+function renderDisclaimer(region: Region): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation;
 
   return (
     <Fragment>
-      <>Learn more about where our data comes from and </>
-      {/* <DisclaimerTooltip
-        title={<>disclaimer tooltip</>}
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={getDataSourceTooltipContent(region, Metric.CASE_DENSITY)}
         mainCopy={'where our data comes from'}
       />
-      <> and </> */}
+      <> and </>
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}

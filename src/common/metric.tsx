@@ -10,6 +10,7 @@ import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { isNumber } from 'lodash';
 import { Metric } from './metricEnum';
+import { Region } from 'common/regions';
 
 export { Metric };
 
@@ -65,9 +66,9 @@ export function getMetricDefinition(metric: Metric) {
   return metricDefinitions[metric];
 }
 
-export function getMetricDisclaimer(metric: Metric, projections: Projections) {
+export function getMetricDisclaimer(metric: Metric, region: Region) {
   const metricDefinition = getMetricDefinition(metric);
-  return metricDefinition.renderDisclaimer(projections);
+  return metricDefinition.renderDisclaimer(region);
 }
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {

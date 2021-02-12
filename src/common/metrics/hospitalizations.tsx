@@ -13,6 +13,8 @@ import {
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -152,17 +154,17 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
+function renderDisclaimer(region: Region): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.HOSPITAL_USAGE].metricCalculation;
 
   return (
     <Fragment>
-      <>Learn more about where our data comes from and </>
-      {/* <DisclaimerTooltip
-        title={<>disclaimer tooltip</>}
+      <>Learn more about </>
+      <DisclaimerTooltip
+        title={getDataSourceTooltipContent(region, Metric.HOSPITAL_USAGE)}
         mainCopy={'where our data comes from'}
       />
-      <> and </> */}
+      <> and </>
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}

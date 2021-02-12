@@ -10,8 +10,10 @@ export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   mainCopy?: string;
 };
 
-export const renderTooltipContent = (body: string) => (
-  <>
-    <StyledMarkdown source={body} />
-  </>
-);
+export function renderTooltipContent(body: string): React.ReactElement {
+  return (
+    <>
+      <StyledMarkdown source={body} />
+    </>
+  );
+}

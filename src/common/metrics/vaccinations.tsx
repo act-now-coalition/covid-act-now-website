@@ -12,6 +12,8 @@ import {
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region, MetroArea, State, County } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -91,17 +93,21 @@ function trackClickVaccinationData() {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
+function renderDisclaimer(region: Region): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
 
   return (
     <Fragment>
-      <>Learn more about where our data comes from and </>
-      {/* <DisclaimerTooltip
-        title={<>disclaimer tooltip</>}
-        mainCopy={'where our data comes from'}
-      />
-      <> and </> */}
+      <>Learn more about </>
+      {region instanceof State ? (
+        <DisclaimerTooltip
+          title={getDataSourceTooltipContent(region, Metric.VACCINATIONS)}
+          mainCopy={'where our data comes from'}
+        />
+      ) : (
+        <>where our data comes from</>
+      )}
+      <> and </>
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}

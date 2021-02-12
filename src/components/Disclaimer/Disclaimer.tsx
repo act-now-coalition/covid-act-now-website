@@ -1,18 +1,18 @@
 import React from 'react';
 import { DisclaimerWrapper } from './Disclaimer.style';
 import { getMetricDisclaimer } from 'common/metric';
-import { Projections } from 'common/models/Projections';
+import { Region } from 'common/regions';
 
 const Disclaimer = ({
   metricName,
-  projections,
+  region,
 }: {
   metricName: number;
-  projections: Projections;
+  region: Region;
 }) => {
   return (
     <DisclaimerWrapper>
-      {getMetricDisclaimer(metricName, projections)}
+      {getMetricDisclaimer(metricName, region)}
     </DisclaimerWrapper>
   );
 };
