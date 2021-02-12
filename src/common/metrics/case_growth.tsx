@@ -143,13 +143,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
   );
 }
 
-// const renderDataSourceCopy () => {
-//   const body = 'This one is a bit complicated. To calculate infection growth, a mathematical model combines trends in daily new cases from the last ~14 day,  with estimates for other variables, such as how many days on average occur between infection and transmission.'
-//   const cta =
-//   title={renderTooltipContent(body, cta)}
-
-// }
-
 function renderThermometer(): React.ReactElement {
   const levelInfo = CASE_GROWTH_RATE_LEVEL_INFO_MAP;
   const levelCritical = levelInfo[Level.CRITICAL];

@@ -33,7 +33,7 @@ import {
 import { MetroArea } from 'common/regions';
 
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
-import { locationPageHeaderTooltipContent } from 'cms-content/tooltips'; //Chelsi:consolidate
+import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 
 function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
