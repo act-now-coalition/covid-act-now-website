@@ -12,7 +12,7 @@ import {
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
-import { Region, MetroArea, State, County } from 'common/regions';
+import { Region, State } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
 
 const METRIC_NAME = 'Vaccinated';
