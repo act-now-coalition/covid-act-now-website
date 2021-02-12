@@ -1,0 +1,36 @@
+name: Send Test Vaccination Alert Email
+# Sends a test email with vaccination information for the given location
+# to a single email address, used for testing and QA.
+
+on:
+  workflow_dispatch:
+    inputs:
+      email_address:
+        description: 'Email address'
+        required: true
+      fips_code:
+        description: 'FIPS code'
+        required: true
+        default: '30'
+
+env:
+  EMAIL_ADDRESS: ${{ github.event.inputs.email_address }}
+  FIPS_CODE: ${{ github.event.inputs.fips_code }}
+
+jobs:
+  send-test-vaccination-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: covid-projections/covid-projections
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn install
+
+      - name: Send test email
+        run: yarn vaccinations-send-test-email ${{ env.EMAIL_ADDRESS }} ${{ env.FIPS_CODE }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

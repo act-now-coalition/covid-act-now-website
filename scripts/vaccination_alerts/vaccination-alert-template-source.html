@@ -1,0 +1,247 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family:Arial, Helvetica, sans-serif;
+        color: {{colors.GREY_5}};
+        font-size: 15px;
+        padding: 0;
+      }
+
+      .centered-column {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .section {
+        margin-top: 24px;
+      }
+
+      .section:first-child {
+        margin-top: 0;
+      }
+
+      .center-text {
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 24px;
+        line-height: 1.5;
+        margin-top: 40px;
+        color: #000;
+      }
+
+      .subtitle {
+        font-size: 15px;
+        color: {{colors.GREY_5}};
+      }
+      
+      h2 {
+        margin-bottom: 3px;
+        font-size: 18px;
+        text-align: center;
+        color: #000;
+      }
+
+      .eligibility-tag {
+        color: {{colors.GREEN.BASE}};
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .description {
+        color: {{colors.GREY_5}};
+      }
+
+      .phase {
+        padding: 16px;
+      }
+
+      .phase-highlighted {
+        background-color: {{colors.LIGHT_YELLOW_EMAIL}};
+      }
+
+      .description ul {
+        list-style-type: '✓';
+        padding-left: 10px;
+      }
+
+      .description ul li {
+        font-size: 15px;
+        margin-top: 12px;
+        padding-left: 10px;
+      }
+
+      .description ul li::marker {
+        color: {{colors.GREEN}};
+      }
+
+      .source {
+        color: {{colors.GREY_4}};
+        font-size: 13px;
+      }
+
+      .source a {
+        color: {{colors.GREY_4}};
+      }
+
+      .main-cta-link  {
+        text-decoration: none;
+      }
+
+      .main-cta-btn {
+        background-color: {{colors.PURPLE}};
+        color: white;
+        padding: 12px;
+        border-radius: 4px;
+      }
+
+      .eligibility-options {
+        color: {{colors.PURPLE}};
+        padding: 12px;
+        border: solid 1px {{colors.GREY_1}};
+      }
+
+      .note {
+        color: {{colors.GREY_5}};
+      }
+
+      .footer {
+        background-color: {{colors.GREY_1}};
+        margin-top: 50px;
+        padding: 50px 24px;
+        text-align: center;
+      }
+
+      .footer__logo {
+        margin-bottom: 24px;
+      }
+
+      .footer__section {
+        margin-bottom: 50px;
+      }
+
+      .footer__section p {
+        margin: 5px auto;
+      }
+
+      .footer__section h2 {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: #000;
+      }
+
+      .footer__link {
+        color: {{colors.GREY_5}};
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="centered-column">
+
+      <div class="section center-text">
+        <h1>{{title}}</h1>
+        <p class="subtitle">{{subtitle}}</p>
+      </div>
+    
+      <div class="section">
+      {{#each currentPhases}}
+        <div class="phase {{#if isMostRecentPhase}}phase-highlighted{{/if}}">
+          <div class="center-text">
+            <h2>{{title}}</h2>
+            <div class="eligibility-tag">{{subtitle}}</div>
+          </div>
+          <div class="description ">
+            {{{description}}}
+          </div>
+        </div>
+      {{/each}}
+      </div>
+
+      <div class="section source center-text">
+        Source: <a href="{{sourceUrl}}">{{sourceName}}</a>
+      </div>
+
+      {{#if eligibilityUrl}}
+      <div class="section">
+        <a href="{{eligibilityUrl}}" class="main-cta-link">
+          <div class="eligibility-options center-text">
+            See who is eligible next
+          </div>
+        </a>
+      </div>
+      {{/if}}
+
+      {{#if vaccinationSignupUrl}}
+      <div class="section main-cta">
+        <a href="{{vaccinationSignupUrl}}" class="main-cta-link">
+          <div class="main-cta-btn center-text">
+            <div>
+              <strong>See where and how to get vaccinated</strong>
+            </div>
+            <div>on the {{sourceName}} website</div>
+          </div>
+        </a>
+      </div>    
+      {{/if}}
+
+      <div class="section description center-text">
+        Because eligibility varies throughout {{locationName}}, you may also want to check your county or city’s health department website.
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <div class="centered-column">
+
+        <div class="footer__logo">
+          <a href="https://covidactnow.org" style="line-height:inherit" target="_blank">
+            <img src="https://data.covidactnow.org/thermometer_screenshot/canlogo.png" alt="Covid Act Now Logo" width="160"/>
+          </a>
+        </div>
+
+        <div class="footer__section">
+          <p>
+          Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.
+          </p>
+          <a class="footer__link" href="https://covidactnow.org/about">Learn more about us</a>
+        </div>
+
+        <div class="footer__section">
+          <h2>Donate</h2>
+          <p>Find these alerts helpful?</p>
+          <a class="footer__link" href="https://covidactnow.org/donate">Support us with a donation</a>
+        </div>
+
+        <div class="footer__section">
+          <h2>Feedback</h2>
+          <p>
+            Tell us how we can make our alerts more useful for you, at <a class="footer__link" href="mailto:info@covidactnow.org">info@covidactnow.org</a>
+          </p>
+        </div>
+
+        <div class="footer__section">
+          <h2>Help others get alerts</h2>
+          <p>Anyone can subscribe using this link:</p>
+          <a class="footer__link" href="https://covidactnow.org/alert_signup">
+            https://covidactnow.org/alert_signup
+          </a>
+        </div>
+
+        <div class="footer__section">
+          <h2>Change your alert settings</h2>
+          <p>
+            <a class="footer__link" href="{{unsubscribeUrl}}">Edit your locations</a>
+          </p>
+          <p>
+            <a class="footer__link" href="{{unsubscribeUrl}}">Unsubscribe from all alerts</a>
+          <p>        
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>
