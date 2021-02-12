@@ -1067,22 +1067,22 @@
       "locationName": "Minnesota",
       "fips": "27",
       "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
           "tier": "a",
           "currentlyEligible": true,
-          "description": "* Health care personnel\n* Long-term care residents",
-          "expandedDefinitionUrl": "",
+          "description": "* Healthcare workers\n* Long-term care facilities",
+          "expandedDefinitionUrl": "https://www.health.state.mn.us/diseases/coronavirus/vaccine/phase1aguide.pdf",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         },
         {
           "phase": "1",
           "tier": "b",
-          "currentlyEligible": false,
-          "description": "* Adults 75+\n* Frontline essential workers",
+          "currentlyEligible": true,
+          "description": "* Adults 65+\n* Teachers and Childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
@@ -1091,7 +1091,7 @@
           "phase": "1",
           "tier": "c",
           "currentlyEligible": false,
-          "description": "* Adults 65+\n* Adults with high-risk medical conditions\n* Other essential workers",
+          "description": "* Adults with high-risk medical conditions\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
