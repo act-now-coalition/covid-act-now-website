@@ -52,19 +52,22 @@ export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
 }
 
 export function getUpdatedVaccinationInfo(
-  currentInfoByFips: RegionVaccinePhaseInfoMap,
-  lastVersionByFips: RegionVaccineVersionMap,
+  cmsInfoByFips: RegionVaccinePhaseInfoMap,
+  firestoreVersionByFips: RegionVaccineVersionMap,
 ): RegionVaccinePhaseInfoMap {
   const updatedInfoByFips: RegionVaccinePhaseInfoMap = {};
-  for (const fipsCode in currentInfoByFips) {
-    const lastVersionInfo = lastVersionByFips[fipsCode];
-    const currentPhaseInfo = currentInfoByFips[fipsCode];
+  for (const fipsCode in cmsInfoByFips) {
+    const firestoreVersionInfo = firestoreVersionByFips[fipsCode];
+    const cmsPhaseInfo = cmsInfoByFips[fipsCode];
 
+    // Only generate the alert if there isn't a version stored in Firestore
+    // or when the version number from the CMS is higher than the latest version
+    // stored in Firestore.
     if (
-      !lastVersionInfo ||
-      lastVersionInfo.emailAlertVersion !== currentPhaseInfo.emailAlertVersion
+      !firestoreVersionInfo ||
+      firestoreVersionInfo.emailAlertVersion < cmsPhaseInfo.emailAlertVersion
     ) {
-      updatedInfoByFips[fipsCode] = currentPhaseInfo;
+      updatedInfoByFips[fipsCode] = cmsPhaseInfo;
     }
   }
   return updatedInfoByFips;
