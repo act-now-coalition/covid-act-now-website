@@ -11,8 +11,9 @@ import {
   Actuals,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
-import { assert } from 'common/utils';
+import { assert, formatPercent } from 'common/utils';
 import { Metric } from 'common/metric';
+import regions from 'common/regions';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
 class DisabledFipsList {
@@ -29,6 +30,14 @@ class DisabledFipsList {
   }
 }
 
+function countyAndMetrosForState(stateCode: string): string[] {
+  const counties = regions.findCountiesByStateCode(stateCode);
+  const metros = regions.metroAreas.filter(
+    m => _.intersection(m.counties, counties).length > 0,
+  );
+  return [...counties, ...metros].map(r => r.fipsCode);
+}
+
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
  */
@@ -42,7 +51,12 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
   [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
-  [Metric.VACCINATIONS]: new DisabledFipsList([]),
+  [Metric.VACCINATIONS]: new DisabledFipsList([
+    ...countyAndMetrosForState('OR'), // https://trello.com/c/iQWpcPgy/
+    ...countyAndMetrosForState('FL'), // https://trello.com/c/qH1UnTgt/
+    ...countyAndMetrosForState('PA'), // https://trello.com/c/uzV9TGbk/
+    ...countyAndMetrosForState('TN'), // https://trello.com/c/BsoMijbC/
+  ]),
 };
 
 /**
@@ -402,6 +416,15 @@ export class Projection {
       actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
     const peopleInitiated =
       actuals.vaccinationsInitiated ?? ratioInitiated * this.totalPopulation;
+
+    if (ratioVaccinated > ratioInitiated) {
+      console.error(
+        `Suspicious vaccine data for ${this.fips}: % Vaccinated ${formatPercent(
+          ratioVaccinated,
+          2,
+        )} > % Initiated ${formatPercent(ratioInitiated, 2)}.`,
+      );
+    }
 
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
