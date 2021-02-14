@@ -75,7 +75,7 @@ const Glossary: React.FC = () => {
           Last updated {formatNumericalDate(lastUpdatedDate)}
         </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
-          <GlossaryTerm term={term} />
+          <GlossaryTerm key={i} term={term} />
         ))}
         <Footer pageSpecificCopy={getGlossaryFooter()} />
         <ScrollToTopButton
