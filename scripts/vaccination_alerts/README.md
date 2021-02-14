@@ -42,10 +42,10 @@ For locations that have updated information, we save a copy of the CMS informati
 
 ```yaml
 '11':
-  email-alert-version: 3
+  emailAlertVersion: 3
   content: 'Phase A...'
 '13':
-  email-alert-version: 3
+  emailAlertVersion: 3
   content: 'Phase 1...'
 ```
 
@@ -61,12 +61,12 @@ alerts-subscriptions:
     locations: ['11', '13']
 ```
 
-Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, in the document `snapshotId`, so we can track the locations and users that we email each time.
+Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, so we can track the users that are sent alerts each time.
 
 ```yaml
 vaccination-alerts:
   '11':
-    email-alert-versions:
+    email-versions:
       '0':
         emails:
           pablo@covidactnow.org: { sentAt: null }

@@ -22,7 +22,9 @@ class FirestoreSubscriptions {
     const vaccinationInfoVersion = await this.getVaccinationInfoVersion();
 
     return vaccinationInfoVersion.docs.reduce((prev, curr) => {
-      return { ...prev, [curr.id]: curr.data() };
+      const data = curr.data();
+      const emailAlertVersion = data['email-alert-version'];
+      return { ...prev, [curr.id]: { emailAlertVersion } };
     }, {});
   }
 
@@ -30,10 +32,9 @@ class FirestoreSubscriptions {
     fipsCode: string,
     emailAlertVersion: number,
   ) {
-    return this.db
-      .collection(VACCINATION_INFO_UPDATES)
-      .doc(fipsCode)
-      .set({ emailAlertVersion });
+    return this.db.collection(VACCINATION_INFO_UPDATES).doc(fipsCode).set({
+      'email-alert-version': emailAlertVersion,
+    });
   }
 
   public async getAlertSubscriptions() {
