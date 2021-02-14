@@ -3,6 +3,7 @@ import React, {
   Suspense as ReactSuspense,
   useContext,
 } from 'react';
+import loadable from '@loadable/component';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   ThemeProvider as MuiThemeProvider,
@@ -51,22 +52,24 @@ export const routes = (ssr: boolean) => {
   const lazy = ssr ? fakeLazy : reactLazy;
 
   /* We dynamically import the following components on initial visit to their respective routes: */
-  const About = lazy(() => import('screens/About/About'));
-  const Landing = lazy(() => import('screens/Learn/Landing/Landing'));
-  const MetricExplainer = lazy(() => import('screens/Learn/MetricExplainer'));
-  const Faq = lazy(() => import('screens/Learn/Faq/Faq'));
-  const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
-  const CaseStudies = lazy(() =>
+  const About = loadable(() => import('screens/About/About'));
+  const Landing = loadable(() => import('screens/Learn/Landing/Landing'));
+  const MetricExplainer = loadable(() =>
+    import('screens/Learn/MetricExplainer'),
+  );
+  const Faq = loadable(() => import('screens/Learn/Faq/Faq'));
+  const Glossary = loadable(() => import('screens/Learn/Glossary/Glossary'));
+  const CaseStudies = loadable(() =>
     import('screens/Learn/CaseStudies/CaseStudies'),
   );
-  const ProductUpdates = lazy(() => import('screens/Learn/Updates'));
-  const Explained = lazy(() => import('screens/Learn/Explained'));
-  const Contact = lazy(() => import('screens/Contact/Contact'));
-  const Tools = lazy(() => import('screens/Tools/Tools'));
-  const Terms = lazy(() => import('screens/Terms/Terms'));
-  const Privacy = lazy(() => import('screens/Terms/Privacy'));
-  const Donate = lazy(() => import('screens/Donate/Donate'));
-  const DeepDivesRedirect = lazy(() =>
+  const ProductUpdates = loadable(() => import('screens/Learn/Updates'));
+  const Explained = loadable(() => import('screens/Learn/Explained'));
+  const Contact = loadable(() => import('screens/Contact/Contact'));
+  const Tools = loadable(() => import('screens/Tools/Tools'));
+  const Terms = loadable(() => import('screens/Terms/Terms'));
+  const Privacy = loadable(() => import('screens/Terms/Privacy'));
+  const Donate = loadable(() => import('screens/Donate/Donate'));
+  const DeepDivesRedirect = loadable(() =>
     import('screens/Learn/Articles/DeepDivesRouter'),
   );
 
