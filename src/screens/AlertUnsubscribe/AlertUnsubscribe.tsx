@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getFirebase, firebase } from 'common/firebase';
 import {
   Wrapper,

@@ -1,5 +1,5 @@
 import { get as _get } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import * as QueryString from 'query-string';
@@ -25,16 +25,20 @@ import {
   METROS_LIMIT,
   CompareOptions,
 } from './utils';
+//import RenderContext, { RenderType } from 'RenderContext';
 
 interface OptionsSelectorProps {
   onNewOptions: (options: CompareOptions) => void;
 }
 
 export function OptionsSelector(props: OptionsSelectorProps) {
+  //const renderContext = useContext(RenderContext);
   const mainSnapshot = useMainSnapshot();
   // TODO(michael): Is there a better React-y way to condition the bulk of a
   // component on a hook result (without introducing a separate component)?
+  // Can't useHistory on SSR, so just skip the whole thing : /
   if (!mainSnapshot) {
+    // || renderContext.type == RenderType.SSR) {
     return null;
   } else {
     return <OptionsSelectorInner mainSnapshot={mainSnapshot} {...props} />;

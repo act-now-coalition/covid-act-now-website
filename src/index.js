@@ -1,36 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import reportWebVitals from './reportWebVitals';
-import { trackWebVitals } from './components/Analytics';
-import * as Sentry from '@sentry/react';
-import { initFullStory } from 'common/fullstory';
+import express from 'express';
 
-Sentry.init({
-  // list of community compiled ignore errors + deny urls to help declutter sentry.
-  ignoreErrors: [
-    // Ignoring cancelled API requests.  We should improve error handling in
-    // src/api/index.ts, but cancelled error messages are crowding sentry.
-    'TypeError: cancelled',
-  ],
-  denyUrls: [
-    // Chrome extensions
-    /extensions\//i,
-    /^chrome:\/\//i,
-  ],
-  dsn:
-    'https://4e1fa0b7df4d490488847bcc7966712b@o378922.ingest.sentry.io/5444052',
-});
+let app = require('./server').default;
 
-initFullStory();
+if (module.hot) {
+  module.hot.accept('./server', function () {
+    console.log('??  HMR Reloading `./server`...');
+    try {
+      app = require('./server').default;
+    } catch (error) {
+      console.error(error);
+    }
+  });
+  console.info('?  Server-side HMR Enabled!');
+}
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const port = process.env.PORT || 3000;
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-
-reportWebVitals(trackWebVitals);
+export default express()
+  .use((req, res) => app.handle(req, res))
+  .listen(port, function (err) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(`> Started on port ${port}`);
+  });

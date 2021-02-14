@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Region } from 'common/regions';
 import { useLocation } from 'react-router-dom';
 import {
@@ -6,10 +7,16 @@ import {
   US_MAP_EMBED_HEIGHT,
   US_MAP_EMBED_WIDTH,
 } from 'screens/Embed/EmbedEnums';
+import RenderContext, { RenderType } from 'contexts/RenderContext';
 
 export function useEmbed(region?: Region) {
   // Check if we're embedded in an iFrame
-  const hostPath = window.location.origin;
+
+  // no access to window during SSR
+  const renderContext = useContext(RenderContext);
+  const ssr = renderContext.type == RenderType.SSR;
+
+  const hostPath = ssr ? '' : window.location.origin;
 
   const getEmbedHeight = () => (region ? EMBED_HEIGHT : US_MAP_EMBED_HEIGHT);
 
