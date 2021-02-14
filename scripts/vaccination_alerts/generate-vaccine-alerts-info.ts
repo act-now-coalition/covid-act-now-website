@@ -1,9 +1,11 @@
 import fs from 'fs';
+import path from 'path';
 import * as yargs from 'yargs';
 import {
   getCmsVaccinationInfo,
   getUpdatedVaccinationInfo,
   DEFAULT_ALERTS_FILE_PATH,
+  projectRelativePath,
 } from './utils';
 import FirestoreSubscriptions from './firestore-subscriptions';
 
@@ -15,6 +17,7 @@ import FirestoreSubscriptions from './firestore-subscriptions';
  */
 
 async function main(alertsFilePath: string) {
+  console.info('Generating vaccination alerts');
   const firestoreSubscriptions = new FirestoreSubscriptions();
 
   console.log('Loading latest alerts from cms data');
@@ -31,14 +34,18 @@ async function main(alertsFilePath: string) {
 
   for (const [fips, current] of Object.entries(vaccinationAlertUpdates)) {
     const previous = firebaseInfo[fips];
+    const { locationName } = current;
+    const prevVersion = previous?.emailAlertVersion;
+    const currVersion = current?.emailAlertVersion;
 
     console.log(
-      `New alert for ${current.locationName}: ${
-        previous?.emailAlertVersion ?? 'None'
-      } -> ${current.emailAlertVersion}`,
+      `New alert for ${locationName} (${fips}):`,
+      ` ${prevVersion ?? 'None'} → ${currVersion}`,
     );
   }
-  console.log(`Saving alert snapshot to ${alertsFilePath}`);
+  console.log(
+    `Saving alert snapshot to ${projectRelativePath(alertsFilePath)}`,
+  );
   fs.writeFileSync(
     alertsFilePath,
     JSON.stringify(vaccinationAlertUpdates, null, 2),
@@ -55,7 +62,8 @@ if (require.main === module) {
 
   main(argv.path)
     .then(() => {
-      console.log(`Done. Generated ${argv.path}`);
+      console.log(`Generated ${projectRelativePath(argv.path)}`);
+      console.log('Done.');
       process.exit(0);
     })
     .catch(err => {

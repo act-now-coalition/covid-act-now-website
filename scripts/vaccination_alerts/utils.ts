@@ -171,3 +171,7 @@ export function generateEmailData(emailAddress: string, fipsCode: string) {
     Group: `vaccination-alerts_${toISO8601(new Date())}`,
   };
 }
+
+export function projectRelativePath(absPath: string) {
+  return path.relative(path.join(__dirname, '../..'), absPath);
+}
