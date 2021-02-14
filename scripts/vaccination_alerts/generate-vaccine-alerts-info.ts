@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import * as yargs from 'yargs';
 import {
   getCmsVaccinationInfo,
