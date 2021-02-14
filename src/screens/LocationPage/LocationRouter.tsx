@@ -16,9 +16,9 @@ const LocationRouter: React.FC = () => {
 
   // Redirects deprecated URLs (/us/ca and us/ca/county/kern_county) to prompt
   // Google to update the canonical URL for location pages
-  const isDeprecatedUrl =
-    stateId?.length === 2 &&
-    (region instanceof State || region instanceof County);
+  const isState = region instanceof State;
+  const isCounty = region instanceof County;
+  const isDeprecatedUrl = stateId?.length === 2 && (isState || isCounty);
 
   if (isDeprecatedUrl) {
     return <Redirect to={region.relativeUrl} />;

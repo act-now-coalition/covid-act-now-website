@@ -13,7 +13,7 @@ import {
   StyledFooterDivider,
 } from './Footer.style';
 
-const Footer = ({ children }: { children: React.ReactNode }) => {
+const Footer = () => {
   const { pathname } = useLocation();
   const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
   const isEmbed = useIsEmbed();

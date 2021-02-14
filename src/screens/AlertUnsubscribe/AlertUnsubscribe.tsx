@@ -18,7 +18,8 @@ const unsubscribedCopy =
 const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
 const AlertUnsubscribe = () => {
-  const params = new URLSearchParams(window.location.search);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const email = params.get('email') || '';
 
   const [selectedLocations, setSelectedLocations] = useState<Region[]>([]);
