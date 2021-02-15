@@ -141,6 +141,9 @@ export interface VaccinationsInfo {
 
   peopleVaccinated: number;
   ratioVaccinated: number;
+
+  dosesDistributed: number | null;
+  ratioDosesAdministered: number | null;
 }
 
 /**
@@ -433,6 +436,24 @@ export class Projection {
       row => row?.vaccinationsInitiatedRatio || null,
     );
 
+    let dosesDistributed = actuals.vaccinesDistributed ?? null;
+    let ratioDosesAdministered = dosesDistributed
+      ? (peopleInitiated + peopleVaccinated) / dosesDistributed
+      : null;
+
+    if (
+      ratioDosesAdministered &&
+      (ratioDosesAdministered < 0 || ratioDosesAdministered > 1)
+    ) {
+      console.error(
+        `Suppressing suspicious vaccine doses administered % for ${
+          this.fips
+        }: ${formatPercent(ratioDosesAdministered, 2)}`,
+      );
+      dosesDistributed = null;
+      ratioDosesAdministered = null;
+    }
+
     return {
       peopleVaccinated,
       peopleInitiated,
@@ -440,6 +461,8 @@ export class Projection {
       ratioVaccinated,
       ratioCompletedSeries: vaccinationsCompletedSeries,
       ratioInitiatedSeries: vaccinationsInitiatedSeries,
+      dosesDistributed,
+      ratioDosesAdministered,
     };
   }
 
