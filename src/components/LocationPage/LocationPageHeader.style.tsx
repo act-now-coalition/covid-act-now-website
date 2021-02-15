@@ -278,33 +278,34 @@ export const SectionHalf = styled(Box)`
   }
 `;
 
-export const SectionColumn = styled(Box)<{ isUpdateCopy?: Boolean }>`
+export const SectionColumn = styled(Box)<{ $isUpdateCopy?: Boolean }>`
   display: flex;
   flex-direction: column;
   margin-left: 1.5rem;
 
   @media (min-width: 600px) {
-    margin-left: ${({ isUpdateCopy }) => (isUpdateCopy ? '1rem' : '1.5rem')};
+    margin-left: ${({ $isUpdateCopy }) => ($isUpdateCopy ? '1rem' : '1.5rem')};
   }
 `;
 
-export const ColumnTitle = styled(Typography)<{ isUpdateCopy?: Boolean }>`
+export const ColumnTitle = styled(Typography)<{ $isUpdateCopy?: Boolean }>`
   font-family: Roboto;
-  font-size: ${({ isUpdateCopy }) => (isUpdateCopy ? '13px' : '12px')};
+  font-size: ${({ $isUpdateCopy }) => ($isUpdateCopy ? '13px' : '12px')};
   text-transform: uppercase;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   letter-spacing: 0.02rem;
   margin-bottom: 0.5rem;
 
   @media (min-width: 600px) {
-    margin-bottom: ${({ isUpdateCopy }) => (isUpdateCopy ? '.5rem' : '.75rem')};
+    margin-bottom: ${({ $isUpdateCopy }) =>
+      $isUpdateCopy ? '.5rem' : '.75rem'};
     font-size: 13px;
   }
 `;
 
-export const Copy = styled(Typography)<{ isUpdateCopy?: Boolean }>`
+export const Copy = styled(Typography)<{ $isUpdateCopy?: Boolean }>`
   font-family: Source Code Pro;
-  font-size: ${({ isUpdateCopy }) => (isUpdateCopy ? '13px' : '12px')};
+  font-size: ${({ $isUpdateCopy }) => ($isUpdateCopy ? '13px' : '12px')};
   line-height: 140%;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 
