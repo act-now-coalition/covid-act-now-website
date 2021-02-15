@@ -65,13 +65,24 @@ function renderStatus(projections: Projections): React.ReactElement {
   const peopleVaccinated = formatInteger(info.peopleVaccinated);
   const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
 
+  let distributedText = <Fragment />;
+  if (info.dosesDistributed && info.ratioDosesAdministered) {
+    distributedText = (
+      <Fragment>
+        {locationName} has administered{' '}
+        {formatPercent(info.ratioDosesAdministered)} of their current supply of{' '}
+        {formatInteger(info.dosesDistributed)} vaccine doses.
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received the first shot and {peopleVaccinated} ({percentVaccinated}) have
-      also received the second shot. According to the CDC, fewer than 0.001% of
-      those who have received the first dose have experienced a severe adverse
-      reaction, none of them deadly.
+      also received the second shot. {distributedText} According to the CDC,
+      fewer than 0.001% of those who have received the first dose have
+      experienced a severe adverse reaction, none of them deadly.
     </Fragment>
   );
 }
