@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { hydrate } from 'react-dom';
 import App from './App';
 import * as Sentry from '@sentry/react';
-import { initFullStory } from 'common/fullstory';
+//import { initFullStory } from 'common/fullstory';
 import { loadableReady } from '@loadable/component';
 
 import './index.css';
@@ -28,20 +28,25 @@ Sentry.init({
     'https://4e1fa0b7df4d490488847bcc7966712b@o378922.ingest.sentry.io/5444052',
 });
 
-function Main() {
-  useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side');
-    jssStyles?.parentElement?.removeChild(jssStyles);
-  }, []);
-  return (
+// function Main() {
+//   /*useEffect(() => {
+//     const jssStyles = document.querySelector('#jss-server-side');
+//     jssStyles?.parentElement?.removeChild(jssStyles);
+//   }, []);*/
+//   return (
+//     <RenderContext.Provider value={{ type: RenderType.Client }}>
+//       <App />
+//     </RenderContext.Provider>
+//   );
+// }
+
+loadableReady(() => {
+  const app = (
     <RenderContext.Provider value={{ type: RenderType.Client }}>
       <App />
     </RenderContext.Provider>
   );
-}
-
-loadableReady(() => {
-  hydrate(<Main />, document.getElementById('root'));
+  hydrate(app, document.getElementById('root'));
 });
 
 if (module.hot) {

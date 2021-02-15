@@ -2,8 +2,8 @@ import { render as renderApp } from './server';
 import { routes as appRoutes } from './App';
 import regions from './common/regions/region_db';
 
-export const render = (req, res) => {
-  const html = renderApp(req.url);
+export const render = async (req, res) => {
+  const html = await renderApp(req.url);
   res.json({ html });
 };
 

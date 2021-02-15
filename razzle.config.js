@@ -30,11 +30,7 @@ module.exports = {
       webpackConfig.plugins = [
         ...webpackConfig.plugins,
         new LoadablePlugin({
-          writeToDisk: {
-            // will write to 'dist/loadable-stats.json', 
-            // which needs to be loaded by chunkextractor during server render
-            filename: 'dist'
-          }
+          writeToDisk: true
         }),
       ]
       console.log('webpackConfig:', webpackConfig)

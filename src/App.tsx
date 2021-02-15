@@ -17,6 +17,7 @@ import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import About from 'screens/About/About';
 import Embed from 'screens/Embed/Embed';
+import HomePage from 'screens/HomePage/HomePage';
 import AllStates from 'screens/internal/AllStates/AllStates';
 import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPhases';
 import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
@@ -39,7 +40,6 @@ import {
   SuspenseFallback,
   ErrorBoundary as LazyErrorBoundary,
 } from 'components/LazyLoading';
-import HomePage from 'screens/HomePage/HomePage';
 import RenderContext, { RenderType } from './contexts/RenderContext';
 
 export const routes = (ssr: boolean) => {
@@ -319,7 +319,7 @@ export default function App() {
   const browserRouter = (props: { children: any }) => {
     return <BrowserRouter>{props.children}</BrowserRouter>;
   };
-  const Router = ssr ? staticRouter : browserRouter;
+  const Router = ssr ? staticRouter : BrowserRouter;
   const Suspense = ssr ? ssrNoop : ReactSuspense;
   const ErrorBoundary = ssr ? ssrNoop : LazyErrorBoundary;
 
