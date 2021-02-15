@@ -69,8 +69,8 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (info.dosesDistributed && info.ratioDosesAdministered) {
     distributedText = (
       <Fragment>
-        This this means that {locationName} has administered{' '}
-        {formatPercent(info.ratioDosesAdministered)} of their supply of{' '}
+        {locationName} has administered{' '}
+        {formatPercent(info.ratioDosesAdministered)} of their current supply of{' '}
         {formatInteger(info.dosesDistributed)} vaccine doses.
       </Fragment>
     );
