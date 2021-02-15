@@ -1,8 +1,6 @@
 name: Send Alert Emails.
 
 on:
-  repository_dispatch:
-    types: send-alert-emails
   workflow_dispatch:
     inputs:
       firebase_env:

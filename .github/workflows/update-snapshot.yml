@@ -1,15 +1,17 @@
 name: Update to new data snapshot
 
 on:
-  repository_dispatch:
-    types: update-data-snapshot
+  workflow_dispatch:
+    inputs:
+      snapshot_id:
+        description: The snapshot number to generate a website PR for.
+        required: true
 
 env:
   AWS_S3_BUCKET: content.covidactnow.org
-  BRANCH: ${{ github.event.client_payload.branch }}
-  SNAPSHOT_ID: ${{ github.event.client_payload.snapshot_id }}
+  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id }}
   # Used in the shared images URL and in the PR branch.
-  RUN_ID: ${{ github.event.client_payload.snapshot_id }}-${{github.run_number}}
+  RUN_ID: ${{ github.event.inputs.snapshot_id }}-${{github.run_number}}
 
 jobs:
   update-data-snapshot:
@@ -19,13 +21,7 @@ jobs:
       - name: Verify snapshot provided
         if: ${{ !env.SNAPSHOT_ID }}
         run: 'echo "Missing client_payload parameter: snapshot_id" ; exit 1'
-      - name: Verify branch provided
-        if: ${{ !env.BRANCH }}
-        run: 'echo "Missing client_payload parameter: branch" ; exit 1'
       - uses: actions/checkout@v2
-        with:
-          repository: covid-projections/covid-projections
-          ref: '${{ env.BRANCH }}'
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
