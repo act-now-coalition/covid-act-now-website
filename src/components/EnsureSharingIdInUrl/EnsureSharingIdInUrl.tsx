@@ -1,6 +1,8 @@
-import { useLocation, useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as QueryString from 'query-string';
 import { ensureSharingIdInQueryParams } from 'common/urls';
+import RenderContext, { RenderType } from 'contexts/RenderContext';
 
 /**
  * Component that adds a short unique string to the URL, corresponding to the
@@ -9,12 +11,17 @@ import { ensureSharingIdInQueryParams } from 'common/urls';
  * Facebook/Twitter/whoever will re-fetch it and get the latest sharing image.
  */
 export default function EnsureSharingIdInUrl() {
-  const location = useLocation();
+  const renderContext = useContext(RenderContext);
   const history = useHistory();
-  const params = QueryString.parse(location.search);
+
+  if (renderContext.type === RenderType.SSR) {
+    return null;
+  }
+
+  const params = QueryString.parse(window.location.search);
   if (ensureSharingIdInQueryParams(params)) {
     history.replace({
-      ...location,
+      ...window.location,
       search: QueryString.stringify(params),
     });
   }

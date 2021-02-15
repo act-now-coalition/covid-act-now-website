@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "razzle/babel", // NEEDED
+  ],
+  "plugins": [
+    ["babel-plugin-styled-components", {
+      //"pure": true,
+    }],
+    "@loadable/babel-plugin"
+  ]
+}

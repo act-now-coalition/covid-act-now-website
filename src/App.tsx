@@ -1,8 +1,4 @@
-import React, {
-  lazy as reactLazy,
-  Suspense as ReactSuspense,
-  useContext,
-} from 'react';
+import React, { Suspense as ReactSuspense, useContext } from 'react';
 import loadable from '@loadable/component';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
@@ -19,6 +15,7 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
+import About from 'screens/About/About';
 import Embed from 'screens/Embed/Embed';
 import AllStates from 'screens/internal/AllStates/AllStates';
 import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPhases';
@@ -46,13 +43,8 @@ import HomePage from 'screens/HomePage/HomePage';
 import RenderContext, { RenderType } from './contexts/RenderContext';
 
 export const routes = (ssr: boolean) => {
-  const fakeLazy = (f: any) => {
-    return f;
-  };
-  const lazy = ssr ? fakeLazy : reactLazy;
-
   /* We dynamically import the following components on initial visit to their respective routes: */
-  const About = loadable(() => import('screens/About/About'));
+  //const About = loadable(() => import('screens/About/About'));
   const Landing = loadable(() => import('screens/Learn/Landing/Landing'));
   const MetricExplainer = loadable(() =>
     import('screens/Learn/MetricExplainer'),
@@ -72,8 +64,6 @@ export const routes = (ssr: boolean) => {
   const DeepDivesRedirect = loadable(() =>
     import('screens/Learn/Articles/DeepDivesRouter'),
   );
-
-  console.log('Donate:', Donate);
 
   // map, in order, of props to Route component to be injected.
   // routes must be defined here so they can be exported during static site generation
@@ -96,7 +86,7 @@ export const routes = (ssr: boolean) => {
     },
     {
       exact: true,
-      path: '/expore/:sharedComponentId?',
+      path: '/explore/:sharedComponentId?',
       component: HomePage,
     },
     {
@@ -109,81 +99,93 @@ export const routes = (ssr: boolean) => {
       path: '/donate',
       component: Donate,
     },
-    // {
-    //   exact: true,
-    //   path: '/us/:stateId',
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: '/us/:stateId/county/:countyId',
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: '/us/metro/metroAreaUrlSegment',
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: '/us/metro/metroAreaUrlSegment/chart/:chartId',
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: '/us/metro/metroAreaUrlSegment/compare/:sharedComponentId?',
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/metro/:metroAreaUrlSegment/explore/:sharedComponentId?",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/metro/:metroAreaUrlSegment/recommendations",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/chart/:chartId",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/recommendations",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/explore/:sharedComponentId?",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/compare/:sharedComponentId?",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/county/:countyId/chart/:chartId",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/county/:countyId/recommendations",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/county/:countyId/explore/:sharedComponentId?",
-    //   component: LocationPage,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/us/:stateId/county/:countyId/compare/:sharedComponentId?",
-    //   component: LocationPage,
-    // },
+    {
+      exact: true,
+      path: '/us/metro/:metroAreaUrlSegment',
+      component: LocationPage,
+    },
+    {
+      exact: true,
+      path: '/us/metro/:metroAreaUrlSegment/chart/:chartId',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/metro/:metroAreaUrlSegment/compare/:sharedComponentId?',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/metro/:metroAreaUrlSegment/explore/:sharedComponentId?',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/metro/:metroAreaUrlSegment/recommendations',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/chart/:chartId',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId',
+      component: LocationPage,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/recommendations',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/explore/:sharedComponentId?',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/compare/:sharedComponentId?',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/county/:countyId',
+      component: LocationPage,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/county/:countyId/chart/:chartId',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/county/:countyId/recommendations',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/county/:countyId/explore/:sharedComponentId?',
+      component: LocationPage,
+      noSsr: true,
+    },
+    {
+      exact: true,
+      path: '/us/:stateId/county/:countyId/compare/:sharedComponentId?',
+      component: LocationPage,
+      noSsr: true,
+    },
     {
       exact: true,
       path: '/learn',
@@ -246,27 +248,27 @@ export const routes = (ssr: boolean) => {
       path: '/embed/us',
       render: () => <Embed isNational />,
     },
-    // {
-    //   exact: true,
-    //   path: "/embed/us/:stateId",
-    //   component: Embed,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/embed/us/:stateId/county/:countyId",
-    //   component: Embed,
-    // },
-    // {
-    //   /* TODO: We might want to support non-embed fips-code URLs too for consistency? */
-    //   exact: true,
-    //   path: "/embed/us/:stateId/county/:countyFipsId",
-    //   component: Embed,
-    // },
-    // {
-    //   exact: true,
-    //   path: "/embed/us/fips/:fipsCode",
-    //   component: Embed,
-    // },
+    {
+      exact: true,
+      path: '/embed/us/:stateId',
+      component: Embed,
+    },
+    {
+      exact: true,
+      path: '/embed/us/:stateId/county/:countyId',
+      component: Embed,
+    },
+    {
+      /* TODO: We might want to support non-embed fips-code URLs too for consistency? */
+      exact: true,
+      path: '/embed/us/:stateId/county/:countyFipsId',
+      component: Embed,
+    },
+    {
+      exact: true,
+      path: '/embed/us/fips/:fipsCode',
+      component: Embed,
+    },
     {
       /** Internal endpoint that shows all the state charts. */
       path: '/internal/all',
@@ -301,9 +303,8 @@ export const routes = (ssr: boolean) => {
 };
 
 export default function App() {
-  console.log('rendering app');
   const renderContext = useContext(RenderContext);
-  const ssr = renderContext.type == RenderType.SSR;
+  const ssr = renderContext.type === RenderType.SSR;
 
   const ssrNoop = (props: { children: any }) => {
     return <React.Fragment>{props.children}</React.Fragment>;

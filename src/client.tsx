@@ -3,6 +3,7 @@ import { hydrate } from 'react-dom';
 import App from './App';
 import * as Sentry from '@sentry/react';
 import { initFullStory } from 'common/fullstory';
+import { loadableReady } from '@loadable/component';
 
 import './index.css';
 
@@ -39,7 +40,9 @@ function Main() {
   );
 }
 
-hydrate(<Main />, document.getElementById('root'));
+loadableReady(() => {
+  hydrate(<Main />, document.getElementById('root'));
+});
 
 if (module.hot) {
   module.hot.accept();
