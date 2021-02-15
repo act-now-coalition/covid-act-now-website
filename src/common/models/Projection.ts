@@ -436,10 +436,23 @@ export class Projection {
       row => row?.vaccinationsInitiatedRatio || null,
     );
 
-    const dosesDistributed = actuals.vaccinesDistributed ?? null;
-    const ratioDosesAdministered = dosesDistributed
+    let dosesDistributed = actuals.vaccinesDistributed ?? null;
+    let ratioDosesAdministered = dosesDistributed
       ? (peopleInitiated + peopleVaccinated) / dosesDistributed
       : null;
+
+    if (
+      ratioDosesAdministered &&
+      (ratioDosesAdministered < 0 || ratioDosesAdministered > 1)
+    ) {
+      console.error(
+        `Suppressing suspicious vaccine doses administered % for ${
+          this.fips
+        }: ${formatPercent(ratioDosesAdministered, 2)}`,
+      );
+      dosesDistributed = null;
+      ratioDosesAdministered = null;
+    }
 
     return {
       peopleVaccinated,
