@@ -4,7 +4,6 @@ import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { Metric } from 'common/metric';
 import {
   InfoTooltip,
@@ -86,14 +85,6 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function trackClickVaccinationData() {
-  trackEvent(
-    EventCategory.VACCINATION,
-    EventAction.CLICK_LINK,
-    'CDC Data Tracker - Vaccinations',
-  );
-}
-
 function renderDisclaimer(region: Region): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
 
@@ -102,7 +93,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
       {'Learn more about '}
       {region instanceof State ? (
         <DisclaimerTooltip
-          title={getDataSourceTooltipContent(region, Metric.VACCINATIONS)}
+          title={getDataSourceTooltipContent(Metric.VACCINATIONS, region)}
           mainCopy={'where our data comes from'}
           trackOpenTooltip={trackOpenTooltip(
             `Learn more: ${Metric.VACCINATIONS}`,

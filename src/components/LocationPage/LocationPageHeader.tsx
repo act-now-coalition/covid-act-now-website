@@ -33,6 +33,7 @@ import {
 import { MetroArea } from 'common/regions';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
@@ -41,6 +42,8 @@ function renderInfoTooltip(): React.ReactElement {
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Description of risk levels`}
+      trackOpenTooltip={trackOpenTooltip('Location page header')}
+      trackCloseTooltip={trackCloseTooltip('Location page header')}
     />
   );
 }

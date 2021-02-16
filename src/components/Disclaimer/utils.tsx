@@ -101,14 +101,22 @@ const metricToSourceMap: RegionSourceMap = {
   },
 };
 
-export const getDataSourceTooltipContent = (region: Region, metric: Metric) => {
+export function getSourceLinks(metric: Metric, region: Region): SourceInfo {
   const metricSources: Regions = metricToSourceMap[metric];
+
   const source: SourceInfo =
     region instanceof MetroArea
       ? metricSources.metro
       : region instanceof County
       ? metricSources.county
       : metricSources.state;
+
+  return source;
+}
+
+export const getDataSourceTooltipContent = (metric: Metric, region: Region) => {
+  const source = getSourceLinks(metric, region);
+
   return (
     <>
       Our data for {region.name} comes from{' '}

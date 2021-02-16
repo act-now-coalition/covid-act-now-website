@@ -162,7 +162,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
     <Fragment>
       {'Learn more about '}
       <DisclaimerTooltip
-        title={getDataSourceTooltipContent(region, Metric.HOSPITAL_USAGE)}
+        title={getDataSourceTooltipContent(Metric.HOSPITAL_USAGE, region)}
         mainCopy={'where our data comes from'}
         trackOpenTooltip={trackOpenTooltip(
           `Learn more: ${Metric.HOSPITAL_USAGE}`,
