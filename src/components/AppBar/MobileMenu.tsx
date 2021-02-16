@@ -2,7 +2,6 @@ import React from 'react';
 import { StyledMenu } from './NavBar.style';
 import MapIcon from 'assets/images/mapIconTwoTone';
 import FAQIcon from 'assets/images/faqIconTwoTone';
-import BlogIcon from 'assets/images/blogIconTwoTone';
 import palette from 'assets/theme/palette';
 
 import { Link } from 'react-router-dom';
@@ -23,12 +22,8 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
       </Link>
       <Link to="/tools" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
-        <span>Tools</span>
+        <span>Data API</span>
       </Link>
-      <a href="https://blog.covidactnow.org" onClick={closeMenu}>
-        <BlogIcon color={palette.secondary.main} />
-        <span>Blog</span>
-      </a>
       <Link to="/about" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>About</span>
