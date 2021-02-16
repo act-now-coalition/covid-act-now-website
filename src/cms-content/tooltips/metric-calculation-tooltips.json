@@ -9,13 +9,13 @@
     {
       "title": "Infection rate",
       "id": "infection-rate",
-      "body": "This one is a bit complicated. To calculate infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days,  with estimates for other variables, such as how many days on average occur between infection and transmission.\n\n[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate).",
+      "body": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days,  with estimates for other variables, such as how many days on average occur between infection and transmission.\n\n[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate).",
       "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
     },
     {
       "title": "Positive test rate",
       "id": "positive-test-rate",
-      "body": "Positive test rate is the number of positive PCR tests over the last 7 days, divided by the total number of PCR tests, over the last 7 days.\n\n[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate).",
+      "body": "Positive test rate is the number of positive PCR tests over the last 7 days, divided by the total number of PCR tests over the last 7 days.\n\n[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate).",
       "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
     },
     {
