@@ -63,10 +63,10 @@ class SendVaccinationAlertsService {
   }
 
   public logErrors() {
-    const { emailSent, invalidEmailCount } = this;
-    console.log('Errors sending vaccination alert emails');
+    const { emailSent, invalidEmailCount, errorCount } = this;
     console.log(`Emails sent: ${emailSent}`);
     console.log(`Invalid emails removed: ${invalidEmailCount}`);
+    console.log(`Error count: ${errorCount}`);
   }
 
   async updateVaccinationInfoVersion(alert: RegionVaccinePhaseInfo) {
@@ -158,8 +158,9 @@ async function main(alertPath: string, dryRun: boolean, singleEmail?: string) {
   }
 
   // Exit with error if there is any errors sending the emails
+  alertEmailService.logErrors();
   if (alertEmailService.errorCount >= 1) {
-    alertEmailService.logErrors();
+    console.log('Errors sending vaccination alert emails');
     process.exit(1);
   } else {
     // Update the email alert version for each location

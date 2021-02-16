@@ -41,10 +41,12 @@ class FirestoreSubscriptions {
     return this.db.collection(ALERT_SUBSCRIPTIONS).get();
   }
 
-  private async getEmailsForVersion(
+  private async getEmailsCollectionForVersion(
     fipsCode: string,
     emailAlertVersion: number,
-  ) {
+  ): Promise<
+    FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
+  > {
     return this.db
       .collection(VACCINATION_ALERTS)
       .doc(fipsCode)
@@ -57,7 +59,7 @@ class FirestoreSubscriptions {
     fipsCode: string,
     emailAlertVersion: number,
   ) {
-    const emailsCollection = await this.getEmailsForVersion(
+    const emailsCollection = await this.getEmailsCollectionForVersion(
       fipsCode,
       emailAlertVersion,
     );
@@ -67,12 +69,12 @@ class FirestoreSubscriptions {
     return querySnapshot.docs.map(emailDoc => emailDoc.id);
   }
 
-  public async createEmailToSend(
+  public async markEmailToSend(
     fipsCode: string,
     emailAlertVersion: number,
     emailAddress: string,
   ) {
-    const emailsCollection = await this.getEmailsForVersion(
+    const emailsCollection = await this.getEmailsCollectionForVersion(
       fipsCode,
       emailAlertVersion,
     );
@@ -84,13 +86,13 @@ class FirestoreSubscriptions {
     emailAlertVersion: number,
     emailAddress: string,
   ) {
-    const emailsCollection = await this.getEmailsForVersion(
+    const emailsCollection = await this.getEmailsCollectionForVersion(
       fipsCode,
       emailAlertVersion,
     );
     return emailsCollection
       .doc(emailAddress)
-      .set({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
+      .update({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
   }
 
   public async removeInvalidEmailFromAlerts(emailAddress: string) {

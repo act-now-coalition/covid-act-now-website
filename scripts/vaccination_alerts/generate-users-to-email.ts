@@ -43,7 +43,7 @@ const buildEmailsToAlertByFips = (
 };
 
 // Adds blank sent records for each email for given alert to Firebase
-const commitUpdatedEmailAlertToSend = async (
+const markEmailAlertsToSend = async (
   firestoreSubscriptions: FirestoreSubscriptions,
   alert: RegionVaccinePhaseInfo,
   emails: string[],
@@ -52,7 +52,7 @@ const commitUpdatedEmailAlertToSend = async (
   return Promise.all(
     emails.map(async (email: string) => {
       try {
-        await firestoreSubscriptions.createEmailToSend(
+        await firestoreSubscriptions.markEmailToSend(
           fips,
           emailAlertVersion,
           email,
@@ -98,11 +98,7 @@ async function main(alertsFilePath: string) {
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
-      await commitUpdatedEmailAlertToSend(
-        firestoreSubscriptions,
-        updatedAlert,
-        emails,
-      );
+      await markEmailAlertsToSend(firestoreSubscriptions, updatedAlert, emails);
     } catch (err) {
       console.error(`Error updating emails for location ${fipsCode}`, err);
       process.exit(1);
