@@ -3,19 +3,11 @@ import { StyledSpan, StyledTooltip, StyledCloseIcon } from './Tooltip.style';
 import { StyledTooltipProps } from 'components/InfoTooltip';
 import DescriptionDiv from './DescriptionDiv';
 import { useBreakpoint } from 'common/hooks';
+import { tooltipAnchorOnClick } from 'components/InfoTooltip';
 
 const DisclaimerTooltip: React.FC<StyledTooltipProps> = props => {
   const [isOpen, setIsOpen] = useState(false);
-
   const isMobile = useBreakpoint(600);
-
-  const IconOnClick = () => {
-    if (!isMobile) {
-      return;
-    } else {
-      setIsOpen(true);
-    }
-  };
 
   return (
     <>
@@ -35,7 +27,7 @@ const DisclaimerTooltip: React.FC<StyledTooltipProps> = props => {
           isOpen={isOpen}
           tabIndex={0}
           role="button"
-          onClick={IconOnClick}
+          onClick={() => tooltipAnchorOnClick(isMobile, setIsOpen)}
         >
           {props.mainCopy}
         </StyledSpan>

@@ -17,3 +17,14 @@ export function renderTooltipContent(body: string): React.ReactElement {
     </>
   );
 }
+
+export function tooltipAnchorOnClick(
+  isMobile: boolean,
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+) {
+  if (!isMobile) {
+    return null;
+  } else {
+    setIsOpen(true);
+  }
+}

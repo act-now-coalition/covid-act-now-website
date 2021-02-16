@@ -31,7 +31,6 @@ import {
   LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { MetroArea } from 'common/regions';
-
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 
