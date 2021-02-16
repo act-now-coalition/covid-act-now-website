@@ -1,0 +1,21 @@
+{
+  "sections": [
+    {
+      "sectionHeader": "Risk-Level and Vaccine Eligibility Alerts",
+      "sectionId": "risk-level-vaccine-eligibility",
+      "sectionBody": "When we detect a change in the risk-level for your state, county, or city, we’ll send you an email to notify you. To avoid overwhelming your inbox, we send out alerts only on Mondays and Thursdays. For the most up-to-date risk assessments, check out the real time metrics on our site."
+    },
+    {
+      "sectionHeader": "Daily Download",
+      "sectionBody": "For a snapshot of the latest COVID map",
+      "sectionId": "daily-download"
+    },
+    {
+      "sectionHeader": "Research Rundown",
+      "sectionSubheader": "",
+      "sectionId": "research-rundown",
+      "sectionBody": "Curated by medical writers and experts,"
+    }
+  ],
+  "pageHeader": "About our alerts"
+}
