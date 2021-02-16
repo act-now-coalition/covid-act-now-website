@@ -15,6 +15,7 @@ import {
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -159,15 +160,27 @@ function renderDisclaimer(region: Region): React.ReactElement {
 
   return (
     <Fragment>
-      <>Learn more about </>
+      {'Learn more about '}
       <DisclaimerTooltip
         title={getDataSourceTooltipContent(region, Metric.HOSPITAL_USAGE)}
         mainCopy={'where our data comes from'}
+        trackOpenTooltip={trackOpenTooltip(
+          `Learn more: ${Metric.HOSPITAL_USAGE}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `Learn more: ${Metric.HOSPITAL_USAGE}`,
+        )}
       />
-      <> and </>
+      {' and '}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.HOSPITAL_USAGE}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.HOSPITAL_USAGE}`,
+        )}
       />
       .
     </Fragment>
@@ -225,7 +238,13 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Description of ${ICUCapacityUsed.metricName} metric`}
+      aria-label={`Show definition of ${ICUCapacityUsed.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `Metric definition: ${Metric.HOSPITAL_USAGE}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `Metric definition: ${Metric.HOSPITAL_USAGE}`,
+      )}
     />
   );
 }

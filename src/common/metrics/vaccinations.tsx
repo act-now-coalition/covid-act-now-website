@@ -14,6 +14,7 @@ import {
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region, State } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -98,19 +99,31 @@ function renderDisclaimer(region: Region): React.ReactElement {
 
   return (
     <Fragment>
-      <>Learn more about </>
+      {'Learn more about '}
       {region instanceof State ? (
         <DisclaimerTooltip
           title={getDataSourceTooltipContent(region, Metric.VACCINATIONS)}
           mainCopy={'where our data comes from'}
+          trackOpenTooltip={trackOpenTooltip(
+            `Learn more: ${Metric.VACCINATIONS}`,
+          )}
+          trackCloseTooltip={trackCloseTooltip(
+            `Learn more: ${Metric.VACCINATIONS}`,
+          )}
         />
       ) : (
         <>where our data comes from</>
       )}
-      <> and </>
+      {' and '}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.VACCINATIONS}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.VACCINATIONS}`,
+        )}
       />
       .
     </Fragment>
@@ -128,7 +141,13 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Description of ${VaccinationsMetric.metricName} metric`}
+      aria-label={`Show definition of ${VaccinationsMetric.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `How we calculate: ${Metric.VACCINATIONS}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `How we calculate: ${Metric.VACCINATIONS}`,
+      )}
     />
   );
 }

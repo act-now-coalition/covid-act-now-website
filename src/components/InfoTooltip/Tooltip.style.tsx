@@ -51,9 +51,9 @@ export const StyledCloseIcon = styled(CloseIcon)`
   }
 `;
 
-export const InfoIcon = styled(InfoOutlinedIcon)<{ isOpen: boolean }>`
-  color: ${({ isOpen }) =>
-    isOpen ? COLOR_MAP.BLUE : COLOR_MAP.GRAY_BODY_COPY};
+export const InfoIcon = styled(InfoOutlinedIcon)<{ $isOpen: boolean }>`
+  color: ${({ $isOpen }) =>
+    $isOpen ? COLOR_MAP.BLUE : COLOR_MAP.GRAY_BODY_COPY};
   cursor: pointer;
   margin-left: 0.5rem;
   height: 18px;
@@ -84,8 +84,8 @@ export const HiddenDiv = styled.div`
   width: 1px;
 `;
 
-export const StyledSpan = styled.span<{ isOpen: boolean }>`
-  text-decoration: ${({ isOpen }) => !isOpen && 'underline'};
+export const StyledSpan = styled.span<{ $isOpen: boolean }>`
+  text-decoration: ${({ $isOpen }) => !$isOpen && 'underline'};
   cursor: pointer;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;

@@ -20,6 +20,7 @@ import {
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -140,15 +141,27 @@ function renderDisclaimer(region: Region): React.ReactElement {
 
   return (
     <Fragment>
-      <>Learn more about </>
+      {'Learn more about '}
       <DisclaimerTooltip
         title={getDataSourceTooltipContent(region, Metric.CASE_DENSITY)}
         mainCopy={'where our data comes from'}
+        trackOpenTooltip={trackOpenTooltip(
+          `Learn more: ${Metric.CASE_DENSITY}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `Learn more: ${Metric.CASE_DENSITY}`,
+        )}
       />
-      <> and </>
+      {' and '}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.CASE_DENSITY}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.CASE_DENSITY}`,
+        )}
       />
       .
     </Fragment>
@@ -206,7 +219,13 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Description of ${CaseIncidenceMetric.metricName} metric`}
+      aria-label={`Show definition of ${CaseIncidenceMetric.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `Metric definition: ${Metric.CASE_DENSITY}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `Metric definition: ${Metric.CASE_DENSITY}`,
+      )}
     />
   );
 }

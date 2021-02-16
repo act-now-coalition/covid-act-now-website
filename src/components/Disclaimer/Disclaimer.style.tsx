@@ -12,10 +12,3 @@ export const DisclaimerWrapper = styled.div`
     margin: 0 1rem 1.5rem;
   }
 `;
-
-export const DisclaimerSpan = styled.span<{ isOpen?: boolean }>`
-  text-decoration: ${({ isOpen }) => !isOpen && 'underline'};
-  cursor: pointer;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.875rem;
-`;

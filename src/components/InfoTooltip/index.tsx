@@ -3,10 +3,13 @@ import InfoTooltip from './InfoTooltip';
 import DisclaimerTooltip from './DisclaimerTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';
 import { StyledMarkdown } from './Tooltip.style';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 export { InfoTooltip, DisclaimerTooltip };
 
 export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
+  trackOpenTooltip: any;
+  trackCloseTooltip: any;
   mainCopy?: string;
 };
 
@@ -27,4 +30,12 @@ export function tooltipAnchorOnClick(
   } else {
     setIsOpen(true);
   }
+}
+
+export function trackOpenTooltip(label: string) {
+  trackEvent(EventCategory.TOOLTIPS, EventAction.OPEN_TOOLTIP, label);
+}
+
+export function trackCloseTooltip(label: string) {
+  trackEvent(EventCategory.TOOLTIPS, EventAction.CLOSE_TOOLTIP, label);
 }
