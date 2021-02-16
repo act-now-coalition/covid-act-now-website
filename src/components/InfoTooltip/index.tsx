@@ -15,7 +15,10 @@ export function renderTooltipContent(body: string): React.ReactElement {
   return <StyledMarkdown source={body} />;
 }
 
-export function tooltipAnchorOnClick(isMobile: boolean, onClick: () => void) {
+export function tooltipAnchorOnClick(
+  isMobile: boolean,
+  onClick: () => void,
+): void | null {
   if (!isMobile) {
     return null;
   } else {

@@ -1,16 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation } from 'common/utils/router';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  useCcviForFips,
-  useScrollToElement,
-  useBreakpoint,
-} from 'common/hooks';
-import { ALL_METRICS } from 'common/metric';
+import dynamic from 'next/dynamic';
+
+import { RegionCcviItem } from 'common/data';
+import { useLocation } from 'common/utils/router';
+import { useScrollToElement, useBreakpoint } from 'common/hooks';
+//import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { Region, State, getStateName } from 'common/regions';
-import { getRecommendationsShareUrl } from 'common/urls';
-import {
+import { Region /* State, getStateName*/ } from 'common/regions';
+//import { getRecommendationsShareUrl } from 'common/urls';
+/*import {
   getDynamicIntroCopy,
   getRecommendations,
   getShareQuote,
@@ -20,23 +19,60 @@ import {
   getModalCopyWithHarvardLevel,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
+*/
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import CompareMain from 'components/Compare/CompareMain';
-import ErrorBoundary from 'components/ErrorBoundary';
-import Explore, { ExploreMetric } from 'components/Explore';
-import Recommend from 'components/Recommend';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
-import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-import ChartBlock from './ChartBlock';
-import LocationPageBlock from './LocationPageBlock';
+//import ErrorBoundary from 'components/ErrorBoundary';
+import { ExploreMetric } from 'components/Explore';
+//import LocationPageBlock from './LocationPageBlock';
 import LocationPageHeader from './LocationPageHeader';
 import { ChartContentWrapper } from './ChartsHolder.style';
-import { useProjectionsFromRegion } from 'common/utils/model';
-import { MetricValues, Projections } from 'common/models/Projections';
+//import { useProjectionsFromRegion } from 'common/utils/model';
+//import { Projections } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import { LocationSummary, useSummaries } from 'common/location_summaries';
+import type { LocationSummary } from 'common/location_summaries';
+import { summaryToStats } from 'common/utils/chart';
+/*
+const Recommend = dynamic(() => import('components/Recommend'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
 
+const CompareMain = dynamic(() => import('components/Compare/CompareMain'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+const VaccinationEligibilityBlock = dynamic(
+  () => import('components/VaccinationEligibilityBlock'),
+  {
+    ssr: false,
+    loading: () => <LoadingScreen />,
+  },
+);
+const Explore = dynamic(() => import('components/Explore'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+const ChartBlock = dynamic(() => import('./ChartBlock'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+
+const ShareModelBlock = dynamic(
+  () => import('components/ShareBlock/ShareModelBlock'),
+  {
+    ssr: false,
+    loading: () => <LoadingScreen />,
+  },
+);
+
+const VulnerabilitiesBlock = dynamic(
+  () => import('components/VulnerabilitiesBlock'),
+  {
+    ssr: false,
+    loading: () => <LoadingScreen />,
+  },
+);
+*/
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
 const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
@@ -46,7 +82,7 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
     top: div.offsetTop - offset,
     behavior: 'smooth',
   });
-
+/*
 interface RecommendationsProps {
   projections: Projections;
   recommendationsRef: React.RefObject<HTMLDivElement>;
@@ -111,25 +147,23 @@ const Recommendations = ({
     />
   );
 };
-
+*/
 interface ChartsHolderProps {
   region: Region;
   chartId: string;
+  locationSummary: LocationSummary;
+  ccviScores: RegionCcviItem | null;
+  lastUpdatedDateString: string;
 }
 
-const summaryToStats = (summary: LocationSummary): MetricValues => {
-  const stats = {} as MetricValues;
-  for (const metric of ALL_METRICS) {
-    stats[metric] = summary.metrics[metric]?.value ?? null;
-  }
-  return stats;
-};
-
-const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
-  const projections = useProjectionsFromRegion(region);
-
-  const summaries = useSummaries();
-  const locationSummary = summaries?.[region.fipsCode];
+const ChartsHolder = ({
+  region,
+  chartId,
+  locationSummary,
+  ccviScores,
+  lastUpdatedDateString,
+}: ChartsHolderProps) => {
+  //const projections = useProjectionsFromRegion(region);
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -145,13 +179,10 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   const isMobile = useBreakpoint(600);
   useScrollToElement();
 
-  const { pathname, hash } = useLocation();
-  const isRecommendationsShareUrl = pathname.includes('recommendations');
+  const { hash } = useLocation();
+  const isRecommendationsShareUrl = hash.includes('recommendations');
 
-  const defaultExploreMetric =
-    hash === '#explore-chart'
-      ? ExploreMetric.HOSPITALIZATIONS
-      : ExploreMetric.CASES;
+  const defaultExploreMetric = ExploreMetric.CASES;
 
   useEffect(() => {
     const scrollToChart = () => {
@@ -183,11 +214,10 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
   const initialFipsList = [region.fipsCode];
 
-  const ccviScores = useCcviForFips(region.fipsCode);
-
   if (!locationSummary) {
     return null;
   }
+
   const stats = summaryToStats(locationSummary);
 
   const alarmLevel = locationSummary.level;
@@ -231,7 +261,9 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           onHeaderSignupClick={onClickAlertSignup}
           isMobile={isMobile}
           region={region}
+          lastUpdatedDateString={lastUpdatedDateString}
         />
+        {/*}
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>
@@ -256,7 +288,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             />
           )}
           {ALL_METRICS.map(metric => (
-            <ErrorBoundary>
+            <ErrorBoundary key={`key-${metric}`}>
               {!projections ? (
                 <LoadingScreen />
               ) : (
@@ -275,19 +307,18 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
         </LocationPageBlock>
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
+            region={region}
             initialFipsList={initialFipsList}
             title="Cases, Deaths, and Hospitalizations"
             defaultMetric={defaultExploreMetric}
           />
         </LocationPageBlock>
+              */}
       </ChartContentWrapper>
-      <div ref={shareBlockRef} id="recommendationsTest">
-        <ShareModelBlock
-          region={region}
-          projections={projections}
-          stats={stats}
-        />
+      {/*<div ref={shareBlockRef} id="recommendationsTest">
+        <ShareModelBlock region={region} projections={projections} />
       </div>
+            */}
     </>
   );
 };

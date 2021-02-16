@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'common/utils/router';
 import { FeaturedItem, SectionId } from 'cms-content/footer';
 import ApiIcon from 'assets/images/ApiIcon';
 import DailyDownloadIcon from 'assets/images/DailyDownloadIcon';

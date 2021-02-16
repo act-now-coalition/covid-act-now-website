@@ -10,7 +10,7 @@ import {
   ExploreTitle,
   ExploreChartWrapper,
 } from './ChartExportImage.style';
-import LogoUrlLight from 'assets/images/logoUrlLight';
+import LogoUrlLight from 'common/images/logoUrlLight';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
 import { ExploreChart } from 'components/Explore';

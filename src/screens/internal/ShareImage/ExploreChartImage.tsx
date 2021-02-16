@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import { ParentSize } from '@vx/responsive';
-import LogoDark from 'assets/images/logoDark';
+import LogoDark from 'common/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ExploreChart } from 'components/Explore';

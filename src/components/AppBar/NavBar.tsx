@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'common/utils/router';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import Logo from 'assets/images/logo';
+import Logo from 'common/images/logo';
 import MegaMenu from 'components/NewFooter/MegaMenu';
 import MobileMenu from './MobileMenu';
 import * as Style from './NavBar.style';
 import { DonateButtonHeart } from './DonateButton';
-import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
 import {
   Experiment,
@@ -50,10 +49,7 @@ const MenuVariant: React.FC<{ isMenuOpen: boolean; closeMenu: () => void }> = ({
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const isEmbed = useIsEmbed();
-
   const { pathname } = useLocation();
-
   const isMobile = useBreakpoint(800);
 
   const onClickHamburger = () => {
@@ -76,10 +72,6 @@ const NavBar: React.FC = () => {
   };
 
   const closeMenu = () => setMenuOpen(false);
-
-  if (isEmbed) {
-    return null;
-  }
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>

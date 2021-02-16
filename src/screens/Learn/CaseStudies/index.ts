@@ -1,5 +1,5 @@
 import CaseStudy from './CaseStudy';
-import CaseStudies from './CaseStudies';
+//import CaseStudies from './CaseStudies.tsx.delete';
 
-export default CaseStudies;
+//export default CaseStudies;
 export { CaseStudy };

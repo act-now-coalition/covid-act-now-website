@@ -91,12 +91,14 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 }
 
 const Explore: React.FunctionComponent<{
+  region: Region | null;
   initialFipsList: string[];
   initialChartIndigenousPopulations?: boolean;
   title?: string;
   defaultMetric?: ExploreMetric;
   nationalSummaryText?: React.ReactElement;
 }> = ({
+  region,
   initialFipsList,
   initialChartIndigenousPopulations,
   defaultMetric = ExploreMetric.CASES,
@@ -113,7 +115,7 @@ const Explore: React.FunctionComponent<{
   }>();
 
   // TODO (chris): Dont love the way of forcing a ''
-  const region = useRegionFromParams();
+  //const region = useRegionFromParams();
 
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.
@@ -230,7 +232,7 @@ const Explore: React.FunctionComponent<{
     fetchSeries().then(setChartSeries);
   }, [selectedLocations, currentMetric, normalizeData]);
 
-  const hasData = some(chartSeries, ({ data }) => data.length > 0);
+  const hasData = some(chartSeries, ({ data }: any) => data.length > 0);
   const hasMultipleLocations = selectedLocations.length > 1;
 
   const modalNormalizeCheckboxProps = {

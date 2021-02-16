@@ -31,9 +31,9 @@ const LocationSelector: React.FC<{
 
   const onChangeRegions = (
     event: React.ChangeEvent<{}>,
-    newRegions: Region[],
+    newRegions: (string | Region)[],
   ) => {
-    onChangeSelectedRegions(newRegions);
+    onChangeSelectedRegions(newRegions as Region[]);
   };
 
   const onClickButton = () => setModalOpen(!modalOpen);

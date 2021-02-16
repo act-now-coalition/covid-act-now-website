@@ -69,13 +69,15 @@ const HomepageSearchAutocomplete: React.FC<{
     }
   };
 
-  const onSelect = (e: any, value: Region) => {
-    trackEvent(
-      EventCategory.SEARCH,
-      EventAction.NAVIGATE,
-      `Selected: ${value.fullName} (${input})`,
-    );
-    window.location.href = value.relativeUrl;
+  const onSelect = (e: any, value: string | Region) => {
+    if (value instanceof Region) {
+      trackEvent(
+        EventCategory.SEARCH,
+        EventAction.NAVIGATE,
+        `Selected: ${value.fullName} (${input})`,
+      );
+      window.location.href = value.relativeUrl;
+    }
   };
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';

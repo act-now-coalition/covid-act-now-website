@@ -108,6 +108,6 @@ const About = () => {
       </PageContent>
     </Fragment>
   );
-};
+}; 
 
 export default About;

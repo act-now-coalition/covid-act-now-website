@@ -1,6 +1,6 @@
-import { useLocation, useHistory } from 'common/utils/router';
-import * as QueryString from 'query-string';
 import { ensureSharingIdInQueryParams } from 'common/urls';
+import { composeUrl, useLocation } from 'common/utils/router';
+import * as QueryString from 'query-string';
 
 /**
  * Component that adds a short unique string to the URL, corresponding to the
@@ -8,16 +8,24 @@ import { ensureSharingIdInQueryParams } from 'common/urls';
  * that the URL is unique enough so that if somebody shares it, then
  * Facebook/Twitter/whoever will re-fetch it and get the latest sharing image.
  */
-export default function EnsureSharingIdInUrl() {
+const EnsureSharingIdInUrl: React.FunctionComponent<{}> = () => {
   const location = useLocation();
-  const history = useHistory();
-  const params = QueryString.parse(location.search);
-  if (ensureSharingIdInQueryParams(params)) {
-    history.replace({
-      ...location,
-      search: QueryString.stringify(params),
-    });
+  const search = new URLSearchParams(location.search);
+  const params = Object.fromEntries(search.entries());
+
+  if (typeof window !== 'undefined') {
+    // `ensure...` returns true if it updated the params.
+    if (ensureSharingIdInQueryParams(params)) {
+      const newUrl = composeUrl({
+        pathname: location.pathname,
+        search: QueryString.stringify(params),
+        hash: location.hash,
+      });
+      window.history.replaceState({}, '', newUrl);
+    }
   }
 
   return null;
-}
+};
+
+export default EnsureSharingIdInUrl;

@@ -2,7 +2,7 @@ import React from 'react';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { Wrapper, InnerContainer, Body } from './SpringSurgeBanner.style';
 import { scrollWithOffset } from 'components/TableOfContents';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'common/utils/router';
 
 const trackClick = () => {
   trackEvent(

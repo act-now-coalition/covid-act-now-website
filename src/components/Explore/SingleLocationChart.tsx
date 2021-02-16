@@ -149,8 +149,8 @@ const SingleLocationChart: React.FC<{
     [showTooltip, dateScale, marginLeft],
   );
 
-  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
-  const getYPosition = (d: Column) => yScale(getY(d));
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) ?? 0;
+  const getYPosition = (d: Column) => yScale(getY(d)) ?? 0;
 
   return (
     <Styles.PositionRelative style={{ height }}>
@@ -215,7 +215,7 @@ const SingleLocationChart: React.FC<{
             subtext={tooltipSubtext}
           />
           <DateMarker
-            left={dateScale(tooltipData.date) + marginLeft}
+            left={(dateScale(tooltipData.date) ?? 0) + marginLeft}
             date={tooltipData.date}
           />
         </Fragment>

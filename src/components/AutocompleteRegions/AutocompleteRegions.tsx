@@ -27,7 +27,10 @@ function getOptionSelected(option: Region, selectedOption: Region) {
 const AutocompleteRegions: React.FC<{
   regions: Region[];
   selectedRegions: Region[];
-  onChangeRegions: (event: React.ChangeEvent<{}>, newRegions: Region[]) => void;
+  onChangeRegions: (
+    event: React.ChangeEvent<{}>,
+    newRegions: (string | Region)[],
+  ) => void;
   ariaLabelledBy?: string;
   placeholder?: string;
   renderTags?: (

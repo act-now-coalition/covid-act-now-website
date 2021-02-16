@@ -22,6 +22,15 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [NY_METRO_FIPS]: 'New York City',
 };
 
+// PODT Region object to aid serialization/deserialization w/ JSON
+export interface RegionObject {
+  name: string;
+  urlSegment: string;
+  fipsCode: FipsCode;
+  population: number;
+  regionType: RegionType;
+}
+
 export abstract class Region {
   constructor(
     public readonly name: string,
@@ -52,8 +61,14 @@ export abstract class Region {
   toString() {
     return `${this.name} (fips=${this.fipsCode})`;
   }
+
+  abstract toJSON(): string;
+  abstract toObject(): RegionObject;
 }
 
+export interface StateObject extends RegionObject {
+  stateCode: string;
+}
 export class State extends Region {
   constructor(
     name: string,
@@ -87,6 +102,39 @@ export class State extends Region {
       (subregion instanceof County && subregion.state === this)
     );
   }
+  
+  public toObject(): StateObject {
+    return {
+      name: this.name,
+      urlSegment: this.urlSegment,
+      fipsCode: this.fipsCode,
+      population: this.population,
+      regionType: this.regionType,
+      stateCode: this.stateCode,
+    };
+  }
+  public toJSON() {
+    return JSON.stringify(this.toObject());
+  }
+  public static fromJSON(serialized: string) {
+    const obj = JSON.parse(serialized);
+    return State.fromObject(obj);
+  }
+
+  public static fromObject(obj: StateObject) {
+    return new State(
+      obj.name,
+      obj.urlSegment,
+      obj.fipsCode,
+      obj.population,
+      obj.stateCode,
+    );
+  }
+}
+
+export interface CountyObject extends RegionObject {
+  stateObject: StateObject;
+  adjacentCountiesFips: FipsCode[];
 }
 
 /**
@@ -142,8 +190,41 @@ export class County extends Region {
   contains(subregion: Region): boolean {
     return false;
   }
+
+  public toObject(): CountyObject {
+    return {
+      name: this.name,
+      urlSegment: this.urlSegment,
+      fipsCode: this.fipsCode,
+      population: this.population,
+      regionType: this.regionType,
+      stateObject: this.state.toObject(),
+      adjacentCountiesFips: this.adjacentCountiesFips,
+    };
+  }
+  public toJSON() {
+    return JSON.stringify(this.toObject());
+  }
+  public static fromJSON(serialized: string) {
+    const obj = JSON.parse(serialized);
+    return County.fromObject(obj);
+  }
+  public static fromObject(obj: CountyObject) {
+    return new County(
+      obj.name,
+      obj.urlSegment,
+      obj.fipsCode,
+      obj.population,
+      State.fromObject(obj.stateObject),
+      obj.adjacentCountiesFips,
+    );
+  }
 }
 
+export interface MetroAreaObject extends RegionObject {
+  countyObjects: CountyObject[];
+  stateObjects: StateObject[];
+}
 /**
  * Metropolitan Statistical Areas
  */
@@ -189,7 +270,36 @@ export class MetroArea extends Region {
   get stateCodes() {
     return this.states.map(state => state.stateCode).join('-');
   }
-
+  public toObject(): MetroAreaObject {
+    return {
+      name: this.name,
+      urlSegment: this.urlSegment,
+      fipsCode: this.fipsCode,
+      population: this.population,
+      regionType: this.regionType,
+      countyObjects: this.counties.map(county => county.toObject()),
+      stateObjects: this.states.map(state => state.toObject()),
+    };
+  }
+  public toJSON() {
+    return JSON.stringify(this.toObject());
+  }
+  public static fromObject(obj: MetroAreaObject) {
+    return new MetroArea(
+      obj.name,
+      obj.urlSegment,
+      obj.fipsCode,
+      obj.population,
+      obj.countyObjects.map((county: CountyObject) =>
+        County.fromObject(county),
+      ),
+      obj.stateObjects.map((state: StateObject) => State.fromObject(state)),
+    );
+  }
+  public static fromJSON(serialized: string) {
+    const obj = JSON.parse(serialized);
+    return MetroArea.fromObject(obj);
+  }
   contains(subregion: Region): boolean {
     return subregion instanceof County && this.counties.includes(subregion);
   }

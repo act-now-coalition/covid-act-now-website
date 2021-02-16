@@ -2,11 +2,12 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import ExternalLink from 'components/ExternalLink';
 import { Logo, LogoSmall } from './LogoGrid.style';
-import ghssLogoUrl from 'assets/images/ghss.png';
-import harvardLogoUrl from 'assets/images/harvard.png';
-import cercLogo from 'assets/images/cerc.png';
 import { StyledGridContainer } from 'screens/About/About.style';
 import { LogoItem } from 'cms-content/about';
+
+const ghssLogoUrl = '/assets/images/ghss.png';
+const harvardLogoUrl = '/assets/images/harvard.png';
+const cercLogo = '/assets/images/cerc.png';
 
 export const LogoGridItem = (props: {
   image: string;

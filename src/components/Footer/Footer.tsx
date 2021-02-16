@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'common/utils/router';
-import Logo from 'assets/images/footerlogoDarkWithURL';
-import { useIsEmbed } from 'common/utils/hooks';
+import Logo from 'common/images/footerlogoDarkWithURL';
 import FooterSocialLinks from './FooterSocialLinks';
 import {
   StyledFooter,
@@ -15,11 +14,6 @@ import {
 const Footer = () => {
   const { pathname } = useLocation();
   const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
-  const isEmbed = useIsEmbed();
-
-  if (isEmbed) {
-    return null;
-  }
 
   return (
     <StyledFooter>

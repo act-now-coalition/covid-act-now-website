@@ -6,10 +6,6 @@ import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
 import { Metric } from 'common/metricEnum';
-import { useModelLastUpdatedDate } from 'common/utils/model';
-import { formatUtcDate } from 'common/utils';
-import { Region } from 'common/regions';
-import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { ThermometerImage } from 'components/Thermometer';
 import LocationPageHeading from './LocationPageHeading';
 import NotificationArea from './Notifications';
@@ -29,10 +25,11 @@ import {
   SectionColumn,
   LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { MetroArea } from 'common/regions';
+import { Region, MetroArea } from 'common/regions';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import type { MetricValues } from 'common/models/Projections';
 
 function renderInfoTooltip(): React.ReactElement {
@@ -58,6 +55,7 @@ const LocationPageHeader = (props: {
   onHeaderSignupClick: () => void;
   isMobile?: boolean;
   region: Region;
+  lastUpdatedDateString: string;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
@@ -75,10 +73,6 @@ const LocationPageHeader = (props: {
 
   const isEmbed = useIsEmbed();
 
-  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
-
   const tooltip = renderInfoTooltip();
 
   return (
@@ -92,7 +86,7 @@ const LocationPageHeader = (props: {
         <TopContainer>
           <HeaderSection>
             <LocationPageHeading region={region} isEmbed={isEmbed} />
-            <ButtonsWrapper>
+            {/*<ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>
                 <ShareOutlinedIcon />
                 Share
@@ -102,6 +96,7 @@ const LocationPageHeader = (props: {
                 Receive alerts
               </HeaderButton>
             </ButtonsWrapper>
+            */}
           </HeaderSection>
           <HeaderSection>
             <SectionHalf>
@@ -132,7 +127,9 @@ const LocationPageHeader = (props: {
         <FooterContainer>
           {!isEmbed && (
             <HeaderSubCopy>
-              <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
+              <LastUpdatedDate>
+                Updated {props.lastUpdatedDateString}
+              </LastUpdatedDate>
             </HeaderSubCopy>
           )}
         </FooterContainer>

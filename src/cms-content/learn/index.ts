@@ -83,7 +83,10 @@ export interface CaseStudiesContent {
 }
 
 export const allCaseStudies = flatten(
-  map(caseStudies.categories, category => category.caseStudies),
+  map(
+    caseStudies.categories,
+    (category: CaseStudyCategory) => category.caseStudies,
+  ),
 );
 
 // Case studies indexed by caseStudyId for easier access on the
@@ -167,7 +170,7 @@ export interface MetricExplainersContent {
 export const metricExplainersContent = metricExplainers as MetricExplainersContent;
 export const [introSection, metricSections] = partition(
   metricExplainersContent.sections,
-  section => section.sectionId === 'how-covid-risk-is-determined',
+  (section: Section) => section.sectionId === 'how-covid-risk-is-determined',
 );
 
 /**

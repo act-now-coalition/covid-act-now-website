@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';

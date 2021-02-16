@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 
 /**
  * Returns an object with the width, height, top and left client coordinates
@@ -21,7 +21,9 @@ import { useState, useLayoutEffect } from 'react';
  */
 const useSvgBox = (ref: React.RefObject<SVGTextElement>) => {
   const [box, setBox] = useState({ width: 0, height: 0, top: 0, left: 0 });
-  useLayoutEffect(() => {
+  // FIXME: hack for SSR
+  // useLayoutEffect
+  useEffect(() => {
     if (ref?.current) {
       const { width, height, x, y } = ref.current.getBBox();
       setBox({ width, height, top: y, left: x });

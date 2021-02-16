@@ -29,9 +29,15 @@ class RegionDB {
     customAreasByFips: Dictionary<State>,
     private statesByStateCode: Dictionary<State>,
   ) {
-    this.states = sortBy(values(statesByFips), state => state.name);
-    this.counties = sortBy(values(countiesByFips), county => county.name);
-    this.metroAreas = sortBy(values(metroAreasByFips), metro => metro.name);
+    this.states = sortBy(values(statesByFips), (state: State) => state.name);
+    this.counties = sortBy(
+      values(countiesByFips),
+      (county: County) => county.name,
+    );
+    this.metroAreas = sortBy(
+      values(metroAreasByFips),
+      (metro: MetroArea) => metro.name,
+    );
     this.customAreas = values(customAreasByFips);
 
     this.regionsByFips = {
@@ -123,14 +129,14 @@ class RegionDB {
 
   topCountiesByPopulation(limit: number): County[] {
     return takeRight(
-      sortBy(this.counties, c => c.population),
+      sortBy(this.counties, (c: County) => c.population),
       limit,
     );
   }
 
   topMetrosByPopulation(limit: number): MetroArea[] {
     return takeRight(
-      sortBy(this.metroAreas, c => c.population),
+      sortBy(this.metroAreas, (c: MetroArea) => c.population),
       limit,
     );
   }

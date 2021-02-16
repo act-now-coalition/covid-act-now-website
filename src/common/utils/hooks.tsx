@@ -9,7 +9,8 @@ import {
 
 export function useEmbed(region?: Region) {
   // Check if we're embedded in an iFrame
-  const hostPath = window.location.origin;
+  // FIXME: do actual SSR guard here
+  const hostPath = typeof window !== 'undefined' && window.location.origin;
 
   const getEmbedHeight = () => (region ? EMBED_HEIGHT : US_MAP_EMBED_HEIGHT);
 

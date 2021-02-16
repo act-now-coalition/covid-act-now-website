@@ -11,7 +11,7 @@ import {
   LastUpdated,
   Url,
 } from './ChartExportImage.style';
-import LogoUrlLight from 'assets/images/logoUrlLight';
+import LogoUrlLight from 'common/images/logoUrlLight';
 import { MetricChart } from '../../../components/Charts';
 import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
 import { Metric } from 'common/metricEnum';

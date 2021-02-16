@@ -90,8 +90,9 @@ const ChartCaseDensity: FunctionComponent<{
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (p: Point) => xScale(getColumnDate(p));
-  const getYCoord = (p: Point) => yScale(Math.min(getYCaseDensity(p), capY));
+  const getXCoord = (p: Point) => xScale(getColumnDate(p)) ?? 0;
+  const getYCoord = (p: Point) =>
+    yScale(Math.min(getYCaseDensity(p), capY)) ?? 0;
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
@@ -166,7 +167,7 @@ const ChartCaseDensity: FunctionComponent<{
           name={region.name}
           isActive={activeZone.name === region.name}
           x={chartWidth - 10}
-          y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+          y={yScale(0.5 * (region.valueFrom + region.valueTo)) ?? 0}
         />
       ))}
       <AxisBottom

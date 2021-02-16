@@ -1,5 +1,9 @@
-import LocationRouter from './LocationRouter';
+//import LocationRouter from './LocationRouter';
 import { getPageTitle, getPageDescription } from './utils';
-export { getPageTitle, getPageDescription };
+import LocationPage, { LocationPageProps } from './LocationPage';
 
-export default LocationRouter;
+export type { LocationPageProps };
+export { getPageTitle, getPageDescription, LocationPage };
+
+// FIXME: remove LocationRouter for full next.js migration
+//export default LocationRouter;

@@ -1,5 +1,5 @@
-import ExplainedRouter from './ExplainedRouter';
+//import ExplainedRouter from './ExplainedRouter';
 import getCovidExplainedFooter from './getCovidExplainedFooter';
 
 export { getCovidExplainedFooter };
-export default ExplainedRouter;
+//export default ExplainedRouter;
