@@ -179,6 +179,23 @@ interface Footer {
 
 export const footerContent = footer as Footer;
 
+/*
+  About our alerts:
+*/
+
+export interface AlertsSection {
+  sectionHeader: string;
+  sectionSubheader: string;
+  sectionId: string;
+  sectionBody: Markdown;
+}
+
+export interface AboutAlertsContent {
+  pageHeader: string;
+  pageIntro?: Markdown;
+  sections: AlertsSection[];
+}
+
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
