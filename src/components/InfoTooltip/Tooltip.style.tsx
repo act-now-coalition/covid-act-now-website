@@ -33,7 +33,7 @@ export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
   arrow: true,
   interactive: true,
   TransitionComponent: Fade,
-  'aria-describedby': 'notifications-desc',
+  'aria-describedby': 'tooltip-description',
   enterDelay: 0,
   enterTouchDelay: 0,
 }))``;

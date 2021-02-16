@@ -14,11 +14,7 @@ export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
 };
 
 export function renderTooltipContent(body: string): React.ReactElement {
-  return (
-    <>
-      <StyledMarkdown source={body} />
-    </>
-  );
+  return <StyledMarkdown source={body} />;
 }
 
 export function tooltipAnchorOnClick(
