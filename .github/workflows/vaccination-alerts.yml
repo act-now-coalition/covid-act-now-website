@@ -48,7 +48,7 @@ jobs:
       - name: Generate the list of users and locations to email
         run: yarn vaccinations-generate-users-to-email
 
-      - name: Senv vaccination alert emails
+      - name: Send vaccination alert emails
         run: yarn vaccinations-send-alert-emails
 
       # Slack notifications
