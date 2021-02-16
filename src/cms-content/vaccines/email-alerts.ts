@@ -88,11 +88,13 @@ export function getEmailAlertData(
     ? `${region.fullName} is now in ${mostRecentPhase.title} of vaccination`
     : `${region.fullName} has updated vaccination information`;
 
+  const emailSubjectLine = `Current vaccine eligibility in ${region.fullName}`;
+
   const { eligibilityInfoUrl, vaccinationSignupUrl } = vaccinationLinks;
 
   // TODO: Add source name to the CMS
   return {
-    emailSubjectLine: `Who is currently eligible for vaccination in ${region.fullName}`,
+    emailSubjectLine,
     title,
     subtitle: 'People who are eligible to be vaccinated now include:',
     locationName: region.fullName,

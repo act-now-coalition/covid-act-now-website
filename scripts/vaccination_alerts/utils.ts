@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 import * as Handlebars from 'handlebars';
-import { getFirestore } from '../common/firebase';
 import { COLOR_MAP } from '../../src/common/colors';
 import regions, { getStateFips } from '../../src/common/regions';
 import {
@@ -31,8 +30,6 @@ export type FipsCode = string;
 export type Email = string;
 export type EmailFips = [Email, FipsCode];
 
-const VACCINATION_VERSIONS_COLLECTION = 'vaccination-info-updates';
-
 export const DEFAULT_ALERTS_FILE_PATH = path.join(
   __dirname,
   'vaccination-alerts.json',
@@ -54,34 +51,23 @@ export function getCmsVaccinationInfo(): RegionVaccinePhaseInfoMap {
     .value();
 }
 
-export async function getFirebaseVaccinationInfo(): Promise<
-  RegionVaccineVersionMap
-> {
-  const collection = await getFirestore()
-    .collection(VACCINATION_VERSIONS_COLLECTION)
-    .get();
-
-  const versionsByFips = await collection.docs.reduce((prev, curr) => {
-    return { ...prev, [curr.id]: curr.data() };
-  }, {});
-
-  return versionsByFips;
-}
-
 export function getUpdatedVaccinationInfo(
-  currentInfoByFips: RegionVaccinePhaseInfoMap,
-  lastVersionByFips: RegionVaccineVersionMap,
+  cmsInfoByFips: RegionVaccinePhaseInfoMap,
+  firestoreVersionByFips: RegionVaccineVersionMap,
 ): RegionVaccinePhaseInfoMap {
   const updatedInfoByFips: RegionVaccinePhaseInfoMap = {};
-  for (const fipsCode in currentInfoByFips) {
-    const lastVersionInfo = lastVersionByFips[fipsCode];
-    const currentPhaseInfo = currentInfoByFips[fipsCode];
+  for (const fipsCode in cmsInfoByFips) {
+    const firestoreVersionInfo = firestoreVersionByFips[fipsCode];
+    const cmsPhaseInfo = cmsInfoByFips[fipsCode];
 
+    // Only generate the alert if there isn't a version stored in Firestore
+    // or when the version number from the CMS is higher than the latest version
+    // stored in Firestore.
     if (
-      !lastVersionInfo ||
-      lastVersionInfo.emailAlertVersion !== currentPhaseInfo.emailAlertVersion
+      !firestoreVersionInfo ||
+      firestoreVersionInfo.emailAlertVersion < cmsPhaseInfo.emailAlertVersion
     ) {
-      updatedInfoByFips[fipsCode] = currentPhaseInfo;
+      updatedInfoByFips[fipsCode] = cmsPhaseInfo;
     }
   }
   return updatedInfoByFips;
@@ -156,8 +142,7 @@ export function getStateFipsCodesSet(fipsCodes: FipsCode[]) {
       return stateFips ? stateFips : '';
     })
     .filter(stateFips => stateFips.length > 0)
-    .uniq()
-    .value();
+    .uniq();
 }
 
 /**
@@ -185,4 +170,8 @@ export function generateEmailData(emailAddress: string, fipsCode: string) {
     ReplyTo: 'noreply@covidactnow.org',
     Group: `vaccination-alerts_${toISO8601(new Date())}`,
   };
+}
+
+export function projectRelativePath(absPath: string) {
+  return path.relative(path.join(__dirname, '../..'), absPath);
 }

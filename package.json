@@ -119,6 +119,7 @@
     "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
     "vaccinations-generate-alerts": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/generate-vaccine-alerts-info.ts",
     "vaccinations-generate-users-to-email": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/generate-users-to-email.ts",
+    "vaccinations-send-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/send-emails.ts",
     "vaccinations-send-test-email": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/send-test-email.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
