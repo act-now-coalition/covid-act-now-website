@@ -1,7 +1,16 @@
 name: Send Vaccination Alerts
 
 # TODO: Change to scheduled once we are confident
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      firebase_env:
+        description: 'Environment to run against (prod, dev, or staging)'
+        required: true
+        default: prod
+
+env:
+  FIREBASE_ENV: ${{ github.event.inputs.firebase_env }}
 
 jobs:
   send-vaccination-alerts:
@@ -16,10 +25,46 @@ jobs:
           node-version: 12.x
       - run: yarn install
 
+      # Write appropriate service account file for FIREBASE_ENV.
+      - name: Write Dev Service Account
+        if: ${{ env.FIREBASE_ENV == 'dev' }}
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DEV }}
+      - name: Write Staging Service Account
+        if: ${{ env.FIREBASE_ENV == 'staging' }}
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAGING }}
+      - name: Write Prod Service Account
+        if: ${{ env.FIREBASE_ENV == 'prod' }}
+        run: echo "$SERVICE_ACCOUNT" > scripts/common/firebase/google-service-account.json
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+
       - name: Generate the vaccination info update
         run: yarn vaccinations-generate-alerts
 
       - name: Generate the list of users and locations to email
         run: yarn vaccinations-generate-users-to-email
-      # Send the email
+
+      - name: Send vaccination alert emails
+        run: yarn vaccinations-send-alert-emails
+
       # Slack notifications
+      - name: Slack notification
+        if: ${{ env.FIREBASE_ENV == 'prod' && job.status != 'success' }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78a305a399cd6d8ede99d641f2b9224daf3
+        with:
+          args: '[${{env.FIREBASE_ENV}}] vaccination-alerts failed: {{STATUS}}'
+      - name: Slack notification
+        if: ${{ env.FIREBASE_ENV == 'prod' && job.status == 'success'}}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          STATUS: ${{job.status}}
+        uses: Ilshidur/action-slack@fb92a78a305a399cd6d8ede99d641f2b9224daf3
+        with:
+          args: '[${{env.FIREBASE_ENV}}] Successfully sent vaccination alerts'
