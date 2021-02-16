@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { useRouter } from 'next/router';
+
 import { getFirestore, getFirestoreFieldValue } from 'common/firebase';
 import {
   Wrapper,
@@ -24,8 +26,10 @@ async function getAlertsSubscriptions(): Promise<
 }
 
 const AlertUnsubscribe = () => {
-  const params = new URLSearchParams(window.location.search);
-  const email = params.get('email') || '';
+  const router = useRouter();
+  //  const params = new URLSearchParams(window.location.search);
+  // fixme: remove coercion?
+  const email = (router.query.email ?? '') as string; //params.get('email') || '';
 
   const [selectedLocations, setSelectedLocations] = useState<Region[]>([]);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');

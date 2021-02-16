@@ -44,7 +44,7 @@ export async function storeSharedComponentParams(
       component: component,
       ...params,
     },
-    v => v !== undefined,
+    (v: any) => v !== undefined,
   );
   let cachedParams = storedComponentParams.find(cached =>
     isEqual(cached.params, params),

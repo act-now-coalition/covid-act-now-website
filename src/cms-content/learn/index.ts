@@ -86,7 +86,7 @@ export interface CaseStudiesContent {
 }
 
 export const allCaseStudies = chain(caseStudies.categories)
-  .map(category => category.caseStudies)
+  .map((category: CaseStudyCategory) => category.caseStudies)
   .flatten()
   .value();
 
@@ -171,7 +171,7 @@ export interface MetricExplainersContent {
 export const metricExplainersContent = metricExplainers as MetricExplainersContent;
 export const [introSection, metricSections] = partition(
   metricExplainersContent.sections,
-  section => section.sectionId === 'how-covid-risk-is-determined',
+  (section: Section) => section.sectionId === 'how-covid-risk-is-determined',
 );
 
 /**

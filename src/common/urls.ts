@@ -48,7 +48,7 @@ export function getPageUrl(region: Region): string {
   social/copy-link button in Recommends footer
 */
 export function getRecommendationsShareUrl(region: Region): string {
-  return addSharingId(urlJoin(region.canonicalUrl, 'recommendations'));
+  return addSharingId(urlJoin(region.canonicalUrl, '#recommendations'));
 }
 
 export function getComparePageUrl(

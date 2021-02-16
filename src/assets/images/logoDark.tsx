@@ -1,5 +1,5 @@
 import React from 'react';
-import can_logo_dark_svg from './covid-act-now-logo-dark.svg';
+const can_logo_dark_svg = '/assets/images/covid-act-now-logo-dark.svg';
 
 const Logo = ({ height }: { height?: number }) => (
   <img

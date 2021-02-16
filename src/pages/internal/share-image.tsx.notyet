@@ -1,0 +1,4 @@
+import React from 'react';
+import ShareImage from 'screens/internal/ShareImage/ShareImage';
+
+export default ShareImage;

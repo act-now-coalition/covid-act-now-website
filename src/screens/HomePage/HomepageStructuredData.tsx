@@ -1,8 +1,8 @@
 import React from 'react';
 import { getMapImageUrl } from 'common/urls';
 import { Helmet } from 'react-helmet';
-import canLogo from 'assets/images/covid-act-now-logo.png';
 import urlJoin from 'url-join';
+const canLogo = '/assets/images/covid-act-now-logo.png';
 
 const HomepageStructuredData: React.FC = () => {
   const canLogoUrl = urlJoin('https://covidactnow.org', canLogo);

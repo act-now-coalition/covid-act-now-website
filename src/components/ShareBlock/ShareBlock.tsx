@@ -10,7 +10,11 @@ import {
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
 import { Projections } from 'common/models/Projections';
+import { COLOR_MAP } from 'common/colors';
+import { Level } from 'common/level';
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import * as urls from 'common/urls';
+import { useModelLastUpdatedDate } from 'common/utils/model';
 import {
   ShareButtonContainer,
   ShareContainer,
@@ -37,14 +41,12 @@ const ShareBlock = ({
   shareURL,
   onClickEmbed,
   projections,
-  stats,
 }: {
   region?: Region;
   shareQuote?: string;
   shareURL?: string;
   onClickEmbed?: any;
   projections?: Projections;
-  stats?: { [key: string]: number | null };
 }) => {
   const locationPath = useLocation();
   const url = urls.addSharingId(shareURL || 'https://covidactnow.org/');
@@ -69,12 +71,34 @@ const ShareBlock = ({
 
   const geolocatedRegions = useGeolocationRegions();
 
-  const SocialPreview =
-    projections && stats ? (
-      <SocialLocationPreview projections={projections} stats={stats} />
-    ) : (
-      <SocialLocationPreviewMap isEmbedPreview />
+  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDateString =
+    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
+
+  let socialPreview = null;
+  if (region && projections) {
+    const stats = projections.getMetricValues();
+    const alarmLevel = projections.getAlarmLevel();
+    const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
+    const fillColor =
+      alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
+    socialPreview = (
+      <SocialLocationPreview
+        regionName={region.name}
+        fillColor={fillColor}
+        levelName={levelInfo.name}
+        stats={stats}
+        lastUpdatedDateString={lastUpdatedDateString}
+      />
     );
+  } else {
+    socialPreview = (
+      <SocialLocationPreviewMap
+        isEmbedPreview
+        lastUpdatedDateString={lastUpdatedDateString}
+      />
+    );
+  }
 
   const defaultSignupRegions = region
     ? getDefaultRegions(region)
@@ -134,8 +158,6 @@ const ShareBlock = ({
                   <LinkedinShareButton
                     url={url}
                     title={quote}
-                    // @ts-ignore: seems to not be available for linkedin?
-                    hashtags={[hashtag]}
                     beforeOnClick={() => {
                       trackShare('linkedin');
                       return Promise.resolve();
@@ -154,7 +176,7 @@ const ShareBlock = ({
               </EmbedPrompt>
             </SocialTextArea>
           </SocialTextAreaWrapper>
-          <SocialMockupWrapper>{SocialPreview}</SocialMockupWrapper>
+          <SocialMockupWrapper>{socialPreview}</SocialMockupWrapper>
         </ShareRowContentArea>
       </ShareRow>
     </ShareContainer>

@@ -1,19 +1,14 @@
 import React from 'react';
 
-import '../../App.css'; /* optional for styling like the :hover pseudo-class */
+//import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 
-import { useProjectionsFromRegion } from 'common/utils/model';
-import { useModelLastUpdatedDate } from 'common/utils/model';
-import { Level } from 'common/level';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import { COLOR_MAP } from 'common/colors';
 import LogoUrlLight from 'assets/images/logoUrlLight';
+import { MetricValues } from 'common/models/Projections';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import {
   HeaderText,
   AlarmLevel,
 } from 'components/SocialLocationPreview/SocialLocationPreview.style';
-import { US_MAP_EMBED_HEIGHT, US_MAP_EMBED_WIDTH } from './EmbedEnums';
 import {
   EmbedContainer,
   EmbedWrapper,
@@ -25,34 +20,33 @@ import {
   EmbedHeader,
   EmbedSubheader,
 } from './Embed.style';
-import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
-import { useRegionFromParams } from 'common/regions';
 
-function LocationEmbed() {
-  const region = useRegionFromParams();
+export interface LocationEmbedProps {
+  regionName: string;
+  fillColor: string;
+  levelName: string;
+  stats: MetricValues;
+  embedOnClickBaseURL: string;
+  lastUpdatedDateString: string;
+}
 
-  const projections = useProjectionsFromRegion(region);
-  if (!projections || !region) {
-    return null;
-  }
-
-  const stats = projections.getMetricValues();
-  const alarmLevel = projections.getAlarmLevel();
-  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
-  const fillColor =
-    alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
-
-  const embedOnClickBaseURL = region.canonicalUrl;
-
+export function LocationEmbed({
+  regionName,
+  fillColor,
+  levelName,
+  stats,
+  embedOnClickBaseURL,
+  lastUpdatedDateString,
+}: LocationEmbedProps) {
   return (
     <EmbedContainer>
       <EmbedWrapper>
         <EmbedHeaderWrapper>
           <HeaderText>
-            <EmbedHeader>{region.fullName}</EmbedHeader>
+            <EmbedHeader>{regionName}</EmbedHeader>
             <EmbedSubheader>Overall COVID risk</EmbedSubheader>
           </HeaderText>
-          <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
+          <AlarmLevel color={fillColor}>{levelName}</AlarmLevel>
         </EmbedHeaderWrapper>
         <EmbedBody>
           <SummaryStats
@@ -62,17 +56,17 @@ function LocationEmbed() {
             embedOnClickBaseURL={embedOnClickBaseURL}
           />
         </EmbedBody>
-        <EmbedFooter />
+        <EmbedFooter lastUpdatedDateString={lastUpdatedDateString} />
       </EmbedWrapper>
     </EmbedContainer>
   );
 }
 
-export function EmbedFooter() {
-  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate && lastUpdatedDate.toLocaleDateString();
-
+export function EmbedFooter({
+  lastUpdatedDateString,
+}: {
+  lastUpdatedDateString: string;
+}) {
   return (
     <EmbedFooterWrapper>
       <LogoWrapper
@@ -85,16 +79,4 @@ export function EmbedFooter() {
       <FooterDate>Last Updated {lastUpdatedDateString}</FooterDate>
     </EmbedFooterWrapper>
   );
-}
-
-export default function Embed({ isNational }: { isNational: boolean }) {
-  if (isNational) {
-    return (
-      <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>
-        <SocialLocationPreviewMap border isEmbed Footer={EmbedFooter} />
-      </EmbedContainer>
-    );
-  }
-
-  return <LocationEmbed />;
 }

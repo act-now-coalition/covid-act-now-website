@@ -52,17 +52,16 @@ export function importFipsToCcviMap(): Promise<FipsToCcviMap> {
 export interface CountyToZipMap {
   [fips: string]: string[];
 }
+
 /** Dynamic import for county-zipcode.json. */
 export function importCountyToZipCodeMap(): Promise<CountyToZipMap> {
   return importJson('county-zipcode', import('./county-zipcode.json'));
 }
 
-}
-
 /** Represent entries in surgo-percent-population-vulnerable.json. */
 export interface FipsToPopVulnerable {
   [fipsCode: string]: number;
-};
+}
 
 export function getVulnPopulationPercentForFips(
   fips: string,

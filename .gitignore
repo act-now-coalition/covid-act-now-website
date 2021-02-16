@@ -46,3 +46,5 @@ package-lock.json
 
 # a scratch file for lil scripts/notes
 scratch
+
+.next

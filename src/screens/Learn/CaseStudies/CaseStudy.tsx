@@ -10,9 +10,8 @@ import {
 } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import {
-  caseStudiesById,
-  getCaseStudyCategory,
-  getMoreStudies,
+  CaseStudy as CaseStudyType,
+  CaseStudyCategory,
   learnPages,
   caseStudiesContent,
 } from 'cms-content/learn';
@@ -26,24 +25,30 @@ import Footer from 'screens/Learn/Footer/Footer';
 
 const { metadataDescription } = caseStudiesContent;
 
-const CaseStudy: React.FC = () => {
-  let { caseStudyId } = useParams<{ caseStudyId: string }>();
+export interface CaseStudyProps {
+  caseStudy: CaseStudyType;
+  studyCategory?: CaseStudyCategory;
+  otherCaseStudies: CaseStudyType[];
+}
+
+const CaseStudy = ({
+  caseStudy,
+  studyCategory,
+  otherCaseStudies,
+}: CaseStudyProps) => {
   const date = formatMetatagDate();
-  const caseStudy = caseStudiesById[caseStudyId];
 
   if (!caseStudy) {
     return null;
   }
 
   const { header, body, author } = caseStudy;
-  const studyCategory = getCaseStudyCategory(caseStudyId);
-  const otherCaseStudies = getMoreStudies(caseStudyId);
   const fullAuthorText = `By ${author}`;
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl={`/case-studies/${caseStudyId}`}
+        canonicalUrl={`/case-studies/${caseStudy.caseStudyId}`}
         pageTitle={`Case Study: ${caseStudy.shortTitle}`}
         pageDescription={`${date} ${metadataDescription}`}
       />

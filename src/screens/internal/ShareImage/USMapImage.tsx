@@ -4,11 +4,17 @@ import React from 'react';
 import { ScreenshotWrapper } from './ShareImage.style';
 import { USMapWrapper } from './USMapImage.style';
 
-export const USMapImage = () => {
+export interface USMapImageProps {
+  lastUpdatedDateString: string;
+}
+
+export const USMapImage = ({ lastUpdatedDateString }: USMapImageProps) => {
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <USMapWrapper>
-        <SocialLocationPreviewMap />
+        <SocialLocationPreviewMap
+          lastUpdatedDateString={lastUpdatedDateString}
+        />
       </USMapWrapper>
     </ScreenshotWrapper>
   );

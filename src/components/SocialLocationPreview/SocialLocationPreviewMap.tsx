@@ -1,5 +1,4 @@
 import React, { ComponentType } from 'react';
-import { useModelLastUpdatedDate } from 'common/utils/model';
 
 import {
   Wrapper,
@@ -15,24 +14,27 @@ import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import Map from 'components/Map/Map';
 import { Legend, LegendItem } from 'components/Map/Legend';
 
-const SocialLocationPreview = (props: {
+const SocialLocationPreviewMap = (props: {
+  lastUpdatedDateString: string;
   border?: Boolean;
   isEmbed?: Boolean;
   Footer?: ComponentType;
   isEmbedPreview?: boolean;
 }) => {
-  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
   const navigateToCAN = () => {
     window.top.location.href = 'https://covidactnow.org/';
     return false;
   };
-  const Footer = props.Footer;
-  const isEmbed = props.isEmbed;
-  const showCountyView = !isEmbed && !props.isEmbedPreview;
+  const {
+    border,
+    Footer,
+    isEmbed,
+    isEmbedPreview,
+    lastUpdatedDateString,
+  } = props;
+  const showCountyView = !isEmbed && !isEmbedPreview;
   return (
-    <Wrapper border={props.border}>
+    <Wrapper border={border}>
       <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
       <USMapPreviewHeader sideLegend={!isEmbed}>
         <MapWrapper>
@@ -90,4 +92,4 @@ const SocialLocationPreview = (props: {
   );
 };
 
-export default SocialLocationPreview;
+export default SocialLocationPreviewMap;

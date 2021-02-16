@@ -135,6 +135,7 @@ export default function HomePage() {
             </Section>
             <Section ref={exploreSectionRef}>
               <Explore
+                region={null}
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsForExplore}
                 initialChartIndigenousPopulations={false}

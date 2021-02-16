@@ -14,7 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "preserve"
   },
-  "include": ["src"]
+  "include": [
+    "src", "public/assets" 
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

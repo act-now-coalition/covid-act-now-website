@@ -11,14 +11,9 @@ const BASE_SHARE_URL = 'https://covidactnow.org/us';
 interface ShareModelBlockParams {
   region?: Region;
   projections?: Projections;
-  stats?: any;
 }
 
-const ShareModelBlock = ({
-  region,
-  projections,
-  stats,
-}: ShareModelBlockParams) => {
+const ShareModelBlock = ({ region, projections }: ShareModelBlockParams) => {
   const { displayName, shareURL } = getUrlAndShareQuote(region);
   const shareQuote = `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
@@ -30,7 +25,6 @@ const ShareModelBlock = ({
         shareQuote={shareQuote}
         projections={projections}
         onClickEmbed={() => setShowEmbedPreviewModal(true)}
-        stats={stats}
       />
       {/* todo: add region to this. county={county} */}
       <EmbedPreview

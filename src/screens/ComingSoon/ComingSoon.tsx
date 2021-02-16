@@ -1,8 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-
-import covid from 'assets/images/covid-19.jpg';
 import { Wrapper, BackgroundImage, Layer } from './ComingSoon.style';
+
+const covid = '../../../public/assets/images/covid-19.jpg';
 
 const ComingSoon = () => {
   return (

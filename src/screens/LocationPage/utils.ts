@@ -23,10 +23,10 @@ export function getPageTitle(region: Region): string {
 
 export function getPageDescription(region: Region): string {
   const date = formatMetatagDate();
-  const { level: alarmLevel, metrics } = LocationSummariesByFIPS[
-    region.fipsCode
-  ];
-  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
+  const summary = LocationSummariesByFIPS?.[region.fipsCode];
+  if (summary) {
+    const { level: alarmLevel, metrics } = summary;
+    const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   const vaccinationRatio = metrics[Metric.VACCINATIONS]?.value;
   const vaccinationText = vaccinationRatio
     ? ` and ${formatPercent(
@@ -37,4 +37,7 @@ export function getPageDescription(region: Region): string {
   return `${date}: ${locationName(
     region,
   )} is at ${levelInfo.name.toLowerCase()} COVID risk level${vaccinationText}.`;
+  } else {
+    return '';
+  }
 }

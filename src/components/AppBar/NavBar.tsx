@@ -4,12 +4,11 @@ import Fade from '@material-ui/core/Fade';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
-import Logo from 'assets/images/logo';
+import Logo from 'common/images/logo';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
 import { DonateButton, DonateButtonHeart } from './DonateButton';
 import MenuButton from './MenuButton';
-import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
 import {
   Experiment,
@@ -83,15 +82,9 @@ const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
-  const isEmbed = useIsEmbed();
-
   // We only fade the donate button on the home page on mobile, where the donate
   // button doesn't appear until the banner is scrolled away.
   const { pathname } = useLocation();
-
-  if (isEmbed) {
-    return null;
-  }
 
   const onClickHamburger = () => {
     const updatedIsOpen = !isMenuOpen;
