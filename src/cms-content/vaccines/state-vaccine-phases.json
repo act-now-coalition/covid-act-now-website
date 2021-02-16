@@ -221,6 +221,15 @@
           "phase": "1B",
           "tier": "1",
           "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-16T22:54:24.611Z",
+          "phase": "1B",
+          "description": "\\* People 16-64 with a high-risk medical condition",
+          "expandedDefinitionUrl": "https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/Provider-Bulletin-2-12-21.aspx",
+          "tier": "2",
+          "startDate": "March 15, 2021"
         }
       ],
       "notes": "Note, the state website has removed references to phase 1b tier 2 and phase 1C. An example of the changes are https://www.placer.ca.gov/DocumentCenter/View/49578/COVID-Vaccine-Infographic-11421."
