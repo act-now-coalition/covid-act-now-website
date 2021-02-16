@@ -17,22 +17,22 @@ This script determines which locations have updated vaccination information by c
 ```yaml
 vaccination-info-updates:
   '11':
-    emailAlertVersion: 0
+    email-alert-version: 0
   '12':
-    emailAlertVersion: 0
+    email-alert-version: 0
 ```
 
 ### From the CMS
 
 ```yaml
 '11':
-  emailAlertVersion: 3 # Updated
+  email-alert-version: 3 # Updated
   content: 'Phase A...'
 '12':
-  emailAlertVersion: 0
+  email-alert-version: 0
   content: 'Phase 1...'
 '13':
-  emailAlertVersion: 3 # New
+  email-alert-version: 3 # New
   content: 'Phase 1...'
 ```
 
@@ -61,12 +61,12 @@ alerts-subscriptions:
     locations: ['11', '13']
 ```
 
-Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, in the document `snapshotId`, so we can track the locations and users that we email each time.
+Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, so we can track the users that are sent alerts each time.
 
 ```yaml
 vaccination-alerts:
   '11':
-    emailAlertVersions:
+    email-versions:
       '0':
         emails:
           pablo@covidactnow.org: { sentAt: null }
@@ -96,9 +96,9 @@ Finally, we update the `vaccination-info-updates` collection with the latest upd
 ```yaml
 vaccination-info-updates:
   '11':
-    emailAlertVersion: 3
+    email-alert-version: 3
   '12':
-    emailAlertVersion: 0
+    email-alert-version: 0
 ```
 
 ## Notes

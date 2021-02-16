@@ -1,13 +1,12 @@
-import path from 'path';
 import fs from 'fs';
+import * as yargs from 'yargs';
 import {
   getCmsVaccinationInfo,
-  getFirebaseVaccinationInfo,
   getUpdatedVaccinationInfo,
   DEFAULT_ALERTS_FILE_PATH,
+  projectRelativePath,
 } from './utils';
-
-import * as yargs from 'yargs';
+import FirestoreSubscriptions from './firestore-subscriptions';
 
 /**
  * Generates the `vaccination-alerts.json` file with a map of locations that
@@ -17,11 +16,14 @@ import * as yargs from 'yargs';
  */
 
 async function main(alertsFilePath: string) {
+  console.info('Generating vaccination alerts');
+  const firestoreSubscriptions = new FirestoreSubscriptions();
+
   console.log('Loading latest alerts from cms data');
   const cmsInfo = getCmsVaccinationInfo();
 
   console.log('Reading latest alerts sent from Firebase');
-  const firebaseInfo = await getFirebaseVaccinationInfo();
+  const firebaseInfo = await firestoreSubscriptions.getVaccinationInfoByFips();
 
   console.log('Getting snapshot of alerts to send');
   const vaccinationAlertUpdates = getUpdatedVaccinationInfo(
@@ -31,14 +33,18 @@ async function main(alertsFilePath: string) {
 
   for (const [fips, current] of Object.entries(vaccinationAlertUpdates)) {
     const previous = firebaseInfo[fips];
+    const { locationName } = current;
+    const prevVersion = previous?.emailAlertVersion;
+    const currVersion = current?.emailAlertVersion;
 
     console.log(
-      `New alert for ${current.locationName}: ${
-        previous?.emailAlertVersion ?? 'None'
-      } -> ${current.emailAlertVersion}`,
+      `New alert for ${locationName} (${fips}):`,
+      ` ${prevVersion ?? 'None'} → ${currVersion}`,
     );
   }
-  console.log(`Saving alert snapshot to ${alertsFilePath}`);
+  console.log(
+    `Saving alert snapshot to ${projectRelativePath(alertsFilePath)}`,
+  );
   fs.writeFileSync(
     alertsFilePath,
     JSON.stringify(vaccinationAlertUpdates, null, 2),
@@ -55,7 +61,8 @@ if (require.main === module) {
 
   main(argv.path)
     .then(() => {
-      console.log(`Done. Generated ${argv.path}`);
+      console.log(`Generated ${projectRelativePath(argv.path)}`);
+      console.log('Done.');
       process.exit(0);
     })
     .catch(err => {
