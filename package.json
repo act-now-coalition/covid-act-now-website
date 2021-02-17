@@ -124,7 +124,7 @@
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js",
-    "generate-counties-ccvi": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_ccvi_counties.ts"
+    "generate-ccvi": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_ccvi.ts"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [

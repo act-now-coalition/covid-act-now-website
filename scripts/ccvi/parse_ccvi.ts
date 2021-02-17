@@ -21,18 +21,17 @@ function formatFips(fips: string): string {
   return fips;
 }
 
+async function readCsv(filePath: string) {
+  const csvText = fs.readFileSync(path.join(__dirname, filePath));
+  const [, ...rows] = await csvParse(csvText);
+  return rows;
+}
+
 async function main() {
   const fipsToCcviData: FipsToCcviMap = {};
 
-  const statecCsvText = fs.readFileSync(
-    path.join(__dirname, 'ccvi_states.csv'),
-  );
-  const [, ...stateRows] = await csvParse(statecCsvText);
-
-  const countyCsvText = fs.readFileSync(
-    path.join(__dirname, 'ccvi_counties.csv'),
-  );
-  const [, ...countyRows] = await csvParse(countyCsvText);
+  const stateRows = await readCsv('ccvi_states.csv');
+  const countyRows = await readCsv('ccvi_counties.csv');
 
   for (const row of stateRows) {
     const formattedFips = formatFips(row[0]);
