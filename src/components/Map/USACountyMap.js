@@ -97,6 +97,10 @@ const USACountyMap = React.memo(
                     .map(geo => {
                       const fipsCode = geo.id;
                       const state = regions.findByFipsCode(fipsCode);
+                      // This flag is used to increase an invisible border around Hawaii and Puerto Rico
+                      // to increase their effective target size
+                      const expandTapArea =
+                        state.stateCode === 'HI' || state.stateCode === 'PR';
                       // Using a custom SVG to place the northern mariana islands to increase
                       // accessibility due to the small size.
                       if (state.stateCode === 'MP') {
@@ -106,6 +110,7 @@ const USACountyMap = React.memo(
                             to={state.relativeUrl}
                             aria-label={state.fullName}
                             onClick={() => trackMapClick(state.fullName)}
+                            tabIndex="-1"
                           >
                             <MarianaIslands
                               key={geo.rsmKey}
@@ -115,6 +120,7 @@ const USACountyMap = React.memo(
                               onMouseLeave={onMouseLeave}
                               onClick={() => stateClickHandler(state.fullName)}
                               fill={getFillColor(geo)}
+                              tabIndex="-1"
                             />
                           </Link>
                         );
@@ -125,6 +131,7 @@ const USACountyMap = React.memo(
                           to={state.relativeUrl}
                           aria-label={state.fullName}
                           onClick={() => trackMapClick(state.fullName)}
+                          tabIndex="-1"
                         >
                           <Geography
                             key={geo.rsmKey}
@@ -137,7 +144,10 @@ const USACountyMap = React.memo(
                             fill={getFillColor(geo)}
                             fillOpacity={showCounties ? 0 : 1}
                             stroke="white"
+                            strokeWidth={expandTapArea ? 35 : 2}
+                            strokeOpacity={expandTapArea ? 0 : 1}
                             role="img"
+                            tabIndex="-1"
                           />
                         </Link>
                       ) : null;
