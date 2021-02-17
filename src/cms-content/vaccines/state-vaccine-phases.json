@@ -1688,7 +1688,8 @@
           "updatedAt": "2021-02-10T01:38:51.236Z",
           "phase": "2",
           "tier": "2",
-          "description": "* Adults of any age with comorbidities\n* Teachers and staff in PreK-12 educational settings\n* Staff and residents in congregate locations and worksites"
+          "description": "* Adults of any age with comorbidities\n* Teachers and staff in PreK-12 educational settings\n* Staff and residents in congregate locations and worksites",
+          "startDate": "2/22/21"
         },
         {
           "currentlyEligible": false,
