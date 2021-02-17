@@ -48,6 +48,21 @@
           "question": "Does immunity protection last longer if you get a vaccine or if you have had COVID?",
           "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
           "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last."
+        },
+        {
+          "question": "Which locations do you have vaccine eligibility information for? ",
+          "questionId": "what-locations-do-you-have-vaccine-eligibility-information-for",
+          "answer": "We currently only have vaccine eligibility information for all 50 states."
+        },
+        {
+          "question": "How do you get your vaccine eligibility information?",
+          "questionId": "how-do-you-get-vaccine-eligibility-information ",
+          "answer": "Our team of staff and volunteers review official government sites of states, metros and counties several times a week."
+        },
+        {
+          "question": "Why do you have vaccine eligibility information for some locations and not others? ",
+          "questionId": "why-vaccine-eligibility-information-for-some-locations",
+          "answer": "Identifying vaccine eligibility information takes time, since the information is not standardized and cannot be processed automatically by a computer. It thus needs to be collected manually. What’s more, eligibility varies not only from state to state, but also sometimes by county, and even by city. Finally, vaccine eligibility information may change as states, counties, or cities adjust their roll-out plans, and making sure this information is up to date is a manual process of regularly checking government websites. For all those reasons, we currently have a limited number of locations that we are able to support with vaccine eligibility alerts."
         }
       ]
     },
