@@ -2006,11 +2006,12 @@
           "description": "* Outpatient healthcare workers with direct patient exposure\n* Ages 70+"
         },
         {
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "updatedAt": "2021-02-10T01:26:44.457Z",
           "phase": "1B",
           "startDate": "Feb/Mar",
-          "description": "* K-12, Child Care\n* Other First Responders\n* Ages 65+"
+          "description": "* K-12, Child Care\n* Other First Responders\n* Ages 65+\n\nNote: Eligibility may depend per county",
+          "expandedDefinitionUrl": "https://covid19.tn.gov/covid-19-vaccines/county-vaccine-information/"
         },
         {
           "currentlyEligible": false,
