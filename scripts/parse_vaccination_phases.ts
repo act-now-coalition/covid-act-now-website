@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { groupBy, forOwn, sortBy } from 'lodash';
+import * as yargs from 'yargs';
 import path from 'path';
 import fs from 'fs-extra';
 import {
@@ -74,7 +75,20 @@ const buildRegionGroup = (
   };
 };
 
-async function main() {
+const updateStatePhases = (
+  cmsRecord: RegionVaccinePhaseInfo,
+  spreadsheetRecord: RegionVaccinePhaseInfo,
+): RegionVaccinePhaseInfo => {
+  return {
+    ...cmsRecord,
+    ...{
+      eligibilityInfoUrl: spreadsheetRecord.eligibilityInfoUrl,
+      phaseGroups: spreadsheetRecord.phaseGroups,
+    },
+  };
+};
+
+async function main(dryRun: boolean) {
   const csv = await fetch(GOOGLE_SHEETS_CSV_URL);
   const content = await csv.text();
   const rows = parse(content, { columns: true });
@@ -89,20 +103,47 @@ async function main() {
 
   const spreadsheetFips = groups.map(group => group.fips);
 
-  const existing = stateVaccinationPhases.filter(phase =>
+  const matchingCMSRecords = stateVaccinationPhases.filter(phase =>
     spreadsheetFips.includes(phase.fips),
   );
 
   const newStates = groups.filter(group => !existingFips.includes(group.fips));
 
-  console.log(`Adding states: ${newStates.map(state => state.locationName)}`);
-  console.log(`Existing states: ${existing.map(state => state.locationName)}`);
+  const inCmsNotSpreadsheet = stateVaccinationPhases.filter(
+    phase => !spreadsheetFips.includes(phase.fips),
+  );
+
+  const updatedMatchingRecords = matchingCMSRecords.map(cmsRecord =>
+    updateStatePhases(
+      cmsRecord,
+      groups.find(group => group.fips === cmsRecord.fips)!,
+    ),
+  );
+
+  console.log(
+    `In spreadsheet but not CMS: ${newStates.map(state => state.locationName)}`,
+  );
+  console.log(
+    `In both: ${matchingCMSRecords.map(state => state.locationName)}`,
+  );
+
+  console.log(
+    `In CMS but not spreadsheet: ${inCmsNotSpreadsheet.map(
+      state => state.locationName,
+    )}`,
+  );
+
+  if (dryRun) {
+    console.log('Dry run -- exiting');
+    return;
+  }
+
   await fs.writeFile(
     PHASES_PATH,
     JSON.stringify(
       {
         regions: sortBy(
-          [...existing, ...newStates],
+          [...updatedMatchingRecords, ...newStates, ...inCmsNotSpreadsheet],
           state => state.locationName,
         ),
       },
@@ -112,7 +153,14 @@ async function main() {
   );
 }
 
-main().catch(e => {
-  console.error(e);
-  process.exit(-1);
-});
+if (require.main === module) {
+  const argv = yargs.options({
+    dryRun: {
+      default: false,
+    },
+  }).argv;
+  main(argv.dryRun).catch(e => {
+    console.error(e);
+    process.exit(-1);
+  });
+}
