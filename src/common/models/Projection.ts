@@ -11,8 +11,9 @@ import {
   Actuals,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
-import { assert } from 'common/utils';
+import { assert, formatPercent } from 'common/utils';
 import { Metric } from 'common/metric';
+import regions from 'common/regions';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */
 class DisabledFipsList {
@@ -29,6 +30,14 @@ class DisabledFipsList {
   }
 }
 
+function countyAndMetrosForState(stateCode: string): string[] {
+  const counties = regions.findCountiesByStateCode(stateCode);
+  const metros = regions.metroAreas.filter(
+    m => _.intersection(m.counties, counties).length > 0,
+  );
+  return [...counties, ...metros].map(r => r.fipsCode);
+}
+
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
  */
@@ -41,30 +50,12 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_DENSITY]: new DisabledFipsList([]),
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
-  [Metric.POSITIVE_TESTS]: new DisabledFipsList([
-    '47093', // https://trello.com/c/pmB5mGZU/883-disabled-knox-county-tn-test-positivity
-  ]),
+  [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
   [Metric.VACCINATIONS]: new DisabledFipsList([
-    //https://trello.com/c/9OCK0e3O/878-maine-vaccination-metric-data-off-by-2-decimal-places-likely-ratio-vs-percentage-bug
-    '23001',
-    '23003',
-    '23005',
-    '23007',
-    '23009',
-    '23011',
-    '23013',
-    '23015',
-    '23017',
-    '23019',
-    '23021',
-    '23023',
-    '23025',
-    '23027',
-    '23029',
-    '23031',
-    '30340',
-    '30620',
-    '38860',
+    ...countyAndMetrosForState('OR'), // https://trello.com/c/iQWpcPgy/
+    ...countyAndMetrosForState('FL'), // https://trello.com/c/qH1UnTgt/
+    ...countyAndMetrosForState('PA'), // https://trello.com/c/uzV9TGbk/
+    ...countyAndMetrosForState('TN'), // https://trello.com/c/BsoMijbC/
   ]),
 };
 
@@ -150,6 +141,9 @@ export interface VaccinationsInfo {
 
   peopleVaccinated: number;
   ratioVaccinated: number;
+
+  dosesDistributed: number | null;
+  ratioDosesAdministered: number | null;
 }
 
 /**
@@ -426,12 +420,39 @@ export class Projection {
     const peopleInitiated =
       actuals.vaccinationsInitiated ?? ratioInitiated * this.totalPopulation;
 
+    if (ratioVaccinated > ratioInitiated) {
+      console.error(
+        `Suspicious vaccine data for ${this.fips}: % Vaccinated ${formatPercent(
+          ratioVaccinated,
+          2,
+        )} > % Initiated ${formatPercent(ratioInitiated, 2)}.`,
+      );
+    }
+
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
     );
     const vaccinationsInitiatedSeries = metricsTimeseries.map(
       row => row?.vaccinationsInitiatedRatio || null,
     );
+
+    let dosesDistributed = actuals.vaccinesDistributed ?? null;
+    let ratioDosesAdministered = dosesDistributed
+      ? (peopleInitiated + peopleVaccinated) / dosesDistributed
+      : null;
+
+    if (
+      ratioDosesAdministered &&
+      (ratioDosesAdministered < 0 || ratioDosesAdministered > 1)
+    ) {
+      console.error(
+        `Suppressing suspicious vaccine doses administered % for ${
+          this.fips
+        }: ${formatPercent(ratioDosesAdministered, 2)}`,
+      );
+      dosesDistributed = null;
+      ratioDosesAdministered = null;
+    }
 
     return {
       peopleVaccinated,
@@ -440,6 +461,8 @@ export class Projection {
       ratioVaccinated,
       ratioCompletedSeries: vaccinationsCompletedSeries,
       ratioInitiatedSeries: vaccinationsInitiatedSeries,
+      dosesDistributed,
+      ratioDosesAdministered,
     };
   }
 

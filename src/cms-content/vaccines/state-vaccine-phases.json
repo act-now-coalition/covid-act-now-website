@@ -39,7 +39,7 @@
       "locationName": "Alaska",
       "fips": "02",
       "eligibilityInfoUrl": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/VaccineAvailability.aspx",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1a",
@@ -110,7 +110,7 @@
       "locationName": "Arizona",
       "fips": "04",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -163,7 +163,7 @@
       "locationName": "Arkansas",
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -221,11 +221,21 @@
           "phase": "1B",
           "tier": "1",
           "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-16T22:54:24.611Z",
+          "phase": "1B",
+          "description": "\\* People 16-64 with a high-risk medical condition",
+          "expandedDefinitionUrl": "https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/Provider-Bulletin-2-12-21.aspx",
+          "tier": "2",
+          "startDate": "March 15, 2021"
         }
-      ]
+      ],
+      "notes": "Note, the state website has removed references to phase 1b tier 2 and phase 1C. An example of the changes are https://www.placer.ca.gov/DocumentCenter/View/49578/COVID-Vaccine-Infographic-11421."
     },
     {
-      "emailAlertVersion": 0,
+      "emailAlertVersion": 1,
       "locationName": "Colorado",
       "fips": "08",
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
@@ -235,21 +245,21 @@
           "updatedAt": "2021-02-09T00:48:56.032Z",
           "phase": "1A",
           "startDate": "Winter 2020-2021",
-          "description": "* Highest-risk health care workers (Direct, prolonged COVID exposure)\n* Highest-risk individuals (Long-term care residents)"
+          "description": "* Highest-risk health care workers (Direct, prolonged COVID exposure)\n* Long-term care facilities"
         },
         {
           "currentlyEligible": true,
           "updatedAt": "2021-02-09T00:51:05.623Z",
           "phase": "1B",
           "tier": "1",
-          "description": "* Moderate risk health care workers (Less direct COVID exposure)\n* First responders\n* Coloradans age 70+",
+          "description": "* Moderate risk health care workers (Less direct COVID exposure)\n* First responders\n* Adults 70+",
           "startDate": "Winter 2020-2021"
         },
         {
           "currentlyEligible": true,
           "updatedAt": "2021-02-09T00:54:46.759Z",
           "phase": "1B",
-          "description": "* Pre-K-12 educators and child care workers\n* Coloradans ages 65-69",
+          "description": "* Teachers\n* Childcare workers\n* Adults 65-69",
           "tier": "2",
           "startDate": "2021-02-08"
         },
@@ -258,14 +268,14 @@
           "updatedAt": "2021-02-09T00:57:52.504Z",
           "phase": "1B",
           "tier": "3",
-          "description": "* Frontline essential workers\n* People age 16-64 with two or more high risk conditions",
+          "description": "* Frontline essential workers\n* Adults 16-64 with two or more high-risk conditions",
           "startDate": "Winter 2020-2021"
         },
         {
           "currentlyEligible": false,
           "updatedAt": "2021-02-09T00:58:58.520Z",
           "phase": "2",
-          "description": "* People age 60-64\n* People age 16-59 with high risk conditions",
+          "description": "* Adults 60-64\n* All adults with high risk conditions",
           "startDate": "Spring 2021"
         },
         {
@@ -281,7 +291,7 @@
       "locationName": "Connecticut",
       "fips": "09",
       "eligibilityInfoUrl": "https://portal.ct.gov/Coronavirus/COVID-19-Vaccinations",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1a",
@@ -325,7 +335,7 @@
       "locationName": "Delaware",
       "fips": "10",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -387,7 +397,7 @@
       "locationName": "District of Columbia",
       "fips": "11",
       "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine-information",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": -2,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -507,7 +517,7 @@
       "locationName": "Hawaii",
       "fips": "15",
       "eligibilityInfoUrl": "https://hawaiicovid19.com/vaccine/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": -1,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -551,7 +561,7 @@
       "locationName": "Idaho",
       "fips": "16",
       "eligibilityInfoUrl": "https://coronavirus.idaho.gov/covid-19-vaccine/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": -1,
       "phaseGroups": [
         {
           "phase": "1",
@@ -645,7 +655,7 @@
       "locationName": "Indiana",
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -671,7 +681,7 @@
       "locationName": "Iowa",
       "fips": "19",
       "eligibilityInfoUrl": "https://idph.iowa.gov/Emerging-Health-Issues/Novel-Coronavirus/Vaccine/Information-for-the-Public",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -742,7 +752,7 @@
       "locationName": "Kansas",
       "fips": "20",
       "eligibilityInfoUrl": "https://www.kansasvaccine.gov/157/Availability",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -795,7 +805,7 @@
       "locationName": "Kentucky",
       "fips": "21",
       "eligibilityInfoUrl": "https://govstatus.egov.com/ky-covid-vaccine",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -857,7 +867,7 @@
       "locationName": "Louisiana",
       "fips": "22",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -892,7 +902,7 @@
       "locationName": "Maine",
       "fips": "23",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -936,7 +946,7 @@
       "locationName": "Maryland",
       "fips": "24",
       "eligibilityInfoUrl": "https://coronavirus.maryland.gov/pages/vaccine",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1067,22 +1077,22 @@
       "locationName": "Minnesota",
       "fips": "27",
       "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
           "tier": "a",
           "currentlyEligible": true,
-          "description": "* Health care personnel\n* Long-term care residents",
-          "expandedDefinitionUrl": "",
+          "description": "* Healthcare workers\n* Long-term care facilities",
+          "expandedDefinitionUrl": "https://www.health.state.mn.us/diseases/coronavirus/vaccine/phase1aguide.pdf",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         },
         {
           "phase": "1",
           "tier": "b",
-          "currentlyEligible": false,
-          "description": "* Adults 75+\n* Frontline essential workers",
+          "currentlyEligible": true,
+          "description": "* Adults 65+\n* Teachers and Childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
@@ -1091,7 +1101,7 @@
           "phase": "1",
           "tier": "c",
           "currentlyEligible": false,
-          "description": "* Adults 65+\n* Adults with high-risk medical conditions\n* Other essential workers",
+          "description": "* Adults with high-risk medical conditions\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
@@ -1105,13 +1115,14 @@
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         }
-      ]
+      ],
+      "notes": "WARNING: The Minnesota website has a very nice graphic, but it is completely outdated. They've changed who is in what phase and removed any information about what the next phases look like."
     },
     {
       "locationName": "Mississippi",
       "fips": "28",
       "eligibilityInfoUrl": "https://msdh.ms.gov/msdhsite/_static/14,22816,420,976.html#eligible",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -1189,7 +1200,7 @@
       "locationName": "Montana",
       "fips": "30",
       "eligibilityInfoUrl": "https://dphhs.mt.gov/covid19vaccine",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -1233,7 +1244,7 @@
       "locationName": "Nebraska",
       "fips": "31",
       "eligibilityInfoUrl": "http://dhhs.ne.gov/Pages/COVID-19-Vaccine-Information.aspx",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -1277,7 +1288,7 @@
       "locationName": "Nevada",
       "fips": "32",
       "eligibilityInfoUrl": "https://www.immunizenevada.org/county-specific-covid-19-vaccine-plan",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1303,7 +1314,7 @@
       "locationName": "New Hampshire",
       "fips": "33",
       "eligibilityInfoUrl": "https://www.nh.gov/covid19/resources-guidance/vaccination-planning.htm",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1397,7 +1408,7 @@
       "locationName": "New Mexico",
       "fips": "35",
       "eligibilityInfoUrl": "https://cv.nmhealth.org/covid-vaccine/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1506,7 +1517,7 @@
       "locationName": "North Dakota",
       "fips": "38",
       "eligibilityInfoUrl": "https://www.health.nd.gov/covid-19-vaccine-priority-groups",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1550,7 +1561,7 @@
       "locationName": "Northern Mariana Islands",
       "fips": "69",
       "eligibilityInfoUrl": "https://www.vaccinatecnmi.com/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1697,7 +1708,7 @@
       "locationName": "Oregon",
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1791,7 +1802,7 @@
       "locationName": "Rhode Island",
       "fips": "44",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -1862,7 +1873,7 @@
       "locationName": "South Carolina",
       "fips": "45",
       "eligibilityInfoUrl": "https://scdhec.gov/covid19/covid-19-vaccine",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
@@ -1906,7 +1917,7 @@
       "locationName": "South Dakota",
       "fips": "46",
       "eligibilityInfoUrl": "https://doh.sd.gov/Covid/Vaccine/Public.aspx",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",

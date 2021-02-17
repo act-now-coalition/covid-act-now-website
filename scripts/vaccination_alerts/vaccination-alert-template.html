@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head></head>
+  <body style="color: #4f4f4f; font-family: Arial, Helvetica, sans-serif; font-size: 15px; padding: 0;">
+    <div class="centered-column" style="margin: 0 auto; max-width: 400px;">
+
+      <div class="section center-text" style="margin-top: 0; text-align: center;">
+        <h1 style="color: #000; font-size: 24px; line-height: 1.5; margin-top: 40px;">{{{title}}}</h1>
+        <p class="subtitle" style="color: #4f4f4f; font-size: 15px;">{{subtitle}}</p>
+      </div>
+    
+      <div class="section" style="margin-top: 24px;">
+      {{#each currentPhases}}
+        <div class="phase {{#if isMostRecentPhase}}phase-highlighted{{/if}}" style="{{#if isMostRecentPhase}}background-color: rgba(255,201,0,0.12){{/if}}; padding: 16px;">
+          <div class="center-text" style="text-align: center;">
+            <h2 style="color: #000; font-size: 18px; margin-bottom: 3px; text-align: center;">{{{title}}}</h2>
+            <div class="eligibility-tag" style="color: #00D474; font-size: 12px; text-transform: uppercase;">{{subtitle}}</div>
+          </div>
+          <div class="description" style="color: #4f4f4f;font-size: 15px;">
+            {{{description}}}
+          </div>
+        </div>
+      {{/each}}
+      </div>
+
+      <div class="section source center-text" style="color: #828282; font-size: 13px; margin-top: 24px; text-align: center;">
+        Source: <a style="color: #828282; font-size: 13px; margin-top: 24px; text-align: center;" href="{{sourceUrl}}">{{sourceName}}</a>
+      </div>
+
+      {{#if eligibilityUrl}}
+      <div class="section" style="margin-top: 24px;">
+        <a href="{{eligibilityUrl}}" class="main-cta-link" style="text-decoration: none;">
+          <div class="eligibility-options center-text" style="border: solid 1px #f2f2f2; color: #5900EA; padding: 12px; text-align: center;">
+            See who is eligible next
+          </div>
+        </a>
+      </div>
+      {{/if}}
+
+      {{#if vaccinationSignupUrl}}
+      <div class="section main-cta" style="margin-top: 24px;">
+        <a href="{{vaccinationSignupUrl}}" class="main-cta-link" style="text-decoration: none;">
+          <div class="main-cta-btn center-text" style="background-color: #5900EA; border-radius: 4px; color: white; padding: 12px; text-align: center;">
+            <div>
+              <strong>See where and how to get vaccinated</strong>
+            </div>
+            <div>on the {{sourceName}} website</div>
+          </div>
+        </a>
+      </div>    
+      {{/if}}
+
+      <div class="section description center-text" style="color: #4f4f4f; margin-top: 24px; text-align: center;">
+        Because eligibility varies throughout {{locationName}}, you may also want to check your county or city’s health department website.
+      </div>
+      
+    </div>
+
+    <div class="footer" style="background-color: #f2f2f2; margin-top: 50px; padding: 50px 24px; text-align: center;">
+      <div class="centered-column" style="margin: 0 auto; max-width: 400px;">
+
+        <div class="footer__logo" style="margin-bottom: 24px;">
+          <a href="https://covidactnow.org" style="line-height:inherit" target="_blank">
+            <img src="https://data.covidactnow.org/thermometer_screenshot/canlogo.png" alt="Covid Act Now Logo" width="160"/>
+          </a>
+        </div>
+
+        <div class="footer__section" style="margin-bottom: 50px;">
+          <p>
+          Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.
+          </p>
+          <a class="footer__link" style="color: #4f4f4f;" href="https://covidactnow.org/about">Learn more about us</a>
+        </div>
+
+        <div class="footer__section" style="margin-bottom: 50px;">
+          <h2 style="color: #000; font-size: 18px; margin-bottom: 5px; text-align: center;">Donate</h2>
+          <p style="margin: 5px auto;">Find these alerts helpful?</p>
+          <a class="footer__link" style="color: #4f4f4f;" href="https://covidactnow.org/donate">Support us with a donation</a>
+        </div>
+
+        <div class="footer__section" style="margin-bottom: 50px;">
+          <h2 style="color: #000; font-size: 18px; margin-bottom: 5px; text-align: center;">Feedback</h2>
+          <p style="margin: 5px auto;">
+            Tell us how we can make our alerts more useful for you, at <a class="footer__link" style="color: #4f4f4f;" href="mailto:info@covidactnow.org">info@covidactnow.org</a>
+          </p>
+        </div>
+
+        <div class="footer__section" style="margin-bottom: 50px;">
+          <h2 style="color: #000; font-size: 18px; margin-bottom: 5px; text-align: center;">Help others get alerts</h2>
+          <p style="margin: 5px auto;">Anyone can subscribe using this link:</p>
+          <a class="footer__link" style="color: #4f4f4f;" href="https://covidactnow.org/alert_signup">
+            https://covidactnow.org/alert_signup
+          </a>
+        </div>
+
+        <div class="footer__section" style="margin-bottom: 50px;">
+          <h2 style="color: #000; font-size: 18px; margin-bottom: 5px; text-align: center;">Change your alert settings</h2>
+          <p style="margin: 5px auto;">
+            <a class="footer__link" style="color: #4f4f4f;" href="{{unsubscribeUrl}}">Edit your locations</a>
+          </p>
+          <p style="margin: 5px auto;">
+            <a class="footer__link" style="color: #4f4f4f;" href="{{unsubscribeUrl}}">Unsubscribe from all alerts</a>
+          <p>        
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>

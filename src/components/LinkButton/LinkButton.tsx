@@ -30,7 +30,12 @@ const LinkButton: React.FC<LinkButtonProps & TrackingProps> = props => {
   );
 
   const isInternalLink = props.to;
-  const { trackingAction, trackingCategory, trackingLabel } = props;
+  const {
+    trackingAction,
+    trackingCategory,
+    trackingLabel,
+    ...ownProps
+  } = props;
 
   const onClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     const action =
@@ -44,11 +49,11 @@ const LinkButton: React.FC<LinkButtonProps & TrackingProps> = props => {
   };
 
   if (isInternalLink) {
-    return <BaseButton {...props} component={Link} onClick={onClick} />;
+    return <BaseButton {...ownProps} component={Link} onClick={onClick} />;
   } else {
     return (
       <BaseButton
-        {...props}
+        {...ownProps}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}

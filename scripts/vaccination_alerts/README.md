@@ -8,7 +8,7 @@ The workflow for sending the updates is:
 2. Generate a list of users and their locations to send the alerts
 3. Send the emails to the users
 
-## 1. generate-vaccine-alerts-info
+## 1. vaccinations-generate-alerts
 
 This script determines which locations have updated vaccination information by comparing the information in Firebase with the information from the CMS.
 
@@ -17,22 +17,22 @@ This script determines which locations have updated vaccination information by c
 ```yaml
 vaccination-info-updates:
   '11':
-    emailAlertVersion: 0
+    email-alert-version: 0
   '12':
-    emailAlertVersion: 0
+    email-alert-version: 0
 ```
 
 ### From the CMS
 
 ```yaml
 '11':
-  emailAlertVersion: 3 # Updated
+  email-alert-version: 3 # Updated
   content: 'Phase A...'
 '12':
-  emailAlertVersion: 0
+  email-alert-version: 0
   content: 'Phase 1...'
 '13':
-  emailAlertVersion: 3 # New
+  email-alert-version: 3 # New
   content: 'Phase 1...'
 ```
 
@@ -61,12 +61,12 @@ alerts-subscriptions:
     locations: ['11', '13']
 ```
 
-Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, in the document `snapshotId`, so we can track the locations and users that we email each time.
+Then, we store the list of locations and email addresses to send in the Firebase collection `vaccination-alerts`, so we can track the users that are sent alerts each time.
 
 ```yaml
 vaccination-alerts:
   '11':
-    emailAlertVersions:
+    email-versions:
       '0':
         emails:
           pablo@covidactnow.org: { sentAt: null }
@@ -96,7 +96,19 @@ Finally, we update the `vaccination-info-updates` collection with the latest upd
 ```yaml
 vaccination-info-updates:
   '11':
-    emailAlertVersion: 3
+    email-alert-version: 3
   '12':
-    emailAlertVersion: 0
+    email-alert-version: 0
 ```
+
+## Notes
+
+The email template `vaccination-alert-template.html` is written in Handlebars, which replaces placeholders in the template with actual data (see the function `renderEmail` in `./utils.ts`).
+
+Writing the template for an email is hard because email clients often strip CSS styles from the HTML content and have lots of rendering quirks, one way to make rendering more reliable is to write the styles inline on each DOM element. An easier way to do this is to:
+
+- Write the template and add a `styles` section in the file with the styles for the email (see `vaccination-alert-template-source.html`). That file can be opened in the browser to get an idea of what the email will look like.
+- Using mock data, render the email and save it locally, uncomment `./utils.ts#L176`
+- Go to the [Foundation Style Inliner](https://get.foundation/emails/inliner.html) and paste the content of the rendered HTML file, unchecking the "Compress HTML" checkbox.
+
+The resulting HTML code contains the styles for each element, so we can manually copy the inline styles matching the classes from the `vaccination=alert-template-source.html` file.

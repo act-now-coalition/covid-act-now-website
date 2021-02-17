@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 
-export const StyledFooter = styled.div`
+export const StyledFooter = styled.footer`
   padding: 2rem 0;
   box-sizing: content-box;
   background: ${palette.black};

@@ -60,11 +60,8 @@ const NavBar: React.FC = () => {
             Learn
           </Style.NavLink>
           <Style.NavLink to="/tools" key="tools">
-            Tools
+            Data API
           </Style.NavLink>
-          <Style.TabLink href="https://blog.covidactnow.org" key="blog">
-            Blog
-          </Style.TabLink>
           <Style.NavLink to="/about" key="about">
             About
           </Style.NavLink>

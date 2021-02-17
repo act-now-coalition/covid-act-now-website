@@ -22,6 +22,7 @@ const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '09', // Connecticut,
   '10', // Delaware,
   '15', // Hawaii
+  '22', // Louisiana,
   '24', // Maryland,
   '26', // Michigan,
   '27', // Minnesota,
@@ -80,8 +81,8 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   return (
     <React.Fragment>
       {icon}
-      <SectionColumn isUpdateCopy>
-        <ColumnTitle isUpdateCopy>{title}</ColumnTitle>
+      <SectionColumn $isUpdateCopy>
+        <ColumnTitle $isUpdateCopy>{title}</ColumnTitle>
 
         {notification === Notification.ExposureNotifications && (
           <ExposureNotificationCopy stateName={getStateName(region)} />

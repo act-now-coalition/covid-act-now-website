@@ -14,7 +14,7 @@ import { learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate, formatNumericalDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
-import { useScrollToElement, useScrollToTopButton } from 'common/hooks';
+import { useScrollToTopButton } from 'common/hooks';
 import Footer from 'screens/Learn/Footer/Footer';
 import ExternalLink from 'components/ExternalLink';
 
@@ -58,8 +58,6 @@ const Glossary: React.FC = () => {
 
   const date = formatMetatagDate();
 
-  useScrollToElement();
-
   return (
     <Fragment>
       <AppMetaTags
@@ -77,7 +75,7 @@ const Glossary: React.FC = () => {
           Last updated {formatNumericalDate(lastUpdatedDate)}
         </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
-          <GlossaryTerm term={term} />
+          <GlossaryTerm key={i} term={term} />
         ))}
         <Footer pageSpecificCopy={getGlossaryFooter()} />
         <ScrollToTopButton
