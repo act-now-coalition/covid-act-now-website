@@ -170,7 +170,7 @@ export default function App() {
                     component={MetricExplainer}
                   />
                   <Route path="/about" component={About} />
-                  <Route path="/covid-risk-vaccine-alerts" component={Alerts} />
+                  <Route path="/subscribe" component={Alerts} />
 
                   {/* /state/ routes are deprecated but still supported. */}
                   <Redirect exact from="/state/:stateId" to="/us/:stateId" />

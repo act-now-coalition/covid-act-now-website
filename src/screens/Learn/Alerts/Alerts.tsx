@@ -26,7 +26,7 @@ const Alerts: React.FC = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/covid-risk-vaccine-alerts"
+        canonicalUrl="/subscribe"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
