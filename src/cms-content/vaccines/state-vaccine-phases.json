@@ -1068,7 +1068,7 @@
           "currentlyEligible": false,
           "updatedAt": "2021-02-09T02:30:25.339Z",
           "phase": "1C",
-          "description": "* People 16-64 with a health condition that puts them at high risk for serious COVID-19 complications\n* Other essential frontline workers",
+          "description": "* People 16-64 with a high-risk medical condition\n* Other essential frontline workers",
           "startDate": "2020-05-01"
         }
       ]
