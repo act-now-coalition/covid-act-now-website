@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { scrollWithOffset } from 'components/TableOfContents';
 import {
@@ -11,7 +11,9 @@ import TwitterEmbed, { isTwitterEmbed } from './TwitterEmbed';
 import YouTubeEmbed, { isYouTubeEmbed } from './YoutubeEmbed';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
-import { CenterEmbed } from './Markdown.style';
+import { CenterEmbed, EmbedLink } from './Markdown.style';
+import EmbedPreview from '../ShareBlock/EmbedPreview';
+
 /**
  * Custom hyperlink for Markdown content. If the link is external, open it on
  * a new tab. If the link is internal, use the HashLink component to render
@@ -24,6 +26,38 @@ export const scrollWithTimeout = (element: any, offset: number) => {
   return setTimeout(() => {
     scrollWithOffset(element, offset);
   }, 600);
+};
+
+const EmbedBox: React.FC<{ href: string }> = ({ href }) => {
+  return (
+    <CenterEmbed>
+      <iframe
+        src={href}
+        title="Covid Act Now"
+        width="400"
+        height="390"
+        frameBorder="0"
+        scrolling="no"
+      />
+    </CenterEmbed>
+  );
+};
+
+const CanEmbed: React.FC<{ href: string }> = ({ href }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  if (href !== 'https://covidactnow.org/embed/us/') {
+    return <EmbedBox href={href} />;
+  } else {
+    return (
+      <>
+        <EmbedBox href={href} />
+        <EmbedLink tabIndex={0} role="button" onClick={() => setIsOpen(true)}>
+          Embed on your website
+        </EmbedLink>
+        <EmbedPreview open={isOpen} onClose={() => setIsOpen(false)} />
+      </>
+    );
+  }
 };
 
 const MarkdownLink: React.FC<{
@@ -44,18 +78,7 @@ const MarkdownLink: React.FC<{
   }
 
   if (isInternalEmbed(href)) {
-    return (
-      <CenterEmbed>
-        <iframe
-          src={href}
-          title="Covid Act Now"
-          width="400"
-          height="390"
-          frameBorder="0"
-          scrolling="no"
-        />
-      </CenterEmbed>
-    );
+    return <CanEmbed href={href} />;
   }
 
   if (href === 'https://g.co/ens') {
