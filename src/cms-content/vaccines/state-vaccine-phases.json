@@ -2231,7 +2231,8 @@
           "updatedAt": "2021-02-09T18:50:18.999Z",
           "phase": "1",
           "tier": "b",
-          "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-frontline essential health care personnel\n* Facility staff and residents in congregate living settings"
+          "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-frontline essential health care personnel\n* Facility staff and residents in congregate living settings",
+          "startDate": "3/1/21"
         }
       ]
     },
