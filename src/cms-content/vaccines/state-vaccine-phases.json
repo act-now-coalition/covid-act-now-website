@@ -1741,7 +1741,7 @@
         {
           "phase": "1B",
           "tier": "3",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* People 75 and older",
           "expandedDefinitionUrl": "",
           "startDate": "February 15",
