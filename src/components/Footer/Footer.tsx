@@ -22,7 +22,7 @@ const Footer = () => {
   }
 
   return (
-    <StyledFooter role="contentinfo">
+    <StyledFooter>
       <StyledFooterInner isMapPage={isMapPage}>
         <StyledFooterContent>
           <Logo />
