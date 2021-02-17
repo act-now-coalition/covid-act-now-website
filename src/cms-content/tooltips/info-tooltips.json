@@ -3,7 +3,7 @@
     {
       "title": "Location page header",
       "id": "location-page-header",
-      "body": "Our five-color COVID risk level looks at three things: daily new cases (per 100K), infection rate, and positive test rate. Each is graded on a five-color scale and the highest risk color becomes the location’s overall risk level.For instance, if daily new cases and test positivity are both yellow, but infection rate is orange, then the overall risk level is orange.\n\n[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics).",
+      "body": "Our  five-color COVID risk level looks at three things: daily new cases (per 100K), infection rate, and positive test rate. Each is graded on a five-color scale and the highest risk color becomes the location’s overall risk level.\n\nFor instance, if daily new cases and test positivity are both yellow, but infection rate is orange, then the overall risk level is orange.\n\n[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics).",
       "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics)."
     },
     {
