@@ -654,7 +654,6 @@ collections:
           - label: Page Intro
             name: pageIntro
             widget: markdown
-            required: false
           - label: Sections
             name: sections
             widget: list

@@ -193,7 +193,7 @@ export interface AlertsSection {
 
 export interface AboutAlertsContent {
   pageHeader: string;
-  pageIntro?: Markdown;
+  pageIntro: Markdown;
   sections: AlertsSection[];
   metadataTitle: string;
   metadataDescription: string;

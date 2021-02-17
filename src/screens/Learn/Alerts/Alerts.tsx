@@ -16,6 +16,7 @@ import { aboutOurAlertsContent } from 'cms-content/learn';
 const Alerts: React.FC = () => {
   const {
     pageHeader,
+    pageIntro,
     sections,
     metadataTitle,
     metadataDescription,
@@ -35,6 +36,7 @@ const Alerts: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
+        <MarkdownContent source={pageIntro} />
         {sections.map((section: any, i: number) => (
           <Fragment key={i}>
             <SectionName id={section.sectionId}>
