@@ -38,6 +38,7 @@ const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
 const ProductUpdates = lazy(() => import('screens/Learn/Updates'));
 const Explained = lazy(() => import('screens/Learn/Explained'));
+const Alerts = lazy(() => import('screens/Learn/Alerts/Alerts'));
 const Contact = lazy(() => import('screens/Contact/Contact'));
 const Tools = lazy(() => import('screens/Tools/Tools'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
@@ -169,6 +170,7 @@ export default function App() {
                     component={MetricExplainer}
                   />
                   <Route path="/about" component={About} />
+                  <Route path="/covid-risk-vaccine-alerts" component={Alerts} />
 
                   {/* /state/ routes are deprecated but still supported. */}
                   <Redirect exact from="/state/:stateId" to="/us/:stateId" />

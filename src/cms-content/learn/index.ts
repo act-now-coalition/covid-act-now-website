@@ -11,6 +11,7 @@ import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
 import footer from './footer.json';
+import aboutAlerts from './about-our-alerts.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -196,6 +197,8 @@ export interface AboutAlertsContent {
   sections: AlertsSection[];
 }
 
+export const aboutOurAlertsContent = aboutAlerts as AboutAlertsContent;
+
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
@@ -203,6 +206,14 @@ export const learnPages: TocItem[] = [
     to: '/covid-risk-levels-metrics',
     items: metricExplainersContent.sections.map(section => ({
       to: `/covid-risk-levels-metrics#${section.sectionId}`,
+      label: section.sectionHeader,
+    })),
+  },
+  {
+    label: aboutAlerts.pageHeader,
+    to: '/covid-risk-vaccine-alerts',
+    items: aboutAlerts.sections.map(section => ({
+      to: `/covid-risk-vaccine-alerts#${section.sectionId}`,
       label: section.sectionHeader,
     })),
   },
