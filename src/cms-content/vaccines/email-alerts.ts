@@ -34,8 +34,8 @@ function formatVaccinationPhaseInfo(
   isMostRecentPhase: boolean,
 ): EmailPhaseInfo {
   const title = phaseInfo.tier
-    ? `Phase ${phaseInfo.phase}, Tier ${phaseInfo.tier}`
-    : `Phase ${phaseInfo.phase}`;
+    ? `Phase&nbsp;${phaseInfo.phase}, Tier&nbsp;${phaseInfo.tier}`
+    : `Phase&nbsp;${phaseInfo.phase}`;
 
   return {
     title,
