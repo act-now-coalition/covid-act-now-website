@@ -63,10 +63,14 @@ export function getUpdatedVaccinationInfo(
     // Only generate the alert if there isn't a version stored in Firestore
     // or when the version number from the CMS is higher than the latest version
     // stored in Firestore.
-    if (
+    const cmsEmailAlertVersion = cmsPhaseInfo.emailAlertVersion;
+    const hasNewVaccinationInfo =
       !firestoreVersionInfo ||
-      firestoreVersionInfo.emailAlertVersion < cmsPhaseInfo.emailAlertVersion
-    ) {
+      firestoreVersionInfo.emailAlertVersion < cmsEmailAlertVersion;
+
+    // Only send email alerts when the version is 1 or greater as a mechanism to
+    // allow sending emails state by state.
+    if (hasNewVaccinationInfo && cmsEmailAlertVersion >= 1) {
       updatedInfoByFips[fipsCode] = cmsPhaseInfo;
     }
   }
