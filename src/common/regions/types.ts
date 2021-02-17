@@ -1,6 +1,5 @@
 import urlJoin from 'url-join';
 import { getAbbreviatedCounty } from 'common/utils/compare';
-import { RegionCcviItem } from 'common/data';
 
 export type FipsCode = string;
 export type ZipCode = string;
@@ -54,7 +53,6 @@ export class State extends Region {
     fipsCode: FipsCode,
     population: number,
     public readonly stateCode: string,
-    public readonly ccviData: RegionCcviItem | null, // null because custom aggregations (USA, NAMC) do not have CCVI data
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.STATE);
   }
@@ -85,7 +83,6 @@ export class County extends Region {
     public readonly state: State,
     public readonly adjacentCountiesFips: FipsCode[],
     public readonly zipCodes: ZipCode[],
-    public readonly ccviData: RegionCcviItem,
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }
