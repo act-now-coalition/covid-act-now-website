@@ -26,7 +26,7 @@ const HomepageSlider: React.FC<{
   $isModal: boolean;
 }> = ({ onChange, homepageScope, homepageSliderValue, $isModal }) => {
   return (
-    <SliderContainer>
+    <SliderContainer $isModal={$isModal}>
       <StyledSlider
         onChange={onChange}
         value={homepageSliderValue}
