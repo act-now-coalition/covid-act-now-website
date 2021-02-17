@@ -1655,7 +1655,7 @@
           "startDate": "2020-02-08"
         },
         {
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "updatedAt": "2021-02-09T02:15:13.981Z",
           "phase": "1B",
           "tier": "5",
