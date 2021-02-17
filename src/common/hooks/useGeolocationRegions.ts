@@ -21,9 +21,10 @@ import useCountyToZipMap from './useCountyToZipMap';
 export default function useGeolocationRegions(): Region[] {
   const [geolocatedRegions, setGeolocatedRegions] = useState<Region[]>([]);
 
-  const { geolocationData } = useGeolocation();
-  const { countyToZipMap } = useCountyToZipMap();
+  const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
+  const { countyToZipMap, isLoading: zipIsLoading } = useCountyToZipMap();
 
+  const isLoading = geoIsLoading || zipIsLoading;
   // combine these and stringify so that useEffect will detect changes
   const geolocationDataString = JSON.stringify(geolocationData);
   const zipDataString = JSON.stringify(countyToZipMap);
@@ -42,7 +43,7 @@ export default function useGeolocationRegions(): Region[] {
         }
       }
     }
-  }, [geolocationDataString, zipDataString]);
+  }, [isLoading, geolocationDataString, zipDataString]);
 
   return geolocatedRegions;
 }

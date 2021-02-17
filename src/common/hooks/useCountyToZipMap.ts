@@ -12,11 +12,18 @@ export interface UseCountyToZipMapReturn {
   isLoading: boolean;
 }
 
-const init = { countyToZipMap: undefined, isLoading: true };
+const init = {
+  countyToZipMap: undefined,
+  // initialize to true so client's don't have to handle case
+  // when not yet loading and not defined, since we kick off the load immediately
+  isLoading: true,
+};
 
 const useCountyToZipMapImpl = (): UseCountyToZipMapReturn => {
-  const [zipData, setZipData] = useState<CountyToZipMap | undefined>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [zipData, setZipData] = useState<CountyToZipMap | undefined>(
+    init.countyToZipMap,
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(init.isLoading);
 
   useEffect(() => {
     const fetchZipData = async () => {
@@ -25,6 +32,8 @@ const useCountyToZipMapImpl = (): UseCountyToZipMapReturn => {
         const response = await fetch(ZIPCODE_JSON_URL);
         const data = await response.json();
         setZipData(data);
+      } catch (e) {
+        setZipData({});
       } finally {
         setIsLoading(false);
       }
