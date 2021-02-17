@@ -1951,7 +1951,7 @@
           "phase": "1",
           "tier": "d",
           "currentlyEligible": true,
-          "description": "* Persons aged 75 years and older\n* High risk patients (dialysis, post-transplant, and active cancer)\n* High risk residents in congregate settings",
+          "description": "* Persons aged 70 years and older\n* High risk patients (dialysis, post-transplant, and active cancer)\n* High risk residents in congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
@@ -1960,7 +1960,7 @@
           "phase": "1",
           "tier": "d",
           "currentlyEligible": false,
-          "description": "* Persons aged 65 years and older\n* Persons with 2 or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff",
+          "description": "\n* Persons aged 70 years and older\n* Persons with 2 or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-10T02:59:08.812Z"
