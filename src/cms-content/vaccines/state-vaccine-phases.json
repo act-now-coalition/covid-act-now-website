@@ -2113,13 +2113,14 @@
           "currentlyEligible": true,
           "updatedAt": "2021-02-10T01:14:47.108Z",
           "phase": "2",
-          "description": "* Individuals aged 75+"
+          "description": "* Individuals aged 70+",
+          "startDate": "2/16/21"
         },
         {
           "currentlyEligible": false,
           "updatedAt": "2021-02-10T01:14:54.656Z",
           "phase": "Up Next",
-          "description": "Not yet eligible but will open in the following order:\n* Individuals 70+\n* Individuals 65+\n* People with certain high-risk health conditions\n\nEstimated completion by Spring 2021",
+          "description": "Not yet eligible but will open in the following order:\n\n* Individuals 65+\n* People with certain high-risk health conditions\n\nEstimated completion by Spring 2021",
           "startDate": ""
         }
       ]
