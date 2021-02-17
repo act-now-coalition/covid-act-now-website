@@ -485,12 +485,6 @@
           "updatedAt": "2021-02-09T01:39:03.616Z",
           "phase": "1",
           "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals deemed extremely vulnerable to COVID-19"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-17T18:32:33.731Z",
-          "phase": "2",
-          "description": "\\* Frontline essential workers \n\n\\* First responders"
         }
       ]
     },
