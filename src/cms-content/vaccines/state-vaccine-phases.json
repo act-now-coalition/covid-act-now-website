@@ -1828,14 +1828,14 @@
           "tier": "3",
           "currentlyEligible": false,
           "description": "* Ages 65-74",
-          "expandedDefinitionUrl": "",
-          "startDate": "Late February",
+          "expandedDefinitionUrl": "https://www.wpri.com/health/coronavirus/ri-to-release-registration-link-hotline-to-make-appointments-at-state-mass-vaccination-sites/",
+          "startDate": "February 22",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         },
         {
           "phase": "1",
           "tier": "4",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Ages 60-64\n* Ages 16-64 with underlying health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Mid March",
