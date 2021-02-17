@@ -80,11 +80,11 @@
         {
           "phase": "1b",
           "tier": "2",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "\\* People 50-64 with a high-risk medical condition \n\n\\* People 50-64 who are an essential worker and must work within 6 feet of others \n\n\\* PreK–12 and child care education staff \n\n\\* People living or working in congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-17T21:58:20.572Z"
         },
         {
           "phase": "1b",
@@ -262,7 +262,7 @@
           "phase": "1B",
           "description": "* Teachers\n* Childcare workers\n* Adults 65-69",
           "tier": "2",
-          "startDate": "2021-02-08"
+          "startDate": "February 8, 2021"
         },
         {
           "currentlyEligible": false,
@@ -778,7 +778,7 @@
           "currentlyEligible": false,
           "description": "* Aged 16-64 with severe medical risks \n* Other critical workers",
           "expandedDefinitionUrl": "",
-          "startDate": "March",
+          "startDate": "March 2021",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         },
         {
@@ -787,7 +787,7 @@
           "currentlyEligible": false,
           "description": "* Aged 16-64 with other medical risks ",
           "expandedDefinitionUrl": "",
-          "startDate": "Late April- mid May",
+          "startDate": "Late April - mid May 2021",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         },
         {
@@ -796,7 +796,7 @@
           "currentlyEligible": false,
           "description": "* General Public",
           "expandedDefinitionUrl": "",
-          "startDate": "June",
+          "startDate": "June 2021",
           "updatedAt": "2021-02-10T02:59:08.812Z"
         }
       ]
