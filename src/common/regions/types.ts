@@ -52,7 +52,7 @@ export class State extends Region {
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
-    public readonly stateCode: string,
+    public readonly stateCode: string, // public readonly ccviData: RegionCcviItem,
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.STATE);
   }
@@ -82,7 +82,7 @@ export class County extends Region {
     population: number,
     public readonly state: State,
     public readonly adjacentCountiesFips: FipsCode[],
-    public readonly zipCodes: ZipCode[],
+    public readonly zipCodes: ZipCode[], // public readonly ccviData: RegionCcviItem,
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }

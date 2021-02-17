@@ -2,6 +2,7 @@ import { chain, Dictionary, fromPairs } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
 import metroAreaDataset from 'common/data/msa-data.json';
+import fipsToCcvi from 'common/data/ccvi-data.json';
 import countyFipsToZips from 'components/MapSelectors/datasets';
 import {
   RegionType,
@@ -75,6 +76,7 @@ function buildStates(): State[] {
         stateInfo.state_fips_code,
         stateInfo.population,
         stateInfo.state_code,
+        // ccviData || {}
       );
     })
     .value();
@@ -102,6 +104,7 @@ function buildCounties(
       const state = statesByFips[countyInfo.state_fips_code];
       const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
       const zipCodes = countyFipsToZips[countyFips];
+      // const ccviData = fipsToCcvi[countyFips];
       return new County(
         countyInfo.county,
         countyInfo.county_url_name,
@@ -110,6 +113,7 @@ function buildCounties(
         state,
         adjacentCounties || [],
         zipCodes || [],
+        // ccviData || {}
       );
     })
     .value();

@@ -1,12 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import { startCase, lowerCase, toNumber } from 'lodash';
+import { toNumber } from 'lodash';
 const promisify = require('util').promisify;
 const csvParse = promisify(require('csv-parse'));
 
-interface CountyItem {
-  county_name: string;
-  state_name: string;
+interface RegionCcviItem {
   overall: number;
   theme1: number;
   theme2: number;
@@ -17,30 +15,49 @@ interface CountyItem {
   theme7: number;
 }
 
-interface CountyToCcviMap {
-  [fips: string]: CountyItem;
+interface FipsToCcviMap {
+  [key: string]: RegionCcviItem;
 }
 
 const outputPath = path.join(__dirname, '../../src/common/data/ccvi-data.json');
 
-function formatCountyFips(fips: string) {
-  if (fips.length === 4) {
+function formatFips(fips: string): string {
+  if (fips.length === 4 || fips.length === 1) {
     return `0${fips}`;
   }
   return fips;
 }
 
 async function main() {
-  const countyFipsToCcviMap: CountyToCcviMap = {};
+  const fipsToCcviData: FipsToCcviMap = {};
 
-  const csvText = fs.readFileSync(path.join(__dirname, 'ccvi_counties.csv'));
-  const [, ...rows] = await csvParse(csvText);
+  const statecCsvText = fs.readFileSync(
+    path.join(__dirname, 'ccvi_states.csv'),
+  );
+  const [, ...stateRows] = await csvParse(statecCsvText);
 
-  for (const row of rows) {
-    const formattedFips = formatCountyFips(row[0]);
-    countyFipsToCcviMap[formattedFips] = {
-      county_name: row[1],
-      state_name: startCase(lowerCase(row[2])),
+  const countyCsvText = fs.readFileSync(
+    path.join(__dirname, 'ccvi_counties.csv'),
+  );
+  const [, ...countyRows] = await csvParse(countyCsvText);
+
+  for (const row of stateRows) {
+    const formattedFips = formatFips(row[0]);
+    fipsToCcviData[formattedFips] = {
+      overall: toNumber(row[2]),
+      theme1: toNumber(row[3]),
+      theme2: toNumber(row[4]),
+      theme3: toNumber(row[5]),
+      theme4: toNumber(row[6]),
+      theme5: toNumber(row[7]),
+      theme6: toNumber(row[8]),
+      theme7: toNumber(row[9]),
+    };
+  }
+
+  for (const row of countyRows) {
+    const formattedFips = formatFips(row[0]);
+    fipsToCcviData[formattedFips] = {
       overall: toNumber(row[3]),
       theme1: toNumber(row[4]),
       theme2: toNumber(row[5]),
@@ -52,10 +69,7 @@ async function main() {
     };
   }
 
-  fs.writeFileSync(
-    outputPath,
-    JSON.stringify({ counties: countyFipsToCcviMap }, null, 2),
-  );
+  fs.writeFileSync(outputPath, JSON.stringify(fipsToCcviData, null, 2));
 }
 
 if (require.main === module) {
