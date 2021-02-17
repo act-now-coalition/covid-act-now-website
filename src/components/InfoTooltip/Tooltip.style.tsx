@@ -84,8 +84,8 @@ export const HiddenDiv = styled.div`
   width: 1px;
 `;
 
-export const StyledSpan = styled.span<{ $isOpen: boolean }>`
-  text-decoration: ${({ $isOpen }) => !$isOpen && 'underline'};
+export const StyledSpan = styled.span`
+  text-decoration: underline;
   cursor: pointer;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;

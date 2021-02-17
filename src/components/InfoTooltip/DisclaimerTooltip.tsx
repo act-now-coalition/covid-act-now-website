@@ -24,7 +24,6 @@ const DisclaimerTooltip: React.FC<StyledTooltipProps> = props => {
         leaveTouchDelay={60000} // for mobile: long leaveTouchDelay makes the tooltip stay open until close-icon is clicked
       >
         <StyledSpan
-          $isOpen={isOpen}
           tabIndex={0}
           role="button"
           onClick={() => tooltipAnchorOnClick(isMobile, setIsOpen)}
