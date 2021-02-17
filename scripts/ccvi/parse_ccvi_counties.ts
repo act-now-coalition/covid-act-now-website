@@ -1,23 +1,16 @@
+/**
+ * A one-time script to parse Surgo foundation's CCVI data for counties and states (ccvi_counties.csv, ccvi_states.csv)
+ * https://precisionforcovid.org/ccvi
+ * https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19
+ *
+ * Results in ccvi-data.json with a format of [fips]: {CCVI data}
+ */
 import fs from 'fs';
 import path from 'path';
 import { toNumber } from 'lodash';
+import { FipsToCcviMap } from '../../src/common/data';
 const promisify = require('util').promisify;
 const csvParse = promisify(require('csv-parse'));
-
-interface RegionCcviItem {
-  overall: number;
-  theme1: number;
-  theme2: number;
-  theme3: number;
-  theme4: number;
-  theme5: number;
-  theme6: number;
-  theme7: number;
-}
-
-interface FipsToCcviMap {
-  [key: string]: RegionCcviItem;
-}
 
 const outputPath = path.join(__dirname, '../../src/common/data/ccvi-data.json');
 

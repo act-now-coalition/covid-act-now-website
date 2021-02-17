@@ -2,7 +2,7 @@ import { chain, Dictionary, fromPairs } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
 import metroAreaDataset from 'common/data/msa-data.json';
-import fipsToCcvi from 'common/data/ccvi-data.json';
+import { fipsToCcviData } from 'common/data';
 import countyFipsToZips from 'components/MapSelectors/datasets';
 import {
   RegionType,
@@ -70,13 +70,14 @@ export const getStateFips = (region: Region): string | null => {
 function buildStates(): State[] {
   return chain(state_dataset)
     .map(stateInfo => {
+      const ccviData = fipsToCcviData[stateInfo.state_fips_code];
       return new State(
         stateInfo.state,
         stateInfo.state_url_name,
         stateInfo.state_fips_code,
         stateInfo.population,
         stateInfo.state_code,
-        // ccviData || {}
+        ccviData || {},
       );
     })
     .value();
@@ -104,7 +105,7 @@ function buildCounties(
       const state = statesByFips[countyInfo.state_fips_code];
       const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
       const zipCodes = countyFipsToZips[countyFips];
-      // const ccviData = fipsToCcvi[countyFips];
+      const ccviData = fipsToCcviData[countyFips];
       return new County(
         countyInfo.county,
         countyInfo.county_url_name,
@@ -113,7 +114,7 @@ function buildCounties(
         state,
         adjacentCounties || [],
         zipCodes || [],
-        // ccviData || {}
+        ccviData || {},
       );
     })
     .value();
@@ -176,8 +177,15 @@ export const metroAreasByFips = fromPairs(
 );
 
 const customAreas = [
-  new State('USA', '', '00001', 331486822, 'USA'),
-  new State('Native American Majority Counties', '', '00002', 314704, 'NAMC'),
+  new State('USA', '', '00001', 331486822, 'USA', {}),
+  new State(
+    'Native American Majority Counties',
+    '',
+    '00002',
+    314704,
+    'NAMC',
+    {},
+  ),
 ];
 
 export const customAreasByFips = fromPairs(
