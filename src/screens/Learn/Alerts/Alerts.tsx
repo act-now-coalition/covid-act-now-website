@@ -14,7 +14,12 @@ import Footer from 'screens/Learn/Footer/Footer';
 import { aboutOurAlertsContent } from 'cms-content/learn';
 
 const Alerts: React.FC = () => {
-  const { pageHeader, sections } = aboutOurAlertsContent;
+  const {
+    pageHeader,
+    sections,
+    metadataTitle,
+    metadataDescription,
+  } = aboutOurAlertsContent;
 
   const date = formatMetatagDate();
 
@@ -22,8 +27,8 @@ const Alerts: React.FC = () => {
     <Fragment>
       <AppMetaTags
         canonicalUrl="/covid-risk-vaccine-alerts"
-        pageTitle={' '}
-        pageDescription={`${date}`}
+        pageTitle={metadataTitle}
+        pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent sidebarItems={learnPages}>
         <BreadcrumbsContainer>

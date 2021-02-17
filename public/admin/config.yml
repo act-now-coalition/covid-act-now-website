@@ -677,6 +677,12 @@ collections:
                   hint: 'Section header, all lowercase, separated by dashes if multi-word',
                 }
               - { label: Section body, name: sectionBody, widget: markdown }
+          - label: Metadata title
+            name: metadataTitle
+            widget: text
+          - label: Metadata description
+            name: metadataDescription
+            widget: text
 
   - label: Vaccination Information
     name: vaccinationInfo

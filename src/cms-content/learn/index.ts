@@ -195,6 +195,8 @@ export interface AboutAlertsContent {
   pageHeader: string;
   pageIntro?: Markdown;
   sections: AlertsSection[];
+  metadataTitle: string;
+  metadataDescription: string;
 }
 
 export const aboutOurAlertsContent = aboutAlerts as AboutAlertsContent;
