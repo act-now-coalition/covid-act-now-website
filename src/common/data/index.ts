@@ -18,7 +18,7 @@ export interface RegionCcviItem {
 }
 
 export interface FipsToCcviMap {
-  [key: string]: RegionCcviItem;
+  [fipsCode: string]: RegionCcviItem;
 }
 
 export const fipsToCcviData = CCVI_DATA_MAP as FipsToCcviMap;

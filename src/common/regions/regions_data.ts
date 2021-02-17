@@ -77,7 +77,7 @@ function buildStates(): State[] {
         stateInfo.state_fips_code,
         stateInfo.population,
         stateInfo.state_code,
-        ccviData || {},
+        ccviData || null,
       );
     })
     .value();
@@ -114,7 +114,7 @@ function buildCounties(
         state,
         adjacentCounties || [],
         zipCodes || [],
-        ccviData || {},
+        ccviData || null,
       );
     })
     .value();
@@ -177,14 +177,14 @@ export const metroAreasByFips = fromPairs(
 );
 
 const customAreas = [
-  new State('USA', '', '00001', 331486822, 'USA', {}),
+  new State('USA', '', '00001', 331486822, 'USA', null),
   new State(
     'Native American Majority Counties',
     '',
     '00002',
     314704,
     'NAMC',
-    {},
+    null,
   ),
 ];
 

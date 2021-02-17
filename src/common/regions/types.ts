@@ -54,7 +54,7 @@ export class State extends Region {
     fipsCode: FipsCode,
     population: number,
     public readonly stateCode: string,
-    public readonly ccviData: RegionCcviItem | {}, // {} because custom aggregations (USA, NAMC) do not have CCVI data
+    public readonly ccviData: RegionCcviItem | null, // null because custom aggregations (USA, NAMC) do not have CCVI data
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.STATE);
   }
