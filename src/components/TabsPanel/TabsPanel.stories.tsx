@@ -10,12 +10,10 @@ const tabList = [
   {
     title: 'Eligible now',
     renderPanel: () => <div>Panel 1</div>,
-    className: 'Eligible-now',
   },
   {
     title: 'Eligible later',
     renderPanel: () => <div>Panel 2</div>,
-    className: 'Eligible-later',
   },
 ];
 

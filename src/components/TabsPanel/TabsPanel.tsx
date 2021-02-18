@@ -10,7 +10,6 @@ import Panel from './Panel';
 export interface TabInfo {
   title: string;
   renderPanel: () => React.ReactNode;
-  className: string;
 }
 
 function a11yProps(index: number) {
@@ -46,7 +45,6 @@ const TabsPanel: React.FC<{
       >
         {tabList.map((tabInfo, index) => (
           <StyledTab
-            className={tabInfo.className}
             key={`tab-${index}`}
             label={tabInfo.title}
             {...a11yProps(index)}
