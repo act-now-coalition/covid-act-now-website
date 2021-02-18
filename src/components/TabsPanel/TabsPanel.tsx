@@ -9,6 +9,7 @@ import Panel from './Panel';
 
 export interface TabInfo {
   title: string;
+  indicatorColor: string;
   renderPanel: () => React.ReactNode;
 }
 
@@ -42,6 +43,7 @@ const TabsPanel: React.FC<{
         onChange={onChange}
         aria-label="Tabs"
         centered
+        $indicatorColor={tabList[selectedTabIndex].indicatorColor}
       >
         {tabList.map((tabInfo, index) => (
           <StyledTab
