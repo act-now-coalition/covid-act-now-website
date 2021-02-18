@@ -21,7 +21,7 @@ export const Container = styled.div<{
 }>`
   display: flex;
   margin: ${({ $isModal }) => $isModal && '1rem auto 0'};
-  padding: ${({ $isModal }) => ($isModal ? '0 0 0 1.75rem' : '0.75rem 1rem')};
+  padding: ${({ $isModal }) => ($isModal ? '0 0 0 1.75rem' : '0.75rem 0')};
   justify-content: ${({ $isHomepage, $isModal }) =>
     $isHomepage && $isModal && 'center'};
   flex-direction: column;
@@ -34,12 +34,12 @@ export const Container = styled.div<{
   }
 `;
 
-export const SliderContainer = styled.div`
+export const SliderContainer = styled.div<{ $isModal: boolean }>`
   width: 200px;
-  margin-left: 1.75rem;
+  margin-left: ${({ $isModal }) => !$isModal && '1.75rem'};
 
   @media (min-width: 600px) {
-    margin-left: 1.5rem;
+    margin-left: ${({ $isModal }) => !$isModal && '2rem'};
   }
 `;
 
@@ -110,7 +110,7 @@ export const MetroMenuButton = styled(Button)<{
   width: 200px;
   border-radius: ${({ $isOpen }) => ($isOpen ? '4px 4px 0 0' : '4px')};
   font-family: Roboto;
-  margin: ${({ $isStatePage }) => !$isStatePage && '1rem 0 .5rem'};
+  margin: ${({ $isStatePage }) => !$isStatePage && '.75rem 0'};
   padding: 0.375rem 0.75rem;
 
   &:hover {

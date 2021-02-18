@@ -245,7 +245,7 @@ const LocationTable: React.FunctionComponent<{
   // In the modal, if the rank of the pinned-location-row is #1, we remove
   // the location's inline row, so as to not have the location listed twice consecutively:
   const removePinnedIfRankedFirst = (location: SummaryForCompare) =>
-    location.region.fipsCode === pinnedLocation?.region.fipsCode;
+    location.region.fipsCode !== pinnedLocation?.region.fipsCode;
 
   const modalLocations = hideInlineLocation
     ? remove(sortedLocations, removePinnedIfRankedFirst)
