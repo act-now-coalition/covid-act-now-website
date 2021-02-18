@@ -25,6 +25,9 @@ export const PhaseDescription = styled(MarkdownContent)<{
 `;
 
 export const PhaseTitle = styled(Heading3)`
+  &:first-child {
+    margin-top: 0;
+  }
   margin-bottom: 4px;
 `;
 
