@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { InfoIcon, StyledTooltip, StyledCloseIcon } from './Tooltip.style';
+import { StyledSpan, StyledTooltip, StyledCloseIcon } from './Tooltip.style';
 import { StyledTooltipProps } from 'components/InfoTooltip';
 import DescriptionDiv from './DescriptionDiv';
 import { useBreakpoint } from 'common/hooks';
 import { tooltipAnchorOnClick } from 'components/InfoTooltip';
 
-const InfoTooltip: React.FC<StyledTooltipProps> = props => {
+const DisclaimerTooltip: React.FC<StyledTooltipProps> = props => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useBreakpoint(600);
 
@@ -23,16 +23,17 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
         open={isOpen}
         leaveTouchDelay={60000} // for mobile: long leaveTouchDelay makes the tooltip stay open until close-icon is clicked
       >
-        <InfoIcon
-          $isOpen={isOpen}
+        <StyledSpan
           tabIndex={0}
           role="button"
           onClick={() => tooltipAnchorOnClick(isMobile, setIsOpen)}
-        />
+        >
+          {props.mainCopy}
+        </StyledSpan>
       </StyledTooltip>
       <DescriptionDiv content={props.title} />
     </>
   );
 };
 
-export default InfoTooltip;
+export default DisclaimerTooltip;

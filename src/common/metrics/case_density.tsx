@@ -8,16 +8,25 @@ import {
   formatInteger,
   formatEstimate,
 } from 'common/utils';
-import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import moment from 'moment';
 import { Metric } from 'common/metric';
+import {
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: 'Daily new cases',
   extendedMetricName: 'Daily new cases per 100k population',
   metricNameForCompare: `Daily new cases per 100k`,
@@ -127,17 +136,33 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
+function renderDisclaimer(region: Region): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation;
+
   return (
     <Fragment>
-      Our risk levels for daily new cases are based on the{' '}
-      <ExternalLink href="https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf">
-        “Key Metrics for Covid Suppression”
-      </ExternalLink>{' '}
-      by Harvard Global Health Institute and others. Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-        our data sources
-      </ExternalLink>
+      {'Learn more about '}
+      <DisclaimerTooltip
+        title={getDataSourceTooltipContent(Metric.CASE_DENSITY, region)}
+        mainCopy={'where our data comes from'}
+        trackOpenTooltip={trackOpenTooltip(
+          `Learn more: ${Metric.CASE_DENSITY}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `Learn more: ${Metric.CASE_DENSITY}`,
+        )}
+      />
+      {' and '}
+      <DisclaimerTooltip
+        title={renderTooltipContent(body)}
+        mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.CASE_DENSITY}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.CASE_DENSITY}`,
+        )}
+      />
       .
     </Fragment>
   );
@@ -186,4 +211,21 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition;
+
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(body)}
+      aria-label={`Show definition of ${CaseIncidenceMetric.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `Metric definition: ${Metric.CASE_DENSITY}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `Metric definition: ${Metric.CASE_DENSITY}`,
+      )}
+    />
+  );
 }

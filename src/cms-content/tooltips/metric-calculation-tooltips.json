@@ -1,0 +1,34 @@
+{
+  "tooltip": [
+    {
+      "title": "Daily new cases",
+      "id": "daily-new-cases",
+      "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.[](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)\n\n[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases).",
+      "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+    },
+    {
+      "title": "Infection rate",
+      "id": "infection-rate",
+      "body": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.[](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)\n\n[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate).",
+      "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
+    },
+    {
+      "title": "Positive test rate",
+      "id": "positive-test-rate",
+      "body": "Positive test rate is the number of positive PCR tests over the last 7 days, divided by the total number of PCR tests over the last 7 days.\n\n[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate).",
+      "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
+    },
+    {
+      "title": "ICU capacity used",
+      "id": "icu-capacity-used",
+      "body": "ICU capacity used is the number of staffed ICU beds that are occupied (by both COVID and non-COVID patients), divided by the total number of staffed ICU beds.\n\n[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
+      "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)."
+    },
+    {
+      "body": "For “Shot 1” in a given location, we take the number of people who have received their first shot and divide it by that location’s population, according to the U.S. Census Bureau.\n\n[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "title": "Percent vaccinated",
+      "id": "percent-vaccinated"
+    }
+  ]
+}
