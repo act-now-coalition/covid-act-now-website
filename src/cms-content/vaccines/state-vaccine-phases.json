@@ -13,7 +13,7 @@
           "description": "* Frontline health workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         },
         {
           "phase": "1",
@@ -22,7 +22,7 @@
           "description": "* Persons age ≥75 years\n* Frontline critical workers\n* Working or living in congregate settings \n* First responders including firefighters and law enforcement",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         },
         {
           "phase": "1",
@@ -31,7 +31,7 @@
           "description": "* Persons age 65-74 years\n* Persons age 16-64 years with high risk medical conditions\n* Additional critical workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         },
         {
           "phase": "2",
@@ -40,7 +40,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         }
       ]
     },
@@ -57,7 +57,7 @@
           "description": "* Frontline health workers\n* Long-term care staff and residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         },
         {
           "phase": "1a",
@@ -66,7 +66,7 @@
           "description": "* Frontline EMS and Fire Service\n* Community Health Care Providers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         },
         {
           "phase": "1a",
@@ -75,7 +75,7 @@
           "description": "* General health care providers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         },
         {
           "phase": "1b",
@@ -84,7 +84,34 @@
           "description": "* Persons age ≥65 years",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.524Z"
+          "updatedAt": "2021-02-18T01:52:35.974Z"
+        },
+        {
+          "phase": "1b",
+          "tier": "2",
+          "currentlyEligible": true,
+          "description": "* People 50-64 with a high-risk medical condition\n* People 50-64 who are an essential worker and must work within 6 feet of others\n* PreK–12 and child care education staff\n* People living or working in congregate settings",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.974Z"
+        },
+        {
+          "phase": "1b",
+          "tier": "3",
+          "currentlyEligible": false,
+          "description": "* All others age 55-64\n* People 40-49 who have a high-risk medical condition\n* People 16-39 who are frontline essential workers with a high-risk medical condition\n* People 16 years and above who live in certain multigenerational households\n* People 16 and above who live in communities where at least 45% homes have not been served either via pipe, septic tank and well, or covered haul system.",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.974Z"
+        },
+        {
+          "phase": "1c",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* People 16 years and above who have a high-risk medical condition\n* All remaining frontline essential workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.974Z"
         }
       ]
     },
@@ -101,7 +128,43 @@
           "description": "* Healthcare Workers\n* Emergency Medical Workers\n* Long-term care facility staff and residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.981Z"
+        },
+        {
+          "phase": "1",
+          "tier": "B",
+          "currentlyEligible": true,
+          "description": "* Education and Childcare workers\n* Adults 65 and older\n* Essential workers\n* Adults with high-risk conditions in congretate settings",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.981Z"
+        },
+        {
+          "phase": "1",
+          "tier": "C",
+          "currentlyEligible": false,
+          "description": "* Adults with high-risk medical conditions\n* Adults in congregate settings",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.981Z"
+        },
+        {
+          "phase": "2",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Additional High-Risk/Critical Populations\n* Beginning of General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.981Z"
+        },
+        {
+          "phase": "3",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.981Z"
         }
       ],
       "notes": "Vaccination phase varies by county."
@@ -119,7 +182,7 @@
           "description": "* Health care workers\n* Long-term care residents and staff\n* First Responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.981Z"
         },
         {
           "phase": "1B",
@@ -128,7 +191,7 @@
           "description": "* People 70+ years old\n* Teacher and childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.981Z"
         },
         {
           "phase": "1B",
@@ -137,7 +200,7 @@
           "description": "* Essential government and community workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.981Z"
         },
         {
           "phase": "1C",
@@ -146,7 +209,7 @@
           "description": "* People 65+\n* Adults with high-risk medical conditions\n* Additional critical infrastructure workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.981Z"
         }
       ]
     },
@@ -163,7 +226,25 @@
           "description": "* Healthcare workers\n* Long-term care residents",
           "expandedDefinitionUrl": "CDPH Allocation Guidelines for Phase 1a",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1b",
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* Persons 65 years of age and older\n* Sector populations: Education and Childcare, Emergency Services, Food and Agriculture",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1b",
+          "tier": "2",
+          "currentlyEligible": false,
+          "description": "* California residents aged 16 to 64 with certain health conditions and disabilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "March 15",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         }
       ],
       "notes": "Note, the state website has removed references to phase 1b tier 2 and phase 1C. An example of the changes are https://www.placer.ca.gov/DocumentCenter/View/49578/COVID-Vaccine-Infographic-11421."
@@ -181,7 +262,7 @@
           "description": "* Highest-risk health care workers\n* Highest-risk individuals (Long-term care residents)",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1B",
@@ -190,7 +271,25 @@
           "description": "* Additional First Responders\n* Individuals with High Risk",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1B",
+          "tier": "2",
+          "currentlyEligible": true,
+          "description": "* Pre-K-12 educators and child care workers\n* Coloradans ages 65-69",
+          "expandedDefinitionUrl": "",
+          "startDate": "February 8, 2021",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1B",
+          "tier": "3",
+          "currentlyEligible": false,
+          "description": "* Frontline essential workers\n* People age 16-64 with two or more high risk conditions ",
+          "expandedDefinitionUrl": "",
+          "startDate": "Winter 2021",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "2",
@@ -199,7 +298,7 @@
           "description": "* People age 60-64\n* People with high risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Spring 2021",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "3",
@@ -208,7 +307,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "Summer 2021",
-          "updatedAt": "2021-02-18T00:06:34.525Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         }
       ]
     },
@@ -225,7 +324,7 @@
           "description": "* Heathcare workers\n* Long-tern care residents\n* Medical first responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1b",
@@ -234,7 +333,16 @@
           "description": "* Individuals 75+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1b",
+          "tier": "2",
+          "currentlyEligible": true,
+          "description": "* Individuals 65-74",
+          "expandedDefinitionUrl": "",
+          "startDate": "February 11, 2021",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1b",
@@ -243,7 +351,7 @@
           "description": "* Frontline essential workers\n* Individuals with high-risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 2021",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         }
       ]
     },
@@ -260,7 +368,7 @@
           "description": "* Health care personnel with direct patient contact and care\n* Emergency Medical Services agencies\n* Long-term care staff and residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1B",
@@ -269,7 +377,7 @@
           "description": "* Older individuals (65+)\n* Frontline Essential Workers (Fire, Police, Correctional Officers, Teachers/Education Staff, US Postal Workers, Food Manufacturers, Agriculture, Transportation, Grocery Store Workers)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1C",
@@ -278,7 +386,7 @@
           "description": "* Persons (16+) with High Risk Medical Conditions\n* Persons in High Risk Congregate/Group Settings\n* Other Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "2",
@@ -287,7 +395,7 @@
           "description": "* Remainder of Congregate/Group Setting Staff and Residents\n* Persons (16+) with Moderate-Risk Medical conditions\n* Other Essential Workers\n* Persons (50+)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "3",
@@ -296,7 +404,7 @@
           "description": "* Individuals (16+)\n* Other Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "4",
@@ -305,7 +413,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         }
       ]
     },
@@ -322,7 +430,7 @@
           "description": "* Long Term Care Residents\n* Healthcare Personnel\n* Fire & Emergency Medical Personnel\n* Frontline Public Health Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1B",
@@ -331,7 +439,7 @@
           "description": "* Older Individuals (65+)\n* Staff and members of Congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
           "phase": "1B",
@@ -340,7 +448,52 @@
           "description": "* First Responders\n* Teachers and childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.526Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1B",
+          "tier": "3",
+          "currentlyEligible": false,
+          "description": "* Essential frontline workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1C",
+          "tier": "1",
+          "currentlyEligible": false,
+          "description": "* DC Residents 16+ with a chronic medical condition\n* Staff working in food service\n* Essential infrastructure workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1C",
+          "tier": "2",
+          "currentlyEligible": false,
+          "description": "* Individuals working in non-public transit, logistics and media",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "1C",
+          "tier": "3",
+          "currentlyEligible": false,
+          "description": "* Additional essential workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
+        },
+        {
+          "phase": "2",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         }
       ]
     },
@@ -357,7 +510,7 @@
           "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of covid",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.982Z"
         }
       ]
     },
@@ -374,7 +527,7 @@
           "description": "* Healthcare workers\n* Long-term care residents and staff\n* Anyone age 65 or older and their caregivers\n* Law enforcement, fire personnel, and first responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1",
@@ -383,7 +536,7 @@
           "description": "* Frontline essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1",
@@ -392,7 +545,7 @@
           "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -409,7 +562,7 @@
           "description": "* Healthcare Personnel\n* Long Term Care Facility Residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -418,7 +571,16 @@
           "description": "* First Responders\n* Frontline Essential Workers\n* Older Adults (75+)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
+        },
+        {
+          "phase": "1C",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Older Adults (65+)\n* Persons (16+) with high risk medical conditions\n* Other Essential workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "Spring 2021",
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "2",
@@ -427,7 +589,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -444,7 +606,7 @@
           "description": "* Healthcare personnel\n* Home care providers\n* Emergency medical services\n* Long-term care facility\nresidents and staff\n* Public health and\nemergency management\nresponse workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "2",
@@ -453,7 +615,7 @@
           "description": "* First responders\n* Pre-K – 12th grade school teachers and staff\n* Child care staff\n* Correctional and detention facility staff ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "2",
@@ -462,7 +624,7 @@
           "description": "* Residents 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "2",
@@ -471,7 +633,7 @@
           "description": "* Non-healthcare frontline essential workers\n* Homeless shelter residents",
           "expandedDefinitionUrl": "",
           "startDate": "Early April 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "3",
@@ -480,7 +642,7 @@
           "description": "* Other essential workers\n* Individuals 16–64 years of age with high-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Late April 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "4",
@@ -489,7 +651,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -506,7 +668,7 @@
           "description": "* Health care workers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -515,7 +677,7 @@
           "description": "* Persons aged 65 and over\n* Non-health care frontline essential workers (first responders, education, food and agriculture, manufacturing, corrections, USPS, public transit, grocery stores, shelters)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1C",
@@ -524,7 +686,7 @@
           "description": "* Persons aged 16 to 64 years with high-risk medical conditions\n* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "March 29, 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "2",
@@ -533,7 +695,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -550,7 +712,7 @@
           "description": "* Patient-facing Healthcare Personnel \n* Long-term Care Facility Residents \n* Congregate living facility workers who provide in-person care to residents \n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -559,7 +721,16 @@
           "description": "* Ages 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
+        },
+        {
+          "phase": "1B",
+          "tier": "2",
+          "currentlyEligible": false,
+          "description": "* Ages 60-64",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -576,7 +747,7 @@
           "description": "* Healthcare Providers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -585,7 +756,7 @@
           "description": "* Older Individuals (65+)\n* First Responders\n* PK-12 staff, Early childhood education, childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -594,7 +765,7 @@
           "description": "* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled inidividuals and care staff living in home settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -603,7 +774,7 @@
           "description": "* Staff and individuals living in congregate settings\n* Government officials/staff at State Capitol",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -612,7 +783,7 @@
           "description": "* Health, Life, and Safety Inspectors",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "1B",
@@ -621,7 +792,7 @@
           "description": "* Correctional Facility Staff and Incarecerated Individuals",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -638,7 +809,7 @@
           "description": "* Healthcare workers \n* Long-term care facilities\n* Workers critical to pandemic response continuity",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "2",
@@ -647,7 +818,16 @@
           "description": "* Persons Aged 65+ \n* Congregate settings \n* High-contact critical workers ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
+        },
+        {
+          "phase": "3",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Aged 16-64 with severe medical risks \n* Other critical workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "March 2021",
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         },
         {
           "phase": "4",
@@ -656,7 +836,16 @@
           "description": "* Aged 16-64 with other medical risks ",
           "expandedDefinitionUrl": "",
           "startDate": "Late April- mid May 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.983Z"
+        },
+        {
+          "phase": "5",
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "June 2021",
+          "updatedAt": "2021-02-18T01:52:35.983Z"
         }
       ]
     },
@@ -673,7 +862,7 @@
           "description": "* Long term care and assisted living facilities\n* Health care personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.984Z"
         },
         {
           "phase": "1",
@@ -682,7 +871,7 @@
           "description": "* First responders\n* Anyone age 70 or older \n* K-12 school personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.984Z"
         },
         {
           "phase": "1",
@@ -691,7 +880,7 @@
           "description": "* Anyone age 60 or older \n* Anyone age 16 or older with certain high-risk conditions \n* All other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.984Z"
         },
         {
           "phase": "2",
@@ -700,7 +889,7 @@
           "description": "* Anyone age 40 or older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.984Z"
         },
         {
           "phase": "3",
@@ -709,7 +898,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.984Z"
         },
         {
           "phase": "4",
@@ -718,7 +907,7 @@
           "description": "* Children under the age of 16 if the vaccine is approved for this age group",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.984Z"
         }
       ]
     },
@@ -735,7 +924,7 @@
           "description": "* Health care workers\n* Long-term care facilities\n* First responders to serve as vaccinators",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -744,7 +933,7 @@
           "description": "* Persons 65 and older\n* Ambulatory and outpatient providers and staff\n* Professional home care providers\n* Health-related support personnel , students and staff\n* Law enforcement and other first responders",
           "expandedDefinitionUrl": "https://ldh.la.gov/index.cfm/newsroom/detail/6028",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -753,7 +942,7 @@
           "description": "* Frontline Essential Workers\n* K-12 school and daycare personnel\n* Essential governmental response personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -770,7 +959,7 @@
           "description": "* Health Care Personnel\n* Long-term care facilities\n* Public Safety Personnel",
           "expandedDefinitionUrl": "",
           "startDate": "Dec 2020",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -779,7 +968,7 @@
           "description": "Now eligible for vaccination:\n* Adults 70+\n\nEligibility pending due to insufficient supply:\n* Adults 65-69\n* Adults With High-Risk Medical Conditions\n* Certain Critical Front Line Workers",
           "expandedDefinitionUrl": "",
           "startDate": "Feb 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -788,7 +977,7 @@
           "description": "* Other Critical Frontline Workers\n",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -797,7 +986,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "June 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -814,7 +1003,7 @@
           "description": "* Healthcare Workers\n* Long-term care facilities\n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -823,7 +1012,7 @@
           "description": "* People living in congregate settings\n* Adults age 75+\n* Education and Continuity of Government",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -832,7 +1021,7 @@
           "description": "* Adults 65+\n* Essential workers (lab services, agriculture, manufacturing, postal service, etc)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -841,7 +1030,7 @@
           "description": "* Adults with a high-risk medical condition\n* Essential workers (criticual utilities, transportation, food service, etc)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -850,7 +1039,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -866,7 +1055,7 @@
           "description": "* Healthcare workers\n* First responders\n* Long term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "Dec 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -875,7 +1064,7 @@
           "description": "* Adults 75+",
           "expandedDefinitionUrl": "",
           "startDate": "Feb 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -884,7 +1073,7 @@
           "description": "* Adults 65+\n* Adults with 2+ high-risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "18 Feb 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -893,7 +1082,7 @@
           "description": "* Teachers and Childcare Workers\n* Other Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -902,7 +1091,7 @@
           "description": "* Adults with a high-risk medical condition",
           "expandedDefinitionUrl": "https://www.mass.gov/info-details/certain-medical-conditions-for-phase-2-groups",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -911,7 +1100,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "April 2021",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ],
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases"
@@ -929,7 +1118,7 @@
           "description": "* Health care workers\n* Long-term care residents and staff",
           "expandedDefinitionUrl": "",
           "startDate": "2020-12-01",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -938,7 +1127,7 @@
           "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
           "expandedDefinitionUrl": "",
           "startDate": "2020-01-15",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -947,7 +1136,7 @@
           "description": "* People 16-64 with a high-risk medical condition\n* Other essential frontline workers",
           "expandedDefinitionUrl": "",
           "startDate": "2020-05-01",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -964,7 +1153,7 @@
           "description": "* Healthcare workers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -973,7 +1162,7 @@
           "description": "* Adults 65+\n* Teachers and Childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -982,7 +1171,7 @@
           "description": "* Adults with high-risk medical conditions\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -991,7 +1180,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ],
       "notes": "WARNING: The Minnesota website has a very nice graphic, but it is completely outdated. They've changed who is in what phase and removed any information about what the next phases look like."
@@ -1009,7 +1198,7 @@
           "description": "* People 65+\n* Adults with high-risk medical conditions\n* Long-term care facilities\n* Healthcare workers and EMTs",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "Up Next",
@@ -1018,7 +1207,7 @@
           "description": "* Teachers\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1035,7 +1224,7 @@
           "description": "* Patient-Facing Health Care Workers \n* Long-Term Care Facility Residents and Staff\n* EMS",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1044,7 +1233,7 @@
           "description": "* First responders (Police, Fire, etc)\n* Emergency Services\n* Public Health Infrastructure",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-1",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1053,7 +1242,7 @@
           "description": "* Adults 65+\n* Adults with high-risk medical conditions",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-2",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1062,7 +1251,7 @@
           "description": "* Teachers\n* Childcare Workers\n* Essential Infrastructure Workers",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-3",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1071,7 +1260,7 @@
           "description": "* Other Essential Workers\n* Vulnerable Populations",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase2",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -1080,7 +1269,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1097,7 +1286,7 @@
           "description": "* Frontline workers\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1106,7 +1295,7 @@
           "description": "* Adults 70+\n* Adults with high-risk medical conditions\n* Vulnerable Populations",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1115,7 +1304,7 @@
           "description": "* Adults 60-69\n* Frontline Essential Workers\n* Congregate Populations\n* Adults with medium-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1124,7 +1313,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1141,7 +1330,7 @@
           "description": "* Healthcare workers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1150,7 +1339,7 @@
           "description": "* Age 65+\n* Adults with high-risk medical conditions\n* First Reponders\n* Educators\n* Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1159,7 +1348,7 @@
           "description": "* Vulnerable populations (disabled, congregate living)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1168,7 +1357,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.528Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1185,7 +1374,7 @@
           "description": "Each county has its own vaccination distribution plan but generally all are vaccinating:\n* Healthcare workers\n* Long-term care facility residents and workers\n* EMS staff\n* First Responders\n* Adults 70+\n\nSome have started vaccinating:\n* Frontline essential workers\n* Adults 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1194,7 +1383,7 @@
           "description": "* People 65+\n* All frontline essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1211,7 +1400,7 @@
           "description": "* High Risk Health Workers\n* First Responders\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "December 2020",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1220,7 +1409,7 @@
           "description": "* 65+ years of age\n* Adults with 2 or more high-risk conditions and their caregivers\n* Residents and staff at facilities with intellectual and developmental disabilities",
           "expandedDefinitionUrl": "",
           "startDate": "December 2020",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2A",
@@ -1229,7 +1418,7 @@
           "description": "* K-12 School and Childcare Staff",
           "expandedDefinitionUrl": "",
           "startDate": "March 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2B",
@@ -1238,7 +1427,7 @@
           "description": "* Adults 50-64",
           "expandedDefinitionUrl": "",
           "startDate": "March 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3A",
@@ -1247,7 +1436,7 @@
           "description": "* Adults with moderate-risk health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3B",
@@ -1256,7 +1445,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1273,7 +1462,7 @@
           "description": "* Healthcare Workers\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1282,7 +1471,7 @@
           "description": "* First Responders\n* Adults 65+\n* Adults with high-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1291,7 +1480,7 @@
           "description": "* Additional First Responders \n* Individuals with Moderately High Risk",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1300,7 +1489,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1317,7 +1506,7 @@
           "description": "* Healthcare personnel\n* Long-term care facilities\n* Congregate care facilities\n* Other personnel with direct exposure to infectious people or materials",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1326,7 +1515,7 @@
           "description": "* Adults 75+\n* Adults with at least one chronic high-risk condition",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1335,7 +1524,7 @@
           "description": "* Frontline essential workers unable to work remotely\n* Vulnerable populations",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1344,7 +1533,7 @@
           "description": "* Adults 60+\n* Essential workers unable to work remotely",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1353,7 +1542,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1370,7 +1559,7 @@
           "description": "* Healthcare workers\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1b",
@@ -1379,7 +1568,7 @@
           "description": "* Anyone age 65 and older\n* Adults with high-risk medical conditions\n* First responders\n* Teachers and childcare workers\n* Other Essential Workers\n* Congregate Care Facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1396,7 +1585,7 @@
           "description": "* Health Care Workers\n* Long-Term Care Staff and Residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1405,7 +1594,7 @@
           "description": "* Adults 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -1414,7 +1603,7 @@
           "description": "* Frontline Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "4",
@@ -1423,7 +1612,7 @@
           "description": "* Adults at High Risk for Exposure and Increased Risk of Severe Illness",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1440,7 +1629,7 @@
           "description": "* Health Care Workers\n* Long-Term Care Residents\n* First Responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1449,7 +1638,7 @@
           "description": "* Adults 75+\n* Adults 65+ with high-risk health conditions\n* People living in congregate settings\n* Child care workers\n* Teachers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1458,7 +1647,7 @@
           "description": "* Essential workers\n* People of any age at increased risk for COVID-19",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1467,7 +1656,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1484,7 +1673,7 @@
           "description": "* High-risk first responders\n* Homebound/bedbound patients\n* Older inviduals (65+)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1493,7 +1682,7 @@
           "description": "* 55+ (Saipan)\n* CNMI Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1502,7 +1691,7 @@
           "description": "* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "Spring 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3A",
@@ -1511,7 +1700,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "Summer 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3B",
@@ -1520,7 +1709,7 @@
           "description": "* School aged children",
           "expandedDefinitionUrl": "",
           "startDate": "Fall 2021",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1537,7 +1726,7 @@
           "description": "* Healthcare workers who are routinely involved in the care of COVID-19 patients.\n* Residents and staff in long-term care facilities.\n* Patients and staff at state psychiatric hospitals.\n* People with developmental disabilities and those with mental health disorders.\n* EMS responders.",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1546,7 +1735,7 @@
           "description": "* Persons 80 and older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1555,7 +1744,7 @@
           "description": "* Persons 75 and older\n* Persons 16+ with a developmental or intellectual disability AND at least one severe co-morbidity",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1564,7 +1753,7 @@
           "description": "* Persons 70 and older\n* K-12 Teachers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1573,7 +1762,7 @@
           "description": "* Persons aged 65 and older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1582,7 +1771,7 @@
           "description": "* Persons with severe congenital, developmental, or early-onset, and inherited conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1599,7 +1788,7 @@
           "description": "* Long-term care residents and staff \n* Healthcare workers supporting direct inpatient care and pandemic mitigation\n* EMTs",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1608,7 +1797,7 @@
           "description": "* First responders \n* Other healthcare workers \n* Adults age 65 and older ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1617,7 +1806,7 @@
           "description": "* Adults of any age with comorbidities\n* Teachers and staff in PreK-12 educational settings\n* Staff and residents in congregate locations and worksites",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -1626,7 +1815,7 @@
           "description": "* Teachers, staff, and residents in other educational settings\n* Critical infrastructure personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "4",
@@ -1635,7 +1824,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1652,7 +1841,7 @@
           "description": "* Healthcare workers\n* Long-term care facility residents and workers\n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1661,7 +1850,7 @@
           "description": "* Teachers and childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1670,7 +1859,7 @@
           "description": "* People 80 and older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1679,7 +1868,7 @@
           "description": "* People 75 and older",
           "expandedDefinitionUrl": "",
           "startDate": "February 15",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1688,7 +1877,7 @@
           "description": "* People 70 and older",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1697,7 +1886,7 @@
           "description": "* People 65 and older",
           "expandedDefinitionUrl": "",
           "startDate": "March 1",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1714,7 +1903,7 @@
           "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1723,7 +1912,7 @@
           "description": "* First Responders\n* Education workers\n* Frontline essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1732,7 +1921,7 @@
           "description": "* Additional Frontline Workers (Transportation, Food Service, etc.)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1741,7 +1930,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1758,7 +1947,7 @@
           "description": "* Healthcare workers\n* First responders\n* congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1767,7 +1956,7 @@
           "description": "* Ages 75+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1776,7 +1965,7 @@
           "description": "* Ages 65-74",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1785,7 +1974,7 @@
           "description": "* Ages 60-64\n* Ages 16-64 with underlying health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Mid March",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1794,7 +1983,7 @@
           "description": "* Ages 50-59",
           "expandedDefinitionUrl": "",
           "startDate": "Mid April",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1803,7 +1992,7 @@
           "description": "* Ages 40-49",
           "expandedDefinitionUrl": "",
           "startDate": "Mid-late May",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1",
@@ -1812,7 +2001,7 @@
           "description": "* Ages 16-39",
           "expandedDefinitionUrl": "",
           "startDate": "Early June",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1829,7 +2018,7 @@
           "description": "* Healthcare workers\n* Long-term care facility residents and staff \n* Ages 65+ ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1838,7 +2027,7 @@
           "description": "* Frontline essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "Early spring",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1847,7 +2036,7 @@
           "description": "* Ages 16-64 years old with certain underlying health conditions\n* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "Late spring",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1856,7 +2045,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "Summer–fall",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1873,7 +2062,7 @@
           "description": "* Frontline healthcare workers\n* Long-term care facility healthcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1882,7 +2071,7 @@
           "description": "* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1891,7 +2080,7 @@
           "description": "* Other healthcare workers, including laboratory and clinic staff\n* Public Health Workers\n* Emergency Medical Services\n* Law Enforcement\n* Correctional Officers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1D",
@@ -1900,7 +2089,7 @@
           "description": "* Persons aged 75 years and older\n* High risk patients (dialysis, post-transplant, and active cancer)\n* High risk residents in congregate settings\n* Starting from 2/25/21, those age 70+ will be able to be vaccinated with new groups being made eligible per week in 5 year increments ",
           "expandedDefinitionUrl": "",
           "startDate": "2/15/21",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1D",
@@ -1909,7 +2098,7 @@
           "description": "* Persons aged 65 years and older\n* Persons with 2 or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1E",
@@ -1918,7 +2107,7 @@
           "description": "* Fire service personnel\n* Other critical infrastructure workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -1927,7 +2116,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -1944,7 +2133,7 @@
           "description": "* Frontline healthcare workers and dependent disabled adults\n* Ages 75+ ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1A",
@@ -1953,7 +2142,7 @@
           "description": "* Outpatient healthcare workers with direct patient exposure\n* Ages 70+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -1962,7 +2151,7 @@
           "description": "* K-12, Child Care\n* Other First Responders\n* Ages 65+",
           "expandedDefinitionUrl": "",
           "startDate": "Feb/March",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -1971,7 +2160,7 @@
           "description": "* 16 years old or older with high-risk health conditions\n* Ages 55+",
           "expandedDefinitionUrl": "",
           "startDate": "March/April",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2A",
@@ -1980,7 +2169,7 @@
           "description": "* Critical infrastructure workers\n* Ages 45+",
           "expandedDefinitionUrl": "",
           "startDate": "Q2/Q3",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2B",
@@ -1989,7 +2178,7 @@
           "description": "* Employed in other certain critical infrastructure industries (transportation, public infrastructure, telecommunications, utilities/energy)\n* Ages 35+",
           "expandedDefinitionUrl": "",
           "startDate": "Q2/Q3",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -1998,7 +2187,7 @@
           "description": "* Tennesseans in other high-risk settings (congregate living facilities, grocery workers, corrections)\n* Ages 25+",
           "expandedDefinitionUrl": "",
           "startDate": "Q3/Q4",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2015,7 +2204,7 @@
           "description": "* Frontline essential workers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2024,7 +2213,7 @@
           "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2041,7 +2230,7 @@
           "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Utahns 70 years and older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "n/a",
@@ -2050,7 +2239,7 @@
           "description": "* Utahns between the ages of 65-69 \n* Anyone 18 or older with certain medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 1",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "n/a",
@@ -2059,7 +2248,7 @@
           "description": "* Other age groups\n* People with underlying medical conditions not already included\n* Those who live in congregate settings and are at higher risk for the virus that causes COVID-19.",
           "expandedDefinitionUrl": "",
           "startDate": "April",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "n/a",
@@ -2068,7 +2257,7 @@
           "description": "* All Utahns",
           "expandedDefinitionUrl": "",
           "startDate": "Later this spring or summer",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2085,7 +2274,7 @@
           "description": "* Long-term care residents and staff\n* Healthcare workers\n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -2094,7 +2283,7 @@
           "description": "* Individuals aged 75+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "\"Eligible Next\"",
@@ -2103,7 +2292,7 @@
           "description": "* The next age grouping will be 70 years and older, then 65 and older, as vaccine supply allows. After the age groups, the vaccine will be available to people in Vermont who have certain high-risk health conditions.",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2120,7 +2309,7 @@
           "description": "* Healthcare staff\n* Residents of long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2129,7 +2318,7 @@
           "description": "* Frontline Essential Workers\n* People age 65+\n* People age 16-64 with an underlying medical condition\n* People living in correctional facilities, homeless shelters, and migrant labor camps",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -2138,7 +2327,7 @@
           "description": "* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2155,7 +2344,7 @@
           "description": "* High-risk workers in health care settings\n* High-risk first responders \n* Residents and staff of long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1A",
@@ -2164,7 +2353,7 @@
           "description": "* All other workers at risk in health care settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2173,7 +2362,7 @@
           "description": "* All people 65 years and older\n* People 50 years and older in multigenerational households",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2182,7 +2371,7 @@
           "description": "* High-risk critical workers 50 years and older who work in certain congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2191,7 +2380,7 @@
           "description": "* People 16 years and older with 2 or more co-morbidities or underlying conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2200,7 +2389,7 @@
           "description": "* High risk critical workers under age 50 in certain congregate settings\n* People in congregate living settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -2209,7 +2398,7 @@
           "description": "* Critical workers in other settings who are in industries essential to the functioning of society and are at risk of exposure\n* People 16 years and older with 1 comorbidity or underlying condition\n* People with disabilities that prevent them from adopting protective measures",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "3",
@@ -2218,7 +2407,7 @@
           "description": "* Other workers in industries and occupations essential to the functioning of society and at increased risk of exposure\n* Young adults/children under 16 years (if vaccine is authorized for those under 16 years)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2235,7 +2424,7 @@
           "description": "* Frontline health care personnel\n* Residents in skilled nursing and long-term care facilities\n* Police and fire personnel, correctional staff\n* Adults ages 65 and over",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2244,7 +2433,7 @@
           "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-frontline essential health care personnel\n* Facility staff and residents in congregate living settings",
           "expandedDefinitionUrl": "",
           "startDate": "3/1/21",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     },
@@ -2261,7 +2450,7 @@
           "description": "* Healthcare workers who are exposed to COVID\n* Staff and residents of long-term care facilities\n* Law enforcement\n* Workers who have exposure to infectious materials",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1B",
@@ -2270,7 +2459,7 @@
           "description": "* Individuals 65 years of age and older \n* Some frontline essential workers who interact with the public \n* Individuals with specific medical conditions \n* Caregivers of medically vulnerable persons who are unable to get vaccinated",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "1C",
@@ -2279,7 +2468,7 @@
           "description": "* Critical infrastructure workers\n* Individuals who live in congregate settings\n",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
           "phase": "2",
@@ -2288,7 +2477,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T00:06:34.529Z"
+          "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
     }

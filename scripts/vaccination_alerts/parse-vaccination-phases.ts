@@ -40,7 +40,7 @@ interface CsvRow {
 
 const parseRow = (row: { [key: string]: string }): CsvRow => {
   return {
-    state: row['State'],
+    state: row['State'].trimRight().trimLeft(),
     eligibilityUrl: row['Eligibility Information URL'],
     currentlyEligible: row['Currently Eligible'].trimRight() !== '',
     startDate: row['Estimated Start Date'],
@@ -99,6 +99,10 @@ async function main(dryRun: boolean) {
   const existingFips = stateVaccinationPhases.map(phase => phase.fips);
 
   const groups = Object.keys(recordsByState).map(key => {
+    if (key === 'Arizona') {
+      console.log(recordsByState[key]);
+      console.log(buildRegionGroup(key, recordsByState[key]));
+    }
     return buildRegionGroup(key, recordsByState[key]);
   });
 
