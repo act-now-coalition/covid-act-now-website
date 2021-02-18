@@ -7,31 +7,40 @@
       "eligibilityInfoUrl": "https://www.alabamapublichealth.gov/covid19vaccine/assets/adph-covid19-vaccination-allocation-plan.pdf",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:37:23.941Z",
           "phase": "1",
-          "tier": "A",
-          "description": "* Frontline health workers"
+          "tier": "a",
+          "currentlyEligible": true,
+          "description": "* Frontline health workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:37:24.447Z",
           "phase": "1",
-          "tier": "B",
-          "description": "* Persons age ≥75 years\n* Frontline critical workers\n* Working or living in congregate settings \n* First responders including firefighters and law enforcement"
+          "tier": "b",
+          "currentlyEligible": true,
+          "description": "* Persons age ≥75 years\n* Frontline critical workers\n* Working or living in congregate settings \n* First responders including firefighters and law enforcement",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:37:24.927Z",
           "phase": "1",
-          "tier": "C",
-          "description": "* Persons age 65-74 years\n* Persons age 16-64 years with high risk medical conditions\n* Additional critical workers"
+          "tier": "c",
+          "currentlyEligible": true,
+          "description": "* Persons age 65-74 years\n* Persons age 16-64 years with high risk medical conditions\n* Additional critical workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:37:25.462Z",
           "phase": "2",
-          "description": "* General Public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         }
       ]
     },
@@ -48,7 +57,7 @@
           "description": "* Frontline health workers\n* Long-term care staff and residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         },
         {
           "phase": "1a",
@@ -57,16 +66,16 @@
           "description": "* Frontline EMS and Fire Service\n* Community Health Care Providers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         },
         {
           "phase": "1a",
           "tier": "3",
           "currentlyEligible": true,
-          "description": "* General Health Care Providers",
+          "description": "* General health care providers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         },
         {
           "phase": "1b",
@@ -75,34 +84,7 @@
           "description": "* Persons age ≥65 years",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "\\* People 50-64 with a high-risk medical condition \n\n\\* People 50-64 who are an essential worker and must work within 6 feet of others \n\n\\* PreK–12 and child care education staff \n\n\\* People living or working in congregate settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-17T21:58:20.572Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "3",
-          "currentlyEligible": false,
-          "description": "\\* All others age 55-64 \n\n\\* People 40-49 who have a high-risk medical condition \n\n\\* People 16-39 who are frontline essential workers with a high-risk medical condition \n\n\\* People 16 years and above who live in certain multigenerational households \n\n\\* People 16 and above who live in communities where at least 45% homes have not been served either via pipe, septic tank and well, or covered haul system.",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-17T18:21:00.545Z"
-        },
-        {
-          "phase": "1c",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "\\* People 16 years and above who have a high-risk medical condition \n\n\\* All remaining frontline essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-17T18:20:52.913Z"
+          "updatedAt": "2021-02-18T00:06:34.524Z"
         }
       ]
     },
@@ -119,43 +101,7 @@
           "description": "* Healthcare Workers\n* Emergency Medical Workers\n* Long-term care facility staff and residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1",
-          "tier": "B",
-          "currentlyEligible": true,
-          "description": "* Education and Childcare workers\n* Adults 65 and older\n* Essential workers\n* Adults with high-risk conditions in congretate settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1",
-          "tier": "C",
-          "currentlyEligible": false,
-          "description": "* Adults with high-risk medical conditions\n* Adults in congregate settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "2",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Additional High-Risk/Critical Populations\n* Beginning of General Public",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* General Public",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         }
       ],
       "notes": "Vaccination phase varies by county."
@@ -173,7 +119,7 @@
           "description": "* Health care workers\n* Long-term care residents and staff\n* First Responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         },
         {
           "phase": "1B",
@@ -181,8 +127,8 @@
           "currentlyEligible": true,
           "description": "* People 70+ years old\n* Teacher and childcare workers",
           "expandedDefinitionUrl": "",
-          "startDate": "2021-01-18",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         },
         {
           "phase": "1B",
@@ -191,7 +137,7 @@
           "description": "* Essential government and community workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         },
         {
           "phase": "1C",
@@ -200,7 +146,7 @@
           "description": "* People 65+\n* Adults with high-risk medical conditions\n* Additional critical infrastructure workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         }
       ]
     },
@@ -211,26 +157,13 @@
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:11:09.388Z",
           "phase": "1a",
-          "description": "* Healthcare workers\n* Long-term care residents"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:11:55.153Z",
-          "phase": "1B",
-          "tier": "1",
-          "description": "* Individuals 65 and older\n* Educators and Childcare\n* Emergency Services\n* Food and Agriculture"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-16T22:54:24.611Z",
-          "phase": "1B",
-          "description": "\\* People 16-64 with a high-risk medical condition",
-          "expandedDefinitionUrl": "https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/Provider-Bulletin-2-12-21.aspx",
-          "tier": "2",
-          "startDate": "March 15, 2021"
+          "description": "* Healthcare workers\n* Long-term care residents",
+          "expandedDefinitionUrl": "CDPH Allocation Guidelines for Phase 1a",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         }
       ],
       "notes": "Note, the state website has removed references to phase 1b tier 2 and phase 1C. An example of the changes are https://www.placer.ca.gov/DocumentCenter/View/49578/COVID-Vaccine-Infographic-11421."
@@ -242,49 +175,40 @@
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T00:48:56.032Z",
           "phase": "1A",
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Highest-risk health care workers\n* Highest-risk individuals (Long-term care residents)",
+          "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
-          "description": "* Highest risk health care workers (Direct, prolonged COVID exposure)\n* Long-term care facilities"
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T00:51:05.623Z",
           "phase": "1B",
           "tier": "1",
-          "description": "* Moderate risk health care workers (Less direct COVID exposure)\n* First responders\n* Adults 70+",
-          "startDate": "Winter 2020-2021"
-        },
-        {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T00:54:46.759Z",
-          "phase": "1B",
-          "description": "* Teachers\n* Childcare workers\n* Adults 65-69",
-          "tier": "2",
-          "startDate": "February 8, 2021"
+          "description": "* Additional First Responders\n* Individuals with High Risk",
+          "expandedDefinitionUrl": "",
+          "startDate": "Winter 2020-2021",
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-17T18:25:46.902Z",
-          "phase": "1B",
-          "tier": "3",
-          "description": "* Frontline essential workers\n* Adults 16-64 with two or more high-risk conditions",
-          "startDate": "Winter 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T00:58:58.520Z",
           "phase": "2",
-          "description": "* Adults 60-64\n* All adults with high risk conditions",
-          "startDate": "Spring 2021"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* People age 60-64\n* People with high risk conditions",
+          "expandedDefinitionUrl": "",
+          "startDate": "Spring 2021",
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T00:58:59.659Z",
           "phase": "3",
-          "description": "* General Public",
-          "startDate": "Summer 2021"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General public",
+          "expandedDefinitionUrl": "",
+          "startDate": "Summer 2021",
+          "updatedAt": "2021-02-18T00:06:34.525Z"
         }
       ]
     },
@@ -301,7 +225,7 @@
           "description": "* Heathcare workers\n* Long-tern care residents\n* Medical first responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "1b",
@@ -310,16 +234,7 @@
           "description": "* Individuals 75+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Individuals 65-74",
-          "expandedDefinitionUrl": "",
-          "startDate": "February 11, 2021",
-          "updatedAt": "2021-02-17T18:27:26.564Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "1b",
@@ -328,7 +243,7 @@
           "description": "* Frontline essential workers\n* Individuals with high-risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 2021",
-          "updatedAt": "2021-02-17T18:28:13.789Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         }
       ]
     },
@@ -345,7 +260,7 @@
           "description": "* Health care personnel with direct patient contact and care\n* Emergency Medical Services agencies\n* Long-term care staff and residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "1B",
@@ -354,7 +269,7 @@
           "description": "* Older individuals (65+)\n* Frontline Essential Workers (Fire, Police, Correctional Officers, Teachers/Education Staff, US Postal Workers, Food Manufacturers, Agriculture, Transportation, Grocery Store Workers)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "1C",
@@ -363,7 +278,7 @@
           "description": "* Persons (16+) with High Risk Medical Conditions\n* Persons in High Risk Congregate/Group Settings\n* Other Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "2",
@@ -372,7 +287,7 @@
           "description": "* Remainder of Congregate/Group Setting Staff and Residents\n* Persons (16+) with Moderate-Risk Medical conditions\n* Other Essential Workers\n* Persons (50+)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "3",
@@ -381,7 +296,7 @@
           "description": "* Individuals (16+)\n* Other Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "4",
@@ -390,7 +305,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         }
       ]
     },
@@ -407,7 +322,7 @@
           "description": "* Long Term Care Residents\n* Healthcare Personnel\n* Fire & Emergency Medical Personnel\n* Frontline Public Health Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-17T18:30:31.849Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "1B",
@@ -416,7 +331,7 @@
           "description": "* Older Individuals (65+)\n* Staff and members of Congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         },
         {
           "phase": "1B",
@@ -425,52 +340,7 @@
           "description": "* First Responders\n* Teachers and childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "3",
-          "currentlyEligible": false,
-          "description": "* Essential frontline workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "1",
-          "currentlyEligible": false,
-          "description": "* DC Residents 16+ with a chronic medical condition\n* Staff working in food service\n* Essential infrastructure workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "2",
-          "currentlyEligible": false,
-          "description": "* Individuals working in non-public transit, logistics and media",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "3",
-          "currentlyEligible": false,
-          "description": "* Additional essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "2",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* General Public",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.526Z"
         }
       ]
     },
@@ -481,10 +351,13 @@
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:39:03.616Z",
           "phase": "1",
-          "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals deemed extremely vulnerable to COVID-19"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Persons 65 of age and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of covid",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -495,22 +368,31 @@
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
       "phaseGroups": [
         {
+          "phase": "1",
+          "tier": "A",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:19:38.593Z",
-          "phase": "1A+",
-          "description": "* Healthcare workers\n* Long-term care staff and residents\n* Adults 65 and older\n* Emergency services"
+          "description": "* Healthcare workers\n* Long-term care residents and staff\n* Anyone age 65 or older and their caregivers\n* Law enforcement, fire personnel, and first responders",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
+          "phase": "1",
+          "tier": "B",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:19:39.240Z",
-          "phase": "1B",
-          "description": "* Essential workers (non-healthcare)"
+          "description": "* Frontline essential workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
+          "phase": "1",
+          "tier": "C",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:19:39.758Z",
-          "phase": "1C",
-          "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID-19"
+          "description": "* Persons aged 16-64 with medical conditions that increase the risk for severe COVID",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -527,7 +409,7 @@
           "description": "* Healthcare Personnel\n* Long Term Care Facility Residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -536,16 +418,7 @@
           "description": "* First Responders\n* Frontline Essential Workers\n* Older Adults (75+)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Older Adults (65+)\n* Persons (16+) with high risk medical conditions\n* Other Essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "Spring 2021",
-          "updatedAt": "2021-02-17T18:36:32.490Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -554,7 +427,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -571,7 +444,7 @@
           "description": "* Healthcare personnel\n* Home care providers\n* Emergency medical services\n* Long-term care facility\nresidents and staff\n* Public health and\nemergency management\nresponse workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -580,7 +453,7 @@
           "description": "* First responders\n* Pre-K – 12th grade school teachers and staff\n* Child care staff\n* Correctional and detention facility staff ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -589,7 +462,7 @@
           "description": "* Residents 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -598,7 +471,7 @@
           "description": "* Non-healthcare frontline essential workers\n* Homeless shelter residents",
           "expandedDefinitionUrl": "",
           "startDate": "Early April 2021",
-          "updatedAt": "2021-02-17T18:38:47.735Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "3",
@@ -607,7 +480,7 @@
           "description": "* Other essential workers\n* Individuals 16–64 years of age with high-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Late April 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "4",
@@ -616,7 +489,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -627,29 +500,40 @@
       "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:00:23.580Z",
           "phase": "1A",
-          "description": "* Health care workers\n* Long-term care residents"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-17T18:51:55.394Z",
+          "description": "* Health care workers\n* Long-term care residents",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
+        },
+        {
           "phase": "1B",
-          "description": "* Persons aged 65 and over\n* Non-health care frontline essential workers (first responders, education, food and agriculture, manufacturing, corrections, USPS, public transit, grocery stores, shelters)"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Persons aged 65 and over\n* Non-health care frontline essential workers (first responders, education, food and agriculture, manufacturing, corrections, USPS, public transit, grocery stores, shelters)",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:03:20.024Z",
           "phase": "1C",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* Persons aged 16 to 64 years with high-risk medical conditions\n* Other essential workers",
-          "startDate": "March 29, 2021"
+          "expandedDefinitionUrl": "",
+          "startDate": "March 29, 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:03:20.625Z",
           "phase": "2",
-          "description": "* General Public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -666,7 +550,7 @@
           "description": "* Patient-facing Healthcare Personnel \n* Long-term Care Facility Residents \n* Congregate living facility workers who provide in-person care to residents \n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-17T18:53:53.205Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -675,14 +559,7 @@
           "description": "* Ages 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-17T18:54:04.875Z",
-          "phase": "1B",
-          "tier": "2",
-          "description": "\\* Ages 60-64"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -699,7 +576,7 @@
           "description": "* Healthcare Providers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -708,7 +585,7 @@
           "description": "* Older Individuals (65+)\n* First Responders\n* PK-12 staff, Early childhood education, childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -717,7 +594,7 @@
           "description": "* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled inidividuals and care staff living in home settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -726,7 +603,7 @@
           "description": "* Staff and individuals living in congregate settings\n* Government officials/staff at State Capitol",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -735,7 +612,7 @@
           "description": "* Health, Life, and Safety Inspectors",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -744,7 +621,7 @@
           "description": "* Correctional Facility Staff and Incarecerated Individuals",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -761,7 +638,7 @@
           "description": "* Healthcare workers \n* Long-term care facilities\n* Workers critical to pandemic response continuity",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -770,16 +647,7 @@
           "description": "* Persons Aged 65+ \n* Congregate settings \n* High-contact critical workers ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Aged 16-64 with severe medical risks \n* Other critical workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "4",
@@ -787,17 +655,8 @@
           "currentlyEligible": false,
           "description": "* Aged 16-64 with other medical risks ",
           "expandedDefinitionUrl": "",
-          "startDate": "Late April - mid May 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
-        },
-        {
-          "phase": "5",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* General Public",
-          "expandedDefinitionUrl": "",
-          "startDate": "June 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "Late April- mid May 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -814,7 +673,7 @@
           "description": "* Long term care and assisted living facilities\n* Health care personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
@@ -823,7 +682,7 @@
           "description": "* First responders\n* Anyone age 70 or older \n* K-12 school personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
@@ -832,7 +691,7 @@
           "description": "* Anyone age 60 or older \n* Anyone age 16 or older with certain high-risk conditions \n* All other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-17T18:58:10.550Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -841,7 +700,7 @@
           "description": "* Anyone age 40 or older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "3",
@@ -850,7 +709,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "4",
@@ -859,7 +718,7 @@
           "description": "* Children under the age of 16 if the vaccine is approved for this age group",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -876,16 +735,16 @@
           "description": "* Health care workers\n* Long-term care facilities\n* First responders to serve as vaccinators",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
           "description": "* Persons 65 and older\n* Ambulatory and outpatient providers and staff\n* Professional home care providers\n* Health-related support personnel , students and staff\n* Law enforcement and other first responders",
-          "expandedDefinitionUrl": "",
+          "expandedDefinitionUrl": "https://ldh.la.gov/index.cfm/newsroom/detail/6028",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
@@ -894,7 +753,7 @@
           "description": "* Frontline Essential Workers\n* K-12 school and daycare personnel\n* Essential governmental response personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -907,20 +766,20 @@
         {
           "phase": "1A",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Health Care Personnel\n* Long-term care facilities\n* Other Patient-Facing Health Care Personnel\n* Public Safety Personnel",
+          "currentlyEligible": true,
+          "description": "* Health Care Personnel\n* Long-term care facilities\n* Public Safety Personnel",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "Dec 2020",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Individuals 70+",
+          "currentlyEligible": true,
+          "description": "Now eligible for vaccination:\n* Adults 70+\n\nEligibility pending due to insufficient supply:\n* Adults 65-69\n* Adults With High-Risk Medical Conditions\n* Certain Critical Front Line Workers",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "Feb 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1C",
@@ -928,61 +787,61 @@
           "currentlyEligible": false,
           "description": "* Other Critical Frontline Workers\n",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "May 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Persons aged 16-64 not otherwise eligible in an prior phase.\n",
+          "description": "* General Public",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "June 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
     {
       "locationName": "Maryland",
       "fips": "24",
-      "eligibilityInfoUrl": "https://coronavirus.maryland.gov/pages/vaccine",
+      "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Healthcare Workers\n* Long-term care facilities\n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1B",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* People living in congregate settings\n* Adults age 75+\n* Education and Continuity of Government",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1C",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Adults age 65+\n* Essential workers (lab services, agriculture, manufacturing, postal service, etc)",
+          "currentlyEligible": true,
+          "description": "* Adults 65+\n* Essential workers (lab services, agriculture, manufacturing, postal service, etc)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Adults 16+ at increased risk of severe COVID-19 illness due to comorbidities\n* Essential workers (criticual utilities, transportation, food service, etc)",
+          "description": "* Adults with a high-risk medical condition\n* Essential workers (criticual utilities, transportation, food service, etc)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "3",
@@ -991,7 +850,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -1001,45 +860,58 @@
       "fips": "25",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:06:36.841Z",
           "phase": "1",
-          "description": "* Healthcare workers\n* First responders\n* Long term care residents and staff"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Healthcare workers\n* First responders\n* Long term care facilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "Dec 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:09:12.507Z",
           "phase": "2",
           "tier": "1",
-          "description": "* Individuals 75+"
+          "currentlyEligible": true,
+          "description": "* Adults 75+",
+          "expandedDefinitionUrl": "",
+          "startDate": "Feb 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:09:12.573Z",
           "phase": "2",
           "tier": "2",
-          "description": "* Individuals 65+\n* Adults with 2+ high risk conditions"
+          "currentlyEligible": false,
+          "description": "* Adults 65+\n* Adults with 2+ high-risk conditions",
+          "expandedDefinitionUrl": "",
+          "startDate": "18 Feb 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:09:12.792Z",
           "phase": "2",
           "tier": "3",
-          "description": "* Teachers\n* Other essential workers"
+          "currentlyEligible": false,
+          "description": "* Teachers and Childcare Workers\n* Other Essential Workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:09:13.141Z",
           "phase": "2",
           "tier": "4",
-          "description": "* Individuals with at least one high risk conditions"
+          "currentlyEligible": false,
+          "description": "* Adults with a high-risk medical condition",
+          "expandedDefinitionUrl": "https://www.mass.gov/info-details/certain-medical-conditions-for-phase-2-groups",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:09:13.586Z",
           "phase": "3",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* General public",
-          "startDate": "April 2021"
+          "expandedDefinitionUrl": "",
+          "startDate": "April 2021",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ],
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases"
@@ -1051,25 +923,31 @@
       "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:30:24.253Z",
           "phase": "1A",
-          "description": "* Health care workers\n* Long-term care residents and staff",
-          "startDate": "2020-12-01"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:30:24.822Z",
-          "phase": "1B",
-          "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
-          "startDate": "2020-01-15"
+          "description": "* Health care workers\n* Long-term care residents and staff",
+          "expandedDefinitionUrl": "",
+          "startDate": "2020-12-01",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:30:25.339Z",
+          "phase": "1B",
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Persons 65 and over\n* Frontline essential workers\n* Teachers and child care providers",
+          "expandedDefinitionUrl": "",
+          "startDate": "2020-01-15",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
+        },
+        {
           "phase": "1C",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* People 16-64 with a high-risk medical condition\n* Other essential frontline workers",
-          "startDate": "2020-05-01"
+          "expandedDefinitionUrl": "",
+          "startDate": "2020-05-01",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -1083,10 +961,10 @@
           "phase": "1",
           "tier": "a",
           "currentlyEligible": true,
-          "description": "* Healthcare workers\n* Long-term care facilities",
-          "expandedDefinitionUrl": "https://www.health.state.mn.us/diseases/coronavirus/vaccine/phase1aguide.pdf",
+          "description": "* Healthcare workers\n* Long-term care residents",
+          "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
@@ -1095,7 +973,7 @@
           "description": "* Adults 65+\n* Teachers and Childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
@@ -1104,7 +982,7 @@
           "description": "* Adults with high-risk medical conditions\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -1113,7 +991,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ],
       "notes": "WARNING: The Minnesota website has a very nice graphic, but it is completely outdated. They've changed who is in what phase and removed any information about what the next phases look like."
@@ -1131,7 +1009,7 @@
           "description": "* People 65+\n* Adults with high-risk medical conditions\n* Long-term care facilities\n* Healthcare workers and EMTs",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "Up Next",
@@ -1140,59 +1018,69 @@
           "description": "* Teachers\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
     {
       "emailAlertVersion": 0,
-      "eligibilityInfoUrl": "https://covidvaccine.mo.gov/",
+      "eligibilityInfoUrl": "https://covidvaccine.mo.gov/priority/",
       "fips": "29",
       "locationName": "Missouri",
       "phaseGroups": [
         {
-          "startDate": "2020-12-14",
-          "updatedAt": "2021-02-02T18:54:06.376Z",
-          "currentlyEligible": true,
           "phase": "1A",
-          "tier": null,
-          "description": "* Patient-Facing Health Care Workers \n* Long-Term Care Facility Residents and Staff",
-          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Patient-Facing Health Care Workers \n* Long-Term Care Facility Residents and Staff\n* EMS",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1a/",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T17:22:07.094Z",
           "phase": "1B",
           "tier": "1",
-          "description": "* First responders\n* Emergency Services\n* Public Health Infrastructure",
-          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-1"
+          "currentlyEligible": true,
+          "description": "* First responders (Police, Fire, etc)\n* Emergency Services\n* Public Health Infrastructure",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-1",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T17:22:07.720Z",
           "phase": "1B",
           "tier": "2",
-          "description": "* Anyone aged 65 and older\n* Any adult with high-risk conditions"
+          "currentlyEligible": true,
+          "description": "* Adults 65+\n* Adults with high-risk medical conditions",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-2",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T17:22:08.292Z",
           "phase": "1B",
           "tier": "3",
-          "description": "* Teachers\n* Childcare Providers\n* Non-healthcare critical infrastructure workers"
+          "currentlyEligible": false,
+          "description": "* Teachers\n* Childcare Workers\n* Essential Infrastructure Workers",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-3",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T17:22:08.755Z",
           "phase": "2",
-          "description": "Other frontline workers and high-risk groups",
-          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase2"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Other Essential Workers\n* Vulnerable Populations",
+          "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase2",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T17:22:09.319Z",
           "phase": "3",
-          "description": "* General Public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -1209,25 +1097,25 @@
           "description": "* Frontline workers\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
           "tier": "B",
           "currentlyEligible": true,
-          "description": "* Age 70+\n* Adults with high-risk medical conditions",
+          "description": "* Adults 70+\n* Adults with high-risk medical conditions\n* Vulnerable Populations",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
           "tier": "C",
           "currentlyEligible": false,
-          "description": "* Frontline essential workers\n* Age 60+\n* Individual in congregate settings\n* Adults with elevated-risk medical conditions",
+          "description": "* Adults 60-69\n* Frontline Essential Workers\n* Congregate Populations\n* Adults with medium-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -1236,7 +1124,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -1253,7 +1141,7 @@
           "description": "* Healthcare workers\n* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
@@ -1262,7 +1150,7 @@
           "description": "* Age 65+\n* Adults with high-risk medical conditions\n* First Reponders\n* Educators\n* Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "1",
@@ -1271,7 +1159,7 @@
           "description": "* Vulnerable populations (disabled, congregate living)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         },
         {
           "phase": "2",
@@ -1280,7 +1168,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.528Z"
         }
       ]
     },
@@ -1294,10 +1182,10 @@
           "phase": "1A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "Each county has its own vaccination distribution plan but generally all are vaccinating:\n* Healthcare workers\n* Long-term care facility residents and workers\n* EMS staff\n* First Responders\n* People 70 and older\n\nSome have started vaccinating:\n* Frontline essential workers",
+          "description": "Each county has its own vaccination distribution plan but generally all are vaccinating:\n* Healthcare workers\n* Long-term care facility residents and workers\n* EMS staff\n* First Responders\n* Adults 70+\n\nSome have started vaccinating:\n* Frontline essential workers\n* Adults 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1306,33 +1194,33 @@
           "description": "* People 65+\n* All frontline essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
     {
       "locationName": "New Hampshire",
       "fips": "33",
-      "eligibilityInfoUrl": "https://www.nh.gov/covid19/resources-guidance/vaccination-planning.htm",
+      "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* High Risk Health Workers\n* First Responders\n* Residents and Staff of Long Term Care and Assisted Living Facilities",
+          "description": "* High Risk Health Workers\n* First Responders\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "December 2020",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* 65+ years of age\n* Adults with high-risk conditions and their caregivers\n* Residents and staff at facilities with intellectual and developmental disabilities\n* Additional First Responders and Healthcare Workers",
+          "description": "* 65+ years of age\n* Adults with 2 or more high-risk conditions and their caregivers\n* Residents and staff at facilities with intellectual and developmental disabilities",
           "expandedDefinitionUrl": "",
           "startDate": "December 2020",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2A",
@@ -1341,25 +1229,25 @@
           "description": "* K-12 School and Childcare Staff",
           "expandedDefinitionUrl": "",
           "startDate": "March 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2B",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* People 50 - 64 years old",
+          "description": "* Adults 50-64",
           "expandedDefinitionUrl": "",
           "startDate": "March 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "3A",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Adults with moderate risk health conditions",
+          "description": "* Adults with moderate-risk health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "3B",
@@ -1368,7 +1256,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "May 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1379,28 +1267,40 @@
       "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:15:14.641Z",
           "phase": "1A",
-          "description": "* Paid and unpaid healthcare workers\n* Long term residents and staff"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:15:15.135Z",
+          "description": "* Healthcare Workers\n* Long-term care facilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
+        },
+        {
           "phase": "1B",
-          "description": "*First Responders\n*Individuals 65+\n*Individuals under 65 with pre-existing medical conditions"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* First Responders\n* Adults 65+\n* Adults with high-risk medical conditions",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:15:15.549Z",
           "phase": "1C",
-          "description": "* Additional First Responders \n* Individuals with High Risk"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Additional First Responders \n* Individuals with Moderately High Risk",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:15:16.052Z",
           "phase": "2",
-          "description": "* General Public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1414,28 +1314,37 @@
           "phase": "1A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Healthcare personnel, staff and residents of long-term care facilities\n* Staff of other congregate care facilities\n* Other personnel with direct exposure to infectious people or materials\n",
+          "description": "* Healthcare personnel\n* Long-term care facilities\n* Congregate care facilities\n* Other personnel with direct exposure to infectious people or materials",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
-          "tier": "",
+          "tier": "1",
           "currentlyEligible": true,
-          "description": "* Persons 75 years or older\n* Adults with at least one chronic high-risk condition\n* Frontline essential workers in critical infrastructure workplaces\n* Vulnerable populations unable to self-isolate",
+          "description": "* Adults 75+\n* Adults with at least one chronic high-risk condition",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
+        },
+        {
+          "phase": "1B",
+          "tier": "2",
+          "currentlyEligible": false,
+          "description": "* Frontline essential workers unable to work remotely\n* Vulnerable populations",
+          "expandedDefinitionUrl": "",
+          "startDate": "Winter 2020 - Spring 2021",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1C",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Age 60+\n* Other Essential workers",
+          "description": "* Adults 60+\n* Essential workers unable to work remotely",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2",
@@ -1444,7 +1353,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1455,25 +1364,22 @@
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
       "phaseGroups": [
         {
+          "phase": "1a",
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:44:33.281Z",
-          "description": "* Healthcare workers\n* Long-term care facility residents and workers",
-          "startDate": "Winter 2020-2021",
-          "phase": "1A"
+          "description": "* Healthcare workers\n* Long-term care facilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "1b",
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:45:00.020Z",
-          "phase": "1B",
-          "description": "* Anyone age 65 and older\n* First responders\n* Corrections workers\n* Teachers and childcare workers\n* Grocery store workers\n* Public transit workers\n* Anyone living or working in a homeless shelter",
-          "startDate": "2021-01-11"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:45:00.452Z",
-          "phase": "1C",
-          "description": "* Adults of any age with high risk medical conditions",
-          "startDate": "2021-02-15"
+          "description": "* Anyone age 65 and older\n* Adults with high-risk medical conditions\n* First responders\n* Teachers and childcare workers\n* Other Essential Workers\n* Congregate Care Facilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1481,35 +1387,43 @@
       "emailAlertVersion": 0,
       "locationName": "North Carolina",
       "fips": "37",
-      "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/frequently-asked-questions-about-covid-19-vaccinations#who-is-being-vaccinated-first",
+      "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:23:34.119Z",
           "phase": "1",
-          "description": "* Health care workers\n* Long-term care staff and residents",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-1"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:23:34.497Z",
+          "description": "* Health Care Workers\n* Long-Term Care Staff and Residents",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
+        },
+        {
           "phase": "2",
-          "description": "* Persons 65 and older",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-2"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Adults 65+",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:24:47.274Z",
           "phase": "3",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* Frontline Essential Workers",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-3"
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T02:24:47.744Z",
           "phase": "4",
-          "description": "* Adults at high risk for exposure and increased risk of severe illness",
-          "expandedDefinitionUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot/deeper-dive-group-4"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Adults at High Risk for Exposure and Increased Risk of Severe Illness",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1523,19 +1437,19 @@
           "phase": "1A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Health Care Workers\n* Long-Term Care Residents ",
+          "description": "* Health Care Workers\n* Long-Term Care Residents\n* First Responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Older individuals (75+)\n* People with underlying health conditions (65+)\n* People living in congregate settings\n* Child care workers\n* Teachers (Pre-K through 12)",
+          "description": "* Adults 75+\n* Adults 65+ with high-risk health conditions\n* People living in congregate settings\n* Child care workers\n* Teachers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1C",
@@ -1544,7 +1458,7 @@
           "description": "* Essential workers\n* People of any age at increased risk for COVID-19",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2",
@@ -1553,7 +1467,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1570,7 +1484,7 @@
           "description": "* High-risk first responders\n* Homebound/bedbound patients\n* Older inviduals (65+)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1579,7 +1493,7 @@
           "description": "* 55+ (Saipan)\n* CNMI Essential Workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2",
@@ -1588,7 +1502,7 @@
           "description": "* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "Spring 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "3A",
@@ -1597,7 +1511,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "Summer 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "3B",
@@ -1606,7 +1520,7 @@
           "description": "* School aged children",
           "expandedDefinitionUrl": "",
           "startDate": "Fall 2021",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1617,50 +1531,58 @@
       "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:07:20.704Z",
           "phase": "1A",
-          "description": "* Healthcare workers who are routinely involved in the care of COVID-19 patients.\n* Residents and staff in long-term care facilities.\n* Patients and staff at state psychiatric hospitals.\n* People with developmental disabilities and those with mental health disorders.\n* EMS responders."
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Healthcare workers who are routinely involved in the care of COVID-19 patients.\n* Residents and staff in long-term care facilities.\n* Patients and staff at state psychiatric hospitals.\n* People with developmental disabilities and those with mental health disorders.\n* EMS responders.",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:07:21.072Z",
           "phase": "1B",
-          "description": "* Persons 80 and older",
           "tier": "1",
-          "startDate": "2021-01-19"
+          "currentlyEligible": true,
+          "description": "* Persons 80 and older",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:07:21.241Z",
           "phase": "1B",
           "tier": "2",
-          "description": "* Persons 75 and older\n* Persons 16+ with a developmental or intellectual disability AND at least one severe co-morbidity\n",
-          "startDate": "2020-01-25"
+          "currentlyEligible": true,
+          "description": "* Persons 75 and older\n* Persons 16+ with a developmental or intellectual disability AND at least one severe co-morbidity",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:07:21.488Z",
           "phase": "1B",
           "tier": "3",
+          "currentlyEligible": true,
           "description": "* Persons 70 and older\n* K-12 Teachers",
-          "startDate": "2021-02-01"
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:15:12.990Z",
           "phase": "1B",
           "tier": "4",
+          "currentlyEligible": true,
           "description": "* Persons aged 65 and older",
-          "startDate": "2020-02-08"
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T02:15:13.981Z",
           "phase": "1B",
           "tier": "5",
+          "currentlyEligible": true,
           "description": "* Persons with severe congenital, developmental, or early-onset, and inherited conditions",
-          "startDate": "2020-02-15"
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1671,37 +1593,49 @@
       "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:37:35.653Z",
           "phase": "1",
-          "description": "* Long-term care residents and staff \n* Healthcare workers supporting direct inpatient care \n* Frontline public health staff\n* EMTs"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Long-term care residents and staff \n* Healthcare workers supporting direct inpatient care and pandemic mitigation\n* EMTs",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:38:50.801Z",
           "phase": "2",
           "tier": "1",
-          "description": "* First responders \n* Other healthcare workers \n* Adults age 65 and older "
+          "currentlyEligible": true,
+          "description": "* First responders \n* Other healthcare workers \n* Adults age 65 and older ",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:38:51.236Z",
           "phase": "2",
           "tier": "2",
+          "currentlyEligible": false,
           "description": "* Adults of any age with comorbidities\n* Teachers and staff in PreK-12 educational settings\n* Staff and residents in congregate locations and worksites",
-          "startDate": "2/22/21"
+          "expandedDefinitionUrl": "",
+          "startDate": "February 22",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:38:51.529Z",
           "phase": "3",
-          "description": "* Teachers, staff, and residents in other educational settings\n* Critical infrastructure personnel"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Teachers, staff, and residents in other educational settings\n* Critical infrastructure personnel",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:38:52.125Z",
           "phase": "4",
-          "description": "* General public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1718,7 +1652,7 @@
           "description": "* Healthcare workers\n* Long-term care facility residents and workers\n* First responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1727,7 +1661,7 @@
           "description": "* Teachers and childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1736,7 +1670,7 @@
           "description": "* People 80 and older",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1745,7 +1679,7 @@
           "description": "* People 75 and older",
           "expandedDefinitionUrl": "",
           "startDate": "February 15",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1754,7 +1688,7 @@
           "description": "* People 70 and older",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1B",
@@ -1763,7 +1697,7 @@
           "description": "* People 65 and older",
           "expandedDefinitionUrl": "",
           "startDate": "March 1",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1774,28 +1708,40 @@
       "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:54:24.941Z",
           "phase": "1A",
-          "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:54:25.435Z",
           "phase": "1B",
-          "description": "* First Responders\n* Education workers\n* Frontline essential workers"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* First Responders\n* Education workers\n* Frontline essential workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:54:25.936Z",
           "phase": "1C",
-          "description": "* Additional Frontline Workers (Transportation, Food Service, etc.)"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Additional Frontline Workers (Transportation, Food Service, etc.)",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T01:54:26.520Z",
           "phase": "2",
-          "description": "* General Public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1812,7 +1758,7 @@
           "description": "* Healthcare workers\n* First responders\n* congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1",
@@ -1821,25 +1767,25 @@
           "description": "* Ages 75+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1",
           "tier": "3",
           "currentlyEligible": false,
           "description": "* Ages 65-74",
-          "expandedDefinitionUrl": "https://www.wpri.com/health/coronavirus/ri-to-release-registration-link-hotline-to-make-appointments-at-state-mass-vaccination-sites/",
+          "expandedDefinitionUrl": "",
           "startDate": "February 22",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1",
           "tier": "4",
-          "currentlyEligible": true,
+          "currentlyEligible": false,
           "description": "* Ages 60-64\n* Ages 16-64 with underlying health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Mid March",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1",
@@ -1848,7 +1794,7 @@
           "description": "* Ages 50-59",
           "expandedDefinitionUrl": "",
           "startDate": "Mid April",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1",
@@ -1857,7 +1803,7 @@
           "description": "* Ages 40-49",
           "expandedDefinitionUrl": "",
           "startDate": "Mid-late May",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "1",
@@ -1866,7 +1812,7 @@
           "description": "* Ages 16-39",
           "expandedDefinitionUrl": "",
           "startDate": "Early June",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1877,31 +1823,31 @@
       "emailAlertVersion": 0,
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "a",
+          "phase": "1A",
+          "tier": "",
           "currentlyEligible": true,
-          "description": "* Healthcare workers\n* Long-term care facility residents and staff\n* Ages 65+",
+          "description": "* Healthcare workers\n* Long-term care facility residents and staff \n* Ages 65+ ",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "b",
+          "phase": "1B",
+          "tier": "",
           "currentlyEligible": false,
           "description": "* Frontline essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "Early spring",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "c",
+          "phase": "1C",
+          "tier": "",
           "currentlyEligible": false,
           "description": "* Ages 16-64 years old with certain underlying health conditions\n* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "Late spring",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2",
@@ -1910,7 +1856,7 @@
           "description": "* General Public",
           "expandedDefinitionUrl": "",
           "startDate": "Summer–fall",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1921,58 +1867,58 @@
       "emailAlertVersion": 0,
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "a",
+          "phase": "1A",
+          "tier": "",
           "currentlyEligible": true,
           "description": "* Frontline healthcare workers\n* Long-term care facility healthcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "b",
+          "phase": "1B",
+          "tier": "",
           "currentlyEligible": true,
           "description": "* Long-term care residents",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "c",
+          "phase": "1C",
+          "tier": "",
           "currentlyEligible": true,
           "description": "* Other healthcare workers, including laboratory and clinic staff\n* Public Health Workers\n* Emergency Medical Services\n* Law Enforcement\n* Correctional Officers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "d",
+          "phase": "1D",
+          "tier": "",
           "currentlyEligible": true,
-          "description": "* Persons aged 70 years and older\n* High risk patients (dialysis, post-transplant, and active cancer)\n* High risk residents in congregate settings",
+          "description": "* Persons aged 75 years and older\n* High risk patients (dialysis, post-transplant, and active cancer)\n* High risk residents in congregate settings\n* Starting from 2/25/21, those age 70+ will be able to be vaccinated with new groups being made eligible per week in 5 year increments ",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "startDate": "2/15/21",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "d",
+          "phase": "1D",
+          "tier": "",
           "currentlyEligible": false,
-          "description": "\n* Persons aged 70 years and older\n* Persons with 2 or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff",
+          "description": "* Persons aged 65 years and older\n* Persons with 2 or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "phase": "1",
-          "tier": "e",
+          "phase": "1E",
+          "tier": "",
           "currentlyEligible": false,
           "description": "* Fire service personnel\n* Other critical infrastructure workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
           "phase": "2",
@@ -1981,7 +1927,7 @@
           "description": "* General public",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-10T02:59:08.812Z"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -1992,54 +1938,67 @@
       "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:26:43.766Z",
           "phase": "1A",
           "tier": "1",
-          "description": "* Frontline healthcare workers and dependent disabled adults\n* Ages 75+ "
+          "currentlyEligible": true,
+          "description": "* Frontline healthcare workers and dependent disabled adults\n* Ages 75+ ",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:26:44.090Z",
           "phase": "1A",
           "tier": "2",
-          "description": "* Outpatient healthcare workers with direct patient exposure\n* Ages 70+"
-        },
-        {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:26:44.457Z",
+          "description": "* Outpatient healthcare workers with direct patient exposure\n* Ages 70+",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
+        },
+        {
           "phase": "1B",
-          "startDate": "Feb/Mar",
-          "description": "* K-12, Child Care\n* Other First Responders\n* Ages 65+\n\nNote: Eligibility may depend per county",
-          "expandedDefinitionUrl": "https://covid19.tn.gov/covid-19-vaccines/county-vaccine-information/"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* K-12, Child Care\n* Other First Responders\n* Ages 65+",
+          "expandedDefinitionUrl": "",
+          "startDate": "Feb/March",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:26:44.883Z",
           "phase": "1C",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* 16 years old or older with high-risk health conditions\n* Ages 55+",
-          "startDate": "March/April"
+          "expandedDefinitionUrl": "",
+          "startDate": "March/April",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:26:45.249Z",
           "phase": "2A",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* Critical infrastructure workers\n* Ages 45+",
-          "startDate": "Q2/Q3"
+          "expandedDefinitionUrl": "",
+          "startDate": "Q2/Q3",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:26:45.818Z",
           "phase": "2B",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* Employed in other certain critical infrastructure industries (transportation, public infrastructure, telecommunications, utilities/energy)\n* Ages 35+",
-          "startDate": "Q2/Q3"
+          "expandedDefinitionUrl": "",
+          "startDate": "Q2/Q3",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:26:46.365Z",
           "phase": "3",
+          "tier": "",
+          "currentlyEligible": false,
           "description": "* Tennesseans in other high-risk settings (congregate living facilities, grocery workers, corrections)\n* Ages 25+",
-          "startDate": "Q3/Q4"
+          "expandedDefinitionUrl": "",
+          "startDate": "Q3/Q4",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2050,16 +2009,22 @@
       "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:21:28.971Z",
           "phase": "1A",
-          "description": "* Frontline essential workers\n* Long-term care residents"
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* Frontline essential workers\n* Long-term care residents",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T01:23:20.387Z",
           "phase": "1B",
-          "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition"
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Persons 65 or older\n* Persons 16+ with at least one chronic medical condition",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2070,30 +2035,40 @@
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
       "phaseGroups": [
         {
+          "phase": "n/a",
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:19:05.468Z",
-          "phase": "1*",
-          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Utahns 70 years and older"
+          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Utahns 70 years and older",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "n/a",
+          "tier": "",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:19:05.828Z",
-          "phase": "2*",
+          "description": "* Utahns between the ages of 65-69 \n* Anyone 18 or older with certain medical conditions",
+          "expandedDefinitionUrl": "",
           "startDate": "March 1",
-          "description": "* People between the ages of 65-69 \n* Adults with high-risk medical conditions"
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "n/a",
+          "tier": "",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:19:06.280Z",
-          "startDate": "April 2020",
           "description": "* Other age groups\n* People with underlying medical conditions not already included\n* Those who live in congregate settings and are at higher risk for the virus that causes COVID-19.",
-          "phase": "3*"
+          "expandedDefinitionUrl": "",
+          "startDate": "April",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "n/a",
+          "tier": "",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:19:06.729Z",
-          "phase": "4*",
-          "description": "* General Public"
+          "description": "* All Utahns",
+          "expandedDefinitionUrl": "",
+          "startDate": "Later this spring or summer",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2104,24 +2079,31 @@
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:14:27.238Z",
           "phase": "1",
-          "description": "* Long-term care residents and staff\n* Healthcare workers\n* First responders"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-10T01:14:47.108Z",
-          "phase": "2",
-          "description": "* Individuals aged 70+",
-          "startDate": "2/16/21"
+          "description": "* Long-term care residents and staff\n* Healthcare workers\n* First responders",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "2",
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Individuals aged 75+",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
+        },
+        {
+          "phase": "\"Eligible Next\"",
+          "tier": "",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-10T01:14:54.656Z",
-          "phase": "Up Next",
-          "description": "Not yet eligible but will open in the following order:\n\n* Individuals 65+\n* People with certain high-risk health conditions\n\nEstimated completion by Spring 2021",
-          "startDate": ""
+          "description": "* The next age grouping will be 70 years and older, then 65 and older, as vaccine supply allows. After the age groups, the vaccine will be available to people in Vermont who have certain high-risk health conditions.",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2132,22 +2114,31 @@
       "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:17:44.139Z",
           "phase": "1A",
-          "description": "* Healthcare staff\n* Residents of long-term care facilities"
-        },
-        {
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:17:44.696Z",
-          "phase": "1B",
-          "description": "* Frontline Essential Workers\n* People age 65+\n* People age 16-64 with an underlying medical condition"
+          "description": "* Healthcare staff\n* Residents of long-term care facilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:17:45.145Z",
+          "phase": "1B",
+          "tier": "",
+          "currentlyEligible": true,
+          "description": "* Frontline Essential Workers\n* People age 65+\n* People age 16-64 with an underlying medical condition\n* People living in correctional facilities, homeless shelters, and migrant labor camps",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
+        },
+        {
           "phase": "1C",
-          "description": "* Other essential workers"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Other essential workers",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2158,58 +2149,76 @@
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
       "phaseGroups": [
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:20:38.277Z",
-          "description": "* High-risk workers in health care settings\n* High-risk first responders \n* Residents and staff of long-term care facilities",
           "phase": "1A",
-          "tier": "1"
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* High-risk workers in health care settings\n* High-risk first responders \n* Residents and staff of long-term care facilities",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:20:38.615Z",
           "phase": "1A",
           "tier": "2",
-          "description": "* All other workers at risk in health care settings"
+          "currentlyEligible": true,
+          "description": "* All other workers at risk in health care settings",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:20:39.031Z",
           "phase": "1B",
           "tier": "1",
-          "description": "* All people 65 years and older\n* People 50 years and older in multigenerational households"
+          "currentlyEligible": true,
+          "description": "* All people 65 years and older\n* People 50 years and older in multigenerational households",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:20:40.719Z",
           "phase": "1B",
           "tier": "2",
-          "description": "* High-risk critical workers 50 years and older who work in certain congregate settings"
+          "currentlyEligible": false,
+          "description": "* High-risk critical workers 50 years and older who work in certain congregate settings",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:20:40.953Z",
           "phase": "1B",
           "tier": "3",
-          "description": "* People 16 years and older with 2 or more co-morbidities or underlying conditions"
+          "currentlyEligible": false,
+          "description": "* People 16 years and older with 2 or more co-morbidities or underlying conditions",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:20:41.312Z",
           "phase": "1B",
           "tier": "4",
-          "description": "* High risk critical workers under age 50 in certain congregate settings\n* People in congregate living settings"
+          "currentlyEligible": false,
+          "description": "* High risk critical workers under age 50 in certain congregate settings\n* People in congregate living settings",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:20:41.616Z",
           "phase": "2",
-          "description": "* Critical workers in other settings who are in industries essential to the functioning of society and are at risk of exposure\n* People 16 years and older with 1 comorbidity or underlying condition\n* People with disabilities that prevent them from adopting protective measures"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Critical workers in other settings who are in industries essential to the functioning of society and are at risk of exposure\n* People 16 years and older with 1 comorbidity or underlying condition\n* People with disabilities that prevent them from adopting protective measures",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:20:41.949Z",
           "phase": "3",
-          "description": "* Other workers in industries and occupations essential to the functioning of society and at increased risk of exposure\n* Young adults/children under 16 years (if vaccine is authorized for those under 16 years)"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* Other workers in industries and occupations essential to the functioning of society and at increased risk of exposure\n* Young adults/children under 16 years (if vaccine is authorized for those under 16 years)",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2220,19 +2229,22 @@
       "eligibilityInfoUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-about.htm",
       "phaseGroups": [
         {
+          "phase": "1A",
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:50:18.350Z",
-          "phase": "1",
-          "tier": "a",
-          "description": "* Frontline health care personnel\n* Residents in skilled nursing and long-term care facilities\n* Police and fire personnel, correctional staff\n* Adults ages 65 and over"
+          "description": "* Frontline health care personnel\n* Residents in skilled nursing and long-term care facilities\n* Police and fire personnel, correctional staff\n* Adults ages 65 and over",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "1B",
+          "tier": "",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:50:18.999Z",
-          "phase": "1",
-          "tier": "b",
           "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-frontline essential health care personnel\n* Facility staff and residents in congregate living settings",
-          "startDate": "3/1/21"
+          "expandedDefinitionUrl": "",
+          "startDate": "3/1/21",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     },
@@ -2243,31 +2255,40 @@
       "eligibilityInfoUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/",
       "phaseGroups": [
         {
+          "phase": "1A",
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:42:02.161Z",
-          "phase": "1",
-          "tier": "a",
-          "description": "* Healthcare workers who are exposed to COVID\n* Staff and residents of long-term care facilities\n* Law enforcement\n* Workers who have exposure to infectious materials"
+          "description": "* Healthcare workers who are exposed to COVID\n* Staff and residents of long-term care facilities\n* Law enforcement\n* Workers who have exposure to infectious materials",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "1B",
+          "tier": "",
           "currentlyEligible": true,
-          "updatedAt": "2021-02-09T18:42:02.556Z",
-          "phase": "1",
-          "tier": "b",
-          "description": "Note: Only some counties have started Phase 1b\n* Individuals 65 years of age and older \n* Some frontline essential workers who interact with the public \n* Individuals with specific medical conditions \n* Caregivers of medically vulnerable persons who are unable to get vaccinated"
+          "description": "* Individuals 65 years of age and older \n* Some frontline essential workers who interact with the public \n* Individuals with specific medical conditions \n* Caregivers of medically vulnerable persons who are unable to get vaccinated",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
+          "phase": "1C",
+          "tier": "",
           "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:42:03.075Z",
-          "phase": "1",
-          "tier": "C",
-          "description": "* Critical infrastructure workers\n* Individuals who live in congregate settings"
+          "description": "* Critical infrastructure workers\n* Individuals who live in congregate settings\n",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-09T18:42:03.537Z",
           "phase": "2",
-          "description": "* General public"
+          "tier": "",
+          "currentlyEligible": false,
+          "description": "* General Public",
+          "expandedDefinitionUrl": "",
+          "startDate": "",
+          "updatedAt": "2021-02-18T00:06:34.529Z"
         }
       ]
     }
