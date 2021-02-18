@@ -31,6 +31,6 @@ export const PhaseTitle = styled(Heading3)`
 export const StyledEligibilityPanel = styled.div``;
 
 export const StartDate = styled.span`
-  color: ${COLOR_MAP.GREY_4};
-  font-size: 13px;
+  color: ${COLOR_MAP.GREY_5};
+  font-size: 14px;
 `;
