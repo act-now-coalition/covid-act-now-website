@@ -1,5 +1,5 @@
 import React from 'react';
-import { Caption, StyledFigure } from './Markdown.style';
+import { StyledFigure } from './Markdown.style';
 
 /**
  * Custom image component for Markdown content.
@@ -12,13 +12,10 @@ const MarkdownImage: React.FC<{
   src: string;
   title: string;
   alt: string;
-}> = ({ src, title, alt }) => {
-  const showTitle = title !== 'none';
-
+}> = ({ src, alt }) => {
   return (
     <StyledFigure>
       <img src={src} alt={alt} />
-      {showTitle && <Caption>{title}</Caption>}
     </StyledFigure>
   );
 };

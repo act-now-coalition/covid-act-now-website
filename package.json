@@ -121,6 +121,7 @@
     "vaccinations-generate-users-to-email": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/generate-users-to-email.ts",
     "vaccinations-send-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/send-emails.ts",
     "vaccinations-send-test-email": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/send-test-email.ts",
+    "vaccinations-parse-phases": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/parse-vaccination-phases.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js",

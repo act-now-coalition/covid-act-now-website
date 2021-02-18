@@ -3,18 +3,18 @@
     {
       "sectionHeader": "Risk-Level and Vaccine Eligibility Alerts",
       "sectionId": "risk-level-vaccine-eligibility-alerts",
-      "sectionBody": "When we detect a change in the risk-level for your state, county, or city, we’ll send you an email to notify you. For states where the information is available, we’ll also let you know when there has been an update in vaccine eligibility. [Sign up for the locations of your choice](https://covidactnow.org/alert_signup?s=1598540).\n\nTo avoid overwhelming your inbox, we send out alerts only on Mondays and Thursdays. For the most up-to-date risk assessments, check out the real time metrics on our site. If available, we recommend that you also sign up for vaccine notifications directly from your state, county, or city’s official site. We are an independent nonprofit not associated with the government."
+      "sectionBody": "When we detect a change in the risk-level for your state, county, or city, we’ll send you an email to notify you. For states where the information is available, we’ll also let you know when there has been an update in vaccine eligibility. [Sign up for the locations of your choice](https://covidactnow.org/alert_signup?s=1598540).\n\nTo avoid overwhelming your inbox, we send out alerts only on Mondays and Thursdays. For the most up-to-date risk assessments, check out the real time metrics on our site. If available, we recommend that you also sign up for vaccine notifications directly from your state, county, or city’s official site. We are an independent nonprofit not associated with the government.\n\n![Example of the alerts for location risk level and vaccine eligibility changes. ](/images_cms/risk-level-vaccine-eligibility-alerts.png \"Risk level and vaccine alerts\")"
     },
     {
       "sectionHeader": "Daily Download",
-      "sectionBody": "For a snapshot of the latest COVID map, news, research and developments around the country, our daily newsletter brings you timely, curated information. [Sign up here](https://confirmsubscription.com/h/t/1CB29DE18ED7358F).",
+      "sectionBody": "For a snapshot of the latest COVID map, news, research and developments around the country, our daily newsletter brings you timely, curated information. [Sign up here](https://confirmsubscription.com/h/t/1CB29DE18ED7358F).\n\n![Example of Daily Download newsletter email](/images_cms/daily-download.png \"Daily Download\")",
       "sectionId": "daily-download"
     },
     {
       "sectionHeader": "Research Rundown",
       "sectionSubheader": "",
       "sectionId": "research-rundown",
-      "sectionBody": "Curated by medical writers and experts, this twice-weekly newsletter offers short, digestible summaries of significant scientific literature and COVID research. [Sign up here](https://confirmsubscription.com/h/t/F4D87CF97744FC8E)."
+      "sectionBody": "Curated by medical writers and experts, this twice-weekly newsletter offers short, digestible summaries of significant scientific literature and COVID research. [Sign up here](https://confirmsubscription.com/h/t/F4D87CF97744FC8E).\n\n![Example of the research rundown newsletter email](/images_cms/research-rundown-example.png \"Research Rundown\")"
     }
   ],
   "pageHeader": "About our alerts",
