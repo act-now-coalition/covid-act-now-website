@@ -47,6 +47,7 @@ export enum EventCategory {
   WEB_VITALS = 'web vitals',
   NONE = 'none', // use NONE for development
   GEOLOCATION_CARDS = 'geolocation cards',
+  TOOLTIPS = 'tooltips',
 }
 
 /**
@@ -72,6 +73,8 @@ export enum EventAction {
   FID = 'First Input Delay (ms)',
   LCP = 'Largest Contentful Paint (ms)',
   TTFB = 'Time to First Byte (ms)',
+  OPEN_TOOLTIP = 'open tooltip',
+  CLOSE_TOOLTIP = 'close tooltip',
 }
 
 /**

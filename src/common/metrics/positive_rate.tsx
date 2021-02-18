@@ -6,8 +6,16 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
+import {
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -15,6 +23,7 @@ export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -142,56 +151,33 @@ function renderStatus(projections: Projections) {
   );
 }
 
-function renderDisclaimer(projections: Projections): React.ReactElement {
-  const usingCMSData =
-    projections.primary.testPositiveRateSource === 'CMSTesting';
-  const usingCDCData =
-    projections.primary.testPositiveRateSource === 'CDCTesting';
-  const usingDefaultData = !(usingCDCData || usingCMSData);
-  const inCT = projections.locationName === 'Connecticut';
+function renderDisclaimer(region: Region): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricCalculation;
 
   return (
     <Fragment>
-      {inCT ? (
-        <>
-          {' '}
-          There is a known discrepancy between the data above and the state
-          dashboard. The state dashboard includes antigen tests in the
-          calculation while we exclude antigen tests.
-          <br />
-          <br />{' '}
-        </>
-      ) : (
-        ''
-      )}
-      The White House Coronavirus Task Force grades a positive test rate of more
-      than 10% as red. The countries most successful in containing COVID have
-      rates of 3% or less.{' '}
-      {usingCMSData && (
-        <React.Fragment>
-          {METRIC_NAME} for {projections.locationName} comes from data
-          aggregated by the Centers for Medicare and Medicaid Services. It is
-          calculated as a 14-day trailing average and may take a week or more to
-          update.
-        </React.Fragment>
-      )}
-      {usingCDCData && (
-        <React.Fragment>
-          {METRIC_NAME} for {projections.locationName} comes from data
-          aggregated by the Centers for Disease Control and Prevention. It is
-          calculated as a 7-day trailing average and may take 3-4 days to
-          update.
-        </React.Fragment>
-      )}
-      {usingDefaultData && (
-        <React.Fragment>
-          We calculate the rate as a 7-day trailing average.
-        </React.Fragment>
-      )}{' '}
-      Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-        our data sources
-      </ExternalLink>
+      {'Learn more about '}
+      <DisclaimerTooltip
+        title={getDataSourceTooltipContent(Metric.POSITIVE_TESTS, region)}
+        mainCopy={'where our data comes from'}
+        trackOpenTooltip={trackOpenTooltip(
+          `Learn more: ${Metric.POSITIVE_TESTS}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `Learn more: ${Metric.POSITIVE_TESTS}`,
+        )}
+      />
+      {' and '}
+      <DisclaimerTooltip
+        title={renderTooltipContent(body)}
+        mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.POSITIVE_TESTS}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.POSITIVE_TESTS}`,
+        )}
+      />
       .
     </Fragment>
   );
@@ -239,4 +225,21 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricDefinition;
+
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(body)}
+      aria-label={`Show definition of ${PositiveTestRateMetric.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `Metric definition: ${Metric.POSITIVE_TESTS}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `Metric definition: ${Metric.POSITIVE_TESTS}`,
+      )}
+    />
+  );
 }

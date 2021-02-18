@@ -82,7 +82,6 @@ export class County extends Region {
     population: number,
     public readonly state: State,
     public readonly adjacentCountiesFips: FipsCode[],
-    public readonly zipCodes: ZipCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
   }

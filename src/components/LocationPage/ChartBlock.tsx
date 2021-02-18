@@ -12,6 +12,7 @@ import {
   Metric,
   getMetricNameExtended,
   getMetricStatusText,
+  getMetricDefinition,
 } from 'common/metric';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
@@ -33,11 +34,14 @@ function ChartBlock(props: {
 
   const hasMetric = projections.hasMetric(metric);
 
+  const chartHeaderTooltip = getMetricDefinition(metric).renderInfoTooltip();
+
   return (
     <Fragment>
       <ChartHeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
+          <>{chartHeaderTooltip}</>
           {showBetaTag && <BetaTag>New</BetaTag>}
         </LocationPageSectionHeader>
         {hasMetric && !isMobile && (
@@ -64,7 +68,7 @@ function ChartBlock(props: {
       {hasMetric && (
         <>
           <MetricChart metric={metric} projections={projections} />
-          <Disclaimer metricName={metric} projections={projections} />
+          <Disclaimer metricName={metric} region={region} />
         </>
       )}
     </Fragment>

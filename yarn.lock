@@ -4616,6 +4616,13 @@
     "@types/react" "*"
     "@types/reactcss" "*"
 
+"@types/react-copy-to-clipboard@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.0.tgz#38b035ca0c28334d3e0efaf3f319b81eea9690cd"
+  integrity sha512-faUg6Kx3Dfv0MBIcs+xzIptlRtjEVSaNjqyC14YAp4UwSiTHghnKtBOt9ERRTZZJfoJgnw10tomVaqG86GzdAw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@*", "@types/react-dom@^16.9.6":
   version "16.9.8"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
@@ -17339,6 +17346,11 @@ react-simple-maps@^1.0.0-beta.0:
   dependencies:
     d3-geo "^1.11.6"
     topojson-client "^3.0.0"
+
+react-singleton-hook@^3.0.142:
+  version "3.0.142"
+  resolved "https://registry.yarnpkg.com/react-singleton-hook/-/react-singleton-hook-3.0.142.tgz#7212d0441748a67e97edeb41f1d425ff433c192c"
+  integrity sha512-ONYk/LftfsF7j8dCP7AE3Pz5gwJdj2eVM8wnvyEq2ypAG7zVKtwSvAqu7xmrg65qrCLfef9+b8DMThEU0GJJVw==
 
 react-sizeme@^2.5.2, react-sizeme@^2.6.7:
   version "2.6.12"

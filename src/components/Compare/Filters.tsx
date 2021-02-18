@@ -183,7 +183,7 @@ const Filters = (props: {
           />
         )}
         {props.county && (
-          <SliderContainer>
+          <SliderContainer $isModal={props.isModal}>
             <GeoSlider
               onChange={sliderHandleChange}
               value={sliderValue}

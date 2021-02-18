@@ -13,10 +13,6 @@ import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import {
-  DisclaimerWrapper,
-  DisclaimerBody,
-} from 'components/Disclaimer/Disclaimer.style';
 import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
@@ -435,15 +431,15 @@ const Explore: React.FunctionComponent<{
         chartIndigenous={chartIndigenous}
         setChartIndigenous={setChartIndigenous}
       />
-      <DisclaimerWrapper>
-        <DisclaimerBody>
+      <Styles.DisclaimerWrapper>
+        <Styles.DisclaimerBody>
           Last updated {lastUpdatedDateString}. Learn more about{' '}
           <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
             our data sources
           </ExternalLink>
           .
-        </DisclaimerBody>
-      </DisclaimerWrapper>
+        </Styles.DisclaimerBody>
+      </Styles.DisclaimerWrapper>
     </Styles.Container>
   );
 };

@@ -2,12 +2,7 @@ import React, { Fragment } from 'react';
 import RegionItem from './RegionItem';
 import RegionItemSkeleton from './RegionItemSkeleton';
 import { RegionItemsWrapper } from 'screens/HomePage/HomePage.style';
-import {
-  getGeolocatedRegions,
-  GeolocatedRegions,
-  Region,
-} from 'common/regions';
-import { GeolocationInfo } from 'common/hooks/useGeolocation';
+import { GeolocatedRegions, Region } from 'common/regions';
 
 enum ItemsState {
   LOADING,
@@ -16,16 +11,12 @@ enum ItemsState {
 }
 
 const HomepageItems: React.FC<{
-  geolocationData?: GeolocationInfo;
+  userRegions: GeolocatedRegions | null;
   isLoading: boolean;
-}> = ({ geolocationData, isLoading }) => {
-  const userRegions = geolocationData
-    ? getGeolocatedRegions(geolocationData)
-    : null;
-
+}> = ({ userRegions, isLoading }) => {
   const itemsState = isLoading
     ? ItemsState.LOADING
-    : geolocationData
+    : userRegions
     ? ItemsState.READY
     : ItemsState.NOT_FOUND;
 

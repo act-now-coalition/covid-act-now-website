@@ -6,8 +6,16 @@ import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from 'components/ExternalLink';
 import Thermometer from 'components/Thermometer';
+import {
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Infection rate';
 
@@ -15,6 +23,7 @@ export const CaseGrowthMetric: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -113,15 +122,35 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(): React.ReactElement {
+function renderDisclaimer(region: Region): React.ReactElement {
+  const { body } = metricToTooltipMap[
+    Metric.CASE_GROWTH_RATE
+  ].metricCalculation;
+
   return (
     <Fragment>
-      Each data point is a 14-day weighted average. We present the most recent
-      seven days of data as a dashed line, as data is often revised by states
-      several days after reporting. Learn more about{' '}
-      <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-        our data sources
-      </ExternalLink>
+      {'Learn more about '}
+      <DisclaimerTooltip
+        title={getDataSourceTooltipContent(Metric.CASE_GROWTH_RATE, region)}
+        mainCopy={'where our data comes from'}
+        trackOpenTooltip={trackOpenTooltip(
+          `Learn more: ${Metric.CASE_GROWTH_RATE}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `Learn more: ${Metric.CASE_GROWTH_RATE}`,
+        )}
+      />
+      {' and '}
+      <DisclaimerTooltip
+        title={renderTooltipContent(body)}
+        mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.CASE_GROWTH_RATE}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.CASE_GROWTH_RATE}`,
+        )}
+      />
       .
     </Fragment>
   );
@@ -163,4 +192,21 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.CASE_GROWTH_RATE].metricDefinition;
+
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(body)}
+      aria-label={`Show definition of ${CaseGrowthMetric.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `Metric definition: ${Metric.CASE_GROWTH_RATE}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `Metric definition: ${Metric.CASE_GROWTH_RATE}`,
+      )}
+    />
+  );
 }
