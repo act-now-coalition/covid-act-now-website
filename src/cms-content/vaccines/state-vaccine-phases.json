@@ -259,7 +259,7 @@
           "phase": "1A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Highest-risk health care workers\n* Highest-risk individuals (Long-term care residents)",
+          "description": "\\* Highest-risk health care workers (Direct, prolonged COVID exposure) \n\n\\* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -268,7 +268,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Additional First Responders\n* Individuals with High Risk",
+          "description": "\\* Moderate-risk health care workers (Less direct COVID exposure) \n\n\\* First Responders \n\n\\* Adults 70+",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -277,7 +277,7 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* Pre-K-12 educators and child care workers\n* Coloradans ages 65-69",
+          "description": "\\* Teachers \n\n\\* Child care workers \n\n\\* Adults 65-69",
           "expandedDefinitionUrl": "",
           "startDate": "February 8, 2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -286,7 +286,7 @@
           "phase": "1B",
           "tier": "3",
           "currentlyEligible": false,
-          "description": "* Frontline essential workers\n* People age 16-64 with two or more high risk conditions ",
+          "description": "\\* Frontline essential workers \n\n\\* People 16-64 with two or more high risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -295,7 +295,7 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* People age 60-64\n* People with high risk conditions",
+          "description": "* Adults 60-64\n* People with high risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Spring 2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -321,7 +321,7 @@
           "phase": "1a",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Heathcare workers\n* Long-tern care residents\n* Medical first responders",
+          "description": "* Heathcare workers\n* Long-term care residents\n* Medical first responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -753,7 +753,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Older Individuals (65+)\n* First Responders\n* PK-12 staff, Early childhood education, childcare workers",
+          "description": "* Older Individuals (65+)\n* First Responders\n* PK-12 staff, early childhood education, childcare workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.983Z"
@@ -762,7 +762,7 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled inidividuals and care staff living in home settings",
+          "description": "* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled individuals and care staff living in home settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.983Z"
@@ -789,7 +789,7 @@
           "phase": "1B",
           "tier": "5",
           "currentlyEligible": true,
-          "description": "* Correctional Facility Staff and Incarecerated Individuals",
+          "description": "* Correctional Facility Staff and Incarcerated Individuals",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.983Z"
