@@ -18,6 +18,7 @@ import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getS
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { LockBodyScroll } from 'components/Dialog';
+import { matchSorter } from 'match-sorter';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -96,6 +97,13 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const lockBackgroundScroll = isMobile && isOpen;
 
+  console.log(locations);
+  console.log(input);
+  const testfilterOptions = (
+    options: Region[],
+    { inputValue }: { inputValue: string },
+  ) => matchSorter(options, inputValue, { keys: ['name'] });
+
   return (
     <>
       {lockBackgroundScroll && <LockBodyScroll />}
@@ -117,11 +125,12 @@ const HomepageSearchAutocomplete: React.FC<{
           onInputChange={onInputChange}
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
-          filterOptions={createFilterOptions({
-            matchFrom: checkForZipcodeMatch ? 'any' : 'start',
-            limit: filterLimit,
-            stringify: stringifyOption,
-          })}
+          // filterOptions={createFilterOptions({
+          //   matchFrom: checkForZipcodeMatch ? 'any' : 'start',
+          //   limit: filterLimit,
+          //   stringify: stringifyOption,
+          // })}
+          filterOptions={testfilterOptions}
           openOnFocus
           onOpen={() => {
             trackEvent(
