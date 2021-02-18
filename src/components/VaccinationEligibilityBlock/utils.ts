@@ -1,11 +1,11 @@
 import { last, partition } from 'lodash';
-import { Region } from 'common/regions';
+import { Region, getStateName } from 'common/regions';
+import { assert } from 'common/utils';
 import {
   getVaccineInfoByFips,
   RegionPhaseGroup,
 } from 'cms-content/vaccines/phases';
 import { getVaccinationDataByRegion } from 'cms-content/vaccines';
-import { assert } from 'common/utils';
 
 function formatPhase(phaseInfo: RegionPhaseGroup) {
   return {
@@ -28,9 +28,12 @@ export function getEligibilityInfo(region: Region) {
 
   const phasesEligibleNow = eligibleNow.map(formatPhase);
   const mostRecentPhase = last(phasesEligibleNow);
+  const stateName = getStateName(region);
 
   return {
     phasesEligibleNow,
     mostRecentPhase,
+    sourceUrl: vaccineLinks.eligibilityInfoUrl,
+    sourceName: `${stateName} Department of Health`,
   };
 }
