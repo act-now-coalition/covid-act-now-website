@@ -7,12 +7,6 @@ import {
 import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 import { assert } from 'common/utils';
 
-function formatPhase(phaseInfo: RegionPhaseGroup) {
-  return {
-    title: `Phase ${phaseInfo.phase}, Tier ${phaseInfo.tier}`,
-  };
-}
-
 export function getEligibilityInfo(region: Region) {
   const { fipsCode } = region;
   const vaccineInfo = getVaccineInfoByFips(region.fipsCode);
@@ -21,16 +15,25 @@ export function getEligibilityInfo(region: Region) {
   assert(vaccineInfo !== null, `Missing vaccination data for ${fipsCode}`);
   assert(vaccineLinks, `Missing vaccination links for ${fipsCode}`);
 
-  const [eligibleNow] = partition(
+  const [phasesEligibleNow, phasesEligibleLater] = partition(
     vaccineInfo.phaseGroups,
     phaseInfo => phaseInfo.currentlyEligible,
   );
 
-  const phasesEligibleNow = eligibleNow.map(formatPhase);
   const mostRecentPhase = last(phasesEligibleNow);
+
+  const mostRecentPhaseName = mostRecentPhase
+    ? getPhaseName(mostRecentPhase)
+    : 'unknown phase';
 
   return {
     phasesEligibleNow,
-    mostRecentPhase,
+    phasesEligibleLater,
+    mostRecentPhaseName,
   };
+}
+
+export function getPhaseName(phaseInfo: RegionPhaseGroup) {
+  const { phase, tier } = phaseInfo;
+  return tier ? `Phase ${phase}, Tier ${tier}` : `Phase ${phase}`;
 }

@@ -9,14 +9,8 @@ import Panel from './Panel';
 
 export interface TabInfo {
   title: string;
+  indicatorColor: string;
   renderPanel: () => React.ReactNode;
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
 }
 
 const TabsPanel: React.FC<{
@@ -42,22 +36,25 @@ const TabsPanel: React.FC<{
         onChange={onChange}
         aria-label="Tabs"
         centered
+        $indicatorColor={tabList[selectedTabIndex].indicatorColor}
       >
         {tabList.map((tabInfo, index) => (
           <StyledTab
+            id={`tab-${index}`}
             key={`tab-${index}`}
             label={tabInfo.title}
-            {...a11yProps(index)}
+            aria-controls={`tabpanel-${index}`}
           />
         ))}
       </StyledTabs>
       <PanelContainer>
         {tabList.map((tabInfo, index) => (
           <Panel
+            id={`tabpanel-${index}`}
             key={`tabpanel-${index}`}
             selectedTabIndex={selectedTabIndex}
             tabIndex={index}
-            ariaLabelledBy={`tabpanel-${index}`}
+            aria-labelledby={`tab-${index}`}
           >
             {tabInfo.renderPanel()}
           </Panel>

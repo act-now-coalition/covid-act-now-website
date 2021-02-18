@@ -8,8 +8,11 @@ export const Container = styled.div`
   border-radius: 4px;
 `;
 
-export const StyledTabs = styled(Tabs)`
+export const StyledTabs = styled(Tabs)<{ $indicatorColor: string }>`
   border-bottom: solid 1px ${COLOR_MAP.GREY_1};
+  .MuiTabs-indicator {
+    background-color: ${props => props.$indicatorColor};
+  }
 `;
 
 export const StyledTab = styled(Tab).attrs(props => ({
@@ -17,6 +20,10 @@ export const StyledTab = styled(Tab).attrs(props => ({
   disableFocusRipple: true,
 }))`
   text-transform: none;
+
+  &.Mui-focusVisible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;
 
 export const PanelContainer = styled.div`

@@ -8,12 +8,14 @@ export default {
 
 const tabList = [
   {
-    title: 'Eligible now',
-    renderPanel: () => <div>Panel 1</div>,
+    title: 'Blue',
+    indicatorColor: '#002984',
+    renderPanel: () => <div>Blue</div>,
   },
   {
-    title: 'Eligible later',
-    renderPanel: () => <div>Panel 2</div>,
+    title: 'Orange',
+    indicatorColor: '#f44336',
+    renderPanel: () => <div>Orange</div>,
   },
 ];
 
