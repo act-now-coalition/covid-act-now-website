@@ -1,12 +1,11 @@
-import { getFirebase } from 'common/firebase';
 import { isEqual, pickBy } from 'lodash';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { assert } from './utils';
+import { getFirestore } from './firebase';
 
-const firestore = getFirebase().firestore();
-const collection = firestore.collection('shared-component-params');
-const nextIdDocRef = collection.doc('__nextId');
+const SHARED_COMPONENT_PARAMS_COLLECTION = 'shared-component-params';
+const NEXT_ID_DOC = '__nextId';
 
 type Params = { [key: string]: any };
 
@@ -51,6 +50,10 @@ export async function storeSharedComponentParams(
     isEqual(cached.params, params),
   );
   if (!cachedParams) {
+    const firestore = await getFirestore();
+    const collection = firestore.collection(SHARED_COMPONENT_PARAMS_COLLECTION);
+    const nextIdDocRef = collection.doc(NEXT_ID_DOC);
+
     const id = firestore.runTransaction<string>(async txn => {
       const nextIdDoc = await txn.get(nextIdDocRef);
 
@@ -88,6 +91,10 @@ async function fetchSharedComponentParams(
   let cachedParams = fetchedComponentParams[sharedComponentId];
   if (!cachedParams) {
     const fetch = async () => {
+      const firestore = await getFirestore();
+      const collection = firestore.collection(
+        SHARED_COMPONENT_PARAMS_COLLECTION,
+      );
       const doc = await collection.doc(sharedComponentId).get();
       const params = doc.data();
       return params;
@@ -141,6 +148,10 @@ export function useSharedComponentParams(
 }
 
 export async function getNextSharedComponentId(): Promise<number> {
+  const firestore = await getFirestore();
+  const nextIdDocRef = firestore
+    .collection(SHARED_COMPONENT_PARAMS_COLLECTION)
+    .doc(NEXT_ID_DOC);
   const doc = await nextIdDocRef.get();
   return doc.get('id') || 0;
 }
