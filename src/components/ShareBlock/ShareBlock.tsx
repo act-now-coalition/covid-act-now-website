@@ -74,7 +74,7 @@ const ShareBlock = ({
     : geolocatedRegions;
 
   return (
-    <ShareContainer>
+    <ShareContainer id="shareContainer">
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea

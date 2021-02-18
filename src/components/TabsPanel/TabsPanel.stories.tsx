@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TabsPanel from './TabsPanel';
+import { ButtonBlock } from 'components/VaccinationEligibilityBlock';
 
 export default {
   title: 'Shared Components/TabsPanel',
@@ -30,6 +31,7 @@ export const UpdatingOutside = () => {
     <div>
       <h3>{label}</h3>
       <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
+      <ButtonBlock />
     </div>
   );
 };
