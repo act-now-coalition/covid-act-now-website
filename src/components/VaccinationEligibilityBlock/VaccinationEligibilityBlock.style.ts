@@ -4,6 +4,7 @@ import { COLOR_MAP } from 'common/colors';
 
 export const Container = styled.div``;
 
+// TODO: Use a better marker (SVG checkbox from Material UI)
 const listWithCheckmark = css`
   ul > li::marker {
     content: '✓  ';
