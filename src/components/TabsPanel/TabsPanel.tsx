@@ -56,10 +56,11 @@ const TabsPanel: React.FC<{
       <PanelContainer>
         {tabList.map((tabInfo, index) => (
           <Panel
+            id={`tabpanel-${index}`}
             key={`tabpanel-${index}`}
             selectedTabIndex={selectedTabIndex}
             tabIndex={index}
-            ariaLabelledBy={`tabpanel-${index}`}
+            aria-labelledby={`tab-${index}`}
           >
             {tabInfo.renderPanel()}
           </Panel>
