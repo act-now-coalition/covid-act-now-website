@@ -23,7 +23,7 @@ export interface UseGeolocationReturn {
 
 export default function useGeolocation(): UseGeolocationReturn {
   const [ipData, setIpData] = useState<GeolocationInfo | undefined>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchIpData = () => {

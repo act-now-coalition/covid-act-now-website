@@ -1,6 +1,5 @@
 import moment from 'moment';
 import _ from 'lodash';
-import US_STATE_DATASET from '../../components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 
 export function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {
@@ -15,16 +14,6 @@ export function fail(msg?: string): never {
 export function nonNull<T>(value: T | null | undefined): T {
   assert(value != null, 'value was null.');
   return value;
-}
-
-export function getFormattedCountyName(stateId: string, countyUrlName: string) {
-  const { county: countyName, state_code: stateCode } = _.find(
-    // @ts-ignore: US_STATE_DATASET is .js, but this is valid
-    US_STATE_DATASET.state_county_map_dataset[stateId].county_dataset,
-    ['county_url_name', countyUrlName],
-  );
-
-  return `${countyName}, ${stateCode}`;
 }
 
 /**

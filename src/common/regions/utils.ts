@@ -11,6 +11,7 @@ import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
+import { CountyToZipMap } from 'common/hooks/useCountyToZipMap';
 
 const UNITED_STATES = 'United States';
 
@@ -68,8 +69,12 @@ export function getAutocompleteRegions(region?: Region): Region[] {
   }
 }
 
-function countyIncludesZip(county: County, zipCode: string): boolean {
-  return county.zipCodes.includes(zipCode);
+function countyIncludesZip(
+  county: County,
+  countyToZipMap: CountyToZipMap,
+  zipCode: string,
+): boolean {
+  return countyToZipMap[county.fipsCode]?.includes(zipCode);
 }
 
 export function getStateRegionFromStateCode(
@@ -84,15 +89,19 @@ export function getStateRegionFromStateCode(
 
 export function getCountyRegionFromZipCode(
   zipCode: string,
+  countyToZipMap: CountyToZipMap,
 ): Region | undefined {
   const countyFromZip = find(regions.counties, (region: County) =>
-    countyIncludesZip(region, zipCode),
+    countyIncludesZip(region, countyToZipMap, zipCode),
   );
   return countyFromZip;
 }
 
-export function getMetroRegionFromZipCode(zipCode: string): Region | undefined {
-  const countyFromZip = getCountyRegionFromZipCode(zipCode);
+export function getMetroRegionFromZipCode(
+  zipCode: string,
+  countyToZipMap: CountyToZipMap,
+): Region | undefined {
+  const countyFromZip = getCountyRegionFromZipCode(zipCode, countyToZipMap);
   const metroFromZip = find(regions.metroAreas, (region: MetroArea) =>
     region.counties.includes(countyFromZip as County),
   );
@@ -107,13 +116,14 @@ export interface GeolocatedRegions {
 
 export function getGeolocatedRegions(
   geolocation: GeolocationInfo,
+  countyToZipMap: CountyToZipMap,
 ): GeolocatedRegions | null {
   if (geolocation.country !== UNITED_STATES) {
     return null;
   } else {
     return {
-      metroArea: getMetroRegionFromZipCode(geolocation.zipCode),
-      county: getCountyRegionFromZipCode(geolocation.zipCode),
+      metroArea: getMetroRegionFromZipCode(geolocation.zipCode, countyToZipMap),
+      county: getCountyRegionFromZipCode(geolocation.zipCode, countyToZipMap),
       state: getStateRegionFromStateCode(geolocation.stateCode),
     };
   }
@@ -132,8 +142,9 @@ export function filterUndefinedRegions(regions: any[]): Region[] | [] {
 export function getAutocompleteRegionsWithGeolocation(
   geolocation: GeolocationInfo,
   locations: Region[],
+  countyToZipMap: CountyToZipMap,
 ): Region[] {
-  const geolocatedRegions = getGeolocatedRegions(geolocation);
+  const geolocatedRegions = getGeolocatedRegions(geolocation, countyToZipMap);
 
   if (isNull(geolocatedRegions)) {
     return locations;
@@ -161,14 +172,16 @@ export function getAutocompleteRegionsWithGeolocation(
  */
 export function getFinalAutocompleteLocations(
   geolocation?: GeolocationInfo,
+  countyToZipMap?: CountyToZipMap,
 ): Region[] {
   const regionsSortedForPagetype = getAutocompleteRegions();
-  if (!geolocation) {
+  if (!geolocation || !countyToZipMap) {
     return regionsSortedForPagetype;
   } else {
     return getAutocompleteRegionsWithGeolocation(
       geolocation,
       regionsSortedForPagetype,
+      countyToZipMap,
     );
   }
 }
