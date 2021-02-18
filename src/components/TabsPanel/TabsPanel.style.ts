@@ -17,10 +17,6 @@ export const StyledTab = styled(Tab).attrs(props => ({
   disableFocusRipple: true,
 }))`
   text-transform: none;
-
-  .MuiTab-root {
-    text-transform: none;
-  }
 `;
 
 export const PanelContainer = styled.div`
