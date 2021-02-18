@@ -232,7 +232,7 @@
           "phase": "1b",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Persons 65 years of age and older\n* Sector populations: Education and Childcare, Emergency Services, Food and Agriculture",
+          "description": "* Adults 65+\n* Education and Childcare\n* Emergency Services\n* Food and Agriculture",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.982Z"
