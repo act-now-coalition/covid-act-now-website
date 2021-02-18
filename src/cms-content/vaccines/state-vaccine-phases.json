@@ -1069,7 +1069,7 @@
         {
           "phase": "2",
           "tier": "2",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Adults 65+\n* Adults with 2+ high-risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "18 Feb 2021",
