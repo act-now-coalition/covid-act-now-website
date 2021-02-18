@@ -421,7 +421,7 @@
       "locationName": "District of Columbia",
       "fips": "11",
       "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine-information",
-      "emailAlertVersion": -2,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -553,7 +553,7 @@
       "locationName": "Hawaii",
       "fips": "15",
       "eligibilityInfoUrl": "https://hawaiicovid19.com/vaccine/",
-      "emailAlertVersion": -1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -597,7 +597,7 @@
       "locationName": "Idaho",
       "fips": "16",
       "eligibilityInfoUrl": "https://coronavirus.idaho.gov/covid-19-vaccine/",
-      "emailAlertVersion": -1,
+      "emailAlertVersion": 0,
       "phaseGroups": [
         {
           "phase": "1",
