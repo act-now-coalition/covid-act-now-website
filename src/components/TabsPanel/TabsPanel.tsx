@@ -13,13 +13,6 @@ export interface TabInfo {
   renderPanel: () => React.ReactNode;
 }
 
-function a11yProps(index: number) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
-}
-
 const TabsPanel: React.FC<{
   tabList: TabInfo[];
   onSelectTab?: (newSelectedTabIndex: number) => void;
@@ -47,9 +40,10 @@ const TabsPanel: React.FC<{
       >
         {tabList.map((tabInfo, index) => (
           <StyledTab
+            id={`tab-${index}`}
             key={`tab-${index}`}
             label={tabInfo.title}
-            {...a11yProps(index)}
+            aria-controls={`tabpanel-${index}`}
           />
         ))}
       </StyledTabs>
