@@ -1,7 +1,8 @@
 import React from 'react';
+import { Heading2, Paragraph } from 'components/Markdown';
+import TabsPanel, { TabInfo } from 'components/TabsPanel';
 import { Region, getStateName } from 'common/regions';
 import ExternalLink from 'components/ExternalLink';
-import { Heading2, Paragraph } from 'components/Markdown';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { getEligibilityInfo } from './utils';
 import {
@@ -9,6 +10,8 @@ import {
   Section,
   Source,
 } from './VaccinationEligibilityBlock.style';
+import EligibilityPanel from './EligibilityPanel';
+import { COLOR_MAP } from 'common/colors';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
@@ -16,18 +19,46 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   // TODO: Assert that the region is a county, state or a single-state metro
   const stateName = getStateName(region);
   const eligibilityData = getEligibilityInfo(region);
-  const { sourceName, sourceUrl } = eligibilityData;
-  // TODO: Handle case where no phases are currently eligible
-  const currentPhaseName = eligibilityData.mostRecentPhase?.title;
+  const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
+
+  const onSelectTab = (newSelectedTab: number) => {
+    // TODO: Tracking
+  };
+
+  const tabList: TabInfo[] = [
+    {
+      title: 'Eligible now',
+      indicatorColor: COLOR_MAP.GREEN.BASE,
+      renderPanel: () => (
+        <EligibilityPanel
+          phaseList={eligibilityData.phasesEligibleNow}
+          currentlyEligible={true}
+        />
+      ),
+    },
+    {
+      title: 'Eligible later',
+      indicatorColor: COLOR_MAP.BLACK,
+      renderPanel: () => (
+        <EligibilityPanel
+          phaseList={eligibilityData.phasesEligibleLater}
+          currentlyEligible={false}
+        />
+      ),
+    },
+  ];
+
   return (
     <Container>
       <Heading2>Vaccine eligibility</Heading2>
       <Paragraph>
-        {stateName} is currently in <strong>{currentPhaseName}</strong>.{' '}
+        {stateName} is currently in <strong>{mostRecentPhaseName}</strong>.{' '}
         Eligibility varies throughout {stateName}, so you may also want to check
         your county or city’s health department website.
       </Paragraph>
-      <Section>{/* Tabs */}</Section>
+      <Section>
+        <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
+      </Section>
       <Section>{/* Buttons */}</Section>
       <Section>
         <Source>
