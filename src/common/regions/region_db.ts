@@ -47,6 +47,10 @@ class RegionDB {
     return region;
   }
 
+  findByFullName(fullName: string): Region | null {
+    return this.all().find(region => region.fullName === fullName) || null;
+  }
+
   findCountiesByStateCode(stateCode: string): County[] {
     return this.counties.filter(county => county.stateCode === stateCode);
   }

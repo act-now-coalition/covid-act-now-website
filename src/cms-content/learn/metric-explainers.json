@@ -66,8 +66,8 @@
           "answer": "https://www.youtube.com/embed/dmp5iAXrkaY"
         },
         {
-          "question": "What are your sources and methodology for infection rate?",
-          "questionId": "infection-rate-sources",
+          "question": "How were risk levels for infection rate determined?",
+          "questionId": "infection-rate-risk-levels",
           "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. **We use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline.** An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
         }
       ]
@@ -91,7 +91,7 @@
         {
           "question": "What are your sources and methodology for calculating positive test rate?",
           "questionId": "positive-test-rate-sources",
-          "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of [total tests](/glossary#testing). We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source testing data from the Department of Health and Human Services (HHS) for state level data. We scrape official state and county dashboards for county level data and, when unavailable, fall back on a weekly test positivity rate provided by the Centers for Medicare & Medicaid Services. If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+          "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of [total tests](/glossary#testing). We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source state level testing data from the Department of Health and Human Services (HHS). For county and metro level testing data, we rely on the Centers for Disease Control and Prevention (CDC). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
         },
         {
           "question": "How were risk levels for positive test rate determined?",
