@@ -2,6 +2,7 @@ import React from 'react';
 import { Region, MetroArea, County } from 'common/regions';
 import ExternalLink from 'components/ExternalLink';
 import { Metric } from 'common/metricEnum';
+import { getMetricName } from 'common/metric';
 
 /**
  * Hardcoding the sources for the time being
@@ -114,12 +115,22 @@ export function getSourceLinks(metric: Metric, region: Region): SourceInfo {
   return source;
 }
 
+function getDisclaimerMetricName(metric: Metric): string {
+  if (metric === Metric.VACCINATIONS) {
+    return 'percent vaccinated';
+  } else if (metric === Metric.HOSPITAL_USAGE) {
+    return getMetricName(metric);
+  } else {
+    return getMetricName(metric).toLowerCase();
+  }
+}
+
 export const getDataSourceTooltipContent = (metric: Metric, region: Region) => {
   const source = getSourceLinks(metric, region);
 
   return (
     <>
-      Our data for {region.name} comes from{' '}
+      Our data for {getDisclaimerMetricName(metric)} in {region.name} comes from{' '}
       <ExternalLink href={source.url}>{source.sourceName}</ExternalLink>.
     </>
   );
