@@ -49,9 +49,12 @@ const markEmailAlertsToSend = async (
   emails: string[],
 ) => {
   const { fips, emailAlertVersion } = alert;
-  return Promise.all(
+  let totalToMark = 0,
+    alreadyMarked = 0;
+  await Promise.all(
     emails.map(async (email: string) => {
       try {
+        totalToMark++;
         await firestoreSubscriptions.markEmailToSend(
           fips,
           emailAlertVersion,
@@ -62,9 +65,14 @@ const markEmailAlertsToSend = async (
         // alerts, in case this is a re-run of the vaccination alerts workflow
         if (updateError.code !== FirestoreErrorCode.ALREADY_EXISTS) {
           throw updateError;
+        } else {
+          alreadyMarked++;
         }
       }
     }),
+  );
+  console.log(
+    `FIPS ${fips} had ${totalToMark} emails to mark and ${alreadyMarked} were already marked.`,
   );
 };
 
