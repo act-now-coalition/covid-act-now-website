@@ -25,7 +25,7 @@
       "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
     },
     {
-      "body": "ICU capacity used is the percentage of staffed intensive care unit (ICU) beds in a location’s healthcare system that are currently in use by both COVID and non-COVID patients.\n\nThe ICU is the part of a hospital for people who are really sick and each ICU bed is equipped with special equipment that regular hospitals don’t have, such as ventilators. ICU beds are important because they may be the difference between life and death for people, including both COVID patients, and other patients, such as those who have had a heart attack.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.\n\n[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
+      "body": "ICU capacity used is the percentage of staffed intensive care unit (ICU) beds in a location’s healthcare system that are currently in use by both COVID and non-COVID patients.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.\n\n[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
       "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
       "title": "ICU capacity used",
       "id": "icu-capacity-used"
