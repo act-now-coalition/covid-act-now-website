@@ -2224,10 +2224,10 @@
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
       "phaseGroups": [
         {
-          "phase": "n/a",
+          "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Utahns 70 years and older",
+          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Adults 70+",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
