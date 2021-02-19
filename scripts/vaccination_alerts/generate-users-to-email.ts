@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import delay from 'delay';
 import * as yargs from 'yargs';
 import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
 import { FipsCode } from '../../src/common/regions';
@@ -110,6 +111,9 @@ async function main(alertsFilePath: string) {
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
+      // HACK: Try waiting between batches to avoid DEADLINE_EXCEEDED error.
+      await delay(1000);
+
       console.log(`Marking ${emails.length} emails for FIPS ${fipsCode}`);
       await markEmailAlertsToSend(firestoreSubscriptions, updatedAlert, emails);
     } catch (err) {
