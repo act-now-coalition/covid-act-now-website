@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { HashLink } from 'react-router-hash-link';
 import { Region, getStateName } from 'common/regions';
 import { COLOR_MAP } from 'common/colors';
 import { assert } from 'common/utils';
@@ -17,6 +18,7 @@ import EligibilityPanel from './EligibilityPanel';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
 import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
@@ -91,6 +93,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
             {...sharedTrackingProps}
             trackingLabel="Vaccination alerts"
             startIcon={<EmailAlertIcon />}
+            scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
           >
             Get notified when eligibility changes
           </StyledLinkButton>
