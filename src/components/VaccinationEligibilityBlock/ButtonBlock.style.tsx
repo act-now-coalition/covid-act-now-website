@@ -3,7 +3,7 @@ import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import LinkButton from 'components/LinkButton';
 
-export const Wrapper = styled.div`
+export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1.25rem;
@@ -23,6 +23,7 @@ const PurpleButton = css`
   }
 
   &:hover {
+    background-color: ${COLOR_MAP.PURPLE};
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.12);
   }
 `;
@@ -36,7 +37,7 @@ const WhiteButton = css`
   }
 `;
 
-export const StyledLinkButton = styled(LinkButton)`
+export const StyledLinkButton = styled(LinkButton)<{ $highlighted: boolean }>`
   text-transform: none;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -44,13 +45,10 @@ export const StyledLinkButton = styled(LinkButton)`
   border: 1px solid ${COLOR_MAP.PURPLE};
   min-height: 50px;
 
-  &:first-child {
-    ${WhiteButton};
-    margin: 0 0 8px;
-  }
+  ${props => (props.$highlighted ? PurpleButton : WhiteButton)}
 
-  &:not(:first-child) {
-    ${PurpleButton};
+  &:first-child {
+    margin: 0 0 8px;
   }
 
   svg {

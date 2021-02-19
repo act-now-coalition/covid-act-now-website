@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Region, getStateName } from 'common/regions';
 import { COLOR_MAP } from 'common/colors';
 import { assert } from 'common/utils';
@@ -7,7 +7,6 @@ import { Heading2, Paragraph } from 'components/Markdown';
 import TabsPanel, { TabInfo } from 'components/TabsPanel';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { getVaccinationDataByRegion } from 'cms-content/vaccines';
-import ButtonBlock from './ButtonBlock';
 import { getEligibilityInfo, getRegionState } from './utils';
 import {
   Container,
@@ -15,6 +14,9 @@ import {
   Source,
 } from './VaccinationEligibilityBlock.style';
 import EligibilityPanel from './EligibilityPanel';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
+import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
@@ -33,6 +35,8 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   const vaccinationData = getVaccinationDataByRegion(region);
   const signupLink = vaccinationData && vaccinationData.vaccinationSignupUrl;
 
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
   const tabList: TabInfo[] = [
     {
       title: 'Eligible now',
@@ -41,6 +45,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         <EligibilityPanel
           phaseList={eligibilityData.phasesEligibleNow}
           currentlyEligible={true}
+          stateName={stateName || 'Your state'}
         />
       ),
     },
@@ -51,6 +56,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         <EligibilityPanel
           phaseList={eligibilityData.phasesEligibleLater}
           currentlyEligible={false}
+          stateName={stateName || 'Your state'}
         />
       ),
     },
@@ -58,6 +64,12 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
 
   const onSelectTab = (newSelectedTab: number) => {
     trackTabSelected(tabList[newSelectedTab].title);
+    setSelectedTabIndex(newSelectedTab);
+  };
+
+  const sharedTrackingProps = {
+    trackingCategory: EventCategory.VACCINATION,
+    trackingAction: EventAction.CLICK_LINK,
   };
 
   return (
@@ -72,7 +84,28 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
       </Section>
       <Section>
-        <ButtonBlock signupLink={signupLink} />
+        <ButtonsContainer>
+          <StyledLinkButton
+            $highlighted={!signupLink || selectedTabIndex === 1}
+            to="#share-container"
+            {...sharedTrackingProps}
+            trackingLabel="Vaccination alerts"
+            startIcon={<EmailAlertIcon />}
+          >
+            Get notified when eligibility changes
+          </StyledLinkButton>
+          {signupLink && (
+            <StyledLinkButton
+              $highlighted={selectedTabIndex === 0}
+              href={signupLink}
+              {...sharedTrackingProps}
+              trackingLabel="Where to get vaccinated"
+              endIcon={<OpenInNewIcon />}
+            >
+              See where and how to get vaccinated
+            </StyledLinkButton>
+          )}
+        </ButtonsContainer>
       </Section>
       <Section>
         <Source>
