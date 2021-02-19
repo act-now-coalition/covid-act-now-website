@@ -13,6 +13,8 @@ import viralVariants from '../articles/covid-explained-viral-variants.json';
 import vaccineBasics from '../articles/covid-vaccine-basics.json';
 import variantsAndVaccines from '../articles/covid-variants-vaccines.json';
 import immunity from '../articles/covid-immunity.json';
+import indigenousPeoplesDay from '../articles/covid-impact-majority-native-american-counties.json';
+import metros from '../articles/metros.json';
 
 const orderedArticles = [
   variantsAndVaccines,
@@ -27,6 +29,8 @@ const orderedArticles = [
   pathOfTheVirus,
   kidsAndCovid,
   antigenTests,
+  indigenousPeoplesDay,
+  metros,
 ];
 
 const articles: ArticleJSON[] = orderedArticles.map(sanitizeArticle);
