@@ -17,7 +17,6 @@ const assets = process.env.RAZZLE_ASSETS_MANIFEST
 async function getStatsFile() {
   // in prod mode, read file exactly once
   if (process.env.NODE_ENV === 'production') {
-    console.log('reading statsFile for PROD');
     return {
       statsFile: path.resolve('./build/public/loadable-stats.json'),
     };
@@ -25,9 +24,7 @@ async function getStatsFile() {
 
   // in dev mode, get the file from memory
   const file = await fetch('http://localhost:3001/loadable-stats.json');
-  //console.log('file:', file);
   const data = await file.json();
-  //console.log('data:', data)
   return {
     stats: data,
   };
@@ -100,7 +97,6 @@ export const render = async (url: string) => {
 };
 
 const renderWrapper = (assets: any, staticData: any, renderedApp: string) => {
-  //console.log('process.env:', process.env)
   return `<!DOCTYPE html>
 <html lang="en">
 
@@ -226,11 +222,12 @@ const renderWrapper = (assets: any, staticData: any, renderedApp: string) => {
             ? `<link rel="stylesheet" href="${assets.client.css}">`
             : ''
         }
-        ${
+        <!-- ${
           process.env.NODE_ENV === 'production'
             ? `<script src="${assets.client.js}" defer></script>`
             : `<script src="${assets.client.js}" defer crossorigin></script>`
         }
+        -->
   <!-- end razzle assets -->
   <!-- injected material-ui styles -->
   <style id="jss-server-side">${staticData.muiCss}</style>
