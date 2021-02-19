@@ -125,11 +125,6 @@ const HomepageSearchAutocomplete: React.FC<{
           onInputChange={onInputChange}
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
-          // filterOptions={createFilterOptions({
-          //   matchFrom: checkForZipcodeMatch ? 'any' : 'start',
-          //   limit: filterLimit,
-          //   stringify: stringifyOption,
-          // })}
           filterOptions={testfilterOptions}
           openOnFocus
           onOpen={() => {
