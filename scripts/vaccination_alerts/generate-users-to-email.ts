@@ -103,6 +103,8 @@ async function main(alertsFilePath: string) {
     alertSubscriptions,
   );
 
+  console.info(`Locations to alert: ${locationsToAlert.join(', ')}`);
+
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
