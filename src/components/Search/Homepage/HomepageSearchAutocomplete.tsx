@@ -97,8 +97,6 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const lockBackgroundScroll = isMobile && isOpen;
 
-  console.log(locations);
-  console.log(input);
   const testfilterOptions = (
     options: Region[],
     { inputValue }: { inputValue: string },
