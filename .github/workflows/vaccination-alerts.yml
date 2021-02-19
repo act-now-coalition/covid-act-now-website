@@ -50,6 +50,13 @@ jobs:
       - name: Generate the vaccination info update
         run: yarn vaccinations-generate-alerts
 
+      # Stores the vaccination-alerts.json file in the workflow for debugging purposes
+      - name: Store vaccination-alerts.json artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: vaccination-alerts.json
+          path: scripts/vaccination_alerts/vaccination-alerts.json
+
       - name: Generate the list of users and locations to email
         run: yarn vaccinations-generate-users-to-email
 
