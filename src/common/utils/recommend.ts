@@ -1,12 +1,8 @@
 import moment from 'moment';
 import { sum, isNumber, reject, isNull, partition } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
-import {
-  Metric,
-  getLevel,
-  getMetricNameForCompare,
-  formatValue,
-} from 'common/metric';
+import { getLevel, getMetricNameForCompare, formatValue } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import {
   FedLevel,

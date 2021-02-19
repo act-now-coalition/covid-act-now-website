@@ -1,7 +1,7 @@
 import React from 'react';
 import { LoadingScreen } from './AllStates.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { MetricChart } from 'components/Charts';
 import regions from 'common/regions';
 

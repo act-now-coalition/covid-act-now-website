@@ -14,7 +14,7 @@ import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { MetricChart } from '../../../components/Charts';
 import { ALL_METRICS, getMetricNameExtended } from 'common/metric';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
 import { useRegionFromParams } from 'common/regions';

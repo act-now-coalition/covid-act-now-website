@@ -19,7 +19,7 @@ import * as urls from 'common/urls';
 import moment from 'moment';
 import { County, MetroArea, Region, State } from 'common/regions';
 import { fail } from 'common/utils';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import delay from 'delay';
 import * as yargs from 'yargs';
 import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
 import { FipsCode } from '../../src/common/regions';
@@ -49,9 +50,12 @@ const markEmailAlertsToSend = async (
   emails: string[],
 ) => {
   const { fips, emailAlertVersion } = alert;
-  return Promise.all(
+  let totalToMark = 0,
+    alreadyMarked = 0;
+  await Promise.all(
     emails.map(async (email: string) => {
       try {
+        totalToMark++;
         await firestoreSubscriptions.markEmailToSend(
           fips,
           emailAlertVersion,
@@ -62,9 +66,14 @@ const markEmailAlertsToSend = async (
         // alerts, in case this is a re-run of the vaccination alerts workflow
         if (updateError.code !== FirestoreErrorCode.ALREADY_EXISTS) {
           throw updateError;
+        } else {
+          alreadyMarked++;
         }
       }
     }),
+  );
+  console.log(
+    `FIPS ${fips} had ${totalToMark} emails to mark and ${alreadyMarked} were already marked.`,
   );
 };
 
@@ -88,16 +97,24 @@ async function main(alertsFilePath: string) {
 
   const vaccinationAlertsInfo = readVaccinationAlerts(alertsFilePath);
   const locationsToAlert = getLocationsToAlert(vaccinationAlertsInfo);
+  console.log('locationsToAlert', locationsToAlert);
   const alertSubscriptions = await firestoreSubscriptions.getAlertSubscriptions();
 
   const emailsToAlertByFips = buildEmailsToAlertByFips(
     locationsToAlert,
     alertSubscriptions,
   );
+  console.log('emailsToAlertByFips', Object.keys(emailsToAlertByFips));
+
+  console.info(`Locations to alert: ${locationsToAlert.join(', ')}`);
 
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
+      // HACK: Try waiting between batches to avoid DEADLINE_EXCEEDED error.
+      await delay(1000);
+
+      console.log(`Marking ${emails.length} emails for FIPS ${fipsCode}`);
       await markEmailAlertsToSend(firestoreSubscriptions, updatedAlert, emails);
     } catch (err) {
       console.error(`Error updating emails for location ${fipsCode}`, err);

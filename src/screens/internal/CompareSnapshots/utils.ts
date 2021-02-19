@@ -1,6 +1,6 @@
 import { takeRight as _takeRight } from 'lodash';
 import { useEffect, useState } from 'react';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { ProjectionsPair, SortType } from 'common/models/ProjectionsPair';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import {

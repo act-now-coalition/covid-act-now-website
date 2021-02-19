@@ -9,11 +9,11 @@ import { Projections } from 'common/models/Projections';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import {
-  Metric,
   getMetricNameExtended,
   getMetricStatusText,
   getMetricDefinition,
 } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
 import { Region } from 'common/regions';

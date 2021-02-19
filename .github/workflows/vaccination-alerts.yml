@@ -8,9 +8,14 @@ on:
         description: 'Environment to run against (prod, dev, or staging)'
         required: true
         default: prod
+      dry_run:
+        description: 'Whether to only do a safe dry run (true) or actually send the emails (false)'
+        required: true
+        default: true
 
 env:
   FIREBASE_ENV: ${{ github.event.inputs.firebase_env }}
+  DRY_RUN: ${{ github.event.inputs.dry_run }}
 
 jobs:
   send-vaccination-alerts:
@@ -48,7 +53,15 @@ jobs:
       - name: Generate the list of users and locations to email
         run: yarn vaccinations-generate-users-to-email
 
+      - name: Send vaccination alert emails (dry run)
+        if: ${{ env.DRY_RUN  == 'true' }}
+        run: yarn vaccinations-send-alert-emails --dryRun true
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - name: Send vaccination alert emails
+        if: ${{ env.DRY_RUN == 'false' }}
         run: yarn vaccinations-send-alert-emails
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
@@ -62,9 +75,9 @@ jobs:
           STATUS: ${{job.status}}
         uses: Ilshidur/action-slack@fb92a78a305a399cd6d8ede99d641f2b9224daf3
         with:
-          args: '[${{env.FIREBASE_ENV}}] vaccination-alerts failed: {{STATUS}}'
+          args: '[${{env.FIREBASE_ENV}}] vaccination-alerts failed dry_run=${{env.DRY_RUN}}: {{STATUS}}'
       - name: Slack notification
-        if: ${{ env.FIREBASE_ENV == 'prod' && job.status == 'success'}}
+        if: ${{ env.FIREBASE_ENV == 'prod' && job.status == 'success' && env.DRY_RUN == 'false'}}
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           STATUS: ${{job.status}}

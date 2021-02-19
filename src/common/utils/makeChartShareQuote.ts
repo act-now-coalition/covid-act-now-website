@@ -1,4 +1,4 @@
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { fail, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers

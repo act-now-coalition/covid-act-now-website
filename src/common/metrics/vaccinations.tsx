@@ -4,7 +4,7 @@ import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import {
   InfoTooltip,
   DisclaimerTooltip,
@@ -102,21 +102,21 @@ function renderDisclaimer(region: Region): React.ReactElement {
   return (
     <Fragment>
       {'Learn more about '}
-      {region instanceof State ? (
-        <DisclaimerTooltip
-          title={getDataSourceTooltipContent(Metric.VACCINATIONS, region)}
-          mainCopy={'where our data comes from'}
-          trackOpenTooltip={trackOpenTooltip(
-            `Learn more: ${Metric.VACCINATIONS}`,
-          )}
-          trackCloseTooltip={trackCloseTooltip(
-            `Learn more: ${Metric.VACCINATIONS}`,
-          )}
-        />
-      ) : (
-        <>where our data comes from</>
+      {region instanceof State && (
+        <>
+          <DisclaimerTooltip
+            title={getDataSourceTooltipContent(Metric.VACCINATIONS, region)}
+            mainCopy={'where our data comes from'}
+            trackOpenTooltip={trackOpenTooltip(
+              `Learn more: ${Metric.VACCINATIONS}`,
+            )}
+            trackCloseTooltip={trackCloseTooltip(
+              `Learn more: ${Metric.VACCINATIONS}`,
+            )}
+          />
+          {' and '}
+        </>
       )}
-      {' and '}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}

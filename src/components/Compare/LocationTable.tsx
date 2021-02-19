@@ -1,7 +1,7 @@
 import React from 'react';
 import { remove } from 'lodash';
 import { Table, TableBody } from '@material-ui/core';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import {
   RankedLocationSummary,
   GeoScopeFilter,

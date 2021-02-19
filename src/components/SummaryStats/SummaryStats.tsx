@@ -1,5 +1,5 @@
 import React from 'react';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import {
   getMetricNameForCompare,
   formatValue,
