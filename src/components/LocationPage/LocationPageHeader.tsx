@@ -31,6 +31,22 @@ import {
   LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { MetroArea } from 'common/regions';
+import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
+import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
+
+function renderInfoTooltip(): React.ReactElement {
+  const { body } = locationPageHeaderTooltipContent;
+
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(body)}
+      aria-label={`Description of risk levels`}
+      trackOpenTooltip={trackOpenTooltip('Location page header')}
+      trackCloseTooltip={trackCloseTooltip('Location page header')}
+    />
+  );
+}
 
 const noop = () => {};
 
@@ -66,6 +82,8 @@ const LocationPageHeader = (props: {
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? formatUtcDate(lastUpdatedDate) : '';
 
+  const tooltip = renderInfoTooltip();
+
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -92,7 +110,7 @@ const LocationPageHeader = (props: {
             <SectionHalf>
               <ThermometerImage currentLevel={alarmLevel} />
               <SectionColumn>
-                <ColumnTitle>Covid risk level</ColumnTitle>
+                <ColumnTitle>Covid risk level {tooltip}</ColumnTitle>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>
                   {levelInfo.detail(

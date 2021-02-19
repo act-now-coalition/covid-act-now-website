@@ -7,6 +7,7 @@ import MenuItem from './MenuItem';
 import { StyledPaper } from './Search.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { SearchBarIcon } from 'components/Search/Homepage/HomepageSearchAutocomplete.style';
+import { useCountyToZipMap } from 'common/hooks';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -21,6 +22,7 @@ const SearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
+  const { countyToZipMap, isLoading } = useCountyToZipMap();
 
   const onInputChange = (e: any, value: string) => {
     setInput(value);
@@ -33,8 +35,8 @@ const SearchAutocomplete: React.FC<{
   };
 
   const stringifyOption = (option: Region) => {
-    if (checkForZipcodeMatch && (option as County).zipCodes) {
-      return `${(option as County).zipCodes.join(' ')}`;
+    if (checkForZipcodeMatch && !isLoading && countyToZipMap) {
+      return `${countyToZipMap[(option as County).fipsCode]?.join(' ')}`;
     } else {
       if (option instanceof MetroArea) {
         return `${option.shortName}, ${(option as MetroArea).stateCodes}`;

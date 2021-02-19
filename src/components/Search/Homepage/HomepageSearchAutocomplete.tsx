@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
-import { Region, County, MetroArea } from 'common/regions';
+import { Region, MetroArea } from 'common/regions';
 import {
   Wrapper,
   StyledTextField,
@@ -15,7 +15,7 @@ import {
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
 import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
-import { useBreakpoint } from 'common/hooks';
+import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { LockBodyScroll } from 'components/Dialog';
 
@@ -33,6 +33,7 @@ const HomepageSearchAutocomplete: React.FC<{
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
   const [isOpen, setIsOpen] = useState(false);
+  const { countyToZipMap } = useCountyToZipMap();
 
   const isMobile = useBreakpoint(600);
 
@@ -56,8 +57,9 @@ const HomepageSearchAutocomplete: React.FC<{
   };
 
   const stringifyOption = (option: Region) => {
-    if (checkForZipcodeMatch && (option as County).zipCodes) {
-      return `${(option as County).zipCodes.join(' ')}`;
+    const zipCodes = countyToZipMap?.[option.fipsCode];
+    if (checkForZipcodeMatch && zipCodes) {
+      return `${zipCodes.join(' ')}`;
     } else {
       if (option instanceof MetroArea) {
         return `${option.shortName}, ${(option as MetroArea).stateCodes}`;

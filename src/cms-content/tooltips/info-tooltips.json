@@ -1,0 +1,40 @@
+{
+  "tooltip": [
+    {
+      "title": "Location page header",
+      "id": "location-page-header",
+      "body": "Our five-color COVID risk level looks at three things: daily new cases (per 100K), infection rate, and positive test rate. Each is graded on a five-color scale and the highest risk color becomes the location’s overall risk level.\n\nFor instance, if daily new cases and test positivity are both yellow, but infection rate is orange, then the overall risk level is orange.\n\n[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics).",
+      "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics)."
+    },
+    {
+      "title": "Daily new cases",
+      "body": "Daily new cases, also known as incidence, is the number of new COVID cases emerging each day in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.\n\n[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases).",
+      "id": "daily-new-cases",
+      "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+    },
+    {
+      "title": "Infection rate",
+      "id": "infection-rate",
+      "body": "Infection rate represents how fast COVID is spreading in a given area right now by estimating the number of people that a newly infected person goes on to eventually infect.\n\nDaily new cases may be low, but if the infection rate is high, then we know that daily new cases will be high in the near future.\n\n[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate).",
+      "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
+    },
+    {
+      "body": "Positive test rate is the percentage of COVID tests that come back positive. It measures both the severity of COVID and the limitations of testing. If a place has a high positive test rate, it is a sign of insufficient testing in that area.\n\nTesting a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\n[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate).",
+      "title": "Positive test rate",
+      "id": "positive-test-rate",
+      "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
+    },
+    {
+      "body": "ICU capacity used is the percentage of staffed intensive care unit (ICU) beds in a location’s healthcare system that are currently in use by both COVID and non-COVID patients.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.\n\n[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
+      "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
+      "title": "ICU capacity used",
+      "id": "icu-capacity-used"
+    },
+    {
+      "body": "Percent vaccinated is the percentage of people in a given location that have started the vaccination process by receiving at least their first shot.\n\n[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "title": "Percent vaccinated",
+      "id": "percent-vaccinated"
+    }
+  ]
+}

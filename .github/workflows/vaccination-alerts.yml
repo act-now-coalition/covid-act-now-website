@@ -8,9 +8,14 @@ on:
         description: 'Environment to run against (prod, dev, or staging)'
         required: true
         default: prod
+      dry_run:
+        description: 'Whether to only do a safe dry run (true) or actually send the emails (false)'
+        required: true
+        default: true
 
 env:
   FIREBASE_ENV: ${{ github.event.inputs.firebase_env }}
+  DRY_RUN: ${{ github.event.inputs.dry_run }}
 
 jobs:
   send-vaccination-alerts:
@@ -49,7 +54,7 @@ jobs:
         run: yarn vaccinations-generate-users-to-email
 
       - name: Send vaccination alert emails
-        run: yarn vaccinations-send-alert-emails
+        run: yarn vaccinations-send-alert-emails --dryRun ${{env.DRY_RUN}}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

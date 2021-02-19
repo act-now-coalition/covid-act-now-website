@@ -13,7 +13,10 @@ import { formatMetatagDate } from 'common/utils';
 import { VaccinationsBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import { getFinalAutocompleteLocations } from 'common/regions';
+import {
+  getFinalAutocompleteLocations,
+  getGeolocatedRegions,
+} from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
@@ -28,7 +31,7 @@ import { HomepageSearchAutocomplete } from 'components/Search';
 import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
-import { useBreakpoint } from 'common/hooks';
+import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -44,7 +47,16 @@ export default function HomePage() {
 
   const indicatorsRef = useRef(null);
 
-  const { geolocationData, isLoading } = useGeolocation();
+  const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
+  const { countyToZipMap, isLoading: zipIsLoading } = useCountyToZipMap();
+
+  const isLoading = geoIsLoading || zipIsLoading;
+
+  const userRegions =
+    geolocationData && countyToZipMap
+      ? getGeolocatedRegions(geolocationData, countyToZipMap)
+      : null;
+
   const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
 
   // Location hash is uniquely set from vaccination banner button click
@@ -93,13 +105,13 @@ export default function HomePage() {
           <Content>
             <ColumnCentered id="search">
               <HomepageSearchAutocomplete
-                locations={getFinalAutocompleteLocations(geolocationData)}
+                locations={getFinalAutocompleteLocations(
+                  geolocationData,
+                  countyToZipMap,
+                )}
                 filterLimit={getFilterLimit()}
               />
-              <HomepageItems
-                isLoading={isLoading}
-                geolocationData={geolocationData}
-              />
+              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}

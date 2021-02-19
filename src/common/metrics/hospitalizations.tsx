@@ -6,8 +6,16 @@ import { getLevel, Metric } from 'common/metric';
 import { formatPercent, formatInteger, assert } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import ExternalLink from '../../components/ExternalLink';
 import Thermometer from 'components/Thermometer';
+import {
+  InfoTooltip,
+  DisclaimerTooltip,
+  renderTooltipContent,
+} from 'components/InfoTooltip';
+import { metricToTooltipMap } from 'cms-content/tooltips';
+import { Region } from 'common/regions';
+import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'ICU capacity used';
 
@@ -15,6 +23,7 @@ export const ICUCapacityUsed: MetricDefinition = {
   renderStatus,
   renderDisclaimer,
   renderThermometer,
+  renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
@@ -143,17 +152,33 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(projections: Projections): React.ReactElement {
+function renderDisclaimer(region: Region): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.HOSPITAL_USAGE].metricCalculation;
+
   return (
     <Fragment>
-      ICU data sourced from the{' '}
-      <ExternalLink href="https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries">
-        Department of Health and Human Services (HHS)
-      </ExternalLink>
-      . Learn more about our{' '}
-      <ExternalLink href="/covid-risk-levels-metrics#icu-capacity-used">
-        ICU capacity methodology
-      </ExternalLink>
+      {'Learn more about '}
+      <DisclaimerTooltip
+        title={getDataSourceTooltipContent(Metric.HOSPITAL_USAGE, region)}
+        mainCopy={'where our data comes from'}
+        trackOpenTooltip={trackOpenTooltip(
+          `Learn more: ${Metric.HOSPITAL_USAGE}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `Learn more: ${Metric.HOSPITAL_USAGE}`,
+        )}
+      />
+      {' and '}
+      <DisclaimerTooltip
+        title={renderTooltipContent(body)}
+        mainCopy={'how we calculate our metrics'}
+        trackOpenTooltip={trackOpenTooltip(
+          `How we calculate: ${Metric.HOSPITAL_USAGE}`,
+        )}
+        trackCloseTooltip={trackCloseTooltip(
+          `How we calculate: ${Metric.HOSPITAL_USAGE}`,
+        )}
+      />
       .
     </Fragment>
   );
@@ -202,4 +227,21 @@ function renderThermometer(): React.ReactElement {
     },
   ];
   return <Thermometer items={items} />;
+}
+
+function renderInfoTooltip(): React.ReactElement {
+  const { body } = metricToTooltipMap[Metric.HOSPITAL_USAGE].metricDefinition;
+
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(body)}
+      aria-label={`Show definition of ${ICUCapacityUsed.metricName} metric`}
+      trackOpenTooltip={trackOpenTooltip(
+        `Metric definition: ${Metric.HOSPITAL_USAGE}`,
+      )}
+      trackCloseTooltip={trackCloseTooltip(
+        `Metric definition: ${Metric.HOSPITAL_USAGE}`,
+      )}
+    />
+  );
 }

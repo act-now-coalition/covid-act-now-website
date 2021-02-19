@@ -1,15 +1,18 @@
 import React from 'react';
 import { PanelContent } from './TabsPanel.style';
 
-const Panel: React.FC<{
-  selectedTabIndex: number;
-  tabIndex: number;
-  ariaLabelledBy: string;
-}> = ({ selectedTabIndex, tabIndex, ariaLabelledBy, children }) => (
+type PanelContentProps = React.ComponentProps<typeof PanelContent>;
+
+const Panel: React.FC<
+  PanelContentProps & {
+    selectedTabIndex: number;
+    tabIndex: number;
+  }
+> = ({ selectedTabIndex, tabIndex, children, ...otherProps }) => (
   <PanelContent
     role="tabpanel"
     hidden={tabIndex !== selectedTabIndex}
-    aria-labelledby={ariaLabelledBy}
+    {...otherProps}
   >
     {selectedTabIndex === tabIndex && children}
   </PanelContent>

@@ -840,7 +840,7 @@ collections:
     files:
       - name: Info tooltips
         label: Info tooltips
-        file: src/cms-content/info-tooltips.json
+        file: src/cms-content/tooltips/info-tooltips.json
         fields:
           - label: Tooltip
             name: tooltip
@@ -860,7 +860,7 @@ collections:
                 widget: markdown
       - name: Metric calculation tooltips
         label: Metric calculation tooltips
-        file: src/cms-content/metric-calculation-tooltips.json
+        file: src/cms-content/tooltips/metric-calculation-tooltips.json
         fields:
           - label: Tooltip
             name: tooltip

@@ -1,5 +1,3 @@
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
 import { Environment, getEnvironment } from './utils/environment';
 
 const ENV_CONFIG: { [env in Environment]: object } = {
@@ -32,13 +30,37 @@ const ENV_CONFIG: { [env in Environment]: object } = {
   },
 };
 
-let firebaseApp: firebase.app.App | null = null;
-export function getFirebase(): firebase.app.App {
+/** Dynamically imports the firebase modules. */
+async function firebaseModule(): Promise<typeof firebase> {
+  // We have to load firestore too even though we only use it indirectly through
+  // the firebase/app module.
+  const [firebase] = await Promise.all([
+    import('firebase/app'),
+    import('firebase/firestore'),
+  ]);
+  return firebase;
+}
+
+let firebaseApp: Promise<firebase.app.App> | null = null;
+async function getFirebase(): Promise<firebase.app.App> {
   if (!firebaseApp) {
     const config = ENV_CONFIG[getEnvironment()];
-    firebaseApp = firebase.initializeApp(config);
+    firebaseApp = firebaseModule().then(firebase => {
+      firebase.initializeApp(config);
+      return firebase.app();
+    });
   }
   return firebaseApp;
 }
 
-export { firebase };
+export async function getFirestore(): Promise<firebase.firestore.Firestore> {
+  const firebase = await getFirebase();
+  return firebase.firestore();
+}
+
+export async function getFirestoreFieldValue(): Promise<
+  typeof firebase.firestore.FieldValue
+> {
+  const firebase = await firebaseModule();
+  return firebase.firestore.FieldValue;
+}

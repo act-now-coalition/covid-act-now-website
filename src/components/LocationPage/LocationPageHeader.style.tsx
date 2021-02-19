@@ -6,6 +6,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 import MuiWarningIcon from '@material-ui/icons/Warning';
 import Button from '@material-ui/core/Button';
+import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
 
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;
@@ -282,6 +283,11 @@ export const SectionColumn = styled(Box)<{ $isUpdateCopy?: Boolean }>`
   display: flex;
   flex-direction: column;
   margin-left: 1.5rem;
+
+  ${InfoIcon} {
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+    transform: translateY(3px);
+  }
 
   @media (min-width: 600px) {
     margin-left: ${({ $isUpdateCopy }) => ($isUpdateCopy ? '1rem' : '1.5rem')};
