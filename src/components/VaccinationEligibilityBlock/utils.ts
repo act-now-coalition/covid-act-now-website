@@ -1,5 +1,5 @@
 import { last, partition } from 'lodash';
-import { Region, getStateName } from 'common/regions';
+import { Region, County, State, MetroArea, getStateName } from 'common/regions';
 import { assert } from 'common/utils';
 import {
   getVaccineInfoByFips,
@@ -39,4 +39,16 @@ export function getEligibilityInfo(region: Region) {
 export function getPhaseName(phaseInfo: RegionPhaseGroup) {
   const { phase, tier } = phaseInfo;
   return tier ? `Phase ${phase}, Tier ${tier}` : `Phase ${phase}`;
+}
+
+export function getRegionState(region: Region) {
+  if (region instanceof County) {
+    return region.state;
+  } else if (region instanceof State) {
+    return region;
+  } else if (region instanceof MetroArea) {
+    return region.isSingleStateMetro ? region.states[0] : null;
+  } else {
+    return null;
+  }
 }
