@@ -19,7 +19,6 @@ const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
         {...sharedTrackingProps}
         trackingLabel="Vaccination alerts"
         startIcon={<EmailAlertIcon />}
-        aria-label="Vaccination alerts signup"
       >
         Get notified when eligibility changes
       </StyledLinkButton>
@@ -29,7 +28,6 @@ const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
           {...sharedTrackingProps}
           trackingLabel="Where to get vaccinated"
           endIcon={<OpenInNewIcon />}
-          aria-label="Vaccination information"
         >
           See where and how to get vaccinated
         </StyledLinkButton>
