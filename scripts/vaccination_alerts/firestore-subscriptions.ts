@@ -1,5 +1,7 @@
 import admin from 'firebase-admin';
+import delay from 'delay';
 import { getFirestore } from '../common/firebase';
+import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
 import { RegionVaccineVersionMap } from './utils';
 
 export const ALERT_SUBSCRIPTIONS = 'alerts-subscriptions';
@@ -69,16 +71,49 @@ class FirestoreSubscriptions {
     return querySnapshot.docs.map(emailDoc => emailDoc.id);
   }
 
+  /**
+   * Marks an email to be sent.
+   *
+   * @returns true if the email was newly marked, false if it was already
+   * marked so nothing happened.
+   */
   public async markEmailToSend(
     fipsCode: string,
     emailAlertVersion: number,
     emailAddress: string,
-  ) {
+    retriesLeft: number = 2,
+  ): Promise<boolean> {
     const emailsCollection = await this.getEmailsCollectionForVersion(
       fipsCode,
       emailAlertVersion,
     );
-    return emailsCollection.doc(emailAddress).create({ sentAt: null });
+    try {
+      await emailsCollection.doc(emailAddress).create({ sentAt: null });
+      return true;
+    } catch (error) {
+      // We don't want to overwrite existing emails for a location to avoid double-sending
+      // alerts, in case this is a re-run of the vaccination alerts workflow
+      if (error.code === FirestoreErrorCode.ALREADY_EXISTS) {
+        return false;
+      } else if (
+        error.code === FirestoreErrorCode.DEADLINE_EXCEEDED &&
+        retriesLeft > 0
+      ) {
+        console.error(
+          `markEmailToSend() failed with DEADLINE_EXCEEDED. Retrying. (retriesLeft=${retriesLeft})`,
+          error,
+        );
+        await delay(250);
+        return this.markEmailToSend(
+          fipsCode,
+          emailAlertVersion,
+          emailAddress,
+          retriesLeft - 1,
+        );
+      } else {
+        throw error;
+      }
+    }
   }
 
   public async markEmailAsSent(
