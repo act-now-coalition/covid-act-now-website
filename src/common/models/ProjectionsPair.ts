@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { Projection, Column } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';
 import { fail, assert } from 'common/utils';

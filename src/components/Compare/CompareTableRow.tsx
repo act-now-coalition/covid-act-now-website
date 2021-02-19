@@ -14,7 +14,8 @@ import {
   Rank,
   StyledLink,
 } from 'components/Compare/Compare.style';
-import { Metric, formatValue } from 'common/metric';
+import { formatValue } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { RankedLocationSummary } from 'common/utils/compare';
 import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';

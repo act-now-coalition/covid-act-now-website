@@ -5,7 +5,7 @@ import { useIsEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';

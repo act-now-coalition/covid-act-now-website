@@ -1,7 +1,7 @@
 import { Projections } from 'common/models/Projections';
 import _ from 'lodash';
 import { ProjectionsPair, SortType } from './ProjectionsPair';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 
 /** A set of left/right projection pairs across multiple locations. */
 export class ProjectionsSet {

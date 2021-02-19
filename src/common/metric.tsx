@@ -9,10 +9,8 @@ import { fail } from 'common/utils';
 import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { isNumber } from 'lodash';
-import { Metric } from './metricEnum';
+import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
-
-export { Metric };
 
 export const ALL_METRICS = [
   Metric.CASE_DENSITY,

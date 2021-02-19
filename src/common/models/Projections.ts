@@ -1,5 +1,6 @@
 import { Projection } from './Projection';
-import { Metric, getLevel, ALL_METRICS } from 'common/metric';
+import { getLevel, ALL_METRICS } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
 import { fail } from 'common/utils';

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { ProjectionsPair } from 'common/models/ProjectionsPair';
 import { formatInteger } from 'common/utils';

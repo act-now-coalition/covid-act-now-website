@@ -10,7 +10,8 @@ import {
   SNAPSHOT_URL,
 } from 'common/utils/snapshots';
 import { SortType } from 'common/models/ProjectionsPair';
-import { ALL_METRICS, getMetricName, Metric } from 'common/metric';
+import { ALL_METRICS, getMetricName } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { OptionsSelectorWrapper } from './OptionsSelector.style';
 import {
   FormControl,

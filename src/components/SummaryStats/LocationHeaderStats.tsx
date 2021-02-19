@@ -1,6 +1,7 @@
 import React from 'react';
 import { isNumber } from 'lodash';
-import { Metric, ALL_METRICS } from 'common/metric';
+import { ALL_METRICS } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { getMetricName, getLevelInfo, formatValue } from 'common/metric';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import StatTag from 'components/SummaryStats/StatTag';
