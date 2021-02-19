@@ -4,7 +4,9 @@ import { EventAction, EventCategory } from 'components/Analytics';
 import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
 import { StyledLinkButton, Wrapper } from './ButtonBlock.style';
 
-const ButtonBlock: React.FC = () => {
+const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
+  signupLink,
+}) => {
   const sharedTrackingProps = {
     trackingCategory: EventCategory.VACCINATION,
     trackingAction: EventAction.CLICK_LINK,
@@ -21,15 +23,17 @@ const ButtonBlock: React.FC = () => {
       >
         Get notified when eligibility changes
       </StyledLinkButton>
-      <StyledLinkButton
-        href="/" // Fill this in
-        {...sharedTrackingProps}
-        trackingLabel="Where to get vaccinated"
-        endIcon={<OpenInNewIcon />}
-        aria-label="Vaccination information"
-      >
-        See where and how to get vaccinated
-      </StyledLinkButton>
+      {signupLink && (
+        <StyledLinkButton
+          href={signupLink}
+          {...sharedTrackingProps}
+          trackingLabel="Where to get vaccinated"
+          endIcon={<OpenInNewIcon />}
+          aria-label="Vaccination information"
+        >
+          See where and how to get vaccinated
+        </StyledLinkButton>
+      )}
     </Wrapper>
   );
 };

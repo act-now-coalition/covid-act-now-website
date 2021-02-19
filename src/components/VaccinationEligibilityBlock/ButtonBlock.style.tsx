@@ -49,7 +49,7 @@ export const StyledLinkButton = styled(LinkButton)`
     margin: 0 0 8px;
   }
 
-  &:last-child {
+  &:not(:first-child) {
     ${PurpleButton};
   }
 
