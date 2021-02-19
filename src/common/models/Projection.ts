@@ -46,17 +46,20 @@ export function reenableDisabledMetrics(enable: boolean): void {
   overrideDisabledMetrics = enable;
 }
 
+/**
+ * Example of disabling counties/metros for 1+ states:
+ *
+ *  [Metric.VACCINATIONS]: new DisabledFipsList([
+ *    ...countyAndMetrosForState('OR'), // https://trello.com/c/iQWpcPgy/
+ *    ...countyAndMetrosForState('FL'), // https://trello.com/c/qH1UnTgt/
+ *  ]),
+ */
 export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_DENSITY]: new DisabledFipsList([]),
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
   [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
-  [Metric.VACCINATIONS]: new DisabledFipsList([
-    ...countyAndMetrosForState('OR'), // https://trello.com/c/iQWpcPgy/
-    ...countyAndMetrosForState('FL'), // https://trello.com/c/qH1UnTgt/
-    ...countyAndMetrosForState('PA'), // https://trello.com/c/uzV9TGbk/
-    ...countyAndMetrosForState('TN'), // https://trello.com/c/BsoMijbC/
-  ]),
+  [Metric.VACCINATIONS]: new DisabledFipsList([]),
 };
 
 /**
