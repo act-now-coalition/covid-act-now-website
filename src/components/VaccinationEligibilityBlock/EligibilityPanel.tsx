@@ -30,7 +30,7 @@ const EligibilityPanel: React.FC<{
       ))}
       {phaseList.length === 0 && (
         <PhaseDescription
-          source={`${statName} is still deciding future eligibility phases`}
+          source={`${stateName} is still deciding future eligibility phases`}
           $currentlyEligible={false}
         />
       )}
