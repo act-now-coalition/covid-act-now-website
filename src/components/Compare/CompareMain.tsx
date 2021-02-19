@@ -28,7 +28,7 @@ import {
   getAllCountiesOfMetroArea,
   SummaryForCompare,
 } from 'common/utils/compare';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';

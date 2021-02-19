@@ -1,8 +1,9 @@
 import React from 'react';
 import { Region, MetroArea, County } from 'common/regions';
 import ExternalLink from 'components/ExternalLink';
-import { Metric } from 'common/metricEnum';
+
 import { getMetricName } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 
 /**
  * Hardcoding the sources for the time being

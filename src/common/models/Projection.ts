@@ -12,7 +12,7 @@ import {
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import regions from 'common/regions';
 
 /** Stores a list of FIPS or FIPS regex patterns to disable. */

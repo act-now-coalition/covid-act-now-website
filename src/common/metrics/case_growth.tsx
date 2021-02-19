@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { getLevel, Metric } from 'common/metric';
+import { getLevel } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';

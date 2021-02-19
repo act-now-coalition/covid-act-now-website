@@ -11,7 +11,7 @@ import {
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import moment from 'moment';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import {
   InfoTooltip,
   DisclaimerTooltip,

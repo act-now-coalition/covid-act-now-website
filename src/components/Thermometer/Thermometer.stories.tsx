@@ -1,7 +1,8 @@
 import React from 'react';
 import Thermometer, { ThermometerBox } from './index';
 import { COLOR_MAP } from 'common/colors';
-import { getMetricDefinition, Metric } from 'common/metric';
+import { getMetricDefinition } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 
 export default {
   title: 'Shared Components/Thermometer',

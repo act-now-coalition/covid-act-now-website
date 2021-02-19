@@ -8,7 +8,7 @@ import {
   ChartVaccinations,
   ChartCaseDensity,
 } from 'components/Charts';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { SeriesType, Series } from 'components/Explore/interfaces';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.

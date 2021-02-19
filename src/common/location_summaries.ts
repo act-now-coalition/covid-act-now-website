@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import fetch from 'node-fetch';
 import { Level } from 'common/level';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import LocationSummariesJSON from 'assets/data/summaries.json';
 import { findStateFipsCode } from 'common/locations';
 import { currentSnapshot, getSnapshotOverride } from './utils/snapshots';

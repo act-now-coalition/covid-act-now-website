@@ -3,7 +3,7 @@ import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 import { Link } from 'react-router-dom';

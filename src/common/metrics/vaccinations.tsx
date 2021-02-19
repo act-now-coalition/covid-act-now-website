@@ -4,7 +4,7 @@ import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
-import { Metric } from 'common/metric';
+import { Metric } from 'common/metricEnum';
 import {
   InfoTooltip,
   DisclaimerTooltip,
