@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TabsPanel from './TabsPanel';
+import { ButtonBlock } from 'components/VaccinationEligibilityBlock';
 
 export default {
   title: 'Shared Components/TabsPanel',
@@ -28,10 +29,14 @@ export const UpdatingOutside = () => {
     setLabel(newTabIndex === 0 ? 'Label A' : 'Label B');
   };
 
+  const exampleSignupLink =
+    'https://mn.gov/covid19/vaccine/find-vaccine/index.jsp';
+
   return (
     <div>
       <h3>{label}</h3>
       <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
+      <ButtonBlock signupLink={exampleSignupLink} />
     </div>
   );
 };

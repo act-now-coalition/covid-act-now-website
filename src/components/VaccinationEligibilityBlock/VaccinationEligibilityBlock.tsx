@@ -5,6 +5,8 @@ import { Region, getStateName } from 'common/regions';
 import ExternalLink from 'components/ExternalLink';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { getEligibilityInfo } from './utils';
+import { getVaccinationDataByRegion } from 'cms-content/vaccines';
+import ButtonBlock from './ButtonBlock';
 import {
   Container,
   Section,
@@ -20,6 +22,9 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   const stateName = getStateName(region);
   const eligibilityData = getEligibilityInfo(region);
   const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
+
+  const vaccinationData = getVaccinationDataByRegion(region);
+  const signupLink = vaccinationData && vaccinationData.vaccinationSignupUrl;
 
   const onSelectTab = (newSelectedTab: number) => {
     // TODO: Tracking
@@ -59,7 +64,9 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
       <Section>
         <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
       </Section>
-      <Section>{/* Buttons */}</Section>
+      <Section>
+        <ButtonBlock signupLink={signupLink} />
+      </Section>
       <Section>
         <Source>
           Source:{' '}
