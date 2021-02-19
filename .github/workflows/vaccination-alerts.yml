@@ -55,7 +55,7 @@ jobs:
 
       - name: Send vaccination alert emails (dry run)
         if: ${{ env.DRY_RUN  == 'true' }}
-        run: yarn vaccinations-send-alert-emails --dryRun
+        run: yarn vaccinations-send-alert-emails --dryRun true
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
