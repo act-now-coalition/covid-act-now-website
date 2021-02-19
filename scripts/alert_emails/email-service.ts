@@ -25,7 +25,7 @@ class EmailService {
   });
 
   private limiter = new Bottleneck({
-    minTime: 83, // Our rate limit is 14/sec so we aim for 12/sec (83ms delay).
+    minTime: 22, // Our rate limit is 50/sec so we aim for 45/sec (22ms delay).
   });
 
   async sendEmail(
