@@ -15,7 +15,7 @@ const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
   return (
     <Wrapper>
       <StyledLinkButton
-        to="#shareContainer"
+        to="#share-container"
         {...sharedTrackingProps}
         trackingLabel="Vaccination alerts"
         startIcon={<EmailAlertIcon />}

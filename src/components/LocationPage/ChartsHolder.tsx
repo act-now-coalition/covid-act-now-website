@@ -154,9 +154,11 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           isMobile={isMobile}
           region={region}
         />
-        <MainContentInner>
-          <RegionVaccinationBlock region={region} />
-        </MainContentInner>
+        {!showVaccinationBlock && (
+          <MainContentInner>
+            <RegionVaccinationBlock region={region} />
+          </MainContentInner>
+        )}
         {showVaccinationBlock && (
           <MainContentInner>
             <VaccinationEligibilityBlock region={region} />

@@ -29,7 +29,7 @@ import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
-import { useGeolocationRegions } from 'common/hooks';
+import { useGeolocationRegions, useScrollToElement } from 'common/hooks';
 
 const ShareBlock = ({
   region,
@@ -74,7 +74,7 @@ const ShareBlock = ({
     : geolocatedRegions;
 
   return (
-    <ShareContainer id="shareContainer">
+    <ShareContainer id="share-container">
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
