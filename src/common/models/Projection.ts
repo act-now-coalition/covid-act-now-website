@@ -30,6 +30,7 @@ class DisabledFipsList {
   }
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 function countyAndMetrosForState(stateCode: string): string[] {
   const counties = regions.findCountiesByStateCode(stateCode);
   const metros = regions.metroAreas.filter(
