@@ -96,18 +96,21 @@ async function main(alertsFilePath: string) {
 
   const vaccinationAlertsInfo = readVaccinationAlerts(alertsFilePath);
   const locationsToAlert = getLocationsToAlert(vaccinationAlertsInfo);
+  console.log('locationsToAlert', locationsToAlert);
   const alertSubscriptions = await firestoreSubscriptions.getAlertSubscriptions();
 
   const emailsToAlertByFips = buildEmailsToAlertByFips(
     locationsToAlert,
     alertSubscriptions,
   );
+  console.log('emailsToAlertByFips', Object.keys(emailsToAlertByFips));
 
   console.info(`Locations to alert: ${locationsToAlert.join(', ')}`);
 
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
+      console.log(`Marking ${emails.length} emails for FIPS ${fipsCode}`);
       await markEmailAlertsToSend(firestoreSubscriptions, updatedAlert, emails);
     } catch (err) {
       console.error(`Error updating emails for location ${fipsCode}`, err);
