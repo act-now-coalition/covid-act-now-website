@@ -29,7 +29,7 @@ import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
-import { useGeolocationRegions, useScrollToElement } from 'common/hooks';
+import { useGeolocationRegions } from 'common/hooks';
 
 const ShareBlock = ({
   region,
