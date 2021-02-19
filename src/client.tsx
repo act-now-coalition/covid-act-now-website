@@ -26,12 +26,9 @@ Sentry.init({
   ],
   dsn:
     'https://4e1fa0b7df4d490488847bcc7966712b@o378922.ingest.sentry.io/5444052',
-<<<<<<< HEAD
-=======
   // Adding sampling to sentry errors to reduce volume. After cleaning up more sentry errors
   // (https://trello.com/c/0LGQjmdw), should be able to remove this.
   sampleRate: 0.5,
->>>>>>> 7995b2e4a (WIP razzle)
 });
 
 // function Main() {

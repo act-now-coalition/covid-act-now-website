@@ -33,7 +33,6 @@ module.exports = {
           writeToDisk: true
         }),
       ]
-      console.log('webpackConfig:', webpackConfig)
     }
     return webpackConfig;
   },

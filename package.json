@@ -90,7 +90,7 @@
     "build": "razzle build && yarn export",
     "test-razzle": "razzle test --env=jsdom",
     "start:prod": "cross-env NODE_ENV=production node build/server.js",
-    "export": "razzle export && mv build build-old && mv build-old/public build",
+    "export": "razzle export && rm -rf build-old && mv build build-old && mv build-old/public build",
     "serve": "serve -s build",
     "export-and-serve": "yarn build && yarn serve",
     "startOLD": "cross-env TSC_COMPILE_ON_ERROR=false react-scripts -r @cypress/instrument-cra start",
