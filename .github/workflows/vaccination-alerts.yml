@@ -53,8 +53,16 @@ jobs:
       - name: Generate the list of users and locations to email
         run: yarn vaccinations-generate-users-to-email
 
+      - name: Send vaccination alert emails (dry run)
+        if: ${{ env.DRY_RUN  == 'true' }}
+        run: yarn vaccinations-send-alert-emails --dryRun
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - name: Send vaccination alert emails
-        run: yarn vaccinations-send-alert-emails --dryRun ${{env.DRY_RUN}}
+        if: ${{ env.DRY_RUN == 'false' }}
+        run: yarn vaccinations-send-alert-emails
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
