@@ -53,6 +53,7 @@
     "handlebars": "^4.7.6",
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.19",
+    "match-sorter": "^6.3.0",
     "moment": "^2.24.0",
     "postinstall-postinstall": "^2.1.0",
     "query-string": "^6.11.1",
