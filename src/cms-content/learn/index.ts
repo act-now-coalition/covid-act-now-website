@@ -244,8 +244,4 @@ export const learnPages: TocItem[] = [
       label: category.header,
     })),
   },
-  {
-    label: 'Covid Act Now updates',
-    to: '/updates',
-  },
 ];
