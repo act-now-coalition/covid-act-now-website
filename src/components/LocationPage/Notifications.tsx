@@ -113,23 +113,20 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         )}
 
         {notification === Notification.TXFeb2021Winter && (
-          <TXFeb2021WinterCopy locationName={region.name} />
+          <TXFeb2021WinterCopy />
         )}
       </SectionColumn>
     </React.Fragment>
   );
 };
 
-const TXFeb2021WinterCopy: React.FC<{ locationName: string }> = ({
-  locationName,
-}) => {
+const TXFeb2021WinterCopy: React.FC<{}> = () => {
   return (
     <Copy>
-      In February 2021, {locationName} experienced extreme winter weather that
-      impacted many aspects of daily life, including COVID testing and
-      vaccination. We expect it to take many weeks for testing to recover. In
-      the meantime, our Daily New Cases and Infection Rate metrics should be
-      treated with caution.
+      In February 2021, Texas experienced extreme winter weather that impacted
+      many aspects of daily life, including COVID testing and vaccination. We
+      expect it to take many weeks for testing to recover. In the meantime, our
+      Daily New Cases and Infection Rate metrics should be treated with caution.
     </Copy>
   );
 };
