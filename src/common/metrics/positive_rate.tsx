@@ -161,23 +161,23 @@ function renderDisclaimer(region: Region): React.ReactElement {
       <DisclaimerTooltip
         title={getDataSourceTooltipContent(Metric.POSITIVE_TESTS, region)}
         mainCopy={'where our data comes from'}
-        trackOpenTooltip={trackOpenTooltip(
-          `Learn more: ${Metric.POSITIVE_TESTS}`,
-        )}
-        trackCloseTooltip={trackCloseTooltip(
-          `Learn more: ${Metric.POSITIVE_TESTS}`,
-        )}
+        trackOpenTooltip={() =>
+          trackOpenTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)
+        }
+        trackCloseTooltip={() =>
+          trackCloseTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)
+        }
       />
       {' and '}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={trackOpenTooltip(
-          `How we calculate: ${Metric.POSITIVE_TESTS}`,
-        )}
-        trackCloseTooltip={trackCloseTooltip(
-          `How we calculate: ${Metric.POSITIVE_TESTS}`,
-        )}
+        trackOpenTooltip={() =>
+          trackOpenTooltip(`How we calculate: ${Metric.POSITIVE_TESTS}`)
+        }
+        trackCloseTooltip={() =>
+          trackCloseTooltip(`How we calculate: ${Metric.POSITIVE_TESTS}`)
+        }
       />
       .
     </Fragment>
@@ -235,12 +235,12 @@ function renderInfoTooltip(): React.ReactElement {
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Show definition of ${PositiveTestRateMetric.metricName} metric`}
-      trackOpenTooltip={trackOpenTooltip(
-        `Metric definition: ${Metric.POSITIVE_TESTS}`,
-      )}
-      trackCloseTooltip={trackCloseTooltip(
-        `Metric definition: ${Metric.POSITIVE_TESTS}`,
-      )}
+      trackOpenTooltip={() =>
+        trackOpenTooltip(`Metric definition: ${Metric.POSITIVE_TESTS}`)
+      }
+      trackCloseTooltip={() =>
+        trackCloseTooltip(`Metric definition: ${Metric.POSITIVE_TESTS}`)
+      }
     />
   );
 }

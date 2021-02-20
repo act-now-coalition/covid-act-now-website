@@ -26,7 +26,7 @@ const DisclaimerTooltip: React.FC<StyledTooltipProps> = props => {
         <StyledSpan
           tabIndex={0}
           role="button"
-          onClick={() => tooltipAnchorOnClick(isMobile, setIsOpen)}
+          onClick={() => tooltipAnchorOnClick(isMobile, () => setIsOpen(true))}
         >
           {props.mainCopy}
         </StyledSpan>

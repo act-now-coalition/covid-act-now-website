@@ -12,7 +12,13 @@ import InfoIcon from '@material-ui/icons/Info';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
-import { State, County, Region, MetroArea } from 'common/regions';
+import {
+  State,
+  County,
+  Region,
+  MetroArea,
+  getFormattedStateCode,
+} from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
@@ -48,12 +54,19 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
     HospitalizationsPeak,
     ThirdWave,
     ExposureNotifications,
+    TXFeb2021Winter,
     None,
   }
   let notification: Notification;
 
   if (showExposureNotifications(region)) {
     notification = Notification.ExposureNotifications;
+  } else if (
+    // TODO(2021/2/20): TX Winter Reporting
+    // https://trello.com/c/TdspuIeM/952-texas-reporting-dip-winter-weather-feb-2020
+    getFormattedStateCode(region)?.includes('TX')
+  ) {
+    notification = Notification.TXFeb2021Winter;
   } else if (
     // TODO(2020/12/22): Remove NYC notice after it's been up for a week or so.
     ['36047', '36061', '36005', '36081', '36085'].includes(region.fipsCode)
@@ -98,8 +111,23 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         {notification === Notification.NYCCounty && (
           <NYCAggregationChangeCopy locationName={region.name} />
         )}
+
+        {notification === Notification.TXFeb2021Winter && (
+          <TXFeb2021WinterCopy />
+        )}
       </SectionColumn>
     </React.Fragment>
+  );
+};
+
+const TXFeb2021WinterCopy: React.FC<{}> = () => {
+  return (
+    <Copy>
+      In February 2021, Texas experienced extreme winter weather that impacted
+      many aspects of daily life, including COVID testing and vaccination. We
+      expect it to take many weeks for testing to recover. In the meantime, our
+      Daily New Cases and Infection Rate metrics should be treated with caution.
+    </Copy>
   );
 };
 

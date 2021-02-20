@@ -134,23 +134,23 @@ function renderDisclaimer(region: Region): React.ReactElement {
       <DisclaimerTooltip
         title={getDataSourceTooltipContent(Metric.CASE_GROWTH_RATE, region)}
         mainCopy={'where our data comes from'}
-        trackOpenTooltip={trackOpenTooltip(
-          `Learn more: ${Metric.CASE_GROWTH_RATE}`,
-        )}
-        trackCloseTooltip={trackCloseTooltip(
-          `Learn more: ${Metric.CASE_GROWTH_RATE}`,
-        )}
+        trackOpenTooltip={() =>
+          trackOpenTooltip(`Learn more: ${Metric.CASE_GROWTH_RATE}`)
+        }
+        trackCloseTooltip={() =>
+          trackCloseTooltip(`Learn more: ${Metric.CASE_GROWTH_RATE}`)
+        }
       />
       {' and '}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={trackOpenTooltip(
-          `How we calculate: ${Metric.CASE_GROWTH_RATE}`,
-        )}
-        trackCloseTooltip={trackCloseTooltip(
-          `How we calculate: ${Metric.CASE_GROWTH_RATE}`,
-        )}
+        trackOpenTooltip={() =>
+          trackOpenTooltip(`How we calculate: ${Metric.CASE_GROWTH_RATE}`)
+        }
+        trackCloseTooltip={() =>
+          trackCloseTooltip(`How we calculate: ${Metric.CASE_GROWTH_RATE}`)
+        }
       />
       .
     </Fragment>
@@ -202,12 +202,12 @@ function renderInfoTooltip(): React.ReactElement {
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Show definition of ${CaseGrowthMetric.metricName} metric`}
-      trackOpenTooltip={trackOpenTooltip(
-        `Metric definition: ${Metric.CASE_GROWTH_RATE}`,
-      )}
-      trackCloseTooltip={trackCloseTooltip(
-        `Metric definition: ${Metric.CASE_GROWTH_RATE}`,
-      )}
+      trackOpenTooltip={() =>
+        trackOpenTooltip(`Metric definition: ${Metric.CASE_GROWTH_RATE}`)
+      }
+      trackCloseTooltip={() =>
+        trackCloseTooltip(`Metric definition: ${Metric.CASE_GROWTH_RATE}`)
+      }
     />
   );
 }

@@ -24,7 +24,14 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, State, County, MetroArea, getStateName } from 'common/regions';
+import {
+  Region,
+  State,
+  County,
+  MetroArea,
+  getStateName,
+  getFormattedStateCode,
+} from 'common/regions';
 import RegionVaccinationBlock from 'components/RegionVaccinationBlock';
 import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 
@@ -142,6 +149,9 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const showVaccinationEligibilityBlock =
     region instanceof State || region instanceof County || isSingleStateMetro;
 
+  // TODO(https://trello.com/c/wXEmHdtr/): Blocking PR for now.
+  const hideVaccineBlocks = getFormattedStateCode(region)?.includes('PR');
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -156,13 +166,15 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           region={region}
         />
 
-        <MainContentInner>
-          {showVaccinationEligibilityBlock ? (
-            <VaccinationEligibilityBlock region={region} />
-          ) : (
-            <RegionVaccinationBlock region={region} />
-          )}
-        </MainContentInner>
+        {!hideVaccineBlocks && (
+          <MainContentInner>
+            {showVaccinationEligibilityBlock ? (
+              <VaccinationEligibilityBlock region={region} />
+            ) : (
+              <RegionVaccinationBlock region={region} />
+            )}
+          </MainContentInner>
+        )}
 
         <MainContentInner>
           <CompareMain
