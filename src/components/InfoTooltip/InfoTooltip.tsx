@@ -9,14 +9,24 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useBreakpoint(600);
 
+  const handleOpen = () => {
+    setIsOpen(true);
+    props.trackOpenTooltip();
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    props.trackCloseTooltip();
+  };
+
   return (
     <>
       <StyledTooltip
-        onOpen={() => setIsOpen(true)}
-        onClose={() => setIsOpen(false)}
+        onOpen={handleOpen}
+        onClose={handleClose}
         title={
           <>
-            <StyledCloseIcon role="button" onClick={() => setIsOpen(false)} />
+            <StyledCloseIcon role="button" onClick={handleClose} />
             {props.title}
           </>
         }
@@ -27,7 +37,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
           $isOpen={isOpen}
           tabIndex={0}
           role="button"
-          onClick={() => tooltipAnchorOnClick(isMobile, setIsOpen)}
+          onClick={() => tooltipAnchorOnClick(isMobile, handleOpen)}
         />
       </StyledTooltip>
       <DescriptionDiv content={props.title} />

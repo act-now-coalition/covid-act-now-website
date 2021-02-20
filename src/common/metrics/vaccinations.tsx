@@ -107,12 +107,12 @@ function renderDisclaimer(region: Region): React.ReactElement {
           <DisclaimerTooltip
             title={getDataSourceTooltipContent(Metric.VACCINATIONS, region)}
             mainCopy={'where our data comes from'}
-            trackOpenTooltip={trackOpenTooltip(
-              `Learn more: ${Metric.VACCINATIONS}`,
-            )}
-            trackCloseTooltip={trackCloseTooltip(
-              `Learn more: ${Metric.VACCINATIONS}`,
-            )}
+            trackOpenTooltip={() =>
+              trackOpenTooltip(`Learn more: ${Metric.VACCINATIONS}`)
+            }
+            trackCloseTooltip={() =>
+              trackCloseTooltip(`Learn more: ${Metric.VACCINATIONS}`)
+            }
           />
           {' and '}
         </>
@@ -120,12 +120,12 @@ function renderDisclaimer(region: Region): React.ReactElement {
       <DisclaimerTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={trackOpenTooltip(
-          `How we calculate: ${Metric.VACCINATIONS}`,
-        )}
-        trackCloseTooltip={trackCloseTooltip(
-          `How we calculate: ${Metric.VACCINATIONS}`,
-        )}
+        trackOpenTooltip={() =>
+          trackOpenTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
+        }
+        trackCloseTooltip={() =>
+          trackCloseTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
+        }
       />
       .
     </Fragment>
@@ -144,12 +144,12 @@ function renderInfoTooltip(): React.ReactElement {
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Show definition of ${VaccinationsMetric.metricName} metric`}
-      trackOpenTooltip={trackOpenTooltip(
-        `How we calculate: ${Metric.VACCINATIONS}`,
-      )}
-      trackCloseTooltip={trackCloseTooltip(
-        `How we calculate: ${Metric.VACCINATIONS}`,
-      )}
+      trackOpenTooltip={() =>
+        trackOpenTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
+      }
+      trackCloseTooltip={() =>
+        trackCloseTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
+      }
     />
   );
 }
