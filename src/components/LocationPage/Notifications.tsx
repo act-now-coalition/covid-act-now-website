@@ -120,9 +120,10 @@ const TXFeb2021WinterCopy: React.FC<{ locationName: string }> = ({
   return (
     <Copy>
       In February 2021, {locationName} experienced extreme winter weather that
-      impacted many aspects of daily life, including COVID testing and vaccination.
-      We expect it to take many weeks for testing to recover, and until then, our
-      Daily New Cases and Infection Rate metrics should be treated with caution.
+      impacted many aspects of daily life, including COVID testing and
+      vaccination. We expect it to take many weeks for testing to recover.
+      In the meantime, our Daily New Cases and Infection Rate metrics should
+      be treated with caution.
     </Copy>
   );
 };
