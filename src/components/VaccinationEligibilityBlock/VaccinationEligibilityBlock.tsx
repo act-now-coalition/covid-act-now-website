@@ -18,23 +18,27 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
 import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
 import { scrollWithOffset } from 'components/TableOfContents';
+import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
 }) => {
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const state = getRegionState(region);
   assert(
     state,
     `VaccinationEligibilityBlock cannot be used for locations with more than one state`,
   );
 
+  const vaccineInfo = getVaccineInfoByFips(region.fipsCode);
+  if (!vaccineInfo) {
+    return null;
+  }
   const eligibilityData = getEligibilityInfo(state);
   const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
 
   const vaccinationData = getVaccinationDataByRegion(region);
   const signupLink = vaccinationData && vaccinationData.vaccinationSignupUrl;
-
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
   const tabList: TabInfo[] = [
     {
