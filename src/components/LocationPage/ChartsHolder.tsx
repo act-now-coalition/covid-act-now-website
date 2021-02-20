@@ -138,7 +138,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
 
   const isSingleStateMetro =
     region instanceof MetroArea && region.isSingleStateMetro;
-  const showVaccinationBlock =
+  const showVaccinationEligibilityBlock =
     region instanceof State || region instanceof County || isSingleStateMetro;
 
   // TODO(pablo): Create separate refs for signup and share
@@ -154,16 +154,15 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           isMobile={isMobile}
           region={region}
         />
-        {!showVaccinationBlock && (
-          <MainContentInner>
-            <RegionVaccinationBlock region={region} />
-          </MainContentInner>
-        )}
-        {showVaccinationBlock && (
-          <MainContentInner>
+
+        <MainContentInner>
+          {showVaccinationEligibilityBlock ? (
             <VaccinationEligibilityBlock region={region} />
-          </MainContentInner>
-        )}
+          ) : (
+            <RegionVaccinationBlock region={region} />
+          )}
+        </MainContentInner>
+
         <MainContentInner>
           <CompareMain
             stateName={getStateName(region) || region.name} // rename prop

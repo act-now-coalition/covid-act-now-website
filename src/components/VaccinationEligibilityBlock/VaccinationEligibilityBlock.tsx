@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { HashLink } from 'react-router-hash-link';
-import { Region, getStateName } from 'common/regions';
+import { Region } from 'common/regions';
 import { COLOR_MAP } from 'common/colors';
 import { assert } from 'common/utils';
 import ExternalLink from 'components/ExternalLink';
@@ -29,8 +28,6 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
     `VaccinationEligibilityBlock cannot be used for locations with more than one state`,
   );
 
-  // TODO: Assert that the region is a county, state or a single-state metro
-  const stateName = getStateName(state);
   const eligibilityData = getEligibilityInfo(state);
   const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
 
@@ -47,7 +44,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         <EligibilityPanel
           phaseList={eligibilityData.phasesEligibleNow}
           currentlyEligible={true}
-          stateName={stateName || 'Your state'}
+          stateName={state.fullName}
         />
       ),
     },
@@ -58,7 +55,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         <EligibilityPanel
           phaseList={eligibilityData.phasesEligibleLater}
           currentlyEligible={false}
-          stateName={stateName || 'Your state'}
+          stateName={state.fullName}
         />
       ),
     },
@@ -78,9 +75,9 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
     <Container>
       <Heading2>Vaccine eligibility</Heading2>
       <Paragraph>
-        {stateName} is currently in <strong>{mostRecentPhaseName}</strong>.{' '}
-        Eligibility varies throughout {stateName}, so you may also want to check
-        your county or city’s health department website.
+        {state.fullName} is currently in <strong>{mostRecentPhaseName}</strong>.{' '}
+        Eligibility varies throughout {state.fullName}, so you may also want to
+        check your county or city’s health department website.
       </Paragraph>
       <Section>
         <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
