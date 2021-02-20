@@ -11,7 +11,8 @@ import {
 const EligibilityPanel: React.FC<{
   phaseList: RegionPhaseGroup[];
   currentlyEligible: boolean;
-}> = ({ phaseList, currentlyEligible }) => {
+  stateName: string;
+}> = ({ phaseList, currentlyEligible, stateName }) => {
   const showStartingDate = !currentlyEligible;
   return (
     <StyledEligibilityPanel>
@@ -27,6 +28,12 @@ const EligibilityPanel: React.FC<{
           />
         </Fragment>
       ))}
+      {phaseList.length === 0 && (
+        <PhaseDescription
+          source={`${stateName} is still deciding future eligibility phases`}
+          $currentlyEligible={false}
+        />
+      )}
     </StyledEligibilityPanel>
   );
 };

@@ -128,6 +128,11 @@ export class MetroArea extends Region {
     }
     return this.name.split('-')[0];
   }
+
+  get isSingleStateMetro() {
+    return this.states.length === 1;
+  }
+
   get fullName() {
     return `${this.principalCityName} metro area`;
   }
