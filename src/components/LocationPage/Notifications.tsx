@@ -12,7 +12,13 @@ import InfoIcon from '@material-ui/icons/Info';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
-import { State, County, Region, MetroArea } from 'common/regions';
+import {
+  State,
+  County,
+  Region,
+  MetroArea,
+  getFormattedStateCode,
+} from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
@@ -58,7 +64,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   } else if (
     // TODO(2021/2/20): TX Winter Reporting
     // https://trello.com/c/TdspuIeM/952-texas-reporting-dip-winter-weather-feb-2020
-    region.fipsCode.startsWith('48')
+    getFormattedStateCode(region)?.includes('TX')
   ) {
     notification = Notification.TXFeb2021Winter;
   } else if (
