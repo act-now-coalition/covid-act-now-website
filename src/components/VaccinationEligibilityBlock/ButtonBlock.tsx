@@ -2,7 +2,7 @@ import React from 'react';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { EventAction, EventCategory } from 'components/Analytics';
 import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
-import { StyledLinkButton, Wrapper } from './ButtonBlock.style';
+import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
 
 const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
   signupLink,
@@ -13,9 +13,9 @@ const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
   };
 
   return (
-    <Wrapper>
+    <ButtonsContainer>
       <StyledLinkButton
-        to="#shareContainer"
+        to="#share-container"
         {...sharedTrackingProps}
         trackingLabel="Vaccination alerts"
         startIcon={<EmailAlertIcon />}
@@ -32,7 +32,7 @@ const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
           See where and how to get vaccinated
         </StyledLinkButton>
       )}
-    </Wrapper>
+    </ButtonsContainer>
   );
 };
 

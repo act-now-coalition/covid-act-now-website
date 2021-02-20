@@ -1,5 +1,9 @@
 import React, { ComponentProps, DetailedHTMLProps } from 'react';
-import { Link, LinkProps } from 'react-router-dom';
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from 'react-router-dom';
+import { HashLink, HashLinkProps } from 'react-router-hash-link';
 import { assert } from 'common/utils';
 import { BaseButton } from './LinkButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -11,9 +15,7 @@ type AnchorLinkType = DetailedHTMLProps<
 
 type StyledButtonProps = ComponentProps<typeof BaseButton>;
 
-type ExternalLinkButtonProps = StyledButtonProps & AnchorLinkType;
-
-type InternalLinkButtonProps = StyledButtonProps & LinkProps;
+type LinkProps = AnchorLinkType | RouterLinkProps | HashLinkProps;
 
 interface TrackingProps {
   trackingCategory: EventCategory;
@@ -21,39 +23,43 @@ interface TrackingProps {
   trackingLabel: string;
 }
 
-export type LinkButtonProps = InternalLinkButtonProps | ExternalLinkButtonProps;
+export type LinkButtonProps = LinkProps & TrackingProps & StyledButtonProps;
 
-const LinkButton: React.FC<LinkButtonProps & TrackingProps> = props => {
-  assert(
-    props.href || props.to,
-    "LinkButton needs either 'to' or 'href' as props",
-  );
+const LinkButton: React.FC<LinkButtonProps> = props => {
+  const isLink = props.href || props.to;
+  assert(isLink, "LinkButton needs either 'to' or 'href' as props");
 
   const isInternalLink = props.to;
+  const isHashLink = props.to && props.to.includes('#');
+
   const {
     trackingAction,
     trackingCategory,
     trackingLabel,
-    ...ownProps
+    ...otherProps
   } = props;
 
   const onClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    const action =
-      trackingAction || isInternalLink
-        ? EventAction.NAVIGATE
-        : EventAction.CLICK_LINK;
-    if (trackingCategory && trackingLabel) {
-      trackEvent(trackingCategory, action, trackingLabel);
-    }
+    const defaultAction = isInternalLink
+      ? EventAction.NAVIGATE
+      : EventAction.CLICK_LINK;
+    const action = trackingAction || defaultAction;
+    trackEvent(trackingCategory, action, trackingLabel);
     props.onClick && props.onClick(ev);
   };
 
-  if (isInternalLink) {
-    return <BaseButton {...ownProps} component={Link} onClick={onClick} />;
+  if (isHashLink) {
+    return (
+      <BaseButton {...otherProps} component={HashLink} onClick={onClick} />
+    );
+  } else if (isInternalLink) {
+    return (
+      <BaseButton {...otherProps} component={RouterLink} onClick={onClick} />
+    );
   } else {
     return (
       <BaseButton
-        {...ownProps}
+        {...otherProps}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}

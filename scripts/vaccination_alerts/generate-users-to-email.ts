@@ -50,30 +50,21 @@ const markEmailAlertsToSend = async (
   emails: string[],
 ) => {
   const { fips, emailAlertVersion } = alert;
-  let totalToMark = 0,
-    alreadyMarked = 0;
+  let alreadyMarked = 0;
   await Promise.all(
     emails.map(async (email: string) => {
-      try {
-        totalToMark++;
-        await firestoreSubscriptions.markEmailToSend(
-          fips,
-          emailAlertVersion,
-          email,
-        );
-      } catch (updateError) {
-        // We don't want to overwrite existing emails for a location to avoid double-sending
-        // alerts, in case this is a re-run of the vaccination alerts workflow
-        if (updateError.code !== FirestoreErrorCode.ALREADY_EXISTS) {
-          throw updateError;
-        } else {
-          alreadyMarked++;
-        }
+      const marked = await firestoreSubscriptions.markEmailToSend(
+        fips,
+        emailAlertVersion,
+        email,
+      );
+      if (!marked) {
+        alreadyMarked++;
       }
     }),
   );
   console.log(
-    `FIPS ${fips} had ${totalToMark} emails to mark and ${alreadyMarked} were already marked.`,
+    `FIPS ${fips} had ${emails.length} emails to mark and ${alreadyMarked} were already marked.`,
   );
 };
 
@@ -111,9 +102,6 @@ async function main(alertsFilePath: string) {
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
-      // HACK: Try waiting between batches to avoid DEADLINE_EXCEEDED error.
-      await delay(1000);
-
       console.log(`Marking ${emails.length} emails for FIPS ${fipsCode}`);
       await markEmailAlertsToSend(firestoreSubscriptions, updatedAlert, emails);
     } catch (err) {

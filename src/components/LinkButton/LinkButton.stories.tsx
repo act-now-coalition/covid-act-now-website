@@ -18,6 +18,12 @@ export const InternalLink = (args: any) => (
   </LinkButton>
 );
 
+export const HashLink = (args: any) => (
+  <LinkButton to="#donate" {...args}>
+    Donate
+  </LinkButton>
+);
+
 export const ExternalLink = (args: any) => (
   <LinkButton {...args} href="https://covidactnow.org">
     Covid Act Now

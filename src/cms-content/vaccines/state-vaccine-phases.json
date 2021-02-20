@@ -259,7 +259,7 @@
           "phase": "1A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "\\* Highest-risk health care workers (Direct, prolonged COVID exposure) \n\n\\* Long-term care facilities",
+          "description": "* Highest-risk health care workers (Direct, prolonged COVID exposure) \n\n* Long-term care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -268,7 +268,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "\\* Moderate-risk health care workers (Less direct COVID exposure) \n\n\\* First Responders \n\n\\* Adults 70+",
+          "description": "* Moderate-risk health care workers (Less direct COVID exposure) \n\n* First Responders \n\n* Adults 70+",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020-2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -277,7 +277,7 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "\\* Teachers \n\n\\* Child care workers \n\n\\* Adults 65-69",
+          "description": "* Teachers \n\n* Child care workers \n\n* Adults 65-69",
           "expandedDefinitionUrl": "",
           "startDate": "February 8, 2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -286,7 +286,7 @@
           "phase": "1B",
           "tier": "3",
           "currentlyEligible": false,
-          "description": "\\* Frontline essential workers \n\n\\* People 16-64 with two or more high risk conditions",
+          "description": "* Frontline essential workers \n\n* People 16-64 with two or more high risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
