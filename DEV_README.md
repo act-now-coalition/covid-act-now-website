@@ -12,6 +12,12 @@ A single page react app, created via `create-react-app`. Routing through `react-
 
 ### Set Up
 
+Make sure you have node installed. [nvm](https://github.com/nvm-sh/nvm) is recommended to manage your node installation so you can easily switch between versions.  node v12.x works well. Once nvm is installed:
+```
+nvm install v12
+nvm alias default v12
+```
+
 Get the repo from github
 ```
 git clone https://github.com/covid-projections/covid-projections.git
@@ -22,12 +28,7 @@ Then install the correct dependencies locally via yarn.
 yarn install
 ```
 
-Then either start with npm or yarn
-
-```
-npm start
-```
-
+Then start the local dev server:
 ```
 yarn start
 ```
