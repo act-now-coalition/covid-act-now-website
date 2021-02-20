@@ -48,7 +48,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
     HospitalizationsPeak,
     ThirdWave,
     ExposureNotifications,
-    TXFeb2021WinterCopy,
+    TXFeb2021Winter,
     None,
   }
   let notification: Notification;
@@ -60,7 +60,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
     // https://trello.com/c/TdspuIeM/952-texas-reporting-dip-winter-weather-feb-2020
     region.fipsCode.startsWith('48')
   ) {
-    notification = Notification.TXFeb2021WinterCopy;
+    notification = Notification.TXFeb2021Winter;
   } else if (
     // TODO(2020/12/22): Remove NYC notice after it's been up for a week or so.
     ['36047', '36061', '36005', '36081', '36085'].includes(region.fipsCode)
@@ -104,6 +104,10 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
 
         {notification === Notification.NYCCounty && (
           <NYCAggregationChangeCopy locationName={region.name} />
+        )}
+
+        {notification === Notification.TXFeb2021Winter && (
+          <TXFeb2021WinterCopy locationName={region.name} />
         )}
       </SectionColumn>
     </React.Fragment>
