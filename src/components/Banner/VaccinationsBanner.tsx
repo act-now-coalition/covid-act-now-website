@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { HashLink } from 'react-router-hash-link';
 import { ButtonContainer } from './Banner.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import {
@@ -17,38 +16,24 @@ import { scrollWithOffset } from 'components/TableOfContents';
 const Buttons: React.FC = () => {
   return (
     <Fragment>
-      <HashLink
+      <CompareButton
         to="#compare"
         scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
+        trackingCategory={EventCategory.VACCINATION}
+        trackingAction={EventAction.CLICK}
+        trackingLabel="Banner: Compare states"
       >
-        <CompareButton
-          onClick={() => {
-            trackEvent(
-              EventCategory.VACCINATION,
-              EventAction.CLICK,
-              'Banner: Compare states',
-            );
-          }}
-        >
-          Compare states
-        </CompareButton>
-      </HashLink>
-      <HashLink
+        Compare states
+      </CompareButton>
+      <SearchButton
         to="#search"
         scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
+        trackingCategory={EventCategory.VACCINATION}
+        trackingAction={EventAction.CLICK}
+        trackingLabel="Banner: See my state"
       >
-        <SearchButton
-          onClick={() => {
-            trackEvent(
-              EventCategory.VACCINATION,
-              EventAction.CLICK,
-              'Banner: See my state',
-            );
-          }}
-        >
-          See my state
-        </SearchButton>
-      </HashLink>
+        See my state
+      </SearchButton>
     </Fragment>
   );
 };

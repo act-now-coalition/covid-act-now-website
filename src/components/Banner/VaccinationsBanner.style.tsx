@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
+import LinkButton from 'components/LinkButton';
 
 export const Wrapper = styled.div`
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
@@ -17,9 +18,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const CompareButton = styled(MuiButton).attrs(props => ({
-  disableRipple: true,
-  disableFocusRipple: true,
+export const CompareButton = styled(LinkButton).attrs(props => ({
   variant: 'contained',
 }))`
   background-color: ${COLOR_MAP.BLUE};
@@ -31,9 +30,7 @@ export const CompareButton = styled(MuiButton).attrs(props => ({
   }
   `;
 
-export const SearchButton = styled(MuiButton).attrs(props => ({
-  disableRipple: true,
-  disableFocusRipple: true,
+export const SearchButton = styled(LinkButton).attrs(props => ({
   variant: 'text',
 }))`
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
