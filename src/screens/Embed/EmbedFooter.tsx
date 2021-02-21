@@ -11,7 +11,7 @@ import {
   FooterLogoWrapper,
 } from './Embed.style';
 
-export default function EmbedFooter({ onShare }) {
+export default function EmbedFooter({ onShare }: { onShare: () => void }) {
   return (
     <FooterContainer>
       <FooterButtonContainer>
@@ -44,7 +44,8 @@ export default function EmbedFooter({ onShare }) {
   );
 }
 
-function IconButton({ iconPosition, children, icon, ...rest }) {
+// FIXME: type this properly
+function IconButton({ iconPosition, children, icon, ...rest }: any) {
   return (
     <FooterButton disableElevation variant="contained" {...rest}>
       {iconPosition === 'left' && icon}

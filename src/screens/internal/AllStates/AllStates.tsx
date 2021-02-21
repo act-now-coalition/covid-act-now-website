@@ -15,14 +15,14 @@ function AllStates() {
   );
 }
 
-function State({ state: StateType }) {
+function State({ state }: { state: StateType }) {
   const projections = useProjectionsFromRegion(state);
 
   // Projections haven't loaded yet
   if (!projections) {
     return <LoadingScreen></LoadingScreen>;
   }
-  const stateName = projections.stateName;
+  const stateName = state.name;
 
   return (
     <>

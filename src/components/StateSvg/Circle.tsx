@@ -1,8 +1,16 @@
 import React from 'react';
-import * as States from './index';
+import States from './index';
 import { CircleWrapper, StateWrapper } from './Circle.style';
 
-const CircleStateAction = ({ state, ratio = 1, fillColor }) => {
+const CircleStateAction = ({
+  state,
+  ratio = 1,
+  fillColor,
+}: {
+  state: string;
+  ratio: number;
+  fillColor: string;
+}) => {
   const State = States[state];
 
   const DEFAULT_SIZE = 64;

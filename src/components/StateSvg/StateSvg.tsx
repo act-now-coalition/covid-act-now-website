@@ -1,8 +1,8 @@
 import React from 'react';
-import * as States from './index';
+import States from './index';
 
-const StateSvg = props => {
-  const State = States[props.state];
+const StateSvg = ({ state }: { state: string }) => {
+  const State = States[state];
 
   return <>{State && <State />}</>;
 };

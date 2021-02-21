@@ -52,7 +52,7 @@ import WV from './WestVirginia';
 import WI from './Wisconsin';
 import WY from './Wyoming';
 
-export {
+const states: { [index: string]: () => JSX.Element } = {
   AK,
   AL,
   AZ,
@@ -107,3 +107,5 @@ export {
   WI,
   WY,
 };
+
+export default states;
