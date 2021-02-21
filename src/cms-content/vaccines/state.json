@@ -36,7 +36,7 @@
       "hidden": false,
       "stateCode": "CA",
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
-      "vaccinationSignupUrl": "",
+      "vaccinationSignupUrl": "https://covid19.ca.gov/vaccines/#How-to-get-vaccinated",
       "locationName": "California",
       "fips": "06"
     },
