@@ -28,7 +28,7 @@
           "phase": "1",
           "tier": "c",
           "currentlyEligible": true,
-          "description": "* Persons age 65-74 years\n* Persons age 16-64 years with high risk medical conditions\n* Additional critical workers",
+          "description": "Currently Vaccinating:\n* Adults 65-74 years\n* Additional critical workers\n\nAbout to Vaccinate:\n* Persons age 16-64 years with high-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.974Z"
@@ -2286,13 +2286,27 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "\"Eligible Next\"",
+          "phase": "3",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* The next age grouping will be 70 years and older, then 65 and older, as vaccine supply allows. After the age groups, the vaccine will be available to people in Vermont who have certain high-risk health conditions.",
+          "currentlyEligible": true,
+          "description": "* Adults 70-74",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-21T22:09:11.381Z",
+          "phase": "4",
+          "startDate": "Early March",
+          "description": "* Adults 65-69"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-21T22:09:12.582Z",
+          "phase": "5",
+          "startDate": "Early March",
+          "description": "* Adults with high-risk medical conditions"
         }
       ]
     },
