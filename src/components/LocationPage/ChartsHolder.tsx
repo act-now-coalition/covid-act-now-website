@@ -24,9 +24,8 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, State, County, MetroArea, getStateName } from 'common/regions';
-import RegionVaccinationBlock from 'components/RegionVaccinationBlock';
-import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
+import { Region, State, getStateName } from 'common/regions';
+import VaccinationBlock from 'components/VaccinationBlock';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -137,11 +136,6 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     projections.getMetricValues(),
   );
 
-  const isSingleStateMetro =
-    region instanceof MetroArea && region.isSingleStateMetro;
-  const showVaccinationEligibilityBlock =
-    region instanceof State || region instanceof County || isSingleStateMetro;
-
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -156,11 +150,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           region={region}
         />
         <MainContentInner>
-          {showVaccinationEligibilityBlock ? (
-            <VaccinationEligibilityBlock region={region} />
-          ) : (
-            <RegionVaccinationBlock region={region} />
-          )}
+          <VaccinationBlock region={region} />
         </MainContentInner>
         <MainContentInner>
           <CompareMain
