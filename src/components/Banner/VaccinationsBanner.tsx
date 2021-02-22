@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ButtonContainer } from './Banner.style';
-import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { EventAction, EventCategory } from 'components/Analytics';
 import {
   Wrapper,
   InnerContainer,

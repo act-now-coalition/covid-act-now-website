@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import MuiButton from '@material-ui/core/Button';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 import LinkButton from 'components/LinkButton';
