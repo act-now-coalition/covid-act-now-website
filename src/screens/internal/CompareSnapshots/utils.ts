@@ -29,6 +29,7 @@ export enum CompareLocations {
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
   TOP_METROS_BY_POPULATION,
+  CHANGED_TEXAS_COUNTIES,
   DISABLED,
 }
 
@@ -76,6 +77,17 @@ export function useProjectionsSet(
           ProjectionsSet.fromProjections(
             await fetchRegionProjections(leftSnapshot, topMetros),
             await fetchRegionProjections(rightSnapshot, topMetros),
+          ),
+        );
+      } else if (locations === CompareLocations.CHANGED_TEXAS_COUNTIES) {
+        const counties = await fetchTexasChangedCounties(
+          leftSnapshot,
+          rightSnapshot,
+        );
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchRegionProjections(leftSnapshot, counties),
+            await fetchRegionProjections(rightSnapshot, counties),
           ),
         );
       } else if (locations === CompareLocations.TOP_COUNTIES_BY_DIFF) {
@@ -255,4 +267,23 @@ async function fetchTopCountiesByDiff(
     regionDiffs.filter(rd => rd.region instanceof County),
     COUNTIES_LIMIT,
   ).map(rd => rd.region);
+}
+
+async function fetchTexasChangedCounties(
+  leftSnapshot: number,
+  rightSnapshot: number,
+): Promise<County[]> {
+  const leftSummaries = await fetchSummaries(leftSnapshot).catch(e => null);
+  const rightSummaries = await fetchSummaries(rightSnapshot).catch(e => null);
+  if (leftSummaries === null || rightSummaries === null) {
+    return [];
+  }
+  const counties = regions.counties.filter(
+    county =>
+      county.state.fipsCode === '48' &&
+      leftSummaries[county.fipsCode]?.level !=
+        rightSummaries[county.fipsCode]?.level,
+  );
+
+  return counties;
 }
