@@ -29,6 +29,7 @@ export enum CompareLocations {
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
   TOP_METROS_BY_POPULATION,
+  TEXAS_COUNTIES,
   CHANGED_TEXAS_COUNTIES,
   DISABLED,
 }
@@ -77,6 +78,16 @@ export function useProjectionsSet(
           ProjectionsSet.fromProjections(
             await fetchRegionProjections(leftSnapshot, topMetros),
             await fetchRegionProjections(rightSnapshot, topMetros),
+          ),
+        );
+      } else if (locations === CompareLocations.TEXAS_COUNTIES) {
+        const counties = regions.counties.filter(
+          county => county.state.fipsCode === '48',
+        );
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchRegionProjections(leftSnapshot, counties),
+            await fetchRegionProjections(rightSnapshot, counties),
           ),
         );
       } else if (locations === CompareLocations.CHANGED_TEXAS_COUNTIES) {

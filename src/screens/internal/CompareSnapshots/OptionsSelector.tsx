@@ -203,6 +203,9 @@ function OptionsSelectorInner({
           <MenuItem value={CompareLocations.TOP_METROS_BY_POPULATION}>
             Top {METROS_LIMIT} Metros (by Population)
           </MenuItem>
+          <MenuItem value={CompareLocations.TEXAS_COUNTIES}>
+            Texas Counties
+          </MenuItem>
           <MenuItem value={CompareLocations.CHANGED_TEXAS_COUNTIES}>
             Changed Texas Counties
           </MenuItem>
