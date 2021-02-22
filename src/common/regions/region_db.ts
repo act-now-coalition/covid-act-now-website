@@ -55,6 +55,17 @@ class RegionDB {
     return this.counties.filter(county => county.stateCode === stateCode);
   }
 
+  /** Find counties and metros that are in / overlap given state code. */
+  findCountiesAndMetrosByStateCode(stateCode: string): Region[] {
+    const counties = this.counties.filter(
+      county => county.stateCode === stateCode,
+    );
+    const metros = this.metroAreas.filter(metro =>
+      metro.states.map(state => state.stateCode).includes(stateCode),
+    );
+    return [...counties, ...metros];
+  }
+
   findStateByUrlParams(stateUrlSegment: string): State | null {
     // The second condition is added to support legacy URLs with the 2-letter
     // state code (`/us/wa`)
