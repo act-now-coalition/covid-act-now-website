@@ -45,13 +45,6 @@
       "description": "Learn about how leaders in industry, public health, and government are using Covid Act Now’s data and tools in their strategic and day-to-day response to the pandemic to make better decisions to combat COVID.",
       "buttonCta": "View case studies",
       "buttonRedirect": "/case-studies"
-    },
-    {
-      "sectionTitle": "Covid Act Now updates",
-      "sectionId": "updates",
-      "description": "Explore recent developments — including new tools and simple instructions on how to use them — at Covid Act Now.",
-      "buttonCta": "View Covid Act Now updates",
-      "buttonRedirect": "/updates"
     }
   ]
 }
