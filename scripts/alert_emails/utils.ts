@@ -4,6 +4,7 @@ import moment from 'moment';
 import * as Handlebars from 'handlebars';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
+import regions from '../../src/common/regions';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 
@@ -21,6 +22,11 @@ const alertTemplate = Handlebars.compile(
   fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
 );
 
+interface Disclaimer {
+  name: string;
+  text: string;
+}
+
 interface AlertTemplateData {
   change: string;
   location_name: string;
@@ -30,6 +36,28 @@ interface AlertTemplateData {
   location_url: string;
   unsubscribe_link: string;
   feedback_subject_line: string;
+  disclaimer: Disclaimer | null;
+}
+
+const texasFipsCodes = [
+  '48',
+  ...regions
+    .findCountiesAndMetrosByStateCode('TX')
+    .map(region => region.fipsCode),
+];
+function getDisclaimerText(fips: string): Disclaimer | null {
+  if (texasFipsCodes.includes(fips)) {
+    return {
+      name: 'NOTICE: Texas Winter Weather',
+      text:
+        'In February 2021, Texas experienced extreme winter weather that impacted many ' +
+        'aspects of daily life, including COVID testing. We expect it to take some time for ' +
+        'testing to recover. In the meantime, our metrics and risk levels should be ' +
+        'treated with caution.',
+    };
+  } else {
+    return null;
+  }
 }
 
 function generateAlertEmailContent(
@@ -46,6 +74,7 @@ function generateAlertEmailContent(
 
   const oldLevelText = LOCATION_SUMMARY_LEVELS[oldLevel].summary;
   const newLevelText = LOCATION_SUMMARY_LEVELS[newLevel].summary;
+  const disclaimer = getDisclaimerText(locationAlert.fips);
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
@@ -57,6 +86,7 @@ function generateAlertEmailContent(
     feedback_subject_line: encodeURI(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,
     ),
+    disclaimer,
   };
 
   return alertTemplate(data);

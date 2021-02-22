@@ -166,6 +166,33 @@
                                 </div>
                                 <div
                                     style="line-height:inherit;border-collapse:collapsed;width:100%;border-width:0!important;border-style:none!important;border-color:white!important">
+
+                                    <!-- Disclaimer -->
+                                    {{#if disclaimer}}
+                                    <div
+                                        style="line-height:inherit;Margin-top:24px;Margin-left:20px;Margin-right:20px;Margin-bottom:8px">
+                                        <div align="center"
+                                            style="font-size:15px;font-style:normal;font-weight:bold;line-height:21px;Margin-bottom:4px;border-width:0!important;border-style:none!important;border-color:white!important">
+                                            <p
+                                                style="line-height:inherit;Margin-top:4px;Margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;text-align:center;font-size:15px">
+                                                {{disclaimer.name}}</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="line-height:inherit;Margin-left:20px;Margin-right:20px;Margin-bottom:4px;border-width:0!important;border-style:none!important;border-color:white!important">
+                                        <div
+                                            style="line-height:inherit;vertical-align:middle;border-width:0!important;border-style:none!important;border-color:white!important">
+                                            <p
+                                                style="Margin-top:0;Margin-bottom:0;font-style:normal;font-weight:normal;font-family:Arial,Helvetica,sans-serif;text-align:center;font-size:15px;line-height:21px">
+                                                <span style="line-height:inherit">
+                                                    <span style="line-height:inherit;color:#4f4f4f">{{disclaimer.text}}</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {{/if}}
+
+                                    <!-- ABOUT -->
                                     <div
                                         style="line-height:inherit;Margin-top:24px;Margin-left:20px;Margin-right:20px;Margin-bottom:8px">
                                         <div align="center"
@@ -210,6 +237,8 @@
                                             </p>
                                         </div>
                                     </div>
+
+                                    <!-- Feedback -->
                                     <div
                                         style="line-height:inherit;Margin-top:24px;Margin-left:20px;Margin-right:20px;Margin-bottom:8px">
                                         <div align="center"
@@ -237,6 +266,8 @@
                                             </p>
                                         </div>
                                     </div>
+
+                                    <!-- Change Alert Settings -->
                                     <div
                                         style="line-height:inherit;Margin-top:24px;Margin-left:20px;Margin-right:20px;Margin-bottom:8px">
                                         <div align="center"
