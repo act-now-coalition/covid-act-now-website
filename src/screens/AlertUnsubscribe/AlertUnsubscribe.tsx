@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { getFirestore, getFirestoreFieldValue } from 'common/firebase';
+import { getFirebase, firebase } from 'common/firebase';
 import {
   Wrapper,
   UnsubscribeHeader,
@@ -16,13 +16,6 @@ const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
 const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
-async function getAlertsSubscriptions(): Promise<
-  firebase.firestore.CollectionReference
-> {
-  const firestore = await getFirestore();
-  return firestore.collection('alerts-subscriptions');
-}
-
 const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email') || '';
@@ -32,11 +25,9 @@ const AlertUnsubscribe = () => {
 
   useEffect(() => {
     async function onPageload() {
-      if (!email) {
-        return;
-      }
-      const subscriptions = await getAlertsSubscriptions();
-      const fipsList: string[] = await subscriptions
+      const fipsList: string[] = await getFirebase()
+        .firestore()
+        .collection('alerts-subscriptions')
         .doc(email)
         .get()
         .then(function (doc) {
@@ -56,8 +47,11 @@ const AlertUnsubscribe = () => {
 
   async function unsubscribeFromAll() {
     trackEvent(EventCategory.ENGAGEMENT, EventAction.ALERTS_UNSUBSCRIBE);
-    const subscriptions = await getAlertsSubscriptions();
-    await subscriptions.doc(email).delete();
+    await getFirebase()
+      .firestore()
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .delete();
     setFormSubmittedCopy(unsubscribedCopy);
   }
 
@@ -67,12 +61,14 @@ const AlertUnsubscribe = () => {
 
   async function subscribeToAlerts() {
     const locations = selectedLocations.map(region => region.fipsCode);
-    const subscriptions = await getAlertsSubscriptions();
-    const FieldValue = await getFirestoreFieldValue();
-    await subscriptions.doc(email).set({
-      locations,
-      subscribedAt: FieldValue.serverTimestamp(),
-    });
+    await getFirebase()
+      .firestore()
+      .collection('alerts-subscriptions')
+      .doc(email)
+      .set({
+        locations,
+        subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
     setFormSubmittedCopy(resubscribedCopy);
   }
 
@@ -85,15 +81,13 @@ const AlertUnsubscribe = () => {
           </UnsubscribeHeader>
           <BodyCopy>To update preferences for {email}:</BodyCopy>
           <UpdatePreferencesFormWrapper>
-            <div style={{ width: '100%' }}>
-              <AutocompleteRegions
-                regions={regions.all()}
-                selectedRegions={selectedLocations}
-                onChangeRegions={(e, newRegions) =>
-                  handleSelectChange(newRegions)
-                }
-              />
-            </div>
+            <AutocompleteRegions
+              regions={regions.all()}
+              selectedRegions={selectedLocations}
+              onChangeRegions={(e, newRegions) =>
+                handleSelectChange(newRegions)
+              }
+            />
             <UpdateAlertsButton type="submit" onClick={subscribeToAlerts}>
               Update Preferences
             </UpdateAlertsButton>

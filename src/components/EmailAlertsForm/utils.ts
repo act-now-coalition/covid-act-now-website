@@ -1,4 +1,4 @@
-import { getFirestore, getFirestoreFieldValue } from 'common/firebase';
+import { getFirebase, firebase } from 'common/firebase';
 import { Region, County, MetroArea } from 'common/regions';
 
 export function getDefaultRegions(region: Region): Region[] {
@@ -12,20 +12,16 @@ export function getDefaultRegions(region: Region): Region[] {
   }
 }
 
-export async function subscribeToLocations(
-  emailAddress: string,
-  fipsList: string[],
-) {
+export function subscribeToLocations(emailAddress: string, fipsList: string[]) {
   // Merge the locations with any existing ones since that's _probably_ what the user wants.
-  const firestore = await getFirestore();
-  const FieldValue = await getFirestoreFieldValue();
-  return firestore
+  return getFirebase()
+    .firestore()
     .collection('alerts-subscriptions')
     .doc(emailAddress.toLocaleLowerCase())
     .set(
       {
-        locations: FieldValue.arrayUnion(...fipsList),
-        subscribedAt: FieldValue.serverTimestamp(),
+        locations: firebase.firestore.FieldValue.arrayUnion(...fipsList),
+        subscribedAt: firebase.firestore.FieldValue.serverTimestamp(),
       },
       { merge: true },
     );
