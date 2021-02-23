@@ -322,6 +322,14 @@
     },
     {
       "hidden": false,
+      "stateCode": "PR",
+      "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
+      "vaccinationSignupUrl": null,
+      "locationName": "Puerto Rico",
+      "fips": "72"
+    },
+    {
+      "hidden": false,
       "stateCode": "RI",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": null,
@@ -332,7 +340,7 @@
       "hidden": false,
       "stateCode": "SC",
       "eligibilityInfoUrl": "https://scdhec.gov/covid19/covid-19-vaccine",
-      "vaccinationSignupUrl": "https://sc-dhec.maps.arcgis.com/apps/webappviewer/index.html?id=58f5a4c3bc864fd0a81f5d9fb3bc17a7",
+      "vaccinationSignupUrl": "https://vaxlocator.dhec.sc.gov/",
       "locationName": "South Carolina",
       "fips": "45"
     },
