@@ -140,7 +140,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`Learn more: ${Metric.CASE_GROWTH_RATE}`)
         }
-        ariaDescribedById={`source-tooltip-${CaseGrowthMetric.metricName}`}
       />
       {' and '}
       <DisclaimerTooltip
@@ -152,7 +151,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`How we calculate: ${Metric.CASE_GROWTH_RATE}`)
         }
-        ariaDescribedById={`calculation-tooltip-${CaseGrowthMetric.metricName}`}
       />
       .
     </Fragment>
@@ -210,7 +208,6 @@ function renderInfoTooltip(): React.ReactElement {
       trackCloseTooltip={() =>
         trackCloseTooltip(`Metric definition: ${Metric.CASE_GROWTH_RATE}`)
       }
-      ariaDescribedById={`info-tooltip-${CaseGrowthMetric.metricName}`}
     />
   );
 }

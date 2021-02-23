@@ -4,6 +4,7 @@ import { StyledTooltipProps } from 'components/InfoTooltip';
 import VisuallyHiddenDiv from 'components/VisuallyHidden/VisuallyHidden';
 import { useBreakpoint } from 'common/hooks';
 import { tooltipAnchorOnClick } from 'components/InfoTooltip';
+import { v4 as uuidv4 } from 'uuid';
 
 const InfoTooltip: React.FC<StyledTooltipProps> = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,8 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
     props.trackCloseTooltip();
   };
 
+  const idForAccessability = `${uuidv4()}`;
+
   return (
     <>
       <StyledTooltip
@@ -32,7 +35,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
         }
         open={isOpen}
         leaveTouchDelay={60000} // for mobile: long leaveTouchDelay makes the tooltip stay open until close-icon is clicked
-        aria-describedby={props.ariaDescribedById}
+        aria-describedby={idForAccessability}
       >
         <InfoIcon
           $isOpen={isOpen}
@@ -41,10 +44,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
           onClick={() => tooltipAnchorOnClick(isMobile, handleOpen)}
         />
       </StyledTooltip>
-      <VisuallyHiddenDiv
-        content={props.title}
-        elemId={props.ariaDescribedById}
-      />
+      <VisuallyHiddenDiv content={props.title} elemId={idForAccessability} />
     </>
   );
 };

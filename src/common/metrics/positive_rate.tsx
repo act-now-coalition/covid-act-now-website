@@ -167,7 +167,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)
         }
-        ariaDescribedById={`source-tooltip-${PositiveTestRateMetric.metricName}`}
       />
       {' and '}
       <DisclaimerTooltip
@@ -179,7 +178,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`How we calculate: ${Metric.POSITIVE_TESTS}`)
         }
-        ariaDescribedById={`calculation-tooltip-${PositiveTestRateMetric.metricName}`}
       />
       .
     </Fragment>
@@ -243,7 +241,6 @@ function renderInfoTooltip(): React.ReactElement {
       trackCloseTooltip={() =>
         trackCloseTooltip(`Metric definition: ${Metric.POSITIVE_TESTS}`)
       }
-      ariaDescribedById={`info-tooltip-${PositiveTestRateMetric.metricName}`}
     />
   );
 }

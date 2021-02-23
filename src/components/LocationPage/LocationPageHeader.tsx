@@ -44,7 +44,6 @@ function renderInfoTooltip(): React.ReactElement {
       aria-label="Description of risk levels"
       trackOpenTooltip={() => trackOpenTooltip('Location page header')}
       trackCloseTooltip={() => trackCloseTooltip('Location page header')}
-      ariaDescribedById="location-page-header-tooltip"
     />
   );
 }

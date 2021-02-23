@@ -16,7 +16,6 @@ export const Example = () => {
       title={<StyledMarkdown source={bodyExample} />}
       trackOpenTooltip={() => {}}
       trackCloseTooltip={() => {}}
-      ariaDescribedById="example"
     />
   );
 };
