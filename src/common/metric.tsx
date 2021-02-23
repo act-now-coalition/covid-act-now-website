@@ -89,24 +89,63 @@ export function getMetricNameForCompare(metric: Metric) {
   return metricDefinition.metricNameForCompare;
 }
 
+/**
+ * How many decimals to include when formatting each metric for display (e.g. in
+ * the location header or compare table).
+ */
+const MetricDecimalPlaces: { [metric in Metric]: number } = {
+  [Metric.CASE_DENSITY]: 1,
+  [Metric.CASE_GROWTH_RATE]: 2,
+  [Metric.HOSPITAL_USAGE]: 0,
+  [Metric.POSITIVE_TESTS]: 1,
+  [Metric.VACCINATIONS]: 1,
+};
+
+/** which metrics should be formatted as percentages. */
+const MetricsFormattedAsPercentage = [
+  Metric.HOSPITAL_USAGE,
+  Metric.POSITIVE_TESTS,
+  Metric.VACCINATIONS,
+];
+
+/**
+ * Formats a metric value as a string for display (e.g. in the location header
+ * or compare table).
+ */
 export const formatValue = (
-  chartType: Metric,
+  metric: Metric,
   value: number | null,
   nullValueCopy: string,
 ): string => {
   if (!isNumber(value)) {
     return nullValueCopy;
   }
-  if (chartType === Metric.CASE_DENSITY) {
-    return formatDecimal(value, 1);
-  } else if (chartType === Metric.CASE_GROWTH_RATE) {
-    return formatDecimal(value);
-  } else if (chartType === Metric.HOSPITAL_USAGE) {
-    return formatPercent(value);
-  } else if (chartType === Metric.POSITIVE_TESTS) {
-    return formatPercent(value, 1);
-  } else if (chartType === Metric.VACCINATIONS) {
-    return formatPercent(value, 1);
+  let decimalPlaces = MetricDecimalPlaces[metric];
+  if (MetricsFormattedAsPercentage.includes(metric)) {
+    return formatPercent(value, decimalPlaces);
+  } else {
+    return formatDecimal(value, decimalPlaces);
   }
-  fail('Invalid Chart Type');
+};
+
+/**
+ * Rounds a metric value to the necessary # of decimal places to avoid
+ * losing precision that we would want for display purposes.  Used to
+ * optimize the data we store in our location summaries JSON.
+ */
+export const roundMetricValue = (
+  metric: Metric,
+  value: number | null,
+): number | null => {
+  if (value === null) {
+    return null;
+  }
+
+  let decimalPlaces = MetricDecimalPlaces[metric];
+  if (MetricsFormattedAsPercentage.includes(metric)) {
+    // The metric will be a 0.xyz ratio that needs to be multiplied by 100 before we
+    // apply the desired number of decimal places, so we need to add 2.
+    decimalPlaces += 2;
+  }
+  return Number(value.toFixed(decimalPlaces));
 };
