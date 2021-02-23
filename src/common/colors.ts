@@ -4,6 +4,7 @@ import { Level } from 'common/level';
 import {
   getSummaryFromStateCode,
   getSummaryFromFips,
+  LocationSummary,
 } from './location_summaries';
 
 export default {
@@ -80,19 +81,19 @@ export const LEVEL_COLOR = {
 };
 
 export function colorFromLocationSummary(
-  summary,
-  defaultColor = COLOR_MAP.GRAY_LIGHT,
+  summary: LocationSummary | null,
+  defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
 }
 
-export function stateColor(stateCode) {
+export function stateColor(stateCode: string) {
   const summary = getSummaryFromStateCode(stateCode);
   return colorFromLocationSummary(summary);
 }
 
 export function countyColor(
-  countyFipsCode,
+  countyFipsCode: string,
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   const summary = getSummaryFromFips(countyFipsCode);

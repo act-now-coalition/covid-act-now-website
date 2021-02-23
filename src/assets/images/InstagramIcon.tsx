@@ -1,7 +1,7 @@
 import React from 'react';
 import instagram_logo_png from './instagram_icon.png';
 
-const InstagramIcon = ({ size }) => (
+const InstagramIcon = ({ size }: { size: number }) => (
   <img
     src={instagram_logo_png}
     style={{ width: size, height: size }}
