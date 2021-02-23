@@ -11,7 +11,7 @@ import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
-import { CountyToZipMap } from 'common/hooks/useCountyToZipMap';
+import { CountyToZipMap } from 'common/data';
 
 const UNITED_STATES = 'United States';
 
