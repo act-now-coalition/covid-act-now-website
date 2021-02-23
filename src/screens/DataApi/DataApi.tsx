@@ -7,7 +7,7 @@ import { LearnHeading1 } from '../Learn/Learn.style';
 import {
   productsLandingContent,
   ProductsLandingSection,
-} from 'cms-content/learn/tools';
+} from 'cms-content/learn/data-api';
 import { MarkdownDataApi, DataApiSection } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
 
