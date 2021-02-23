@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import PageContent from 'components/PageContent';
-import { Heading2 } from 'components/Markdown';
+import { Heading2, MarkdownContent } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import { LearnHeading1 } from '../Learn/Learn.style';
 import {
@@ -13,6 +13,7 @@ import { TocItem } from 'cms-content/utils';
 
 const {
   header,
+  intro,
   productsList,
   metadataTitle,
   metadataDescription,
@@ -41,6 +42,7 @@ const DataApi = () => {
       />
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
+        <MarkdownContent source={intro} />
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>

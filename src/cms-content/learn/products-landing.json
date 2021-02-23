@@ -1,21 +1,14 @@
 {
-  "header": "Tools",
-  "intro": "",
+  "header": "Data API",
+  "intro": "Our API provides state, county, and metro data using the most useful metrics to understand COVID’s spread and local risk. \n\nIt includes data and metrics for [cases](https://apidocs.covidactnow.org/data-definitions#cases), [vaccinations](https://apidocs.covidactnow.org/data-definitions#vaccinations), [tests](https://apidocs.covidactnow.org/data-definitions#tests), [hospitalizations](https://apidocs.covidactnow.org/data-definitions#hospitalizations), and [deaths](https://apidocs.covidactnow.org/data-definitions#deaths). The data is aggregated from a number of official sources, quality assured, and updated daily. It’s available in JSON and CSV format. \n\nTo gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
   "productsList": [
     {
-      "productName": "API",
-      "productId": "api",
-      "productSubtitle": "Allows you to use our data",
-      "productDescription": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access) to generate your unique key.\n\nNote that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. We define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\nPlease also note that V1.0 of our API will be deprecated on October 5, 2020. See our [documentation](https://apidocs.covidactnow.org/migration) for migration instructions.",
-      "buttons": []
-    },
-    {
-      "productName": "Embed",
-      "productId": "embed",
-      "productSubtitle": "Allows you to embed our data into your website",
-      "productDescription": "Want to show our COVID map or risk-levels on your own website? Find the embed link at the bottom of this page. \n\n[Covid Act Now Embed- US Map](https://covidactnow.org/embed/us/)\n\nOr, you can embed the specific risk-level module for any location. Simply scroll to the bottom of that state, county or metro’s page.\n\n [Covid Act Now Embed - Dallas metro area](https://covidactnow.org/embed/us/fips/19100)"
+      "productName": "License",
+      "productId": "license",
+      "productSubtitle": "API License",
+      "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
     }
   ],
-  "metadataTitle": "Tools",
-  "metadataDescription": "Free COVID data tools — API, embeds, downloadable CSVs — to help governments and other partners."
+  "metadataTitle": "Data API",
+  "metadataDescription": "Latest Covid-19 data and metrics. Our API powers dashboards, websites, and apps. Data tracks all US states, counties, and metros."
 }
