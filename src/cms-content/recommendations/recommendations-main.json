@@ -83,6 +83,13 @@
       "category": "TRAVEL",
       "level": "ALL",
       "id": "TRAVEL_ALL"
+    },
+    {
+      "body": "**Schools** can safely offer in-person learning only when [these infection control measures](https://covidactnow.org/covid-explained/school-guidance) are in place.",
+      "category": "SCHOOLS",
+      "source": "HGHI",
+      "level": "ALL",
+      "id": "SCHOOLS_ALL"
     }
   ],
   "header": "Recommended actions",
