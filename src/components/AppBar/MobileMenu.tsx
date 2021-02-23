@@ -20,7 +20,7 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
         <FAQIcon color={palette.secondary.main} />
         <span>Learn</span>
       </Link>
-      <Link to="/tools" onClick={closeMenu}>
+      <Link to="/data-api" onClick={closeMenu}>
         <FAQIcon color={palette.secondary.main} />
         <span>Data API</span>
       </Link>
