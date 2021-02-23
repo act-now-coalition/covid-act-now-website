@@ -15,6 +15,7 @@ import variantsAndVaccines from '../articles/covid-variants-vaccines.json';
 import immunity from '../articles/covid-immunity.json';
 import indigenousPeoplesDay from '../articles/covid-impact-majority-native-american-counties.json';
 import metros from '../articles/metros.json';
+import schoolGuidance from '../articles/school-guidance.json';
 
 const orderedArticles = [
   variantsAndVaccines,
@@ -31,6 +32,7 @@ const orderedArticles = [
   antigenTests,
   indigenousPeoplesDay,
   metros,
+  schoolGuidance,
 ];
 
 const articles: ArticleJSON[] = orderedArticles.map(sanitizeArticle);
