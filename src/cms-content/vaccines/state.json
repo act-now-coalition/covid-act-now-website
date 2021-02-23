@@ -322,6 +322,14 @@
     },
     {
       "hidden": false,
+      "stateCode": "PR",
+      "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
+      "vaccinationSignupUrl": null,
+      "locationName": "Puerto Rico",
+      "fips": "72"
+    },
+    {
+      "hidden": false,
       "stateCode": "RI",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": null,

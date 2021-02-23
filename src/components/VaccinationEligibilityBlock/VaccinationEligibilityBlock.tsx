@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { Region } from 'common/regions';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { Region, MetroArea } from 'common/regions';
 import { COLOR_MAP } from 'common/colors';
 import { assert } from 'common/utils';
+import { getVaccinationDataByRegion } from 'cms-content/vaccines';
+import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
+import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
 import ExternalLink from 'components/ExternalLink';
 import { Heading2, Paragraph } from 'components/Markdown';
 import TabsPanel, { TabInfo } from 'components/TabsPanel';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
-import { getVaccinationDataByRegion } from 'cms-content/vaccines';
+import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
+import { scrollWithOffset } from 'components/TableOfContents';
+import RegionVaccinationBlock from 'components/RegionVaccinationBlock';
 import { getEligibilityInfo, getRegionState } from './utils';
 import {
   Container,
@@ -14,26 +20,26 @@ import {
   Source,
 } from './VaccinationEligibilityBlock.style';
 import EligibilityPanel from './EligibilityPanel';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
-import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
-import { scrollWithOffset } from 'components/TableOfContents';
-import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
 }) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
-  const state = getRegionState(region);
-  assert(
-    state,
-    `VaccinationEligibilityBlock cannot be used for locations with more than one state`,
-  );
 
-  const vaccineInfo = getVaccineInfoByFips(region.fipsCode);
-  if (!vaccineInfo) {
-    return null;
+  if (region instanceof MetroArea && !region.isSingleStateMetro) {
+    return <RegionVaccinationBlock region={region} />;
   }
+
+  const state = getRegionState(region);
+  assert(state, `Couldn't find a state for region ${region.fipsCode}`);
+
+  // If we don't have vaccination information for a given state, we fallback to
+  // show the eligibility links.
+  const vaccineInfo = getVaccineInfoByFips(state.fipsCode);
+  if (!vaccineInfo) {
+    return <RegionVaccinationBlock region={region} />;
+  }
+
   const eligibilityData = getEligibilityInfo(state);
   const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
 
