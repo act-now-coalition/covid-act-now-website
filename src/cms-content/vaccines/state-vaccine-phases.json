@@ -751,45 +751,9 @@
         },
         {
           "phase": "1B",
-          "tier": "1",
+          "tier": "",
           "currentlyEligible": true,
-          "description": "* Older Individuals (65+)\n* First Responders\n* PK-12 staff, early childhood education, childcare workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled individuals and care staff living in home settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "3",
-          "currentlyEligible": true,
-          "description": "* Staff and individuals living in congregate settings\n* Government officials/staff at State Capitol",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "4",
-          "currentlyEligible": true,
-          "description": "* Health, Life, and Safety Inspectors",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "5",
-          "currentlyEligible": true,
-          "description": "* Correctional Facility Staff and Incarcerated Individuals",
+          "description": "Counties will work through the 1B Tiers in the following order:\n\nTier 1\n* Older Individuals (65+)\n* First Responders\n* PK-12 staff, early childhood education, childcare workers\n\nTier 2\n* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled individuals and care staff living in home settings\n\nTier 3\n* Staff and individuals living in congregate settings\n* Government officials/staff at State Capitol\n\nTier 4\n* Health, Life, and Safety Inspectors\n\nTier 5\n* Correctional Facility Staff and Incarcerated Individuals",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.983Z"
@@ -1802,7 +1766,7 @@
         {
           "phase": "2",
           "tier": "2",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Adults of any age with comorbidities\n* Teachers and staff in PreK-12 educational settings\n* Staff and residents in congregate locations and worksites",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
@@ -1873,7 +1837,7 @@
         {
           "phase": "1B",
           "tier": "4",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* People 70 and older",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
@@ -1944,7 +1908,7 @@
           "phase": "1",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Healthcare workers\n* First responders\n* congregate settings",
+          "description": "* Healthcare workers\n* First responders\n* Congregate settings",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -1961,7 +1925,7 @@
         {
           "phase": "1",
           "tier": "3",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Ages 65-74",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
@@ -2227,7 +2191,7 @@
           "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Adults 70+",
+          "description": "* Healthcare workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Adults 65+",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -2236,7 +2200,7 @@
           "phase": "n/a",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Utahns between the ages of 65-69 \n* Anyone 18 or older with certain medical conditions",
+          "description": "* Anyone 18 or older with certain medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 1",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -2424,6 +2388,28 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
+    },
+    {
+      "emailAlertVersion": 0,
+      "locationName": "West Virginia",
+      "eligibilityInfoUrl": "https://dhhr.wv.gov/covid-19/pages/vaccine.aspx",
+      "phaseGroups": [
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-02-22T22:48:18.252Z",
+          "phase": "1",
+          "tier": "A",
+          "description": "* Healthcare workers \n* Long-term care facility residents and workers \n* 65 years of age and older population\n* Teachers 50 years of age or older"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-22T22:48:19.221Z",
+          "phase": "2",
+          "startDate": "March – October, 2021",
+          "description": "General population"
+        }
+      ],
+      "fips": "54"
     },
     {
       "emailAlertVersion": 1,
