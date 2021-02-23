@@ -168,6 +168,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`Learn more: ${Metric.HOSPITAL_USAGE}`)
         }
+        ariaDescribedById={`source-tooltip-${ICUCapacityUsed.metricName}`}
       />
       {' and '}
       <DisclaimerTooltip
@@ -179,6 +180,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`How we calculate: ${Metric.HOSPITAL_USAGE}`)
         }
+        ariaDescribedById={`calculation-tooltip-${ICUCapacityUsed.metricName}`}
       />
       .
     </Fragment>
@@ -243,6 +245,7 @@ function renderInfoTooltip(): React.ReactElement {
       trackCloseTooltip={() =>
         trackCloseTooltip(`Metric definition: ${Metric.HOSPITAL_USAGE}`)
       }
+      ariaDescribedById={`info-tooltip-${ICUCapacityUsed.metricName}`}
     />
   );
 }

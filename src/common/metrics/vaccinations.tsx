@@ -113,6 +113,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
             trackCloseTooltip={() =>
               trackCloseTooltip(`Learn more: ${Metric.VACCINATIONS}`)
             }
+            ariaDescribedById={`source-tooltip-${VaccinationsMetric.metricName}`}
           />
           {' and '}
         </>
@@ -126,6 +127,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
         }
+        ariaDescribedById={`calculation-tooltip-${VaccinationsMetric.metricName}`}
       />
       .
     </Fragment>
@@ -150,6 +152,7 @@ function renderInfoTooltip(): React.ReactElement {
       trackCloseTooltip={() =>
         trackCloseTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
       }
+      ariaDescribedById={`info-tooltip-${VaccinationsMetric.metricName}`}
     />
   );
 }

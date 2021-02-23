@@ -10,6 +10,7 @@ export { InfoTooltip, DisclaimerTooltip };
 export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   trackOpenTooltip: () => void;
   trackCloseTooltip: () => void;
+  ariaDescribedById: string;
   mainCopy?: string;
 };
 

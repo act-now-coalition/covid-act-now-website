@@ -151,6 +151,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`Learn more: ${Metric.CASE_DENSITY}`)
         }
+        ariaDescribedById={`calculation-tooltip-${CaseIncidenceMetric.metricName}`}
       />
       {' and '}
       <DisclaimerTooltip
@@ -162,6 +163,7 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackCloseTooltip={() =>
           trackCloseTooltip(`How we calculate: ${Metric.CASE_DENSITY}`)
         }
+        ariaDescribedById={`source-tooltip-${CaseIncidenceMetric.metricName}`}
       />
       .
     </Fragment>
@@ -226,6 +228,7 @@ function renderInfoTooltip(): React.ReactElement {
       trackCloseTooltip={() =>
         trackCloseTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
       }
+      ariaDescribedById={`info-tooltip-${CaseIncidenceMetric.metricName}`}
     />
   );
 }
