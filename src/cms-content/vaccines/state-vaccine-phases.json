@@ -751,45 +751,9 @@
         },
         {
           "phase": "1B",
-          "tier": "1",
+          "tier": "",
           "currentlyEligible": true,
-          "description": "* Older Individuals (65+)\n* First Responders\n* PK-12 staff, early childhood education, childcare workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled individuals and care staff living in home settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "3",
-          "currentlyEligible": true,
-          "description": "* Staff and individuals living in congregate settings\n* Government officials/staff at State Capitol",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "4",
-          "currentlyEligible": true,
-          "description": "* Health, Life, and Safety Inspectors",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "5",
-          "currentlyEligible": true,
-          "description": "* Correctional Facility Staff and Incarcerated Individuals",
+          "description": "Counties will work through the 1B Tiers in the following order:\n\nTier 1\n* Older Individuals (65+)\n* First Responders\n* PK-12 staff, early childhood education, childcare workers\n\nTier 2\n* Frontline essential workers (food, agriculture, distribution, and manufacturing sectors)\n* Disabled individuals and care staff living in home settings\n\nTier 3\n* Staff and individuals living in congregate settings\n* Government officials/staff at State Capitol\n\nTier 4\n* Health, Life, and Safety Inspectors\n\nTier 5\n* Correctional Facility Staff and Incarcerated Individuals",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.983Z"
