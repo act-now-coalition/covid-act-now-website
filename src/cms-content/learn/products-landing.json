@@ -7,7 +7,12 @@
       "productId": "download-the-data",
       "productSubtitle": "Allows you to use our data",
       "productDescription": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access) to generate your unique key.\n\nPlease also note that V1.0 of our API will be deprecated on October 5, 2020. See our [documentation](https://apidocs.covidactnow.org/migration) for migration instructions.",
-      "buttons": []
+      "buttons": [
+        {
+          "cta": "Sign up to download data",
+          "redirect": "https://apidocs.covidactnow.org/access"
+        }
+      ]
     },
     {
       "productName": "License",
