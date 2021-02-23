@@ -2236,7 +2236,7 @@
           "phase": "n/a",
           "tier": "",
           "currentlyEligible": false,
-          "description": "\\* Anyone 18 or older with certain medical conditions",
+          "description": "* Anyone 18 or older with certain medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 1",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -2435,7 +2435,7 @@
           "updatedAt": "2021-02-22T22:48:18.252Z",
           "phase": "1",
           "tier": "A",
-          "description": "\\* Healthcare workers \n\n\\* Long-term care facility residents and workers \n\n\\* 65 years of age and older population \n\n\\* Teachers 50 years of age or older"
+          "description": "* Healthcare workers \n* Long-term care facility residents and workers \n* 65 years of age and older population\n* Teachers 50 years of age or older"
         },
         {
           "currentlyEligible": false,
