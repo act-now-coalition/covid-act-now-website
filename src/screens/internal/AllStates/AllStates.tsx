@@ -3,22 +3,26 @@ import { LoadingScreen } from './AllStates.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { Metric } from 'common/metricEnum';
 import { MetricChart } from 'components/Charts';
-import regions from 'common/regions';
+import regions, { State as StateType } from 'common/regions';
 
 function AllStates() {
-  return regions.states.map(state => {
-    return <State key={state.stateCode} state={state} />;
-  });
+  return (
+    <>
+      {regions.states.map(state => {
+        return <State key={state.stateCode} state={state} />;
+      })}
+    </>
+  );
 }
 
-function State({ state }) {
+function State({ state }: { state: StateType }) {
   const projections = useProjectionsFromRegion(state);
 
   // Projections haven't loaded yet
   if (!projections) {
     return <LoadingScreen></LoadingScreen>;
   }
-  const stateName = projections.stateName;
+  const stateName = state.name;
 
   return (
     <>
