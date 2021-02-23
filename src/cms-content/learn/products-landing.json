@@ -1,6 +1,6 @@
 {
   "header": "Data API",
-  "intro": "Our API provides state, county, and metro data using the most useful metrics to understand COVID’s spread and local risk. \n\nIt includes data and metrics for [cases](https://apidocs.covidactnow.org/data-definitions#cases), [vaccinations](https://apidocs.covidactnow.org/data-definitions#vaccinations), [tests](https://apidocs.covidactnow.org/data-definitions#tests), [hospitalizations](https://apidocs.covidactnow.org/data-definitions#hospitalizations), and [deaths](https://apidocs.covidactnow.org/data-definitions#deaths). The data is aggregated from a number of official sources, quality assured, and updated daily. It’s available in JSON and CSV format. \n\nTo gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
+  "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
   "productsList": [
     {
       "productName": "License",
