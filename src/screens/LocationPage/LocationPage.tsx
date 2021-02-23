@@ -27,7 +27,7 @@ function LocationPage({ region }: LocationPageProps) {
     setMapOption(defaultMapOption);
     // Close the map on mobile on any change to a region.
     setMobileMenuOpen(false);
-  }, [defaultMapOption]);
+  }, [defaultMapOption, region]);
 
   return (
     <div>
