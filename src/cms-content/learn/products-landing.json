@@ -18,7 +18,7 @@
       "productName": "License",
       "productId": "license",
       "productSubtitle": "API License",
-      "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. We define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
+      "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
     }
   ],
   "metadataTitle": "Data API",
