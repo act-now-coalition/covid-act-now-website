@@ -2,17 +2,19 @@ import styled, { css } from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
-export const LegendContainer = styled.div`
+export const LegendContainer = styled.div<{
+  $condensed: boolean;
+}>`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: ${props => (props.condensed ? 'unset' : '3.5rem')};
+  height: ${props => (props.$condensed ? 'unset' : '3.5rem')};
   width: 100%;
 
   @media (min-width: 960px) {
     height: unset;
     width: unset;
-    flex-direction: ${props => (props.condensed ? 'column' : 'row')};
+    flex-direction: ${props => (props.$condensed ? 'column' : 'row')};
   }
 `;
 
@@ -27,11 +29,13 @@ export const LegendItemHeader = styled.div`
   color: rgba(0, 0, 0, 0.7);
 `;
 
-export const LegendItemContainer = styled.div`
+export const LegendItemContainer = styled.div<{
+  $condensed: boolean;
+}>`
   display: flex;
   flex: 0 1 auto;
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     margin: 0;
     padding: 0;
@@ -57,20 +61,24 @@ export const ColorBox = styled(Grid)`
   width: 12px;
 `;
 
-export const LegendWrapper = styled.div`
+export const LegendWrapper = styled.div<{
+  $condensed: boolean;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 1rem;
-  align-items: ${props => (props.condensed ? 'flex-start' : 'center')};
-  padding: ${props => (props.condensed ? '0.75rem 0 0' : '0 0.5rem')};
+  align-items: ${props => (props.$condensed ? 'flex-start' : 'center')};
+  padding: ${props => (props.$condensed ? '0.75rem 0 0' : '0 0.5rem')};
   ${props =>
-    !props.condensed &&
-    css`
+    !props.$condensed &&
+    css<{
+      $condensed: boolean;
+    }>`
       @media (min-width: 600px) {
         flex-direction: row;
         margin-top: 2rem;
-        padding: ${props => (props.condensed ? '0.75rem 0 0' : '0 1rem')};
+        padding: ${props => (props.$condensed ? '0.75rem 0 0' : '0 1rem')};
       }
     `};
 `;
