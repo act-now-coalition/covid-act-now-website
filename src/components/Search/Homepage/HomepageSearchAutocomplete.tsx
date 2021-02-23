@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
-import { Region, MetroArea } from 'common/regions';
+import { Region, MetroArea, State } from 'common/regions';
 import {
   Wrapper,
   StyledTextField,
@@ -31,6 +31,7 @@ const HomepageSearchAutocomplete: React.FC<{
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
+  const [checkForStateMatch, setCheckForStateMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
   const [isOpen, setIsOpen] = useState(false);
   const { countyToZipMap } = useCountyToZipMap();
@@ -43,16 +44,22 @@ const HomepageSearchAutocomplete: React.FC<{
   const onInputChange = (e: any, value: string) => {
     setInput(value);
     const isStringOfDigits = /^\d+$/.test(value);
+    const isStringOfTwoLetters =
+      value.length === 2 && /^[a-zA-Z]+$/.test(value);
     if (isStringOfDigits) {
       setNoOptionsCopy('Enter a valid 5-digit zip code');
-      if (value.length === 5) setCheckForZipcodeMatch(true);
-      else setCheckForZipcodeMatch(false);
+      value.length === 5
+        ? setCheckForZipcodeMatch(true)
+        : setCheckForZipcodeMatch(false);
     } else {
-      if (value.length) {
-        setNoOptionsCopy(
-          `No locations named ${value} found. You can also try searching by zip code.`,
-        );
-      } else setNoOptionsCopy('No location found');
+      isStringOfTwoLetters
+        ? setCheckForStateMatch(true)
+        : setCheckForStateMatch(false);
+      value.length
+        ? setNoOptionsCopy(
+            `No locations named ${value} found. You can also try searching by zip code.`,
+          )
+        : setNoOptionsCopy('No location found');
     }
   };
 
@@ -60,13 +67,16 @@ const HomepageSearchAutocomplete: React.FC<{
     const zipCodes = countyToZipMap?.[option.fipsCode];
     if (checkForZipcodeMatch && zipCodes) {
       return `${zipCodes.join(' ')}`;
-    } else {
-      if (option instanceof MetroArea) {
-        return `${option.shortName}, ${(option as MetroArea).stateCodes}`;
-      } else {
-        return option.shortName;
-      }
-    }
+    } else if (
+      checkForStateMatch &&
+      option instanceof State &&
+      (option as State).stateCode === input.toUpperCase()
+    ) {
+      return (option as State).stateCode;
+    } else
+      return option instanceof MetroArea
+        ? `${option.shortName}, ${(option as MetroArea).stateCodes}`
+        : option.shortName;
   };
 
   const onSelect = (e: any, value: Region) => {
@@ -118,7 +128,8 @@ const HomepageSearchAutocomplete: React.FC<{
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
           filterOptions={createFilterOptions({
-            matchFrom: checkForZipcodeMatch ? 'any' : 'start',
+            matchFrom:
+              checkForZipcodeMatch || checkForStateMatch ? 'any' : 'start',
             limit: filterLimit,
             stringify: stringifyOption,
           })}
