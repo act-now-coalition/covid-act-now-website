@@ -2488,14 +2488,14 @@
       "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
       "phaseGroups": [
         {
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "updatedAt": "2021-02-23T14:50:55.215Z",
           "phase": "1",
           "description": "* Healthcare workers\n* Long-term care facilities\n* Facilities for people with mental disabilities",
           "tier": "A"
         },
         {
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "updatedAt": "2021-02-23T14:50:56.315Z",
           "phase": "1",
           "tier": "B",
