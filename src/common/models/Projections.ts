@@ -1,5 +1,5 @@
 import { Projection } from './Projection';
-import { getLevel, ALL_METRICS } from 'common/metric';
+import { getLevel, ALL_METRICS, roundMetricValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
@@ -52,8 +52,11 @@ export class Projections {
   get summary(): LocationSummary {
     const metrics = {} as { [metric in Metric]: MetricSummary };
     for (const metric of ALL_METRICS) {
+      const value = this.getMetricValue(metric);
+      const roundedValue = roundMetricValue(metric, value);
+
       metrics[metric] = {
-        value: this.getMetricValue(metric),
+        value: roundedValue,
         level: this.getMetricLevel(metric),
       };
     }
