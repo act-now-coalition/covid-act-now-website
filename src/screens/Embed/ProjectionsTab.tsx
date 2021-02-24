@@ -18,6 +18,12 @@ export default function DataPage({
   totalPopulation,
   deathsPercentage,
   populationPercentage,
+}: {
+  cases: number;
+  deaths: number;
+  totalPopulation: number;
+  deathsPercentage: number;
+  populationPercentage: number;
 }) {
   return (
     <Grid container style={{ height: '100%' }}>
@@ -33,7 +39,7 @@ export default function DataPage({
           <Grid item xs={12}>
             <Spacer />
           </Grid>
-          <Grid container item xs={12} align="center" justify="center">
+          <Grid container item xs={12}>
             {[
               // TODO
               // {
@@ -57,7 +63,7 @@ export default function DataPage({
   );
 }
 
-function TotalPopulation({ population }) {
+function TotalPopulation({ population }: { population: number }) {
   return (
     <PaddedGridItem br bt bb xs={12} direction="column">
       <PeopleIcon />
@@ -67,7 +73,15 @@ function TotalPopulation({ population }) {
   );
 }
 
-function GroupStat({ total, percentage, subHeading }) {
+function GroupStat({
+  total,
+  percentage,
+  subHeading,
+}: {
+  total: number;
+  percentage: number;
+  subHeading: string;
+}) {
   return (
     <PaddedGridItem direction="column" flexGrow={1}>
       <H2Statistic>{new Intl.NumberFormat().format(total)}</H2Statistic>

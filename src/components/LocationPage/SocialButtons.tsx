@@ -16,9 +16,15 @@ import {
   SocialShareButton,
 } from './ShareButtons.style';
 
-const SocialButtons = props => {
-  const { iconSize: size, shareURL, shareQuote } = props;
-
+const SocialButtons = ({
+  iconSize,
+  shareURL,
+  shareQuote,
+}: {
+  iconSize: number;
+  shareURL: string;
+  shareQuote: string;
+}) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
     shareQuote ||
@@ -29,7 +35,7 @@ const SocialButtons = props => {
   const [copyLinkButtonTextB, setCopyLinkButtonTextB] = useState('Link');
 
   const iconProps = {
-    size,
+    size: iconSize,
     round: false,
     fill: 'auto',
   };
@@ -52,7 +58,7 @@ const SocialButtons = props => {
         </TwitterShareButton>
       </SocialShareButton>
       <SocialShareButton {...buttonProps} color="#007fb1">
-        <LinkedinShareButton url={url} hashtags={[hashtag]} title={quote}>
+        <LinkedinShareButton url={url} title={quote}>
           <LinkedinIcon {...iconProps} />
         </LinkedinShareButton>
       </SocialShareButton>

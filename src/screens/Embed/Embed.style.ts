@@ -18,7 +18,10 @@ export const EmbedHeaderContainer = styled(Box)`
   background-color: ${COLORS.LIGHTGRAY};
 `;
 
-export const EmbedContainer = styled(Paper)`
+export const EmbedContainer = styled(Paper)<{
+  height?: number;
+  width?: number;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +37,13 @@ export const EmbedContentContainer = styled(Box)`
 `;
 
 // DATA PAGE STYLES
-export const PaddedGridItem = styled(Grid)`
+export const PaddedGridItem = styled(Grid)<{
+  flexGrow?: number;
+  p?: string;
+  bt?: boolean;
+  bb?: boolean;
+  br?: boolean;
+}>`
   display: flex;
   flex-grow: 1;
   justify-content: center;
@@ -45,7 +54,9 @@ export const PaddedGridItem = styled(Grid)`
   border-right: ${props => (props.br ? '1px solid lightgray' : 'none')};
 `;
 
-export const H1Statistic = styled(Box)`
+export const H1Statistic = styled(Box)<{
+  mb: boolean;
+}>`
   font-weight: 800;
   font-size: 1.6rem;
   margin-bottom: ${props => props.mb || 'none'};
