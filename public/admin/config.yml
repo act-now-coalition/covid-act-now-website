@@ -548,7 +548,7 @@ collections:
             name: intro
             widget: markdown
             required: false
-          - label: 'Who we work with logos'
+          - label: 'Who uses our data logos'
             name: 'logos'
             widget: 'list'
             fields:
