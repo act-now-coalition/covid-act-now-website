@@ -41,7 +41,7 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Description of risk levels`}
+      aria-label="Description of risk levels"
       trackOpenTooltip={() => trackOpenTooltip('Location page header')}
       trackCloseTooltip={() => trackCloseTooltip('Location page header')}
     />
