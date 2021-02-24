@@ -36,7 +36,7 @@ const Announcements: React.FC = () => {
         . Due to the widespread, untracked, community spread across all of the
         United States, we will no longer be showing a contact tracing metric on
         our site, although we will continue serving it through our{' '}
-        <Link to="/tools">API</Link>.
+        <Link to="/data-api">API</Link>.
       </AnnouncementBodyCopy>
       <ButtonsContainer>
         <ViewAllLink

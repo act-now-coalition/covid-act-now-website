@@ -84,6 +84,10 @@ export function getRecommendations(
     item => item.category === RecommendCategory.TRAVEL,
   );
 
+  const schoolRecommendation = recommendations.filter(
+    item => item.category === RecommendCategory.SCHOOLS,
+  );
+
   /**
    * Some Fed recommendations in the Yellow level only apply when the positive
    * test rate is over 3% - we filter those out when that's the case.
@@ -120,6 +124,7 @@ export function getRecommendations(
     ...exposureRecommendations,
     ...gatheringRecommendation,
     ...masksRecommendation,
+    ...schoolRecommendation,
     ...finalOtherFedRecommendations,
     ...travelRecommendation,
   ];

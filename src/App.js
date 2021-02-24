@@ -39,7 +39,7 @@ const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
 const Explained = lazy(() => import('screens/Learn/Explained'));
 const Alerts = lazy(() => import('screens/Learn/Alerts/Alerts'));
 const Contact = lazy(() => import('screens/Contact/Contact'));
-const Tools = lazy(() => import('screens/Tools/Tools'));
+const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
 const Donate = lazy(() => import('screens/Donate/Donate'));
@@ -179,9 +179,10 @@ export default function App() {
                     to="/us/:stateId/county/:countyId"
                   />
 
-                  <Route path="/tools" component={Tools} />
+                  <Route path="/data-api" component={DataApi} />
                   {/* Keeping the /resources URL active in case linked elsewhere */}
-                  <Redirect from="/resources" to="/tools" />
+                  <Redirect from="/resources" to="/data-api" />
+                  <Redirect from="/tools" to="/data-api" />
                   <Route path="/contact" component={Contact} />
                   <Route path="/terms" component={Terms} />
                   <Route path="/privacy" component={Privacy} />
