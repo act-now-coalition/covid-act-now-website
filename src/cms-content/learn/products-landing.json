@@ -1,6 +1,40 @@
 {
   "header": "Data API",
-  "intro": "Our API provides state, county, and metro level data using the most useful metrics to understand COVID’s spread and local risk. The data is aggregated from a number of official sources, quality assured, and updated daily. It is available in JSON and CSV formats.",
+  "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data.",
+  "logos": [
+    {
+      "altText": "California Department of Health logo",
+      "image": "/images_cms/cdph.png"
+    },
+    {
+      "altText": "Washington National Guard logo",
+      "image": "/images_cms/washington-nationa-guard-logo-red.svg"
+    },
+    {
+      "altText": "National Association of Counties logo",
+      "image": "/images_cms/naco-logo.png"
+    },
+    {
+      "altText": "Unilever logo",
+      "image": "/images_cms/logo-blue-rgb.jpg"
+    },
+    {
+      "altText": "General Mills logo",
+      "image": "/images_cms/general-mills-logo.png"
+    },
+    {
+      "altText": "IBM logo",
+      "image": "/images_cms/ibm-logo.png"
+    },
+    {
+      "altText": "Wayfair logo",
+      "image": "/images_cms/wayfair-logo.jpg"
+    },
+    {
+      "altText": "DC Department of Health logo",
+      "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png"
+    }
+  ],
   "productsList": [
     {
       "productName": "License",
