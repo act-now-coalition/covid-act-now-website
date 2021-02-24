@@ -63,7 +63,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
           <strong>When</strong> can I get vaccinated if I’m in...
           <VaccinationLinksBlock
             links={eligibilityLinks}
-            trackingLinkPrefix="Eligibility"
+            trackingLabel="Eligibility"
           />
         </Fragment>
       )}
@@ -73,7 +73,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
           <strong>Where and how</strong> do I get vaccinated if I’m in...
           <VaccinationLinksBlock
             links={vaccinationOptionsLinks}
-            trackingLinkPrefix="Options"
+            trackingLabel="Options"
           />
         </Fragment>
       )}
@@ -81,11 +81,10 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   );
 };
 
-// TODO: Add tracking for these links
 const VaccinationLinksBlock: React.FC<{
   links: VaccinationLink[];
-  trackingLinkPrefix: string;
-}> = ({ links, trackingLinkPrefix }) => (
+  trackingLabel: string;
+}> = ({ links, trackingLabel }) => (
   <ButtonContainer>
     {links.map(({ label, url }) => (
       <LinkButton
@@ -93,7 +92,7 @@ const VaccinationLinksBlock: React.FC<{
         key={label}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => trackVaccinationLink(`${trackingLinkPrefix}: ${label}`)}
+        onClick={() => trackVaccinationLink(trackingLabel)}
       >
         {label}
       </LinkButton>
