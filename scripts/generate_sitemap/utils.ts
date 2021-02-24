@@ -52,7 +52,7 @@ export function getTopLevelPageItems(): SitemapItemLoose[] {
     },
     '/donate',
     '/about',
-    '/tools',
+    '/data-api',
     '/contact',
     '/terms',
     '/privacy',

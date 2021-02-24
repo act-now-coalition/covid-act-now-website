@@ -29,7 +29,7 @@ const Footer = () => {
           <StyledFooterBodyNav>
             <Link to="/">Map</Link>
             <Link to="/learn">Learn</Link>
-            <Link to="/tools">Tools</Link>
+            <Link to="/data-api">Data API</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact us</Link>
           </StyledFooterBodyNav>

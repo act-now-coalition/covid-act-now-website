@@ -1,18 +1,19 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import PageContent from 'components/PageContent';
-import { Heading2 } from 'components/Markdown';
+import { Heading2, MarkdownContent } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import { LearnHeading1 } from '../Learn/Learn.style';
 import {
   productsLandingContent,
   ProductsLandingSection,
-} from 'cms-content/learn/tools';
-import { MarkdownTools, ToolsSection } from './Tools.style';
+} from 'cms-content/learn/data-api';
+import { MarkdownDataApi, DataApiSection } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
 
 const {
   header,
+  intro,
   productsList,
   metadataTitle,
   metadataDescription,
@@ -20,36 +21,37 @@ const {
 
 export const sidebarSections: TocItem[] = [
   {
-    label: 'Tools',
-    to: '/tools',
+    label: 'Data API',
+    to: '/data-api',
     items: productsLandingContent.productsList.map(product => ({
-      to: `/tools#${product.productId}`,
+      to: `/data-api#${product.productId}`,
       label: product.productName,
     })),
   },
 ];
 
-const Tools = () => {
+const DataApi = () => {
   const date = formatMetatagDate();
 
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/tools"
+        canonicalUrl="/data-api"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
+        <MarkdownContent source={intro} />
         {productsList.map((product: ProductsLandingSection) => (
-          <ToolsSection key={product.productId}>
+          <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
-            <MarkdownTools source={product.productDescription} />
-          </ToolsSection>
+            <MarkdownDataApi source={product.productDescription} />
+          </DataApiSection>
         ))}
       </PageContent>
     </Fragment>
   );
 };
 
-export default Tools;
+export default DataApi;
