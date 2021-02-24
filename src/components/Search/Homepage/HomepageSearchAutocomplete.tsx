@@ -33,7 +33,7 @@ const HomepageSearchAutocomplete: React.FC<{
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
   const [isOpen, setIsOpen] = useState(false);
-  const { countyToZipMap } = useCountyToZipMap();
+  const { result: countyToZipMap } = useCountyToZipMap();
 
   const isMobile = useBreakpoint(600);
 

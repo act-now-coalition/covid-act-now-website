@@ -28,7 +28,7 @@ export default function useGeolocationInExplore(
     getLargestMetroFipsForExplore(numLocations),
   );
 
-  const { countyToZipMap } = useCountyToZipMap();
+  const { result: countyToZipMap } = useCountyToZipMap();
 
   useEffect(() => {
     if (geolocation && countyToZipMap) {

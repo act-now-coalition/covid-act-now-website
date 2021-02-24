@@ -48,7 +48,7 @@ export default function HomePage() {
   const indicatorsRef = useRef(null);
 
   const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
-  const { countyToZipMap, isLoading: zipIsLoading } = useCountyToZipMap();
+  const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
 
   const isLoading = geoIsLoading || zipIsLoading;
 
