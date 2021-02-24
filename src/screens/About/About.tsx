@@ -40,6 +40,10 @@ export const sidebarItems: TocItem[] = [
         to: '/about#team',
         label: 'Who we are',
       },
+      {
+        to: '/about#join-us',
+        label: 'Join us',
+      },
     ],
   },
 ];
@@ -100,6 +104,8 @@ const About = () => {
           <MarkdownContent source={aboutContent.teamIntro} />
           <TeamSection />
         </HashWrapper>
+        <AboutHeading2 id="join-us">{aboutContent.joinUsHeader}</AboutHeading2>
+        <MarkdownContent source={aboutContent.joinUsContent} />
       </PageContent>
     </Fragment>
   );

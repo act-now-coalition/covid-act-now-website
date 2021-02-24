@@ -26,6 +26,8 @@ interface AboutContent {
   governmentLogos: LogoItem[];
   teamHeader: string;
   teamIntro: Markdown;
+  joinUsHeader: string;
+  joinUsContent: Markdown;
 }
 
 const aboutContent = aboutPage as AboutContent;

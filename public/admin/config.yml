@@ -84,6 +84,12 @@ collections:
             }
           - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
           - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
+          - { label: 'Join us: Header', name: 'joinUsHeader', widget: 'string' }
+          - {
+              label: 'Join us: Content',
+              name: 'joinUsContent',
+              widget: 'markdown',
+            }
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
