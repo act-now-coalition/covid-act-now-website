@@ -18,6 +18,7 @@ import metros from '../articles/metros.json';
 import schoolGuidance from '../articles/school-guidance.json';
 
 const orderedArticles = [
+  schoolGuidance,
   variantsAndVaccines,
   vaccineProgress,
   vaccineBasics,
@@ -32,7 +33,6 @@ const orderedArticles = [
   antigenTests,
   indigenousPeoplesDay,
   metros,
-  schoolGuidance,
 ];
 
 const articles: ArticleJSON[] = orderedArticles.map(sanitizeArticle);
