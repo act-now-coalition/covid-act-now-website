@@ -17,7 +17,6 @@ function initializeGA() {
       ...options,
     },
   ]);
-  ReactGA.plugin.require('linkid');
 }
 
 /**
