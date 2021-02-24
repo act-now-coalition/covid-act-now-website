@@ -1,12 +1,15 @@
-/* Closes modal when hitting escape key */
+/* Closes modals + share buttons module when hitting escape key */
 
 import { useEffect } from 'react';
 
-export default function useEscCloseModal(handleCloseModal: any): void {
+export default function useEscToClose(
+  handleClose: () => void,
+  additionalDependency: any = null,
+): void {
   useEffect(() => {
     const handleEsc = (e: any) => {
       if (e.keyCode === 27) {
-        handleCloseModal();
+        handleClose();
       }
     };
 
@@ -15,5 +18,5 @@ export default function useEscCloseModal(handleCloseModal: any): void {
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [handleCloseModal]);
+  }, [handleClose, additionalDependency]);
 }

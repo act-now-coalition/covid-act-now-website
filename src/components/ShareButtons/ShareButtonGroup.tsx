@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import TwitterShareButton from './TwitterShareButton';
 import LinkedinShareButton from './LinkedinShareButton';
 import CopyLinkButton from './CopyLinkButton';
 import { ShareButton, SocialButtonsContainer } from './ShareButtons.style';
+import { useEscToClose } from 'common/hooks';
 
 const ShareImageButtons: React.FC<{
   imageUrl: string | (() => Promise<string>);
@@ -71,6 +72,8 @@ const ShareImageButtons: React.FC<{
       showSocialButtons();
     }
   };
+
+  useEscToClose(hideSocialButtons, socialSharingProps);
 
   return (
     <ClickAwayListener onClickAway={() => hideSocialButtons()}>
