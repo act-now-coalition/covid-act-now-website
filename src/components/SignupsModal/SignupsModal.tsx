@@ -9,10 +9,10 @@ import {
   CloseIcon,
 } from 'components/Compare/ModalFaq.style';
 import { LockBodyScroll } from 'components/Dialog';
-import { useEscCloseModal } from 'common/hooks';
+import { useEscToClose } from 'common/hooks';
 
 const SignupsModal = (props: { handleCloseModal: () => void }) => {
-  useEscCloseModal(props.handleCloseModal);
+  useEscToClose(props.handleCloseModal);
 
   return (
     <Fragment>

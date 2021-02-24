@@ -7,4 +7,10 @@ export default {
       backgroundColor: 'rgba(0, 0, 0, 0.03)',
     },
   },
+  label: {
+    '.Mui-focusVisible &': {
+      outline: 'rgb(0, 95, 204) 1px auto',
+      outlineOffset: 1,
+    },
+  },
 };
