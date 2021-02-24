@@ -3,6 +3,13 @@ import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';
 
+export const ExternalStyledLink = styled.a.attrs(props => ({
+  rel: 'noopener noreferrer',
+  target: '_blank',
+}))`
+  text-decoration: none;
+`;
+
 export const MarkdownDataApi = styled(MarkdownContent)`
   /* The blockquote shows as the Notes section */
   blockquote {
