@@ -3,6 +3,8 @@ import Thermometer, { ThermometerBox } from './index';
 import { COLOR_MAP } from 'common/colors';
 import { getMetricDefinition } from 'common/metric';
 import { Metric } from 'common/metricEnum';
+import NewThermometer from './NewThermometer';
+import { Level } from 'common/level';
 
 export default {
   title: 'Shared Components/Thermometer',
@@ -62,3 +64,7 @@ export const HospitalUsage = () =>
 
 export const PositiveTests = () =>
   renderMetricThermometer(Metric.POSITIVE_TESTS);
+
+export const SvgThermometer = () => {
+  return <NewThermometer currentLevel={Level.MEDIUM} />;
+};
