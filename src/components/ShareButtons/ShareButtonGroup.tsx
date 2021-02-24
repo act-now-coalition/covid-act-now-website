@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
