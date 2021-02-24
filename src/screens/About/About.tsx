@@ -25,6 +25,10 @@ export const sidebarItems: TocItem[] = [
         label: 'Our mission',
       },
       {
+        to: '/about#contact-us',
+        label: 'Contact us',
+      },
+      {
         to: '/about#partners',
         label: 'Who we work with',
       },
@@ -54,6 +58,10 @@ const About = () => {
         <AboutHeading1>{aboutContent.pageHeader}</AboutHeading1>
         <AboutHeading2 id="mission">{aboutContent.introHeader}</AboutHeading2>
         <MarkdownContent source={aboutContent.introContent} />
+        <AboutHeading2 id="contact-us">
+          {aboutContent.contactUsHeader}
+        </AboutHeading2>
+        <MarkdownContent source={aboutContent.contactUsContent} />
         <AboutHeading2 id="partners">
           {aboutContent.partnersHeader}
         </AboutHeading2>

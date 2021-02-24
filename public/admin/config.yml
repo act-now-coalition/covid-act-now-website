@@ -30,6 +30,12 @@ collections:
               name: 'introContent',
               widget: 'markdown',
             }
+          - { label: 'Contact us: Header', name: 'contactUsHeader', widget: 'string' }
+          - {
+              label: 'Contact us: Content',
+              name: 'contactUsContent',
+              widget: 'markdown',
+            }
           - {
               label: 'Partners: Header',
               name: 'partnersHeader',

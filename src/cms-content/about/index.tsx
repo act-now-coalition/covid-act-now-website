@@ -16,6 +16,8 @@ interface AboutContent {
   pageHeader: string;
   introHeader: string;
   introContent: Markdown;
+  contactUsHeader: string;
+  contactUsContent: Markdown;
   partnersHeader: string;
   partnersContent: PartnersContent[];
   whoWeServeHeader: string;
