@@ -1,7 +1,40 @@
 {
   "header": "Data API",
   "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
-  "logos": [],
+  "logos": [
+    {
+      "altText": "California Department of Health logo",
+      "image": "/images_cms/cdph.png"
+    },
+    {
+      "altText": "Washington National Guard logo",
+      "image": "/images_cms/washington-nationa-guard-logo-red.svg"
+    },
+    {
+      "altText": "National Association of Counties logo",
+      "image": "/images_cms/naco-logo.png"
+    },
+    {
+      "altText": "Unilever logo",
+      "image": "/images_cms/logo-blue-rgb.jpg"
+    },
+    {
+      "altText": "General Mills logo",
+      "image": "/images_cms/general-mills-logo.png"
+    },
+    {
+      "altText": "IBM logo",
+      "image": "/images_cms/ibm-logo.png"
+    },
+    {
+      "altText": "Wayfair logo",
+      "image": "/images_cms/wayfair-logo.jpg"
+    },
+    {
+      "altText": "DC Department of Health logo",
+      "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png"
+    }
+  ],
   "productsList": [
     {
       "productName": "License",
