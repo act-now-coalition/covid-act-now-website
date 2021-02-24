@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FacebookIcon, TwitterIcon, LinkedinIcon } from 'react-share';
 import InstagramIcon from 'assets/images/InstagramIcon';
 
-const FooterSocialLinks = props => {
+const FooterSocialLinks = () => {
   const iconSize = 40;
 
   return (
-    <Fragment>
+    <>
       <a href="https://www.facebook.com/covidactnow" aria-label="Facebook">
         <FacebookIcon size={iconSize} borderRadius={10} />
       </a>
@@ -22,7 +22,7 @@ const FooterSocialLinks = props => {
       >
         <LinkedinIcon size={iconSize} borderRadius={10} />
       </a>
-    </Fragment>
+    </>
   );
 };
 
