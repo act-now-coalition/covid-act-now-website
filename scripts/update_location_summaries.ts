@@ -22,6 +22,7 @@ import { DatasetId } from '../src/common/models/Projection';
 import { assert } from '../src/common/utils';
 import { Level } from '../src/common/level';
 import regions from '../src/common/regions';
+import { importFipsToCcviMap } from '../src/common/data';
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
 const SUMMARIES_FOLDER = path.join(__dirname, 'alert_emails/summaries');
@@ -60,33 +61,23 @@ async function main() {
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
   const allMetroProjections = await fetchAllMetroProjections();
-  await buildSummaries(
-    allStatesProjections,
-    allCountiesProjections,
-    allMetroProjections,
-  );
+  await buildSummaries([
+    ...allStatesProjections,
+    ...allCountiesProjections,
+    ...allMetroProjections,
+  ]);
   await buildAggregations(allStatesProjections, allCountiesProjections);
   await buildSlackSummary();
   console.log('done');
 }
 
-async function buildSummaries(
-  allStatesProjections: Projections[],
-  allCountiesProjections: Projections[],
-  allMetroProjections: Projections[],
-) {
+async function buildSummaries(allProjections: Projections[]) {
+  const fipsToCcviMap = await importFipsToCcviMap();
   const summaries = {} as { [fips: string]: LocationSummary };
 
-  for (const stateProjections of allStatesProjections) {
-    summaries[stateProjections.fips] = stateProjections.summary;
-  }
-
-  for (const countyProjections of allCountiesProjections) {
-    summaries[countyProjections.fips] = countyProjections.summary;
-  }
-
-  for (const metroProjections of allMetroProjections) {
-    summaries[metroProjections.fips] = metroProjections.summary;
+  for (const projections of allProjections) {
+    const fips = projections.fips;
+    summaries[fips] = projections.summary(fipsToCcviMap[fips]?.overall ?? null);
   }
 
   await fs.writeJson(`${OUTPUT_FOLDER}/summaries.json`, summaries);
