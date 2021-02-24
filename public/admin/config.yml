@@ -30,6 +30,12 @@ collections:
               name: 'introContent',
               widget: 'markdown',
             }
+          - { label: 'Contact us: Header', name: 'contactUsHeader', widget: 'string' }
+          - {
+              label: 'Contact us: Content',
+              name: 'contactUsContent',
+              widget: 'markdown',
+            }
           - {
               label: 'Partners: Header',
               name: 'partnersHeader',
@@ -78,6 +84,12 @@ collections:
             }
           - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
           - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
+          - { label: 'Join us: Header', name: 'joinUsHeader', widget: 'string' }
+          - {
+              label: 'Join us: Content',
+              name: 'joinUsContent',
+              widget: 'markdown',
+            }
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
@@ -548,6 +560,20 @@ collections:
             name: intro
             widget: markdown
             required: false
+          - label: 'Who uses our data logos'
+            name: 'logos'
+            widget: 'list'
+            fields:
+              - label: 'Alt text'
+                name: 'altText'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Url'
+                name: 'url'
+                widget: 'string'
+                required: false
           - label: Products List
             name: productsList
             widget: list

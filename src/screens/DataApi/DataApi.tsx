@@ -32,7 +32,6 @@ export const sidebarSections: TocItem[] = [
 
 const DataApi = () => {
   const date = formatMetatagDate();
-
   return (
     <Fragment>
       <AppMetaTags
