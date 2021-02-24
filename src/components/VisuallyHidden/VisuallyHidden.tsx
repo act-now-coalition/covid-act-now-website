@@ -22,11 +22,7 @@ const VisuallyHiddenDiv: React.FC<{
   content: React.ReactNode;
   elemId: string;
 }> = ({ content, elemId }) => {
-  return (
-    <HiddenDiv role="tooltip" id={elemId}>
-      {content}
-    </HiddenDiv>
-  );
+  return <HiddenDiv id={elemId}>{content}</HiddenDiv>;
 };
 
 export default VisuallyHiddenDiv;
