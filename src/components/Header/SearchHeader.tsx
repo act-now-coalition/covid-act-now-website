@@ -29,7 +29,7 @@ const SearchHeader = ({
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
 
   const { geolocationData } = useGeolocation();
-  const { countyToZipMap } = useCountyToZipMap();
+  const { result: countyToZipMap } = useCountyToZipMap();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen((mobileMenuOpen = !mobileMenuOpen));

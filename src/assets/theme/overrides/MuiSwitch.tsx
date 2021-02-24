@@ -11,4 +11,11 @@ export default {
       opacity: 0.38,
     },
   },
+  switchBase: {
+    '&$focusVisible $thumb': {
+      outline: 'rgb(0, 95, 204) 1px auto',
+      'outline-offset': '2px',
+    },
+  },
+  focusVisible: {},
 };

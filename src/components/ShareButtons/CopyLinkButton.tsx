@@ -2,7 +2,13 @@ import React, { Fragment, useState } from 'react';
 import { SocialButton, SocialShareButton } from './ShareButtons.style';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-const CopyLinkButton = ({ url, onCopyLink = () => {} }) => {
+const CopyLinkButton = ({
+  url,
+  onCopyLink = () => {},
+}: {
+  url: string;
+  onCopyLink: () => void;
+}) => {
   const [copiedLink, setCopiedLink] = useState(false);
   return (
     <CopyToClipboard
@@ -12,7 +18,7 @@ const CopyLinkButton = ({ url, onCopyLink = () => {} }) => {
         onCopyLink();
       }}
     >
-      <SocialShareButton variant="contained" disableElevation color="#007fb1">
+      <SocialShareButton variant="contained" color="#007fb1">
         <SocialButton disableRipple disableFocusRipple disableTouchRipple>
           {copiedLink ? (
             'Copied!'

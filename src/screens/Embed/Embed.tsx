@@ -32,7 +32,7 @@ function LocationEmbed() {
   const region = useRegionFromParams();
 
   const projections = useProjectionsFromRegion(region);
-  if (!projections) {
+  if (!projections || !region) {
     return null;
   }
 
@@ -87,9 +87,7 @@ export function EmbedFooter() {
   );
 }
 
-export default function Embed(props) {
-  const { isNational } = props;
-
+export default function Embed({ isNational }: { isNational: boolean }) {
   if (isNational) {
     return (
       <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>

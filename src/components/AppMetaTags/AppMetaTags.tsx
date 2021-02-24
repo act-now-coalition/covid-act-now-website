@@ -6,14 +6,15 @@ import { getMapImageUrl } from 'common/urls';
  * public/index.html contains meta tags for the home page. Every non-home page
  * will contain react-helmet tags to override the meta tags for the home page.
  * This component helps manage the per-page meta tags.
- *
- * TypeScript definition for props:
- * @param {{canonicalUrl: string, pageTitle?: string, pageDescription: string, shareTitle?: string, shareDescription?: string}} props
  */
 export default function AppMetaTags({
   canonicalUrl,
   pageTitle,
   pageDescription,
+}: {
+  canonicalUrl: string;
+  pageTitle?: string;
+  pageDescription: string;
 }) {
   let fullPageTitle = pageTitle
     ? [pageTitle, 'Covid Act Now'].join(' - ')
