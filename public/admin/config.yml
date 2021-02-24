@@ -548,6 +548,20 @@ collections:
             name: intro
             widget: markdown
             required: false
+          - label: 'Who uses our data logos'
+            name: 'logos'
+            widget: 'list'
+            fields:
+              - label: 'Alt text'
+                name: 'altText'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Url'
+                name: 'url'
+                widget: 'string'
+                required: false
           - label: Products List
             name: productsList
             widget: list
