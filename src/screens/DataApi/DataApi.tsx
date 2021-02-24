@@ -14,7 +14,7 @@ import {
   ExternalStyledLink,
 } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
-import { WhiteButton } from 'screens/Learn/Landing/SectionButton.style';
+import { GreenButton } from 'screens/Learn/Landing/SectionButton.style';
 
 const {
   header,
@@ -49,7 +49,7 @@ const DataApi = () => {
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
         <ExternalStyledLink href="https://apidocs.covidactnow.org/access/">
-          <WhiteButton disableRipple>Register</WhiteButton>
+          <GreenButton disableRipple>Register</GreenButton>
         </ExternalStyledLink>
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
