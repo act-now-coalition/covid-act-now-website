@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: add-logos-section-to-products
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -548,6 +548,20 @@ collections:
             name: intro
             widget: markdown
             required: false
+          - label: 'Who we work with logos'
+            name: 'logos'
+            widget: 'list'
+            fields:
+              - label: 'Alt text'
+                name: 'altText'
+                widget: 'string'
+              - label: 'Image'
+                name: 'image'
+                widget: 'image'
+              - label: 'Url'
+                name: 'url'
+                widget: 'string'
+                required: false
           - label: Products List
             name: productsList
             widget: list

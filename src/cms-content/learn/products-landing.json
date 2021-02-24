@@ -1,6 +1,7 @@
 {
   "header": "Data API",
   "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
+  "logos": [],
   "productsList": [
     {
       "productName": "License",

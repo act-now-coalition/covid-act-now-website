@@ -4,6 +4,7 @@ import { chain, concat, difference } from 'lodash';
 import { teams } from '../../src/cms-content/team';
 import aboutContent from '../../src/cms-content/about';
 import { allCaseStudies } from '../../src/cms-content/learn';
+import { productsLandingContent } from '../../src/cms-content/learn/data-api';
 import {
   ImageInfo,
   isRasterImage,
@@ -84,6 +85,16 @@ const partnersLogos = chain(aboutContent.partnersContent)
   }))
   .value();
 
+const apiUsersLogos = chain(productsLandingContent.logos)
+  .map(logoInfo => joinPublicFolder(logoInfo.image))
+  .filter(isRasterImage)
+  .map((imagePath: string) => ({
+    inputPath: imagePath,
+    originalPath: cmsOriginalPath(imagePath),
+    height: 100,
+  }))
+  .value();
+
 const caseStudyLogos = chain(allCaseStudies)
   .map(caseStudy => joinPublicFolder(caseStudy.logoUrl))
   .filter(isRasterImage)
@@ -99,6 +110,7 @@ const cmsStructuredImages = concat(
   governmentLogos,
   partnersLogos,
   caseStudyLogos,
+  apiUsersLogos,
 );
 
 const cmsStructuredImageFilenames = cmsStructuredImages.map(

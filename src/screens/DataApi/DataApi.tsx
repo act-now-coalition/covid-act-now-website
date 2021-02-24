@@ -5,6 +5,7 @@ import { Heading2, MarkdownContent } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import { LearnHeading1 } from '../Learn/Learn.style';
 import {
+  LogoItem,
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn/data-api';
@@ -17,6 +18,7 @@ const {
   productsList,
   metadataTitle,
   metadataDescription,
+  logos,
 } = productsLandingContent;
 
 export const sidebarSections: TocItem[] = [
@@ -29,6 +31,23 @@ export const sidebarSections: TocItem[] = [
     })),
   },
 ];
+
+interface Props {
+  logos: LogoItem[];
+}
+
+const WhosUsingOurDataSection = ({ logos }: Props) => {
+  const key = 'whos-using-our-data';
+  const name = "Who's using our data";
+  return (
+    <DataApiSection key={key}>
+      <Heading2 id={key}>{name}</Heading2>
+      {logos.map(logo => (
+        <img src={logo.url} alt={logo.altText} />
+      ))}
+    </DataApiSection>
+  );
+};
 
 const DataApi = () => {
   const date = formatMetatagDate();
@@ -43,6 +62,7 @@ const DataApi = () => {
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
+        <WhosUsingOurDataSection logos={logos} />
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
