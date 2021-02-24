@@ -106,6 +106,7 @@
     "prettier-fix": "prettier --write '**/*.{css,scss,js,ts,tsx}'",
     "update-api-types": "ts-node-script scripts/update_api_types.ts",
     "update-location-summaries": "ts-node-script -r tsconfig-paths/register scripts/update_location_summaries.ts",
+    "update-availability-snapshot": "ts-node-script -r tsconfig-paths/register scripts/update_availability_snapshot.ts",
     "create-lists-to-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/create_lists_to_email.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-daily-alerts": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/generate_daily_alerts.ts",

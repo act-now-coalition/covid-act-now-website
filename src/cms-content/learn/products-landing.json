@@ -3,6 +3,24 @@
   "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
   "productsList": [
     {
+      "productName": "Who's using our data",
+      "productId": "whos-using-our-data",
+      "productSubtitle": "",
+      "productDescription": ""
+    },
+    {
+      "productName": "Available data",
+      "productId": "available-data",
+      "productSubtitle": "Available data",
+      "productDescription": "Our data, metrics, and risk levels are available in the API. Refer to our [data definitions](https://apidocs.covidactnow.org/data-definitions) for all included fields.\n\nWe provide data aggregated for"
+    },
+    {
+      "productName": "FAQs",
+      "productId": "faqs",
+      "productSubtitle": "",
+      "productDescription": "#### How often is your data updated?\n\nData is updated daily."
+    },
+    {
       "productName": "License",
       "productId": "license",
       "productSubtitle": "API License",
