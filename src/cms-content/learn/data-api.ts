@@ -15,12 +15,19 @@ export interface ProductsLandingSection {
   productId: string;
   productSubtitle: string;
   productDescription: Markdown;
-  buttons: LandingPageButton[];
+  buttons?: LandingPageButton[];
+}
+
+export interface LogoItem {
+  altText: string;
+  image: string;
+  url: string;
 }
 
 export interface ProductsLandingContent {
   header: string;
   intro?: Markdown;
+  logos: LogoItem[];
   productsList: ProductsLandingSection[];
   metadataTitle: string;
   metadataDescription: string;

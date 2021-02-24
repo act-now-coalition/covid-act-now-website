@@ -1,8 +1,9 @@
 {
   "teamHeader": "Who we are",
+  "contactUsHeader": "Contact us",
   "whoWeServeContentA": "We've worked with more than 100 federal, state, and county officials to develop data-driven COVID responses.",
   "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
-  "introContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge",
+  "introContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge\n\nPlease note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services.",
   "partnersContent": [
     {
       "copy": "Georgetown University Center for Global Health Science and Security, Stanford University Clinical Excellence Research Center, and Harvard Global Health Institute",
@@ -46,6 +47,8 @@
   ],
   "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
   "whoWeServeHeader": "Who we serve",
+  "joinUsContent": "Want to join us? [Let us know](https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform).\n\nSome roles that we need:\n\n* UI/UX Designers\n* JavaScript/React, Python engineers\n* Epidemiologists\n* Data Modelers\n* User Support Representatives\n* Product Managers\n* Social Media Managers\n* ...and more!",
+  "joinUsHeader": "Join us",
   "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
   "governmentLogos": [
     {
@@ -96,5 +99,6 @@
   ],
   "partnersHeader": "Who we work with",
   "introHeader": "Our mission",
+  "contactUsContent": "For general questions, email [info@covidactnow.org](mailto:info@covidactnow.org).\n\nFor press inquiries, email [press@covidactnow.org](mailto:press@covidactnow.org).\n\nIf you are with a state or local government, reach out to us at [gov@covidactnow.org](mailto:gov@covidactnow.org).",
   "pageHeader": "About Covid Act Now"
 }
