@@ -10,7 +10,7 @@ const DisclaimerTooltip: React.FC<StyledTooltipProps> = props => {
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useBreakpoint(600);
 
-  const idForAccessability = `${uuidv4()}`;
+  const idForAccessability = uuidv4();
 
   return (
     <>

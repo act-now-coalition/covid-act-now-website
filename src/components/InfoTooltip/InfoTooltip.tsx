@@ -20,7 +20,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
     props.trackCloseTooltip();
   };
 
-  const idForAccessability = `${uuidv4()}`;
+  const idForAccessability = uuidv4();
 
   return (
     <>
