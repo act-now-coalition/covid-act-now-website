@@ -3,7 +3,7 @@
  * https://precisionforcovid.org/ccvi
  * https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19
  *
- * Results in ccvi-data.json with a format of [fips]: {CCVI data}
+ * Results in ccvi.json with a format of [fips]: {CCVI data}
  */
 import fs from 'fs';
 import path from 'path';
@@ -12,7 +12,7 @@ import { FipsToCcviMap } from '../../src/common/data';
 const promisify = require('util').promisify;
 const csvParse = promisify(require('csv-parse'));
 
-const outputPath = path.join(__dirname, '../../src/common/data/ccvi-data.json');
+const outputPath = path.join(__dirname, '../../src/common/data/ccvi.json');
 
 function formatFips(fips: string): string {
   if (fips.length === 4 || fips.length === 1) {

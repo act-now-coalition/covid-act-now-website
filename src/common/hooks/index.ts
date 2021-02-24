@@ -6,7 +6,9 @@ import useGeolocationInExplore from './useGeolocationInExplore';
 import useScrollToElement from './useScrollToElement';
 import useEscCloseModal from './useEscCloseModal';
 import useGeolocationRegions from './useGeolocationRegions';
+import usePromise from './usePromise';
 import useCountyToZipMap from './useCountyToZipMap';
+import useFipsToCcviMap from './useFipsToCcviMap';
 
 export {
   useScrollToElement,
@@ -18,4 +20,6 @@ export {
   useEscCloseModal,
   useGeolocationRegions,
   useCountyToZipMap,
+  useFipsToCcviMap,
+  usePromise,
 };
