@@ -345,13 +345,34 @@
           "updatedAt": "2021-02-18T01:52:35.982Z"
         },
         {
-          "phase": "1b",
-          "tier": "3",
+          "phase": "2",
+          "tier": "",
           "currentlyEligible": false,
-          "description": "* Frontline essential workers\n* Individuals with high-risk conditions",
+          "description": "* Educators and childcare providers\n* Individuals 55-64",
           "expandedDefinitionUrl": "",
-          "startDate": "March 2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
+          "startDate": "March 1, 2021",
+          "updatedAt": "2021-02-24T16:35:12.090Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-24T16:35:32.481Z",
+          "phase": "3",
+          "description": "* Individuals 45-54",
+          "startDate": "March 22, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-24T16:37:19.993Z",
+          "phase": "4",
+          "description": "* Individuals 35-44",
+          "startDate": "April 12, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-24T16:35:36.096Z",
+          "phase": "5",
+          "description": "* Individuals 16-34",
+          "startDate": "May 3, 2021"
         }
       ]
     },
