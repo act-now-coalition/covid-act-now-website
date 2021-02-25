@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { defaultTracker, legacyTracker } from './utils';
+import amplitude from 'amplitude-js';
+
+function initializeAmplitude() {
+  amplitude.getInstance().init('9273bc15ce71641291d471c9f17895a5');
+}
 
 /**
  * Initialize Google Analytics
@@ -37,6 +42,7 @@ function usePageTracking() {
   useEffect(() => {
     if (!initialized) {
       initializeGA();
+      initializeAmplitude();
       setInitialized(true);
     }
   }, [initialized]);
