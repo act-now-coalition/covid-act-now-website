@@ -120,10 +120,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
       <Section>
         <Source>
           Source:{' '}
-          <ExternalLink
-            href={sourceUrl}
-            onClick={() => trackSourceClick(region)}
-          >
+          <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
             {sourceName}
           </ExternalLink>
         </Source>
@@ -132,12 +129,8 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   );
 };
 
-function trackSourceClick(region: Region) {
-  trackEvent(
-    EventCategory.VACCINATION,
-    EventAction.CLICK_LINK,
-    `Source: ${region.fullName}`,
-  );
+function trackSourceClick() {
+  trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, 'Source');
 }
 
 function trackTabSelected(tabName: string) {

@@ -1,8 +1,12 @@
 import { Markdown } from '../utils';
 import infoToolTipContent from './info-tooltips.json';
 import metricCaculationTooltipContent from './metric-calculation-tooltips.json';
+import ccviTooltipContent from './ccvi-tooltips.json';
 import { Metric } from 'common/metricEnum';
 import { assert } from 'common/utils';
+import { keyBy } from 'lodash';
+
+/* Metric tooltips + location page header tooltip: */
 
 export interface Tooltip {
   title: string;
@@ -48,3 +52,37 @@ export const locationPageHeaderTooltipContent: Tooltip = getTooltipContentById(
   'location-page-header',
   infoToolTipContent.tooltip,
 );
+
+/* CCVI tooltips: */
+
+interface CcviSubscoreTooltip {
+  subscoreName: string;
+  id: string;
+  content: Markdown;
+}
+
+const tooltipContentById = keyBy(
+  ccviTooltipContent.subscoreTooltips,
+  item => item.id,
+);
+
+function getCcviTooltipById(id: string) {
+  const tooltipContent = tooltipContentById[id];
+  assert(
+    tooltipContent,
+    `Ccvi tooltip content unexpectedly not found for id: ${id}`,
+  );
+  return tooltipContent;
+}
+
+export const orderedCcviSubscores: CcviSubscoreTooltip[] = [
+  getCcviTooltipById('socioeconomic-status'),
+  getCcviTooltipById('minority-status-and-language'),
+  getCcviTooltipById('household-transportation'),
+  getCcviTooltipById('epidemiological-factors'),
+  getCcviTooltipById('healthcare-system-factors'),
+  getCcviTooltipById('high-risk-environments'),
+  getCcviTooltipById('population-density'),
+];
+
+export const vulnerabilitiesHeaderTooltip = ccviTooltipContent.headerTooltipContent as Markdown;

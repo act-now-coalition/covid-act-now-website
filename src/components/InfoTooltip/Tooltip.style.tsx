@@ -33,7 +33,6 @@ export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
   arrow: true,
   interactive: true,
   TransitionComponent: Fade,
-  'aria-describedby': 'tooltip-description',
   enterDelay: 0,
   enterTouchDelay: 0,
 }))``;
@@ -72,16 +71,6 @@ export const StyledMarkdown = styled(MarkdownBody)`
   p:not(:last-child) {
     margin-bottom: 0.5rem;
   }
-`;
-
-export const HiddenDiv = styled.div`
-  clip-path: inset(100%);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 `;
 
 export const StyledSpan = styled.span`

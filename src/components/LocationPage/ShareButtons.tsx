@@ -46,7 +46,7 @@ const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
 
 interface InnerContentProps {
   region: Region;
-  iconSize: string;
+  iconSize: number;
   shareURL: string;
   shareQuote: string;
   chartIdentifier: number;
@@ -180,7 +180,7 @@ const ShareButtons = ({
     return (
       <MobileButtonsWrapper>
         <InnerContent
-          iconSize="40"
+          iconSize={40}
           shareURL={shareURL}
           shareQuote={shareQuote}
           chartIdentifier={chartIdentifier}
@@ -192,7 +192,7 @@ const ShareButtons = ({
     return (
       <DesktopButtonsWrapper>
         <InnerContent
-          iconSize="50"
+          iconSize={50}
           shareURL={shareURL}
           shareQuote={shareQuote}
           chartIdentifier={chartIdentifier}

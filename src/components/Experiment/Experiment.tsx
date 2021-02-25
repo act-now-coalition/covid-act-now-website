@@ -24,6 +24,9 @@ import {
  *
  * The code always defaults to version A if the experiment is not running
  * (or ended) and we still have both versions in the code.
+ *
+ * Note: The optimize script needs to be uncommented from index.html before
+ * starting experiments.
  */
 
 export enum ExperimentID {
