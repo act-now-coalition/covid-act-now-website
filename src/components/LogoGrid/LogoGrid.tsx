@@ -1,10 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import ExternalLink from 'components/ExternalLink';
-import { Logo } from './LogoGrid.style';
+import { Logo, LogoSmall } from './LogoGrid.style';
 import ghssLogoUrl from 'assets/images/ghss.png';
 import harvardLogoUrl from 'assets/images/harvard.png';
 import cercLogo from 'assets/images/cerc.png';
+import { StyledGridContainer } from 'screens/About/About.style';
+import { LogoItem } from 'cms-content/about';
 
 export const LogoGridItem = (props: {
   image: string;
@@ -56,3 +58,27 @@ export const PartnerLogoGrid = () => {
     </Grid>
   );
 };
+
+const LogoGrid: React.FC<{ logos: LogoItem[] }> = ({ logos }) => {
+  return (
+    <StyledGridContainer
+      container
+      spacing={1}
+      alignItems="center"
+      justify="center"
+    >
+      {logos.map((logo: LogoItem) => {
+        return (
+          <Grid container item xs={4} justify="center" key={logo.altText}>
+            <Grid item>
+              <ExternalLink href={logo.url}>
+                <LogoSmall src={logo.image} alt={logo.altText} />
+              </ExternalLink>
+            </Grid>
+          </Grid>
+        );
+      })}
+    </StyledGridContainer>
+  );
+};
+export default LogoGrid;

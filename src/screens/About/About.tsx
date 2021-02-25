@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
+import LogoGrid, { LogoGridItem } from 'components/LogoGrid/LogoGrid';
 import {
   AboutHeading1,
   AboutHeading2,
@@ -12,7 +12,6 @@ import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { TocItem } from 'cms-content/utils';
 import TeamSection from './Team/TeamSection';
-import GovLogoGrid from './GovLogoGrid';
 import { StyledGridContainer } from './About.style';
 
 export const sidebarItems: TocItem[] = [
@@ -96,7 +95,7 @@ const About = () => {
         </AboutHeading2>
         <PartnersSectionWrapper>
           <MarkdownContent source={aboutContent.whoWeServeContentA} />
-          <GovLogoGrid logos={aboutContent.governmentLogos} />
+          <LogoGrid logos={aboutContent.governmentLogos} />
           <MarkdownContent source={aboutContent.whoWeServeContentB} />
         </PartnersSectionWrapper>
         <HashWrapper id="team">
