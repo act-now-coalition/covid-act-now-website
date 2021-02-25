@@ -1,0 +1,40 @@
+{
+  "headerTooltipContent": "vulnerabilities section header tooltip content",
+  "subscoreTooltips": [
+    {
+      "subscoreName": "Socioeconomic status",
+      "id": "socioeconomic-status",
+      "content": "Socioeconomic status tooltip content"
+    },
+    {
+      "subscoreName": "Minority status & language",
+      "id": "minority-status-and-language",
+      "content": "Minority status & language tooltip content"
+    },
+    {
+      "subscoreName": "Household & transportation",
+      "id": "household-transportation",
+      "content": "Household & transportation tooltip content"
+    },
+    {
+      "subscoreName": "Epidemiological factors ",
+      "id": "epidemiological-factors",
+      "content": "Epidemiological factors tooltip content"
+    },
+    {
+      "subscoreName": "Healthcare system factors",
+      "id": "healthcare-system-factors",
+      "content": "Healthcare system factors tooltip content"
+    },
+    {
+      "subscoreName": "High-risk environments",
+      "id": "high-risk-environments",
+      "content": "High-risk environments tooltip content"
+    },
+    {
+      "subscoreName": "Population density",
+      "id": "population-density",
+      "content": "Population density tooltip content"
+    }
+  ]
+}
