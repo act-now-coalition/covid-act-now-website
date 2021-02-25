@@ -1540,7 +1540,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Adults 75+\n* Adults with at least one chronic high-risk condition",
+          "description": "* Adults 75+\n* Individuals (16+) with at least one chronic high-risk condition",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
           "updatedAt": "2021-02-18T01:52:35.985Z"
