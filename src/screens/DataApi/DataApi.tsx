@@ -11,10 +11,10 @@ import {
 import {
   MarkdownDataApi,
   DataApiSection,
-  ExternalStyledLink,
+  GreenLinkButton,
 } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
-import { GreenButton } from 'screens/Learn/Landing/SectionButton.style';
+import { EventCategory } from 'components/Analytics';
 
 const {
   header,
@@ -47,9 +47,13 @@ const DataApi = () => {
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
-        <ExternalStyledLink href="https://apidocs.covidactnow.org/access/">
-          <GreenButton disableRipple>Register</GreenButton>
-        </ExternalStyledLink>
+        <GreenLinkButton
+          trackingCategory={EventCategory.API}
+          trackingLabel="Data API: Register"
+          href="https://apidocs.covidactnow.org/access/"
+        >
+          Register
+        </GreenLinkButton>
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>

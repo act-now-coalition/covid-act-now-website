@@ -48,6 +48,7 @@ export enum EventCategory {
   NONE = 'none', // use NONE for development
   GEOLOCATION_CARDS = 'geolocation cards',
   TOOLTIPS = 'tooltips',
+  API = 'api',
 }
 
 /**
