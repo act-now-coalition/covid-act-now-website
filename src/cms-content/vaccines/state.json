@@ -12,7 +12,7 @@
       "hidden": false,
       "stateCode": "AK",
       "eligibilityInfoUrl": "http://dhss.alaska.gov/dph/epi/id/pages/COVID-19/vaccine.aspx",
-      "vaccinationSignupUrl": "https://alaska-dhss.maps.arcgis.com/apps/webappviewer/index.html?id=3d1dff7f0e544edbb18c9039b0473aa5",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Alaska",
       "fips": "02"
     },
@@ -60,7 +60,7 @@
       "hidden": false,
       "stateCode": "DE",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
-      "vaccinationSignupUrl": "",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Delaware",
       "fips": "10"
     },
@@ -98,17 +98,17 @@
     },
     {
       "hidden": false,
-      "stateCode": "IA",
+      "stateCode": "ID",
       "eligibilityInfoUrl": "https://coronavirus.idaho.gov/wp-content/uploads/2021/01/When-can-I-get-a-COVID-vaccine-in-Idaho-011221-5.pdf",
-      "vaccinationSignupUrl": null,
-      "locationName": "Iowa",
-      "fips": "19"
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
+      "locationName": "Idaho",
+      "fips": "16"
     },
     {
       "hidden": false,
       "stateCode": "IL",
       "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Illinois",
       "fips": "17"
     },
@@ -116,7 +116,7 @@
       "hidden": false,
       "stateCode": "IN",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
-      "vaccinationSignupUrl": "https://vaccine.coronavirus.in.gov/",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Indiana",
       "fips": "18"
     },
@@ -124,7 +124,7 @@
       "hidden": false,
       "stateCode": "IA",
       "eligibilityInfoUrl": "https://idph.iowa.gov/Emerging-Health-Issues/Novel-Coronavirus/Vaccine/Information-for-the-Public",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Iowa",
       "fips": "19"
     },
@@ -140,7 +140,7 @@
       "hidden": false,
       "stateCode": "KY",
       "eligibilityInfoUrl": "https://govstatus.egov.com/ky-covid-vaccine",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Kentucky",
       "fips": "21"
     },
@@ -156,7 +156,7 @@
       "hidden": false,
       "stateCode": "ME",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Maine",
       "fips": "23"
     },
@@ -170,7 +170,7 @@
     },
     {
       "hidden": false,
-      "stateCode": "MS",
+      "stateCode": "MA",
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/covid-19-vaccination-program",
       "vaccinationSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated",
       "locationName": "Massachusetts",
@@ -220,7 +220,7 @@
       "hidden": false,
       "stateCode": "NE",
       "eligibilityInfoUrl": "http://dhhs.ne.gov/Pages/COVID-19-Vaccine-Information.aspx",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Nebraska",
       "fips": "31"
     },
@@ -236,7 +236,7 @@
       "hidden": false,
       "stateCode": "NH",
       "eligibilityInfoUrl": "https://www.nh.gov/covid19/resources-guidance/vaccination-planning.htm",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "New Hampshire",
       "fips": "33"
     },
@@ -324,7 +324,7 @@
       "hidden": false,
       "stateCode": "PR",
       "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Puerto Rico",
       "fips": "72"
     },
@@ -332,7 +332,7 @@
       "hidden": false,
       "stateCode": "RI",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Rhode Island",
       "fips": "44"
     },
@@ -356,7 +356,7 @@
       "hidden": false,
       "stateCode": "TN",
       "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
-      "vaccinationSignupUrl": "https://covid19.tn.gov/covid-19-vaccines/county-vaccine-information/",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Tennessee",
       "fips": "47"
     },
@@ -412,7 +412,7 @@
       "hidden": false,
       "stateCode": "WI",
       "eligibilityInfoUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-about.htm",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "locationName": "Wisconsin",
       "fips": "55"
     },
@@ -423,11 +423,6 @@
       "vaccinationSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/",
       "locationName": "Wyoming",
       "fips": "56"
-    },
-    {
-      "locationName": "Idaho",
-      "fips": "16",
-      "eligibilityInfoUrl": "https://coronavirus.idaho.gov/wp-content/uploads/2021/01/When-can-I-get-a-COVID-vaccine-in-Idaho-011221-5.pdf"
     }
   ]
 }

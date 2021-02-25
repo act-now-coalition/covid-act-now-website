@@ -85,13 +85,14 @@ const partnersLogos = chain(aboutContent.partnersContent)
   }))
   .value();
 
-const apiUsersLogos = chain(productsLandingContent.logos)
+const apiUsersLogos = chain(productsLandingContent.productsList)
+  .flatMap(product => product.logos ?? [])
   .map(logoInfo => joinPublicFolder(logoInfo.image))
   .filter(isRasterImage)
   .map((imagePath: string) => ({
     inputPath: imagePath,
     originalPath: cmsOriginalPath(imagePath),
-    height: 100,
+    width: 200,
   }))
   .value();
 

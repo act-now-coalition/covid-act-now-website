@@ -14,6 +14,7 @@ import {
   GreenLinkButton,
 } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
+import LogoGrid from 'components/LogoGrid/LogoGrid';
 import { EventCategory } from 'components/Analytics';
 
 const {
@@ -28,7 +29,7 @@ export const sidebarSections: TocItem[] = [
   {
     label: 'Data API',
     to: '/data-api',
-    items: productsLandingContent.productsList.map(product => ({
+    items: productsList.map(product => ({
       to: `/data-api#${product.productId}`,
       label: product.productName,
     })),
@@ -58,6 +59,7 @@ const DataApi = () => {
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
             <MarkdownDataApi source={product.productDescription} />
+            {product.logos && <LogoGrid logos={product.logos} />}
           </DataApiSection>
         ))}
       </PageContent>
