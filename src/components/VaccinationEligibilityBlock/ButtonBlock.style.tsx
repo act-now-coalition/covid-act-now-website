@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import LinkButton from 'components/LinkButton';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 export const ButtonsContainer = styled.div`
   display: flex;
@@ -13,11 +14,13 @@ export const ButtonsContainer = styled.div`
   }
 `;
 
+export const OpenLinkIcon = styled(OpenInNewIcon)``;
+
 const PurpleButton = css`
   background-color: ${COLOR_MAP.PURPLE};
   color: white;
 
-  svg {
+  ${OpenLinkIcon} {
     color: white;
     opacity: 0.5;
   }
