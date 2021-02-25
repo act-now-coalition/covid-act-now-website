@@ -2203,7 +2203,7 @@
       ]
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Utah",
       "fips": "49",
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
@@ -2212,7 +2212,7 @@
           "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Adults 65+",
+          "description": "* Health care workers\n* Long-term care facility staff and residents\n* First responders\n* K-12 school staff\n* Adults 65+\n* Anyone 16 or older with certain medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
