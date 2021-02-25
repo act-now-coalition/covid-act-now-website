@@ -57,7 +57,7 @@ class MetricColumn implements ColumnDefinition {
 class CcviColumn implements ColumnDefinition {
   columnId = CCVI_COLUMN_ID;
 
-  name = 'Vulnerability Level';
+  name = 'Vuln. Level';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.ccvi;
@@ -88,9 +88,6 @@ const caseGrowthRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
 const positiveTestsColumn = new MetricColumn(Metric.POSITIVE_TESTS);
 const hospitalUsageColumn = new MetricColumn(Metric.HOSPITAL_USAGE);
 const vaccinationsColumn = new MetricColumn(Metric.VACCINATIONS);
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// TODO(michael): Add CCVI to columns.
 const ccviColumn = new CcviColumn();
 
 /** Ordered array of columns. */
@@ -100,6 +97,7 @@ export const orderedColumns = [
   positiveTestsColumn,
   hospitalUsageColumn,
   vaccinationsColumn,
+  ccviColumn,
 ];
 
 /** Ordered array of columns but with vaccinations first. */
