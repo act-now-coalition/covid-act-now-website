@@ -2521,7 +2521,7 @@
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* NOTE: May vary by county\n\n* Individuals 65 years of age and older \n* Some front-line essential workers who interact with the public \n* Individuals with specific medical conditions \n* Caregivers of medically vulnerable persons who are unable to get vaccinated",
+          "description": "* Individuals 65 years of age and older \n* Some front-line essential workers who interact with the public \n* Individuals with specific medical conditions \n* Caregivers of medically vulnerable persons who are unable to get vaccinated",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
