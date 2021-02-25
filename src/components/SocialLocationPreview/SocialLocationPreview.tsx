@@ -49,7 +49,7 @@ const SocialLocationPreview = (props: {
         <USMapPreviewHeader sideLegend={!isEmbed}>
           <MapWrapper>
             <Map
-              onClick={isEmbed ? navigateToCAN : null}
+              onClick={isEmbed ? navigateToCAN : undefined}
               hideLegend={!isEmbed}
               hideLegendTitle={true}
               hideInstructions={true}

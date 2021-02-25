@@ -53,9 +53,7 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
       </Styles.Tabs>
       <Styles.MapContainer>
         {/* US Map */}
-        {mapOption === MAP_FILTERS.NATIONAL && (
-          <Map hideLegend={true} isMiniMap />
-        )}
+        {mapOption === MAP_FILTERS.NATIONAL && <Map hideLegend={true} />}
         {/* State Map */}
         {mapOption === MAP_FILTERS.STATE && (
           <Styles.StateMapContainer>
