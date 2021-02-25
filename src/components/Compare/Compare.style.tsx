@@ -66,12 +66,12 @@ export const Wrapper = styled.div<{
     th,
     td {
       &:first-child {
-        width: 27.5%;
+        width: 22%;
         min-width: ${locationNameCellWidth}px;
       }
 
       &:not(:first-child) {
-        width: 14.5%;
+        width: 13%;
         min-width: ${metricCellWidth}px;
       }
     }
