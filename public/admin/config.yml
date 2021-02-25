@@ -904,3 +904,27 @@ collections:
               - label: CTA
                 name: cta
                 widget: markdown
+      - name: CCVI tooltips
+        label: CCVI tooltips
+        file: src/cms-content/tooltips/ccvi-tooltips.json
+        fields:
+          - label: Vulnerabilities section header tooltip content
+            name: headerTooltipContent
+            widget: markdown
+            hint: Content of the tooltip in the vulnerabilities section header
+          - label: Subscore tooltips
+            name: subscoreTooltips
+            label_singular: subscore tooltip
+            widget: list
+            fields:
+              - label: Subscore name
+                name: subscoreName
+                widget: string
+              - label: Id
+                name: id
+                widget: string
+                hint: subscore name, all lowercase, dash-separated
+              - label: Tooltip content
+                name: content
+                widget: markdown
+                hint: subscore definition

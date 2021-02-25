@@ -19,6 +19,14 @@ export const GREY_3 = '#bdbdbd';
 export const GREY_4 = '#828282';
 export const GREY_5 = '#4f4f4f';
 
+export const PURPLE_MAP = {
+  PURPLE_1: '#8539FF',
+  PURPLE_2: '#6000FE',
+  PURPLE_3: '#4A00C3',
+  PURPLE_4: '#340088',
+  PURPLE_5: '#160039',
+};
+
 export const COLOR_MAP = {
   ORANGE: {
     BASE: '#FFC900',

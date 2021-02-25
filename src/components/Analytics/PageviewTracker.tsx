@@ -17,7 +17,6 @@ function initializeGA() {
       ...options,
     },
   ]);
-  ReactGA.plugin.require('linkid');
 }
 
 /**
@@ -45,8 +44,11 @@ function usePageTracking() {
   useEffect(() => {
     if (initialized) {
       // We only add the legacy tracker explicitly here, because by default, GA
-      // will send always send hits to the default tracker.
-      ReactGA.pageview(pathname, [legacyTracker.name]);
+      // will send always send hits to the default tracker. We add a delay to
+      // give the app time to update the page title.
+      setTimeout(() => {
+        ReactGA.pageview(pathname, [legacyTracker.name], document.title);
+      }, 10);
     }
   }, [initialized, pathname]);
 }

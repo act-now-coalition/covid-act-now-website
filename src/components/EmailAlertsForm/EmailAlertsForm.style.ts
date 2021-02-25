@@ -7,7 +7,6 @@ import MuiFormControlLabel from '@material-ui/core/FormControlLabel';
 import { COLOR_MAP } from 'common/colors';
 import { BaseButton } from 'components/Button';
 import { Paragraph } from 'components/Markdown';
-import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 import { Chip } from '@material-ui/core';
 
 export const StyledForm = styled.form`
@@ -106,47 +105,6 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
   svg {
     color: ${COLOR_MAP.BLUE};
   }
-`;
-
-export const AlertsInfoBox = styled.div`
-  display: flex;
-  align-items: flex-start;
-  padding: 12px;
-  background: ${COLOR_MAP.GREY_1};
-  border-radius: 4px;
-
-  & > * {
-    margin-right: 12px;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;
-
-export const AlertsInfoBoxIcon = styled(ImmunizationIcon).attrs(props => ({
-  width: 16,
-  height: 20,
-}))`
-  flex: 0 0 16px;
-  align-self: flex-start;
-`;
-
-export const AlertsInfoBoxCopy = styled(Paragraph)`
-  flex: 1 0 fill;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 1.4;
-  color: ${COLOR_MAP.GREY_5};
-`;
-
-export const LearnMoreCopy = styled.span`
-  cursor: pointer;
-  text-decoration: underline;
-`;
-
-export const VaccinationIcon = styled(ImmunizationIcon)`
-  padding: 2px;
-  padding-left: 6px;
 `;
 
 export const LocationChip = styled(Chip)`

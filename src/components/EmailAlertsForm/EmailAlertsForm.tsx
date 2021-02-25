@@ -7,17 +7,14 @@ import React, {
 } from 'react';
 import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
 import { isValidEmail } from 'common/utils';
-import { Region, State } from 'common/regions';
+import { Region } from 'common/regions';
 import AutocompleteRegions from 'components/AutocompleteRegions';
-import SignupsModal from 'components/SignupsModal/SignupsModal';
-import { CenteredContentModal } from 'components/Compare/Compare.style';
 import {
   subscribeToLocations,
   subscribeToDailyDownload,
   CREATESEND_DATA_ID,
 } from './utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-
 import {
   StyledForm,
   EmailTextField,
@@ -27,11 +24,6 @@ import {
   StyledCheckbox,
   StyledCheckboxLabel,
   StyledFormControlLabel,
-  AlertsInfoBox,
-  AlertsInfoBoxIcon,
-  AlertsInfoBoxCopy,
-  LearnMoreCopy,
-  VaccinationIcon,
   LocationChip,
 } from './EmailAlertsForm.style';
 
@@ -53,10 +45,6 @@ const EmailAlertsForm: React.FC<{
   const [checkDailyDownload, setCheckDailyDownload] = useState(true);
   const [selectedRegions, setSelectedRegions] = useState<Region[]>([]);
   const [defaultInitialized, setDefaultInitialized] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
 
@@ -123,15 +111,6 @@ const EmailAlertsForm: React.FC<{
     setSelectedRegions(newRegions);
   };
 
-  const onClickLearnMore = () => {
-    setShowModal(true);
-    trackEvent(
-      EventCategory.ENGAGEMENT,
-      EventAction.CLICK,
-      'Email Alerts: Learn More',
-    );
-  };
-
   const emailInputLabel = emailError
     ? 'Invalid email'
     : 'Enter your email address';
@@ -143,17 +122,12 @@ const EmailAlertsForm: React.FC<{
     return (
       <Fragment>
         {regionItems.map((region: Region, index: number) => {
-          const isState = region instanceof State;
           const tagProps = getTagProps ? getTagProps({ index }) : {};
-          const chipProps = {
-            icon: isState ? <VaccinationIcon /> : undefined,
-            ...tagProps,
-          };
           return (
             <LocationChip
               key={region.fipsCode}
               label={region.fullName}
-              {...chipProps}
+              {...tagProps}
             />
           );
         })}
@@ -162,85 +136,64 @@ const EmailAlertsForm: React.FC<{
   };
 
   return (
-    <>
-      <StyledForm
-        onSubmit={onSubmit}
-        ref={formRef}
-        method="post"
-        data-id={CREATESEND_DATA_ID}
-      >
-        <StyledFormGroup>
-          <AutocompleteRegions
-            regions={autocompleteRegions}
-            selectedRegions={selectedRegions}
-            onChangeRegions={onChangeRegions}
-            placeholder="+ Add alert locations"
-            renderTags={renderTags}
-            placeholderMinWidth="100%"
+    <StyledForm
+      onSubmit={onSubmit}
+      ref={formRef}
+      method="post"
+      data-id={CREATESEND_DATA_ID}
+    >
+      <StyledFormGroup>
+        <AutocompleteRegions
+          regions={autocompleteRegions}
+          selectedRegions={selectedRegions}
+          onChangeRegions={onChangeRegions}
+          placeholder="+ Add alert locations"
+          renderTags={renderTags}
+          placeholderMinWidth="100%"
+        />
+      </StyledFormGroup>
+      <StyledFormGroup>
+        <EmailFieldGroup>
+          <EmailTextField
+            id="fieldEmail"
+            className="js-cm-email-input qa-input-email fs-exclude"
+            label={emailInputLabel}
+            error={emailError}
+            onChange={onChangeEmail}
+            value={email}
+            placeholder={emailInputLabel}
+            type="email"
+            name="cm-wurhhh-wurhhh"
+            autoComplete="email"
+            aria-invalid={!isValidEmail(email)}
           />
-        </StyledFormGroup>
-        <StyledFormGroup>
-          <AlertsInfoBox>
-            <AlertsInfoBoxIcon />
-            <AlertsInfoBoxCopy>
-              Alerts for vaccine eligibility are available for these locations.{' '}
-              <LearnMoreCopy
-                tabIndex={0}
-                role="button"
-                onClick={onClickLearnMore}
-              >
-                Learn about our alerts
-              </LearnMoreCopy>
-              .
-            </AlertsInfoBoxCopy>
-          </AlertsInfoBox>
-        </StyledFormGroup>
-        <StyledFormGroup>
-          <EmailFieldGroup>
-            <EmailTextField
-              id="fieldEmail"
-              className="js-cm-email-input qa-input-email fs-exclude"
-              label={emailInputLabel}
-              error={emailError}
-              onChange={onChangeEmail}
-              value={email}
-              placeholder={emailInputLabel}
-              type="email"
-              name="cm-wurhhh-wurhhh"
-              autoComplete="email"
-              aria-invalid={!isValidEmail(email)}
+          <StyledButton
+            onClick={() => subscribeToAlerts()}
+            $success={showConfirmation}
+          >
+            {showConfirmation ? 'Subscribed!' : 'Sign up'}
+          </StyledButton>
+        </EmailFieldGroup>
+      </StyledFormGroup>
+      <StyledFormGroup>
+        <StyledFormControlLabel
+          labelPlacement="end"
+          control={
+            <StyledCheckbox
+              checked={checkDailyDownload}
+              onChange={onChangeDailyDownload}
+              name="check-daily-download"
             />
-            <StyledButton
-              onClick={() => subscribeToAlerts()}
-              $success={showConfirmation}
-            >
-              {showConfirmation ? 'Subscribed!' : 'Sign up'}
-            </StyledButton>
-          </EmailFieldGroup>
-        </StyledFormGroup>
-        <StyledFormGroup>
-          <StyledFormControlLabel
-            labelPlacement="end"
-            control={
-              <StyledCheckbox
-                checked={checkDailyDownload}
-                onChange={onChangeDailyDownload}
-                name="check-daily-download"
-              />
-            }
-            label={
-              <StyledCheckboxLabel>
-                Also send me <strong>daily news</strong> with the latest data
-                and scientific findings
-              </StyledCheckboxLabel>
-            }
-          />
-        </StyledFormGroup>
-      </StyledForm>
-      <CenteredContentModal open={showModal} onClose={handleCloseModal}>
-        <SignupsModal handleCloseModal={handleCloseModal} />
-      </CenteredContentModal>
-    </>
+          }
+          label={
+            <StyledCheckboxLabel>
+              Also send me <strong>daily news</strong> with the latest data and
+              scientific findings.
+            </StyledCheckboxLabel>
+          }
+        />
+      </StyledFormGroup>
+    </StyledForm>
   );
 };
 
