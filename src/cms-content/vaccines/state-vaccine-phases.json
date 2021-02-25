@@ -2424,49 +2424,9 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-02-25T19:53:16.949Z",
-          "phase": "1",
-          "tier": "B",
-          "description": "* Community Infrastructure \n* Emergency Response Workers\n* Public Health Officials\n* First Responders",
-          "startDate": "March - October, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-25T19:55:00.622Z",
-          "phase": "1",
-          "tier": "C",
-          "startDate": "March - October, 2021",
-          "description": "* Remaining Healthcare Workers"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-25T19:55:22.167Z",
-          "phase": "1",
-          "tier": "D",
-          "description": "* Other Essential Workers",
-          "startDate": "March - October, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-22T22:48:19.221Z",
-          "phase": "2",
-          "startDate": "March – October, 2021",
-          "description": "* General Populace prioritized by age (80+, 70+, 60+) and Pre-existing medical conditions",
-          "tier": "A"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-25T19:56:37.239Z",
-          "phase": "2",
-          "tier": "B",
-          "description": "* Other healthcare and critical workers (50+) not included in Phase 1C/1D",
-          "startDate": "March - October, 2021"
-        },
-        {
-          "currentlyEligible": false,
           "updatedAt": "2021-02-25T19:57:26.353Z",
           "phase": "2",
-          "tier": "C",
+          "tier": "",
           "description": "* General Population",
           "startDate": "March - October, 2021"
         }
