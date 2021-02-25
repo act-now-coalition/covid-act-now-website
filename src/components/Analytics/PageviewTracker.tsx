@@ -48,7 +48,7 @@ function usePageTracking() {
       // give the app time to update the page title.
       setTimeout(() => {
         ReactGA.pageview(pathname, [legacyTracker.name], document.title);
-      }, 200);
+      }, 10);
     }
   }, [initialized, pathname]);
 }
