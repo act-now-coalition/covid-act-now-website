@@ -1137,7 +1137,7 @@
           "currentlyEligible": true,
           "description": "* Health care workers\n* Long-term care residents and staff",
           "expandedDefinitionUrl": "",
-          "startDate": "2020-12-01",
+          "startDate": "December 1, 2020",
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
@@ -1146,7 +1146,7 @@
           "currentlyEligible": true,
           "description": "* Persons 65 and over\n* Front-line essential workers\n* Teachers and child care providers",
           "expandedDefinitionUrl": "",
-          "startDate": "2020-01-15",
+          "startDate": "January 15, 2021",
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
@@ -1163,7 +1163,7 @@
           "currentlyEligible": false,
           "description": "* People 16-64 with a high-risk medical condition\n* Other essential front-line workers",
           "expandedDefinitionUrl": "",
-          "startDate": "2020-05-01",
+          "startDate": "May 1, 2021",
           "updatedAt": "2021-02-18T01:52:35.985Z"
         }
       ]
