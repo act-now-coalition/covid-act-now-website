@@ -4,35 +4,43 @@
   "logos": [
     {
       "altText": "California Department of Health logo",
-      "image": "/images_cms/cdph.png"
-    },
-    {
-      "altText": "National Association of Counties logo",
-      "image": "/images_cms/naco-logo.png"
-    },
-    {
-      "altText": "Unilever logo",
-      "image": "/images_cms/logo-blue-rgb.jpg"
-    },
-    {
-      "altText": "General Mills logo",
-      "image": "/images_cms/general-mills-logo.png"
-    },
-    {
-      "altText": "IBM logo",
-      "image": "/images_cms/ibm-logo.png"
-    },
-    {
-      "altText": "Wayfair logo",
-      "image": "/images_cms/wayfair-logo.jpg"
-    },
-    {
-      "altText": "DC Department of Health logo",
-      "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png"
+      "image": "/images_cms/cdph.png",
+      "url": "https://www.cdph.ca.gov/"
     },
     {
       "altText": "Washington National Guard logo",
-      "image": "/images_cms/washington-nationa-guard-logo-red.svg"
+      "image": "/images_cms/washington-nationa-guard-logo-red.svg",
+      "url": "https://mil.wa.gov/national-guard"
+    },
+    {
+      "altText": "National Association of Counties logo",
+      "image": "/images_cms/naco-logo.png",
+      "url": "https://www.naco.org/"
+    },
+    {
+      "altText": "Unilever logo",
+      "image": "/images_cms/logo-blue-rgb.jpg",
+      "url": "https://www.unilever.com/"
+    },
+    {
+      "altText": "General Mills logo",
+      "image": "/images_cms/general-mills-logo.png",
+      "url": "https://www.generalmills.com/"
+    },
+    {
+      "altText": "IBM logo",
+      "image": "/images_cms/ibm-logo.png",
+      "url": "https://www.ibm.com/us-en/"
+    },
+    {
+      "altText": "Wayfair logo",
+      "image": "/images_cms/wayfair-logo.jpg",
+      "url": "https://www.wayfair.com/"
+    },
+    {
+      "altText": "DC Department of Health logo",
+      "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
+      "url": "https://dchealth.dc.gov/"
     }
   ],
   "productsList": [
