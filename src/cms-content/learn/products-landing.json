@@ -5,7 +5,7 @@
     {
       "productName": "Who's using our data",
       "productId": "whos-using-our-data",
-      "productSubtitle": "",
+      "productSubtitle": "Who's using our data",
       "productDescription": "Our API is used by organizations and individuals around the country including:",
       "logos": [
         {
@@ -60,6 +60,12 @@
       "productId": "license",
       "productSubtitle": "API License",
       "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
+    },
+    {
+      "productName": "FAQs",
+      "productId": "faqs",
+      "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.",
+      "productSubtitle": "Frequently Asked Questions"
     }
   ],
   "metadataTitle": "Data API",
