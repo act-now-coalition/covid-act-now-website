@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: adding-faqs
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
