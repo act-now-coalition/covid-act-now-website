@@ -560,48 +560,40 @@ collections:
             name: intro
             widget: markdown
             required: false
-          - label: 'Who uses our data logos'
-            name: 'logos'
-            widget: 'list'
-            fields:
-              - label: 'Alt text'
-                name: 'altText'
-                widget: 'string'
-              - label: 'Image'
-                name: 'image'
-                widget: 'image'
-              - label: 'Url'
-                name: 'url'
-                widget: 'string'
-                required: false
           - label: Products List
             name: productsList
             widget: list
             fields:
-              - {
-                  label: Product name,
-                  name: productName,
-                  widget: string,
-                  hint: 'Product name (ex. API)',
-                }
-              - {
-                  label: Product ID,
-                  name: productId,
-                  widget: string,
-                  hint: 'Product name in all lowercase, divided by dashes if multi-word (ex: response-simulator)',
-                }
-              - {
-                  label: Product subtitle,
-                  name: productSubtitle,
-                  widget: text,
-                  hint: 'Short few-words-long description underneath product name (ie. Allows you to forecast scenarios)',
-                }
-              - {
-                  label: Product description,
-                  name: productDescription,
-                  widget: markdown,
-                  hint: 'Longer product description',
-                }
+              - label: Product name
+                name: productName
+                widget: string
+                hint: 'Product name (ex. API)'
+              - label: Product ID
+                name: productId
+                widget: string
+                hint: 'Product name in all lowercase, divided by dashes if multi-word (ex: response-simulator)'
+              - label: Product subtitle
+                name: productSubtitle
+                widget: text
+                hint: 'Short few-words-long description underneath product name (ie. Allows you to forecast scenarios)'
+              - label: Product description
+                name: productDescription
+                widget: markdown
+                hint: 'Longer product description'
+              - label: 'Logos'
+                name: 'logos'
+                widget: 'list'
+                fields:
+                  - label: 'Alt text'
+                    name: 'altText'
+                    widget: 'string'
+                  - label: 'Image'
+                    name: 'image'
+                    widget: 'image'
+                  - label: 'Url'
+                    name: 'url'
+                    widget: 'string'
+                    required: false
               - label: Buttons
                 name: buttons
                 required: false
