@@ -49,6 +49,7 @@ export enum EventCategory {
   GEOLOCATION_CARDS = 'geolocation cards',
   TOOLTIPS = 'tooltips',
   API = 'api',
+  METRICS = 'metrics',
 }
 
 /**
