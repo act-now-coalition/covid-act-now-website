@@ -98,11 +98,11 @@
     },
     {
       "hidden": false,
-      "stateCode": "IA",
+      "stateCode": "ID",
       "eligibilityInfoUrl": "https://coronavirus.idaho.gov/wp-content/uploads/2021/01/When-can-I-get-a-COVID-vaccine-in-Idaho-011221-5.pdf",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "locationName": "Iowa",
-      "fips": "19"
+      "locationName": "Idaho",
+      "fips": "16"
     },
     {
       "hidden": false,
@@ -170,7 +170,7 @@
     },
     {
       "hidden": false,
-      "stateCode": "MS",
+      "stateCode": "MA",
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/covid-19-vaccination-program",
       "vaccinationSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated",
       "locationName": "Massachusetts",
@@ -423,12 +423,6 @@
       "vaccinationSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/",
       "locationName": "Wyoming",
       "fips": "56"
-    },
-    {
-      "locationName": "Idaho",
-      "fips": "16",
-      "eligibilityInfoUrl": "https://coronavirus.idaho.gov/wp-content/uploads/2021/01/When-can-I-get-a-COVID-vaccine-in-Idaho-011221-5.pdf",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/"
     }
   ]
 }
