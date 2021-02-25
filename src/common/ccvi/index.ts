@@ -1,4 +1,5 @@
 import { PURPLE_MAP } from 'common/colors';
+import { fail } from 'common/utils';
 
 export enum CcviLevel {
   VERY_LOW,
@@ -58,11 +59,11 @@ export function getCcviLevelName(level: CcviLevel): string {
   return CCVI_LEVEL_INFO_MAP[level].levelName;
 }
 
-export function getCcviLevel(score: number): CcviLevel | null {
+export function getCcviLevel(score: number): CcviLevel {
   for (const level of allCcviLevels) {
     if (score <= CCVI_LEVEL_INFO_MAP[level].upperLimit) {
       return level;
     }
   }
-  return null;
+  fail('Invalid CCVI encountered: ' + score);
 }

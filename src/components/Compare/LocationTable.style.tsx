@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { locationNameCellWidth, metricCellWidth } from './Compare.style';
 import { RankedLocationSummary } from 'common/utils/compare';
+import { orderedColumns } from './columns';
 
-const minTableWidth = locationNameCellWidth + 5 * metricCellWidth;
+const minTableWidth =
+  locationNameCellWidth + orderedColumns.length * metricCellWidth;
 const pinnedBorderColor = '#CEBFAC';
 
 //159px is the header-height
