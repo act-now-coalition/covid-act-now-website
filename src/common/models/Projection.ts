@@ -60,7 +60,9 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
   [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
-  [Metric.VACCINATIONS]: new DisabledFipsList([]),
+  [Metric.VACCINATIONS]: new DisabledFipsList([
+    ...countyAndMetrosForState('WY'), //https://trello.com/c/kvjwZJJP/
+  ]),
 };
 
 /**
