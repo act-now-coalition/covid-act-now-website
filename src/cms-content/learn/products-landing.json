@@ -41,6 +41,11 @@
       "altText": "DC Department of Health logo",
       "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
       "url": "https://dchealth.dc.gov/"
+    },
+    {
+      "altText": "Citizen Logo",
+      "url": "www.citizen.com",
+      "image": "/images_cms/citizen-com_logo.png"
     }
   ],
   "productsList": [
