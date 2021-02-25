@@ -19,8 +19,8 @@ import { ExplainersHeading2 } from './MetricExplainer.style';
 import { useScrollToTopButton } from 'common/hooks';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
-import GovLogoGrid from 'screens/About/GovLogoGrid';
 import Footer from 'screens/Learn/Footer/Footer';
+import LogoGrid from 'components/LogoGrid/LogoGrid';
 
 const MetricExplainer = () => {
   const {
@@ -72,7 +72,7 @@ const MetricExplainer = () => {
             <MarkdownContent source={question.answer} />
           </Fragment>
         ))}
-        <GovLogoGrid logos={frameworkLogos} />
+        <LogoGrid logos={frameworkLogos} />
         {metricSections.map(section => {
           const sectionThermometer = getThermometer(section.sectionId);
           return (

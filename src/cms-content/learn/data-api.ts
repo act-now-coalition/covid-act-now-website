@@ -16,6 +16,7 @@ export interface ProductsLandingSection {
   productSubtitle: string;
   productDescription: Markdown;
   buttons?: LandingPageButton[];
+  logos?: LogoItem[];
 }
 
 export interface LogoItem {
@@ -27,7 +28,6 @@ export interface LogoItem {
 export interface ProductsLandingContent {
   header: string;
   intro?: Markdown;
-  logos: LogoItem[];
   productsList: ProductsLandingSection[];
   metadataTitle: string;
   metadataDescription: string;
