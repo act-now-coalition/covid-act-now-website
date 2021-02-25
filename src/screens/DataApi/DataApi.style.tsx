@@ -15,6 +15,7 @@ const SharedButtonStyles = css`
 export const GreenLinkButton = styled(LinkButton)`
   ${SharedButtonStyles};
   color: white;
+  min-width: 120px;
   background-color: ${COLOR_MAP.GREEN.BASE};
   border: 1px solid ${COLOR_MAP.GREEN.BASE};
 
