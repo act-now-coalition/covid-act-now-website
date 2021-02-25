@@ -13,6 +13,8 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
   overallScore,
 }) => {
   const gradientId = uuidv4();
+  const titleId = uuidv4();
+
   const containerHeight = 34;
   const thermometerWidth = 240;
   const thermometerHeight = 20;
@@ -28,19 +30,19 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
 
   // todo (chelsi): add location name, possibly edit copy
   const title = level
-    ? `Thermometer image showing that locationName's vulnurability level is ${getCcviLevelName(
+    ? `Thermometer image showing that the vulnerability level is ${getCcviLevelName(
         level,
       ).toLowerCase()}.`
-    : 'Thermometer image showing locationName vulnurability level.';
+    : 'Thermometer image showing the vulnerability level.';
 
   return (
     <svg
       width={thermometerWidth}
       height={containerHeight}
       role="img"
-      aria-labelledby="ccviThermometerTitle"
+      aria-labelledby={titleId}
     >
-      <title id="ccviThermometerTitle">{title}</title>
+      <title id={titleId}>{title}</title>
       <defs>
         <linearGradient id={gradientId}>
           <stop
