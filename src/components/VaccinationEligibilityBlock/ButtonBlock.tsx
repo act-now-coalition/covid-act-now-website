@@ -1,11 +1,8 @@
 import React from 'react';
 import { EventAction, EventCategory } from 'components/Analytics';
 import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
-import {
-  StyledLinkButton,
-  ButtonsContainer,
-  OpenLinkIcon,
-} from './ButtonBlock.style';
+import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
   signupLink,
@@ -30,7 +27,7 @@ const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
           href={signupLink}
           {...sharedTrackingProps}
           trackingLabel="Where to get vaccinated"
-          endIcon={<OpenLinkIcon />}
+          endIcon={<OpenInNewIcon />}
         >
           See where and how to get vaccinated
         </StyledLinkButton>
