@@ -5,8 +5,15 @@ import ReactGA from 'react-ga';
 import { defaultTracker, legacyTracker } from './utils';
 import amplitude from 'amplitude-js';
 
+const AMPLITUDE_KEY_DEV = '9273bc15ce71641291d471c9f17895a5';
+const AMPLITUDE_KEY_PROD = 'c92804b9b1f5323200e94002a76a86a9';
+
 function initializeAmplitude() {
-  amplitude.getInstance().init('9273bc15ce71641291d471c9f17895a5');
+  const amplitudeKey =
+    process.env.NODE_ENV === 'production'
+      ? AMPLITUDE_KEY_PROD
+      : AMPLITUDE_KEY_DEV;
+  amplitude.getInstance().init(amplitudeKey);
 }
 
 /**
