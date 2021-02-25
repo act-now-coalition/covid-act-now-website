@@ -6,14 +6,15 @@ import { defaultTracker, legacyTracker } from './utils';
 import amplitude from 'amplitude-js';
 import { Environment, getEnvironment } from 'common/utils/environment';
 
-const AMPLITUDE_KEY_DEV = '9273bc15ce71641291d471c9f17895a5';
-const AMPLITUDE_KEY_PROD = 'c92804b9b1f5323200e94002a76a86a9';
+const AmplitudeKeyByEnv: { [env in Environment]: string } = {
+  [Environment.PROD]: 'c92804b9b1f5323200e94002a76a86a9',
+  [Environment.STAGING]: 'a0a38d854e1f15457d11bf53df9d719e',
+  [Environment.DEV]: '9273bc15ce71641291d471c9f17895a5',
+};
 
 function initializeAmplitude() {
-  const amplitudeKey =
-    getEnvironment() === Environment.PROD
-      ? AMPLITUDE_KEY_PROD
-      : AMPLITUDE_KEY_DEV;
+  const env = getEnvironment();
+  const amplitudeKey = AmplitudeKeyByEnv[env];
   amplitude.getInstance().init(amplitudeKey);
 }
 
