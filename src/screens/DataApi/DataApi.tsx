@@ -5,13 +5,12 @@ import { Heading2, MarkdownContent } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
 import { LearnHeading1 } from '../Learn/Learn.style';
 import {
-  LogoItem,
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn/data-api';
 import { MarkdownDataApi, DataApiSection } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
-import GovLogoGrid from 'screens/About/GovLogoGrid';
+import LogoGrid from 'components/LogoGrid/LogoGrid';
 
 const {
   header,
@@ -48,7 +47,7 @@ const DataApi = () => {
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
             <MarkdownDataApi source={product.productDescription} />
-            {product.logos && <GovLogoGrid logos={product.logos} />}
+            {product.logos && <LogoGrid logos={product.logos} />}
           </DataApiSection>
         ))}
       </PageContent>
