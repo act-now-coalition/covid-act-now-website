@@ -38,15 +38,6 @@ const Announcements: React.FC = () => {
         our site, although we will continue serving it through our{' '}
         <Link to="/data-api">API</Link>.
       </AnnouncementBodyCopy>
-      <ButtonsContainer>
-        <ViewAllLink
-          href="https://blog.covidactnow.org/"
-          target="_blank"
-          rel="noopener"
-        >
-          View all announcements
-        </ViewAllLink>
-      </ButtonsContainer>
     </Wrapper>
   );
 };
