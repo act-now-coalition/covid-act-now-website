@@ -4,6 +4,7 @@ import metricCaculationTooltipContent from './metric-calculation-tooltips.json';
 import ccviTooltipContent from './ccvi-tooltips.json';
 import { Metric } from 'common/metricEnum';
 import { assert } from 'common/utils';
+import { keyBy } from 'lodash';
 
 /* Metric tooltips + location page header tooltip: */
 
@@ -60,10 +61,13 @@ interface CcviSubscoreTooltip {
   content: Markdown;
 }
 
+const tooltipContentById = keyBy(
+  ccviTooltipContent.subscoreTooltips,
+  item => item.id,
+);
+
 function getCcviTooltipById(id: string) {
-  const tooltipContent = ccviTooltipContent.subscoreTooltips.find(
-    item => item.id === id,
-  );
+  const tooltipContent = tooltipContentById[id];
   assert(
     tooltipContent,
     `Ccvi tooltip content unexpectedly not found for id: ${id}`,
