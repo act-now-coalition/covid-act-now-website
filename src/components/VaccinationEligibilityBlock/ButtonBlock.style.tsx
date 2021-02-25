@@ -17,11 +17,6 @@ const PurpleButton = css`
   background-color: ${COLOR_MAP.PURPLE};
   color: white;
 
-  svg {
-    color: white;
-    opacity: 0.5;
-  }
-
   &:hover {
     background-color: ${COLOR_MAP.PURPLE};
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.12);
