@@ -1,6 +1,6 @@
 {
   "header": "Data API",
-  "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data. To gain access, please use this [registration form](https://apidocs.covidactnow.org/access/) to generate your unique key.",
+  "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data.",
   "productsList": [
     {
       "productName": "Who's using our data",
@@ -47,6 +47,11 @@
           "altText": "DC Department of Health logo",
           "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
           "url": "https://dchealth.dc.gov/"
+        },
+        {
+          "altText": "Citizen Logo",
+          "url": "www.citizen.com",
+          "image": "/images_cms/citizen-com_logo.png"
         }
       ]
     },
