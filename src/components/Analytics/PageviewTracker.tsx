@@ -60,7 +60,9 @@ function usePageTracking() {
       // will send always send hits to the default tracker. We add a delay to
       // give the app time to update the page title.
       setTimeout(() => {
-        ReactGA.pageview(pathname, [legacyTracker.name], document.title);
+        const { title } = document;
+        ReactGA.pageview(pathname, [legacyTracker.name], title);
+        amplitude.getInstance().logEvent('Pageview', { path: pathname, title });
       }, 10);
     }
   }, [initialized, pathname]);
