@@ -1,6 +1,6 @@
 import { capitalize, words } from 'lodash';
 import ReactGA from 'react-ga';
-import amplitude from 'amplitude-js';
+import { amplitudeLogEvent } from './amplitude';
 
 export interface Tracker {
   trackingId: string;
@@ -110,7 +110,7 @@ export function trackEvent(
     const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
     const valueProp = Number.isFinite(value) ? { eventValue: value } : {};
 
-    amplitude.getInstance().logEvent(category, {
+    amplitudeLogEvent(category, {
       eventCategory: toTitleCase(category),
       eventAction: toTitleCase(action),
       ...labelProp,
