@@ -1220,19 +1220,19 @@
       "emailAlertVersion": 1,
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "A",
+          "phase": "1A",
+          "tier": "",
           "currentlyEligible": true,
-          "description": "* People 65+\n* Adults with high-risk medical conditions\n* Long-term care facilities\n* Health care workers and EMTs",
+          "description": "* Adults 65+\n* Individuals (16+) with high-risk medical conditions\n* Long-term care facilities\n* Healthcare workers and EMTs\n* Teachers\n* Public Safety Personnel",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "Up Next",
+          "phase": "1B",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Teachers\n* Essential workers",
+          "description": "* Workers in congregate settings\n* Corrections officers\n* Additional first responders",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
