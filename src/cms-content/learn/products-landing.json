@@ -7,10 +7,6 @@
       "image": "/images_cms/cdph.png"
     },
     {
-      "altText": "Washington National Guard logo",
-      "image": "/images_cms/washington-nationa-guard-logo-red.svg"
-    },
-    {
       "altText": "National Association of Counties logo",
       "image": "/images_cms/naco-logo.png"
     },
@@ -33,6 +29,10 @@
     {
       "altText": "DC Department of Health logo",
       "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png"
+    },
+    {
+      "altText": "Washington National Guard logo",
+      "image": "/images_cms/washington-nationa-guard-logo-red.svg"
     }
   ],
   "productsList": [
