@@ -1142,12 +1142,20 @@
         },
         {
           "phase": "1B",
-          "tier": "",
+          "tier": "1",
           "currentlyEligible": true,
           "description": "* Persons 65 and over\n* Front-line essential workers\n* Teachers and child care providers",
           "expandedDefinitionUrl": "",
           "startDate": "2020-01-15",
           "updatedAt": "2021-02-18T01:52:35.985Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-25T22:02:57.281Z",
+          "phase": "1B",
+          "tier": "2",
+          "description": "* Agriculture and food processing workers",
+          "startDate": "March 1, 2021"
         },
         {
           "phase": "1C",
