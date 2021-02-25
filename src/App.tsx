@@ -38,7 +38,6 @@ const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
 const Explained = lazy(() => import('screens/Learn/Explained'));
 const Alerts = lazy(() => import('screens/Learn/Alerts/Alerts'));
-const Contact = lazy(() => import('screens/Contact/Contact'));
 const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
@@ -183,7 +182,7 @@ export default function App() {
                   {/* Keeping the /resources URL active in case linked elsewhere */}
                   <Redirect from="/resources" to="/data-api" />
                   <Redirect from="/tools" to="/data-api" />
-                  <Route path="/contact" component={Contact} />
+                  <Redirect path="/contact" to="/about#contact-us" />
                   <Route path="/terms" component={Terms} />
                   <Route path="/privacy" component={Privacy} />
 
@@ -220,7 +219,6 @@ export default function App() {
                   />
                   {/* /model and /contact are deprecated in favor of /faq */}
                   <Redirect from="/model" to="/faq" />
-                  <Redirect from="/contact" to="/faq" />
                   {/**
                    * This endpoint is to share the feedback survey link in social
                    * media. We redirec them to Typeform with URL parameters to

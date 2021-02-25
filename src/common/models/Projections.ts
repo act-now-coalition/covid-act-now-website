@@ -49,7 +49,12 @@ export class Projections {
     return this.primary.totalPopulation;
   }
 
-  get summary(): LocationSummary {
+  /**
+   * Generates the summary entry for this location to be stored in our summaries.json file.
+   *
+   * @param ccvi The CCVI score to store in the summary entry.
+   */
+  summary(ccvi: number): LocationSummary {
     const metrics = {} as { [metric in Metric]: MetricSummary };
     for (const metric of ALL_METRICS) {
       const value = this.getMetricValue(metric);
@@ -64,6 +69,7 @@ export class Projections {
     return {
       level: this.getAlarmLevel(),
       metrics,
+      ccvi,
     };
   }
 

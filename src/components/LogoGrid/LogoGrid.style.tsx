@@ -12,7 +12,7 @@ export const Logo = styled.img`
   }
 `;
 
-export const GovLogo = styled.img`
+export const LogoSmall = styled.img`
   max-height: 100px;
   max-width: 90px;
 

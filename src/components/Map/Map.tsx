@@ -9,14 +9,21 @@ import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
 
+interface MapProps {
+  hideLegend?: boolean;
+  hideInstructions?: boolean;
+  hideLegendTitle?: boolean;
+  onClick?: () => void;
+  showCounties?: boolean;
+}
+
 function Map({
   hideLegend = false,
   hideInstructions = false,
   hideLegendTitle = false,
-  onClick = null,
-  isMiniMap = false,
+  onClick = () => {},
   showCounties = false,
-}) {
+}: MapProps) {
   const [content, setContent] = useState('');
 
   // TODO(chris): The only user of `onClick` is the embed. When you click on a state
@@ -26,8 +33,8 @@ function Map({
   const handleClick = React.useCallback(
     stateName => {
       // externally provided click handler
-      if (onClick) {
-        return onClick();
+      if (Boolean(onClick)) {
+        onClick();
       }
     },
     [onClick],
@@ -39,27 +46,27 @@ function Map({
         <Legend hideLegendTitle={hideLegendTitle}>
           <LegendItem
             key={'legend-5'}
-            title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].summary}
+            title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].summary || ''}
             color={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].color}
           />
           <LegendItem
             key={'legend-4'}
-            title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary}
+            title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].summary || ''}
             color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
           />
           <LegendItem
             key={'legend-3'}
-            title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary}
+            title={LOCATION_SUMMARY_LEVELS[Level.HIGH].summary || ''}
             color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
           />
           <LegendItem
             key={'legend-2'}
-            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary}
+            title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].summary || ''}
             color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
           />
           <LegendItem
             key={'legend-1'}
-            title={LOCATION_SUMMARY_LEVELS[Level.LOW].summary}
+            title={LOCATION_SUMMARY_LEVELS[Level.LOW].summary || ''}
             color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
           />
         </Legend>
@@ -72,7 +79,7 @@ function Map({
         />
       </div>
       {!hideInstructions && (
-        <MapInstructions $isMiniMap={isMiniMap}>
+        <MapInstructions>
           <strong>Click a state</strong> to view risk details{' '}
           <MobileLineBreak /> and county info.
         </MapInstructions>

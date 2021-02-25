@@ -1,7 +1,6 @@
 import React from 'react';
 import { remove } from 'lodash';
 import { Table, TableBody } from '@material-ui/core';
-import { Metric } from 'common/metricEnum';
 import {
   RankedLocationSummary,
   GeoScopeFilter,
@@ -19,6 +18,7 @@ import { SCREENSHOT_CLASS } from 'components/Screenshot';
 import { trackCompareEvent } from 'common/utils/compare';
 import { EventAction } from 'components/Analytics';
 import { Region, MetroArea } from 'common/regions';
+import { ColumnDefinition } from './columns';
 
 const LocationTableHead: React.FunctionComponent<{
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -28,7 +28,7 @@ const LocationTableHead: React.FunctionComponent<{
   arrowColorSelected: string;
   arrowColorNotSelected: string;
   firstColumnHeader: string;
-  metrics: Metric[];
+  columns: ColumnDefinition[];
   isModal: boolean;
   stateName?: string;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,7 +43,7 @@ const LocationTableHead: React.FunctionComponent<{
   arrowColorSelected,
   arrowColorNotSelected,
   firstColumnHeader,
-  metrics,
+  columns,
   isModal,
   stateName,
   setSortByPopulation,
@@ -101,10 +101,10 @@ const LocationTableHead: React.FunctionComponent<{
               <ExpandMoreIcon onClick={() => setSortDescending(true)} />
             </CompareStyles.ArrowContainer>
           </CompareStyles.LocationHeaderCell>
-          {metrics.map((metric, i) => (
+          {columns.map((column, i) => (
             <HeaderCell
               key={`header-cell-${i}`}
-              metricInMap={metric}
+              column={column}
               sorter={sorter}
               sortDescending={sortDescending}
               arrowColorSelected={arrowColorSelected}
@@ -129,7 +129,7 @@ const LocationTableBody: React.FunctionComponent<{
   sortByPopulation: boolean;
   isHomepage?: boolean;
   showStateCode: boolean;
-  metrics: Metric[];
+  columns: ColumnDefinition[];
 }> = ({
   sortedLocations,
   sorter,
@@ -137,7 +137,7 @@ const LocationTableBody: React.FunctionComponent<{
   sortByPopulation,
   isHomepage,
   showStateCode,
-  metrics,
+  columns,
 }) => (
   <Table>
     <TableBody>
@@ -150,7 +150,7 @@ const LocationTableBody: React.FunctionComponent<{
           sortByPopulation={sortByPopulation}
           isHomepage={isHomepage}
           showStateCode={showStateCode}
-          metrics={metrics}
+          columns={columns}
         />
       ))}
     </TableBody>
@@ -176,7 +176,7 @@ const LocationTable: React.FunctionComponent<{
   arrowColorSelected: string;
   arrowColorNotSelected: string;
   firstColumnHeader: string;
-  metrics: Metric[];
+  columns: ColumnDefinition[];
   isModal: boolean;
   pinnedLocation?: RankedLocationSummary;
   sortedLocations: RankedLocationSummary[];
@@ -196,7 +196,7 @@ const LocationTable: React.FunctionComponent<{
   arrowColorSelected,
   arrowColorNotSelected,
   firstColumnHeader,
-  metrics,
+  columns,
   isModal,
   pinnedLocation,
   sortedLocations,
@@ -291,7 +291,7 @@ const LocationTable: React.FunctionComponent<{
             arrowColorSelected={arrowColorSelected}
             arrowColorNotSelected={arrowColorNotSelected}
             firstColumnHeader={firstColumnHeader}
-            metrics={metrics}
+            columns={columns}
             isModal={isModal}
             stateName={stateName}
             setSortByPopulation={setSortByPopulation}
@@ -303,7 +303,7 @@ const LocationTable: React.FunctionComponent<{
             <Table key="table-pinned-location">
               <TableBody>
                 <CompareTableRow
-                  metrics={metrics}
+                  columns={columns}
                   location={pinnedLocation}
                   sorter={sorter}
                   isCurrentCounty
@@ -323,13 +323,13 @@ const LocationTable: React.FunctionComponent<{
             sortByPopulation={sortByPopulation}
             isHomepage={isHomepage}
             showStateCode={showStateCode}
-            metrics={metrics}
+            columns={columns}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && !isModal && (
           <Styles.Body>
             <LocationTableBody
-              metrics={metrics}
+              columns={columns}
               sorter={sorter}
               sortedLocations={[pinnedLocation]}
               currentLocationRank={pinnedLocation?.rank}

@@ -65,9 +65,6 @@ const NavBar: React.FC = () => {
           <Style.NavLink to="/about" key="about">
             About
           </Style.NavLink>
-          <Style.NavLink to="/contact" key="contact">
-            Contact Us
-          </Style.NavLink>
           <DonateButton />
         </Style.DesktopOnly>
         <Style.MobileOnly>
