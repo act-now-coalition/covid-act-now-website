@@ -3,11 +3,11 @@ import {
   ArrowContainer,
   MetricHeaderCell,
 } from 'components/Compare/Compare.style';
-import { getMetricNameForCompare } from 'common/metric';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { trackCompareEvent } from 'common/utils/compare';
 import { EventAction } from 'components/Analytics';
+import { ColumnDefinition } from './columns';
 
 function getTrackingLabel(metricName: string, descending: boolean) {
   const sortLabel = descending ? 'Desc' : 'Asc';
@@ -19,7 +19,7 @@ const HeaderCell = (props: {
   setSorter: any;
   sortDescending: any;
   setSortDescending: any;
-  metricInMap: any;
+  column: ColumnDefinition;
   arrowColorSelected: string;
   arrowColorNotSelected: string;
   isModal: boolean;
@@ -31,7 +31,7 @@ const HeaderCell = (props: {
     setSorter,
     sortDescending,
     setSortDescending,
-    metricInMap,
+    column,
     arrowColorSelected,
     arrowColorNotSelected,
     isModal,
@@ -39,32 +39,32 @@ const HeaderCell = (props: {
     sortByPopulation,
   } = props;
 
-  const metricName = getMetricNameForCompare(metricInMap);
+  const columnName = column.name;
 
   function cellOnClick() {
     if (sortByPopulation) {
       setSortByPopulation(false);
     }
-    if (sorter === metricInMap) {
+    if (sorter === column.columnId) {
       setSortDescending(!sortDescending);
       trackCompareEvent(
         EventAction.SELECT,
-        getTrackingLabel(metricName, !sortDescending),
+        getTrackingLabel(columnName, !sortDescending),
       );
     } else {
-      setSorter(metricInMap);
+      setSorter(column.columnId);
       setSortDescending(true);
-      trackCompareEvent(EventAction.SELECT, getTrackingLabel(metricName, true));
+      trackCompareEvent(EventAction.SELECT, getTrackingLabel(columnName, true));
     }
   }
 
-  const isSelectedMetric = sorter === metricInMap;
+  const isSelectedMetric = sorter === column.columnId;
 
   const onClickSortArrow = (isDescending: boolean) => {
     setSortDescending(isDescending);
     trackCompareEvent(
       EventAction.SELECT,
-      getTrackingLabel(metricName, isDescending),
+      getTrackingLabel(columnName, isDescending),
     );
   };
 
@@ -77,7 +77,7 @@ const HeaderCell = (props: {
       $sortDescending={sortDescending}
       $isSelectedMetric={isSelectedMetric}
     >
-      <span>{metricName}</span>
+      <span>{columnName}</span>
       <ArrowContainer
         $arrowColorNotSelected={arrowColorNotSelected}
         $isModal={isModal}

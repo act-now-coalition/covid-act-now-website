@@ -3,7 +3,6 @@ import { isNumber } from 'lodash';
 import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
-import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 import { Link } from 'react-router-dom';
@@ -310,10 +309,7 @@ const SharedCellStyles = css`
 `;
 
 export const LocationNameCell = styled.td<{
-  countyName?: Boolean;
   iconColor?: Level;
-  sorter?: any;
-  metric?: Metric;
   sortByPopulation: boolean;
 }>`
   ${SharedCellStyles}
@@ -341,7 +337,7 @@ export const LocationNameCell = styled.td<{
   }
 `;
 
-export const MetricValue = styled.span<{ valueUnknown: boolean }>`
+export const DataCellValue = styled.span<{ valueUnknown: boolean }>`
   width: 48px;
   display: inline-block;
   text-align: right;
@@ -349,27 +345,22 @@ export const MetricValue = styled.span<{ valueUnknown: boolean }>`
   font-family: Source Code Pro;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-right: 0.75rem;
+  text-transform: capitalize;
 `;
 
-export const MetricCell = styled.td<{
-  countyName?: Boolean;
-  iconColor?: Level;
-  sorter?: any;
-  metric?: Metric;
-  sortByPopulation: boolean;
+export const DataCell = styled.td<{
+  iconColor: string;
+  isSelected: boolean;
 }>`
   ${SharedCellStyles}
   min-width: ${metricCellWidth}px;
-  color: ${({ sorter, metric }) =>
-    sorter === metric ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
-  font-weight: ${({ sorter, metric, sortByPopulation }) =>
-    !sortByPopulation && sorter === metric && '600'};
-  background-color: ${({ sorter, metric, sortByPopulation }) =>
-    !sortByPopulation && sorter === metric && 'rgba(0,0,0,0.02)'};
+  color: ${({ isSelected }) =>
+    isSelected ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
+  font-weight: ${({ isSelected }) => isSelected && '600'};
+  background-color: ${({ isSelected }) => isSelected && 'rgba(0,0,0,0.02)'};
 
   svg {
-    color: ${({ iconColor }) =>
-      iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
+    color: ${({ iconColor }) => iconColor};
   }
 `;
 
@@ -406,7 +397,7 @@ export const Row = styled(TableRow)<{
   &:hover {
     color: ${({ $headerRowBackground }) =>
       !$headerRowBackground && `${COLOR_MAP.BLUE}`};
-    ${MetricCell} {
+    ${DataCell} {
       span,
       ${Tag} {
         color: ${COLOR_MAP.BLUE};
