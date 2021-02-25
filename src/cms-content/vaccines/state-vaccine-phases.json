@@ -1165,6 +1165,13 @@
           "expandedDefinitionUrl": "",
           "startDate": "May 1, 2021",
           "updatedAt": "2021-02-18T01:52:35.985Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-02-25T22:58:42.424Z",
+          "phase": "2",
+          "description": "* Individuals 16+",
+          "startDate": "July 2021"
         }
       ]
     },
