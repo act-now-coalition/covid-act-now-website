@@ -7,8 +7,6 @@ import {
   Wrapper,
   Date,
   AnnouncementBodyCopy,
-  ButtonsContainer,
-  ViewAllLink,
 } from './Announcements.style';
 import { scrollWithOffset } from 'components/TableOfContents';
 
