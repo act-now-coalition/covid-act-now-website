@@ -1,5 +1,10 @@
 import React from 'react';
-import { CcviLevel, getCcviLevelColor } from 'common/ccvi';
+import {
+  CcviLevel,
+  getCcviLevelColor,
+  getCcviLevelName,
+  getCcviLevel,
+} from 'common/ccvi';
 import { scaleLinear } from '@vx/scale';
 import { v4 as uuidv4 } from 'uuid';
 import { Group } from '@vx/group';
@@ -8,6 +13,8 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
   overallScore,
 }) => {
   const gradientId = uuidv4();
+  const titleId = uuidv4();
+
   const containerHeight = 34;
   const thermometerWidth = 240;
   const thermometerHeight = 20;
@@ -19,8 +26,23 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
 
   const pointerX = scaleWidth(overallScore);
 
+  const level = getCcviLevel(overallScore);
+
+  // todo (chelsi): add location name, possibly edit copy
+  const title = level
+    ? `Thermometer image showing that the vulnerability level is ${getCcviLevelName(
+        level,
+      ).toLowerCase()}.`
+    : 'Thermometer image showing the vulnerability level.';
+
   return (
-    <svg width={thermometerWidth} height={containerHeight}>
+    <svg
+      width={thermometerWidth}
+      height={containerHeight}
+      role="img"
+      aria-labelledby={titleId}
+    >
+      <title id={titleId}>{title}</title>
       <defs>
         <linearGradient id={gradientId}>
           <stop

@@ -54,6 +54,10 @@ export function getCcviLevelColor(level: CcviLevel): string {
   return CCVI_LEVEL_INFO_MAP[level].color;
 }
 
+export function getCcviLevelName(level: CcviLevel): string {
+  return CCVI_LEVEL_INFO_MAP[level].levelName;
+}
+
 export function getCcviLevel(score: number): CcviLevel | null {
   for (const level of allCcviLevels) {
     if (score <= CCVI_LEVEL_INFO_MAP[level].upperLimit) {
