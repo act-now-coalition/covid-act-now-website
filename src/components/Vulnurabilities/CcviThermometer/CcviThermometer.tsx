@@ -2,6 +2,7 @@ import React from 'react';
 import { CcviLevel, getCcviLevelColor } from 'common/ccvi';
 import { scaleLinear } from '@vx/scale';
 import { v4 as uuidv4 } from 'uuid';
+import { Group } from '@vx/group';
 
 const CcviThermometer: React.FC<{ overallScore: number }> = ({
   overallScore,
@@ -24,30 +25,30 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
         <linearGradient id={gradientId}>
           <stop
             offset="20%"
-            stop-color={getCcviLevelColor(CcviLevel.VERY_LOW)}
+            stopColor={getCcviLevelColor(CcviLevel.VERY_LOW)}
           />
-          <stop offset="20%" stop-color={getCcviLevelColor(CcviLevel.LOW)} />
-          <stop offset="40%" stop-color={getCcviLevelColor(CcviLevel.LOW)} />
-          <stop offset="40%" stop-color={getCcviLevelColor(CcviLevel.MEDIUM)} />
-          <stop offset="60%" stop-color={getCcviLevelColor(CcviLevel.MEDIUM)} />
-          <stop offset="60%" stop-color={getCcviLevelColor(CcviLevel.HIGH)} />
-          <stop offset="80%" stop-color={getCcviLevelColor(CcviLevel.HIGH)} />
+          <stop offset="20%" stopColor={getCcviLevelColor(CcviLevel.LOW)} />
+          <stop offset="40%" stopColor={getCcviLevelColor(CcviLevel.LOW)} />
+          <stop offset="40%" stopColor={getCcviLevelColor(CcviLevel.MEDIUM)} />
+          <stop offset="60%" stopColor={getCcviLevelColor(CcviLevel.MEDIUM)} />
+          <stop offset="60%" stopColor={getCcviLevelColor(CcviLevel.HIGH)} />
+          <stop offset="80%" stopColor={getCcviLevelColor(CcviLevel.HIGH)} />
           <stop
             offset="80%"
-            stop-color={getCcviLevelColor(CcviLevel.VERY_HIGH)}
+            stopColor={getCcviLevelColor(CcviLevel.VERY_HIGH)}
           />
         </linearGradient>
       </defs>
-      <g transform={`translate(${pointerX}, 0)`}>
+      <Group left={pointerX}>
         <polygon points={`-6,0 0,6 6,0`} fill="black" />
-      </g>
+      </Group>
       <rect
         fill={`url(#${gradientId})`}
         width={thermometerWidth}
         height={thermometerHeight}
         y={containerHeight - thermometerHeight}
-        rx={10}
-        ry={10}
+        rx={thermometerHeight / 2}
+        ry={thermometerHeight / 2}
       />
     </svg>
   );
