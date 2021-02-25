@@ -56,16 +56,16 @@
       ]
     },
     {
+      "productName": "FAQs",
+      "productId": "faqs",
+      "productSubtitle": "Frequently Asked Questions",
+      "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.\n\n### Where can I see all data fields included in your API?\n\nAll fields can be found in our [data definitions](https://apidocs.covidactnow.org/data-definitions).  To see an overview of how to query data for states, counties, or metros visit our [getting started guide](https://apidocs.covidactnow.org/access#getting-started).\n\n### When does your data update and at what time?\n\nOur data is updated daily around Noon Eastern time.  Updates reflects the latest available data from each our our sources.\n\n### Do I need to acquire a license to use the API?\n\nBy default, our data is available for noncommercial use under the [CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/).\n\nAll commercial entities wishing to access our API should contact [api@covidactnow.org](mailto:api@covidactnow.org) to acquire a commercial license. We define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services.  For more details, see our [Terms of Use](/terms)."
+    },
+    {
       "productName": "License",
       "productId": "license",
       "productSubtitle": "API License",
       "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
-    },
-    {
-      "productName": "FAQs",
-      "productId": "faqs",
-      "productSubtitle": "Frequently Asked Questions",
-      "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.\n\n### When does your data update?\n\nOur data is updated daily around Noon Eastern time."
     }
   ],
   "metadataTitle": "Data API",
