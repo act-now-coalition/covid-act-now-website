@@ -120,74 +120,67 @@ const USACountyMap = React.memo(
                     .filter(geo => stateFipsCodes.includes(geo.id))
                     .map(geo => {
                       const fipsCode = geo.id;
-                      const state = regions.findByFipsCode(fipsCode);
+                      // we can coerce this to a state safely because we're only
+                      // dealing with FIPS codes that are from states, because of that filter.
+                      const state = regions.findByFipsCodeStrict(
+                        fipsCode,
+                      ) as StateType;
 
-                      if (
-                        state === null ||
-                        !Boolean(state) ||
-                        !(state instanceof StateType)
-                      ) {
-                        return null;
+                      // This flag is used to increase an invisible border around Hawaii and Puerto Rico
+                      // to increase their effective target size
+                      const expandTapArea =
+                        state.stateCode === 'HI' || state.stateCode === 'PR';
+
+                      // Using a custom SVG to place the northern mariana islands to increase
+                      // accessibility due to the small size.
+                      if (state.stateCode === 'MP') {
+                        return (
+                          <Link
+                            key={state.stateCode}
+                            to={state.relativeUrl}
+                            aria-label={state.fullName}
+                            onClick={() => trackMapClick(state.fullName)}
+                            tabIndex={-1}
+                          >
+                            <MarianaIslands
+                              key={geo.rsmKey}
+                              onMouseEnter={() =>
+                                setTooltipContent(state.fullName)
+                              }
+                              onMouseLeave={onMouseLeave}
+                              onClick={() => stateClickHandler(state.fullName)}
+                              fill={getFillColor(geo)}
+                              tabIndex={-1}
+                            />
+                          </Link>
+                        );
                       } else {
-                        // This flag is used to increase an invisible border around Hawaii and Puerto Rico
-                        // to increase their effective target size
-                        const expandTapArea =
-                          state.stateCode === 'HI' || state.stateCode === 'PR';
-                        // Using a custom SVG to place the northern mariana islands to increase
-                        // accessibility due to the small size.
-                        if (state.stateCode === 'MP') {
-                          return (
-                            <Link
-                              key={state.stateCode}
-                              to={state.relativeUrl}
-                              aria-label={state.fullName}
-                              onClick={() => trackMapClick(state.fullName)}
+                        return (
+                          <Link
+                            key={state.stateCode}
+                            to={state.relativeUrl}
+                            aria-label={state.fullName}
+                            onClick={() => trackMapClick(state.fullName)}
+                            tabIndex={-1}
+                          >
+                            <Geography
+                              key={geo.rsmKey}
+                              geography={geo}
+                              onMouseEnter={() =>
+                                setTooltipContent(state.fullName)
+                              }
+                              onMouseLeave={onMouseLeave}
+                              onClick={() => stateClickHandler(state.fullName)}
+                              fill={getFillColor(geo)}
+                              fillOpacity={showCounties ? 0 : 1}
+                              stroke="white"
+                              strokeWidth={expandTapArea ? 35 : 1}
+                              strokeOpacity={expandTapArea ? 0 : 1}
+                              role="img"
                               tabIndex={-1}
-                            >
-                              <MarianaIslands
-                                key={geo.rsmKey}
-                                onMouseEnter={() =>
-                                  setTooltipContent(state.fullName)
-                                }
-                                onMouseLeave={onMouseLeave}
-                                onClick={() =>
-                                  stateClickHandler(state.fullName)
-                                }
-                                fill={getFillColor(geo)}
-                                tabIndex={-1}
-                              />
-                            </Link>
-                          );
-                        } else {
-                          return (
-                            <Link
-                              key={state.stateCode}
-                              to={state.relativeUrl}
-                              aria-label={state.fullName}
-                              onClick={() => trackMapClick(state.fullName)}
-                              tabIndex={-1}
-                            >
-                              <Geography
-                                key={geo.rsmKey}
-                                geography={geo}
-                                onMouseEnter={() =>
-                                  setTooltipContent(state.fullName)
-                                }
-                                onMouseLeave={onMouseLeave}
-                                onClick={() =>
-                                  stateClickHandler(state.fullName)
-                                }
-                                fill={getFillColor(geo)}
-                                fillOpacity={showCounties ? 0 : 1}
-                                stroke="white"
-                                strokeWidth={expandTapArea ? 35 : 1}
-                                strokeOpacity={expandTapArea ? 0 : 1}
-                                role="img"
-                                tabIndex={-1}
-                              />
-                            </Link>
-                          );
-                        }
+                            />
+                          </Link>
+                        );
                       }
                     })
                 }
