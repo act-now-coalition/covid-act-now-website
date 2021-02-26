@@ -1,6 +1,6 @@
 {
   "header": "Data API",
-  "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data.",
+  "intro": "The Covid Act Now API provides access to comprehensive COVID data - both current and historical. The data is available for all US states, counties, and metros and is aggregated from a number of official sources, quality assured, and updated daily. It is available in JSON and CSV formats.",
   "productsList": [
     {
       "productName": "Who's using our data",
