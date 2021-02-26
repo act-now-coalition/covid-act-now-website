@@ -9,6 +9,7 @@ import useGeolocationRegions from './useGeolocationRegions';
 import usePromise from './usePromise';
 import useCountyToZipMap from './useCountyToZipMap';
 import useFipsToCcviMap from './useFipsToCcviMap';
+import useCcviForFips from './useCcviForFips';
 
 export {
   useScrollToElement,
@@ -22,4 +23,5 @@ export {
   useCountyToZipMap,
   useFipsToCcviMap,
   usePromise,
+  useCcviForFips,
 };
