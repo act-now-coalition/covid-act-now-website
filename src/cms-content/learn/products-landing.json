@@ -1,11 +1,11 @@
 {
   "header": "Data API",
-  "intro": "Looking for all the data that powers our site in a machine-readable format? You can use our API, made for ease-of-use by those wishing to programmatically ingest our data.",
+  "intro": "The Covid Act Now API provides access to comprehensive COVID data — both current and historical. The data is available for all US states, counties, and metros and is aggregated from a number of official sources, quality assured, and updated daily. It is available in JSON and CSV formats.",
   "productsList": [
     {
       "productName": "Who's using our data",
       "productId": "whos-using-our-data",
-      "productSubtitle": "",
+      "productSubtitle": "Who's using our data",
       "productDescription": "Our API is used by organizations and individuals around the country including:",
       "logos": [
         {
@@ -54,6 +54,12 @@
           "image": "/images_cms/citizen-com_logo.png"
         }
       ]
+    },
+    {
+      "productName": "FAQs",
+      "productId": "faqs",
+      "productSubtitle": "Frequently Asked Questions",
+      "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.\n\n### Where can I see all data fields included in your API?\n\nAll fields can be found in our [data definitions](https://apidocs.covidactnow.org/data-definitions).  To see an overview of how to query data for states, counties, or metros visit our [getting started guide](https://apidocs.covidactnow.org/access#getting-started).\n\n### When does your data update and at what time?\n\nOur data is updated daily around noon Eastern Time.  Updates reflect the latest available data from each of our sources."
     },
     {
       "productName": "License",
