@@ -250,7 +250,7 @@ export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
   ${MetricHeaderCell}, ${LocationHeaderCell} {
     vertical-align: bottom;
     line-height: 1.1rem;
-    padding: 1rem 1rem 0.8rem;
+    padding: 1rem 0 0.8rem 0.8rem;
     color: ${({ $isModal }) => $isModal && 'white'};
     border-bottom: ${({ $isModal }) =>
       !$isModal && `2px solid ${COLORS.LIGHTGRAY}`};

@@ -57,7 +57,7 @@ class MetricColumn implements ColumnDefinition {
 class CcviColumn implements ColumnDefinition {
   columnId = CCVI_COLUMN_ID;
 
-  name = 'Vulnerable Level';
+  name = 'Vulnerability Level';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.ccvi;
