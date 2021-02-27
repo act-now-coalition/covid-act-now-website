@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useFipsToCcviMap from './useFipsToCcviMap';
 import { RegionCcviItem } from 'common/data';
 
-export default function useCcviForFips(fips: any): null | RegionCcviItem {
+export default function useCcviForFips(fips: string): null | RegionCcviItem {
   const [fipsCcviScores, setFipsCcviScores] = useState<null | RegionCcviItem>(
     null,
   );
