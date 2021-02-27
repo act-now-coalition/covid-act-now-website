@@ -56,7 +56,9 @@ export function reenableDisabledMetrics(enable: boolean): void {
  *  ]),
  */
 export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
-  [Metric.CASE_DENSITY]: new DisabledFipsList([]),
+  [Metric.CASE_DENSITY]: new DisabledFipsList([
+    ...countyAndMetrosForState('IA'), // https://trello.com/c/tuJ0B1aH/
+  ]),
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
   [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
