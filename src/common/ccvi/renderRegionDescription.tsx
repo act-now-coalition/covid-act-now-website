@@ -12,7 +12,7 @@ export function renderStateDescription(
     return (
       <>
         is one of the most vulnerable states, with{' '}
-        <strong>{overallScore}</strong>% of the population in a high
+        <strong>{scoreAsPercent}</strong> of the population in a high
         vulnerability area.{' '}
       </>
     );
