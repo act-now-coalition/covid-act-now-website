@@ -1,13 +1,14 @@
 import React from 'react';
 
 function CountyPage({ region, locationSummary }) {
-  console.log(JSON.stringify(locationSummary, null, 2));
+  if (!locationSummary) {
+    return <h1>no data for {region.fullName}</h1>;
+  }
   const { metrics } = locationSummary;
   return (
     <div>
       <h1>{region.fullName}</h1>
       <span>{`risk level: ${locationSummary.level}`}</span>
-
       <h2>Overall risk: {locationSummary.level}</h2>
       <ul>
         <li>{`level: ${metrics[0].level}, value: ${metrics[0].value}`}</li>
@@ -25,7 +26,6 @@ export async function getStaticProps({ params }) {
   const { default: regions } = await import('../../../../src/common/regions');
 
   const region = regions.findCountyByUrlParams(state, county);
-  // get location summaries
   // get projections
 
   const locationSummaries = await import(
