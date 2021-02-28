@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from './Banner';
 import { ContainedButton } from './Banner.style';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 const trackClick = () => {

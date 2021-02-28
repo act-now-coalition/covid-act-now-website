@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'common/utils/router';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';

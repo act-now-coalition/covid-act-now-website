@@ -26,7 +26,7 @@ import {
 } from './ShareBlock.style';
 import { trackShare } from 'components/Analytics';
 import { Region } from 'common/regions';
-import { matchPath, useLocation } from 'react-router';
+import { matchPath, useLocation } from 'common/utils/router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
 import { useGeolocationRegions } from 'common/hooks';

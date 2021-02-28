@@ -3,7 +3,7 @@ import { StyledMenu } from './NavBar.style';
 import MapIcon from 'assets/images/mapIconTwoTone';
 import FAQIcon from 'assets/images/faqIconTwoTone';
 import palette from 'assets/theme/palette';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { trackNavigation } from './utils';
 
 const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({

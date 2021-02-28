@@ -1,6 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import { useParams } from 'common/utils/router';
+import { Redirect } from 'common/utils/router';
 import { useRegionFromParams, State, County } from 'common/regions';
 import LocationPage from './LocationPage';
 

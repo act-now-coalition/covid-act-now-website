@@ -5,7 +5,7 @@ import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
 import { Level } from 'common/level';
 import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 
 // TODO (Chelsi): consolidate into a theme:
 

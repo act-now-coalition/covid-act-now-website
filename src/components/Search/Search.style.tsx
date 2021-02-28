@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'common/utils/router';
 import Paper from '@material-ui/core/Paper';
 import { COLOR_MAP } from 'common/colors';
-import { Link } from 'react-router-dom';
 
 // Note (chelsi): These random 1px margins solve an alignment bug that I cannot figure out otherwise :)
 export const StyledPaper = styled(Paper)`

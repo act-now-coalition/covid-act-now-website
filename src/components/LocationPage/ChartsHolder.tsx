@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'common/utils/router';
 import { v4 as uuidv4 } from 'uuid';
 import {
   useCcviForFips,

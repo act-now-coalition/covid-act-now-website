@@ -11,7 +11,7 @@ import {
 import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'common/utils/router';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { scrollWithOffset } from 'components/TableOfContents';
 

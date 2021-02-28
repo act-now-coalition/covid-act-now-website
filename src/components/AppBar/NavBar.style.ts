@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import MuiAppBar from '@material-ui/core/AppBar';
 import MuiToolbar from '@material-ui/core/Toolbar';
-import { NavLink as _NavLink } from 'react-router-dom';
+import { NavLink as _NavLink } from 'common/utils/router';
 import MuiMenuIcon from '@material-ui/icons/Menu';
 import MuiCloseIcon from '@material-ui/icons/Close';
 import MuiIconButton from '@material-ui/core/IconButton';

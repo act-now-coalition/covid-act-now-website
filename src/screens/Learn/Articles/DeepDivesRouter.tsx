@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'common/utils/router';
 import explainedArticles from 'cms-content/explained';
 
 const DeepDivesRedirect: React.FC = () => {

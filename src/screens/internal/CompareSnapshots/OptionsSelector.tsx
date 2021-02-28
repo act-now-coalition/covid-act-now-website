@@ -1,7 +1,7 @@
 import { get as _get } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'common/utils/router';
+import { useHistory } from 'common/utils/router';
 import * as QueryString from 'query-string';
 import { assert } from 'common/utils';
 import {

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'common/utils/router';
 import { scrollWithOffset } from 'components/TableOfContents';
 import {
   isValidURL,

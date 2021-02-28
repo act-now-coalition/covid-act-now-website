@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'common/utils/router';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';

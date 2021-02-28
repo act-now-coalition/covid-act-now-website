@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'common/utils/router';
 import Landing from './CaseStudiesLanding';
 import CaseStudyPage from './CaseStudy';
 

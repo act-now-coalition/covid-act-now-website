@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import theme from 'assets/theme';
 
 export const StyledLink = styled(Link)`

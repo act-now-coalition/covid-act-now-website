@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import COLORS, { COLOR_MAP } from 'common/colors';
