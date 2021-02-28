@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ color }: { color?: string }) => (
+const mapIconTwoTone = ({ color }: { color?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     height="24"
@@ -19,3 +19,4 @@ export default ({ color }: { color?: string }) => (
     />
   </svg>
 );
+export default mapIconTwoTone;
