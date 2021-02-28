@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useParams } from 'common/utils/router';
 import regions from './region_db';
 import { Region } from './types';
 

@@ -1,5 +1,5 @@
 import { Region } from 'common/regions';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'common/utils/router';
 import {
   EMBED_HEIGHT,
   EMBED_WIDTH,

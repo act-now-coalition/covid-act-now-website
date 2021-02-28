@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Sentry from '@sentry/react';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { Container, Message } from './LazyLoading.style';
 
 const Fallback: React.FC = () => {

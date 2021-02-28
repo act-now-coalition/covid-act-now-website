@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 import { HeaderWrapperStyles } from 'components/LocationPage/ChartsHolder.style';

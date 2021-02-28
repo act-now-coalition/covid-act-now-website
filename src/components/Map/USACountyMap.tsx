@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import ReactTooltip from 'react-tooltip';

@@ -5,7 +5,7 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'common/utils/router';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { Link } from 'common/utils/router';
+import { HashLink } from 'common/utils/router';
 import { Subtitle1 } from 'components/Typography';
 import {
   AnnouncementIntro,

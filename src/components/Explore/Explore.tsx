@@ -5,7 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'common/utils/router';
 import some from 'lodash/some';
 import uniq from 'lodash/uniq';
 import max from 'lodash/max';

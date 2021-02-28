@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'common/utils/router';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NewFooter/MegaMenu';

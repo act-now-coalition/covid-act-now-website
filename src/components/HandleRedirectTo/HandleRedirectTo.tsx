@@ -1,4 +1,4 @@
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useLocation } from 'common/utils/router';
 import * as QueryString from 'query-string';
 import React from 'react';
 

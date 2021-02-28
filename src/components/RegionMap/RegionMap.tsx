@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'common/utils/router';
 import { ComposableMap, Geographies } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 import * as topojson from 'topojson-client';

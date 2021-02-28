@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'common/utils/router';
 import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
 import { learnPages } from 'cms-content/learn';

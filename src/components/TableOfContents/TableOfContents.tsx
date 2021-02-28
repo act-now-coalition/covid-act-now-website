@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'common/utils/router';
 import * as Style from './TableOfContents.style';
 import { scrollWithOffset } from './utils';
 

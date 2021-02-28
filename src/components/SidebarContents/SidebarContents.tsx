@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'common/utils/router';
 import * as Styles from './SidebarContents.style';
 
 interface TocItem {

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'common/utils/router';
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import {
   ChartWrapper,

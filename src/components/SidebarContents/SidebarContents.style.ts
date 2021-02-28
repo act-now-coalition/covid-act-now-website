@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'common/utils/router';
 import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
-import { NavHashLink } from 'react-router-hash-link';
+import { NavHashLink } from 'common/utils/router';
 import { scrollWithOffset } from 'components/TableOfContents';
 import ScrollSpy from 'react-scrollspy';
 

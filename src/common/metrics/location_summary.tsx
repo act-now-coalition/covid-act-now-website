@@ -1,7 +1,7 @@
 import React from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'common/utils/router';
 import { scrollWithOffset } from 'components/TableOfContents';
 
 // Note: These names are used on SocialLocationPreview

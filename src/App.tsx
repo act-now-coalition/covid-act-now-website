@@ -4,7 +4,7 @@ import {
   ThemeProvider as MuiThemeProvider,
   StylesProvider,
 } from '@material-ui/core/styles';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'common/utils/router';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import Embed from 'screens/Embed/Embed';

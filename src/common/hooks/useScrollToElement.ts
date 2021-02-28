@@ -2,7 +2,7 @@
 Example: covidactnow.org/glossary#npi will automatically scroll to the NPI section. */
 
 import { useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'common/utils/router';
 import { scrollWithTimeout } from 'components/Markdown/MarkdownLink';
 
 export default function useScrollToElement(): void {

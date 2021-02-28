@@ -1,6 +1,6 @@
 import pickBy from 'lodash/pickBy';
 import isEqual from 'lodash/isEqual';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'common/utils/router';
 import { useEffect, useState } from 'react';
 import { assert } from './utils';
 import { getFirestore } from './firebase';

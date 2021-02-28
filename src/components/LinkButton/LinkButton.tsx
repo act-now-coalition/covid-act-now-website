@@ -2,8 +2,8 @@ import React, { ComponentProps, DetailedHTMLProps } from 'react';
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
-} from 'react-router-dom';
-import { HashLink, HashLinkProps } from 'react-router-hash-link';
+} from 'common/utils/router';
+import { HashLink, HashLinkProps } from 'common/utils/router';
 import { assert } from 'common/utils';
 import { BaseButton } from './LinkButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';

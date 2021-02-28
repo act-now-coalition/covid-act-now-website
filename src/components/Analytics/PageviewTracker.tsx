@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'common/utils/router';
 import ReactGA from 'react-ga';
 import { defaultTracker, legacyTracker } from './utils';
 import { initializeAmplitude, amplitudeLogEvent } from './amplitude';

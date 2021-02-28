@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, Redirect, useRouteMatch } from 'common/utils/router';
 import urlJoin from 'url-join';
 import ExplainedLanding from './ExplainedLanding';
 import Article from '../Articles/Article';
