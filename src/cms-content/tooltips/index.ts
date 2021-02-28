@@ -66,7 +66,7 @@ enum CcviThemeId {
 }
 
 /*
-  Maps each subscore ID to its corresponding 'theme' in ccvi.json.
+  Maps each ID to its corresponding CCVI-theme in ccvi.json.
   7 ids/themes in total, dictated here (page 6): https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19
 */
 const ccviThemeToIdMap: { [id in CcviThemeId]: string } = {
