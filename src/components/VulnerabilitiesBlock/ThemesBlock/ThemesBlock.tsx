@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, ThemeNameCell, LevelCell } from './ThemesBlock.style';
+import { Row, ThemeNameCell, LevelCell, Wrapper } from './ThemesBlock.style';
 import { orderedCcviThemes, CcviThemeInfo } from 'cms-content/tooltips';
 import { InfoTooltip } from 'components/InfoTooltip';
 import { RegionCcviItem } from 'common/data';
@@ -20,7 +20,7 @@ const ThemesBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
   );
 
   return (
-    <>
+    <Wrapper>
       {themesWithScores.map((theme: ThemeWithScore) => {
         const level = getCcviLevel(theme.score);
         const levelName = getCcviLevelName(level);
@@ -44,7 +44,7 @@ const ThemesBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
           </Row>
         );
       })}
-    </>
+    </Wrapper>
   );
 };
 
