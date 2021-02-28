@@ -6,10 +6,10 @@ import { HomepageLocationScope } from 'common/utils/compare';
 const returnSliderLabelColor = (
   filter: HomepageLocationScope,
   $isModal: boolean,
-  homepageScope: HomepageLocationScope,
+  $homepageScope: HomepageLocationScope,
 ) => {
   if (!$isModal) {
-    if (homepageScope === filter) return 'black';
+    if ($homepageScope === filter) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   }
   return 'white';
@@ -17,7 +17,7 @@ const returnSliderLabelColor = (
 
 export const StyledSlider = styled(Slider)<{
   $isModal: boolean;
-  homepageScope: HomepageLocationScope;
+  $homepageScope: HomepageLocationScope;
 }>`
   color: ${COLOR_MAP.BLUE};
   opacity: 1;
@@ -28,30 +28,30 @@ export const StyledSlider = styled(Slider)<{
         returnSliderLabelColor(
           HomepageLocationScope.COUNTY,
           props.$isModal,
-          props.homepageScope,
+          props.$homepageScope,
         )};
-      font-weight: ${({ homepageScope }) =>
-        homepageScope === HomepageLocationScope.COUNTY && 'bold'};
+      font-weight: ${({ $homepageScope }) =>
+        $homepageScope === HomepageLocationScope.COUNTY && 'bold'};
     }
     &:nth-child(7) {
       color: ${props =>
         returnSliderLabelColor(
           HomepageLocationScope.MSA,
           props.$isModal,
-          props.homepageScope,
+          props.$homepageScope,
         )};
-      font-weight: ${({ homepageScope }) =>
-        homepageScope === HomepageLocationScope.MSA && 'bold'};
+      font-weight: ${({ $homepageScope }) =>
+        $homepageScope === HomepageLocationScope.MSA && 'bold'};
     }
     &:nth-child(9) {
       color: ${props =>
         returnSliderLabelColor(
           HomepageLocationScope.STATE,
           props.$isModal,
-          props.homepageScope,
+          props.$homepageScope,
         )};
-      font-weight: ${({ homepageScope }) =>
-        homepageScope === HomepageLocationScope.STATE && 'bold'};
+      font-weight: ${({ $homepageScope }) =>
+        $homepageScope === HomepageLocationScope.STATE && 'bold'};
     }
   }
 `;
