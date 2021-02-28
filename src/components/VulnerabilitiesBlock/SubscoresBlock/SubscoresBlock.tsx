@@ -21,12 +21,11 @@ const SubscoresBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
 
   return (
     <>
-      {themesWithScores.map((theme: ThemeWithScore, i: number) => {
-        const grayRow = i % 2 === 0;
+      {themesWithScores.map((theme: ThemeWithScore) => {
         const level = getCcviLevel(theme.score);
         const levelName = getCcviLevelName(level);
         return (
-          <Row grayRow={grayRow}>
+          <Row key={theme.subscoreName}>
             <ScoreNameCell>
               {theme.subscoreName}
               <InfoTooltip
@@ -36,7 +35,12 @@ const SubscoresBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
                 trackCloseTooltip={() => {}}
               />
             </ScoreNameCell>
-            <LevelCell color={getCcviLevelColor(level)}>{levelName}</LevelCell>
+            <LevelCell
+              aria-label={levelName.toLowerCase()}
+              color={getCcviLevelColor(level)}
+            >
+              {levelName}
+            </LevelCell>
           </Row>
         );
       })}

@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components';
 import { GREY_0, COLOR_MAP } from 'common/colors';
 
-export const Row = styled.div<{ grayRow?: boolean }>`
-  background-color: ${({ grayRow }) => grayRow && GREY_0};
+export const Row = styled.div`
   display: flex;
+
+  &:nth-child(odd) {
+    background-color: ${GREY_0};
+  }
 `;
 
 const CellStyles = css`
