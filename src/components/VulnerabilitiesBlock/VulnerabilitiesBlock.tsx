@@ -1,5 +1,5 @@
 import React from 'react';
-import SubscoresBlock from './SubscoresBlock/SubscoresBlock';
+import ThemesBlock from './ThemesBlock/ThemesBlock';
 import { useCcviForFips } from 'common/hooks';
 
 const VulnerabilitiesBlock = () => {
@@ -11,7 +11,7 @@ const VulnerabilitiesBlock = () => {
 
   return (
     <>
-      <SubscoresBlock scores={scores} />
+      <ThemesBlock scores={scores} />
     </>
   );
 };

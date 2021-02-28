@@ -15,7 +15,7 @@ const CellStyles = css`
   width: 100%;
 `;
 
-export const ScoreNameCell = styled.div`
+export const ThemeNameCell = styled.div`
   ${CellStyles};
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;

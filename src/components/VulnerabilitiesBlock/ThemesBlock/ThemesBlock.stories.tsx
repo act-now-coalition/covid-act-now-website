@@ -1,10 +1,10 @@
 import React from 'react';
-import SubscoresBlock from './SubscoresBlock';
+import ThemesBlock from './ThemesBlock';
 import { useCcviForFips } from 'common/hooks';
 
 export default {
-  title: 'Shared Components/Vulnerabilities/CcviSubscoreTable',
-  component: SubscoresBlock,
+  title: 'Shared Components/Vulnerabilities/ThemesBlock',
+  component: ThemesBlock,
 };
 
 export const Block = () => {
@@ -14,5 +14,5 @@ export const Block = () => {
     return null;
   }
 
-  return <SubscoresBlock scores={scores} />;
+  return <ThemesBlock scores={scores} />;
 };

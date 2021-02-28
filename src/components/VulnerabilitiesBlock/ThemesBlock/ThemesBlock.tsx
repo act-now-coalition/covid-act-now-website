@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, ScoreNameCell, LevelCell } from './SubscoresBlock.style';
+import { Row, ThemeNameCell, LevelCell } from './ThemesBlock.style';
 import { orderedCcviThemes, CcviThemeInfo } from 'cms-content/tooltips';
 import { InfoTooltip } from 'components/InfoTooltip';
 import { RegionCcviItem } from 'common/data';
@@ -9,7 +9,7 @@ export interface ThemeWithScore extends CcviThemeInfo {
   score: number;
 }
 
-const SubscoresBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
+const ThemesBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
   const themesWithScores: ThemeWithScore[] = orderedCcviThemes.map(
     (item: CcviThemeInfo) => {
       return {
@@ -26,7 +26,7 @@ const SubscoresBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
         const levelName = getCcviLevelName(level);
         return (
           <Row key={theme.subscoreName}>
-            <ScoreNameCell>
+            <ThemeNameCell>
               {theme.subscoreName}
               <InfoTooltip
                 title={theme.content}
@@ -34,7 +34,7 @@ const SubscoresBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
                 trackOpenTooltip={() => {}}
                 trackCloseTooltip={() => {}}
               />
-            </ScoreNameCell>
+            </ThemeNameCell>
             <LevelCell
               aria-label={levelName.toLowerCase()}
               color={getCcviLevelColor(level)}
@@ -48,4 +48,4 @@ const SubscoresBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
   );
 };
 
-export default SubscoresBlock;
+export default ThemesBlock;
