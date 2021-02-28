@@ -4,11 +4,11 @@ import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 
 export const SummaryStatsWrapper = styled(Box)<{
-  condensed?: Boolean;
-  isHeader?: Boolean;
+  $condensed?: Boolean;
+  $isHeader?: Boolean;
 }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     display: block;
   `
@@ -16,7 +16,7 @@ export const SummaryStatsWrapper = styled(Box)<{
     display: flex;
     align-items: stretch;
     justify-content: space-around;
-    background-color: ${props.isHeader ? 'none' : 'white'};
+    background-color: ${props.$isHeader ? 'none' : 'white'};
     border-radius: 0;
     box-shadow: none;
     max-width: 1040px;
@@ -33,18 +33,18 @@ export const SummaryStatsWrapper = styled(Box)<{
 `;
 
 export const SummaryStatWrapper = styled(Box)<{
-  condensed?: Boolean;
-  isEmbed?: Boolean;
-  isHeader?: Boolean;
+  $condensed?: Boolean;
+  $isEmbed?: Boolean;
+  $isHeader?: Boolean;
 }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: ${props.isEmbed && '14px 12px'};
-    margin-bottom:  ${!props.isEmbed && '0.75rem'};
+    padding: ${props.$isEmbed && '14px 12px'};
+    margin-bottom:  ${!props.$isEmbed && '0.75rem'};
 
     &:last-child {
       margin-bottom: 0;
@@ -63,22 +63,22 @@ export const SummaryStatWrapper = styled(Box)<{
     display: flex;
     flex: 1;
     flex-direction: row;
-    padding: ${props.isHeader ? '1rem 1.25rem' : '1.85rem 1rem'};
+    padding: ${props.$isHeader ? '1rem 1.25rem' : '1.85rem 1rem'};
     align-items: stretch;
-    border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
+    border-bottom: ${!props.$isHeader && `1px solid ${palette.lightGray}`};
 
     @media (min-width: 600px) {
-      border-bottom: ${!props.isHeader && `1px solid ${palette.lightGray}`};
+      border-bottom: ${!props.$isHeader && `1px solid ${palette.lightGray}`};
       margin: 0;
       flex-direction: column;
       align-items: center;
       max-width: 20%;
-      padding: ${props.isHeader ? '2rem 1rem' : '1.5rem 1.25rem'};
-      align-items: ${props.isHeader ? 'center' : 'unset'};
+      padding: ${props.$isHeader ? '2rem 1rem' : '1.5rem 1.25rem'};
+      align-items: ${props.$isHeader ? 'center' : 'unset'};
 
       &:not(:last-child) {
         border-right: ${
-          props.isHeader ? 'none' : `1px solid ${palette.divider}`
+          props.$isHeader ? 'none' : `1px solid ${palette.divider}`
         };
       }
     }
@@ -86,22 +86,22 @@ export const SummaryStatWrapper = styled(Box)<{
 `;
 
 export const StatNameText = styled(Typography)<{
-  condensed?: Boolean;
-  isEmbed?: Boolean;
-  isHeader?: Boolean;
-  statusUnknown?: Boolean;
+  $condensed?: Boolean;
+  $isEmbed?: Boolean;
+  $isHeader?: Boolean;
+  $statusUnknown?: Boolean;
 }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     font-weight: 500;
     font-size: 0.75rem;
     line-height: 0.875rem;
-    letter-spacing: ${props.isEmbed ? '0.04em' : '0.06em'};
+    letter-spacing: ${props.$isEmbed ? '0.04em' : '0.06em'};
     text-transform: uppercase;
     text-align: left;
     color: rgba(0, 0, 0, 0.7);
-    margin-right: ${props.isEmbed ? '.75rem' : '1rem'};
+    margin-right: ${props.$isEmbed ? '.75rem' : '1rem'};
   `
       : `
     font-weight: 600;
@@ -109,38 +109,38 @@ export const StatNameText = styled(Typography)<{
 
     text-transform: uppercase;
     font-size: 14px;
-    line-height: ${props.isHeader ? '1' : '1.4'};
+    line-height: ${props.$isHeader ? '1' : '1.4'};
 
     @media (min-width: 600px) {
       min-height: 0;
       font-size: 1rem;
       margin-bottom: ${
-        !props.isHeader ? 0 : props.statusUnknown ? '16px' : '9px'
+        !props.$isHeader ? 0 : props.$statusUnknown ? '16px' : '9px'
       }
     }
   `}
 `;
 
 export const StatTextWrapper = styled.div<{
-  isHeader?: Boolean;
-  isEmbed?: Boolean;
+  $isHeader?: Boolean;
+  $isEmbed?: Boolean;
 }>`
   display: flex;
-  flex-direction: ${({ isHeader }) => (isHeader ? 'column' : 'row')};
+  flex-direction: ${({ $isHeader }) => ($isHeader ? 'column' : 'row')};
   justify-content: flex-start;
   text-align: left;
   flex: 1;
-  margin-right: ${({ isEmbed }) => (isEmbed ? '.75rem' : '1.5rem')};
+  margin-right: ${({ $isEmbed }) => ($isEmbed ? '.75rem' : '1.5rem')};
 
   @media (min-width: 600px) {
-    text-align: ${({ isHeader }) => (isHeader ? 'left' : 'center')};
+    text-align: ${({ $isHeader }) => ($isHeader ? 'left' : 'center')};
     margin-right: 0;
   }
 `;
 
-export const StatValueWrapper = styled.div<{ condensed?: Boolean }>`
+export const StatValueWrapper = styled.div<{ $condensed?: Boolean }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     display: flex;
     align-items: center;
@@ -174,44 +174,48 @@ export const StatDetailText = styled(Typography)`
 `;
 
 export const StatValueText = styled(Typography)<{
-  condensed?: Boolean;
-  statusUnknown?: Boolean;
-  isEmbed?: Boolean;
-  isHeader?: Boolean;
+  $condensed?: Boolean;
+  $statusUnknown?: Boolean;
+  $isEmbed?: Boolean;
+  $isHeader?: Boolean;
 }>`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
   font-weight: 700;
 
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
-    font-size: ${props.isEmbed ? '17px' : '1rem'};
+    font-size: ${props.$isEmbed ? '17px' : '1rem'};
     line-height: 1rem;
     text-align: right;
   `
       : `
-    font-size: ${props.isHeader ? '1.4rem' : '1.5rem'};
+    font-size: ${props.$isHeader ? '1.4rem' : '1.5rem'};
     font-size: ${
-      !props.isHeader ? '1.5rem' : props.statusUnknown ? '.95rem' : '1.4rem'
+      !props.$isHeader ? '1.5rem' : props.$statusUnknown ? '.95rem' : '1.4rem'
     };
     line-height: 1.125rem;
-    margin-bottom: ${props.isHeader ? '0' : '0.35rem'};
+    margin-bottom: ${props.$isHeader ? '0' : '0.35rem'};
 
 
     @media (min-width: 600px) {
       text-align: left;
       font-size: ${
-        !props.isHeader ? '1.875rem' : props.statusUnknown ? '.9rem' : '1.55rem'
+        !props.$isHeader
+          ? '1.875rem'
+          : props.$statusUnknown
+          ? '.9rem'
+          : '1.55rem'
       };
-      line-height: ${props.isHeader ? '1.4' : '3.5rem'};
-      margin-bottom: ${props.isHeader ? '0' : '0.5rem'};
+      line-height: ${props.$isHeader ? '1.4' : '3.5rem'};
+      margin-bottom: ${props.$isHeader ? '0' : '0.5rem'};
       display: flex;
       flex-direction: column;
     }
 
     @media (min-width: 932px) {
-      font-size: ${props.statusUnknown ? '1rem' : '1.875rem'};
+      font-size: ${props.$statusUnknown ? '1rem' : '1.875rem'};
     }
   `}
 `;
@@ -259,14 +263,14 @@ export const NewIndicatorTag = styled.span<{ $isHeader?: boolean }>`
   }
 `;
 
-export const ValueWrapper = styled(Box)<{ iconColor: string }>`
+export const ValueWrapper = styled(Box)<{ $iconColor: string }>`
   display: flex;
   align-items: center;
 
   svg {
     font-size: 0.75rem;
     margin-right: 0.5rem;
-    color: ${({ iconColor }) => iconColor};
+    color: ${({ $iconColor }) => $iconColor};
 
     @media (min-width: 600px) {
       margin-right: 0.55rem;

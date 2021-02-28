@@ -20,12 +20,12 @@ export const ColoredHeaderBanner = styled(Box)`
 `;
 
 export const Wrapper = styled(Box)<{
-  condensed?: Boolean;
-  headerTopMargin: number;
-  headerBottomMargin: number;
+  $condensed?: Boolean;
+  $headerTopMargin: number;
+  $headerBottomMargin: number;
 }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     display: block;
   `
@@ -43,18 +43,18 @@ export const Wrapper = styled(Box)<{
     @media (min-width: 600px) {
       position: relative;
       flex-direction: column;
-      margin: ${props.headerTopMargin}px 1rem ${props.headerBottomMargin}px;
+      margin: ${props.$headerTopMargin}px 1rem ${props.$headerBottomMargin}px;
     }
 
     @media (min-width: 1060px) {
-      margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
+      margin: ${props.$headerTopMargin}px auto ${props.$headerBottomMargin}px;
     }
     @media (min-width: 1350px) {
-      margin: ${props.headerTopMargin}px 350px ${props.headerBottomMargin}px auto;
+      margin: ${props.$headerTopMargin}px 350px ${props.$headerBottomMargin}px auto;
     }
 
     @media (min-width: 1750px) {
-      margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
+      margin: ${props.$headerTopMargin}px auto ${props.$headerBottomMargin}px;
     }
   `}
 `;

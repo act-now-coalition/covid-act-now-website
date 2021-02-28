@@ -54,11 +54,11 @@ const SummaryStat: React.FC<{
   return (
     <SummaryStatWrapper
       onClick={finalOnClick}
-      condensed={condensed}
-      isEmbed={isEmbed}
+      $condensed={condensed}
+      $isEmbed={isEmbed}
     >
-      <StatTextWrapper isEmbed={isEmbed}>
-        <StatNameText condensed={condensed} isEmbed={isEmbed}>
+      <StatTextWrapper $isEmbed={isEmbed}>
+        <StatNameText $condensed={condensed} $isEmbed={isEmbed}>
           {getMetricNameForCompare(chartType)}{' '}
           {!condensed && beta && isMobile && (
             <StatTag beta isHeader={isHeader} />
@@ -66,10 +66,10 @@ const SummaryStat: React.FC<{
         </StatNameText>
         {!condensed && <StatDetailText>{levelInfo.detail()}</StatDetailText>}
       </StatTextWrapper>
-      <StatValueWrapper condensed={condensed}>
+      <StatValueWrapper $condensed={condensed}>
         {value == null ? null : (
           <>
-            <StatValueText condensed={condensed} isEmbed={isEmbed}>
+            <StatValueText $condensed={condensed} $isEmbed={isEmbed}>
               {formatValue(chartType, value, /*nullValueCopy=*/ '-')}
               {!condensed && beta && !isMobile && <StatTag beta />}
             </StatValueText>
@@ -118,7 +118,7 @@ const SummaryStats = (props: {
   return (
     <>
       {hasStats && (
-        <SummaryStatsWrapper condensed={props.condensed}>
+        <SummaryStatsWrapper $condensed={props.condensed}>
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
             chartType={Metric.CASE_DENSITY}
