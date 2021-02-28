@@ -5,7 +5,7 @@
  * https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19
  */
 export interface RegionCcviItem {
-  overall: number;
+  [overall: string]: number;
   theme1: number;
   theme2: number;
   theme3: number;
