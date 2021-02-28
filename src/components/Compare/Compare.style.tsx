@@ -309,7 +309,7 @@ const SharedCellStyles = css`
 `;
 
 export const LocationNameCell = styled.td<{
-  iconColor?: Level;
+  $iconColor?: Level;
   sortByPopulation: boolean;
 }>`
   ${SharedCellStyles}
@@ -320,8 +320,8 @@ export const LocationNameCell = styled.td<{
   line-height: 1.2;
 
   svg {
-    color: ${({ iconColor }) =>
-      iconColor !== undefined && `${LEVEL_COLOR[iconColor]}`};
+    color: ${({ $iconColor }) =>
+      $iconColor !== undefined && `${LEVEL_COLOR[$iconColor]}`};
   }
 
   div {
@@ -337,11 +337,11 @@ export const LocationNameCell = styled.td<{
   }
 `;
 
-export const DataCellValue = styled.span<{ valueUnknown: boolean }>`
+export const DataCellValue = styled.span<{ $valueUnknown: boolean }>`
   width: 48px;
   display: inline-block;
   text-align: right;
-  opacity: ${({ valueUnknown }) => valueUnknown && '.5'};
+  opacity: ${({ $valueUnknown }) => $valueUnknown && '.5'};
   font-family: Source Code Pro;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-right: 0.75rem;
@@ -349,18 +349,18 @@ export const DataCellValue = styled.span<{ valueUnknown: boolean }>`
 `;
 
 export const DataCell = styled.td<{
-  iconColor: string;
-  isSelected: boolean;
+  $iconColor: string;
+  $isSelected: boolean;
 }>`
   ${SharedCellStyles}
   min-width: ${metricCellWidth}px;
-  color: ${({ isSelected }) =>
-    isSelected ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
-  font-weight: ${({ isSelected }) => isSelected && '600'};
-  background-color: ${({ isSelected }) => isSelected && 'rgba(0,0,0,0.02)'};
+  color: ${({ $isSelected }) =>
+    $isSelected ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
+  font-weight: ${({ $isSelected }) => $isSelected && '600'};
+  background-color: ${({ $isSelected }) => $isSelected && 'rgba(0,0,0,0.02)'};
 
   svg {
-    color: ${({ iconColor }) => iconColor};
+    color: ${({ $iconColor }) => $iconColor};
   }
 `;
 
@@ -382,7 +382,7 @@ export const Row = styled(TableRow)<{
   background-color: ${({ index, $headerRowBackground }) =>
     !isNumber(index)
       ? `${$headerRowBackground}`
-      : index % 2 === 0
+      : (index ?? 0) % 2 === 0
       ? `${COLOR_MAP.LIGHTGRAY_BG}`
       : 'white'};
   background-color: ${({ $isModal }) =>
