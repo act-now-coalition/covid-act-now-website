@@ -8,22 +8,6 @@ import { fetchSummariesForRegionType } from '../src/common/utils/model';
 import _, { first } from 'lodash';
 import { interpolateMagma } from 'd3-scale-chromatic';
 
-const getValue = (regionSummary: RegionSummary, key: string): any => {
-  var tmp = regionSummary;
-  console.log('yo');
-  key.split('.').forEach(key => {
-    console.log(key);
-    console.log(tmp);
-    // @ts-ignore
-    tmp = tmp[key];
-  });
-  return tmp;
-};
-
-const metricMap: { [key: string]: string } = {
-  'Daily new cases': 'metrics.caseDensity',
-};
-
 interface MetricRecord {
   name: string;
   regionType: AggregationLevel;

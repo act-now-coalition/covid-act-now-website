@@ -8,12 +8,21 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-interface AvailabilityTableRow {
-  name: string;
+interface TableProps {
+  rows: MetricAvailability[];
 }
 
-interface TableProps {
-  rows: AvailabilityTableRow[];
+enum DataAvailiabilityStatus {
+  NONE = '--',
+  PARTIAL = 'Partial',
+  FULL = 'Full',
+}
+
+interface MetricAvailability {
+  name: string;
+  state: DataAvailiabilityStatus;
+  county: DataAvailiabilityStatus;
+  metro: DataAvailiabilityStatus;
 }
 
 const AvailabilityTable = ({ rows }: TableProps) => {
@@ -34,9 +43,9 @@ const AvailabilityTable = ({ rows }: TableProps) => {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="right">{row.state}</TableCell>
+              <TableCell align="right">{row.county}</TableCell>
+              <TableCell align="right">{row.metro}</TableCell>
             </TableRow>
           ))}
         </TableBody>
