@@ -1,35 +1,4 @@
 import surgoPopulationVulnerable from './surgo-percent-population-vulnerable.json';
-/**
- * CCVI has 8 scores per fips (1 'overall' score, 7 nuanced scores)
- *
- * See the defintion of each nuanced score, themes 1-7, here (page 6):
- * https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19
- */
-export interface RegionCcviItem {
-  [overall: string]: number;
-  theme1: number;
-  theme2: number;
-  theme3: number;
-  theme4: number;
-  theme5: number;
-  theme6: number;
-  theme7: number;
-}
-
-/** Represent entries in ccvi.json. */
-export interface FipsToCcviMap {
-  [fipsCode: string]: RegionCcviItem;
-}
-
-/** Represents entries in county-zipcode.json */
-export interface CountyToZipMap {
-  [fips: string]: string[];
-}
-
-/** Represent entries in surgo-percent-population-vulnerable.json. */
-export interface FipsToPopVulnerable {
-  [fipsCode: string]: number;
-}
 
 /** Cache used by importJson(). */
 let cachedImports: { [cacheToken: string]: Promise<any> } = {};
@@ -52,15 +21,48 @@ function importJson<T>(
   return cachedImports[cacheToken];
 }
 
+/**
+ * CCVI has 8 scores per fips (1 'overall' score, 7 nuanced scores)
+ *
+ * See the defintion of each nuanced score, themes 1-7, here (page 6):
+ * https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19
+ */
+export interface RegionCcviItem {
+  [overall: string]: number;
+  theme1: number;
+  theme2: number;
+  theme3: number;
+  theme4: number;
+  theme5: number;
+  theme6: number;
+  theme7: number;
+}
+
+/** Represent entries in ccvi.json. */
+export interface FipsToCcviMap {
+  [fipsCode: string]: RegionCcviItem;
+}
+
 /** Dynamic import for ccvi.json. */
 export function importFipsToCcviMap(): Promise<FipsToCcviMap> {
   return importJson('ccvi', import('./ccvi.json'));
 }
 
+/** Represents entries in county-zipcode.json */
+export interface CountyToZipMap {
+  [fips: string]: string[];
+}
 /** Dynamic import for county-zipcode.json. */
 export function importCountyToZipCodeMap(): Promise<CountyToZipMap> {
   return importJson('county-zipcode', import('./county-zipcode.json'));
 }
+
+}
+
+/** Represent entries in surgo-percent-population-vulnerable.json. */
+export interface FipsToPopVulnerable {
+  [fipsCode: string]: number;
+};
 
 export function getVulnPopulationPercentForFips(
   fips: string,
@@ -77,4 +79,28 @@ export function importStateGeographies(): Promise<StatesTopology> {
 export type CountiesTopology = typeof import('./counties-10m.json');
 export function importCountyGeographies(): Promise<CountiesTopology> {
   return importJson('counties-10m', import('./counties-10m.json'));
+}
+
+export interface Aggregation {
+  totalPopulation: number;
+  totalCases: number;
+  totalDeaths: number;
+  totalVaccinationsInitiated: number;
+  dates: (number | null)[];
+  rawDailyCases: (number | null)[];
+  smoothedDailyCases: (number | null)[];
+  rawDailyDeaths: (number | null)[];
+  smoothedDailyDeaths: (number | null)[];
+  rawHospitalizations?: (number | null)[];
+  smoothedHospitalizations?: (number | null)[];
+  rawICUHospitalizations?: (number | null)[];
+  smoothedICUHospitalizations?: (number | null)[];
+}
+export interface Aggregations {
+  [fips: string]: Aggregation;
+}
+
+/** Dynamic import for aggregations.json. */
+export function importAggregations(): Promise<Aggregations> {
+  return importJson('aggregations', import('assets/data/aggregations.json'));
 }

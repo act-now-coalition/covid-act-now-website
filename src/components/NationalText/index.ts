@@ -1,5 +1,5 @@
 import NationalText from './NationalText';
-import { getNationalText } from './utils';
+import { NationalTextContent } from './utils';
 
-export { getNationalText };
+export { NationalTextContent };
 export default NationalText;

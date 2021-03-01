@@ -12,7 +12,7 @@ import { Column, DatasetId } from 'common/models/Projection';
 import { AGGREGATED_LOCATIONS } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
-import AggregationsJSON from 'assets/data/aggregations.json';
+import { importAggregations } from 'common/data';
 import regions, {
   County,
   MetroArea,
@@ -460,6 +460,7 @@ class AggregatedProjection implements ProjectionLike {
 
 async function getProjectionForRegion(region: Region): Promise<ProjectionLike> {
   const fullFips = region.fipsCode;
+  const AggregationsJSON = await importAggregations();
   if (fullFips && fullFips in AggregationsJSON) {
     // This is a special aggregate location.
     // TODO(michael): Fix any.

@@ -1,3 +1,4 @@
+export { default as useAggregations} from './useAggregations';
 export { default as useScrollToTopButton } from './useScrollToTopButton';
 export { default as useShowPastPosition } from './useShowPastPosition';
 export { default as useBreakpoint } from './useBreakpoint';
