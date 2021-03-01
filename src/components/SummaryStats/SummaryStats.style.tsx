@@ -4,8 +4,8 @@ import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 
 export const SummaryStatsWrapper = styled(Box)<{
-  $condensed?: Boolean;
-  $isHeader?: Boolean;
+  $condensed?: boolean;
+  $isHeader?: boolean;
 }>`
   ${props =>
     props.$condensed
@@ -33,9 +33,9 @@ export const SummaryStatsWrapper = styled(Box)<{
 `;
 
 export const SummaryStatWrapper = styled(Box)<{
-  $condensed?: Boolean;
-  $isEmbed?: Boolean;
-  $isHeader?: Boolean;
+  $condensed?: boolean;
+  $isEmbed?: boolean;
+  $isHeader?: boolean;
 }>`
   ${props =>
     props.$condensed
@@ -86,10 +86,10 @@ export const SummaryStatWrapper = styled(Box)<{
 `;
 
 export const StatNameText = styled(Typography)<{
-  $condensed?: Boolean;
-  $isEmbed?: Boolean;
-  $isHeader?: Boolean;
-  $statusUnknown?: Boolean;
+  $condensed?: boolean;
+  $isEmbed?: boolean;
+  $isHeader?: boolean;
+  $statusUnknown?: boolean;
 }>`
   ${props =>
     props.$condensed
@@ -122,8 +122,8 @@ export const StatNameText = styled(Typography)<{
 `;
 
 export const StatTextWrapper = styled.div<{
-  $isHeader?: Boolean;
-  $isEmbed?: Boolean;
+  $isHeader?: boolean;
+  $isEmbed?: boolean;
 }>`
   display: flex;
   flex-direction: ${({ $isHeader }) => ($isHeader ? 'column' : 'row')};
@@ -138,7 +138,7 @@ export const StatTextWrapper = styled.div<{
   }
 `;
 
-export const StatValueWrapper = styled.div<{ $condensed?: Boolean }>`
+export const StatValueWrapper = styled.div<{ $condensed?: boolean }>`
   ${props =>
     props.$condensed
       ? `
@@ -174,10 +174,10 @@ export const StatDetailText = styled(Typography)`
 `;
 
 export const StatValueText = styled(Typography)<{
-  $condensed?: Boolean;
-  $statusUnknown?: Boolean;
-  $isEmbed?: Boolean;
-  $isHeader?: Boolean;
+  $condensed?: boolean;
+  $statusUnknown?: boolean;
+  $isEmbed?: boolean;
+  $isHeader?: boolean;
 }>`
   font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New',
     monospace;
