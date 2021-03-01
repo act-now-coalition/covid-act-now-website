@@ -81,6 +81,12 @@
       "profileUrl": "https://www.linkedin.com/in/mattsidor/"
     },
     {
+      "profileImgUrl": "/images_cms/derekstevenson.jpeg",
+      "fullName": "Derek Stevenson",
+      "description": "Engineering",
+      "profileUrl": "https://www.linkedin.com/in/derekstevenson/"
+    },
+    {
       "profileImgUrl": "/images_cms/christopherturner.jpeg",
       "fullName": "Christopher Turner",
       "description": "Data engineering",
