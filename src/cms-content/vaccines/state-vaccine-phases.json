@@ -953,7 +953,7 @@
       "locationName": "Louisiana",
       "fips": "22",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://ldh.la.gov/covidvaccine-locations/",
       "emailAlertVersion": 2,
       "phaseGroups": [
         {
@@ -2513,7 +2513,7 @@
       "emailAlertVersion": 1,
       "locationName": "West Virginia",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/covid-19/pages/vaccine.aspx",
-      "vaccinationSignupUrl": null,
+      "vaccinationSignupUrl": "https://member.everbridge.net/747122446041089/login",
       "phaseGroups": [
         {
           "currentlyEligible": true,

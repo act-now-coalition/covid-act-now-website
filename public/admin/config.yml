@@ -707,31 +707,6 @@ collections:
     description: Details on vaccination program status in different regions.
     format: json
     files:
-      - name: Vaccine Information-State
-        label: State Vaccine Information
-        file: src/cms-content/vaccines/state.json
-        fields:
-          - label: Regions
-            name: regions
-            widget: list
-            fields:
-              - label: Location Name
-                name: locationName
-                widget: string
-              - label: Fips Code
-                name: fips
-                widget: string
-              - label: Hidden
-                name: hidden
-                widget: boolean
-                required: false
-              - label: Eligibility Information URL
-                name: eligibilityInfoUrl
-                widget: string
-              - label: Vaccination Signup URL
-                name: vaccinationSignupUrl
-                required: false
-                widget: string
       - name: Vaccine Information-Metros
         label: Metro Vaccine Information
         file: src/cms-content/vaccines/msa.json
