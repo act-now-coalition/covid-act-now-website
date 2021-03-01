@@ -17,5 +17,4 @@ export default {
       'outline-offset': '2px',
     },
   },
-  focusVisible: {},
 };
