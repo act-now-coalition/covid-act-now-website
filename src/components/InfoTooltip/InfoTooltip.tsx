@@ -17,7 +17,6 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
 
   const handleClose = () => {
     setIsOpen(false);
-    props.trackCloseTooltip();
   };
 
   const idForAccessability = uuidv4();
