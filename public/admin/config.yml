@@ -809,6 +809,10 @@ collections:
               - label: Eligibility Information URL
                 name: eligibilityInfoUrl
                 widget: string
+              - label: Vaccination Signup URL
+                name: vaccinationSignupUrl
+                widget: string
+                required: false
               - label: Email alert version
                 name: emailAlertVersion
                 default: 0
