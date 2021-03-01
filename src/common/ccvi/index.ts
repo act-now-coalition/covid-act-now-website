@@ -1,5 +1,6 @@
 import { PURPLE_MAP } from 'common/colors';
 import { fail } from 'common/utils';
+import { Region, State, County } from 'common/regions';
 
 export enum CcviLevel {
   VERY_LOW,
@@ -66,4 +67,20 @@ export function getCcviLevel(score: number): CcviLevel {
     }
   }
   fail('Invalid CCVI encountered: ' + score);
+}
+
+/**
+ * For vulnerabilities module footer.
+ * Returns a Surgo URL with region-specific CCVI scores+maps:
+ *    State --> returns a county-level state map
+ *    County --> returns a neighborhood-level county map
+ */
+export function getSurgoUrlByRegion(region: Region): string | null {
+  const baseUrl = 'https://www.precisionforcoviddata.org/?metricId=ccvi';
+  if (region instanceof State) {
+    return `${baseUrl}&geoLevel=county&fipsCode=${region.fipsCode}&focusLevel=state&focusFips=${region.fipsCode}`;
+  } else if (region instanceof County) {
+    return `${baseUrl}&geoLevel=tract&fipsCode=${region.fipsCode}&focusLevel=county&focusFips=${region.fipsCode}`;
+  }
+  return null;
 }
