@@ -1807,6 +1807,20 @@
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-01T20:46:01.010Z",
+          "phase": "1C",
+          "description": "* Adults 60+\n* Law enforcement and corrections officers\n* Child care services employees\n* Funeral services employees",
+          "startDate": "March 4, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-01T20:47:50.337Z",
+          "phase": "2",
+          "description": "* Adults 60+",
+          "startDate": "March 4, 2021"
         }
       ]
     },
