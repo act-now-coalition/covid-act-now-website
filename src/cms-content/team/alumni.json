@@ -25,6 +25,11 @@
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/alexmacaulay/",
+      "fullName": "Alex MacAulay"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Ali Berlin Johnson",
       "profileUrl": "https://www.linkedin.com/in/berlinjohnson/"
     },
