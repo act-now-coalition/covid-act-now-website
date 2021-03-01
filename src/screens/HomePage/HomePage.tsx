@@ -17,7 +17,7 @@ import {
   getFinalAutocompleteLocations,
   getGeolocatedRegions,
 } from 'common/regions';
-import { getNationalText } from 'components/NationalText';
+import { NationalTextContent } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
@@ -138,7 +138,7 @@ export default function HomePage() {
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsForExplore}
                 initialChartIndigenousPopulations={false}
-                nationalSummaryText={getNationalText()}
+                nationalSummaryText={NationalTextContent()}
               />
             </Section>
             <SectionWrapper ref={indicatorsRef}>

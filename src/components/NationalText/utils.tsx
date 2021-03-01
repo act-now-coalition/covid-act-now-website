@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import AggregationsJSON from 'assets/data/aggregations.json';
 import { last, isNull } from 'lodash';
+import { useAggregations } from 'common/hooks';
 import {
   formatPercent,
   formatDecimal,
@@ -29,8 +29,12 @@ const getTotalCasesCopy = (summedRawCases: number): string => {
   return `${formatDecimal(divided, 1)} million`;
 };
 
-export function getNationalText(): React.ReactElement {
-  const usaAggregation = AggregationsJSON['00001'];
+export function NationalTextContent(): React.ReactElement {
+  const { result: aggregations, pending } = useAggregations();
+  if (pending || !aggregations) {
+    return <>Loading...</>;
+  }
+  const usaAggregation = aggregations['00001'];
   const {
     totalCases,
     totalDeaths,

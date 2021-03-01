@@ -9,8 +9,8 @@ import {
   SearchButton,
   CompareButton,
 } from './VaccinationsBanner.style';
-import AggregationsJSON from 'assets/data/aggregations.json';
 import { formatEstimate } from 'common/utils';
+import { useAggregations } from 'common/hooks';
 import { scrollWithOffset } from 'components/TableOfContents';
 
 const Buttons: React.FC = () => {
@@ -39,7 +39,13 @@ const Buttons: React.FC = () => {
 };
 
 const VaccinationsBannerInner: React.FC = () => {
-  const usaAggregation = AggregationsJSON['00001'];
+  const { result: aggregations, pending } = useAggregations();
+
+  if (pending || !aggregations) {
+    return <InnerContainer>Loading...</InnerContainer>;
+  }
+
+  const usaAggregation = aggregations['00001'];
   const { totalVaccinationsInitiated } = usaAggregation;
 
   return (
