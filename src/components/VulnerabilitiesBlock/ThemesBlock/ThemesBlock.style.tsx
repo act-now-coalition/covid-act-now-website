@@ -5,9 +5,10 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 export const Wrapper = styled.div`
   border-radius: 0 0 4px 4px;
   overflow: hidden;
-  max-width: 400px;
+  width: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    max-width: 450px;
     border-radius: 4px;
   }
 `;

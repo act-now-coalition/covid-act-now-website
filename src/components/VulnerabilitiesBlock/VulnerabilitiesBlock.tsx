@@ -6,22 +6,34 @@ import {
   HeaderWrapper,
 } from 'components/LocationPage/ChartsHolder.style';
 import { Subtitle1 } from 'components/Typography';
-import { vulnerabilitiesHeaderTooltip } from 'cms-content/tooltips';
-import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
-import { trackOpenTooltip } from 'components/InfoTooltip';
 import regions from 'common/regions';
 import {
   BorderedContainer,
-  Column,
+  FirstColumn,
+  SecondColumn,
   TextSmall,
   LevelName,
   RegionDescription,
+  StyledLink,
 } from './VulnerabilitiesBlock.style';
 import FooterLinks from './FooterLinks/FooterLinks';
 import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
 import CcviThermometer from './CcviThermometer/CcviThermometer';
 import { getCcviLevelNameFromScore } from 'common/ccvi';
 import { RegionCcviItem } from 'common/data';
+import { vulnerabilitiesHeaderTooltip } from 'cms-content/tooltips';
+import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
+import { trackOpenTooltip } from 'components/InfoTooltip';
+
+function renderVulnerabilitiesTooltip(): React.ReactElement {
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(vulnerabilitiesHeaderTooltip)}
+      aria-label="Description of vulnerabilities"
+      trackOpenTooltip={() => trackOpenTooltip('Vulnerabilities header')}
+    />
+  );
+}
 
 const VulnerabilitiesBlock = () => {
   const region = regions.findByFipsCodeStrict('39045');
@@ -45,32 +57,25 @@ const VulnerabilitiesBlock = () => {
       </HeaderWrapper>
       <Subtitle1>In {region.fullName}</Subtitle1>
       <BorderedContainer>
-        <Column>
+        <FirstColumn>
           <TextSmall>OVERALL</TextSmall>
           <LevelName>{levelName}</LevelName>
           <CcviThermometer overallScore={scores.overall} />
           <RegionDescription>
             {region.shortName} {renderRegionDescription(scores.overall, region)}
           </RegionDescription>
-        </Column>
-        <Column>
+        </FirstColumn>
+        <SecondColumn>
           <TextSmall>SPECIFIC VULNERABILITIES</TextSmall>
           <ThemesBlock scores={scores} />
-        </Column>
+        </SecondColumn>
       </BorderedContainer>
+      <StyledLink href="https://precisionforcovid.org/ccvi">
+        How the vulnerability score is calculated
+      </StyledLink>
       <FooterLinks region={region} />
     </>
   );
 };
-
-function renderVulnerabilitiesTooltip(): React.ReactElement {
-  return (
-    <InfoTooltip
-      title={renderTooltipContent(vulnerabilitiesHeaderTooltip)}
-      aria-label="Description of vulnerabilities"
-      trackOpenTooltip={() => trackOpenTooltip('Vulnerabilities header')}
-    />
-  );
-}
 
 export default VulnerabilitiesBlock;

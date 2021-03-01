@@ -1,59 +1,99 @@
 import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 
 export const BorderedContainer = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   border-radius: 4px;
-  padding: 0.5rem 0.25rem;
+  max-width: 780px;
+  width: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    padding: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
     flex-direction: row;
   }
 `;
 
-export const Column = styled.div`
+const ColumnStyles = css`
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    align-items: unset;
+  }
 `;
 
-export const GraySpan = css`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  text-align: center;
-
-  strong {
-    color: black;
-  }
+export const FirstColumn = styled.div`
+  ${ColumnStyles};
+  padding: 1.5rem 2.5rem 0.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 4px;
+    padding: 0;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-right: 1rem;
+  }
+`;
+
+export const SecondColumn = styled.div`
+  ${ColumnStyles};
+`;
+
+export const TextSmall = styled.span`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.8125rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+
+  @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
   }
 `;
 
-export const TextSmall = styled.span`
-  ${GraySpan};
-  font-size: 0.8125rem;
+export const RegionDescription = styled.span`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 1rem;
+  margin: 1rem 0 1.25rem;
+  text-align: center;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin: 1rem 0 0;
+    text-align: left;
+  }
 `;
 
-export const RegionDescription = styled.span`
-  ${GraySpan};
-  font-size: 1rem;
+export const StyledLink = styled.a.attrs(props => ({
+  rel: 'noopener noreferrer',
+  target: '_blank',
+}))`
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.8125rem;
+  display: block;
+  margin: 0.5rem 0 1.25rem;
+  text-align: center;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    text-align: left;
+  }
 `;
 
 export const LevelName = styled.span`
   font-weight: bold;
   font-size: 1.125rem;
   text-transform: uppercase;
-  margin-bottom; 12px;
+  margin-bottom: 1rem;
   text-align: center;
 
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 8px;
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-bottom: 0.5rem;
     text-align: left;
   }
 `;
