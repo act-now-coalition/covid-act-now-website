@@ -225,6 +225,11 @@
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://township.agency/",
+      "fullName": "Matt McInerney"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "profileUrl": "https://www.linkedin.com/in/megan-briggs-3a62b2160/\t",
       "fullName": "Megan Briggs"
     },
