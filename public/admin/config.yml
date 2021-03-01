@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: pablo/update-cms-vaccinations
   base_url: https://api.netlify.com
 
 media_folder: 'public/images_cms'
@@ -30,7 +30,11 @@ collections:
               name: 'introContent',
               widget: 'markdown',
             }
-          - { label: 'Contact us: Header', name: 'contactUsHeader', widget: 'string' }
+          - {
+              label: 'Contact us: Header',
+              name: 'contactUsHeader',
+              widget: 'string',
+            }
           - {
               label: 'Contact us: Content',
               name: 'contactUsContent',
@@ -676,11 +680,7 @@ collections:
             name: sections
             widget: list
             fields:
-              - {
-                  label: Section header,
-                  name: sectionHeader,
-                  widget: string,
-                }
+              - { label: Section header, name: sectionHeader, widget: string }
               - {
                   label: Section subheader,
                   name: sectionSubheader,
