@@ -160,6 +160,11 @@
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Kara Huang",
+      "profileUrl": "https://www.linkedin.com/in/kara-huang/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Lara Mitra",
       "profileUrl": "https://www.linkedin.com/in/lara-mitra/"
     },
@@ -200,6 +205,11 @@
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Nina Yang",
+      "profileUrl": "https://www.linkedin.com/in/ninaqyang/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Noah Spector",
       "profileUrl": "https://www.linkedin.com/in/noahspector/"
     },
@@ -212,6 +222,11 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "profileUrl": "https://www.linkedin.com/in/ranjitchacko/",
       "fullName": "Ranjit Chacko"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/raphael-rosen/",
+      "fullName": "Raphel Rosen"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
@@ -308,16 +323,6 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Yvonne Hung",
       "profileUrl": "https://www.linkedin.com/in/hungyvonne/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Nina Yang",
-      "profileUrl": "https://www.linkedin.com/in/ninaqyang/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "fullName": "Kara Huang",
-      "profileUrl": "https://www.linkedin.com/in/kara-huang/"
     }
   ]
 }
