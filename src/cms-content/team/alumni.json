@@ -323,6 +323,11 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Yvonne Hung",
       "profileUrl": "https://www.linkedin.com/in/hungyvonne/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/benji-wu-17bb461b2/",
+      "fullName": "Benji Wu"
     }
   ]
 }
