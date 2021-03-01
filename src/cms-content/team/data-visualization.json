@@ -1,12 +1,5 @@
 {
-  "teamMembers": [
-    {
-      "profileImgUrl": "/images_cms/leo.jpeg",
-      "fullName": "Leo Jacoby",
-      "description": "Associate product manager",
-      "profileUrl": "https://www.linkedin.com/in/leo-jacoby-080898142/"
-    }
-  ],
+  "teamMembers": [],
   "teamName": "Data Visualization",
   "teamID": "data-visualization"
 }
