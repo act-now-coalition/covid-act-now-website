@@ -1,12 +1,10 @@
 import React from 'react';
 import ThemesBlock from './ThemesBlock/ThemesBlock';
-import { useCcviForFips } from 'common/hooks';
 import {
   LocationPageSectionHeader,
   HeaderWrapper,
 } from 'components/LocationPage/ChartsHolder.style';
 import { Subtitle1 } from 'components/Typography';
-import regions from 'common/regions';
 import {
   BorderedContainer,
   FirstColumn,
@@ -24,22 +22,12 @@ import { RegionCcviItem } from 'common/data';
 import { vulnerabilitiesHeaderTooltip } from 'cms-content/tooltips';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { Region } from 'common/regions';
 
-function renderVulnerabilitiesTooltip(): React.ReactElement {
-  return (
-    <InfoTooltip
-      title={renderTooltipContent(vulnerabilitiesHeaderTooltip)}
-      aria-label="Description of vulnerabilities"
-      trackOpenTooltip={() => trackOpenTooltip('Vulnerabilities header')}
-    />
-  );
-}
-
-const VulnerabilitiesBlock = () => {
-  const region = regions.findByFipsCodeStrict('39045');
-  const scores = useCcviForFips(region.fipsCode); // call from ChartsHolder
-
-  console.log('scores', scores);
+const VulnerabilitiesBlock: React.FC<{
+  scores: RegionCcviItem | null;
+  region: Region;
+}> = ({ scores, region }) => {
   if (!scores) {
     return null;
   }
@@ -77,5 +65,15 @@ const VulnerabilitiesBlock = () => {
     </>
   );
 };
+
+function renderVulnerabilitiesTooltip(): React.ReactElement {
+  return (
+    <InfoTooltip
+      title={renderTooltipContent(vulnerabilitiesHeaderTooltip)}
+      aria-label="Description of vulnerabilities"
+      trackOpenTooltip={() => trackOpenTooltip('Vulnerabilities header')}
+    />
+  );
+}
 
 export default VulnerabilitiesBlock;

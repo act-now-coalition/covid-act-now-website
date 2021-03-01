@@ -20,12 +20,12 @@ export const ListHeader = styled.span`
 `;
 
 export const LinkList = styled.ul`
-  margin: 0.75rem 0;
+  margin: 0.75rem 0 0;
   padding: 0 1.5rem;
 
   li {
     &:not(:last-child) {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
     ::marker {
       color: ${GREY_3};

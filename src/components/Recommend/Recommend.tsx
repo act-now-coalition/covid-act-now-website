@@ -22,6 +22,7 @@ import {
   FedLevel,
   HarvardLevel,
 } from 'cms-content/recommendations';
+import { HeaderWrapper } from 'components/LocationPage/ChartsHolder.style';
 import SmallShareButtons from 'components/SmallShareButtons';
 import RecommendModal from './RecommendModal';
 import Dialog, { useDialog } from 'components/Dialog';
@@ -54,7 +55,9 @@ const Header = (props: {
   const { introCopy, locationName, onClickOpenModal } = props;
   return (
     <Fragment>
-      <HeaderCopy>{header}</HeaderCopy>
+      <HeaderWrapper>
+        <HeaderCopy>{header}</HeaderCopy>
+      </HeaderWrapper>
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
         These recommendations match the guidelines set by the{' '}
