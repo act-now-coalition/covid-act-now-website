@@ -57,7 +57,8 @@ class MetricColumn implements ColumnDefinition {
 class CcviColumn implements ColumnDefinition {
   columnId = CCVI_COLUMN_ID;
 
-  name = 'Vulnerable Level';
+  // \u00AD inserts a "shy" hyphen that will be inserted when necessary.
+  name = 'Vulner\u00ADability Level';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.ccvi;
