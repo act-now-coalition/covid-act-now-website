@@ -50,8 +50,13 @@
         },
         {
           "altText": "Citizen Logo",
-          "url": "www.citizen.com",
+          "url": "https://citizen.com/",
           "image": "/images_cms/citizen-com_logo.png"
+        },
+        {
+          "altText": "Team Rubicon Logo",
+          "url": "https://teamrubiconusa.org/",
+          "image": "/images_cms/teamrubicon_logo_dr-primary_brown-red_cmyk-01.png"
         }
       ]
     },
