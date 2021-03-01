@@ -40,6 +40,11 @@
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/benji-wu-17bb461b2/",
+      "fullName": "Benji Wu"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Bradley Lautenbach",
       "profileUrl": "https://www.linkedin.com/in/lautenbach/"
     },
@@ -177,6 +182,11 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Lekha Maruthur",
       "profileUrl": "https://www.linkedin.com/in/sreelekha-haridas-m-12380210/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/leo-jacoby-080898142/",
+      "fullName": "Leo Jacoby"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
@@ -323,11 +333,6 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Yvonne Hung",
       "profileUrl": "https://www.linkedin.com/in/hungyvonne/"
-    },
-    {
-      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
-      "profileUrl": "https://www.linkedin.com/in/benji-wu-17bb461b2/",
-      "fullName": "Benji Wu"
     }
   ]
 }
