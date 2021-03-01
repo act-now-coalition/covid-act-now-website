@@ -7,7 +7,7 @@ export const BorderedContainer = styled.div`
   flex-direction: column;
   border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   border-radius: 4px;
-  max-width: 780px;
+  max-width: 900px;
   width: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -49,7 +49,7 @@ export const SecondColumn = styled.div`
 
 export const TextSmall = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   margin-bottom: 0.25rem;
   text-align: center;
 
@@ -67,6 +67,7 @@ export const RegionDescription = styled.span`
   @media (min-width: ${mobileBreakpoint}) {
     margin: 1rem 0 0;
     text-align: left;
+    max-width: 385px;
   }
 `;
 
@@ -75,14 +76,10 @@ export const StyledLink = styled.a.attrs(props => ({
   target: '_blank',
 }))`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   display: block;
   margin: 0.5rem 0 1.25rem;
-  text-align: center;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    text-align: left;
-  }
+  text-align: left;
 `;
 
 export const LevelName = styled.span`
