@@ -3,16 +3,21 @@
   "teamID": "user-experience",
   "teamMembers": [
     {
-      "fullName": "Josh Ziman",
-      "description": "User experience lead",
-      "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
-      "profileImgUrl": "/images_cms/joshziman.jpeg"
+      "profileImgUrl": "/images_cms/samvogt.jpeg",
+      "fullName": "Sam Vogt",
+      "profileUrl": "https://www.linkedin.com/in/sam-vogt/"
     },
     {
       "profileImgUrl": "/images_cms/grace.jpeg",
       "fullName": "Grace Zec",
       "description": "UX researcher",
       "profileUrl": "https://www.linkedin.com/in/gracezec/"
+    },
+    {
+      "fullName": "Josh Ziman",
+      "description": "User experience lead",
+      "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
+      "profileImgUrl": "/images_cms/joshziman.jpeg"
     }
   ]
 }

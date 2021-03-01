@@ -1,11 +1,5 @@
 {
-  "teamMembers": [
-    {
-      "profileImgUrl": "/images_cms/alexmacaulay.jpeg",
-      "fullName": "Alex MacAuley",
-      "profileUrl": "https://www.linkedin.com/in/alexmacaulay/"
-    }
-  ],
+  "teamMembers": [],
   "teamName": "Modeling",
   "teamID": "modeling"
 }
