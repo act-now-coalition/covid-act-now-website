@@ -60,6 +60,11 @@
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "profileUrl": "https://www.linkedin.com/in/charlie-m-8a1655178/",
+      "fullName": "Charlie McCollum"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Chris Wilcox",
       "profileUrl": "https://www.linkedin.com/in/chrisrwilcox/"
     },
@@ -247,6 +252,11 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Nina Yang",
       "profileUrl": "https://www.linkedin.com/in/ninaqyang/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Noah Belsky",
+      "profileUrl": "https://www.linkedin.com/in/noah-belsky-7213661ba/"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
