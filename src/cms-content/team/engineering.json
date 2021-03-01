@@ -27,6 +27,12 @@
       "profileUrl": "https://www.linkedin.com/in/chasegcoleman/"
     },
     {
+      "profileImgUrl": "/images_cms/faihegberg.jpeg",
+      "fullName": "Fai Hegberg",
+      "description": "Front-end engineering",
+      "profileUrl": "https://www.linkedin.com/in/faihegberg/"
+    },
+    {
       "profileImgUrl": "/images_cms/chris.jpeg",
       "fullName": "Chris Kelly",
       "description": "Back-end engineering",
