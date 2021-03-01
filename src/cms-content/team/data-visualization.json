@@ -1,12 +1,6 @@
 {
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/raphael.jpg",
-      "fullName": "Raphael Rosen",
-      "description": "Associate product manager",
-      "profileUrl": "https://www.linkedin.com/in/raphael-rosen/"
-    },
-    {
       "profileImgUrl": "/images_cms/benjiwu.jpeg",
       "fullName": "Benji Wu",
       "description": "Associate product manager",
