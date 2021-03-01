@@ -41,7 +41,7 @@ export const MainContentInner = styled.div`
   }
 `;
 
-export const ChartHeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

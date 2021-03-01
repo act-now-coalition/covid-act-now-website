@@ -1,10 +1,22 @@
 import React from 'react';
 import { CcviLevel, getCcviLevel } from './index';
 import { formatPercent } from 'common/utils';
+import { Region, State, County } from 'common/regions';
 
-export function renderStateDescription(
+export function renderRegionDescription(
   overallScore: number,
-): React.ReactElement {
+  region: Region,
+): React.ReactElement | null {
+  if (region instanceof State) {
+    return renderStateDescription(overallScore);
+  } else if (region instanceof County) {
+    return renderCountyDescription(overallScore);
+  } else {
+    return null;
+  }
+}
+
+function renderStateDescription(overallScore: number): React.ReactElement {
   const level = getCcviLevel(overallScore);
   const scoreAsPercent = formatPercent(overallScore);
 
@@ -51,9 +63,7 @@ export function renderStateDescription(
   }
 }
 
-export function renderCountyDescription(
-  overallScore: number,
-): React.ReactElement {
+function renderCountyDescription(overallScore: number): React.ReactElement {
   const level = getCcviLevel(overallScore);
   const scoreAsPercent = formatPercent(overallScore);
 

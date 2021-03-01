@@ -69,6 +69,11 @@ export function getCcviLevel(score: number): CcviLevel {
   fail('Invalid CCVI encountered: ' + score);
 }
 
+export function getCcviLevelNameFromScore(score: number) {
+  const level = getCcviLevel(score);
+  return getCcviLevelName(level);
+}
+
 /**
  * For vulnerabilities module footer.
  * Returns a Surgo URL with region-specific CCVI scores+maps:
