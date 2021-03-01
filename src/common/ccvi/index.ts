@@ -75,12 +75,12 @@ export function getCcviLevel(score: number): CcviLevel {
  *    State --> returns a county-level state map
  *    County --> returns a neighborhood-level county map
  */
-export function getSurgoUrlByRegion(region: Region): string {
+export function getSurgoUrlByRegion(region: Region): string | null {
   const baseUrl = 'https://www.precisionforcoviddata.org/?metricId=ccvi';
   if (region instanceof State) {
     return `${baseUrl}&geoLevel=county&fipsCode=${region.fipsCode}&focusLevel=state&focusFips=${region.fipsCode}`;
   } else if (region instanceof County) {
     return `${baseUrl}&geoLevel=tract&fipsCode=${region.fipsCode}&focusLevel=county&focusFips=${region.fipsCode}`;
   }
-  return baseUrl;
+  return null;
 }

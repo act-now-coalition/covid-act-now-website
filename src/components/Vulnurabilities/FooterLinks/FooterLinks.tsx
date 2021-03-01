@@ -17,14 +17,16 @@ const FooterLinks: React.FC<{ region: Region }> = ({ region }) => {
     <Wrapper>
       <ListHeader>Also see:</ListHeader>
       <LinkList>
-        <li>
-          <ExternalLink
-            href={surgoUrl}
-            onClick={() => trackLinkClick('Surgo link')}
-          >
-            {surgoUrlCta}
-          </ExternalLink>
-        </li>
+        {surgoUrl && (
+          <li>
+            <ExternalLink
+              href={surgoUrl}
+              onClick={() => trackLinkClick('Surgo link')}
+            >
+              {surgoUrlCta}
+            </ExternalLink>
+          </li>
+        )}
         <li>
           <Link
             to="/learn" // TODO - replace with article url
