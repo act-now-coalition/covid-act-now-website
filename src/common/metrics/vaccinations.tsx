@@ -13,7 +13,7 @@ import {
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region, State } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
-import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
+import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -110,9 +110,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
             trackOpenTooltip={() =>
               trackOpenTooltip(`Learn more: ${Metric.VACCINATIONS}`)
             }
-            trackCloseTooltip={() =>
-              trackCloseTooltip(`Learn more: ${Metric.VACCINATIONS}`)
-            }
           />
           {' and '}
         </>
@@ -122,9 +119,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         mainCopy={'how we calculate our metrics'}
         trackOpenTooltip={() =>
           trackOpenTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
-        }
-        trackCloseTooltip={() =>
-          trackCloseTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
         }
       />
       .
@@ -146,9 +140,6 @@ function renderInfoTooltip(): React.ReactElement {
       aria-label={`Show definition of ${VaccinationsMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
-      }
-      trackCloseTooltip={() =>
-        trackCloseTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
       }
     />
   );
