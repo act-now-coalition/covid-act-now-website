@@ -312,6 +312,12 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Kara Huang",
       "profileUrl": "https://www.linkedin.com/in/kara-huang/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Souradeep Sen",
+      "description": "",
+      "profileUrl": "https://www.linkedin.com/in/souradeepsen/"
     }
   ]
 }
