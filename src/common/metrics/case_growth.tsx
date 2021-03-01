@@ -16,7 +16,7 @@ import {
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
-import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
+import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Infection rate';
 
@@ -137,9 +137,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackOpenTooltip={() =>
           trackOpenTooltip(`Learn more: ${Metric.CASE_GROWTH_RATE}`)
         }
-        trackCloseTooltip={() =>
-          trackCloseTooltip(`Learn more: ${Metric.CASE_GROWTH_RATE}`)
-        }
       />
       {' and '}
       <DisclaimerTooltip
@@ -147,9 +144,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         mainCopy={'how we calculate our metrics'}
         trackOpenTooltip={() =>
           trackOpenTooltip(`How we calculate: ${Metric.CASE_GROWTH_RATE}`)
-        }
-        trackCloseTooltip={() =>
-          trackCloseTooltip(`How we calculate: ${Metric.CASE_GROWTH_RATE}`)
         }
       />
       .
@@ -204,9 +198,6 @@ function renderInfoTooltip(): React.ReactElement {
       aria-label={`Show definition of ${CaseGrowthMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`Metric definition: ${Metric.CASE_GROWTH_RATE}`)
-      }
-      trackCloseTooltip={() =>
-        trackCloseTooltip(`Metric definition: ${Metric.CASE_GROWTH_RATE}`)
       }
     />
   );
