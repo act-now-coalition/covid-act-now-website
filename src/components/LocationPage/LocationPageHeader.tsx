@@ -88,9 +88,9 @@ const LocationPageHeader = (props: {
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
       <Wrapper
-        condensed={props.condensed}
-        headerTopMargin={headerTopMargin}
-        headerBottomMargin={headerBottomMargin}
+        $condensed={props.condensed}
+        $headerTopMargin={headerTopMargin}
+        $headerBottomMargin={headerBottomMargin}
       >
         <TopContainer>
           <HeaderSection>
