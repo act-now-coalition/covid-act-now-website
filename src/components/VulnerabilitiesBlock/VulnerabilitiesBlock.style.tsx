@@ -65,6 +65,10 @@ export const RegionDescription = styled.span`
   margin: 1rem 0 1.25rem;
   text-align: center;
 
+  strong {
+    color: black;
+  }
+
   @media (min-width: ${mobileBreakpoint}) {
     margin: 1rem 0 0;
     text-align: left;
