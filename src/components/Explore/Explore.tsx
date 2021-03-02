@@ -307,7 +307,6 @@ const Explore: React.FunctionComponent<{
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
-              hashtags={['COVIDActNow']}
               onSaveImage={() => {
                 trackExploreEvent(
                   EventAction.SAVE_IMAGE,

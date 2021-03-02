@@ -29,6 +29,7 @@ import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock'
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import { useCcviForFips } from 'common/hooks';
+import { useScrollToElement } from 'common/hooks';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -61,6 +62,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  useScrollToElement();
 
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
@@ -192,7 +194,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             region={region}
           />
         </MainContentInner>
-        <MainContentInner>
+        <MainContentInner id="vulnerabilities">
           <VulnerabilitiesBlock scores={ccviScores} region={region} />
         </MainContentInner>
         <MainContentInner>

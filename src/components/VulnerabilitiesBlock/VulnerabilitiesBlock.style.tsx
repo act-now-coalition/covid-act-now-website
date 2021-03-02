@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import { HeaderWrapperStyles } from 'components/LocationPage/ChartsHolder.style';
 
 export const BorderedContainer = styled.div`
   display: flex;
@@ -92,5 +93,13 @@ export const LevelName = styled.span`
   @media (min-width: ${mobileBreakpoint}) {
     margin-bottom: 0.5rem;
     text-align: left;
+  }
+`;
+
+export const HeaderWrapper = styled.div`
+  ${HeaderWrapperStyles};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    flex-direction: row;
   }
 `;

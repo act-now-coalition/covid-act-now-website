@@ -234,7 +234,6 @@ const CompareTable = (props: {
                 imageFilename="CovidActNow-compare.png"
                 url={getShareUrl}
                 quote={shareQuote}
-                hashtags={['COVIDActNow']}
                 onCopyLink={() =>
                   trackCompareEvent(EventAction.COPY_LINK, trackLabel)
                 }
