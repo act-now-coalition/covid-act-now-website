@@ -8,7 +8,7 @@ export function renderRegionDescription(
   region: Region,
 ): React.ReactElement {
   if (region instanceof State) {
-    return renderStateDescription(overallScore, 1); // update this
+    return renderStateDescription(overallScore, '{{population %}}'); // update this
   } else if (region instanceof County) {
     return renderCountyOrMetroDescription(overallScore, 'counties');
   } else {
@@ -18,7 +18,7 @@ export function renderRegionDescription(
 
 function renderStateDescription(
   overallScore: number,
-  vulnerablePopulation: number,
+  vulnerablePopulation: string,
 ): React.ReactElement {
   const level = getCcviLevel(overallScore);
 
@@ -86,7 +86,7 @@ function renderCountyOrMetroDescription(
   } else if (level === CcviLevel.LOW) {
     return (
       <>
-        has <strong>lower vulnerability</strong> than most US {regionType}
+        has <strong>lower vulnerability</strong> than most US {regionType}.
       </>
     );
   } else {

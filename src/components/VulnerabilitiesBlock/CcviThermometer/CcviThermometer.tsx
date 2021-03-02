@@ -1,18 +1,20 @@
 import React from 'react';
+import { keyBy } from 'lodash';
 import {
   CcviLevel,
   getCcviLevelColor,
   getCcviLevelName,
   getCcviLevel,
 } from 'common/ccvi';
-import { scaleLinear } from '@vx/scale';
+import { scalePoint } from '@vx/scale';
 import { v4 as uuidv4 } from 'uuid';
 import { Group } from '@vx/group';
-import { StyledSvg } from 'components/VulnerabilitiesBlock/VulnerabilitiesBlock.style';
+import { CCVI_LEVEL_INFO_MAP } from 'common/ccvi';
 
-const CcviThermometer: React.FC<{ overallScore: number }> = ({
-  overallScore,
-}) => {
+const CcviThermometer: React.FC<{
+  overallScore: number;
+  regionName: string;
+}> = ({ overallScore, regionName }) => {
   const gradientId = uuidv4();
   const titleId = uuidv4();
 
@@ -20,27 +22,28 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
   const thermometerWidth = 240;
   const thermometerHeight = 20;
   const thermometerBorderRadius = thermometerHeight / 2;
-  const horizontalMargin = 6;
-  const innerWidth = thermometerWidth - 2 * horizontalMargin;
 
-  const scaleWidth = scaleLinear({
-    domain: [0, 1],
-    range: [0, innerWidth],
+  const mapByColor = keyBy(CCVI_LEVEL_INFO_MAP, level => level.color);
+
+  const scaleWidth = scalePoint({
+    domain: Object.keys(mapByColor),
+    range: [0, thermometerWidth],
+    padding: 0.5,
   });
-
-  const pointerX = scaleWidth(overallScore);
 
   const level = getCcviLevel(overallScore);
 
+  const pointerX = scaleWidth(CCVI_LEVEL_INFO_MAP[level].color);
+
   // todo (chelsi): add location name, possibly edit copy
   const title = level
-    ? `Thermometer image showing that the vulnerability level is ${getCcviLevelName(
+    ? `Thermometer image showing that ${regionName}'s vulnerability level is ${getCcviLevelName(
         level,
       ).toLowerCase()}.`
-    : 'Thermometer image showing the vulnerability level.';
+    : `Thermometer image showing ${regionName}'s vulnerability level.`;
 
   return (
-    <StyledSvg
+    <svg
       width={thermometerWidth}
       height={containerHeight}
       role="img"
@@ -65,20 +68,18 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
           />
         </linearGradient>
       </defs>
-      <Group left={horizontalMargin}>
-        <Group left={pointerX}>
-          <polygon points={`-6,0 0,6 6,0`} fill="black" />
-        </Group>
-        <rect
-          fill={`url(#${gradientId})`}
-          width={innerWidth}
-          height={thermometerHeight}
-          y={containerHeight - thermometerHeight}
-          rx={thermometerBorderRadius}
-          ry={thermometerBorderRadius}
-        />
+      <Group left={pointerX}>
+        <polygon points={`-6,0 0,6 6,0`} fill="black" />
       </Group>
-    </StyledSvg>
+      <rect
+        fill={`url(#${gradientId})`}
+        width={thermometerWidth}
+        height={thermometerHeight}
+        y={containerHeight - thermometerHeight}
+        rx={thermometerBorderRadius}
+        ry={thermometerBorderRadius}
+      />
+    </svg>
   );
 };
 
