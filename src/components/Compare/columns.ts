@@ -21,6 +21,9 @@ export interface ColumnDefinition {
   /** The column name. */
   name: string;
 
+  /** The CSS text-align value to use for the column. */
+  textAlign: string;
+
   /** Get the numeric value for the specified `row`. (used for sorting) */
   getValue(row: SummaryForCompare): number | null;
 
@@ -38,6 +41,8 @@ class MetricColumn implements ColumnDefinition {
   columnId = this.metric;
 
   name = getMetricNameForCompare(this.metric);
+
+  textAlign = 'right';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.metrics[this.metric]?.value ?? null;
@@ -58,6 +63,8 @@ class CcviColumn implements ColumnDefinition {
   columnId = CCVI_COLUMN_ID;
 
   name = 'Vulnerability Level';
+
+  textAlign = 'left';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.ccvi;

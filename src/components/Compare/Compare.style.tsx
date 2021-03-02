@@ -337,14 +337,17 @@ export const LocationNameCell = styled.td<{
   }
 `;
 
-export const DataCellValue = styled.span<{ $valueUnknown: boolean }>`
-  width: 48px;
+export const DataCellValue = styled.span<{
+  $valueUnknown: boolean;
+  $textAlign: string;
+}>`
+  min-width: 48px;
   display: inline-block;
-  text-align: right;
+  text-align: ${({ $textAlign }) => $textAlign};
   opacity: ${({ $valueUnknown }) => $valueUnknown && '.5'};
   font-family: Source Code Pro;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  margin-right: 0.75rem;
+  margin-right: 0.5rem;
   text-transform: capitalize;
 `;
 
@@ -354,6 +357,7 @@ export const DataCell = styled.td<{
 }>`
   ${SharedCellStyles}
   min-width: ${metricCellWidth}px;
+  padding-right: 0;
   color: ${({ $isSelected }) =>
     $isSelected ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
   font-weight: ${({ $isSelected }) => $isSelected && '600'};
