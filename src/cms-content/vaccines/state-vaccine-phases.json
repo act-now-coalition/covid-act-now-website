@@ -283,7 +283,7 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* Teachers \n\n* Child care workers \n\n* Adults 65-69",
+          "description": "* Teachers \n* Child care workers \n* Adults 65-69",
           "expandedDefinitionUrl": "",
           "startDate": "February 8, 2021",
           "updatedAt": "2021-02-18T01:52:35.982Z"
@@ -292,10 +292,10 @@
           "phase": "1B",
           "tier": "3",
           "currentlyEligible": false,
-          "description": "Adults 60-64\n* Frontline essential workers in grocery and agriculture\n* People 16-59 with two or more high risk conditions",
+          "description": "* Adults 60-64\n* Frontline essential workers in grocery and agriculture\n* People 16-59 with two or more high risk conditions",
           "expandedDefinitionUrl": "",
-          "startDate": "On or around March 5, 2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
+          "startDate": "March 5, 2021",
+          "updatedAt": "2021-03-02T00:58:17.096Z"
         },
         {
           "phase": "2",
@@ -304,7 +304,7 @@
           "description": "* Adults 50-59\n* People with a high risk condition\n* Other frontline essential workers (including food services, state and local government, postal service, manufacturing, public transit, and journalism)",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
+          "updatedAt": "2021-03-02T00:59:20.786Z"
         },
         {
           "phase": "3",
@@ -312,8 +312,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "Summer 2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
+          "startDate": "",
+          "updatedAt": "2021-03-02T00:59:28.412Z"
         }
       ]
     },
@@ -322,7 +322,7 @@
       "fips": "09",
       "eligibilityInfoUrl": "https://portal.ct.gov/Coronavirus/COVID-19-Vaccinations",
       "vaccinationSignupUrl": "https://dphsubmissions.ct.gov/OnlineVaccine",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1a",
@@ -1165,7 +1165,7 @@
       "vaccinationSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated"
     },
     {
-      "emailAlertVersion": 3,
+      "emailAlertVersion": 2,
       "locationName": "Michigan",
       "fips": "26",
       "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
@@ -1246,7 +1246,7 @@
           "currentlyEligible": false,
           "description": "* Adults with specific high-risk medical conditions\n* Essential workers in food processing plants",
           "expandedDefinitionUrl": "",
-          "startDate": "April 2021",
+          "startDate": "April",
           "updatedAt": "2021-03-02T00:39:56.084Z"
         },
         {
