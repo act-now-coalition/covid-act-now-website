@@ -1,40 +1,40 @@
 {
-  "headerTooltipContent": "vulnerabilities section header tooltip content",
+  "headerTooltipContent": "Vulnerable areas are more likely to experience more severe physical and economic suffering from COVID, and struggle more to recover.  \n\nAs of January 2021, people in the most vulnerable third of U.S. counties are 23% more likely to be diagnosed with COVID, 32% more likely to have died from COVID, and 35% more likely to be unemployed due to COVID ([see source](https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19)). \n\nTo calculate vulnerability, we use Surgo Venture’s COVID Community Vulnerability Index (CCVI). [Learn more](covidactnow.org/learn).",
   "subscoreTooltips": [
     {
-      "subscoreName": "Socioeconomic status",
+      "subscoreName": "Unemployment & low income",
       "id": "socioeconomic-status",
-      "content": "Socioeconomic status tooltip content"
+      "content": "Measures the relative financial health of a community. In addition to data on income, employment, and education, the rate of uninsured people is also included. People without insurance tend to delay or avoid seeking health care, making them more vulnerable to severe COVID outcomes."
     },
     {
-      "subscoreName": "Minority status & language",
+      "subscoreName": "Minorities & non-English speakers",
       "id": "minority-status-and-language",
-      "content": "Minority status & language tooltip content"
+      "content": "Measures the presence of minorities and non-English speaking people within a community. The data on COVID so far has demonstrated that racial and ethnic minorities are often at the highest risk of poor medical outcomes and more likely to experience negative secondary impacts."
     },
     {
-      "subscoreName": "Household & transportation",
+      "subscoreName": "Housing and transport challenges",
       "id": "household-transportation",
-      "content": "Household & transportation tooltip content"
+      "content": "Measures factors accounting for crowded housing, access to indoor plumbing, vehicle ownership, and the presence of dependents. These can increase vulnerability not only to primary impacts of the pandemic, but also to housing instability and limited transit options."
     },
     {
-      "subscoreName": "Epidemiological factors ",
+      "subscoreName": "Older age & health issues",
       "id": "epidemiological-factors",
-      "content": "Epidemiological factors tooltip content"
+      "content": "Identifies high-risk populations (per CDC guidelines), such as elderly adults and individuals with underlying conditions, including respiratory conditions, heart conditions, obesity, diabetes, and conditions related to immunodeficiency."
     },
     {
-      "subscoreName": "Healthcare system factors",
+      "subscoreName": "Health system challenges",
       "id": "healthcare-system-factors",
-      "content": "Healthcare system factors tooltip content"
+      "content": "Measures the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID. It looks at factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables."
     },
     {
-      "subscoreName": "High-risk environments",
+      "subscoreName": "Crowded living & working areas",
       "id": "high-risk-environments",
-      "content": "High-risk environments tooltip content"
+      "content": "Measures variables within a community such as working in a high- risk industry or living in a nursing home or prison, which significantly contribute to a person's exposure to and vulnerability to the virus."
     },
     {
       "subscoreName": "Population density",
       "id": "population-density",
-      "content": "Population density tooltip content"
+      "content": "Measures the number of people per unit of area. Higher population density has been demonstrated to increase the risk of quick viral spread and adverse health outcomes. Given its importance in understanding vulnerability to the pandemic, it comprises a specific theme in the index."
     }
   ]
 }

@@ -1,12 +1,6 @@
 {
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/lily-headshot.png",
-      "fullName": "Lily Donovan-Seid",
-      "description": "Graphic design lead",
-      "profileUrl": "https://www.linkedin.com/in/lily-donovan-seid-88977a14/"
-    },
-    {
       "profileImgUrl": "/images_cms/sophiachan.jpeg",
       "fullName": "Sophia Chan",
       "description": "Junior designer",
