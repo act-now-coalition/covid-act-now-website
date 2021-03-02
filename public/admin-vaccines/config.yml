@@ -1,6 +1,8 @@
 # This file controls the configuration of our Netlify CMS UI+content structure
 # 'branch' is the branch where all copy changes made in the CMS UI will be committed
 # Netlify CMS docs: https://www.netlifycms.org/docs/intro/
+#
+# This is only for vaccine data
 backend:
   name: github
   repo: covid-projections/covid-projections
