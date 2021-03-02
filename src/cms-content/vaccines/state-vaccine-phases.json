@@ -2183,7 +2183,7 @@
       "fips": "46",
       "eligibilityInfoUrl": "https://doh.sd.gov/Covid/Vaccine/Public.aspx",
       "vaccinationSignupUrl": "https://doh.sd.gov/Covid/Vaccine/ProviderMap/default.aspx",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1A",
