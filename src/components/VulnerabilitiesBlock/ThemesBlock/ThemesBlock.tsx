@@ -32,7 +32,6 @@ const ThemesBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
                 title={theme.content}
                 aria-label={`Show definition of ${theme.subscoreName}`}
                 trackOpenTooltip={() => {}}
-                trackCloseTooltip={() => {}}
               />
             </ThemeNameCell>
             <LevelCell
