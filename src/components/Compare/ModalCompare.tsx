@@ -85,6 +85,8 @@ const ModalCompare = (props: {
             setHomepageSliderValue={props.setHomepageSliderValue}
           />
         )}
+        {/* Need explicit div to ensure close icon is on the right of the pop up */}
+        <div />
         <CloseIcon onClick={() => props.handleCloseModal()} />
       </ModalHeader>
       <CompareTable
