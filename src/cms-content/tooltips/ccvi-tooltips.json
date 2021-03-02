@@ -2,39 +2,39 @@
   "headerTooltipContent": "vulnerabilities section header tooltip content",
   "subscoreTooltips": [
     {
-      "subscoreName": "Socioeconomic status",
-      "id": "socioeconomic-status",
-      "content": "Socioeconomic status tooltip content"
+      "subscoreName": "Unemployment & low income",
+      "id": "unemployment-low-income",
+      "content": "Measures the relative financial health of a community. In addition to data on income, employment, and education, the rate of uninsured people is also included. People without insurance tend to delay or avoid seeking health care, making them more vulnerable to severe COVID outcomes."
     },
     {
-      "subscoreName": "Minority status & language",
-      "id": "minority-status-and-language",
-      "content": "Minority status & language tooltip content"
+      "subscoreName": "Minorities & non-English speakers",
+      "id": "minorities-non-english-speakers",
+      "content": "Measures the presence of minorities and non-English speaking people within a community. The data on COVID so far has demonstrated that racial and ethnic minorities are often at the highest risk of poor medical outcomes and more likely to experience negative secondary impacts."
     },
     {
-      "subscoreName": "Household & transportation",
-      "id": "household-transportation",
-      "content": "Household & transportation tooltip content"
+      "subscoreName": "Housing and transport challenges",
+      "id": "housing-transport-challenges",
+      "content": "Measures factors accounting for crowded housing, access to indoor plumbing, vehicle ownership, and the presence of dependents. These can increase vulnerability not only to primary impacts of the pandemic, but also to housing instability and limited transit options."
     },
     {
-      "subscoreName": "Epidemiological factors ",
-      "id": "epidemiological-factors",
-      "content": "Epidemiological factors tooltip content"
+      "subscoreName": "Older age & health issues",
+      "id": "older-age-health-issues",
+      "content": "Identifies high-risk populations (per CDC guidelines), such as elderly adults and individuals with underlying conditions, including respiratory conditions, heart conditions, obesity, diabetes, and conditions related to immunodeficiency."
     },
     {
-      "subscoreName": "Healthcare system factors",
-      "id": "healthcare-system-factors",
-      "content": "Healthcare system factors tooltip content"
+      "subscoreName": "Health system challenges",
+      "id": "health-system-challenges",
+      "content": "Measures the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID. It looks at factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables."
     },
     {
-      "subscoreName": "High-risk environments",
-      "id": "high-risk-environments",
-      "content": "High-risk environments tooltip content"
+      "subscoreName": "Crowded living & working areas",
+      "id": "crowded-living-working-areas",
+      "content": "Measures variables within a community such as working in a high- risk industry or living in a nursing home or prison, which significantly contribute to a person's exposure to and vulnerability to the virus."
     },
     {
       "subscoreName": "Population density",
       "id": "population-density",
-      "content": "Population density tooltip content"
+      "content": "Measures the number of people per unit of area. Higher population density has been demonstrated to increase the risk of quick viral spread and adverse health outcomes. Given its importance in understanding vulnerability to the pandemic, it comprises a specific theme in the index."
     }
   ]
 }
