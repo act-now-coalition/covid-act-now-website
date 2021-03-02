@@ -30,7 +30,7 @@ const SocialButtonBlock: React.FC<{
     socialIconSize,
   };
   return (
-    <SocialButtonsContainer onClick={() => onClickContainer()}>
+    <SocialButtonsContainer onClick={onClickContainer}>
       <FacebookShareButton
         onClickShare={onShareOnFacebook}
         {...socialSharingProps}
