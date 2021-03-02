@@ -9,7 +9,7 @@ export function renderRegionDescription(
   percentPopulationVulnerable?: number,
 ): React.ReactElement {
   if (region instanceof State) {
-    return renderStateDescription(overallScore, percentPopulationVulnerable); // update this
+    return renderStateDescription(overallScore, percentPopulationVulnerable);
   } else if (region instanceof County) {
     return renderCountyOrMetroDescription(overallScore, 'counties');
   } else {
