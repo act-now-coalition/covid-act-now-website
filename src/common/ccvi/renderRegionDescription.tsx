@@ -6,9 +6,10 @@ import { Region, State, County } from 'common/regions';
 export function renderRegionDescription(
   overallScore: number,
   region: Region,
+  percentPopulationVulnerable?: number,
 ): React.ReactElement {
   if (region instanceof State) {
-    return renderStateDescription(overallScore, '{{population %}}'); // update this
+    return renderStateDescription(overallScore, percentPopulationVulnerable);
   } else if (region instanceof County) {
     return renderCountyOrMetroDescription(overallScore, 'counties');
   } else {
@@ -18,46 +19,53 @@ export function renderRegionDescription(
 
 function renderStateDescription(
   overallScore: number,
-  vulnerablePopulation: string,
+  percentPopulationVulnerable?: number,
 ): React.ReactElement {
   const level = getCcviLevel(overallScore);
 
   if (level === CcviLevel.VERY_HIGH) {
     return (
       <>
-        is one of the <strong>most vulnerable</strong> states, with{' '}
-        {vulnerablePopulation} of the population in a high vulnerability area.
+        is one of the <strong>most vulnerable</strong> states
+        {percentPopulationVulnerable
+          ? `, with ${percentPopulationVulnerable}% of the population in a high vulnerability area.`
+          : '.'}
       </>
     );
   } else if (level === CcviLevel.HIGH) {
     return (
       <>
-        has <strong>higher vulnerability</strong> than most states, with{' '}
-        {vulnerablePopulation} of the population in a high vulnerability area.
+        has <strong>higher vulnerability</strong> than most states
+        {percentPopulationVulnerable
+          ? `, with ${percentPopulationVulnerable}% of the population in a high vulnerability area.`
+          : '.'}
       </>
     );
   } else if (level === CcviLevel.MEDIUM) {
     return (
       <>
-        has <strong>average vulnerability</strong>. However,{' '}
-        {vulnerablePopulation} of the population is in a high vulnerability
-        area.
+        has <strong>average vulnerability</strong>.
+        {percentPopulationVulnerable
+          ? ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+          : ''}
       </>
     );
   } else if (level === CcviLevel.LOW) {
     return (
       <>
-        has <strong>lower vulnerability</strong> than most states. However,{' '}
-        {vulnerablePopulation} of the population is in a high vulnerability
-        area.
+        has <strong>lower vulnerability</strong> than most states.
+        {percentPopulationVulnerable
+          ? ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+          : ''}
       </>
     );
   } else {
     return (
       <>
-        is one of the <strong>least vulnerable</strong> states. However,{' '}
-        {vulnerablePopulation} of the population is in a high vulnerability
-        area.
+        is one of the <strong>least vulnerable</strong> states.
+        {percentPopulationVulnerable
+          ? ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+          : ''}
       </>
     );
   }
@@ -73,7 +81,7 @@ function renderCountyOrMetroDescription(
   if (level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH) {
     return (
       <>
-        is <strong>more vulnerable than {scoreAsPercent}</strong> of U.S.
+        is <strong>more vulnerable than {scoreAsPercent}</strong> of U.S.{' '}
         {regionType}.
       </>
     );
