@@ -33,7 +33,7 @@ const HomepageSlider: React.FC<{
         step={null}
         marks={marks}
         track={false}
-        homepageScope={homepageScope}
+        $homepageScope={homepageScope}
         $isModal={$isModal}
       />
     </SliderContainer>

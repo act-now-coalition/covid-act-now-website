@@ -16,7 +16,7 @@ import {
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
 import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
-import { trackOpenTooltip, trackCloseTooltip } from 'components/InfoTooltip';
+import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -164,9 +164,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         trackOpenTooltip={() =>
           trackOpenTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)
         }
-        trackCloseTooltip={() =>
-          trackCloseTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)
-        }
       />
       {' and '}
       <DisclaimerTooltip
@@ -174,9 +171,6 @@ function renderDisclaimer(region: Region): React.ReactElement {
         mainCopy={'how we calculate our metrics'}
         trackOpenTooltip={() =>
           trackOpenTooltip(`How we calculate: ${Metric.POSITIVE_TESTS}`)
-        }
-        trackCloseTooltip={() =>
-          trackCloseTooltip(`How we calculate: ${Metric.POSITIVE_TESTS}`)
         }
       />
       .
@@ -237,9 +231,6 @@ function renderInfoTooltip(): React.ReactElement {
       aria-label={`Show definition of ${PositiveTestRateMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`Metric definition: ${Metric.POSITIVE_TESTS}`)
-      }
-      trackCloseTooltip={() =>
-        trackCloseTooltip(`Metric definition: ${Metric.POSITIVE_TESTS}`)
       }
     />
   );

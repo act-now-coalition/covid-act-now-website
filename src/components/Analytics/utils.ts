@@ -52,6 +52,7 @@ export enum EventCategory {
   TOOLTIPS = 'tooltips',
   API = 'api',
   METRICS = 'metrics',
+  VULNERABILITIES = 'vulnerabilities',
 }
 
 /**

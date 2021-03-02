@@ -20,12 +20,12 @@ export const ColoredHeaderBanner = styled(Box)`
 `;
 
 export const Wrapper = styled(Box)<{
-  condensed?: Boolean;
-  headerTopMargin: number;
-  headerBottomMargin: number;
+  $condensed?: boolean;
+  $headerTopMargin: number;
+  $headerBottomMargin: number;
 }>`
   ${props =>
-    props.condensed
+    props.$condensed
       ? `
     display: block;
   `
@@ -43,18 +43,18 @@ export const Wrapper = styled(Box)<{
     @media (min-width: 600px) {
       position: relative;
       flex-direction: column;
-      margin: ${props.headerTopMargin}px 1rem ${props.headerBottomMargin}px;
+      margin: ${props.$headerTopMargin}px 1rem ${props.$headerBottomMargin}px;
     }
 
     @media (min-width: 1060px) {
-      margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
+      margin: ${props.$headerTopMargin}px auto ${props.$headerBottomMargin}px;
     }
     @media (min-width: 1350px) {
-      margin: ${props.headerTopMargin}px 350px ${props.headerBottomMargin}px auto;
+      margin: ${props.$headerTopMargin}px 350px ${props.$headerBottomMargin}px auto;
     }
 
     @media (min-width: 1750px) {
-      margin: ${props.headerTopMargin}px auto ${props.headerBottomMargin}px;
+      margin: ${props.$headerTopMargin}px auto ${props.$headerBottomMargin}px;
     }
   `}
 `;
@@ -235,7 +235,7 @@ export const HeaderButton = styled(Button).attrs(props => ({
 `;
 
 export const LastUpdatedDate = styled.span<{
-  isVerifiedState?: Boolean;
+  isVerifiedState?: boolean;
 }>`
   display: flex;
   margin-left: ${({ isVerifiedState }) => isVerifiedState && '32px'};
@@ -279,7 +279,7 @@ export const SectionHalf = styled(Box)`
   }
 `;
 
-export const SectionColumn = styled(Box)<{ $isUpdateCopy?: Boolean }>`
+export const SectionColumn = styled(Box)<{ $isUpdateCopy?: boolean }>`
   display: flex;
   flex-direction: column;
   margin-left: 1.5rem;
@@ -294,7 +294,7 @@ export const SectionColumn = styled(Box)<{ $isUpdateCopy?: Boolean }>`
   }
 `;
 
-export const ColumnTitle = styled(Typography)<{ $isUpdateCopy?: Boolean }>`
+export const ColumnTitle = styled(Typography)<{ $isUpdateCopy?: boolean }>`
   font-family: Roboto;
   font-size: ${({ $isUpdateCopy }) => ($isUpdateCopy ? '13px' : '12px')};
   text-transform: uppercase;
@@ -309,7 +309,7 @@ export const ColumnTitle = styled(Typography)<{ $isUpdateCopy?: Boolean }>`
   }
 `;
 
-export const Copy = styled(Typography)<{ $isUpdateCopy?: Boolean }>`
+export const Copy = styled(Typography)<{ $isUpdateCopy?: boolean }>`
   font-family: Source Code Pro;
   font-size: ${({ $isUpdateCopy }) => ($isUpdateCopy ? '13px' : '12px')};
   line-height: 140%;

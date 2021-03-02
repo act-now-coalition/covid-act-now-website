@@ -61,7 +61,7 @@ const CompareTableRow = (props: {
         $isModal={isModal}
       >
         <LocationNameCell
-          iconColor={location.metricsInfo.level}
+          $iconColor={location.metricsInfo.level}
           sortByPopulation={sortByPopulation}
         >
           <LocationCellWrapper>
@@ -96,11 +96,11 @@ const CompareTableRow = (props: {
           return (
             <DataCell
               key={`data-cell-${i}`}
-              isSelected={isSelected}
-              iconColor={column.getIconColor(location)}
+              $isSelected={isSelected}
+              $iconColor={column.getIconColor(location)}
             >
               <FiberManualRecordIcon />
-              <DataCellValue valueUnknown={valueUnknown}>
+              <DataCellValue $valueUnknown={valueUnknown}>
                 {column.getFormattedValue(location)}
               </DataCellValue>
             </DataCell>

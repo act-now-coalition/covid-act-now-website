@@ -9,7 +9,6 @@ export { InfoTooltip, DisclaimerTooltip };
 
 export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   trackOpenTooltip: () => void;
-  trackCloseTooltip: () => void;
   mainCopy?: string;
 };
 
@@ -27,8 +26,4 @@ export function tooltipAnchorOnClick(isMobile: boolean, onClick: () => void) {
 
 export function trackOpenTooltip(label: string) {
   trackEvent(EventCategory.TOOLTIPS, EventAction.OPEN_TOOLTIP, label);
-}
-
-export function trackCloseTooltip(label: string) {
-  trackEvent(EventCategory.TOOLTIPS, EventAction.CLOSE_TOOLTIP, label);
 }

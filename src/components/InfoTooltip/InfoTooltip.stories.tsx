@@ -15,7 +15,6 @@ export const Example = () => {
     <InfoTooltip
       title={<StyledMarkdown source={bodyExample} />}
       trackOpenTooltip={() => {}}
-      trackCloseTooltip={() => {}}
     />
   );
 };

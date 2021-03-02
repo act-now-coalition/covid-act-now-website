@@ -1,10 +1,9 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, has, partition, toLower } from 'lodash';
+import { each, has } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
-import { REVERSED_STATES, STATES as STATES_MAP } from 'common';
-// import CountyMap from 'components/CountyMap/CountyMap';
+import { STATES as STATES_MAP } from 'common';
 
 export interface AdjacencyData {
   [fips: string]: {
@@ -32,25 +31,6 @@ export const AGGREGATED_LOCATIONS: Location[] = [
     state_code: 'NAMC',
   },
 ];
-
-// TODO(michael): Move more common code here.
-export interface State {
-  state_code: string;
-  state: string;
-  state_url_name: string;
-  state_fips_code: string;
-  population: number;
-}
-
-export interface County {
-  county: string;
-  county_url_name: string;
-  county_fips_code: string;
-  state_fips_code: string;
-  state_code: string;
-  full_fips_code: string;
-  population: number;
-}
 
 export interface Location {
   county?: string;
@@ -100,23 +80,6 @@ export function findCountyByFips(fips: string) {
   return undefined;
 }
 
-function _findStateByFips(fips: string): State | undefined {
-  return US_STATE_DATASET.state_dataset.find(
-    state => state.state_fips_code === fips,
-  );
-}
-
-export function isStateFips(fips: string): boolean {
-  const state = _findStateByFips(fips);
-  return !!state;
-}
-
-export function findStateByFips(fips: string): State {
-  const state = _findStateByFips(fips);
-  assert(state !== undefined, `Invalid fips: ${fips}`);
-  return state;
-}
-
 export function findStateFipsCode(stateCode: string): string {
   const fips = US_STATE_DATASET.state_dataset.find(
     state => state.state_code === stateCode,
@@ -131,32 +94,6 @@ export function getCountyMsaCode(fips: string): string | undefined {
   }
 }
 
-export function findLocationForFips(fips: string): Location {
-  return fips.startsWith('00')
-    ? AGGREGATED_LOCATIONS.find(l => l.full_fips_code === fips)
-    : isStateFips(fips)
-    ? findStateByFips(fips)
-    : findCountyByFips(fips);
-}
-
-export function getStateCode(stateName: string) {
-  return REVERSED_STATES[stateName];
-}
-
 export function getStateName(stateCode: string): string | undefined {
   return (STATES_MAP as any)[stateCode];
-}
-
-const isCounty = (location: Location) => location.county !== undefined;
-
-const ALL_LOCATIONS = getLocationNames();
-const locationsByType = partition(ALL_LOCATIONS, isCounty);
-export const STATES = locationsByType[1] as State[];
-
-export function getStateByUrlName(stateUrlName: string): State | undefined {
-  return STATES.find(
-    state =>
-      toLower(state.state_url_name) === toLower(stateUrlName) ||
-      toLower(state.state_code) === toLower(stateUrlName),
-  );
 }
