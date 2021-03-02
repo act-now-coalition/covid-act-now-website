@@ -18,10 +18,13 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
   const containerHeight = 34;
   const thermometerWidth = 240;
   const thermometerHeight = 20;
+  const thermometerBorderRadius = thermometerHeight / 2;
+  const horizontalMargin = 6;
+  const innerWidth = thermometerWidth - 2 * horizontalMargin;
 
   const scaleWidth = scaleLinear({
     domain: [0, 1],
-    range: [0, thermometerWidth],
+    range: [0, innerWidth],
   });
 
   const pointerX = scaleWidth(overallScore);
@@ -61,17 +64,19 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
           />
         </linearGradient>
       </defs>
-      <Group left={pointerX}>
-        <polygon points={`-6,0 0,6 6,0`} fill="black" />
+      <Group left={horizontalMargin}>
+        <Group left={pointerX}>
+          <polygon points={`-6,0 0,6 6,0`} fill="black" />
+        </Group>
+        <rect
+          fill={`url(#${gradientId})`}
+          width={innerWidth}
+          height={thermometerHeight}
+          y={containerHeight - thermometerHeight}
+          rx={thermometerBorderRadius}
+          ry={thermometerBorderRadius}
+        />
       </Group>
-      <rect
-        fill={`url(#${gradientId})`}
-        width={thermometerWidth}
-        height={thermometerHeight}
-        y={containerHeight - thermometerHeight}
-        rx={thermometerHeight / 2}
-        ry={thermometerHeight / 2}
-      />
     </svg>
   );
 };

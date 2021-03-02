@@ -6,6 +6,18 @@ export default {
   component: CcviThermometer,
 };
 
-export const Example = () => {
+export const Score00 = () => {
+  return <CcviThermometer overallScore={0} />;
+};
+
+export const Score04 = () => {
+  return <CcviThermometer overallScore={0.4} />;
+};
+
+export const Score09 = () => {
   return <CcviThermometer overallScore={0.9} />;
+};
+
+export const Score10 = () => {
+  return <CcviThermometer overallScore={1.0} />;
 };
