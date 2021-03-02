@@ -49,7 +49,10 @@ const VulnerabilitiesBlock: React.FC<{
         <FirstColumn>
           <TextSmall>OVERALL</TextSmall>
           <LevelName>{levelName}</LevelName>
-          <CcviThermometer overallScore={scores.overall} />
+          <CcviThermometer
+            overallScore={scores.overall}
+            regionName={region.shortName}
+          />
           <RegionDescription>
             {region.shortName} {renderRegionDescription(scores.overall, region)}
           </RegionDescription>
