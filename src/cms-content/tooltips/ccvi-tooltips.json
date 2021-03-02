@@ -24,7 +24,7 @@
     {
       "subscoreName": "Health system challenges",
       "id": "healthcare-system-factors",
-      "content": "Measures the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID. It looks at factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables."
+      "content": "Measures factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables. These aim to capture the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID."
     },
     {
       "subscoreName": "Crowded living & working areas",
