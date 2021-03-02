@@ -1,9 +1,7 @@
 import React from 'react';
+import { vulnerabilitiesHeaderTooltip } from 'cms-content/tooltips';
 import ThemesBlock from './ThemesBlock/ThemesBlock';
-import {
-  LocationPageSectionHeader,
-  HeaderWrapper,
-} from 'components/LocationPage/ChartsHolder.style';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import { Subtitle1 } from 'components/Typography';
 import {
   BorderedContainer,
@@ -13,21 +11,24 @@ import {
   LevelName,
   RegionDescription,
   StyledLink,
+  HeaderWrapper,
 } from './VulnerabilitiesBlock.style';
-import FooterLinks from './FooterLinks/FooterLinks';
-import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
-import CcviThermometer from './CcviThermometer/CcviThermometer';
-import { getCcviLevelNameFromScore } from 'common/ccvi';
-import { RegionCcviItem } from 'common/data';
-import { vulnerabilitiesHeaderTooltip } from 'cms-content/tooltips';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import ShareButtons from './ShareButtons';
+import FooterLinks from './FooterLinks/FooterLinks';
+import CcviThermometer from './CcviThermometer/CcviThermometer';
+import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
+import { getCcviLevelNameFromScore } from 'common/ccvi';
 import { Region } from 'common/regions';
+import { RegionCcviItem } from 'common/data';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
   region: Region;
 }> = ({ scores, region }) => {
+  const shareUrl = `${region.canonicalUrl}#vulnerabilities`;
+
   if (!scores) {
     return null;
   }
@@ -41,7 +42,7 @@ const VulnerabilitiesBlock: React.FC<{
           Vulnerabilities
           <>{renderVulnerabilitiesTooltip()}</>
         </LocationPageSectionHeader>
-        {/* Share button */}
+        <ShareButtons shareUrl={shareUrl} />
       </HeaderWrapper>
       <Subtitle1>In {region.fullName}</Subtitle1>
       <BorderedContainer>

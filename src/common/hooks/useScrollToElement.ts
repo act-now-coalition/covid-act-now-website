@@ -6,13 +6,15 @@ import { useLocation } from 'react-router';
 import { scrollWithTimeout } from 'components/Markdown/MarkdownLink';
 
 export default function useScrollToElement(): void {
-  const elementToScrollTo = useLocation().hash;
+  const { pathname, hash } = useLocation();
+
+  const isLocationPage = pathname.includes('/us/');
+  const offset = isLocationPage ? -180 : -80;
+
   useEffect(() => {
-    const element = elementToScrollTo
-      ? (document.querySelector(elementToScrollTo) as HTMLElement)
-      : null;
+    const element = hash ? (document.querySelector(hash) as HTMLElement) : null;
     if (element) {
-      scrollWithTimeout(element, -80);
+      scrollWithTimeout(element, offset);
     }
-  }, [elementToScrollTo]);
+  }, [hash, offset]);
 }
