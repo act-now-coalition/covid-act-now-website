@@ -29,7 +29,7 @@ const TooltipWithStyles = withStyles({
 })(Tooltip);
 
 export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
-  placement: 'bottom',
+  placement: 'top',
   arrow: true,
   interactive: true,
   TransitionComponent: Fade,
