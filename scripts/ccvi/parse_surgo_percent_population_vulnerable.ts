@@ -30,11 +30,8 @@ async function main() {
   const fipsToPopulationVulnerable: FipsToPopVulnerable = {};
 
   const rows = await readCsv('surgo_population_percentage.csv');
-  console.log('rows', rows);
 
   for (const row of rows) {
-    console.log('row.fips', row.fips);
-    console.log('row.vuln_percentage', row.vuln_percentage);
     fipsToPopulationVulnerable[row.fips] = toNumber(row.vuln_percentage);
   }
 
