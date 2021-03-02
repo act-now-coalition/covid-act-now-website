@@ -45,24 +45,27 @@ function renderStateDescription(
     return (
       <>
         has <strong>average vulnerability</strong>.
-        {percentPopulationVulnerable &&
-          ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`}
+        {percentPopulationVulnerable
+          ? ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+          : ''}
       </>
     );
   } else if (level === CcviLevel.LOW) {
     return (
       <>
         has <strong>lower vulnerability</strong> than most states.
-        {percentPopulationVulnerable &&
-          ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`}
+        {percentPopulationVulnerable
+          ? ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+          : ''}
       </>
     );
   } else {
     return (
       <>
         is one of the <strong>least vulnerable</strong> states.
-        {percentPopulationVulnerable &&
-          ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`}
+        {percentPopulationVulnerable
+          ? ` However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+          : ''}
       </>
     );
   }
