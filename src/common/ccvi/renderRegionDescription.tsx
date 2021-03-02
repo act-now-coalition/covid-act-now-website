@@ -6,79 +6,94 @@ import { Region, State, County } from 'common/regions';
 export function renderRegionDescription(
   overallScore: number,
   region: Region,
-): React.ReactElement | null {
+): React.ReactElement {
   if (region instanceof State) {
-    return renderStateDescription(overallScore);
+    return renderStateDescription(overallScore, 1); // update this
   } else if (region instanceof County) {
-    return renderCountyDescription(overallScore);
+    return renderCountyOrMetroDescription(overallScore, 'counties');
   } else {
-    return null;
+    return renderCountyOrMetroDescription(overallScore, 'metros');
   }
 }
 
-function renderStateDescription(overallScore: number): React.ReactElement {
+function renderStateDescription(
+  overallScore: number,
+  vulnerablePopulation: number,
+): React.ReactElement {
   const level = getCcviLevel(overallScore);
-  const scoreAsPercent = formatPercent(overallScore);
 
   if (level === CcviLevel.VERY_HIGH) {
     return (
       <>
-        is one of the most vulnerable states, with{' '}
-        <strong>{scoreAsPercent}</strong> of the population in a high
-        vulnerability area.{' '}
+        is one of the <strong>most vulnerable</strong> states, with{' '}
+        {vulnerablePopulation} of the population in a high vulnerability area.
       </>
     );
   } else if (level === CcviLevel.HIGH) {
     return (
       <>
-        has higher than average vulnerability compared to other states, with{' '}
-        <strong>{scoreAsPercent}</strong> of the population in a high
-        vulnerability area.
+        has <strong>higher vulnerability</strong> than most states, with{' '}
+        {vulnerablePopulation} of the population in a high vulnerability area.
       </>
     );
   } else if (level === CcviLevel.MEDIUM) {
     return (
       <>
-        has average vulnerability compared to other states. However,{' '}
-        <strong>{scoreAsPercent}</strong> of the population is in a high
-        vulnerability area.
+        has <strong>average vulnerability</strong>. However,{' '}
+        {vulnerablePopulation} of the population is in a high vulnerability
+        area.
       </>
     );
   } else if (level === CcviLevel.LOW) {
     return (
       <>
-        is one of the less vulnerable states. However,{' '}
-        <strong>{scoreAsPercent}</strong> of the population is in a high
-        vulnerability area.
+        has <strong>lower vulnerability</strong> than most states. However,{' '}
+        {vulnerablePopulation} of the population is in a high vulnerability
+        area.
       </>
     );
   } else {
     return (
       <>
-        is one of the least vulnerable states. However,{' '}
-        <strong>{scoreAsPercent}</strong> of the population is in a high
-        vulnerability area.
+        is one of the <strong>least vulnerable</strong> states. However,{' '}
+        {vulnerablePopulation} of the population is in a high vulnerability
+        area.
       </>
     );
   }
 }
 
-function renderCountyDescription(overallScore: number): React.ReactElement {
+function renderCountyOrMetroDescription(
+  overallScore: number,
+  regionType: string,
+): React.ReactElement {
   const level = getCcviLevel(overallScore);
   const scoreAsPercent = formatPercent(overallScore);
 
   if (level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH) {
     return (
       <>
-        is more vulnerable than <strong>{scoreAsPercent}</strong> of U.S.
-        counties.
+        is <strong>more vulnerable than {scoreAsPercent}</strong> of U.S.
+        {regionType}.
       </>
     );
   } else if (level === CcviLevel.MEDIUM) {
-    return <>has average vulnerability compared to other US counties.</>;
+    return (
+      <>
+        has <strong>average vulnerability</strong> among US {regionType}.
+      </>
+    );
   } else if (level === CcviLevel.LOW) {
-    return <>is one of the less vulnerable US counties.</>;
+    return (
+      <>
+        has <strong>lower vulnerability</strong> than most US {regionType}
+      </>
+    );
   } else {
-    return <>is one of the least vulnerable US counties.</>;
+    return (
+      <>
+        is one of the <strong>least vulnerable</strong> US {regionType}.
+      </>
+    );
   }
 }
