@@ -3,32 +3,32 @@
   "subscoreTooltips": [
     {
       "subscoreName": "Unemployment & low income",
-      "id": "unemployment-low-income",
+      "id": "socioeconomic-status",
       "content": "Measures the relative financial health of a community. In addition to data on income, employment, and education, the rate of uninsured people is also included. People without insurance tend to delay or avoid seeking health care, making them more vulnerable to severe COVID outcomes."
     },
     {
       "subscoreName": "Minorities & non-English speakers",
-      "id": "minorities-non-english-speakers",
+      "id": "minority-status-and-language",
       "content": "Measures the presence of minorities and non-English speaking people within a community. The data on COVID so far has demonstrated that racial and ethnic minorities are often at the highest risk of poor medical outcomes and more likely to experience negative secondary impacts."
     },
     {
       "subscoreName": "Housing and transport challenges",
-      "id": "housing-transport-challenges",
+      "id": "household-transportation",
       "content": "Measures factors accounting for crowded housing, access to indoor plumbing, vehicle ownership, and the presence of dependents. These can increase vulnerability not only to primary impacts of the pandemic, but also to housing instability and limited transit options."
     },
     {
       "subscoreName": "Older age & health issues",
-      "id": "older-age-health-issues",
+      "id": "epidemiological-factors",
       "content": "Identifies high-risk populations (per CDC guidelines), such as elderly adults and individuals with underlying conditions, including respiratory conditions, heart conditions, obesity, diabetes, and conditions related to immunodeficiency."
     },
     {
       "subscoreName": "Health system challenges",
-      "id": "health-system-challenges",
+      "id": "healthcare-system-factors",
       "content": "Measures the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID. It looks at factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables."
     },
     {
       "subscoreName": "Crowded living & working areas",
-      "id": "crowded-living-working-areas",
+      "id": "high-risk-environments",
       "content": "Measures variables within a community such as working in a high- risk industry or living in a nursing home or prison, which significantly contribute to a person's exposure to and vulnerability to the virus."
     },
     {
