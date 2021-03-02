@@ -86,7 +86,7 @@ function renderCountyOrMetroDescription(
   } else if (level === CcviLevel.LOW) {
     return (
       <>
-        has <strong>lower vulnerability</strong> than most US {regionType}
+        has <strong>lower vulnerability</strong> than most US {regionType}.
       </>
     );
   } else {
