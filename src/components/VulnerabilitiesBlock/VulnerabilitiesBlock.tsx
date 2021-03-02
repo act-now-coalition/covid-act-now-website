@@ -21,7 +21,7 @@ import CcviThermometer from './CcviThermometer/CcviThermometer';
 import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
 import { getCcviLevelNameFromScore } from 'common/ccvi';
 import { Region } from 'common/regions';
-import { RegionCcviItem } from 'common/data';
+import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
@@ -34,6 +34,14 @@ const VulnerabilitiesBlock: React.FC<{
   }
 
   const levelName = getCcviLevelNameFromScore(scores.overall);
+  const percentPopulationVulnerable = getVulnPopulationPercentForFips(
+    region.fipsCode,
+  );
+  const regionDescription = renderRegionDescription(
+    scores.overall,
+    region,
+    percentPopulationVulnerable,
+  );
 
   return (
     <>
@@ -54,7 +62,7 @@ const VulnerabilitiesBlock: React.FC<{
             regionName={region.shortName}
           />
           <RegionDescription>
-            {region.shortName} {renderRegionDescription(scores.overall, region)}
+            {region.shortName} {regionDescription}
           </RegionDescription>
         </FirstColumn>
         <SecondColumn>
