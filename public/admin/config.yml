@@ -894,7 +894,7 @@ collections:
               - label: Id
                 name: id
                 widget: string
-                hint: subscore name, all lowercase, dash-separated
+                hint: Do not edit this field
               - label: Tooltip content
                 name: content
                 widget: markdown
