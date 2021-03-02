@@ -70,7 +70,6 @@ const CcviThermometer: React.FC<{
       </defs>
       <Group left={pointerX}>
         <polygon points={`-6,0 0,6 6,0`} fill="black" />
-        <circle r="2" fill="blue" cy={8} />
       </Group>
       <rect
         fill={`url(#${gradientId})`}
@@ -80,14 +79,6 @@ const CcviThermometer: React.FC<{
         rx={thermometerBorderRadius}
         ry={thermometerBorderRadius}
       />
-      <rect
-        width={thermometerWidth / 5}
-        height={thermometerHeight}
-        x={(3 * thermometerWidth) / 5}
-        y={containerHeight - thermometerHeight}
-        fill="red"
-      />
-      {/* </Group> */}
     </svg>
   );
 };
