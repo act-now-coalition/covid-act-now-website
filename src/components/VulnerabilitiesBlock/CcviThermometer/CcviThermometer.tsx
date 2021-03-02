@@ -8,6 +8,7 @@ import {
 import { scaleLinear } from '@vx/scale';
 import { v4 as uuidv4 } from 'uuid';
 import { Group } from '@vx/group';
+import { StyledSvg } from 'components/VulnerabilitiesBlock/VulnerabilitiesBlock.style';
 
 const CcviThermometer: React.FC<{ overallScore: number }> = ({
   overallScore,
@@ -39,7 +40,7 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
     : 'Thermometer image showing the vulnerability level.';
 
   return (
-    <svg
+    <StyledSvg
       width={thermometerWidth}
       height={containerHeight}
       role="img"
@@ -77,7 +78,7 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
           ry={thermometerBorderRadius}
         />
       </Group>
-    </svg>
+    </StyledSvg>
   );
 };
 

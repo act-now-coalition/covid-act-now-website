@@ -103,3 +103,9 @@ export const HeaderWrapper = styled.div`
     flex-direction: row;
   }
 `;
+
+export const StyledSvg = styled.svg`
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-left: -6px;
+  }
+`;
