@@ -340,10 +340,12 @@ export const LocationNameCell = styled.td<{
 export const DataCellValue = styled.span<{
   $valueUnknown: boolean;
   $textAlign: string;
+  $fontSize: string;
 }>`
   min-width: 48px;
   display: inline-block;
   text-align: ${({ $textAlign }) => $textAlign};
+  font-size: ${({ $fontSize }) => $fontSize};
   opacity: ${({ $valueUnknown }) => $valueUnknown && '.5'};
   font-family: Source Code Pro;
   color: ${COLOR_MAP.GRAY_BODY_COPY};

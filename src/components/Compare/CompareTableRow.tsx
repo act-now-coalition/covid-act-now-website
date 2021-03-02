@@ -103,6 +103,7 @@ const CompareTableRow = (props: {
               <DataCellValue
                 $valueUnknown={valueUnknown}
                 $textAlign={column.textAlign}
+                $fontSize={column.fontSize}
               >
                 {column.getFormattedValue(location)}
               </DataCellValue>

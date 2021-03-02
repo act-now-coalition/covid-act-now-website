@@ -13,6 +13,10 @@ const CCVI_COLUMN_ID = 100;
 /**
  * Represents a column in the compare table (e.g. for the case density metric or CCVI).
  * Implementations must define the name, getValue() function, etc. as appropriate.
+ *
+ * TODO(michael): Refactor this to have a `cellContent(row: SummaryForCompare)` method that
+ * returns the rendered React component and then we can probably drop textAlign, fontSize,
+ * getFormattedValue(), getIconColor().
  */
 export interface ColumnDefinition {
   /** A unique ID used to identify the column, e.g. to identify which column is sorted. */
@@ -23,6 +27,8 @@ export interface ColumnDefinition {
 
   /** The CSS text-align value to use for the column. */
   textAlign: string;
+
+  fontSize: string;
 
   /** Get the numeric value for the specified `row`. (used for sorting) */
   getValue(row: SummaryForCompare): number | null;
@@ -43,6 +49,8 @@ class MetricColumn implements ColumnDefinition {
   name = getMetricNameForCompare(this.metric);
 
   textAlign = 'right';
+
+  fontSize = '16px;';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.metrics[this.metric]?.value ?? null;
@@ -65,6 +73,8 @@ class CcviColumn implements ColumnDefinition {
   name = 'Vulnerability Level';
 
   textAlign = 'left';
+
+  fontSize = '14px;';
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.ccvi;
