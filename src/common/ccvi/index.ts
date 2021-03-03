@@ -62,6 +62,9 @@ export function getCcviLevelName(level: CcviLevel): string {
 
 export function getCcviLevel(score: number): CcviLevel {
   for (const level of allCcviLevels) {
+    if (score === 1) {
+      return CcviLevel.VERY_HIGH;
+    }
     if (score < CCVI_LEVEL_INFO_MAP[level].upperLimit) {
       return level;
     }
