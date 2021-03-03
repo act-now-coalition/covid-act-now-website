@@ -65,6 +65,8 @@ async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
     return { fips, count: items.length };
   });
 
+  // TODO (Pablo): Metro areas are being counted as counties, it might be worth
+  // fixing at some point
   const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) => {
     const region = regions.findByFipsCodeStrict(fips);
     return region instanceof State;
