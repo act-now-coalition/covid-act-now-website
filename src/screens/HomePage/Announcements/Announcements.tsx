@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ExternalLink from 'components/ExternalLink';
 import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
 import {
@@ -14,30 +15,41 @@ const Announcements: React.FC = () => {
   return (
     <Wrapper>
       <Subtitle1>Announcements</Subtitle1>
-      <AnnouncementIntro>Vaccination Data Now Available</AnnouncementIntro>
-      <Date>THURSDAY, Jan 21, 2021</Date>
+      <AnnouncementIntro>
+        COVID Vulnerability Data Now Available
+      </AnnouncementIntro>
+      <Date>THURSDAY, Mar 4, 2021</Date>
       <AnnouncementBodyCopy>
-        You can now see how many people are vaccinated in{' '}
-        <HashLink
-          to="#search"
-          scroll={element => scrollWithOffset(element, -80)}
-        >
-          each state
-        </HashLink>
-        , and compare vaccine rollout{' '}
+        You can now see which counties and metros are most and least vulnerable.
+        Vulnerable areas are more likely to experience severe physical and
+        economic suffering from COVID, and to face a harder, longer recovery. As
+        of January 2021, people in the most vulnerable third of U.S. counties
+        are:
+        <ul>
+          <li>23 percent more likely to be diagnosed with COVID</li>
+          <li>32 percent more likely to have died from COVID</li>
+          <li>35 percent more likely to be unemployed due to COVID</li>
+        </ul>
+        This is due to a number of factors such as a community member's income,
+        age, and underlying health, as well as their access to transportation
+        and health care.
+
         <HashLink
           to="#compare"
-          scroll={element => scrollWithOffset(element, -80)}
+          scroll={(element) => scrollWithOffset(element, -80)}
         >
-          across states
+          See the most vulnerable counties
         </HashLink>
-        . Due to the widespread, untracked, community spread across all of the
-        United States, we will no longer be showing a contact tracing metric on
-        our site, although we will continue serving it through our{' '}
-        <Link to="/data-api">API</Link>.
+        .
+        
+        <ExternalLink href="https://covidactnow.org/covid-explained/covid-vulnerability-data">
+          Learn more
+        </ExternalLink>{' '}
+        .
       </AnnouncementBodyCopy>
     </Wrapper>
   );
 };
+
 
 export default Announcements;
