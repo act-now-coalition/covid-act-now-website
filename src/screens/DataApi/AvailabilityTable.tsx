@@ -77,7 +77,6 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
 
       <StyledInfoTooltip
         trackOpenTooltip={() => {}}
-        trackCloseTooltip={() => {}}
         title={tooltipContent}
         mainCopy={"Hey i'm some useful content"}
       />
