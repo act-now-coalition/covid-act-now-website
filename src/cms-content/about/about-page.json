@@ -41,8 +41,14 @@
       ]
     },
     {
-      "copy": "Our data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.",
-      "logos": []
+      "copy": "Our data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards. Our Covid-19 Community Vulnerability Index comes from Surgo Ventures.",
+      "logos": [
+        {
+          "altText": "Surgo Ventures Logo",
+          "image": "/images_cms/surgoventures_logo-icon-2x.png",
+          "url": "https://precisionforcovid.org/"
+        }
+      ]
     }
   ],
   "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
