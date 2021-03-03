@@ -29,10 +29,10 @@ export const BoxedAnnotation = ({
   return (
     <Group left={x} top={y}>
       <rect
-        y={top - padding}
-        x={left - padding}
-        width={Math.abs(width + 2 * padding)}
-        height={Math.abs(height + 2 * padding)}
+        y={top}
+        x={left - 2 * padding}
+        width={Math.abs(width + 4 * padding)}
+        height={Math.abs(height + 0 * padding)}
       />
       <text ref={textRef}>{text}</text>
     </Group>

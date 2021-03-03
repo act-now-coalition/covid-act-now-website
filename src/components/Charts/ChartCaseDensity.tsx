@@ -73,7 +73,7 @@ const ChartCaseDensity: FunctionComponent<{
   const dates = data.map(getDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
-  const xScale = getUtcScale(minDate, currDate, 0, chartWidth, 15);
+  const xScale = getUtcScale(minDate, currDate, 0, chartWidth, 10);
   const [startDate, endDate] = xScale.domain();
   const dateTicks = getTimeAxisTicks(startDate, endDate);
 
@@ -152,10 +152,10 @@ const ChartCaseDensity: FunctionComponent<{
         <Style.LineGrid>
           <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
         </Style.LineGrid>
-        <Style.TextAnnotation>
+        <Style.TextAnnotation textAnchor="end">
           <BoxedAnnotation
             x={getXCoord(lastPoint)}
-            y={getYCoord(lastPoint) + 15}
+            y={getYCoord(lastPoint)}
             text={formatDecimal(getYCaseDensity(lastPoint), 1)}
           />
         </Style.TextAnnotation>
@@ -175,6 +175,7 @@ const ChartCaseDensity: FunctionComponent<{
         innerHeight={chartHeight}
         scale={xScale}
         tickValues={dateTicks}
+        showYear
       />
       <Group top={-6} left={-10}>
         <AxisRight scale={yScale} tickValues={yTicks.slice(1)} />

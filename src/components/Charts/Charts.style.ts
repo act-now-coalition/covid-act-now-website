@@ -34,8 +34,9 @@ export const Axis = styled.g<{ exploreStroke?: string }>`
   text {
     font-family: ${charts.fontFamily};
     font-weight: 'medium';
-    font-size: 12px;
+    font-size: 11px;
     fill: ${props => palette(props).axis};
+    text-transform: uppercase;
   }
   line {
     stroke: ${props => props.exploreStroke || palette(props).axis};
