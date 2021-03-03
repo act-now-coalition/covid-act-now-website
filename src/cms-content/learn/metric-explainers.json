@@ -76,27 +76,32 @@
       "sectionHeader": " Positive test rate",
       "sectionSubheader": "Also known as: test positivity",
       "sectionId": "positive-test-rate",
-      "sectionIntro": "**Positive test rate is the *percentage* of COVID testing that comes back positive** (not the total number of positive tests).",
+      "sectionIntro": "**Positive test rate is the *percentage* of COVID PCR testing that comes back positive** (not the total number of positive PCR tests).",
       "questions": [
         {
-          "question": "Why is positive test rate important?",
-          "questionId": "why-is-positive-test-rate-important",
-          "answer": "Positive test rate, also known as test positivity, is a good indicator of how widespread testing is in a given area. If a state or county has a **high** positive test rate, it is a sign of **insufficient** testing in that area. If a state or county has a **low** positive test rate, it is a sign that we are **testing more** than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios,** but the positive test rate differs drastically due to the percentage of the population that is being tested. The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![Key for positive test rate example](/images_cms/test-positivity-calculate-key.jpg)\n\n![Positive test rate diagram for insufficient testing](/images_cms/test-positivity-calculate-high.jpg)\n\nIn the first scenario, 2 out of 10 people test positive for COVID, so the positive test rate is 20%. The remaining 90% of the population remain untested.\n\n![Positive test rate diagram for bare minimum testing](/images_cms/test-positivity-calculate-medium.jpg)\n\nIn the second scenario, 2 out of 20 people test positive for COVID, so the positive test rate is 10%. The remaining 80% of the population remain untested.\n\n![Positive test rate diagram for sufficient testing](/images_cms/test-positivity-calculate-low.jpg)\n\nIn the last scenario, 2 out of 100 people test positive for COVID, so the test positivity is 2%. The entire population is tested."
+          "question": "Sources and methodology",
+          "questionId": "positive-test-rate-sources-methodology",
+          "answer": "Positive test rate is calculated by dividing the number of positive PCR tests over the last 7 days by the total number of PCR tests over the last 7 days. It is important to note that the positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess). It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nIn most cases, we source state level testing data from the Department of Health and Human Services (HHS). For county and metro level testing data, we rely on the Centers for Disease Control and Prevention (CDC). Check out your location’s page for more details."
         },
         {
-          "question": "Can I watch a video explainer? ",
-          "questionId": "positive-test-rate-video-explainer",
-          "answer": "https://www.youtube.com/embed/RpqI-ZVGGoY"
+          "question": "Levels",
+          "questionId": "positive-test-rate-levels",
+          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority, which is why we have set 3 percent as the threshold for the lowest level.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
         },
         {
-          "question": "What are your sources and methodology for calculating positive test rate?",
-          "questionId": "positive-test-rate-sources",
-          "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of [total tests](/glossary#testing). We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source state level testing data from the Department of Health and Human Services (HHS). For county and metro level testing data, we rely on the Centers for Disease Control and Prevention (CDC). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+          "question": "Limitations",
+          "questionId": "positive-test-rate-limitations",
+          "answer": "States report testing data in ways that can make comparisons difficult.\n\n1. Some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing, also referred to as [antigen](https://covidactnow.org/glossary#antigen-test) testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters.\n\nFederal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. [Learn more about the current state of federal testing data and its limitations](https://covidtracking.com/analysis-updates/federal-testing-datas-last-mile/)."
         },
         {
-          "question": "How were risk levels for positive test rate determined?",
-          "questionId": "positive-test-rate-thresholds",
-          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
+          "question": "More information positive test rate",
+          "questionId": "more-info-positive-test-rate\n",
+          "answer": "What does positive test rate tell us?\n\n### [Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
+        },
+        {
+          "question": "More information on COVID testing",
+          "questionId": "more-info-testing",
+          "answer": "Why is testing important? \n\nWhen tests are conducted, where do the results get counted?\n\nHow soon after a possible exposure to COVID should I get tested?\n\nAre rapid tests less accurate than PCR tests?\n\n[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
         }
       ]
     },
