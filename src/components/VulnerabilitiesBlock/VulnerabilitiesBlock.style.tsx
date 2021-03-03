@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 import { HeaderWrapperStyles } from 'components/LocationPage/ChartsHolder.style';
@@ -76,10 +77,7 @@ export const RegionDescription = styled.span`
   }
 `;
 
-export const StyledLink = styled.a.attrs(props => ({
-  rel: 'noopener noreferrer',
-  target: '_blank',
-}))`
+export const StyledLink = styled(Link)`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
   display: block;

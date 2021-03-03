@@ -70,7 +70,7 @@ const VulnerabilitiesBlock: React.FC<{
           <ThemesBlock scores={scores} />
         </SecondColumn>
       </BorderedContainer>
-      <StyledLink href="https://precisionforcovid.org/ccvi">
+      <StyledLink to="/covid-risk-levels-metrics#vulnerability">
         How the vulnerability score is calculated
       </StyledLink>
       <FooterLinks region={region} />
