@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ExternalLink from 'components/ExternalLink';
 import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
@@ -32,15 +31,15 @@ const Announcements: React.FC = () => {
         </ul>
         This is due to a number of factors such as a community member's income,
         age, and underlying health, as well as their access to transportation
-        and health care.
+        and health care.{' '}
 
-        <HashLink
+        {/* <HashLink
           to="#compare"
           scroll={(element) => scrollWithOffset(element, -80)}
         >
           See the most vulnerable counties
         </HashLink>
-        .
+        . */}
         
         <ExternalLink href="https://covidactnow.org/covid-explained/covid-vulnerability-data">
           Learn more
