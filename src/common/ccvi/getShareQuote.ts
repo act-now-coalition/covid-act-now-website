@@ -12,7 +12,7 @@ export function getShareQuote(
   const level = getCcviLevel(overallScore);
   const scoreAsPercent = formatPercent(overallScore);
 
-  const baseText = `Communities across the U.S. are not all equally vulnerable to the effects of the pandemic. According to @CovidActNow, ${region.name}`;
+  const baseText = `Communities across the U.S. are not all equally vulnerable to the effects of the pandemic. According to @CovidActNow, ${region.shortName}`;
 
   const levelToShareQuote = {
     [CcviLevel.VERY_HIGH]: getVeryHighShareQuote(region, scoreAsPercent),
