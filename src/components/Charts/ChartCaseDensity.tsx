@@ -10,7 +10,7 @@ import { Group } from '@vx/group';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
 import { LevelInfoMap, Level } from 'common/level';
 import { formatUtcDate, formatDecimal } from 'common/utils';
-import { AxisRight } from './Axis';
+import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -167,7 +167,7 @@ const ChartCaseDensity: FunctionComponent<{
           name={region.name}
           isActive={activeZone.name === region.name}
           x={23}
-          y={yScale(0.5 * (region.valueFrom + region.valueFrom)) - 7}
+          y={yScale(0.5 * (region.valueFrom + region.valueFrom)) - 6}
         />
       ))}
 
@@ -177,8 +177,8 @@ const ChartCaseDensity: FunctionComponent<{
         tickValues={dateTicks}
         showYear
       />
-      <Group top={-6} left={-10}>
-        <AxisRight scale={yScale} tickValues={yTicks.slice(1)} />
+      <Group top={-6} left={28}>
+        <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
       </Group>
     </ChartContainer>
   );
