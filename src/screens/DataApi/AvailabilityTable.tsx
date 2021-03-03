@@ -68,6 +68,8 @@ const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
   if (status.regionsAvailable >= status.totalRegions * 0.95) {
     return <CheckIcon />;
   }
+
+  const totalAvailability = `${status.regionsAvailable} / ${status.totalRegions} regions - ${status.statesAvailable} / ${status.totalStates} states`;
   if (status.regionsAvailable === 0) {
     return (
       <TextWithTooltip text="No data" tooltipContent="No data available." />
@@ -78,7 +80,7 @@ const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
     return (
       <TextWithTooltip
         text={`~${formatPercent(availableRatio, 0)}`}
-        tooltipContent="No data available."
+        tooltipContent={totalAvailability}
       />
     );
   }
@@ -86,7 +88,7 @@ const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
     return (
       <TextWithTooltip
         text={`${status.statesAvailable} States`}
-        tooltipContent="StatesAvailable"
+        tooltipContent={totalAvailability}
       />
     );
   }
