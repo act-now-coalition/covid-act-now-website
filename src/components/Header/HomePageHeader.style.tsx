@@ -29,7 +29,10 @@ export const Header = styled.h1`
   }
 `;
 
-export const Subcopy = styled.span`
+export const Subcopy = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0.875rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 
