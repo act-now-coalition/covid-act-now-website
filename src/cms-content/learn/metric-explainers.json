@@ -38,7 +38,7 @@
           "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
         },
         {
-          "question": "More information on our daily new cases metric",
+          "question": "More information on daily new cases",
           "questionId": "more-info-daily-new-cases",
           "answer": "How can daily new cases be looked at alongside infection rate?\n\nWhat is R-naught (R0) and how is it different from R(t)?\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
