@@ -129,7 +129,7 @@ const AvailabilityTable = ({ rows }: TableProps) => {
             <TableCell>Name</TableCell>
             <TableCell align="center">States</TableCell>
             <TableCell align="center">Counties</TableCell>
-            <TableCell align="center">Metro areas</TableCell>
+            <TableCell align="center">Metros</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
