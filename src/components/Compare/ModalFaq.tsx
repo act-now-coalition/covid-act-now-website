@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Wrapper,
   Question,
@@ -24,15 +25,34 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
           <Subheader>Frequently asked questions</Subheader>
           <Question>How do you define “vulnerability”?</Question>
           <Answer>
-            “Vulnerability” in this context refers to a location’s risk of
-            suffering more severely from COVID, including increased cases and
-            deaths, and recovering more slowly from the physical and economic
-            harm caused by COVID.
+            Vulnerable areas are more likely to experience severe physical and
+            economic suffering from COVID, and to face a harder, longer
+            recovery.
             <br />
             <br />
-            To calculate vulnerability, we use Surgo Venture’s COVID Community
-            Vulnerability Index (CCVI), which uses key social, health, and
-            economic factors to score every U.S. state and county.
+            As of January 2021, people in the most vulnerable third of U.S.
+            counties are:
+            <ul>
+              <li>23 percent more likely to be diagnosed with COVID</li>
+              <li>32 percent more likely to have died from COVID</li>
+              <li>
+                35 percent more likely to be unemployed due to COVID (
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19"
+                >
+                  see source
+                </a>
+                ).
+              </li>
+            </ul>
+            To calculate vulnerability, we use Surgo Ventures’ COVID-19
+            Community Vulnerability Index (CCVI).{' '}
+            <Link to="/covid-explained/covid-vulnerability-data">
+              Learn more
+            </Link>
+            .
           </Answer>
           <Question>How are “metro” and “non-metro” counties defined?</Question>
           <Answer>
