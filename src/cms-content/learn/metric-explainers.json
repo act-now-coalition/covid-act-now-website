@@ -23,29 +23,24 @@
       "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measure per 100K people).",
       "questions": [
         {
-          "question": "Why do you not call it incidence?",
-          "questionId": "why-not-incidence",
-          "answer": "The term “daily new cases” tells you exactly what is happening: There were 100 daily new cases per 100K. Incidence, which is more commonly expressed as a rate, can be confusing."
+          "question": "Sources and methodology",
+          "questionId": "daily-new-cases-sources-methodology",
+          "answer": "Our daily new cases number is a seven-day average, and divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the daily new cases by two.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png)\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
-          "question": "How can daily new cases be looked at alongside infection rate?",
-          "questionId": "daily-new-cases-alongside-infection-rate",
-          "answer": "The infection rate answers the question: “on average, how many new people will one person infect while contagious?” Daily new cases answers the question: “how many new COVID infections are in my area today?” The two metrics go hand-in-hand.\n\n**A community heading towards an outbreak has a high infection rate, but a low number of daily new cases.** The number of daily new cases per 100K will grow in the coming days because of the high infection rate.\n\nIn contrast, **a community recovering from a major outbreak has a high number of daily new cases. However, with fewer people testing positive than in the weeks prior, the infection rate is declining.** Because its infection rate is less than 1, the community’s incidence should continue to drop."
+          "question": "Levels",
+          "answer": "Levels for daily new cases are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
+          "questionId": "daily-new-cases-levels"
         },
         {
-          "question": "Can I see a video explainer? ",
-          "questionId": "daily-new-cases-video-explainer",
-          "answer": "https://www.youtube.com/embed/_S0k1I3kIbM"
+          "question": "Limitations",
+          "questionId": "daily-new-cases-limitations",
+          "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
         },
         {
-          "question": "What are your sources and methodology for daily new cases?",
-          "questionId": "daily-new-cases-sources",
-          "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png)\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
-        },
-        {
-          "question": "How were the risk levels for daily new cases determined?",
-          "answer": "Our risk levels are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. When estimating the number of people who will become infected in the course of a year, we rely on the [CDC’s estimate](https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported) that many more people are infected than are likely to get tested. Therefore, we use a conservative estimate that only one in five people infected will subsequently get tested. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
-          "questionId": "daily-new-cases-thresholds"
+          "question": "More information on our daily new cases metric",
+          "questionId": "more-info-daily-new-cases",
+          "answer": "How can daily new cases be looked at alongside infection rate?\n\nWhat is R-naught (R0) and how is it different from R(t)?\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
       ]
     },
