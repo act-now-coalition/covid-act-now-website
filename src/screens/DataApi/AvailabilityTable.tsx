@@ -66,7 +66,7 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
 const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
   const availableRatio = status.regionsAvailable / status.totalRegions;
   if (status.regionsAvailable >= status.totalRegions * 0.95) {
-    return <CheckIcon />;
+    return <CheckIcon color="secondary" />;
   }
 
   const totalAvailability = `${status.regionsAvailable} / ${status.totalRegions} regions - ${status.statesAvailable} / ${status.totalStates} states`;
