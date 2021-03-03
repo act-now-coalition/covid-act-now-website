@@ -1,7 +1,7 @@
 import React from 'react';
 import { Region, MetroArea, County } from 'common/regions';
+import { Annotations, Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import ExternalLink from 'components/ExternalLink';
-
 import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 
@@ -42,7 +42,7 @@ const metricToSourceMap: RegionSourceMap = {
   },
   [Metric.CASE_GROWTH_RATE]: {
     state: {
-      sourceName: 'The New York Times',
+      sourceName: 'The New York Times!',
       url: 'https://github.com/nytimes/covid-19-data',
     },
     metro: {
@@ -126,13 +126,57 @@ function getDisclaimerMetricName(metric: Metric): string {
   }
 }
 
-export const getDataSourceTooltipContent = (metric: Metric, region: Region) => {
-  const source = getSourceLinks(metric, region);
+export const getDataSourceTooltipContent = (
+  metric: Metric,
+  region: Region,
+  provenanceInfo?: Sources,
+) => {
+  const sourceFromMap = getSourceLinks(metric, region);
+
+  const source =
+    provenanceInfo && provenanceInfo[0].url && provenanceInfo[0].name
+      ? {
+          url: provenanceInfo[0].url,
+          name: provenanceInfo[0].name,
+        }
+      : {
+          url: sourceFromMap.url,
+          name: sourceFromMap.sourceName,
+        };
 
   return (
     <>
       Our data for {getDisclaimerMetricName(metric)} in {region.name} comes from{' '}
-      <ExternalLink href={source.url}>{source.sourceName}</ExternalLink>.
+      <ExternalLink href={source.url}>{source.name}</ExternalLink>.
     </>
   );
 };
+
+export function getSourcesForMetric(annotations: any, metric: Metric) {
+  switch (metric) {
+    case Metric.CASE_DENSITY:
+      return annotations.caseDensity.sources;
+    case Metric.CASE_GROWTH_RATE:
+      return annotations.infectionRate.sources;
+    case Metric.POSITIVE_TESTS:
+      return annotations.testPositiveRate.sources;
+    case Metric.HOSPITAL_USAGE:
+      return annotations.icuCapacityRatio.sources;
+    case Metric.VACCINATIONS:
+      return annotations.caseDensity.sources;
+  }
+}
+
+export type MetricToProvenance = { [metric in Metric]: Sources | undefined };
+
+export function makeMetricToProvenanceMap(
+  annotations: Annotations,
+): MetricToProvenance {
+  return {
+    [Metric.CASE_DENSITY]: annotations.caseDensity?.sources,
+    [Metric.CASE_GROWTH_RATE]: annotations.infectionRate?.sources,
+    [Metric.POSITIVE_TESTS]: annotations.testPositivityRatio?.sources,
+    [Metric.HOSPITAL_USAGE]: annotations.icuCapacityRatio?.sources,
+    [Metric.VACCINATIONS]: annotations.caseDensity?.sources,
+  };
+}

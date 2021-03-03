@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
@@ -96,7 +97,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(region: Region): React.ReactElement {
+function renderDisclaimer(
+  region: Region,
+  provenanceForMetric?: Sources,
+): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
 
   return (
@@ -105,7 +109,11 @@ function renderDisclaimer(region: Region): React.ReactElement {
       {region instanceof State && (
         <>
           <DisclaimerTooltip
-            title={getDataSourceTooltipContent(Metric.VACCINATIONS, region)}
+            title={getDataSourceTooltipContent(
+              Metric.VACCINATIONS,
+              region,
+              provenanceForMetric,
+            )}
             mainCopy={'where our data comes from'}
             trackOpenTooltip={() =>
               trackOpenTooltip(`Learn more: ${Metric.VACCINATIONS}`)

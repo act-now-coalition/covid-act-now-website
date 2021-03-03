@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import moment from 'moment';
-
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -9,6 +8,7 @@ import {
   Metricstimeseries,
   Metrics,
   Actuals,
+  Annotations,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
@@ -152,6 +152,20 @@ export interface VaccinationsInfo {
   ratioDosesAdministered: number | null;
 }
 
+export interface ProvenanceInfo {
+  ratioCompletedSeries: Array<number | null>;
+  ratioInitiatedSeries: Array<number | null>;
+
+  peopleInitiated: number;
+  ratioInitiated: number;
+
+  peopleVaccinated: number;
+  ratioVaccinated: number;
+
+  dosesDistributed: number | null;
+  ratioDosesAdministered: number | null;
+}
+
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
@@ -207,6 +221,7 @@ export class Projection {
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
   private readonly metrics: Metrics | null;
+  readonly annotations: Annotations;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -295,6 +310,8 @@ export class Projection {
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
+
+    this.annotations = summaryWithTimeseries.annotations;
   }
 
   // TODO(michael): We should really pre-compute currentDailyAverageCases and
