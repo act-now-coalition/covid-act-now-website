@@ -51,19 +51,24 @@
       "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
       "questions": [
         {
-          "question": "Why is infection rate important?",
-          "questionId": "why-is-infection-rate-important",
-          "answer": "Infection rate, also known as R(t) or “R-effective,” is important because it estimates how fast COVID is spreading *right now*.\n\nTo give an example, if the R(t) is 3, it indicates that one infected person will most likely infect three other people, and those three people will each go on to infect three more people. We as a community can change it by modifying community behavior (whether there are large gatherings) and intervention practices (whether people wear masks and maintain [social distancing](/glossary#social-distancing)).\n\n![Infection rate diagram](/images_cms/infection-rate-diagram.png)"
+          "question": "Sources and methodology",
+          "questionId": "infection-rate-sources-methodology",
+          "answer": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\nTo calculate the infection rate, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
-          "question": "Can I watch a video explainer?",
-          "questionId": "infection-rate-video-explainer",
-          "answer": "https://www.youtube.com/embed/dmp5iAXrkaY"
+          "question": "Levels",
+          "questionId": "infection-rate-levels",
+          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. \n\nWe use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline. An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
         },
         {
-          "question": "How were risk levels for infection rate determined?",
-          "questionId": "infection-rate-risk-levels",
-          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. **We use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline.** An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
+          "question": "Limitations",
+          "questionId": "infection-rate-limitations",
+          "answer": "Because you can’t measure infection rate directly, our estimates hinge upon our epidemiological assumptions and the accuracy of our data sources. \n\n1. Infection rate can only track COVID growth once a positive case gets reported through the system. By then, infectious individuals have likely been COVID positive for some time, so the metric will always lag the true risk on the ground. For example, if someone was exposed over the holidays, they likely didn’t test positive until the new year.\n2. Infection rate should be considered in context with the other metrics. Daily new cases refers to the number of new COVID infections, while the infection rate represents the trend. A place with high daily new cases may have an infection rate less than 1 and still have higher exposure than a place with relatively few, but growing, cases."
+        },
+        {
+          "question": "More information on infection rate",
+          "questionId": "more-info-infection-rate",
+          "answer": "Why is infection rate important?\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
       ]
     },
