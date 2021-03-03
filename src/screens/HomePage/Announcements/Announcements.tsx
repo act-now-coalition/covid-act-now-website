@@ -1,5 +1,5 @@
 import React from 'react';
-import ExternalLink from 'components/ExternalLink';
+import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
 import {
@@ -31,24 +31,28 @@ const Announcements: React.FC = () => {
         </ul>
         This is due to a number of factors such as a community member's income,
         age, and underlying health, as well as their access to transportation
-        and health care.{' '}
-
-        {/* <HashLink
+        and health care (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19"
+        >
+          see source
+        </a>
+        ).
+        <br />
+        <br />
+        <HashLink
           to="#compare"
-          scroll={(element) => scrollWithOffset(element, -80)}
+          scroll={element => scrollWithOffset(element, -80)}
         >
           See the most vulnerable counties
         </HashLink>
-        . */}
-        
-        <ExternalLink href="https://covidactnow.org/covid-explained/covid-vulnerability-data">
-          Learn more
-        </ExternalLink>{' '}
-        .
+        <br />
+        <Link to="covid-explained/covid-vulnerability-data">Learn more</Link>
       </AnnouncementBodyCopy>
     </Wrapper>
   );
 };
-
 
 export default Announcements;
