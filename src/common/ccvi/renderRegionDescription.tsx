@@ -3,8 +3,8 @@ import { CcviLevel, getCcviLevel } from './index';
 import { formatPercent } from 'common/utils';
 import { Region, State, County } from 'common/regions';
 
-const mostVulnerableFips = ['48', '12105', '37107'];
-const leastVulnerableFips = ['50', '30063', '30033'];
+const mostVulnerableFips = ['48', '29460', '37107'];
+const leastVulnerableFips = ['50', '33540', '30033'];
 
 export function renderRegionDescription(
   overallScore: number,
@@ -121,14 +121,14 @@ function renderCountyOrMetroDescription(
   if (isMostVulnerable) {
     return (
       <>
-        has the <strong>highest vulnerability</strong> of all US {regionType}.
+        has the <strong>highest vulnerability</strong> of all U.S. {regionType}.
       </>
     );
   } else if (isLeastVulnerable) {
     return (
       <>
         is the <strong>least vulnerable</strong>{' '}
-        {regionType === 'counties' ? 'county' : 'metro'} in the US .
+        {regionType === 'counties' ? 'county' : 'metro'} in the U.S.
       </>
     );
   } else if (level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH) {
@@ -141,19 +141,19 @@ function renderCountyOrMetroDescription(
   } else if (level === CcviLevel.MEDIUM) {
     return (
       <>
-        has <strong>average vulnerability</strong> among US {regionType}.
+        has <strong>average vulnerability</strong> among U.S. {regionType}.
       </>
     );
   } else if (level === CcviLevel.LOW) {
     return (
       <>
-        has <strong>lower vulnerability</strong> than most US {regionType}.
+        has <strong>lower vulnerability</strong> than most U.S. {regionType}.
       </>
     );
   } else {
     return (
       <>
-        is one of the <strong>least vulnerable</strong> US {regionType}.
+        is one of the <strong>least vulnerable</strong> U.S. {regionType}.
       </>
     );
   }
