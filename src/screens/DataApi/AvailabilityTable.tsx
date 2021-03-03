@@ -17,6 +17,28 @@ import { formatPercent } from 'common/utils';
 
 export const AVAILABILITY_SNAPSHOT = availabilitySnapshot as MetricAvailability[];
 
+export const NAMES_BY_FIELD: { [key: string]: string } = {
+  'actuals.cases': 'Cases',
+  'metrics.caseDensity': 'Daily new cases',
+  'metrics.infectionRate': 'Infection Rate',
+  'riskLevels.overall': 'Risk level',
+  'metrics.vaccinationsInitiatedRatio': '% Vaccinated',
+  'metrics.testPositivityRatio': 'Test positivity',
+  'actuals.positiveTests': 'Testing volume',
+  'metrics.icuCapacityRatio': 'ICU Utilization',
+  'actuals.deaths': 'Deaths',
+};
+
+export const FIELDS_PRETTY_NAMES = AVAILABILITY_SNAPSHOT.map(record => {
+  if (NAMES_BY_FIELD[record.name]) {
+    return {
+      ...record,
+      ...{ name: NAMES_BY_FIELD[record.name] },
+    };
+  }
+  return null;
+}).filter((record): record is MetricAvailability => record !== null);
+
 interface TableProps {
   rows: MetricAvailability[];
 }
