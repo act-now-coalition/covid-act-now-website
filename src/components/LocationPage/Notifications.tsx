@@ -6,7 +6,7 @@ import {
   ColumnTitle,
   SectionColumn,
   WarningIcon,
-  //VulnerabilityIcon,
+  PurpleInfoIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
 import InfoIcon from '@material-ui/icons/Info';
@@ -21,6 +21,8 @@ import {
   getFormattedStateCode,
 } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+import { useCcviForFips } from 'common/hooks';
+import { getCcviLevel } from 'common/ccvi';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '01', // Alabama,
@@ -51,32 +53,18 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   const region = projections.region;
 
   enum Notification {
-    NYCCounty,
     HospitalizationsPeak,
-    ThirdWave,
     ExposureNotifications,
-    TXFeb2021Winter,
     Vulnerability,
     None,
   }
   let notification: Notification;
 
+  // NOTE: For now showVulnerability() always returns true and will be the notification shown.
   if (showVulnerability(region)) {
-    //Warning: Always returns true right now.
     notification = Notification.Vulnerability;
   } else if (showExposureNotifications(region)) {
     notification = Notification.ExposureNotifications;
-  } else if (
-    // TODO(2021/2/20): TX Winter Reporting
-    // https://trello.com/c/TdspuIeM/952-texas-reporting-dip-winter-weather-feb-2020
-    getFormattedStateCode(region)?.includes('TX')
-  ) {
-    notification = Notification.TXFeb2021Winter;
-  } else if (
-    // TODO(2020/12/22): Remove NYC notice after it's been up for a week or so.
-    ['36047', '36061', '36005', '36081', '36085'].includes(region.fipsCode)
-  ) {
-    notification = Notification.NYCCounty;
   } else if (isHospitalizationsPeak(projections.primary)) {
     notification = Notification.HospitalizationsPeak;
   } else {
@@ -84,13 +72,9 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   }
 
   let icon, title;
-  if (notification === Notification.NYCCounty) {
-    icon = <InfoIcon />;
+  if (notification === Notification.Vulnerability) {
+    icon = <PurpleInfoIcon />;
     title = 'update';
-  } else if (notification === Notification.Vulnerability) {
-    // icon = <VulnerabilityIcon />;
-    icon = <WarningIcon />; // Switch to VulnerabilityIcon when available
-    title = 'alert';
   } else {
     icon = <WarningIcon />;
     title = 'alert';
@@ -117,18 +101,10 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
           />
         )}
 
-        {notification === Notification.NYCCounty && (
-          <NYCAggregationChangeCopy locationName={region.name} />
-        )}
-
-        {notification === Notification.TXFeb2021Winter && (
-          <TXFeb2021WinterCopy />
-        )}
-
         {notification === Notification.Vulnerability && (
           <VulnerabilityCopy
             locationName={region.name}
-            levelLabel="high" // replace with "high" or "very high" depending on region
+            fips={projections.fips}
           />
         )}
       </SectionColumn>
@@ -136,34 +112,16 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   );
 };
 
-const TXFeb2021WinterCopy: React.FC<{}> = () => {
-  return (
-    <Copy>
-      In February 2021, Texas experienced extreme winter weather that impacted
-      many aspects of daily life, including COVID testing and vaccination. We
-      expect it to take many weeks for testing to recover. In the meantime, our
-      Daily New Cases and Infection Rate metrics should be treated with caution.
-    </Copy>
-  );
-};
-
-const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
-  locationName,
-}) => {
-  return (
-    <Copy>
-      Prior to December 15th, {locationName} was aggregated together with the
-      other New York City boroughs. It now has its own metrics and risk level.
-    </Copy>
-  );
-};
-
 const VulnerabilityCopy: React.FC<{
   locationName: string;
-  levelLabel: string;
-}> = ({ locationName, levelLabel }) => {
+  fips: string;
+}> = ({ locationName, fips }) => {
+  const scores = useCcviForFips(fips);
+  const level = getCcviLevel(scores?.overall ?? 0);
   return (
     <Copy>
+      <p>We now surface vulnerability levels for locations.</p>
+      <p>See vulnerability details for {locationName}.</p>
       {locationName} has {levelLabel} vulnerability, making it more likely to
       experience severe physical and economic suffering from COVID, and to face
       a harder, longer recovery.{' '}
