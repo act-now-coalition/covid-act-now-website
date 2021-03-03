@@ -40,7 +40,7 @@
         {
           "question": "More information on daily new cases",
           "questionId": "more-info-daily-new-cases",
-          "answer": "What is R-naught (R0) and how is it different from R(t)?\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
+          "answer": "[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
       ]
     },
@@ -68,7 +68,7 @@
         {
           "question": "More information on infection rate",
           "questionId": "more-info-infection-rate",
-          "answer": "Why is infection rate important?\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
+          "answer": "[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
       ]
     },
@@ -96,12 +96,12 @@
         {
           "question": "More information positive test rate",
           "questionId": "more-info-positive-test-rate\n",
-          "answer": "What does positive test rate tell us?\n\n### [Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
+          "answer": "### [Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
         },
         {
           "question": "More information on COVID testing",
           "questionId": "more-info-testing",
-          "answer": "Why is testing important? \n\nWhen tests are conducted, where do the results get counted?\n\nHow soon after a possible exposure to COVID should I get tested?\n\nAre rapid tests less accurate than PCR tests?\n\n[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
+          "answer": "[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
         }
       ]
     },
@@ -125,11 +125,6 @@
           "question": "Limitations",
           "questionId": "icu-capacity-used-limitations",
           "answer": "This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nThe biggest source of uncertainty in this metric is the ability for a hospital to quickly expand beyond its normal capacity to meet increased demand. This “[surge” capacity](https://covidactnow.org/glossary#surge-capacity) is difficult to predict in advance because it depends on both physical hospital resources like available beds and non-physical resources like healthy nurses and doctors to run them.\n\nHHS tries to control for this by requiring that hospitals report staffed ICU beds on a daily basis, but this doesn’t give a complete picture about theoretical surge capacity."
-        },
-        {
-          "question": "More information on ICU capacity used",
-          "questionId": "more-info-icu-capacity-used",
-          "answer": "Why is ICU capacity used important?"
         }
       ]
     },
@@ -147,11 +142,6 @@
           "question": "Limitations",
           "questionId": "limitations-percent-vaccination",
           "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated. \n2. **Number of shots**: For the Pfizer and Moderna vaccines, we require two shots to consider someone as having completed vaccination. This stays close to the available science and the advice of experts, including many of our advisors. The J&J vaccine is designed to only require one shot to count as completed.\n3. **Permanence of immunity**: Until we know more, we assume that someone who has completed vaccination stays immune for the foreseeable future, and we do not try to estimate waning immunity. \n4. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n5. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public."
-        },
-        {
-          "question": "More information on % vaccinated",
-          "questionId": "more-info-percent-vaccinated",
-          "answer": "Why is % vaccinated important?"
         },
         {
           "question": "More information on COVID vaccines",
@@ -183,7 +173,7 @@
         {
           "question": "More information on vulnerability",
           "questionId": "more-info-vulnerability",
-          "answer": "Why vulnerability data is important for all communities \n\nResources for vulnerable people"
+          "answer": "[Why vulnerability data is important for all communities ](https://covidactnow.org/covid-explained//covid-vulnerability-data)\n\n[Resources for vulnerable people](https://covidactnow.org/covid-explained//federal-resources-covid-relief)"
         }
       ]
     }
