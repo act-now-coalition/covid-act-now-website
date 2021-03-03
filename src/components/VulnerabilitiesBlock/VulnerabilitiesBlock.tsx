@@ -61,7 +61,9 @@ const VulnerabilitiesBlock: React.FC<{
       <BorderedContainer>
         <FirstColumn>
           <TextSmall>OVERALL</TextSmall>
-          <LevelName>{levelName}</LevelName>
+          <LevelName aria-label={levelName.toLowerCase()}>
+            {levelName}
+          </LevelName>
           <CcviThermometer
             overallScore={scores.overall}
             regionName={region.shortName}
