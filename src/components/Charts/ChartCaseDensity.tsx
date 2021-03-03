@@ -58,7 +58,7 @@ const ChartCaseDensity: FunctionComponent<{
   width,
   height,
   marginTop = 15,
-  marginBottom = 40,
+  marginBottom = 28,
   marginLeft = 10,
   marginRight = 5,
 }) => {
@@ -187,7 +187,7 @@ const ChartCaseDensity: FunctionComponent<{
 const ChartCaseDensityAutosize: FunctionComponent<{
   columnData: Column[];
   height?: number;
-}> = ({ columnData, height = 400 }) => (
+}> = ({ columnData, height = 270 }) => (
   <Style.ChartContainer>
     <ParentSize>
       {({ width }) => (

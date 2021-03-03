@@ -48,6 +48,7 @@ export const AxisBottom: React.FC<AxisBottomProps> = ({
         scale={scale}
         tickValues={finalTickValues}
         tickFormat={(d: Date) => getXTickFormat(d, isMobile, showYear)}
+        tickLength={4}
       />
     </Style.Axis>
   );

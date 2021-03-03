@@ -5,7 +5,7 @@ export const charts = {
   fontWeight: 'bold',
   fontSize: '13px',
   series: {
-    lineWidth: '4px',
+    lineWidth: '3px',
   },
 };
 
@@ -34,7 +34,7 @@ export const Axis = styled.g<{ exploreStroke?: string }>`
   text {
     font-family: ${charts.fontFamily};
     font-weight: 'medium';
-    font-size: 11px;
+    font-size: 10px;
     fill: ${props => palette(props).axis};
     text-transform: uppercase;
   }
