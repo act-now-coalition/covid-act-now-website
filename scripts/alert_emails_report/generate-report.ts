@@ -7,12 +7,8 @@ import {
 } from '../alert_emails/firestore';
 import { getFirestore } from '../common/firebase';
 import GoogleSheets, { Cell } from '../common/google-sheets';
-import {
-  findCountyByFips,
-  isStateFips,
-  findStateByFips,
-} from '../../src/common/locations';
-import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
+import regions, { County, State } from '../../src/common/regions';
+// import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
 function getSpreadsheetId(): string {
   if (process.env.SPREADSHEET_ID) {
@@ -70,9 +66,11 @@ async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
     return { fips, count: items.length };
   });
 
-  const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) =>
-    isStateFips(fips),
-  );
+  const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) => {
+    const region = regions.findByFipsCodeStrict(fips);
+    return region instanceof State;
+  });
+
   const countyStats = formatCountyStats(countyCounts);
   const stateStats = formatStateStats(stateCounts);
 
@@ -115,19 +113,19 @@ async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const state = findStateByFips(fips);
-    return [state?.state_code, state?.state, state?.population, count];
+    const state = regions.findByFipsCode(fips);
+    return [state?.stateCode, state?.fullName, state?.population, count];
   });
   return _.sortBy(data, item => item[0]);
 }
 
 function formatCountyStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const county = findCountyByFips(fips);
+    const county: County = regions.findByFipsCodeStrict(fips);
     // The ' prefix forces the value to be interpreted as text by Google Sheets
     const fipsCode = `'${fips}`;
-    const countyName: string = county?.county || 'Unknown county';
-    const stateCode: string = county?.state_code || '-';
+    const countyName: string = county?.fullName || 'Unknown county';
+    const stateCode: string = county?.state.stateCode || '-';
     return [fipsCode, countyName, stateCode, county?.population, count];
   });
   return _.sortBy(data, item => item[0]);
