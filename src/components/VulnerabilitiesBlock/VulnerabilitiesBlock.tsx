@@ -71,7 +71,7 @@ const VulnerabilitiesBlock: React.FC<{
         </SecondColumn>
       </BorderedContainer>
       <StyledLink to="/covid-risk-levels-metrics#vulnerability">
-        How the vulnerability score is calculated
+        How vulnerability is calculated
       </StyledLink>
       <FooterLinks region={region} />
     </>
