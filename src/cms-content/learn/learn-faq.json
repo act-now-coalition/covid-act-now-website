@@ -149,23 +149,23 @@
         },
         {
           "question": "Why is testing important?",
-          "answer": "Diagnostic testing allows health officials to identify and isolate infected individuals and begin [contact tracing](/glossary#contact-tracing) to [quarantine](/glossary#quarantine) people who were exposed. It also allows public health officials to collect the data and information necessary to know when it is safe to resume ordinary activities or when [non-pharmaceutical interventions](/glossary#npi) like [masks](/glossary#face-mask) are critical. Leaders of the [American Heart Association](https://healthmetrics.heart.org/covid-19-science-why-testing-is-so-important/), the [American Medical Association](https://www.ama-assn.org/delivering-care/public-health/why-cdc-was-right-revise-coronavirus-testing-guidelines) and the [National Institute on Aging](https://www.nia.nih.gov/news/why-covid-19-testing-key-getting-back-normal), among other organizations, have all urged for an expansion of testing.",
+          "answer": "Diagnostic testing allows health officials to identify and isolate infected individuals and begin [contact tracing](https://covidactnow.org/glossary#contact-tracing) to [quarantine](https://covidactnow.org/glossary#quarantine) people who were exposed. It also allows public health officials to collect the data and information necessary to know when it is safe to resume ordinary activities or when [non-pharmaceutical interventions](https://covidactnow.org/glossary#npi) like [masks](https://covidactnow.org/glossary#face-mask) are critical. Leaders of the [American Heart Association](https://healthmetrics.heart.org/covid-19-science-why-testing-is-so-important/), the [American Medical Association](https://www.ama-assn.org/delivering-care/public-health/why-cdc-was-right-revise-coronavirus-testing-guidelines) and the [National Institute on Aging](https://www.nia.nih.gov/news/why-covid-19-testing-key-getting-back-normal), among other organizations, have all urged for an expansion of testing.",
           "questionId": "why-is-testing-important"
-        },
-        {
-          "question": "Why is a low positive test rate a good sign?",
-          "questionId": "why-low-positive-test-rate-good",
-          "answer": "Many people infected with COVID are [pre-symptomatic](https://covidactnow.org/glossary#presymptomatic-spread) or [asymptomatic](https://covidactnow.org/glossary#asymptomatic), making it difficult to know how widespread the disease is in a community. If there is ample testing being done, including of individuals who have no reason to believe that they have the [virus](https://covidactnow.org/glossary#virus), then many negative test results will be received, leading to a low [test positivity rate](https://covidactnow.org/glossary#test-positivity). This is an indication that adequate testing is being done in an area and that there are not a lot of undetected cases in the community."
-        },
-        {
-          "question": "When tests are conducted, where do the results get counted?",
-          "answer": "State reporting practices differ. In most states, the test results are reported where individuals are tested, not where they live. Florida, however, distinguishes between residents and non-residents in the statistics it publishes.",
-          "questionId": "covid-test-results-counted"
         },
         {
           "question": "What does positive test rate tell us? ",
           "questionId": "what-does-positive-test-rate-tell-us",
           "answer": "Positive test rate, also known as test positivity, is a good indicator of how widespread testing is in a given area. If a state or county has a *high* positive test rate, it is a sign of insufficient testing in that area. If a state or county has a *low* positive test rate, it is a sign that we are testing more than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios, but the positive test rate differs drastically due to the percentage of the population that is being tested.** The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![key for images](/images_cms/test-positivity-calculate-key.jpg \"key for images\")\n\n![scenario of insufficient testing with positive test rate of 20 percent, where only 10 percent of the population is tested. ](/images_cms/test-positivity-calculate-high.jpg \"Insufficient testing scenario\")\n\nIn the first scenario, 2 out of 10 people test positive for COVID, so the positive test rate is 20%. The remaining 90% of the population remain untested.\n\n![scenario of bare minimum testing with positive test rate of 10 percent, where only 20 percent of the population is tested. ](/images_cms/test-positivity-calculate-medium.jpg \"Scenario of bare minimum testing\")\n\nIn the second scenario, 2 out of 20 people test positive for COVID, so the positive test rate is 10%. The remaining 80% of the population remain untested.\n\n![scenario of sufficient testing with positive test rate of 2 percent, where 100 percent of the population is tested. ](/images_cms/test-positivity-calculate-low.jpg \"Scenario with sufficient testing\")\n\nIn the last scenario, 2 out of 100 people test positive for COVID, so the test positivity is 2%. The entire population is tested."
+        },
+        {
+          "question": "Why is ICU capacity used important? ",
+          "answer": "The ICU is the part of a hospital for people who are the sickest. Each ICU bed is staffed by specially-trained personnel and supported with special equipment, such as ventilators. They are needed to treat not only COVID patients, but also other patients, such as people who have had a heart attack or suffered a life-threatening injury.",
+          "questionId": "why-icu-capacity-used-important"
+        },
+        {
+          "question": "Why is % vaccinated important?",
+          "questionId": "why-percent-vaccinated-important",
+          "answer": "The progress of the vaccine roll-out is a key metric for understanding when a return to normal might be possible. We don’t yet know what level of vaccination will be sufficient, so at this stage in the process (March 2021) we are focusing on distribution as the key metric. We will continue to work with our academic and government partners to evaluate the scientific evidence and will update our metric when appropriate."
         }
       ]
     },
