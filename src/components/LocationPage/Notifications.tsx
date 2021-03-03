@@ -6,6 +6,7 @@ import {
   ColumnTitle,
   SectionColumn,
   WarningIcon,
+  //VulnerabilityIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
 import InfoIcon from '@material-ui/icons/Info';
@@ -55,11 +56,15 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
     ThirdWave,
     ExposureNotifications,
     TXFeb2021Winter,
+    Vulnerability,
     None,
   }
   let notification: Notification;
 
-  if (showExposureNotifications(region)) {
+  if (showVulnerability(region)) {
+    //Warning: Always returns true right now.
+    notification = Notification.Vulnerability;
+  } else if (showExposureNotifications(region)) {
     notification = Notification.ExposureNotifications;
   } else if (
     // TODO(2021/2/20): TX Winter Reporting
@@ -82,6 +87,10 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   if (notification === Notification.NYCCounty) {
     icon = <InfoIcon />;
     title = 'update';
+  } else if (notification === Notification.Vulnerability) {
+    // icon = <VulnerabilityIcon />;
+    icon = <WarningIcon />; // Switch to VulnerabilityIcon when available
+    title = 'alert';
   } else {
     icon = <WarningIcon />;
     title = 'alert';
@@ -115,6 +124,13 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         {notification === Notification.TXFeb2021Winter && (
           <TXFeb2021WinterCopy />
         )}
+
+        {notification === Notification.Vulnerability && (
+          <VulnerabilityCopy
+            locationName={region.name}
+            levelLabel="high" // replace with "high" or "very high" depending on region
+          />
+        )}
       </SectionColumn>
     </React.Fragment>
   );
@@ -138,6 +154,25 @@ const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
     <Copy>
       Prior to December 15th, {locationName} was aggregated together with the
       other New York City boroughs. It now has its own metrics and risk level.
+    </Copy>
+  );
+};
+
+const VulnerabilityCopy: React.FC<{
+  locationName: string;
+  levelLabel: string;
+}> = ({ locationName, levelLabel }) => {
+  return (
+    <Copy>
+      {locationName} has {levelLabel} vulnerability, making it more likely to
+      experience severe physical and economic suffering from COVID, and to face
+      a harder, longer recovery.{' '}
+      <ExternalLink
+        href="https://youtu.be/0EqSXDwTq6U" //placeholder
+      >
+        See more vulnerability details below
+      </ExternalLink>
+      .
     </Copy>
   );
 };
@@ -181,6 +216,11 @@ export function showExposureNotifications(region: Region) {
   } else {
     return false;
   }
+}
+
+export function showVulnerability(region: Region) {
+  // STUB. Return true if the vulnerability category for the region is "High" or "Very High"
+  return true;
 }
 
 export function getStateName(region: Region) {
