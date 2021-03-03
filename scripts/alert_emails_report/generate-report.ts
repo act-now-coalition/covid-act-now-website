@@ -8,7 +8,6 @@ import {
 import { getFirestore } from '../common/firebase';
 import GoogleSheets, { Cell } from '../common/google-sheets';
 import regions, { County, State } from '../../src/common/regions';
-// import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
 
 function getSpreadsheetId(): string {
   if (process.env.SPREADSHEET_ID) {
@@ -113,20 +112,28 @@ async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const state = regions.findByFipsCode(fips);
-    return [state?.stateCode, state?.fullName, state?.population, count];
+    const state = regions.findByFipsCodeStrict(fips);
+    if (state instanceof State) {
+      return [state.stateCode, state.fullName, state.population, count];
+    } else {
+      return [];
+    }
   });
   return _.sortBy(data, item => item[0]);
 }
 
 function formatCountyStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const county: County = regions.findByFipsCodeStrict(fips);
-    // The ' prefix forces the value to be interpreted as text by Google Sheets
-    const fipsCode = `'${fips}`;
-    const countyName: string = county?.fullName || 'Unknown county';
-    const stateCode: string = county?.state.stateCode || '-';
-    return [fipsCode, countyName, stateCode, county?.population, count];
+    const region = regions.findByFipsCodeStrict(fips);
+    if (region instanceof County) {
+      // The ' prefix forces the value to be interpreted as text by Google Sheets
+      const fipsCode = `'${fips}`;
+      const countyName: string = region.fullName || 'Unknown county';
+      const stateCode: string = region.state.stateCode || '-';
+      return [fipsCode, countyName, stateCode, region.population, count];
+    } else {
+      return [];
+    }
   });
   return _.sortBy(data, item => item[0]);
 }
