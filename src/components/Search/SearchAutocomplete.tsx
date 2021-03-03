@@ -22,7 +22,7 @@ const SearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
-  const { countyToZipMap, isLoading } = useCountyToZipMap();
+  const { result: countyToZipMap, pending: isLoading } = useCountyToZipMap();
 
   const onInputChange = (e: any, value: string) => {
     setInput(value);

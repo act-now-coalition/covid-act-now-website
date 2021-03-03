@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
+import LogoGrid, { LogoGridItem } from 'components/LogoGrid/LogoGrid';
 import {
   AboutHeading1,
   AboutHeading2,
@@ -12,7 +12,6 @@ import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { TocItem } from 'cms-content/utils';
 import TeamSection from './Team/TeamSection';
-import GovLogoGrid from './GovLogoGrid';
 import { StyledGridContainer } from './About.style';
 
 export const sidebarItems: TocItem[] = [
@@ -25,6 +24,10 @@ export const sidebarItems: TocItem[] = [
         label: 'Our mission',
       },
       {
+        to: '/about#contact-us',
+        label: 'Contact us',
+      },
+      {
         to: '/about#partners',
         label: 'Who we work with',
       },
@@ -35,6 +38,10 @@ export const sidebarItems: TocItem[] = [
       {
         to: '/about#team',
         label: 'Who we are',
+      },
+      {
+        to: '/about#join-us',
+        label: 'Join us',
       },
     ],
   },
@@ -54,6 +61,10 @@ const About = () => {
         <AboutHeading1>{aboutContent.pageHeader}</AboutHeading1>
         <AboutHeading2 id="mission">{aboutContent.introHeader}</AboutHeading2>
         <MarkdownContent source={aboutContent.introContent} />
+        <AboutHeading2 id="contact-us">
+          {aboutContent.contactUsHeader}
+        </AboutHeading2>
+        <MarkdownContent source={aboutContent.contactUsContent} />
         <AboutHeading2 id="partners">
           {aboutContent.partnersHeader}
         </AboutHeading2>
@@ -84,7 +95,7 @@ const About = () => {
         </AboutHeading2>
         <PartnersSectionWrapper>
           <MarkdownContent source={aboutContent.whoWeServeContentA} />
-          <GovLogoGrid logos={aboutContent.governmentLogos} />
+          <LogoGrid logos={aboutContent.governmentLogos} />
           <MarkdownContent source={aboutContent.whoWeServeContentB} />
         </PartnersSectionWrapper>
         <HashWrapper id="team">
@@ -92,6 +103,8 @@ const About = () => {
           <MarkdownContent source={aboutContent.teamIntro} />
           <TeamSection />
         </HashWrapper>
+        <AboutHeading2 id="join-us">{aboutContent.joinUsHeader}</AboutHeading2>
+        <MarkdownContent source={aboutContent.joinUsContent} />
       </PageContent>
     </Fragment>
   );

@@ -1,4 +1,6 @@
+import { capitalize, words } from 'lodash';
 import ReactGA from 'react-ga';
+import { amplitudeLogEvent } from './amplitude';
 
 export interface Tracker {
   trackingId: string;
@@ -48,6 +50,9 @@ export enum EventCategory {
   NONE = 'none', // use NONE for development
   GEOLOCATION_CARDS = 'geolocation cards',
   TOOLTIPS = 'tooltips',
+  API = 'api',
+  METRICS = 'metrics',
+  VULNERABILITIES = 'vulnerabilities',
 }
 
 /**
@@ -77,6 +82,10 @@ export enum EventAction {
   CLOSE_TOOLTIP = 'close tooltip',
 }
 
+function toTitleCase(name: string) {
+  return words(name).map(capitalize).join(' ');
+}
+
 /**
  * An event represents a single user interaction. We must trigger a single
  * event per interaction to avoid double counting.
@@ -97,6 +106,16 @@ export function trackEvent(
       value,
       nonInteraction,
       transport,
+    });
+
+    const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
+    const valueProp = Number.isFinite(value) ? { eventValue: value } : {};
+
+    amplitudeLogEvent(category, {
+      eventCategory: toTitleCase(category),
+      eventAction: toTitleCase(action),
+      ...labelProp,
+      ...valueProp,
     });
   }
 }

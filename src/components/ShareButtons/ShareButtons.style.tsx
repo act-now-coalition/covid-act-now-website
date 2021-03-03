@@ -12,6 +12,10 @@ export const ShareButton = styled(Button).attrs(props => ({
   border-color: ${palette.lightGray};
   color: ${palette.lightBlue};
   text-transform: none;
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;
 
 export const Container = styled.div`
@@ -45,6 +49,10 @@ export const SocialButton = styled(Button).attrs(props => ({
   color: rgba(0, 0, 0, 0.7);
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: normal;
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 
   @media (min-width: 600px) {
     width: 80px;

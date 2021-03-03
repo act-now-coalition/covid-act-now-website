@@ -20,7 +20,7 @@ const TooltipWithStyles = withStyles({
       color: 'white',
     },
     [theme.breakpoints.down('xs')]: {
-      padding: '8px 24px 20px',
+      padding: '20px 24px',
     },
   },
   arrow: {
@@ -33,7 +33,6 @@ export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
   arrow: true,
   interactive: true,
   TransitionComponent: Fade,
-  'aria-describedby': 'tooltip-description',
   enterDelay: 0,
   enterTouchDelay: 0,
 }))``;
@@ -44,7 +43,9 @@ export const StyledCloseIcon = styled(CloseIcon)`
   height: 20px;
   display: flex;
   margin-left: auto;
-  transform: translateX(16px);
+  position: absolute;
+  top: 4px;
+  right: 4px;
 
   @media (min-width: ${materialSMBreakpoint}) {
     display: none;
@@ -72,16 +73,6 @@ export const StyledMarkdown = styled(MarkdownBody)`
   p:not(:last-child) {
     margin-bottom: 0.5rem;
   }
-`;
-
-export const HiddenDiv = styled.div`
-  clip-path: inset(100%);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 `;
 
 export const StyledSpan = styled.span`

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { defaultTracker, legacyTracker } from './utils';
+import { initializeAmplitude, amplitudeLogEvent } from './amplitude';
 
 /**
  * Initialize Google Analytics
@@ -17,7 +18,6 @@ function initializeGA() {
       ...options,
     },
   ]);
-  ReactGA.plugin.require('linkid');
 }
 
 /**
@@ -38,6 +38,7 @@ function usePageTracking() {
   useEffect(() => {
     if (!initialized) {
       initializeGA();
+      initializeAmplitude();
       setInitialized(true);
     }
   }, [initialized]);
@@ -45,8 +46,13 @@ function usePageTracking() {
   useEffect(() => {
     if (initialized) {
       // We only add the legacy tracker explicitly here, because by default, GA
-      // will send always send hits to the default tracker.
-      ReactGA.pageview(pathname, [legacyTracker.name]);
+      // will send always send hits to the default tracker. We add a delay to
+      // give the app time to update the page title.
+      setTimeout(() => {
+        const { title } = document;
+        ReactGA.pageview(pathname, [legacyTracker.name], title);
+        amplitudeLogEvent('Pageview', { path: pathname, title });
+      }, 10);
     }
   }, [initialized, pathname]);
 }

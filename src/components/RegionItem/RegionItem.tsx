@@ -32,7 +32,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
         trackEvent(
           EventCategory.GEOLOCATION_CARDS,
           EventAction.NAVIGATE,
-          region.name,
+          region.regionType,
         );
       }}
     >

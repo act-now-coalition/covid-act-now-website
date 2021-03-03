@@ -31,6 +31,16 @@ collections:
               widget: 'markdown',
             }
           - {
+              label: 'Contact us: Header',
+              name: 'contactUsHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Contact us: Content',
+              name: 'contactUsContent',
+              widget: 'markdown',
+            }
+          - {
               label: 'Partners: Header',
               name: 'partnersHeader',
               widget: 'string',
@@ -78,6 +88,12 @@ collections:
             }
           - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
           - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
+          - { label: 'Join us: Header', name: 'joinUsHeader', widget: 'string' }
+          - {
+              label: 'Join us: Content',
+              name: 'joinUsContent',
+              widget: 'markdown',
+            }
   - label: Team directory
     name: team
     folder: 'src/cms-content/team'
@@ -552,30 +568,36 @@ collections:
             name: productsList
             widget: list
             fields:
-              - {
-                  label: Product name,
-                  name: productName,
-                  widget: string,
-                  hint: 'Product name (ex. API)',
-                }
-              - {
-                  label: Product ID,
-                  name: productId,
-                  widget: string,
-                  hint: 'Product name in all lowercase, divided by dashes if multi-word (ex: response-simulator)',
-                }
-              - {
-                  label: Product subtitle,
-                  name: productSubtitle,
-                  widget: text,
-                  hint: 'Short few-words-long description underneath product name (ie. Allows you to forecast scenarios)',
-                }
-              - {
-                  label: Product description,
-                  name: productDescription,
-                  widget: markdown,
-                  hint: 'Longer product description',
-                }
+              - label: Product name
+                name: productName
+                widget: string
+                hint: 'Product name (ex. API)'
+              - label: Product ID
+                name: productId
+                widget: string
+                hint: 'Product name in all lowercase, divided by dashes if multi-word (ex: response-simulator)'
+              - label: Product subtitle
+                name: productSubtitle
+                widget: text
+                hint: 'Short few-words-long description underneath product name (ie. Allows you to forecast scenarios)'
+              - label: Product description
+                name: productDescription
+                widget: markdown
+                hint: 'Longer product description'
+              - label: 'Logos'
+                name: 'logos'
+                widget: 'list'
+                fields:
+                  - label: 'Alt text'
+                    name: 'altText'
+                    widget: 'string'
+                  - label: 'Image'
+                    name: 'image'
+                    widget: 'image'
+                  - label: 'Url'
+                    name: 'url'
+                    widget: 'string'
+                    required: false
               - label: Buttons
                 name: buttons
                 required: false
@@ -658,11 +680,7 @@ collections:
             name: sections
             widget: list
             fields:
-              - {
-                  label: Section header,
-                  name: sectionHeader,
-                  widget: string,
-                }
+              - { label: Section header, name: sectionHeader, widget: string }
               - {
                   label: Section subheader,
                   name: sectionSubheader,
@@ -689,31 +707,6 @@ collections:
     description: Details on vaccination program status in different regions.
     format: json
     files:
-      - name: Vaccine Information-State
-        label: State Vaccine Information
-        file: src/cms-content/vaccines/state.json
-        fields:
-          - label: Regions
-            name: regions
-            widget: list
-            fields:
-              - label: Location Name
-                name: locationName
-                widget: string
-              - label: Fips Code
-                name: fips
-                widget: string
-              - label: Hidden
-                name: hidden
-                widget: boolean
-                required: false
-              - label: Eligibility Information URL
-                name: eligibilityInfoUrl
-                widget: string
-              - label: Vaccination Signup URL
-                name: vaccinationSignupUrl
-                required: false
-                widget: string
       - name: Vaccine Information-Metros
         label: Metro Vaccine Information
         file: src/cms-content/vaccines/msa.json
@@ -740,7 +733,7 @@ collections:
                 required: false
                 widget: string
       - name: Vaccine Information-Counties
-        label: Metro Vaccine Information
+        label: County Vaccine Information
         file: src/cms-content/vaccines/county.json
         fields:
           - label: Regions
@@ -791,6 +784,10 @@ collections:
               - label: Eligibility Information URL
                 name: eligibilityInfoUrl
                 widget: string
+              - label: Vaccination Signup URL
+                name: vaccinationSignupUrl
+                widget: string
+                required: false
               - label: Email alert version
                 name: emailAlertVersion
                 default: 0
@@ -878,3 +875,27 @@ collections:
               - label: CTA
                 name: cta
                 widget: markdown
+      - name: CCVI tooltips
+        label: CCVI tooltips
+        file: src/cms-content/tooltips/ccvi-tooltips.json
+        fields:
+          - label: Vulnerabilities section header tooltip content
+            name: headerTooltipContent
+            widget: markdown
+            hint: Content of the tooltip in the vulnerabilities section header
+          - label: Subscore tooltips
+            name: subscoreTooltips
+            label_singular: subscore tooltip
+            widget: list
+            fields:
+              - label: Subscore name
+                name: subscoreName
+                widget: string
+              - label: Id
+                name: id
+                widget: string
+                hint: Do not edit this field
+              - label: Tooltip content
+                name: content
+                widget: markdown
+                hint: subscore definition

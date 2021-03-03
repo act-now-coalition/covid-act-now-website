@@ -8,12 +8,18 @@ import {
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn/data-api';
-import { MarkdownDataApi, DataApiSection } from './DataApi.style';
+import {
+  MarkdownDataApi,
+  DataApiSection,
+  GreenLinkButton,
+} from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
 import AvailabilityTable, {
   AVAILABILITY_SNAPSHOT,
   FIELDS_PRETTY_NAMES,
 } from './AvailabilityTable';
+import LogoGrid from 'components/LogoGrid/LogoGrid';
+import { EventCategory } from 'components/Analytics';
 
 const {
   header,
@@ -27,7 +33,7 @@ export const sidebarSections: TocItem[] = [
   {
     label: 'Data API',
     to: '/data-api',
-    items: productsLandingContent.productsList.map(product => ({
+    items: productsList.map(product => ({
       to: `/data-api#${product.productId}`,
       label: product.productName,
     })),
@@ -36,7 +42,6 @@ export const sidebarSections: TocItem[] = [
 
 const DataApi = () => {
   const date = formatMetatagDate();
-
   return (
     <Fragment>
       <AppMetaTags
@@ -47,7 +52,13 @@ const DataApi = () => {
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
-
+        <GreenLinkButton
+          trackingCategory={EventCategory.API}
+          trackingLabel="Data API: Register"
+          href="https://apidocs.covidactnow.org/access/"
+        >
+          Register
+        </GreenLinkButton>
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
@@ -55,6 +66,7 @@ const DataApi = () => {
             {product.productId === 'coverage' && (
               <AvailabilityTable rows={FIELDS_PRETTY_NAMES} />
             )}
+            {product.logos && <LogoGrid logos={product.logos} />}
           </DataApiSection>
         ))}
       </PageContent>

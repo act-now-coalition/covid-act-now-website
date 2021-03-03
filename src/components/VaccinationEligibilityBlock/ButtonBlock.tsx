@@ -1,8 +1,8 @@
 import React from 'react';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { EventAction, EventCategory } from 'components/Analytics';
 import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
 import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const ButtonBlock: React.FC<{ signupLink?: string | null }> = ({
   signupLink,

@@ -9,6 +9,12 @@
       "profileUrl": "https://www.linkedin.com/in/chelsi-asulin/"
     },
     {
+      "profileImgUrl": "/images_cms/christopherbremer.jpeg",
+      "fullName": "Christopher Bremer",
+      "profileUrl": "https://www.linkedin.com/in/christopherbremer/",
+      "description": "Data engineering"
+    },
+    {
       "profileImgUrl": "/images_cms/tombrown.jpeg",
       "fullName": "Tom Brown",
       "description": "Back-end engineering",
@@ -21,10 +27,22 @@
       "profileUrl": "https://www.linkedin.com/in/chasegcoleman/"
     },
     {
+      "profileImgUrl": "/images_cms/faihegberg.jpeg",
+      "fullName": "Fai Hegberg",
+      "description": "Front-end engineering",
+      "profileUrl": "https://www.linkedin.com/in/faihegberg/"
+    },
+    {
       "profileImgUrl": "/images_cms/chris.jpeg",
       "fullName": "Chris Kelly",
       "description": "Back-end engineering",
       "profileUrl": "https://www.linkedin.com/in/ckelly90/"
+    },
+    {
+      "profileImgUrl": "/images_cms/benlewis.jpeg",
+      "fullName": "Ben Lewis",
+      "description": "Data engineering",
+      "profileUrl": "https://www.linkedin.com/in/benjamintlewis/"
     },
     {
       "profileImgUrl": "/images_cms/spencerlyon.jpeg",
@@ -33,10 +51,52 @@
       "profileUrl": "https://www.linkedin.com/in/spencer-lyon-27991541/"
     },
     {
+      "profileImgUrl": "/images_cms/seanmcclure.jpeg",
+      "fullName": "Sean McClure",
+      "description": "Data engineering",
+      "profileUrl": "https://www.linkedin.com/in/sean-mcclure-54b142191/"
+    },
+    {
       "fullName": "Pablo Navarro",
       "description": "Front-end engineering",
       "profileUrl": "https://www.linkedin.com/in/pnavarrc/",
       "profileImgUrl": "/images_cms/pablo.jpeg"
+    },
+    {
+      "profileImgUrl": "/images_cms/joerybacek.jpeg",
+      "fullName": "Joe Rybacek",
+      "profileUrl": "https://www.linkedin.com/in/joe-rybacek/",
+      "description": "Data engineering"
+    },
+    {
+      "profileImgUrl": "/images_cms/copy-of-andrewschamp.jpeg",
+      "fullName": "Andrew Schamp",
+      "description": "Engineering",
+      "profileUrl": "https://www.linkedin.com/in/andrew-schamp/"
+    },
+    {
+      "profileImgUrl": "/images_cms/mattsidor.jpeg",
+      "fullName": "Matt Sidor",
+      "description": "Data engineering",
+      "profileUrl": "https://www.linkedin.com/in/mattsidor/"
+    },
+    {
+      "profileImgUrl": "/images_cms/derekstevenson.jpeg",
+      "fullName": "Derek Stevenson",
+      "description": "Engineering",
+      "profileUrl": "https://www.linkedin.com/in/derekstevenson/"
+    },
+    {
+      "profileImgUrl": "/images_cms/christopherturner.jpeg",
+      "fullName": "Christopher Turner",
+      "description": "Data engineering",
+      "profileUrl": "https://www.linkedin.com/in/christophermatthewturner/"
+    },
+    {
+      "profileImgUrl": "/images_cms/zethweissman.jpeg",
+      "fullName": "Zeth Weissman",
+      "description": "Data engineering",
+      "profileUrl": "https://www.linkedin.com/in/zeth-weissman-b010271/"
     }
   ]
 }

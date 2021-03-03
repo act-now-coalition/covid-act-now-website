@@ -11,7 +11,7 @@ import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
-import { CountyToZipMap } from 'common/hooks/useCountyToZipMap';
+import { CountyToZipMap } from 'common/data';
 
 const UNITED_STATES = 'United States';
 
@@ -21,6 +21,20 @@ export function belongsToState(county: County, stateFips: string | null) {
 
 const sortByPopulation = (regions: Region[]): Region[] =>
   sortBy(regions, region => -region.population);
+
+/* Sort regions by name in ascending order.
+If two regions have the same name, sort them by population in descending order. */
+function sortByNameThenPopulation(locations: Region[]) {
+  const sortedLocations = [...locations];
+  sortedLocations.sort(compareRegionsByNameAndPopulation);
+  return sortedLocations;
+}
+
+function compareRegionsByNameAndPopulation(region1: Region, region2: Region) {
+  if (region1.name === region2.name)
+    return region1.population < region2.population ? 1 : -1;
+  else return region1.name < region2.name ? -1 : 1;
+}
 
 /**
  * Returns a list of regions in the order that is most relevant given the
@@ -35,7 +49,11 @@ export function getAutocompleteRegions(region?: Region): Region[] {
 
   // Homepage
   if (!region) {
-    return concat<Region>(states, metroAreas, counties);
+    return concat<Region>(
+      sortByNameThenPopulation(states),
+      sortByNameThenPopulation(metroAreas),
+      sortByNameThenPopulation(counties),
+    );
   }
 
   // Location pages

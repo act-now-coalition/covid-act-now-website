@@ -16,6 +16,7 @@ export interface LocationSummary {
   metrics: {
     [metric in Metric]?: MetricSummary;
   };
+  ccvi: number | null;
 }
 
 export type SummariesMap = { [fips: string]: LocationSummary };

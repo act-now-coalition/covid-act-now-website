@@ -1,8 +1,8 @@
+import { keyBy } from 'lodash';
 import { Region } from 'common/regions';
-import STATE_VACCINE_DATA from './state.json';
 import METRO_VACCINE_DATA from './msa.json';
 import COUNTY_VACCINE_DATA from './county.json';
-import { fromPairs } from 'lodash';
+import { stateVaccinationPhases } from './phases';
 
 export interface RegionVaccinationInfo {
   hidden: boolean;
@@ -16,24 +16,29 @@ export interface RegionTypeVaccinationInfo {
   regions: RegionVaccinationInfo[];
 }
 
+/**
+ * Note: We are deprecating the vaccination links for states because the `state-vaccine-phases.json`
+ * file contains eligibility and signup URLs
+ */
+const STATE_VACCINE_DATA: RegionVaccinationInfo[] = stateVaccinationPhases.map(
+  vaccinationInfo => ({
+    hidden: false,
+    fips: vaccinationInfo.fips,
+    locationName: vaccinationInfo.locationName,
+    eligibilityInfoUrl: vaccinationInfo.eligibilityInfoUrl,
+    vaccinationSignupUrl: vaccinationInfo.vaccinationSignupUrl,
+  }),
+);
+
 const VACCINATION_DATA_BY_FIPS: { [fips: string]: RegionVaccinationInfo } = {
-  ...fromPairs(
-    (STATE_VACCINE_DATA as RegionTypeVaccinationInfo).regions.map(item => [
-      item.fips,
-      item,
-    ]),
+  ...keyBy(STATE_VACCINE_DATA, item => item.fips),
+  ...keyBy(
+    (METRO_VACCINE_DATA as RegionTypeVaccinationInfo).regions,
+    item => item.fips,
   ),
-  ...fromPairs(
-    (METRO_VACCINE_DATA as RegionTypeVaccinationInfo).regions.map(item => [
-      item.fips,
-      item,
-    ]),
-  ),
-  ...fromPairs(
-    (COUNTY_VACCINE_DATA as RegionTypeVaccinationInfo).regions.map(item => [
-      item.fips,
-      item,
-    ]),
+  ...keyBy(
+    (COUNTY_VACCINE_DATA as RegionTypeVaccinationInfo).regions,
+    item => item.fips,
   ),
 };
 

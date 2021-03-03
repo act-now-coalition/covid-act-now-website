@@ -4,9 +4,12 @@ import useBreakpoint from './useBreakpoint';
 import useGeolocation from './useGeolocation';
 import useGeolocationInExplore from './useGeolocationInExplore';
 import useScrollToElement from './useScrollToElement';
-import useEscCloseModal from './useEscCloseModal';
+import useEscToClose from './useEscToClose';
 import useGeolocationRegions from './useGeolocationRegions';
+import usePromise from './usePromise';
 import useCountyToZipMap from './useCountyToZipMap';
+import useFipsToCcviMap from './useFipsToCcviMap';
+import useCcviForFips from './useCcviForFips';
 
 export {
   useScrollToElement,
@@ -15,7 +18,10 @@ export {
   useBreakpoint,
   useGeolocation,
   useGeolocationInExplore,
-  useEscCloseModal,
+  useEscToClose,
   useGeolocationRegions,
   useCountyToZipMap,
+  useFipsToCcviMap,
+  usePromise,
+  useCcviForFips,
 };

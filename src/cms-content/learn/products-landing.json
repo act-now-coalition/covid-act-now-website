@@ -1,12 +1,64 @@
 {
   "header": "Data API",
-  "intro": "Our API provides state, county, and metro level data using the most useful metrics to understand COVID’s spread and local risk. The data is aggregated from a number of official sources, quality assured, and updated daily. It’s available in JSON and CSV formats.",
+  "intro": "The Covid Act Now API provides access to comprehensive COVID data — both current and historical. The data is available for all US states, counties, and metros and is aggregated from a number of official sources, quality assured, and updated daily. It is available in JSON and CSV formats.",
   "productsList": [
     {
       "productName": "Who's using our data",
       "productId": "whos-using-our-data",
-      "productSubtitle": "",
-      "productDescription": ""
+      "productSubtitle": "Who's using our data",
+      "productDescription": "Our API is used by organizations and individuals around the country including:",
+      "logos": [
+        {
+          "altText": "California Department of Health logo",
+          "image": "/images_cms/cdph.png",
+          "url": "https://www.cdph.ca.gov/"
+        },
+        {
+          "altText": "Washington National Guard logo",
+          "image": "/images_cms/washington-nationa-guard-logo-red.svg",
+          "url": "https://mil.wa.gov/national-guard"
+        },
+        {
+          "altText": "National Association of Counties logo",
+          "image": "/images_cms/naco-logo.png",
+          "url": "https://www.naco.org/"
+        },
+        {
+          "altText": "Unilever logo",
+          "image": "/images_cms/logo-blue-rgb.jpg",
+          "url": "https://www.unilever.com/"
+        },
+        {
+          "altText": "General Mills logo",
+          "image": "/images_cms/general-mills-logo.png",
+          "url": "https://www.generalmills.com/"
+        },
+        {
+          "altText": "IBM logo",
+          "image": "/images_cms/ibm-logo.png",
+          "url": "https://www.ibm.com/us-en/"
+        },
+        {
+          "altText": "Wayfair logo",
+          "image": "/images_cms/wayfair-logo.jpg",
+          "url": "https://www.wayfair.com/"
+        },
+        {
+          "altText": "DC Department of Health logo",
+          "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
+          "url": "https://dchealth.dc.gov/"
+        },
+        {
+          "altText": "Citizen Logo",
+          "url": "https://citizen.com/",
+          "image": "/images_cms/citizen-com_logo.png"
+        },
+        {
+          "altText": "Team Rubicon Logo",
+          "url": "https://teamrubiconusa.org/",
+          "image": "/images_cms/teamrubicon_logo_dr-primary_brown-red_cmyk-01.png"
+        }
+      ]
     },
     {
       "productName": "Coverage",
@@ -17,8 +69,8 @@
     {
       "productName": "FAQs",
       "productId": "faqs",
-      "productSubtitle": "",
-      "productDescription": "#### How often is your data updated?\n\nData is updated daily."
+      "productSubtitle": "Frequently Asked Questions",
+      "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.\n\n### Where can I see all data fields included in your API?\n\nAll fields can be found in our [data definitions](https://apidocs.covidactnow.org/data-definitions).  To see an overview of how to query data for states, counties, or metros visit our [getting started guide](https://apidocs.covidactnow.org/access#getting-started).\n\n### When does your data update and at what time?\n\nOur data is updated daily around noon Eastern Time.  Updates reflect the latest available data from each of our sources."
     },
     {
       "productName": "License",

@@ -13,7 +13,6 @@ import {
   SummaryForCompare,
   RankedLocationSummary,
   MetroFilter,
-  orderedMetrics,
   GeoScopeFilter,
   getShareQuote,
   getMetroPrefixCopy,
@@ -21,7 +20,6 @@ import {
   HomepageLocationScope,
   homepageLabelMap,
   getCompareSubheader,
-  orderedMetricsVaccineFirst,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
@@ -32,6 +30,7 @@ import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
 import { Region, MetroArea } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import { orderedColumns, orderedColumnsVaccineFirst } from './columns';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -95,7 +94,7 @@ const CompareTable = (props: {
 
   function sortLocationsBy(
     locations: SummaryForCompare[],
-    getValue: (location: SummaryForCompare) => number | undefined,
+    getValue: (location: SummaryForCompare) => number | null,
   ) {
     const [locationsWithValue, locationsWithoutValue] = partition(
       locations,
@@ -108,15 +107,18 @@ const CompareTable = (props: {
     return [...sortedLocations, ...locationsWithoutValue];
   }
 
+  const columns = vaccinesFirst ? orderedColumnsVaccineFirst : orderedColumns;
+
   const getPopulation = (location: SummaryForCompare) =>
     location.region.population;
-  const getMetricValue = (location: any) => {
+  const getSortByValue = (location: SummaryForCompare) => {
     // TODO(https://trello.com/c/x0G7LZ91): Not sure if this check should be necessary,
     // but we seem to be missing projections for Northern Islands Municipality, MP right now.
     if (!location.metricsInfo) {
       return null;
     }
-    return location.metricsInfo.metrics[sorter].value;
+    let sortedColumn = columns.find(c => c.columnId === sorter) ?? columns[0];
+    return sortedColumn.getValue(location);
   };
 
   let sortedLocationsArr = props.locations;
@@ -124,7 +126,7 @@ const CompareTable = (props: {
   if (sortByPopulation) {
     sortedLocationsArr = sortLocationsBy(props.locations, getPopulation);
   } else {
-    sortedLocationsArr = sortLocationsBy(props.locations, getMetricValue);
+    sortedLocationsArr = sortLocationsBy(props.locations, getSortByValue);
   }
 
   const currentCountyRank = findIndex(
@@ -270,7 +272,7 @@ const CompareTable = (props: {
         firstColumnHeader={firstColumnHeader}
         setSorter={setSorter}
         setSortDescending={setSortDescending}
-        metrics={vaccinesFirst ? orderedMetricsVaccineFirst : orderedMetrics}
+        columns={columns}
         isModal={props.isModal}
         {...arrowContainerProps}
         pinnedLocation={currentLocation}

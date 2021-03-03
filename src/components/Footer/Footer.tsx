@@ -31,7 +31,6 @@ const Footer = () => {
             <Link to="/learn">Learn</Link>
             <Link to="/data-api">Data API</Link>
             <Link to="/about">About</Link>
-            <Link to="/contact">Contact us</Link>
           </StyledFooterBodyNav>
           <StyledFooterDivider />
           <StyledFooterBodyLinks>
@@ -39,7 +38,7 @@ const Footer = () => {
           </StyledFooterBodyLinks>
           <StyledFooterDivider />
           <StyledFooterBodyLinks>
-            <Link to="/contact">Contact</Link>
+            <Link to="/about#contact-us">Contact</Link>
             {' ∙ '}
             <Link to="/terms">Terms</Link>
             {' ∙ '}

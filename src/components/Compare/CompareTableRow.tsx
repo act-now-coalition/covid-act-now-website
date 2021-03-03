@@ -2,9 +2,9 @@ import React from 'react';
 import { isNumber } from 'lodash';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
-  MetricCell,
+  DataCell,
   Row,
-  MetricValue,
+  DataCellValue,
   Population,
   LocationCellWrapper,
   LocationInfoWrapper,
@@ -14,24 +14,15 @@ import {
   Rank,
   StyledLink,
 } from 'components/Compare/Compare.style';
-import { formatValue } from 'common/metric';
-import { Metric } from 'common/metricEnum';
 import { RankedLocationSummary } from 'common/utils/compare';
-import { Level } from 'common/level';
 import { formatEstimate } from 'common/utils';
 import regions from 'common/regions';
 import { fail } from 'assert';
 import { StyledRegionName } from 'components/SharedComponents';
-
-function cellValue(metric: any, metricType: Metric) {
-  if (metric === null || metric === undefined) {
-    return 'Unknown';
-  }
-  return formatValue(metricType, metric.value, '---');
-}
+import { ColumnDefinition } from './columns';
 
 const CompareTableRow = (props: {
-  metrics: Metric[];
+  columns: ColumnDefinition[];
   location: RankedLocationSummary;
   sorter: number;
   isCurrentCounty?: boolean;
@@ -41,7 +32,7 @@ const CompareTableRow = (props: {
   showStateCode: boolean;
 }) => {
   const {
-    metrics,
+    columns,
     location,
     sorter,
     isCurrentCounty,
@@ -50,14 +41,6 @@ const CompareTableRow = (props: {
     isHomepage,
     showStateCode,
   } = props;
-
-  function getLevel(metricIndex: Metric): Level {
-    const metricInfo = location.metricsInfo.metrics[metricIndex];
-    if (metricInfo) {
-      return metricInfo.level;
-    }
-    return 4;
-  }
 
   const fipsCode = location.region.fipsCode;
 
@@ -78,7 +61,7 @@ const CompareTableRow = (props: {
         $isModal={isModal}
       >
         <LocationNameCell
-          iconColor={location.metricsInfo.level}
+          $iconColor={location.metricsInfo.level}
           sortByPopulation={sortByPopulation}
         >
           <LocationCellWrapper>
@@ -104,25 +87,23 @@ const CompareTableRow = (props: {
             </LocationNameWrapper>
           </LocationCellWrapper>
         </LocationNameCell>
-        {metrics.map((metric: Metric, i) => {
-          const metricForValue = location.metricsInfo.metrics[metric];
-          const metricValue = metricForValue?.value;
+        {columns.map((column, i) => {
+          const metricValue = column.getValue(location);
           const valueUnknown =
             !isNumber(metricValue) || !Number.isFinite(metricValue);
+          const isSelected = !sortByPopulation && sorter === column.columnId;
 
           return (
-            <MetricCell
-              key={`metric-cell-${i}`}
-              sorter={sorter}
-              metric={metric}
-              iconColor={getLevel(metric)}
-              sortByPopulation={sortByPopulation}
+            <DataCell
+              key={`data-cell-${i}`}
+              $isSelected={isSelected}
+              $iconColor={column.getIconColor(location)}
             >
               <FiberManualRecordIcon />
-              <MetricValue valueUnknown={valueUnknown}>
-                {cellValue(metricForValue, metric)}
-              </MetricValue>
-            </MetricCell>
+              <DataCellValue $valueUnknown={valueUnknown}>
+                {column.getFormattedValue(location)}
+              </DataCellValue>
+            </DataCell>
           );
         })}
       </Row>

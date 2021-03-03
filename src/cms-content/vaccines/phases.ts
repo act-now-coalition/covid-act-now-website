@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { keyBy } from 'lodash';
 import stateVaccinationInfo from './state-vaccine-phases.json';
 
 export interface RegionPhaseGroup {
@@ -14,6 +14,7 @@ export interface RegionPhaseGroup {
 export interface RegionVaccinePhaseInfo {
   emailAlertVersion: number;
   eligibilityInfoUrl: string;
+  vaccinationSignupUrl: string;
   locationName: string;
   fips: string;
   notes?: string | null;
@@ -23,8 +24,9 @@ export interface RegionVaccinePhaseInfo {
 export const stateVaccinationPhases: RegionVaccinePhaseInfo[] =
   stateVaccinationInfo.regions;
 
-const vaccinationPhasesMap = _.fromPairs(
-  stateVaccinationPhases.map(phasesInfo => [phasesInfo.fips, phasesInfo]),
+const vaccinationPhasesMap = keyBy(
+  stateVaccinationPhases,
+  stateInfo => stateInfo.fips,
 );
 
 export function getVaccineInfoByFips(

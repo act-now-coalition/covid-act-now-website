@@ -16,6 +16,8 @@ interface AboutContent {
   pageHeader: string;
   introHeader: string;
   introContent: Markdown;
+  contactUsHeader: string;
+  contactUsContent: Markdown;
   partnersHeader: string;
   partnersContent: PartnersContent[];
   whoWeServeHeader: string;
@@ -24,6 +26,8 @@ interface AboutContent {
   governmentLogos: LogoItem[];
   teamHeader: string;
   teamIntro: Markdown;
+  joinUsHeader: string;
+  joinUsContent: Markdown;
 }
 
 const aboutContent = aboutPage as AboutContent;

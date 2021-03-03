@@ -33,13 +33,13 @@ const StatValue = (props: {
   metric: Metric;
 }) => {
   return (
-    <ValueWrapper iconColor={props.iconColor}>
+    <ValueWrapper $iconColor={props.iconColor}>
       <FiberManualRecordIcon />
       <StatValueText
-        condensed={props.condensed}
-        isEmbed={props.isEmbed}
-        statusUnknown={props.statusUnknown}
-        isHeader={props.isHeader}
+        $condensed={props.condensed}
+        $isEmbed={props.isEmbed}
+        $statusUnknown={props.statusUnknown}
+        $isHeader={props.isHeader}
       >
         {props.value}
       </StatValueText>
@@ -100,16 +100,16 @@ const SummaryStat = ({
   return (
     <SummaryStatWrapper
       onClick={finalOnClick}
-      condensed={condensed}
-      isEmbed={isEmbed}
-      isHeader={isHeader}
+      $condensed={condensed}
+      $isEmbed={isEmbed}
+      $isHeader={isHeader}
     >
-      <StatTextWrapper isHeader={isHeader}>
+      <StatTextWrapper $isHeader={isHeader}>
         <StatNameText
-          condensed={condensed}
-          isEmbed={isEmbed}
-          isHeader={true}
-          statusUnknown={statusUnknown}
+          $condensed={condensed}
+          $isEmbed={isEmbed}
+          $isHeader={true}
+          $statusUnknown={statusUnknown}
         >
           {getMetricName(chartType)}{' '}
         </StatNameText>
@@ -135,7 +135,7 @@ const SummaryStat = ({
         )}
       </StatTextWrapper>
       {!condensed && isMobile && (
-        <StatValueWrapper condensed={condensed}>
+        <StatValueWrapper $condensed={condensed}>
           <StatValue
             value={statValue}
             iconColor={levelInfo.color}
@@ -182,8 +182,8 @@ const LocationHeaderStats = (props: {
     <>
       {hasStats && (
         <SummaryStatsWrapper
-          isHeader={props.isHeader}
-          condensed={props.condensed}
+          $isHeader={props.isHeader}
+          $condensed={props.condensed}
         >
           {ALL_METRICS.map((metric, i) => (
             <SummaryStat
