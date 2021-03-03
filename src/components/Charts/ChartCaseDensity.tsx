@@ -57,7 +57,7 @@ const ChartCaseDensity: FunctionComponent<{
   capY = 500,
   width,
   height,
-  marginTop = 5,
+  marginTop = 15,
   marginBottom = 40,
   marginLeft = 10,
   marginRight = 5,
@@ -150,12 +150,7 @@ const ChartCaseDensity: FunctionComponent<{
           curve={curveMonotoneX}
         />
         <Style.LineGrid>
-          <GridRows
-            left={15}
-            width={chartWidth - 15}
-            scale={yScale}
-            tickValues={yTicks}
-          />
+          <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
         </Style.LineGrid>
         <Style.TextAnnotation>
           <BoxedAnnotation
@@ -171,8 +166,8 @@ const ChartCaseDensity: FunctionComponent<{
           color={region.color}
           name={region.name}
           isActive={activeZone.name === region.name}
-          x={35}
-          y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+          x={23}
+          y={yScale(0.5 * (region.valueFrom + region.valueFrom)) - 7}
         />
       ))}
 
@@ -181,7 +176,7 @@ const ChartCaseDensity: FunctionComponent<{
         scale={xScale}
         tickValues={dateTicks}
       />
-      <Group left={-20}>
+      <Group top={-6} left={-10}>
         <AxisRight scale={yScale} tickValues={yTicks.slice(1)} />
       </Group>
     </ChartContainer>

@@ -17,7 +17,7 @@ export const BoxedAnnotation = ({
   x,
   y,
   text,
-  padding = 4,
+  padding = 1,
 }: {
   x: number;
   y: number;
