@@ -173,12 +173,17 @@
         {
           "question": "Limitations\n",
           "questionId": "limitations-vulnerability ",
-          "answer": "Vulnerability is a complex issue, and it does not look the same in every community and through every lens. There are several limitations of the CCVI data to keep in mind: \n\n* The index is an estimate of vulnerability and does not account for every factor which may make an individual or community at higher risk of COVID disease or death. \n* For the most complete understanding of a community’s vulnerability, the index should be used in conjunction with COVID statistics and data on public response, such as test site locations, Non-Pharmaceutical Interventions \\[link to definition], and vaccine distribution."
+          "answer": "Vulnerability is a complex issue, and it does not look the same in every community and through every lens. There are several limitations of the CCVI data to keep in mind: \n\n* The index is an estimate of vulnerability and does not account for every factor which may make an individual or community at higher risk of COVID disease or death. \n* For the most complete understanding of a community’s vulnerability, the index should be used in conjunction with COVID statistics and data on public response, such as test site locations, [nonpharmaceutical interventions](https://covidactnow.org/glossary#npi) (NPIs), and vaccine distribution. \n* The CCVI may not capture all at-risk essential worker groups represented in the “crowded living and working areas” special vulnerability."
         },
         {
           "question": "Still have more questions? ",
           "questionId": "more-questions",
           "answer": "For further details, read [](https://docs.google.com/document/d/142EPwY0GqcSJlsD2fJOHIg_2G4e2ksxy8iToJ7maP4Y/edit)[Surgo’s methodology and sourcing document](https://covid-static-assets.s3.amazonaws.com/US-CCVI/COVID-19+Community+Vulnerability+Index+(CCVI)+Methodology.pdf)."
+        },
+        {
+          "question": "More information on vulnerability",
+          "questionId": "more-info-vulnerability",
+          "answer": "Why vulnerability data is important for all communities \n\nResources for vulnerable people"
         }
       ]
     }
