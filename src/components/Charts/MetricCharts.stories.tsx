@@ -20,7 +20,7 @@ const DesktopContainer: React.FC = ({ children }) => (
 );
 
 const MobileContainer: React.FC = ({ children }) => (
-  <div style={{ border: 'dashed 1px blue', minWidth: '343px' }}>{children}</div>
+  <div style={{ minWidth: '343px' }}>{children}</div>
 );
 
 export const DailyCases = () => {
@@ -102,7 +102,7 @@ export const DailyCasesMobile = () => {
       <MetricChart
         metric={Metric.CASE_DENSITY}
         projections={projections}
-        height={400}
+        height={300}
       />
     </MobileContainer>
   );
@@ -119,7 +119,7 @@ export const ICUCapacityMobile = () => {
       <MetricChart
         metric={Metric.HOSPITAL_USAGE}
         projections={projections}
-        height={400}
+        height={300}
       />
     </MobileContainer>
   );

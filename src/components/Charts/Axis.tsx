@@ -1,5 +1,9 @@
 import React from 'react';
-import { AxisBottom as VxAxisBottom, AxisLeft as VxAxisLeft } from '@vx/axis';
+import {
+  AxisBottom as VxAxisBottom,
+  AxisLeft as VxAxisLeft,
+  AxisRight as VxAxisRight,
+} from '@vx/axis';
 import { SharedAxisProps } from '@vx/axis/lib/types';
 import * as Style from './Charts.style';
 import { getXTickFormat, getMobileDateTicks } from './utils';
@@ -9,6 +13,12 @@ import { ScaleTime } from 'd3-scale';
 export const AxisLeft = (props: SharedAxisProps<number>) => (
   <Style.Axis>
     <VxAxisLeft {...props} hideAxisLine hideTicks hideZero />
+  </Style.Axis>
+);
+
+export const AxisRight = (props: SharedAxisProps<number>) => (
+  <Style.Axis>
+    <VxAxisRight {...props} hideAxisLine hideTicks hideZero />
   </Style.Axis>
 );
 

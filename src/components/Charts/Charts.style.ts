@@ -120,7 +120,7 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
   text {
     fill: ${props =>
       props.isActive ? palette(props).background : props.color};
-    text-anchor: end;
+    // text-anchor: end;
   }
 `;
 

@@ -6,10 +6,11 @@ import { GridRows } from '@vx/grid';
 import { scaleLinear } from '@vx/scale';
 import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
+import { Group } from '@vx/group';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
 import { LevelInfoMap, Level } from 'common/level';
 import { formatUtcDate, formatDecimal } from 'common/utils';
-import { AxisLeft } from './Axis';
+import { AxisRight } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -58,7 +59,7 @@ const ChartCaseDensity: FunctionComponent<{
   height,
   marginTop = 5,
   marginBottom = 40,
-  marginLeft = 40,
+  marginLeft = 10,
   marginRight = 5,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
@@ -72,7 +73,7 @@ const ChartCaseDensity: FunctionComponent<{
   const dates = data.map(getDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
-  const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
+  const xScale = getUtcScale(minDate, currDate, 0, chartWidth, 15);
   const [startDate, endDate] = xScale.domain();
   const dateTicks = getTimeAxisTicks(startDate, endDate);
 
@@ -149,12 +150,17 @@ const ChartCaseDensity: FunctionComponent<{
           curve={curveMonotoneX}
         />
         <Style.LineGrid>
-          <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
+          <GridRows
+            left={15}
+            width={chartWidth - 15}
+            scale={yScale}
+            tickValues={yTicks}
+          />
         </Style.LineGrid>
         <Style.TextAnnotation>
           <BoxedAnnotation
-            x={getXCoord(lastPoint) + 30}
-            y={getYCoord(lastPoint)}
+            x={getXCoord(lastPoint)}
+            y={getYCoord(lastPoint) + 15}
             text={formatDecimal(getYCaseDensity(lastPoint), 1)}
           />
         </Style.TextAnnotation>
@@ -165,16 +171,19 @@ const ChartCaseDensity: FunctionComponent<{
           color={region.color}
           name={region.name}
           isActive={activeZone.name === region.name}
-          x={chartWidth - 10}
+          x={35}
           y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
       ))}
+
       <AxisBottom
         innerHeight={chartHeight}
         scale={xScale}
         tickValues={dateTicks}
       />
-      <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
+      <Group left={-20}>
+        <AxisRight scale={yScale} tickValues={yTicks.slice(1)} />
+      </Group>
     </ChartContainer>
   );
 };
