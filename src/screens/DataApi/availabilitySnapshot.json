@@ -1,0 +1,611 @@
+[
+  {
+    "name": "riskLevels.overall",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "riskLevels.testPositivityRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "riskLevels.caseDensity",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "riskLevels.contactTracerCapacityRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "riskLevels.infectionRate",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "riskLevels.icuHeadroomRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "riskLevels.icuCapacityRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.testPositivityRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3047,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 920,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.testPositivityRatioDetails",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.caseDensity",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.contactTracerCapacityRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 51,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1,
+      "totalStates": 53,
+      "statesAvailable": 1
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 0,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.infectionRate",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 2951,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 937,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.infectionRateCI90",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 2951,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 937,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.icuHeadroomRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1351,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 2,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.icuHeadroomDetails",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1977,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 4,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.icuCapacityRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1439,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 613,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.vaccinationsInitiatedRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 51,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1643,
+      "totalStates": 53,
+      "statesAvailable": 24
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 500,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.vaccinationsCompletedRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 51,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1610,
+      "totalStates": 53,
+      "statesAvailable": 23
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 481,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.cases",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.deaths",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3144,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 927,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.positiveTests",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1,
+      "totalStates": 53,
+      "statesAvailable": 1
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 0,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.negativeTests",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1,
+      "totalStates": 53,
+      "statesAvailable": 1
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 0,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.contactTracers",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1,
+      "totalStates": 53,
+      "statesAvailable": 1
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 0,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.hospitalBeds",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.icuBeds",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.newCases",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 53,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 3222,
+      "totalStates": 53,
+      "statesAvailable": 53
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 939,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.vaccinesDistributed",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 51,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 33,
+      "totalStates": 53,
+      "statesAvailable": 2
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 19,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.vaccinationsInitiated",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 51,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1590,
+      "totalStates": 53,
+      "statesAvailable": 23
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 479,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.vaccinationsCompleted",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 51,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 1557,
+      "totalStates": 53,
+      "statesAvailable": 22
+    },
+    "metro": {
+      "totalRegions": 939,
+      "regionsAvailable": 460,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  }
+]

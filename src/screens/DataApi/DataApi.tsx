@@ -10,6 +10,7 @@ import {
 } from 'cms-content/learn/data-api';
 import { MarkdownDataApi, DataApiSection } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
+import AvailabilityTable, { AVAILABILITY_SNAPSHOT } from './AvailabilityTable';
 
 const {
   header,
@@ -43,6 +44,7 @@ const DataApi = () => {
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
+        <AvailabilityTable rows={AVAILABILITY_SNAPSHOT} />
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
