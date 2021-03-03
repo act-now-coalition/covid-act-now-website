@@ -10,7 +10,10 @@ function trackShare(label: string) {
   trackEvent(EventCategory.VULNERABILITIES, EventAction.SHARE, label);
 }
 
-const ShareButtons: React.FC<{ shareUrl: string }> = ({ shareUrl }) => {
+const ShareButtons: React.FC<{ shareUrl: string; shareQuote: string }> = ({
+  shareUrl,
+  shareQuote,
+}) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
   const hideSocialButtons = () => {
@@ -24,7 +27,7 @@ const ShareButtons: React.FC<{ shareUrl: string }> = ({ shareUrl }) => {
 
   const socialSharingProps = {
     url: shareUrl,
-    quote: 'test quote',
+    quote: shareQuote,
     socialIconSize: isMobile ? 40 : 50,
   };
 

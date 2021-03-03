@@ -20,6 +20,7 @@ import FooterLinks from './FooterLinks/FooterLinks';
 import CcviThermometer from './CcviThermometer/CcviThermometer';
 import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
 import { getCcviLevelNameFromScore } from 'common/ccvi';
+import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { Region } from 'common/regions';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 
@@ -27,8 +28,6 @@ const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
   region: Region;
 }> = ({ scores, region }) => {
-  const shareUrl = `${region.canonicalUrl}#vulnerabilities`;
-
   if (!scores) {
     return null;
   }
@@ -42,6 +41,12 @@ const VulnerabilitiesBlock: React.FC<{
     region,
     percentPopulationVulnerable,
   );
+  const shareUrl = `${region.canonicalUrl}#vulnerabilities`;
+  const shareQuote = getShareQuote(
+    scores.overall,
+    region,
+    percentPopulationVulnerable,
+  );
 
   return (
     <>
@@ -50,7 +55,7 @@ const VulnerabilitiesBlock: React.FC<{
           Vulnerabilities
           <>{renderVulnerabilitiesTooltip()}</>
         </LocationPageSectionHeader>
-        <ShareButtons shareUrl={shareUrl} />
+        <ShareButtons shareUrl={shareUrl} shareQuote={shareQuote} />
       </HeaderWrapper>
       <Subtitle1>In {region.fullName}</Subtitle1>
       <BorderedContainer>
