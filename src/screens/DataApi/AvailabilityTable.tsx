@@ -69,6 +69,7 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
         style={{
           textDecorationLine: 'underline',
           textDecorationStyle: 'dotted',
+          textUnderlinePosition: 'under',
           verticalAlign: 'middle',
         }}
       >

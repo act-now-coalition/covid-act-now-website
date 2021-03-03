@@ -24,6 +24,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
   return (
     <>
       <StyledTooltip
+        style={{ verticalAlign: 'middle' }}
         onOpen={handleOpen}
         onClose={handleClose}
         title={
