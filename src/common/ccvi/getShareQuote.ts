@@ -75,7 +75,7 @@ function getVeryLowShareQuote(
   if (region instanceof State) {
     return `is one of the least vulnerable states. ${
       percentPopulationVulnerable
-        ? `However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area.`
+        ? `However, ${percentPopulationVulnerable}% of the population is in a high vulnerability area. Learn more:`
         : ' Learn more:'
     }`;
   }
