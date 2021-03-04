@@ -1,5 +1,5 @@
 {
-  "headerTooltipContent": "Vulnerable areas are more likely to experience more severe physical and economic suffering from COVID, and struggle more to recover.  \n\nAs of January 2021, people in the most vulnerable third of U.S. counties are 23% more likely to be diagnosed with COVID, 32% more likely to have died from COVID, and 35% more likely to be unemployed due to COVID ([see source](https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19)). \n\nTo calculate vulnerability, we use Surgo Venture’s COVID Community Vulnerability Index (CCVI). [Learn more](covidactnow.org/learn).",
+  "headerTooltipContent": "Vulnerable areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.  \n\nAs of January 2021, people in the most vulnerable third of U.S. counties are \n\n* 23 percent more likely to be diagnosed with COVID\n* 32 percent more likely to have died from COVID \n* 35 percent more likely to be unemployed due to COVID ([see source](https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19)). \n\nTo calculate vulnerability, we use Surgo Ventures’ COVID-19 Community Vulnerability Index (CCVI). [Learn more](https://covidactnow.org/covid-explained/covid-vulnerability-data).",
   "subscoreTooltips": [
     {
       "subscoreName": "Unemployment & low income",
@@ -24,12 +24,12 @@
     {
       "subscoreName": "Health system challenges",
       "id": "healthcare-system-factors",
-      "content": "Measures the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID. It looks at factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables."
+      "content": "Measures factors such as hospital bed availability, pharmacies, healthcare spending per capita within a region, and the percentage of population with a primary care physician, among other variables. These aim to capture the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID."
     },
     {
       "subscoreName": "Crowded living & working areas",
       "id": "high-risk-environments",
-      "content": "Measures variables within a community such as working in a high- risk industry or living in a nursing home or prison, which significantly contribute to a person's exposure to and vulnerability to the virus."
+      "content": "Measures variables within a community such as working in a high-risk industry or living in a nursing home or prison, which significantly contribute to a person's exposure to and vulnerability to the virus."
     },
     {
       "subscoreName": "Population density",

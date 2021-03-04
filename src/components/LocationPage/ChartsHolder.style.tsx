@@ -41,7 +41,7 @@ export const MainContentInner = styled.div`
   }
 `;
 
-export const ChartHeaderWrapper = styled.div`
+export const HeaderWrapperStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -56,6 +56,10 @@ export const ChartHeaderWrapper = styled.div`
   }
 `;
 
+export const HeaderWrapper = styled.div`
+  ${HeaderWrapperStyles};
+`;
+
 export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
   component: 'h2',
 }))`
@@ -63,6 +67,7 @@ export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
   font-size: 1.5rem;
   max-width: 440px;
   line-height: 1.1;
+  width: fit-content;
 
   @media (min-width: ${mobileBreakpoint}) {
     max-width: unset;

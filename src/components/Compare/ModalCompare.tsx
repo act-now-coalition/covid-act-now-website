@@ -43,6 +43,7 @@ const ModalCompare = (props: {
   >;
   region?: Region;
   vaccinesFirst?: boolean;
+  vulnerabilityFirst?: boolean;
 }) => {
   const { handleCloseModal, region } = props;
 
@@ -118,6 +119,7 @@ const ModalCompare = (props: {
         setHomepageSliderValue={props.setHomepageSliderValue}
         region={props.region}
         vaccinesFirst={props.vaccinesFirst}
+        vulnerabilityFirst={props.vulnerabilityFirst}
       />
     </Fragment>
   );

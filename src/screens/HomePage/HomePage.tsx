@@ -61,6 +61,8 @@ export default function HomePage() {
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
+  const compareShowVulnerabilityFirst =
+    location.hash === '#compare-vulnerabilities';
 
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
@@ -128,6 +130,7 @@ export default function HomePage() {
               <CompareMain
                 locationsViewable={8}
                 vaccinesFirst={compareShowVaccinationsFirst}
+                vulnerabilityFirst={compareShowVulnerabilityFirst}
               />
             </Section>
             <Section ref={exploreSectionRef}>

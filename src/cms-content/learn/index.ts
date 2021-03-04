@@ -139,14 +139,18 @@ export const categoriesWithStudies = caseStudiesContent.categories.filter(
 /**
  * Metric Explainers:
  **/
+export interface ExplainerQuestion {
+  question?: string;
+  questionId: string;
+  answer: Markdown;
+}
 
-// re-uses Question interface from FAQ
 interface Section {
   sectionHeader: string;
   sectionSubheader: string;
   sectionId: string;
   sectionIntro: Markdown;
-  questions: Question[];
+  questions: ExplainerQuestion[];
 }
 
 interface LogoItem {

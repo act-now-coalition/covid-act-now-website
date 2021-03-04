@@ -5,10 +5,10 @@
   "sections": [
     {
       "sectionId": "how-covid-risk-is-determined",
-      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA state or county’s overall risk level takes into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* [Daily new cases](/covid-risk-levels-metrics#daily-new-cases), also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* [Infection rate](/covid-risk-levels-metrics#infection-rate) is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* [Positive test rate](/covid-risk-levels-metrics#positive-test-rate) is a measure of our confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nEach metric is graded green, yellow, orange, or red. Incidence is the only metric for which there is a dark red, a color we added after the third surge in winter 2020, in order to capture unprecedented case counts. \n\nIf a region’s daily new cases is green, then its overall risk level is green. For instance, if the daily new cases metric is green, but test positivity is yellow, the overall risk level is still green. Otherwise, a region’s overall risk level reflects the highest risk level across all three metrics. For instance, if daily new cases and test positivity are both yellow, but infection growth is orange, then the overall risk level is orange. \n\nThe end goal is for regions to reduce cases to zero, to fully reopen their economies, and for people to resume normal lives, unrestricted by COVID or containment measures.",
+      "sectionIntro": "### What does the overall risk level for a location mean?\n\nA state or county’s overall risk level takes into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* [Daily new cases](/covid-risk-levels-metrics#daily-new-cases), also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* [Infection rate](/covid-risk-levels-metrics#infection-rate) is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* [Positive test rate](/covid-risk-levels-metrics#positive-test-rate) is a measure of our confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nEach metric has the following levels: green, yellow, orange, and red. Incidence is the only metric for which there is a dark red, a color we added after the third surge in winter 2020, in order to capture unprecedented case counts. \n\nIf a region’s daily new cases is green, then its overall risk level is green. For instance, if the daily new cases metric is green, but test positivity is yellow, the overall risk level is still green. Otherwise, a region’s overall risk level reflects the highest risk level across all three metrics. For instance, if daily new cases and test positivity are both yellow, but infection growth is orange, then the overall risk level is orange. \n\nThe end goal is for regions to reduce cases to zero, to fully reopen their economies, and for people to resume normal lives, unrestricted by COVID or containment measures.",
       "questions": [
         {
-          "question": "How did you develop your framework?",
+          "question": "",
           "questionId": "framework",
           "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop our COVID risk framework. This framework is the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
         }
@@ -23,29 +23,24 @@
       "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measure per 100K people).",
       "questions": [
         {
-          "question": "Why do you not call it incidence?",
-          "questionId": "why-not-incidence",
-          "answer": "The term “daily new cases” tells you exactly what is happening: There were 100 daily new cases per 100K. Incidence, which is more commonly expressed as a rate, can be confusing."
+          "question": "Sources and methodology",
+          "questionId": "daily-new-cases-sources-methodology",
+          "answer": "Our daily new cases number is a seven-day average, and divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the daily new cases by two.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png)\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
-          "question": "How can daily new cases be looked at alongside infection rate?",
-          "questionId": "daily-new-cases-alongside-infection-rate",
-          "answer": "The infection rate answers the question: “on average, how many new people will one person infect while contagious?” Daily new cases answers the question: “how many new COVID infections are in my area today?” The two metrics go hand-in-hand.\n\n**A community heading towards an outbreak has a high infection rate, but a low number of daily new cases.** The number of daily new cases per 100K will grow in the coming days because of the high infection rate.\n\nIn contrast, **a community recovering from a major outbreak has a high number of daily new cases. However, with fewer people testing positive than in the weeks prior, the infection rate is declining.** Because its infection rate is less than 1, the community’s incidence should continue to drop."
+          "question": "Levels",
+          "answer": "Levels for daily new cases are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
+          "questionId": "daily-new-cases-levels"
         },
         {
-          "question": "Can I see a video explainer? ",
-          "questionId": "daily-new-cases-video-explainer",
-          "answer": "https://www.youtube.com/embed/_S0k1I3kIbM"
+          "question": "Limitations",
+          "questionId": "daily-new-cases-limitations",
+          "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
         },
         {
-          "question": "What are your sources and methodology for daily new cases?",
-          "questionId": "daily-new-cases-sources",
-          "answer": "When calculating daily new cases, we look at the average cases per 100,000 people in a location, which is calculated as a seven-day average of daily new cases, divided by the population, divided by 100,000.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png)\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
-        },
-        {
-          "question": "How were the risk levels for daily new cases determined?",
-          "answer": "Our risk levels are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. When estimating the number of people who will become infected in the course of a year, we rely on the [CDC’s estimate](https://www.globalhealthnow.org/2020-06/us-cases-10x-higher-reported) that many more people are infected than are likely to get tested. Therefore, we use a conservative estimate that only one in five people infected will subsequently get tested. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
-          "questionId": "daily-new-cases-thresholds"
+          "question": "More information on daily new cases",
+          "questionId": "more-info-daily-new-cases",
+          "answer": "[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
       ]
     },
@@ -56,19 +51,24 @@
       "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
       "questions": [
         {
-          "question": "Why is infection rate important?",
-          "questionId": "why-is-infection-rate-important",
-          "answer": "Infection rate, also known as R(t) or “R-effective,” is important because it estimates how fast COVID is spreading *right now*.\n\nTo give an example, if the R(t) is 3, it indicates that one infected person will most likely infect three other people, and those three people will each go on to infect three more people. We as a community can change it by modifying community behavior (whether there are large gatherings) and intervention practices (whether people wear masks and maintain [social distancing](/glossary#social-distancing)).\n\n![Infection rate diagram](/images_cms/infection-rate-diagram.png)"
+          "question": "Sources and methodology",
+          "questionId": "infection-rate-sources-methodology",
+          "answer": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\nTo calculate the infection rate, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
-          "question": "Can I watch a video explainer?",
-          "questionId": "infection-rate-video-explainer",
-          "answer": "https://www.youtube.com/embed/dmp5iAXrkaY"
+          "question": "Levels",
+          "questionId": "infection-rate-levels",
+          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. \n\nWe use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline. An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
         },
         {
-          "question": "How were risk levels for infection rate determined?",
-          "questionId": "infection-rate-risk-levels",
-          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. **We use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline.** An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
+          "question": "Limitations",
+          "questionId": "infection-rate-limitations",
+          "answer": "Because you can’t measure infection rate directly, our estimates hinge upon our epidemiological assumptions and the accuracy of our data sources. \n\n1. Infection rate can only track COVID growth once a positive case gets reported through the system. By then, infectious individuals have likely been COVID positive for some time, so the metric will always lag the true risk on the ground. For example, if someone was exposed over the holidays, they likely didn’t test positive until the new year.\n2. Infection rate should be considered in context with the other metrics. Daily new cases refers to the number of new COVID infections, while the infection rate represents the trend. A place with high daily new cases may have an infection rate less than 1 and still have higher exposure than a place with relatively few, but growing, cases."
+        },
+        {
+          "question": "More information on infection rate",
+          "questionId": "more-info-infection-rate",
+          "answer": "[Video explainer](https://www.youtube.com/watch?v=dmp5iAXrkaY&t=0s)"
         }
       ]
     },
@@ -76,27 +76,32 @@
       "sectionHeader": " Positive test rate",
       "sectionSubheader": "Also known as: test positivity",
       "sectionId": "positive-test-rate",
-      "sectionIntro": "**Positive test rate is the *percentage* of COVID testing that comes back positive** (not the total number of positive tests).",
+      "sectionIntro": "**Positive test rate is the *percentage* of COVID PCR testing that comes back positive** (not the total number of positive PCR tests).",
       "questions": [
         {
-          "question": "Why is positive test rate important?",
-          "questionId": "why-is-positive-test-rate-important",
-          "answer": "Positive test rate, also known as test positivity, is a good indicator of how widespread testing is in a given area. If a state or county has a **high** positive test rate, it is a sign of **insufficient** testing in that area. If a state or county has a **low** positive test rate, it is a sign that we are **testing more** than only the sickest people. Testing a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.\n\nLet’s look at the pictures below. **There are two positive COVID tests in each of these scenarios,** but the positive test rate differs drastically due to the percentage of the population that is being tested. The closer we get to testing everyone, the less likely we are to miss positive cases.\n\n![Key for positive test rate example](/images_cms/test-positivity-calculate-key.jpg)\n\n![Positive test rate diagram for insufficient testing](/images_cms/test-positivity-calculate-high.jpg)\n\nIn the first scenario, 2 out of 10 people test positive for COVID, so the positive test rate is 20%. The remaining 90% of the population remain untested.\n\n![Positive test rate diagram for bare minimum testing](/images_cms/test-positivity-calculate-medium.jpg)\n\nIn the second scenario, 2 out of 20 people test positive for COVID, so the positive test rate is 10%. The remaining 80% of the population remain untested.\n\n![Positive test rate diagram for sufficient testing](/images_cms/test-positivity-calculate-low.jpg)\n\nIn the last scenario, 2 out of 100 people test positive for COVID, so the test positivity is 2%. The entire population is tested."
+          "question": "Sources and methodology",
+          "questionId": "positive-test-rate-sources-methodology",
+          "answer": "Positive test rate is calculated by dividing the number of positive PCR tests over the last 7 days by the total number of PCR tests over the last 7 days. It is important to note that the positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess). It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/covid-19-diagnostic-laboratory-testing-pcr-testing-time-series) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
         },
         {
-          "question": "Can I watch a video explainer? ",
-          "questionId": "positive-test-rate-video-explainer",
-          "answer": "https://www.youtube.com/embed/RpqI-ZVGGoY"
+          "question": "Levels",
+          "questionId": "positive-test-rate-levels",
+          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority, which is why we have set 3 percent as the threshold for the lowest level.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
         },
         {
-          "question": "What are your sources and methodology for calculating positive test rate?",
-          "questionId": "positive-test-rate-sources",
-          "answer": "Positive test rate is calculated by dividing the number of positive tests over the number of [total tests](/glossary#testing). We calculate the rate as a seven-day trailing average. It is important to note that positive test rate can be difficult to interpret and messy to calculate, for reasons well captured by the [Covid Tracking Project](https://covidtracking.com/blog/test-positivity-in-the-us-is-a-mess).  It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source state level testing data from the Department of Health and Human Services (HHS). For county and metro level testing data, we rely on the Centers for Disease Control and Prevention (CDC). If you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
+          "question": "Limitations",
+          "questionId": "positive-test-rate-limitations",
+          "answer": "States report testing data in ways that can make comparisons difficult.\n\n1. Some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing, also referred to as [antigen](https://covidactnow.org/glossary#antigen-test) testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters.\n\nFederal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. [Learn more about the current state of federal testing data and its limitations](https://covidtracking.com/analysis-updates/federal-testing-datas-last-mile/)."
         },
         {
-          "question": "How were risk levels for positive test rate determined?",
-          "questionId": "positive-test-rate-thresholds",
-          "answer": "There is a growing [consensus](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) that driving the positive test rate downwards of 3 percent should be a priority.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
+          "question": "More information positive test rate",
+          "questionId": "more-info-positive-test-rate\n",
+          "answer": "[Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
+        },
+        {
+          "question": "More information on COVID testing",
+          "questionId": "more-info-testing",
+          "answer": "[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
         }
       ]
     },
@@ -107,24 +112,19 @@
       "sectionIntro": "**ICU capacity used measures the number of intensive care unit (ICU) beds that are currently in use.**",
       "questions": [
         {
-          "question": "Why is ICU capacity used important? \n",
-          "questionId": "why-icu-capacity-important",
-          "answer": "The ICU is the part of a hospital for people who are the sickest. Each ICU bed is staffed by specially-trained personnel and supported with special equipment, such as ventilators. Staffed ICU beds are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat not only COVID patients, but also other patients, such as people who have had a heart attack or suffered a life-threatening injury. It is important that hospitals retain enough ICU capacity to take care of both COVID and other patients requiring critical care."
+          "questionId": "icu-capacity-used-sources-methodology",
+          "question": "Sources and methodology",
+          "answer": "We calculate ICU capacity by taking the number of staffed ICU beds that are occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries) to calculate the metric. This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15).\n\nFor more details, see your location’s page."
         },
         {
-          "question": "How does Covid Act Now assess ICU capacity?\n",
-          "questionId": "icu-capacity-thresholds",
-          "answer": "[Studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3840149/#:~:text=The%20mean%20hourly%20occupancy%20for,ICUs%20(P%20%3D%200.036).) have found that, on average, U.S. ICUs operate at 68 percent full. However, there is variability from hospital to hospital, depending on the size of the hospital, whether the hospital is located in a rural or urban area, and other factors. For instance, a small hospital with only four ICU beds running at 75 percent full has only one bed available, whereas a larger hospital with 100 ICU beds running at 75 percent full has twenty five ICU beds available.\n\nSo smaller hospitals with only a few (three to four) staffed ICU beds typically have lower occupancy (30 to 50 percent), and generally have a system for transferring critically ill patients to larger hospitals. Meanwhile, larger hospitals tend to run leaner, with higher ICU usage (60 to 80 percent). \n\nIn general, experts agree that as ICU capacity usage approaches 15 percent, the likelihood of an abrupt outbreak overwhelming hospital systems increases. At such levels of ICU usage, NPIs (Non-Pharmaceutical Interventions), ranging from business closures to stay-at-home orders, may be needed to prevent a hospital system’s ICU from being overwhelmed, which means that it would not be able to serve patients in need of lifesaving care. For instance, in California, the [California Department of Public Health (CDPH)](https://www.gov.ca.gov/wp-content/uploads/2020/12/12.3.20-Stay-at-Home-Order-ICU-Scenario.pdf) calls for stay-at-home orders when this 85 percent threshold is met."
+          "question": "Levels\n",
+          "questionId": "icu-capacity-levels",
+          "answer": "[Studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3840149/#:~:text=The%20mean%20hourly%20occupancy%20for,ICUs%20(P%20%3D%200.036).) have found that, on average, before the pandemic, U.S. ICUs operated at about 68 percent of full capacity. However, that number depends heavily on things like the overall size of the hospital and the urban or rural region it serves. For instance, a small hospital with only four ICU beds running at 75 percent of full capacity has only one bed available, whereas a larger hospital with 100 ICU beds running at 75 percent of full capacity has twenty five ICU beds available.\n\nSo smaller hospitals with only a few (three to four) staffed ICU beds typically have lower occupancy (30 percent to 50 percent), and generally have a system for transferring critically ill patients to larger hospitals. Meanwhile, larger hospitals tend to run fuller, with higher ICU usage (60 percent to 80 percent). \n\nIn general, experts agree that as ICU capacity usage approaches 85 percent, the likelihood of an abrupt outbreak overwhelming hospital systems increases. At such levels of ICU usage, NPIs ([nonpharmaceutical interventions](https://covidactnow.org/glossary#npi)), ranging from business closures to stay-at-home orders, may be needed to prevent a hospital system’s ICU from being overwhelmed, which means that it would not be able to serve patients in need of any type of lifesaving care. For instance, in California, the [California Department of Public Health (CDPH)](https://www.gov.ca.gov/wp-content/uploads/2020/12/12.3.20-Stay-at-Home-Order-ICU-Scenario.pdf) calls for stay-at-home orders when this 85 percent threshold is met."
         },
         {
-          "questionId": "icu-capacity-used-sources",
-          "question": "What are your data sources for ICU capacity used?",
-          "answer": "To calculate ICU capacity used, we use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries). This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15).\n\nThis data is updated regularly and provides the latest values reported by each hospital facility in the system within the last four days for all time. This allows for a more comprehensive picture of the hospital utilization within a state by ensuring a hospital is represented, even if it misses a single day of reporting.\n\nIf you would like to learn more, check out [our data sources](https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit)."
-        },
-        {
-          "question": "Why the data may be inaccurate",
-          "questionId": "why-data-inaccurate",
-          "answer": "Reporting is also generally susceptible to human error. There may be missing data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nIn addition, the number of hospitalizations can change suddenly, such as if there is an outbreak of COVID. Such an outbreak may also lead to reporting delays, as hospital staff work to accommodate the influx of patients and prioritize lifesaving care. \n\nFurthermore, hospitals may have “surge capacity,” which refers to a healthcare system's ability to quickly expand beyond its normal capacity in order to meet a “surge, or a sudden and unexpected increase in demand for medical care. In such instances, a hospital may be able to repurpose non ICU spaces, such as hallways, cafeterias, or other wards, to increase their ICU capacity. It may also allow other hospital staff to operate ICU beds under the supervision of trained ICU staff. Thus, although the HHS reports staffed ICU beds on a daily basis, hospital capacity numbers may not always represent the complete picture given the flux in ICU capacity."
+          "question": "Limitations",
+          "questionId": "icu-capacity-used-limitations",
+          "answer": "This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nThe biggest source of uncertainty in this metric is the ability for a hospital to quickly expand beyond its normal capacity to meet increased demand. This “[surge” capacity](https://covidactnow.org/glossary#surge-capacity) is difficult to predict in advance because it depends on both physical hospital resources like available beds and non-physical resources like healthy nurses and doctors to run them.\n\nHHS tries to control for this by requiring that hospitals report staffed ICU beds on a daily basis, but this doesn’t give a complete picture about theoretical surge capacity."
         }
       ]
     },
@@ -134,25 +134,52 @@
       "sectionIntro": "**% Vaccinated is the percentage of people in a given location that have started the vaccination process.**",
       "questions": [
         {
-          "question": "Why is % vaccinated important?",
-          "questionId": "why-percent-vaccinated-important",
-          "answer": "The progress of the vaccine roll-out is a key metric for understanding when a return to normal might be possible. We don’t yet know what level of vaccination will be sufficient, so at this stage in the process (Jan 2021) we are focusing on distribution as the key metric. We will continue to work with our academic and government partners to evaluate the scientific evidence and will update our metric when appropriate."
+          "question": "Sources and methodology",
+          "questionId": "percent-vaccinated-sources-methodology",
+          "answer": "Our primary source for state vaccination data is the [CDC COVID Data Tracker](https://covid.cdc.gov/covid-data-tracker/#vaccinations). The CDC currently does not supply county level vaccination data, so we also directly collect data from state dashboards that provide county level data when available.\n\nOur top level metric tracks the percentage of people in each state who have initiated vaccination. Someone has initiated vaccination if they have received the first shot of any of the currently available vaccines (Pfizer, Moderna, J&J). For context, we also include in our graphs the percentage of people in each state who have completed vaccination. Someone has completed vaccination if they have completed the recommended number of shots (one shot for J&J, two shots for Pfizer and Moderna)."
         },
         {
-          "question": "How does Covid Act Now assess % vaccinated?",
-          "questionId": "how-covid-act-now-assess-percent-vaccinated",
-          "answer": "Our primary source for federal and state data is the [CDC COVID Data Tracker](https://covid.cdc.gov/covid-data-tracker/#vaccinations). We supplement that federal data by scraping metro and county dashboards when available.\n\nOur top level metric tracks the percentage of people in each state who have started vaccination by receiving the first shot of the vaccine (“Shot 1”). For context, we also include in our graphs the percentage of people in each state who have completed vaccination by receiving the second shot of the vaccine (“Shot 2”)."
+          "question": "Limitations",
+          "questionId": "limitations-percent-vaccination",
+          "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated. \n2. **Number of shots**: For the Pfizer and Moderna vaccines, we require two shots to consider someone as having completed vaccination. This stays close to the available science and the advice of experts, including many of our advisors. The J&J vaccine is designed to only require one shot to count as completed.\n3. **Permanence of immunity**: Until we know more, we assume that someone who has completed vaccination stays immune for the foreseeable future, and we do not try to estimate waning immunity. \n4. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n5. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public."
         },
         {
-          "question": "Limitations of our vaccination data",
-          "questionId": "limitations-of-vaccination-data",
-          "answer": "The vaccination data we show contains a number of limitations: \n\n1. Vaccine vs. infection-acquired immunity - We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated. \n2. Number of shots - We require 2 shots to consider someone as having completed vaccination. This stays close to the available science and the advice of experts, including many of our advisers. As more data becomes available we may revisit our choice but we’d rather err on the side of a stricter cutoff.\n3. Permanence of immunity - Until we know more, we assume that someone who has completed vaccination stays immune for the foreseeable future, and we do not try to estimate waning immunity. \n4. Vaccine variations - We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer and Moderna vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n5. Timeliness - We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public."
+          "question": "More information on COVID vaccines",
+          "questionId": "more-info-vaccines",
+          "answer": "[Sign up for vaccine eligibility updates in locations of your choice](https://covidactnow.org/alert_signup)\n\n[Information on vaccine safety, eligibility, and immunity](https://covidactnow.org/faq#vaccines)\n\n[Variants and Vaccines ](https://covidactnow.org/covid-explained/covid-variants-vaccines)\n\n[A Round up of Current Vaccine Progress](https://covidactnow.org/covid-explained/roundup-current-vaccine-progress)\n\n[The Basics of COVID Vaccine Development](https://covidactnow.org/covid-explained/covid-vaccine-basics)"
+        }
+      ]
+    },
+    {
+      "sectionHeader": "Vulnerability ",
+      "sectionId": "vulnerability",
+      "sectionIntro": "**Vulnerable areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.** \n\nAs of January 2021, people in the most vulnerable third of U.S. counties are\n\n* 23 percent more likely to be diagnosed with COVID\n* 32 percent more likely to have died from COVID \n* 35 percent more likely to be unemployed due to COVID ([see source](https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19)). \n\nThis is due to a number of factors such as a community members’ income, age, and underlying health, as well as their access to transportation and health care.",
+      "questions": [
+        {
+          "question": "Sources and methodology",
+          "questionId": "sources-methodology-vulnerability",
+          "answer": "We use a score calculated by [Surgo Ventures](https://precisionforcovid.org/ccvi), a nonprofit with expertise in behavioral and data science. Known as the COVID-19 Community Vulnerability Index (CCVI), this index compares states, counties, and metros across the U.S. and ranks their vulnerability relative to each other, for example with the least vulnerable county assigned a score of 0 percent, and the most vulnerable county in the U.S. with a score of 100 percent, meaning it is more vulnerable than 100 of counties in the U.S. A location’s vulnerability score looks at seven different factors: \n\n* **Unemployment & low income**: measures the relative financial health of a community. In addition to data on income, employment, and education, the rate of uninsured people is also included. People without insurance tend to delay or avoid seeking health care, making them more vulnerable to severe COVID outcomes.\n* **Minorities & non-English speakers**: measures the presence of minorities and non-English speaking people within a community. The data on COVID so far has demonstrated that racial and ethnic minorities are often at the highest risk of poor medical outcomes and more likely to experience negative secondary impacts.\n* **Housing & transport challenges**: measures sub-indicators accounting for crowded housing, access to indoor plumbing, vehicle ownership, and the presence of dependents. These factors can increase vulnerability not only to primary impacts of the pandemic, but also to housing instability and limited transit options.\n* **Older age & health issues**: identifies high-risk populations (per CDC guidelines), such as elderly adults and individuals with underlying conditions, including respiratory conditions, heart conditions, obesity, diabetes, and conditions related to immunodeficiency.\n* **Health system challenges**: measures factors such as hospital bed availability, pharmacies, and healthcare spending per capita within a region, among many other variables. These aim to capture the capacity, strength, accessibility and preparedness of the healthcare system to respond to COVID. \n* **Crowded living & working areas**: measures variables within a community such as working in a high- risk industry or living in a nursing home or prison, which significantly contribute to a person's exposure to and vulnerability to the virus. \n* **Population density**: measures the number of people per unit of area. Higher population density has been demonstrated to increase the risk of quick viral spread and adverse health outcomes. Given its importance in understanding vulnerability to the pandemic, it comprises a specific theme in the index.\n\nSurgo Ventures sources their data from the CDC, Centers for Medicare, & Medicaid Services (CMS), the Harvard Global Health Institute, PolicyMap, the U.S Bureau of Labor Statistics (BLS), the U.S. Census Bureau (USCB), the National Cancer Institute (NCI), the National Center for HIV, STD and TB Prevention (NCHSTP), Kaiser Health News, Census Economic Annual Surveys, the Vera institute for Justice, and the Association of Public Health Laboratories (APHL).\n\nThe CCVI is updated whenever new research about risk factors for COVID becomes available. Thus far it's been updated approximately every 4-6 months, but this may change. The way the CCVI is calculated may also change in the future, for instance to take into account economic recovery."
+        },
+        {
+          "question": "Limitations\n",
+          "questionId": "limitations-vulnerability ",
+          "answer": "Vulnerability is a complex issue, and it does not look the same in every community and through every lens. There are several limitations of the CCVI data to keep in mind: \n\n* The index is an estimate of vulnerability and does not account for every factor which may make an individual or community at higher risk of COVID disease or death. \n* For the most complete understanding of a community’s vulnerability, the index should be used in conjunction with COVID statistics and data on public response, such as test site locations, [nonpharmaceutical interventions (NPIs)](https://covidactnow.org/glossary#npi), and vaccine distribution. \n* The CCVI may not capture all at-risk essential worker groups represented in the “crowded living and working areas” special vulnerability."
+        },
+        {
+          "question": "Still have more questions? ",
+          "questionId": "more-questions",
+          "answer": "For further details, read [](https://docs.google.com/document/d/142EPwY0GqcSJlsD2fJOHIg_2G4e2ksxy8iToJ7maP4Y/edit)[Surgo’s methodology and sourcing document](https://covid-static-assets.s3.amazonaws.com/US-CCVI/COVID-19+Community+Vulnerability+Index+(CCVI)+Methodology.pdf)."
+        },
+        {
+          "question": "More information on vulnerability",
+          "questionId": "more-info-vulnerability",
+          "answer": "[Why vulnerability data is important for all communities ](/covid-explained/covid-vulnerability-data)\n\n[Resources for vulnerable people](/covid-explained/federal-resources-covid-relief)"
         }
       ]
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now uses five key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other two—[ICU capacity used](#icu-capacity-used) and [% vaccinated](#percent-vaccinated)—reflect a location's preparedness to handle COVID risk. Below, learn more about each metric and how it is assessed.",
+  "pageIntro": "Covid Act Now uses six key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other three—[ICU capacity used](#icu-capacity-used), [% vaccinated](#percent-vaccinated) and [vulnerability](https://covidactnow.org/covid-risk-levels-metrics#vulnerability)—reflect a location's ability to protect itself and recover from COVID. Below, learn more about each metric and how it is assessed.",
   "frameworkLogos": [
     {
       "image": "/images_cms/the-rockefeller-foundation-logo.png",

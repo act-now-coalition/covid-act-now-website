@@ -5,6 +5,7 @@ import {
   introSection,
   metricSections,
   learnPages,
+  ExplainerQuestion,
 } from 'cms-content/learn';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
@@ -84,9 +85,11 @@ const MetricExplainer = () => {
               {sectionThermometer && (
                 <ThermometerBox>{sectionThermometer}</ThermometerBox>
               )}
-              {section.questions.map(question => (
+              {section.questions.map((question: ExplainerQuestion) => (
                 <Fragment key={question.questionId}>
-                  <ItemName>{question.question}</ItemName>
+                  {question.question && (
+                    <ItemName>{question.question}</ItemName>
+                  )}
                   <MarkdownContent source={question.answer} />
                 </Fragment>
               ))}

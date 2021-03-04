@@ -100,7 +100,11 @@ const CompareTableRow = (props: {
               $iconColor={column.getIconColor(location)}
             >
               <FiberManualRecordIcon />
-              <DataCellValue $valueUnknown={valueUnknown}>
+              <DataCellValue
+                $valueUnknown={valueUnknown}
+                $textAlign={column.textAlign}
+                $fontSize={column.fontSize}
+              >
                 {column.getFormattedValue(location)}
               </DataCellValue>
             </DataCell>

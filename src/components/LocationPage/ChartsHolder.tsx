@@ -27,6 +27,9 @@ import { getRecommendationsShareUrl } from 'common/urls';
 import { Region, State, getStateName } from 'common/regions';
 import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
+import { useCcviForFips } from 'common/hooks';
+import { useScrollToElement } from 'common/hooks';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -59,6 +62,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  useScrollToElement();
 
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
@@ -164,6 +168,8 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     scrollTo(metricRefs[metric].current);
   };
 
+  const ccviScores = useCcviForFips(region.fipsCode);
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -187,6 +193,9 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             stateId={(region as State).stateCode || undefined}
             region={region}
           />
+        </MainContentInner>
+        <MainContentInner id="vulnerabilities">
+          <VulnerabilitiesBlock scores={ccviScores} region={region} />
         </MainContentInner>
         <MainContentInner>
           <Recommend

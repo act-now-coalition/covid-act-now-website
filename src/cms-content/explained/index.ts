@@ -16,8 +16,12 @@ import immunity from '../articles/covid-immunity.json';
 import indigenousPeoplesDay from '../articles/covid-impact-majority-native-american-counties.json';
 import metros from '../articles/metros.json';
 import schoolGuidance from '../articles/school-guidance.json';
+import vulnerabilityData from '../articles/covid-vulnerability-data.json';
+import federalResources from '../articles/federal-resources-covid-relief.json';
 
 const orderedArticles = [
+  vulnerabilityData,
+  federalResources,
   schoolGuidance,
   variantsAndVaccines,
   vaccineProgress,

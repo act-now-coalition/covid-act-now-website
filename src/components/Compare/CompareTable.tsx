@@ -30,7 +30,11 @@ import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
 import { Region, MetroArea } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
-import { orderedColumns, orderedColumnsVaccineFirst } from './columns';
+import {
+  orderedColumns,
+  orderedColumnsVaccineFirst,
+  orderedColumnsVulnerabilityFirst,
+} from './columns';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -69,6 +73,7 @@ const CompareTable = (props: {
   >;
   region?: Region;
   vaccinesFirst?: boolean;
+  vulnerabilityFirst?: boolean;
 }) => {
   const {
     sorter,
@@ -86,6 +91,7 @@ const CompareTable = (props: {
     setHomepageSliderValue,
     region,
     vaccinesFirst,
+    vulnerabilityFirst,
   } = props;
 
   const currentCounty = props.county && props.currentCounty;
@@ -107,7 +113,8 @@ const CompareTable = (props: {
     return [...sortedLocations, ...locationsWithoutValue];
   }
 
-  const columns = vaccinesFirst ? orderedColumnsVaccineFirst : orderedColumns;
+  let columns = vaccinesFirst ? orderedColumnsVaccineFirst : orderedColumns;
+  columns = vulnerabilityFirst ? orderedColumnsVulnerabilityFirst : columns;
 
   const getPopulation = (location: SummaryForCompare) =>
     location.region.population;
@@ -234,7 +241,6 @@ const CompareTable = (props: {
                 imageFilename="CovidActNow-compare.png"
                 url={getShareUrl}
                 quote={shareQuote}
-                hashtags={['COVIDActNow']}
                 onCopyLink={() =>
                   trackCompareEvent(EventAction.COPY_LINK, trackLabel)
                 }
