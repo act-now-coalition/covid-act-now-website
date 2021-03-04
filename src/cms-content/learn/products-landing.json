@@ -64,7 +64,7 @@
       "productName": "Coverage",
       "productId": "coverage",
       "productSubtitle": "coverage",
-      "productDescription": "Our data, metrics, and risk levels are available in the API. Refer to our [data definitions](https://apidocs.covidactnow.org/data-definitions) for all included fields.\n\nWe provide data aggregated for"
+      "productDescription": "Our data, metrics, and risk levels are available in the API. Refer to our [data definitions](https://apidocs.covidactnow.org/data-definitions) for all included fields."
     },
     {
       "productName": "FAQs",

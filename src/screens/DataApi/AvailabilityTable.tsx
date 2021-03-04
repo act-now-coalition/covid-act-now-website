@@ -17,25 +17,35 @@ import { formatPercent } from 'common/utils';
 
 export const AVAILABILITY_SNAPSHOT = availabilitySnapshot as MetricAvailability[];
 
-export const NAMES_BY_FIELD: { [key: string]: string } = {
-  'actuals.cases': 'Cases',
-  'metrics.caseDensity': 'Daily new cases',
-  'metrics.infectionRate': 'Infection Rate',
-  'riskLevels.overall': 'Risk level',
-  'metrics.vaccinationsInitiatedRatio': '% Vaccinated',
-  'metrics.testPositivityRatio': 'Test positivity',
-  'actuals.positiveTests': 'Testing volume',
-  'metrics.icuCapacityRatio': 'ICU Utilization',
-  'actuals.deaths': 'Deaths',
-};
+interface MetricField {
+  displayName: string;
+  field: string;
+}
 
-export const FIELDS_PRETTY_NAMES = AVAILABILITY_SNAPSHOT.map(record => {
-  if (NAMES_BY_FIELD[record.name]) {
+export const FIELDS: MetricField[] = [
+  { displayName: 'Overall risk level', field: 'riskLevels.overall' },
+  { displayName: 'Daily new cases', field: 'metrics.caseDensity' },
+  { displayName: 'Infection rate', field: 'metrics.infectionRate' },
+  { displayName: 'Test positivity', field: 'metrics.testPositivityRatio' },
+  { displayName: 'Vaccinations', field: 'metrics.vaccinationsInitiatedRatio' },
+  { displayName: 'Cases', field: 'actuals.cases' },
+  { displayName: 'Deaths', field: 'actuals.deaths' },
+  { displayName: 'Total testing volume', field: 'actuals.positiveTests' },
+  { displayName: 'Hospitalization usage', field: 'metrics.icuCapacityRatio' },
+  { displayName: 'ICU usage', field: 'metrics.icuCapacityRatio' },
+];
+
+export const FIELDS_PRETTY_NAMES = FIELDS.map(field => {
+  const record = AVAILABILITY_SNAPSHOT.find(
+    record => field.field === record.name,
+  );
+  if (record) {
     return {
       ...record,
-      ...{ name: NAMES_BY_FIELD[record.name] },
+      ...{ name: field.displayName },
     };
   }
+
   return null;
 }).filter((record): record is MetricAvailability => record !== null);
 
@@ -71,6 +81,7 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
           textDecorationStyle: 'dotted',
           textUnderlinePosition: 'under',
           verticalAlign: 'middle',
+          fontSize: 14,
         }}
       >
         {text}
@@ -117,7 +128,19 @@ const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
   return <div></div>;
 };
 
+const useRowStyles = makeStyles({
+  row: {
+    '&:nth-of-type(even)': {
+      backgroundColor: '#fafafa',
+    },
+  },
+  rowName: {
+    fontWeight: 500,
+    size: 14,
+  },
+});
 const AvailabilityRow: React.FC<{ row: MetricAvailability }> = ({ row }) => {
+  const classes = useRowStyles();
   // grid based centering, hopefully won't need
   // <Grid container style={{ width: '100%' }} justify="center">
   // <Grid item>
@@ -125,33 +148,56 @@ const AvailabilityRow: React.FC<{ row: MetricAvailability }> = ({ row }) => {
   //</Grid>
   // </Grid>
   return (
-    <TableRow key={row.name}>
-      <TableCell component="th" align="left" scope="row">
+    <TableRow className={classes.row} key={row.name}>
+      <TableCell
+        className={classes.rowName}
+        style={{ width: '31%' }}
+        component="th"
+        align="left"
+        scope="row"
+      >
         {row.name}
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" style={{ width: '23%' }}>
         <Status status={row.state} />
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" style={{ width: '23%' }}>
         <Status status={row.county} />
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" style={{ width: '23%' }}>
         <Status status={row.metro} />
       </TableCell>
     </TableRow>
   );
 };
 
+const useTableStyles = makeStyles({
+  headerText: {
+    fontFamily: 'Roboto',
+    fontWeight: 500,
+    fontSize: 13,
+    textTransform: 'uppercase',
+    backgroundColor: 'white',
+  },
+});
+
 const AvailabilityTable = ({ rows }: TableProps) => {
+  const classes = useTableStyles();
   return (
     <TableContainer>
-      <Table size="small" aria-label="a dense table">
-        <TableHead>
+      <Table aria-label="Data Coverage Table">
+        <TableHead className={classes.headerText}>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="center">States</TableCell>
-            <TableCell align="center">Counties</TableCell>
-            <TableCell align="center">Metros</TableCell>
+            <TableCell style={{ width: '31%' }}>Metric</TableCell>
+            <TableCell align="center" style={{ width: '23%' }}>
+              States
+            </TableCell>
+            <TableCell align="center" style={{ width: '23%' }}>
+              Counties
+            </TableCell>
+            <TableCell align="center" style={{ width: '23%' }}>
+              Metros
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

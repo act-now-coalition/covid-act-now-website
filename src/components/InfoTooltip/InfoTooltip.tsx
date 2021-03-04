@@ -44,6 +44,7 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
           onClick={() => tooltipAnchorOnClick(isMobile, handleOpen)}
         />
       </StyledTooltip>
+
       <VisuallyHiddenDiv content={props.title} elemId={idForAccessability} />
     </>
   );
