@@ -43,7 +43,7 @@ const Announcements: React.FC = () => {
         <br />
         <br />
         <HashLink
-          to="#compare"
+          to="#compare-vulnerabilities"
           scroll={element => scrollWithOffset(element, -80)}
         >
           See the most vulnerable counties
