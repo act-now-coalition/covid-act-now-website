@@ -132,7 +132,7 @@ const VaccinationLines: React.FC<{
   height,
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 30,
+  marginLeft = 35,
   marginRight = 20,
 }) => {
   const innerHeight = height - marginTop - marginBottom;
