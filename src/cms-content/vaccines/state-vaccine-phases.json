@@ -757,7 +757,7 @@
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 3,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1A",
