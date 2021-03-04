@@ -1679,7 +1679,7 @@
       ]
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "North Carolina",
       "fips": "37",
       "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot",
@@ -1706,10 +1706,10 @@
         {
           "phase": "3",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Front-line essential workers",
           "expandedDefinitionUrl": "",
-          "startDate": "March 10",
+          "startDate": "March 4",
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
