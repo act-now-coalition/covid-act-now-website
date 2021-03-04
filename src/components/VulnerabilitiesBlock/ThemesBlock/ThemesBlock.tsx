@@ -1,4 +1,5 @@
 import React from 'react';
+import { sortBy } from 'lodash';
 import { Row, ThemeNameCell, LevelCell, Wrapper } from './ThemesBlock.style';
 import { orderedCcviThemes, CcviThemeInfo } from 'cms-content/tooltips';
 import { InfoTooltip } from 'components/InfoTooltip';
@@ -19,9 +20,14 @@ const ThemesBlock: React.FC<{ scores: RegionCcviItem }> = ({ scores }) => {
     },
   );
 
+  const themesSortedByScoreDesc = sortBy(
+    themesWithScores,
+    theme => theme.score,
+  ).reverse();
+
   return (
     <Wrapper>
-      {themesWithScores.map((theme: ThemeWithScore) => {
+      {themesSortedByScoreDesc.map((theme: ThemeWithScore) => {
         const level = getCcviLevel(theme.score);
         const levelName = getCcviLevelName(level);
         return (

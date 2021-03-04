@@ -29,7 +29,7 @@ const TooltipWithStyles = withStyles({
 })(Tooltip);
 
 export const StyledTooltip = styled(TooltipWithStyles).attrs(props => ({
-  placement: 'bottom',
+  placement: 'top',
   arrow: true,
   interactive: true,
   TransitionComponent: Fade,
@@ -63,11 +63,20 @@ export const InfoIcon = styled(InfoOutlinedIcon)<{ $isOpen: boolean }>`
 
 export const StyledMarkdown = styled(MarkdownBody)`
   p,
-  a {
+  a,
+  ul,
+  li {
     color: white;
     font-size: 0.8125rem;
     line-height: 1.4;
     margin: 0;
+  }
+
+  ul {
+    margin-bottom: 0.5rem;
+    a {
+      color: white;
+    }
   }
 
   p:not(:last-child) {

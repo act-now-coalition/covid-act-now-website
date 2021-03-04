@@ -3,7 +3,7 @@ import {
   LocationPageSectionHeader,
   ChartDescription,
   BetaTag,
-  ChartHeaderWrapper,
+  HeaderWrapper,
 } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
 import Disclaimer from 'components/Disclaimer/Disclaimer';
@@ -38,7 +38,7 @@ function ChartBlock(props: {
 
   return (
     <Fragment>
-      <ChartHeaderWrapper>
+      <HeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
           <>{chartHeaderTooltip}</>
@@ -52,7 +52,7 @@ function ChartBlock(props: {
             isMobile={isMobile}
           />
         )}
-      </ChartHeaderWrapper>
+      </HeaderWrapper>
       <Subtitle1>{region.fullName}</Subtitle1>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}

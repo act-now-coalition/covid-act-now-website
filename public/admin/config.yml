@@ -650,7 +650,7 @@ collections:
                 name: questions
                 widget: list
                 fields:
-                  - { label: Question, name: question, widget: text }
+                  - { label: Question, name: question, widget: text, required: false }
                   - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
           - label: 'Framework section logos'

@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { ClickAwayListener, useMediaQuery } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { ClickAwayListener } from '@material-ui/core';
 import { downloadImage } from './utils';
-import FacebookShareButton from './FacebookShareButton';
-import TwitterShareButton from './TwitterShareButton';
-import LinkedinShareButton from './LinkedinShareButton';
-import CopyLinkButton from './CopyLinkButton';
-import { ShareButton, SocialButtonsContainer } from './ShareButtons.style';
-import { useEscToClose } from 'common/hooks';
+import { ShareButton } from './ShareButtons.style';
+import { useEscToClose, useBreakpoint } from 'common/hooks';
+import SocialButtonBlock from './SocialButtonBlock';
 
 const ShareImageButtons: React.FC<{
   imageUrl: string | (() => Promise<string>);
   imageFilename: string;
   url: string | (() => Promise<string>);
   quote: string;
-  hashtags: string[];
   disabled?: boolean;
   onSaveImage?: () => void;
   onCopyLink?: () => void;
@@ -27,7 +22,6 @@ const ShareImageButtons: React.FC<{
   imageFilename,
   url,
   quote,
-  hashtags,
   disabled = false,
   onShareOnFacebook,
   onShareOnTwitter,
@@ -51,8 +45,8 @@ const ShareImageButtons: React.FC<{
     return () => clearTimeout(timeoutId);
   };
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useBreakpoint(600);
+
   const socialIconSize = isMobile ? 40 : 50;
 
   const showSocialButtons = () => {
@@ -96,25 +90,14 @@ const ShareImageButtons: React.FC<{
           </ShareButton>
         </ButtonGroup>
         {socialSharingProps && (
-          <SocialButtonsContainer onClick={() => hideSocialButtons(1500)}>
-            <FacebookShareButton
-              onClickShare={onShareOnFacebook}
-              {...socialSharingProps}
-            />
-            <TwitterShareButton
-              onClickShare={onShareOnTwitter}
-              {...socialSharingProps}
-              hashtags={hashtags}
-            />
-            <LinkedinShareButton
-              onClickShare={onShareOnLinkedin}
-              {...socialSharingProps}
-            />
-            <CopyLinkButton
-              url={socialSharingProps.url}
-              onCopyLink={onCopyLink}
-            />
-          </SocialButtonsContainer>
+          <SocialButtonBlock
+            {...socialSharingProps}
+            onClickContainer={() => hideSocialButtons(1500)}
+            onShareOnFacebook={onShareOnFacebook}
+            onShareOnTwitter={onShareOnTwitter}
+            onShareOnLinkedin={onShareOnLinkedin}
+            onCopyLink={onCopyLink}
+          />
         )}
       </div>
     </ClickAwayListener>
