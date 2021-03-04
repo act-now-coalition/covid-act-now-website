@@ -5,6 +5,7 @@ import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 import MuiWarningIcon from '@material-ui/icons/Warning';
+import MuiInfoIcon from '@material-ui/icons/Info';
 import Button from '@material-ui/core/Button';
 import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
 
@@ -368,5 +369,12 @@ export const WarningIcon = styled(MuiWarningIcon)`
   align-self: flex-start;
   path {
     fill: ${COLOR_MAP.RED.BASE};
+  }
+`;
+
+export const PurpleInfoIcon = styled(MuiInfoIcon)`
+  align-self: flex-start;
+  path {
+    fill: ${COLOR_MAP.PURPLE};
   }
 `;
