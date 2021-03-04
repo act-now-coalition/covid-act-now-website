@@ -2013,6 +2013,38 @@
           "expandedDefinitionUrl": "",
           "startDate": "March 1",
           "updatedAt": "2021-02-18T01:52:35.985Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:41:40.165Z",
+          "phase": "1B",
+          "tier": "6",
+          "description": "* Adults 45+ with underlying health conditions",
+          "startDate": "March 29"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:42:31.387Z",
+          "phase": "1B",
+          "tier": "7",
+          "description": "* Individuals 16+ with underlying health conditions",
+          "startDate": "May 1"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:43:22.324Z",
+          "phase": "2",
+          "tier": "1",
+          "description": "* Individuals 45+",
+          "startDate": "June 1"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:43:55.936Z",
+          "phase": "2",
+          "tier": "2",
+          "description": "* Individuals 16+",
+          "startDate": "July 1"
         }
       ]
     },
