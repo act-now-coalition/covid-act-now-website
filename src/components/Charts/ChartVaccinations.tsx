@@ -145,7 +145,10 @@ const VaccinationLines: React.FC<{
 
   const dateScale = getUtcScale(dateFrom, dateTo, 0, innerWidth);
 
-  const maxY = 0.35; // 35%
+  const dataMaxY = max(seriesList.map(series => last(series.data)?.y ?? 0));
+  // Add 5% buffer then round to the next highest 10% to align with a grid line.
+  const dataMaxWithBuffer = Math.ceil((100 * dataMaxY + 5) / 10) / 10;
+  const maxY = Math.min(1, Math.max(0.35, dataMaxWithBuffer));
   const yScale = scaleLinear({
     domain: [0, maxY],
     range: [innerHeight, 0],
