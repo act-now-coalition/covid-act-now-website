@@ -2645,7 +2645,7 @@
       "fips": "54"
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Wisconsin",
       "fips": "55",
       "eligibilityInfoUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-about.htm",
@@ -2664,7 +2664,7 @@
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Education and child care\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-front-line essential health care personnel\n* Facility staff and residents in congregate living settings",
+          "description": "* (NEW) Education and child care personnel\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-front-line essential health care personnel\n* Facility staff and residents in congregate living settings",
           "expandedDefinitionUrl": "",
           "startDate": "3/1/21",
           "updatedAt": "2021-02-18T01:52:35.985Z"
