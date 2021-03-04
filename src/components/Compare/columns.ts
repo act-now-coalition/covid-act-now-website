@@ -122,3 +122,8 @@ export const orderedColumnsVaccineFirst = [
   vaccinationsColumn,
   ...orderedColumns.filter(c => c !== vaccinationsColumn),
 ];
+
+export const orderedColumnsVulnerabilityFirst = [
+  ccviColumn,
+  ...orderedColumns.filter(c => c !== ccviColumn),
+];

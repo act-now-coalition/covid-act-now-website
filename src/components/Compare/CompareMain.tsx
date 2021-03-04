@@ -65,6 +65,7 @@ const CompareMain = (props: {
   stateId?: string;
   region?: Region;
   vaccinesFirst?: boolean;
+  vulnerabilityFirst?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
 
@@ -254,6 +255,15 @@ const CompareMain = (props: {
     }
   }, [props.vaccinesFirst]);
 
+  useEffect(() => {
+    if (props.vulnerabilityFirst) {
+      setSorter(100);
+      setSortByPopulation(false);
+      setSortDescending(true);
+      setHomepageScope(HomepageLocationScope.STATE);
+    }
+  }, [props.vulnerabilityFirst]);
+
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
   if (!locations || locations.length < 2) {
     return null;
@@ -287,10 +297,12 @@ const CompareMain = (props: {
     setHomepageSliderValue,
     region: region,
     vaccinesFirst: props.vaccinesFirst,
+    vulnerabilityFirst: props.vulnerabilityFirst,
   };
 
   return (
     <Fragment>
+      <div id="vulnerability"></div>
       <DivForRef ref={tableRef} id="compare">
         <CompareTable
           {...sharedProps}
