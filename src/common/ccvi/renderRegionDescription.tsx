@@ -1,6 +1,6 @@
 import React from 'react';
 import { CcviLevel, getCcviLevel } from './index';
-import { formatPercent } from 'common/utils';
+import { formatPercent, formatDecimal } from 'common/utils';
 import { Region, State, County } from 'common/regions';
 
 const mostVulnerableFips = ['48', '29460', '37107'];
@@ -109,6 +109,17 @@ function renderStateDescription(
   }
 }
 
+/* Special cases regions with a score that isn't 1 but would round up to 1 and confusingly render as 100% */
+function formatScoreAsPercent(overallScore: number): string {
+  if (overallScore > 0.995 && overallScore < 1) {
+    const scoreToPercent = Math.floor(overallScore * 1000) / 10;
+    const formattedDecimal = formatDecimal(scoreToPercent, 1);
+    return `${formattedDecimal}%`;
+  } else {
+    return formatPercent(overallScore);
+  }
+}
+
 function renderCountyOrMetroDescription(
   overallScore: number,
   isMostVulnerable: boolean,
@@ -116,7 +127,7 @@ function renderCountyOrMetroDescription(
   regionType: string,
 ): React.ReactElement {
   const level = getCcviLevel(overallScore);
-  const scoreAsPercent = formatPercent(overallScore);
+  const scoreAsPercent = formatScoreAsPercent(overallScore);
 
   if (isMostVulnerable) {
     return (
