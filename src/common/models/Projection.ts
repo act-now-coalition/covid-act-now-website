@@ -152,20 +152,6 @@ export interface VaccinationsInfo {
   ratioDosesAdministered: number | null;
 }
 
-export interface ProvenanceInfo {
-  ratioCompletedSeries: Array<number | null>;
-  ratioInitiatedSeries: Array<number | null>;
-
-  peopleInitiated: number;
-  ratioInitiated: number;
-
-  peopleVaccinated: number;
-  ratioVaccinated: number;
-
-  dosesDistributed: number | null;
-  ratioDosesAdministered: number | null;
-}
-
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main

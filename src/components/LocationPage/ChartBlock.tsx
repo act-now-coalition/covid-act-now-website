@@ -37,6 +37,7 @@ function ChartBlock(props: {
   const metricToProvenanceMap: MetricToProvenance = makeMetricToProvenanceMap(
     projections.primary.annotations,
   );
+  const provenanceForMetric = metricToProvenanceMap[metric];
 
   const showBetaTag = metric === Metric.VACCINATIONS;
 
@@ -77,9 +78,9 @@ function ChartBlock(props: {
         <>
           <MetricChart metric={metric} projections={projections} />
           <Disclaimer
-            metricName={metric}
+            metric={metric}
             region={region}
-            provenanceInfo={metricToProvenanceMap}
+            provenanceForMetric={provenanceForMetric}
           />
         </>
       )}
