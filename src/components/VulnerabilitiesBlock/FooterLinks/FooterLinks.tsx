@@ -29,7 +29,7 @@ const FooterLinks: React.FC<{ region: Region }> = ({ region }) => {
         )}
         <li>
           <Link
-            to="/covid-explained/covid-vulnerability-data"
+            to="/covid-explained/federal-resources-covid-relief"
             onClick={() => trackLinkClick('Vulnerable community resources')}
           >
             Resources for vulnerable people
@@ -37,7 +37,7 @@ const FooterLinks: React.FC<{ region: Region }> = ({ region }) => {
         </li>
         <li>
           <Link
-            to="/covid-explained/federal-resources-covid-relief"
+            to="/covid-explained/covid-vulnerability-data"
             onClick={() =>
               trackLinkClick('Why is vulnerability data important')
             }
