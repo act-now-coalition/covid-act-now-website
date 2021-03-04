@@ -2049,7 +2049,7 @@
       ]
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "Pennsylvania",
       "fips": "42",
       "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
@@ -2066,12 +2066,19 @@
         },
         {
           "phase": "1B",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* First responders\n* Education workers\n* Front-line essential workers",
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* Education workers\n",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 4",
+          "updatedAt": "2021-03-04T18:47:02.344Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:46:00.987Z",
+          "phase": "1B",
+          "tier": "2",
+          "description": "* First Responders\n* Frontline essential workers"
         },
         {
           "phase": "1C",
