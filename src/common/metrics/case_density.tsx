@@ -139,7 +139,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 
 function renderDisclaimer(
   region: Region,
-  provenanceForMetric?: Sources,
+  provenance?: Sources,
 ): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation;
 
@@ -150,7 +150,7 @@ function renderDisclaimer(
         title={getDataSourceTooltipContent(
           Metric.CASE_DENSITY,
           region,
-          provenanceForMetric,
+          provenance,
         )}
         mainCopy={'where our data comes from'}
         trackOpenTooltip={() =>

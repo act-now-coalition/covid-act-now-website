@@ -8,15 +8,15 @@ import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 const Disclaimer = ({
   metric,
   region,
-  provenanceForMetric,
+  provenance,
 }: {
   metric: Metric;
   region: Region;
-  provenanceForMetric?: Sources;
+  provenance?: Sources;
 }) => {
   return (
     <DisclaimerWrapper>
-      {getMetricDisclaimer(metric, region, provenanceForMetric)}
+      {getMetricDisclaimer(metric, region, provenance)}
     </DisclaimerWrapper>
   );
 };

@@ -155,7 +155,7 @@ function renderStatus(projections: Projections) {
 
 function renderDisclaimer(
   region: Region,
-  provenanceForMetric?: Sources,
+  provenance?: Sources,
 ): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricCalculation;
 
@@ -166,7 +166,7 @@ function renderDisclaimer(
         title={getDataSourceTooltipContent(
           Metric.POSITIVE_TESTS,
           region,
-          provenanceForMetric,
+          provenance,
         )}
         mainCopy={'where our data comes from'}
         trackOpenTooltip={() =>

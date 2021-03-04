@@ -68,10 +68,10 @@ export function getMetricDefinition(metric: Metric) {
 export function getMetricDisclaimer(
   metric: Metric,
   region: Region,
-  provenanceForMetric?: Sources,
+  provenance?: Sources,
 ) {
   const metricDefinition = getMetricDefinition(metric);
-  return metricDefinition.renderDisclaimer(region, provenanceForMetric);
+  return metricDefinition.renderDisclaimer(region, provenance);
 }
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {

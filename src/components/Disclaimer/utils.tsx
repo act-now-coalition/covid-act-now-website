@@ -6,8 +6,10 @@ import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 
 /**
- * Hardcoding the sources for the time being
- * until we start getting it from the backend.
+ * Hardcoding sources as fallback (metricToSourceMap) for the time being
+ * until we have full API coverage.
+ *
+ * Todo (chelsi): delete fallback code when API coverage is complete.
  */
 
 interface SourceInfo {
@@ -42,7 +44,7 @@ const metricToSourceMap: RegionSourceMap = {
   },
   [Metric.CASE_GROWTH_RATE]: {
     state: {
-      sourceName: 'The New York Times!',
+      sourceName: 'The New York Times',
       url: 'https://github.com/nytimes/covid-19-data',
     },
     metro: {
@@ -152,31 +154,20 @@ export const getDataSourceTooltipContent = (
   );
 };
 
-export function getSourcesForMetric(annotations: any, metric: Metric) {
+export function getSourcesForMetric(
+  annotations: Annotations,
+  metric: Metric,
+): Sources | undefined {
   switch (metric) {
     case Metric.CASE_DENSITY:
-      return annotations.caseDensity.sources;
+      return annotations.caseDensity?.sources;
     case Metric.CASE_GROWTH_RATE:
-      return annotations.infectionRate.sources;
+      return annotations.infectionRate?.sources;
     case Metric.POSITIVE_TESTS:
-      return annotations.testPositiveRate.sources;
+      return annotations.testPositivityRatio?.sources;
     case Metric.HOSPITAL_USAGE:
-      return annotations.icuCapacityRatio.sources;
+      return annotations.icuCapacityRatio?.sources;
     case Metric.VACCINATIONS:
-      return annotations.caseDensity.sources;
+      return annotations.vaccinationsInitiated?.sources;
   }
-}
-
-export type MetricToProvenance = { [metric in Metric]: Sources | undefined };
-
-export function makeMetricToProvenanceMap(
-  annotations: Annotations,
-): MetricToProvenance {
-  return {
-    [Metric.CASE_DENSITY]: annotations.caseDensity?.sources,
-    [Metric.CASE_GROWTH_RATE]: annotations.infectionRate?.sources,
-    [Metric.POSITIVE_TESTS]: annotations.testPositivityRatio?.sources,
-    [Metric.HOSPITAL_USAGE]: annotations.icuCapacityRatio?.sources,
-    [Metric.VACCINATIONS]: annotations.caseDensity?.sources,
-  };
 }

@@ -7,7 +7,7 @@ export interface MetricDefinition {
   renderStatus: (projections: Projections) => React.ReactElement;
   renderDisclaimer: (
     region: Region,
-    provenanceForMetric?: Sources,
+    provenance?: Sources,
   ) => React.ReactElement;
   metricName: string;
   extendedMetricName: string;
