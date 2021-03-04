@@ -167,7 +167,7 @@ const ChartCaseDensity: FunctionComponent<{
           name={region.name}
           isActive={activeZone.name === region.name}
           x={23}
-          y={yScale(0.5 * (region.valueFrom + region.valueFrom)) - 6}
+          y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
       ))}
 

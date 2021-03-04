@@ -117,13 +117,14 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
     stroke: ${props =>
       props.isActive || palette(props).isDarkMode ? props.color : 'none'};
     stroke-width: 1px;
+    opacity: ${props => (props.isActive ? 1 : 0)};
   }
   text {
-    fill: ${props =>
-      props.isActive ? palette(props).background : props.color};
+    fill: ${props => (props.isActive ? palette(props).background : 'none')};
     text-anchor: start;
     font-size: 11px;
     text-transform: uppercase;
+    opacity: ${props => (props.isActive ? 1 : 0)};
   }
 `;
 
