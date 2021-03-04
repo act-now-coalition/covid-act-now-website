@@ -2484,9 +2484,22 @@
         {
           "currentlyEligible": false,
           "updatedAt": "2021-02-21T22:09:12.582Z",
-          "phase": "5",
-          "startDate": "Early March",
-          "description": "* Adults with high-risk medical conditions"
+          "phase": "5A",
+          "startDate": "March 8",
+          "description": "* Adults (55+) with high-risk medical conditions\n* K-12 education and child care personnel\n* Public safety workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:53:24.268Z",
+          "phase": "5B",
+          "description": "* Individuals 16+ with certain high-risk health conditions"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-04T18:54:09.016Z",
+          "phase": "6",
+          "description": "* Individuals 60+",
+          "startDate": "Late March"
         }
       ]
     },
