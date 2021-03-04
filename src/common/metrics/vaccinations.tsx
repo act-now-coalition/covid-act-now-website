@@ -23,11 +23,11 @@ export const VaccinationsMetric: MetricDefinition = {
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Vaccinated: 1st and 2nd shot',
-  metricNameForCompare: 'Vaccinated (1st shot)',
+  extendedMetricName: 'Vaccinated: 1st and 2nd dose',
+  metricNameForCompare: 'Vaccinated (1+ dose)',
 };
 
-const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
+const SHORT_DESCRIPTION_LOW = 'Population given at least one dose';
 // const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const UNKNOWN = 'Unknown';
@@ -88,9 +88,9 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
-      received the first shot and {peopleVaccinated} ({percentVaccinated}) have
-      also received the second shot. {distributedText} According to the CDC,
-      fewer than 0.001% of those who have received the first dose have
+      received at least the first dose and {peopleVaccinated} (
+      {percentVaccinated}) are fully vaccinated. {distributedText} According to
+      the CDC, fewer than 0.001% of those who have received the first dose have
       experienced a severe adverse reaction, none of them deadly.
     </Fragment>
   );
