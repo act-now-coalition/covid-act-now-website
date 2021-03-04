@@ -2330,7 +2330,7 @@
           "description": "* 16 years old or older with high-risk health conditions\n* Ages 55+",
           "expandedDefinitionUrl": "",
           "startDate": "March 8",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-04T18:48:35.227Z"
         },
         {
           "phase": "2A",
@@ -2385,6 +2385,13 @@
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-04T18:50:54.556Z",
+          "phase": "1C",
+          "description": "* Education and child care personnel",
+          "startDate": "March 4"
         }
       ]
     },
