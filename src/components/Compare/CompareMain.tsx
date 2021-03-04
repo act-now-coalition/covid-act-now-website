@@ -260,7 +260,7 @@ const CompareMain = (props: {
       setSorter(100);
       setSortByPopulation(false);
       setSortDescending(true);
-      setHomepageScope(HomepageLocationScope.STATE);
+      setHomepageScope(HomepageLocationScope.COUNTY);
     }
   }, [props.vulnerabilityFirst]);
 
