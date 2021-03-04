@@ -278,9 +278,10 @@ export class Projection {
       metrics,
       metricsTimeseries,
     );
-    this.vaccinations =
-      this.vaccinationsInfo?.ratioInitiatedSeries ||
-      this.dates.map(date => null);
+
+    this.vaccinations = this.vaccinationRate;
+    // this.vaccinationsInfo?.ratioInitiatedSeries ||
+    // this.dates.map(date => null);
     this.vaccinationsCompleted =
       this.vaccinationsInfo?.ratioCompletedSeries ||
       this.dates.map(date => null);
@@ -304,6 +305,28 @@ export class Projection {
     return lastValue(this.smoothedDailyCases);
   }
 
+  get vaccinationRate() {
+    const vaccinations = this.actualTimeseries.map(actual =>
+      actual?.vaccinationsInitiated
+        ? (actual?.vaccinationsCompleted ?? 0) +
+          (actual?.vaccinationsInitiated ?? 0)
+        : null,
+    );
+    const shiftedVaccinations = [
+      ...[null, null, null, null, null, null, null],
+      ...vaccinations.slice(0, vaccinations.length - 7),
+    ];
+    const delta7d = vaccinations.map((value, i) => {
+      const prev = shiftedVaccinations[i];
+      return prev === null ||
+        prev === undefined ||
+        value === null ||
+        value === undefined
+        ? null
+        : (value - prev) / (this.totalPopulation / 100_000) / 7;
+    });
+    return delta7d;
+  }
   /** Returns the date when projections end (should be 30 days out). */
   get finalDate(): Date {
     return this.dates[this.dates.length - 1];
@@ -327,7 +350,7 @@ export class Projection {
         return this.metrics?.testPositivityRatio ?? null;
       case Metric.VACCINATIONS:
         return this.vaccinationsInfo
-          ? this.vaccinationsInfo.ratioInitiated
+          ? lastValue(this.vaccinations) ?? null
           : null;
       case Metric.CASE_DENSITY:
         return this.currentCaseDensity;

@@ -42,7 +42,7 @@ function formatCurrentValueLabels(
         x: lastPoint?.x ? getXPosition(lastPoint) : 0,
         y: lastPoint?.y ? Math.max(getYPosition(lastPoint), currMaxY + 20) : 0,
         label: currSeries.shortLabel,
-        formattedValue: formatPercent(lastPoint?.y, 1),
+        formattedValue: lastPoint?.y,
       },
     ];
   }, []);
@@ -72,9 +72,7 @@ const VaccinesTooltip: React.FC<{
           {seriesInitiated.tooltipLabel}
         </Styles.TooltipLabel>
         <Styles.TooltipValue>
-          {isNumber(pointInitiated.y)
-            ? formatPercent(pointInitiated.y, 1)
-            : '-'}
+          {isNumber(pointInitiated.y) ? pointInitiated.y : '-'}
         </Styles.TooltipValue>
       </Styles.TooltipLine>
       {seriesCompleted && pointCompleted && (
@@ -83,9 +81,7 @@ const VaccinesTooltip: React.FC<{
             {seriesCompleted.tooltipLabel}
           </Styles.TooltipLabel>{' '}
           <Styles.TooltipValue>
-            {isNumber(pointCompleted.y)
-              ? formatPercent(pointCompleted.y, 1)
-              : '-'}
+            {isNumber(pointCompleted.y) ? pointCompleted.y : '-'}
           </Styles.TooltipValue>
         </Styles.TooltipLine>
       )}
@@ -132,7 +128,7 @@ const VaccinationLines: React.FC<{
   height,
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 30,
+  marginLeft = 50,
   marginRight = 20,
 }) => {
   const innerHeight = height - marginTop - marginBottom;
@@ -145,7 +141,7 @@ const VaccinationLines: React.FC<{
 
   const dateScale = getUtcScale(dateFrom, dateTo, 0, innerWidth);
 
-  const maxY = 0.35; // 35%
+  const maxY = 1000; // 35%
   const yScale = scaleLinear({
     domain: [0, maxY],
     range: [innerHeight, 0],
@@ -192,7 +188,7 @@ const VaccinationLines: React.FC<{
             <AxisLeft
               scale={yScale}
               numTicks={5}
-              tickFormat={(value: number) => formatPercent(value, 0)}
+              tickFormat={(value: number) => value}
             />
             <AxisBottom
               innerHeight={innerHeight}

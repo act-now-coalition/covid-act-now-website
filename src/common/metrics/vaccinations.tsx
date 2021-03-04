@@ -35,7 +35,7 @@ const UNKNOWN = 'Unknown';
 // HACK: There isn't a clean way to avoid having grading / zones right now.
 const dummyLevelInfo: LevelInfo = {
   level: Level.LOW,
-  upperLimit: 1,
+  upperLimit: 100000,
   name: '',
   color: '',
   detail: () => '',
@@ -55,7 +55,7 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.SUPER_CRITICAL]: dummyLevelInfo,
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
-    upperLimit: 1,
+    upperLimit: 1000000,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
     detail: () => '',

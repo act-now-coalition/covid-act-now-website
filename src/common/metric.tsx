@@ -105,7 +105,7 @@ const MetricDecimalPlaces: { [metric in Metric]: number } = {
 const MetricsFormattedAsPercentage = [
   Metric.HOSPITAL_USAGE,
   Metric.POSITIVE_TESTS,
-  Metric.VACCINATIONS,
+  // Metric.VACCINATIONS,
 ];
 
 /**
