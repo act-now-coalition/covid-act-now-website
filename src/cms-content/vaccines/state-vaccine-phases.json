@@ -1924,7 +1924,7 @@
       "locationName": "Oklahoma",
       "fips": "40",
       "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
-      "vaccinationSignupUrl": "https://vaccinate.oklahoma.gov/",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
         {
           "phase": "1",
@@ -2420,7 +2420,7 @@
       "locationName": "Utah",
       "fips": "49",
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
-      "vaccinationSignupUrl": "https://coronavirus.utah.gov/vaccine-distribution/#lhd",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
         {
           "phase": "1",
