@@ -533,7 +533,7 @@
       ]
     },
     {
-      "emailAlertVersion": 3,
+      "emailAlertVersion": 2,
       "locationName": "Florida",
       "fips": "12",
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
