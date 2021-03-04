@@ -9,9 +9,6 @@ import {
   PurpleInfoIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
-import HospitalizationsAlert, {
-  isHospitalizationsPeak,
-} from './HospitalizationsAlert';
 import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
@@ -54,13 +51,10 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   }
   let notification: Notification;
 
-  // NOTE: For now showVulnerability() always returns true and will be the notification shown.
   if (showVulnerability(region)) {
     notification = Notification.Vulnerability;
   } else if (showExposureNotifications(region)) {
     notification = Notification.ExposureNotifications;
-  } else if (isHospitalizationsPeak(projections.primary)) {
-    notification = Notification.HospitalizationsPeak;
   } else {
     notification = Notification.None;
   }
@@ -86,13 +80,6 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
 
         {notification === Notification.ExposureNotifications && (
           <ExposureNotificationCopy stateName={getStateName(region)} />
-        )}
-
-        {notification === Notification.HospitalizationsPeak && (
-          <HospitalizationsAlert
-            locationName={region.fullName}
-            projection={projections.primary}
-          />
         )}
 
         {notification === Notification.Vulnerability && (
@@ -132,7 +119,12 @@ const VulnerabilityCopy: React.FC<{
       )}
       <br />
       <br />
-      <HashLink to="#vulnerabilities">{linkText}</HashLink>
+      <HashLink
+        to="#vulnerabilities"
+        onClick={() => trackClickVulnerability('Location Header Update')}
+      >
+        {linkText}
+      </HashLink>
     </Copy>
   );
 };
@@ -178,9 +170,21 @@ export function showExposureNotifications(region: Region) {
   }
 }
 
+const STATES_WITHOUT_CCVI = [
+  '72', // Puerto Rico
+  '69', // Mariana Islands
+];
+
 export function showVulnerability(region: Region) {
-  // We're showing it everywhere for now.
-  return true;
+  if (region instanceof State) {
+    return !STATES_WITHOUT_CCVI.includes(region.fipsCode);
+  } else if (region instanceof County) {
+    return !STATES_WITHOUT_CCVI.includes(region.state.fipsCode);
+  } else if (region instanceof MetroArea) {
+    return !some(region.states, state =>
+      STATES_WITHOUT_CCVI.includes(state.fipsCode),
+    );
+  }
 }
 
 export function getStateName(region: Region) {
@@ -195,6 +199,10 @@ export function getStateName(region: Region) {
   } else {
     return '';
   }
+}
+
+export function trackClickVulnerability(label: string) {
+  trackEvent(EventCategory.VULNERABILITIES, EventAction.CLICK_LINK, label);
 }
 
 export default NotificationArea;
