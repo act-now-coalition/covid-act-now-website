@@ -2540,7 +2540,7 @@
       ]
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "Washington",
       "fips": "53",
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
@@ -2568,7 +2568,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* All people 65 years and older\n* People 50 years and older in multigenerational households",
+          "description": "* (NEW) Educators and child care personnel\n* All people 65 years and older\n* People 50 years and older in multigenerational households",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
