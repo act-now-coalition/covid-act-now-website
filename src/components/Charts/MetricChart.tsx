@@ -79,8 +79,8 @@ function getVaccinationSeries(projection: Projection): Series[] {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsCompleted')),
       label: 'Vaccinations Completed',
-      shortLabel: 'Fully Vaccinated',
-      tooltipLabel: 'Fully Vaccinated',
+      shortLabel: 'Fully vaccinated',
+      tooltipLabel: 'Fully vaccinated',
       params: {
         stroke: '#000',
         fill: '#000',
