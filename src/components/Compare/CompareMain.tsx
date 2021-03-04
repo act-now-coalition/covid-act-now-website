@@ -302,7 +302,7 @@ const CompareMain = (props: {
 
   return (
     <Fragment>
-      <div id="vulnerability"></div>
+      <div id="compare-vulnerabilities"></div>
       <DivForRef ref={tableRef} id="compare">
         <CompareTable
           {...sharedProps}

@@ -61,7 +61,8 @@ export default function HomePage() {
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
-  const compareShowVulnerabilityFirst = location.hash === '#vulnerability';
+  const compareShowVulnerabilityFirst =
+    location.hash === '#compare-vulnerabilities';
 
   const scrollTo = (div: null | HTMLDivElement) =>
     div &&
