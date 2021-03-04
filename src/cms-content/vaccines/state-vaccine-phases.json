@@ -50,7 +50,7 @@
       "fips": "02",
       "eligibilityInfoUrl": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/VaccineAvailability.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1a",
@@ -113,7 +113,7 @@
       "fips": "04",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
       "vaccinationSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -533,7 +533,7 @@
       ]
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Florida",
       "fips": "12",
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
@@ -757,7 +757,7 @@
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -987,7 +987,7 @@
       "fips": "23",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1099,7 +1099,7 @@
       ]
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "Massachusetts",
       "fips": "25",
       "phaseGroups": [
