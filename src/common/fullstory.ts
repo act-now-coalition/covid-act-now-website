@@ -26,17 +26,28 @@ function isRecordingEnabled() {
 }
 
 async function getFullStory() {
-  return isRecordingEnabled() ? import('@fullstory/browser') : null;
+  if (isRecordingEnabled()) {
+    return import('@fullstory/browser');
+  } else {
+    return null;
+  }
 }
 
-export async function initFullStory() {
-  return getFullStory().then(fs => (fs ? fs.init({ orgId: 'XEVN9' }) : null));
+export async function initFullStory(): Promise<void> {
+  const FS = await getFullStory();
+  if (FS) {
+    FS.init({ orgId: 'XEVN9' });
+  }
 }
 
-export function fullStoryTrackEvent(eventName: string, properties: any) {
-  return getFullStory().then(fs =>
-    fs ? fs.event(eventName, properties) : null,
-  );
+export async function fullStoryTrackEvent(
+  eventName: string,
+  properties: any,
+): Promise<void> {
+  const FS = await getFullStory();
+  if (FS) {
+    FS.event(eventName, properties);
+  }
 }
 
 function initStorage() {
