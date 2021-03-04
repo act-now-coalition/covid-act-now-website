@@ -1,5 +1,3 @@
-import * as FullStory from '@fullstory/browser';
-
 /**
  * We want to sample FullStory recordings so we don't hit the limit so quickly. We do this
  * by storing a flag in localStorage and only initializing FullStory for the percentage of
@@ -9,27 +7,36 @@ import * as FullStory from '@fullstory/browser';
  * and set the flag to true if the number is below the sampling percentage.
  */
 
-const FULLSTORY_RECORD_KEY = 'FULLSTORY_RECORD';
-
 // Percentage of overall users that we want to record
 const FULLSTORY_RECORD_PERCENT = 1 / 100;
+
+const FULLSTORY_RECORD_KEY = 'FULLSTORY_RECORD';
 
 enum RecordSession {
   TRUE = 'true',
   FALSE = 'false',
 }
 
-export function initFullStory() {
+function isRecordingEnabled() {
   if (!storageAvailable('localStorage')) {
-    return;
+    return false;
   }
-
   initStorage();
+  return localStorage.getItem(FULLSTORY_RECORD_KEY) === RecordSession.TRUE;
+}
 
-  // If we can't find the value in localStorage we won't enable recordings in FullStory
-  if (localStorage.getItem(FULLSTORY_RECORD_KEY) === RecordSession.TRUE) {
-    FullStory.init({ orgId: 'XEVN9' });
-  }
+async function getFullStory() {
+  return isRecordingEnabled() ? import('@fullstory/browser') : null;
+}
+
+export async function initFullStory() {
+  return getFullStory().then(fs => (fs ? fs.init({ orgId: 'XEVN9' }) : null));
+}
+
+export function fullStoryTrackEvent(eventName: string, properties: any) {
+  return getFullStory().then(fs =>
+    fs ? fs.event(eventName, properties) : null,
+  );
 }
 
 function initStorage() {
