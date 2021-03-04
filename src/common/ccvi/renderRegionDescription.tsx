@@ -1,6 +1,6 @@
 import React from 'react';
 import { CcviLevel, getCcviLevel } from './index';
-import { formatPercent, formatDecimal } from 'common/utils';
+import { formatPercent } from 'common/utils';
 import { Region, State, County } from 'common/regions';
 
 const mostVulnerableFips = ['48', '29460', '37107'];
@@ -112,9 +112,8 @@ function renderStateDescription(
 /* Special cases regions with a score that isn't 1 but would round up to 1 and confusingly render as 100% */
 function formatScoreAsPercent(overallScore: number): string {
   if (overallScore > 0.995 && overallScore < 1) {
-    const formattedDecimal = formatDecimal(100 * Math.min(1, overallScore), 2); // (ie: .9963 -> 99.63)
-    const sliced = formattedDecimal.slice(0, 4); // we show one decimal place (ie: 99.63 -> 99.6 -> 99.6%)
-    return `${sliced}%`;
+    const scoreToPercent = Math.floor(overallScore * 1000) / 10;
+    return `${scoreToPercent}%`;
   } else {
     return formatPercent(overallScore);
   }
