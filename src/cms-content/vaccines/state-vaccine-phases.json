@@ -533,7 +533,7 @@
       ]
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Florida",
       "fips": "12",
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
@@ -757,7 +757,7 @@
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1A",
