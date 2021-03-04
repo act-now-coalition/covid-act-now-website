@@ -109,6 +109,15 @@ function renderStateDescription(
   }
 }
 
+/* Special cases regions with a score that isn't 1 but would round up to 1 and confusingly render as 100% */
+function formatScoreAsPercent(overallScore: number) {
+  if (overallScore > 0.995 && overallScore !== 1) {
+    return formatPercent(overallScore, 2);
+  } else {
+    return formatPercent(overallScore);
+  }
+}
+
 function renderCountyOrMetroDescription(
   overallScore: number,
   isMostVulnerable: boolean,
@@ -116,7 +125,7 @@ function renderCountyOrMetroDescription(
   regionType: string,
 ): React.ReactElement {
   const level = getCcviLevel(overallScore);
-  const scoreAsPercent = formatPercent(overallScore);
+  const scoreAsPercent = formatScoreAsPercent(overallScore);
 
   if (isMostVulnerable) {
     return (
