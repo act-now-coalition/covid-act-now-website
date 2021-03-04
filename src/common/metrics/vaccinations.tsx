@@ -23,7 +23,7 @@ export const VaccinationsMetric: MetricDefinition = {
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Vaccinated: 1st and 2nd dose',
+  extendedMetricName: 'Percent Vaccinated',
   metricNameForCompare: 'Vaccinated (1+ dose)',
 };
 
@@ -88,10 +88,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
-      received at least the first dose and {peopleVaccinated} (
-      {percentVaccinated}) are fully vaccinated. {distributedText} According to
-      the CDC, fewer than 0.001% of those who have received the first dose have
-      experienced a severe adverse reaction, none of them deadly.
+      received at least one dose and {peopleVaccinated} ({percentVaccinated})
+      are fully vaccinated. {distributedText} According to the CDC, fewer than
+      0.001% of those who have received at least one dose have experienced a
+      severe adverse reaction, none of them deadly.
     </Fragment>
   );
 }
