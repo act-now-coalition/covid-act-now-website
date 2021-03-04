@@ -9,20 +9,14 @@ import {
   PurpleInfoIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
-import InfoIcon from '@material-ui/icons/Info';
 import HospitalizationsAlert, {
   isHospitalizationsPeak,
 } from './HospitalizationsAlert';
-import {
-  State,
-  County,
-  Region,
-  MetroArea,
-  getFormattedStateCode,
-} from 'common/regions';
+import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
-import { useCcviForFips } from 'common/hooks';
-import { getCcviLevel } from 'common/ccvi';
+import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
+import { HashLink } from 'react-router-hash-link';
+import { getSummaryFromFips } from 'common/location_summaries';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '01', // Alabama,
@@ -103,7 +97,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
 
         {notification === Notification.Vulnerability && (
           <VulnerabilityCopy
-            locationName={region.name}
+            locationName={region.shortName}
             fips={projections.fips}
           />
         )}
@@ -116,21 +110,29 @@ const VulnerabilityCopy: React.FC<{
   locationName: string;
   fips: string;
 }> = ({ locationName, fips }) => {
-  const scores = useCcviForFips(fips);
-  const level = getCcviLevel(scores?.overall ?? 0);
+  const locationSummary = getSummaryFromFips(fips);
+  const ccvi = locationSummary?.ccvi ?? 0;
+  const level = getCcviLevel(ccvi);
+  const levelName = getCcviLevelName(level).toLowerCase();
+  const isHigh = level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH;
+
+  const linkText = isHigh
+    ? 'See more vulnerability details'
+    : `See vulnerability details for ${locationName}`;
+
   return (
     <Copy>
-      <p>We now surface vulnerability levels for locations.</p>
-      <p>See vulnerability details for {locationName}.</p>
-      {locationName} has {levelLabel} vulnerability, making it more likely to
-      experience severe physical and economic suffering from COVID, and to face
-      a harder, longer recovery.{' '}
-      <ExternalLink
-        href="https://youtu.be/0EqSXDwTq6U" //placeholder
-      >
-        See more vulnerability details below
-      </ExternalLink>
-      .
+      We now surface vulnerability levels for locations.{' '}
+      {isHigh && (
+        <React.Fragment>
+          {locationName} has <strong>{levelName} vulnerability</strong>, making
+          it more likely to experience severe physical and economic suffering
+          from COVID, and to face a harder, longer recovery.
+        </React.Fragment>
+      )}
+      <br />
+      <br />
+      <HashLink to="#vulnerabilities">{linkText}</HashLink>
     </Copy>
   );
 };
@@ -177,7 +179,7 @@ export function showExposureNotifications(region: Region) {
 }
 
 export function showVulnerability(region: Region) {
-  // STUB. Return true if the vulnerability category for the region is "High" or "Very High"
+  // We're showing it everywhere for now.
   return true;
 }
 
