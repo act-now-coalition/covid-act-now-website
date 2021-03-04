@@ -543,7 +543,7 @@
           "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Persons ages 65 and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of COVID\n* K-12 school personnel, law enforcement officers, and firefighters age 50 and above\n* Newly eligible: CVS is vaccinating teachers under age 50",
+          "description": "* Persons ages 65 and older\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of COVID\n* K-12 school personnel, law enforcement officers, and firefighters age 50 and above\n* (NEW) CVS is vaccinating teachers under age 50",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-04T20:11:24.205Z"
