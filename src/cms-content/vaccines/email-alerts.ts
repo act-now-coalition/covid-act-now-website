@@ -68,6 +68,8 @@ export function getEmailAlertData(
     `Vaccination eligibility info for ${fipsCode} not found in the CMS`,
   );
 
+  // The vaccination phases are entered in order in the CMS, we reverse the currently
+  // active vaccination phases here to show the most recently eligible first.
   const currentPhases = vacinationInfo.phaseGroups
     .filter(phaseInfo => phaseInfo.currentlyEligible)
     .map((phaseInfo, index, allCurrentPhases) => {
