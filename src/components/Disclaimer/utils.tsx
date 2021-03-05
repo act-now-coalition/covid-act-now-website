@@ -1,13 +1,15 @@
 import React from 'react';
 import { Region, MetroArea, County } from 'common/regions';
+import { Annotations, Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import ExternalLink from 'components/ExternalLink';
-
 import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 
 /**
- * Hardcoding the sources for the time being
- * until we start getting it from the backend.
+ * Hardcoding sources as fallback (metricToSourceMap) for the time being
+ * until we have full API coverage.
+ *
+ * Todo (chelsi): delete fallback code when API coverage is complete.
  */
 
 interface SourceInfo {
@@ -126,13 +128,46 @@ function getDisclaimerMetricName(metric: Metric): string {
   }
 }
 
-export const getDataSourceTooltipContent = (metric: Metric, region: Region) => {
-  const source = getSourceLinks(metric, region);
+export const getDataSourceTooltipContent = (
+  metric: Metric,
+  region: Region,
+  provenanceInfo?: Sources,
+) => {
+  const sourceFromMap = getSourceLinks(metric, region);
+
+  const source =
+    provenanceInfo && provenanceInfo[0].url && provenanceInfo[0].name
+      ? {
+          url: provenanceInfo[0].url,
+          name: provenanceInfo[0].name,
+        }
+      : {
+          url: sourceFromMap.url,
+          name: sourceFromMap.sourceName,
+        };
 
   return (
     <>
       Our data for {getDisclaimerMetricName(metric)} in {region.name} comes from{' '}
-      <ExternalLink href={source.url}>{source.sourceName}</ExternalLink>.
+      <ExternalLink href={source.url}>{source.name}</ExternalLink>.
     </>
   );
 };
+
+export function getSourcesForMetric(
+  annotations: Annotations,
+  metric: Metric,
+): Sources | undefined {
+  switch (metric) {
+    case Metric.CASE_DENSITY:
+      return annotations.caseDensity?.sources;
+    case Metric.CASE_GROWTH_RATE:
+      return annotations.infectionRate?.sources;
+    case Metric.POSITIVE_TESTS:
+      return annotations.testPositivityRatio?.sources;
+    case Metric.HOSPITAL_USAGE:
+      return annotations.icuCapacityRatio?.sources;
+    case Metric.VACCINATIONS:
+      return annotations.vaccinationsInitiated?.sources;
+  }
+}

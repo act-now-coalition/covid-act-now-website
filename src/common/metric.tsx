@@ -11,6 +11,7 @@ import { formatDecimal, formatPercent } from 'common/utils';
 import { isNumber } from 'lodash';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 
 export const ALL_METRICS = [
   Metric.CASE_DENSITY,
@@ -64,9 +65,13 @@ export function getMetricDefinition(metric: Metric) {
   return metricDefinitions[metric];
 }
 
-export function getMetricDisclaimer(metric: Metric, region: Region) {
+export function getMetricDisclaimer(
+  metric: Metric,
+  region: Region,
+  provenance?: Sources,
+) {
   const metricDefinition = getMetricDefinition(metric);
-  return metricDefinition.renderDisclaimer(region);
+  return metricDefinition.renderDisclaimer(region, provenance);
 }
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {

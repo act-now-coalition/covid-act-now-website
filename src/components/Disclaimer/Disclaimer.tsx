@@ -2,17 +2,21 @@ import React from 'react';
 import { DisclaimerWrapper } from './Disclaimer.style';
 import { getMetricDisclaimer } from 'common/metric';
 import { Region } from 'common/regions';
+import { Metric } from 'common/metricEnum';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 
 const Disclaimer = ({
-  metricName,
+  metric,
   region,
+  provenance,
 }: {
-  metricName: number;
+  metric: Metric;
   region: Region;
+  provenance?: Sources;
 }) => {
   return (
     <DisclaimerWrapper>
-      {getMetricDisclaimer(metricName, region)}
+      {getMetricDisclaimer(metric, region, provenance)}
     </DisclaimerWrapper>
   );
 };
