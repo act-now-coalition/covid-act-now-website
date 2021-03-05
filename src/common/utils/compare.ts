@@ -308,7 +308,7 @@ export function getShareQuote(
   const hasValidRank =
     currentLocation &&
     currentLocation.rank !== 0 &&
-    isNumber(currentLocation.metricsInfo.metrics[sorter]?.value);
+    isNumber(currentLocation.metricsInfo.m[sorter]?.v);
 
   const ascendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
     sorter,

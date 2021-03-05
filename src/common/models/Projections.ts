@@ -61,15 +61,15 @@ export class Projections {
       const roundedValue = roundMetricValue(metric, value);
 
       metrics[metric] = {
-        value: roundedValue,
-        level: this.getMetricLevel(metric),
+        v: roundedValue,
+        l: this.getMetricLevel(metric),
       };
     }
 
     return {
-      level: this.getAlarmLevel(),
-      metrics,
-      ccvi,
+      l: this.getAlarmLevel(),
+      m: metrics,
+      c: ccvi === null ? null : Number(ccvi.toFixed(2)),
     };
   }
 

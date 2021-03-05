@@ -227,8 +227,8 @@ async function fetchSortedRegionDiffs(
     .all()
     .map(region => {
       const fips = region.fipsCode;
-      const leftValue = leftSummaries[fips]?.metrics?.[metric]?.value ?? null;
-      const rightValue = rightSummaries[fips]?.metrics?.[metric]?.value ?? null;
+      const leftValue = leftSummaries[fips]?.m?.[metric]?.v ?? null;
+      const rightValue = rightSummaries[fips]?.m?.[metric]?.v ?? null;
       const diff = ProjectionsPair.metricValueDiff(leftValue, rightValue);
       return {
         region,

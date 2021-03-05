@@ -77,6 +77,7 @@ async function buildSummaries(allProjections: Projections[]) {
 
   for (const projections of allProjections) {
     const fips = projections.fips;
+
     summaries[fips] = projections.summary(fipsToCcviMap[fips]?.overall ?? null);
   }
 
@@ -203,8 +204,8 @@ async function buildSlackSummary() {
     worse = [];
 
   for (const state of regions.states) {
-    const oldLevel = oldSummaries[state.fipsCode].level;
-    const newLevel = newSummaries[state.fipsCode].level;
+    const oldLevel = oldSummaries[state.fipsCode].l;
+    const newLevel = newSummaries[state.fipsCode].l;
     const changeString = `${state.fullName} (${Level[oldLevel]} => ${Level[newLevel]})`;
     if (newLevel > oldLevel) {
       worse.push(changeString);

@@ -53,7 +53,7 @@ class MetricColumn implements ColumnDefinition {
   fontSize = '16px;';
 
   getValue(row: SummaryForCompare): number | null {
-    return row.metricsInfo.metrics[this.metric]?.value ?? null;
+    return row.metricsInfo.m[this.metric]?.v ?? null;
   }
 
   getFormattedValue(row: SummaryForCompare): string {
@@ -61,7 +61,7 @@ class MetricColumn implements ColumnDefinition {
   }
 
   getIconColor(row: SummaryForCompare): string {
-    const level = row.metricsInfo.metrics[this.metric]?.level ?? Level.UNKNOWN;
+    const level = row.metricsInfo.m[this.metric]?.l ?? Level.UNKNOWN;
     return LEVEL_COLOR[level];
   }
 }
@@ -77,11 +77,11 @@ class CcviColumn implements ColumnDefinition {
   fontSize = '14px;';
 
   getValue(row: SummaryForCompare): number | null {
-    return row.metricsInfo.ccvi;
+    return row.metricsInfo.c;
   }
 
   getFormattedValue(row: SummaryForCompare): string {
-    const ccvi = row.metricsInfo.ccvi;
+    const ccvi = row.metricsInfo.c;
     if (ccvi === null) {
       return UNKNOWN_VALUE_TEXT;
     }
@@ -90,7 +90,7 @@ class CcviColumn implements ColumnDefinition {
   }
 
   getIconColor(row: SummaryForCompare): string {
-    const ccvi = row.metricsInfo.ccvi;
+    const ccvi = row.metricsInfo.c;
     if (ccvi === null) {
       return LEVEL_COLOR[Level.UNKNOWN];
     }

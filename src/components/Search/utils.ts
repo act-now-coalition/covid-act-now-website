@@ -18,7 +18,7 @@ function belongsToState(county: County, stateFips: string | null) {
 export function getLocationIconFillColor(region: Region) {
   const locationSummary = LocationSummariesByFIPS[region.fipsCode];
   if (locationSummary) {
-    return LOCATION_SUMMARY_LEVELS[locationSummary.level].color;
+    return LOCATION_SUMMARY_LEVELS[locationSummary.l].color;
   } else return `${COLOR_MAP.GRAY.LIGHT}`;
 }
 

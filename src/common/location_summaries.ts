@@ -7,16 +7,16 @@ import { findStateFipsCode } from 'common/locations';
 import { currentSnapshot, getSnapshotOverride } from './utils/snapshots';
 
 export interface MetricSummary {
-  value: number | null;
-  level: Level;
+  v: number | null;
+  l: Level;
 }
 
 export interface LocationSummary {
-  level: Level;
-  metrics: {
+  l: Level;
+  m: {
     [metric in Metric]?: MetricSummary;
   };
-  ccvi: number | null;
+  c: number | null;
 }
 
 export type SummariesMap = { [fips: string]: LocationSummary };

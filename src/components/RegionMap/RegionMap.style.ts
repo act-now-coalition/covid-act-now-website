@@ -50,6 +50,6 @@ export const CountyWithLevel = styled(GeoPath)<{
 
 function getAlertColor(locationSummary?: LocationSummary) {
   return locationSummary
-    ? LOCATION_SUMMARY_LEVELS[locationSummary.level].color
+    ? LOCATION_SUMMARY_LEVELS[locationSummary.l].color
     : COLOR_MAP.GRAY.LIGHT;
 }

@@ -22,7 +22,7 @@ export function getPageTitle(region: Region): string {
 
 export function getPageDescription(region: Region): string {
   const date = formatMetatagDate();
-  const { level: alarmLevel } = LocationSummariesByFIPS[region.fipsCode];
+  const { l: alarmLevel } = LocationSummariesByFIPS[region.fipsCode];
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   return `${date} COVID RISK LEVEL: ${levelInfo.detail(locationName(region))}`;
 }

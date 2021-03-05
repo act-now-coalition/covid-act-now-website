@@ -61,7 +61,7 @@ const CompareTableRow = (props: {
         $isModal={isModal}
       >
         <LocationNameCell
-          $iconColor={location.metricsInfo.level}
+          $iconColor={location.metricsInfo.l}
           sortByPopulation={sortByPopulation}
         >
           <LocationCellWrapper>

@@ -38,8 +38,8 @@ async function main() {
     const region = regions.findByFipsCodeStrict(fips);
     const newSummary = newSummaries[fips];
     const oldSummary = oldSummaries[fips];
-    const oldLevel = oldSummary ? oldSummary.level : Level.UNKNOWN;
-    const newLevel = newSummary.level;
+    const oldLevel = oldSummary ? oldSummary.l : Level.UNKNOWN;
+    const newLevel = newSummary.l;
     const locationName = region.fullName;
     const locationURL = region.canonicalUrl;
     // Use today's date (roughly in the Pacific timezone).

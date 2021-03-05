@@ -92,7 +92,7 @@ export function colorFromLocationSummary(
   summary: LocationSummary | null,
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
-  return summary ? LEVEL_COLOR[summary.level] : defaultColor;
+  return summary ? LEVEL_COLOR[summary.l] : defaultColor;
 }
 
 export function stateColor(stateCode: string) {

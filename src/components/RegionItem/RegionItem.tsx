@@ -19,8 +19,8 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = getLocationIconFillColor(region);
 
   const regionSummary = getSummaryFromFips(region.fipsCode);
-  const levelDescriptionCopy = regionSummary?.level
-    ? LOCATION_SUMMARY_LEVELS[regionSummary.level].summary
+  const levelDescriptionCopy = regionSummary?.l
+    ? LOCATION_SUMMARY_LEVELS[regionSummary.l].summary
     : '';
 
   const showStateCode = !(region instanceof State);

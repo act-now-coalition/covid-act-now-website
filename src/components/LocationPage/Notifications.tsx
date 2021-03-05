@@ -99,7 +99,7 @@ const VulnerabilityCopy: React.FC<{
   fips: string;
 }> = ({ locationName, fips }) => {
   const locationSummary = getSummaryFromFips(fips);
-  const ccvi = locationSummary?.ccvi ?? 0;
+  const ccvi = locationSummary?.c ?? 0;
   const level = getCcviLevel(ccvi);
   const levelName = getCcviLevelName(level).toLowerCase();
   const isHigh = level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH;
