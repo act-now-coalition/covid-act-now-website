@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
@@ -23,11 +24,11 @@ export const VaccinationsMetric: MetricDefinition = {
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Vaccinated: 1st and 2nd shot',
-  metricNameForCompare: 'Vaccinated (1st shot)',
+  extendedMetricName: 'Percent Vaccinated',
+  metricNameForCompare: 'Vaccinated (1+ dose)',
 };
 
-const SHORT_DESCRIPTION_LOW = 'Population given the first shot';
+const SHORT_DESCRIPTION_LOW = 'Population given at least one dose';
 // const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const UNKNOWN = 'Unknown';
@@ -88,15 +89,18 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
-      received the first shot and {peopleVaccinated} ({percentVaccinated}) have
-      also received the second shot. {distributedText} According to the CDC,
-      fewer than 0.001% of those who have received the first dose have
-      experienced a severe adverse reaction, none of them deadly.
+      received at least one dose and {peopleVaccinated} ({percentVaccinated})
+      are fully vaccinated. {distributedText} According to the CDC, fewer than
+      0.001% of those who have received at least one dose have experienced a
+      severe adverse reaction, none of them deadly.
     </Fragment>
   );
 }
 
-function renderDisclaimer(region: Region): React.ReactElement {
+function renderDisclaimer(
+  region: Region,
+  provenance?: Sources,
+): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
 
   return (
@@ -105,7 +109,11 @@ function renderDisclaimer(region: Region): React.ReactElement {
       {region instanceof State && (
         <>
           <DisclaimerTooltip
-            title={getDataSourceTooltipContent(Metric.VACCINATIONS, region)}
+            title={getDataSourceTooltipContent(
+              Metric.VACCINATIONS,
+              region,
+              provenance,
+            )}
             mainCopy={'where our data comes from'}
             trackOpenTooltip={() =>
               trackOpenTooltip(`Learn more: ${Metric.VACCINATIONS}`)

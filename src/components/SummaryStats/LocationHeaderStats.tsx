@@ -52,9 +52,9 @@ const StatValue = (props: {
       )}
       {props.metric === Metric.VACCINATIONS && (
         <PrevalenceMeasure>
-          1ST
+          1+
           <br />
-          SHOT
+          DOSE
         </PrevalenceMeasure>
       )}
     </ValueWrapper>

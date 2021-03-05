@@ -36,7 +36,7 @@ export type Infectionrate = number | null;
 export type Infectionrateci90 = number | null;
 export type Icuheadroomratio = number | null;
 /**
- * Current number of covid patients in icu.
+ * Current number of covid patients in the ICU.
  */
 export type Currenticucovid = number;
 /**
@@ -54,6 +54,9 @@ export type NonCovidPatientsMethod =
   | 'actual'
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
+/**
+ * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
+ */
 export type Icucapacityratio = number | null;
 /**
  * Ratio of population that has initiated vaccination.
