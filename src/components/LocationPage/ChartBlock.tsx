@@ -40,7 +40,12 @@ function ChartBlock(props: {
 
   const hasMetric = projections.hasMetric(metric);
 
-  const chartHeaderTooltip = getMetricDefinition(metric).renderInfoTooltip();
+  const metricDefinition = getMetricDefinition(metric);
+  const chartHeaderTooltip = metricDefinition.renderInfoTooltip();
+  const disclaimerContent = metricDefinition.renderDisclaimer(
+    region,
+    provenance,
+  );
 
   return (
     <Fragment>
@@ -74,7 +79,7 @@ function ChartBlock(props: {
       {hasMetric && (
         <>
           <MetricChart metric={metric} projections={projections} />
-          <Disclaimer metric={metric} region={region} provenance={provenance} />
+          <Disclaimer disclaimerContent={disclaimerContent} />
         </>
       )}
     </Fragment>
