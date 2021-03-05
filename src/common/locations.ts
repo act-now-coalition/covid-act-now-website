@@ -47,8 +47,14 @@ export interface Location {
 export function getLocationNames(): Location[] {
   const locations: Location[] = US_STATE_DATASET.state_dataset.map(state => {
     return {
-      ...state,
-      full_fips_code: state.state_fips_code,
+      ...{
+        state_code: state.sc,
+        state: state.state,
+        state_url_name: state.state_url_name,
+        state_fips_code: state.f,
+        population: state.p,
+      },
+      full_fips_code: state.f,
     };
   });
 
@@ -58,7 +64,18 @@ export function getLocationNames(): Location[] {
     }
     locations.push(
       ...value.county_dataset.map(county => {
-        return { ...county, state: county.state_code };
+        return {
+          ...{
+            county: county.c,
+            county_url_name: county.cun,
+            county_fips_code: county.f.substr(2, 3),
+            state_fips_code: county.f.substr(0, 2),
+            state_code: county.sc,
+            full_fips_code: county.f,
+            population: county.p,
+          },
+          state: county.sc,
+        };
       }),
     );
   });
@@ -73,7 +90,15 @@ export function findCountyByFips(fips: string) {
     const countiesData = statesData[state].county_dataset;
     for (const county of countiesData) {
       if (String(county.full_fips_code) === String(fips)) {
-        return county;
+        return {
+          county: county.c,
+          county_url_name: county.cun,
+          county_fips_code: county.f.substr(2, 3),
+          state_fips_code: county.f.substr(0, 2),
+          state_code: county.sc,
+          full_fips_code: county.f,
+          population: county.p,
+        };
       }
     }
   }
@@ -82,8 +107,8 @@ export function findCountyByFips(fips: string) {
 
 export function findStateFipsCode(stateCode: string): string {
   const fips = US_STATE_DATASET.state_dataset.find(
-    state => state.state_code === stateCode,
-  )?.state_fips_code;
+    state => state.sc === stateCode,
+  )?.f;
   assert(fips !== undefined, `Invalid state code: ${stateCode}`);
   return fips;
 }
