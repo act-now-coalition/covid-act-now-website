@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, lazy, Suspense } from 'react';
 import { Projections } from 'common/models/Projections';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 
@@ -19,10 +19,12 @@ import {
 } from './SocialLocationPreview.style';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import Map from 'components/Map/Map';
+
 import { COLOR_MAP } from 'common/colors';
 import SummaryStats from 'components/SummaryStats/SummaryStats';
 import { Legend, LegendItem } from 'components/Map/Legend';
+import { SuspenseFallback } from 'components/LazyLoading';
+const Map = lazy(() => import('components/Map/Map'));
 
 const SocialLocationPreview = (props: {
   projections?: Projections;
@@ -48,13 +50,15 @@ const SocialLocationPreview = (props: {
         <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
         <USMapPreviewHeader sideLegend={!isEmbed}>
           <MapWrapper>
-            <Map
-              onClick={isEmbed ? navigateToCAN : undefined}
-              hideLegend={!isEmbed}
-              hideLegendTitle={true}
-              hideInstructions={true}
-              showCounties={showCountyView}
-            />
+            <Suspense fallback={<SuspenseFallback />}>
+              <Map
+                onClick={isEmbed ? navigateToCAN : undefined}
+                hideLegend={!isEmbed}
+                hideLegendTitle={true}
+                hideInstructions={true}
+                showCounties={showCountyView}
+              />
+            </Suspense>
           </MapWrapper>
           {isEmbed ? (
             ''

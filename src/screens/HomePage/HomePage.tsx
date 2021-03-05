@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import Map from 'components/Map/Map';
+import React, { lazy, useRef, useEffect, useState, Suspense } from 'react';
+
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -32,6 +32,8 @@ import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
+import { SuspenseFallback } from 'components/LazyLoading';
+const Map = lazy(() => import('components/Map/Map'));
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -119,9 +121,9 @@ export default function HomePage() {
                 onClickSwitch={onClickSwitch}
               />
             </ColumnCentered>
-
-            <Map hideLegend hideInstructions showCounties={showCounties} />
-
+            <Suspense fallback={<SuspenseFallback />}>
+              <Map hideLegend hideInstructions showCounties={showCounties} />
+            </Suspense>
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />
             </ColumnCentered>
