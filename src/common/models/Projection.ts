@@ -59,7 +59,9 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_DENSITY]: new DisabledFipsList([]),
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
-  [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
+  [Metric.POSITIVE_TESTS]: new DisabledFipsList([
+    '48113', // https://trello.com/c/vZ77ZnXT/1052-disabled-dallas-county-test-positivity-for-anomalous-spike-again
+  ]),
   [Metric.VACCINATIONS]: new DisabledFipsList([
     ...countyAndMetrosForState('WY'), //https://trello.com/c/kvjwZJJP/
   ]),
