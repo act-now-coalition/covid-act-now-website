@@ -235,10 +235,8 @@ export class Projection {
     this.rawDailyCases = this.actualTimeseries.map(row => row && row.newCases);
     this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
 
-    this.rawDailyDeaths = this.deltasFromCumulatives(
-      this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => row && row.deaths),
-      ),
+    this.rawDailyDeaths = this.actualTimeseries.map(
+      row => row && row.newDeaths,
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.rawDailyDeaths,
