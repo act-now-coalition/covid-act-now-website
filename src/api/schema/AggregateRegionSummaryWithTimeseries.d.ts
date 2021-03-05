@@ -203,6 +203,25 @@ export type Icubeds = HospitalResourceUtilization;
  */
 export type Newcases = number | null;
 /**
+ *
+ * New confirmed or suspected deaths.
+ *
+ *
+ * New cases are a processed timeseries of cases - summing new cases may not equal
+ * the cumulative case count.
+ *
+ * Processing steps:
+ *  1. If a region does not report cases for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
+ *     multiple days worth of cases and can be misleading to the overall series.
+ *  2. We remove any days with negative new cases.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported cases.
+ *
+ */
+export type Newdeaths = number | null;
+/**
  * Number of vaccine doses distributed.
  */
 export type Vaccinesdistributed = number | null;
@@ -302,6 +321,10 @@ export type Icubeds1 = FieldAnnotations;
  * Annotations for newCases
  */
 export type Newcases1 = FieldAnnotations;
+/**
+ * Annotations for newDeaths
+ */
+export type Newdeaths1 = FieldAnnotations;
 /**
  * Annotations for vaccinesDistributed
  */
@@ -460,6 +483,25 @@ export type Icubeds2 = HospitalResourceUtilization;
  */
 export type Newcases2 = number | null;
 /**
+ *
+ * New confirmed or suspected deaths.
+ *
+ *
+ * New cases are a processed timeseries of cases - summing new cases may not equal
+ * the cumulative case count.
+ *
+ * Processing steps:
+ *  1. If a region does not report cases for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
+ *     multiple days worth of cases and can be misleading to the overall series.
+ *  2. We remove any days with negative new cases.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported cases.
+ *
+ */
+export type Newdeaths2 = number | null;
+/**
  * Number of vaccine doses distributed.
  */
 export type Vaccinesdistributed2 = number | null;
@@ -607,6 +649,7 @@ export interface Actuals {
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
   newCases: Newcases;
+  newDeaths: Newdeaths;
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
@@ -632,6 +675,7 @@ export interface Annotations {
   hospitalBeds?: Hospitalbeds1;
   icuBeds?: Icubeds1;
   newCases?: Newcases1;
+  newDeaths?: Newdeaths1;
   vaccinesDistributed?: Vaccinesdistributed1;
   vaccinationsInitiated?: Vaccinationsinitiated1;
   vaccinationsCompleted?: Vaccinationscompleted1;
@@ -703,6 +747,7 @@ export interface ActualsTimeseriesRow {
   hospitalBeds: Hospitalbeds2;
   icuBeds: Icubeds2;
   newCases: Newcases2;
+  newDeaths: Newdeaths2;
   vaccinesDistributed?: Vaccinesdistributed2;
   vaccinationsInitiated?: Vaccinationsinitiated2;
   vaccinationsCompleted?: Vaccinationscompleted2;
