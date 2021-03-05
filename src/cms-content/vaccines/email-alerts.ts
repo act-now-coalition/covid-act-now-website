@@ -73,7 +73,8 @@ export function getEmailAlertData(
     .map((phaseInfo, index, allCurrentPhases) => {
       const isLastCurrentPhase = index === allCurrentPhases.length - 1;
       return formatVaccinationPhaseInfo(phaseInfo, isLastCurrentPhase);
-    });
+    })
+    .reverse();
 
   assert(
     currentPhases.length > 0,
