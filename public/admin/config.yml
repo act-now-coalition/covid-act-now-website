@@ -770,3 +770,56 @@ collections:
                 name: content
                 widget: markdown
                 hint: subscore definition
+
+  - name: regionOverrides
+    label: Region Overrides
+    description: Add metric disclaimers, etc.
+    format: json
+    files:
+      - name: regionOverrides
+        label: Region Overrides
+        file: src/cms-content/region-overrides/region-overrides.json
+        fields:
+          - name: overrides
+            label: Overrides
+            widget: list
+            fields:
+              - name: region
+                label: Region
+                hint: State code (2 letters) or FIPS code (2 or 5 digits)
+                widget: string
+                pattern: ['^([A-Z][A-Z]|\d{2}|\d{5})$', 'Must be a 2-letter state code or 2 or 5-digit FIPS code']
+              - name: include
+                label: Include
+                widget: select
+                default: region
+                options:
+                  - label: Region
+                    value: region
+                  - label: Subregions (counties / metros)
+                    value: subregions
+                  - label: Region and subregions (counties / metros)
+                    value: region-and-subregions
+              - name: metric
+                label: Metric
+                widget: select
+                default: 'metrics.testPositivityRatio'
+                options:
+                  - label: 'Metric: Daily New Cases'
+                    value: 'metrics.caseDensity'
+                  - label: 'Metric: Infection Rate'
+                    value: 'metrics.infectionRate'
+                  - label: 'Metric: Positive Test Rate'
+                    value: 'metrics.testPositivityRatio'
+                  - label: 'Metric: ICU Capacity Used'
+                    value: 'metrics.icuCapacityRatio'
+                  - label: 'Metric: Vaccinated'
+                    value: 'metrics.vaccinationsInitiatedRatio'
+              - name: context
+                label: [Internal] Context
+                widget: string
+                hint: Context about this issue (trello links, owner, etc.) - not displayed externally
+              - name: disclaimer
+                label: Add Disclaimer
+                widget: markdown
+                minimal: true

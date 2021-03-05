@@ -1,0 +1,25 @@
+{
+  "overrides": [
+    {
+      "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "region": "CT",
+      "context": "[michael] Ongoing issue with CT dashboard including antigen tests.",
+      "disclaimer": "There is a known discrepancy between our data and the Connecticut state dashboard. The state dashboard includes antigen tests in the calculation while we exclude antigen tests."
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.caseDensity",
+      "region": "CA",
+      "context": "[michael] https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/COVID19CountyMonitoringOverview.aspx",
+      "disclaimer": "Note that our cases per 100k metric is different than the \"adjusted case rate per 100k\" metric used by California for determining reopening tier assignments. Their adjusted case rate is adjusted to account for testing levels."
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.testPositivityRatio",
+      "region": "NY",
+      "context": "[michael] NY dashboard uses \"testing encounters\" instead of \"PCR test specimens\"",
+      "disclaimer": "There is a known discrepancy between our data and the New York state dashboard. We calculate test positivity rate based on positive PCR test specimens, while the state dashboard rate is based on individuals testing positive."
+    }
+  ]
+}

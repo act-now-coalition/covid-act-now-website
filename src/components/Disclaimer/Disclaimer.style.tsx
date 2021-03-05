@@ -11,4 +11,8 @@ export const DisclaimerWrapper = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     padding: 1.5rem 0 2rem;
   }
+
+  p {
+    font-size: inherit;
+  }
 `;

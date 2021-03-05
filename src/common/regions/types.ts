@@ -36,6 +36,7 @@ export abstract class Region {
   abstract get shortName(): string;
   abstract get abbreviation(): string;
   abstract get relativeUrl(): string;
+  abstract get states(): State[];
 
   get canonicalUrl() {
     return urlJoin('https://covidactnow.org', this.relativeUrl);
@@ -72,6 +73,10 @@ export class State extends Region {
   get relativeUrl() {
     return `/us/${this.urlSegment}/`;
   }
+
+  get states() {
+    return [this];
+  }
 }
 
 export class County extends Region {
@@ -104,6 +109,10 @@ export class County extends Region {
 
   get stateCode() {
     return this.state.stateCode;
+  }
+
+  get states() {
+    return [this.state];
   }
 }
 

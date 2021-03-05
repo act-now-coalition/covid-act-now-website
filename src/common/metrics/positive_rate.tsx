@@ -26,6 +26,7 @@ export const PositiveTestRateMetric: MetricDefinition = {
   renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
+  metricId: 'metrics.testPositivityRatio',
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
