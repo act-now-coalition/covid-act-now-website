@@ -11,7 +11,8 @@ interface RegionOverride {
   metric: string;
   region: string;
   context: string;
-  disclaimer: Markdown;
+  blocked: boolean;
+  disclaimer?: Markdown;
 }
 
 /** Looks for any override applied to the specified region + metric and returns it. */

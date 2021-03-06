@@ -152,6 +152,10 @@ export const statesByFips = fromPairs(
   states.map(state => [state.fipsCode, state]),
 );
 
+export const statesByStateCode = fromPairs(
+  states.map(state => [state.stateCode, state]),
+);
+
 interface AdjacencyInfo {
   adjacent_counties: FipsCode[];
   msa_code?: string;

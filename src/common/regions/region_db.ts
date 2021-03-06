@@ -5,6 +5,7 @@ import {
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
+  statesByStateCode,
 } from './regions_data';
 import { assert } from 'common/utils';
 
@@ -20,6 +21,7 @@ class RegionDB {
 
   constructor(
     private statesByFips: Dictionary<State>,
+    private statesByStateCode: Dictionary<State>,
     private countiesByFips: Dictionary<County>,
     private metroAreasByFips: Dictionary<MetroArea>,
     private customAreasByFips: Dictionary<State>,
@@ -44,6 +46,12 @@ class RegionDB {
   findByFipsCodeStrict(fipsCode: FipsCode): Region {
     const region = this.regionsByFips[fipsCode];
     assert(region, `Region unexpectedly not found for ${fipsCode}`);
+    return region;
+  }
+
+  findByStateCodeStrict(stateCode: string): State {
+    const region = this.statesByStateCode[stateCode];
+    assert(region, `Region unexpectedly not found for ${stateCode}`);
     return region;
   }
 
@@ -127,6 +135,7 @@ function equalLower(a: string, b: string) {
 
 const regions = new RegionDB(
   statesByFips,
+  statesByStateCode,
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,

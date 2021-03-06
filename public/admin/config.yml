@@ -773,7 +773,7 @@ collections:
 
   - name: regionOverrides
     label: Region Overrides
-    description: Add metric disclaimers, etc.
+    description: Block metrics, add metric disclaimers, etc.
     format: json
     files:
       - name: regionOverrides
@@ -816,10 +816,16 @@ collections:
                   - label: 'Metric: Vaccinated'
                     value: 'metrics.vaccinationsInitiatedRatio'
               - name: context
-                label: [Internal] Context
+                label: '[Internal] Context'
                 widget: string
                 hint: Context about this issue (trello links, owner, etc.) - not displayed externally
+              - name: blocked
+                label: Block Metric
+                widget: boolean
+                hint: Block the metric from appearing and being used in the risk level calculation.
               - name: disclaimer
                 label: Add Disclaimer
+                required: false
+                hint: Disclaimer to show below metric chart. Not used if metric is blocked.
                 widget: markdown
                 minimal: true
