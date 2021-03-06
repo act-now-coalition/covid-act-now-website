@@ -51,19 +51,16 @@ describe('regions', () => {
   describe('findByStateCodeStrict', () => {
     test('returns a state when passing a valid uppercase state code', () => {
       const ca = regions.findByStateCodeStrict('CA');
-      expect(ca).not.toBeNull();
-      expect(ca?.regionType).toBe(RegionType.STATE);
+      expect(ca.regionType).toBe(RegionType.STATE);
     });
 
     test('returns a state when passing a valid lowercase state code', () => {
       const ca = regions.findByStateCodeStrict('ca');
-      expect(ca).not.toBeNull();
-      expect(ca?.regionType).toBe(RegionType.STATE);
+      expect(ca.regionType).toBe(RegionType.STATE);
     });
 
     test('throws when passing an invalid state code', () => {
-      const getInvalid = () => regions.findByStateCodeStrict('cat');
-      expect(getInvalid).toThrow();
+      expect(() => regions.findByStateCodeStrict('cate')).toThrow();
     });
   });
 
