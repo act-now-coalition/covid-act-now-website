@@ -1,7 +1,9 @@
 import regions, { RegionType } from 'common/regions';
 
 // Common regions to test against.
-const alaska = regions.findByFipsCodeStrict('02');
+const alaska = regions.findByStateCodeStrict('AK');
+const newYork = regions.findByStateCodeStrict('NY');
+const newJersey = regions.findByStateCodeStrict('NJ');
 const anchorageCountyAK = regions.findByFipsCodeStrict('02020');
 const kingCountyWA = regions.findByFipsCodeStrict('53033');
 const anchorageMetro = regions.findByFipsCodeStrict('11260');
@@ -141,10 +143,8 @@ describe('State', () => {
     expect(alaska.contains(newYorkCityMetro)).toBe(false);
 
     // multi-state metros.
-    const NY = regions.findByStateCodeStrict('NY');
-    const NJ = regions.findByStateCodeStrict('NJ');
-    expect(NY.contains(newYorkCityMetro)).toBe(true);
-    expect(NJ.contains(newYorkCityMetro)).toBe(true);
+    expect(newYork.contains(newYorkCityMetro)).toBe(true);
+    expect(newJersey.contains(newYorkCityMetro)).toBe(true);
   });
 });
 
