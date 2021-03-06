@@ -17,6 +17,7 @@ import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
 import { Region } from 'common/regions';
+import { getSourcesForMetric } from 'components/Disclaimer/utils';
 
 //TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
 
@@ -30,11 +31,21 @@ function ChartBlock(props: {
 }) {
   const { projections, metric, isMobile, region, stats } = props;
 
+  const provenance = getSourcesForMetric(
+    projections.primary.annotations,
+    metric,
+  );
+
   const showBetaTag = metric === Metric.VACCINATIONS;
 
   const hasMetric = projections.hasMetric(metric);
 
-  const chartHeaderTooltip = getMetricDefinition(metric).renderInfoTooltip();
+  const metricDefinition = getMetricDefinition(metric);
+  const chartHeaderTooltip = metricDefinition.renderInfoTooltip();
+  const disclaimerContent = metricDefinition.renderDisclaimer(
+    region,
+    provenance,
+  );
 
   return (
     <Fragment>
@@ -68,7 +79,7 @@ function ChartBlock(props: {
       {hasMetric && (
         <>
           <MetricChart metric={metric} projections={projections} />
-          <Disclaimer metricName={metric} region={region} />
+          <Disclaimer disclaimerContent={disclaimerContent} />
         </>
       )}
     </Fragment>

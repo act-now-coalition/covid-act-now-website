@@ -14,6 +14,7 @@ import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
 import { HashLink } from 'react-router-hash-link';
 import { getSummaryFromFips } from 'common/location_summaries';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '01', // Alabama,
@@ -120,6 +121,8 @@ const VulnerabilityCopy: React.FC<{
       <br />
       <br />
       <HashLink
+        smooth
+        scroll={(element: HTMLElement) => scrollWithOffset(element, -180)}
         to="#vulnerabilities"
         onClick={() => trackClickVulnerability('Location Header Update')}
       >

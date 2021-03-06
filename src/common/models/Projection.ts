@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import moment from 'moment';
-
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -9,6 +8,7 @@ import {
   Metricstimeseries,
   Metrics,
   Actuals,
+  Annotations,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
@@ -59,7 +59,9 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   [Metric.CASE_DENSITY]: new DisabledFipsList([]),
   [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
   [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
-  [Metric.POSITIVE_TESTS]: new DisabledFipsList([]),
+  [Metric.POSITIVE_TESTS]: new DisabledFipsList([
+    '48113', // https://trello.com/c/vZ77ZnXT/1052-disabled-dallas-county-test-positivity-for-anomalous-spike-again
+  ]),
   [Metric.VACCINATIONS]: new DisabledFipsList([
     ...countyAndMetrosForState('WY'), //https://trello.com/c/kvjwZJJP/
   ]),
@@ -207,6 +209,7 @@ export class Projection {
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
   private readonly metrics: Metrics | null;
+  readonly annotations: Annotations;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -296,6 +299,8 @@ export class Projection {
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
+
+    this.annotations = summaryWithTimeseries.annotations;
   }
 
   // TODO(michael): We should really pre-compute currentDailyAverageCases and

@@ -68,7 +68,7 @@ async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
   // TODO (Pablo): Metro areas are being counted as counties, it might be worth
   // fixing at some point
   const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) => {
-    const region = regions.findByFipsCodeStrict(fips);
+    const region = regions.findByFipsCode(fips);
     return region instanceof State;
   });
 
@@ -114,7 +114,7 @@ async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const state = regions.findByFipsCodeStrict(fips);
+    const state = regions.findByFipsCode(fips);
     if (state instanceof State) {
       return [state.stateCode, state.fullName, state.population, count];
     } else {
@@ -126,7 +126,7 @@ function formatStateStats(stats: FipsCount[]): Cell[][] {
 
 function formatCountyStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const region = regions.findByFipsCodeStrict(fips);
+    const region = regions.findByFipsCode(fips);
     if (region instanceof County) {
       // The ' prefix forces the value to be interpreted as text by Google Sheets
       const fipsCode = `'${fips}`;

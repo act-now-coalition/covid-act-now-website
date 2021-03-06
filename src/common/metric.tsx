@@ -10,7 +10,6 @@ import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { isNumber } from 'lodash';
 import { Metric } from 'common/metricEnum';
-import { Region } from 'common/regions';
 
 export const ALL_METRICS = [
   Metric.CASE_DENSITY,
@@ -62,11 +61,6 @@ export function getMetricDefinition(metric: Metric) {
     fail('unknown metric');
   }
   return metricDefinitions[metric];
-}
-
-export function getMetricDisclaimer(metric: Metric, region: Region) {
-  const metricDefinition = getMetricDefinition(metric);
-  return metricDefinition.renderDisclaimer(region);
 }
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {
