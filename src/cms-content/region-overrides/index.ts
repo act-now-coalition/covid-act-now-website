@@ -2,7 +2,7 @@ import RegionOverrides from './region-overrides.json';
 import { Markdown } from 'cms-content/utils';
 import { getMetricDefinition } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import regions, { County, MetroArea, Region, State } from 'common/regions';
+import regions, { Region } from 'common/regions';
 
 type Include = 'region' | 'subregions' | 'region-and-subregions';
 
