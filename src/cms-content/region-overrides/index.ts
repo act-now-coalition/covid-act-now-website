@@ -52,19 +52,7 @@ function overrideAppliesToRegion(override: RegionOverride, region: Region) {
   if (includeSelf && region === overrideRegion) {
     return true;
   } else if (includeSubregions) {
-    if (
-      overrideRegion instanceof State &&
-      (region instanceof County || region instanceof MetroArea) &&
-      region.states.includes(overrideRegion)
-    ) {
-      return true;
-    } else if (
-      overrideRegion instanceof MetroArea &&
-      region instanceof County &&
-      overrideRegion.counties.includes(region)
-    ) {
-      return true;
-    }
+    return overrideRegion.contains(region);
   }
   return false;
 }

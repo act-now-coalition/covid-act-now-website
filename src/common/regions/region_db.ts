@@ -20,11 +20,11 @@ class RegionDB {
   private regionsByFips: Dictionary<Region>;
 
   constructor(
-    private statesByFips: Dictionary<State>,
+    statesByFips: Dictionary<State>,
+    countiesByFips: Dictionary<County>,
+    metroAreasByFips: Dictionary<MetroArea>,
+    customAreasByFips: Dictionary<State>,
     private statesByStateCode: Dictionary<State>,
-    private countiesByFips: Dictionary<County>,
-    private metroAreasByFips: Dictionary<MetroArea>,
-    private customAreasByFips: Dictionary<State>,
   ) {
     this.states = sortBy(values(statesByFips), state => state.name);
     this.counties = sortBy(values(countiesByFips), county => county.name);
@@ -50,7 +50,7 @@ class RegionDB {
   }
 
   findByStateCodeStrict(stateCode: string): State {
-    const region = this.statesByStateCode[stateCode];
+    const region = this.statesByStateCode[stateCode.toUpperCase()];
     assert(region, `Region unexpectedly not found for ${stateCode}`);
     return region;
   }
@@ -135,10 +135,10 @@ function equalLower(a: string, b: string) {
 
 const regions = new RegionDB(
   statesByFips,
-  statesByStateCode,
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
+  statesByStateCode,
 );
 
 export default regions;

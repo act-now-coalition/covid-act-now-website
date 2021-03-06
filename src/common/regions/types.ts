@@ -36,7 +36,15 @@ export abstract class Region {
   abstract get shortName(): string;
   abstract get abbreviation(): string;
   abstract get relativeUrl(): string;
-  abstract get states(): State[];
+
+  /**
+   * Returns true if this region (at least partially) contains the specified subregion.
+   *
+   * Notes:
+   *  - If a metro is partially contained within a state, state.contains(metro) returns true
+   *  - Regions do not contain themselves, i.e. region.contains(region) returns false
+   */
+  abstract contains(subregion: Region): boolean;
 
   get canonicalUrl() {
     return urlJoin('https://covidactnow.org', this.relativeUrl);
@@ -74,8 +82,11 @@ export class State extends Region {
     return `/us/${this.urlSegment}/`;
   }
 
-  get states() {
-    return [this];
+  contains(subregion: Region): boolean {
+    return (
+      (subregion instanceof MetroArea && subregion.states.includes(this)) ||
+      (subregion instanceof County && subregion.state === this)
+    );
   }
 }
 
@@ -111,8 +122,8 @@ export class County extends Region {
     return this.state.stateCode;
   }
 
-  get states() {
-    return [this.state];
+  contains(subregion: Region): boolean {
+    return false;
   }
 }
 
@@ -160,5 +171,9 @@ export class MetroArea extends Region {
 
   get stateCodes() {
     return this.states.map(state => state.stateCode).join('-');
+  }
+
+  contains(subregion: Region): boolean {
+    return subregion instanceof County && this.counties.includes(subregion);
   }
 }
