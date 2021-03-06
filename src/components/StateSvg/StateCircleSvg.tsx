@@ -1,5 +1,4 @@
-import React from 'react';
-import Circle from './Circle';
+import React, { lazy, Suspense } from 'react';
 
 const StateCircleSvg = ({
   state,
@@ -10,8 +9,11 @@ const StateCircleSvg = ({
   ratio: number;
   fillColor: string;
 }) => {
+  const Circle = lazy(() => import('./Circle'));
   return state ? (
-    <Circle ratio={ratio} state={state} fillColor={fillColor} />
+    <Suspense fallback="...Loading">
+      <Circle ratio={ratio} state={state} fillColor={fillColor} />
+    </Suspense>
   ) : null;
 };
 
