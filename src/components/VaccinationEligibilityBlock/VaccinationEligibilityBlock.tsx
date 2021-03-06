@@ -35,15 +35,18 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
 
   // If we don't have vaccination information for a given state, we fallback to
   // show the eligibility links.
-  const vaccineInfo = getVaccineInfoByFips(state.fipsCode);
-  if (!vaccineInfo) {
+  const stateVaccineInfo = getVaccineInfoByFips(state.fipsCode);
+  if (!stateVaccineInfo) {
     return <RegionVaccinationBlock region={region} />;
   }
 
   const eligibilityData = getEligibilityInfo(state);
   const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
 
-  const vaccinationData = getVaccinationDataByRegion(region);
+  // Use local vaccine sign-up link but fall back to the state link
+  // TODO: do we ever have county/ level links?
+  const vaccinationData =
+    getVaccinationDataByRegion(region) || stateVaccineInfo;
   const signupLink = vaccinationData && vaccinationData.vaccinationSignupUrl;
 
   const tabList: TabInfo[] = [
