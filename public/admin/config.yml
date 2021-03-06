@@ -7,6 +7,12 @@ backend:
   branch: cms-content-entry
   base_url: https://api.netlify.com
 
+# To use the CMS locally during development, run:
+#   npx netlify-cms-proxy-server
+#
+# And uncomment the following line:
+#local_backend: true
+
 media_folder: 'public/images_cms'
 public_folder: '/images_cms'
 
