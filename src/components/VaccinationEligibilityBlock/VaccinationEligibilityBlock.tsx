@@ -47,7 +47,10 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   // TODO: do we ever have county/ level links?
   const vaccinationData =
     getVaccinationDataByRegion(region) || stateVaccineInfo;
-  const signupLink = vaccinationData && vaccinationData.vaccinationSignupUrl;
+  const signupLink =
+    vaccinationData &&
+    (vaccinationData.vaccinationSignupUrl ||
+      vaccinationData.eligibilityInfoUrl);
 
   const tabList: TabInfo[] = [
     {
