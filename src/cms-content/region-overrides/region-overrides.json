@@ -32,17 +32,17 @@
       "blocked": true
     },
     {
-      "include": "subregions",
-      "metric": "metrics.vaccinationsInitiatedRatio",
-      "region": "WY",
-      "context": "https://trello.com/c/kvjwZJJP/1005-disabled-wyoming-counties-vaccine-data-due-to-anomalous-drop-off",
-      "blocked": true
-    },
-    {
       "include": "region",
       "metric": "metrics.testPositivityRatio",
       "region": "19100",
       "context": "[michael] Dallas Metro https://trello.com/c/vZ77ZnXT/",
+      "blocked": true
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "region": "WY",
+      "context": "https://trello.com/c/kvjwZJJP/1005-disabled-wyoming-counties-vaccine-data-due-to-anomalous-drop-off",
       "blocked": true
     }
   ]
