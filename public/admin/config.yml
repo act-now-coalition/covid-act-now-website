@@ -828,6 +828,7 @@ collections:
               - name: blocked
                 label: Block Metric
                 widget: boolean
+                default: false
                 hint: Block the metric from appearing and being used in the risk level calculation.
               - name: disclaimer
                 label: Add Disclaimer

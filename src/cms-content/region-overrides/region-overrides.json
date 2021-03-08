@@ -25,6 +25,14 @@
       "blocked": false
     },
     {
+      "include": "region-and-subregions",
+      "metric": "metrics.testPositivityRatio",
+      "region": "NH",
+      "context": "https://trello.com/c/ezum3pY6/922-nh-test-positivity-discrepancy",
+      "disclaimer": "There is a known discrepancy between our data, which comes from HHS and CDC, and the data reported on the New Hampshire state dashboard. We are looking into the cause.",
+      "blocked": false
+    },
+    {
       "include": "region",
       "metric": "metrics.testPositivityRatio",
       "region": "48113",
