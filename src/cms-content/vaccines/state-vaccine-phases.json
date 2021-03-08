@@ -1457,7 +1457,7 @@
       "fips": "30",
       "eligibilityInfoUrl": "https://dphhs.mt.gov/covid19vaccine",
       "vaccinationSignupUrl": "https://dphhs.mt.gov/publichealth/FCSS/countytribalhealthdepts",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1",
@@ -1479,12 +1479,12 @@
         },
         {
           "phase": "1",
-          "tier": "C",
-          "currentlyEligible": false,
-          "description": "* Adults 60-69\n* Front-line essential workers\n* Congregate populations\n* Adults with medium-risk medical conditions",
+          "tier": "B+",
+          "currentlyEligible": true,
+          "description": "* Adults 60+\n* Frontline Essential Workers\n* Congregate Populations\n* Individuals 16+ with medium-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 8, 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-08T17:45:41.184Z"
         },
         {
           "phase": "2",
@@ -1821,7 +1821,7 @@
       "fips": "38",
       "eligibilityInfoUrl": "https://www.health.nd.gov/covid-19-vaccine-priority-groups",
       "vaccinationSignupUrl": "https://www.health.nd.gov/covidvaccinelocator",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1844,11 +1844,11 @@
         {
           "phase": "1C",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Essential workers\n* People of any age at increased risk for COVID",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-08T17:46:43.890Z"
         },
         {
           "phase": "2",
