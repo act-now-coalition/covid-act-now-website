@@ -46,6 +46,7 @@ const texasFipsCodes = [
     .map(region => region.fipsCode),
 ];
 function getDisclaimerText(fips: string): Disclaimer | null {
+  /* Add any necessary disclaimers here, e.g.:
   if (texasFipsCodes.includes(fips)) {
     return {
       name: 'NOTICE: Texas Winter Weather',
@@ -55,9 +56,10 @@ function getDisclaimerText(fips: string): Disclaimer | null {
         'testing to recover. In the meantime, our metrics and risk levels should be ' +
         'treated with caution.',
     };
-  } else {
-    return null;
   }
+  */
+
+  return null;
 }
 
 function generateAlertEmailContent(
