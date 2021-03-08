@@ -39,6 +39,7 @@ interface AlertTemplateData {
   disclaimer: Disclaimer | null;
 }
 
+/* EXAMPLE of an alert disclaimer.
 const texasFipsCodes = [
   '48',
   ...regions
@@ -46,7 +47,6 @@ const texasFipsCodes = [
     .map(region => region.fipsCode),
 ];
 function getDisclaimerText(fips: string): Disclaimer | null {
-  /* Add any necessary disclaimers here, e.g.:
   if (texasFipsCodes.includes(fips)) {
     return {
       name: 'NOTICE: Texas Winter Weather',
@@ -56,9 +56,13 @@ function getDisclaimerText(fips: string): Disclaimer | null {
         'testing to recover. In the meantime, our metrics and risk levels should be ' +
         'treated with caution.',
     };
+  } else {
+    return null;
   }
-  */
-
+}
+*/
+function getDisclaimerText(fips: string): Disclaimer | null {
+  // See above for an example of how to specify an alert disclaimer.
   return null;
 }
 
