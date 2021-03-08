@@ -32,28 +32,29 @@ export const legacyTracker: Tracker = {
  * Categories represent high-level groups of events in the application.
  */
 export enum EventCategory {
+  API = 'api',
   ARTICLES = 'articles',
   COMPARE = 'compare',
-  EXPLORE = 'explore',
-  ENGAGEMENT = 'engagement',
-  VOTE_2020 = 'vote',
   DONATE = 'donate',
-  MAP = 'map',
-  RECOMMENDATIONS = 'recommendations',
-  INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
-  GLOSSARY = 'glossary',
-  FAQ = 'faq',
-  METRIC_EXPLAINERS = 'metric explainers',
+  ENGAGEMENT = 'engagement',
+  EXPLORE = 'explore',
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
-  SEARCH = 'search',
-  VACCINATION = 'vaccination',
-  WEB_VITALS = 'web vitals',
-  NONE = 'none', // use NONE for development
+  FAQ = 'faq',
   GEOLOCATION_CARDS = 'geolocation cards',
-  TOOLTIPS = 'tooltips',
-  API = 'api',
+  GLOSSARY = 'glossary',
+  INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
+  MAP = 'map',
   METRICS = 'metrics',
+  METRIC_EXPLAINERS = 'metric explainers',
+  NONE = 'none', // use NONE for development
+  RECOMMENDATIONS = 'recommendations',
+  SEARCH = 'search',
+  TOP_NAVBAR = 'top navbar',
+  TOOLTIPS = 'tooltips',
+  VACCINATION = 'vaccination',
+  VOTE_2020 = 'vote',
   VULNERABILITIES = 'vulnerabilities',
+  WEB_VITALS = 'web vitals',
 }
 
 /**

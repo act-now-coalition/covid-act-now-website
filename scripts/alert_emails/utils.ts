@@ -39,6 +39,7 @@ interface AlertTemplateData {
   disclaimer: Disclaimer | null;
 }
 
+/* EXAMPLE of an alert disclaimer.
 const texasFipsCodes = [
   '48',
   ...regions
@@ -58,6 +59,11 @@ function getDisclaimerText(fips: string): Disclaimer | null {
   } else {
     return null;
   }
+}
+*/
+function getDisclaimerText(fips: string): Disclaimer | null {
+  // See above for an example of how to specify an alert disclaimer.
+  return null;
 }
 
 function generateAlertEmailContent(
