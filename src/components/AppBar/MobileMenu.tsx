@@ -16,8 +16,16 @@ const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({
     trackNavigation(label, isMobile);
   };
 
+  const onMouseLeave = (e: React.MouseEvent<{}>) => {
+    // Do not close when the user hovers on the top bar (including the button
+    // to close the menu.
+    if (e.clientY > 64) {
+      closeMenu();
+    }
+  };
+
   return (
-    <StyledMenu open={open}>
+    <StyledMenu open={open} onMouseLeave={onMouseLeave}>
       <Link to="/" onClick={() => onClick('Map')}>
         <MapIcon color={palette.secondary.main} />
         <span>Map</span>
