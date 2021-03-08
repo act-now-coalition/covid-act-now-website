@@ -278,7 +278,7 @@
       "notes": "Note, the state website has removed references to phase 1b tier 2 and phase 1C. An example of the changes are https://www.placer.ca.gov/DocumentCenter/View/49578/COVID-Vaccine-Infographic-11421."
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "Colorado",
       "fips": "08",
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
@@ -575,7 +575,7 @@
       ]
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "Georgia",
       "fips": "13",
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
@@ -1217,7 +1217,7 @@
       "vaccinationSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated"
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Michigan",
       "fips": "26",
       "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
@@ -1348,7 +1348,7 @@
       "fips": "28",
       "eligibilityInfoUrl": "https://msdh.ms.gov/msdhsite/_static/14,22816,420,976.html#eligible",
       "vaccinationSignupUrl": "https://covidvaccine.umc.edu/",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1A",
