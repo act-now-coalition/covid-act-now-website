@@ -13,7 +13,6 @@ import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
