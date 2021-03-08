@@ -2276,7 +2276,7 @@
       "fips": "45",
       "eligibilityInfoUrl": "https://scdhec.gov/covid19/covid-19-vaccine",
       "vaccinationSignupUrl": "https://vaxlocator.dhec.sc.gov/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -2290,11 +2290,11 @@
         {
           "phase": "1B",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Front-line essential workers",
+          "currentlyEligible": true,
+          "description": "* Adults 55+\n* Frontline essential workers\n* Individuals 16+ with high-risk medical conditions",
           "expandedDefinitionUrl": "",
-          "startDate": "Early spring",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 8, 2021",
+          "updatedAt": "2021-03-08T17:54:21.927Z"
         },
         {
           "phase": "1C",
