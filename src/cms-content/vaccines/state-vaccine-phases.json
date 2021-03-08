@@ -2389,7 +2389,7 @@
       ]
     },
     {
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "locationName": "Tennessee",
       "fips": "47",
       "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
@@ -2425,11 +2425,11 @@
         {
           "phase": "1C",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* 16 years old or older with high-risk health conditions\n* Ages 55+",
+          "currentlyEligible": true,
+          "description": "* Individuals 16+ with high-risk health conditions\n* Caregivers of children with high-risk co-morbidities",
           "expandedDefinitionUrl": "",
           "startDate": "March 8",
-          "updatedAt": "2021-03-04T18:48:35.227Z"
+          "updatedAt": "2021-03-08T17:57:39.897Z"
         },
         {
           "phase": "2A",
