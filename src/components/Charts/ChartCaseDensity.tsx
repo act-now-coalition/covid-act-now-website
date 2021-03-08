@@ -153,8 +153,8 @@ const ChartCaseDensity: FunctionComponent<{
         </Style.LineGrid>
         <Style.TextAnnotation>
           <BoxedAnnotation
-            x={getXCoord(lastPoint) + 30}
-            y={getYCoord(lastPoint)}
+            x={getXCoord(lastPoint)}
+            y={getYCoord(lastPoint) - 20}
             text={formatDecimal(getYCaseDensity(lastPoint), 1)}
           />
         </Style.TextAnnotation>
