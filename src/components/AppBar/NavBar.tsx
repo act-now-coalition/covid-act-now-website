@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Logo from 'assets/images/logo';
+import Fade from '@material-ui/core/Fade';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import Logo from 'assets/images/logo';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
 import { DonateButton } from './DonateButton';
@@ -108,7 +109,9 @@ const NavBar: React.FC = () => {
               {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
             </Style.IconButton>
           </Style.StyledMobileMenu>
-          <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
+          <Fade in={isMenuOpen}>
+            <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
+          </Fade>
         </Style.MobileOnly>
       </Style.Toolbar>
     </Style.AppBar>
