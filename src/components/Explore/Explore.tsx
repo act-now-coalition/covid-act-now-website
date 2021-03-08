@@ -34,7 +34,6 @@ import {
   getSeriesLabel,
   EXPLORE_CHART_IDS,
   getSubtitle,
-  DATA_SOURCES_URL,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -64,8 +63,7 @@ function trackShare(label: string, value?: number) {
 function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
-      We don't have {metricName} data for {locationNames}. Learn more about{' '}
-      <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
+      We don't have {metricName} data for {locationNames}.
     </p>
   );
 }
@@ -432,11 +430,7 @@ const Explore: React.FunctionComponent<{
       />
       <Styles.DisclaimerWrapper>
         <Styles.DisclaimerBody>
-          Last updated {lastUpdatedDateString}. Learn more about{' '}
-          <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-            our data sources
-          </ExternalLink>
-          .
+          Last updated {lastUpdatedDateString}.
         </Styles.DisclaimerBody>
       </Styles.DisclaimerWrapper>
     </Styles.Container>
