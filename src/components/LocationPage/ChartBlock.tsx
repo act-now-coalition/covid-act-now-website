@@ -4,9 +4,9 @@ import {
   ChartDescription,
   BetaTag,
   HeaderWrapper,
+  DisclaimerWrapper,
 } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
-import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import {
   getMetricNameExtended,
@@ -17,7 +17,7 @@ import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
 import { Region } from 'common/regions';
-import { getSourcesForMetric } from 'components/Disclaimer/utils';
+import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { MarkdownContent } from 'components/Markdown';
@@ -77,7 +77,7 @@ function ChartBlock(props: {
       {hasMetric && (
         <>
           <MetricChart metric={metric} projections={projections} />
-          <Disclaimer disclaimerContent={disclaimerContent} />
+          <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
         </>
       )}
     </Fragment>

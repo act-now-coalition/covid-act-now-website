@@ -16,7 +16,7 @@ import {
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'ICU capacity used';
