@@ -1845,10 +1845,10 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Essential workers\n* People of any age at increased risk for COVID",
+          "description": "* Essential workers\n* People of any age at increased risk for COVID\n* NOTE: County eligibility may vary.",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-08T17:46:43.890Z"
+          "updatedAt": "2021-03-08T17:51:56.264Z"
         },
         {
           "phase": "2",
@@ -2204,7 +2204,7 @@
       "fips": "44",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1",
@@ -2228,7 +2228,7 @@
           "phase": "1",
           "tier": "3",
           "currentlyEligible": true,
-          "description": "* Ages 65-74",
+          "description": "* (NEW) Educators and child care personnel\n* Ages 65-74\n",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
           "updatedAt": "2021-02-18T01:52:35.985Z"
