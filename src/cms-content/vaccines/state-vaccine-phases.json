@@ -629,7 +629,7 @@
       "fips": "15",
       "eligibilityInfoUrl": "https://hawaiicovid19.com/vaccine/",
       "vaccinationSignupUrl": "https://hawaiicovid19.com/vaccination-registration/",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 2,
       "phaseGroups": [
         {
           "phase": "1A",
