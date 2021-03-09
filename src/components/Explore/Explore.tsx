@@ -12,7 +12,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
-import { useModelLastUpdatedDate } from 'common/utils/model';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
@@ -245,10 +244,6 @@ const Explore: React.FunctionComponent<{
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
   const hasMultipleLocations = selectedLocations.length > 1;
-
-  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
 
   const modalNormalizeCheckboxProps = {
     hasMultipleLocations,
