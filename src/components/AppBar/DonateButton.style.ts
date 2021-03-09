@@ -32,5 +32,6 @@ export const DonateButtonWrapper = styled.div`
 
 export const StyledDonateButtonHeart = styled(LinkButton)`
   text-transform: none;
+  font-size: 16px;
   color: ${COLOR_MAP.PURPLE};
 `;

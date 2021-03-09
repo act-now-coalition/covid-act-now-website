@@ -3,4 +3,5 @@ import { BaseButton } from 'components/Button';
 
 export const StyledButton = styled(BaseButton)`
   text-transform: none;
+  font-size: 16px;
 `;
