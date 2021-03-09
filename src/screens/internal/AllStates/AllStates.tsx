@@ -41,7 +41,13 @@ function State({ state }: { state: StateType }) {
         }}
       >
         {[Metric.CASE_DENSITY].map(metric => (
-          <div style={{ width: `${width}px`, border: '1px solid black' }}>
+          <div
+            style={{
+              width: `${width}px`,
+              height: `${height}px`,
+              border: '1px solid black',
+            }}
+          >
             <MetricChart
               metric={metric}
               projections={projections}

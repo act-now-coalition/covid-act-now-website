@@ -56,13 +56,13 @@ const ChartCaseDensity: FunctionComponent<{
   capY = 500,
   width,
   height,
-  marginTop = 5,
-  marginBottom = 40,
-  marginLeft = 40,
-  marginRight = 5,
+  marginTop = 0,
+  marginBottom = 0,
+  marginLeft = 55,
+  marginRight = 0,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
-  const chartHeight = height;
+  const chartHeight = height - 10;
 
   const data: Point[] = columnData.filter(hasData);
 
