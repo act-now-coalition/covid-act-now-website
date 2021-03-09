@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background-color: white;
   @media (min-width: 1350px) {
     padding: 1rem 0 calc(1rem + 1px) 0; /* The extra pixel aligns the bottom border with the adjacent map box */
-    background-color: #f2f2f2;
+    background-color: ${COLOR_MAP.GREY_1};
   }
 
   @media print {

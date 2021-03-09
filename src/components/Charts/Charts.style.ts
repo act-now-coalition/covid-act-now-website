@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const charts = {
   fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
@@ -116,11 +117,23 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
     stroke: ${props =>
       props.isActive || palette(props).isDarkMode ? props.color : 'none'};
     stroke-width: 1px;
+    display: ${props => !props.isActive && 'none'};
+    }
   }
   text {
     fill: ${props =>
       props.isActive ? palette(props).background : props.color};
-    text-anchor: end;
+    text-anchor: start;
+    display: ${props => !props.isActive && 'none'};
+    }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    rect {
+      display: ${props => !props.isActive && 'inherit'};
+    }
+    text {
+      display: ${props => !props.isActive && 'inherit'};
+    }
   }
 `;
 

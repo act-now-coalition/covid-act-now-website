@@ -57,9 +57,6 @@ export const EXPLORE_METRICS = [
   ExploreMetric.ICU_HOSPITALIZATIONS,
 ];
 
-export const DATA_SOURCES_URL =
-  'https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit';
-
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   switch (chartId) {
     case 'cases':
