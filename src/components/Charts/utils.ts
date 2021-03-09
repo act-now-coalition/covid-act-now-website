@@ -148,7 +148,7 @@ export const getUtcScale = (
   dateTo: Date,
   minX: number,
   maxX: number,
-  zoneLabelsWidth = 80,
+  zoneLabelsWidth = 15,
 ) => {
   const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
