@@ -7,7 +7,7 @@ export const MoreInfo = styled(MuiButton)`
   height: fit-content;
   border-radius: 4px;
   padding: 0.35rem 0.75rem;
-  border: 1px solid #f2f2f2;
+  border: 1px solid ${COLOR_MAP.GREY_1};
   text-transform: none;
   line-height: 1;
   letter-spacing: 0;

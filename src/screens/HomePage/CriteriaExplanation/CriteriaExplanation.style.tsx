@@ -71,7 +71,7 @@ export const KickerContent = styled.span`
   color: ${palette.secondary.main};
   font-weight: 700;
   text-transform: uppercase;
-  border: 1px solid #f2f2f2;
+  border: 1px solid ${COLOR_MAP.GREY_1};
   border-radius: 4px;
   width: fit-content;
   height: fit-content;
