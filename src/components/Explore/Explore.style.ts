@@ -42,7 +42,7 @@ export const Subtitle = styled.div`
   line-height: 14px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #828282;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const Tabs = styled(MuiTabs)`
