@@ -62,7 +62,7 @@ const ChartCaseDensity: FunctionComponent<{
   marginRight = 5,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
-  const chartHeight = height - marginTop - marginBottom;
+  const chartHeight = height;
 
   const data: Point[] = columnData.filter(hasData);
 
@@ -148,33 +148,7 @@ const ChartCaseDensity: FunctionComponent<{
           yScale={yScale}
           curve={curveMonotoneX}
         />
-        <Style.LineGrid>
-          <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
-        </Style.LineGrid>
-        <Style.TextAnnotation>
-          <BoxedAnnotation
-            x={getXCoord(lastPoint)}
-            y={getYCoord(lastPoint) - 20}
-            text={formatDecimal(getYCaseDensity(lastPoint), 1)}
-          />
-        </Style.TextAnnotation>
       </RectClipGroup>
-      {regionLabels.map((region, i) => (
-        <ZoneAnnotation
-          key={`zone-annotation-${i}`}
-          color={region.color}
-          name={region.name}
-          isActive={activeZone.name === region.name}
-          x={chartWidth - 10}
-          y={yScale(0.5 * (region.valueFrom + region.valueTo))}
-        />
-      ))}
-      <AxisBottom
-        innerHeight={chartHeight}
-        scale={xScale}
-        tickValues={dateTicks}
-      />
-      <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
     </ChartContainer>
   );
 };
@@ -182,7 +156,7 @@ const ChartCaseDensity: FunctionComponent<{
 const ChartCaseDensityAutosize: FunctionComponent<{
   columnData: Column[];
   height?: number;
-}> = ({ columnData, height = 400 }) => (
+}> = ({ columnData, height = 80 }) => (
   <Style.ChartContainer>
     <ParentSize>
       {({ width }) => (

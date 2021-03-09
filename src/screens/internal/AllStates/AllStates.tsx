@@ -4,6 +4,8 @@ import { useProjectionsFromRegion } from 'common/utils/model';
 import { Metric } from 'common/metricEnum';
 import { MetricChart } from 'components/Charts';
 import regions, { State as StateType } from 'common/regions';
+import * as QueryString from 'query-string';
+import { useHistory } from 'react-router-dom';
 
 function AllStates() {
   return (
@@ -17,6 +19,10 @@ function AllStates() {
 
 function State({ state }: { state: StateType }) {
   const projections = useProjectionsFromRegion(state);
+  const history = useHistory();
+  const params = QueryString.parse(history.location.search);
+  const width = Number(params['w'] || 280);
+  const height = Number(params['h'] || 80);
 
   // Projections haven't loaded yet
   if (!projections) {
@@ -34,13 +40,13 @@ function State({ state }: { state: StateType }) {
           justifyContent: 'space-between',
         }}
       >
-        {[
-          Metric.CASE_GROWTH_RATE,
-          Metric.POSITIVE_TESTS,
-          Metric.HOSPITAL_USAGE,
-        ].map(metric => (
-          <div style={{ width: '31%' }}>
-            <MetricChart metric={metric} projections={projections} />
+        {[Metric.CASE_DENSITY].map(metric => (
+          <div style={{ width: `${width}px`, border: '1px solid black' }}>
+            <MetricChart
+              metric={metric}
+              projections={projections}
+              height={height}
+            />
           </div>
         ))}
       </div>
