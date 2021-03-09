@@ -30,8 +30,9 @@ import {
  */
 
 export enum ExperimentID {
-  DONATE_BTN_COLOR = 'P_IiKCRHSGCFqFQaEThuDw',
-  HOMEPAGE_SEARCH_REDESIGN = 'oqbm1jC4Sf2psEd_IOUS9A',
+  // DONATE_BTN_COLOR = 'P_IiKCRHSGCFqFQaEThuDw',
+  // HOMEPAGE_SEARCH_REDESIGN = 'oqbm1jC4Sf2psEd_IOUS9A',
+  TOPNAV_HAMBURGER = 'EShMLNjyQm6rJePwFyuB5A',
 }
 
 export type ExperimentProps = Omit<OptimizeExperimentProps, 'id'> & {
