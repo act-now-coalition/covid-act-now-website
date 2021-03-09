@@ -65,7 +65,7 @@ const NavBar: React.FC = () => {
           <Logo />
         </Link>
         <Style.Spacer />
-        <Style.DesktopOnly>
+        <Style.DesktopOnly breakPoint={800}>
           <Style.NavLink
             to="/"
             key="map"
@@ -98,7 +98,7 @@ const NavBar: React.FC = () => {
           </Style.NavLink>
           <DonateButton />
         </Style.DesktopOnly>
-        <Style.MobileOnly>
+        <Style.MobileOnly breakPoint={800}>
           <Style.StyledMobileMenu>
             <DonateButton />
             <Style.IconButton

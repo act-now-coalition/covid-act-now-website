@@ -22,10 +22,6 @@ export const StyledMobileMenu = styled.nav`
   @media print {
     display: none;
   }
-
-  & > :not(:last-child) {
-    margin-right: 45px;
-  }
 `;
 
 export const Toolbar = styled(MuiToolbar)`
