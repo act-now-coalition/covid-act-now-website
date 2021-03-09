@@ -13,7 +13,7 @@ import {
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region, State } from 'common/regions';
-import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Vaccinated';
@@ -103,10 +103,16 @@ function renderDisclaimer(
 ): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
 
+  /**
+   * We don't have a fallback source for non-state vaccinations.
+   * If the page is not a state page or if there is no vaccinations provenance in the API,
+   * we don't render the first half of the disclaimer ("where our data comes from").
+   */
   return (
     <Fragment>
       {'Learn more about '}
-      {region instanceof State && (
+      {region instanceof State ||
+      (provenance && provenance[0].name && provenance[0].url) ? (
         <>
           <DisclaimerTooltip
             title={getDataSourceTooltipContent(
@@ -121,6 +127,8 @@ function renderDisclaimer(
           />
           {' and '}
         </>
+      ) : (
+        ''
       )}
       <DisclaimerTooltip
         title={renderTooltipContent(body)}

@@ -1,5 +1,14 @@
 import regions, { RegionType } from 'common/regions';
 
+// Common regions to test against.
+const alaska = regions.findByStateCodeStrict('AK');
+const newYork = regions.findByStateCodeStrict('NY');
+const newJersey = regions.findByStateCodeStrict('NJ');
+const anchorageCountyAK = regions.findByFipsCodeStrict('02020');
+const kingCountyWA = regions.findByFipsCodeStrict('53033');
+const anchorageMetro = regions.findByFipsCodeStrict('11260');
+const newYorkCityMetro = regions.findByFipsCodeStrict('35620');
+
 describe('regions', () => {
   test('states returns all the states', () => {
     const states = regions.states;
@@ -38,6 +47,22 @@ describe('regions', () => {
     test('returns null if the FIPS doesn’t exist', () => {
       const notFound = regions.findByFipsCode('xx');
       expect(notFound).toBeNull();
+    });
+  });
+
+  describe('findByStateCodeStrict', () => {
+    test('returns a state when passing a valid uppercase state code', () => {
+      const ca = regions.findByStateCodeStrict('CA');
+      expect(ca.regionType).toBe(RegionType.STATE);
+    });
+
+    test('returns a state when passing a valid lowercase state code', () => {
+      const ca = regions.findByStateCodeStrict('ca');
+      expect(ca.regionType).toBe(RegionType.STATE);
+    });
+
+    test('throws when passing an invalid state code', () => {
+      expect(() => regions.findByStateCodeStrict('cate')).toThrow();
     });
   });
 
@@ -89,75 +114,93 @@ describe('regions', () => {
 });
 
 describe('State', () => {
-  const state = regions.findByFipsCode('02');
   test('fullName', () => {
-    expect(state?.fullName).toBe('Alaska');
+    expect(alaska.fullName).toBe('Alaska');
   });
 
   test('shortName', () => {
-    expect(state?.shortName).toBe('Alaska');
+    expect(alaska.shortName).toBe('Alaska');
   });
 
   test('abbreviation', () => {
-    expect(state?.abbreviation).toBe('AK');
+    expect(alaska.abbreviation).toBe('AK');
   });
 
   test('relativeUrl', () => {
-    expect(state?.relativeUrl).toBe('/us/alaska-ak/');
+    expect(alaska.relativeUrl).toBe('/us/alaska-ak/');
   });
 
   test('canonicalUrl', () => {
-    expect(state?.canonicalUrl).toBe('https://covidactnow.org/us/alaska-ak/');
+    expect(alaska.canonicalUrl).toBe('https://covidactnow.org/us/alaska-ak/');
+  });
+
+  test('contains', () => {
+    expect(alaska.contains(anchorageCountyAK)).toBe(true);
+    expect(alaska.contains(anchorageMetro)).toBe(true);
+
+    expect(alaska.contains(alaska)).toBe(false);
+    expect(alaska.contains(kingCountyWA)).toBe(false);
+    expect(alaska.contains(newYorkCityMetro)).toBe(false);
+
+    // multi-state metros.
+    expect(newYork.contains(newYorkCityMetro)).toBe(true);
+    expect(newJersey.contains(newYorkCityMetro)).toBe(true);
   });
 });
 
 describe('County', () => {
-  const county = regions.findByFipsCode('53033');
   test('fullName', () => {
-    expect(county?.fullName).toBe('King County, Washington');
+    expect(kingCountyWA.fullName).toBe('King County, Washington');
   });
 
   test('shortName', () => {
-    expect(county?.shortName).toBe('King County, WA');
+    expect(kingCountyWA.shortName).toBe('King County, WA');
   });
 
   test('abbreviation', () => {
-    expect(county?.abbreviation).toBe('King Co.');
+    expect(kingCountyWA.abbreviation).toBe('King Co.');
   });
 
   test('relativeUrl', () => {
-    expect(county?.relativeUrl).toBe('/us/washington-wa/county/king_county/');
+    expect(kingCountyWA.relativeUrl).toBe(
+      '/us/washington-wa/county/king_county/',
+    );
   });
 
   test('canonicalUrl', () => {
-    expect(county?.canonicalUrl).toBe(
+    expect(kingCountyWA.canonicalUrl).toBe(
       'https://covidactnow.org/us/washington-wa/county/king_county/',
     );
+  });
+
+  test('contains', () => {
+    expect(anchorageCountyAK.contains(anchorageCountyAK)).toBe(false);
+    expect(anchorageCountyAK.contains(anchorageMetro)).toBe(false);
+    expect(anchorageCountyAK.contains(alaska)).toBe(false);
   });
 });
 
 describe('Metro Area', () => {
-  const metro = regions.findByFipsCode('35620');
   test('fullName', () => {
-    expect(metro?.fullName).toBe('New York City metro area');
+    expect(newYorkCityMetro.fullName).toBe('New York City metro area');
   });
 
   test('shortName', () => {
-    expect(metro?.shortName).toBe('New York City metro');
+    expect(newYorkCityMetro.shortName).toBe('New York City metro');
   });
 
   test('abbreviation', () => {
-    expect(metro?.abbreviation).toBe('New York City metro');
+    expect(newYorkCityMetro.abbreviation).toBe('New York City metro');
   });
 
   test('relativeUrl', () => {
-    expect(metro?.relativeUrl).toBe(
+    expect(newYorkCityMetro.relativeUrl).toBe(
       '/us/metro/new-york-city-newark-jersey-city_ny-nj-pa/',
     );
   });
 
   test('canonicalUrl', () => {
-    expect(metro?.canonicalUrl).toBe(
+    expect(newYorkCityMetro.canonicalUrl).toBe(
       'https://covidactnow.org/us/metro/new-york-city-newark-jersey-city_ny-nj-pa/',
     );
   });
@@ -165,5 +208,11 @@ describe('Metro Area', () => {
   test('DC Metro Area Name', () => {
     const metro = regions.findByFipsCodeStrict('47900');
     expect(metro.fullName).toBe('Washington DC metro area');
+  });
+
+  test('contains', () => {
+    expect(anchorageMetro.contains(anchorageCountyAK)).toBe(true);
+    expect(anchorageMetro.contains(anchorageMetro)).toBe(false);
+    expect(anchorageMetro.contains(alaska)).toBe(false);
   });
 });

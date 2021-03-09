@@ -9,6 +9,7 @@ export interface MetricDefinition {
     region: Region,
     provenance?: Sources,
   ) => React.ReactElement;
+
   metricName: string;
   extendedMetricName: string;
   metricNameForCompare: string;
