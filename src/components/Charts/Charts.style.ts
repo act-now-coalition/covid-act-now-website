@@ -128,7 +128,9 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
     }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    display: ${props => !props.isActive && 'inherit'};
+    rect {
+      display: ${props => !props.isActive && 'inherit'};
+    }
     text {
       display: ${props => !props.isActive && 'inherit'};
     }
