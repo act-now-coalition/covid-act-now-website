@@ -125,7 +125,7 @@ export const MobileOnly = styled.div<{ breakPoint?: number }>`
   display: flex;
   align-items: center;
   @media (min-width: ${props =>
-      props.breakPoint ? props.breakPoint : mobileBreakpoint}px) {
+      props.breakPoint ? `${props.breakPoint}px` : mobileBreakpoint}) {
     display: none;
   }
 `;
@@ -133,7 +133,7 @@ export const MobileOnly = styled.div<{ breakPoint?: number }>`
 export const DesktopOnly = styled.div<{ breakPoint?: number }>`
   display: none;
   @media (min-width: ${props =>
-      props.breakPoint ? props.breakPoint : mobileBreakpoint}px) {
+      props.breakPoint ? `${props.breakPoint}px` : mobileBreakpoint}) {
     display: flex;
     align-items: center;
     min-height: ${desktopNavHeight}px;
