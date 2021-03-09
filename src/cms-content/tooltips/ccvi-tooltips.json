@@ -1,5 +1,5 @@
 {
-  "headerTooltipContent": "Higher vulnerable areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.  \n\nAs of March 8 2021, people in the *most* vulnerable third of U.S. counties are 44 percent more likely to have died from COVID than people in the *least* vulnerable third of U.S. counties. \n\nTo calculate vulnerability, we use Surgo Ventures’ [COVID-19 Community Vulnerability Index (CCVI)](https://precisionforcovid.org/ccvi). [Learn more](https://covidactnow.org/covid-explained/covid-vulnerability-data).",
+  "headerTooltipContent": "Higher vulnerable areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.  \n\nAs of March 8, 2021, people in the *most* vulnerable third of U.S. counties are 44 percent more likely to have died from COVID than people in the *least* vulnerable third of U.S. counties. \n\nTo calculate vulnerability, we use Surgo Ventures’ [COVID-19 Community Vulnerability Index (CCVI)](https://precisionforcovid.org/ccvi). [Learn more](https://covidactnow.org/covid-explained/covid-vulnerability-data).",
   "subscoreTooltips": [
     {
       "subscoreName": "Unemployment & low income",
