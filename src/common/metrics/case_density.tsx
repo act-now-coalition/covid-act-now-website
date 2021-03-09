@@ -3,15 +3,9 @@ import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Projections } from 'common/models/Projections';
-import {
-  formatDecimal,
-  formatPercent,
-  formatInteger,
-  formatEstimate,
-} from 'common/utils';
+import { formatDecimal, formatInteger } from 'common/utils';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
-import moment from 'moment';
 import { Metric } from 'common/metricEnum';
 import {
   InfoTooltip,
@@ -96,43 +90,18 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const ESTIMATED_INFECTIONS_FACTOR = 5;
   const newCasesPerDay = currentDailyAverageCases;
   // Try not to round cases/day to zero (since it will probably be >0 per 100k).
   const newCasesPerDayText =
     newCasesPerDay >= 0.1 && newCasesPerDay < 1
       ? formatDecimal(newCasesPerDay, 1)
       : formatInteger(newCasesPerDay);
-  const threeMonthsFromNow = moment().add(3, 'months');
-  const daysTil3MonthsFromNow = threeMonthsFromNow.diff(moment(), 'days');
-  const newCasesPer3Months = daysTil3MonthsFromNow * newCasesPerDay;
-  const estimatedNewInfectionsIn3Months =
-    ESTIMATED_INFECTIONS_FACTOR * newCasesPer3Months;
-
-  // Makes sure estimated # of cases and infections over the next year don't go above total population:
-  function maxAtTotalPopulation(num: number) {
-    return Math.min(num, totalPopulation);
-  }
-  const estimatedNewInfectionsIn3MonthsWithMax = maxAtTotalPopulation(
-    estimatedNewInfectionsIn3Months,
-  );
-  const newCasesIn3MonthsWithMax = maxAtTotalPopulation(newCasesPer3Months);
-
-  const estimatedPercentageNewInfectedIn3Months = Math.min(
-    1,
-    estimatedNewInfectionsIn3Months / totalPopulation,
-  );
 
   return (
     <Fragment>
       Over the last week, {locationName} has averaged {newCasesPerDayText} new
       confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents). If this trend continued for the next three
-      months, this would translate to approximately{' '}
-      {formatEstimate(newCasesIn3MonthsWithMax)} cases and an estimated{' '}
-      {formatEstimate(estimatedNewInfectionsIn3MonthsWithMax)} infections (
-      {formatPercent(estimatedPercentageNewInfectedIn3Months)} of the
-      population).
+      every 100,000 residents).
     </Fragment>
   );
 }

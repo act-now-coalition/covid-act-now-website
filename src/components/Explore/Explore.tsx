@@ -427,11 +427,6 @@ const Explore: React.FunctionComponent<{
         chartIndigenous={chartIndigenous}
         setChartIndigenous={setChartIndigenous}
       />
-      <Styles.DisclaimerWrapper>
-        <Styles.DisclaimerBody>
-          Last updated {lastUpdatedDateString}.
-        </Styles.DisclaimerBody>
-      </Styles.DisclaimerWrapper>
     </Styles.Container>
   );
 };

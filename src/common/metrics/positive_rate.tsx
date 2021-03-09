@@ -137,18 +137,10 @@ function renderStatus(projections: Projections) {
     `which indicates that testing in ${locationName} is limited and that most cases likely go undetected`,
   );
 
-  const textForecast = levelText(
-    level,
-    `Identifying and isolating new cases can help contain COVID without resorting to lockdowns`,
-    `Identifying and isolating new cases can help contain COVID without resorting to lockdowns`,
-    `At these levels, it is hard to know how fast COVID is actually spreading, and there is risk of being surprised by a second wave of disease. Caution is warranted`,
-    `At these levels, it is hard to know how fast COVID is actually spreading, and there is very high risk of being surprised by a wave of disease. More testing urgently needed`,
-  );
-
   return (
     <Fragment>
       A {lowSizableLarge} percentage ({percentage}) of COVID tests were
-      positive, {testingBroadlyText}. {textForecast}.
+      positive, {testingBroadlyText}.
     </Fragment>
   );
 }
