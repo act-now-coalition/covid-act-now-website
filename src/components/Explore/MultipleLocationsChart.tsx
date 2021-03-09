@@ -11,7 +11,6 @@ import ChartSeries, { SeriesMarker } from './SeriesChart';
 import { getMaxBy, getSeriesLabel } from './utils';
 import * as Styles from './Explore.style';
 import { ScreenshotReady } from 'components/Screenshot';
-import TodayMarker from './TodayMarker';
 import SeriesTooltipOverlay, { HoverPointInfo } from './SeriesTooltipOverlay';
 import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
@@ -184,7 +183,6 @@ const MultipleLocationsChart: React.FC<{
             isMobile={isMobile}
             yNumTicks={5}
           />
-          <TodayMarker height={innerHeight} dateScale={dateScale} />
           {seriesLabels.map((label, i) => (
             <Styles.LineLabel
               key={`label-${label.label}`}

@@ -1,12 +1,12 @@
 import React from 'react';
-import moment from 'moment';
 import { ScaleTime, ScaleLinear } from 'd3-scale';
 import { AxisLeft, AxisBottom } from '@vx/axis';
 import { Axis as AxisStyle } from './Explore.style';
-import { getTimeAxisTicks } from './utils';
-
-const xTickFormat = (date: Date, isMobile: boolean) =>
-  moment(date).format(isMobile ? 'MMM' : 'MMM D');
+import {
+  getFinalTicks,
+  getXTickFormat,
+  getTimeAxisTicks,
+} from 'components/Charts/utils';
 
 const yTickFormatDefault = (value: number) => value.toString();
 
@@ -27,16 +27,17 @@ const Axes: React.FC<{
 }) => {
   const [dateFrom, dateTo] = dateScale.domain();
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
-  // We remove the last tick to make room for the Today marker
-  const xTicks = timeTicks.slice(0, timeTicks.length - 1);
+
+  const finalTickValues = getFinalTicks(isMobile, timeTicks);
+
   return (
     <AxisStyle>
       <AxisLeft scale={yScale} numTicks={yNumTicks} tickFormat={yTickFormat} />
       <AxisBottom
         top={height}
         scale={dateScale}
-        tickValues={xTicks}
-        tickFormat={date => xTickFormat(date, isMobile)}
+        tickValues={finalTickValues}
+        tickFormat={(date: Date) => getXTickFormat(date)}
       />
     </AxisStyle>
   );

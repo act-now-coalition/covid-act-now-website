@@ -13,7 +13,6 @@ import ChartOverlay from './ChartOverlay';
 import { getMaxBy, findPointByDate } from './utils';
 import * as Styles from './Explore.style';
 import { ScreenshotReady } from 'components/Screenshot';
-import TodayMarker from './TodayMarker';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
@@ -168,7 +167,6 @@ const SingleLocationChart: React.FC<{
             isMobile={isMobile}
             yNumTicks={5}
           />
-          <TodayMarker height={innerHeight} dateScale={dateScale} />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }) => (
               <ChartSeries
