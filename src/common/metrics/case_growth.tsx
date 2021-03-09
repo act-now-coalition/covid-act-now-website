@@ -26,7 +26,6 @@ export const CaseGrowthMetric: MetricDefinition = {
   renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
-  metricId: 'metrics.infectionRate',
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,

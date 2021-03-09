@@ -23,7 +23,6 @@ export const VaccinationsMetric: MetricDefinition = {
   renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
-  metricId: 'metrics.vaccinationsInitiatedRatio',
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent Vaccinated',
   metricNameForCompare: 'Vaccinated (1+ dose)',

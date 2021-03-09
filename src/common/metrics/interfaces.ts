@@ -10,13 +10,6 @@ export interface MetricDefinition {
     provenance?: Sources,
   ) => React.ReactElement;
 
-  /**
-   * A string ID used to reference the metric, e.g. from
-   * cms-content/region-overrides/region-overrides.json
-   * For convention, I suggest using the full path to the metric in the API
-   * (e.g. metrics.testPositivityRatio)
-   */
-  metricId: string;
   metricName: string;
   extendedMetricName: string;
   metricNameForCompare: string;

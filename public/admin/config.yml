@@ -800,12 +800,12 @@ collections:
                 widget: select
                 default: region
                 options:
-                  - label: Region
+                  - label: Region only
                     value: region
-                  - label: Subregions (counties / metros)
-                    value: subregions
-                  - label: Region and subregions (counties / metros)
+                  - label: Region and its subregions (e.g. state and its counties & metros)
                     value: region-and-subregions
+                  - label: Subregions only (e.g. counties & metros in a state but not the state itself)
+                    value: subregions
               - name: metric
                 label: Metric
                 widget: select

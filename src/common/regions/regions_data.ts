@@ -1,4 +1,4 @@
-import { chain, Dictionary, fromPairs } from 'lodash';
+import { chain, Dictionary, keyBy } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
 import metroAreaDataset from 'common/data/msa-data.json';
@@ -118,8 +118,7 @@ function buildMetroAreas(
 ): MetroArea[] {
   const statesByCode = chain(statesByFips)
     .values()
-    .map(state => [state.stateCode, state])
-    .fromPairs()
+    .keyBy(state => state.stateCode)
     .value();
 
   return chain(metroAreaDataset.metro_areas)
@@ -148,13 +147,9 @@ function buildMetroAreas(
 }
 
 const states: State[] = buildStates();
-export const statesByFips = fromPairs(
-  states.map(state => [state.fipsCode, state]),
-);
+export const statesByFips = keyBy(states, state => state.fipsCode);
 
-export const statesByStateCode = fromPairs(
-  states.map(state => [state.stateCode, state]),
-);
+export const statesByStateCode = keyBy(states, state => state.stateCode);
 
 interface AdjacencyInfo {
   adjacent_counties: FipsCode[];
@@ -163,20 +158,14 @@ interface AdjacencyInfo {
 const adjacency: Dictionary<AdjacencyInfo> = countyAdjacencyMsa.counties;
 
 const counties: County[] = buildCounties(statesByFips, adjacency);
-export const countiesByFips = fromPairs(
-  counties.map(county => [county.fipsCode, county]),
-);
+export const countiesByFips = keyBy(counties, county => county.fipsCode);
 
 const metroAreas = buildMetroAreas(countiesByFips, statesByFips);
-export const metroAreasByFips = fromPairs(
-  metroAreas.map(metro => [metro.fipsCode, metro]),
-);
+export const metroAreasByFips = keyBy(metroAreas, metro => metro.fipsCode);
 
 const customAreas = [
   new State('USA', '', '00001', 331486822, 'USA'),
   new State('Native American Majority Counties', '', '00002', 314704, 'NAMC'),
 ];
 
-export const customAreasByFips = fromPairs(
-  customAreas.map(metro => [metro.fipsCode, metro]),
-);
+export const customAreasByFips = keyBy(customAreas, metro => metro.fipsCode);

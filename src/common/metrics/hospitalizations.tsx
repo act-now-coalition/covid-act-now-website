@@ -26,7 +26,6 @@ export const ICUCapacityUsed: MetricDefinition = {
   renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
-  metricId: 'metrics.icuCapacityRatio',
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,

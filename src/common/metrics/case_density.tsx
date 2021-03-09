@@ -28,7 +28,6 @@ export const CaseIncidenceMetric: MetricDefinition = {
   renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
-  metricId: 'metrics.caseDensity',
   metricName: 'Daily new cases',
   extendedMetricName: 'Daily new cases per 100k population',
   metricNameForCompare: `Daily new cases per 100k`,

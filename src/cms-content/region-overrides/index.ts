@@ -1,10 +1,22 @@
 import RegionOverrides from './region-overrides.json';
 import { Markdown } from 'cms-content/utils';
-import { getMetricDefinition } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import regions, { Region } from 'common/regions';
+import { assert } from 'common/utils';
 
-type Include = 'region' | 'subregions' | 'region-and-subregions';
+enum Include {
+  Region = 'region',
+  Subregions = 'subregions',
+  RegionAndSubregions = 'region-and-subregions',
+}
+
+const metricIdToMetric: { [metricId: string]: Metric } = {
+  'metrics.caseDensity': Metric.CASE_DENSITY,
+  'metrics.infectionRate': Metric.CASE_GROWTH_RATE,
+  'metrics.testPositivityRatio': Metric.POSITIVE_TESTS,
+  'metrics.icuCapacityRatio': Metric.HOSPITAL_USAGE,
+  'metrics.vaccinationsInitiatedRatio': Metric.VACCINATIONS,
+};
 
 interface RegionOverride {
   include: Include;
@@ -20,19 +32,26 @@ export function getRegionMetricOverride(
   region: Region,
   metric: Metric,
 ): RegionOverride | undefined {
-  const metricDefinition = getMetricDefinition(metric);
   for (const override of getOverridesForRegion(region)) {
-    if (override.metric === metricDefinition.metricId) {
+    if (metric === getMetricForOverride(override)) {
       return override;
     }
   }
   return undefined;
 }
 
+/** Can be called from a test to validate properties for each override. */
+export function validateOverrides() {
+  for (const override of getOverrides()) {
+    getRegionFromOverride(override);
+    getMetricForOverride(override);
+  }
+}
+
 /** Looks for any overrides applied to the specified region and returns them. */
 function getOverridesForRegion(region: Region): RegionOverride[] {
   const result: RegionOverride[] = [];
-  for (const override of RegionOverrides.overrides as RegionOverride[]) {
+  for (const override of getOverrides()) {
     if (overrideAppliesToRegion(override, region)) {
       result.push(override);
     }
@@ -40,15 +59,19 @@ function getOverridesForRegion(region: Region): RegionOverride[] {
   return result;
 }
 
+function getOverrides(): RegionOverride[] {
+  return RegionOverrides.overrides as RegionOverride[];
+}
+
 /** Checks if the specified override applies to the specified region. */
 function overrideAppliesToRegion(override: RegionOverride, region: Region) {
   const overrideRegion = getRegionFromOverride(override);
   const includeSelf =
-    override.include === 'region' ||
-    override.include === 'region-and-subregions';
+    override.include === Include.Region ||
+    override.include === Include.RegionAndSubregions;
   const includeSubregions =
-    override.include === 'subregions' ||
-    override.include === 'region-and-subregions';
+    override.include === Include.Subregions ||
+    override.include === Include.RegionAndSubregions;
   if (includeSelf && region === overrideRegion) {
     return true;
   } else if (includeSubregions) {
@@ -64,4 +87,10 @@ function getRegionFromOverride(override: RegionOverride): Region {
   } else {
     return regions.findByFipsCodeStrict(override.region);
   }
+}
+
+function getMetricForOverride(override: RegionOverride): Metric {
+  const metric = metricIdToMetric[override.metric];
+  assert(metric !== undefined, 'Invalid metricId: ' + override.metric);
+  return metric;
 }
