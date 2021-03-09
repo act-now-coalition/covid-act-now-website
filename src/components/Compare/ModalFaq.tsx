@@ -25,45 +25,29 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
           <Subheader>Frequently asked questions</Subheader>
           <Question>How do you define “vulnerability”?</Question>
           <Answer>
-            Vulnerable areas are more likely to experience severe physical and
-            economic suffering from COVID, and to face a harder, longer
-            recovery.
+            Higher vulnerability areas are more likely to experience severe
+            physical and economic suffering from COVID, and to face a harder,
+            longer recovery.
             <br />
             <br />
-            As of January 2021, people in the most vulnerable third of U.S.
-            counties are:
-            <ul>
-              <li>23 percent more likely to be diagnosed with COVID</li>
-              <li>32 percent more likely to have died from COVID</li>
-              <li>
-                35 percent more likely to be unemployed due to COVID (
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19"
-                >
-                  see source
-                </a>
-                ).
-              </li>
-            </ul>
-            To calculate vulnerability, we use Surgo Ventures’ COVID-19
-            Community Vulnerability Index (CCVI).{' '}
+            As of March 8 2021, people in the <i>most</i> vulnerable third of
+            U.S. counties are 44 percent more likely to have died from COVID
+            than people in the <i>least</i> vulnerable third of U.S. counties.
+            <br />
+            <br />
+            To calculate vulnerability, we use Surgo Ventures’{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://precisionforcovid.org/ccvi"
+            >
+              COVID-19 Community Vulnerability Index (CCVI)
+            </a>
+            .{' '}
             <Link to="/covid-explained/covid-vulnerability-data">
               Learn more
             </Link>
             .
-          </Answer>
-          <Question>How are “metro” and “non-metro” counties defined?</Question>
-          <Answer>
-            You can think of this as urban or rural, but just keep in mind that
-            isn’t exact.
-            <br />
-            <br />
-            We follow US Census definitions. A Metro Statistical Area (MSA)
-            consists of one or more counties that contain a city of 50,000 or
-            more inhabitants. We define “metro counties” as counties belonging
-            to MSAs; “non metro counties” as counties not within an MSA.
           </Answer>
         </Content>
       </Wrapper>
