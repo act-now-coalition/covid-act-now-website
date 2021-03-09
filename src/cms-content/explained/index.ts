@@ -18,11 +18,13 @@ import metros from '../articles/metros.json';
 import schoolGuidance from '../articles/school-guidance.json';
 import vulnerabilityData from '../articles/covid-vulnerability-data.json';
 import federalResources from '../articles/federal-resources-covid-relief.json';
+import vaccineTrials from '../articles/covid-vaccine-trials.json';
 
 const orderedArticles = [
   vulnerabilityData,
   federalResources,
   schoolGuidance,
+  vaccineTrials,
   variantsAndVaccines,
   vaccineProgress,
   vaccineBasics,
