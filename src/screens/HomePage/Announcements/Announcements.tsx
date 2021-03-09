@@ -20,26 +20,30 @@ const Announcements: React.FC = () => {
       <Date>THURSDAY, Mar 4, 2021</Date>
       <AnnouncementBodyCopy>
         You can now see which counties and metros are most and least vulnerable.
-        Vulnerable areas are more likely to experience severe physical and
-        economic suffering from COVID, and to face a harder, longer recovery. As
-        of January 2021, people in the most vulnerable third of U.S. counties
-        are:
-        <ul>
-          <li>23 percent more likely to be diagnosed with COVID</li>
-          <li>32 percent more likely to have died from COVID</li>
-          <li>35 percent more likely to be unemployed due to COVID</li>
-        </ul>
-        This is due to a number of factors such as a community member's income,
+        Higher vulnerability areas are more likely to experience severe physical
+        and economic suffering from COVID, and to face a harder, longer
+        recovery.
+        <br />
+        <br />
+        As of March 8, 2021, people in the <i>most</i> vulnerable third of U.S.
+        counties are 44 percent more likely to have died from COVID than people
+        in the <i>least</i> vulnerable third of U.S. counties.
+        <br />
+        <br />
+        This is due to a number of factors such as a community members’ income,
         age, and underlying health, as well as their access to transportation
-        and health care (
+        and health care.
+        <br />
+        <br />
+        To calculate vulnerability, we use Surgo Ventures’{' '}
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19"
+          href="https://precisionforcovid.org/ccvi"
         >
-          see source
+          COVID-19 Community Vulnerability Index (CCVI)
         </a>
-        ).
+        .
         <br />
         <br />
         <HashLink
