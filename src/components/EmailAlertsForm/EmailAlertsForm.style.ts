@@ -34,11 +34,11 @@ export const EmailTextField = styled(StyledTextField).attrs(props => ({
   background-color: white;
 
   & label.Mui-focused {
-    color: ${COLOR_MAP.GREY_5};
+    color: ${COLOR_MAP.GREY_4};
   }
 
   & label {
-    color: ${COLOR_MAP.GREY_4};
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
   }
 
   input {
@@ -109,7 +109,7 @@ export const StyledCheckbox = styled(MuiCheckbox).attrs(props => ({
 
 export const LocationChip = styled(Chip)`
   background-color: ${COLOR_MAP.GREY_1};
-  color: ${COLOR_MAP.GREY_5};
+  color: ${COLOR_MAP.GREY_4};
   font-weight: 500;
 
   span :not(:first-child) {
