@@ -39,7 +39,7 @@ const Announcements: React.FC = () => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19"
+          href="https://precisionforcovid.org/ccvi"
         >
           COVID-19 Community Vulnerability Index (CCVI)
         </a>
