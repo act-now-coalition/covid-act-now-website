@@ -12,7 +12,7 @@ import { snapshotUrl } from 'common/utils/snapshots';
 import regions, { County, MetroArea, Region } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { fetchSummaries } from 'common/location_summaries';
-import { DISABLED_METRICS } from 'common/models/Projection';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
 
 export const COUNTIES_LIMIT = 100;
 export const METROS_LIMIT = 100;
@@ -142,7 +142,7 @@ export function useProjectionsSet(
       } else if (locations === CompareLocations.DISABLED) {
         const disabledRegions = regions
           .all()
-          .filter(r => DISABLED_METRICS[metric].includes(r.fipsCode));
+          .filter(r => getRegionMetricOverride(r, metric)?.blocked);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
             await fetchRegionProjections(leftSnapshot, disabledRegions),
