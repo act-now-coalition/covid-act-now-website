@@ -20,7 +20,9 @@ const isLearnPage = (pathname: string) =>
   pathname.startsWith('/covid-explained') ||
   pathname.startsWith('/updates');
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<{ mobileBreakpoint?: number }> = ({
+  mobileBreakpoint,
+}) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
@@ -65,7 +67,7 @@ const NavBar: React.FC = () => {
           <Logo />
         </Link>
         <Style.Spacer />
-        <Style.DesktopOnly>
+        <Style.DesktopOnly breakPoint={mobileBreakpoint}>
           <Style.NavLink
             to="/"
             key="map"
@@ -98,7 +100,7 @@ const NavBar: React.FC = () => {
           </Style.NavLink>
           <DonateButton />
         </Style.DesktopOnly>
-        <Style.MobileOnly>
+        <Style.MobileOnly breakPoint={mobileBreakpoint}>
           <Style.StyledMobileMenu>
             <DonateButton />
             <Style.IconButton

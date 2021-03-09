@@ -121,17 +121,19 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
   }
 `;
 
-export const MobileOnly = styled.div`
+export const MobileOnly = styled.div<{ breakPoint?: number }>`
   display: flex;
   align-items: center;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${props =>
+      props.breakPoint ? props.breakPoint : mobileBreakpoint}) {
     display: none;
   }
 `;
 
-export const DesktopOnly = styled.div`
+export const DesktopOnly = styled.div<{ breakPoint?: number }>`
   display: none;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${props =>
+      props.breakPoint ? props.breakPoint : mobileBreakpoint}) {
     display: flex;
     align-items: center;
     min-height: ${desktopNavHeight}px;
