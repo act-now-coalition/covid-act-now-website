@@ -52,6 +52,13 @@
       "region": "WY",
       "context": "https://trello.com/c/kvjwZJJP/1005-disabled-wyoming-counties-vaccine-data-due-to-anomalous-drop-off",
       "blocked": true
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "42101",
+      "context": "https://trello.com/c/GjrTXF0m/1012-philadelphia-vaccination-confusion-between-town-county-federal"
     }
   ]
 }
