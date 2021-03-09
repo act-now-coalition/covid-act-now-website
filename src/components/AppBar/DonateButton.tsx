@@ -1,6 +1,11 @@
 import React from 'react';
-import { DonateButtonWrapper, StyledDonateButton } from './DonateButton.style';
+import {
+  DonateButtonWrapper,
+  StyledDonateButton,
+  StyledDonateButtonHeart,
+} from './DonateButton.style';
 import { EventAction, EventCategory } from 'components/Analytics';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const trackingProps = {
   trackingCategory: EventCategory.DONATE,
@@ -14,4 +19,14 @@ export const DonateButton = () => (
       Donate
     </StyledDonateButton>
   </DonateButtonWrapper>
+);
+
+export const DonateButtonHeart = () => (
+  <StyledDonateButtonHeart
+    to="/donate"
+    {...trackingProps}
+    endIcon={<FavoriteIcon />}
+  >
+    Donate
+  </StyledDonateButtonHeart>
 );

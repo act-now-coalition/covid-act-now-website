@@ -29,3 +29,8 @@ export const DonateButtonWrapper = styled.div`
     text-decoration: none;
   }
 `;
+
+export const StyledDonateButtonHeart = styled(LinkButton)`
+  text-transform: none;
+  color: ${COLOR_MAP.PURPLE};
+`;
