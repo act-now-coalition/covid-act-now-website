@@ -204,20 +204,19 @@ export type Icubeds = HospitalResourceUtilization;
 export type Newcases = number | null;
 /**
  *
- * New confirmed or suspected deaths.
+ * New confirmed or suspected COVID-19 deaths.
  *
- *
- * New cases are a processed timeseries of cases - summing new cases may not equal
- * the cumulative case count.
+ * New deaths is an estimate of deaths per day; summing new deaths may not equal the
+ * cumulative death count.
  *
  * Processing steps:
- *  1. If a region does not report cases for a period of time but then begins reporting again,
+ *  1. If a region does not report deaths for a period of time but then begins reporting again,
  *     we will exclude the first day that reporting recommences. This first day likely includes
- *     multiple days worth of cases and can be misleading to the overall series.
- *  2. We remove any days with negative new cases.
+ *     multiple days worth of deaths and can be misleading to the overall series.
+ *  2. We remove any days with negative new deaths.
  *  3. We apply an outlier detection filter to the timeseries, which removes any data
  *     points that seem improbable given recent numbers. Many times this is due to
- *     backfill of previously unreported cases.
+ *     backfill of previously unreported deaths.
  *
  */
 export type Newdeaths = number | null;
