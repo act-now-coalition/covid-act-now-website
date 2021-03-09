@@ -64,6 +64,7 @@ export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
   ]),
   [Metric.VACCINATIONS]: new DisabledFipsList([
     ...countyAndMetrosForState('WY'), //https://trello.com/c/kvjwZJJP/
+    '42101', // https://trello.com/c/GjrTXF0m/1012-philadelphia-vaccination-confusion-between-town-county-federal
   ]),
 };
 
