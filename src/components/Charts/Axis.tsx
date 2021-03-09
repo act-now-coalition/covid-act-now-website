@@ -23,7 +23,7 @@ export const AxisBottom: React.FC<AxisBottomProps> = ({
   innerHeight,
   tickValues,
 }) => {
-  const isMobile = useBreakpoint(600);
+  const isMobile = useBreakpoint(960);
   const finalTickValues = getFinalTicks(isMobile, tickValues);
 
   return (
