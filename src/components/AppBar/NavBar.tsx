@@ -5,9 +5,12 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import * as Style from './NavBar.style';
 import MobileMenu from './MobileMenu';
-import { DonateButton } from './DonateButton';
+import { DonateButton, DonateButtonHeart } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
+import MenuButton from './MenuButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
@@ -100,14 +103,15 @@ const NavBar: React.FC = () => {
         </Style.DesktopOnly>
         <Style.MobileOnly breakPoint={1350}>
           <Style.StyledMobileMenu>
-            <DonateButton />
-            <Style.IconButton
+            <DonateButtonHeart />
+            <MenuButton
               onClick={onClickHamburger}
               onMouseEnter={onHoverHamburger}
               edge="end"
+              endIcon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             >
-              {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-            </Style.IconButton>
+              Menu
+            </MenuButton>
           </Style.StyledMobileMenu>
           <Fade in={isMenuOpen}>
             <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />

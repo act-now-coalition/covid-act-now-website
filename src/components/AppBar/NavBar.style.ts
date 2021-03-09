@@ -8,7 +8,7 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
+import { smallPhoneBreakpoint } from 'assets/theme/sizes';
 
 const desktopNavHeight = 64;
 
@@ -21,6 +21,10 @@ export const StyledMobileMenu = styled.nav`
   display: inherit;
   @media print {
     display: none;
+  }
+
+  & > :not(:last-child) {
+    margin-right: 45px;
   }
 `;
 
