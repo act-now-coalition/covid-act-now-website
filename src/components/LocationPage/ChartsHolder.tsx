@@ -6,8 +6,6 @@ import { Projections } from 'common/models/Projections';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
 import ChartBlock from 'components/LocationPage/ChartBlock';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import CompareMain from 'components/Compare/CompareMain';
@@ -29,7 +27,7 @@ import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock'
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import { useCcviForFips } from 'common/hooks';
-import { useScrollToElement } from 'common/hooks';
+import { useScrollToElement, useBreakpoint } from 'common/hooks';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -60,8 +58,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const exploreChartRef = useRef<HTMLDivElement>(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useBreakpoint(600);
   useScrollToElement();
 
   const { pathname, hash } = useLocation();
