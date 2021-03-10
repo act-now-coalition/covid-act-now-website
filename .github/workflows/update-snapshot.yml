@@ -34,6 +34,9 @@ jobs:
       # Generate new county-history-data.json file (for animap project).
       - run: yarn generate-county-history-data
 
+      # Generate new data coverage snapshot file (For data coverage table).
+      - run: yarn update-coverage-snapshot
+
       # Deploy https://content.covidactnow.org/animap/county-history-data.json
       - uses: jakejarvis/s3-sync-action@master
         with:
