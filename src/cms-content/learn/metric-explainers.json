@@ -40,7 +40,7 @@
         {
           "question": "More information on daily new cases",
           "questionId": "more-info-daily-new-cases",
-          "answer": "[What is R-naught (R0) and how is it different from R(t)?](https://covidactnow.org/faq#r-0-vs-r-t)\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
+          "answer": "[What is R-naught (R₀) and how is it different from R(t)?](https://covidactnow.org/faq#r-0-vs-r-t)\n\n[Video explainer](https://www.youtube.com/watch?v=_S0k1I3kIbM)"
         }
       ]
     },
