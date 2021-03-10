@@ -2,12 +2,14 @@ import { TableHead, Typography } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-import { InfoTooltip } from 'components/InfoTooltip';
-import styled, { css } from 'styled-components';
 
-export const StyledInfoTooltip = styled(InfoTooltip)`
-  svg {
-    margin-left: 0.1rem;
+import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
+import styled from 'styled-components';
+
+export const TextWithTooltipContainer = styled.div`
+  ${InfoIcon} {
+    margin-left: 0.2rem;
+    vertical-align: middle;
   }
 `;
 
@@ -54,6 +56,7 @@ export const MetricTableCell = styled(TableCell).attrs(props => ({
     padding: 8px;
     padding-left: 0px;
     width: 20%;
+    hyphens: auto;
   }
 `;
 
@@ -63,7 +66,7 @@ export const AvailabilityTableCell = styled(TableCell).attrs(props => ({
   width: 23%;
 
   @media (max-width: ${materialSMBreakpoint}) {
-    padding: 8px;
+    padding: 4px;
   }
 `;
 

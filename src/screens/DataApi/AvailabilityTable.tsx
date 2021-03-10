@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import CheckIcon from '@material-ui/icons/Check';
 
 import {
-  StyledInfoTooltip,
+  TextWithTooltipContainer,
   UnderlinedText,
   StyledTableHead,
   MetricTableCell,
@@ -18,6 +18,8 @@ import {
 } from './AvailabilityTable.style';
 import availabilitySnapshot from './availabilitySnapshot.json';
 import { formatPercent } from 'common/utils';
+import { InfoTooltip } from 'components/InfoTooltip';
+import { pluralize } from 'components/Explore/utils';
 
 export const AVAILABILITY_SNAPSHOT = availabilitySnapshot as MetricAvailability[];
 
@@ -31,11 +33,11 @@ export const FIELDS: MetricField[] = [
   { displayName: 'Daily new cases', field: 'metrics.caseDensity' },
   { displayName: 'Infection rate', field: 'metrics.infectionRate' },
   { displayName: 'Test positivity', field: 'metrics.testPositivityRatio' },
-  { displayName: 'Vaccinat', field: 'metrics.vaccinationsInitiatedRatio' },
+  { displayName: 'Vaccinations', field: 'metrics.vaccinationsInitiatedRatio' },
   { displayName: 'Cases', field: 'actuals.cases' },
   { displayName: 'Deaths', field: 'actuals.deaths' },
   { displayName: 'Total testing volume', field: 'actuals.positiveTests' },
-  { displayName: 'Hospitaliz usage', field: 'metrics.icuCapacityRatio' },
+  { displayName: 'Hospitalization usage', field: 'metrics.icuCapacityRatio' },
   { displayName: 'ICU usage', field: 'metrics.icuCapacityRatio' },
 ];
 
@@ -76,16 +78,16 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
   tooltipContent,
 }) => {
   return (
-    <div style={{ display: 'flex' }}>
+    <TextWithTooltipContainer>
       <UnderlinedText align="center">
         {text}
-        <StyledInfoTooltip
+        <InfoTooltip
           trackOpenTooltip={() => {}}
           title={tooltipContent}
           mainCopy={"Hey i'm some useful content"}
         />
       </UnderlinedText>
-    </div>
+    </TextWithTooltipContainer>
   );
 };
 
@@ -111,9 +113,10 @@ const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
     );
   }
   if (status.statesAvailable > 0) {
+    const statesText = pluralize(status.statesAvailable, 'State', 'States');
     return (
       <TextWithTooltip
-        text={`${status.statesAvailable} States`}
+        text={`${status.statesAvailable} ${statesText}`}
         tooltipContent={totalAvailability}
       />
     );
