@@ -25,9 +25,9 @@ import {
   last,
   getAxisLimits,
   getUtcScale,
+  getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = {
   x: number;

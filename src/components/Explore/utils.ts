@@ -1,6 +1,6 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
-import { concat, deburr, flatten, isNumber, max, range, words } from 'lodash';
+import { concat, deburr, flatten, isNumber, max, words } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -33,14 +33,6 @@ export function getMaxBy<T>(
 ): T {
   const maxValue = max(seriesList.map(({ data }) => max(data.map(getValue))));
   return maxValue || defaultValue;
-}
-
-export function getTimeAxisTicks(from: Date, to: Date) {
-  const dateFrom = moment(from).startOf('month').toDate();
-  const numMonths = moment(to).diff(dateFrom, 'months');
-  return range(1, numMonths + 1).map(i =>
-    moment(dateFrom).add(i, 'month').toDate(),
-  );
 }
 
 export enum ExploreMetric {
