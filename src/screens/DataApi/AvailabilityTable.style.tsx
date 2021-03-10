@@ -6,7 +6,7 @@ import { InfoTooltip } from 'components/InfoTooltip';
 import styled, { css } from 'styled-components';
 
 export const StyledInfoTooltip = styled(InfoTooltip)`
-  div.svg {
+  svg {
     margin-left: 0.1rem;
   }
 `;
