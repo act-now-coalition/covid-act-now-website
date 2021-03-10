@@ -96,12 +96,12 @@
         {
           "question": "More information positive test rate",
           "questionId": "more-info-positive-test-rate\n",
-          "answer": "[Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
+          "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
         },
         {
           "question": "More information on COVID testing",
           "questionId": "more-info-testing",
-          "answer": "[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
+          "answer": "[Why is testing important? ](https://covidactnow.org/faq#why-is-testing-important)\n\nHow soon after a possible exposure to COVID should I get tested?\n\nAre rapid tests less accurate than PCR tests?\n\n[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
         }
       ]
     },
