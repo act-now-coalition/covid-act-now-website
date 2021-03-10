@@ -109,7 +109,7 @@ export const computeTickPositions = (
   const maxZones = includeSuperCritical(maxY, zones)
     ? zones[Level.CRITICAL].upperLimit
     : zones[Level.HIGH].upperLimit;
-  const maxTick = maxY < 1.5 * maxZones ? 1.5 * maxZones : maxY;
+  const maxTick = maxY < 1.2 * maxZones ? 1.2 * maxZones : maxY;
   return [
     minY,
     zones[Level.LOW].upperLimit,
