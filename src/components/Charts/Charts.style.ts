@@ -31,7 +31,7 @@ export const PositionRelative = styled.div`
   position: relative;
 `;
 
-export const Axis = styled.g<{ exploreStroke?: string }>`
+export const Axis = styled.g`
   text {
     font-family: ${charts.fontFamily};
     font-weight: 'medium';
@@ -39,11 +39,11 @@ export const Axis = styled.g<{ exploreStroke?: string }>`
     fill: ${props => palette(props).axis};
   }
   line {
-    stroke: ${props => props.exploreStroke || palette(props).axis};
+    stroke: ${props => palette(props).axis};
   }
 `;
 
-export const LineGrid = styled.g<{ exploreStroke?: string }>`
+export const LineGrid = styled.g`
   line,
   path {
     fill: none;
