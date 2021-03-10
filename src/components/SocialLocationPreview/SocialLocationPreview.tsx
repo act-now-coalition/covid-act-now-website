@@ -45,7 +45,7 @@ const SocialLocationPreview = (props: {
   if (!props.projections || !props.stats) {
     return (
       <Wrapper border={props.border}>
-        <MapHeaderHeader>America’s COVID warning system</MapHeaderHeader>
+        <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
         <USMapPreviewHeader sideLegend={!isEmbed}>
           <MapWrapper>
             <Map
