@@ -6,7 +6,8 @@ export const charts = {
   fontWeight: 'bold',
   fontSize: '13px',
   series: {
-    lineWidth: '4px',
+    lineWidthMobile: '2.5px',
+    lineWidthDesktop: '4px',
   },
 };
 
@@ -31,7 +32,7 @@ export const PositionRelative = styled.div`
   position: relative;
 `;
 
-export const Axis = styled.g<{ exploreStroke?: string }>`
+export const Axis = styled.g`
   text {
     font-family: ${charts.fontFamily};
     font-weight: 'medium';
@@ -39,11 +40,11 @@ export const Axis = styled.g<{ exploreStroke?: string }>`
     fill: ${props => palette(props).axis};
   }
   line {
-    stroke: ${props => props.exploreStroke || palette(props).axis};
+    stroke: ${props => palette(props).axis};
   }
 `;
 
-export const LineGrid = styled.g<{ exploreStroke?: string }>`
+export const LineGrid = styled.g`
   line,
   path {
     fill: none;
@@ -60,8 +61,15 @@ export const SeriesLine = styled.g`
     fill: none;
     stroke: ${props =>
       props.stroke ? props.stroke : palette(props).foreground};
-    stroke-width: ${charts.series.lineWidth};
+    stroke-width: ${charts.series.lineWidthMobile};
     stroke-linecap: round;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    line,
+    path {
+      stroke-width: ${charts.series.lineWidthDesktop};
+    }
   }
 `;
 
@@ -97,8 +105,6 @@ export const TextAnnotation = styled.g`
     fill: ${props => palette(props).background};
     fill-opacity: 1;
     stroke: none;
-    rx: 3;
-    ry: 3;
   }
   text {
     font-family: ${charts.fontFamily};

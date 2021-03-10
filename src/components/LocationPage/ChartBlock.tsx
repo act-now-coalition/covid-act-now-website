@@ -45,6 +45,8 @@ function ChartBlock(props: {
   const chartHeaderTooltip = metricDefinition.renderInfoTooltip();
   const disclaimerContent = renderDisclaimer(region, metric, provenance);
 
+  const chartHeight = isMobile ? 280 : 400;
+
   return (
     <Fragment>
       <HeaderWrapper>
@@ -76,7 +78,11 @@ function ChartBlock(props: {
       )}
       {hasMetric && (
         <>
-          <MetricChart metric={metric} projections={projections} />
+          <MetricChart
+            metric={metric}
+            projections={projections}
+            height={chartHeight}
+          />
           <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
         </>
       )}
