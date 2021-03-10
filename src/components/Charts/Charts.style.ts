@@ -6,7 +6,7 @@ export const charts = {
   fontWeight: 'bold',
   fontSize: '13px',
   series: {
-    lineWidthMobile: '2px',
+    lineWidthMobile: '2.5px',
     lineWidthDesktop: '4px',
   },
 };
