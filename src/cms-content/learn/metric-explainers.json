@@ -94,7 +94,7 @@
           "answer": "States report testing data in ways that can make comparisons difficult.\n\n1. Some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing, also referred to as [antigen](https://covidactnow.org/glossary#antigen-test) testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters.\n\nFederal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. [Learn more about the current state of federal testing data and its limitations](https://covidtracking.com/analysis-updates/federal-testing-datas-last-mile/)."
         },
         {
-          "question": "More information positive test rate",
+          "question": "More information on positive test rate",
           "questionId": "more-info-positive-test-rate\n",
           "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
         },
@@ -125,6 +125,11 @@
           "question": "Limitations",
           "questionId": "icu-capacity-used-limitations",
           "answer": "This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nThe biggest source of uncertainty in this metric is the ability for a hospital to quickly expand beyond its normal capacity to meet increased demand. This “[surge” capacity](https://covidactnow.org/glossary#surge-capacity) is difficult to predict in advance because it depends on both physical hospital resources like available beds and non-physical resources like healthy nurses and doctors to run them.\n\nHHS tries to control for this by requiring that hospitals report staffed ICU beds on a daily basis, but this doesn’t give a complete picture about theoretical surge capacity."
+        },
+        {
+          "question": "More information on ICU capacity used",
+          "questionId": "more-info-icu-capacity",
+          "answer": "[Why is ICU capacity used important?](https://covidactnow.org/faq#why-icu-capacity-used-important)"
         }
       ]
     },
@@ -142,6 +147,11 @@
           "question": "Limitations",
           "questionId": "limitations-percent-vaccination",
           "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated. \n2. **Number of shots**: For the Pfizer and Moderna vaccines, we require two shots to consider someone as having completed vaccination. This stays close to the available science and the advice of experts, including many of our advisors. The J&J vaccine is designed to only require one shot to count as completed.\n3. **Permanence of immunity**: Until we know more, we assume that someone who has completed vaccination stays immune for the foreseeable future, and we do not try to estimate waning immunity. \n4. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n5. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public."
+        },
+        {
+          "question": "More information on % vaccinated",
+          "questionId": "more-info-percent-vaccinated",
+          "answer": "[Why is % vaccinated important?](https://covidactnow.org/faq#why-percent-vaccinated-important)"
         },
         {
           "question": "More information on COVID vaccines",
