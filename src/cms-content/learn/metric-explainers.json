@@ -153,7 +153,7 @@
     {
       "sectionHeader": "Vulnerability ",
       "sectionId": "vulnerability",
-      "sectionIntro": "**Vulnerable areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.** \n\nAs of January 2021, people in the most vulnerable third of U.S. counties are\n\n* 23 percent more likely to be diagnosed with COVID\n* 32 percent more likely to have died from COVID \n* 35 percent more likely to be unemployed due to COVID ([see source](https://surgoventures.org/resource-library/report-vulnerable-communities-and-covid-19)). \n\nThis is due to a number of factors such as a community members’ income, age, and underlying health, as well as their access to transportation and health care.",
+      "sectionIntro": "**Higher vulnerability areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.** \n\nAs of March 8, 2021, people in the *most* vulnerable third of U.S. counties are 44 percent more likely to have died from COVID than people in the *least* vulnerable third of U.S. counties ([see source](https://precisionforcovid.org/ccvi)).  \n\nThis is due to a number of factors such as a community members’ income, age, and underlying health, as well as their access to transportation and health care.",
       "questions": [
         {
           "question": "Sources and methodology",

@@ -12,10 +12,10 @@ export const Section = styled.div`
 
 export const Source = styled.div`
   font-size: 14px;
-  color: ${COLOR_MAP.GREY_5};
+  color: ${COLOR_MAP.GREY_4};
 
   a {
-    color: ${COLOR_MAP.GREY_5};
+    color: ${COLOR_MAP.GREY_4};
   }
 `;
 
@@ -49,6 +49,6 @@ export const PhaseTitle = styled(Heading3)`
 export const StyledEligibilityPanel = styled.div``;
 
 export const StartDate = styled.span`
-  color: ${COLOR_MAP.GREY_5};
+  color: ${COLOR_MAP.GREY_4};
   font-size: 14px;
 `;

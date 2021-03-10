@@ -16,8 +16,7 @@ export const GREY_0 = '#fafafa';
 export const GREY_1 = '#f2f2f2';
 export const GREY_2 = '#e5e5e5';
 export const GREY_3 = '#bdbdbd';
-export const GREY_4 = '#828282';
-export const GREY_5 = '#4f4f4f';
+export const GREY_4 = '#4f4f4f';
 
 export const PURPLE_MAP = {
   PURPLE_1: '#8539FF',
@@ -50,7 +49,7 @@ export const COLOR_MAP = {
   },
   BLUE: '#3BBCE6',
   LIGHT_BLUE: '#00bfea',
-  GRAY_BODY_COPY: GREY_5,
+  GRAY_BODY_COPY: GREY_4,
   GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
     BASE: '#CCCCCC',
@@ -63,7 +62,6 @@ export const COLOR_MAP = {
   GREY_2,
   GREY_3,
   GREY_4,
-  GREY_5,
   // Material UI
   GREY_50: grey[50],
   GREY_100: grey[100],

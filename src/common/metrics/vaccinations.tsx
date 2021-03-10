@@ -80,8 +80,8 @@ function renderStatus(projections: Projections): React.ReactElement {
     distributedText = (
       <Fragment>
         {locationName} has administered{' '}
-        {formatPercent(info.ratioDosesAdministered)} of their current supply of{' '}
-        {formatInteger(info.dosesDistributed)} vaccine doses.
+        {formatPercent(info.ratioDosesAdministered)} of their supply of vaccine
+        doses.
       </Fragment>
     );
   }
@@ -90,9 +90,9 @@ function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose and {peopleVaccinated} ({percentVaccinated})
-      are fully vaccinated. {distributedText} According to the CDC, fewer than
-      0.001% of those who have received at least one dose have experienced a
-      severe adverse reaction, none of them deadly.
+      are fully vaccinated. {distributedText} Fewer than 0.001% of people who
+      have received a dose experienced a severe adverse reaction, none of them
+      deadly.
     </Fragment>
   );
 }
