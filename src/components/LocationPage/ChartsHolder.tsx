@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
-import { useCcviForFips, useScrollToElement } from 'common/hooks';
+import {
+  useCcviForFips,
+  useScrollToElement,
+  useBreakpoint,
+} from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Projections } from 'common/models/Projections';
@@ -61,8 +63,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const exploreChartRef = useRef<HTMLDivElement>(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useBreakpoint(600);
   useScrollToElement();
 
   const { pathname, hash } = useLocation();

@@ -56,9 +56,9 @@ const ChartCaseDensity: FunctionComponent<{
   capY = 500,
   width,
   height,
-  marginTop = 5,
+  marginTop = 6,
   marginBottom = 40,
-  marginLeft = 40,
+  marginLeft = 30,
   marginRight = 5,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
