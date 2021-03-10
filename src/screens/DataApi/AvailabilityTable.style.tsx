@@ -32,6 +32,12 @@ export const MetricTableCellHeader = styled(TableCell).attrs(props => ({
   scope: 'row',
 }))`
   width: 30%;
+
+  @media (max-width: ${materialSMBreakpoint}) {
+    padding: 8px;
+    padding-left: 0px;
+    width: 20%;
+  }
 `;
 
 export const MetricTableCell = styled(TableCell).attrs(props => ({
@@ -42,12 +48,22 @@ export const MetricTableCell = styled(TableCell).attrs(props => ({
   width: 30%;
   font-weight: 500;
   size: 14px;
+
+  @media (max-width: ${materialSMBreakpoint}) {
+    padding: 8px;
+    padding-left: 0px;
+    width: 20%;
+  }
 `;
 
 export const AvailabilityTableCell = styled(TableCell).attrs(props => ({
   align: 'center',
 }))`
   width: 23%;
+
+  @media (max-width: ${materialSMBreakpoint}) {
+    padding: 8px;
+  }
 `;
 
 export const MetricTableRow = styled(TableRow)`
