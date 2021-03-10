@@ -97,8 +97,6 @@ export const TextAnnotation = styled.g`
     fill: ${props => palette(props).background};
     fill-opacity: 1;
     stroke: none;
-    rx: 3;
-    ry: 3;
   }
   text {
     font-family: ${charts.fontFamily};
