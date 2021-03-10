@@ -2,8 +2,8 @@ import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import { assert } from 'common/utils';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
-import moment from 'moment';
 import { Region } from './regions';
+import { timeFormats, formatDateTime } from 'common/utils/time-utils';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -31,7 +31,7 @@ function getShareImageBaseUrl(): string {
 }
 
 export function getMapImageUrl(): string {
-  const date = moment().format('YYYY-MM-DD');
+  const date = formatDateTime(new Date(), timeFormats.YYYY_MM_DD);
   return urlJoin(
     getShareImageBaseUrl(),
     `${date}-image-covid-us-map-cases.png`,
