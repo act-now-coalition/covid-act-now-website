@@ -60,7 +60,7 @@ export const SeriesLine = styled.g`
     fill: none;
     stroke: ${props =>
       props.stroke ? props.stroke : palette(props).foreground};
-    stroke-width: ${charts.series.lineWidth};
+    stroke-width: ${props => props.strokeWidth};
     stroke-linecap: round;
   }
 `;
