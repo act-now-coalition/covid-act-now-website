@@ -9,6 +9,7 @@ import {
   Metrics,
   Actuals,
   Annotations,
+  FieldAnnotations,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
@@ -445,16 +446,37 @@ export class Projection {
     return this.getColumn(dataset);
   }
 
+  private anomaliesToColumn(fieldAnnotations: FieldAnnotations) {
+    const { anomalies } = fieldAnnotations;
+    if (!anomalies || anomalies.length === 0) {
+      return [];
+    }
+
+    return anomalies.map(d => ({
+      x: new Date(d.date).getTime(),
+      y: d.original_observation,
+    }));
+  }
+
   getAnomalies(dataset: DatasetId): Column[] {
-    if (!this.annotations?.newCases?.anomalies) {
+    const { annotations } = this;
+    if (
+      !annotations.newCases ||
+      !annotations.newDeaths ||
+      !annotations.hospitalBeds ||
+      !annotations.icuBeds
+    ) {
       return [];
     }
 
     if (dataset === 'rawDailyCases') {
-      return this.annotations.newCases?.anomalies.map(item => ({
-        x: new Date(item.date).getTime(),
-        y: item.original_observation,
-      }));
+      return this.anomaliesToColumn(annotations.newCases);
+    } else if (dataset === 'rawDailyDeaths') {
+      return this.anomaliesToColumn(annotations.newDeaths);
+    } else if (dataset === 'rawHospitalizations') {
+      return this.anomaliesToColumn(annotations.hospitalBeds);
+    } else if (dataset === 'rawICUHospitalizations') {
+      return this.anomaliesToColumn(annotations.icuBeds);
     } else {
       return [];
     }
