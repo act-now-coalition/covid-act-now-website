@@ -8,7 +8,7 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
+import { smallPhoneBreakpoint } from 'assets/theme/sizes';
 
 const desktopNavHeight = 64;
 
@@ -121,17 +121,17 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
   }
 `;
 
-export const MobileOnly = styled.div`
+export const MobileOnly = styled.div<{ breakPoint: number }>`
   display: flex;
   align-items: center;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${props => `${props.breakPoint}px`}) {
     display: none;
   }
 `;
 
-export const DesktopOnly = styled.div`
+export const DesktopOnly = styled.div<{ breakPoint: number }>`
   display: none;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${props => `${props.breakPoint}px`}) {
     display: flex;
     align-items: center;
     min-height: ${desktopNavHeight}px;
