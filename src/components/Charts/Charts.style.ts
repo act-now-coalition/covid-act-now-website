@@ -6,7 +6,8 @@ export const charts = {
   fontWeight: 'bold',
   fontSize: '13px',
   series: {
-    lineWidth: '4px',
+    lineWidthMobile: '2px',
+    lineWidthDesktop: '4px',
   },
 };
 
@@ -60,8 +61,15 @@ export const SeriesLine = styled.g`
     fill: none;
     stroke: ${props =>
       props.stroke ? props.stroke : palette(props).foreground};
-    stroke-width: ${charts.series.lineWidth};
+    stroke-width: ${charts.series.lineWidthMobile};
     stroke-linecap: round;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    line,
+    path {
+      stroke-width: ${charts.series.lineWidthDesktop};
+    }
   }
 `;
 
