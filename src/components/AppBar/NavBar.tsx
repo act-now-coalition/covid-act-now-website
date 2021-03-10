@@ -61,6 +61,21 @@ const DesktopMenuItems: React.FC = () => (
     >
       About
     </Style.NavLink>
+    <DonateButton />
+  </>
+);
+
+const MenuVariant: React.FC<{
+  breakPoint: number;
+  mobileMenu: JSX.Element;
+}> = ({ breakPoint, mobileMenu }) => (
+  <>
+    <Style.DesktopOnly breakPoint={breakPoint}>
+      <DesktopMenuItems />
+    </Style.DesktopOnly>
+    <Style.MobileOnly breakPoint={breakPoint}>
+      <Style.StyledMobileMenu>{mobileMenu}</Style.StyledMobileMenu>
+    </Style.MobileOnly>
   </>
 );
 
@@ -109,35 +124,28 @@ const NavBar: React.FC = () => {
           <Logo />
         </Link>
         <Style.Spacer />
-
         <Experiment id={ExperimentID.HAMBURGER_MENU_DESKTOP}>
           <Variant id={VariantID.A}>
-            <Style.DesktopOnly breakPoint={800}>
-              <DesktopMenuItems />
-              <DonateButton />
-            </Style.DesktopOnly>
-            <Style.MobileOnly breakPoint={800}>
-              <Style.StyledMobileMenu>
-                <DonateButton />
-                <Style.IconButton
-                  onClick={onClickHamburger}
-                  onMouseEnter={onHoverHamburger}
-                  edge="end"
-                >
-                  {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-                </Style.IconButton>
-              </Style.StyledMobileMenu>
-              <Fade in={isMenuOpen}>
-                <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
-              </Fade>
-            </Style.MobileOnly>
+            <MenuVariant
+              breakPoint={800}
+              mobileMenu={
+                <>
+                  <DonateButton />
+                  <Style.IconButton
+                    onClick={onClickHamburger}
+                    onMouseEnter={onHoverHamburger}
+                    edge="end"
+                  >
+                    {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
+                  </Style.IconButton>
+                </>
+              }
+            />
           </Variant>
           <Variant id={VariantID.B}>
-            <Style.DesktopOnly breakPoint={1350}>
-              <DesktopMenuItems />
-            </Style.DesktopOnly>
-            <Style.MobileOnly breakPoint={1350}>
-              <Style.StyledMobileMenu>
+            <MenuVariant
+              breakPoint={1350}
+              mobileMenu={
                 <Style.ExperimentButtonsContainer>
                   <DonateButtonHeart />
                   <MenuButton
@@ -149,13 +157,13 @@ const NavBar: React.FC = () => {
                     Menu
                   </MenuButton>
                 </Style.ExperimentButtonsContainer>
-              </Style.StyledMobileMenu>
-              <Fade in={isMenuOpen}>
-                <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
-              </Fade>
-            </Style.MobileOnly>
+              }
+            />
           </Variant>
         </Experiment>
+        <Fade in={isMenuOpen}>
+          <MobileMenu open={isMenuOpen} closeMenu={closeMenu} />
+        </Fade>
       </Style.Toolbar>
     </Style.AppBar>
   );
