@@ -154,3 +154,9 @@ export const CloseIcon = styled(MuiCloseIcon)`
 export const MenuIcon = styled(MuiMenuIcon)`
   color: ${COLOR_MAP.BLACK};
 `;
+
+export const ExperimentButtonsContainer = styled.div`
+  & > :not(:last-child) {
+    margin-right: 45px;
+  }
+`;
