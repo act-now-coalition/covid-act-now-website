@@ -22,6 +22,7 @@ import { fail } from 'assert';
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
   getDataset(datasetId: DatasetId): Column[];
+  getAnomalies(datasetId: DatasetId): Column[];
   fips: string;
   totalPopulation: number;
 }
@@ -187,22 +188,25 @@ function cleanSeries(data: Column[]) {
 }
 
 /**
- * Returns both the raw and smoothed series for the given metric and
- * projection. It's used for the single-location Explore chart, which
- * represents the raw data with bars and smoothed data with a line.
+ * Returns series for the corresponding metrics. It returns the raw series,
+ * the anomalies and smoothed series.
  */
 export function getAllSeriesForMetric(
   metric: ExploreMetric,
   projection: ProjectionLike,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
-  return metricDefinition.seriesList.map(item => ({
+  const anomaliesSeries: Series = getAnomaliesSeries(metric, projection);
+  const dataSeries = metricDefinition.seriesList.map(item => ({
     data: cleanSeries(projection.getDataset(item.datasetId)),
     type: item.type,
     label: item.label,
     shortLabel: item.label,
     tooltipLabel: item.tooltipLabel,
   }));
+
+  const [rawSeries, smoothSeries] = dataSeries;
+  return [rawSeries, anomaliesSeries, smoothSeries];
 }
 
 function scalePer100k(data: Column[], population: number) {
@@ -440,6 +444,10 @@ class AggregatedProjection implements ProjectionLike {
       return [];
     }
   }
+
+  getAnomalies(datasetId: DatasetId): Column[] {
+    return [];
+  }
 }
 
 async function getProjectionForRegion(region: Region): Promise<ProjectionLike> {
@@ -455,6 +463,22 @@ async function getProjectionForRegion(region: Region): Promise<ProjectionLike> {
   }
   const projections = await fetchProjectionsRegion(region);
   return projections.primary;
+}
+
+function getAnomaliesSeries(metric: ExploreMetric, projection: ProjectionLike) {
+  const datasetId = exploreMetricData[metric].seriesList[0].datasetId;
+  const anomalies: Series = {
+    data: projection.getAnomalies(datasetId),
+    type: SeriesType.BAR,
+    label: 'anomalies',
+    shortLabel: 'anomalies',
+    tooltipLabel: 'anomalies',
+    params: {
+      stroke: '#ffc900',
+    },
+  };
+
+  return anomalies;
 }
 
 export function getChartSeries(

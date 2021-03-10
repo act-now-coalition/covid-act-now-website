@@ -445,6 +445,21 @@ export class Projection {
     return this.getColumn(dataset);
   }
 
+  getAnomalies(dataset: DatasetId): Column[] {
+    if (!this.annotations?.newCases?.anomalies) {
+      return [];
+    }
+
+    if (dataset === 'rawDailyCases') {
+      return this.annotations.newCases?.anomalies.map(item => ({
+        x: new Date(item.date).getTime(),
+        y: item.original_observation,
+      }));
+    } else {
+      return [];
+    }
+  }
+
   /** Makes a dictionary from a timerseries to a row so that we can look up the values
    * based off the date. Eventually would be nice to use this around instead of the
    * two list scenario we have going right now.
