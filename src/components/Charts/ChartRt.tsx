@@ -50,7 +50,7 @@ const ChartRt = ({
   columnData,
   width,
   height = 400,
-  marginTop = 5,
+  marginTop = 6,
   marginBottom = 40,
   marginLeft = 40,
   marginRight = 5,
@@ -228,7 +228,7 @@ const ChartRtAutosize = ({
         <ChartRt
           width={width}
           height={height}
-          marginLeft={48}
+          marginLeft={32}
           columnData={columnData}
         />
       )}
