@@ -1,12 +1,13 @@
 import { TableHead, Typography } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { InfoTooltip } from 'components/InfoTooltip';
 import styled, { css } from 'styled-components';
 
 export const StyledInfoTooltip = styled(InfoTooltip)`
-  svg {
-    vertical-align: middle;
+  div.svg {
+    margin-left: 0.1rem;
   }
 `;
 

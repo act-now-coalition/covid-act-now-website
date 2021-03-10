@@ -76,16 +76,15 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
   tooltipContent,
 }) => {
   return (
-    <div>
-      <UnderlinedText align="center" display="inline">
+    <div style={{ display: 'flex' }}>
+      <UnderlinedText align="center">
         {text}
+        <StyledInfoTooltip
+          trackOpenTooltip={() => {}}
+          title={tooltipContent}
+          mainCopy={"Hey i'm some useful content"}
+        />
       </UnderlinedText>
-
-      <StyledInfoTooltip
-        trackOpenTooltip={() => {}}
-        title={tooltipContent}
-        mainCopy={"Hey i'm some useful content"}
-      />
     </div>
   );
 };
