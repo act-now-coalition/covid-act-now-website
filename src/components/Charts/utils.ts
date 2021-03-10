@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { range } from 'lodash';
 import moment from 'moment';
 import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
@@ -148,7 +149,7 @@ export const getUtcScale = (
   dateTo: Date,
   minX: number,
   maxX: number,
-  zoneLabelsWidth = 80,
+  zoneLabelsWidth = 15,
 ) => {
   const dateScale = scaleUtc({
     domain: [dateFrom, dateTo],
@@ -161,29 +162,33 @@ export const getUtcScale = (
   return dateScale;
 };
 
-export const getXTickFormat = (
-  date: Date,
-  isMobile: boolean,
-  showYear?: boolean,
-) => {
+export const getXTickFormat = (date: Date) => {
   const momentDate = moment(date);
 
-  if (!showYear) {
-    return momentDate.format('MMM');
-  } else {
-    // Shows the year if the tick is in January (0) or December (11)
-    const yearFormat = isMobile ? 'YY' : 'YYYY';
-    const dateFormat =
-      momentDate.month() === 0 || momentDate.month() === 11
-        ? `MMM ${yearFormat}`
-        : 'MMM';
-    return momentDate.format(dateFormat);
-  }
+  // Shows the year if the tick is in January (0) or December (11)
+  const dateFormat =
+    momentDate.month() === 0 || momentDate.month() === 11 ? `MMM 'YY` : 'MMM';
+  return momentDate.format(dateFormat);
 };
 
 /**
  * For mobile, we only show every other month
  */
-export function getMobileDateTicks(tickValues: Date[]): Date[] {
+function getMobileDateTicks(tickValues: Date[]): Date[] {
   return tickValues.filter((value: Date, i: number) => i % 2 === 0);
+}
+
+export function getFinalTicks(isMobile: boolean, ticks: Date[]): Date[] {
+  if (isMobile) {
+    return getMobileDateTicks(ticks);
+  }
+  return ticks;
+}
+
+export function getTimeAxisTicks(from: Date, to: Date) {
+  const dateFrom = moment(from).startOf('month').toDate();
+  const numMonths = moment(to).diff(dateFrom, 'months');
+  return range(1, numMonths + 1).map((i: number) =>
+    moment(dateFrom).add(i, 'month').toDate(),
+  );
 }

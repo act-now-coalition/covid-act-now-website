@@ -1,6 +1,6 @@
 import moment from 'moment';
 import urlJoin from 'url-join';
-import { concat, deburr, flatten, isNumber, max, range, words } from 'lodash';
+import { concat, deburr, flatten, isNumber, max, words } from 'lodash';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -35,14 +35,6 @@ export function getMaxBy<T>(
   return maxValue || defaultValue;
 }
 
-export function getTimeAxisTicks(from: Date, to: Date) {
-  const dateFrom = moment(from).startOf('month').toDate();
-  const numMonths = moment(to).diff(dateFrom, 'months');
-  return range(1, numMonths + 1).map(i =>
-    moment(dateFrom).add(i, 'month').toDate(),
-  );
-}
-
 export enum ExploreMetric {
   CASES,
   DEATHS,
@@ -56,9 +48,6 @@ export const EXPLORE_METRICS = [
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
 ];
-
-export const DATA_SOURCES_URL =
-  'https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit';
 
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   switch (chartId) {

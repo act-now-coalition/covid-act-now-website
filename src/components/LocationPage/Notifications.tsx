@@ -6,20 +6,15 @@ import {
   ColumnTitle,
   SectionColumn,
   WarningIcon,
+  PurpleInfoIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
 import { Projections } from 'common/models/Projections';
-import InfoIcon from '@material-ui/icons/Info';
-import HospitalizationsAlert, {
-  isHospitalizationsPeak,
-} from './HospitalizationsAlert';
-import {
-  State,
-  County,
-  Region,
-  MetroArea,
-  getFormattedStateCode,
-} from 'common/regions';
+import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
+import { HashLink } from 'react-router-hash-link';
+import { getSummaryFromFips } from 'common/location_summaries';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '01', // Alabama,
@@ -50,37 +45,24 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
   const region = projections.region;
 
   enum Notification {
-    NYCCounty,
     HospitalizationsPeak,
-    ThirdWave,
     ExposureNotifications,
-    TXFeb2021Winter,
+    Vulnerability,
     None,
   }
   let notification: Notification;
 
-  if (showExposureNotifications(region)) {
+  if (showVulnerability(region)) {
+    notification = Notification.Vulnerability;
+  } else if (showExposureNotifications(region)) {
     notification = Notification.ExposureNotifications;
-  } else if (
-    // TODO(2021/2/20): TX Winter Reporting
-    // https://trello.com/c/TdspuIeM/952-texas-reporting-dip-winter-weather-feb-2020
-    getFormattedStateCode(region)?.includes('TX')
-  ) {
-    notification = Notification.TXFeb2021Winter;
-  } else if (
-    // TODO(2020/12/22): Remove NYC notice after it's been up for a week or so.
-    ['36047', '36061', '36005', '36081', '36085'].includes(region.fipsCode)
-  ) {
-    notification = Notification.NYCCounty;
-  } else if (isHospitalizationsPeak(projections.primary)) {
-    notification = Notification.HospitalizationsPeak;
   } else {
     notification = Notification.None;
   }
 
   let icon, title;
-  if (notification === Notification.NYCCounty) {
-    icon = <InfoIcon />;
+  if (notification === Notification.Vulnerability) {
+    icon = <PurpleInfoIcon />;
     title = 'update';
   } else {
     icon = <WarningIcon />;
@@ -101,43 +83,51 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
           <ExposureNotificationCopy stateName={getStateName(region)} />
         )}
 
-        {notification === Notification.HospitalizationsPeak && (
-          <HospitalizationsAlert
-            locationName={region.fullName}
-            projection={projections.primary}
+        {notification === Notification.Vulnerability && (
+          <VulnerabilityCopy
+            locationName={region.shortName}
+            fips={projections.fips}
           />
-        )}
-
-        {notification === Notification.NYCCounty && (
-          <NYCAggregationChangeCopy locationName={region.name} />
-        )}
-
-        {notification === Notification.TXFeb2021Winter && (
-          <TXFeb2021WinterCopy />
         )}
       </SectionColumn>
     </React.Fragment>
   );
 };
 
-const TXFeb2021WinterCopy: React.FC<{}> = () => {
-  return (
-    <Copy>
-      In February 2021, Texas experienced extreme winter weather that impacted
-      many aspects of daily life, including COVID testing and vaccination. We
-      expect it to take many weeks for testing to recover. In the meantime, our
-      Daily New Cases and Infection Rate metrics should be treated with caution.
-    </Copy>
-  );
-};
+const VulnerabilityCopy: React.FC<{
+  locationName: string;
+  fips: string;
+}> = ({ locationName, fips }) => {
+  const locationSummary = getSummaryFromFips(fips);
+  const ccvi = locationSummary?.ccvi ?? 0;
+  const level = getCcviLevel(ccvi);
+  const levelName = getCcviLevelName(level).toLowerCase();
+  const isHigh = level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH;
 
-const NYCAggregationChangeCopy: React.FC<{ locationName: string }> = ({
-  locationName,
-}) => {
+  const linkText = isHigh
+    ? 'See more vulnerability details'
+    : `See vulnerability details for ${locationName}`;
+
   return (
     <Copy>
-      Prior to December 15th, {locationName} was aggregated together with the
-      other New York City boroughs. It now has its own metrics and risk level.
+      We now surface vulnerability levels for locations.{' '}
+      {isHigh && (
+        <React.Fragment>
+          {locationName} has <strong>{levelName} vulnerability</strong>, making
+          it more likely to experience severe physical and economic suffering
+          from COVID, and to face a harder, longer recovery.
+        </React.Fragment>
+      )}
+      <br />
+      <br />
+      <HashLink
+        smooth
+        scroll={(element: HTMLElement) => scrollWithOffset(element, -180)}
+        to="#vulnerabilities"
+        onClick={() => trackClickVulnerability('Location Header Update')}
+      >
+        {linkText}
+      </HashLink>
     </Copy>
   );
 };
@@ -183,6 +173,23 @@ export function showExposureNotifications(region: Region) {
   }
 }
 
+const STATES_WITHOUT_CCVI = [
+  '72', // Puerto Rico
+  '69', // Mariana Islands
+];
+
+export function showVulnerability(region: Region) {
+  if (region instanceof State) {
+    return !STATES_WITHOUT_CCVI.includes(region.fipsCode);
+  } else if (region instanceof County) {
+    return !STATES_WITHOUT_CCVI.includes(region.state.fipsCode);
+  } else if (region instanceof MetroArea) {
+    return !some(region.states, state =>
+      STATES_WITHOUT_CCVI.includes(state.fipsCode),
+    );
+  }
+}
+
 export function getStateName(region: Region) {
   if (region instanceof State) {
     return region.fullName;
@@ -195,6 +202,10 @@ export function getStateName(region: Region) {
   } else {
     return '';
   }
+}
+
+export function trackClickVulnerability(label: string) {
+  trackEvent(EventCategory.VULNERABILITIES, EventAction.CLICK_LINK, label);
 }
 
 export default NotificationArea;

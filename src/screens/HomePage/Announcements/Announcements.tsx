@@ -14,27 +14,46 @@ const Announcements: React.FC = () => {
   return (
     <Wrapper>
       <Subtitle1>Announcements</Subtitle1>
-      <AnnouncementIntro>Vaccination Data Now Available</AnnouncementIntro>
-      <Date>THURSDAY, Jan 21, 2021</Date>
+      <AnnouncementIntro>
+        COVID Vulnerability Data Now Available
+      </AnnouncementIntro>
+      <Date>THURSDAY, Mar 4, 2021</Date>
       <AnnouncementBodyCopy>
-        You can now see how many people are vaccinated in{' '}
+        You can now see which counties and metros are most and least vulnerable.
+        Higher vulnerability areas are more likely to experience severe physical
+        and economic suffering from COVID, and to face a harder, longer
+        recovery.
+        <br />
+        <br />
+        As of March 8, 2021, people in the <i>most</i> vulnerable third of U.S.
+        counties are 44 percent more likely to have died from COVID than people
+        in the <i>least</i> vulnerable third of U.S. counties.
+        <br />
+        <br />
+        This is due to a number of factors such as a community members’ income,
+        age, and underlying health, as well as their access to transportation
+        and health care.
+        <br />
+        <br />
+        To calculate vulnerability, we use Surgo Ventures’{' '}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://precisionforcovid.org/ccvi"
+        >
+          COVID-19 Community Vulnerability Index (CCVI)
+        </a>
+        .
+        <br />
+        <br />
         <HashLink
-          to="#search"
+          to="#compare-vulnerabilities"
           scroll={element => scrollWithOffset(element, -80)}
         >
-          each state
+          See the most vulnerable counties
         </HashLink>
-        , and compare vaccine rollout{' '}
-        <HashLink
-          to="#compare"
-          scroll={element => scrollWithOffset(element, -80)}
-        >
-          across states
-        </HashLink>
-        . Due to the widespread, untracked, community spread across all of the
-        United States, we will no longer be showing a contact tracing metric on
-        our site, although we will continue serving it through our{' '}
-        <Link to="/data-api">API</Link>.
+        <br />
+        <Link to="covid-explained/covid-vulnerability-data">Learn more</Link>
       </AnnouncementBodyCopy>
     </Wrapper>
   );

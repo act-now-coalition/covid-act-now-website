@@ -7,12 +7,7 @@ import {
 } from '../alert_emails/firestore';
 import { getFirestore } from '../common/firebase';
 import GoogleSheets, { Cell } from '../common/google-sheets';
-import {
-  findCountyByFips,
-  isStateFips,
-  findStateByFips,
-} from '../../src/common/locations';
-import { ALERT_EMAIL_GROUP_PREFIX } from '../alert_emails/utils';
+import regions, { County, State } from '../../src/common/regions';
 
 function getSpreadsheetId(): string {
   if (process.env.SPREADSHEET_ID) {
@@ -70,9 +65,13 @@ async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
     return { fips, count: items.length };
   });
 
-  const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) =>
-    isStateFips(fips),
-  );
+  // TODO (Pablo): Metro areas are being counted as counties, it might be worth
+  // fixing at some point
+  const [stateCounts, countyCounts] = _.partition(countByFips, ({ fips }) => {
+    const region = regions.findByFipsCode(fips);
+    return region instanceof State;
+  });
+
   const countyStats = formatCountyStats(countyCounts);
   const stateStats = formatStateStats(stateCounts);
 
@@ -115,20 +114,28 @@ async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
 
 function formatStateStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const state = findStateByFips(fips);
-    return [state?.state_code, state?.state, state?.population, count];
+    const state = regions.findByFipsCode(fips);
+    if (state instanceof State) {
+      return [state.stateCode, state.fullName, state.population, count];
+    } else {
+      return [];
+    }
   });
   return _.sortBy(data, item => item[0]);
 }
 
 function formatCountyStats(stats: FipsCount[]): Cell[][] {
   const data = stats.map(({ fips, count }) => {
-    const county = findCountyByFips(fips);
-    // The ' prefix forces the value to be interpreted as text by Google Sheets
-    const fipsCode = `'${fips}`;
-    const countyName: string = county?.county || 'Unknown county';
-    const stateCode: string = county?.state_code || '-';
-    return [fipsCode, countyName, stateCode, county?.population, count];
+    const region = regions.findByFipsCode(fips);
+    if (region instanceof County) {
+      // The ' prefix forces the value to be interpreted as text by Google Sheets
+      const fipsCode = `'${fips}`;
+      const countyName: string = region.fullName || 'Unknown county';
+      const stateCode: string = region.state.stateCode || '-';
+      return [fipsCode, countyName, stateCode, region.population, count];
+    } else {
+      return [];
+    }
   });
   return _.sortBy(data, item => item[0]);
 }

@@ -57,6 +57,11 @@
           "altText": "Team Rubicon Logo",
           "url": "https://teamrubiconusa.org/",
           "image": "/images_cms/teamrubicon_logo_dr-primary_brown-red_cmyk-01.png"
+        },
+        {
+          "altText": "Boston Consulting Group",
+          "url": "https://www.bcg.com/en-us/",
+          "image": "/images_cms/bcg_monogram.png"
         }
       ]
     },

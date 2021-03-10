@@ -1,0 +1,144 @@
+# This file controls the configuration of our Netlify CMS UI+content structure
+# 'branch' is the branch where all copy changes made in the CMS UI will be committed
+# Netlify CMS docs: https://www.netlifycms.org/docs/intro/
+#
+# This is only for vaccine data
+backend:
+  name: github
+  repo: covid-projections/covid-projections
+  branch: cms-vaccine-info
+  base_url: https://api.netlify.com
+
+media_folder: 'public/images_cms'
+public_folder: '/images_cms'
+
+collections:
+  - label: Vaccination Information
+    name: vaccinationInfo
+    label_singular: Region Vaccine information
+    description: Details on vaccination program status in different regions.
+    format: json
+    files:
+      - name: Vaccine Information-Metros
+        label: Metro Vaccine Information
+        file: src/cms-content/vaccines/msa.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: Location Name
+                name: locationName
+                widget: string
+              - label: Fips Code
+                name: fips
+                widget: string
+              - label: Hidden
+                name: hidden
+                widget: boolean
+                required: false
+              - label: Eligibility Information URL
+                name: eligibilityInfoUrl
+                widget: string
+              - label: Vaccination Signup URL
+                name: vaccinationSignupUrl
+                required: false
+                widget: string
+      - name: Vaccine Information-Counties
+        label: County Vaccine Information
+        file: src/cms-content/vaccines/county.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: Location Name
+                name: locationName
+                widget: string
+              - label: Fips Code
+                name: fips
+                widget: string
+              - label: Hidden
+                name: hidden
+                widget: boolean
+                required: false
+              - label: Eligibility Information URL
+                name: eligibilityInfoUrl
+                widget: string
+              - label: Vaccination Signup URL
+                name: vaccinationSignupUrl
+                required: false
+                widget: string
+  - label: Vaccination Phases & Alerts
+    name: vaccinationPhasesAndAlerts
+    label_singular: Vaccination Phase
+    description: Details on vaccination phases and alerts.
+    format: json
+    files:
+      - name: Vaccine Information-State
+        label: State Vaccine Information
+        file: src/cms-content/vaccines/state-vaccine-phases.json
+        fields:
+          - label: Regions
+            name: regions
+            widget: list
+            fields:
+              - label: Location Name
+                name: locationName
+                widget: string
+              - label: Fips Code
+                name: fips
+                widget: string
+              - label: Hidden
+                name: hidden
+                widget: boolean
+                required: false
+              - label: Eligibility Information URL
+                name: eligibilityInfoUrl
+                widget: string
+              - label: Vaccination Signup URL
+                name: vaccinationSignupUrl
+                widget: string
+                required: false
+              - label: Email alert version
+                name: emailAlertVersion
+                default: 0
+                widget: number
+              - label: Notes
+                name: notes
+                required: false
+                widget: text
+              - label: Phase Groups
+                name: phaseGroups
+                description: Each element describes a specific phase or phase + tier combination where available.
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Phase
+                    name: phase
+                    widget: string
+                  - label: Tier
+                    name: tier
+                    widget: string
+                    required: false
+                  - label: Description
+                    name: description
+                    widget: markdown
+                  - label: Expanded Definition URL
+                    name: expandedDefinitionUrl
+                    description: URL to learn more about specifics of group
+                    required: false
+                    widget: string
+                  - label: Currently Eligible
+                    name: currentlyEligible
+                    description: If checked, this phase is currently eligible for vaccination.
+                    default: false
+                    widget: boolean
+                  - label: Eligibility Start Date
+                    name: startDate
+                    description: Latest available start date for when group will be eligible.
+                    required: false
+                    widget: text
+                  - label: Updated at
+                    name: updatedAt
+                    widget: datetime

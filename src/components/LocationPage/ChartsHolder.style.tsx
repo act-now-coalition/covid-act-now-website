@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { COLOR_MAP } from 'common/colors';
 
 export const ChartContentWrapper = styled.div`
   margin-top: 85px;
@@ -41,7 +42,7 @@ export const MainContentInner = styled.div`
   }
 `;
 
-export const ChartHeaderWrapper = styled.div`
+export const HeaderWrapperStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -56,6 +57,10 @@ export const ChartHeaderWrapper = styled.div`
   }
 `;
 
+export const HeaderWrapper = styled.div`
+  ${HeaderWrapperStyles};
+`;
+
 export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
   component: 'h2',
 }))`
@@ -63,6 +68,7 @@ export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
   font-size: 1.5rem;
   max-width: 440px;
   line-height: 1.1;
+  width: fit-content;
 
   @media (min-width: ${mobileBreakpoint}) {
     max-width: unset;
@@ -101,4 +107,19 @@ export const BetaTag = styled.div`
   background-color: ${palette.info.main};
   color: white;
   transform: translateY(-0.375rem);
+`;
+
+export const DisclaimerWrapper = styled.div`
+  max-width: 600px;
+  padding: 1.5rem 0 0.75rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.875rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 1.5rem 0 2rem;
+  }
+
+  p {
+    font-size: inherit;
+  }
 `;

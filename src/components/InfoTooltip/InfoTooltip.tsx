@@ -11,12 +11,16 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
   const isMobile = useBreakpoint(600);
 
   const handleOpen = () => {
-    setIsOpen(true);
-    props.trackOpenTooltip();
+    if (!isOpen) {
+      setIsOpen(true);
+      props.trackOpenTooltip();
+    }
   };
 
   const handleClose = () => {
-    setIsOpen(false);
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
 
   const idForAccessability = uuidv4();

@@ -41,8 +41,6 @@ const Footer = () => {
             <Link to="/about#contact-us">Contact</Link>
             {' ∙ '}
             <Link to="/terms">Terms</Link>
-            {' ∙ '}
-            <a href="mailto:press@covidactnow.org">Press</a>
           </StyledFooterBodyLinks>
         </StyledFooterContent>
       </StyledFooterInner>

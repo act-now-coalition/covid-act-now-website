@@ -41,11 +41,11 @@ export type Locationid = string;
  */
 export type Actuals1 = Actuals;
 /**
- * Cumulative number of confirmed or suspected cases
+ * Cumulative confirmed or suspected cases.
  */
 export type Cases = number | null;
 /**
- * Cumulative number of deaths that are suspected or confirmed to have been caused by COVID-19
+ * Cumulative deaths that are suspected or confirmed to have been caused by COVID-19.
  */
 export type Deaths = number | null;
 /**
@@ -61,7 +61,15 @@ export type Negativetests = number | null;
  */
 export type Contacttracers = number | null;
 /**
- * Information about hospital bed utilization
+ *
+ * Information about acute bed utilization details.
+ *
+ * Fields:
+ *  * capacity - Current staffed acute bed capacity.
+ *  * currentUsageTotal - Total number of acute beds currently in use
+ *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * typicalUsageRate - Typical acute bed utilization rate.
+ *
  */
 export type Hospitalbeds = HospitalResourceUtilization;
 /**
@@ -81,24 +89,54 @@ export type Currentusagecovid = number | null;
  */
 export type Typicalusagerate = number | null;
 /**
- * Information about ICU bed utilization
+ *
+ * Information about ICU bed utilization details.
+ *
+ * Fields:
+ *  * capacity - Current staffed ICU bed capacity.
+ *  * currentUsageTotal - Total number of ICU beds currently in use
+ *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
+ *  * typicalUsageRate - Typical ICU utilization rate.
+ *
  */
 export type Icubeds = HospitalResourceUtilization;
 /**
  *
  * New confirmed or suspected cases.
  *
+ *
  * New cases are a processed timeseries of cases - summing new cases may not equal
  * the cumulative case count.
  *
- * Notable exceptions:
- *  1. If a region does not report cases for a period of time, the first day
- *     cases start reporting again will not be included. This day likely includes
+ * Processing steps:
+ *  1. If a region does not report cases for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
  *     multiple days worth of cases and can be misleading to the overall series.
- *  2. Any days with negative new cases are removed.
+ *  2. We remove any days with negative new cases.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported cases.
  *
  */
 export type Newcases = number | null;
+/**
+ *
+ * New confirmed or suspected COVID-19 deaths.
+ *
+ * New deaths is an estimate of deaths per day; summing new deaths may not equal the
+ * cumulative death count.
+ *
+ * Processing steps:
+ *  1. If a region does not report deaths for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
+ *     multiple days worth of deaths and can be misleading to the overall series.
+ *  2. We remove any days with negative new deaths.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported deaths.
+ *
+ */
+export type Newdeaths = number | null;
 /**
  * Number of vaccine doses distributed.
  */
@@ -107,7 +145,7 @@ export type Vaccinesdistributed = number | null;
  *
  * Number of vaccinations initiated.
  *
- * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * This value may vary by type of vaccine, but for Moderna and Pfizer this indicates
  * number of people vaccinated with the first dose.
  *
  */
@@ -116,7 +154,7 @@ export type Vaccinationsinitiated = number | null;
  *
  * Number of vaccinations completed.
  *
- * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * This value may vary by type of vaccine, but for Moderna and Pfizer this indicates
  * number of people vaccinated with both the first and second dose.
  *
  */
@@ -157,7 +195,7 @@ export type Infectionrate = number | null;
 export type Infectionrateci90 = number | null;
 export type Icuheadroomratio = number | null;
 /**
- * Current number of covid patients in icu.
+ * Current number of covid patients in the ICU.
  */
 export type Currenticucovid = number;
 /**
@@ -175,6 +213,9 @@ export type NonCovidPatientsMethod =
   | 'actual'
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
+/**
+ * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
+ */
 export type Icucapacityratio = number | null;
 /**
  * Ratio of population that has initiated vaccination.
@@ -233,6 +274,7 @@ export interface Actuals {
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
   newCases: Newcases;
+  newDeaths: Newdeaths;
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;

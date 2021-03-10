@@ -31,7 +31,7 @@ export const Subtitle = styled.div`
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
-  color: #828282;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
   text-transform: uppercase;
 `;
 

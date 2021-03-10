@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
@@ -15,7 +16,7 @@ import {
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Positive test rate';
@@ -136,30 +137,29 @@ function renderStatus(projections: Projections) {
     `which indicates that testing in ${locationName} is limited and that most cases likely go undetected`,
   );
 
-  const textForecast = levelText(
-    level,
-    `Identifying and isolating new cases can help contain COVID without resorting to lockdowns`,
-    `Identifying and isolating new cases can help contain COVID without resorting to lockdowns`,
-    `At these levels, it is hard to know how fast COVID is actually spreading, and there is risk of being surprised by a second wave of disease. Caution is warranted`,
-    `At these levels, it is hard to know how fast COVID is actually spreading, and there is very high risk of being surprised by a wave of disease. More testing urgently needed`,
-  );
-
   return (
     <Fragment>
       A {lowSizableLarge} percentage ({percentage}) of COVID tests were
-      positive, {testingBroadlyText}. {textForecast}.
+      positive, {testingBroadlyText}.
     </Fragment>
   );
 }
 
-function renderDisclaimer(region: Region): React.ReactElement {
+function renderDisclaimer(
+  region: Region,
+  provenance?: Sources,
+): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricCalculation;
 
   return (
     <Fragment>
       {'Learn more about '}
       <DisclaimerTooltip
-        title={getDataSourceTooltipContent(Metric.POSITIVE_TESTS, region)}
+        title={getDataSourceTooltipContent(
+          Metric.POSITIVE_TESTS,
+          region,
+          provenance,
+        )}
         mainCopy={'where our data comes from'}
         trackOpenTooltip={() =>
           trackOpenTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)

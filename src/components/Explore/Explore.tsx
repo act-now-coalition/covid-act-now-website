@@ -12,8 +12,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
-import { useModelLastUpdatedDate } from 'common/utils/model';
-import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
@@ -34,7 +32,6 @@ import {
   getSeriesLabel,
   EXPLORE_CHART_IDS,
   getSubtitle,
-  DATA_SOURCES_URL,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -64,8 +61,7 @@ function trackShare(label: string, value?: number) {
 function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
-      We don't have {metricName} data for {locationNames}. Learn more about{' '}
-      <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
+      We don't have {metricName} data for {locationNames}.
     </p>
   );
 }
@@ -249,10 +245,6 @@ const Explore: React.FunctionComponent<{
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
   const hasMultipleLocations = selectedLocations.length > 1;
 
-  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-
   const modalNormalizeCheckboxProps = {
     hasMultipleLocations,
     normalizeData,
@@ -307,7 +299,6 @@ const Explore: React.FunctionComponent<{
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
-              hashtags={['COVIDActNow']}
               onSaveImage={() => {
                 trackExploreEvent(
                   EventAction.SAVE_IMAGE,
@@ -431,15 +422,6 @@ const Explore: React.FunctionComponent<{
         chartIndigenous={chartIndigenous}
         setChartIndigenous={setChartIndigenous}
       />
-      <Styles.DisclaimerWrapper>
-        <Styles.DisclaimerBody>
-          Last updated {lastUpdatedDateString}. Learn more about{' '}
-          <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-            our data sources
-          </ExternalLink>
-          .
-        </Styles.DisclaimerBody>
-      </Styles.DisclaimerWrapper>
     </Styles.Container>
   );
 };

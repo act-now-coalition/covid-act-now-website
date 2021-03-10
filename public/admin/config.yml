@@ -7,6 +7,12 @@ backend:
   branch: cms-content-entry
   base_url: https://api.netlify.com
 
+# To use the CMS locally during development, run:
+#   npx netlify-cms-proxy-server
+#
+# And uncomment the following line:
+#local_backend: true
+
 media_folder: 'public/images_cms'
 public_folder: '/images_cms'
 
@@ -650,7 +656,7 @@ collections:
                 name: questions
                 widget: list
                 fields:
-                  - { label: Question, name: question, widget: text }
+                  - { label: Question, name: question, widget: text, required: false }
                   - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
           - label: 'Framework section logos'
@@ -701,135 +707,6 @@ collections:
             name: metadataDescription
             widget: text
 
-  - label: Vaccination Information
-    name: vaccinationInfo
-    label_singular: Region Vaccine information
-    description: Details on vaccination program status in different regions.
-    format: json
-    files:
-      - name: Vaccine Information-Metros
-        label: Metro Vaccine Information
-        file: src/cms-content/vaccines/msa.json
-        fields:
-          - label: Regions
-            name: regions
-            widget: list
-            fields:
-              - label: Location Name
-                name: locationName
-                widget: string
-              - label: Fips Code
-                name: fips
-                widget: string
-              - label: Hidden
-                name: hidden
-                widget: boolean
-                required: false
-              - label: Eligibility Information URL
-                name: eligibilityInfoUrl
-                widget: string
-              - label: Vaccination Signup URL
-                name: vaccinationSignupUrl
-                required: false
-                widget: string
-      - name: Vaccine Information-Counties
-        label: County Vaccine Information
-        file: src/cms-content/vaccines/county.json
-        fields:
-          - label: Regions
-            name: regions
-            widget: list
-            fields:
-              - label: Location Name
-                name: locationName
-                widget: string
-              - label: Fips Code
-                name: fips
-                widget: string
-              - label: Hidden
-                name: hidden
-                widget: boolean
-                required: false
-              - label: Eligibility Information URL
-                name: eligibilityInfoUrl
-                widget: string
-              - label: Vaccination Signup URL
-                name: vaccinationSignupUrl
-                required: false
-                widget: string
-  - label: Vaccination Phases & Alerts
-    name: vaccinationPhasesAndAlerts
-    label_singular: Vaccination Phase
-    description: Details on vaccination phases and alerts.
-    format: json
-    files:
-      - name: Vaccine Information-State
-        label: State Vaccine Information
-        file: src/cms-content/vaccines/state-vaccine-phases.json
-        fields:
-          - label: Regions
-            name: regions
-            widget: list
-            fields:
-              - label: Location Name
-                name: locationName
-                widget: string
-              - label: Fips Code
-                name: fips
-                widget: string
-              - label: Hidden
-                name: hidden
-                widget: boolean
-                required: false
-              - label: Eligibility Information URL
-                name: eligibilityInfoUrl
-                widget: string
-              - label: Vaccination Signup URL
-                name: vaccinationSignupUrl
-                widget: string
-                required: false
-              - label: Email alert version
-                name: emailAlertVersion
-                default: 0
-                widget: number
-              - label: Notes
-                name: notes
-                required: false
-                widget: text
-              - label: Phase Groups
-                name: phaseGroups
-                description: Each element describes a specific phase or phase + tier combination where available.
-                widget: list
-                collapsed: true
-                fields:
-                  - label: Phase
-                    name: phase
-                    widget: string
-                  - label: Tier
-                    name: tier
-                    widget: string
-                    required: false
-                  - label: Description
-                    name: description
-                    widget: markdown
-                  - label: Expanded Definition URL
-                    name: expandedDefinitionUrl
-                    description: URL to learn more about specifics of group
-                    required: false
-                    widget: string
-                  - label: Currently Eligible
-                    name: currentlyEligible
-                    description: If checked, this phase is currently eligible for vaccination.
-                    default: false
-                    widget: boolean
-                  - label: Eligibility Start Date
-                    name: startDate
-                    description: Latest available start date for when group will be eligible.
-                    required: false
-                    widget: text
-                  - label: Updated at
-                    name: updatedAt
-                    widget: datetime
   - label: Tooltips
     name: tooltips
     description: Content for location page tooltips (short metric explainers, location page header info, chart disclaimers)
@@ -899,3 +776,63 @@ collections:
                 name: content
                 widget: markdown
                 hint: subscore definition
+
+  - name: regionOverrides
+    label: Region Overrides
+    description: Block metrics, add metric disclaimers, etc.
+    format: json
+    files:
+      - name: regionOverrides
+        label: Region Overrides
+        file: src/cms-content/region-overrides/region-overrides.json
+        fields:
+          - name: overrides
+            label: Overrides
+            widget: list
+            fields:
+              - name: region
+                label: Region
+                hint: State code (2 letters) or FIPS code (2 or 5 digits)
+                widget: string
+                pattern: ['^([A-Z][A-Z]|\d{2}|\d{5})$', 'Must be a 2-letter state code or 2 or 5-digit FIPS code']
+              - name: include
+                label: Include
+                widget: select
+                default: region
+                options:
+                  - label: Region only
+                    value: region
+                  - label: Region and its subregions (e.g. state and its counties & metros)
+                    value: region-and-subregions
+                  - label: Subregions only (e.g. counties & metros in a state but not the state itself)
+                    value: subregions
+              - name: metric
+                label: Metric
+                widget: select
+                default: 'metrics.testPositivityRatio'
+                options:
+                  - label: 'Metric: Daily New Cases'
+                    value: 'metrics.caseDensity'
+                  - label: 'Metric: Infection Rate'
+                    value: 'metrics.infectionRate'
+                  - label: 'Metric: Positive Test Rate'
+                    value: 'metrics.testPositivityRatio'
+                  - label: 'Metric: ICU Capacity Used'
+                    value: 'metrics.icuCapacityRatio'
+                  - label: 'Metric: Vaccinated'
+                    value: 'metrics.vaccinationsInitiatedRatio'
+              - name: context
+                label: '[Internal] Context'
+                widget: string
+                hint: Context about this issue (trello links, owner, etc.) - not displayed externally
+              - name: blocked
+                label: Block Metric
+                widget: boolean
+                default: false
+                hint: Block the metric from appearing and being used in the risk level calculation.
+              - name: disclaimer
+                label: Add Disclaimer
+                required: false
+                hint: Disclaimer to show below metric chart. Not used if metric is blocked.
+                widget: markdown
+                minimal: true

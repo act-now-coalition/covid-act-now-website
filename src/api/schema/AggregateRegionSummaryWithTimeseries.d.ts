@@ -77,7 +77,7 @@ export type Infectionrate = number | null;
 export type Infectionrateci90 = number | null;
 export type Icuheadroomratio = number | null;
 /**
- * Current number of covid patients in icu.
+ * Current number of covid patients in the ICU.
  */
 export type Currenticucovid = number;
 /**
@@ -95,6 +95,9 @@ export type NonCovidPatientsMethod =
   | 'actual'
   | 'estimated_from_typical_utilization'
   | 'estimated_from_total_icu_actual';
+/**
+ * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
+ */
 export type Icucapacityratio = number | null;
 /**
  * Ratio of population that has initiated vaccination.
@@ -121,11 +124,11 @@ export type Risklevels = RiskLevels;
  */
 export type RiskLevel = 0 | 1 | 2 | 3 | 4 | 5;
 /**
- * Cumulative number of confirmed or suspected cases
+ * Cumulative confirmed or suspected cases.
  */
 export type Cases = number | null;
 /**
- * Cumulative number of deaths that are suspected or confirmed to have been caused by COVID-19
+ * Cumulative deaths that are suspected or confirmed to have been caused by COVID-19.
  */
 export type Deaths = number | null;
 /**
@@ -141,7 +144,15 @@ export type Negativetests = number | null;
  */
 export type Contacttracers = number | null;
 /**
- * Information about hospital bed utilization
+ *
+ * Information about acute bed utilization details.
+ *
+ * Fields:
+ *  * capacity - Current staffed acute bed capacity.
+ *  * currentUsageTotal - Total number of acute beds currently in use
+ *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * typicalUsageRate - Typical acute bed utilization rate.
+ *
  */
 export type Hospitalbeds = HospitalResourceUtilization;
 /**
@@ -161,24 +172,54 @@ export type Currentusagecovid = number | null;
  */
 export type Typicalusagerate = number | null;
 /**
- * Information about ICU bed utilization
+ *
+ * Information about ICU bed utilization details.
+ *
+ * Fields:
+ *  * capacity - Current staffed ICU bed capacity.
+ *  * currentUsageTotal - Total number of ICU beds currently in use
+ *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
+ *  * typicalUsageRate - Typical ICU utilization rate.
+ *
  */
 export type Icubeds = HospitalResourceUtilization;
 /**
  *
  * New confirmed or suspected cases.
  *
+ *
  * New cases are a processed timeseries of cases - summing new cases may not equal
  * the cumulative case count.
  *
- * Notable exceptions:
- *  1. If a region does not report cases for a period of time, the first day
- *     cases start reporting again will not be included. This day likely includes
+ * Processing steps:
+ *  1. If a region does not report cases for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
  *     multiple days worth of cases and can be misleading to the overall series.
- *  2. Any days with negative new cases are removed.
+ *  2. We remove any days with negative new cases.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported cases.
  *
  */
 export type Newcases = number | null;
+/**
+ *
+ * New confirmed or suspected COVID-19 deaths.
+ *
+ * New deaths is an estimate of deaths per day; summing new deaths may not equal the
+ * cumulative death count.
+ *
+ * Processing steps:
+ *  1. If a region does not report deaths for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
+ *     multiple days worth of deaths and can be misleading to the overall series.
+ *  2. We remove any days with negative new deaths.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported deaths.
+ *
+ */
+export type Newdeaths = number | null;
 /**
  * Number of vaccine doses distributed.
  */
@@ -187,7 +228,7 @@ export type Vaccinesdistributed = number | null;
  *
  * Number of vaccinations initiated.
  *
- * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * This value may vary by type of vaccine, but for Moderna and Pfizer this indicates
  * number of people vaccinated with the first dose.
  *
  */
@@ -196,7 +237,7 @@ export type Vaccinationsinitiated = number | null;
  *
  * Number of vaccinations completed.
  *
- * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * This value may vary by type of vaccine, but for Moderna and Pfizer this indicates
  * number of people vaccinated with both the first and second dose.
  *
  */
@@ -209,7 +250,7 @@ export type Cases1 = FieldAnnotations;
  * The data source of a field (metric or actual). This enumeration lists the places from which
  * CAN fetches data. The source is tracked on a per field and region timeseries basis.
  */
-export type FieldSource =
+export type FieldSourceType =
   | 'NYTimes'
   | 'CMSTesting'
   | 'CDCTesting'
@@ -218,11 +259,34 @@ export type FieldSource =
   | 'Valorum'
   | 'covid_tracking'
   | 'USAFacts'
+  | 'TestAndTrace'
+  | 'CANScrapersStateProviders'
   | 'other';
+/**
+ * URL of a webpage containing the data at the source
+ */
+export type Url = string | null;
+/**
+ * A human readable name of the source
+ */
+export type Name = string | null;
+export type Sources = FieldSource[];
 /**
  * Date of anomaly
  */
 export type Date = string;
+/**
+ * The type of the annotation.
+ *
+ * Each enumeration refers to the method used to generate the annotation.
+ */
+export type TagType =
+  | 'cumulative_tail_truncated'
+  | 'cumulative_long_tail_truncated'
+  | 'zscore_outlier'
+  | 'provenance'
+  | 'source_url'
+  | 'source';
 /**
  * Original value on this date detected as anomalous.
  */
@@ -257,6 +321,10 @@ export type Icubeds1 = FieldAnnotations;
  */
 export type Newcases1 = FieldAnnotations;
 /**
+ * Annotations for newDeaths
+ */
+export type Newdeaths1 = FieldAnnotations;
+/**
  * Annotations for vaccinesDistributed
  */
 export type Vaccinesdistributed1 = FieldAnnotations;
@@ -269,54 +337,93 @@ export type Vaccinationsinitiated1 = FieldAnnotations;
  */
 export type Vaccinationscompleted1 = FieldAnnotations;
 /**
+ * Annotations for testPositivityRatio
+ */
+export type Testpositivityratio1 = FieldAnnotations;
+/**
+ * Annotations for caseDensity
+ */
+export type Casedensity1 = FieldAnnotations;
+/**
+ * Annotations for contactTracerCapacityRatio
+ */
+export type Contacttracercapacityratio1 = FieldAnnotations;
+/**
+ * Annotations for infectionRate
+ */
+export type Infectionrate1 = FieldAnnotations;
+/**
+ * Annotations for infectionRateCI90
+ */
+export type Infectionrateci901 = FieldAnnotations;
+/**
+ * Annotations for icuHeadroomRatio
+ */
+export type Icuheadroomratio1 = FieldAnnotations;
+/**
+ * Annotations for icuCapacityRatio
+ */
+export type Icucapacityratio1 = FieldAnnotations;
+/**
+ * Annotations for vaccinationsInitiatedRatio
+ */
+export type Vaccinationsinitiatedratio1 = FieldAnnotations;
+/**
+ * Annotations for vaccinationsCompletedRatio
+ */
+export type Vaccinationscompletedratio1 = FieldAnnotations;
+/**
  * Date of latest data
  */
 export type Lastupdateddate = string;
 /**
  * URL linking to Covid Act Now location page.
  */
-export type Url = string | null;
+export type Url1 = string | null;
 /**
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
-export type Testpositivityratio1 = number | null;
+export type Testpositivityratio2 = number | null;
 /**
  * The number of cases per 100k population calculated using a 7-day rolling average.
  */
-export type Casedensity1 = number | null;
+export type Casedensity2 = number | null;
 /**
  * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
  */
-export type Contacttracercapacityratio1 = number | null;
+export type Contacttracercapacityratio2 = number | null;
 /**
  * R_t, or the estimated number of infections arising from a typical case.
  */
-export type Infectionrate1 = number | null;
+export type Infectionrate2 = number | null;
 /**
  * 90th percentile confidence interval upper endpoint of the infection rate.
  */
-export type Infectionrateci901 = number | null;
-export type Icuheadroomratio1 = number | null;
-export type Icucapacityratio1 = number | null;
+export type Infectionrateci902 = number | null;
+export type Icuheadroomratio2 = number | null;
+/**
+ * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
+ */
+export type Icucapacityratio2 = number | null;
 /**
  * Ratio of population that has initiated vaccination.
  */
-export type Vaccinationsinitiatedratio1 = number | null;
+export type Vaccinationsinitiatedratio2 = number | null;
 /**
  * Ratio of population that has completed vaccination.
  */
-export type Vaccinationscompletedratio1 = number | null;
+export type Vaccinationscompletedratio2 = number | null;
 /**
  * Date of timeseries data point
  */
 export type Date1 = string;
 export type Metricstimeseries = MetricsTimeseriesRow[];
 /**
- * Cumulative number of confirmed or suspected cases
+ * Cumulative confirmed or suspected cases.
  */
 export type Cases2 = number | null;
 /**
- * Cumulative number of deaths that are suspected or confirmed to have been caused by COVID-19
+ * Cumulative deaths that are suspected or confirmed to have been caused by COVID-19.
  */
 export type Deaths2 = number | null;
 /**
@@ -332,28 +439,66 @@ export type Negativetests2 = number | null;
  */
 export type Contacttracers2 = number | null;
 /**
- * Information about hospital bed utilization
+ *
+ * Information about acute bed utilization details.
+ *
+ * Fields:
+ *  * capacity - Current staffed acute bed capacity.
+ *  * currentUsageTotal - Total number of acute beds currently in use
+ *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * typicalUsageRate - Typical acute bed utilization rate.
+ *
  */
 export type Hospitalbeds2 = HospitalResourceUtilization;
 /**
- * Information about ICU bed utilization
+ *
+ * Information about ICU bed utilization details.
+ *
+ * Fields:
+ *  * capacity - Current staffed ICU bed capacity.
+ *  * currentUsageTotal - Total number of ICU beds currently in use
+ *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
+ *  * typicalUsageRate - Typical ICU utilization rate.
+ *
  */
 export type Icubeds2 = HospitalResourceUtilization;
 /**
  *
  * New confirmed or suspected cases.
  *
+ *
  * New cases are a processed timeseries of cases - summing new cases may not equal
  * the cumulative case count.
  *
- * Notable exceptions:
- *  1. If a region does not report cases for a period of time, the first day
- *     cases start reporting again will not be included. This day likely includes
+ * Processing steps:
+ *  1. If a region does not report cases for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
  *     multiple days worth of cases and can be misleading to the overall series.
- *  2. Any days with negative new cases are removed.
+ *  2. We remove any days with negative new cases.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported cases.
  *
  */
 export type Newcases2 = number | null;
+/**
+ *
+ * New confirmed or suspected COVID-19 deaths.
+ *
+ * New deaths is an estimate of deaths per day; summing new deaths may not equal the
+ * cumulative death count.
+ *
+ * Processing steps:
+ *  1. If a region does not report deaths for a period of time but then begins reporting again,
+ *     we will exclude the first day that reporting recommences. This first day likely includes
+ *     multiple days worth of deaths and can be misleading to the overall series.
+ *  2. We remove any days with negative new deaths.
+ *  3. We apply an outlier detection filter to the timeseries, which removes any data
+ *     points that seem improbable given recent numbers. Many times this is due to
+ *     backfill of previously unreported deaths.
+ *
+ */
+export type Newdeaths2 = number | null;
 /**
  * Number of vaccine doses distributed.
  */
@@ -362,7 +507,7 @@ export type Vaccinesdistributed2 = number | null;
  *
  * Number of vaccinations initiated.
  *
- * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * This value may vary by type of vaccine, but for Moderna and Pfizer this indicates
  * number of people vaccinated with the first dose.
  *
  */
@@ -371,7 +516,7 @@ export type Vaccinationsinitiated2 = number | null;
  *
  * Number of vaccinations completed.
  *
- * This value may vary by type of vaccine, but for Moderna and Pfizer, this indicates
+ * This value may vary by type of vaccine, but for Moderna and Pfizer this indicates
  * number of people vaccinated with both the first and second dose.
  *
  */
@@ -412,7 +557,7 @@ export interface RegionSummaryWithTimeseries {
   actuals: Actuals;
   annotations: Annotations;
   lastUpdatedDate: Lastupdateddate;
-  url: Url;
+  url: Url1;
   metricsTimeseries: Metricstimeseries;
   actualsTimeseries: Actualstimeseries;
   riskLevelsTimeseries: Risklevelstimeseries;
@@ -502,6 +647,7 @@ export interface Actuals {
   hospitalBeds: Hospitalbeds;
   icuBeds: Icubeds;
   newCases: Newcases;
+  newDeaths: Newdeaths;
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
@@ -527,39 +673,64 @@ export interface Annotations {
   hospitalBeds?: Hospitalbeds1;
   icuBeds?: Icubeds1;
   newCases?: Newcases1;
+  newDeaths?: Newdeaths1;
   vaccinesDistributed?: Vaccinesdistributed1;
   vaccinationsInitiated?: Vaccinationsinitiated1;
   vaccinationsCompleted?: Vaccinationscompleted1;
+  testPositivityRatio?: Testpositivityratio1;
+  caseDensity?: Casedensity1;
+  contactTracerCapacityRatio?: Contacttracercapacityratio1;
+  infectionRate?: Infectionrate1;
+  infectionRateCI90?: Infectionrateci901;
+  icuHeadroomRatio?: Icuheadroomratio1;
+  icuCapacityRatio?: Icucapacityratio1;
+  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio1;
+  vaccinationsCompletedRatio?: Vaccinationscompletedratio1;
 }
 /**
  * Annotations associated with one field.
  */
 export interface FieldAnnotations {
-  sources: FieldSource[];
+  sources: Sources;
   anomalies: Anomalies;
+}
+/**
+ * Base model for API output.
+ */
+export interface FieldSource {
+  /**
+   * The type of data source from a CAN list of data source types
+   */
+  type?: FieldSourceType;
+  url?: Url;
+  name?: Name;
 }
 /**
  * Base model for API output.
  */
 export interface AnomalyAnnotation {
   date: Date;
+  /**
+   * Type of annotation
+   */
+  type: TagType;
   original_observation: OriginalObservation;
 }
 /**
  * Metrics data for a specific day.
  */
 export interface MetricsTimeseriesRow {
-  testPositivityRatio: Testpositivityratio1;
+  testPositivityRatio: Testpositivityratio2;
   testPositivityRatioDetails?: TestPositivityRatioDetails | null;
-  caseDensity: Casedensity1;
-  contactTracerCapacityRatio: Contacttracercapacityratio1;
-  infectionRate: Infectionrate1;
-  infectionRateCI90: Infectionrateci901;
-  icuHeadroomRatio: Icuheadroomratio1;
+  caseDensity: Casedensity2;
+  contactTracerCapacityRatio: Contacttracercapacityratio2;
+  infectionRate: Infectionrate2;
+  infectionRateCI90: Infectionrateci902;
+  icuHeadroomRatio: Icuheadroomratio2;
   icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
-  icuCapacityRatio: Icucapacityratio1;
-  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio1;
-  vaccinationsCompletedRatio?: Vaccinationscompletedratio1;
+  icuCapacityRatio: Icucapacityratio2;
+  vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio2;
+  vaccinationsCompletedRatio?: Vaccinationscompletedratio2;
   date: Date1;
 }
 /**
@@ -574,6 +745,7 @@ export interface ActualsTimeseriesRow {
   hospitalBeds: Hospitalbeds2;
   icuBeds: Icubeds2;
   newCases: Newcases2;
+  newDeaths: Newdeaths2;
   vaccinesDistributed?: Vaccinesdistributed2;
   vaccinationsInitiated?: Vaccinationsinitiated2;
   vaccinationsCompleted?: Vaccinationscompleted2;

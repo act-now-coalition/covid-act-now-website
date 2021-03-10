@@ -1,3 +1,4 @@
+import surgoPopulationVulnerable from './surgo-percent-population-vulnerable.json';
 /**
  * CCVI has 8 scores per fips (1 'overall' score, 7 nuanced scores)
  *
@@ -23,6 +24,11 @@ export interface FipsToCcviMap {
 /** Represents entries in county-zipcode.json */
 export interface CountyToZipMap {
   [fips: string]: string[];
+}
+
+/** Represent entries in surgo-percent-population-vulnerable.json. */
+export interface FipsToPopVulnerable {
+  [fipsCode: string]: number;
 }
 
 /** Cache used by importJson(). */
@@ -54,4 +60,11 @@ export function importFipsToCcviMap(): Promise<FipsToCcviMap> {
 /** Dynamic import for county-zipcode.json. */
 export function importCountyToZipCodeMap(): Promise<CountyToZipMap> {
   return importJson('county-zipcode', import('./county-zipcode.json'));
+}
+
+export function getVulnPopulationPercentForFips(
+  fips: string,
+): number | undefined {
+  const fipsToSurgoPopVulnerable: FipsToPopVulnerable = surgoPopulationVulnerable;
+  return fipsToSurgoPopVulnerable[fips];
 }

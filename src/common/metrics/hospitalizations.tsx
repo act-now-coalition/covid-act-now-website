@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
@@ -15,7 +16,7 @@ import {
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'ICU capacity used';
@@ -153,14 +154,21 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(region: Region): React.ReactElement {
+function renderDisclaimer(
+  region: Region,
+  provenance?: Sources,
+): React.ReactElement {
   const { body } = metricToTooltipMap[Metric.HOSPITAL_USAGE].metricCalculation;
 
   return (
     <Fragment>
       {'Learn more about '}
       <DisclaimerTooltip
-        title={getDataSourceTooltipContent(Metric.HOSPITAL_USAGE, region)}
+        title={getDataSourceTooltipContent(
+          Metric.HOSPITAL_USAGE,
+          region,
+          provenance,
+        )}
         mainCopy={'where our data comes from'}
         trackOpenTooltip={() =>
           trackOpenTooltip(`Learn more: ${Metric.HOSPITAL_USAGE}`)

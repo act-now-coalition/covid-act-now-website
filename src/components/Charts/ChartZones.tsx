@@ -25,9 +25,9 @@ import {
   getAxisLimits,
   getZoneByValue,
   getUtcScale,
+  getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;

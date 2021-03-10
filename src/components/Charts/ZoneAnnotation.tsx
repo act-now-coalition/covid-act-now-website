@@ -16,7 +16,8 @@ const ZoneAnnotation = ({
   y: number;
 }) => (
   <Style.RegionAnnotation color={color} isActive={isActive}>
-    <BoxedAnnotation x={x} y={y} text={name} />
+    {/* An x of 4 accounts for the annotation box's 2px of padding, and then some */}
+    <BoxedAnnotation x={4} y={y} text={name} />
   </Style.RegionAnnotation>
 );
 

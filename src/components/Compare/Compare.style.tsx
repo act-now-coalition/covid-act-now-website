@@ -66,12 +66,12 @@ export const Wrapper = styled.div<{
     th,
     td {
       &:first-child {
-        width: 27.5%;
+        width: 22%;
         min-width: ${locationNameCellWidth}px;
       }
 
       &:not(:first-child) {
-        width: 14.5%;
+        width: 13%;
         min-width: ${metricCellWidth}px;
       }
     }
@@ -250,7 +250,7 @@ export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
   ${MetricHeaderCell}, ${LocationHeaderCell} {
     vertical-align: bottom;
     line-height: 1.1rem;
-    padding: 1rem 1rem 0.8rem;
+    padding: 1rem 0 0.8rem 0.8rem;
     color: ${({ $isModal }) => $isModal && 'white'};
     border-bottom: ${({ $isModal }) =>
       !$isModal && `2px solid ${COLORS.LIGHTGRAY}`};
@@ -337,14 +337,19 @@ export const LocationNameCell = styled.td<{
   }
 `;
 
-export const DataCellValue = styled.span<{ $valueUnknown: boolean }>`
-  width: 48px;
+export const DataCellValue = styled.span<{
+  $valueUnknown: boolean;
+  $textAlign: string;
+  $fontSize: string;
+}>`
+  min-width: 48px;
   display: inline-block;
-  text-align: right;
+  text-align: ${({ $textAlign }) => $textAlign};
+  font-size: ${({ $fontSize }) => $fontSize};
   opacity: ${({ $valueUnknown }) => $valueUnknown && '.5'};
   font-family: Source Code Pro;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  margin-right: 0.75rem;
+  margin-right: 0.5rem;
   text-transform: capitalize;
 `;
 
@@ -354,6 +359,7 @@ export const DataCell = styled.td<{
 }>`
   ${SharedCellStyles}
   min-width: ${metricCellWidth}px;
+  padding-right: 0;
   color: ${({ $isSelected }) =>
     $isSelected ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
   font-weight: ${({ $isSelected }) => $isSelected && '600'};

@@ -14,9 +14,9 @@ import * as Styles from 'components/Explore/Explore.style';
 import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
-import { findPointByDate, getTimeAxisTicks } from 'components/Explore/utils';
+import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
-import { getUtcScale } from './utils';
+import { getUtcScale, getTimeAxisTicks } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 
 const getDate = (d: Column) => new Date(d.x);
@@ -132,7 +132,7 @@ const VaccinationLines: React.FC<{
   height,
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 30,
+  marginLeft = 35,
   marginRight = 20,
 }) => {
   const innerHeight = height - marginTop - marginBottom;
@@ -145,7 +145,10 @@ const VaccinationLines: React.FC<{
 
   const dateScale = getUtcScale(dateFrom, dateTo, 0, innerWidth);
 
-  const maxY = 0.35; // 35%
+  const dataMaxY = max(seriesList.map(series => last(series.data)?.y ?? 0));
+  // Add 5% buffer then round to the next highest 10% to align with a grid line.
+  const dataMaxWithBuffer = Math.ceil((100 * dataMaxY + 5) / 10) / 10;
+  const maxY = Math.min(1, Math.max(0.35, dataMaxWithBuffer));
   const yScale = scaleLinear({
     domain: [0, maxY],
     range: [innerHeight, 0],
@@ -198,7 +201,6 @@ const VaccinationLines: React.FC<{
               innerHeight={innerHeight}
               scale={dateScale}
               tickValues={dateTicks}
-              showYear={true}
             />
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>

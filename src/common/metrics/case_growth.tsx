@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { getLevel } from 'common/metric';
@@ -15,7 +16,7 @@ import {
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'components/Disclaimer/utils';
+import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Infection rate';
@@ -123,7 +124,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(region: Region): React.ReactElement {
+function renderDisclaimer(
+  region: Region,
+  provenance?: Sources,
+): React.ReactElement {
   const { body } = metricToTooltipMap[
     Metric.CASE_GROWTH_RATE
   ].metricCalculation;
@@ -132,7 +136,11 @@ function renderDisclaimer(region: Region): React.ReactElement {
     <Fragment>
       {'Learn more about '}
       <DisclaimerTooltip
-        title={getDataSourceTooltipContent(Metric.CASE_GROWTH_RATE, region)}
+        title={getDataSourceTooltipContent(
+          Metric.CASE_GROWTH_RATE,
+          region,
+          provenance,
+        )}
         mainCopy={'where our data comes from'}
         trackOpenTooltip={() =>
           trackOpenTooltip(`Learn more: ${Metric.CASE_GROWTH_RATE}`)

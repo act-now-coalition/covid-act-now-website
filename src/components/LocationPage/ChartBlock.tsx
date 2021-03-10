@@ -3,10 +3,10 @@ import {
   LocationPageSectionHeader,
   ChartDescription,
   BetaTag,
-  ChartHeaderWrapper,
+  HeaderWrapper,
+  DisclaimerWrapper,
 } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
-import Disclaimer from 'components/Disclaimer/Disclaimer';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import {
   getMetricNameExtended,
@@ -17,8 +17,10 @@ import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
 import { Region } from 'common/regions';
-
-//TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
+import { getSourcesForMetric } from 'common/utils/provenance';
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { MarkdownContent } from 'components/Markdown';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
@@ -30,15 +32,22 @@ function ChartBlock(props: {
 }) {
   const { projections, metric, isMobile, region, stats } = props;
 
+  const provenance = getSourcesForMetric(
+    projections.primary.annotations,
+    metric,
+  );
+
   const showBetaTag = metric === Metric.VACCINATIONS;
 
   const hasMetric = projections.hasMetric(metric);
 
-  const chartHeaderTooltip = getMetricDefinition(metric).renderInfoTooltip();
+  const metricDefinition = getMetricDefinition(metric);
+  const chartHeaderTooltip = metricDefinition.renderInfoTooltip();
+  const disclaimerContent = renderDisclaimer(region, metric, provenance);
 
   return (
     <Fragment>
-      <ChartHeaderWrapper>
+      <HeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
           <>{chartHeaderTooltip}</>
@@ -52,7 +61,7 @@ function ChartBlock(props: {
             isMobile={isMobile}
           />
         )}
-      </ChartHeaderWrapper>
+      </HeaderWrapper>
       <Subtitle1>{region.fullName}</Subtitle1>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
@@ -68,10 +77,32 @@ function ChartBlock(props: {
       {hasMetric && (
         <>
           <MetricChart metric={metric} projections={projections} />
-          <Disclaimer metricName={metric} region={region} />
+          <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
         </>
       )}
     </Fragment>
+  );
+}
+
+function renderDisclaimer(
+  region: Region,
+  metric: Metric,
+  provenance: Sources | undefined,
+) {
+  const metricDefinition = getMetricDefinition(metric);
+  const standardDisclaimer = metricDefinition.renderDisclaimer(
+    region,
+    provenance,
+  );
+
+  // Preface with any region override disclaimer text.
+  const overrideDisclaimer = getRegionMetricOverride(region, metric)
+    ?.disclaimer;
+  return (
+    <>
+      {overrideDisclaimer && <MarkdownContent source={overrideDisclaimer} />}
+      {standardDisclaimer}
+    </>
   );
 }
 

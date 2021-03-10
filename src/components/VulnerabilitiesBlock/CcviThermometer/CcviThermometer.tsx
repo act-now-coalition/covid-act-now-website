@@ -1,39 +1,46 @@
 import React from 'react';
+import { keyBy } from 'lodash';
 import {
   CcviLevel,
   getCcviLevelColor,
   getCcviLevelName,
   getCcviLevel,
 } from 'common/ccvi';
-import { scaleLinear } from '@vx/scale';
+import { scalePoint } from '@vx/scale';
 import { v4 as uuidv4 } from 'uuid';
 import { Group } from '@vx/group';
+import { CCVI_LEVEL_INFO_MAP } from 'common/ccvi';
 
-const CcviThermometer: React.FC<{ overallScore: number }> = ({
-  overallScore,
-}) => {
+const CcviThermometer: React.FC<{
+  overallScore: number;
+  regionName: string;
+}> = ({ overallScore, regionName }) => {
   const gradientId = uuidv4();
   const titleId = uuidv4();
 
   const containerHeight = 34;
   const thermometerWidth = 240;
   const thermometerHeight = 20;
+  const thermometerBorderRadius = thermometerHeight / 2;
 
-  const scaleWidth = scaleLinear({
-    domain: [0, 1],
+  const mapByColor = keyBy(CCVI_LEVEL_INFO_MAP, level => level.color);
+
+  const scaleWidth = scalePoint({
+    domain: Object.keys(mapByColor),
     range: [0, thermometerWidth],
+    padding: 0.5,
   });
-
-  const pointerX = scaleWidth(overallScore);
 
   const level = getCcviLevel(overallScore);
 
+  const pointerX = scaleWidth(CCVI_LEVEL_INFO_MAP[level].color);
+
   // todo (chelsi): add location name, possibly edit copy
   const title = level
-    ? `Thermometer image showing that the vulnerability level is ${getCcviLevelName(
+    ? `Thermometer image showing that ${regionName}'s vulnerability level is ${getCcviLevelName(
         level,
       ).toLowerCase()}.`
-    : 'Thermometer image showing the vulnerability level.';
+    : `Thermometer image showing ${regionName}'s vulnerability level.`;
 
   return (
     <svg
@@ -69,8 +76,8 @@ const CcviThermometer: React.FC<{ overallScore: number }> = ({
         width={thermometerWidth}
         height={thermometerHeight}
         y={containerHeight - thermometerHeight}
-        rx={thermometerHeight / 2}
-        ry={thermometerHeight / 2}
+        rx={thermometerBorderRadius}
+        ry={thermometerBorderRadius}
       />
     </svg>
   );

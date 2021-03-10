@@ -1,0 +1,52 @@
+stname,fips,stusps,vuln_percentage
+Alabama,01,AL,60
+Alaska,02,AK,7
+Arizona,04,AZ,48
+Arkansas,05,AR,36
+California,06,CA,56
+Colorado,08,CO,15
+Connecticut,09,CT,13
+Delaware,10,DE,7
+District of Columbia,11,DC,29
+Florida,12,FL,62
+Georgia,13,GA,58
+Hawaii,15,HI,5
+Idaho,16,ID,12
+Illinois,17,IL,34
+Indiana,18,IN,32
+Iowa,19,IA,12
+Kansas,20,KS,18
+Kentucky,21,KY,37
+Louisiana,22,LA,43
+Maine,23,ME,4
+Maryland,24,MD,16
+Massachusetts,25,MA,18
+Michigan,26,MI,31
+Minnesota,27,MN,11
+Mississippi,28,MS,52
+Missouri,29,MO,34
+Montana,30,MT,1
+Nebraska,31,NE,12
+Nevada,32,NV,43
+New Hampshire,33,NH,5
+New Jersey,34,NJ,30
+New Mexico,35,NM,28
+New York,36,NY,50
+North Carolina,37,NC,59
+North Dakota,38,ND,5
+Ohio,39,OH,27
+Oklahoma,40,OK,45
+Oregon,41,OR,25
+Pennsylvania,42,PA,24
+Rhode Island,44,RI,17
+South Carolina,45,SC,32
+South Dakota,46,SD,15
+Tennessee,47,TN,48
+Texas,48,TX,63
+Utah,49,UT,14
+Vermont,50,VT,0
+Virginia,51,VA,27
+Washington,53,WA,25
+West Virginia,54,WV,4
+Wisconsin,55,WI,14
+Wyoming,56,WY,2

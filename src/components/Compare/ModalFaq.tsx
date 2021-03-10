@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Wrapper,
   Question,
@@ -22,16 +23,31 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
         <Content>
           <Header>Compare table</Header>
           <Subheader>Frequently asked questions</Subheader>
-          <Question>How are “metro” and “non-metro” counties defined?</Question>
+          <Question>How do you define “vulnerability”?</Question>
           <Answer>
-            You can think of this as urban or rural, but just keep in mind that
-            isn’t exact.
+            Higher vulnerability areas are more likely to experience severe
+            physical and economic suffering from COVID, and to face a harder,
+            longer recovery.
             <br />
             <br />
-            We follow US Census definitions. A Metro Statistical Area (MSA)
-            consists of one or more counties that contain a city of 50,000 or
-            more inhabitants. We define “metro counties” as counties belonging
-            to MSAs; “non metro counties” as counties not within an MSA.
+            As of March 8 2021, people in the <i>most</i> vulnerable third of
+            U.S. counties are 44 percent more likely to have died from COVID
+            than people in the <i>least</i> vulnerable third of U.S. counties.
+            <br />
+            <br />
+            To calculate vulnerability, we use Surgo Ventures’{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://precisionforcovid.org/ccvi"
+            >
+              COVID-19 Community Vulnerability Index (CCVI)
+            </a>
+            .{' '}
+            <Link to="/covid-explained/covid-vulnerability-data">
+              Learn more
+            </Link>
+            .
           </Answer>
         </Content>
       </Wrapper>

@@ -52,7 +52,7 @@ export const InnerContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     align-items: flex-start;
     text-align: left;
-    max-width: 485px;
+    max-width: 520px;
   }
 `;
 
@@ -67,24 +67,4 @@ export const Body = styled.span`
   font-size: 15px;
   margin-bottom: 1.25rem;
   line-height: 1.5;
-`;
-
-export const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin-bottom: 1rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 0;
-    margin-right: 2.5rem;
-    background-color: white;
-    height: 104px;
-    min-width: 104px;
-  }
-`;
-
-export const Icon = styled.img`
-  height: 64px;
 `;
