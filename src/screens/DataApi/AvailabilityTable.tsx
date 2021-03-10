@@ -1,17 +1,21 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+
 import CheckIcon from '@material-ui/icons/Check';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import { Grid, Tooltip, Typography } from '@material-ui/core';
-import { InfoTooltip } from 'components/InfoTooltip';
-import { StyledInfoTooltip } from './AvailabilityTable.style';
+
+import {
+  StyledInfoTooltip,
+  UnderlinedText,
+  StyledTableHead,
+  MetricTableCell,
+  AvailabilityTableCell,
+  MetricTableRow,
+  MetricTableCellHeader,
+} from './AvailabilityTable.style';
 import availabilitySnapshot from './availabilitySnapshot.json';
 import { formatPercent } from 'common/utils';
 
@@ -73,19 +77,9 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
 }) => {
   return (
     <div>
-      <Typography
-        align="center"
-        display="inline"
-        style={{
-          textDecorationLine: 'underline',
-          textDecorationStyle: 'dotted',
-          textUnderlinePosition: 'under',
-          verticalAlign: 'middle',
-          fontSize: 14,
-        }}
-      >
+      <UnderlinedText align="center" display="inline">
         {text}
-      </Typography>
+      </UnderlinedText>
 
       <StyledInfoTooltip
         trackOpenTooltip={() => {}}
@@ -128,78 +122,35 @@ const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
   return <div></div>;
 };
 
-const useRowStyles = makeStyles({
-  row: {
-    '&:nth-of-type(even)': {
-      backgroundColor: '#fafafa',
-    },
-  },
-  rowName: {
-    fontWeight: 500,
-    size: 14,
-  },
-});
 const AvailabilityRow: React.FC<{ row: MetricAvailability }> = ({ row }) => {
-  const classes = useRowStyles();
-  // grid based centering, hopefully won't need
-  // <Grid container style={{ width: '100%' }} justify="center">
-  // <Grid item>
-  // <Status status={row.state} />
-  //</Grid>
-  // </Grid>
   return (
-    <TableRow className={classes.row} key={row.name}>
-      <TableCell
-        className={classes.rowName}
-        style={{ width: '31%' }}
-        component="th"
-        align="left"
-        scope="row"
-      >
-        {row.name}
-      </TableCell>
-      <TableCell align="center" style={{ width: '23%' }}>
+    <MetricTableRow key={row.name}>
+      <MetricTableCell>{row.name}</MetricTableCell>
+      <AvailabilityTableCell>
         <Status status={row.state} />
-      </TableCell>
-      <TableCell align="center" style={{ width: '23%' }}>
+      </AvailabilityTableCell>
+      <AvailabilityTableCell>
         <Status status={row.county} />
-      </TableCell>
-      <TableCell align="center" style={{ width: '23%' }}>
+      </AvailabilityTableCell>
+      <AvailabilityTableCell>
         <Status status={row.metro} />
-      </TableCell>
-    </TableRow>
+      </AvailabilityTableCell>
+    </MetricTableRow>
   );
 };
 
-const useTableStyles = makeStyles({
-  headerText: {
-    fontFamily: 'Roboto',
-    fontWeight: 500,
-    fontSize: 13,
-    textTransform: 'uppercase',
-    backgroundColor: 'white',
-  },
-});
-
 const AvailabilityTable = ({ rows }: TableProps) => {
-  const classes = useTableStyles();
   return (
     <TableContainer>
       <Table aria-label="Data Coverage Table">
-        <TableHead className={classes.headerText}>
+        <StyledTableHead>
           <TableRow>
-            <TableCell style={{ width: '31%' }}>Metric</TableCell>
-            <TableCell align="center" style={{ width: '23%' }}>
-              States
-            </TableCell>
-            <TableCell align="center" style={{ width: '23%' }}>
-              Counties
-            </TableCell>
-            <TableCell align="center" style={{ width: '23%' }}>
-              Metros
-            </TableCell>
+            <MetricTableCellHeader>Metric</MetricTableCellHeader>
+            <AvailabilityTableCell>States</AvailabilityTableCell>
+            <AvailabilityTableCell>Counties</AvailabilityTableCell>
+            <AvailabilityTableCell>Metros</AvailabilityTableCell>
           </TableRow>
-        </TableHead>
+        </StyledTableHead>
         <TableBody>
           {rows.map(row => (
             <AvailabilityRow row={row} />
