@@ -93,8 +93,11 @@ async function main(outputFolder: string) {
   // Iterating over all region summaries and building coverage for each metric by region type.
   allSummaries.forEach(regionSummary => {
     _.forEach(['riskLevels', 'metrics', 'actuals'], firstLevel => {
+      // summaryDataSection is a sub object of a `RegionSummary`.  Accessing it
+      // directly generates a typescript error, but we know it will always have a value.
       // @ts-ignore
-      _.forEach(regionSummary[firstLevel], (value, key) => {
+      const summaryDataSection = regionSummary[firstLevel];
+      _.forEach(summaryDataSection, (value, key) => {
         const metricPath = `${firstLevel}.${key}`;
         const coverageKey = `${regionSummary.level}-${metricPath}`;
 
