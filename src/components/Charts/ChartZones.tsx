@@ -199,6 +199,8 @@ const ChartZoneAutosize = ({
   getTooltipContent,
   getPointText,
   height = 400,
+  marginTop,
+  marginLeft,
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
@@ -208,6 +210,8 @@ const ChartZoneAutosize = ({
   ) => { body: string; subtitle: string; width: string };
   getPointText: (valueY: number) => string;
   height?: number;
+  marginTop?: number;
+  marginLeft?: number;
 }) => (
   <Style.ChartContainer>
     <ParentSize>
@@ -220,6 +224,8 @@ const ChartZoneAutosize = ({
           capY={capY}
           getTooltipContent={getTooltipContent}
           getPointText={getPointText}
+          marginTop={marginTop}
+          marginLeft={marginLeft}
         />
       )}
     </ParentSize>
