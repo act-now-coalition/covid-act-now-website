@@ -2316,7 +2316,7 @@
       "fips": "46",
       "eligibilityInfoUrl": "https://doh.sd.gov/Covid/Vaccine/Public.aspx",
       "vaccinationSignupUrl": "https://doh.sd.gov/Covid/Vaccine/ProviderMap/default.aspx",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -2357,11 +2357,11 @@
         {
           "phase": "1D",
           "tier": "2",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Persons with two or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff\n* Funeral service workers",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 9",
+          "updatedAt": "2021-03-11T17:25:43.315Z"
         },
         {
           "phase": "1E",
