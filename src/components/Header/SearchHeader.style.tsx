@@ -2,28 +2,14 @@ import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 
-export const Wrapper = styled.div`
-  margin: 0;
-  padding: 1rem;
-  background-color: white;
-  @media (min-width: 1350px) {
-    padding: 1rem 0 calc(1rem + 1px) 0; /* The extra pixel aligns the bottom border with the adjacent map box */
-    background-color: ${COLOR_MAP.GREY_1};
-  }
-
-  @media print {
-    display: none;
-  }
-`;
-
 export const Content = styled.div`
   margin: 0 auto;
 `;
 
-export const SelectorWrapper = styled.div<{ isNarrowMobile: Boolean }>`
+export const SelectorWrapper = styled.div<{ $isNarrowMobile: boolean }>`
   flex: 1;
   margin-right: 0;
-  position: ${props => (props.isNarrowMobile ? 'static' : 'relative')};
+  position: ${props => (props.$isNarrowMobile ? 'static' : 'relative')};
 
   > div {
     margin: 0 auto;
@@ -73,8 +59,17 @@ export const SearchHeaderWrapper = styled.div`
   left: 0;
   right: 0;
   z-index: 900;
-  border-bottom: 1px solid #e3e3e3;
-  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid ${COLOR_MAP.GREY_2};
+  border-top: 1px solid ${COLOR_MAP.GREY_2};
+
+  margin: 0;
+  padding: 1rem;
+  background-color: white;
+
+  @media (min-width: 1350px) {
+    padding: 1rem 0 calc(1rem + 1px) 0; /* The extra pixel aligns the bottom border with the adjacent map box */
+    background-color: ${COLOR_MAP.GREY_1};
+  }
 
   @media print {
     display: none;
