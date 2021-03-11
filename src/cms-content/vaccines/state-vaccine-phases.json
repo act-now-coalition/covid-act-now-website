@@ -50,7 +50,7 @@
       "fips": "02",
       "eligibilityInfoUrl": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/VaccineAvailability.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1a",
@@ -151,7 +151,7 @@
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations",
-      "emailAlertVersion": 3,
+      "emailAlertVersion": 4,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -968,7 +968,7 @@
       "fips": "22",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
       "vaccinationSignupUrl": "https://ldh.la.gov/covidvaccine-locations/",
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1263,7 +1263,7 @@
       "fips": "27",
       "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
       "vaccinationSignupUrl": "https://mn.gov/covid19/vaccine/find-vaccine/index.jsp",
-      "emailAlertVersion": 1,
+      "emailAlertVersion": 3,
       "phaseGroups": [
         {
           "phase": "1",
