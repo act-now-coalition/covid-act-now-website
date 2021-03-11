@@ -35,11 +35,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: LOW_NAME,
     summary: LEGEND_SUMMARY_LOW,
     color: COLOR_MAP.GREEN.BASE,
-    detail: locationName => (
-      <>
-        {locationName} is at low risk. See {recommendationsLink}.
-      </>
-    ),
+    detail: locationName => <>See {recommendationsLink}.</>,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
@@ -47,11 +43,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: MEDIUM_NAME,
     summary: LEGEND_SUMMARY_MEDIUM,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: locationName => (
-      <>
-        {locationName} is at medium risk. See {recommendationsLink}.
-      </>
-    ),
+    detail: locationName => <>See {recommendationsLink}.</>,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
@@ -60,10 +52,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     summary: LEGEND_SUMMARY_MEDIUM_HIGH,
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: locationName => (
-      <>
-        {locationName} is at high risk. Take precautions to avoid exposure,
-        including {recommendationsLink}.
-      </>
+      <>Take precautions to avoid exposure, including {recommendationsLink}.</>
     ),
   },
   [Level.CRITICAL]: {
@@ -74,8 +63,8 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     color: COLOR_MAP.RED.BASE,
     detail: locationName => (
       <>
-        {locationName} is at very high risk. Take strong precautions to avoid
-        exposure, including {recommendationsLink}.
+        Take strong precautions to avoid exposure, including{' '}
+        {recommendationsLink}.
       </>
     ),
   },
@@ -87,8 +76,8 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     color: COLOR_MAP.RED.DARK,
     detail: locationName => (
       <>
-        {locationName} is at severe risk. Take all possible precautions to avoid
-        exposure, including {recommendationsLink}.
+        Take all possible precautions to avoid exposure, including{' '}
+        {recommendationsLink}.
       </>
     ),
   },
