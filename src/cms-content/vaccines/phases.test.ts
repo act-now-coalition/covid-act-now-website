@@ -1,6 +1,6 @@
 import { sortBy } from 'lodash';
 import regions from 'common/regions';
-import { getVaccineInfoByFips } from './phases';
+import { getVaccineInfoByFips, verifyOneItemPerState } from './phases';
 
 describe('vaccination info is complete for each state', () => {
   const states = sortBy(regions.states, state => state.fullName);
@@ -28,4 +28,8 @@ describe('vaccination info is complete for each state', () => {
       });
     });
   }
+
+  test('there are no repeated states in the CMS', () => {
+    expect(() => verifyOneItemPerState()).not.toThrow();
+  });
 });
