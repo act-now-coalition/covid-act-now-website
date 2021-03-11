@@ -23,6 +23,9 @@ describe('vaccination info is complete for each state', () => {
       test('has at least one phase', () => {
         expect(vaccinationInfo?.phaseGroups.length).toBeGreaterThan(0);
       });
+      test('emailAlertVersion is a number', () => {
+        expect(Number.isFinite(vaccinationInfo?.emailAlertVersion)).toBe(true);
+      });
     });
   }
 });

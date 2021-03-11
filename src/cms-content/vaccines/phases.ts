@@ -21,8 +21,12 @@ export interface RegionVaccinePhaseInfo {
   phaseGroups: RegionPhaseGroup[];
 }
 
-export const stateVaccinationPhases: RegionVaccinePhaseInfo[] =
-  stateVaccinationInfo.regions;
+export const stateVaccinationPhases: RegionVaccinePhaseInfo[] = stateVaccinationInfo.regions.map(
+  ({ emailAlertVersion, ...otherProps }) => ({
+    emailAlertVersion: parseInt(emailAlertVersion, 10),
+    ...otherProps,
+  }),
+);
 
 const vaccinationPhasesMap = keyBy(
   stateVaccinationPhases,
