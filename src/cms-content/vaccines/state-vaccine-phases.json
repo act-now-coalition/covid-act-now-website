@@ -1994,7 +1994,7 @@
       ]
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Oklahoma",
       "fips": "40",
       "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
@@ -2030,11 +2030,11 @@
         {
           "phase": "3",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Teachers, staff, and residents in other educational settings\n* Critical infrastructure personnel",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 9",
+          "updatedAt": "2021-03-11T17:23:47.686Z"
         },
         {
           "phase": "4",
