@@ -14,7 +14,7 @@ const levels = [
 const items = levels.map(level => {
   const summaryLevel = LOCATION_SUMMARY_LEVELS[level];
   return {
-    title: summaryLevel.name,
+    title: summaryLevel.name + ' risk',
     description: '',
     color: summaryLevel.color,
     roundTop: level === Level.SUPER_CRITICAL,
