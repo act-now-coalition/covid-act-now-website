@@ -2,10 +2,6 @@ import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 
-export const Content = styled.div`
-  margin: 0 auto;
-`;
-
 export const SelectorWrapper = styled.div<{ $isNarrowMobile: boolean }>`
   flex: 1;
   margin-right: 0;
@@ -27,8 +23,8 @@ export const SelectorWrapper = styled.div<{ $isNarrowMobile: boolean }>`
 `;
 
 export const MapToggle = styled.div<{
-  isActive: boolean;
-  hideMapToggle: boolean;
+  $isActive: boolean;
+  $hideMapToggle: boolean;
 }>`
   cursor: pointer;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
@@ -39,12 +35,12 @@ export const MapToggle = styled.div<{
   align-items: center;
   border-radius: 4px;
   margin-left: 1rem;
-  color: ${props => (props.isActive ? 'white' : palette.secondary.main)};
+  color: ${props => (props.$isActive ? 'white' : palette.secondary.main)};
   background: ${props =>
-    props.isActive ? palette.secondary.main : 'transparent'};
-  display: ${({ hideMapToggle }) => hideMapToggle && 'none'};
+    props.$isActive ? palette.secondary.main : 'transparent'};
+  display: ${({ $hideMapToggle }) => $hideMapToggle && 'none'};
   svg path {
-    fill: ${props => (props.isActive ? 'white' : palette.secondary.main)};
+    fill: ${props => (props.$isActive ? 'white' : palette.secondary.main)};
   }
 `;
 
@@ -62,7 +58,7 @@ export const SearchHeaderWrapper = styled.div`
   border-bottom: 1px solid ${COLOR_MAP.GREY_2};
   border-top: 1px solid ${COLOR_MAP.GREY_2};
 
-  margin: 0;
+  margin: 0 auto;
   padding: 1rem;
   background-color: white;
 
