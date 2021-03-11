@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MapIcon from 'assets/images/mapIcon';
 import {
-  Wrapper,
   Content,
   SelectorWrapper,
   MapToggle,
@@ -41,37 +40,35 @@ const SearchHeader = ({
   // TODO (sgoldblatt): WHY are there so many wrappers?
   return (
     <SearchHeaderWrapper>
-      <Wrapper>
-        <Content>
-          <MenuBarWrapper>
-            <SelectorWrapper
-              onClick={() => {
-                setMobileMenuOpen(false);
-              }}
-              isNarrowMobile={isNarrowMobile}
+      <Content>
+        <MenuBarWrapper>
+          <SelectorWrapper
+            onClick={() => {
+              setMobileMenuOpen(false);
+            }}
+            $isNarrowMobile={isNarrowMobile}
+          >
+            <SearchAutocomplete
+              filterLimit={getFilterLimit(region)}
+              setHideMapToggle={setHideMapToggle}
+              locations={getFinalAutocompleteLocations(
+                geolocationData,
+                countyToZipMap,
+              )}
+            />
+          </SelectorWrapper>
+          {isMobile && (
+            <MapToggle
+              hideMapToggle={hideMapToggle}
+              onClick={() => toggleMobileMenu()}
+              isActive={mobileMenuOpen}
             >
-              <SearchAutocomplete
-                filterLimit={getFilterLimit(region)}
-                setHideMapToggle={setHideMapToggle}
-                locations={getFinalAutocompleteLocations(
-                  geolocationData,
-                  countyToZipMap,
-                )}
-              />
-            </SelectorWrapper>
-            {isMobile && (
-              <MapToggle
-                hideMapToggle={hideMapToggle}
-                onClick={() => toggleMobileMenu()}
-                isActive={mobileMenuOpen}
-              >
-                <>Counties&nbsp;&nbsp;</>
-                <MapIcon />
-              </MapToggle>
-            )}
-          </MenuBarWrapper>
-        </Content>
-      </Wrapper>
+              <>Counties&nbsp;&nbsp;</>
+              <MapIcon />
+            </MapToggle>
+          )}
+        </MenuBarWrapper>
+      </Content>
     </SearchHeaderWrapper>
   );
 };
