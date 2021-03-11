@@ -11,7 +11,6 @@ import {
   KickerWrapper,
 } from './CriteriaExplanation.style';
 import { Subtitle1 } from 'components/Typography';
-import ExternalLink from 'components/ExternalLink';
 
 const Kicker = (props: {
   number: string;
