@@ -1731,9 +1731,24 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:23:47.219Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "updatedAt": "2021-03-11T17:13:15.825Z",
+          "phase": "1c",
+          "description": "* Public-facing government and public employees\n* Not-for-profit public workers\n* Essential public service workers",
+          "startDate": "March 17"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-11T17:16:11.972Z",
+          "phase": "2",
+          "description": "* Other at-risk groups\n* Other essential workers",
+          "startDate": "March - April 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-11T17:13:41.419Z",
+          "phase": "3",
+          "description": "* General public",
+          "startDate": "Summer 2021"
         }
       ]
     },
