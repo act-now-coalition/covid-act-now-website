@@ -1897,7 +1897,7 @@
       ]
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 3,
       "locationName": "Ohio",
       "fips": "39",
       "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
@@ -1967,9 +1967,23 @@
         {
           "currentlyEligible": true,
           "updatedAt": "2021-03-01T20:47:50.337Z",
-          "phase": "2",
+          "phase": "2A",
           "description": "* Adults 60+",
           "startDate": "March 4, 2021"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-11T17:21:22.124Z",
+          "phase": "1D",
+          "description": "* Individuals with Type 2 diabetes\n* Individuals with end-stage renal disease",
+          "startDate": "March 11"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-11T17:21:31.983Z",
+          "phase": "2B",
+          "description": "* Adults 50+",
+          "startDate": "March 11"
         },
         {
           "currentlyEligible": false,
