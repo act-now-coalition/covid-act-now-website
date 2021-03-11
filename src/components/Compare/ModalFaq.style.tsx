@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { Typography } from '@material-ui/core';
 import MuiCloseIcon from '@material-ui/icons/Close';
+import { fonts } from 'common/theme';
 
 export const Wrapper = styled.div`
   background-color: white;
@@ -39,7 +40,7 @@ export const Header = styled(Typography)`
 `;
 
 export const Subheader = styled(Typography)`
-  font-family: Source Code Pro;
+  ${fonts.monospace};
   font-size: 0.875rem;
   color: ${COLOR_MAP.GRAY.DARK};
   text-transform: uppercase;

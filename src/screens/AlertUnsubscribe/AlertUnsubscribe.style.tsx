@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
+import { fonts } from 'common/theme';
 
 export const Wrapper = styled(Box)`
   max-width: 700px;
@@ -19,17 +20,15 @@ export const Wrapper = styled(Box)`
 `;
 
 export const UnsubscribeHeader = styled(Typography)`
-  font-family: Roboto;
+  ${fonts.regularBookBold};
   font-size: 2rem;
   margin-bottom: 2.5rem;
-  font-weight: 700;
   line-height: 1.2;
 `;
 
 const Button = css`
-  font-family: Roboto;
+  ${fonts.regularBookBold};
   font-size: 0.875rem;
-  font-weight: 700;
   line-height: 1.1rem;
   text-transform: uppercase;
   color: white;
@@ -68,7 +67,7 @@ export const UnsubscribeButton = styled.button`
 `;
 
 export const BodyCopy = styled(Typography)`
-  font-family: Roboto;
+  ${fonts.regularBook};
   font-size: 1.1rem;
   margin-bottom: 1.75rem;
   line-height: 1.4;
