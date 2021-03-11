@@ -66,6 +66,12 @@
       ]
     },
     {
+      "productName": "Coverage",
+      "productId": "coverage",
+      "productSubtitle": "coverage",
+      "productDescription": "The following data is available for all 50 states (plus D.C., Puerto Rico, and Northern Marina Islands), most or all counties and metro areas, except where noted. Refer to our [data definitions](https://apidocs.covidactnow.org/data-definitions) for all included fields."
+    },
+    {
       "productName": "FAQs",
       "productId": "faqs",
       "productSubtitle": "Frequently Asked Questions",

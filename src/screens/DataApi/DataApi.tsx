@@ -15,14 +15,9 @@ import {
   BlueLinkButton,
 } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
-import AvailabilityTable, {
-  AVAILABILITY_SNAPSHOT,
-  FIELDS_PRETTY_NAMES,
-} from './AvailabilityTable';
+import DataCoverageTable, { FIELDS_PRETTY_NAMES } from './DataCoverageTable';
 import LogoGrid from 'components/LogoGrid/LogoGrid';
 import { EventCategory } from 'components/Analytics';
-import ExternalLink from 'components/ExternalLink';
-import LinkButton from 'components/LinkButton';
 import { Grid } from '@material-ui/core';
 
 const {
@@ -44,11 +39,11 @@ export const sidebarSections: TocItem[] = [
   },
 ];
 
-const DataCoverageSection: React.FC<{}> = ({}) => {
+const DataCoverageSection: React.FC<{}> = () => {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <AvailabilityTable rows={FIELDS_PRETTY_NAMES} />
+        <DataCoverageTable rows={FIELDS_PRETTY_NAMES} />
       </Grid>
       <Grid item xs={12}>
         <BlueLinkButton

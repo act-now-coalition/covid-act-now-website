@@ -12,6 +12,10 @@ import { RegionType } from '../src/common/regions';
 import { fetchSummariesForRegionType } from '../src/common/utils/model';
 import _ from 'lodash';
 import { assert } from '../src/common/utils';
+import {
+  MetricCoverage,
+  CoverageDetails,
+} from '../src/screens/DataApi/DataCoverageTable';
 
 interface SingleLevelMetricCoverage {
   name: string;
@@ -20,20 +24,6 @@ interface SingleLevelMetricCoverage {
   totalHasValue: number;
   allStates: Set<string>;
   statesHasValue: Set<string>;
-}
-
-interface CoverageDetails {
-  totalRegions: number;
-  regionsAvailable: number;
-  totalStates: number;
-  statesAvailable: number;
-}
-
-interface MetricCoverage {
-  name: string;
-  state: CoverageDetails;
-  county: CoverageDetails;
-  metro: CoverageDetails;
 }
 
 const combineCoverageByMetric = (
@@ -94,7 +84,8 @@ async function main(outputFolder: string) {
   allSummaries.forEach(regionSummary => {
     _.forEach(['riskLevels', 'metrics', 'actuals'], firstLevel => {
       // summaryDataSection is a sub object of a `RegionSummary`.  Accessing it
-      // directly generates a typescript error, but we know it will always have a value.
+      // directly generates a typescript error, but we know it will always have a value
+      // as it's part of the
       // @ts-ignore
       const summaryDataSection = regionSummary[firstLevel];
       _.forEach(summaryDataSection, (value, key) => {

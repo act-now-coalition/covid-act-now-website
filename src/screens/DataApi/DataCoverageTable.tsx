@@ -15,13 +15,14 @@ import {
   AvailabilityTableCell,
   MetricTableRow,
   MetricTableCellHeader,
-} from './AvailabilityTable.style';
-import availabilitySnapshot from './availabilitySnapshot.json';
+} from './DataCoverageTable.style';
+import coverageSummary from './coverage-summary.json';
 import { formatPercent } from 'common/utils';
 import { InfoTooltip } from 'components/InfoTooltip';
 import { pluralize } from 'components/Explore/utils';
+import { RegionType } from 'common/regions';
 
-export const AVAILABILITY_SNAPSHOT = availabilitySnapshot as MetricAvailability[];
+export const COVERAGE_SUMMARY = coverageSummary as MetricCoverage[];
 
 interface MetricField {
   displayName: string;
@@ -32,19 +33,16 @@ export const FIELDS: MetricField[] = [
   { displayName: 'Overall risk level', field: 'riskLevels.overall' },
   { displayName: 'Daily new cases', field: 'metrics.caseDensity' },
   { displayName: 'Infection rate', field: 'metrics.infectionRate' },
-  { displayName: 'Test positivity', field: 'metrics.testPositivityRatio' },
-  { displayName: 'Vaccinations', field: 'metrics.vaccinationsInitiatedRatio' },
-  { displayName: 'Cases', field: 'actuals.cases' },
+  { displayName: 'Positive test rate', field: 'metrics.testPositivityRatio' },
+  { displayName: '% Vaccinated', field: 'metrics.vaccinationsInitiatedRatio' },
+  { displayName: 'ICU capacity used', field: 'metrics.icuCapacityRatio' },
+  { displayName: 'Hospitalization usage', field: 'metrics.icuCapacityRatio' },
   { displayName: 'Deaths', field: 'actuals.deaths' },
   { displayName: 'Total testing volume', field: 'actuals.positiveTests' },
-  { displayName: 'Hospitalization usage', field: 'metrics.icuCapacityRatio' },
-  { displayName: 'ICU usage', field: 'metrics.icuCapacityRatio' },
 ];
 
 export const FIELDS_PRETTY_NAMES = FIELDS.map(field => {
-  const record = AVAILABILITY_SNAPSHOT.find(
-    record => field.field === record.name,
-  );
+  const record = COVERAGE_SUMMARY.find(record => field.field === record.name);
   if (record) {
     return {
       ...record,
@@ -53,24 +51,20 @@ export const FIELDS_PRETTY_NAMES = FIELDS.map(field => {
   }
 
   return null;
-}).filter((record): record is MetricAvailability => record !== null);
+}).filter((record): record is MetricCoverage => record !== null);
 
-interface TableProps {
-  rows: MetricAvailability[];
-}
-
-interface AvailabilityDetails {
+export interface CoverageDetails {
   totalRegions: number;
   regionsAvailable: number;
   totalStates: number;
   statesAvailable: number;
 }
 
-export interface MetricAvailability {
+export interface MetricCoverage {
   name: string;
-  state: AvailabilityDetails;
-  county: AvailabilityDetails;
-  metro: AvailabilityDetails;
+  state: CoverageDetails;
+  county: CoverageDetails;
+  metro: CoverageDetails;
 }
 
 const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
@@ -81,67 +75,79 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
     <TextWithTooltipContainer>
       <UnderlinedText align="center">
         {text}
-        <InfoTooltip
-          trackOpenTooltip={() => {}}
-          title={tooltipContent}
-          mainCopy={"Hey i'm some useful content"}
-        />
+        <InfoTooltip trackOpenTooltip={() => {}} title={tooltipContent} />
       </UnderlinedText>
     </TextWithTooltipContainer>
   );
 };
 
-const Status: React.FC<{ status: AvailabilityDetails }> = ({ status }) => {
-  const availableRatio = status.regionsAvailable / status.totalRegions;
-  if (status.regionsAvailable >= status.totalRegions * 0.95) {
-    return <CheckIcon color="secondary" />;
+const tooltipText = (coverage: CoverageDetails, regionType: RegionType) => {
+  switch (regionType) {
+    case RegionType.COUNTY:
+      return (
+        `Supported in ${coverage.regionsAvailable} counties (of ${coverage.totalRegions}), ` +
+        `or ${coverage.statesAvailable} states and territories (of ${coverage.totalStates}).`
+      );
+    case RegionType.MSA:
+      return `Supported in ${coverage.regionsAvailable} metros (of ${coverage.totalRegions}).`;
+    case RegionType.STATE:
+      return `Supported in ${coverage.regionsAvailable} states (of ${coverage.totalRegions}).`;
   }
+};
 
-  const totalAvailability = `${status.regionsAvailable} / ${status.totalRegions} regions - ${status.statesAvailable} / ${status.totalStates} states`;
+const Status: React.FC<{ status: CoverageDetails; level: RegionType }> = ({
+  status,
+  level,
+}) => {
   if (status.regionsAvailable === 0) {
     return (
       <TextWithTooltip text="No data" tooltipContent="No data available." />
     );
   }
 
-  if (availableRatio >= 0.6) {
+  const availableRatio = status.regionsAvailable / status.totalRegions;
+
+  if (availableRatio >= 0.95) {
+    return <CheckIcon color="secondary" />;
+  }
+
+  const tooltipContent = tooltipText(status, level);
+  if (availableRatio >= 0.6 || level === RegionType.MSA) {
     return (
       <TextWithTooltip
         text={`~${formatPercent(availableRatio, 0)}`}
-        tooltipContent={totalAvailability}
+        tooltipContent={tooltipContent}
       />
     );
   }
-  if (status.statesAvailable > 0) {
-    const statesText = pluralize(status.statesAvailable, 'State', 'States');
-    return (
-      <TextWithTooltip
-        text={`${status.statesAvailable} ${statesText}`}
-        tooltipContent={totalAvailability}
-      />
-    );
-  }
-  return <div></div>;
+
+  const statesText = pluralize(status.statesAvailable, 'State', 'States');
+  return (
+    <TextWithTooltip
+      text={`${status.statesAvailable} ${statesText}`}
+      tooltipContent={tooltipContent}
+    />
+  );
 };
 
-const AvailabilityRow: React.FC<{ row: MetricAvailability }> = ({ row }) => {
+const CoverageRow: React.FC<{ row: MetricCoverage }> = ({ row }) => {
   return (
     <MetricTableRow key={row.name}>
       <MetricTableCell>{row.name}</MetricTableCell>
       <AvailabilityTableCell>
-        <Status status={row.state} />
+        <Status status={row.state} level={RegionType.STATE} />
       </AvailabilityTableCell>
       <AvailabilityTableCell>
-        <Status status={row.county} />
+        <Status status={row.county} level={RegionType.COUNTY} />
       </AvailabilityTableCell>
       <AvailabilityTableCell>
-        <Status status={row.metro} />
+        <Status status={row.metro} level={RegionType.MSA} />
       </AvailabilityTableCell>
     </MetricTableRow>
   );
 };
 
-const AvailabilityTable = ({ rows }: TableProps) => {
+const CoverageTable: React.FC<{ rows: MetricCoverage[] }> = ({ rows }) => {
   return (
     <TableContainer>
       <Table aria-label="Data Coverage Table">
@@ -155,7 +161,7 @@ const AvailabilityTable = ({ rows }: TableProps) => {
         </StyledTableHead>
         <TableBody>
           {rows.map(row => (
-            <AvailabilityRow row={row} />
+            <CoverageRow row={row} />
           ))}
         </TableBody>
       </Table>
@@ -163,4 +169,4 @@ const AvailabilityTable = ({ rows }: TableProps) => {
   );
 };
 
-export default AvailabilityTable;
+export default CoverageTable;

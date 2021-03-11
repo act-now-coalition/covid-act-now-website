@@ -329,7 +329,7 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
   return '';
 }
 
-const pluralize = (num: number, singular: string, plural: string) =>
+export const pluralize = (num: number, singular: string, plural: string) =>
   num === 1 ? singular : plural;
 
 const pluralizeWeeks = (num: number) => pluralize(num, 'week', 'weeks');
