@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MapIcon from 'assets/images/mapIcon';
 import {
-  Wrapper,
-  Content,
   SelectorWrapper,
   MapToggle,
   MenuBarWrapper,
@@ -38,40 +36,33 @@ const SearchHeader = ({
   /* We hide the minimap toggle button when the searchbar is in focus on mobile */
   const [hideMapToggle, setHideMapToggle] = useState(false);
 
-  // TODO (sgoldblatt): WHY are there so many wrappers?
   return (
     <SearchHeaderWrapper>
-      <Wrapper>
-        <Content>
-          <MenuBarWrapper>
-            <SelectorWrapper
-              onClick={() => {
-                setMobileMenuOpen(false);
-              }}
-              isNarrowMobile={isNarrowMobile}
-            >
-              <SearchAutocomplete
-                filterLimit={getFilterLimit(region)}
-                setHideMapToggle={setHideMapToggle}
-                locations={getFinalAutocompleteLocations(
-                  geolocationData,
-                  countyToZipMap,
-                )}
-              />
-            </SelectorWrapper>
-            {isMobile && (
-              <MapToggle
-                hideMapToggle={hideMapToggle}
-                onClick={() => toggleMobileMenu()}
-                isActive={mobileMenuOpen}
-              >
-                <>Counties&nbsp;&nbsp;</>
-                <MapIcon />
-              </MapToggle>
+      <MenuBarWrapper>
+        <SelectorWrapper
+          onClick={() => setMobileMenuOpen(false)}
+          $isNarrowMobile={isNarrowMobile}
+        >
+          <SearchAutocomplete
+            filterLimit={getFilterLimit(region)}
+            setHideMapToggle={setHideMapToggle}
+            locations={getFinalAutocompleteLocations(
+              geolocationData,
+              countyToZipMap,
             )}
-          </MenuBarWrapper>
-        </Content>
-      </Wrapper>
+          />
+        </SelectorWrapper>
+        {isMobile && (
+          <MapToggle
+            $hideMapToggle={hideMapToggle}
+            onClick={() => toggleMobileMenu()}
+            $isActive={mobileMenuOpen}
+          >
+            <>Counties&nbsp;&nbsp;</>
+            <MapIcon />
+          </MapToggle>
+        )}
+      </MenuBarWrapper>
     </SearchHeaderWrapper>
   );
 };
