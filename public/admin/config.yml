@@ -836,3 +836,25 @@ collections:
                 hint: Disclaimer to show below metric chart. Not used if metric is blocked.
                 widget: markdown
                 minimal: true
+  - name: footer
+    label: Footer
+    description: Website footer content
+    format: json
+    files:
+      - name: footer
+        label: Footer
+        file: src/cms-content/footer/footer.json
+        fields:
+          - name: learnLinks
+            label: Learn links
+            widget: list
+            fields:
+              - name: url
+                label: Url
+                widget: string
+              - name: cta
+                label: Cta
+                widget: string
+          - name: aboutUs
+            label: About us
+            widget: markdown

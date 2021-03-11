@@ -35,6 +35,8 @@ const ChartICUCapacityUsed = ({
     zones={HOSPITAL_USAGE_LEVEL_INFO_MAP}
     getTooltipContent={getTooltipContent}
     getPointText={getPointText}
+    marginTop={16}
+    marginLeft={38}
   />
 );
 
