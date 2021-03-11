@@ -1,4 +1,5 @@
-import { keyBy } from 'lodash';
+import { assert } from 'common/utils';
+import { keyBy, groupBy, map } from 'lodash';
 import stateVaccinationInfo from './state-vaccine-phases.json';
 
 export interface RegionPhaseGroup {
@@ -21,8 +22,12 @@ export interface RegionVaccinePhaseInfo {
   phaseGroups: RegionPhaseGroup[];
 }
 
-export const stateVaccinationPhases: RegionVaccinePhaseInfo[] =
-  stateVaccinationInfo.regions;
+export const stateVaccinationPhases: RegionVaccinePhaseInfo[] = stateVaccinationInfo.regions.map(
+  ({ emailAlertVersion, ...otherProps }) => ({
+    emailAlertVersion: parseInt(emailAlertVersion, 10),
+    ...otherProps,
+  }),
+);
 
 const vaccinationPhasesMap = keyBy(
   stateVaccinationPhases,
@@ -33,4 +38,17 @@ export function getVaccineInfoByFips(
   fipsCode: string,
 ): RegionVaccinePhaseInfo | null {
   return vaccinationPhasesMap[fipsCode] || null;
+}
+
+export function verifyOneItemPerState() {
+  const groupedByFips = groupBy(
+    stateVaccinationInfo.regions,
+    info => info.fips,
+  );
+  map(groupedByFips, infoList => {
+    assert(
+      infoList.length === 1,
+      `${infoList[0].fips} (${infoList[0].locationName}) is repeated in state-vaccine-phases.json`,
+    );
+  });
 }
