@@ -14,7 +14,7 @@ export enum APIRegionSubPath {
   CBSAS = 'cbsas',
 }
 
-const getSubpathFromRegionType = (regionType: RegionType) => {
+function getSubpathFromRegionType(regionType: RegionType): APIRegionSubPath {
   switch (regionType) {
     case RegionType.COUNTY:
       return APIRegionSubPath.COUNTIES;
@@ -25,7 +25,7 @@ const getSubpathFromRegionType = (regionType: RegionType) => {
     default:
       fail('Unsuported type');
   }
-};
+}
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
 
