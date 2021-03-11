@@ -7,6 +7,12 @@ backend:
   branch: cms-content-entry
   base_url: https://api.netlify.com
 
+# To use the CMS locally during development, run:
+#   npx netlify-cms-proxy-server
+#
+# And uncomment the following line:
+#local_backend: true
+
 media_folder: 'public/images_cms'
 public_folder: '/images_cms'
 
@@ -770,3 +776,85 @@ collections:
                 name: content
                 widget: markdown
                 hint: subscore definition
+
+  - name: regionOverrides
+    label: Region Overrides
+    description: Block metrics, add metric disclaimers, etc.
+    format: json
+    files:
+      - name: regionOverrides
+        label: Region Overrides
+        file: src/cms-content/region-overrides/region-overrides.json
+        fields:
+          - name: overrides
+            label: Overrides
+            widget: list
+            fields:
+              - name: region
+                label: Region
+                hint: State code (2 letters) or FIPS code (2 or 5 digits)
+                widget: string
+                pattern: ['^([A-Z][A-Z]|\d{2}|\d{5})$', 'Must be a 2-letter state code or 2 or 5-digit FIPS code']
+              - name: include
+                label: Include
+                widget: select
+                default: region
+                options:
+                  - label: Region only
+                    value: region
+                  - label: Region and its subregions (e.g. state and its counties & metros)
+                    value: region-and-subregions
+                  - label: Subregions only (e.g. counties & metros in a state but not the state itself)
+                    value: subregions
+              - name: metric
+                label: Metric
+                widget: select
+                default: 'metrics.testPositivityRatio'
+                options:
+                  - label: 'Metric: Daily New Cases'
+                    value: 'metrics.caseDensity'
+                  - label: 'Metric: Infection Rate'
+                    value: 'metrics.infectionRate'
+                  - label: 'Metric: Positive Test Rate'
+                    value: 'metrics.testPositivityRatio'
+                  - label: 'Metric: ICU Capacity Used'
+                    value: 'metrics.icuCapacityRatio'
+                  - label: 'Metric: Vaccinated'
+                    value: 'metrics.vaccinationsInitiatedRatio'
+              - name: context
+                label: '[Internal] Context'
+                widget: string
+                hint: Context about this issue (trello links, owner, etc.) - not displayed externally
+              - name: blocked
+                label: Block Metric
+                widget: boolean
+                default: false
+                hint: Block the metric from appearing and being used in the risk level calculation.
+              - name: disclaimer
+                label: Add Disclaimer
+                required: false
+                hint: Disclaimer to show below metric chart. Not used if metric is blocked.
+                widget: markdown
+                minimal: true
+  - name: footer
+    label: Footer
+    description: Website footer content
+    format: json
+    files:
+      - name: footer
+        label: Footer
+        file: src/cms-content/footer/footer.json
+        fields:
+          - name: learnLinks
+            label: Learn links
+            widget: list
+            fields:
+              - name: url
+                label: Url
+                widget: string
+              - name: cta
+                label: Cta
+                widget: string
+          - name: aboutUs
+            label: About us
+            widget: markdown

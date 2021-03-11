@@ -13,31 +13,8 @@ import {
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
-import regions from 'common/regions';
-
-/** Stores a list of FIPS or FIPS regex patterns to disable. */
-class DisabledFipsList {
-  constructor(private fipsPatterns: (string | RegExp)[]) {}
-
-  includes(fips: string): boolean {
-    return _.some(this.fipsPatterns, pattern => {
-      if (typeof pattern === 'string') {
-        return pattern === fips;
-      } else {
-        return pattern.test(fips);
-      }
-    });
-  }
-}
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-function countyAndMetrosForState(stateCode: string): string[] {
-  const counties = regions.findCountiesByStateCode(stateCode);
-  const metros = regions.metroAreas.filter(
-    m => _.intersection(m.counties, counties).length > 0,
-  );
-  return [...counties, ...metros].map(r => r.fipsCode);
-}
+import regions, { Region } from 'common/regions';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -46,26 +23,6 @@ let overrideDisabledMetrics = false;
 export function reenableDisabledMetrics(enable: boolean): void {
   overrideDisabledMetrics = enable;
 }
-
-/**
- * Example of disabling counties/metros for 1+ states:
- *
- *  [Metric.VACCINATIONS]: new DisabledFipsList([
- *    ...countyAndMetrosForState('OR'), // https://trello.com/c/iQWpcPgy/
- *    ...countyAndMetrosForState('FL'), // https://trello.com/c/qH1UnTgt/
- *  ]),
- */
-export const DISABLED_METRICS: { [metric in Metric]: DisabledFipsList } = {
-  [Metric.CASE_DENSITY]: new DisabledFipsList([]),
-  [Metric.CASE_GROWTH_RATE]: new DisabledFipsList([]),
-  [Metric.HOSPITAL_USAGE]: new DisabledFipsList([]),
-  [Metric.POSITIVE_TESTS]: new DisabledFipsList([
-    '48113', // https://trello.com/c/vZ77ZnXT/1052-disabled-dallas-county-test-positivity-for-anomalous-spike-again
-  ]),
-  [Metric.VACCINATIONS]: new DisabledFipsList([
-    ...countyAndMetrosForState('WY'), //https://trello.com/c/kvjwZJJP/
-  ]),
-};
 
 /**
  * We truncate (or in the case of charts, switch to a dashed line) the last
@@ -174,6 +131,7 @@ export const CASE_FATALITY_RATIO = 0.01;
 export class Projection {
   readonly totalPopulation: number;
   readonly fips: string;
+  readonly region: Region;
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
   readonly vaccinationsInfo: VaccinationsInfo | null;
@@ -232,15 +190,14 @@ export class Projection {
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
+    this.region = regions.findByFipsCodeStrict(this.fips);
 
     // Set up our series data exposed via getDataset().
     this.rawDailyCases = this.actualTimeseries.map(row => row && row.newCases);
     this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
 
-    this.rawDailyDeaths = this.deltasFromCumulatives(
-      this.fillLeadingNullsWithZeros(
-        actualTimeseries.map(row => row && row.deaths),
-      ),
+    this.rawDailyDeaths = this.actualTimeseries.map(
+      row => row && row.newDeaths,
     );
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.rawDailyDeaths,
@@ -343,12 +300,12 @@ export class Projection {
 
   isMetricDisabled(metric: Metric): boolean {
     return (
-      DISABLED_METRICS[metric].includes(this.fips) && !overrideDisabledMetrics
+      !overrideDisabledMetrics && this.isMetricDisabledIgnoreOverride(metric)
     );
   }
 
   isMetricDisabledIgnoreOverride(metric: Metric): boolean {
-    return DISABLED_METRICS[metric].includes(this.fips);
+    return getRegionMetricOverride(this.region, metric)?.blocked ?? false;
   }
 
   private getIcuCapacityInfo(

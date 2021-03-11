@@ -20,7 +20,7 @@ const ShareModelBlock = ({
   stats,
 }: ShareModelBlockParams) => {
   const { displayName, shareURL } = getUrlAndShareQuote(region);
-  const shareQuote = `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
+  const shareQuote = `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
   return (
     <>

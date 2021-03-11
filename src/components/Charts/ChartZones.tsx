@@ -25,9 +25,9 @@ import {
   getAxisLimits,
   getZoneByValue,
   getUtcScale,
+  getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -47,9 +47,9 @@ const ChartZones = ({
   height,
   columnData,
   zones,
-  marginTop = 5,
+  marginTop = 6,
   marginBottom = 40,
-  marginLeft = 40,
+  marginLeft = 32,
   marginRight = 5,
   capY,
   getTooltipContent,
@@ -199,6 +199,8 @@ const ChartZoneAutosize = ({
   getTooltipContent,
   getPointText,
   height = 400,
+  marginTop,
+  marginLeft,
 }: {
   columnData: Point[];
   zones: LevelInfoMap;
@@ -208,6 +210,8 @@ const ChartZoneAutosize = ({
   ) => { body: string; subtitle: string; width: string };
   getPointText: (valueY: number) => string;
   height?: number;
+  marginTop?: number;
+  marginLeft?: number;
 }) => (
   <Style.ChartContainer>
     <ParentSize>
@@ -220,6 +224,8 @@ const ChartZoneAutosize = ({
           capY={capY}
           getTooltipContent={getTooltipContent}
           getPointText={getPointText}
+          marginTop={marginTop}
+          marginLeft={marginLeft}
         />
       )}
     </ParentSize>

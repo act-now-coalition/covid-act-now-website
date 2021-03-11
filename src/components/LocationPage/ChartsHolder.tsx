@@ -1,18 +1,16 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { ChartContentWrapper, MainContentInner } from './ChartsHolder.style';
-import { Projections } from 'common/models/Projections';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import LocationPageHeader from 'components/LocationPage/LocationPageHeader';
-import ChartBlock from 'components/LocationPage/ChartBlock';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import {
+  useCcviForFips,
+  useScrollToElement,
+  useBreakpoint,
+} from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import CompareMain from 'components/Compare/CompareMain';
-import Explore, { ExploreMetric } from 'components/Explore';
-import Recommend from 'components/Recommend';
+import { Projections } from 'common/models/Projections';
+import { Region, State, getStateName } from 'common/regions';
+import { getRecommendationsShareUrl } from 'common/urls';
 import {
   getDynamicIntroCopy,
   getRecommendations,
@@ -23,13 +21,18 @@ import {
   getModalCopyWithHarvardLevel,
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
-import { getRecommendationsShareUrl } from 'common/urls';
-import { Region, State, getStateName } from 'common/regions';
-import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import CompareMain from 'components/Compare/CompareMain';
+import ErrorBoundary from 'components/ErrorBoundary';
+import Explore, { ExploreMetric } from 'components/Explore';
+import Recommend from 'components/Recommend';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-import { useCcviForFips } from 'common/hooks';
-import { useScrollToElement } from 'common/hooks';
+import ChartBlock from './ChartBlock';
+import LocationPageBlock from './LocationPageBlock';
+import LocationPageHeader from './LocationPageHeader';
+import { ChartContentWrapper } from './ChartsHolder.style';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -60,8 +63,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
   const exploreChartRef = useRef<HTMLDivElement>(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useBreakpoint(600);
   useScrollToElement();
 
   const { pathname, hash } = useLocation();
@@ -183,21 +185,21 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           isMobile={isMobile}
           region={region}
         />
-        <MainContentInner>
+        <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
-        </MainContentInner>
-        <MainContentInner>
+        </LocationPageBlock>
+        <LocationPageBlock>
           <CompareMain
             stateName={getStateName(region) || region.name} // rename prop
             locationsViewable={6}
             stateId={(region as State).stateCode || undefined}
             region={region}
           />
-        </MainContentInner>
-        <MainContentInner id="vulnerabilities">
+        </LocationPageBlock>
+        <LocationPageBlock id="vulnerabilities">
           <VulnerabilitiesBlock scores={ccviScores} region={region} />
-        </MainContentInner>
-        <MainContentInner>
+        </LocationPageBlock>
+        <LocationPageBlock>
           <Recommend
             introCopy={recommendationsIntro}
             recommendations={recommendationsMainContent}
@@ -212,24 +214,26 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
             fedModalLocationCopy={recommendationsFedModalCopy}
           />
           {ALL_METRICS.map(metric => (
-            <ChartBlock
-              key={metric}
-              metric={metric}
-              projections={projections}
-              chartRef={metricRefs[metric]}
-              isMobile={isMobile}
-              region={region}
-              stats={stats}
-            />
+            <ErrorBoundary>
+              <ChartBlock
+                key={metric}
+                metric={metric}
+                projections={projections}
+                chartRef={metricRefs[metric]}
+                isMobile={isMobile}
+                region={region}
+                stats={stats}
+              />
+            </ErrorBoundary>
           ))}
-        </MainContentInner>
-        <MainContentInner ref={exploreChartRef} id="explore-chart">
+        </LocationPageBlock>
+        <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
             initialFipsList={initialFipsList}
             title="Cases, Deaths, and Hospitalizations"
             defaultMetric={defaultExploreMetric}
           />
-        </MainContentInner>
+        </LocationPageBlock>
       </ChartContentWrapper>
       <div ref={shareBlockRef} id="recommendationsTest">
         <ShareModelBlock

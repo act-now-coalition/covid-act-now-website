@@ -13,12 +13,12 @@ const getTooltipContent = (valueY: number) =>
     ? {
         subtitle: `ICU capacity used >`,
         body: `${getPointText(CAP_Y)}`,
-        width: 'auto',
+        width: '125px',
       }
     : {
         subtitle: `ICU capacity used`,
         body: `${getPointText(valueY)}`,
-        width: 'auto',
+        width: '125px',
       };
 
 const ChartICUCapacityUsed = ({
@@ -35,6 +35,8 @@ const ChartICUCapacityUsed = ({
     zones={HOSPITAL_USAGE_LEVEL_INFO_MAP}
     getTooltipContent={getTooltipContent}
     getPointText={getPointText}
+    marginTop={16}
+    marginLeft={38}
   />
 );
 

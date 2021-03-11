@@ -14,9 +14,9 @@ import * as Styles from 'components/Explore/Explore.style';
 import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
-import { findPointByDate, getTimeAxisTicks } from 'components/Explore/utils';
+import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
-import { getUtcScale } from './utils';
+import { getUtcScale, getTimeAxisTicks } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 
 const getDate = (d: Column) => new Date(d.x);
@@ -132,7 +132,7 @@ const VaccinationLines: React.FC<{
   height,
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 35,
+  marginLeft = 32,
   marginRight = 20,
 }) => {
   const innerHeight = height - marginTop - marginBottom;
@@ -201,7 +201,6 @@ const VaccinationLines: React.FC<{
               innerHeight={innerHeight}
               scale={dateScale}
               tickValues={dateTicks}
-              showYear={true}
             />
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>

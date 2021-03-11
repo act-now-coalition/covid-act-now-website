@@ -8,12 +8,12 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
+import { smallPhoneBreakpoint } from 'assets/theme/sizes';
 
 const desktopNavHeight = 64;
 
 export const AppBar = styled(MuiAppBar)`
-  border-bottom: solid 1px ${COLOR_MAP.LIGHTGRAY};
+  border-bottom: solid 1px ${COLOR_MAP.GREY_1};
   background-color: white;
 `;
 
@@ -79,10 +79,9 @@ export const BackLink = styled(_NavLink)`
 export const StyledMenu = styled.nav<{ open: boolean }>`
   display: flex;
   flex-direction: column;
-  background: #f2f2f2;
-  border-top: 1px solid #e3e3e3;
+  background: ${COLOR_MAP.GREY_1};
+  border-top: 1px solid ${COLOR_MAP.GREY_2};
   transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
-  /* height: 100vh; */
   text-align: left;
   position: absolute;
   top: 0;
@@ -102,7 +101,7 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
 
     &:hover,
     &:active {
-      background: #f2f2f2;
+      background: ${COLOR_MAP.GREY_1};
     }
 
     display: flex;
@@ -122,17 +121,17 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
   }
 `;
 
-export const MobileOnly = styled.div`
+export const MobileOnly = styled.div<{ breakPoint: number }>`
   display: flex;
   align-items: center;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${props => `${props.breakPoint}px`}) {
     display: none;
   }
 `;
 
-export const DesktopOnly = styled.div`
+export const DesktopOnly = styled.div<{ breakPoint: number }>`
   display: none;
-  @media (min-width: ${mobileBreakpoint}) {
+  @media (min-width: ${props => `${props.breakPoint}px`}) {
     display: flex;
     align-items: center;
     min-height: ${desktopNavHeight}px;
@@ -149,9 +148,15 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
 `;
 
 export const CloseIcon = styled(MuiCloseIcon)`
-  color: #000;
+  color: ${COLOR_MAP.BLACK};
 `;
 
 export const MenuIcon = styled(MuiMenuIcon)`
-  color: #000;
+  color: ${COLOR_MAP.BLACK};
+`;
+
+export const ExperimentButtonsContainer = styled.div`
+  & > :not(:last-child) {
+    margin-right: 45px;
+  }
 `;

@@ -25,9 +25,9 @@ import {
   last,
   getAxisLimits,
   getUtcScale,
+  getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { getTimeAxisTicks } from 'components/Explore/utils';
 
 type Point = {
   x: number;
@@ -56,9 +56,9 @@ const ChartCaseDensity: FunctionComponent<{
   capY = 500,
   width,
   height,
-  marginTop = 5,
+  marginTop = 6,
   marginBottom = 40,
-  marginLeft = 40,
+  marginLeft = 30,
   marginRight = 5,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
@@ -153,8 +153,8 @@ const ChartCaseDensity: FunctionComponent<{
         </Style.LineGrid>
         <Style.TextAnnotation>
           <BoxedAnnotation
-            x={getXCoord(lastPoint) + 30}
-            y={getYCoord(lastPoint)}
+            x={getXCoord(lastPoint)}
+            y={getYCoord(lastPoint) - 20}
             text={formatDecimal(getYCaseDensity(lastPoint), 1)}
           />
         </Style.TextAnnotation>

@@ -12,8 +12,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
-import { useModelLastUpdatedDate } from 'common/utils/model';
-import ExternalLink from 'components/ExternalLink';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
@@ -34,7 +32,6 @@ import {
   getSeriesLabel,
   EXPLORE_CHART_IDS,
   getSubtitle,
-  DATA_SOURCES_URL,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -44,7 +41,6 @@ import {
 } from 'common/sharing';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import NationalText from 'components/NationalText';
@@ -64,8 +60,7 @@ function trackShare(label: string, value?: number) {
 function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
-      We don't have {metricName} data for {locationNames}. Learn more about{' '}
-      <ExternalLink href={DATA_SOURCES_URL}>our data sources</ExternalLink>.
+      We don't have {metricName} data for {locationNames}.
     </p>
   );
 }
@@ -161,11 +156,8 @@ const Explore: React.FunctionComponent<{
     [initialFipsList],
   );
 
-  const [chartIndigenous, setChartIndigenous] = useState(
-    initialChartIndigenousPopulations || false,
-  );
   const [selectedLocations, setSelectedLocations] = useState<Region[]>(
-    chartIndigenous ? indigeneousPopulationsLocations : initialLocations,
+    initialLocations,
   );
 
   const onChangeSelectedLocations = (newLocations: Region[]) => {
@@ -187,16 +179,6 @@ const Explore: React.FunctionComponent<{
     // make sure that the current location is always selected
     setSelectedLocations(changedLocations);
   };
-
-  useEffect(() => {
-    if (chartIndigenous) {
-      setSelectedLocations(indigeneousPopulationsLocations);
-      setNormalizeData(true);
-    } else {
-      setSelectedLocations(initialLocations);
-      setNormalizeData(initialLocations.length > 1);
-    }
-  }, [chartIndigenous, indigeneousPopulationsLocations, initialLocations]);
 
   const exploreRef = useRef<HTMLDivElement>(null);
   const scrollToExplore = useCallback(() => {
@@ -248,10 +230,6 @@ const Explore: React.FunctionComponent<{
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
   const hasMultipleLocations = selectedLocations.length > 1;
-
-  const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
-  const lastUpdatedDateString =
-    lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
 
   const modalNormalizeCheckboxProps = {
     hasMultipleLocations,
@@ -426,19 +404,6 @@ const Explore: React.FunctionComponent<{
           <ScreenshotReady />
         </Styles.EmptyPanel>
       )}
-      <IndigenousDataCheckbox
-        chartIndigenous={chartIndigenous}
-        setChartIndigenous={setChartIndigenous}
-      />
-      <Styles.DisclaimerWrapper>
-        <Styles.DisclaimerBody>
-          Last updated {lastUpdatedDateString}. Learn more about{' '}
-          <ExternalLink href="https://docs.google.com/presentation/d/1XmKCBWYZr9VQKFAdWh_D7pkpGGM_oR9cPjj-UrNdMJQ/edit">
-            our data sources
-          </ExternalLink>
-          .
-        </Styles.DisclaimerBody>
-      </Styles.DisclaimerWrapper>
     </Styles.Container>
   );
 };

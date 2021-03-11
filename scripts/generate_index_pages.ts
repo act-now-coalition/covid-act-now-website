@@ -45,8 +45,8 @@ function locationPageTags(
   canonicalUrl: string,
   locationName: string,
 ): MetaTags {
-  const title = `America’s COVID warning system`;
-  const description = `Covid Act Now has real-time COVID data and risk level for your community. See how ${locationName} is doing at covidactnow.org.`;
+  const title = `U.S. COVID Risk & Vaccine Tracker`;
+  const description = `Covid Act Now has real-time vaccination progress and COVID risk level data for your community. See how ${locationName} is doing at covidactnow.org.`;
   return {
     'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,

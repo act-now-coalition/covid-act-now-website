@@ -18,8 +18,9 @@ import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
 import { Region } from 'common/regions';
 import { getSourcesForMetric } from 'common/utils/provenance';
-
-//TODO (chelsi): Use Projections.hasMetric() helper to get rid of the check for props.data
+import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { MarkdownContent } from 'components/Markdown';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
@@ -42,10 +43,9 @@ function ChartBlock(props: {
 
   const metricDefinition = getMetricDefinition(metric);
   const chartHeaderTooltip = metricDefinition.renderInfoTooltip();
-  const disclaimerContent = metricDefinition.renderDisclaimer(
-    region,
-    provenance,
-  );
+  const disclaimerContent = renderDisclaimer(region, metric, provenance);
+
+  const chartHeight = isMobile ? 280 : 400;
 
   return (
     <Fragment>
@@ -78,11 +78,37 @@ function ChartBlock(props: {
       )}
       {hasMetric && (
         <>
-          <MetricChart metric={metric} projections={projections} />
+          <MetricChart
+            metric={metric}
+            projections={projections}
+            height={chartHeight}
+          />
           <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
         </>
       )}
     </Fragment>
+  );
+}
+
+function renderDisclaimer(
+  region: Region,
+  metric: Metric,
+  provenance: Sources | undefined,
+) {
+  const metricDefinition = getMetricDefinition(metric);
+  const standardDisclaimer = metricDefinition.renderDisclaimer(
+    region,
+    provenance,
+  );
+
+  // Preface with any region override disclaimer text.
+  const overrideDisclaimer = getRegionMetricOverride(region, metric)
+    ?.disclaimer;
+  return (
+    <>
+      {overrideDisclaimer && <MarkdownContent source={overrideDisclaimer} />}
+      {standardDisclaimer}
+    </>
   );
 }
 

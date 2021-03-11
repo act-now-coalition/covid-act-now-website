@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const charts = {
   fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
   fontWeight: 'bold',
   fontSize: '13px',
   series: {
-    lineWidth: '4px',
+    lineWidthMobile: '2.5px',
+    lineWidthDesktop: '4px',
   },
 };
 
@@ -30,7 +32,7 @@ export const PositionRelative = styled.div`
   position: relative;
 `;
 
-export const Axis = styled.g<{ exploreStroke?: string }>`
+export const Axis = styled.g`
   text {
     font-family: ${charts.fontFamily};
     font-weight: 'medium';
@@ -38,11 +40,11 @@ export const Axis = styled.g<{ exploreStroke?: string }>`
     fill: ${props => palette(props).axis};
   }
   line {
-    stroke: ${props => props.exploreStroke || palette(props).axis};
+    stroke: ${props => palette(props).axis};
   }
 `;
 
-export const LineGrid = styled.g<{ exploreStroke?: string }>`
+export const LineGrid = styled.g`
   line,
   path {
     fill: none;
@@ -59,8 +61,15 @@ export const SeriesLine = styled.g`
     fill: none;
     stroke: ${props =>
       props.stroke ? props.stroke : palette(props).foreground};
-    stroke-width: ${charts.series.lineWidth};
+    stroke-width: ${charts.series.lineWidthMobile};
     stroke-linecap: round;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    line,
+    path {
+      stroke-width: ${charts.series.lineWidthDesktop};
+    }
   }
 `;
 
@@ -96,8 +105,6 @@ export const TextAnnotation = styled.g`
     fill: ${props => palette(props).background};
     fill-opacity: 1;
     stroke: none;
-    rx: 3;
-    ry: 3;
   }
   text {
     font-family: ${charts.fontFamily};
@@ -116,11 +123,23 @@ export const RegionAnnotation = styled(TextAnnotation)<{ isActive: boolean }>`
     stroke: ${props =>
       props.isActive || palette(props).isDarkMode ? props.color : 'none'};
     stroke-width: 1px;
+    display: ${props => !props.isActive && 'none'};
+    }
   }
   text {
     fill: ${props =>
       props.isActive ? palette(props).background : props.color};
-    text-anchor: end;
+    text-anchor: start;
+    display: ${props => !props.isActive && 'none'};
+    }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    rect {
+      display: ${props => !props.isActive && 'inherit'};
+    }
+    text {
+      display: ${props => !props.isActive && 'inherit'};
+    }
   }
 `;
 
