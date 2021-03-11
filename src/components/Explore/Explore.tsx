@@ -41,7 +41,6 @@ import {
 } from 'common/sharing';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import { IndigenousDataCheckbox } from 'components/IndigenousPopulationsFeature';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import NationalText from 'components/NationalText';
@@ -157,11 +156,8 @@ const Explore: React.FunctionComponent<{
     [initialFipsList],
   );
 
-  const [chartIndigenous, setChartIndigenous] = useState(
-    initialChartIndigenousPopulations || false,
-  );
   const [selectedLocations, setSelectedLocations] = useState<Region[]>(
-    chartIndigenous ? indigeneousPopulationsLocations : initialLocations,
+    initialLocations,
   );
 
   const onChangeSelectedLocations = (newLocations: Region[]) => {
@@ -183,16 +179,6 @@ const Explore: React.FunctionComponent<{
     // make sure that the current location is always selected
     setSelectedLocations(changedLocations);
   };
-
-  useEffect(() => {
-    if (chartIndigenous) {
-      setSelectedLocations(indigeneousPopulationsLocations);
-      setNormalizeData(true);
-    } else {
-      setSelectedLocations(initialLocations);
-      setNormalizeData(initialLocations.length > 1);
-    }
-  }, [chartIndigenous, indigeneousPopulationsLocations, initialLocations]);
 
   const exploreRef = useRef<HTMLDivElement>(null);
   const scrollToExplore = useCallback(() => {
@@ -418,10 +404,6 @@ const Explore: React.FunctionComponent<{
           <ScreenshotReady />
         </Styles.EmptyPanel>
       )}
-      <IndigenousDataCheckbox
-        chartIndigenous={chartIndigenous}
-        setChartIndigenous={setChartIndigenous}
-      />
     </Styles.Container>
   );
 };

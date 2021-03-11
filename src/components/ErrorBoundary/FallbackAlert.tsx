@@ -1,12 +1,10 @@
 import React from 'react';
-import { Alert, AlertTitle } from '@material-ui/lab';
 
-const FallbackAlert: React.FC = () => (
-  <Alert severity="error">
-    <AlertTitle>Error</AlertTitle>
-    An error occurred while rendering this component. We were notified about it
-    and will fix it soon.
-  </Alert>
-);
+/*
+ * This Fallback alert allow us to customize an error message for the user when
+ * a component fails. Since the error message is not useful for the user, we won't
+ * render it and just log to Sentry instead.
+ */
+const FallbackAlert: React.FC = () => <></>;
 
 export default FallbackAlert;
