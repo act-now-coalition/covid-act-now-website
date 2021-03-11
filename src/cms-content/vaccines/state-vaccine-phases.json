@@ -2547,7 +2547,7 @@
       ]
     },
     {
-      "emailAlertVersion": 4,
+      "emailAlertVersion": 5,
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
@@ -2595,8 +2595,8 @@
           "description": "* Adults (55+) with high-risk medical conditions\n* K-12 education and child care personnel\n* Public safety workers"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:53:24.268Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-11T18:23:17.818Z",
           "phase": "5B",
           "description": "* Individuals 16+ with certain high-risk health conditions"
         },
