@@ -102,8 +102,8 @@ collections:
                 required: false
               - label: Email alert version
                 name: emailAlertVersion
-                default: 0
-                widget: number
+                default: '0'
+                widget: string
               - label: Notes
                 name: notes
                 required: false
