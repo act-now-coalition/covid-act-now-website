@@ -36,7 +36,6 @@ const SearchHeader = ({
   /* We hide the minimap toggle button when the searchbar is in focus on mobile */
   const [hideMapToggle, setHideMapToggle] = useState(false);
 
-  // TODO (sgoldblatt): WHY are there so many wrappers?
   return (
     <SearchHeaderWrapper>
       <MenuBarWrapper>
