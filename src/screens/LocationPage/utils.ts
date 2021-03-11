@@ -1,8 +1,9 @@
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import { formatMetatagDate } from 'common/utils';
+import { formatMetatagDate, formatPercent } from 'common/utils';
 import { Region, State, County, MetroArea } from 'common/regions';
 import { replace } from 'lodash';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
+import { Metric } from 'common/metricEnum';
 
 function locationName(region: Region) {
   if (region instanceof State) {
@@ -22,7 +23,18 @@ export function getPageTitle(region: Region): string {
 
 export function getPageDescription(region: Region): string {
   const date = formatMetatagDate();
-  const { level: alarmLevel } = LocationSummariesByFIPS[region.fipsCode];
+  const { level: alarmLevel, metrics } = LocationSummariesByFIPS[
+    region.fipsCode
+  ];
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
-  return `${date} COVID RISK LEVEL: ${levelInfo.detail(locationName(region))}`;
+  const vaccinationRatio = metrics[Metric.VACCINATIONS]?.value;
+  const vaccinationText = vaccinationRatio
+    ? ` and ${formatPercent(
+        vaccinationRatio,
+        1,
+      )} of the population has received at least one vaccine dose`
+    : '';
+  return `${date}: ${locationName(region)} is at ${
+    levelInfo.name
+  } COVID risk level${vaccinationText}.`;
 }

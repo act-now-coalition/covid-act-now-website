@@ -11,20 +11,11 @@ const levels = [
   Level.LOW,
 ];
 
-const levelToDescription = {
-  [Level.SUPER_CRITICAL]: 'Severe outbreak',
-  [Level.CRITICAL]: 'Active outbreak',
-  [Level.HIGH]: 'At risk of outbreak',
-  [Level.MEDIUM]: 'Slow disease growth',
-  [Level.LOW]: 'On track for containment',
-  [Level.UNKNOWN]: '',
-};
-
 const items = levels.map(level => {
   const summaryLevel = LOCATION_SUMMARY_LEVELS[level];
   return {
     title: summaryLevel.name,
-    description: levelToDescription[level] || '',
+    description: '',
     color: summaryLevel.color,
     roundTop: level === Level.SUPER_CRITICAL,
     roundBottom: level === Level.LOW,
