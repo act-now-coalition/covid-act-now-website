@@ -2462,7 +2462,7 @@
       ]
     },
     {
-      "emailAlertVersion": 2,
+      "emailAlertVersion": 4,
       "locationName": "Texas",
       "fips": "48",
       "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
@@ -2488,9 +2488,9 @@
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-04T18:50:54.556Z",
+          "updatedAt": "2021-03-11T17:28:58.485Z",
           "phase": "1C",
-          "description": "* Education and child care personnel",
+          "description": "* (NEW) Adults 50+\n* Education and child care personnel\n",
           "startDate": "March 4"
         },
         {
