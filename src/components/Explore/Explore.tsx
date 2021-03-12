@@ -32,6 +32,7 @@ import {
   getSeriesLabel,
   EXPLORE_CHART_IDS,
   getSubtitle,
+  getDateFrom,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -382,6 +383,7 @@ const Explore: React.FunctionComponent<{
                   hasMultipleLocations={hasMultipleLocations}
                   isMobileXs={isMobileXs}
                   marginRight={marginRight}
+                  dateFrom={getDateFrom(currentMetric)}
                 />
               ) : (
                 <div style={{ height: 400 }} />

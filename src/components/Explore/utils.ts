@@ -94,6 +94,7 @@ interface ExploreMetricDescription {
   name: string;
   chartId: string;
   seriesList: SerieDescription[];
+  dateFrom?: Date;
 }
 
 export const exploreMetricData: {
@@ -122,6 +123,7 @@ export const exploreMetricData: {
     title: 'Vaccines Administered',
     name: 'Vaccines Administered',
     chartId: 'vaccines-administered',
+    dateFrom: new Date('2021-01-01'),
     seriesList: [
       {
         label: 'VaccinesAdministered',
@@ -268,6 +270,10 @@ function getAveragedSeriesForMetric(
 
 export function getTitle(metric: ExploreMetric) {
   return exploreMetricData[metric].title;
+}
+
+export function getDateFrom(metric: ExploreMetric) {
+  return exploreMetricData[metric].dateFrom ?? new Date('2020-03-01');
 }
 
 export function getMetricName(metric: ExploreMetric) {

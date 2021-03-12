@@ -17,6 +17,7 @@ const ExploreChart: React.FC<{
   barOpacity?: number;
   barOpacityHover?: number;
   isMobileXs?: boolean;
+  dateFrom?: Date;
 }> = ({
   hasMultipleLocations,
   barOpacity,

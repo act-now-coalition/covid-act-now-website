@@ -98,6 +98,7 @@ const SingleLocationChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
+  dateFrom?: Date;
 }> = ({
   width,
   height,
@@ -110,8 +111,8 @@ const SingleLocationChart: React.FC<{
   marginRight = 20,
   barOpacity,
   barOpacityHover,
+  dateFrom = new Date('2020-03-01'),
 }) => {
-  const dateFrom = new Date('2020-03-01');
   const today = new Date();
   const dateTo = today;
   const numDays = daysBetween(dateFrom, dateTo);
