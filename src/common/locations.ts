@@ -1,6 +1,6 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { has } from 'lodash';
+import { each, has } from 'lodash';
 import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import { STATES as STATES_MAP } from 'common';
