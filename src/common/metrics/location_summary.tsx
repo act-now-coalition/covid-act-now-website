@@ -1,19 +1,32 @@
+import React from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
+import { HashLink } from 'react-router-hash-link';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 // Note: These names are used on SocialLocationPreview
 const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
 const MEDIUM_HIGH_NAME = 'High';
-const HIGH_NAME = 'Critical';
+const HIGH_NAME = 'Very high';
 const SUPER_CRITICAL_NAME = 'Severe';
 const UNKNOWN = 'Unknown';
 
-const LEGEND_SUMMARY_LOW = 'On track for containment';
-const LEGEND_SUMMARY_MEDIUM = 'Slow disease growth';
-const LEGEND_SUMMARY_MEDIUM_HIGH = 'At risk of outbreak';
-const LEGEND_SUMMARY_HIGH = 'Active outbreak';
-const LEGEND_SUMMARY_SUPER_CRITICAL = 'Severe outbreak';
+const LEGEND_SUMMARY_LOW = 'Low risk';
+const LEGEND_SUMMARY_MEDIUM = 'Medium risk';
+const LEGEND_SUMMARY_MEDIUM_HIGH = 'High risk';
+const LEGEND_SUMMARY_HIGH = 'Very high risk';
+const LEGEND_SUMMARY_SUPER_CRITICAL = 'Severe risk';
+
+const recommendationsLink = (
+  <HashLink
+    smooth
+    scroll={(element: HTMLElement) => scrollWithOffset(element, -180)}
+    to="#recommendations"
+  >
+    official recommended actions
+  </HashLink>
+);
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
@@ -22,8 +35,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: LOW_NAME,
     summary: LEGEND_SUMMARY_LOW,
     color: COLOR_MAP.GREEN.BASE,
-    detail: locationName =>
-      `${locationName} is on track to contain COVID. Cases are steadily decreasing and ${locationName}’s COVID preparedness meets or exceeds international standards.`,
+    detail: locationName => <>See {recommendationsLink}.</>,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
@@ -31,8 +43,7 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: MEDIUM_NAME,
     summary: LEGEND_SUMMARY_MEDIUM,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: locationName =>
-      `COVID in ${locationName} is spreading in a slow and controlled fashion, and ${locationName}’s COVID preparedness meets international standards.`,
+    detail: locationName => <>See {recommendationsLink}.</>,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
@@ -40,8 +51,9 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: MEDIUM_HIGH_NAME,
     summary: LEGEND_SUMMARY_MEDIUM_HIGH,
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: locationName =>
-      `${locationName} is at risk of an outbreak. COVID cases are either increasing at a rate likely to overwhelm hospitals and/or the state’s COVID preparedness is below international standards.`,
+    detail: locationName => (
+      <>Take precautions to avoid exposure, including {recommendationsLink}.</>
+    ),
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
@@ -49,8 +61,12 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: HIGH_NAME,
     summary: LEGEND_SUMMARY_HIGH,
     color: COLOR_MAP.RED.BASE,
-    detail: locationName =>
-      `${locationName} is either actively experiencing an outbreak or is at extreme risk. COVID cases are exponentially growing and/or ${locationName}’s COVID preparedness is significantly below international standards.`,
+    detail: locationName => (
+      <>
+        Take strong precautions to avoid exposure, including{' '}
+        {recommendationsLink}.
+      </>
+    ),
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
@@ -58,8 +74,12 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: SUPER_CRITICAL_NAME,
     summary: LEGEND_SUMMARY_SUPER_CRITICAL,
     color: COLOR_MAP.RED.DARK,
-    detail: locationName =>
-      `${locationName} is currently experiencing a severe outbreak. Take all possible precautions to avoid exposure.`,
+    detail: locationName => (
+      <>
+        Take all possible precautions to avoid exposure, including{' '}
+        {recommendationsLink}.
+      </>
+    ),
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
