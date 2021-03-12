@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _, { isNil } from 'lodash';
 import moment from 'moment';
 import { ActualsTimeseries } from 'api';
 import {
@@ -69,7 +69,9 @@ export type DatasetId =
   | 'rawHospitalizations'
   | 'smoothedHospitalizations'
   | 'rawICUHospitalizations'
-  | 'smoothedICUHospitalizations';
+  | 'smoothedICUHospitalizations'
+  | 'rawDailyVaccinesAdministered'
+  | 'smoothedDailyVaccinesAdministered';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -166,6 +168,8 @@ export class Projection {
   private readonly smoothedHospitalizations: Array<number | null>;
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
+  private readonly rawDailyVaccinesAdministered: Array<number | null>;
+  private readonly smoothedDailyVaccinesAdministered: Array<number | null>;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
 
@@ -218,6 +222,25 @@ export class Projection {
 
     this.cumulativeActualDeaths = this.smoothCumulatives(
       actualTimeseries.map(row => row && row.deaths),
+    );
+
+    const addIfOneNotNil = (
+      value1: number | null | undefined,
+      value2: number | null | undefined,
+    ): number | null => {
+      if (isNil(value1) && isNil(value2)) {
+        return null;
+      }
+      return (value1 ?? 0) + (value2 ?? 0);
+    };
+    const approxAdministered = actualTimeseries.map(row =>
+      addIfOneNotNil(row?.vaccinationsCompleted, row?.vaccinationsInitiated),
+    );
+    this.rawDailyVaccinesAdministered = this.deltasFromCumulatives(
+      approxAdministered,
+    );
+    this.smoothedDailyVaccinesAdministered = this.smoothWithRollingAverage(
+      this.rawDailyVaccinesAdministered,
     );
 
     this.rtRange = this.calcRtRange(metricsTimeseries);

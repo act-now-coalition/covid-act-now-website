@@ -38,6 +38,7 @@ export function getMaxBy<T>(
 
 export enum ExploreMetric {
   CASES,
+  VACCINES_ADMINISTERED,
   DEATHS,
   HOSPITALIZATIONS,
   ICU_HOSPITALIZATIONS,
@@ -45,6 +46,7 @@ export enum ExploreMetric {
 
 export const EXPLORE_METRICS = [
   ExploreMetric.CASES,
+  ExploreMetric.VACCINES_ADMINISTERED,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
@@ -54,6 +56,8 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   switch (chartId) {
     case 'cases':
       return ExploreMetric.CASES;
+    case 'vaccines-administered':
+      return ExploreMetric.VACCINES_ADMINISTERED;
     case 'deaths':
       return ExploreMetric.DEATHS;
     case 'hospitalizations':
@@ -67,6 +71,8 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
   switch (metric) {
     case ExploreMetric.CASES:
       return 'smoothedDailyCases';
+    case ExploreMetric.VACCINES_ADMINISTERED:
+      return 'smoothedDailyVaccinesAdministered';
     case ExploreMetric.DEATHS:
       return 'smoothedDailyDeaths';
     case ExploreMetric.HOSPITALIZATIONS:
@@ -108,6 +114,25 @@ export const exploreMetricData: {
         label: '7 Day Average',
         tooltipLabel: 'cases',
         datasetId: 'smoothedDailyCases',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.VACCINES_ADMINISTERED]: {
+    title: 'Vaccines Administered',
+    name: 'Vaccines Administered',
+    chartId: 'vaccines-administered',
+    seriesList: [
+      {
+        label: 'VaccinesAdministered',
+        tooltipLabel: 'administered-vaccines',
+        datasetId: 'rawDailyVaccinesAdministered',
+        type: SeriesType.BAR,
+      },
+      {
+        label: '7 Day Average',
+        tooltipLabel: 'administered-vaccines',
+        datasetId: 'smoothedDailyVaccinesAdministered',
         type: SeriesType.LINE,
       },
     ],
