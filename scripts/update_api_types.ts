@@ -6,6 +6,7 @@
  * and generates corresponding typescript definition files in src/models/api/
  */
 
+import yargs from 'yargs';
 import fetch from 'node-fetch';
 import { compile } from 'json-schema-to-typescript';
 import fs from 'fs-extra';
@@ -33,12 +34,12 @@ const BANNER_COMMENT = `
 `;
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'api', 'schema');
-const SCHEMAS_BASE_URL =
-  'https://github.com/covid-projections/covid-data-model/raw/main/api/schemas_v2/';
+const schemasBaseUrl = (branch: string) =>
+  `https://github.com/covid-projections/covid-data-model/raw/${branch}/api/schemas_v2/`;
 
-(async () => {
+const main = async (branch: string) => {
   for (const file of SCHEMA_FILES) {
-    const response = await fetch(SCHEMAS_BASE_URL + file, {});
+    const response = await fetch(schemasBaseUrl(branch) + file, {});
     const json = await response.json();
     forceAdditionalPropertiesFalse(json);
     const ts = await compile(json, file.replace('.json', ''), {
@@ -48,7 +49,7 @@ const SCHEMAS_BASE_URL =
     await fs.writeFile(outFile, ts);
     console.log(`Generated ${outFile}`);
   }
-})();
+};
 
 // HACK: We modify the schema to disable 'additionalProperties' on all types so
 // that the generated TypeScript definitions are more restrictive and doesn't
@@ -59,4 +60,23 @@ function forceAdditionalPropertiesFalse(jsonSchema: any) {
   for (const type in definitions) {
     definitions[type]['additionalProperties'] = false;
   }
+}
+
+if (require.main === module) {
+  const argv = yargs.options({
+    branch: {
+      default: 'main',
+      description: 'covid-data-model branch to pull api schemas from.',
+    },
+  }).argv;
+
+  main(argv.branch)
+    .then(() => {
+      console.log('Done.');
+      process.exit(0);
+    })
+    .catch(err => {
+      console.error('Error', err);
+      process.exit(-1);
+    });
 }
