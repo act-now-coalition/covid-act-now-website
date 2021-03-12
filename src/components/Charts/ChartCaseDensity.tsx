@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
+import moment from 'moment';
 import { isDate } from 'lodash';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveMonotoneX } from '@vx/curve';
@@ -40,6 +41,27 @@ const getYNewCases = (d: Point) => d?.y?.newCases;
 const hasData = (d: any) =>
   isDate(getDate(d)) && Number.isFinite(getYCaseDensity(d));
 
+enum Period {
+  DAYS_7 = 7,
+  DAYS_30 = 30,
+  DAYS_90 = 90,
+  ALL = -1,
+}
+
+function getDateRange(columnData: Column[], period: Period) {
+  const data: Point[] = columnData.filter(hasData);
+  const dates = data.map(getDate);
+  const minDate = d3min(dates) || new Date('2020-03-01');
+
+  const dateTo = d3max(dates) || new Date();
+  const dateFrom =
+    period === Period.ALL
+      ? minDate
+      : moment().subtract(period, 'days').toDate();
+
+  return [dateFrom, dateTo || new Date()];
+}
+
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
   zones: LevelInfoMap;
@@ -69,9 +91,14 @@ const ChartCaseDensity: FunctionComponent<{
   const lastPoint = last(data);
   const activeZone = getZoneByValue(getYCaseDensity(lastPoint), zones);
 
-  const dates = data.map(getDate);
-  const minDate = d3min(dates) || new Date('2020-01-01');
-  const currDate = new Date();
+  // const dates = data.map(getDate);
+  // const minDate = d3min(dates) || new Date('2020-01-01');
+  // const currDate = new Date();
+
+  //
+  const [period, setPeriod] = useState(Period.ALL);
+  const [minDate, currDate] = getDateRange(data, period);
+
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
   const [startDate, endDate] = xScale.domain();
   const dateTicks = getTimeAxisTicks(startDate, endDate);
@@ -125,57 +152,65 @@ const ChartCaseDensity: FunctionComponent<{
   );
 
   return (
-    <ChartContainer<Point>
-      data={data}
-      x={getXCoord}
-      y={getYCoord}
-      renderMarker={renderMarker}
-      renderTooltip={renderTooltip}
-      width={width}
-      height={height}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-      marginLeft={marginLeft}
-      marginRight={marginRight}
-    >
-      <RectClipGroup width={chartWidth} height={chartHeight} topPadding={5}>
-        <LinePathRegion
-          data={data}
-          x={getXCoord}
-          y={getYCoord}
-          regions={regions}
-          width={chartWidth}
-          yScale={yScale}
-          curve={curveMonotoneX}
-        />
-        <Style.LineGrid>
-          <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
-        </Style.LineGrid>
-        <Style.TextAnnotation>
-          <BoxedAnnotation
-            x={getXCoord(lastPoint)}
-            y={getYCoord(lastPoint) - 20}
-            text={formatDecimal(getYCaseDensity(lastPoint), 1)}
+    <>
+      <div>
+        <button onClick={() => setPeriod(Period.ALL)}>all</button>
+        <button onClick={() => setPeriod(Period.DAYS_90)}>90 days</button>
+        <button onClick={() => setPeriod(Period.DAYS_30)}>30 days</button>
+        <button onClick={() => setPeriod(Period.DAYS_7)}>7 days</button>
+      </div>
+      <ChartContainer<Point>
+        data={data}
+        x={getXCoord}
+        y={getYCoord}
+        renderMarker={renderMarker}
+        renderTooltip={renderTooltip}
+        width={width}
+        height={height}
+        marginTop={marginTop}
+        marginBottom={marginBottom}
+        marginLeft={marginLeft}
+        marginRight={marginRight}
+      >
+        <RectClipGroup width={chartWidth} height={chartHeight} topPadding={5}>
+          <LinePathRegion
+            data={data}
+            x={getXCoord}
+            y={getYCoord}
+            regions={regions}
+            width={chartWidth}
+            yScale={yScale}
+            curve={curveMonotoneX}
           />
-        </Style.TextAnnotation>
-      </RectClipGroup>
-      {regionLabels.map((region, i) => (
-        <ZoneAnnotation
-          key={`zone-annotation-${i}`}
-          color={region.color}
-          name={region.name}
-          isActive={activeZone.name === region.name}
-          x={chartWidth - 10}
-          y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+          <Style.LineGrid>
+            <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
+          </Style.LineGrid>
+          <Style.TextAnnotation>
+            <BoxedAnnotation
+              x={getXCoord(lastPoint)}
+              y={getYCoord(lastPoint) - 20}
+              text={formatDecimal(getYCaseDensity(lastPoint), 1)}
+            />
+          </Style.TextAnnotation>
+        </RectClipGroup>
+        {regionLabels.map((region, i) => (
+          <ZoneAnnotation
+            key={`zone-annotation-${i}`}
+            color={region.color}
+            name={region.name}
+            isActive={activeZone.name === region.name}
+            x={chartWidth - 10}
+            y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+          />
+        ))}
+        <AxisBottom
+          innerHeight={chartHeight}
+          scale={xScale}
+          tickValues={dateTicks}
         />
-      ))}
-      <AxisBottom
-        innerHeight={chartHeight}
-        scale={xScale}
-        tickValues={dateTicks}
-      />
-      <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
-    </ChartContainer>
+        <AxisLeft scale={yScale} tickValues={yTicks.slice(1)} />
+      </ChartContainer>
+    </>
   );
 };
 
