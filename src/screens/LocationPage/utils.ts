@@ -34,7 +34,7 @@ export function getPageDescription(region: Region): string {
         1,
       )} of the population has received at least one vaccine dose`
     : '';
-  return `${date}: ${locationName(region)} is at ${
-    levelInfo.name
-  } COVID risk level${vaccinationText}.`;
+  return `${date}: ${locationName(
+    region,
+  )} is at ${levelInfo.name.toLowerCase()} COVID risk level${vaccinationText}.`;
 }
