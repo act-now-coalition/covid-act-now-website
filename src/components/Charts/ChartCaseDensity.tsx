@@ -29,6 +29,8 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { ButtonsContainer, PeriodButton } from './Charts.style';
 
 type Point = {
   x: number;
@@ -153,12 +155,34 @@ const ChartCaseDensity: FunctionComponent<{
 
   return (
     <>
-      <div>
-        <button onClick={() => setPeriod(Period.ALL)}>all</button>
-        <button onClick={() => setPeriod(Period.DAYS_90)}>90 days</button>
-        <button onClick={() => setPeriod(Period.DAYS_30)}>30 days</button>
-        <button onClick={() => setPeriod(Period.DAYS_7)}>7 days</button>
-      </div>
+      <ButtonsContainer>
+        <ButtonGroup variant="outlined" size="small">
+          <PeriodButton
+            $selected={period === Period.ALL}
+            onClick={() => setPeriod(Period.ALL)}
+          >
+            all
+          </PeriodButton>
+          <PeriodButton
+            $selected={period === Period.DAYS_90}
+            onClick={() => setPeriod(Period.DAYS_90)}
+          >
+            90 days
+          </PeriodButton>
+          <PeriodButton
+            $selected={period === Period.DAYS_30}
+            onClick={() => setPeriod(Period.DAYS_30)}
+          >
+            30 days
+          </PeriodButton>
+          <PeriodButton
+            $selected={period === Period.DAYS_7}
+            onClick={() => setPeriod(Period.DAYS_7)}
+          >
+            7 days
+          </PeriodButton>
+        </ButtonGroup>
+      </ButtonsContainer>
       <ChartContainer<Point>
         data={data}
         x={getXCoord}

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import Button from '@material-ui/core/Button';
 
 export const charts = {
   fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
@@ -202,4 +203,26 @@ export const VaccinationLabel = styled.text.attrs(props => ({ dx: 8, dy: 7 }))`
 
 export const VaccinationLabelBold = styled.tspan`
   font-weight: bold;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+`;
+
+const colorBlue = '#1976d2';
+
+export const PeriodButton = styled(Button).attrs(props => ({
+  disableRipple: true,
+}))<{ $selected: boolean }>`
+  border-color: ${colorBlue};
+
+  background-color: ${props => (props.$selected ? colorBlue : 'white')};
+  color: ${props => (props.$selected ? 'white' : colorBlue)};
+
+  &:hover {
+    background-color: ${props => (props.$selected ? colorBlue : 'white')};
+    color: ${props => (props.$selected ? 'white' : colorBlue)};
+  }
 `;
