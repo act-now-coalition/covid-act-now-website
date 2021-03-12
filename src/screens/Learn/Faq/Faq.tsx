@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { formatMetatagDate, formatNumericalDate } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -17,6 +17,11 @@ import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { EventCategory } from 'components/Analytics';
 import FaqStructuredData from './FaqStructuredData';
 import Footer from 'screens/Learn/Footer/Footer';
+import {
+  timeFormats,
+  parseDateString,
+  formatDateTime,
+} from 'common/utils/time-utils';
 
 const Faq: React.FC = () => {
   const {
@@ -57,7 +62,11 @@ const Faq: React.FC = () => {
         <LearnHeading1>{header}</LearnHeading1>
         {intro && <MarkdownContent source={intro} />}
         <LastUpdatedDate>
-          Last updated {formatNumericalDate(lastUpdatedDate)}
+          Last updated{' '}
+          {formatDateTime(
+            parseDateString(lastUpdatedDate),
+            timeFormats.MM_DD_YYYY,
+          )}
         </LastUpdatedDate>
         <MobileOnly>
           <TableOfContents items={getSectionItems(sections)} />

@@ -3,14 +3,28 @@ import { Projections } from '../models/Projections';
 import { Api } from 'api';
 import { getStateName } from 'common/locations';
 import moment from 'moment';
-import { assert } from '.';
+import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, County } from 'common/regions';
+import regions, { Region, County, RegionType } from 'common/regions';
+import { RegionSummary } from 'api/schema/RegionSummary';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
   STATES = 'states',
   CBSAS = 'cbsas',
+}
+
+function getSubpathFromRegionType(regionType: RegionType): APIRegionSubPath {
+  switch (regionType) {
+    case RegionType.COUNTY:
+      return APIRegionSubPath.COUNTIES;
+    case RegionType.MSA:
+      return APIRegionSubPath.CBSAS;
+    case RegionType.STATE:
+      return APIRegionSubPath.STATES;
+    default:
+      fail('Unsuported type');
+  }
 }
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
@@ -35,6 +49,27 @@ export function fetchProjectionsRegion(
   const key = snapshotUrl + '-' + region.fipsCode;
   cachedProjections[key] = cachedProjections[key] || fetch();
   return cachedProjections[key];
+}
+
+/** Returns an array of `Projections` instances for all states. */
+const cachedSummariesByRegionType: {
+  [key: string]: Promise<RegionSummary[]>;
+} = {};
+export function fetchSummariesForRegionType(
+  regionType: RegionType,
+  snapshotUrl: string | null = null,
+) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
+  async function fetch() {
+    const all = await new Api(snapshotUrl).fetchAggregateRegionSummaries(
+      getSubpathFromRegionType(regionType),
+    );
+    return all;
+  }
+  const key = `${snapshotUrl}-${regionType}` || 'null';
+  cachedSummariesByRegionType[key] =
+    cachedSummariesByRegionType[key] || fetch();
+  return cachedSummariesByRegionType[key];
 }
 
 /** Returns an array of `Projections` instances for all states. */
