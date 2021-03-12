@@ -211,18 +211,18 @@ export const ButtonsContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const colorBlue = '#1976d2';
+const colorPeriod = '#555';
 
 export const PeriodButton = styled(Button).attrs(props => ({
   disableRipple: true,
 }))<{ $selected: boolean }>`
-  border-color: ${colorBlue};
+  border-color: ${colorPeriod};
 
-  background-color: ${props => (props.$selected ? colorBlue : 'white')};
-  color: ${props => (props.$selected ? 'white' : colorBlue)};
+  background-color: ${props => (props.$selected ? colorPeriod : 'white')};
+  color: ${props => (props.$selected ? 'white' : colorPeriod)};
 
   &:hover {
-    background-color: ${props => (props.$selected ? colorBlue : 'white')};
-    color: ${props => (props.$selected ? 'white' : colorBlue)};
+    background-color: ${props => (props.$selected ? colorPeriod : 'white')};
+    color: ${props => (props.$selected ? 'white' : colorPeriod)};
   }
 `;

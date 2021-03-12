@@ -24,15 +24,16 @@ export const AxisBottom: React.FC<AxisBottomProps> = ({
   tickValues,
 }) => {
   const isMobile = useBreakpoint(960);
-  const finalTickValues = getFinalTicks(isMobile, tickValues);
+  const tickValuesProp = tickValues
+    ? { tickValues: getFinalTicks(isMobile, tickValues) }
+    : {};
 
   return (
     <Style.Axis>
       <VxAxisBottom
         top={innerHeight}
         scale={scale}
-        tickValues={finalTickValues}
-        tickFormat={(d: Date) => getXTickFormat(d)}
+        // tickFormat={(d: Date) => getXTickFormat(d)}
       />
     </Style.Axis>
   );
