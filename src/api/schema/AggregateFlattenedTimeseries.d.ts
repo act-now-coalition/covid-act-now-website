@@ -160,6 +160,10 @@ export type Vaccinationsinitiated = number | null;
  */
 export type Vaccinationscompleted = number | null;
 /**
+ * Total number of vaccine doses administered.
+ */
+export type Vaccinesadministered = number | null;
+/**
  * Metrics for given day
  */
 export type Metrics1 = Metrics;
@@ -278,6 +282,7 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinesAdministered?: Vaccinesadministered;
 }
 /**
  * Base model for API output.

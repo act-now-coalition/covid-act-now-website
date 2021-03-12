@@ -243,6 +243,10 @@ export type Vaccinationsinitiated = number | null;
  */
 export type Vaccinationscompleted = number | null;
 /**
+ * Total number of vaccine doses administered.
+ */
+export type Vaccinesadministered = number | null;
+/**
  * Annotations for cases
  */
 export type Cases1 = FieldAnnotations;
@@ -324,6 +328,10 @@ export type Newcases1 = FieldAnnotations;
  * Annotations for newDeaths
  */
 export type Newdeaths1 = FieldAnnotations;
+/**
+ * Annotations for vaccinesAdministered
+ */
+export type Vaccinesadministered1 = FieldAnnotations;
 /**
  * Annotations for vaccinesDistributed
  */
@@ -522,6 +530,10 @@ export type Vaccinationsinitiated2 = number | null;
  */
 export type Vaccinationscompleted2 = number | null;
 /**
+ * Total number of vaccine doses administered.
+ */
+export type Vaccinesadministered2 = number | null;
+/**
  * Date of timeseries data point
  */
 export type Date2 = string;
@@ -647,6 +659,7 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinesAdministered?: Vaccinesadministered;
 }
 /**
  * Base model for API output.
@@ -670,6 +683,7 @@ export interface Annotations {
   icuBeds?: Icubeds1;
   newCases?: Newcases1;
   newDeaths?: Newdeaths1;
+  vaccinesAdministered?: Vaccinesadministered1;
   vaccinesDistributed?: Vaccinesdistributed1;
   vaccinationsInitiated?: Vaccinationsinitiated1;
   vaccinationsCompleted?: Vaccinationscompleted1;
@@ -745,6 +759,7 @@ export interface ActualsTimeseriesRow {
   vaccinesDistributed?: Vaccinesdistributed2;
   vaccinationsInitiated?: Vaccinationsinitiated2;
   vaccinationsCompleted?: Vaccinationscompleted2;
+  vaccinesAdministered?: Vaccinesadministered2;
   date: Date2;
 }
 /**
