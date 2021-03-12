@@ -14,6 +14,7 @@ export const StyledDonateButton = styled(LinkButton).attrs(props => ({
   box-shadow: none;
   &:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    background-color: white;
   }
   @media (min-width: ${mobileBreakpoint}) {
     margin-left: 2rem;
