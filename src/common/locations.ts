@@ -1,18 +1,17 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import { each, has } from 'lodash';
-import { assert } from './utils';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
 import { STATES as STATES_MAP } from 'common';
 
-export interface AdjacencyData {
+interface AdjacencyData {
   [fips: string]: {
     adjacent_counties: string[];
     msa_code?: string;
   };
 }
 
-export const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
+const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
 
 /** Aggregations supported by the Explore chart. */
 export const AGGREGATED_LOCATIONS: Location[] = [
@@ -78,14 +77,6 @@ export function findCountyByFips(fips: string) {
     }
   }
   return undefined;
-}
-
-export function findStateFipsCode(stateCode: string): string {
-  const fips = US_STATE_DATASET.state_dataset.find(
-    state => state.state_code === stateCode,
-  )?.state_fips_code;
-  assert(fips !== undefined, `Invalid state code: ${stateCode}`);
-  return fips;
 }
 
 export function getCountyMsaCode(fips: string): string | undefined {
