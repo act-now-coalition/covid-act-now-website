@@ -1,11 +1,7 @@
 import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 
-import {
-  getSummaryFromStateCode,
-  getSummaryFromFips,
-  LocationSummary,
-} from './location_summaries';
+import { LocationSummary } from './location_summaries';
 
 export default {
   LIGHTGRAY: '#f2f2f2',
@@ -91,17 +87,4 @@ export function colorFromLocationSummary(
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
-}
-
-export function stateColor(stateCode: string) {
-  const summary = getSummaryFromStateCode(stateCode);
-  return colorFromLocationSummary(summary);
-}
-
-export function countyColor(
-  countyFipsCode: string,
-  defaultColor = COLOR_MAP.GRAY.LIGHT,
-) {
-  const summary = getSummaryFromFips(countyFipsCode);
-  return colorFromLocationSummary(summary, defaultColor);
 }

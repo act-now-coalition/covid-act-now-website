@@ -3,7 +3,6 @@ import fetch from 'node-fetch';
 import { Level } from 'common/level';
 import { Metric } from 'common/metricEnum';
 import LocationSummariesJSON from 'assets/data/summaries.json';
-import { findStateFipsCode } from 'common/locations';
 import { currentSnapshot, getSnapshotOverride } from './utils/snapshots';
 
 export interface MetricSummary {
@@ -22,13 +21,6 @@ export interface LocationSummary {
 export type SummariesMap = { [fips: string]: LocationSummary };
 
 export const LocationSummariesByFIPS = LocationSummariesJSON as SummariesMap;
-
-export function getSummaryFromStateCode(
-  stateCode: string,
-): LocationSummary | null {
-  const fips = findStateFipsCode(stateCode);
-  return LocationSummariesByFIPS[fips] || null;
-}
 
 export function getSummaryFromFips(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
