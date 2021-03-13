@@ -66,6 +66,20 @@
       "blocked": true,
       "region": "GA",
       "context": "https://trello.com/c/vRHHJfFD/1079-ga-county-vaccine-data-seems-broken-disabled"
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "TX",
+      "context": "https://trello.com/c/Jr72cE8X/1097-disabled-texas-counties-scrapers-due-to-anomaly-swapping-of-1st-2nd-dose"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "32033",
+      "context": "https://trello.com/c/7tqJyFna/1099-disabled-white-pine-county-nv-vaccine-data-due-to-anomoly"
     }
   ]
 }
