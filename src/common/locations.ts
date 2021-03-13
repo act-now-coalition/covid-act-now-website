@@ -1,8 +1,7 @@
 /** Helpers for dealing with the State / Counties dataset. */
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import { each, has } from 'lodash';
+import { has } from 'lodash';
 import countyAdjacencyMsa from './data/county_adjacency_msa.json';
-import { STATES as STATES_MAP } from 'common';
 
 interface AdjacencyData {
   [fips: string]: {
@@ -43,28 +42,6 @@ export interface Location {
   state_url_name?: string;
 }
 
-export function getLocationNames(): Location[] {
-  const locations: Location[] = US_STATE_DATASET.state_dataset.map(state => {
-    return {
-      ...state,
-      full_fips_code: state.state_fips_code,
-    };
-  });
-
-  each(US_STATE_DATASET.state_county_map_dataset, (value, key) => {
-    if (value.county_dataset.length === 0) {
-      return null;
-    }
-    locations.push(
-      ...value.county_dataset.map(county => {
-        return { ...county, state: county.state_code };
-      }),
-    );
-  });
-
-  return locations;
-}
-
 // TODO(michael): Make this return County type and fix up references.
 export function findCountyByFips(fips: string) {
   const statesData = US_STATE_DATASET.state_county_map_dataset as any;
@@ -83,8 +60,4 @@ export function getCountyMsaCode(fips: string): string | undefined {
   if (has(ADJACENT_COUNTIES, fips)) {
     return ADJACENT_COUNTIES[fips].msa_code;
   }
-}
-
-export function getStateName(stateCode: string): string | undefined {
-  return (STATES_MAP as any)[stateCode];
 }
