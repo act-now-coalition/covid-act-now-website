@@ -49,6 +49,10 @@ class RegionDB {
     return region;
   }
 
+  findByStateCode(stateCode: string): State | null {
+    return this.statesByStateCode[stateCode.toUpperCase()] ?? null;
+  }
+
   findByStateCodeStrict(stateCode: string): State {
     const region = this.statesByStateCode[stateCode.toUpperCase()];
     assert(region, `Region unexpectedly not found for ${stateCode}`);

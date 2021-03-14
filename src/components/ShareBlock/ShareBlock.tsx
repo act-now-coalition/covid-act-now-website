@@ -25,7 +25,6 @@ import {
 } from './ShareBlock.style';
 import { trackShare } from 'components/Analytics';
 import { Region } from 'common/regions';
-import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
@@ -54,7 +53,7 @@ const ShareBlock = ({
   const hashtag = 'COVIDActNow';
 
   const isMatchingProjectionsRoute = matchPath<{
-    id: keyof typeof STATES;
+    id: string;
     county?: string;
   }>(locationPath.pathname, {
     path: [
@@ -78,7 +77,7 @@ const ShareBlock = ({
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
-          isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
+          $isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
         >
           <SocialTextAreaWrapper id="shareblock">
             <SocialTextArea>
