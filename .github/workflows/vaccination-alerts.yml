@@ -8,14 +8,14 @@ on:
         description: 'Environment to run against (prod, dev, or staging)'
         required: true
         default: prod
-      dry_run:
-        description: 'Whether to only do a safe dry run (true) or actually send the emails (false)'
+      send_emails:
+        description: 'Whether to actually send emails (true) or just do a safe dry-run (false).'
         required: true
-        default: true
+        default: false
 
 env:
   FIREBASE_ENV: ${{ github.event.inputs.firebase_env }}
-  DRY_RUN: ${{ github.event.inputs.dry_run }}
+  SEND_EMAILS: ${{ github.event.inputs.send_emails }}
 
 jobs:
   send-vaccination-alerts:
@@ -54,14 +54,14 @@ jobs:
         run: yarn vaccinations-generate-users-to-email
 
       - name: Send vaccination alert emails (dry run)
-        if: ${{ env.DRY_RUN  == 'true' }}
+        if: ${{ env.SEND_EMAILS == 'false' }}
         run: yarn vaccinations-send-alert-emails --dryRun true
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Send vaccination alert emails
-        if: ${{ env.DRY_RUN == 'false' }}
+        if: ${{ env.SEND_EMAILS == 'true' }}
         run: yarn vaccinations-send-alert-emails
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
@@ -75,9 +75,9 @@ jobs:
           STATUS: ${{job.status}}
         uses: Ilshidur/action-slack@fb92a78a305a399cd6d8ede99d641f2b9224daf3
         with:
-          args: '[${{env.FIREBASE_ENV}}] vaccination-alerts failed dry_run=${{env.DRY_RUN}}: {{STATUS}}'
+          args: '[${{env.FIREBASE_ENV}}] vaccination-alerts failed send_emails=${{env.SEND_EMAILS}}: {{STATUS}}'
       - name: Slack notification
-        if: ${{ env.FIREBASE_ENV == 'prod' && job.status == 'success' && env.DRY_RUN == 'false'}}
+        if: ${{ env.FIREBASE_ENV == 'prod' && job.status == 'success' && env.SEND_EMAILS == 'true'}}
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           STATUS: ${{job.status}}
