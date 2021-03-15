@@ -4,7 +4,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
-
 import CheckIcon from '@material-ui/icons/Check';
 
 import {
@@ -45,7 +44,7 @@ export const FIELDS_PRETTY_NAMES = FIELDS.map(field => {
   if (record) {
     return {
       ...record,
-      ...{ name: field.displayName },
+      name: field.displayName,
     };
   }
 
@@ -107,7 +106,7 @@ const Status: React.FC<{ status: CoverageDetails; level: RegionType }> = ({
   const availableRatio = status.regionsAvailable / status.totalRegions;
 
   if (availableRatio >= 0.95) {
-    return <CheckIcon color="secondary" />;
+    return <CheckIcon color="secondary" titleAccess="Complete coverage" />;
   }
 
   const tooltipContent = tooltipText(status, level);
@@ -131,7 +130,7 @@ const Status: React.FC<{ status: CoverageDetails; level: RegionType }> = ({
 
 const CoverageRow: React.FC<{ row: MetricCoverage }> = ({ row }) => {
   return (
-    <MetricTableRow key={row.name}>
+    <MetricTableRow>
       <MetricTableCell>{row.name}</MetricTableCell>
       <AvailabilityTableCell>
         <Status status={row.state} level={RegionType.STATE} />
@@ -160,7 +159,7 @@ const CoverageTable: React.FC<{ rows: MetricCoverage[] }> = ({ rows }) => {
         </StyledTableHead>
         <TableBody>
           {rows.map(row => (
-            <CoverageRow row={row} />
+            <CoverageRow key={row.name} row={row} />
           ))}
         </TableBody>
       </Table>

@@ -12,10 +12,7 @@ import { RegionType } from '../src/common/regions';
 import { fetchSummariesForRegionType } from '../src/common/utils/model';
 import _ from 'lodash';
 import { assert } from '../src/common/utils';
-import {
-  MetricCoverage,
-  CoverageDetails,
-} from '../src/screens/DataApi/DataCoverageTable';
+import { MetricCoverage } from '../src/components/DataCoverageTable/DataCoverageTable';
 
 interface SingleLevelMetricCoverage {
   name: string;

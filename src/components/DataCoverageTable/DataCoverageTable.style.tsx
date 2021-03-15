@@ -3,6 +3,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
+import { COLOR_MAP } from 'common/colors';
 import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
 import styled from 'styled-components';
 
@@ -18,21 +19,22 @@ export const UnderlinedText = styled(Typography)`
   text-decoration-style: dotted;
   text-underline-position: under;
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 16px;
+  @media (max-width: ${materialSMBreakpoint}) {
+    font-size: 14px;
+  }
 `;
 
 export const StyledTableHead = styled(TableHead)`
   font-family: Roboto;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 16px;
   text-transform: uppercase;
   background-color: white;
 `;
 
 export const MetricTableCellHeader = styled(TableCell).attrs(props => ({
-  component: 'th',
   align: 'left',
-  scope: 'row',
 }))`
   width: 30%;
 
@@ -44,19 +46,18 @@ export const MetricTableCellHeader = styled(TableCell).attrs(props => ({
 `;
 
 export const MetricTableCell = styled(TableCell).attrs(props => ({
-  component: 'th',
   align: 'left',
-  scope: 'row',
 }))`
   width: 30%;
   font-weight: 500;
-  size: 14px;
+  size: 16px;
 
   @media (max-width: ${materialSMBreakpoint}) {
     padding: 8px;
     padding-left: 0px;
     width: 20%;
     hyphens: auto;
+    size: 14px;
   }
 `;
 
@@ -72,6 +73,6 @@ export const AvailabilityTableCell = styled(TableCell).attrs(props => ({
 
 export const MetricTableRow = styled(TableRow)`
   &:nth-of-type(even) {
-    background-color: #fafafa;
+    background-color: ${COLOR_MAP.GREY_0};
   }
 `;
