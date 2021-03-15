@@ -1574,7 +1574,7 @@
       ]
     },
     {
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "locationName": "New Jersey",
       "fips": "34",
       "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
@@ -1600,12 +1600,20 @@
         },
         {
           "phase": "1C",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Additional first responders \n* Individuals with moderately high risk",
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* Public and local transportation workers\n* Public safety workers\n* Migrant farm workers\n* Members of tribal communities\n* Individuals experiencing homelessness and those living in shelters\n* individuals (16+) with underlying medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 15",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-15T16:47:30.294Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-15T16:48:00.566Z",
+          "phase": "1C",
+          "tier": "2",
+          "description": "* Additional First Responders ",
+          "startDate": "March 29"
         },
         {
           "phase": "2",
