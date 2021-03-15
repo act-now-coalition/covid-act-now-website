@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: casulin/more-footer-in-cms
   base_url: https://api.netlify.com
 
 # To use the CMS locally during development, run:
@@ -871,8 +871,8 @@ collections:
               - name: description
                 label: Description
                 widget: text
-              - name: icon ID
+              - name: iconId
                 label: Icon ID
-                hint: Determines the associated icon (current options are email and API)
+                hint: Determines the associated icon (current options are EMAIL and API)
                 widget: select
-                options: ["Email", "API"]
+                options: ["EMAIL", "API"]
