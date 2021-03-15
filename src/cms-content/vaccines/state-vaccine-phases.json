@@ -1415,10 +1415,10 @@
           "phase": "1",
           "tier": "B+",
           "currentlyEligible": true,
-          "description": "* Adults 60+\n* Frontline Essential Workers\n* Congregate Populations\n* Individuals 16+ with medium-risk medical conditions",
+          "description": "* Adults 60+\n* Congregate Populations\n* Individuals 16+ with medium-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 8, 2021",
-          "updatedAt": "2021-03-08T17:45:41.184Z"
+          "updatedAt": "2021-03-15T16:44:56.454Z"
         },
         {
           "phase": "2",
