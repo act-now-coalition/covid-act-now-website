@@ -1515,7 +1515,7 @@
       "fips": "33",
       "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1538,11 +1538,11 @@
         {
           "phase": "2A",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* K-12 school and child care staff",
           "expandedDefinitionUrl": "",
           "startDate": "March 12, 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-15T16:45:56.825Z"
         },
         {
           "phase": "2B",
