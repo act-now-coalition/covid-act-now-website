@@ -17,9 +17,8 @@ import {
   MetricTableCellHeader,
 } from './DataCoverageTable.style';
 import coverageSummary from 'components/DataCoverageTable/coverage-summary.json';
-import { formatPercent } from 'common/utils';
+import { formatPercent, pluralize } from 'common/utils';
 import { InfoTooltip } from 'components/InfoTooltip';
-import { pluralize } from 'components/Explore/utils';
 import { RegionType } from 'common/regions';
 
 export const COVERAGE_SUMMARY = coverageSummary as MetricCoverage[];

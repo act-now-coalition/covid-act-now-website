@@ -77,6 +77,7 @@ export const formatDecimal = (num: number, places = 2): string => {
     maximumFractionDigits: places,
   });
 };
+
 /**
  * Returns a percentage representation of a number.
  *
@@ -120,3 +121,12 @@ export function getPercentChange(numA: number, numB: number): number | null {
     return percentChange;
   }
 }
+
+/**
+ * Returns singular or plural form of word depending on value.
+ *
+ *   pluralize(1, 'sock', 'socks')      // 'sock'
+ *   pluralize(2, 'sock', 'socks')      // 'socks'
+ */
+export const pluralize = (num: number, singular: string, plural: string) =>
+  num === 1 ? singular : plural;

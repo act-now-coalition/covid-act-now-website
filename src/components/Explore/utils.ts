@@ -18,6 +18,7 @@ import regions, {
   getAutocompleteRegions,
 } from 'common/regions';
 import { fail } from 'assert';
+import { pluralize } from 'common/utils';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -328,9 +329,6 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
   }
   return '';
 }
-
-export const pluralize = (num: number, singular: string, plural: string) =>
-  num === 1 ? singular : plural;
 
 const pluralizeWeeks = (num: number) => pluralize(num, 'week', 'weeks');
 const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
