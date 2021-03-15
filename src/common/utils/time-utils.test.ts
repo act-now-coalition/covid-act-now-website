@@ -2,6 +2,7 @@ import {
   timeFormats,
   formatDateTime,
   parseDateString,
+  dateToUTC,
 } from 'common/utils/time-utils';
 
 // Date object constructor takes a zero-indexed month number.
@@ -46,5 +47,13 @@ describe('date string parsing', () => {
   });
   test('Date string to date object', () => {
     expect(parseDateString('2020-03-01')).toEqual(testDate);
+  });
+});
+
+// Pacific timezone is set as default timezone (for consistent testing) in package.json.
+describe('convert to UTC', () => {
+  // Ambiguous date is assumed to be in UTC.
+  test('Date object to UTC', () => {
+    expect(dateToUTC(testDate).toISOString()).toBe('2020-03-01T08:00:00.000Z');
   });
 });
