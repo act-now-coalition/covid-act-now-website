@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
+import ReactTooltip from 'react-tooltip';
 import { colorFromLocationSummary } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
@@ -68,17 +69,13 @@ const MarianaIslands = ({
 
 interface USACountyMapProps {
   stateClickHandler: (stateName: string) => void;
-  setTooltipContent: (content: string) => void;
   showCounties: boolean;
 }
 
 const USACountyMap = React.memo(
-  ({
-    stateClickHandler,
-    setTooltipContent,
-    showCounties,
-  }: USACountyMapProps) => {
+  ({ stateClickHandler, showCounties }: USACountyMapProps) => {
     const locationSummaries = useSummaries();
+    const [tooltipContent, setTooltipContent] = useState('');
 
     const getFillColor = (geo: any) => {
       const summary = (locationSummaries && locationSummaries[geo.id]) || null;
@@ -189,6 +186,7 @@ const USACountyMap = React.memo(
           </ComposableMap>
         </USStateMapWrapper>
         {locationSummaries && <ScreenshotReady />}
+        <ReactTooltip>{tooltipContent}</ReactTooltip>
       </USMapWrapper>
     );
   },
