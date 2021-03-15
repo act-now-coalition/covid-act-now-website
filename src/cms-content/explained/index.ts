@@ -19,6 +19,7 @@ import schoolGuidance from '../articles/school-guidance.json';
 import vulnerabilityData from '../articles/covid-vulnerability-data.json';
 import federalResources from '../articles/federal-resources-covid-relief.json';
 import vaccineTrials from '../articles/covid-vaccine-trials.json';
+// import testingBasics from '../articles/covid-testing-basics.json';
 
 const orderedArticles = [
   vulnerabilityData,
@@ -26,6 +27,7 @@ const orderedArticles = [
   schoolGuidance,
   vaccineTrials,
   variantsAndVaccines,
+  // testingBasics,
   vaccineProgress,
   vaccineBasics,
   immunity,
