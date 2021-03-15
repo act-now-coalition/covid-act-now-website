@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon';
+import moment from 'moment';
 
 export enum timeFormats {
   YYYY_MM_DD = 'yyyy-MM-dd', // 2020-03-01
@@ -17,4 +18,9 @@ export function parseDateString(dateString: string): Date {
 // More info about tokens: https://momentjs.com/docs/#/displaying/
 export function formatDateTime(date: Date, formatString: timeFormats): string {
   return DateTime.fromJSDate(date).toFormat(formatString);
+}
+
+// Convert date object to UTC.
+export function dateToUTC(date: Date): Date {
+  return moment.utc(date).toDate();
 }
