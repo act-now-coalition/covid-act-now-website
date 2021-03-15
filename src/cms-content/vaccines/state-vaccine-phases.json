@@ -1343,7 +1343,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* First responders (police, fire, etc.)\n* Emergency services\n* Public health infrastructure",
+          "description": "* First responders (police, fire, etc.)\n* Emergency services workers\n* Public health infrastructure workers",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-1",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -1360,11 +1360,11 @@
         {
           "phase": "1B",
           "tier": "3",
-          "currentlyEligible": false,
-          "description": "* Teachers and childcare workers\n* Essential infrastructure workers",
+          "currentlyEligible": true,
+          "description": "* Education (K-12) and childcare workers\n* Essential infrastructure workers (communications, dams, energy, food & agriculture, government, IT, etc.)",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase1b/#phase1b-3",
           "startDate": "March 15, 2021",
-          "updatedAt": "2021-03-02T00:48:09.973Z"
+          "updatedAt": "2021-03-15T16:11:46.938Z"
         },
         {
           "phase": "2",
