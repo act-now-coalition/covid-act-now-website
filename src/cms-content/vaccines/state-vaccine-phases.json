@@ -213,7 +213,7 @@
       ]
     },
     {
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "locationName": "California",
       "fips": "06",
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
@@ -502,7 +502,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Florida",
       "fips": "12",
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
@@ -533,7 +533,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "Georgia",
       "fips": "13",
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
@@ -631,7 +631,7 @@
       "fips": "16",
       "eligibilityInfoUrl": "https://coronavirus.idaho.gov/covid-19-vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1",
@@ -1324,7 +1324,7 @@
       ]
     },
     {
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "eligibilityInfoUrl": "https://covidvaccine.mo.gov/priority/",
       "vaccinationSignupUrl": "https://covidvaccine.mo.gov/map/",
       "fips": "29",
