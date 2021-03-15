@@ -322,12 +322,11 @@ function getIcon(
   from text in location_summary.ts
 */
 export const summaryByLevel = {
-  [Level.LOW]: 'is on track to contain COVID',
-  [Level.MEDIUM]: 'is spreading in a slow and controlled fashion',
-  [Level.HIGH]: 'is at risk of an outbreak',
-  [Level.CRITICAL]:
-    'is either actively experiencing an outbreak or is at extreme risk',
-  [Level.SUPER_CRITICAL]: 'is experiencing a severe outbreak',
+  [Level.LOW]: 'is at low risk',
+  [Level.MEDIUM]: 'is at medium risk',
+  [Level.HIGH]: 'is at high risk',
+  [Level.CRITICAL]: 'is at very high risk',
+  [Level.SUPER_CRITICAL]: 'is at severe risk',
 };
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {

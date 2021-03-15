@@ -1,5 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
+import { timeFormats, formatDateTime } from 'common/utils/time-utils';
 
 export function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {
@@ -28,29 +29,11 @@ export function formatUtcDate(date: Date, format: string = 'LL'): string {
 }
 
 /**
- * Returns a local timezone date formatted as a string. The default format is
- * locale-specific, for US: April 29, 2020.
- *
- * See https://momentjs.com/docs/#/displaying/format/ for more details.
- */
-export function formatLocalDate(date: Date, format: string = 'LL'): string {
-  return moment(date).format(format);
-}
-
-/**
  * Returns a date formatted for meta tag descriptions, ie: Oct 26, 2020
  */
 
 export function formatMetatagDate(): string {
-  return moment().format('MMM DD, YYYY');
-}
-
-/**
- * Returns a date formatted for timestamps in Learn (glossary + FAQ), ie: 10/26/2020
- */
-
-export function formatNumericalDate(date: string): string {
-  return moment(date).format('L');
+  return formatDateTime(new Date(), timeFormats.MMM_DD_YYYY);
 }
 
 /**

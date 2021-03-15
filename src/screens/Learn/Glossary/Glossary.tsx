@@ -12,11 +12,16 @@ import PageContent from 'components/PageContent';
 import { glossaryContent, Term } from 'cms-content/learn/glossary';
 import { learnPages } from 'cms-content/learn';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { formatMetatagDate, formatNumericalDate } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 import ScrollToTopButton from 'components/SharedComponents/ScrollToTopButton';
 import { useScrollToTopButton } from 'common/hooks';
 import Footer from 'screens/Learn/Footer/Footer';
 import ExternalLink from 'components/ExternalLink';
+import {
+  timeFormats,
+  parseDateString,
+  formatDateTime,
+} from 'common/utils/time-utils';
 
 function getGlossaryFooter(): React.ReactElement {
   return (
@@ -72,7 +77,11 @@ const Glossary: React.FC = () => {
         <LearnHeading1>{header}</LearnHeading1>
         {intro && <MarkdownContent source={intro} />}
         <LastUpdatedDate>
-          Last updated {formatNumericalDate(lastUpdatedDate)}
+          Last updated{' '}
+          {formatDateTime(
+            parseDateString(lastUpdatedDate),
+            timeFormats.MM_DD_YYYY,
+          )}
         </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (
           <GlossaryTerm key={i} term={term} />

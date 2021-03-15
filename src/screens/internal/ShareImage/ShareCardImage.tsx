@@ -7,10 +7,10 @@ import {
   LastUpdatedWrapper,
 } from './ShareCardImage.style';
 import { DarkScreenshotWrapper } from './ShareImage.style';
-import { formatLocalDate } from 'common/utils';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
 import { useRegionFromParams } from 'common/regions';
 import { Region } from 'common/regions';
+import { timeFormats, formatDateTime } from 'common/utils/time-utils';
 
 // TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
 
@@ -38,7 +38,7 @@ const Header = (props: { isHomePage?: Boolean }) => {
         Real-time COVID metrics
       </TitleWrapper>
       <LastUpdatedWrapper>
-        Updated {formatLocalDate(new Date())}
+        Updated {formatDateTime(new Date(), timeFormats.MMMM_D_YYYY)}
       </LastUpdatedWrapper>
     </>
   );

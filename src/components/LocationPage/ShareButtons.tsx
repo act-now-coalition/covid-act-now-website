@@ -16,10 +16,10 @@ import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
-import moment from 'moment';
 import { County, MetroArea, Region, State } from 'common/regions';
 import { fail } from 'common/utils';
 import { Metric } from 'common/metricEnum';
+import { timeFormats, formatDateTime } from 'common/utils/time-utils';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
@@ -71,7 +71,7 @@ const InnerContent = ({
   };
 
   const downloadLink = getShareImageUrl(region, chartIdentifier);
-  const downloadDate = moment().format('YYYY-MM-DD');
+  const downloadDate = formatDateTime(new Date(), timeFormats.YYYY_MM_DD);
 
   function makeDownloadFilename(chartIdentifier: number) {
     const chartDownloadType = {

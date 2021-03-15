@@ -81,8 +81,7 @@ async function main(outputFolder: string) {
   allSummaries.forEach(regionSummary => {
     _.forEach(['riskLevels', 'metrics', 'actuals'], firstLevel => {
       // summaryDataSection is a sub object of a `RegionSummary`.  Accessing it
-      // directly generates a typescript error, but we know it will always have a value
-      // as it's part of the
+      // directly generates a typescript error, but we know it will always have a value.
       // @ts-ignore
       const summaryDataSection = regionSummary[firstLevel];
       _.forEach(summaryDataSection, (value, key) => {
