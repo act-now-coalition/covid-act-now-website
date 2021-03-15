@@ -1,4 +1,4 @@
-name: Send Vaccination Alerts
+name: Send Vaccination Alert Emails
 
 # TODO: Change to scheduled once we are confident
 on:
