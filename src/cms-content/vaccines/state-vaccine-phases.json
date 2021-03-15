@@ -2422,31 +2422,22 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "n/a",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Anyone 18 or older with certain medical conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 1",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "n/a",
+          "phase": "TBD",
           "tier": "",
           "currentlyEligible": false,
           "description": "* Other age groups\n* People with underlying medical conditions not already included\n* People who live in congregate settings and are at higher risk for the virus that causes COVID",
           "expandedDefinitionUrl": "",
-          "startDate": "April",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "April 1",
+          "updatedAt": "2021-03-15T16:52:35.689Z"
         },
         {
-          "phase": "n/a",
+          "phase": "TBD",
           "tier": "",
           "currentlyEligible": false,
           "description": "* All residents of Utah",
           "expandedDefinitionUrl": "",
-          "startDate": "Later this spring or summer",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "April 1",
+          "updatedAt": "2021-03-15T16:52:31.859Z"
         }
       ]
     },
