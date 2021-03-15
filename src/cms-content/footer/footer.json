@@ -13,5 +13,25 @@
       "cta": "How do variants impact vaccines?",
       "url": "/covid-explained/covid-variants-vaccines"
     }
+  ],
+  "featuredSections": [
+    {
+      "cta": "Alerts",
+      "url": "/subscribe",
+      "description": "Receive emails when your location changes risk level or vaccine eligibility",
+      "icon ID": "Email"
+    },
+    {
+      "cta": "Daily Download",
+      "description": "Receive daily emails with the latest data and scientific findings",
+      "url": "/subscribe#daily-download",
+      "icon ID": "Email"
+    },
+    {
+      "cta": "Get our data",
+      "url": "/data-api",
+      "description": "Download our data or display it on your website or app",
+      "icon ID": "API"
+    }
   ]
 }
