@@ -1,0 +1,175 @@
+import styled, { css } from 'styled-components';
+import { COLOR_MAP } from 'common/colors';
+import { mobileBreakpoint } from 'assets/theme/sizes';
+import fonts from 'common/theme/fonts';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import LinkButton from 'components/LinkButton';
+
+import EmailAlertIcon from 'assets/images/EmailAlertIcon';
+import ApiIcon from 'assets/images/ApiIcon';
+
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+
+export const StyledFooter = styled.footer`
+  box-sizing: content-box;
+  background: ${COLOR_MAP.BLACK};
+  padding: 1.5rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 4rem;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1120px;
+  width: 100%;
+  margin: auto;
+
+  img {
+    height: 20px;
+    margin-bottom: 1.25rem;
+    align-self: center;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    flex-direction: row;
+
+    img {
+      align-self: flex-start;
+    }
+  }
+`;
+
+export const Section = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  &:last-child {
+    align-items: center;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    &:not(:last-child) {
+      margin-bottom: 0;
+      margin-right: 5rem;
+    }
+
+    &:last-child {
+      align-items: flex-start;
+    }
+  }
+`;
+
+export const SectionHeader = styled.p`
+  ${fonts.regularBookMidWeight};
+  color: ${COLOR_MAP.GREY_3};
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1.75rem;
+  }
+`;
+
+export const ArrowIcon = styled(ArrowForwardIcon)`
+  color: ${COLOR_MAP.GREY_3};
+  font-size: 1.25rem;
+`;
+
+export const BodyCopy = css`
+  ${fonts.regularBook};
+  color: ${COLOR_MAP.GREY_3};
+  line-height: 1.4;
+  margin: 0;
+`;
+
+export const FeaturedDescription = styled.p`
+  ${BodyCopy};
+`;
+
+export const AboutCopy = styled.p`
+  ${BodyCopy};
+  margin-bottom: 2rem;
+  text-align: center;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    text-align: left;
+  }
+`;
+
+export const ButtonBase = css`
+  ${fonts.regularBookMidWeight};
+  color: white;
+  width: fit-content;
+  text-transform: none;
+`;
+
+export const TextButton = styled(LinkButton)`
+  ${ButtonBase};
+  font-size: 1rem;
+  padding: 0;
+`;
+
+export const LearnLink = styled(TextButton)`
+  &:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    &:last-of-type {
+      margin-bottom: 1.75rem;
+    }
+  }
+`;
+
+export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
+  ${ButtonBase};
+  font-size: 0.8725rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid ${COLOR_MAP.GREY_3};
+  display: ${({ desktopOnly }) => desktopOnly && 'none'};
+
+  &:nth-child(2) {
+    margin-left: 0.75rem;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    display: inherit;
+  }
+`;
+
+export const TestIcon = styled(InfoOutlinedIcon)`
+  color: red;
+  margin-right: 1rem;
+`;
+
+export const SocialButtonsRow = styled.div`
+    display: flex;
+    svg {
+        color: white;
+    }
+    a {
+      color: white;
+        &:not(:last-of-type) {
+            margin-right: .5rem;
+        }
+    }
+    }
+`;
