@@ -15,7 +15,9 @@ import {
   BlueLinkButton,
 } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
-import DataCoverageTable, { FIELDS_PRETTY_NAMES } from './DataCoverageTable';
+import DataCoverageTable, {
+  FIELDS_PRETTY_NAMES,
+} from 'components/DataCoverageTable';
 import LogoGrid from 'components/LogoGrid/LogoGrid';
 import { EventCategory } from 'components/Analytics';
 import { Grid } from '@material-ui/core';

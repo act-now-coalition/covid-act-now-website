@@ -130,7 +130,7 @@ async function main(outputFolder: string) {
 if (require.main === module) {
   const argv = yargs.options({
     outputDir: {
-      default: 'src/screens/DataApi',
+      default: 'src/components/DataCoverageTable',
       description: 'Output directory to save summary.',
     },
   }).argv;

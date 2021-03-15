@@ -16,7 +16,7 @@ import {
   MetricTableRow,
   MetricTableCellHeader,
 } from './DataCoverageTable.style';
-import coverageSummary from './coverage-summary.json';
+import coverageSummary from 'components/DataCoverageTable/coverage-summary.json';
 import { formatPercent } from 'common/utils';
 import { InfoTooltip } from 'components/InfoTooltip';
 import { pluralize } from 'components/Explore/utils';
