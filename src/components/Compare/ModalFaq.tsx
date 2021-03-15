@@ -12,14 +12,18 @@ import {
 import { LockBodyScroll } from 'components/Dialog';
 import { useEscToClose } from 'common/hooks';
 
-const ModalFaq = (props: { handleCloseModal: () => void }) => {
-  useEscToClose(props.handleCloseModal);
+interface ModalFaqProps {
+  handleCloseModal: () => void;
+}
+
+const ModalFaq = ({ handleCloseModal }: ModalFaqProps) => {
+  useEscToClose(handleCloseModal);
 
   return (
     <Fragment>
       <LockBodyScroll />
       <Wrapper>
-        <CloseIcon onClick={props.handleCloseModal} />
+        <CloseIcon onClick={handleCloseModal} />
         <Content>
           <Header>Compare table</Header>
           <Subheader>Frequently asked questions</Subheader>
@@ -55,4 +59,9 @@ const ModalFaq = (props: { handleCloseModal: () => void }) => {
   );
 };
 
-export default ModalFaq;
+// Swallow the ref, because we don't need it, to silence a warning
+const ModalFaqWrapper = React.forwardRef((props: ModalFaqProps, ref) => {
+  return <ModalFaq {...props} />;
+});
+
+export default ModalFaqWrapper;

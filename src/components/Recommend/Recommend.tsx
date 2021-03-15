@@ -55,7 +55,7 @@ const Header = (props: {
   const { introCopy, locationName, onClickOpenModal } = props;
   return (
     <Fragment>
-      <HeaderWrapper>
+      <HeaderWrapper id="recommendations">
         <HeaderCopy>{header}</HeaderCopy>
       </HeaderWrapper>
       <Subtitle1>for {locationName}</Subtitle1>

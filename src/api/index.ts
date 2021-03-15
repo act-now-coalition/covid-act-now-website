@@ -13,6 +13,10 @@ import { APIRegionSubPath } from '../common/utils/model';
 import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
 import { County, MetroArea, Region, State } from 'common/regions';
+import {
+  AggregateRegionSummary,
+  RegionSummary,
+} from './schema/AggregateRegionSummary';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;
 
@@ -31,6 +35,20 @@ export class Api {
     this.snapshotUrl = dataUrl || SNAPSHOT_URL;
     // trim any trailing /
     this.snapshotUrl = this.snapshotUrl.replace(/\/$/, '');
+  }
+
+  /**
+   * Fetches the summary+timeseries for every region in the specified region
+   * aggregate (e.g. all counties or all states).
+   */
+  async fetchAggregateRegionSummaries(
+    regionAggregate: APIRegionSubPath,
+  ): Promise<RegionSummary[]> {
+    const all = await this.fetchApiJson<AggregateRegionSummary>(
+      `${regionAggregate}.json`,
+    );
+    assert(all != null, 'Failed to load summaries');
+    return all;
   }
 
   /**

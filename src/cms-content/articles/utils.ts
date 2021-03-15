@@ -1,6 +1,10 @@
-import moment from 'moment';
 import { Markdown, sanitizeID } from '../utils';
 import { keyBy, sortBy } from 'lodash';
+import {
+  timeFormats,
+  parseDateString,
+  formatDateTime,
+} from 'common/utils/time-utils';
 
 export interface ArticleMain {
   articleID: string;
@@ -23,7 +27,7 @@ export function sanitizeArticle(article: ArticleJSON): Article {
   return {
     ...article,
     articleID: sanitizeID(article.articleID),
-    date: moment(article.date).format('MMM Do, YYYY'),
+    date: formatDateTime(parseDateString(article.date), timeFormats.MM_DD_YYYY),
   };
 }
 

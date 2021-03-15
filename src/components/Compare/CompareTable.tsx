@@ -147,9 +147,7 @@ const CompareTable = (props: {
 
   //TODO (chelsi): make this a theme-
   const arrowColorSelected = 'white';
-  const arrowColorNotSelected = props.isModal
-    ? COLOR_MAP.GRAY_BODY_COPY
-    : COLOR_MAP.GRAY.BASE;
+  const arrowColorNotSelected = COLOR_MAP.GREY_3;
 
   const arrowContainerProps = {
     sortDescending,

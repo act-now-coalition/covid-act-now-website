@@ -1,10 +1,14 @@
-import moment from 'moment';
 import { Markdown, sanitizeID } from '../utils';
 import { keyBy, sortBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
 import canCompare from './can-compare.json';
 import metros from './metros.json';
+import {
+  timeFormats,
+  parseDateString,
+  formatDateTime,
+} from 'common/utils/time-utils';
 
 interface ArticleMain {
   articleID: string;
@@ -27,7 +31,7 @@ function sanitizeArticle(article: ArticleJSON): Article {
   return {
     ...article,
     articleID: sanitizeID(article.articleID),
-    date: moment(article.date).format('MMM Do, YYYY'),
+    date: formatDateTime(parseDateString(article.date), timeFormats.MM_DD_YYYY),
   };
 }
 
