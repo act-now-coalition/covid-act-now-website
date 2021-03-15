@@ -7,7 +7,7 @@ import { StyledPaper } from './Search.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { SearchBarIcon } from 'components/Search/Homepage/HomepageSearchAutocomplete.style';
 import { useCountyToZipMap } from 'common/hooks';
-import MenuItem from 'components/Search/NewMenuItem/NewMenuItem';
+import MenuItem from './MenuItem';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
