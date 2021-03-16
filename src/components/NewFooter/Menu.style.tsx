@@ -74,11 +74,12 @@ export const Section = styled.div`
   }
 `;
 
-export const SectionHeader = styled.p`
+export const SectionHeader = styled.h2`
   ${fonts.regularBookMidWeight};
   color: ${COLOR_MAP.GREY_3};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
+  font-size: 1rem;
 `;
 
 export const Column = styled.div`
