@@ -68,3 +68,7 @@ export function getVulnPopulationPercentForFips(
   const fipsToSurgoPopVulnerable: FipsToPopVulnerable = surgoPopulationVulnerable;
   return fipsToSurgoPopVulnerable[fips];
 }
+
+export function importCountyGeographies() {
+  return importJson('county-10m', import('./counties-10m.json'));
+}
