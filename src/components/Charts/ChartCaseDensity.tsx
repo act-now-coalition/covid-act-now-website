@@ -28,6 +28,7 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
+import { TimeFormat } from 'common/utils/time-utils';
 
 type Point = {
   x: number;
@@ -103,7 +104,7 @@ const ChartCaseDensity: FunctionComponent<{
     <Tooltip
       left={marginLeft + getXCoord(p)}
       top={marginTop + getYCoord(p)}
-      title={formatUtcDate(getDate(p), 'MMM D, YYYY')}
+      title={formatUtcDate(getDate(p), TimeFormat.MMM_D_YYYY)}
       subtitle="DAILY NEW CASES"
       width={'145px'}
     >

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
 import { Api } from 'api';
-import moment from 'moment';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
 import regions, { Region, County, RegionType } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
+import { parseDateString, dateToUTC } from 'common/utils/time-utils';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
@@ -171,8 +171,8 @@ export function useModelLastUpdatedDate() {
   useEffect(() => {
     new Api().fetchVersionInfo().then(version => {
       // NOTE: "new Date(version.timestamp)" on safari fails due to pickiness about the
-      // date formatting, so just use moment to parse.
-      setLastUpdated(moment.utc(version.timestamp).toDate());
+      // date formatting, so just use time utils to parse.
+      setLastUpdated(dateToUTC(parseDateString(version.timestamp)));
     });
   }, []);
 

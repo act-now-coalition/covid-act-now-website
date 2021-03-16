@@ -1,7 +1,7 @@
 import { Markdown, sanitizeID } from '../utils';
 import { keyBy, sortBy } from 'lodash';
 import {
-  timeFormats,
+  TimeFormat,
   parseDateString,
   formatDateTime,
 } from 'common/utils/time-utils';
@@ -27,7 +27,7 @@ export function sanitizeArticle(article: ArticleJSON): Article {
   return {
     ...article,
     articleID: sanitizeID(article.articleID),
-    date: formatDateTime(parseDateString(article.date), timeFormats.MM_DD_YYYY),
+    date: formatDateTime(parseDateString(article.date), TimeFormat.MM_DD_YYYY),
   };
 }
 
