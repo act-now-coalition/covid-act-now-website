@@ -1,7 +1,16 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import { COLOR_MAP } from 'common/colors';
+import { Link } from 'react-router-dom';
+
+// Note (chelsi): These random 1px margins solve an alignment bug that I cannot figure out otherwise :)
+export const StyledPaper = styled(Paper)`
+  border-radius: 0;
+  margin: 0 -1px 0 1px;
+  box-shadow: none;
+  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
+  border-top: none;
+`;
 
 export const MenuItemWrapper = styled.div`
   display: flex;
@@ -32,13 +41,4 @@ export const Zipcode = styled.span`
 export const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: inherit;
-`;
-
-// Note (chelsi): These random 1px margins solve an alignment bug that I cannot figure out otherwise :)
-export const StyledPaper = styled(Paper)`
-  border-radius: 0;
-  margin: 0 -1px 0 1px;
-  box-shadow: none;
-  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
-  border-top: none;
 `;

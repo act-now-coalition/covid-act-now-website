@@ -858,3 +858,21 @@ collections:
           - name: aboutUs
             label: About us
             widget: markdown
+          - name: featuredSections
+            label: Featured sections
+            widget: list
+            fields:
+              - name: cta
+                label: Cta
+                widget: string
+              - name: url
+                label: Url
+                widget: string
+              - name: description
+                label: Description
+                widget: text
+              - name: iconId
+                label: Icon ID
+                hint: Determines the associated icon (current options are EMAIL and API)
+                widget: select
+                options: ["EMAIL", "API"]

@@ -12,7 +12,7 @@ import Filters from 'components/Compare/Filters';
 import { LockBodyScroll } from 'components/Dialog';
 import { Region, MetroArea } from 'common/regions';
 
-const ModalCompare = (props: {
+interface ModalCompareProps {
   stateName?: string;
   county: any | null;
   setShowModal: any;
@@ -44,7 +44,9 @@ const ModalCompare = (props: {
   region?: Region;
   vaccinesFirst?: boolean;
   vulnerabilityFirst?: boolean;
-}) => {
+}
+
+const ModalCompare = (props: ModalCompareProps) => {
   const { handleCloseModal, region } = props;
 
   useEffect(() => {
@@ -125,4 +127,11 @@ const ModalCompare = (props: {
   );
 };
 
-export default ModalCompare;
+// Swallow the ref, because we don't need it, to silence a warning
+const ModalCompareWrapper = React.forwardRef(
+  (props: ModalCompareProps, ref) => {
+    return <ModalCompare {...props} />;
+  },
+);
+
+export default ModalCompareWrapper;
