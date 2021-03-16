@@ -1,3 +1,4 @@
+import { Geography } from 'react-simple-maps';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { COLOR_MAP } from 'common/colors';
@@ -25,4 +26,8 @@ export const MobileLineBreak = styled.br`
   @media (min-width: 600px) {
     display: none;
   }
+`;
+
+export const StyledGeography = styled(Geography)`
+  transition: fill-opacity 1s;
 `;

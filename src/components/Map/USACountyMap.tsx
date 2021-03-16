@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
+import ReactTooltip from 'react-tooltip';
 import { colorFromLocationSummary } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import regions, { State as StateType } from 'common/regions';
@@ -9,7 +10,7 @@ import { ScreenshotReady } from 'components/Screenshot';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import STATES_JSON from './data/states-10m.json';
 import MapCounties from './MapCounties';
-import { USMapWrapper, USStateMapWrapper } from './Map.style';
+import { USMapWrapper, USStateMapWrapper, StyledGeography } from './Map.style';
 
 function trackMapClick(label: string) {
   trackEvent(EventCategory.MAP, EventAction.NAVIGATE, label);
@@ -53,17 +54,13 @@ const MarianaIslands = ({
 
 interface USACountyMapProps {
   stateClickHandler: (stateName: string) => void;
-  setTooltipContent: (content: string) => void;
   showCounties: boolean;
 }
 
 const USACountyMap = React.memo(
-  ({
-    stateClickHandler,
-    setTooltipContent,
-    showCounties,
-  }: USACountyMapProps) => {
+  ({ stateClickHandler, showCounties }: USACountyMapProps) => {
     const locationSummaries = useSummaries();
+    const [tooltipContent, setTooltipContent] = useState('');
 
     const getFillColor = (geo: any) => {
       const summary = (locationSummaries && locationSummaries[geo.id]) || null;
@@ -132,7 +129,7 @@ const USACountyMap = React.memo(
                             onClick={() => trackMapClick(state.fullName)}
                             tabIndex={-1}
                           >
-                            <Geography
+                            <StyledGeography
                               key={geo.rsmKey}
                               geography={geo}
                               onMouseEnter={() =>
@@ -158,6 +155,7 @@ const USACountyMap = React.memo(
           </ComposableMap>
         </USStateMapWrapper>
         {locationSummaries && <ScreenshotReady />}
+        <ReactTooltip>{tooltipContent}</ReactTooltip>
       </USMapWrapper>
     );
   },

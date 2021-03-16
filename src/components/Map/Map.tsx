@@ -4,7 +4,6 @@ import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
-import ReactTooltip from 'react-tooltip';
 import { MapInstructions, MobileLineBreak } from './Map.style';
 
 // TODO(@pablo): We might want to move this to LOCATION_SUMMARY_LEVELS
@@ -24,8 +23,6 @@ function Map({
   onClick = () => {},
   showCounties = false,
 }: MapProps) {
-  const [content, setContent] = useState('');
-
   // TODO(chris): The only user of `onClick` is the embed. When you click on a state
   // it eventually navigates you to the home page. If we want the action of clicking
   // on a state to take you to the home page, we should change the link in USACountyMap
@@ -73,7 +70,6 @@ function Map({
       )}
       <div className="us-state-map">
         <USACountyMap
-          setTooltipContent={setContent}
           stateClickHandler={handleClick}
           showCounties={showCounties}
         />
@@ -84,7 +80,6 @@ function Map({
           <MobileLineBreak /> and county info.
         </MapInstructions>
       )}
-      <ReactTooltip>{content}</ReactTooltip>
     </div>
   );
 }
