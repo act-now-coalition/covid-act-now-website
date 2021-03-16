@@ -60,9 +60,11 @@ export function fetchSummariesForRegionType(
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
-    const all = await new Api(snapshotUrl).fetchAggregateRegionSummaries(
-      getSubpathFromRegionType(regionType),
-    );
+    const all = (
+      await new Api(snapshotUrl).fetchAggregateRegionSummaries(
+        getSubpathFromRegionType(regionType),
+      )
+    ).filter(summary => regions.findByFipsCode(summary.fips) !== null);
     return all;
   }
   const key = `${snapshotUrl}-${regionType}` || 'null';
