@@ -3,7 +3,7 @@ import { Geographies, Geography } from 'react-simple-maps';
 import { useCountyGeographies } from 'common/hooks';
 
 const MapCounties: React.FC<{
-  getFillColor: (geo: any) => string;
+  getFillColor: (fipsCode: string) => string;
 }> = ({ getFillColor }) => {
   const { pending, result: geoCounties } = useCountyGeographies();
 
@@ -14,17 +14,15 @@ const MapCounties: React.FC<{
   return (
     <Geographies geography={geoCounties}>
       {({ geographies }) =>
-        geographies.map(geo => {
-          return (
-            <Geography
-              key={geo.id}
-              geography={geo}
-              fill={getFillColor(geo)}
-              strokeWidth={0}
-              role="img"
-            />
-          );
-        })
+        geographies.map(geo => (
+          <Geography
+            key={geo.id}
+            geography={geo}
+            fill={getFillColor(geo.id)}
+            strokeWidth={0}
+            role="img"
+          />
+        ))
       }
     </Geographies>
   );

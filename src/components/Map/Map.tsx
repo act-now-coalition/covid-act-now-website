@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../App.css'; /* optional for styling like the :hover pseudo-class */
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
+import { ComposableMap, Geographies } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import ReactTooltip from 'react-tooltip';
 import { colorFromLocationSummary } from 'common/colors';
@@ -25,27 +25,12 @@ const stateFipsCodes = regions.states.map(state => state.fipsCode);
  * This is special cased from the normal map display. The mariana islands are
  * small enough that simply showing the islands is not a UX that works.
  */
-const MarianaIslands = ({
-  fill,
-  onMouseEnter,
-  onMouseLeave,
-  onClick,
-  tabIndex,
-}: {
+const MarianaIslands: React.FC<{
   fill: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-  onClick: () => void;
   tabIndex: number;
-}) => {
+}> = ({ fill, tabIndex }) => {
   return (
-    <g
-      transform="translate(40, 395) scale(0.8)"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      tabIndex={tabIndex}
-    >
+    <g transform="translate(40, 395) scale(0.8)" tabIndex={tabIndex}>
       <rect width="20" height="20" fill={fill} />
       <text transform="translate(25, 15)">CNMI</text>
     </g>
@@ -62,8 +47,8 @@ const USACountyMap = React.memo(
     const locationSummaries = useSummaries();
     const [tooltipContent, setTooltipContent] = useState('');
 
-    const getFillColor = (geo: any) => {
-      const summary = (locationSummaries && locationSummaries[geo.id]) || null;
+    const getFillColor = (fips: string) => {
+      const summary = (locationSummaries && locationSummaries[fips]) || null;
       return colorFromLocationSummary(summary);
     };
 
@@ -91,53 +76,32 @@ const USACountyMap = React.memo(
                       const state = regions.findByFipsCodeStrict(
                         fipsCode,
                       ) as StateType;
+                      const { stateCode, fullName } = state;
+                      const fillColor = getFillColor(fipsCode);
 
-                      // This flag is used to increase an invisible border around Hawaii and Puerto Rico
-                      // to increase their effective target size
-                      const expandTapArea =
-                        state.stateCode === 'HI' || state.stateCode === 'PR';
+                      // This flag is used to increase an invisible border around Hawaii and
+                      // Puerto Rico to increase their effective target size
+                      const expandTapArea = ['HI', 'PR'].includes(stateCode);
 
-                      // Using a custom SVG to place the northern mariana islands to increase
-                      // accessibility due to the small size.
-                      if (state.stateCode === 'MP') {
-                        return (
-                          <Link
-                            key={state.stateCode}
-                            to={state.relativeUrl}
-                            aria-label={state.fullName}
-                            onClick={() => trackMapClick(state.fullName)}
-                            tabIndex={-1}
-                          >
-                            <MarianaIslands
-                              key={geo.rsmKey}
-                              onMouseEnter={() =>
-                                setTooltipContent(state.fullName)
-                              }
-                              onMouseLeave={onMouseLeave}
-                              onClick={() => stateClickHandler(state.fullName)}
-                              fill={getFillColor(geo)}
-                              tabIndex={-1}
-                            />
-                          </Link>
-                        );
-                      } else {
-                        return (
-                          <Link
-                            key={state.stateCode}
-                            to={state.relativeUrl}
-                            aria-label={state.fullName}
-                            onClick={() => trackMapClick(state.fullName)}
-                            tabIndex={-1}
-                          >
+                      return (
+                        <Link
+                          key={stateCode}
+                          to={state.relativeUrl}
+                          aria-label={fullName}
+                          tabIndex={-1}
+                          onMouseEnter={() => setTooltipContent(fullName)}
+                          onMouseLeave={onMouseLeave}
+                          onClick={() => {
+                            stateClickHandler(fullName);
+                            trackMapClick(fullName);
+                          }}
+                        >
+                          {stateCode === 'MP' ? (
+                            <MarianaIslands fill={fillColor} tabIndex={-1} />
+                          ) : (
                             <StyledGeography
-                              key={geo.rsmKey}
                               geography={geo}
-                              onMouseEnter={() =>
-                                setTooltipContent(state.fullName)
-                              }
-                              onMouseLeave={onMouseLeave}
-                              onClick={() => stateClickHandler(state.fullName)}
-                              fill={getFillColor(geo)}
+                              fill={fillColor}
                               fillOpacity={showCounties ? 0 : 1}
                               stroke="white"
                               strokeWidth={expandTapArea ? 35 : 1}
@@ -145,9 +109,9 @@ const USACountyMap = React.memo(
                               role="img"
                               tabIndex={-1}
                             />
-                          </Link>
-                        );
-                      }
+                          )}
+                        </Link>
+                      );
                     })
                 }
               </Geographies>
