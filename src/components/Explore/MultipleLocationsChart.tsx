@@ -16,6 +16,7 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
+import { TimeFormat } from 'common/utils/time-utils';
 
 interface LabelInfo {
   x: number;
@@ -52,7 +53,7 @@ const MultipleLocationsTooltip: React.FC<{
       width={'210px'}
       top={top}
       left={left}
-      title={formatUtcDate(new Date(pointInfo.x), 'MMM D, YYYY')}
+      title={formatUtcDate(new Date(pointInfo.x), TimeFormat.MMM_D_YYYY)}
     >
       <Styles.TooltipSubtitle>
         {currentSeries && currentSeries.tooltipLabel}

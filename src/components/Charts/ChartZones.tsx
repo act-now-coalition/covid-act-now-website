@@ -28,6 +28,7 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
+import { TimeFormat } from 'common/utils/time-utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -117,7 +118,7 @@ const ChartZones = ({
     <Tooltip
       top={marginTop + getYCoord(d)}
       left={marginLeft + getXCoord(d)}
-      title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
+      title={formatUtcDate(getDate(d), TimeFormat.MMM_D_YYYY)}
       subtitle={getTooltipContent(getY(d)).subtitle}
       width={getTooltipContent(getY(d)).width}
     >

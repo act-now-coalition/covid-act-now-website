@@ -16,6 +16,7 @@ import { ScreenshotReady } from 'components/Screenshot';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
+import { TimeFormat } from 'common/utils/time-utils';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -38,7 +39,7 @@ const SingleLocationTooltip: React.FC<{
       width={'210px'}
       top={top(pointSmooth)}
       left={left(pointSmooth)}
-      title={formatUtcDate(new Date(pointSmooth.x), 'MMM D, YYYY')}
+      title={formatUtcDate(new Date(pointSmooth.x), TimeFormat.MMM_D_YYYY)}
     >
       <Styles.TooltipSubtitle>
         {`${seriesRaw.tooltipLabel}: ${

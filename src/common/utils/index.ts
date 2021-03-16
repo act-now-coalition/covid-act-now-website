@@ -1,6 +1,5 @@
-import moment from 'moment';
 import _ from 'lodash';
-import { timeFormats, formatDateTime } from 'common/utils/time-utils';
+import { TimeFormat, formatDateTime, dateToUTC } from 'common/utils/time-utils';
 
 export function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {
@@ -21,11 +20,12 @@ export function nonNull<T>(value: T | null | undefined): T {
  * Returns a date formatted as a string, assuming the Date is in the UTC
  * timezone (this is probably the case if it came from our API). The default
  * format is locale-specific, for US: April 29, 2020.
- *
- * See https://momentjs.com/docs/#/displaying/format/ for more details.
  */
-export function formatUtcDate(date: Date, format: string = 'LL'): string {
-  return moment.utc(date).format(format);
+export function formatUtcDate(
+  date: Date,
+  format: TimeFormat = TimeFormat.MMMM_D_YYYY,
+): string {
+  return formatDateTime(dateToUTC(date), format);
 }
 
 /**
@@ -33,7 +33,7 @@ export function formatUtcDate(date: Date, format: string = 'LL'): string {
  */
 
 export function formatMetatagDate(): string {
-  return formatDateTime(new Date(), timeFormats.MMM_DD_YYYY);
+  return formatDateTime(new Date(), TimeFormat.MMM_DD_YYYY);
 }
 
 /**
