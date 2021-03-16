@@ -3,6 +3,7 @@ import { footerContent } from 'cms-content/footer';
 import FeaturedSection from './FeaturedSection';
 import SocialButtonsBlock from './SocialButtonsBlock';
 import Logo from 'assets/images/footerlogoDarkWithURL';
+import { FeaturedItem, LinkItem } from 'cms-content/footer';
 import {
   ContentWrapper,
   Section,
@@ -23,7 +24,7 @@ const MenuContent: React.FC = () => {
       <Section>
         <SectionHeader>Learn</SectionHeader>
         <Column>
-          {learnLinks.map((link: any) => (
+          {learnLinks.map((link: LinkItem) => (
             <LearnLink to={link.url} endIcon={<ArrowIcon />}>
               {link.cta}
             </LearnLink>
@@ -33,20 +34,12 @@ const MenuContent: React.FC = () => {
           View all topics
         </OutlinedButton>
       </Section>
-
       <Section>
         <SectionHeader>Featured</SectionHeader>
-        {featuredSections.map((section: any) => {
-          return (
-            <FeaturedSection
-              url={section.url}
-              cta={section.cta}
-              description={section.description}
-            />
-          );
-        })}
+        {featuredSections.map((section: FeaturedItem) => (
+          <FeaturedSection section={section} />
+        ))}
       </Section>
-
       <Section>
         <Logo />
         <AboutCopy>{aboutUs}</AboutCopy>

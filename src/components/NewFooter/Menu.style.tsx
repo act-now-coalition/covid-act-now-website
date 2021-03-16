@@ -5,11 +5,6 @@ import fonts from 'common/theme/fonts';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
-import EmailAlertIcon from 'assets/images/EmailAlertIcon';
-import ApiIcon from 'assets/images/ApiIcon';
-
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-
 export const StyledFooter = styled.footer`
   box-sizing: content-box;
   background: ${COLOR_MAP.BLACK};
@@ -155,11 +150,6 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   }
 `;
 
-export const TestIcon = styled(InfoOutlinedIcon)`
-  color: red;
-  margin-right: 1rem;
-`;
-
 export const SocialButtonsRow = styled.div`
     display: flex;
     svg {
@@ -172,4 +162,9 @@ export const SocialButtonsRow = styled.div`
         }
     }
     }
+`;
+
+export const IconWrapper = styled.div`
+  display: block;
+  margin-right: 1rem;
 `;

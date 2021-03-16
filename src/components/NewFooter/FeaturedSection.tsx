@@ -1,21 +1,28 @@
 import React from 'react';
+import { FeaturedItem } from 'cms-content/footer';
+import EmailAlertIcon from 'assets/images/EmailAlertIcon';
+import ApiIcon from 'assets/images/ApiIcon';
 import {
   Column,
   ArrowIcon,
   FeaturedDescription,
   TextButton,
   Row,
-  TestIcon,
+  IconWrapper,
 } from './Menu.style';
 
 const FeaturedSection: React.FC<{
-  url: string;
-  cta: string;
-  description: string;
-}> = ({ url, cta, description }) => {
+  section: FeaturedItem;
+}> = ({ section }) => {
+  const { url, cta, description, iconId } = section;
+
+  const IconById = iconId === 'API' ? ApiIcon : EmailAlertIcon;
+
   return (
     <Row>
-      <TestIcon />
+      <IconWrapper>
+        <IconById height="36" width="36" />
+      </IconWrapper>
       <Column>
         <TextButton to={url} endIcon={<ArrowIcon />}>
           {cta}

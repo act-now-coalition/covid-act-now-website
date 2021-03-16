@@ -1,12 +1,12 @@
 import { Markdown } from '../utils';
 import footer from './footer.json';
 
-interface LinkItem {
+export interface LinkItem {
   url: string;
   cta: string;
 }
 
-interface FeaturedItem {
+export interface FeaturedItem {
   cta: string;
   url: string;
   description: string;
