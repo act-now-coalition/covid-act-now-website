@@ -29,6 +29,9 @@ const RegionMap: React.FC<{
     [countyFipsList, allCountiesTopoJson],
   );
 
+  // Calculating the projection config involves doing some complex map on the
+  // geographies of the counties, we memoize it to avoid recalculating that on
+  // each render.
   const projectionConfig = useMemo(() => {
     return countiesTopoJson
       ? getProjectionConfig(countiesTopoJson, width, height)
