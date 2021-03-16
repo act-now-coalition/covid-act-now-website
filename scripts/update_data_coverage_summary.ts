@@ -12,6 +12,7 @@ import { RegionType } from '../src/common/regions';
 import { fetchSummariesForRegionType } from '../src/common/utils/model';
 import _ from 'lodash';
 import { assert } from '../src/common/utils';
+import { MetricCoverage } from '../src/components/DataCoverageTable/DataCoverageTable';
 
 interface SingleLevelMetricCoverage {
   name: string;
@@ -20,20 +21,6 @@ interface SingleLevelMetricCoverage {
   totalHasValue: number;
   allStates: Set<string>;
   statesHasValue: Set<string>;
-}
-
-interface CoverageDetails {
-  totalRegions: number;
-  regionsAvailable: number;
-  totalStates: number;
-  statesAvailable: number;
-}
-
-interface MetricCoverage {
-  name: string;
-  state: CoverageDetails;
-  county: CoverageDetails;
-  metro: CoverageDetails;
 }
 
 const combineCoverageByMetric = (
@@ -139,7 +126,7 @@ async function main(outputFolder: string) {
 if (require.main === module) {
   const argv = yargs.options({
     outputDir: {
-      default: 'src/screens/DataApi',
+      default: 'src/components/DataCoverageTable',
       description: 'Output directory to save summary.',
     },
   }).argv;

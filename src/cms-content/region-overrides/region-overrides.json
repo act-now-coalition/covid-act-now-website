@@ -66,6 +66,20 @@
       "blocked": true,
       "region": "GA",
       "context": "https://trello.com/c/vRHHJfFD/1079-ga-county-vaccine-data-seems-broken-disabled"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "32033",
+      "context": "https://trello.com/c/7tqJyFna/1099-disabled-white-pine-county-nv-vaccine-data-due-to-anomoly"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "region": "47157",
+      "context": "https://trello.com/c/aB0EunUd/1108-disabled-shelby-county-tn-due-to-trailing-zeros-bringing-dnc-down"
     }
   ]
 }

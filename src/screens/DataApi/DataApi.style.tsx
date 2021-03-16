@@ -25,6 +25,11 @@ export const GreenLinkButton = styled(LinkButton)`
   }
 `;
 
+export const BlueLinkButton = styled(LinkButton)`
+  color: ${COLOR_MAP.BLUE};
+  text-transform: none;
+`;
+
 export const MarkdownDataApi = styled(MarkdownContent)`
   /* The blockquote shows as the Notes section */
   blockquote {

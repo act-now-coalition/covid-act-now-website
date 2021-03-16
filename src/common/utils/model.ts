@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
 import { Api } from 'api';
-import { getStateName } from 'common/locations';
 import moment from 'moment';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
@@ -61,9 +60,11 @@ export function fetchSummariesForRegionType(
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
-    const all = await new Api(snapshotUrl).fetchAggregateRegionSummaries(
-      getSubpathFromRegionType(regionType),
-    );
+    const all = (
+      await new Api(snapshotUrl).fetchAggregateRegionSummaries(
+        getSubpathFromRegionType(regionType),
+      )
+    ).filter(summary => regions.findByFipsCode(summary.fips) !== null);
     return all;
   }
   const key = `${snapshotUrl}-${regionType}` || 'null';
@@ -81,9 +82,10 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
       APIRegionSubPath.STATES,
     );
     return all
-      .filter(
-        summaryWithTimeseries =>
-          getStateName(summaryWithTimeseries.state || '') !== undefined,
+      .filter(summaryWithTimeseries =>
+        summaryWithTimeseries?.state
+          ? Boolean(regions.findByStateCode(summaryWithTimeseries.state))
+          : false,
       )
       .map(summaryWithTimeseries => {
         const region = regions.findByFipsCode(summaryWithTimeseries.fips);
@@ -105,15 +107,11 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
       APIRegionSubPath.COUNTIES,
     );
     return all
-      .filter(
-        summaryWithTimeseries =>
-          getStateName(summaryWithTimeseries.state || '') !== undefined,
-      )
       .filter(summaryWithTimeseries => {
         // We don't want to return county projections for counties that we
         // don't have in the regions instance
         const region = regions.findByFipsCode(summaryWithTimeseries.fips);
-        return region instanceof County;
+        return region instanceof County && Boolean(region.state);
       })
       .map(summaryWithTimeseries => {
         const region = regions.findByFipsCodeStrict(summaryWithTimeseries.fips);

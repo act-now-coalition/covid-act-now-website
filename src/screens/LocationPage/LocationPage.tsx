@@ -39,10 +39,8 @@ function LocationPage({ region }: LocationPageProps) {
       />
       <div>
         <SearchHeader
-          setMapOption={setMapOption}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-          region={region}
         />
         {/* Shows a loading screen if projections are not loaded yet, or
          * if a new location has been selected */}
