@@ -21,7 +21,7 @@ const FeaturedSection: React.FC<{
   return (
     <Row>
       <IconWrapper>
-        <IconById height="36" width="36" />
+        <IconById height="36" width="40" />
       </IconWrapper>
       <Column>
         <TextButton to={url} endIcon={<ArrowIcon />}>

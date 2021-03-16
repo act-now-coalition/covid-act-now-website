@@ -120,6 +120,10 @@ export const TextButton = styled(LinkButton)`
   ${ButtonBase};
   font-size: 1rem;
   padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const LearnLink = styled(TextButton)`
@@ -143,6 +147,11 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
 
   &:nth-child(2) {
     margin-left: 0.75rem;
+  }
+
+  &:hover {
+    background-color: rgba(83, 97, 253, 0.6);
+    border-color: ${COLOR_MAP.NEW_BLUE_PURPLE};
   }
 
   @media (min-width: ${mobileBreakpoint}) {

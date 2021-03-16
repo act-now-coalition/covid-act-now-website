@@ -45,6 +45,7 @@ export const COLOR_MAP = {
   },
   BLUE: '#3BBCE6',
   LIGHT_BLUE: '#00bfea',
+  NEW_BLUE_PURPLE: '#5361FD', // rename when new button/color system is implemented
   GRAY_BODY_COPY: GREY_4,
   GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
