@@ -5,12 +5,18 @@ import fonts from 'common/theme/fonts';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
+const mobileBreakpointPlus = '960px';
+
 export const StyledFooter = styled.footer`
   box-sizing: content-box;
   background: ${COLOR_MAP.BLACK};
   padding: 1.5rem;
 
   @media (min-width: ${mobileBreakpoint}) {
+    padding: 3rem;
+  }
+
+  @media (min-width: ${mobileBreakpointPlus}) {
     padding: 4rem;
   }
 `;
@@ -53,11 +59,17 @@ export const Section = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     &:not(:last-child) {
       margin-bottom: 0;
-      margin-right: 5rem;
+      margin-right: 3.5rem;
     }
 
     &:last-child {
       align-items: flex-start;
+    }
+  }
+
+  @media (min-width: ${mobileBreakpointPlus}) {
+    &:not(:last-child) {
+      margin-right: 5rem;
     }
   }
 `;
@@ -114,6 +126,7 @@ export const ButtonBase = css`
   color: white;
   width: fit-content;
   text-transform: none;
+  line-height: 1.4;
 `;
 
 export const TextButton = styled(LinkButton)`
@@ -122,7 +135,10 @@ export const TextButton = styled(LinkButton)`
   padding: 0;
 
   &:hover {
-    text-decoration: underline;
+    ${ArrowIcon} {
+      transform: translateX(10px);
+      transition: transform 0.06s ease-in-out;
+    }
   }
 `;
 
@@ -144,7 +160,7 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   padding: 0.4rem 0.75rem;
   border: 1px solid ${COLOR_MAP.GREY_3};
   display: ${({ desktopOnly }) => desktopOnly && 'none'};
-
+  white-space: nowrap;
   &:nth-child(2) {
     margin-left: 0.75rem;
   }
