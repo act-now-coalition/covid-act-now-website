@@ -24,32 +24,12 @@ const stateFipsCodes = regions.states.map(state => state.fipsCode);
  * This is special cased from the normal map display. The mariana islands are
  * small enough that simply showing the islands is not a UX that works.
  */
-const MarianaIslands = ({
-  fill,
-  onMouseEnter,
-  onMouseLeave,
-  onClick,
-  tabIndex,
-}: {
-  fill: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-  onClick: () => void;
-  tabIndex: number;
-}) => {
-  return (
-    <g
-      transform="translate(40, 395) scale(0.8)"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      tabIndex={tabIndex}
-    >
-      <rect width="20" height="20" fill={fill} />
-      <text transform="translate(25, 15)">CNMI</text>
-    </g>
-  );
-};
+const MarianaIslands = ({ fill }: { fill: string }) => (
+  <g transform="translate(40, 395) scale(0.8)" tabIndex={-1}>
+    <rect width="20" height="20" fill={fill} />
+    <text transform="translate(25, 15)">CNMI</text>
+  </g>
+);
 
 interface USACountyMapProps {
   stateClickHandler: (stateName: string) => void;
@@ -95,52 +75,33 @@ const USACountyMap = React.memo(
                         fipsCode,
                       ) as StateType;
 
+                      const { stateCode, fullName } = state;
+                      const fillColor = getFillColor(fipsCode);
+
                       // This flag is used to increase an invisible border around Hawaii and Puerto Rico
                       // to increase their effective target size
-                      const expandTapArea =
-                        state.stateCode === 'HI' || state.stateCode === 'PR';
+                      const expandTapArea = ['HI', 'PR'].includes(stateCode);
 
-                      // Using a custom SVG to place the northern mariana islands to increase
-                      // accessibility due to the small size.
-                      if (state.stateCode === 'MP') {
-                        return (
-                          <Link
-                            key={state.stateCode}
-                            to={state.relativeUrl}
-                            aria-label={state.fullName}
-                            onClick={() => trackMapClick(state.fullName)}
-                            tabIndex={-1}
-                          >
-                            <MarianaIslands
-                              key={geo.rsmKey}
-                              onMouseEnter={() =>
-                                setTooltipContent(state.fullName)
-                              }
-                              onMouseLeave={onMouseLeave}
-                              onClick={() => stateClickHandler(state.fullName)}
-                              fill={getFillColor(geo.id)}
-                              tabIndex={-1}
-                            />
-                          </Link>
-                        );
-                      } else {
-                        return (
-                          <Link
-                            key={state.stateCode}
-                            to={state.relativeUrl}
-                            aria-label={state.fullName}
-                            onClick={() => trackMapClick(state.fullName)}
-                            tabIndex={-1}
-                          >
+                      return (
+                        <Link
+                          key={stateCode}
+                          to={state.relativeUrl}
+                          aria-label={fullName}
+                          onClick={() => {
+                            trackMapClick(fullName);
+                            stateClickHandler(fullName);
+                          }}
+                          tabIndex={-1}
+                          onMouseEnter={() => setTooltipContent(fullName)}
+                          onMouseLeave={onMouseLeave}
+                        >
+                          {stateCode === 'MP' ? (
+                            <MarianaIslands key={fipsCode} fill={fillColor} />
+                          ) : (
                             <Geography
-                              key={geo.rsmKey}
+                              key={fipsCode}
                               geography={geo}
-                              onMouseEnter={() =>
-                                setTooltipContent(state.fullName)
-                              }
-                              onMouseLeave={onMouseLeave}
-                              onClick={() => stateClickHandler(state.fullName)}
-                              fill={getFillColor(geo.id)}
+                              fill={fillColor}
                               fillOpacity={showCounties ? 0 : 1}
                               stroke="white"
                               strokeWidth={expandTapArea ? 35 : 1}
@@ -148,9 +109,9 @@ const USACountyMap = React.memo(
                               role="img"
                               tabIndex={-1}
                             />
-                          </Link>
-                        );
-                      }
+                          )}
+                        </Link>
+                      );
                     })
                 }
               </Geographies>
