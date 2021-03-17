@@ -10,6 +10,7 @@ import {
   Row,
   IconWrapper,
 } from './Menu.style';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const FeaturedSection: React.FC<{
   section: FeaturedItem;
@@ -24,7 +25,11 @@ const FeaturedSection: React.FC<{
         <IconById height="36" width="40" aria-hidden="true" />
       </IconWrapper>
       <Column>
-        <TextButton to={url} endIcon={<ArrowIcon />}>
+        <TextButton
+          to={url}
+          scroll={(element: any) => scrollWithOffset(element, -80)}
+          endIcon={<ArrowIcon />}
+        >
           {cta}
         </TextButton>
         <FeaturedDescription>{description}</FeaturedDescription>
