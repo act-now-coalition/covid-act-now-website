@@ -2,7 +2,7 @@ import React from 'react';
 import { footerContent } from 'cms-content/footer';
 import FeaturedSection from './FeaturedSection';
 import SocialButtonsBlock from './SocialButtonsBlock';
-import Logo from 'assets/images/footerlogoDarkWithURL';
+import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { FeaturedItem, LinkItem } from 'cms-content/footer';
 import {
   ContentWrapper,
@@ -43,7 +43,7 @@ const MenuContent: React.FC = () => {
       </Section>
       <Section>
         <LogoWrapper to="/donate">
-          <Logo />
+          <LogoNonUrl />
         </LogoWrapper>
         <AboutCopy>{aboutUs}</AboutCopy>
         <Row>

@@ -138,7 +138,7 @@ export const TextButton = styled(LinkButton)`
 
   &:hover {
     ${ArrowIcon} {
-      transform: translateX(10px);
+      transform: translateX(6px);
       transition: transform 0.06s ease-in-out;
     }
   }
@@ -205,4 +205,5 @@ export const IconWrapper = styled.div`
 
 export const LogoWrapper = styled(Link)`
   line-height: 1;
+  margin-bottom: 1.25rem;
 `;

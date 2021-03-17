@@ -25,12 +25,6 @@ const SocialButtonsBlock = () => {
       <ExternalLink href="https://twitter.com/CovidActNow" aria-label="Twitter">
         <TwitterIcon />
       </ExternalLink>
-      <ExternalLink
-        href="https://www.linkedin.com/company/covid-act-now/?viewAsMember=true"
-        aria-label="Linkedin"
-      >
-        <LinkedInIcon />
-      </ExternalLink>
       <Link to="/terms" aria-label="Terms">
         Terms
       </Link>
