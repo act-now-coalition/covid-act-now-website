@@ -9,6 +9,7 @@ import {
   TextButton,
   Row,
   IconWrapper,
+  RowWithSpacing,
 } from './Menu.style';
 import { scrollWithOffset } from 'components/TableOfContents';
 
@@ -20,21 +21,23 @@ const FeaturedSection: React.FC<{
   const IconById = iconId === 'API' ? ApiIcon : EmailAlertIcon;
 
   return (
-    <Row>
+    <RowWithSpacing>
       <IconWrapper>
         <IconById height="36" width="40" aria-hidden="true" />
       </IconWrapper>
-      <Column>
-        <TextButton
-          to={url}
-          scroll={(element: any) => scrollWithOffset(element, -80)}
-          endIcon={<ArrowIcon />}
-        >
-          {cta}
-        </TextButton>
-        <FeaturedDescription>{description}</FeaturedDescription>
-      </Column>
-    </Row>
+      <TextButton
+        to={url}
+        scroll={(element: any) => scrollWithOffset(element, -80)}
+      >
+        <Column>
+          <Row>
+            {cta}
+            <ArrowIcon />
+          </Row>
+          <FeaturedDescription>{description}</FeaturedDescription>
+        </Column>
+      </TextButton>
+    </RowWithSpacing>
   );
 };
 

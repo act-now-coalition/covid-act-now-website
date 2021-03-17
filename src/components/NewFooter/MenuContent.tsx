@@ -11,10 +11,10 @@ import {
   SectionHeader,
   ArrowIcon,
   OutlinedButton,
-  Row,
   LearnLink,
   AboutCopy,
   LogoWrapper,
+  RowWithSpacing,
 } from './Menu.style';
 
 const MenuContent: React.FC = () => {
@@ -46,10 +46,10 @@ const MenuContent: React.FC = () => {
           <LogoNonUrl />
         </LogoWrapper>
         <AboutCopy>{aboutUs}</AboutCopy>
-        <Row>
+        <RowWithSpacing>
           <OutlinedButton to="/about">Learn more about us</OutlinedButton>
           <OutlinedButton to="/about#contact-us">Contact us</OutlinedButton>
-        </Row>
+        </RowWithSpacing>
         <SocialButtonsBlock />
       </Section>
     </ContentWrapper>

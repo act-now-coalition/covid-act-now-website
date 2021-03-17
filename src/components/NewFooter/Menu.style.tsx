@@ -88,18 +88,24 @@ export const Column = styled.div`
   flex-direction: column;
 `;
 
+export const ArrowIcon = styled(ArrowForwardIcon)`
+  color: ${COLOR_MAP.GREY_3};
+  font-size: 1.25rem;
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
 
-  &:not(:last-of-type) {
-    margin-bottom: 1.75rem;
+  ${ArrowIcon} {
+    margin-left: 8px;
   }
 `;
 
-export const ArrowIcon = styled(ArrowForwardIcon)`
-  color: ${COLOR_MAP.GREY_3};
-  font-size: 1.25rem;
+export const RowWithSpacing = styled(Row)`
+  &:not(:last-of-type) {
+    margin-bottom: 1.75rem;
+  }
 `;
 
 export const BodyCopy = css`
@@ -111,6 +117,7 @@ export const BodyCopy = css`
 
 export const FeaturedDescription = styled.p`
   ${BodyCopy};
+  letter-spacing: 0;
 `;
 
 export const AboutCopy = styled.p`
