@@ -121,7 +121,7 @@ const LocationPageHeader = (props: {
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
-              <NotificationArea projections={projections} />
+              <NotificationArea region={region} />
             </SectionHalf>
           </HeaderSection>
           <LocationHeaderStats
