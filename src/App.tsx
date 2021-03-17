@@ -17,13 +17,13 @@ import PageviewTracker, {
   EventCategory,
 } from 'components/Analytics';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
-
+import HomePage from 'screens/HomePage/HomePage';
 import NavBar from 'components/AppBar';
 import Footer from 'components/Footer/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
-const HomePage = lazy(() => import('screens/HomePage/HomePage'));
+
 const Embed = lazy(() => import('screens/Embed/Embed'));
 const AllStates = lazy(() => import('screens/internal/AllStates/AllStates'));
 const VaccinationPhases = lazy(() =>
