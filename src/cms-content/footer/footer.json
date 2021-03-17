@@ -17,7 +17,7 @@
   "featuredSections": [
     {
       "cta": "Alerts",
-      "url": "/subscribe",
+      "url": "#share",
       "description": "Receive emails when your location changes risk level or vaccine eligibility",
       "iconId": "EMAIL"
     },
