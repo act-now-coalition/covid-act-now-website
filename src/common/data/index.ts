@@ -69,10 +69,12 @@ export function getVulnPopulationPercentForFips(
   return fipsToSurgoPopVulnerable[fips];
 }
 
-export function importStateGeographies() {
+export type StatesTopology = typeof import('./states-10m.json');
+export function importStateGeographies(): Promise<StatesTopology> {
   return importJson('states-10m', import('./states-10m.json'));
 }
 
-export function importCountyGeographies() {
+export type CountiesTopology = typeof import('./counties-10m.json');
+export function importCountyGeographies(): Promise<CountiesTopology> {
   return importJson('counties-10m', import('./counties-10m.json'));
 }

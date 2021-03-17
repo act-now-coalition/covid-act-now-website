@@ -8,6 +8,7 @@ import regions, { County, MetroArea, State, Region } from 'common/regions';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { useCountyGeographies, useStateGeographies } from 'common/hooks';
 import * as Styles from './RegionMap.style';
+import { CountiesTopology } from 'common/data';
 
 const RegionMap: React.FC<{
   height?: number;
@@ -152,7 +153,7 @@ function getProjectionConfig(
 }
 
 function buildCountyGeometries(
-  countiesTopoJson: any,
+  countiesTopoJson: CountiesTopology,
   countyFipsList: string[],
 ) {
   const objects = countiesTopoJson.objects;
