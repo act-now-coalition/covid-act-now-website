@@ -12,7 +12,6 @@ const MapCounties: React.FC<{
     return <g />;
   }
 
-  console.log('render');
   return (
     <Geographies geography={allCountiesTopoJson}>
       {({ geographies }) =>
