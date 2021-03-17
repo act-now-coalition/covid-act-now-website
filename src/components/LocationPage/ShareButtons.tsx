@@ -19,7 +19,7 @@ import * as urls from 'common/urls';
 import { County, MetroArea, Region, State } from 'common/regions';
 import { fail } from 'common/utils';
 import { Metric } from 'common/metricEnum';
-import { timeFormats, formatDateTime } from 'common/utils/time-utils';
+import { TimeFormat, formatDateTime } from 'common/utils/time-utils';
 
 const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
   const imageBaseUrl = ShareImageUrlJSON.share_image_url;
@@ -71,7 +71,7 @@ const InnerContent = ({
   };
 
   const downloadLink = getShareImageUrl(region, chartIdentifier);
-  const downloadDate = formatDateTime(new Date(), timeFormats.YYYY_MM_DD);
+  const downloadDate = formatDateTime(new Date(), TimeFormat.YYYY_MM_DD);
 
   function makeDownloadFilename(chartIdentifier: number) {
     const chartDownloadType = {

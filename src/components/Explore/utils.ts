@@ -19,7 +19,7 @@ import regions, {
 } from 'common/regions';
 import { fail } from 'assert';
 import { pluralize } from 'common/utils';
-import { timeFormats, formatDateTime } from 'common/utils/time-utils';
+import { TimeFormat, formatDateTime } from 'common/utils/time-utils';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -279,7 +279,7 @@ function getLocationFileName(region: Region) {
 }
 
 export function getImageFilename(locations: Region[], metric: ExploreMetric) {
-  const downloadDate = formatDateTime(new Date(), timeFormats.YYYY_MM_DD);
+  const downloadDate = formatDateTime(new Date(), TimeFormat.YYYY_MM_DD);
   const chartId = getChartIdByMetric(metric);
   const fileNameSuffix = `${chartId}-${downloadDate}`;
 

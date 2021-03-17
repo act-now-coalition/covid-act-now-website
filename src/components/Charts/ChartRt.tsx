@@ -30,6 +30,7 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
+import { TimeFormat } from 'common/utils/time-utils';
 
 type PointRt = Omit<Column, 'y'> & {
   y: RtRange;
@@ -110,7 +111,7 @@ const ChartRt = ({
       <Tooltip
         left={marginLeft + getXCoord(d)}
         top={marginTop + getYCoord(d)}
-        title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
+        title={formatUtcDate(getDate(d), TimeFormat.MMM_D_YYYY)}
         subtitle="Infection rate"
         subtext={isConfirmed ? undefined : 'Data might change'}
         width="150px"

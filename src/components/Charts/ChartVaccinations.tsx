@@ -18,6 +18,7 @@ import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
 import { getUtcScale, getTimeAxisTicks } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
+import { TimeFormat } from 'common/utils/time-utils';
 
 const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
@@ -65,7 +66,7 @@ const VaccinesTooltip: React.FC<{
       width={'160px'}
       top={top(pointInitiated)}
       left={left(pointCompleted ? pointCompleted : pointInitiated)}
-      title={formatUtcDate(new Date(pointInitiated.x), 'MMM D, YYYY')}
+      title={formatUtcDate(new Date(pointInitiated.x), TimeFormat.MMM_D_YYYY)}
     >
       <Styles.TooltipLine>
         <Styles.TooltipLabel>

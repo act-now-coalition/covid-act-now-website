@@ -8,7 +8,6 @@ import {
   WarningIcon,
   PurpleInfoIcon,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { Projections } from 'common/models/Projections';
 import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
@@ -39,11 +38,7 @@ const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '56', // Wyoming
 ];
 
-const NotificationArea: React.FC<{ projections: Projections }> = ({
-  projections,
-}) => {
-  const region = projections.region;
-
+const NotificationArea: React.FC<{ region: Region }> = ({ region }) => {
   enum Notification {
     HospitalizationsPeak,
     ExposureNotifications,
@@ -86,7 +81,7 @@ const NotificationArea: React.FC<{ projections: Projections }> = ({
         {notification === Notification.Vulnerability && (
           <VulnerabilityCopy
             locationName={region.shortName}
-            fips={projections.fips}
+            fips={region.fipsCode}
           />
         )}
       </SectionColumn>
