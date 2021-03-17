@@ -7,9 +7,8 @@ import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
 import { Metric } from 'common/metricEnum';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
-import { Region } from 'common/regions';
+import { County, Region } from 'common/regions';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { ThermometerImage } from 'components/Thermometer';
 import LocationPageHeading from './LocationPageHeading';
@@ -50,7 +49,7 @@ function renderInfoTooltip(): React.ReactElement {
 const noop = () => {};
 
 const LocationPageHeader = (props: {
-  projections: Projections;
+  alarmLevel: Level;
   condensed?: boolean;
   stats: { [key: string]: number | null };
   onMetricClick: (metric: Metric) => void;
@@ -62,13 +61,12 @@ const LocationPageHeader = (props: {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
   ).length;
-  const { projections, region } = props;
+  const { alarmLevel, region } = props;
+  const isCounty = region instanceof County;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
-
-  const alarmLevel = projections.getAlarmLevel();
 
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
 
@@ -132,7 +130,7 @@ const LocationPageHeader = (props: {
           />
         </TopContainer>
         <FooterContainer>
-          {projections.isCounty && !isEmbed && (
+          {isCounty && !isEmbed && (
             <HeaderSubCopy>
               <span>Updated {lastUpdatedDateString} · </span>
               <span>See something wrong? </span>
@@ -146,7 +144,7 @@ const LocationPageHeader = (props: {
               .
             </HeaderSubCopy>
           )}
-          {!projections.isCounty && !isEmbed && (
+          {!isCounty && !isEmbed && (
             <HeaderSubCopy>
               <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
             </HeaderSubCopy>

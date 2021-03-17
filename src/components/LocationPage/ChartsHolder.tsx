@@ -177,7 +177,7 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     <>
       <ChartContentWrapper>
         <LocationPageHeader
-          projections={projections}
+          alarmLevel={projections.getAlarmLevel()}
           stats={projections.getMetricValues()}
           onMetricClick={metric => onClickMetric(metric)}
           onHeaderShareClick={onClickShare}
