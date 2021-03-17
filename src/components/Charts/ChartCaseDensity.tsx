@@ -44,9 +44,11 @@ const hasData = (d: any) =>
   isDate(getDate(d)) && Number.isFinite(getYCaseDensity(d));
 
 enum Period {
-  DAYS_7 = 7,
+  DAYS_14 = 14,
   DAYS_30 = 30,
   DAYS_90 = 90,
+  DAYS_120 = 120,
+  DAYS_180 = 180,
   ALL = -1,
 }
 
@@ -164,6 +166,18 @@ const ChartCaseDensity: FunctionComponent<{
             all
           </PeriodButton>
           <PeriodButton
+            $selected={period === Period.DAYS_180}
+            onClick={() => setPeriod(Period.DAYS_180)}
+          >
+            180 days
+          </PeriodButton>
+          <PeriodButton
+            $selected={period === Period.DAYS_120}
+            onClick={() => setPeriod(Period.DAYS_120)}
+          >
+            120 days
+          </PeriodButton>
+          <PeriodButton
             $selected={period === Period.DAYS_90}
             onClick={() => setPeriod(Period.DAYS_90)}
           >
@@ -176,10 +190,10 @@ const ChartCaseDensity: FunctionComponent<{
             30 days
           </PeriodButton>
           <PeriodButton
-            $selected={period === Period.DAYS_7}
-            onClick={() => setPeriod(Period.DAYS_7)}
+            $selected={period === Period.DAYS_14}
+            onClick={() => setPeriod(Period.DAYS_14)}
           >
-            7 days
+            14 days
           </PeriodButton>
         </ButtonGroup>
       </ButtonsContainer>
