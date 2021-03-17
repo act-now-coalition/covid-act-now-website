@@ -6,12 +6,12 @@ import {
   Column,
   ArrowIcon,
   FeaturedDescription,
-  TextButton,
+  TextLink,
   Row,
   IconWrapper,
   RowWithSpacing,
 } from './Menu.style';
-import { scrollWithOffset } from 'components/TableOfContents';
+// import { scrollWithOffset } from 'components/TableOfContents';
 
 const FeaturedSection: React.FC<{
   section: FeaturedItem;
@@ -25,10 +25,7 @@ const FeaturedSection: React.FC<{
       <IconWrapper>
         <IconById height="36" width="40" aria-hidden="true" />
       </IconWrapper>
-      <TextButton
-        to={url}
-        scroll={(element: any) => scrollWithOffset(element, -80)}
-      >
+      <TextLink to={url}>
         <Column>
           <Row>
             {cta}
@@ -36,7 +33,7 @@ const FeaturedSection: React.FC<{
           </Row>
           <FeaturedDescription>{description}</FeaturedDescription>
         </Column>
-      </TextButton>
+      </TextLink>
     </RowWithSpacing>
   );
 };

@@ -97,9 +97,9 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
 
-  ${ArrowIcon} {
-    margin-left: 8px;
-  }
+  // ${ArrowIcon} {
+  //   margin-left: 8px;
+  // }
 `;
 
 export const RowWithSpacing = styled(Row)`
@@ -138,10 +138,15 @@ export const ButtonBase = css`
   line-height: 1.4;
 `;
 
-export const TextButton = styled(LinkButton)`
+export const TextLink = styled(Link)`
   ${ButtonBase};
   font-size: 1rem;
   padding: 0;
+  text-decoration: none;
+
+  ${ArrowIcon} {
+    margin-left: 0.5rem;
+  }
 
   &:hover {
     ${ArrowIcon} {
@@ -151,7 +156,7 @@ export const TextButton = styled(LinkButton)`
   }
 `;
 
-export const LearnLink = styled(TextButton)`
+export const LearnLink = styled(TextLink)`
   &:not(:last-of-type) {
     margin-bottom: 0.5rem;
   }

@@ -26,8 +26,9 @@ const MenuContent: React.FC = () => {
         <SectionHeader>Learn</SectionHeader>
         <Column>
           {learnLinks.map((link: LinkItem) => (
-            <LearnLink key={link.cta} to={link.url} endIcon={<ArrowIcon />}>
+            <LearnLink key={link.cta} to={link.url}>
               {link.cta}
+              <ArrowIcon />
             </LearnLink>
           ))}
         </Column>
