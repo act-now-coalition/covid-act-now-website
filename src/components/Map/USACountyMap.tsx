@@ -6,31 +6,16 @@ import { colorFromLocationSummary } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 import regions, { State as StateType } from 'common/regions';
+import stateGeographies from 'common/data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
-import COUNTIES_JSON from './data/counties-10m.json';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import MapCounties from './MapCounties';
 
 function trackMapClick(label: string) {
   trackEvent(EventCategory.MAP, EventAction.NAVIGATE, label);
 }
 
 const stateFipsCodes = regions.states.map(state => state.fipsCode);
-
-/**
- * The COUNTIES_JSON file contains geographies for counties, states and the
- * nation. The following variables simplify the object to contain either
- * state or county, not both (this might make parsing of the geographies faster
- * and reduce our bundle size a bit).
- */
-const geoCounties = {
-  ...COUNTIES_JSON,
-  objects: { counties: COUNTIES_JSON.objects.counties },
-};
-
-const geoStates = {
-  ...COUNTIES_JSON,
-  objects: { states: COUNTIES_JSON.objects.states },
-};
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -80,8 +65,8 @@ const USACountyMap = React.memo(
   }: USACountyMapProps) => {
     const locationSummaries = useSummaries();
 
-    const getFillColor = (geo: any) => {
-      const summary = (locationSummaries && locationSummaries[geo.id]) || null;
+    const getFillColor = (fips: string) => {
+      const summary = (locationSummaries && locationSummaries[fips]) || null;
       return colorFromLocationSummary(summary);
     };
 
@@ -97,24 +82,8 @@ const USACountyMap = React.memo(
         <USStateMapWrapper $showCounties={showCounties}>
           <ComposableMap data-tip="" projection={projection} height={500}>
             <g transform="translate(0, -50)">
-              {showCounties && (
-                <Geographies geography={geoCounties}>
-                  {({ geographies }) =>
-                    geographies.map(geo => {
-                      return (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill={getFillColor(geo)}
-                          strokeWidth={0}
-                          role="img"
-                        />
-                      );
-                    })
-                  }
-                </Geographies>
-              )}
-              <Geographies geography={geoStates}>
+              {showCounties && <MapCounties getFillColor={getFillColor} />}
+              <Geographies geography={stateGeographies}>
                 {({ geographies }) =>
                   geographies
                     .filter(geo => stateFipsCodes.includes(geo.id))
@@ -149,7 +118,7 @@ const USACountyMap = React.memo(
                               }
                               onMouseLeave={onMouseLeave}
                               onClick={() => stateClickHandler(state.fullName)}
-                              fill={getFillColor(geo)}
+                              fill={getFillColor(geo.id)}
                               tabIndex={-1}
                             />
                           </Link>
@@ -171,7 +140,7 @@ const USACountyMap = React.memo(
                               }
                               onMouseLeave={onMouseLeave}
                               onClick={() => stateClickHandler(state.fullName)}
-                              fill={getFillColor(geo)}
+                              fill={getFillColor(geo.id)}
                               fillOpacity={showCounties ? 0 : 1}
                               stroke="white"
                               strokeWidth={expandTapArea ? 35 : 1}
