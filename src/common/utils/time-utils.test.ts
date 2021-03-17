@@ -1,8 +1,11 @@
 import {
   TimeFormat,
+  UnitsOfTime,
   formatDateTime,
   parseDateString,
   dateToUTC,
+  addTime,
+  subtractTime,
 } from 'common/utils/time-utils';
 
 // Date object constructor takes a zero-indexed month number.
@@ -55,5 +58,41 @@ describe('convert to UTC', () => {
   // Ambiguous date is assumed to be in UTC.
   test('Date object to UTC', () => {
     expect(dateToUTC(testDate).toISOString()).toBe('2020-03-01T08:00:00.000Z');
+  });
+});
+
+describe('add time', () => {
+  test('Add hours', () => {
+    expect(addTime(testDate, 8, UnitsOfTime.HOURS).toISOString()).toBe(
+      '2020-03-01T16:00:00.000Z',
+    );
+  });
+  test('Add weeks', () => {
+    expect(addTime(testDate, 2, UnitsOfTime.WEEKS)).toEqual(
+      new Date(2020, 2, 15),
+    );
+  });
+  test('Add months', () => {
+    expect(addTime(testDate, 3, UnitsOfTime.MONTHS)).toEqual(
+      new Date(2020, 5, 1),
+    );
+  });
+});
+
+describe('subtract time', () => {
+  test('Subtract hours', () => {
+    expect(subtractTime(testDate, 8, UnitsOfTime.HOURS).toISOString()).toBe(
+      '2020-03-01T00:00:00.000Z',
+    );
+  });
+  test('Subtract weeks', () => {
+    expect(subtractTime(testDate, 2, UnitsOfTime.WEEKS)).toEqual(
+      new Date(2020, 1, 16),
+    );
+  });
+  test('Subtract months', () => {
+    expect(subtractTime(testDate, 3, UnitsOfTime.MONTHS)).toEqual(
+      new Date(2019, 11, 1),
+    );
   });
 });
