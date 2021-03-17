@@ -6,17 +6,7 @@ import {
 } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
-import LocationPage from 'screens/LocationPage';
-import Embed from 'screens/Embed/Embed';
-import AllStates from 'screens/internal/AllStates/AllStates';
-import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPhases';
-import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
-import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
-import ShareImage from 'screens/internal/ShareImage/ShareImage';
-import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-import NavBar from 'components/AppBar';
-import Footer from 'components/Footer/Footer';
-import ScrollToTop from 'components/ScrollToTop';
+
 import theme from 'assets/theme';
 import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
@@ -27,9 +17,29 @@ import PageviewTracker, {
   EventCategory,
 } from 'components/Analytics';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
-import HomePage from 'screens/HomePage/HomePage';
+
+import NavBar from 'components/AppBar';
+import Footer from 'components/Footer/Footer';
+import ScrollToTop from 'components/ScrollToTop';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
+const HomePage = lazy(() => import('screens/HomePage/HomePage'));
+const Embed = lazy(() => import('screens/Embed/Embed'));
+const AllStates = lazy(() => import('screens/internal/AllStates/AllStates'));
+const VaccinationPhases = lazy(() =>
+  import('screens/internal/VaccinationPhases/VaccinationPhases'),
+);
+const CompareSnapshots = lazy(() =>
+  import('screens/internal/CompareSnapshots/CompareSnapshots'),
+);
+const ExportImage = lazy(() =>
+  import('screens/internal/ShareImage/ChartExportImage'),
+);
+const ShareImage = lazy(() => import('screens/internal/ShareImage/ShareImage'));
+const AlertUnsubscribe = lazy(() =>
+  import('screens/AlertUnsubscribe/AlertUnsubscribe'),
+);
+
 const About = lazy(() => import('screens/About/About'));
 const Landing = lazy(() => import('screens/Learn/Landing/Landing'));
 const MetricExplainer = lazy(() => import('screens/Learn/MetricExplainer'));
@@ -42,6 +52,7 @@ const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
 const Donate = lazy(() => import('screens/Donate/Donate'));
+const LocationPage = lazy(() => import('screens/LocationPage'));
 const DeepDivesRedirect = lazy(() =>
   import('screens/Learn/Articles/DeepDivesRouter'),
 );
