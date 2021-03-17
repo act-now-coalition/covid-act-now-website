@@ -2,16 +2,16 @@
   "aboutUs": "Covid Act Now is an independent nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.",
   "learnLinks": [
     {
-      "url": "/covid-risk-levels-metrics#infection-rate",
-      "cta": "What is infection rate?"
+      "url": "/covid-explained/covid-variants-vaccines",
+      "cta": "How do variants affect vaccines?"
     },
     {
-      "cta": "How are risk levels determined?",
-      "url": "/covid-risk-levels-metrics#how-covid-risk-is-determined"
+      "cta": "Are COVID vaccines safe?",
+      "url": "/faq#are-covid-vaccines-safe"
     },
     {
-      "cta": "How do variants impact vaccines?",
-      "url": "/covid-explained/covid-variants-vaccines"
+      "cta": "How can schools reopen safely?",
+      "url": "/covid-explained/school-guidance"
     }
   ],
   "featuredSections": [
