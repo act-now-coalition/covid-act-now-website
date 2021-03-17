@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 // import Map from 'components/Map/Map';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+// import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 // import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 // import Announcements from './Announcements';
 import { useLocation } from 'react-router-dom';
@@ -12,7 +12,6 @@ import PartnersSection from 'components/PartnersSection/PartnersSection';
 import { formatMetatagDate } from 'common/utils';
 import { VaccinationsBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { getFilterLimit } from 'components/Search';
 import {
   getFinalAutocompleteLocations,
   getGeolocatedRegions,
@@ -23,11 +22,11 @@ import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
-  SectionWrapper,
-  Section,
+  // SectionWrapper,
+  // Section,
   ColumnCentered,
 } from './HomePage.style';
-import { HomepageSearchAutocomplete } from 'components/Search';
+// import { HomepageSearchAutocomplete } from 'components/Search';
 import Toggle from './Toggle/Toggle';
 // import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -57,7 +56,7 @@ export default function HomePage() {
       ? getGeolocatedRegions(geolocationData, countyToZipMap)
       : null;
 
-  const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
+  // const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -106,13 +105,13 @@ export default function HomePage() {
         <div className="App">
           <Content>
             <ColumnCentered id="search">
-              <HomepageSearchAutocomplete
+              {/* <HomepageSearchAutocomplete
                 locations={getFinalAutocompleteLocations(
                   geolocationData,
                   countyToZipMap,
                 )}
-                filterLimit={getFilterLimit()}
-              />
+                filterLimit={51}
+              /> */}
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
                 showCounties={showCounties}
@@ -147,9 +146,9 @@ export default function HomePage() {
             <Announcements /> */}
           </Content>
           <PartnersSection />
-          <div ref={shareBlockRef}>
+          {/* <div ref={shareBlockRef}>
             <ShareModelBlock />
-          </div>
+          </div> */}
         </div>
       </main>
     </>
