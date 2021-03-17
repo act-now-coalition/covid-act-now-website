@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import fonts from 'common/theme/fonts';
@@ -30,7 +31,7 @@ export const ContentWrapper = styled.div`
 
   img {
     height: 20px;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     align-self: center;
   }
 
@@ -179,13 +180,20 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
 export const SocialButtonsRow = styled.div`
     display: flex;
     svg {
-        color: white;
+        fill: white;
+        font-size: 1.75rem;
+        &:hover {
+          fill: ${COLOR_MAP.NEW_BLUE_PURPLE};
+        }
     }
     a {
       color: white;
         &:not(:last-of-type) {
-            margin-right: .5rem;
+            margin-right: .75rem;
         }
+        &:last-of-type {
+          align-self: center;
+      }
     }
     }
 `;
@@ -193,4 +201,8 @@ export const SocialButtonsRow = styled.div`
 export const IconWrapper = styled.div`
   display: block;
   margin-right: 1rem;
+`;
+
+export const LogoWrapper = styled(Link)`
+  line-height: 1;
 `;

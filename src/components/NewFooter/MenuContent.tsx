@@ -14,6 +14,7 @@ import {
   Row,
   LearnLink,
   AboutCopy,
+  LogoWrapper,
 } from './Menu.style';
 
 const MenuContent: React.FC = () => {
@@ -25,7 +26,7 @@ const MenuContent: React.FC = () => {
         <SectionHeader>Learn</SectionHeader>
         <Column>
           {learnLinks.map((link: LinkItem) => (
-            <LearnLink to={link.url} endIcon={<ArrowIcon />}>
+            <LearnLink key={link.cta} to={link.url} endIcon={<ArrowIcon />}>
               {link.cta}
             </LearnLink>
           ))}
@@ -37,11 +38,13 @@ const MenuContent: React.FC = () => {
       <Section>
         <SectionHeader>Featured</SectionHeader>
         {featuredSections.map((section: FeaturedItem) => (
-          <FeaturedSection section={section} />
+          <FeaturedSection key={section.cta} section={section} />
         ))}
       </Section>
       <Section>
-        <Logo />
+        <LogoWrapper to="/donate">
+          <Logo />
+        </LogoWrapper>
         <AboutCopy>{aboutUs}</AboutCopy>
         <Row>
           <OutlinedButton to="/about">Learn more about us</OutlinedButton>

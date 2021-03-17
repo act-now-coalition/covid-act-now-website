@@ -4,7 +4,7 @@ import MenuContent from './MenuContent';
 
 const Footer: React.FC = () => {
   return (
-    <StyledFooter>
+    <StyledFooter role="contentinfo">
       <MenuContent />
     </StyledFooter>
   );
