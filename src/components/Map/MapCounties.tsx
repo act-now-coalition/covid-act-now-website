@@ -20,7 +20,6 @@ const MapCounties: React.FC<{
             key={geo.id}
             geography={geo}
             fill={getFillColor(geo.id)}
-            strokeWidth={0}
             role="img"
           />
         ))
