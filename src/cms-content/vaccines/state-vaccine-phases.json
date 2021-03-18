@@ -1921,6 +1921,13 @@
           "startDate": "March 11"
         },
         {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-18T19:27:14.923Z",
+          "phase": "1E",
+          "description": "* Individuals 16+ with medium-risk underlying conditions",
+          "startDate": "March 19"
+        },
+        {
           "currentlyEligible": true,
           "updatedAt": "2021-03-15T03:49:27.379Z",
           "phase": "2A",
@@ -1933,6 +1940,20 @@
           "phase": "2B",
           "description": "* Adults 50-59",
           "startDate": "March 11"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-18T19:28:02.436Z",
+          "phase": "2C",
+          "description": "* Adults 40+",
+          "startDate": "March 19"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-18T19:28:39.032Z",
+          "phase": "2D",
+          "description": "* Individuals 16+",
+          "startDate": "Mach 29"
         },
         {
           "currentlyEligible": false,
