@@ -1,16 +1,22 @@
 import { Markdown } from '../utils';
 import footer from './footer.json';
 
-interface LinkItem {
+export interface LinkItem {
   url: string;
   cta: string;
 }
 
-interface FeaturedItem {
+export enum SectionId {
+  API = 'API',
+  DAILY_DOWNLOAD = 'DAILY_DOWNLOAD',
+  ALERTS = 'ALERTS',
+}
+
+export interface FeaturedItem {
   cta: string;
   url: string;
   description: string;
-  iconId: string;
+  iconId: SectionId;
 }
 
 interface FooterContent {
