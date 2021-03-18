@@ -10,6 +10,7 @@ import {
   subtractTime,
   formatUTCDateTime,
 } from 'common/utils/time-utils';
+import { Column } from 'common/models/Projection';
 
 export const last = (list: any[]) => list[list.length - 1];
 
@@ -200,10 +201,10 @@ export function getTimeAxisTicks(from: Date, to: Date) {
   );
 }
 
-export function getColumnDate({ x }: { x: number }): Date {
+export function getColumnDate({ x }: Column): Date {
   return new Date(x);
 }
 
-export function formatTooltipColumnDate({ x }: { x: number }): string {
-  return formatUTCDateTime(getColumnDate({ x }), TimeFormat.MMM_D_YYYY);
+export function formatTooltipColumnDate(data: Column): string {
+  return formatUTCDateTime(getColumnDate(data), TimeFormat.MMM_D_YYYY);
 }
