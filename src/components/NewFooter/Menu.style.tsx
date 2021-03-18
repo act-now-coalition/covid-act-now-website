@@ -91,15 +91,12 @@ export const Column = styled.div`
 export const ArrowIcon = styled(ArrowForwardIcon)`
   color: ${COLOR_MAP.GREY_3};
   font-size: 1.25rem;
+  margin-left: 0.5rem;
 `;
 
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
-
-  // ${ArrowIcon} {
-  //   margin-left: 8px;
-  // }
 `;
 
 export const RowWithSpacing = styled(Row)`
@@ -143,10 +140,6 @@ export const TextLink = styled(Link)`
   font-size: 1rem;
   padding: 0;
   text-decoration: none;
-
-  ${ArrowIcon} {
-    margin-left: 0.5rem;
-  }
 
   &:hover {
     ${ArrowIcon} {
