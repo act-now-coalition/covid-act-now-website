@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import { last, isNull } from 'lodash';
-import moment from 'moment';
 import {
   formatPercent,
   formatDecimal,
   getPercentChange,
   formatEstimate,
 } from 'common/utils';
+import {
+  parseDateUnix,
+  TimeFormat,
+  formatUTCDateTime,
+} from 'common/utils/time-utils';
 
 const getTwoWeekPercentChange = (series: any[]): number | null => {
   const lastTwoWeeks = series.slice(-15);
@@ -43,9 +47,10 @@ export function getNationalText(): React.ReactElement {
   );
 
   const lastDate = last(dates);
-  const lastDateFormatted: string = moment
-    .utc(lastDate)
-    .format('MMMM Do, YYYY');
+  const lastDateFormatted: string = formatUTCDateTime(
+    parseDateUnix(lastDate!),
+    TimeFormat.MMMM_D_YYYY,
+  );
 
   const getChangeDescriptorCopy = (percentChange: number): string => {
     const changeByCopy = `by about ${formatPercent(Math.abs(percentChange))}`;
