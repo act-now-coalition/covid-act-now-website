@@ -18,7 +18,7 @@ function locationName(region: Region) {
 }
 
 export function getPageTitle(region: Region): string {
-  return `${locationName(region)} - COVID Data & Key Metrics`;
+  return `${locationName(region)} - COVID Vaccine & Risk Tracker`;
 }
 
 export function getPageDescription(region: Region): string {
