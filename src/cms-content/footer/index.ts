@@ -6,11 +6,17 @@ export interface LinkItem {
   cta: string;
 }
 
+export enum SectionId {
+  API = 'API',
+  DAILY_DOWNLOAD = 'DAILY_DOWNLOAD',
+  ALERTS = 'ALERTS',
+}
+
 export interface FeaturedItem {
   cta: string;
   url: string;
   description: string;
-  iconId: string;
+  iconId: SectionId;
 }
 
 interface FooterContent {

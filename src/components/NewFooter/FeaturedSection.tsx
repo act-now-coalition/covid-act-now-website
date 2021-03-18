@@ -1,7 +1,9 @@
 import React from 'react';
-import { FeaturedItem } from 'cms-content/footer';
-import EmailAlertIcon from 'assets/images/EmailAlertIcon';
+import { HashLink } from 'react-router-hash-link';
+import { FeaturedItem, SectionId } from 'cms-content/footer';
 import ApiIcon from 'assets/images/ApiIcon';
+import DailyDownloadIcon from 'assets/images/DailyDownloadIcon';
+import AlertsIcon from 'assets/images/AlertsIcon';
 import {
   Column,
   ArrowIcon,
@@ -11,21 +13,34 @@ import {
   IconWrapper,
   RowWithSpacing,
 } from './Menu.style';
-// import { scrollWithOffset } from 'components/TableOfContents';
+import { scrollWithOffset } from 'components/TableOfContents';
 
 const FeaturedSection: React.FC<{
   section: FeaturedItem;
 }> = ({ section }) => {
   const { url, cta, description, iconId } = section;
 
-  const IconById = iconId === 'API' ? ApiIcon : EmailAlertIcon;
+  const idToIconMap = {
+    [SectionId.API]: ApiIcon,
+    [SectionId.DAILY_DOWNLOAD]: DailyDownloadIcon,
+    [SectionId.ALERTS]: AlertsIcon,
+  };
+  const Icon = idToIconMap[iconId];
+
+  const hashlinkProps =
+    iconId === SectionId.ALERTS
+      ? {
+          as: HashLink,
+          scroll: (element: HTMLElement) => scrollWithOffset(element, -80),
+        }
+      : {};
 
   return (
     <RowWithSpacing>
       <IconWrapper>
-        <IconById height="36" width="40" aria-hidden="true" />
+        <Icon height="36" width="40" aria-hidden="true" />
       </IconWrapper>
-      <TextLink to={url}>
+      <TextLink to={url} {...hashlinkProps}>
         <Column>
           <Row>
             {cta}

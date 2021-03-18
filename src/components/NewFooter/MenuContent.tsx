@@ -43,7 +43,7 @@ const MenuContent: React.FC = () => {
         ))}
       </Section>
       <Section>
-        <LogoWrapper to="/donate">
+        <LogoWrapper to="/">
           <LogoNonUrl />
         </LogoWrapper>
         <AboutCopy>{aboutUs}</AboutCopy>
