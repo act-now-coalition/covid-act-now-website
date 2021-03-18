@@ -161,6 +161,10 @@ export const LearnLink = styled(TextLink)`
     margin-bottom: 0.5rem;
   }
 
+  ${ArrowIcon} {
+    margin-bottom: -4px;
+  }
+
   @media (min-width: ${mobileBreakpoint}) {
     &:last-of-type {
       margin-bottom: 1.75rem;
