@@ -2612,7 +2612,7 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* (NEW) Educators and child care personnel\n* All people 65 years and older\n* People 50 years and older in multigenerational households",
+          "description": "* Educators and child care personnel\n* All people 65 years and older\n* People 50 years and older in multigenerational households",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -2620,11 +2620,11 @@
         {
           "phase": "1B",
           "tier": "2",
-          "currentlyEligible": false,
-          "description": "* High-risk critical workers 50 years and older who work in certain congregate settings",
+          "currentlyEligible": true,
+          "description": "* High-risk critical workers who work in certain congregate settings",
           "expandedDefinitionUrl": "",
-          "startDate": "March 22",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 17",
+          "updatedAt": "2021-03-18T19:31:59.760Z"
         },
         {
           "phase": "1B",
