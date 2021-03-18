@@ -4,6 +4,7 @@ import FeaturedSection from './FeaturedSection';
 import SocialButtonsBlock from './SocialButtonsBlock';
 import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { FeaturedItem, LinkItem } from 'cms-content/footer';
+import TextAndIconWithSpecialWrapping from './TextAndIconWithSpecialWrapping';
 import {
   ContentWrapper,
   Section,
@@ -27,8 +28,10 @@ const MenuContent: React.FC = () => {
         <Column>
           {learnLinks.map((link: LinkItem) => (
             <LearnLink key={link.cta} to={link.url}>
-              {link.cta}
-              <ArrowIcon />
+              <TextAndIconWithSpecialWrapping
+                text={link.cta}
+                icon={<ArrowIcon />}
+              />
             </LearnLink>
           ))}
         </Column>

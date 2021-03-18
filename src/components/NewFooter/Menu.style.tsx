@@ -216,3 +216,7 @@ export const LogoWrapper = styled(Link)`
   line-height: 1;
   margin-bottom: 1.25rem;
 `;
+
+export const NonWrappingSpan = styled.span`
+  white-space: nowrap;
+`;
