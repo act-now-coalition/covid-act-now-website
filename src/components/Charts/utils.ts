@@ -3,6 +3,13 @@ import { range } from 'lodash';
 import moment from 'moment';
 import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
+import {
+  TimeFormat,
+  formatDateTime,
+  TimeUnit,
+  addTime,
+  subtractTime,
+} from 'common/utils/time-utils';
 
 export const last = (list: any[]) => list[list.length - 1];
 
@@ -12,7 +19,7 @@ export const roundAxisLimits = (axisMin: number, axisMax: number) => [
 ];
 
 export const getTruncationDate = (date: Date, truncationDays: number) =>
-  moment(date).subtract(truncationDays, 'days').toDate();
+  subtractTime(date, truncationDays, TimeUnit.DAYS);
 
 export const randomizeId = (name: string): string =>
   `${name}-${Math.random().toFixed(9)}`;
@@ -163,12 +170,12 @@ export const getUtcScale = (
 };
 
 export const getXTickFormat = (date: Date) => {
-  const momentDate = moment(date);
-
   // Shows the year if the tick is in January (0) or December (11)
   const dateFormat =
-    momentDate.month() === 0 || momentDate.month() === 11 ? `MMM 'YY` : 'MMM';
-  return momentDate.format(dateFormat);
+    date.getMonth() === 0 || date.getMonth() === 11
+      ? TimeFormat.MMM_YY
+      : TimeFormat.MMM;
+  return formatDateTime(date, dateFormat).replace(' ', " '");
 };
 
 /**
@@ -189,6 +196,6 @@ export function getTimeAxisTicks(from: Date, to: Date) {
   const dateFrom = moment(from).startOf('month').toDate();
   const numMonths = moment(to).diff(dateFrom, 'months');
   return range(1, numMonths + 1).map((i: number) =>
-    moment(dateFrom).add(i, 'month').toDate(),
+    addTime(dateFrom, i, TimeUnit.MONTHS),
   );
 }

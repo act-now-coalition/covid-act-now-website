@@ -3,6 +3,7 @@ import {
   TimeUnit,
   formatDateTime,
   parseDateString,
+  parseDateUnix,
   dateToUTC,
   addTime,
   subtractTime,
@@ -50,6 +51,20 @@ describe('date string parsing', () => {
   });
   test('Date string to date object', () => {
     expect(parseDateString('2020-03-01')).toEqual(testDate);
+  });
+});
+
+// Unix time are expressed in milliseconds.
+describe('unix time parsing', () => {
+  test('unix time at midnight', () => {
+    expect(parseDateUnix(1583049600000).toISOString()).toBe(
+      '2020-03-01T08:00:00.000Z',
+    );
+  });
+  test('unix time with non-zero minutes and seconds', () => {
+    expect(parseDateUnix(1583080230000).toISOString()).toBe(
+      '2020-03-01T16:30:30.000Z',
+    );
   });
 });
 
