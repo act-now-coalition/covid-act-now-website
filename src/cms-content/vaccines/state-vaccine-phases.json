@@ -159,7 +159,7 @@
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -373,7 +373,7 @@
       "fips": "10",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -752,7 +752,7 @@
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1281,7 +1281,7 @@
       "fips": "28",
       "eligibilityInfoUrl": "https://msdh.ms.gov/msdhsite/_static/14,22816,420,976.html#eligible",
       "vaccinationSignupUrl": "https://covidvaccine.umc.edu/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1565,7 +1565,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "New Jersey",
       "fips": "34",
       "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
@@ -1620,7 +1620,7 @@
       "fips": "35",
       "eligibilityInfoUrl": "https://cv.nmhealth.org/covid-vaccine/",
       "vaccinationSignupUrl": "https://cvvaccine.nmhealth.org/",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1677,7 +1677,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "New York",
       "fips": "36",
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
@@ -1725,7 +1725,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "North Carolina",
       "fips": "37",
       "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot",
