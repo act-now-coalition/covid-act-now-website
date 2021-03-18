@@ -19,18 +19,18 @@
       "cta": "Alerts",
       "url": "#share",
       "description": "Receive emails when your location changes risk level or vaccine eligibility",
-      "iconId": "EMAIL"
+      "iconId": "ALERTS"
     },
     {
       "cta": "Daily Download",
       "description": "Receive daily emails with the latest data and scientific findings",
       "url": "/subscribe#daily-download",
-      "iconId": "EMAIL"
+      "iconId": "DAILY_DOWNLOAD"
     },
     {
       "cta": "Get our data",
       "url": "/data-api",
-      "description": "Download our data or display it on your website or app",
+      "description": "Download all of our data in CSV or JSON files",
       "iconId": "API"
     }
   ]
