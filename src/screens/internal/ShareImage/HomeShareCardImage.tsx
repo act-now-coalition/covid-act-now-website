@@ -10,7 +10,6 @@ import { Header } from './LocationShareCardImage';
  * screenshot that we then use as our OpenGraph image.
  */
 const HomeShareCardImage = () => {
-  // FIXME: do we need <ScreenshotReady> on this one? it was missing before
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header isHomePage />
