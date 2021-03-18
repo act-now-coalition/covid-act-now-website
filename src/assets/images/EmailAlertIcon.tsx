@@ -1,11 +1,14 @@
 import React from 'react';
 
-const EmailAlertsIcon: React.FC = () => {
+const EmailAlertsIcon: React.FC<{ height?: string; width?: string }> = ({
+  height = 32,
+  width = 40,
+}) => {
   return (
     <svg
-      width="40"
-      height="32"
-      viewBox="0 0 40 32"
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

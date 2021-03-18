@@ -13,11 +13,17 @@ import path from 'path';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 import regions from '../../src/common/regions';
 import { Alert } from './interfaces';
-import moment from 'moment';
 import { getFirestore } from '../common/firebase';
 import { SummariesMap } from '../../src/common/location_summaries';
 import { Level } from '../../src/common/level';
 import { resolveSnapshot } from './utils';
+import {
+  dateToUTC,
+  TimeUnit,
+  subtractTime,
+  TimeFormat,
+  formatDateTime,
+} from '../../src/common/utils/time-utils';
 
 const summariesFolder = path.join(__dirname, 'summaries');
 const outputFile = path.join(__dirname, 'alerts.json');
@@ -43,7 +49,10 @@ async function main() {
     const locationName = region.fullName;
     const locationURL = region.canonicalUrl;
     // Use today's date (roughly in the Pacific timezone).
-    const lastUpdated = moment.utc().subtract(8, 'hours').format('MM/DD/YYYY');
+    const lastUpdated = formatDateTime(
+      subtractTime(dateToUTC(new Date()), 8, TimeUnit.HOURS),
+      TimeFormat.MM_DD_YYYY,
+    );
     if (oldLevel !== newLevel && newLevel !== Level.UNKNOWN) {
       alerts[fips] = {
         fips,

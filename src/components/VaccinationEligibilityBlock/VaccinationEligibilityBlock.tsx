@@ -102,7 +102,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         <ButtonsContainer>
           <StyledLinkButton
             $highlighted={!signupLink || selectedTabIndex === 1}
-            to="#share-container"
+            to="#share"
             {...sharedTrackingProps}
             trackingLabel="Vaccination alerts"
             startIcon={<EmailAlertIcon />}

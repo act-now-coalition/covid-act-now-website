@@ -873,6 +873,6 @@ collections:
                 widget: text
               - name: iconId
                 label: Icon ID
-                hint: Determines the associated icon (current options are EMAIL and API)
+                hint: Determines the associated icon
                 widget: select
-                options: ["EMAIL", "API"]
+                options: ["ALERTS", "API", "DAILY_DOWNLOAD"]
