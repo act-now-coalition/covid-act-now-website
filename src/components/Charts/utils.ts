@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import { range } from 'lodash';
+import { range, ceil, min, max } from 'lodash';
 import moment from 'moment';
 import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
@@ -9,13 +8,14 @@ import {
   TimeUnit,
   addTime,
   subtractTime,
+  formatUTCDateTime,
 } from 'common/utils/time-utils';
 
 export const last = (list: any[]) => list[list.length - 1];
 
 export const roundAxisLimits = (axisMin: number, axisMax: number) => [
   axisMin,
-  _.ceil(axisMax, 2),
+  ceil(axisMax, 2),
 ];
 
 export const getTruncationDate = (date: Date, truncationDays: number) =>
@@ -140,8 +140,8 @@ export const getAxisLimits = (
   zones: LevelInfoMap,
 ) => {
   const tickPositions = computeTickPositions(minY, maxY, zones);
-  const minTickPosition = _.min(tickPositions) || minY;
-  const maxTickPosition = _.max(tickPositions) || maxY;
+  const minTickPosition = min(tickPositions) || minY;
+  const maxTickPosition = max(tickPositions) || maxY;
   return roundAxisLimits(minTickPosition, maxTickPosition);
 };
 
@@ -198,4 +198,12 @@ export function getTimeAxisTicks(from: Date, to: Date) {
   return range(1, numMonths + 1).map((i: number) =>
     addTime(dateFrom, i, TimeUnit.MONTHS),
   );
+}
+
+export function getColumnDate({ x }: { x: number }): Date {
+  return new Date(x);
+}
+
+export function formatTooltipColumnDate({ x }: { x: number }): string {
+  return formatUTCDateTime(getColumnDate({ x }), TimeFormat.MMM_D_YYYY);
 }
