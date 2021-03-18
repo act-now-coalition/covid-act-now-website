@@ -2,7 +2,6 @@ import React from 'react';
 import { HomepageLocationScope, homepageLabelMap } from 'common/utils/compare';
 import { SliderContainer } from 'components/Compare/Filters.style';
 import { StyledSlider } from './HomepageSlider.style';
-import VisuallyHiddenDiv from 'components/VisuallyHidden/VisuallyHidden';
 
 /* Last value is set to 99 for styling so that the final mark falls on the slider and not to the right of it */
 const marks = [
@@ -20,9 +19,13 @@ const marks = [
   },
 ];
 
-function getValueLabel(value: number): string {
+function getAriaValueText(value: number): string {
   const item = marks.find(item => item.value === value);
   return item?.label ?? 'Unknown value';
+}
+
+function getAriaLabel(index: number): string {
+  return index < 3 ? marks[index].label : 'Unknown value';
 }
 
 const HomepageSlider: React.FC<{
@@ -30,24 +33,21 @@ const HomepageSlider: React.FC<{
   homepageScope: HomepageLocationScope;
   homepageSliderValue: HomepageLocationScope;
   $isModal: boolean;
-}> = ({ onChange, homepageScope, homepageSliderValue, $isModal }) => {
-  const currentLabel = homepageLabelMap[homepageScope].plural;
-
-  return (
-    <SliderContainer $isModal={$isModal}>
-      <StyledSlider
-        onChange={onChange}
-        value={homepageSliderValue}
-        step={null}
-        marks={marks}
-        track={false}
-        $homepageScope={homepageScope}
-        $isModal={$isModal}
-        aria-label="Select county, metro areas or states"
-        getAriaValueText={getValueLabel}
-      />
-    </SliderContainer>
-  );
-};
+}> = ({ onChange, homepageScope, homepageSliderValue, $isModal }) => (
+  <SliderContainer $isModal={$isModal}>
+    <StyledSlider
+      onChange={onChange}
+      value={homepageSliderValue}
+      step={null}
+      marks={marks}
+      track={false}
+      $homepageScope={homepageScope}
+      $isModal={$isModal}
+      aria-label="Select county, metro areas or states"
+      getAriaValueText={getAriaValueText}
+      getAriaLabel={getAriaLabel}
+    />
+  </SliderContainer>
+);
 
 export default HomepageSlider;
