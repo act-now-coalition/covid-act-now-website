@@ -2621,10 +2621,10 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* High-risk critical workers who work in certain congregate settings",
+          "description": "* High-risk critical workers who work in certain congregate settings (agriculture and fishing, food services, corrections, court system, public transit, remaining first responders)",
           "expandedDefinitionUrl": "",
-          "startDate": "March 17",
-          "updatedAt": "2021-03-18T19:31:59.760Z"
+          "startDate": "March 17, 2021",
+          "updatedAt": "2021-03-18T19:55:00.781Z"
         },
         {
           "phase": "1B",
