@@ -2569,11 +2569,11 @@
         {
           "phase": "1C",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-18T19:30:07.774Z"
         },
         {
           "currentlyEligible": false,
