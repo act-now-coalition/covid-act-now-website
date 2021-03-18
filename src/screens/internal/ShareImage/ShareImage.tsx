@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, RouteComponentProps } from 'react-router-dom';
-import ShareCardImage from './ShareCardImage';
+import HomeShareCardImage from './HomeShareCardImage';
+import LocationShareCardImage from './LocationShareCardImage';
 import ChartShareImage from './ChartShareImage';
 import ChartExportImage from './ChartExportImage';
 import ExploreChartImage from './ExploreChartImage';
@@ -31,7 +32,7 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
   return (
     <Switch>
       {/* HOME PAGE SHARE CARD */}
-      <Route exact path={`${match.path}`} component={ShareCardImage} />
+      <Route exact path={`${match.path}`} component={HomeShareCardImage} />
 
       {/* HOME PAGE MAP IMAGE (used in meta name="image" tag) */}
       <Route exact path={`${match.path}map/`}>
@@ -42,17 +43,17 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
       <Route
         exact
         path={`${match.path}states/:stateId`}
-        component={ShareCardImage}
+        component={LocationShareCardImage}
       />
       <Route
         exact
         path={`${match.path}counties/:countyFipsId`}
-        component={ShareCardImage}
+        component={LocationShareCardImage}
       />
       <Route
         exact
         path={`${match.path}metros/:fipsCode`}
-        component={ShareCardImage}
+        component={LocationShareCardImage}
       />
 
       {/* METRIC CHARTS */}
