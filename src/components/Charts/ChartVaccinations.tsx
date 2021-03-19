@@ -5,7 +5,7 @@ import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatPercent, formatUtcDate } from 'common/utils';
+import { formatPercent } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { ScreenshotReady } from 'components/Screenshot';
@@ -18,9 +18,8 @@ import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
 import { getUtcScale, getTimeAxisTicks } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { TimeFormat } from 'common/utils/time-utils';
+import { getColumnDate, formatTooltipColumnDate } from './utils';
 
-const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
 
 interface LabelInfo {
@@ -66,7 +65,7 @@ const VaccinesTooltip: React.FC<{
       width={'160px'}
       top={top(pointInitiated)}
       left={left(pointCompleted ? pointCompleted : pointInitiated)}
-      title={formatUtcDate(new Date(pointInitiated.x), TimeFormat.MMM_D_YYYY)}
+      title={formatTooltipColumnDate(pointInitiated)}
     >
       <Styles.TooltipLine>
         <Styles.TooltipLabel>
@@ -169,7 +168,7 @@ const VaccinationLines: React.FC<{
     [showTooltip, dateScale, marginLeft],
   );
 
-  const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
   const dateTicks = getTimeAxisTicks(dateFrom, dateTo);
 

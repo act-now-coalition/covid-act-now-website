@@ -8,7 +8,7 @@ import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
 import { CASE_DENSITY_LEVEL_INFO_MAP } from 'common/metrics/case_density';
 import { LevelInfoMap, Level } from 'common/level';
-import { formatUtcDate, formatDecimal } from 'common/utils';
+import { formatDecimal } from 'common/utils';
 import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
@@ -28,18 +28,17 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { TimeFormat } from 'common/utils/time-utils';
+import { getColumnDate, formatTooltipColumnDate } from './utils';
 
 type Point = {
   x: number;
   y: any;
 };
 
-const getDate = (d: Point) => new Date(d.x);
 const getYCaseDensity = (d: Point) => d?.y?.caseDensity;
 const getYNewCases = (d: Point) => d?.y?.newCases;
 const hasData = (d: any) =>
-  isDate(getDate(d)) && Number.isFinite(getYCaseDensity(d));
+  isDate(getColumnDate(d)) && Number.isFinite(getYCaseDensity(d));
 
 const ChartCaseDensity: FunctionComponent<{
   columnData: Column[];
@@ -70,7 +69,7 @@ const ChartCaseDensity: FunctionComponent<{
   const lastPoint = last(data);
   const activeZone = getZoneByValue(getYCaseDensity(lastPoint), zones);
 
-  const dates = data.map(getDate);
+  const dates = data.map(getColumnDate);
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
@@ -91,7 +90,7 @@ const ChartCaseDensity: FunctionComponent<{
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (p: Point) => xScale(getDate(p));
+  const getXCoord = (p: Point) => xScale(getColumnDate(p));
   const getYCoord = (p: Point) => yScale(Math.min(getYCaseDensity(p), capY));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
@@ -104,7 +103,7 @@ const ChartCaseDensity: FunctionComponent<{
     <Tooltip
       left={marginLeft + getXCoord(p)}
       top={marginTop + getYCoord(p)}
-      title={formatUtcDate(getDate(p), TimeFormat.MMM_D_YYYY)}
+      title={formatTooltipColumnDate(p)}
       subtitle="DAILY NEW CASES"
       width={'145px'}
     >

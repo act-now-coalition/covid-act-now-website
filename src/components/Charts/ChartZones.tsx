@@ -7,7 +7,7 @@ import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear } from '@vx/scale';
 import { Column } from 'common/models/Projection';
-import { assert, formatUtcDate, formatPercent } from 'common/utils';
+import { assert, formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
 import { AxisLeft } from './Axis';
@@ -28,20 +28,15 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { TimeFormat } from 'common/utils/time-utils';
+import { getColumnDate, formatTooltipColumnDate } from './utils';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
 };
 
-type ToolTipContent = {
-  subtitle: string;
-  body: string;
-};
-
-const getDate = (d: Point) => new Date(d.x);
 const getY = (d: Point) => d.y;
-const hasData = (d: any) => isDate(getDate(d)) && Number.isFinite(getY(d));
+const hasData = (d: any) =>
+  isDate(getColumnDate(d)) && Number.isFinite(getY(d));
 
 const ChartZones = ({
   width,
@@ -74,7 +69,7 @@ const ChartZones = ({
   const chartHeight = height - marginTop - marginBottom;
 
   const data: Point[] = columnData.filter(hasData);
-  const dates: Date[] = columnData.map(getDate).filter(isDate);
+  const dates: Date[] = columnData.map(getColumnDate).filter(isDate);
 
   const minDate = d3min(dates);
   const maxDate = new Date();
@@ -95,7 +90,7 @@ const ChartZones = ({
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (d: Point) => xScale(getDate(d));
+  const getXCoord = (d: Point) => xScale(getColumnDate(d));
   const getYCoord = (d: Point) => yScale(Math.min(getY(d), capY));
 
   const regions = getChartRegions(yAxisMin, yMax, zones);
@@ -118,7 +113,7 @@ const ChartZones = ({
     <Tooltip
       top={marginTop + getYCoord(d)}
       left={marginLeft + getXCoord(d)}
-      title={formatUtcDate(getDate(d), TimeFormat.MMM_D_YYYY)}
+      title={formatTooltipColumnDate(d)}
       subtitle={getTooltipContent(getY(d)).subtitle}
       width={getTooltipContent(getY(d)).width}
     >
