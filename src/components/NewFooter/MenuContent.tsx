@@ -46,7 +46,7 @@ const MenuContent: React.FC = () => {
         ))}
       </Section>
       <Section>
-        <LogoWrapper to="/">
+        <LogoWrapper to="/" aria-label="Covid Act Now">
           <LogoNonUrl />
         </LogoWrapper>
         <AboutCopy>{aboutUs}</AboutCopy>
