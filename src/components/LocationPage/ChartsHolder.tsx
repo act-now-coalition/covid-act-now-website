@@ -181,9 +181,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const initialFipsList = useMemo(() => {
-    return projections?.primary?.fips ? [projections.primary.fips] : [];
-  }, [projections]);
+  const initialFipsList = [region.fipsCode];
 
   const ccviScores = useCcviForFips(region.fipsCode);
 
