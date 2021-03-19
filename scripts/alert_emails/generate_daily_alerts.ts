@@ -18,10 +18,9 @@ import { SummariesMap } from '../../src/common/location_summaries';
 import { Level } from '../../src/common/level';
 import { resolveSnapshot } from './utils';
 import {
-  dateToUTC,
   TimeUnit,
   subtractTime,
-  TimeFormat,
+  DateFormat,
   formatDateTime,
 } from '../../src/common/utils/time-utils';
 
@@ -50,8 +49,8 @@ async function main() {
     const locationURL = region.canonicalUrl;
     // Use today's date (roughly in the Pacific timezone).
     const lastUpdated = formatDateTime(
-      subtractTime(dateToUTC(new Date()), 8, TimeUnit.HOURS),
-      TimeFormat.MM_DD_YYYY,
+      subtractTime(new Date(), 8, TimeUnit.HOURS),
+      DateFormat.MM_DD_YYYY,
     );
     if (oldLevel !== newLevel && newLevel !== Level.UNKNOWN) {
       alerts[fips] = {

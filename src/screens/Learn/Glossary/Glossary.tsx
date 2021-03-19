@@ -18,7 +18,7 @@ import { useScrollToTopButton } from 'common/hooks';
 import Footer from 'screens/Learn/Footer/Footer';
 import ExternalLink from 'components/ExternalLink';
 import {
-  TimeFormat,
+  DateFormat,
   parseDateString,
   formatDateTime,
 } from 'common/utils/time-utils';
@@ -80,7 +80,7 @@ const Glossary: React.FC = () => {
           Last updated{' '}
           {formatDateTime(
             parseDateString(lastUpdatedDate),
-            TimeFormat.MM_DD_YYYY,
+            DateFormat.MM_DD_YYYY,
           )}
         </LastUpdatedDate>
         {terms.map((term: Term, i: number) => (

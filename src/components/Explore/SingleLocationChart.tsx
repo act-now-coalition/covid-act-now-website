@@ -1,5 +1,4 @@
 import React, { useCallback, Fragment } from 'react';
-import moment from 'moment';
 import { isNumber } from 'lodash';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
@@ -20,10 +19,11 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from 'components/Charts/utils';
+import { TimeUnit, getTimeDiff } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
-  moment(dateTo).diff(dateFrom, 'days');
+  getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
 
 const SingleLocationTooltip: React.FC<{
   date: Date;

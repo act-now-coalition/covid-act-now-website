@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { TimeFormat, formatDateTime, dateToUTC } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from 'common/utils/time-utils';
 
 export function assert(condition: any, msg?: string): asserts condition {
   if (!condition) {
@@ -23,9 +23,9 @@ export function nonNull<T>(value: T | null | undefined): T {
  */
 export function formatUtcDate(
   date: Date,
-  format: TimeFormat = TimeFormat.MMMM_D_YYYY,
+  format: DateFormat = DateFormat.MMMM_D_YYYY,
 ): string {
-  return formatDateTime(dateToUTC(date), format);
+  return formatDateTime(date, format);
 }
 
 /**
@@ -33,7 +33,7 @@ export function formatUtcDate(
  */
 
 export function formatMetatagDate(): string {
-  return formatDateTime(new Date(), TimeFormat.MMM_DD_YYYY);
+  return formatDateTime(new Date(), DateFormat.MMM_DD_YYYY);
 }
 
 /**

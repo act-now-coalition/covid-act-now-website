@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { sum, isNumber, reject, isNull, partition } from 'lodash';
 import { Projection, Column } from 'common/models/Projection';
 import { getLevel, getMetricNameForCompare, formatValue } from 'common/metric';
@@ -22,6 +21,7 @@ import {
   showExposureNotifications,
 } from 'components/LocationPage/Notifications';
 import regions, { getAbbreviatedCounty } from 'common/regions';
+import { TimeUnit, getStartOf, subtractTime } from 'common/utils/time-utils';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
@@ -249,8 +249,8 @@ export function getModalCopyWithHarvardLevel(
  */
 function getWeeklyNewCasesPer100k(projection: Projection): number | null {
   const { totalPopulation } = projection;
-  const dateTo = moment().startOf('day').toDate();
-  const dateFrom = moment(dateTo).subtract(1, 'week').toDate();
+  const dateTo = getStartOf(new Date(), TimeUnit.DAYS);
+  const dateFrom = subtractTime(dateTo, 1, TimeUnit.WEEKS);
 
   const getY = (point: Column) => point.y;
 

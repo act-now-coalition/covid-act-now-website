@@ -9,7 +9,7 @@ import {
 } from 'common/utils';
 import {
   parseDateUnix,
-  TimeFormat,
+  DateFormat,
   formatUTCDateTime,
 } from 'common/utils/time-utils';
 
@@ -49,7 +49,7 @@ export function getNationalText(): React.ReactElement {
   const lastDate = last(dates);
   const lastDateFormatted: string = formatUTCDateTime(
     parseDateUnix(lastDate!),
-    TimeFormat.MMMM_D_YYYY,
+    DateFormat.MMMM_D_YYYY,
   );
 
   const getChangeDescriptorCopy = (percentChange: number): string => {
