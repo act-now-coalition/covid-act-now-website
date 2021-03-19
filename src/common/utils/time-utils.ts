@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime, DurationObject } from 'luxon';
 
 export enum TimeFormat {
   YYYY_MM_DD = 'yyyy-MM-dd', // 2020-03-01
@@ -6,16 +6,16 @@ export enum TimeFormat {
   MMM_DD_YYYY = 'MMM dd, yyyy', // Mar 01, 2020
   MMM_D_YYYY = 'MMM d, yyyy', // Mar 1, 2020
   MMMM_D_YYYY = 'MMMM d, yyyy', // March 1, 2020
-  MMM_YY = 'MMM yy', // Mar 20.
+  MMM_YY = 'MMM yy', // Mar 20
   MMMM_D = 'MMMM d', // March 1
   MMM = 'MMM', // Mar
 }
 
 export enum TimeUnit {
-  HOURS,
-  DAYS,
-  WEEKS,
-  MONTHS,
+  HOURS = 'hours',
+  DAYS = 'days',
+  WEEKS = 'weeks',
+  MONTHS = 'months',
 }
 
 // Parse date string to JS date object.
@@ -45,28 +45,27 @@ export function dateToUTC(date: Date): Date {
 
 // Add a specified amount of time (in units) to date object.
 export function addTime(date: Date, amount: number, unit: TimeUnit): Date {
-  switch (unit) {
-    case TimeUnit.HOURS:
-      return DateTime.fromJSDate(date).plus({ hours: amount }).toJSDate();
-    case TimeUnit.DAYS:
-      return DateTime.fromJSDate(date).plus({ days: amount }).toJSDate();
-    case TimeUnit.WEEKS:
-      return DateTime.fromJSDate(date).plus({ weeks: amount }).toJSDate();
-    case TimeUnit.MONTHS:
-      return DateTime.fromJSDate(date).plus({ months: amount }).toJSDate();
-  }
+  return DateTime.fromJSDate(date)
+    .plus(getTimeUnitOption(amount, unit))
+    .toJSDate();
 }
 
 // Subtract a specified amount of time (in units) to date object.
 export function subtractTime(date: Date, amount: number, unit: TimeUnit): Date {
+  return DateTime.fromJSDate(date)
+    .minus(getTimeUnitOption(amount, unit))
+    .toJSDate();
+}
+
+function getTimeUnitOption(amount: number, unit: TimeUnit): DurationObject {
   switch (unit) {
     case TimeUnit.HOURS:
-      return DateTime.fromJSDate(date).minus({ hours: amount }).toJSDate();
+      return { hours: amount };
     case TimeUnit.DAYS:
-      return DateTime.fromJSDate(date).minus({ days: amount }).toJSDate();
+      return { days: amount };
     case TimeUnit.WEEKS:
-      return DateTime.fromJSDate(date).minus({ weeks: amount }).toJSDate();
+      return { weeks: amount };
     case TimeUnit.MONTHS:
-      return DateTime.fromJSDate(date).minus({ months: amount }).toJSDate();
+      return { months: amount };
   }
 }

@@ -11,27 +11,27 @@ import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
 import { useRegionFromParams } from 'common/regions';
 import { Region } from 'common/regions';
 import { TimeFormat, formatDateTime } from 'common/utils/time-utils';
-
-// TODO(michael): Split this into HomeImage and LocationImage (with some shared code).
+import { assert } from 'common/utils';
 
 /**
  * Screen that just shows the appropriate share card so that we can take a
  * screenshot that we then use as our OpenGraph image.
  */
-const ShareCardImage = () => {
+const LocationShareCardImage = () => {
   const region = useRegionFromParams();
-  const isHomePage = !region;
+  // we know Region won't be null because this won't be called for non-region routes
+  assert(region !== null);
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
-      <Header isHomePage={isHomePage} />
-      <ShareCardWrapper isHomePage={isHomePage}>
-        <ShareCard region={region} />
+      <Header />
+      <ShareCardWrapper>
+        <LocationShareCard region={region} />
       </ShareCardWrapper>
     </DarkScreenshotWrapper>
   );
 };
 
-const Header = (props: { isHomePage?: Boolean }) => {
+export const Header = (props: { isHomePage?: Boolean }) => {
   return (
     <>
       <TitleWrapper isHomePage={props.isHomePage}>
@@ -42,18 +42,6 @@ const Header = (props: { isHomePage?: Boolean }) => {
       </LastUpdatedWrapper>
     </>
   );
-};
-
-interface ShareCardProps {
-  region: Region | null;
-}
-
-const ShareCard = ({ region }: ShareCardProps) => {
-  if (region) {
-    return <LocationShareCard region={region} />;
-  } else {
-    return <SocialLocationPreview />;
-  }
 };
 
 interface LocationShareCardProps {
@@ -76,4 +64,4 @@ const LocationShareCard = ({ region }: LocationShareCardProps) => {
   );
 };
 
-export default ShareCardImage;
+export default LocationShareCardImage;
