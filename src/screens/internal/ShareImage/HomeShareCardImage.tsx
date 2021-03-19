@@ -1,5 +1,5 @@
 import React from 'react';
-import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
 import { ShareCardWrapper } from './ShareCardImage.style';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
@@ -14,7 +14,7 @@ const HomeShareCardImage = () => {
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header isHomePage />
       <ShareCardWrapper isHomePage>
-        <SocialLocationPreview />;
+        <SocialLocationPreviewMap />;
       </ShareCardWrapper>
     </DarkScreenshotWrapper>
   );
