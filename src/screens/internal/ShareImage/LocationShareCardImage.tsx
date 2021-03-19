@@ -25,7 +25,7 @@ const LocationShareCardImage = () => {
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header />
       <ShareCardWrapper>
-        <LocationShareCard region={region} />;
+        <LocationShareCard region={region} />
       </ShareCardWrapper>
     </DarkScreenshotWrapper>
   );
