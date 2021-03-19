@@ -8,6 +8,12 @@ import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { County, Region } from 'common/regions';
 
+export type MetricValue = number | null;
+
+export type MetricValues = {
+  [metric in Metric]: MetricValue;
+};
+
 /**
  * The complete set of data / metrics and related information for a given
  * location (state or county).
@@ -77,12 +83,12 @@ export class Projections {
     return this.getMetricValue(metric) !== null;
   }
 
-  getMetricValue(metric: Metric): number | null {
+  getMetricValue(metric: Metric): MetricValue {
     return this.primary.getMetricValue(metric);
   }
 
-  getMetricValues(): { [metric in Metric]: number | null } {
-    const result = {} as { [metric in Metric]: number | null };
+  getMetricValues(): MetricValues {
+    const result = {} as MetricValues;
     for (const metric of ALL_METRICS) {
       result[metric] = this.getMetricValue(metric);
     }

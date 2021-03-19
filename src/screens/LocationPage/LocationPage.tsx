@@ -6,8 +6,6 @@ import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
-import { LoadingScreen } from './LocationPage.style';
-import { useProjectionsFromRegion } from 'common/utils/model';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
 
@@ -21,7 +19,6 @@ function LocationPage({ region }: LocationPageProps) {
   const defaultMapOption = getDefaultMapOption(region);
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const projections = useProjectionsFromRegion(region);
 
   useEffect(() => {
     setMapOption(defaultMapOption);
@@ -42,17 +39,7 @@ function LocationPage({ region }: LocationPageProps) {
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
         />
-        {/* Shows a loading screen if projections are not loaded yet, or
-         * if a new location has been selected */}
-        {!projections || projections.fips !== region.fipsCode ? (
-          <LoadingScreen />
-        ) : (
-          <ChartsHolder
-            projections={projections}
-            chartId={chartId}
-            region={region}
-          />
-        )}
+        <ChartsHolder chartId={chartId} region={region} />
         <MiniMap
           region={region}
           mobileMenuOpen={mobileMenuOpen}

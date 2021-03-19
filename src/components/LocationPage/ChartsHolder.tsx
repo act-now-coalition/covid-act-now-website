@@ -8,7 +8,6 @@ import {
 } from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { Projections } from 'common/models/Projections';
 import { Region, State, getStateName } from 'common/regions';
 import { getRecommendationsShareUrl } from 'common/urls';
 import {
@@ -33,6 +32,10 @@ import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import LocationPageHeader from './LocationPageHeader';
 import { ChartContentWrapper } from './ChartsHolder.style';
+import { useProjectionsFromRegion } from 'common/utils/model';
+import { MetricValues, Projections } from 'common/models/Projections';
+import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
+import { LocationSummary, useSummaries } from 'common/location_summaries';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -44,13 +47,89 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
     behavior: 'smooth',
   });
 
-interface ChartsHolderProps {
+interface RecommendationsProps {
   projections: Projections;
+  recommendationsRef: React.RefObject<HTMLDivElement>;
+}
+
+const Recommendations = ({
+  projections,
+  recommendationsRef,
+}: RecommendationsProps) => {
+  const alarmLevel = projections.getAlarmLevel();
+  const region = projections.region;
+  const projection = projections.primary;
+
+  const recommendationsIntro = getDynamicIntroCopy(
+    projection,
+    projections.locationName,
+    projections.getMetricValues(),
+  );
+
+  const recommendationsMainContent = getRecommendations(
+    projection,
+    mainContent.recommendations,
+  );
+
+  const recommendsShareUrl = getRecommendationsShareUrl(region);
+
+  const recommendsShareQuote = getShareQuote(
+    projections.locationName,
+    alarmLevel,
+  );
+
+  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
+    projection.fips
+  }`;
+
+  // TODO(Chelsi): make these 2 functions less redundant?
+  const recommendationsFedModalCopy = getModalCopyWithFedLevel(
+    projection,
+    projections.locationName,
+    projections.getMetricValues(),
+  );
+
+  const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
+    projection,
+    projections.locationName,
+    projections.getMetricValues(),
+  );
+
+  return (
+    <Recommend
+      introCopy={recommendationsIntro}
+      recommendations={recommendationsMainContent}
+      locationName={region.fullName}
+      shareUrl={recommendsShareUrl}
+      shareQuote={recommendsShareQuote}
+      recommendationsRef={recommendationsRef}
+      feedbackFormUrl={recommendationsFeedbackForm}
+      fedLevel={getFedLevel(projections.primary)}
+      harvardLevel={getHarvardLevel(projections.primary)}
+      harvardModalLocationCopy={recommendationsHarvardModalCopy}
+      fedModalLocationCopy={recommendationsFedModalCopy}
+    />
+  );
+};
+
+interface ChartsHolderProps {
   region: Region;
   chartId: string;
 }
-const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
-  const projection = projections.primary;
+
+const summaryToStats = (summary: LocationSummary): MetricValues => {
+  const stats = {} as MetricValues;
+  for (const metric of ALL_METRICS) {
+    stats[metric] = summary.metrics[metric]?.value ?? null;
+  }
+  return stats;
+};
+
+const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
+  const projections = useProjectionsFromRegion(region);
+
+  const summaries = useSummaries();
+  const locationSummary = summaries?.[region.fipsCode];
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -102,46 +181,18 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const stats = projection ? projections.getMetricValues() : {};
   const initialFipsList = useMemo(() => {
-    return [projections.primary.fips];
-  }, [projections.primary.fips]);
+    return projections?.primary?.fips ? [projections.primary.fips] : [];
+  }, [projections]);
 
-  const recommendationsIntro = getDynamicIntroCopy(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
+  const ccviScores = useCcviForFips(region.fipsCode);
 
-  const recommendationsMainContent = getRecommendations(
-    projection,
-    mainContent.recommendations,
-  );
+  if (!locationSummary) {
+    return null;
+  }
+  const stats = summaryToStats(locationSummary);
 
-  const recommendsShareUrl = getRecommendationsShareUrl(region);
-
-  const alarmLevel = projections.getAlarmLevel();
-  const recommendsShareQuote = getShareQuote(
-    projections.locationName,
-    alarmLevel,
-  );
-
-  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
-    projection.fips
-  }`;
-
-  // TODO(Chelsi): make these 2 functions less redundant?
-  const recommendationsFedModalCopy = getModalCopyWithFedLevel(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
-
-  const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
+  const alarmLevel = locationSummary.level;
 
   const onClickAlertSignup = () => {
     trackEvent(
@@ -170,15 +221,13 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
     scrollTo(metricRefs[metric].current);
   };
 
-  const ccviScores = useCcviForFips(region.fipsCode);
-
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       <ChartContentWrapper>
         <LocationPageHeader
-          alarmLevel={projections.getAlarmLevel()}
-          stats={projections.getMetricValues()}
+          alarmLevel={alarmLevel}
+          stats={stats}
           onMetricClick={metric => onClickMetric(metric)}
           onHeaderShareClick={onClickShare}
           onHeaderSignupClick={onClickAlertSignup}
@@ -200,30 +249,29 @@ const ChartsHolder = ({ projections, region, chartId }: ChartsHolderProps) => {
           <VulnerabilitiesBlock scores={ccviScores} region={region} />
         </LocationPageBlock>
         <LocationPageBlock>
-          <Recommend
-            introCopy={recommendationsIntro}
-            recommendations={recommendationsMainContent}
-            locationName={region.fullName}
-            shareUrl={recommendsShareUrl}
-            shareQuote={recommendsShareQuote}
-            recommendationsRef={recommendationsRef}
-            feedbackFormUrl={recommendationsFeedbackForm}
-            fedLevel={getFedLevel(projections.primary)}
-            harvardLevel={getHarvardLevel(projections.primary)}
-            harvardModalLocationCopy={recommendationsHarvardModalCopy}
-            fedModalLocationCopy={recommendationsFedModalCopy}
-          />
+          {!projections ? (
+            <LoadingScreen />
+          ) : (
+            <Recommendations
+              projections={projections}
+              recommendationsRef={recommendationsRef}
+            />
+          )}
           {ALL_METRICS.map(metric => (
             <ErrorBoundary>
-              <ChartBlock
-                key={metric}
-                metric={metric}
-                projections={projections}
-                chartRef={metricRefs[metric]}
-                isMobile={isMobile}
-                region={region}
-                stats={stats}
-              />
+              {!projections ? (
+                <LoadingScreen />
+              ) : (
+                <ChartBlock
+                  key={metric}
+                  metric={metric}
+                  projections={projections}
+                  chartRef={metricRefs[metric]}
+                  isMobile={isMobile}
+                  region={region}
+                  stats={stats}
+                />
+              )}
             </ErrorBoundary>
           ))}
         </LocationPageBlock>
