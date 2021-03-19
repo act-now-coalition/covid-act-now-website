@@ -8,6 +8,7 @@ import {
   LinkedinIcon,
 } from 'react-share';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
 import { Projections } from 'common/models/Projections';
 import * as urls from 'common/urls';
 import {
@@ -67,6 +68,13 @@ const ShareBlock = ({
   });
 
   const geolocatedRegions = useGeolocationRegions();
+
+  const SocialPreview =
+    projections && stats ? (
+      <SocialLocationPreview projections={projections} stats={stats} />
+    ) : (
+      <SocialLocationPreviewMap isEmbedPreview />
+    );
 
   const defaultSignupRegions = region
     ? getDefaultRegions(region)
@@ -146,13 +154,7 @@ const ShareBlock = ({
               </EmbedPrompt>
             </SocialTextArea>
           </SocialTextAreaWrapper>
-          <SocialMockupWrapper>
-            <SocialLocationPreview
-              isEmbedPreview
-              projections={projections}
-              stats={stats}
-            />
-          </SocialMockupWrapper>
+          <SocialMockupWrapper>{SocialPreview}</SocialMockupWrapper>
         </ShareRowContentArea>
       </ShareRow>
     </ShareContainer>
