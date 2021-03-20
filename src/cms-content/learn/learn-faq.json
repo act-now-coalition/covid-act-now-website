@@ -40,11 +40,6 @@
           "questionId": "if-i-recovered-should-i-get-vaccinated"
         },
         {
-          "question": "If I get a COVID vaccine, do I still need to wear a mask and practice social distancing? ",
-          "answer": "Yes. A vaccine will help protect you from getting sick if you are exposed to COVID, but it may not prevent you from carrying and transmitting the virus to others, according to experts at [Duke University Health System](https://www.dukehealth.org/covid-19-update/covid-19-vaccine-FAQ). Until enough people have been vaccinated, it is important to continue to wear masks, practice social distancing and take other precautions. \n\nIn time, we’ll know more about the protection that COVID vaccines provide. Such factors as the number of people getting vaccinated and how the virus is spreading in communities may affect the advice, says the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html).",
-          "questionId": "if-vaccinated-do-i-need-to-wear-mask-and-social-distance"
-        },
-        {
           "question": "Does immunity protection last longer if you get a vaccine or if you have had COVID?",
           "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
           "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last."
