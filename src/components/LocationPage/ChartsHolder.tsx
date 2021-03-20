@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useLocation } from 'common/utils/router';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -33,9 +33,10 @@ import LocationPageBlock from './LocationPageBlock';
 import LocationPageHeader from './LocationPageHeader';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
-import { MetricValues, Projections } from 'common/models/Projections';
+import { Projections } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import { LocationSummary, useSummaries } from 'common/location_summaries';
+import type { LocationSummary } from 'common/location_summaries';
+import { summaryToStats } from 'common/utils/chart';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -115,21 +116,15 @@ const Recommendations = ({
 interface ChartsHolderProps {
   region: Region;
   chartId: string;
+  locationSummary: LocationSummary;
 }
 
-const summaryToStats = (summary: LocationSummary): MetricValues => {
-  const stats = {} as MetricValues;
-  for (const metric of ALL_METRICS) {
-    stats[metric] = summary.metrics[metric]?.value ?? null;
-  }
-  return stats;
-};
-
-const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
+const ChartsHolder = ({
+  region,
+  chartId,
+  locationSummary,
+}: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
-
-  const summaries = useSummaries();
-  const locationSummary = summaries?.[region.fipsCode];
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -253,7 +248,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             />
           )}
           {ALL_METRICS.map(metric => (
-            <ErrorBoundary>
+            <ErrorBoundary key={`key-${metric}`}>
               {!projections ? (
                 <LoadingScreen />
               ) : (

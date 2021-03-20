@@ -6,19 +6,20 @@ import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getStateCode, MetroArea, Region } from 'common/regions';
+import type { LocationSummary } from 'common/location_summaries';
 
 import { useLocation } from 'common/utils/router';
 
 interface LocationPageProps {
   region: Region;
-  summary: LocationSummary;
+  locationSummary: LocationSummary;
   title: string;
   description: string;
 }
 
 function LocationPage({
   region,
-  summary,
+  locationSummary,
   title,
   description,
 }: LocationPageProps) {
@@ -49,7 +50,11 @@ function LocationPage({
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
         />
-        <ChartsHolder chartId={chartId} region={region} />
+        <ChartsHolder
+          chartId={chartId}
+          region={region}
+          locationSummary={locationSummary}
+        />
         <MiniMap
           region={region}
           mobileMenuOpen={mobileMenuOpen}

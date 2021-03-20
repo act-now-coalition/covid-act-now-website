@@ -54,8 +54,8 @@ export default function ShareImage({ match }: RouteComponentProps<{}>) {
       <Route exact path={'${match.path}states/:stateId/explore/:chartId'} component={ExploreChartImage} />
       <Route exact path={'${match.path}counties/:countyFipsId/explore/:chartId'} component={ExploreChartImage} />
       <Route exact path={'${match.path}metros/:fipsCode/explore/:chartId'} component={ExploreChartImage} />
-      <Route exact path={'${match.path}counties/:countyFipsId/explore/:chartId/export'} component={ExploreChartExportImage} />
       <Route exact path={'${match.path}states/:stateId/explore/:chartId/export'} component={ExploreChartExportImage} />
+      <Route exact path={'${match.path}counties/:countyFipsId/explore/:chartId/export'} component={ExploreChartExportImage} />
       <Route exact path={'${match.path}metros/:fipsCode/explore/:chartId/export'} component={ExploreChartExportImage} />
 
       {/* SHARED COMPONENTS (Compare, Explore, etc.) */}

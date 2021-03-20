@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { LocationPage } from 'screens/LocationPage';
 import PageWrapper from 'screens/utils/PageWrapper';
 
-import { Projections } from 'common/models/Projections';
+import { LocationSummary } from 'common/location_summaries';
 import {
   LocationPageWrapperProps,
   makeLocationPageGetStaticProps,
@@ -21,18 +21,17 @@ const getStaticProps: GetStaticProps = makeLocationPageGetStaticProps({
 
 function Location({
   regionObject,
-  summaryWithTimeseries,
+  locationSummary,
   title,
   description,
 }: LocationPageWrapperProps) {
   const region = County.fromObject(regionObject as CountyObject);
-  const projections = new Projections(summaryWithTimeseries, region);
 
   return (
     <PageWrapper>
       <LocationPage
         region={region}
-        projections={projections}
+        locationSummary={locationSummary}
         title={title}
         description={description}
       />

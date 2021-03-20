@@ -10,10 +10,11 @@ import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeser
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import { Projections } from 'common/models/Projections';
 import { getPageTitle, getPageDescription } from 'screens/LocationPage/utils';
 import regions from 'common/regions';
 import type { Region, RegionObject } from 'common/regions';
+import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
+import { summaryToStats } from 'common/utils/chart';
 
 const NOT_FOUND = {
   notFound: true,
@@ -186,7 +187,7 @@ export const getLastUpdatedDateString = async () => {
   }
   return lastUpdatedDateString;
 };
-
+/*
 // A memoized version of summaries for build-time, so we don't refetch
 const summaryByFips: { [fips: string]: RegionSummaryWithTimeseries } = {};
 
@@ -211,10 +212,10 @@ const getSummaryWithTimeseries = async (region: Region) => {
   }
   return summaryByFips[region.fipsCode] ?? null;
 };
-
+*/
 export interface LocationPageWrapperProps {
   regionObject: RegionObject;
-  summaryWithTimeseries: RegionSummaryWithTimeseries;
+  locationSummary: LocationSummary;
   title: string;
   description: string;
 }
@@ -230,19 +231,19 @@ export const makeLocationPageGetStaticProps = ({
       return NOT_FOUND;
     }
 
-    const summaryWithTimeseries = await getSummaryWithTimeseries(region);
+    const locationSummary = getSummaryFromFips(region.fipsCode);
     const regionObject = region.toObject();
     const title = getPageTitle(region);
     const description = getPageDescription(region);
 
     const props = {
       regionObject,
-      summaryWithTimeseries,
+      locationSummary,
       title,
       description,
     };
 
-    if (!(summaryWithTimeseries && title && description)) {
+    if (!(locationSummary && title && description)) {
       console.error('Missing data:', props);
       return NOT_FOUND;
     }
@@ -263,16 +264,15 @@ export const makeEmbedRegionGetStaticProps = ({
     if (!region) {
       return NOT_FOUND;
     }
-    const summaryWithTimeseries = await getSummaryWithTimeseries(region);
-    if (!summaryWithTimeseries) {
+
+    const locationSummary = getSummaryFromFips(region.fipsCode);
+    if (!locationSummary) {
       console.error('Missing data:', region.name);
       return NOT_FOUND;
     }
 
-    const projections = new Projections(summaryWithTimeseries, region);
-
-    const stats = projections.getMetricValues();
-    const alarmLevel = projections.getAlarmLevel();
+    const stats = summaryToStats(locationSummary);
+    const alarmLevel = locationSummary.level;
     const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
     const fillColor =
       alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;

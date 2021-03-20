@@ -4,7 +4,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { LocationPage } from 'screens/LocationPage';
 import PageWrapper from 'screens/utils/PageWrapper';
 
-import { Projections } from 'common/models/Projections';
 import {
   getMetroAreaPathParams,
   LocationPageWrapperProps,
@@ -20,16 +19,15 @@ const getStaticProps: GetStaticProps = makeLocationPageGetStaticProps({
 });
 
 function Location(props: LocationPageWrapperProps) {
-  const { regionObject, summaryWithTimeseries, title, description } = props;
+  const { regionObject, locationSummary, title, description } = props;
 
   const region = MetroArea.fromObject(regionObject as MetroAreaObject);
-  const projections = new Projections(summaryWithTimeseries, region);
 
   return (
     <PageWrapper>
       <LocationPage
         region={region}
-        projections={projections}
+        locationSummary={locationSummary}
         title={title}
         description={description}
       />

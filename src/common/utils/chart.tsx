@@ -1,4 +1,7 @@
 import { Level } from 'common/level';
+import type { LocationSummary } from 'common/location_summaries';
+import type { MetricValues } from 'common/models/Projections';
+import { ALL_METRICS } from 'common/metric';
 
 /**
  * Depending on provided `level`, returns the appropriate text (`lowText`,
@@ -25,3 +28,11 @@ export function levelText(
       return superCriticalText || highText;
   }
 }
+
+export const summaryToStats = (summary: LocationSummary): MetricValues => {
+  const stats = {} as MetricValues;
+  for (const metric of ALL_METRICS) {
+    stats[metric] = summary.metrics[metric]?.value ?? null;
+  }
+  return stats;
+};
