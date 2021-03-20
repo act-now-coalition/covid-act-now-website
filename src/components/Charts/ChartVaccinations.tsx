@@ -168,8 +168,8 @@ const VaccinationLines: React.FC<{
     [showTooltip, dateScale, marginLeft],
   );
 
-  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
-  const getYPosition = (d: Column) => yScale(getY(d));
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) ?? 0;
+  const getYPosition = (d: Column) => yScale(getY(d)) ?? 0;
   const dateTicks = getTimeAxisTicks(dateFrom, dateTo);
 
   const currentValueLabels = formatCurrentValueLabels(

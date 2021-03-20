@@ -160,8 +160,8 @@ const MultipleLocationsChart: React.FC<{
     [showTooltip],
   );
 
-  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
-  const getYPosition = (d: Column) => yScale(getY(d));
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) ?? 0;
+  const getYPosition = (d: Column) => yScale(getY(d)) ?? 0;
   const seriesLabels = formatCurrentValueLabels(
     seriesList,
     (p: Column) => innerWidth + 5,

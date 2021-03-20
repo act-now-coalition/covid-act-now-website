@@ -85,8 +85,8 @@ const ChartRt = ({
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (d: PointRt) => xScale(getColumnDate(d));
-  const getYCoord = (d: PointRt) => yScale(getRt(d));
+  const getXCoord = (d: PointRt) => xScale(getColumnDate(d)) ?? 0;
+  const getYCoord = (d: PointRt) => yScale(getRt(d)) ?? 0;
 
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
@@ -102,7 +102,7 @@ const ChartRt = ({
   );
   const truncationPoint = last(prevData);
   const truncationRt = getRt(truncationPoint);
-  const yTruncationRt = yScale(truncationRt);
+  const yTruncationRt = yScale(truncationRt) ?? 0;
   const truncationZone = getZoneByValue(truncationRt, zones);
 
   const renderTooltip = (d: PointRt) => {
@@ -135,7 +135,7 @@ const ChartRt = ({
     />
   );
 
-  const xTruncationRt = xScale(getColumnDate(truncationPoint));
+  const xTruncationRt = xScale(getColumnDate(truncationPoint)) ?? 0;
 
   return (
     <ChartContainer<PointRt>
@@ -157,8 +157,8 @@ const ChartRt = ({
             <Area
               data={data}
               x={getXCoord}
-              y0={(d: PointRt) => yScale(getYAreaLow(d))}
-              y1={(d: PointRt) => yScale(getYAreaHigh(d))}
+              y0={(d: PointRt) => yScale(getYAreaLow(d)) ?? 0}
+              y1={(d: PointRt) => yScale(getYAreaHigh(d)) ?? 0}
               curve={curveNatural}
             />
           </Style.SeriesArea>
@@ -190,7 +190,7 @@ const ChartRt = ({
               name={region.name}
               isActive={truncationZone.name === region.name}
               x={chartWidth - 10}
-              y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+              y={yScale(0.5 * (region.valueFrom + region.valueTo)) ?? 0}
             />
           </Group>
         ))}
