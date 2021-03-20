@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { DetailedHTMLProps } from 'react';
 
-const ExternalLink: React.FC<{ href: string; onClick?: () => void }> = ({
-  href,
+type AnchorLinkType = DetailedHTMLProps<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+>;
+
+const ExternalLink: React.FC<AnchorLinkType> = ({
   children,
-  onClick = () => {},
+  ...otherProps
 }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick}>
+  <a target="_blank" rel="noopener noreferrer" {...otherProps}>
     {children}
   </a>
 );
