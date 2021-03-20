@@ -8,10 +8,8 @@ import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { County, Region } from 'common/regions';
 
-export type MetricValue = number | null;
-
 export type MetricValues = {
-  [metric in Metric]: MetricValue;
+  [metric in Metric]: number | null;
 };
 
 /**
@@ -83,7 +81,7 @@ export class Projections {
     return this.getMetricValue(metric) !== null;
   }
 
-  getMetricValue(metric: Metric): MetricValue {
+  getMetricValue(metric: Metric): number | null {
     return this.primary.getMetricValue(metric);
   }
 
