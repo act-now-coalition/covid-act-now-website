@@ -6,18 +6,10 @@ type AnchorLinkType = DetailedHTMLProps<
 >;
 
 const ExternalLink: React.FC<AnchorLinkType> = ({
-  href,
   children,
-  onClick = () => {},
   ...otherProps
 }) => (
-  <a
-    href={href}
-    onClick={onClick}
-    {...otherProps}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
+  <a target="_blank" rel="noopener noreferrer" {...otherProps}>
     {children}
   </a>
 );
