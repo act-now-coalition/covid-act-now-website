@@ -46,13 +46,15 @@ const SearchAutocomplete: React.FC<{
     }
   };
 
-  const onSelect = (e: React.ChangeEvent<{}>, value: Region) => {
-    trackEvent(
-      EventCategory.SEARCH,
-      EventAction.NAVIGATE,
-      `Selected: ${value.fullName} (${input})`,
-    );
-    window.location.href = value.relativeUrl;
+  const onSelect = (e: React.ChangeEvent<{}>, value: string | Region) => {
+    if (value instanceof Region) {
+      trackEvent(
+        EventCategory.SEARCH,
+        EventAction.NAVIGATE,
+        `Selected: ${value.fullName} (${input})`,
+      );
+      window.location.href = value.relativeUrl;
+    }
   };
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';

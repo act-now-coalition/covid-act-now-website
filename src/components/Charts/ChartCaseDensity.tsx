@@ -101,7 +101,7 @@ const ChartCaseDensity: FunctionComponent<{
 
   const renderTooltip = (p: Point) => (
     <Tooltip
-      left={marginLeft + getXCoord(p)}
+      left={marginLeft + (getXCoord(p) ?? 0)}
       top={marginTop + getYCoord(p)}
       title={formatTooltipColumnDate(p)}
       subtitle="DAILY NEW CASES"

@@ -107,8 +107,11 @@ const EmailAlertsForm: React.FC<{
     setCheckDailyDownload(event.target.checked);
   };
 
-  const onChangeRegions = (event: ChangeEvent<{}>, newRegions: Region[]) => {
-    setSelectedRegions(newRegions);
+  const onChangeRegions = (
+    event: ChangeEvent<{}>,
+    newRegions: (string | Region)[],
+  ) => {
+    setSelectedRegions(newRegions as Region[]);
   };
 
   const emailInputLabel = emailError

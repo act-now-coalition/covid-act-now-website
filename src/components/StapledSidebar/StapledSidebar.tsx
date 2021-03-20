@@ -63,7 +63,7 @@ export default class StapledSidebar extends React.Component<
     offset: 65,
   };
 
-  t: number;
+  t: any;
   sidebar: HTMLDivElement | null;
   wrapper: HTMLDivElement | null;
   sidebarWrapper: HTMLDivElement | null;
@@ -75,7 +75,7 @@ export default class StapledSidebar extends React.Component<
     this.sidebar = null;
     this.wrapper = null;
     this.sidebarWrapper = null;
-    this.t = 0;
+    this.t = null;
     this.state = {
       inRAF: false,
       lastWrapperBottom: 0,
