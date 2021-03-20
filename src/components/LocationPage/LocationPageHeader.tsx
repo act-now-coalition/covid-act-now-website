@@ -33,6 +33,7 @@ import { MetroArea } from 'common/regions';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import type { MetricValues } from 'common/models/Projections';
 
 function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
@@ -51,7 +52,7 @@ const noop = () => {};
 const LocationPageHeader = (props: {
   alarmLevel: Level;
   condensed?: boolean;
-  stats: { [key: string]: number | null };
+  stats: MetricValues;
   onMetricClick: (metric: Metric) => void;
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
