@@ -105,7 +105,7 @@ const VulnerabilityCopy: React.FC<{
 
   return (
     <Copy>
-      We now surface vulnerability levels for locations.{' '}
+      You can now see which locations are more vulnerable than others.{' '}
       {isHigh && (
         <React.Fragment>
           {locationName} has <strong>{levelName} vulnerability</strong>, making
