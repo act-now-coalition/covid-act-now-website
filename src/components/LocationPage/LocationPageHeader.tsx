@@ -8,7 +8,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Metric } from 'common/metricEnum';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
-import { County, Region } from 'common/regions';
+import { Region } from 'common/regions';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { ThermometerImage } from 'components/Thermometer';
 import LocationPageHeading from './LocationPageHeading';
