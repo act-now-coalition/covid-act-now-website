@@ -63,7 +63,6 @@ const LocationPageHeader = (props: {
     (val: number | null) => val !== null,
   ).length;
   const { alarmLevel, region } = props;
-  const isCounty = region instanceof County;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
@@ -131,21 +130,7 @@ const LocationPageHeader = (props: {
           />
         </TopContainer>
         <FooterContainer>
-          {isCounty && !isEmbed && (
-            <HeaderSubCopy>
-              <span>Updated {lastUpdatedDateString} · </span>
-              <span>See something wrong? </span>
-              <a
-                href="mailto:info@covidactnow.org?subject=[Website%20Feedback]"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Email us
-              </a>
-              .
-            </HeaderSubCopy>
-          )}
-          {!isCounty && !isEmbed && (
+          {!isEmbed && (
             <HeaderSubCopy>
               <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
             </HeaderSubCopy>
