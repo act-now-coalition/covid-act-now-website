@@ -1939,12 +1939,6 @@
           "phase": "2D",
           "description": "* Individuals 16+",
           "startDate": "March 29, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:25:18.305Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ]
     },
