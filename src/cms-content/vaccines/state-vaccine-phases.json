@@ -1,7 +1,7 @@
 {
   "regions": [
     {
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "locationName": "Alabama",
       "fips": "01",
       "eligibilityInfoUrl": "https://www.alabamapublichealth.gov/covid19vaccine/assets/adph-covid19-vaccination-allocation-plan.pdf",
@@ -20,26 +20,26 @@
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Persons ages ≥75 years\n* Front-line critical workers\n* Working or living in congregate settings \n* First responders including firefighters and law enforcement",
+          "description": "* Persons ages ≥75 years\n* Frontline critical workers\n* Those working or living in congregate settings\n* First responders including firefighters and law enforcement",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.974Z"
+          "updatedAt": "2021-03-22T15:32:27.207Z"
         },
         {
           "phase": "1C",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Persons age 65-74 years\n* Certain other critical workers",
+          "description": "* Persons ages 65-74 years",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-08T16:53:06.089Z"
+          "updatedAt": "2021-03-22T15:32:39.475Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-15T14:30:52.688Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-22T15:33:54.737Z",
           "phase": "1C",
           "tier": "2",
-          "description": "* Persons age 55-64\n* Persons ages 16-64 years with high-risk medical conditions\n* Additional critical workers",
+          "description": "* People ages 55-64\n* People ages 16-64 years with high-risk medical conditions\n* People with intellectual and developmental disabilities\n* Additional critical workers",
           "startDate": "March 22, 2021"
         },
         {
@@ -48,8 +48,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.974Z"
+          "startDate": "By May 1, 2021",
+          "updatedAt": "2021-03-22T15:34:28.015Z"
         }
       ]
     },
