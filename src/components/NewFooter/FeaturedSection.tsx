@@ -17,7 +17,7 @@ import { scrollWithOffset } from 'components/TableOfContents';
 
 const FeaturedSection: React.FC<{
   section: FeaturedItem;
-  trackMenuEvent: any;
+  trackMenuEvent: (label: string) => void;
 }> = ({ section, trackMenuEvent }) => {
   const { url, cta, description, iconId } = section;
 
@@ -37,7 +37,7 @@ const FeaturedSection: React.FC<{
       : {};
 
   return (
-    <RowWithSpacing onClick={trackMenuEvent(cta)}>
+    <RowWithSpacing onClick={() => trackMenuEvent(cta)}>
       <IconWrapper>
         <Icon height="36" width="40" aria-hidden="true" />
       </IconWrapper>

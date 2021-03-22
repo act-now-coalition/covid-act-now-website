@@ -18,7 +18,9 @@ import {
   RowWithSpacing,
 } from './Menu.style';
 
-const MenuContent: React.FC<{ trackMenuEvent: any }> = ({ trackMenuEvent }) => {
+const MenuContent: React.FC<{ trackMenuEvent: (label: string) => void }> = ({
+  trackMenuEvent,
+}) => {
   const { learnLinks, aboutUs, featuredSections } = footerContent;
 
   return (
@@ -30,7 +32,7 @@ const MenuContent: React.FC<{ trackMenuEvent: any }> = ({ trackMenuEvent }) => {
             <LearnLink
               key={link.cta}
               to={link.url}
-              onClick={trackMenuEvent(`Learn: ${link.cta}`)}
+              onClick={() => trackMenuEvent(`Learn: ${link.cta}`)}
             >
               <TextAndIconWithSpecialWrapping
                 text={link.cta}
@@ -42,7 +44,7 @@ const MenuContent: React.FC<{ trackMenuEvent: any }> = ({ trackMenuEvent }) => {
         <OutlinedButton
           to="/learn"
           desktopOnly
-          onClick={trackMenuEvent('Learn: View all topics')}
+          onClick={() => trackMenuEvent('Learn: View all topics')}
         >
           View all topics
         </OutlinedButton>
@@ -53,7 +55,7 @@ const MenuContent: React.FC<{ trackMenuEvent: any }> = ({ trackMenuEvent }) => {
           <FeaturedSection
             key={section.cta}
             section={section}
-            trackMenuEvent={trackMenuEvent(`Learn: ${section.cta}`)}
+            trackMenuEvent={() => trackMenuEvent(`Learn: ${section.cta}`)}
           />
         ))}
       </Section>
@@ -61,7 +63,7 @@ const MenuContent: React.FC<{ trackMenuEvent: any }> = ({ trackMenuEvent }) => {
         <LogoWrapper
           to="/"
           aria-label="Covid Act Now"
-          onClick={trackMenuEvent('Logo')}
+          onClick={() => trackMenuEvent('Logo')}
         >
           <LogoNonUrl />
         </LogoWrapper>
