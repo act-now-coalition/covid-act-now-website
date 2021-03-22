@@ -47,12 +47,12 @@
         {
           "question": "How do you get your vaccine eligibility information?",
           "questionId": "how-do-you-get-vaccine-eligibility-information ",
-          "answer": "Our team of staff and volunteers review official government sites of states, metros and counties several times a week. Please note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
+          "answer": "Our team of staff and volunteers frequently reviews official state government sites and updates vaccine eligibility information on the site every Monday and Thursday. Please note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
         },
         {
           "question": "Which locations do you have vaccine eligibility information for? ",
           "questionId": "what-locations-do-you-have-vaccine-eligibility-information-for",
-          "answer": "We currently only have vaccine eligibility information for all 50 states."
+          "answer": "We currently have vaccine eligibility information for every U.S. state, two territories, and the District of Columbia."
         },
         {
           "question": "Why do you have vaccine eligibility information for some locations and not others? ",
@@ -180,7 +180,7 @@
       "questions": [
         {
           "question": "Is it safe to reopen schools?",
-          "answer": "There are many ways that schools can reduce risk. For instance, schools may adopt plans to limit [infections](https://covidactnow.org/glossary#infection), such as establishing effective protocols for testing, tracking and tracing, and providing [masks](https://covidactnow.org/glossary#face-mask) and other [protective equipment](https://covidactnow.org/glossary#ppe). Still, some schools may face limitations. They may have a greater density of students and employees in buildings, poorer ventilation and less opportunity for outdoor learning. Covid Act Now provides decision makers with [data](https://covidactnow.org/glossary#data) to assess risk and consider the ability of the school and school district to keep students and teachers safe. [Learn more](https://covidactnow.org/covid-explained/school-guidance).",
+          "answer": "A growing body of evidence collected during the fall suggests that schools can reopen, and stay open, while achieving low or near zero in-school COVID transmission to both children and adults. Crucially, low or near zero in-school transmission can be maintained even when transmission within the local community is high, if the school implements a strict infection control strategy.\n\nFor instance, schools can focus on developing effective protocols for [testing](https://covidactnow.org/glossary#testing), [contract tracing](https://covidactnow.org/glossary#contact-tracing), vaccination, and providing [masks](https://covidactnow.org/glossary#face-mask) and other [protective equipment](https://covidactnow.org/glossary#ppe). Still, some schools may face greater limitations. They may have a greater density of students and employees in buildings, poorer ventilation and less opportunity for outdoor learning. Covid Act Now provides decision makers with [data](https://covidactnow.org/glossary#data) to assess risk and consider the ability of the school and school district to keep students and teachers safe. [Learn more](https://covidactnow.org/covid-explained/school-guidance).",
           "questionId": "is-it-safe-to-reopen-schools"
         },
         {
