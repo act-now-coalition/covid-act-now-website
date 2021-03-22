@@ -22,14 +22,19 @@ class MyDocument extends Document {
               materialUiSheets.collect(<App {...props} />),
             ),
         });
-      const initialProps = await Document.getInitialProps(ctx);
+      const {
+        styles: initialStyles,
+        ...initialProps
+      } = await Document.getInitialProps(ctx);
+      const materialStyles = materialUiSheets.getStyleElement();
+      const scStyles = styledComponentSheet.getStyleElement();
       return {
         ...initialProps,
         styles: (
           <>
-            {initialProps.styles}
-            {materialUiSheets.getStyleElement()}
-            {styledComponentSheet.getStyleElement()}
+            {initialStyles}
+            {materialStyles}
+            {scStyles}
           </>
         ),
       };
@@ -193,14 +198,6 @@ class MyDocument extends Document {
               src="https://www.facebook.com/tr?id=692591964861759&ev=PageView&noscript=1"
             />
           </noscript>
-
-          {/*<div dangerouslySetInnerHTML={{ __html: `
-            <!-- injected styled-component styles -->
-        `}} />*/}
-          {this.props.styles}
-          {/*<div dangerouslySetInnerHTML={{ __html: `
-            <!-- end injected styled-component styles -->
-      `}} />*/}
         </Head>
         <body>
           <Main />
