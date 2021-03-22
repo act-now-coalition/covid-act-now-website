@@ -40,6 +40,7 @@ export enum EventCategory {
   EXPLORE = 'explore',
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
   FAQ = 'faq',
+  FOOTER = 'footer',
   GEOLOCATION_CARDS = 'geolocation cards',
   GLOSSARY = 'glossary',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
@@ -81,7 +82,6 @@ export enum EventAction {
   LCP = 'Largest Contentful Paint (ms)',
   TTFB = 'Time to First Byte (ms)',
   OPEN_TOOLTIP = 'open tooltip',
-  CLOSE_TOOLTIP = 'close tooltip',
 }
 
 function toTitleCase(name: string) {
