@@ -2558,7 +2558,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Washington",
       "fips": "53",
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
@@ -2595,7 +2595,7 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* High-risk critical workers who work in certain congregate settings (agriculture and fishing, food services, corrections, court system, public transit, remaining first responders)",
+          "description": "* High-risk critical workers who work in certain congregate settings (agriculture and fishing, food services, corrections, court system, public transit, remaining first responders)\n(NEW) * Individuals 16+ who are pregnant or have high-risk disabilities",
           "expandedDefinitionUrl": "",
           "startDate": "March 17, 2021",
           "updatedAt": "2021-03-18T19:55:00.781Z"
