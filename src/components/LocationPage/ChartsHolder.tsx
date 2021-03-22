@@ -29,7 +29,7 @@ import { /*Explore, */ ExploreMetric } from 'components/Explore';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 //import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-import ChartBlock from './ChartBlock';
+//import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import LocationPageHeader from './LocationPageHeader';
 import { ChartContentWrapper } from './ChartsHolder.style';
@@ -56,6 +56,10 @@ const VaccinationEligibilityBlock = dynamic(
   },
 );
 const Explore = dynamic(() => import('components/Explore'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+const ChartBlock = dynamic(() => import('./ChartBlock'), {
   ssr: false,
   loading: () => <LoadingScreen />,
 });
