@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useLocation } from 'common/utils/router';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -21,12 +22,12 @@ import {
 } from 'common/utils/recommend';
 import { mainContent } from 'cms-content/recommendations';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import CompareMain from 'components/Compare/CompareMain';
+//import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
-import Explore, { ExploreMetric } from 'components/Explore';
-import Recommend from 'components/Recommend';
+import { /*Explore, */ ExploreMetric } from 'components/Explore';
+//import Recommend from 'components/Recommend';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
+//import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
@@ -37,6 +38,27 @@ import { Projections } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import type { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from 'common/utils/chart';
+
+const Recommend = dynamic(() => import('components/Recommend'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+
+const CompareMain = dynamic(() => import('components/Compare/CompareMain'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+const VaccinationEligibilityBlock = dynamic(
+  () => import('components/VaccinationEligibilityBlock'),
+  {
+    ssr: false,
+    loading: () => <LoadingScreen />,
+  },
+);
+const Explore = dynamic(() => import('components/Explore'), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
