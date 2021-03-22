@@ -12,8 +12,8 @@
       "buttonRedirect": "/covid-risk-levels-metrics"
     },
     {
-      "sectionTitle": "About our alerts",
-      "sectionId": "about-our-alerts",
+      "sectionTitle": "COVID news & updates",
+      "sectionId": "news-and-updates",
       "description": "If you’d like to stay on top of COVID without visiting our site, sign up for alerts or subscribe to our free newsletters.",
       "buttonCta": "View our alerts",
       "buttonRedirect": "/subscribe"
