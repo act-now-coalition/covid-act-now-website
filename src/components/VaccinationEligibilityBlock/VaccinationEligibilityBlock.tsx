@@ -125,7 +125,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
       </Section>
       <Section>
         <Source>
-          Source:{' '}
+          Updated Mondays and Thursdays from:{' '}
           <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
             {sourceName}
           </ExternalLink>
