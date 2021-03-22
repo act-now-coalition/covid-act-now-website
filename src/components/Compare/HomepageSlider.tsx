@@ -19,25 +19,35 @@ const marks = [
   },
 ];
 
+function getAriaValueText(value: number): string {
+  const item = marks.find(item => item.value === value);
+  return item?.label ?? 'Unknown value';
+}
+
+function getAriaLabel(index: number): string {
+  return index < 3 ? marks[index].label : 'Unknown value';
+}
+
 const HomepageSlider: React.FC<{
   onChange: (event: React.ChangeEvent<{}>, value: any) => void;
   homepageScope: HomepageLocationScope;
   homepageSliderValue: HomepageLocationScope;
   $isModal: boolean;
-}> = ({ onChange, homepageScope, homepageSliderValue, $isModal }) => {
-  return (
-    <SliderContainer $isModal={$isModal}>
-      <StyledSlider
-        onChange={onChange}
-        value={homepageSliderValue}
-        step={null}
-        marks={marks}
-        track={false}
-        $homepageScope={homepageScope}
-        $isModal={$isModal}
-      />
-    </SliderContainer>
-  );
-};
+}> = ({ onChange, homepageScope, homepageSliderValue, $isModal }) => (
+  <SliderContainer $isModal={$isModal}>
+    <StyledSlider
+      onChange={onChange}
+      value={homepageSliderValue}
+      step={null}
+      marks={marks}
+      track={false}
+      $homepageScope={homepageScope}
+      $isModal={$isModal}
+      aria-label="Select county, metro areas or states"
+      getAriaValueText={getAriaValueText}
+      getAriaLabel={getAriaLabel}
+    />
+  </SliderContainer>
+);
 
 export default HomepageSlider;
