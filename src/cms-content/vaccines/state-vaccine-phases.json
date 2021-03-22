@@ -1872,7 +1872,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Ohio",
       "fips": "39",
       "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
@@ -1932,8 +1932,8 @@
           "startDate": "March 11"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-18T19:28:02.436Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-22T19:56:45.353Z",
           "phase": "2C",
           "description": "* Adults 40+",
           "startDate": "March 19"
