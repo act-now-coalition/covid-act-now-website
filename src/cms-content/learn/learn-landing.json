@@ -14,7 +14,7 @@
     {
       "sectionTitle": "COVID news & updates",
       "sectionId": "news-and-updates",
-      "description": "If you’d like to stay on top of COVID without visiting our site, sign up for alerts or subscribe to our free newsletters.",
+      "description": "To stay on top of COVID, sign up for risk & vaccine eligibility email alerts or check out our free newsletters.",
       "buttonCta": "View our alerts",
       "buttonRedirect": "/subscribe"
     },
