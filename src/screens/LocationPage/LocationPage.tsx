@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import MiniMap from 'components/MiniMap';
+//import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getStateCode, MetroArea, Region } from 'common/regions';
 import type { LocationSummary } from 'common/location_summaries';
 
 import { useLocation } from 'common/utils/router';
+
+const MiniMap = dynamic(() => import('components/MiniMap'), {
+  ssr: false,
+});
 
 interface LocationPageProps {
   region: Region;
