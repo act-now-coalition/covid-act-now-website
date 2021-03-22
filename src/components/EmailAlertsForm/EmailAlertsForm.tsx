@@ -49,7 +49,7 @@ const EmailAlertsForm: React.FC<{
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
 
-  const isSmallMobile = useBreakpoint(321);
+  const isSmallMobile = useBreakpoint(360);
 
   // The default (geolocated) regions are updated asynchronously, so once we
   // get the default regions we set them as selected initially
