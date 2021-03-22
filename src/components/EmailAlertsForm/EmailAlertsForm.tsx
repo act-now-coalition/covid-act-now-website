@@ -8,6 +8,7 @@ import React, {
 import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
 import { isValidEmail } from 'common/utils';
 import { Region } from 'common/regions';
+import { useBreakpoint } from 'common/hooks';
 import AutocompleteRegions from 'components/AutocompleteRegions';
 import {
   subscribeToLocations,
@@ -47,6 +48,8 @@ const EmailAlertsForm: React.FC<{
   const [defaultInitialized, setDefaultInitialized] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
+
+  const isSmallMobile = useBreakpoint(360);
 
   // The default (geolocated) regions are updated asynchronously, so once we
   // get the default regions we set them as selected initially
@@ -111,9 +114,10 @@ const EmailAlertsForm: React.FC<{
     setSelectedRegions(newRegions);
   };
 
-  const emailInputLabel = emailError
-    ? 'Invalid email'
+  const validInputLabel = isSmallMobile
+    ? 'Enter your email'
     : 'Enter your email address';
+  const emailInputLabel = emailError ? 'Invalid email' : validInputLabel;
 
   const renderTags = (
     regionItems: Region[],
