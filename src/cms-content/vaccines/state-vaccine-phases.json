@@ -1822,7 +1822,7 @@
       "fips": "69",
       "eligibilityInfoUrl": "https://www.vaccinatecnmi.com/",
       "vaccinationSignupUrl": "https://www.vaccinatecnmi.com/covid-19/registration/",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1845,11 +1845,11 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Other essential workers",
+          "currentlyEligible": true,
+          "description": "* Individuals 16+ (Saipan)\n* Individuals 18+ (Tinian, Rota)",
           "expandedDefinitionUrl": "",
           "startDate": "Spring 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-22T19:55:45.780Z"
         },
         {
           "phase": "3A",
