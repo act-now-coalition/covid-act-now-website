@@ -2688,17 +2688,17 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-22T20:06:39.463Z",
+          "phase": "1C",
+          "description": "* Individuals (16+) with underlying medical conditions",
+          "startDate": "March 22"
+        },
+        {
           "currentlyEligible": false,
           "updatedAt": "2021-03-08T17:29:35.625Z",
           "phase": "TBD",
           "description": "Still to be determined: \n\n* General public and under 16"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-11T18:30:31.842Z",
-          "phase": "1C",
-          "description": "* TBD",
-          "startDate": "Late March/Early April"
         }
       ]
     },
