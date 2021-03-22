@@ -2310,7 +2310,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "5",
       "locationName": "Tennessee",
       "fips": "47",
       "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
@@ -2344,19 +2344,10 @@
           "updatedAt": "2021-03-08T17:57:39.897Z"
         },
         {
-          "phase": "2A",
+          "phase": "2A/2B",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Critical infrastructure workers\n* Ages 45+",
-          "expandedDefinitionUrl": "",
-          "startDate": "Q2/Q3",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2B",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Employed in other certain critical infrastructure industries (transportation, public infrastructure, telecommunications, utilities/energy)\n* Ages 35+",
+          "description": "* Critical infrastructure workers\n* Ages 35+\n\nNOTE: Rollout depends on county",
           "expandedDefinitionUrl": "",
           "startDate": "Q2/Q3",
           "updatedAt": "2021-02-18T01:52:35.985Z"
