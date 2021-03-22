@@ -2431,7 +2431,7 @@
           "currentlyEligible": false,
           "description": "* Other age groups\n* People with underlying medical conditions not already included\n* People who live in congregate settings and are at higher risk for the virus that causes COVID",
           "expandedDefinitionUrl": "",
-          "startDate": "April 1",
+          "startDate": "March 24",
           "updatedAt": "2021-03-15T16:52:35.689Z"
         },
         {
@@ -2440,8 +2440,8 @@
           "currentlyEligible": false,
           "description": "* All residents of Utah",
           "expandedDefinitionUrl": "",
-          "startDate": "April 1",
-          "updatedAt": "2021-03-15T16:52:31.859Z"
+          "startDate": "March 24",
+          "updatedAt": "2021-03-22T20:02:17.947Z"
         }
       ]
     },
