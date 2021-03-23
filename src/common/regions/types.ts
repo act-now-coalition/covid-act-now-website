@@ -1,5 +1,4 @@
 import urlJoin from 'url-join';
-import { getAbbreviatedCounty } from 'common/utils/compare';
 
 export type FipsCode = string;
 export type ZipCode = string;
@@ -88,6 +87,24 @@ export class State extends Region {
       (subregion instanceof County && subregion.state === this)
     );
   }
+}
+
+/**
+ * Shortens the county name by using the abbreviated version of 'county'
+ * or the equivalent administrative division.
+ */
+export function getAbbreviatedCounty(fullCountyName: string) {
+  if (fullCountyName.includes('Parish'))
+    return fullCountyName.replace('Parish', 'Par.');
+  if (fullCountyName.includes('Borough'))
+    return fullCountyName.replace('Borough', 'Bor.');
+  if (fullCountyName.includes('Census Area'))
+    return fullCountyName.replace('Census Area', 'C.A.');
+  if (fullCountyName.includes('Municipality'))
+    return fullCountyName.replace('Municipality', 'Mun.');
+  if (fullCountyName.includes('Municipio'))
+    return fullCountyName.replace('Municipio', 'Mun.');
+  else return fullCountyName.replace('County', 'Co.');
 }
 
 export class County extends Region {

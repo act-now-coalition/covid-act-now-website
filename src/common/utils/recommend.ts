@@ -13,16 +13,15 @@ import {
   RecommendationWithIcon,
   RecommendCategory,
   RecommendID,
+  allIcons,
 } from 'cms-content/recommendations';
-import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { getAbbreviatedCounty } from 'common/utils/compare';
 import { formatDecimal } from '.';
 import {
   getStateName,
   showExposureNotifications,
 } from 'components/LocationPage/Notifications';
-import regions from 'common/regions';
+import regions, { getAbbreviatedCounty } from 'common/regions';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);

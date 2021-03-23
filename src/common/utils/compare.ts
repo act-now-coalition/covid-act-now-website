@@ -12,6 +12,7 @@ import regions, {
   MetroArea,
   getStateName,
   getFormattedStateCode,
+  getAbbreviatedCounty,
 } from 'common/regions';
 import { fail } from 'assert';
 
@@ -225,19 +226,6 @@ export function getHomePageViewMoreCopy(
   } else {
     return `View more`;
   }
-}
-
-// For formatting and abbreviating location names:
-
-export function getAbbreviatedCounty(county: string) {
-  if (county.includes('Parish')) return county.replace('Parish', 'Par.');
-  if (county.includes('Borough')) return county.replace('Borough', 'Bor.');
-  if (county.includes('Census Area'))
-    return county.replace('Census Area', 'C.A.');
-  if (county.includes('Municipality'))
-    return county.replace('Municipality', 'Mun.');
-  if (county.includes('Municipio')) return county.replace('Municipio', 'Mun.');
-  else return county.replace('County', 'Co.');
 }
 
 /*
