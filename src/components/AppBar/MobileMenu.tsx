@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyledMenu } from './NavBar.style';
+import { Link } from 'react-router-dom';
 import MapIcon from 'assets/images/mapIconTwoTone';
 import FAQIcon from 'assets/images/faqIconTwoTone';
 import palette from 'assets/theme/palette';
-import { Link } from 'react-router-dom';
+import { StyledMenu } from './NavBar.style';
 import { trackNavigation } from './utils';
 
 const MobileMenu: React.FC<{ open: boolean; closeMenu: () => void }> = ({

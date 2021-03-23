@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
+import { isUndefined } from 'lodash';
 import { footerContent } from 'cms-content/footer';
 import FeaturedSection from './FeaturedSection';
 import SocialButtonsBlock from './SocialButtonsBlock';
-import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { FeaturedItem, LinkItem } from 'cms-content/footer';
 import TextAndIconWithSpecialWrapping from './TextAndIconWithSpecialWrapping';
 import {
@@ -18,10 +18,13 @@ import {
   RowWithSpacing,
 } from './Menu.style';
 
-const MenuContent: React.FC<{ trackMenuEvent: (label: string) => void }> = ({
-  trackMenuEvent,
-}) => {
+const MenuContent: React.FC<{
+  trackMenuEvent: (label: string) => void;
+  Logo?: ComponentType;
+}> = ({ trackMenuEvent, Logo }) => {
   const { learnLinks, aboutUs, featuredSections } = footerContent;
+
+  const showTerms = !isUndefined(Logo);
 
   return (
     <ContentWrapper>
@@ -60,13 +63,17 @@ const MenuContent: React.FC<{ trackMenuEvent: (label: string) => void }> = ({
         ))}
       </Section>
       <Section>
-        <LogoWrapper
-          to="/"
-          aria-label="Covid Act Now"
-          onClick={() => trackMenuEvent('Logo')}
-        >
-          <LogoNonUrl />
-        </LogoWrapper>
+        {Logo ? (
+          <LogoWrapper
+            to="/"
+            aria-label="Covid Act Now"
+            onClick={() => trackMenuEvent('Logo')}
+          >
+            <Logo />
+          </LogoWrapper>
+        ) : (
+          <SectionHeader>About Us</SectionHeader>
+        )}
         <AboutCopy>{aboutUs}</AboutCopy>
         <RowWithSpacing>
           <OutlinedButton to="/about" onClick={trackMenuEvent('About us')}>
@@ -79,7 +86,7 @@ const MenuContent: React.FC<{ trackMenuEvent: (label: string) => void }> = ({
             Contact us
           </OutlinedButton>
         </RowWithSpacing>
-        <SocialButtonsBlock />
+        <SocialButtonsBlock showTerms={showTerms} />
       </Section>
     </ContentWrapper>
   );

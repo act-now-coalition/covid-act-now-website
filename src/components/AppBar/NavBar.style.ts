@@ -142,8 +142,12 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
 }))`
-  &:focus {
+  &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
+  }
+
+  &:hover {
+    background-color: transparent;
   }
 `;
 

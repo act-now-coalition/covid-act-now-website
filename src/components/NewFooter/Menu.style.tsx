@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import fonts from 'common/theme/fonts';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
+//background, grayText, bodycopy
 const mobileBreakpointPlus = '960px';
 
 export const StyledFooter = styled.footer`
@@ -77,7 +78,7 @@ export const Section = styled.div`
 
 export const SectionHeader = styled.h2`
   ${fonts.regularBookMidWeight};
-  color: ${COLOR_MAP.GREY_3};
+  color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
@@ -89,7 +90,7 @@ export const Column = styled.div`
 `;
 
 export const ArrowIcon = styled(ArrowForwardIcon)`
-  color: ${COLOR_MAP.GREY_3};
+  color: ${props => props.theme.palette.megaMenu.gray};
   font-size: 1.25rem;
   margin-left: 0.5rem;
 `;
@@ -107,7 +108,7 @@ export const RowWithSpacing = styled(Row)`
 
 export const BodyCopy = css`
   ${fonts.regularBook};
-  color: ${COLOR_MAP.GREY_3};
+  color: ${props => props.theme.palette.megaMenu.mainText};
   line-height: 1.4;
   margin: 0;
 `;
@@ -129,7 +130,6 @@ export const AboutCopy = styled.p`
 
 export const ButtonBase = css`
   ${fonts.regularBookMidWeight};
-  color: white;
   width: fit-content;
   text-transform: none;
   line-height: 1.4;
@@ -137,6 +137,9 @@ export const ButtonBase = css`
 
 export const TextLink = styled(Link)`
   ${ButtonBase};
+
+  color: ${props => props.theme.palette.megaMenu.mainText};
+
   font-size: 1rem;
   padding: 0;
   text-decoration: none;
@@ -167,9 +170,12 @@ export const LearnLink = styled(TextLink)`
 
 export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   ${ButtonBase};
+
+  color: ${props => props.theme.palette.megaMenu.buttonContent};
+
   font-size: 0.8725rem;
   padding: 0.4rem 0.75rem;
-  border: 1px solid ${COLOR_MAP.GREY_3};
+  border: ${props => `1px solid ${props.theme.palette.megaMenu.buttonBorder}`};
   display: ${({ desktopOnly }) => desktopOnly && 'none'};
   white-space: nowrap;
   &:nth-child(2) {
@@ -179,6 +185,7 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   &:hover {
     background-color: rgba(83, 97, 253, 0.6);
     border-color: ${COLOR_MAP.NEW_BLUE_PURPLE};
+    color: white;
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -189,7 +196,7 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
 export const SocialButtonsRow = styled.div`
     display: flex;
     svg {
-        fill: white;
+        fill: ${props => props.theme.palette.megaMenu.buttonContent};
         font-size: 1.75rem;
         &:hover {
           fill: ${COLOR_MAP.NEW_BLUE_PURPLE};
@@ -198,7 +205,7 @@ export const SocialButtonsRow = styled.div`
     a {
       color: white;
         &:not(:last-of-type) {
-            margin-right: .75rem;
+            margin-right: 1rem;
         }
         &:last-of-type {
           align-self: center;
@@ -219,4 +226,27 @@ export const LogoWrapper = styled(Link)`
 
 export const NonWrappingSpan = styled.span`
   white-space: nowrap;
+`;
+
+export const StyledMegaMenu = styled.nav<{ open: boolean }>`
+  background: white;
+  border-top: 1px solid ${COLOR_MAP.GREY_2};
+  border-bottom: 1px solid ${COLOR_MAP.GREY_2};
+  transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  height: calc(100vh - 112px);
+  overflow-y: auto;
+  box-sizing: content-box;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    height: auto;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 3rem;
+  }
 `;

@@ -1,4 +1,5 @@
 import { colors } from '@material-ui/core';
+import { COLOR_MAP } from 'common/colors';
 
 const white = '#FFFFFF';
 const black = '#000000';
@@ -28,6 +29,22 @@ export const chartDarkMode = {
   area: '#ffffff26',
   annotation: white,
   isDarkMode: true,
+};
+
+const megaMenu = {
+  mainText: black,
+  gray: COLOR_MAP.GREY_4,
+  buttonContent: COLOR_MAP.NEW_BLUE_PURPLE,
+  buttonContentHover: white,
+  buttonBorder: COLOR_MAP.GREY_2,
+};
+
+export const megaMenuFooter = {
+  mainText: white,
+  gray: COLOR_MAP.GREY_3,
+  buttonContent: white,
+  buttonContentHover: COLOR_MAP.NEW_BLUE_PURPLE,
+  buttonBorder: COLOR_MAP.GREY_3,
 };
 
 export default {
@@ -83,4 +100,5 @@ export default {
   icon: colors.blueGrey[600],
   divider: colors.grey[200],
   chart,
+  megaMenu,
 };
