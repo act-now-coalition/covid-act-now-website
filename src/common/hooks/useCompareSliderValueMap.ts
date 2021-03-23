@@ -6,14 +6,6 @@ import {
   HomepageLocationScope,
 } from 'common/utils/compare';
 
-// export default function useCompareSliderValueMap(setSliderValue:any, geoScope: GeoScopeFilter, setHomepageSliderValue: any, homepageScope:HomepageLocationScope) {
-//   useEffect(() => {
-//     setSliderValue(scopeValueMap[geoScope])
-//     setHomepageSliderValue(homepageScopeValueMap[homepageScope])
-
-//   }, [geoScope, homepageScope])
-// }
-
 export default function useCompareSliderValueMap(
   geoScope: GeoScopeFilter,
   homepageScope: HomepageLocationScope,

@@ -15,22 +15,6 @@ import {
 import { EventAction } from 'components/Analytics';
 import HomepageSlider from './HomepageSlider';
 
-// // For location page: maps each numerical slider value to its corresponding GeoScopeFilter
-// export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
-//   0: GeoScopeFilter.NEARBY,
-//   50: GeoScopeFilter.STATE,
-//   99: GeoScopeFilter.COUNTRY,
-// };
-
-// // For homepage: maps each numerical slider value to its corresponding HomepageLocationScope
-// export const homepageSliderNumberToFilterMap: {
-//   [val: number]: HomepageLocationScope;
-// } = {
-//   0: HomepageLocationScope.COUNTY,
-//   50: HomepageLocationScope.MSA,
-//   99: HomepageLocationScope.STATE,
-// };
-
 const Filters = (props: {
   isHomepage?: boolean;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
@@ -41,29 +25,17 @@ const Filters = (props: {
   setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   isModal: boolean;
   sliderValue: GeoScopeFilter;
-  // setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
-  // setHomepageSliderValue: React.Dispatch<
-  //   React.SetStateAction<HomepageLocationScope>
-  // >;
 }) => {
   const {
     sliderValue,
-    // setSliderValue,
     setCountyTypeToView,
     homepageScope,
     setHomepageScope,
     homepageSliderValue,
-    // setHomepageSliderValue,
-    // geoScope,
   } = props;
-
-  // const [sliderValue, homepageSliderValue] = useCompareSliderValueMap(
-  //   geoScope,
-  //   homepageScope,
-  // );
 
   const disableMetroMenu = props.isHomepage
     ? homepageScope !== HomepageLocationScope.COUNTY
@@ -100,7 +72,6 @@ const Filters = (props: {
 
   const sliderHandleChange = (event: any, value: any) => {
     if (props.setGeoScope) {
-      // setSliderValue(value);
       props.setGeoScope(sliderNumberToFilterMap[value]);
       trackCompareEvent(
         EventAction.SELECT,
@@ -114,7 +85,6 @@ const Filters = (props: {
     value: any,
   ) => {
     if (setHomepageScope) {
-      // setHomepageSliderValue(value);
       setHomepageScope(homepageSliderNumberToFilterMap[value]);
       trackCompareEvent(
         EventAction.SELECT,

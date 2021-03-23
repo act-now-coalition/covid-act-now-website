@@ -32,15 +32,11 @@ interface ModalCompareProps {
   sortByPopulation: boolean;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
-  // setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
-  // setHomepageSliderValue: React.Dispatch<
-  //   React.SetStateAction<HomepageLocationScope>
-  // >;
   region?: Region;
   vaccinesFirst?: boolean;
   vulnerabilityFirst?: boolean;
@@ -81,11 +77,9 @@ const ModalCompare = (props: ModalCompareProps) => {
             setGeoScope={props.setGeoScope}
             isModal
             sliderValue={props.sliderValue}
-            // setSliderValue={props.setSliderValue}
             homepageScope={props.homepageScope}
             setHomepageScope={props.setHomepageScope}
             homepageSliderValue={props.homepageSliderValue}
-            // setHomepageSliderValue={props.setHomepageSliderValue}
           />
         )}
         {/* Need explicit div to ensure close icon is on the right of the pop up */}
@@ -112,13 +106,11 @@ const ModalCompare = (props: ModalCompareProps) => {
         sortByPopulation={props.sortByPopulation}
         setSortByPopulation={props.setSortByPopulation}
         sliderValue={props.sliderValue}
-        // setSliderValue={props.setSliderValue}
         setShowFaqModal={props.setShowFaqModal}
         createCompareShareId={props.createCompareShareId}
         homepageScope={props.homepageScope}
         setHomepageScope={props.setHomepageScope}
         homepageSliderValue={props.homepageSliderValue}
-        // setHomepageSliderValue={props.setHomepageSliderValue}
         region={props.region}
         vaccinesFirst={props.vaccinesFirst}
         vulnerabilityFirst={props.vulnerabilityFirst}
