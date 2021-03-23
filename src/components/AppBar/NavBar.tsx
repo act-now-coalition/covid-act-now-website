@@ -115,7 +115,7 @@ const NavBar: React.FC = () => {
           <Style.BackLink
             to="/"
             onClick={() => trackNavigation('Back Home')}
-            aria-label="Covid Act Now"
+            aria-label="Back to Covid Act Now"
           >
             <ArrowBack />
           </Style.BackLink>
