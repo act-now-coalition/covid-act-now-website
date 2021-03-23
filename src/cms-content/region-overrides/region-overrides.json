@@ -25,28 +25,6 @@
       "blocked": false
     },
     {
-      "include": "region-and-subregions",
-      "metric": "metrics.testPositivityRatio",
-      "region": "NH",
-      "context": "https://trello.com/c/ezum3pY6/922-nh-test-positivity-discrepancy",
-      "disclaimer": "There is a known discrepancy between our data, which comes from HHS and CDC, and the data reported on the New Hampshire state dashboard. We are looking into the cause.",
-      "blocked": false
-    },
-    {
-      "include": "region",
-      "metric": "metrics.testPositivityRatio",
-      "region": "48113",
-      "context": "[michael] Dallas County https://trello.com/c/vZ77ZnXT/",
-      "blocked": true
-    },
-    {
-      "include": "region",
-      "metric": "metrics.testPositivityRatio",
-      "region": "19100",
-      "context": "[michael] Dallas Metro https://trello.com/c/vZ77ZnXT/",
-      "blocked": true
-    },
-    {
       "include": "subregions",
       "metric": "metrics.vaccinationsInitiatedRatio",
       "region": "WY",
@@ -75,11 +53,19 @@
       "context": "https://trello.com/c/7tqJyFna/1099-disabled-white-pine-county-nv-vaccine-data-due-to-anomoly"
     },
     {
-      "include": "region",
+      "include": "subregions",
       "metric": "metrics.caseDensity",
       "blocked": true,
-      "region": "47157",
-      "context": "https://trello.com/c/aB0EunUd/1108-disabled-shelby-county-tn-due-to-trailing-zeros-bringing-dnc-down"
+      "region": "OK",
+      "context": "https://trello.com/c/HdAKfp49/1139-all-ok-counties-except-2-no-longer-reporting-cases"
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "region": "IL",
+      "context": "https://trello.com/c/buXoYmKy/1140-il-county-first-doses-underreporting",
+      "disclaimer": "Note that Illinois does not report enough information to correctly distinguish between administration of one dose vaccines and two dose vaccines, and therefore our \"1+ dose\" data above may be an underestimation of the true number of people receiving at least one dose.",
+      "blocked": false
     }
   ]
 }
