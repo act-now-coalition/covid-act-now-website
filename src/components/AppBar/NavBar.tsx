@@ -112,7 +112,11 @@ const NavBar: React.FC = () => {
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
       <Style.Toolbar>
         {isLocationPage(pathname) && (
-          <Style.BackLink to="/" onClick={() => trackNavigation('Back Home')}>
+          <Style.BackLink
+            to="/"
+            onClick={() => trackNavigation('Back Home')}
+            aria-label="Back to Covid Act Now"
+          >
             <ArrowBack />
           </Style.BackLink>
         )}
@@ -120,6 +124,7 @@ const NavBar: React.FC = () => {
           to="/"
           style={{ display: 'inline-flex' }}
           onClick={() => trackNavigation('Home (Logo)')}
+          aria-label="Covid Act Now"
         >
           <Logo />
         </Link>
