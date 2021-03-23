@@ -163,17 +163,6 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
-  // Since the route isn't changing when navigating between county pages within the same state, state variables weren't resetting. This forces a reset:
-  useEffect(() => {
-    setShowModal(false);
-    setSorter(Metric.CASE_DENSITY);
-    setSortDescending(true);
-    setSortByPopulation(true);
-    setCountyTypeToView(MetroFilter.ALL);
-    setShowFaqModal(false);
-    setGeoScope(GeoScopeFilter.STATE);
-  }, [location.pathname]);
-
   // Since the route isn't changing when navigating between county pages within the same state, state variables don't reset. This forces a reset:
   useEffect(() => {
     setShowModal(false);
@@ -247,9 +236,6 @@ const CompareMain = (props: {
       setSorter(Metric.VACCINATIONS);
       setSortByPopulation(false);
       setSortDescending(true);
-      // setHomepageSliderValue(
-      //   homepageScopeValueMap[HomepageLocationScope.STATE],
-      // );
       setHomepageScope(HomepageLocationScope.STATE);
     }
   }, [props.vaccinesFirst]);
