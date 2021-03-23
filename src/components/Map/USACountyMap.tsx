@@ -7,7 +7,7 @@ import { colorFromLocationSummary } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 import regions, { State as StateType } from 'common/regions';
-import stateGeographies from 'common/data/states-10m.json';
+import stateGeographies from 'common/data/states-10m-small.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import MapCounties from './MapCounties';
