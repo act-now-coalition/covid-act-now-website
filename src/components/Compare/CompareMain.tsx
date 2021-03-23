@@ -175,18 +175,6 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
-  // Since the route isn't changing when navigating between county pages within the same state, state variables weren't resetting. This forces a reset:
-  useEffect(() => {
-    setShowModal(false);
-    setSorter(Metric.CASE_DENSITY);
-    setSortDescending(true);
-    setSortByPopulation(true);
-    setCountyTypeToView(MetroFilter.ALL);
-    setShowFaqModal(false);
-    setGeoScope(GeoScopeFilter.STATE);
-    setSliderValue(scopeValueMap[geoScope as GeoScopeFilter]);
-  }, [geoScope, location.pathname]);
-
   // Location page slider:
   const defaultSliderValue = scopeValueMap[geoScope];
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);
@@ -196,6 +184,22 @@ const CompareMain = (props: {
   const [homepageSliderValue, setHomepageSliderValue] = useState(
     defaultHomepageSliderValue,
   );
+
+  // Since the route isn't changing when navigating between county pages within the same state, state variables weren't resetting. This forces a reset:
+  useEffect(() => {
+    setShowModal(false);
+    setSorter(Metric.CASE_DENSITY);
+    setSortDescending(true);
+    setSortByPopulation(true);
+    setCountyTypeToView(MetroFilter.ALL);
+    setShowFaqModal(false);
+    setGeoScope(GeoScopeFilter.STATE);
+  }, [geoScope, location.pathname]);
+
+  // So the slider value updates in accordance with geoScope, without needing to add geoScope to the above effect's dependecy array:
+  useEffect(() => {
+    setSliderValue(scopeValueMap[geoScope as GeoScopeFilter]);
+  }, [geoScope]);
 
   // State needed to reconstruct the current sort / filters. Needs to be persisted
   // when we generate sharing URLs, etc.
