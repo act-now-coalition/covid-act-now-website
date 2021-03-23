@@ -1,3 +1,8 @@
+/**
+ * Used for Compare filters.
+ * Updates the MUI slider value whenever the filter scope changes on homepage or location page.
+ */
+
 import { useEffect, useState } from 'react';
 import {
   scopeValueMap,

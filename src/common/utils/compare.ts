@@ -366,31 +366,33 @@ export const getCompareSubheader = (region: Region): string => {
   }
 };
 
-// For filters (0, 50, and 99 are numerical values required by MUI Slider component):
-export const scopeValueMap = {
-  [GeoScopeFilter.NEARBY]: 0,
-  [GeoScopeFilter.STATE]: 50,
-  [GeoScopeFilter.COUNTRY]: 99,
-};
+// Value maps for filters' slider components (0, 50, and 99 are numerical values required by MUI Slider).
+// Maps each numerical slider value to its corresponding scope:
 
-export const homepageScopeValueMap = {
-  [HomepageLocationScope.COUNTY]: 0,
-  [HomepageLocationScope.MSA]: 50,
-  [HomepageLocationScope.STATE]: 99,
-};
-
-// For location page: maps each numerical slider value to its corresponding GeoScopeFilter
+// For location page:
 export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
   0: GeoScopeFilter.NEARBY,
   50: GeoScopeFilter.STATE,
   99: GeoScopeFilter.COUNTRY,
 };
 
-// For homepage: maps each numerical slider value to its corresponding HomepageLocationScope
+export const scopeValueMap = {
+  [GeoScopeFilter.NEARBY]: 0,
+  [GeoScopeFilter.STATE]: 50,
+  [GeoScopeFilter.COUNTRY]: 99,
+};
+
+// For homepage:
 export const homepageSliderNumberToFilterMap: {
   [val: number]: HomepageLocationScope;
 } = {
   0: HomepageLocationScope.COUNTY,
   50: HomepageLocationScope.MSA,
   99: HomepageLocationScope.STATE,
+};
+
+export const homepageScopeValueMap = {
+  [HomepageLocationScope.COUNTY]: 0,
+  [HomepageLocationScope.MSA]: 50,
+  [HomepageLocationScope.STATE]: 99,
 };
