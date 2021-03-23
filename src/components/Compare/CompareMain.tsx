@@ -44,7 +44,10 @@ import regions, {
   County,
 } from 'common/regions';
 import { assert } from 'common/utils';
-import { useCompareSliderValueMap } from 'common/hooks';
+import {
+  useLocationPageCompareSliderMap,
+  useHomepageCompareSliderMap,
+} from 'common/hooks';
 
 const CompareMain = (props: {
   stateName?: string;
@@ -198,10 +201,10 @@ const CompareMain = (props: {
   // sharing URL.
   const sharedParams = useSharedComponentParams(SharedComponent.Compare);
 
-  const [sliderValue, homepageSliderValue] = useCompareSliderValueMap(
-    geoScope,
-    homepageScope,
-  );
+  // For location page:
+  const sliderValue = useLocationPageCompareSliderMap(geoScope);
+  // For homepage:
+  const homepageSliderValue = useHomepageCompareSliderMap(homepageScope);
 
   useEffect(() => {
     if (sharedParams) {
