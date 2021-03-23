@@ -15,7 +15,7 @@ import { Region, MetroArea } from 'common/regions';
 interface ModalCompareProps {
   stateName?: string;
   county: any | null;
-  setShowModal: any;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isHomepage?: boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;

@@ -175,6 +175,16 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
+  // Since the route isn't changing when navigating between county pages within the same state, state variables weren't resetting. This forces a reset:
+  useEffect(() => {
+    setSorter(Metric.CASE_DENSITY);
+    setSortDescending(true);
+    setSortByPopulation(true);
+    setCountyTypeToView(MetroFilter.ALL);
+    setShowFaqModal(false);
+    setShowModal(false);
+  }, [location.pathname]);
+
   // Location page slider:
   const defaultSliderValue = scopeValueMap[geoScope];
   const [sliderValue, setSliderValue] = useState(defaultSliderValue);

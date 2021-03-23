@@ -43,7 +43,7 @@ function trackShare(label: string) {
 const CompareTable = (props: {
   stateName?: string;
   county?: any | null;
-  setShowModal: any;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isModal: boolean;
   locationsViewable?: number;
   isHomepage?: boolean;
@@ -180,7 +180,10 @@ const CompareTable = (props: {
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)
-    .map((summary: SummaryForCompare, i: any) => ({ rank: i + 1, ...summary }));
+    .map((summary: SummaryForCompare, i: number) => ({
+      rank: i + 1,
+      ...summary,
+    }));
 
   const currentLocation = props.county
     ? { rank: currentCountyRank + 1, ...currentCounty }
