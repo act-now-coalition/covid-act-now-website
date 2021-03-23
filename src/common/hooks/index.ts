@@ -12,3 +12,4 @@ export { default as useFipsToCcviMap } from './useFipsToCcviMap';
 export { default as useCcviForFips } from './useCcviForFips';
 export { default as useCountyGeographies } from './useCountyGeographies';
 export { default as useStateGeographies } from './useStateGeographies';
+export { default as useCompareSliderValueMap } from './useCompareSliderValueMap';
