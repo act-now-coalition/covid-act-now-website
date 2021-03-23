@@ -185,11 +185,6 @@ const CompareMain = (props: {
     setGeoScope(GeoScopeFilter.STATE);
   }, [location.pathname]);
 
-  // Makes sure the location page's slider value updates in accordance with geoScope, without needing to add geoScope to the above effect's dependecy array:
-  useEffect(() => {
-    setSliderValue(scopeValueMap[geoScope as GeoScopeFilter]);
-  }, [geoScope]);
-
   // State needed to reconstruct the current sort / filters. Needs to be persisted
   // when we generate sharing URLs, etc.
   const uiState = {
