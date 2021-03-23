@@ -194,7 +194,7 @@ const CompareMain = (props: {
     setCountyTypeToView(MetroFilter.ALL);
     setShowFaqModal(false);
     setGeoScope(GeoScopeFilter.STATE);
-  }, [geoScope, location.pathname]);
+  }, [location.pathname]);
 
   // So the slider value updates in accordance with geoScope, without needing to add geoScope to the above effect's dependecy array:
   useEffect(() => {
