@@ -14,7 +14,7 @@ const HomeShareCardImage = () => {
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Header isHomePage />
       <ShareCardWrapper isHomePage>
-        <SocialLocationPreviewMap />;
+        <SocialLocationPreviewMap />
       </ShareCardWrapper>
     </DarkScreenshotWrapper>
   );
