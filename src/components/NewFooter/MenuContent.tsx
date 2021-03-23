@@ -69,12 +69,15 @@ const MenuContent: React.FC<{ trackMenuEvent: (label: string) => void }> = ({
         </LogoWrapper>
         <AboutCopy>{aboutUs}</AboutCopy>
         <RowWithSpacing>
-          <OutlinedButton to="/about" onClick={trackMenuEvent('About us')}>
+          <OutlinedButton
+            to="/about"
+            onClick={() => trackMenuEvent('About us')}
+          >
             Learn more about us
           </OutlinedButton>
           <OutlinedButton
             to="/about#contact-us"
-            onClick={trackMenuEvent('Contact us')}
+            onClick={() => trackMenuEvent('Contact us')}
           >
             Contact us
           </OutlinedButton>
