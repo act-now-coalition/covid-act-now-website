@@ -185,18 +185,18 @@ const CompareMain = (props: {
     defaultHomepageSliderValue,
   );
 
-  // Since the route isn't changing when navigating between county pages within the same state, state variables weren't resetting. This forces a reset:
+  // Since the route isn't changing when navigating between county pages within the same state, state variables don't reset. This forces a reset:
   useEffect(() => {
     setShowModal(false);
+    setShowFaqModal(false);
     setSorter(Metric.CASE_DENSITY);
     setSortDescending(true);
     setSortByPopulation(true);
     setCountyTypeToView(MetroFilter.ALL);
-    setShowFaqModal(false);
     setGeoScope(GeoScopeFilter.STATE);
   }, [location.pathname]);
 
-  // So the slider value updates in accordance with geoScope, without needing to add geoScope to the above effect's dependecy array:
+  // Makes sure the location page's slider value updates in accordance with geoScope, without needing to add geoScope to the above effect's dependecy array:
   useEffect(() => {
     setSliderValue(scopeValueMap[geoScope as GeoScopeFilter]);
   }, [geoScope]);
