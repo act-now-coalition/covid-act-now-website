@@ -32,7 +32,8 @@ export const chartDarkMode = {
 };
 
 const megaMenu = {
-  mainText: black,
+  primaryText: black,
+  secondaryText: COLOR_MAP.GREY_4,
   gray: COLOR_MAP.GREY_4,
   buttonContent: COLOR_MAP.NEW_BLUE_PURPLE,
   buttonContentHover: white,
@@ -40,7 +41,8 @@ const megaMenu = {
 };
 
 export const megaMenuFooter = {
-  mainText: white,
+  primaryText: white,
+  secondaryText: white,
   gray: COLOR_MAP.GREY_3,
   buttonContent: white,
   buttonContentHover: COLOR_MAP.NEW_BLUE_PURPLE,

@@ -97,9 +97,11 @@ export const ArrowIcon = styled(ArrowForwardIcon)`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 0.25rem;
 `;
 
 export const RowWithSpacing = styled(Row)`
+  margin-bottom: 0;
   &:not(:last-of-type) {
     margin-bottom: 1.75rem;
   }
@@ -107,7 +109,6 @@ export const RowWithSpacing = styled(Row)`
 
 export const BodyCopy = css`
   ${fonts.regularBook};
-  color: ${props => props.theme.palette.megaMenu.mainText};
   line-height: 1.4;
   margin: 0;
 `;
@@ -115,10 +116,12 @@ export const BodyCopy = css`
 export const FeaturedDescription = styled.p`
   ${BodyCopy};
   letter-spacing: 0;
+  color: ${props => props.theme.palette.megaMenu.secondaryText};
 `;
 
 export const AboutCopy = styled.p`
   ${BodyCopy};
+  color: ${props => props.theme.palette.megaMenu.primaryText};
   margin-bottom: 2rem;
   text-align: center;
 
@@ -137,7 +140,7 @@ export const ButtonBase = css`
 export const TextLink = styled(Link)`
   ${ButtonBase};
 
-  color: ${props => props.theme.palette.megaMenu.mainText};
+  color: ${props => props.theme.palette.megaMenu.primaryText};
 
   font-size: 1rem;
   padding: 0;

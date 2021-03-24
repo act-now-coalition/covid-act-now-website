@@ -12,7 +12,7 @@ const AlertsIcon: React.FC<{ height?: string; width?: string }> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0)">
+      <g>
         <path
           d="M27.141 26.7C27.141 28.095 26 29.235 24.606 29.235H4.324C2.93 29.235 1.789 28.094 1.789 26.7V11.49C1.789 10.095 2.93 8.95502 4.324 8.95502H24.606C26.001 8.95502 27.141 10.096 27.141 11.49V26.7Z"
           fill="white"

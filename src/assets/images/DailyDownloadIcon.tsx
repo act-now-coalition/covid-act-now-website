@@ -12,7 +12,7 @@ const DailyDownloadIcon: React.FC<{ height?: string; width?: string }> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0)">
+      <g>
         <path
           d="M27.1375 26.901C27.1375 28.296 25.9965 29.436 24.6025 29.436H4.32046C2.92646 29.436 1.78546 28.295 1.78546 26.901V11.69C1.78546 10.295 2.92646 9.155 4.32046 9.155H24.6025C25.9975 9.155 27.1375 10.296 27.1375 11.69V26.901Z"
           fill="white"
