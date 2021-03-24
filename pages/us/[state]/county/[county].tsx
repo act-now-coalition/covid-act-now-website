@@ -28,7 +28,7 @@ function CountyPage({ region, locationSummary }) {
   const { metrics } = locationSummary;
   return (
     <div>
-      <LocationHeader region={county} />
+      <LocationHeader region={county} locationSummary={locationSummary} />
     </div>
   );
 }
@@ -55,9 +55,13 @@ export async function getStaticProps({ params }) {
         fipsCode: region.fipsCode,
         population: region.population,
         state: {
+          name: region.state.name,
           fipsCode: region.state.fipsCode,
           stateCode: region.state.stateCode,
+          urlSegment: region.state.urlSegment,
+          population: region.state.population,
         },
+        urlSegment: region.urlSegment,
       },
       locationSummary,
     },
