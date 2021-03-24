@@ -8,7 +8,7 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { smallPhoneBreakpoint } from 'assets/theme/sizes';
+import { smallPhoneBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import { fonts } from 'common/theme';
 
 const desktopNavHeight = 64;
@@ -149,10 +149,6 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   font-size: 1rem;
   line-height: 1.4rem;
 
-  svg {
-    margin-left: 0.5rem;
-  }
-
   &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
   }
@@ -173,5 +169,14 @@ export const MenuIcon = styled(MuiMenuIcon)`
 export const ExperimentButtonsContainer = styled.div`
   & > :not(:last-child) {
     margin-right: 45px;
+  }
+`;
+
+export const MenuLabel = styled.span`
+  display: none;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: inherit;
+    margin-right: 0.5rem;
   }
 `;
