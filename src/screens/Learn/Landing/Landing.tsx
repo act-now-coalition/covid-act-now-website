@@ -15,6 +15,7 @@ const Landing: React.FC = () => {
     sections,
     metadataTitle,
     metadataDescription,
+    editorsNote,
   } = landingPageContent;
 
   const date = formatMetatagDate();
@@ -42,6 +43,7 @@ const Landing: React.FC = () => {
             </ButtonContainer>
           </Fragment>
         ))}
+        <MarkdownContent source={editorsNote} />
       </PageContent>
     </Fragment>
   );

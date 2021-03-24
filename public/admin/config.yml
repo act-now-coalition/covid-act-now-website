@@ -354,6 +354,9 @@ collections:
           - label: Intro
             name: intro
             widget: markdown
+          - label: Editors Note
+            name: editorsNote
+            widget: markdown
           - label: Sections
             name: sections
             widget: list
