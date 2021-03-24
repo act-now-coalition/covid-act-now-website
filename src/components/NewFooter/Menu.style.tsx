@@ -6,7 +6,6 @@ import fonts from 'common/theme/fonts';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
-//background, grayText, bodycopy
 const mobileBreakpointPlus = '960px';
 
 export const StyledFooter = styled.footer`
