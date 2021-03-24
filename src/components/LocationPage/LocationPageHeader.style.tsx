@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import { COLORS } from 'common';
 import { COLOR_MAP } from 'common/colors';
 import { Level } from 'common/level';

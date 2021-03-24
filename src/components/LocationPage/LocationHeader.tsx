@@ -1,19 +1,14 @@
 import React from 'react';
-import * as Styles from './LocationPageHeading.style';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { Region } from 'common/regions/types';
 import {
   ColoredHeaderBanner,
   Wrapper,
   TopContainer,
-  FooterContainer,
   HeaderSection,
-  HeaderSubCopy,
   ButtonsWrapper,
   HeaderButton,
-  LastUpdatedDate,
   SectionHalf,
-  Copy,
   ColumnTitle,
   SectionColumn,
   LevelDescription,
@@ -51,50 +46,46 @@ const LocationHeader: React.FC<{
   const stats = summaryToStats(locationSummary);
 
   return (
-    <div>
-      <>
-        <ChartContentWrapper>
-          <ColoredHeaderBanner bgcolor={fillColor} />
-          <Wrapper
-            $condensed={false}
-            $headerTopMargin={-218}
-            $headerBottomMargin={0}
-          >
-            <TopContainer>
-              <HeaderSection>
-                <LocationPageHeading region={region} isEmbed={false} />
-                <ButtonsWrapper>
-                  <HeaderButton onClick={noop}>
-                    <ShareOutlinedIcon />
-                    Share
-                  </HeaderButton>
-                  <HeaderButton onClick={noop}>
-                    <NotificationsNoneIcon />
-                    Receive alerts
-                  </HeaderButton>
-                </ButtonsWrapper>
-              </HeaderSection>
-              <HeaderSection>
-                <SectionHalf>
-                  <ThermometerImage currentLevel={alarmLevel} />
-                  <SectionColumn>
-                    <ColumnTitle>Covid risk level</ColumnTitle>
-                    <LevelDescription>{levelInfo.summary}</LevelDescription>
-                  </SectionColumn>
-                </SectionHalf>
-                <SectionHalf></SectionHalf>
-              </HeaderSection>
-              <LocationHeaderStats
-                stats={stats}
-                onMetricClick={noop}
-                isMobile={false}
-                isHeader={true}
-              />
-            </TopContainer>
-          </Wrapper>
-        </ChartContentWrapper>
-      </>
-    </div>
+    <ChartContentWrapper>
+      <ColoredHeaderBanner bgcolor={fillColor} />
+      <Wrapper
+        $condensed={false}
+        $headerTopMargin={-218}
+        $headerBottomMargin={0}
+      >
+        <TopContainer>
+          <HeaderSection>
+            <LocationPageHeading region={region} isEmbed={false} />
+            <ButtonsWrapper>
+              <HeaderButton onClick={noop}>
+                <ShareOutlinedIcon />
+                Share
+              </HeaderButton>
+              <HeaderButton onClick={noop}>
+                <NotificationsNoneIcon />
+                Receive alerts
+              </HeaderButton>
+            </ButtonsWrapper>
+          </HeaderSection>
+          <HeaderSection>
+            <SectionHalf>
+              <ThermometerImage currentLevel={alarmLevel} />
+              <SectionColumn>
+                <ColumnTitle>Covid risk level</ColumnTitle>
+                <LevelDescription>{levelInfo.summary}</LevelDescription>
+              </SectionColumn>
+            </SectionHalf>
+            <SectionHalf></SectionHalf>
+          </HeaderSection>
+          <LocationHeaderStats
+            stats={stats}
+            onMetricClick={noop}
+            isMobile={false}
+            isHeader={true}
+          />
+        </TopContainer>
+      </Wrapper>
+    </ChartContentWrapper>
   );
 };
 
