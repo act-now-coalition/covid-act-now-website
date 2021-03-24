@@ -20,7 +20,7 @@ const MegaMenu: React.FC<{
 
   return (
     <>
-      {isMobile && <LockBodyScroll />}
+      {isMobile && open && <LockBodyScroll />}
       <Fade in={open}>
         <StyledMegaMenu role="contentinfo" onMouseLeave={onMouseLeave}>
           <MenuContent onClick={onClick} />
