@@ -13,7 +13,7 @@ import {
   // SectionColumn,
   // LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { LocationSummary } from 'common/location_summaries';
+// import { LocationSummary } from 'common/location_summaries';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
@@ -22,8 +22,29 @@ import { COLOR_MAP } from 'common/colors';
 // import LocationPageHeading from './LocationPageHeading';
 // import { ThermometerImage } from 'components/Thermometer';
 // import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
-import { ALL_METRICS } from 'common/metric';
+// import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
+
+export const ALL_METRICS = [
+  Metric.CASE_DENSITY,
+  Metric.CASE_GROWTH_RATE,
+  Metric.POSITIVE_TESTS,
+  Metric.HOSPITAL_USAGE,
+  Metric.VACCINATIONS,
+];
+
+export interface MetricSummary {
+  value: number | null;
+  level: Level;
+}
+
+export interface LocationSummary {
+  level: Level;
+  metrics: {
+    [metric in Metric]?: MetricSummary;
+  };
+  ccvi: number | null;
+}
 
 // import type { MetricValues } from 'common/models/Projections';
 

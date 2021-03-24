@@ -1,7 +1,22 @@
 import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 
-import { LocationSummary } from './location_summaries';
+import { Metric } from 'common/metricEnum';
+
+// import { LocationSummary } from './location_summaries';
+
+export interface MetricSummary {
+  value: number | null;
+  level: Level;
+}
+
+export interface LocationSummary {
+  level: Level;
+  metrics: {
+    [metric in Metric]?: MetricSummary;
+  };
+  ccvi: number | null;
+}
 
 export default {
   LIGHTGRAY: '#f2f2f2',
