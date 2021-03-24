@@ -137,7 +137,7 @@
     "next:build": "next build",
     "next:start": "next start",
     "next:export": "next export",
-    "next:serve": "next build && next export && serve -s out"
+    "next:serve": "next build && next export && serve out"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [
