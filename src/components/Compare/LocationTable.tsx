@@ -185,7 +185,7 @@ const LocationTable: React.FunctionComponent<{
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sortByPopulation: boolean;
   isHomepage?: boolean;
-  geoScope?: GeoScopeFilter;
+  geoScope: GeoScopeFilter;
   homepageScope: HomepageLocationScope;
   region?: Region;
 }> = ({

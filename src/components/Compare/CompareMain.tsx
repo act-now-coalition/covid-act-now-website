@@ -44,19 +44,10 @@ import regions, {
   County,
 } from 'common/regions';
 import { assert } from 'common/utils';
-
-// For filters (0, 50, and 99 are numerical values required by MUI Slider component):
-const scopeValueMap = {
-  [GeoScopeFilter.NEARBY]: 0,
-  [GeoScopeFilter.STATE]: 50,
-  [GeoScopeFilter.COUNTRY]: 99,
-};
-
-const homepageScopeValueMap = {
-  [HomepageLocationScope.COUNTY]: 0,
-  [HomepageLocationScope.MSA]: 50,
-  [HomepageLocationScope.STATE]: 99,
-};
+import {
+  useLocationPageCompareSliderMap,
+  useHomepageCompareSliderMap,
+} from 'common/hooks';
 
 const CompareMain = (props: {
   stateName?: string;
@@ -175,16 +166,6 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
-  // Location page slider:
-  const defaultSliderValue = scopeValueMap[geoScope];
-  const [sliderValue, setSliderValue] = useState(defaultSliderValue);
-
-  // Homepage slider:
-  const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
-  const [homepageSliderValue, setHomepageSliderValue] = useState(
-    defaultHomepageSliderValue,
-  );
-
   // Since the route isn't changing when navigating between county pages within the same state, state variables don't reset. This forces a reset:
   useEffect(() => {
     setShowModal(false);
@@ -195,11 +176,6 @@ const CompareMain = (props: {
     setCountyTypeToView(MetroFilter.ALL);
     setGeoScope(GeoScopeFilter.STATE);
   }, [location.pathname]);
-
-  // Makes sure the location page's slider value updates in accordance with geoScope, without needing to add geoScope to the above effect's dependecy array:
-  useEffect(() => {
-    setSliderValue(scopeValueMap[geoScope as GeoScopeFilter]);
-  }, [geoScope]);
 
   // State needed to reconstruct the current sort / filters. Needs to be persisted
   // when we generate sharing URLs, etc.
@@ -224,6 +200,12 @@ const CompareMain = (props: {
   // Repopulate state from shared parameters if we're being rendered via a
   // sharing URL.
   const sharedParams = useSharedComponentParams(SharedComponent.Compare);
+
+  // For location page:
+  const sliderValue = useLocationPageCompareSliderMap(geoScope);
+  // For homepage:
+  const homepageSliderValue = useHomepageCompareSliderMap(homepageScope);
+
   useEffect(() => {
     if (sharedParams) {
       const { stateId, countyId, regionFips } = sharedParams;
@@ -238,19 +220,12 @@ const CompareMain = (props: {
         const regionFromFips = regions.findByFipsCodeStrict(countyId);
         setRegion(regionFromFips);
       }
-
       setSorter(sharedParams.sorter);
       setSortDescending(sharedParams.sortDescending);
       setSortByPopulation(sharedParams.sortByPopulation);
       setCountyTypeToView(sharedParams.countyTypeToView);
       setHomepageScope(sharedParams.homepageScope);
-      setHomepageSliderValue(
-        homepageScopeValueMap[
-          sharedParams.homepageScope as HomepageLocationScope
-        ],
-      );
       setGeoScope(sharedParams.geoScope);
-      setSliderValue(scopeValueMap[sharedParams.geoScope as GeoScopeFilter]);
 
       // Now that the UI is populated, we can capture the screenshot.
       setScreenshotReady(true);
@@ -264,9 +239,6 @@ const CompareMain = (props: {
       setSorter(Metric.VACCINATIONS);
       setSortByPopulation(false);
       setSortDescending(true);
-      setHomepageSliderValue(
-        homepageScopeValueMap[HomepageLocationScope.STATE],
-      );
       setHomepageScope(HomepageLocationScope.STATE);
     }
   }, [props.vaccinesFirst]);
@@ -277,9 +249,6 @@ const CompareMain = (props: {
       setSortByPopulation(false);
       setSortDescending(true);
       setHomepageScope(HomepageLocationScope.COUNTY);
-      setHomepageSliderValue(
-        homepageScopeValueMap[HomepageLocationScope.COUNTY],
-      );
     }
   }, [props.vulnerabilityFirst]);
 
@@ -307,13 +276,11 @@ const CompareMain = (props: {
     setSortDescending,
     setSortByPopulation,
     sliderValue,
-    setSliderValue,
     setShowFaqModal,
     createCompareShareId,
     homepageScope,
     setHomepageScope,
     homepageSliderValue,
-    setHomepageSliderValue,
     region: region,
     vaccinesFirst: props.vaccinesFirst,
     vulnerabilityFirst: props.vulnerabilityFirst,
