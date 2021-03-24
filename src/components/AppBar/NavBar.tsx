@@ -33,6 +33,7 @@ const MenuVariant: React.FC<{ isMenuOpen: boolean; closeMenu: () => void }> = ({
     closeMenu,
     onMouseLeave,
   };
+
   return (
     <Experiment id={ExperimentID.HAMBURGER_MENU_VARIATIONS}>
       <Variant id={VariantID.A}>

@@ -8,12 +8,12 @@ import theme from 'assets/theme';
 import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { useIsEmbed } from 'common/utils/hooks';
 
-const trackFooterEvent = (label: string) => {
-  trackEvent(EventCategory.FOOTER, EventAction.NAVIGATE, label);
-};
-
 const Footer: React.FC = () => {
   const isEmbed = useIsEmbed();
+
+  const onClick = (label: string) => {
+    trackEvent(EventCategory.FOOTER, EventAction.NAVIGATE, label);
+  };
 
   if (isEmbed) {
     return null;
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
       }}
     >
       <StyledFooter role="contentinfo">
-        <MenuContent trackMenuEvent={trackFooterEvent} Logo={LogoNonUrl} />
+        <MenuContent onClick={onClick} Logo={LogoNonUrl} />
       </StyledFooter>
     </ThemeProvider>
   );

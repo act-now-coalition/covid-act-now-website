@@ -19,9 +19,9 @@ import {
 } from './Menu.style';
 
 const MenuContent: React.FC<{
-  trackMenuEvent: (label: string) => void;
+  onClick: (label: string) => void;
   Logo?: ComponentType;
-}> = ({ trackMenuEvent, Logo }) => {
+}> = ({ onClick, Logo }) => {
   const { learnLinks, aboutUs, featuredSections } = footerContent;
 
   const showTerms = !isUndefined(Logo);
@@ -35,7 +35,7 @@ const MenuContent: React.FC<{
             <LearnLink
               key={link.cta}
               to={link.url}
-              onClick={() => trackMenuEvent(`Learn: ${link.cta}`)}
+              onClick={() => onClick(`Learn: ${link.cta}`)}
             >
               <TextAndIconWithSpecialWrapping
                 text={link.cta}
@@ -47,7 +47,7 @@ const MenuContent: React.FC<{
         <OutlinedButton
           to="/learn"
           desktopOnly
-          onClick={() => trackMenuEvent('Learn: View all topics')}
+          onClick={() => onClick('Learn: View all topics')}
         >
           View all topics
         </OutlinedButton>
@@ -58,7 +58,7 @@ const MenuContent: React.FC<{
           <FeaturedSection
             key={section.cta}
             section={section}
-            trackMenuEvent={() => trackMenuEvent(`Learn: ${section.cta}`)}
+            trackMenuEvent={() => onClick(`Learn: ${section.cta}`)}
           />
         ))}
       </Section>
@@ -67,7 +67,7 @@ const MenuContent: React.FC<{
           <LogoWrapper
             to="/"
             aria-label="Covid Act Now"
-            onClick={() => trackMenuEvent('Logo')}
+            onClick={() => onClick('Logo')}
           >
             <Logo />
           </LogoWrapper>
@@ -76,15 +76,12 @@ const MenuContent: React.FC<{
         )}
         <AboutCopy>{aboutUs}</AboutCopy>
         <RowWithSpacing>
-          <OutlinedButton
-            to="/about"
-            onClick={() => trackMenuEvent('About us')}
-          >
+          <OutlinedButton to="/about" onClick={() => onClick('About us')}>
             Learn more about us
           </OutlinedButton>
           <OutlinedButton
             to="/about#contact-us"
-            onClick={() => trackMenuEvent('Contact us')}
+            onClick={() => onClick('Contact us')}
           >
             Contact us
           </OutlinedButton>
