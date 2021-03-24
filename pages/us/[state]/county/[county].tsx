@@ -1,14 +1,34 @@
 import React from 'react';
+import { County, State } from '../../../../src/common/regions/types';
 import LocationHeader from '../../../../src/components/LocationPage/LocationHeader';
 
 function CountyPage({ region, locationSummary }) {
   if (!locationSummary) {
     return <h1>no data for {region.fullName}</h1>;
   }
+
+  const stateData = region.state;
+  const state = new State(
+    stateData.name,
+    stateData.urlSegment,
+    stateData.fipsCode,
+    stateData.population,
+    stateData.stateCode,
+  );
+
+  const county = new County(
+    region.name,
+    region.urlSegment,
+    region.fipsCode,
+    region.population,
+    state,
+    [],
+  );
+
   const { metrics } = locationSummary;
   return (
     <div>
-      <LocationHeader />
+      <LocationHeader region={county} />
     </div>
   );
 }
