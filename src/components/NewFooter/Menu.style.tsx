@@ -240,6 +240,7 @@ export const StyledMegaMenu = styled.nav<{ open: boolean }>`
   height: calc(100vh - 112px);
   overflow-y: auto;
   box-sizing: content-box;
+  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
 
   @media (min-width: ${materialSMBreakpoint}) {
     height: auto;
