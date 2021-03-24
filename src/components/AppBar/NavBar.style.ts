@@ -9,6 +9,7 @@ import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import { smallPhoneBreakpoint } from 'assets/theme/sizes';
+import { fonts } from 'common/theme';
 
 const desktopNavHeight = 64;
 
@@ -143,6 +144,15 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
 }))`
+  ${fonts.regularBookMidWeight};
+  color: black;
+  font-size: 1rem;
+  line-height: 1.4rem;
+
+  svg {
+    margin-left: 0.5rem;
+  }
+
   &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
   }

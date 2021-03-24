@@ -29,6 +29,7 @@ export const StyledDonateButtonHeart = styled(LinkButton)`
   text-transform: none;
   font-size: 16px;
   color: ${COLOR_MAP.PURPLE};
+  letter-spacing: 0;
 
   @media (min-width: ${materialSMBreakpoint}) {
     padding-right: 1rem;

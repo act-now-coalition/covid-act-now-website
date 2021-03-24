@@ -102,6 +102,7 @@ const NavBar: React.FC = () => {
             onClick={onClickHamburger}
             edge="end"
           >
+            Menu
             {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
           </Style.IconButton>
         </>
