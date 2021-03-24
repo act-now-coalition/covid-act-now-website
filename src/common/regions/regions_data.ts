@@ -166,6 +166,19 @@ export const metroAreasByFips = keyBy(metroAreas, metro => metro.fipsCode);
 const customAreas = [
   new State('USA', '', '00001', 331486822, 'USA'),
   new State('Native American Majority Counties', '', '00002', 314704, 'NAMC'),
+  new State('New England Division', '', '00003', 14845063, 'NE-D'),
+  new State('Middle Atlantic Division', '', '00004', 41137740, 'MA-D'),
+  new State('East North Central Division', '', '00005', 46902431, 'ENC-D'),
+  new State('West North Central Division', '', '00006', 21426573, 'WNC-D'),
+  new State('South Atlantic Division', '', '00007', 65784817, 'SA-D'),
+  new State('East South Central Division', '', '00008', 19176181, 'ESC-D'),
+  new State('West South Central Division', '', '00009', 40619450, 'WSC-D'),
+  new State('Mountain Division', '', '00010', 24854998, 'M-D'),
+  new State('Pacific Division', '', '00011', 53492270, 'P-D'),
+  new State('Northeast Region', '', '00012', 55982803, 'N-R'),
+  new State('Midwest Region', '', '00013', 68329004, 'M-R'),
+  new State('South Region', '', '00014', 125580448, 'S-R'),
+  new State('West Region', '', '00015', 78347268, 'W-R'),
 ];
 
 export const customAreasByFips = keyBy(customAreas, metro => metro.fipsCode);

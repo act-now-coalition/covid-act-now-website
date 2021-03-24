@@ -57,6 +57,36 @@ const INDIGENOUS_FIPS = [
   '55078',
 ];
 
+// Based on https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf
+const CENSUS_DIVISIONS = {
+  'New England': ['09', '23', '25', '33', '44', '50'],
+  'Middle Atlantic': ['34', '36', '42'],
+  'East North Central': ['18', '17', '26', '39', '55'],
+  'West North Central': ['19', '20', '27', '29', '31', '38', '46'],
+  'South Atlantic': ['10', '11', '12', '13', '24', '37', '45', '51', '54'],
+  'East South Central': ['01', '21', '28', '47'],
+  'West South Central': ['05', '22', '40', '48'],
+  Mountain: ['04', '08', '16', '35', '30', '49', '32', '56'],
+  Pacific: ['02', '06', '15', '41', '53'],
+};
+
+const CENSUS_REGIONS = {
+  Northeast: [
+    ...CENSUS_DIVISIONS['New England'],
+    ...CENSUS_DIVISIONS['Middle Atlantic'],
+  ],
+  Midwest: [
+    ...CENSUS_DIVISIONS['East North Central'],
+    ...CENSUS_DIVISIONS['West North Central'],
+  ],
+  South: [
+    ...CENSUS_DIVISIONS['South Atlantic'],
+    ...CENSUS_DIVISIONS['East South Central'],
+    ...CENSUS_DIVISIONS['West South Central'],
+  ],
+  West: [...CENSUS_DIVISIONS['Mountain'], ...CENSUS_DIVISIONS['Pacific']],
+};
+
 async function main() {
   const allStatesProjections = await fetchAllStateProjections();
   const allCountiesProjections = await fetchAllCountyProjections();
@@ -187,6 +217,82 @@ async function buildAggregations(
     '00002': aggregate(
       allCountiesProjections.filter(p => INDIGENOUS_FIPS.includes(p.fips)),
       COUNTY_AGGREGATED_DATASETS,
+    ),
+    '00003': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['New England'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00004': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['Middle Atlantic'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00005': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['East North Central'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00006': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['West North Central'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00007': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['South Atlantic'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00008': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['East South Central'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00009': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['West South Central'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00010': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['Mountain'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00011': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_DIVISIONS['Pacific'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00012': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_REGIONS['Northeast'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00013': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_REGIONS['Midwest'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00014': aggregate(
+      allStatesProjections.filter(p =>
+        CENSUS_REGIONS['South'].includes(p.fips),
+      ),
+      STATE_AGGREGATED_DATASETS,
+    ),
+    '00015': aggregate(
+      allStatesProjections.filter(p => CENSUS_REGIONS['West'].includes(p.fips)),
+      STATE_AGGREGATED_DATASETS,
     ),
   };
 
