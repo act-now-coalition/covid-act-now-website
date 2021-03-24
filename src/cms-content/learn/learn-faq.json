@@ -40,11 +40,6 @@
           "questionId": "if-i-recovered-should-i-get-vaccinated"
         },
         {
-          "question": "If I get a COVID vaccine, do I still need to wear a mask and practice social distancing? ",
-          "answer": "Yes. A vaccine will help protect you from getting sick if you are exposed to COVID, but it may not prevent you from carrying and transmitting the virus to others, according to experts at [Duke University Health System](https://www.dukehealth.org/covid-19-update/covid-19-vaccine-FAQ). Until enough people have been vaccinated, it is important to continue to wear masks, practice social distancing and take other precautions. \n\nIn time, we’ll know more about the protection that COVID vaccines provide. Such factors as the number of people getting vaccinated and how the virus is spreading in communities may affect the advice, says the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html).",
-          "questionId": "if-vaccinated-do-i-need-to-wear-mask-and-social-distance"
-        },
-        {
           "question": "Does immunity protection last longer if you get a vaccine or if you have had COVID?",
           "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
           "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last."
@@ -52,17 +47,27 @@
         {
           "question": "How do you get your vaccine eligibility information?",
           "questionId": "how-do-you-get-vaccine-eligibility-information ",
-          "answer": "Our team of staff and volunteers review official government sites of states, metros and counties several times a week. Please note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
+          "answer": "Our team of staff and volunteers frequently reviews official state government sites and updates vaccine eligibility information on the site every Monday and Thursday. Please note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
         },
         {
           "question": "Which locations do you have vaccine eligibility information for? ",
           "questionId": "what-locations-do-you-have-vaccine-eligibility-information-for",
-          "answer": "We currently only have vaccine eligibility information for all 50 states."
+          "answer": "We currently have vaccine eligibility information for every U.S. state, two territories, and the District of Columbia."
         },
         {
           "question": "Why do you have vaccine eligibility information for some locations and not others? ",
           "questionId": "why-vaccine-eligibility-information-for-some-locations",
           "answer": "Identifying vaccine eligibility information takes time, since the information is not standardized and cannot be processed automatically by a computer. It thus needs to be collected manually. What’s more, eligibility varies not only from state to state, but also sometimes by county, and even by city. Finally, vaccine eligibility information may change as states, counties, or cities adjust their roll-out plans, and making sure this information is up to date is a manual process of regularly checking government websites. For all those reasons, we currently have a limited number of locations that we are able to support with vaccine eligibility alerts."
+        },
+        {
+          "question": "Will vaccination for COVID cause me to test positive for COVID?",
+          "questionId": "vaccination-COVID-cause-positive-COVID",
+          "answer": "Receiving a COVID vaccine will not cause you to test positive for COVID. The mRNA vaccines, like Pfizer and Moderna, give instructions for your cells to make a piece of the spike protein, not the entire viral genome. The vaccines simply do not have enough RNA or even the complete RNA sequence to give a positive signal in testing. Similarly, the Johnson & Johnson vaccine — which takes a piece of DNA from the COVID spike protein and combines it with an [adenovirus to carry instructions](https://www.covidactnow.org/covid-explained/roundup-current-vaccine-progress) to your immune system — cannot cause you to test positive for COVID.\n\nIf you receive a positive test result in the days or weeks after you have been vaccinated, it is likely because it takes time for the vaccines to work and protection is not 100 percent effective. Anyone who becomes infected with the SARS-CoV-2 virus should isolate as recommended.\n\nAfter vaccination, people may attempt to get a [serology, or antibody, test](https://covidactnow.org/glossary#serology-test) to see if the vaccine has “worked.” However, serology tests focus on a wide set of antibodies, and the vaccine stimulates your immune system to produce antibodies only against the spike protein. So, in order to determine if vaccination has stimulated antibody production, we would need a test that specifically looks for antibodies to the spike protein."
+        },
+        {
+          "question": "If I get a COVID vaccine, do I still need to wear a mask and practice social distancing? ",
+          "questionId": "If-COVID-vaccine-do-I-need-wear-mask-and-social-distance",
+          "answer": "According to the March 2021 [CDC guidance](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html), if you are fully vaccinated, you can gather indoors with other fully vaccinated people without a mask. You can also gather with one other household of low risk, unvaccinated people. This means that if you’ve received the vaccine, you could socialize with another fully vaccinated family, but should not gather in larger groups or with high risk individuals.  \n\nHowever, it’s important to continue wearing a mask and practicing social distancing when you are in public. While there’s a growing amount of [evidence](https://academic.oup.com/cid/advance-article/doi/10.1093/cid/ciab229/6167855) that vaccines help reduce transmission, you should continue to take precautions, like wearing a mask and practicing social distancing, to protect those around you until enough people have received the vaccine. For now, the CDC also advises against travel. This means that grandparents could visit their low risk grandchildren if they live locally, but shouldn’t travel or meet with more than one other household at a time."
         }
       ]
     },
@@ -175,7 +180,7 @@
       "questions": [
         {
           "question": "Is it safe to reopen schools?",
-          "answer": "There are many ways that schools can reduce risk. For instance, schools may adopt plans to limit [infections](https://covidactnow.org/glossary#infection), such as establishing effective protocols for testing, tracking and tracing, and providing [masks](https://covidactnow.org/glossary#face-mask) and other [protective equipment](https://covidactnow.org/glossary#ppe). Still, some schools may face limitations. They may have a greater density of students and employees in buildings, poorer ventilation and less opportunity for outdoor learning. Covid Act Now provides decision makers with [data](https://covidactnow.org/glossary#data) to assess risk and consider the ability of the school and school district to keep students and teachers safe. [Learn more](https://covidactnow.org/covid-explained/school-guidance).",
+          "answer": "A growing body of evidence collected during the fall suggests that schools can reopen, and stay open, while achieving low or near zero in-school COVID transmission to both children and adults. Crucially, low or near zero in-school transmission can be maintained even when transmission within the local community is high, if the school implements a strict infection control strategy.\n\nFor instance, schools can focus on developing effective protocols for [testing](https://covidactnow.org/glossary#testing), [contract tracing](https://covidactnow.org/glossary#contact-tracing), vaccination, and providing [masks](https://covidactnow.org/glossary#face-mask) and other [protective equipment](https://covidactnow.org/glossary#ppe). Still, some schools may face greater limitations. They may have a greater density of students and employees in buildings, poorer ventilation and less opportunity for outdoor learning. Covid Act Now provides decision makers with [data](https://covidactnow.org/glossary#data) to assess risk and consider the ability of the school and school district to keep students and teachers safe. [Learn more](https://covidactnow.org/covid-explained/school-guidance).",
           "questionId": "is-it-safe-to-reopen-schools"
         },
         {

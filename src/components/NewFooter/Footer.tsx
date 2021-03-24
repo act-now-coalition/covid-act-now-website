@@ -6,12 +6,19 @@ import { ThemeProvider } from 'styled-components';
 import { megaMenuFooter } from 'assets/theme/palette';
 import theme from 'assets/theme';
 import LogoNonUrl from 'assets/images/LogoNonUrl';
+import { useIsEmbed } from 'common/utils/hooks';
 
 const trackFooterEvent = (label: string) => {
   trackEvent(EventCategory.FOOTER, EventAction.NAVIGATE, label);
 };
 
 const Footer: React.FC = () => {
+  const isEmbed = useIsEmbed();
+
+  if (isEmbed) {
+    return null;
+  }
+
   return (
     <ThemeProvider
       theme={{

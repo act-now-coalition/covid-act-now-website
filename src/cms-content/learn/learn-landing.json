@@ -12,10 +12,10 @@
       "buttonRedirect": "/covid-risk-levels-metrics"
     },
     {
-      "sectionTitle": "About our alerts",
-      "sectionId": "about-our-alerts",
-      "description": "If you’d like to stay on top of COVID without visiting our site, sign up for alerts or subscribe to our free newsletters.",
-      "buttonCta": "View our alerts",
+      "sectionTitle": "COVID news & updates",
+      "sectionId": "news-and-updates",
+      "description": "To stay on top of COVID, sign up for risk & vaccine eligibility email alerts or check out our free newsletters.",
+      "buttonCta": "View news & updates",
       "buttonRedirect": "/subscribe"
     },
     {
