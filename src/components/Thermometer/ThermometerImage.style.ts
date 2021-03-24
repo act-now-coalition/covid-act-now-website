@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
 

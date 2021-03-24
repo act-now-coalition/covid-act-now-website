@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import palette from 'assets/theme/palette';

@@ -5,23 +5,23 @@ import {
   ColoredHeaderBanner,
   Wrapper,
   TopContainer,
-  // HeaderSection,
-  // ButtonsWrapper,
-  // HeaderButton,
-  // SectionHalf,
-  // ColumnTitle,
-  // SectionColumn,
-  // LevelDescription,
+  HeaderSection,
+  ButtonsWrapper,
+  HeaderButton,
+  SectionHalf,
+  ColumnTitle,
+  SectionColumn,
+  LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
 // import { LocationSummary } from 'common/location_summaries';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
-// import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-// import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-// import LocationPageHeading from './LocationPageHeading';
-// import { ThermometerImage } from 'components/Thermometer';
-// import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import LocationPageHeading from './LocationPageHeading';
+import { ThermometerImage } from 'components/Thermometer';
+import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 // import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 
@@ -81,7 +81,7 @@ const LocationHeader: React.FC<{
         $headerBottomMargin={0}
       >
         <TopContainer>
-          {/* <HeaderSection>
+          <HeaderSection>
             <LocationPageHeading region={region} isEmbed={false} />
             <ButtonsWrapper>
               <HeaderButton onClick={noop}>
@@ -109,7 +109,7 @@ const LocationHeader: React.FC<{
             onMetricClick={noop}
             isMobile={false}
             isHeader={true}
-          /> */}
+          />
         </TopContainer>
       </Wrapper>
     </ChartContentWrapper>

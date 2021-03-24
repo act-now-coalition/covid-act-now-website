@@ -1,5 +1,5 @@
 import React from 'react';
-import { Region, State, County, MetroArea } from 'common/regions';
+import { Region, State, County, MetroArea } from 'common/regions/types';
 import * as Styles from './LocationPageHeading.style';
 import urlJoin from 'url-join';
 
