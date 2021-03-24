@@ -76,18 +76,19 @@ export const BackLink = styled(_NavLink)`
   }
 `;
 
-export const StyledMenu = styled.nav<{ open: boolean }>`
+export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   background: ${COLOR_MAP.GREY_1};
   border-top: 1px solid ${COLOR_MAP.GREY_2};
-  transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
+  transform: translateY(64px);
   text-align: left;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
+  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
 
   a {
     cursor: pointer;

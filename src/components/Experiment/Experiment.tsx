@@ -31,6 +31,7 @@ import {
 
 export enum ExperimentID {
   HAMBURGER_MENU_DESKTOP = 'ValZVSToRlOxvqM1QYtjIA',
+  HAMBURGER_MENU_VARIATIONS = 'Osj4ZMGVTia8fMsmubSdnQ',
 }
 
 export type ExperimentProps = Omit<OptimizeExperimentProps, 'id'> & {

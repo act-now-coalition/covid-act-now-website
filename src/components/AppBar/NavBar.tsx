@@ -3,27 +3,47 @@ import { Link, useLocation } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NewFooter/MegaMenu';
+import MobileMenu from './MobileMenu';
 import * as Style from './NavBar.style';
 import { DonateButtonHeart } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
-// import {
-//   Experiment,
-//   ExperimentID,
-//   Variant,
-//   VariantID,
-// } from 'components/Experiment';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
-// const isHomePage = (pathname: string) =>
-//   ['/', '/alert_signup', '/compare'].includes(pathname);
+const MenuVariant: React.FC<{ isMenuOpen: boolean; closeMenu: () => void }> = ({
+  isMenuOpen,
+  closeMenu,
+}) => {
+  const onMouseLeave = (e: React.MouseEvent<{}>) => {
+    // Do not close when the user hovers on the top bar (including the button to close the menu)
+    if (e.clientY > 64) {
+      closeMenu();
+    }
+  };
 
-// const isLearnPage = (pathname: string) =>
-//   ['/glossary', '/faq', '/explained', '/learn'].includes(pathname) ||
-//   pathname.startsWith('/case-studies') ||
-//   pathname.startsWith('/covid-explained') ||
-//   pathname.startsWith('/updates');
+  const menuProps = {
+    open: isMenuOpen,
+    closeMenu,
+    onMouseLeave,
+  };
+  return (
+    <Experiment id={ExperimentID.HAMBURGER_MENU_VARIATIONS}>
+      <Variant id={VariantID.A}>
+        <MegaMenu {...menuProps} />
+      </Variant>
+      <Variant id={VariantID.B}>
+        <MobileMenu {...menuProps} />
+      </Variant>
+    </Experiment>
+  );
+};
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -84,7 +104,7 @@ const NavBar: React.FC = () => {
             {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
           </Style.IconButton>
         </>
-        <MegaMenu open={isMenuOpen} closeMenu={closeMenu} />
+        <MenuVariant isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
       </Style.Toolbar>
     </Style.AppBar>
   );

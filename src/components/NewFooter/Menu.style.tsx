@@ -227,7 +227,7 @@ export const NonWrappingSpan = styled.span`
   white-space: nowrap;
 `;
 
-export const StyledMegaMenu = styled.nav<{ open: boolean }>`
+export const StyledMegaMenu = styled.nav`
   background: white;
   border-top: 1px solid ${COLOR_MAP.GREY_2};
   border-bottom: 1px solid ${COLOR_MAP.GREY_2};
