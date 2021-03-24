@@ -44,6 +44,15 @@ const NavBar: React.FC = () => {
     }
   };
 
+  const onHoverHamburger = () => {
+    if (!isMenuOpen) {
+      setMenuOpen(true);
+      trackMobileMenuOpen();
+    }
+  };
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
       <Style.Toolbar>
@@ -67,11 +76,15 @@ const NavBar: React.FC = () => {
         <Style.Spacer />
         <>
           <DonateButtonHeart />
-          <Style.IconButton onClick={onClickHamburger} edge="end">
+          <Style.IconButton
+            onMouseEnter={onHoverHamburger}
+            onClick={onClickHamburger}
+            edge="end"
+          >
             {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
           </Style.IconButton>
         </>
-        <MegaMenu open={isMenuOpen} />
+        <MegaMenu open={isMenuOpen} closeMenu={closeMenu} />
       </Style.Toolbar>
     </Style.AppBar>
   );

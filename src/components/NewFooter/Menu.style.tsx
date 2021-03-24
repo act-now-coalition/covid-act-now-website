@@ -231,7 +231,7 @@ export const StyledMegaMenu = styled.nav<{ open: boolean }>`
   background: white;
   border-top: 1px solid ${COLOR_MAP.GREY_2};
   border-bottom: 1px solid ${COLOR_MAP.GREY_2};
-  transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
+  transform: translateY(64px);
   position: absolute;
   top: 0;
   left: 0;
