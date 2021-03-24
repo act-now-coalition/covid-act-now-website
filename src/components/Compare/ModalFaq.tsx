@@ -34,8 +34,8 @@ const ModalFaq = ({ handleCloseModal }: ModalFaqProps) => {
             longer recovery.
             <br />
             <br />
-            As of March 8 2021, people in the <i>most</i> vulnerable third of
-            U.S. counties are 44 percent more likely to have died from COVID
+            As of March 24 2021, people in the <i>most</i> vulnerable third of
+            U.S. counties are 45 percent more likely to have died from COVID
             than people in the <i>least</i> vulnerable third of U.S. counties.
             <br />
             <br />
