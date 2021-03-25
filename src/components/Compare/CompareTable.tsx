@@ -12,10 +12,8 @@ import Filters from 'components/Compare/Filters';
 import {
   SummaryForCompare,
   RankedLocationSummary,
-  MetroFilter,
   GeoScopeFilter,
   getShareQuote,
-  getMetroPrefixCopy,
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
@@ -50,8 +48,6 @@ const CompareTable = (props: {
   locations: SummaryForCompare[];
   currentCounty: any | null;
   viewMoreCopy?: string;
-  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
-  countyTypeToView: MetroFilter;
   geoScope: GeoScopeFilter;
   setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
@@ -159,18 +155,14 @@ const CompareTable = (props: {
 
   const firstColumnHeaderHomepage =
     props.homepageScope === HomepageLocationScope.COUNTY
-      ? `${getMetroPrefixCopy(props.countyTypeToView)} ${
-          homepageLabelMap[HomepageLocationScope.COUNTY].singular
-        }`
+      ? `${homepageLabelMap[HomepageLocationScope.COUNTY].singular}`
       : `${homepageLabelMap[homepageScope].singular}`;
 
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal
-    ? `${getMetroPrefixCopy(props.countyTypeToView)} Counties (${
-        sortedLocationsArr.length
-      })`
-    : `${getMetroPrefixCopy(props.countyTypeToView)} County`;
+    ? `Counties (${sortedLocationsArr.length})`
+    : `County`;
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)
@@ -185,7 +177,6 @@ const CompareTable = (props: {
 
   const shareQuote = getShareQuote(
     sorter,
-    props.countyTypeToView,
     sliderNumberToFilterMap[sliderValue],
     sortedLocationsArr.length,
     sortDescending,
@@ -252,8 +243,6 @@ const CompareTable = (props: {
           {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}
-              countyTypeToView={props.countyTypeToView}
-              setCountyTypeToView={props.setCountyTypeToView}
               stateId={props.stateId}
               county={props.county}
               geoScope={props.geoScope}
