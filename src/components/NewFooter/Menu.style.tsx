@@ -99,13 +99,13 @@ export const Section = styled.div`
   }
 `;
 
-export const SectionHeader = styled.h2<{ desktopOnly?: boolean }>`
+export const SectionHeader = styled.h2<{ $desktopOnly?: boolean }>`
   ${props => props.theme.fonts.regularBookMidWeight};
   color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
-  display: ${({ desktopOnly }) => (desktopOnly ? 'none' : 'inherit')};
+  display: ${({ $desktopOnly }) => ($desktopOnly ? 'none' : 'inherit')};
 
   @media (min-width: ${mobileBreakpoint}) {
     display: inherit;

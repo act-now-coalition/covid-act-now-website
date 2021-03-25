@@ -29,7 +29,7 @@ const FeaturedSection: React.FC<{
 
   return (
     <Section>
-      <SectionHeader desktopOnly={true}>Featured</SectionHeader>
+      <SectionHeader $desktopOnly={true}>Featured</SectionHeader>
       {featuredSections.map((section: FeaturedItem) => {
         const { url, cta, description, iconId } = section;
 
