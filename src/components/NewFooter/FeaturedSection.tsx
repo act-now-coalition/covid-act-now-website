@@ -13,7 +13,7 @@ import {
   IconWrapper,
   RowWithSpacing,
   Section,
-  SectionHeaderDesktopOnly,
+  SectionHeader,
 } from './Menu.style';
 import { scrollWithOffset } from 'components/TableOfContents';
 
@@ -29,7 +29,7 @@ const FeaturedSection: React.FC<{
 
   return (
     <Section>
-      <SectionHeaderDesktopOnly>Featured</SectionHeaderDesktopOnly>
+      <SectionHeader desktopOnly={true}>Featured</SectionHeader>
       {featuredSections.map((section: FeaturedItem) => {
         const { url, cta, description, iconId } = section;
 

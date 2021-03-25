@@ -100,21 +100,13 @@ export const Section = styled.div`
   }
 `;
 
-const Header = css`
+export const SectionHeader = styled.h2<{ desktopOnly?: boolean }>`
   ${fonts.regularBookMidWeight};
   color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
-`;
-
-export const SectionHeader = styled.h2`
-  ${Header};
-`;
-
-export const SectionHeaderDesktopOnly = styled.h2`
-  ${Header};
-  display: none;
+  display: ${({ desktopOnly }) => (desktopOnly ? 'none' : 'inherit')};
 
   @media (min-width: ${mobileBreakpoint}) {
     display: inherit;

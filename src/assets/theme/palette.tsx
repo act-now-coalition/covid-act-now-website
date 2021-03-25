@@ -1,9 +1,8 @@
 import { colors } from '@material-ui/core';
-import { COLOR_MAP } from 'common/colors';
 import { megaMenu } from './customThemeBlocks';
 
-export const white = '#FFFFFF';
-export const black = '#000000';
+const white = '#FFFFFF';
+const black = '#000000';
 const lightGray = '#f2f2f2';
 
 const chart = {
