@@ -2425,20 +2425,11 @@
         {
           "phase": "TBD",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Other age groups\n* People with underlying medical conditions not already included\n* People who live in congregate settings and are at higher risk for the virus that causes COVID",
+          "currentlyEligible": true,
+          "description": "* All Utahns 16+",
           "expandedDefinitionUrl": "",
           "startDate": "March 24",
-          "updatedAt": "2021-03-15T16:52:35.689Z"
-        },
-        {
-          "phase": "TBD",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* All residents of Utah",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 24",
-          "updatedAt": "2021-03-22T20:02:17.947Z"
+          "updatedAt": "2021-03-25T06:12:38.931Z"
         }
       ]
     },
