@@ -2504,7 +2504,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "4",
       "locationName": "Virginia",
       "fips": "51",
       "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
@@ -2532,10 +2532,10 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Other essential workers",
+          "description": "* (NEW) All veterans and their spouses/caregivers\nSome counties are now vaccinating:\n* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-18T19:30:07.774Z"
+          "updatedAt": "2021-03-25T06:14:26.374Z"
         },
         {
           "currentlyEligible": false,
