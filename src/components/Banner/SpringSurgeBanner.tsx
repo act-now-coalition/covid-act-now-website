@@ -6,7 +6,7 @@ import { HashLink } from 'react-router-hash-link';
 
 const trackClick = () => {
   trackEvent(
-    EventCategory.BANNER,
+    EventCategory.HOMEPAGE_BANNER,
     EventAction.CLICK,
     'Banner: Hospitalizations explore chart',
   );
