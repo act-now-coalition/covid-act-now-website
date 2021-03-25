@@ -16,7 +16,7 @@ const LearnSection: React.FC<{
 }> = ({ learnLinks, onClick }) => {
   return (
     <Section>
-      <SectionHeader>Learn</SectionHeader>
+      <SectionHeader>FAQ</SectionHeader>
       <Column>
         {learnLinks.map((link: LinkItem) => {
           const { url, cta } = link;

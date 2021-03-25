@@ -27,7 +27,7 @@ const MobileMenu: React.FC<{
         </Link>
         <Link to="/learn" onClick={() => onClick('Learn')}>
           <FAQIcon color={palette.secondary.main} />
-          <span>Learn</span>
+          <span>FAQ</span>
         </Link>
         <Link to="/data-api" onClick={() => onClick('Data API')}>
           <FAQIcon color={palette.secondary.main} />
