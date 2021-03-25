@@ -2399,9 +2399,10 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:26:33.828Z",
+          "updatedAt": "2021-03-25T06:11:43.220Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "* All adults ",
+          "startDate": "March 29"
         }
       ]
     },
