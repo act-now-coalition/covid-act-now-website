@@ -2556,10 +2556,10 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-04T18:56:46.857Z",
+          "updatedAt": "2021-03-25T19:29:01.171Z",
           "phase": "1",
           "tier": "A",
-          "description": "* Health care workers \n* Long-term care facility residents and workers \n* (NEW) Adults 50+\n* (NEW) Education personnel aged 40+"
+          "description": "* Healthcare workers\n* Long-term care facility residents and workers\n* Adults 50+\n* Education personnel aged 40+\n* Individuals (16+) with underlying medical conditions"
         },
         {
           "currentlyEligible": true,
