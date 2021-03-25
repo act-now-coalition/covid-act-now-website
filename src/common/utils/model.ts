@@ -3,7 +3,7 @@ import { Projections } from '../models/Projections';
 import { Api } from 'api';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, County, RegionType } from 'common/regions';
+import regions, { Region, County, RegionType, State } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
 import { parseDateString } from 'common/utils/time-utils';
 
@@ -121,6 +121,37 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
   return cachedCountiesProjections[key];
+}
+
+/** Returns an array of `Projections` instances for all counties in a state. */
+const cachedCountiesProjectionsForState: {
+  [key: string]: Promise<Projections[]>;
+} = {};
+export function fetchCountyProjectionsForState(
+  state: State,
+  snapshotUrl: string | null = null,
+) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
+  async function fetch() {
+    const all = await new Api(
+      snapshotUrl,
+    ).fetchCountySummariesWithTimeseriesForState(state);
+    return all
+      .filter(summaryWithTimeseries => {
+        // We don't want to return county projections for counties that we
+        // don't have in the regions instance
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        return region instanceof County && Boolean(region.state);
+      })
+      .map(summaryWithTimeseries => {
+        const region = regions.findByFipsCodeStrict(summaryWithTimeseries.fips);
+        return new Projections(summaryWithTimeseries, region);
+      });
+  }
+  const key = `${state.stateCode}-${snapshotUrl}` || 'null';
+  cachedCountiesProjectionsForState[key] =
+    cachedCountiesProjectionsForState[key] || fetch();
+  return cachedCountiesProjectionsForState[key];
 }
 
 /** Returns an array of `Projections` instances for all counties. */
