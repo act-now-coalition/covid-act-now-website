@@ -3,9 +3,9 @@ import { Projections } from '../models/Projections';
 import { Api } from 'api';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, County, RegionType } from 'common/regions';
+import regions, { Region, County, RegionType, State } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
-import { parseDateString, dateToUTC } from 'common/utils/time-utils';
+import { parseDateString } from 'common/utils/time-utils';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
@@ -100,7 +100,14 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
 
 /** Returns an array of `Projections` instances for all counties. */
 const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
+export function fetchAllCountyProjections(
+  snapshotUrl: string | null = null,
+  queryByState: boolean = true,
+) {
+  if (queryByState) {
+    return fetchAllCountyProjectionsByState();
+  }
+
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
@@ -121,6 +128,48 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
   return cachedCountiesProjections[key];
+}
+
+export async function fetchAllCountyProjectionsByState() {
+  // Query counties for states individually as the entire counties.timeseries.json is too large
+  // to be parsed by node.
+  const allProjections = await Promise.all(
+    regions.states.map(
+      async (state: State) => await fetchCountyProjectionsForState(state),
+    ),
+  );
+  return allProjections.flatMap(obj => obj);
+}
+
+/** Returns an array of `Projections` instances for all counties in a state. */
+const cachedCountiesProjectionsForState: {
+  [key: string]: Promise<Projections[]>;
+} = {};
+export function fetchCountyProjectionsForState(
+  state: State,
+  snapshotUrl: string | null = null,
+) {
+  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
+  async function fetch() {
+    const all = await new Api(
+      snapshotUrl,
+    ).fetchCountySummariesWithTimeseriesForState(state);
+    return all
+      .filter(summaryWithTimeseries => {
+        // We don't want to return county projections for counties that we
+        // don't have in the regions instance
+        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
+        return region instanceof County && Boolean(region.state);
+      })
+      .map(summaryWithTimeseries => {
+        const region = regions.findByFipsCodeStrict(summaryWithTimeseries.fips);
+        return new Projections(summaryWithTimeseries, region);
+      });
+  }
+  const key = `${state.stateCode}-${snapshotUrl}` || 'null';
+  cachedCountiesProjectionsForState[key] =
+    cachedCountiesProjectionsForState[key] || fetch();
+  return cachedCountiesProjectionsForState[key];
 }
 
 /** Returns an array of `Projections` instances for all counties. */
@@ -172,7 +221,7 @@ export function useModelLastUpdatedDate() {
     new Api().fetchVersionInfo().then(version => {
       // NOTE: "new Date(version.timestamp)" on safari fails due to pickiness about the
       // date formatting, so just use time utils to parse.
-      setLastUpdated(dateToUTC(parseDateString(version.timestamp)));
+      setLastUpdated(parseDateString(version.timestamp));
     });
   }, []);
 

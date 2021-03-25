@@ -3,7 +3,7 @@ import { assert } from 'common/utils';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
 import { Region } from './regions';
-import { TimeFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from 'common/utils/time-utils';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -31,7 +31,7 @@ function getShareImageBaseUrl(): string {
 }
 
 export function getMapImageUrl(): string {
-  const date = formatDateTime(new Date(), TimeFormat.YYYY_MM_DD);
+  const date = formatDateTime(new Date(), DateFormat.YYYY_MM_DD);
   return urlJoin(
     getShareImageBaseUrl(),
     `${date}-image-covid-us-map-cases.png`,

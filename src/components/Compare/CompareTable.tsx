@@ -20,10 +20,10 @@ import {
   HomepageLocationScope,
   homepageLabelMap,
   getCompareSubheader,
+  sliderNumberToFilterMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
-import { sliderNumberToFilterMap } from 'components/Compare/Filters';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
@@ -52,8 +52,8 @@ const CompareTable = (props: {
   viewMoreCopy?: string;
   setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
   countyTypeToView: MetroFilter;
-  geoScope?: GeoScopeFilter;
-  setGeoScope?: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
+  geoScope: GeoScopeFilter;
+  setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
   sorter: number;
   setSorter: React.Dispatch<React.SetStateAction<number>>;
@@ -62,15 +62,11 @@ const CompareTable = (props: {
   sortByPopulation: boolean;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
-  setSliderValue: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
-  setHomepageSliderValue: React.Dispatch<
-    React.SetStateAction<HomepageLocationScope>
-  >;
   region?: Region;
   vaccinesFirst?: boolean;
   vulnerabilityFirst?: boolean;
@@ -83,12 +79,10 @@ const CompareTable = (props: {
     sortByPopulation,
     setSortByPopulation,
     sliderValue,
-    setSliderValue,
     stateId,
     homepageScope,
     setHomepageScope,
     homepageSliderValue,
-    setHomepageSliderValue,
     region,
     vaccinesFirst,
     vulnerabilityFirst,
@@ -266,11 +260,9 @@ const CompareTable = (props: {
               setGeoScope={props.setGeoScope}
               isModal={props.isModal}
               sliderValue={sliderValue}
-              setSliderValue={setSliderValue}
               homepageScope={homepageScope}
               setHomepageScope={setHomepageScope}
               homepageSliderValue={homepageSliderValue}
-              setHomepageSliderValue={setHomepageSliderValue}
             />
           )}
         </div>

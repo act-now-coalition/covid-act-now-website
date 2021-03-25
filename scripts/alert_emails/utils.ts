@@ -6,7 +6,7 @@ import { Level } from '../../src/common/level';
 import regions from '../../src/common/regions';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
-import { TimeFormat, formatDateTime } from '../../src/common/utils/time-utils';
+import { DateFormat, formatDateTime } from '../../src/common/utils/time-utils';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
@@ -15,7 +15,7 @@ const thermometerBaseURL =
 const unsubscribeURL = 'https://covidactnow.org/alert_unsubscribe';
 
 export function toISO8601(date: Date): string {
-  return formatDateTime(date, TimeFormat.YYYY_MM_DD);
+  return formatDateTime(date, DateFormat.YYYY_MM_DD);
 }
 
 const alertTemplate = Handlebars.compile(

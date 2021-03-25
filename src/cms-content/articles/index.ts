@@ -5,7 +5,7 @@ import thirdSurge from './third-surge.json';
 import canCompare from './can-compare.json';
 import metros from './metros.json';
 import {
-  TimeFormat,
+  DateFormat,
   parseDateString,
   formatDateTime,
 } from 'common/utils/time-utils';
@@ -31,7 +31,7 @@ function sanitizeArticle(article: ArticleJSON): Article {
   return {
     ...article,
     articleID: sanitizeID(article.articleID),
-    date: formatDateTime(parseDateString(article.date), TimeFormat.MM_DD_YYYY),
+    date: formatDateTime(parseDateString(article.date), DateFormat.MM_DD_YYYY),
   };
 }
 
