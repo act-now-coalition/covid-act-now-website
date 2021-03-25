@@ -66,7 +66,7 @@ export class Api {
   }
 
   /**
-   * Fetches the summary+timeseries for every region in the specified state
+   * Fetches the summary+timeseries for every county in the specified state
    */
   async fetchCountySummariesWithTimeseriesForState(
     state: State,

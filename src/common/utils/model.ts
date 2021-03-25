@@ -98,47 +98,24 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
   return cachedStatesProjections[key];
 }
 
-/** Returns an array of `Projections` instances for all counties. */
 const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllCountyProjections(
+export async function fetchAllCountyProjections(
   snapshotUrl: string | null = null,
-  queryByState: boolean = true,
 ) {
-  if (queryByState) {
-    return fetchAllCountyProjectionsByState();
+  async function fetch() {
+    // Query counties for states individually as the entire counties.timeseries.json is too large
+    // to be parsed by node.
+    const allProjections = await Promise.all(
+      regions.states.map(
+        async (state: State) => await fetchCountyProjectionsForState(state),
+      ),
+    );
+    return allProjections.flatMap(obj => obj);
   }
 
-  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
-  async function fetch() {
-    const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
-      APIRegionSubPath.COUNTIES,
-    );
-    return all
-      .filter(summaryWithTimeseries => {
-        // We don't want to return county projections for counties that we
-        // don't have in the regions instance
-        const region = regions.findByFipsCode(summaryWithTimeseries.fips);
-        return region instanceof County && Boolean(region.state);
-      })
-      .map(summaryWithTimeseries => {
-        const region = regions.findByFipsCodeStrict(summaryWithTimeseries.fips);
-        return new Projections(summaryWithTimeseries, region);
-      });
-  }
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
   return cachedCountiesProjections[key];
-}
-
-export async function fetchAllCountyProjectionsByState() {
-  // Query counties for states individually as the entire counties.timeseries.json is too large
-  // to be parsed by node.
-  const allProjections = await Promise.all(
-    regions.states.map(
-      async (state: State) => await fetchCountyProjectionsForState(state),
-    ),
-  );
-  return allProjections.flatMap(obj => obj);
 }
 
 /** Returns an array of `Projections` instances for all counties in a state. */
