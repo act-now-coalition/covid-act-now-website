@@ -8,11 +8,11 @@
 import fs from 'fs-extra';
 import path from 'path';
 import _ from 'lodash';
-import { fetchAllCountyProjections } from '../../src/common/utils/model';
+import { fetchAllCountyProjectionsByState } from '../../src/common/utils/model';
 import { Projection } from '../../src/common/models/Projection';
 
 async function main() {
-  const allProjections = await fetchAllCountyProjections();
+  const allProjections = await fetchAllCountyProjectionsByState();
   const result = {} as {
     [date: string]: {
       [fips: string]: { population: number; caseDensity: number };

@@ -66,6 +66,19 @@ export class Api {
   }
 
   /**
+   * Fetches the summary+timeseries for every region in the specified state
+   */
+  async fetchCountySummariesWithTimeseriesForState(
+    state: State,
+  ): Promise<RegionSummaryWithTimeseries[]> {
+    const all = await this.fetchApiJson<AggregateRegionSummaryWithTimeseries>(
+      `county/${state.stateCode}.timeseries.json`,
+    );
+    assert(all != null, 'Failed to load timeseries');
+    return all;
+  }
+
+  /**
    * Fetches the summary+timeseries for a region. Returns null if not found.
    */
   async fetchSummaryWithTimeseries(

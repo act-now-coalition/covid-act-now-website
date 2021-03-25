@@ -4,8 +4,8 @@ import path from 'path';
 import _ from 'lodash';
 import {
   fetchAllStateProjections,
-  fetchAllCountyProjections,
   fetchAllMetroProjections,
+  fetchAllCountyProjections,
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
