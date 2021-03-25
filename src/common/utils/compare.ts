@@ -107,10 +107,6 @@ export function getNeighboringCounties(
   return [...adjacentCounties, ...[getLocationObj(county)]];
 }
 
-export function getAllCountiesSelection() {
-  return getAllCounties();
-}
-
 export function getLocationPageCountiesSelection(stateCode: string) {
   return getAllCountiesOfState(stateCode);
 }

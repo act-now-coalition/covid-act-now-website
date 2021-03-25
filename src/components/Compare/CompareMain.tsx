@@ -16,7 +16,7 @@ import {
 } from 'components/Compare/Compare.style';
 import {
   getAllStates,
-  getAllCountiesSelection,
+  getAllCounties,
   getHomePageViewMoreCopy,
   getNeighboringCounties,
   getLocationPageCountiesSelection,
@@ -112,7 +112,7 @@ const CompareMain = (props: {
   const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
   const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTY]: getAllCountiesSelection(),
+    [HomepageLocationScope.COUNTY]: getAllCounties(),
     [HomepageLocationScope.MSA]: getAllMetroAreas(),
     [HomepageLocationScope.STATE]: getAllStates(),
   };
@@ -137,7 +137,7 @@ const CompareMain = (props: {
     } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
       return getLocationPageCountiesSelection(stateCode);
     } else {
-      return getAllCountiesSelection();
+      return getAllCounties();
     }
   }
 
