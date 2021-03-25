@@ -343,9 +343,9 @@ const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
  * today, 1 day ago, 5 days ago, 3 weeks and 2 days ago, 5 weeks ago, etc.
  */
 export function weeksAgo(dateFrom: Date, dateTo: Date) {
-  const totalDays = getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
+  const totalDays = Math.floor(getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS));
   const totalWeeks = Math.floor(totalDays / 7);
-  const numDays = totalDays % 7;
+  const numDays = Math.floor(totalDays % 7);
 
   if (totalDays < 7) {
     return totalDays === 0
