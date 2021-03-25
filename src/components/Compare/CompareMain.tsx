@@ -19,13 +19,13 @@ import {
   getAllCounties,
   getHomePageViewMoreCopy,
   getNeighboringCounties,
-  getLocationPageCountiesSelection,
   getLocationPageViewMoreCopy,
   GeoScopeFilter,
   HomepageLocationScope,
   getAllMetroAreas,
   getAllCountiesOfMetroArea,
   SummaryForCompare,
+  getAllCountiesOfState,
 } from 'common/utils/compare';
 import { Metric } from 'common/metricEnum';
 import { getSummaryFromFips } from 'common/location_summaries';
@@ -135,7 +135,7 @@ const CompareMain = (props: {
     } else if (geoScope === GeoScopeFilter.NEARBY) {
       return getNeighboringCounties(region.fipsCode);
     } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
-      return getLocationPageCountiesSelection(stateCode);
+      return getAllCountiesOfState(stateCode);
     } else {
       return getAllCounties();
     }

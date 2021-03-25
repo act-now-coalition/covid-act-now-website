@@ -107,10 +107,6 @@ export function getNeighboringCounties(
   return [...adjacentCounties, ...[getLocationObj(county)]];
 }
 
-export function getLocationPageCountiesSelection(stateCode: string) {
-  return getAllCountiesOfState(stateCode);
-}
-
 export enum GeoScopeFilter {
   NEARBY,
   STATE,
