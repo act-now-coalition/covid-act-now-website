@@ -19,7 +19,7 @@ const AboutUsSection: React.FC<{
 
   return (
     <Section>
-      {Logo && (
+      {Logo ? (
         <LogoWrapper
           to="/"
           aria-label="Covid Act Now"
@@ -27,8 +27,9 @@ const AboutUsSection: React.FC<{
         >
           <Logo />
         </LogoWrapper>
+      ) : (
+        <SectionHeader desktopOnly={true}>About Us</SectionHeader>
       )}
-      <SectionHeader desktopOnly={true}>About Us</SectionHeader>
       <AboutCopy>{aboutUsCopy}</AboutCopy>
       <RowWithSpacing>
         <OutlinedButton to="/about" onClick={() => onClick('About us')}>
