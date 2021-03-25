@@ -969,7 +969,7 @@
       "fips": "23",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -997,8 +997,8 @@
           "startDate": "March 3, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:21:47.281Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T17:20:02.856Z",
           "phase": "3",
           "description": "* Adults 50-59",
           "startDate": "March 23, 2021"
@@ -1017,7 +1017,7 @@
       "fips": "24",
       "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "vaccinationSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1049,11 +1049,11 @@
         {
           "phase": "2A",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Adults 60+",
           "expandedDefinitionUrl": "",
           "startDate": "March 23, 2021",
-          "updatedAt": "2021-03-22T21:31:34.900Z"
+          "updatedAt": "2021-03-25T17:22:25.584Z"
         },
         {
           "currentlyEligible": false,
@@ -1276,39 +1276,8 @@
       "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Healthcare workers and EMTs\n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 65+\n* Individuals (16+) with high-risk medical conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-02T00:45:58.206Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-02T00:44:24.943Z",
-          "phase": "1C",
-          "description": "* Teachers\n* First responders (law enforcement, public safety, fire services, and emergency management officials)",
-          "startDate": "March 1, 2021"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-08T17:13:12.310Z",
-          "description": "* Adults aged 50 to 64",
-          "phase": "2"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T21:52:39.551Z",
+          "updatedAt": "2021-03-25T17:24:29.725Z",
           "phase": "3",
           "description": "* All individuals age 16 and older"
         }
