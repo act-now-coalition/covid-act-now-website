@@ -1429,7 +1429,7 @@
           "currentlyEligible": true,
           "updatedAt": "2021-03-22T22:00:49.786Z",
           "phase": "2A",
-          "description": "Some counties may be vaccinating: \n\n* Individuals age 50-64 \n* Individuals with underlying medical conditions"
+          "description": "Some counties may be vaccinating: \n\n* Individuals age 50-64 \n* Individuals with underlying medical conditions\n\nAdditional groups may be eligible in certain counties. Check your local health department website for county-specific information."
         },
         {
           "phase": "2B",
@@ -1488,7 +1488,7 @@
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* 65+ years of age\n* Adults with two or more high-risk conditions and their caregivers\n* Residents and staff at facilities with intellectual and developmental disabilities",
+          "description": "* 65+ years of age\n* Adults with two or more high-risk conditions and their caregivers\n* Residents and staff at facilities for individuals with intellectual and developmental disabilities",
           "expandedDefinitionUrl": "",
           "startDate": "December 2020",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -1644,7 +1644,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "New York",
       "fips": "36",
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
@@ -1661,19 +1661,27 @@
         },
         {
           "phase": "1b",
-          "tier": "",
+          "tier": "1",
           "currentlyEligible": true,
           "description": "* Adults 60+\n* Individuals (16+) with underlying high-risk medical conditions\n* First responders\n* Teachers and child care workers\n* Other essential workers\n* Congregate care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-25T17:53:15.717Z"
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-18T18:26:56.314Z",
-          "phase": "1c",
+          "updatedAt": "2021-03-25T17:53:38.491Z",
+          "phase": "1b",
           "description": "* Public-facing government, not-for-profit, and building service workers",
-          "startDate": "March 17, 2021"
+          "startDate": "March 17, 2021",
+          "tier": "2"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T17:53:46.240Z",
+          "phase": "1b",
+          "tier": "3",
+          "description": "* Adults 50-59"
         },
         {
           "currentlyEligible": false,
@@ -1729,7 +1737,7 @@
           "phase": "4A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings",
+          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings\n\nSome counties may be vaccinating additional groups.",
           "expandedDefinitionUrl": "",
           "startDate": "March 17, 2021",
           "updatedAt": "2021-03-18T18:30:44.911Z"
