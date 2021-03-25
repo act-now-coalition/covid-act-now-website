@@ -6,8 +6,8 @@ import React from 'react';
 import moment from 'moment';
 
 import { Api } from 'api';
-import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
+import { importFipsToCcviMap, RegionCcviItem } from 'common/data';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { getPageTitle, getPageDescription } from 'screens/LocationPage/utils';
@@ -187,37 +187,13 @@ export const getLastUpdatedDateString = async () => {
   }
   return lastUpdatedDateString;
 };
-/*
-// A memoized version of summaries for build-time, so we don't refetch
-const summaryByFips: { [fips: string]: RegionSummaryWithTimeseries } = {};
 
-const getSummaryWithTimeseries = async (region: Region) => {
-  // Projections isn't JSON serializable but this is, so let's use it instead
-  if (!Boolean(summaryByFips[region.fipsCode])) {
-    let summaryWithTimeseries = null;
-    const retries = 3;
-    for (let i = 0; i < retries; i++) {
-      try {
-        summaryWithTimeseries = await new Api().fetchSummaryWithTimeseries(
-          region,
-        );
-        break;
-      } catch {
-        console.log(`failed to fetch data for ${region.name}, retrying`);
-      }
-    }
-    if (summaryWithTimeseries) {
-      summaryByFips[region.fipsCode] = summaryWithTimeseries;
-    }
-  }
-  return summaryByFips[region.fipsCode] ?? null;
-};
-*/
 export interface LocationPageWrapperProps {
   regionObject: RegionObject;
   locationSummary: LocationSummary;
   title: string;
   description: string;
+  ccviScores: RegionCcviItem | null;
 }
 
 export const makeLocationPageGetStaticProps = ({
@@ -236,11 +212,15 @@ export const makeLocationPageGetStaticProps = ({
     const title = getPageTitle(region);
     const description = getPageDescription(region);
 
+    const fipsToCcviMap = await importFipsToCcviMap();
+    const ccviScores = fipsToCcviMap[region.fipsCode] ?? null;
+
     const props = {
       regionObject,
       locationSummary,
       title,
       description,
+      ccviScores,
     };
 
     if (!(locationSummary && title && description)) {

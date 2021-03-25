@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+
+import { RegionCcviItem } from 'common/data';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -20,6 +22,7 @@ interface LocationPageProps {
   locationSummary: LocationSummary;
   title: string;
   description: string;
+  ccviScores: RegionCcviItem | null;
 }
 
 function LocationPage({
@@ -27,6 +30,7 @@ function LocationPage({
   locationSummary,
   title,
   description,
+  ccviScores,
 }: LocationPageProps) {
   const location = useLocation();
   const chartIdMatch = location.hash.match(/chart-(?<chartId>\d+)/);
@@ -59,6 +63,7 @@ function LocationPage({
           chartId={chartId}
           region={region}
           locationSummary={locationSummary}
+          ccviScores={ccviScores}
         />
         <MiniMap
           region={region}

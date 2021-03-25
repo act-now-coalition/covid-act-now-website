@@ -18,9 +18,13 @@ const getStaticProps: GetStaticProps = makeLocationPageGetStaticProps({
   paramsToRegion: metroAreaParamsToRegion,
 });
 
-function Location(props: LocationPageWrapperProps) {
-  const { regionObject, locationSummary, title, description } = props;
-
+function Location({
+  regionObject,
+  locationSummary,
+  title,
+  description,
+  ccviScores,
+}: LocationPageWrapperProps) {
   const region = MetroArea.fromObject(regionObject as MetroAreaObject);
 
   return (
@@ -30,6 +34,7 @@ function Location(props: LocationPageWrapperProps) {
         locationSummary={locationSummary}
         title={title}
         description={description}
+        ccviScores={ccviScores}
       />
     </PageWrapper>
   );

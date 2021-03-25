@@ -24,6 +24,7 @@ function Location({
   locationSummary,
   title,
   description,
+  ccviScores,
 }: LocationPageWrapperProps) {
   const region = State.fromObject(regionObject as StateObject);
 
@@ -34,6 +35,7 @@ function Location({
         locationSummary={locationSummary}
         title={title}
         description={description}
+        ccviScores={ccviScores}
       />
     </PageWrapper>
   );

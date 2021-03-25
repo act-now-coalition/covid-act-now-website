@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { useLocation } from 'common/utils/router';
 import { v4 as uuidv4 } from 'uuid';
+
+import { useLocation } from 'common/utils/router';
+import { RegionCcviItem } from 'common/data';
 import {
-  useCcviForFips,
+  //useCcviForFips,
   useScrollToElement,
   useBreakpoint,
 } from 'common/hooks';
@@ -143,12 +145,14 @@ interface ChartsHolderProps {
   region: Region;
   chartId: string;
   locationSummary: LocationSummary;
+  ccviScores: RegionCcviItem | null;
 }
 
 const ChartsHolder = ({
   region,
   chartId,
   locationSummary,
+  ccviScores,
 }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
 
@@ -166,7 +170,7 @@ const ChartsHolder = ({
   const isMobile = useBreakpoint(600);
   useScrollToElement();
 
-  const { search, hash } = useLocation();
+  const { hash } = useLocation();
   const isRecommendationsShareUrl = hash.includes('recommendations');
 
   const defaultExploreMetric = ExploreMetric.CASES;
@@ -201,11 +205,10 @@ const ChartsHolder = ({
 
   const initialFipsList = [region.fipsCode];
 
-  const ccviScores = useCcviForFips(region.fipsCode);
-
   if (!locationSummary) {
     return null;
   }
+
   const stats = summaryToStats(locationSummary);
 
   const alarmLevel = locationSummary.level;
