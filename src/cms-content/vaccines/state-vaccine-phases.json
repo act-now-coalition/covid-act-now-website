@@ -1677,25 +1677,19 @@
           "tier": "2"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T17:53:46.240Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T19:22:16.477Z",
           "phase": "1b",
           "tier": "3",
-          "description": "* Adults 50-59"
+          "description": "* Adults 50-59",
+          "startDate": "March 23, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-11T17:16:11.972Z",
-          "phase": "2",
-          "description": "* Other at-risk groups\n* Other essential workers",
-          "startDate": "March - April 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-11T17:13:41.419Z",
-          "phase": "3",
-          "description": "* General public",
-          "startDate": "Summer 2021"
+          "updatedAt": "2021-03-25T19:23:27.129Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* General population and individuals under 16",
+          "startDate": ""
         }
       ]
     },
