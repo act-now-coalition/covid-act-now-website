@@ -2600,8 +2600,21 @@
         {
           "currentlyEligible": false,
           "updatedAt": "2021-03-22T23:34:38.906Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* General population and under 16"
+          "phase": "2",
+          "description": "* Individuals 16+ with one comorbidity\n* Critical workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T06:15:47.938Z",
+          "phase": "3",
+          "description": "* Individuals 16+",
+          "startDate": "May 1"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T06:16:06.904Z",
+          "phase": "4",
+          "description": "* General Public (under 16)"
         }
       ]
     },
