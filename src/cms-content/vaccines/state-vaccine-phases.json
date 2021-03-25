@@ -2001,7 +2001,7 @@
           "updatedAt": "2021-03-25T06:06:43.688Z",
           "phase": "1B",
           "tier": "6",
-          "description": "* NOTE: ONLY AVAILABLE IN SOME COUNTIES\n* Adults 45+ with underlying health conditions\n* Migrant and seasonal farm workers\n* Seafood and agricultural workers\n* Food processing workers\n* Individuals living in congregate settings",
+          "description": "Some counties are now vaccinating:\n\n* Adults 45+ with underlying health conditions\n* Migrant and seasonal farm workers\n* Seafood and agricultural workers\n* Food processing workers\n* Individuals living in congregate settings",
           "startDate": "March 25"
         },
         {
@@ -2656,7 +2656,7 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* (NOTE: May vary by county)\n* Individuals 18+",
+          "description": "Some counties are now vaccinating:\n\n* Individuals 18+",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-25T06:18:47.416Z"
