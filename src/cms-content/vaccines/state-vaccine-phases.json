@@ -506,7 +506,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Georgia",
       "fips": "13",
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
