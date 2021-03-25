@@ -7,7 +7,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
 const Section = (props: { section: FaqSection }) => {
   const { section } = props;
-  const url = 'https://covidactnow.org/faq#';
+  const url = 'https://covidactnow.org/faq';
   const trackShareFacebook = () =>
     trackEvent(EventCategory.FAQ, EventAction.SHARE, 'facebook');
   const trackShareTwitter = () =>
@@ -23,8 +23,8 @@ const Section = (props: { section: FaqSection }) => {
             <ItemName id={question.questionId}>{question.question}</ItemName>
             <MarkdownContent source={question.answer} />
             <SmallShareButtons
-              shareUrl={url + question.questionId}
-              shareQuote={`See the answer to '${question.question}', part of @CovidActNow's FAQs.`}
+              shareUrl={`${url}#${question.questionId}`}
+              shareQuote={`${question.question} @CovidActNow breaks down my top COVID questions. Learn more:`}
               onCopyLink={trackCopyLink}
               onShareOnFacebook={trackShareFacebook}
               onShareOnTwitter={trackShareTwitter}
