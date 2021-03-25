@@ -2619,7 +2619,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "West Virginia",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/covid-19/pages/vaccine.aspx",
       "vaccinationSignupUrl": "https://member.everbridge.net/747122446041089/login",
@@ -2632,12 +2632,12 @@
           "description": "* Health care workers \n* Long-term care facility residents and workers \n* (NEW) Adults 50+\n* (NEW) Education personnel aged 40+"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-25T19:57:26.353Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T06:17:41.197Z",
           "phase": "2",
           "tier": "",
-          "description": "* General Population",
-          "startDate": "March - October, 2021"
+          "description": "* All West Virginians 16+",
+          "startDate": "March 2021"
         }
       ],
       "fips": "54"
