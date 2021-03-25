@@ -97,7 +97,7 @@
       "fips": "04",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
       "vaccinationSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -134,14 +134,14 @@
           "startDate": ""
         }
       ],
-      "notes": "Vaccination phase varies by county."
+      "notes": ""
     },
     {
       "locationName": "Arkansas",
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
           "phase": "1A",
