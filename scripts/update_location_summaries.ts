@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {
   fetchAllStateProjections,
   fetchAllMetroProjections,
-  fetchCountyProjectionsForState,
+  fetchAllCountyProjections,
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
@@ -21,7 +21,7 @@ import { Projections } from '../src/common/models/Projections';
 import { DatasetId } from '../src/common/models/Projection';
 import { assert } from '../src/common/utils';
 import { Level } from '../src/common/level';
-import regions, { State } from '../src/common/regions';
+import regions from '../src/common/regions';
 import { importFipsToCcviMap } from '../src/common/data';
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
@@ -57,20 +57,9 @@ const INDIGENOUS_FIPS = [
   '55078',
 ];
 
-async function fetchCountyProjections() {
-  // Query counties for states individually as the entire counties.timeseries.json is too large
-  // to be parsed by node.
-  const allProjections = await Promise.all(
-    regions.states.map(
-      async (state: State) => await fetchCountyProjectionsForState(state),
-    ),
-  );
-  return allProjections.flatMap(obj => obj);
-}
-
 async function main() {
   const allStatesProjections = await fetchAllStateProjections();
-  const allCountiesProjections = await fetchCountyProjections();
+  const allCountiesProjections = await fetchAllCountyProjections();
   const allMetroProjections = await fetchAllMetroProjections();
   await buildSummaries([
     ...allStatesProjections,

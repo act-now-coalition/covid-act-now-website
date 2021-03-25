@@ -100,7 +100,14 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
 
 /** Returns an array of `Projections` instances for all counties. */
 const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
+export function fetchAllCountyProjections(
+  snapshotUrl: string | null = null,
+  queryByState: boolean = true,
+) {
+  if (queryByState) {
+    return fetchAllCountyProjectionsByState();
+  }
+
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
@@ -121,6 +128,17 @@ export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   const key = snapshotUrl || 'null';
   cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
   return cachedCountiesProjections[key];
+}
+
+export async function fetchAllCountyProjectionsByState() {
+  // Query counties for states individually as the entire counties.timeseries.json is too large
+  // to be parsed by node.
+  const allProjections = await Promise.all(
+    regions.states.map(
+      async (state: State) => await fetchCountyProjectionsForState(state),
+    ),
+  );
+  return allProjections.flatMap(obj => obj);
 }
 
 /** Returns an array of `Projections` instances for all counties in a state. */
