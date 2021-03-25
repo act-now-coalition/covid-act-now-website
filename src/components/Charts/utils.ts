@@ -1,14 +1,15 @@
 import { range, ceil, min, max } from 'lodash';
-import moment from 'moment';
 import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
 import {
-  TimeFormat,
+  DateFormat,
   formatDateTime,
   TimeUnit,
   addTime,
   subtractTime,
   formatUTCDateTime,
+  getStartOf,
+  getTimeDiff,
 } from 'common/utils/time-utils';
 import { Column } from 'common/models/Projection';
 
@@ -174,8 +175,8 @@ export const getXTickFormat = (date: Date) => {
   // Shows the year if the tick is in January (0) or December (11)
   const dateFormat =
     date.getMonth() === 0 || date.getMonth() === 11
-      ? TimeFormat.MMM_YY
-      : TimeFormat.MMM;
+      ? DateFormat.MMM_YY
+      : DateFormat.MMM;
   return formatDateTime(date, dateFormat).replace(' ', " '");
 };
 
@@ -194,8 +195,8 @@ export function getFinalTicks(isMobile: boolean, ticks: Date[]): Date[] {
 }
 
 export function getTimeAxisTicks(from: Date, to: Date) {
-  const dateFrom = moment(from).startOf('month').toDate();
-  const numMonths = moment(to).diff(dateFrom, 'months');
+  const dateFrom = getStartOf(from, TimeUnit.MONTHS);
+  const numMonths = getTimeDiff(to, dateFrom, TimeUnit.MONTHS);
   return range(1, numMonths + 1).map((i: number) =>
     addTime(dateFrom, i, TimeUnit.MONTHS),
   );
@@ -206,5 +207,5 @@ export function getColumnDate({ x }: Column): Date {
 }
 
 export function formatTooltipColumnDate(data: Column): string {
-  return formatUTCDateTime(getColumnDate(data), TimeFormat.MMM_D_YYYY);
+  return formatUTCDateTime(getColumnDate(data), DateFormat.MMM_D_YYYY);
 }

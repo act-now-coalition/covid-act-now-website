@@ -1,4 +1,3 @@
-import moment from 'moment';
 import urlJoin from 'url-join';
 import { concat, deburr, flatten, isNumber, max, words } from 'lodash';
 import { color } from 'd3-color';
@@ -19,7 +18,12 @@ import regions, {
 } from 'common/regions';
 import { fail } from 'assert';
 import { pluralize } from 'common/utils';
-import { TimeFormat, formatDateTime } from 'common/utils/time-utils';
+import {
+  TimeUnit,
+  DateFormat,
+  formatDateTime,
+  getTimeDiff,
+} from 'common/utils/time-utils';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -279,7 +283,7 @@ function getLocationFileName(region: Region) {
 }
 
 export function getImageFilename(locations: Region[], metric: ExploreMetric) {
-  const downloadDate = formatDateTime(new Date(), TimeFormat.YYYY_MM_DD);
+  const downloadDate = formatDateTime(new Date(), DateFormat.YYYY_MM_DD);
   const chartId = getChartIdByMetric(metric);
   const fileNameSuffix = `${chartId}-${downloadDate}`;
 
@@ -339,7 +343,7 @@ const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
  * today, 1 day ago, 5 days ago, 3 weeks and 2 days ago, 5 weeks ago, etc.
  */
 export function weeksAgo(dateFrom: Date, dateTo: Date) {
-  const totalDays = moment(dateTo).diff(dateFrom, 'days');
+  const totalDays = getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
   const totalWeeks = Math.floor(totalDays / 7);
   const numDays = totalDays % 7;
 

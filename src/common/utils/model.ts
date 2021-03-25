@@ -5,7 +5,7 @@ import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
 import regions, { Region, County, RegionType } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
-import { parseDateString, dateToUTC } from 'common/utils/time-utils';
+import { parseDateString } from 'common/utils/time-utils';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
@@ -172,7 +172,7 @@ export function useModelLastUpdatedDate() {
     new Api().fetchVersionInfo().then(version => {
       // NOTE: "new Date(version.timestamp)" on safari fails due to pickiness about the
       // date formatting, so just use time utils to parse.
-      setLastUpdated(dateToUTC(parseDateString(version.timestamp)));
+      setLastUpdated(parseDateString(version.timestamp));
     });
   }, []);
 

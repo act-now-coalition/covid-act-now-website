@@ -10,7 +10,7 @@ import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
 import { useRegionFromParams } from 'common/regions';
 import { Region } from 'common/regions';
-import { TimeFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from 'common/utils/time-utils';
 import { assert } from 'common/utils';
 
 /**
@@ -38,7 +38,7 @@ export const Header = (props: { isHomePage?: Boolean }) => {
         Real-time COVID metrics
       </TitleWrapper>
       <LastUpdatedWrapper>
-        Updated {formatDateTime(new Date(), TimeFormat.MMMM_D_YYYY)}
+        Updated {formatDateTime(new Date(), DateFormat.MMMM_D_YYYY)}
       </LastUpdatedWrapper>
     </>
   );

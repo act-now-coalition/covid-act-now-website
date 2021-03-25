@@ -18,7 +18,7 @@ import { EventCategory } from 'components/Analytics';
 import FaqStructuredData from './FaqStructuredData';
 import Footer from 'screens/Learn/Footer/Footer';
 import {
-  TimeFormat,
+  DateFormat,
   parseDateString,
   formatDateTime,
 } from 'common/utils/time-utils';
@@ -65,7 +65,7 @@ const Faq: React.FC = () => {
           Last updated{' '}
           {formatDateTime(
             parseDateString(lastUpdatedDate),
-            TimeFormat.MM_DD_YYYY,
+            DateFormat.MM_DD_YYYY,
           )}
         </LastUpdatedDate>
         <MobileOnly>
