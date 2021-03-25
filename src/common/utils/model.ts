@@ -99,9 +99,7 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
 }
 
 const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
-export async function fetchAllCountyProjections(
-  snapshotUrl: string | null = null,
-) {
+export function fetchAllCountyProjections(snapshotUrl: string | null = null) {
   async function fetch() {
     // Query counties for states individually as the entire counties.timeseries.json is too large
     // to be parsed by node.
