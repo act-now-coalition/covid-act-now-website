@@ -97,7 +97,7 @@
       "fips": "04",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
       "vaccinationSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -118,48 +118,30 @@
           "updatedAt": "2021-03-08T16:56:01.245Z"
         },
         {
-          "phase": "1B and 1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "Eligibility varies throughout Arizona. Some counties are vaccinating Phase 1B groups: \n\n* Certain essential workers\n* Adults with high-risk medical conditions in congretate settings (such as shelters) \n\nSome counties are vaccinating Phase 1C groups:\n\n* All adults with high-risk medical conditions\n* All adults living in congregate settings\n\nThe state recently announced plans to move to an age-based eligibility system. Some counties are now vaccinating:\n\n* Adults 55-64",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-08T16:57:47.124Z"
-        },
-        {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Adults 45-54",
+          "currentlyEligible": true,
+          "description": "Moving forward, eligibility will be primarily determined by age. Eligibility will vary across counties and tribes, which may also choose to prioritize certain additional frontline workers. Counties are now vaccinating:\n\n* Age group 65+ (Santa Cruz)\n* Age group 55+ (Apache, Graham, Maricopa, Mohave, Pima, Yavapai, Yuma)\n* Age group 16+ or 18+ (Coconino, Cochise, Gila, Graham, Greenlee, La Paz, Navajo, Pinal, Yuma)\n\n(NEW) State-run sites in Maricopa, Pima, and Yuma counties are now vaccinating age group 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 2021",
-          "updatedAt": "2021-03-04T20:02:06.842Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Adults 35-44",
-          "expandedDefinitionUrl": "",
-          "startDate": "April-May 2021",
-          "updatedAt": "2021-03-04T20:02:46.934Z"
+          "startDate": "",
+          "updatedAt": "2021-03-25T14:13:53.139Z"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-04T19:56:49.683Z",
-          "phase": "4",
-          "description": "* Adults 16-34",
-          "startDate": "May 2021"
+          "updatedAt": "2021-03-25T14:08:33.873Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* General population and individuals under 16",
+          "startDate": ""
         }
       ],
-      "notes": "Vaccination phase varies by county."
+      "notes": ""
     },
     {
       "locationName": "Arkansas",
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -199,10 +181,10 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* People 16-64 with high-risk medical conditions\n* Additional essential workers\n* People residing in high-risk settings (incarceration/detention facilities, group homes, congregate settings, crowded housing, student housing)",
+          "description": "* People 16-64 with high-risk medical conditions\n* Additional essential workers\n* People residing in high-risk settings (incarceration/detention facilities, group homes, congregate settings, crowded housing, student housing)\n* (NEW) Veterans of all ages",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-18T17:25:02.348Z"
+          "updatedAt": "2021-03-25T14:15:11.169Z"
         },
         {
           "currentlyEligible": false,
@@ -241,10 +223,10 @@
           "phase": "1b",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* Adults aged 16 to 64 with certain high-risk health conditions and disabilities\n* Adults living or working in congregate settings (incarceration/detention facilities, homeless shelters, behavioral health facilities, etc.)\n* Public transit workers",
+          "description": "* Adults aged 16 to 64 with certain high-risk health conditions and disabilities\n* Adults living or working in congregate settings (incarceration/detention facilities, homeless shelters, behavioral health facilities, etc.)\n* Public transit workers\n\nCertain counties and localities may be vaccinating additional groups.",
           "expandedDefinitionUrl": "",
           "startDate": "March 15, 2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
+          "updatedAt": "2021-03-25T14:16:07.123Z"
         },
         {
           "currentlyEligible": false,
@@ -404,10 +386,10 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Adults 50-64 (pharmacies only)\n* Persons 16+ with high risk medical conditions\n* Family caregivers of those with high/moderate-risk conditions",
+          "description": "* Adults 50-64\n* Persons 16+ with high risk medical conditions\n* Family caregivers of those with high/moderate-risk conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-18T17:31:49.528Z"
+          "updatedAt": "2021-03-25T14:16:50.054Z"
         },
         {
           "phase": "2",
@@ -503,7 +485,7 @@
           "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* (NEW) Persons ages 50+\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of COVID\n* Certain sites (including CVS, Publix, Walmart, and Walgreens) are vaccinating teachers under 50",
+          "description": "* Persons ages 50+\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of COVID\n* Certain sites (including CVS, Publix, Walmart, and Walgreens) are vaccinating teachers under 50",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-22T16:39:15.666Z"
@@ -524,7 +506,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Georgia",
       "fips": "13",
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
@@ -557,10 +539,17 @@
           "updatedAt": "2021-03-15T14:37:38.157Z"
         },
         {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T14:19:21.935Z",
+          "phase": "2",
+          "description": "* All individuals 16 years and older",
+          "startDate": "March 25, 2021"
+        },
+        {
           "currentlyEligible": false,
           "updatedAt": "2021-03-08T17:20:35.037Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ]
     },
@@ -673,33 +662,17 @@
           "updatedAt": "2021-03-11T15:14:51.539Z",
           "phase": "2",
           "tier": "5",
-          "description": "* Age 45-54 with at least one medical condition",
+          "description": "* Age 16+ with at least one medical condition",
           "startDate": "March 29, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-11T15:14:52.605Z",
-          "phase": "2",
-          "tier": "6",
-          "description": "* All others age 45-54",
-          "startDate": "April 5, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-18T17:41:05.944Z",
-          "phase": "2",
-          "tier": "7",
-          "description": "* Age 16-44 with at least one medical condition",
-          "startDate": "April 12, 2021"
         },
         {
           "phase": "3",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* All others age 16-44",
+          "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 26, 2021",
-          "updatedAt": "2021-03-18T17:41:25.677Z"
+          "startDate": "April 5, 2021",
+          "updatedAt": "2021-03-25T14:20:34.443Z"
         }
       ]
     },
@@ -797,9 +770,16 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:20:59.701Z",
+          "updatedAt": "2021-03-25T14:23:21.118Z",
+          "phase": "2",
+          "description": "* Ages 16+",
+          "startDate": "March 31, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T14:23:52.250Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ]
     },
@@ -830,9 +810,16 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:21:35.812Z",
+          "updatedAt": "2021-03-25T14:25:07.724Z",
+          "phase": "2",
+          "startDate": "April 5, 2021",
+          "description": "* All individuals 16+"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T14:26:15.069Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ]
     },
@@ -970,9 +957,10 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:22:08.531Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "updatedAt": "2021-03-25T17:16:51.894Z",
+          "phase": "2",
+          "description": "* All individuals 16 and older",
+          "startDate": "March 29, 2021"
         }
       ]
     },
@@ -981,7 +969,7 @@
       "fips": "23",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1009,8 +997,8 @@
           "startDate": "March 3, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:21:47.281Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T17:20:02.856Z",
           "phase": "3",
           "description": "* Adults 50-59",
           "startDate": "March 23, 2021"
@@ -1029,7 +1017,7 @@
       "fips": "24",
       "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "vaccinationSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1061,11 +1049,11 @@
         {
           "phase": "2A",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Adults 60+",
           "expandedDefinitionUrl": "",
           "startDate": "March 23, 2021",
-          "updatedAt": "2021-03-22T21:31:34.900Z"
+          "updatedAt": "2021-03-25T17:22:25.584Z"
         },
         {
           "currentlyEligible": false,
@@ -1288,39 +1276,8 @@
       "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Healthcare workers and EMTs\n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 65+\n* Individuals (16+) with high-risk medical conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-02T00:45:58.206Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-02T00:44:24.943Z",
-          "phase": "1C",
-          "description": "* Teachers\n* First responders (law enforcement, public safety, fire services, and emergency management officials)",
-          "startDate": "March 1, 2021"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-08T17:13:12.310Z",
-          "description": "* Adults aged 50 to 64",
-          "phase": "2"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T21:52:39.551Z",
+          "updatedAt": "2021-03-25T17:24:29.725Z",
           "phase": "3",
           "description": "* All individuals age 16 and older"
         }
@@ -1418,7 +1375,7 @@
           "phase": "1",
           "tier": "B+",
           "currentlyEligible": true,
-          "description": "* Adults 60+\n* Congregate Populations\n* Individuals 16+ with medium-risk medical conditions",
+          "description": "* Adults 60+\n* Individuals 16+ with medium-risk medical conditions",
           "expandedDefinitionUrl": "",
           "startDate": "March 8, 2021",
           "updatedAt": "2021-03-15T16:44:56.454Z"
@@ -1472,7 +1429,7 @@
           "currentlyEligible": true,
           "updatedAt": "2021-03-22T22:00:49.786Z",
           "phase": "2A",
-          "description": "Some counties may be vaccinating: \n\n* Individuals age 50-64 \n* Individuals with underlying medical conditions"
+          "description": "Some counties may be vaccinating: \n\n* Individuals age 50-64 \n* Individuals with underlying medical conditions\n\nAdditional groups may be eligible in certain counties. Check your local health department website for county-specific information."
         },
         {
           "phase": "2B",
@@ -1531,7 +1488,7 @@
           "phase": "1B",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* 65+ years of age\n* Adults with two or more high-risk conditions and their caregivers\n* Residents and staff at facilities with intellectual and developmental disabilities",
+          "description": "* 65+ years of age\n* Adults with two or more high-risk conditions and their caregivers\n* Residents and staff at facilities for individuals with intellectual and developmental disabilities",
           "expandedDefinitionUrl": "",
           "startDate": "December 2020",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -1687,7 +1644,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "New York",
       "fips": "36",
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
@@ -1704,33 +1661,35 @@
         },
         {
           "phase": "1b",
-          "tier": "",
+          "tier": "1",
           "currentlyEligible": true,
           "description": "* Adults 60+\n* Individuals (16+) with underlying high-risk medical conditions\n* First responders\n* Teachers and child care workers\n* Other essential workers\n* Congregate care facilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-25T17:53:15.717Z"
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-18T18:26:56.314Z",
-          "phase": "1c",
+          "updatedAt": "2021-03-25T17:53:38.491Z",
+          "phase": "1b",
           "description": "* Public-facing government, not-for-profit, and building service workers",
-          "startDate": "March 17, 2021"
+          "startDate": "March 17, 2021",
+          "tier": "2"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T19:22:16.477Z",
+          "phase": "1b",
+          "tier": "3",
+          "description": "* Adults 50-59",
+          "startDate": "March 23, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-11T17:16:11.972Z",
-          "phase": "2",
-          "description": "* Other at-risk groups\n* Other essential workers",
-          "startDate": "March - April 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-11T17:13:41.419Z",
-          "phase": "3",
-          "description": "* General public",
-          "startDate": "Summer 2021"
+          "updatedAt": "2021-03-25T19:23:27.129Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* General population and individuals under 16",
+          "startDate": ""
         }
       ]
     },
@@ -1772,7 +1731,7 @@
           "phase": "4A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings",
+          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings\n\nSome counties may be vaccinating additional groups.",
           "expandedDefinitionUrl": "",
           "startDate": "March 17, 2021",
           "updatedAt": "2021-03-18T18:30:44.911Z"
@@ -1786,9 +1745,10 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-18T18:32:51.129Z",
+          "updatedAt": "2021-03-25T18:00:17.183Z",
           "description": "* All individuals 16+",
-          "phase": "5"
+          "phase": "5",
+          "startDate": "By May 1, 2021"
         }
       ]
     },
@@ -1989,10 +1949,10 @@
           "phase": "4",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* General public",
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 29",
+          "updatedAt": "2021-03-25T06:06:00.578Z"
         }
       ]
     },
@@ -2001,7 +1961,7 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -2031,36 +1991,36 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:41:40.165Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T06:06:43.688Z",
           "phase": "1B",
           "tier": "6",
-          "description": "* Adults 45+ with underlying health conditions",
-          "startDate": "March 29"
+          "description": "Some counties are now vaccinating:\n\n* Adults 45+ with underlying health conditions\n* Migrant and seasonal farm workers\n* Seafood and agricultural workers\n* Food processing workers\n* Individuals living in congregate settings",
+          "startDate": "March 25"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:42:31.387Z",
+          "updatedAt": "2021-03-25T06:08:11.237Z",
           "phase": "1B",
           "tier": "7",
-          "description": "* Individuals 16+ with underlying health conditions",
+          "description": "* Individuals 16+ with underlying health conditions\n* Frontline workers\n* Adults 50+ in a multigenerational household",
+          "startDate": "April 19"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T06:08:26.650Z",
+          "phase": "2",
+          "tier": "1",
+          "description": "* Individuals 45+",
           "startDate": "May 1"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:43:22.324Z",
-          "phase": "2",
-          "tier": "1",
-          "description": "* Individuals 45+",
-          "startDate": "June 1"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:43:55.936Z",
+          "updatedAt": "2021-03-25T06:08:35.570Z",
           "phase": "2",
           "tier": "2",
           "description": "* Individuals 16+",
-          "startDate": "July 1"
+          "startDate": "May 1"
         }
       ]
     },
@@ -2238,7 +2198,7 @@
       "fips": "46",
       "eligibilityInfoUrl": "https://doh.sd.gov/Covid/Vaccine/Public.aspx",
       "vaccinationSignupUrl": "https://doh.sd.gov/Covid/Vaccine/ProviderMap/default.aspx",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -2288,11 +2248,11 @@
         {
           "phase": "1E",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Fire service personnel\n* Other critical infrastructure workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-25T06:09:45.844Z"
         },
         {
           "phase": "2",
@@ -2399,14 +2359,15 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:26:33.828Z",
+          "updatedAt": "2021-03-25T06:11:43.220Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "* All adults ",
+          "startDate": "March 29"
         }
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "5",
       "locationName": "Utah",
       "fips": "49",
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
@@ -2422,27 +2383,18 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "TBD",
+          "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Other age groups\n* People with underlying medical conditions not already included\n* People who live in congregate settings and are at higher risk for the virus that causes COVID",
+          "currentlyEligible": true,
+          "description": "* All Utahns 16+",
           "expandedDefinitionUrl": "",
           "startDate": "March 24",
-          "updatedAt": "2021-03-15T16:52:35.689Z"
-        },
-        {
-          "phase": "TBD",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* All residents of Utah",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 24",
-          "updatedAt": "2021-03-22T20:02:17.947Z"
+          "updatedAt": "2021-03-25T06:12:38.931Z"
         }
       ]
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "8",
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
@@ -2458,50 +2410,20 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "2",
+          "phase": "2-5",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals aged 75+",
+          "description": "* Individuals 65+\n* K-12 education and child care personnel\n* Public safety workers\n* Individuals 16+ with certain high-risk health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 70-74",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-25T18:28:30.474Z"
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-21T22:09:11.381Z",
-          "phase": "4",
-          "startDate": "Early March",
-          "description": "* Adults 65-69"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-08T17:59:01.306Z",
-          "phase": "5A",
-          "startDate": "March 8",
-          "description": "* Adults (55+) with high-risk medical conditions\n* K-12 education and child care personnel\n* Public safety workers"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-11T18:29:03.121Z",
-          "phase": "5B",
-          "description": "* Individuals 16+ with certain high-risk health conditions",
-          "startDate": "March 11"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:54:09.016Z",
+          "updatedAt": "2021-03-25T06:13:37.063Z",
           "phase": "6",
           "description": "* Individuals 60+",
-          "startDate": "Late March"
+          "startDate": "March 25"
         },
         {
           "currentlyEligible": false,
@@ -2512,7 +2434,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "4",
       "locationName": "Virginia",
       "fips": "51",
       "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
@@ -2540,10 +2462,10 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Other essential workers",
+          "description": "* (NEW) All veterans and their spouses/caregivers\nSome counties are now vaccinating:\n* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-18T19:30:07.774Z"
+          "updatedAt": "2021-03-25T06:14:26.374Z"
         },
         {
           "currentlyEligible": false,
@@ -2608,31 +2530,44 @@
         {
           "currentlyEligible": false,
           "updatedAt": "2021-03-22T23:34:38.906Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* General population and under 16"
+          "phase": "2",
+          "description": "* Individuals 16+ with one comorbidity\n* Critical workers"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T06:15:47.938Z",
+          "phase": "3",
+          "description": "* Individuals 16+",
+          "startDate": "May 1"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T06:16:06.904Z",
+          "phase": "4",
+          "description": "* General Public (under 16)"
         }
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "4",
       "locationName": "West Virginia",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/covid-19/pages/vaccine.aspx",
       "vaccinationSignupUrl": "https://member.everbridge.net/747122446041089/login",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-04T18:56:46.857Z",
+          "updatedAt": "2021-03-25T19:29:01.171Z",
           "phase": "1",
           "tier": "A",
-          "description": "* Health care workers \n* Long-term care facility residents and workers \n* (NEW) Adults 50+\n* (NEW) Education personnel aged 40+"
+          "description": "* Healthcare workers\n* Long-term care facility residents and workers\n* Adults 50+\n* Education personnel aged 40+\n* Individuals (16+) with underlying medical conditions"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-25T19:57:26.353Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T06:17:41.197Z",
           "phase": "2",
           "tier": "",
-          "description": "* General Population",
-          "startDate": "March - October, 2021"
+          "description": "* All West Virginians 16+",
+          "startDate": "March 2021"
         }
       ],
       "fips": "54"
@@ -2678,7 +2613,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "4",
       "locationName": "Wyoming",
       "fips": "56",
       "eligibilityInfoUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/",
@@ -2714,11 +2649,11 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "Some counties are now vaccinating:\n\n* Individuals 18+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "updatedAt": "2021-03-25T06:18:47.416Z"
         }
       ]
     },
