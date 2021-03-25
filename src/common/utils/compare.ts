@@ -204,8 +204,6 @@ export function getRegionNameForRow(region: Region, condensed?: boolean) {
   }
 }
 
-// For college tag:
-
 export function getShareQuote(
   sorter: Metric,
   sliderValue: GeoScopeFilter,
@@ -250,7 +248,7 @@ export function getShareQuote(
   const countyShareCopy =
     currentLocation &&
     hasValidRank &&
-    `${currentLocation.region.name} ranks #${
+    `${currentLocation.region.shortName} ranks #${
       currentLocation.rank
     } out of ${totalLocations} total ${
       geoScopeShareCopy[sliderValue]
