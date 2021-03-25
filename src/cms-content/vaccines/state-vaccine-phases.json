@@ -2434,7 +2434,7 @@
       ]
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
@@ -2489,11 +2489,11 @@
           "startDate": "March 11"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:54:09.016Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T06:13:37.063Z",
           "phase": "6",
           "description": "* Individuals 60+",
-          "startDate": "Late March"
+          "startDate": "March 25"
         },
         {
           "currentlyEligible": false,
