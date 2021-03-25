@@ -1,9 +1,9 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
+import isNumber from 'lodash/isNumber';
 import { getCountyMsaCode } from 'common/locations';
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import regions, {
   County,

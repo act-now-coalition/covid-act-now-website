@@ -1,4 +1,8 @@
-import { flatten, map, values, Dictionary, keyBy } from 'lodash';
+import flatten from 'lodash/flatten';
+import map from 'lodash/map';
+import keyBy from 'lodash/keyBy';
+import values from 'lodash/values';
+import type { Dictionary } from 'lodash';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
 import metroAreaDataset from 'common/data/msa-data.json';

@@ -9,7 +9,8 @@
  */
 
 import { useEffect, useState } from 'react';
-import { isNull, values } from 'lodash';
+import isNull from 'lodash/isNull';
+import values from 'lodash/values';
 import {
   getGeolocatedRegions,
   filterUndefinedRegions,

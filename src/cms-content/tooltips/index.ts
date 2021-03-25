@@ -1,10 +1,10 @@
+import keyBy from 'lodash/keyBy';
 import { Markdown } from '../utils';
 import infoToolTipContent from './info-tooltips.json';
 import metricCaculationTooltipContent from './metric-calculation-tooltips.json';
 import ccviTooltipContent from './ccvi-tooltips.json';
 import { Metric } from 'common/metricEnum';
 import { assert } from 'common/utils';
-import { keyBy } from 'lodash';
 
 /* Metric tooltips + location page header tooltip: */
 
