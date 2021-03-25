@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { flatten } from 'lodash';
+import flatten from 'lodash/flatten';
 import { voronoi, VoronoiPolygon } from '@vx/voronoi';
 import { Group } from '@vx/group';
 import { Series } from './interfaces';

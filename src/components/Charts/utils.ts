@@ -1,4 +1,7 @@
-import { range, ceil, min, max } from 'lodash';
+import range from 'lodash/range';
+import ceil from 'lodash/ceil';
+import min from 'lodash/min';
+import max from 'lodash/max';
 import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
 import {

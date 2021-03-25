@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
