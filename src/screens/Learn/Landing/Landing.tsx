@@ -5,8 +5,9 @@ import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { LandingSection, landingPageContent } from 'cms-content/learn/landing';
 import { learnPages } from 'cms-content/learn';
-import SectionButton, { ButtonTheme } from './SectionButton';
+// import SectionButton, { ButtonTheme } from './SectionButton';
 import { ButtonContainer } from '../Learn.style';
+import { TestSmallButton } from './SectionButton.style';
 
 const Landing: React.FC = () => {
   const {
@@ -35,11 +36,14 @@ const Landing: React.FC = () => {
             <Heading2 id={section.sectionId}>{section.sectionTitle}</Heading2>
             <MarkdownContent source={section.description} />
             <ButtonContainer>
-              <SectionButton
+              {/* <SectionButton
                 cta={section.buttonCta}
                 redirect={section.buttonRedirect}
                 theme={ButtonTheme.WHITE}
-              />
+              /> */}
+              <TestSmallButton href="/donate">
+                {section.buttonCta}
+              </TestSmallButton>
             </ButtonContainer>
           </Fragment>
         ))}

@@ -3,6 +3,8 @@ import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
 import { Link } from 'react-router-dom';
 import theme from 'assets/theme';
+import { standardButton } from 'components/ButtonSystem/Buttons.style';
+import { ButtonType } from 'assets/theme/buttons';
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -36,4 +38,8 @@ export const WhiteButton = styled(MuiButton)`
   &:hover {
     background-color: ${COLOR_MAP.GRAY.LIGHT};
   }
+`;
+
+export const TestSmallButton = styled.a`
+  ${standardButton(ButtonType.FILL)};
 `;
