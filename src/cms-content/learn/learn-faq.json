@@ -114,7 +114,7 @@
         {
           "question": "Are children at risk of becoming sick with COVID?\n",
           "questionId": "children-risk-sick-covid",
-          "answer": "Children can become infected and sick with COVID. According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/faq.html#Children), fewer children get sick than adults and most display mild symptoms or are [asymptomatic](\\[/glossary#asymptomatic]). However, children with underlying medical conditions or infants (less than 1 year old) may be at increased risk for severe illness. There have also been cases of a rare disease called [multisystem inflammatory syndrome (MIS-C)](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/children/mis-c.html), which has been linked to COVID."
+          "answer": "Children can become infected and sick with COVID. According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/faq.html#Children), fewer children get sick than adults and most display mild symptoms or are [asymptomatic](/glossary#asymptomatic). However, children with underlying medical conditions or infants (less than 1 year old) may be at increased risk for severe illness. There have also been cases of a rare disease called [multisystem inflammatory syndrome (MIS-C)](https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/children/mis-c.html), which has been linked to COVID."
         },
         {
           "question": "How long are you contagious with COVID?",
