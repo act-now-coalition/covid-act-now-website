@@ -34,6 +34,7 @@ export const legacyTracker: Tracker = {
 export enum EventCategory {
   API = 'api',
   ARTICLES = 'articles',
+  BANNER = 'banner',
   COMPARE = 'compare',
   DONATE = 'donate',
   ENGAGEMENT = 'engagement',
