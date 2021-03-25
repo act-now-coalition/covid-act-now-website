@@ -2040,27 +2040,27 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:42:31.387Z",
+          "updatedAt": "2021-03-25T06:08:11.237Z",
           "phase": "1B",
           "tier": "7",
-          "description": "* Individuals 16+ with underlying health conditions",
+          "description": "* Individuals 16+ with underlying health conditions\n* Frontline workers\n* Adults 50+ in a multigenerational household",
+          "startDate": "April 19"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-25T06:08:26.650Z",
+          "phase": "2",
+          "tier": "1",
+          "description": "* Individuals 45+",
           "startDate": "May 1"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:43:22.324Z",
-          "phase": "2",
-          "tier": "1",
-          "description": "* Individuals 45+",
-          "startDate": "June 1"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:43:55.936Z",
+          "updatedAt": "2021-03-25T06:08:35.570Z",
           "phase": "2",
           "tier": "2",
           "description": "* Individuals 16+",
-          "startDate": "July 1"
+          "startDate": "May 1"
         }
       ]
     },
