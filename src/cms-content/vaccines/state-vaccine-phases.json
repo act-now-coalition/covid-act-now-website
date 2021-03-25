@@ -2416,43 +2416,13 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "2",
+          "phase": "2-5",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals aged 75+",
+          "description": "* Individuals 65+\n* K-12 education and child care personnel\n* Public safety workers\n* Individuals 16+ with certain high-risk health conditions",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 70-74",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-21T22:09:11.381Z",
-          "phase": "4",
-          "startDate": "Early March",
-          "description": "* Adults 65-69"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-08T17:59:01.306Z",
-          "phase": "5A",
-          "startDate": "March 8",
-          "description": "* Adults (55+) with high-risk medical conditions\n* K-12 education and child care personnel\n* Public safety workers"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-11T18:29:03.121Z",
-          "phase": "5B",
-          "description": "* Individuals 16+ with certain high-risk health conditions",
-          "startDate": "March 11"
+          "updatedAt": "2021-03-25T18:28:30.474Z"
         },
         {
           "currentlyEligible": true,
