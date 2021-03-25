@@ -58,11 +58,15 @@ export default function HomePage() {
       : null;
 
   const exploreGeoLocations = useGeolocationInExplore(5, geolocationData);
-  const showTopHospitalizations = location.hash === '#explore-hospitalizations';
-  const initialFipsListForExplore = showTopHospitalizations
-    ? ['MI', 'NJ'].map(state => regions.findByStateCodeStrict(state).fipsCode)
+  const showRisingHospitalizations =
+    location.hash === '#explore-hospitalizations';
+  const risingHospitalizationStates = ['MI', 'NJ'];
+  const initialFipsListForExplore = showRisingHospitalizations
+    ? risingHospitalizationStates.map(
+        state => regions.findByStateCodeStrict(state).fipsCode,
+      )
     : exploreGeoLocations;
-  const initialMetricForExplore = showTopHospitalizations
+  const initialMetricForExplore = showRisingHospitalizations
     ? ExploreMetric.HOSPITALIZATIONS
     : ExploreMetric.CASES;
 
