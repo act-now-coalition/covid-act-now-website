@@ -4,10 +4,10 @@ import { MarkdownContent } from 'components/Markdown';
 import { FaqSection, Question } from 'cms-content/learn';
 import SmallShareButtons from 'components/SmallShareButtons';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import urlJoin from 'url-join';
 
 const Section = (props: { section: FaqSection }) => {
   const { section } = props;
-  const url = 'https://covidactnow.org/faq';
   const trackShareFacebook = () =>
     trackEvent(EventCategory.FAQ, EventAction.SHARE, 'facebook');
   const trackShareTwitter = () =>
@@ -23,7 +23,11 @@ const Section = (props: { section: FaqSection }) => {
             <ItemName id={question.questionId}>{question.question}</ItemName>
             <MarkdownContent source={question.answer} />
             <SmallShareButtons
-              shareUrl={`${url}#${question.questionId}`}
+              shareUrl={urlJoin(
+                'https://covidactnow.org',
+                'faq',
+                `#${question.questionId}`,
+              )}
               shareQuote={`${question.question} @CovidActNow breaks down my top COVID questions. Learn more:`}
               onCopyLink={trackCopyLink}
               onShareOnFacebook={trackShareFacebook}
