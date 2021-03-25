@@ -2373,7 +2373,7 @@
       ]
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Utah",
       "fips": "49",
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
@@ -2389,7 +2389,7 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "TBD",
+          "phase": "2",
           "tier": "",
           "currentlyEligible": true,
           "description": "* All Utahns 16+",
