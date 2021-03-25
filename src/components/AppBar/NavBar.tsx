@@ -14,6 +14,7 @@ import {
   Variant,
   VariantID,
 } from 'components/Experiment';
+import { useBreakpoint } from 'common/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
@@ -53,9 +54,7 @@ const NavBar: React.FC = () => {
 
   const { pathname } = useLocation();
 
-  if (isEmbed) {
-    return null;
-  }
+  const isMobile = useBreakpoint(800);
 
   const onClickHamburger = () => {
     const updatedIsOpen = !isMenuOpen;
@@ -66,13 +65,21 @@ const NavBar: React.FC = () => {
   };
 
   const onHoverHamburger = () => {
-    if (!isMenuOpen) {
-      setMenuOpen(true);
-      trackMobileMenuOpen();
+    if (isMobile) {
+      return;
+    } else {
+      if (!isMenuOpen) {
+        setMenuOpen(true);
+        trackMobileMenuOpen();
+      }
     }
   };
 
   const closeMenu = () => setMenuOpen(false);
+
+  if (isEmbed) {
+    return null;
+  }
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
