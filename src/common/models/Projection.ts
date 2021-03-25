@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { first, last, findIndex, findLastIndex } from 'lodash';
 import moment from 'moment';
 import { ActualsTimeseries } from 'api';
 import {
@@ -486,11 +486,11 @@ export class Projection {
     // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
     // It cuts off some of the earlier dates
     if (metricsTimeseriesRaw.length > 0) {
-      earliestDate = moment.utc(_.first(metricsTimeseriesRaw)!.date);
-      latestDate = moment.utc(_.last(metricsTimeseriesRaw)!.date);
+      earliestDate = moment.utc(first(metricsTimeseriesRaw)!.date);
+      latestDate = moment.utc(last(metricsTimeseriesRaw)!.date);
     } else {
-      earliestDate = moment.utc(_.first(actualsTimeseriesRaw)!.date);
-      latestDate = moment.utc(_.last(actualsTimeseriesRaw)!.date);
+      earliestDate = moment.utc(first(actualsTimeseriesRaw)!.date);
+      latestDate = moment.utc(last(actualsTimeseriesRaw)!.date);
     }
 
     earliestDate = moment.utc('2020-03-01');
@@ -729,7 +729,7 @@ export class Projection {
   }
 
   private fillLeadingNullsWithZeros(data: Array<number | null>) {
-    let nonZeroIndex = _.findIndex(data, v => v !== null);
+    let nonZeroIndex = findIndex(data, v => v !== null);
     const result = [];
     for (let i = 0; i < data.length; i++) {
       if (i < nonZeroIndex) {
@@ -751,7 +751,7 @@ export class Projection {
     let count = 0;
     let lastValidIndex = data.length - 1;
     if (!includeTrailingZeros) {
-      lastValidIndex = _.findLastIndex(
+      lastValidIndex = findLastIndex(
         data,
         value => value !== null && value !== 0,
       );
