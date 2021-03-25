@@ -1751,9 +1751,10 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-18T18:32:51.129Z",
+          "updatedAt": "2021-03-25T18:00:17.183Z",
           "description": "* All individuals 16+",
-          "phase": "5"
+          "phase": "5",
+          "startDate": "By May 1, 2021"
         }
       ]
     },
