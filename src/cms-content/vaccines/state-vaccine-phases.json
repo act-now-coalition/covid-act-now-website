@@ -2619,7 +2619,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "West Virginia",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/covid-19/pages/vaccine.aspx",
       "vaccinationSignupUrl": "https://member.everbridge.net/747122446041089/login",
