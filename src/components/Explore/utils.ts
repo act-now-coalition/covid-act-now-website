@@ -24,6 +24,7 @@ import {
   formatDateTime,
   getTimeDiff,
 } from 'common/utils/time-utils';
+import { formatDecimal } from 'common/utils/index';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -343,17 +344,24 @@ const pluralizeDays = (num: number) => pluralize(num, 'day', 'days');
  * today, 1 day ago, 5 days ago, 3 weeks and 2 days ago, 5 weeks ago, etc.
  */
 export function weeksAgo(dateFrom: Date, dateTo: Date) {
-  const totalDays = getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
+  const totalDays = Math.floor(getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS));
   const totalWeeks = Math.floor(totalDays / 7);
-  const numDays = totalDays % 7;
+  const numDaysWithinPastWeek = Math.floor(totalDays % 7);
 
   if (totalDays < 7) {
     return totalDays === 0
       ? 'today'
-      : `${totalDays} ${pluralizeDays(totalDays)} ago`;
+      : `${formatDecimal(totalDays, 0)} ${pluralizeDays(totalDays)} ago`;
   } else {
-    const weeksAgo = `${totalWeeks} ${pluralizeWeeks(totalWeeks)}`;
-    const daysAgo = numDays > 0 ? `, ${numDays} ${pluralizeDays(numDays)}` : '';
+    const weeksAgo = `${formatDecimal(totalWeeks, 0)} ${pluralizeWeeks(
+      totalWeeks,
+    )}`;
+    const daysAgo =
+      numDaysWithinPastWeek > 0
+        ? `, ${formatDecimal(numDaysWithinPastWeek, 0)} ${pluralizeDays(
+            numDaysWithinPastWeek,
+          )}`
+        : '';
     return `${weeksAgo} ${daysAgo} ago`;
   }
 }

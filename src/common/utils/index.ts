@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { DateFormat, formatDateTime } from 'common/utils/time-utils';
 
 export function assert(condition: any, msg?: string): asserts condition {
@@ -95,7 +94,8 @@ export function isValidEmail(emailAddress: string) {
 
 // Returns unformatted percent in decimal form
 export function getPercentChange(numA: number, numB: number): number | null {
-  const validParams = _.isFinite(numA) && _.isFinite(numB) && numA !== 0;
+  const validParams =
+    Number.isFinite(numA) && Number.isFinite(numB) && numA !== 0;
   if (!validParams) {
     return null;
   } else {
