@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
-import fonts from 'common/theme/fonts';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
@@ -11,7 +10,7 @@ const mobileBreakpointPlus = '960px';
 export const StyledFooter = styled.footer`
   box-sizing: content-box;
   background: ${COLOR_MAP.BLACK};
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
 
   @media (min-width: ${mobileBreakpoint}) {
     padding: 3rem;
@@ -19,6 +18,30 @@ export const StyledFooter = styled.footer`
 
   @media (min-width: ${mobileBreakpointPlus}) {
     padding: 4rem;
+  }
+`;
+
+export const StyledMegaMenu = styled.nav`
+  background: white;
+  border-top: 1px solid ${COLOR_MAP.GREY_2};
+  border-bottom: 1px solid ${COLOR_MAP.GREY_2};
+  transform: translateY(64px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.5rem;
+  height: calc(100vh - 128px);
+  overflow-y: auto;
+  box-sizing: content-box;
+  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    height: auto;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 3rem;
   }
 `;
 
@@ -50,11 +73,12 @@ export const Section = styled.div`
   flex-direction: column;
 
   &:not(:last-child) {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   &:last-child {
-    align-items: center;
+    align-items: ${props =>
+      props.theme.palette.megaMenu.aboutUsContentAlignment};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -75,12 +99,17 @@ export const Section = styled.div`
   }
 `;
 
-export const SectionHeader = styled.h2`
-  ${fonts.regularBookMidWeight};
-  color: ${COLOR_MAP.GREY_3};
+export const SectionHeader = styled.h2<{ $desktopOnly?: boolean }>`
+  ${props => props.theme.fonts.regularBookMidWeight};
+  color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
+  display: ${({ $desktopOnly }) => ($desktopOnly ? 'none' : 'inherit')};
+
+  @media (min-width: ${mobileBreakpoint}) {
+    display: inherit;
+  }
 `;
 
 export const Column = styled.div`
@@ -89,7 +118,7 @@ export const Column = styled.div`
 `;
 
 export const ArrowIcon = styled(ArrowForwardIcon)`
-  color: ${COLOR_MAP.GREY_3};
+  color: ${props => props.theme.palette.megaMenu.gray};
   font-size: 1.25rem;
   margin-left: 0.5rem;
 `;
@@ -97,17 +126,18 @@ export const ArrowIcon = styled(ArrowForwardIcon)`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 0.25rem;
 `;
 
 export const RowWithSpacing = styled(Row)`
+  margin-bottom: 0;
   &:not(:last-of-type) {
     margin-bottom: 1.75rem;
   }
 `;
 
 export const BodyCopy = css`
-  ${fonts.regularBook};
-  color: ${COLOR_MAP.GREY_3};
+  ${props => props.theme.fonts.regularBook};
   line-height: 1.4;
   margin: 0;
 `;
@@ -115,12 +145,14 @@ export const BodyCopy = css`
 export const FeaturedDescription = styled.p`
   ${BodyCopy};
   letter-spacing: 0;
+  color: ${props => props.theme.palette.megaMenu.secondaryText};
 `;
 
 export const AboutCopy = styled.p`
   ${BodyCopy};
+  color: ${props => props.theme.palette.megaMenu.primaryText};
   margin-bottom: 2rem;
-  text-align: center;
+  text-align: ${props => props.theme.palette.megaMenu.aboutUsTextAlignment};
 
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
@@ -128,8 +160,7 @@ export const AboutCopy = styled.p`
 `;
 
 export const ButtonBase = css`
-  ${fonts.regularBookMidWeight};
-  color: white;
+  ${props => props.theme.fonts.regularBookMidWeight};
   width: fit-content;
   text-transform: none;
   line-height: 1.4;
@@ -137,6 +168,9 @@ export const ButtonBase = css`
 
 export const TextLink = styled(Link)`
   ${ButtonBase};
+
+  color: ${props => props.theme.palette.megaMenu.primaryText};
+
   font-size: 1rem;
   padding: 0;
   text-decoration: none;
@@ -167,9 +201,12 @@ export const LearnLink = styled(TextLink)`
 
 export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   ${ButtonBase};
+
+  color: ${props => props.theme.palette.megaMenu.buttonContent};
+
   font-size: 0.8725rem;
   padding: 0.4rem 0.75rem;
-  border: 1px solid ${COLOR_MAP.GREY_3};
+  border: ${props => `1px solid ${props.theme.palette.megaMenu.buttonBorder}`};
   display: ${({ desktopOnly }) => desktopOnly && 'none'};
   white-space: nowrap;
   &:nth-child(2) {
@@ -179,6 +216,7 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   &:hover {
     background-color: rgba(83, 97, 253, 0.6);
     border-color: ${COLOR_MAP.NEW_BLUE_PURPLE};
+    color: white;
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -189,7 +227,7 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
 export const SocialButtonsRow = styled.div`
     display: flex;
     svg {
-        fill: white;
+        fill: ${props => props.theme.palette.megaMenu.buttonContent};
         font-size: 1.75rem;
         &:hover {
           fill: ${COLOR_MAP.NEW_BLUE_PURPLE};
@@ -198,7 +236,7 @@ export const SocialButtonsRow = styled.div`
     a {
       color: white;
         &:not(:last-of-type) {
-            margin-right: .75rem;
+            margin-right: 1rem;
         }
         &:last-of-type {
           align-self: center;
@@ -214,7 +252,11 @@ export const IconWrapper = styled.div`
 
 export const LogoWrapper = styled(Link)`
   line-height: 1;
-  margin-bottom: 1.25rem;
+  margin: 1rem 0 1.25rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin: 0 0 1.25rem;
+  }
 `;
 
 export const NonWrappingSpan = styled.span`

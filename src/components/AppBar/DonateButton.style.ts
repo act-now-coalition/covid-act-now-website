@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import LinkButton from 'components/LinkButton';
 
 export const StyledDonateButton = styled(LinkButton).attrs(props => ({
@@ -29,4 +29,9 @@ export const StyledDonateButtonHeart = styled(LinkButton)`
   text-transform: none;
   font-size: 16px;
   color: ${COLOR_MAP.PURPLE};
+  letter-spacing: 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding-right: 1rem;
+  }
 `;

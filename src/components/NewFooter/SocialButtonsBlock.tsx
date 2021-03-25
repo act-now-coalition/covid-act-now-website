@@ -6,7 +6,9 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import ExternalLink from 'components/ExternalLink';
 
-const SocialButtonsBlock = () => {
+const SocialButtonsBlock: React.FC<{ showTerms: boolean }> = ({
+  showTerms,
+}) => {
   return (
     <SocialButtonsRow>
       <ExternalLink
@@ -24,9 +26,7 @@ const SocialButtonsBlock = () => {
       <ExternalLink href="https://twitter.com/CovidActNow" aria-label="Twitter">
         <TwitterIcon />
       </ExternalLink>
-      <Link to="/terms" aria-label="Terms">
-        Terms
-      </Link>
+      {showTerms && <Link to="/terms">Terms</Link>}
     </SocialButtonsRow>
   );
 };

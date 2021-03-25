@@ -4,6 +4,9 @@ import palette from './palette';
 import typography from './typography';
 import overrides from './overrides';
 import { COLOR_MAP } from 'common/colors';
+import { megaMenuFooter } from './customThemeBlocks';
+
+export { megaMenuFooter };
 
 interface ThemeColors {
   green: string;
