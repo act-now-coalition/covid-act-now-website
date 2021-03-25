@@ -12,7 +12,7 @@ const trackClick = () => {
   );
 };
 
-const VaccinationsBannerInner: React.FC = () => {
+const BannerInner: React.FC = () => {
   const SeveralStatesLink = (
     <HashLink
       to="#explore-hospitalizations"
@@ -33,12 +33,12 @@ const VaccinationsBannerInner: React.FC = () => {
   );
 };
 
-const VaccinationsBanner: React.FC = () => {
+const SummerSurgeBanner: React.FC = () => {
   return (
     <Wrapper>
-      <VaccinationsBannerInner />
+      <BannerInner />
     </Wrapper>
   );
 };
 
-export default VaccinationsBanner;
+export default SummerSurgeBanner;
