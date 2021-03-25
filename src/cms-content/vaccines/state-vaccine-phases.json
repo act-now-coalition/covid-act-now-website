@@ -2001,7 +2001,7 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -2031,12 +2031,12 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-04T18:41:40.165Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-25T06:06:43.688Z",
           "phase": "1B",
           "tier": "6",
-          "description": "* Adults 45+ with underlying health conditions",
-          "startDate": "March 29"
+          "description": "* NOTE: ONLY AVAILABLE IN SOME COUNTIES\n* Adults 45+ with underlying health conditions\n* Migrant and seasonal farm workers\n* Seafood and agricultural workers\n* Food processing workers\n* Individuals living in congregate settings",
+          "startDate": "March 25"
         },
         {
           "currentlyEligible": false,
