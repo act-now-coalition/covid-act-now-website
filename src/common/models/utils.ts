@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { filter, find, findLastIndex } from 'lodash';
 
 // TODO(michael): We should perhaps create a Timeseries class that wraps an
 // Array<Date> and Array<number | null> and hang these utility functions off of
@@ -40,15 +40,15 @@ export function hasRecentData(
   data: Array<number | null>,
   dates: Array<Date>,
 ): boolean {
-  const currentDateIndex = _.findLastIndex(dates, date => date <= new Date());
+  const currentDateIndex = findLastIndex(dates, date => date <= new Date());
   const twoWeeksAgoIndex = Math.max(0, currentDateIndex - 13);
   const lastTwoWeeksData = data.slice(twoWeeksAgoIndex, currentDateIndex + 1);
-  const dataPointsInLastTwoWeeks = _.filter(
+  const dataPointsInLastTwoWeeks = filter(
     lastTwoWeeksData,
     value => value != null,
   ).length;
   const hasNonZeroDataPoint =
-    _.find(data, value => value != null && value > 0) != null;
+    find(data, value => value != null && value > 0) != null;
 
   return dataPointsInLastTwoWeeks >= 7 && hasNonZeroDataPoint;
 }
