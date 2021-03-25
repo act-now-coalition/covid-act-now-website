@@ -11,7 +11,7 @@ const mobileBreakpointPlus = '960px';
 export const StyledFooter = styled.footer`
   box-sizing: content-box;
   background: ${COLOR_MAP.BLACK};
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
 
   @media (min-width: ${mobileBreakpoint}) {
     padding: 3rem;
@@ -19,6 +19,30 @@ export const StyledFooter = styled.footer`
 
   @media (min-width: ${mobileBreakpointPlus}) {
     padding: 4rem;
+  }
+`;
+
+export const StyledMegaMenu = styled.nav`
+  background: white;
+  border-top: 1px solid ${COLOR_MAP.GREY_2};
+  border-bottom: 1px solid ${COLOR_MAP.GREY_2};
+  transform: translateY(64px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.5rem;
+  height: calc(100vh - 128px);
+  overflow-y: auto;
+  box-sizing: content-box;
+  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    height: auto;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 3rem;
   }
 `;
 
@@ -50,11 +74,12 @@ export const Section = styled.div`
   flex-direction: column;
 
   &:not(:last-child) {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   &:last-child {
-    align-items: center;
+    align-items: ${props =>
+      props.theme.palette.megaMenu.aboutUsContentAlignment};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -75,12 +100,25 @@ export const Section = styled.div`
   }
 `;
 
-export const SectionHeader = styled.h2`
+const Header = css`
   ${fonts.regularBookMidWeight};
   color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
+`;
+
+export const SectionHeader = styled.h2`
+  ${Header};
+`;
+
+export const SectionHeaderDesktopOnly = styled.h2`
+  ${Header};
+  display: none;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    display: inherit;
+  }
 `;
 
 export const Column = styled.div`
@@ -123,7 +161,7 @@ export const AboutCopy = styled.p`
   ${BodyCopy};
   color: ${props => props.theme.palette.megaMenu.primaryText};
   margin-bottom: 2rem;
-  text-align: center;
+  text-align: ${props => props.theme.palette.megaMenu.aboutUsTextAlignment};
 
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
@@ -223,33 +261,13 @@ export const IconWrapper = styled.div`
 
 export const LogoWrapper = styled(Link)`
   line-height: 1;
-  margin-bottom: 1.25rem;
+  margin: 1rem 0 1.25rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin: 0 0 1.25rem;
+  }
 `;
 
 export const NonWrappingSpan = styled.span`
   white-space: nowrap;
-`;
-
-export const StyledMegaMenu = styled.nav`
-  background: white;
-  border-top: 1px solid ${COLOR_MAP.GREY_2};
-  border-bottom: 1px solid ${COLOR_MAP.GREY_2};
-  transform: translateY(64px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem;
-  height: calc(100vh - 112px);
-  overflow-y: auto;
-  box-sizing: content-box;
-  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    height: auto;
-  }
-
-  @media (min-width: ${mobileBreakpoint}) {
-    padding: 3rem;
-  }
 `;

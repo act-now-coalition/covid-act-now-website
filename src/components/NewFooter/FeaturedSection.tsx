@@ -12,45 +12,56 @@ import {
   Row,
   IconWrapper,
   RowWithSpacing,
+  Section,
+  SectionHeaderDesktopOnly,
 } from './Menu.style';
 import { scrollWithOffset } from 'components/TableOfContents';
 
 const FeaturedSection: React.FC<{
-  section: FeaturedItem;
-  trackMenuEvent: (label: string) => void;
-}> = ({ section, trackMenuEvent }) => {
-  const { url, cta, description, iconId } = section;
-
+  featuredSections: FeaturedItem[];
+  onClick: (label: string) => void;
+}> = ({ featuredSections, onClick }) => {
   const idToIconMap = {
     [SectionId.API]: ApiIcon,
     [SectionId.DAILY_DOWNLOAD]: DailyDownloadIcon,
     [SectionId.ALERTS]: AlertsIcon,
   };
-  const Icon = idToIconMap[iconId];
-
-  const hashlinkProps =
-    iconId === SectionId.ALERTS
-      ? {
-          as: HashLink,
-          scroll: (element: HTMLElement) => scrollWithOffset(element, -80),
-        }
-      : {};
 
   return (
-    <RowWithSpacing onClick={() => trackMenuEvent(cta)}>
-      <IconWrapper>
-        <Icon height="36" width="40" aria-hidden="true" />
-      </IconWrapper>
-      <TextLink to={url} {...hashlinkProps}>
-        <Column>
-          <Row>
-            {cta}
-            <ArrowIcon />
-          </Row>
-          <FeaturedDescription>{description}</FeaturedDescription>
-        </Column>
-      </TextLink>
-    </RowWithSpacing>
+    <Section>
+      <SectionHeaderDesktopOnly>Featured</SectionHeaderDesktopOnly>
+      {featuredSections.map((section: FeaturedItem) => {
+        const { url, cta, description, iconId } = section;
+
+        const Icon = idToIconMap[iconId];
+
+        const hashlinkProps =
+          iconId === SectionId.ALERTS
+            ? {
+                as: HashLink,
+                scroll: (element: HTMLElement) =>
+                  scrollWithOffset(element, -80),
+              }
+            : {};
+
+        return (
+          <RowWithSpacing onClick={() => onClick(`Learn: ${cta}`)}>
+            <IconWrapper>
+              <Icon height="36" width="40" aria-hidden="true" />
+            </IconWrapper>
+            <TextLink to={url} {...hashlinkProps}>
+              <Column>
+                <Row>
+                  {cta}
+                  <ArrowIcon />
+                </Row>
+                <FeaturedDescription>{description}</FeaturedDescription>
+              </Column>
+            </TextLink>
+          </RowWithSpacing>
+        );
+      })}
+    </Section>
   );
 };
 

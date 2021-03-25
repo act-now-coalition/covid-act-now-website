@@ -3,7 +3,7 @@ import { StyledFooter } from './Menu.style';
 import MenuContent from './MenuContent';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { ThemeProvider } from 'styled-components';
-import { megaMenuFooter } from 'assets/theme/palette';
+import { megaMenuFooter } from 'assets/theme';
 import theme from 'assets/theme';
 import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { useIsEmbed } from 'common/utils/hooks';

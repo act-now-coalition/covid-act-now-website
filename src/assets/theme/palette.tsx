@@ -1,8 +1,9 @@
 import { colors } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
+import { megaMenu } from './customThemeBlocks';
 
-const white = '#FFFFFF';
-const black = '#000000';
+export const white = '#FFFFFF';
+export const black = '#000000';
 const lightGray = '#f2f2f2';
 
 const chart = {
@@ -29,24 +30,6 @@ export const chartDarkMode = {
   area: '#ffffff26',
   annotation: white,
   isDarkMode: true,
-};
-
-const megaMenu = {
-  primaryText: black,
-  secondaryText: COLOR_MAP.GREY_4,
-  gray: COLOR_MAP.GREY_4,
-  buttonContent: COLOR_MAP.NEW_BLUE_PURPLE,
-  buttonContentHover: white,
-  buttonBorder: COLOR_MAP.GREY_2,
-};
-
-export const megaMenuFooter = {
-  primaryText: white,
-  secondaryText: white,
-  gray: COLOR_MAP.GREY_3,
-  buttonContent: white,
-  buttonContentHover: COLOR_MAP.NEW_BLUE_PURPLE,
-  buttonBorder: COLOR_MAP.GREY_3,
 };
 
 export default {
