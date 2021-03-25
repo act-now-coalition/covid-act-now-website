@@ -28,7 +28,7 @@ const AboutUsSection: React.FC<{
           <Logo />
         </LogoWrapper>
       ) : (
-        <SectionHeader desktopOnly={true}>About Us</SectionHeader>
+        <SectionHeader>About Us</SectionHeader>
       )}
       <AboutCopy>{aboutUsCopy}</AboutCopy>
       <RowWithSpacing>
