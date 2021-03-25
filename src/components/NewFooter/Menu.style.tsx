@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
-import fonts from 'common/theme/fonts';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
@@ -101,7 +100,7 @@ export const Section = styled.div`
 `;
 
 export const SectionHeader = styled.h2<{ desktopOnly?: boolean }>`
-  ${fonts.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
@@ -138,7 +137,7 @@ export const RowWithSpacing = styled(Row)`
 `;
 
 export const BodyCopy = css`
-  ${fonts.regularBook};
+  ${props => props.theme.fonts.regularBook};
   line-height: 1.4;
   margin: 0;
 `;
@@ -161,7 +160,7 @@ export const AboutCopy = styled.p`
 `;
 
 export const ButtonBase = css`
-  ${fonts.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   width: fit-content;
   text-transform: none;
   line-height: 1.4;

@@ -26,11 +26,7 @@ const SocialButtonsBlock: React.FC<{ showTerms: boolean }> = ({
       <ExternalLink href="https://twitter.com/CovidActNow" aria-label="Twitter">
         <TwitterIcon />
       </ExternalLink>
-      {showTerms && (
-        <Link to="/terms" aria-label="Terms">
-          Terms
-        </Link>
-      )}
+      {showTerms && <Link to="/terms">Terms</Link>}
     </SocialButtonsRow>
   );
 };

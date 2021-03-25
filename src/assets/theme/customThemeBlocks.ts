@@ -4,7 +4,18 @@ import { COLOR_MAP } from 'common/colors';
  * Used for mega menu and footer, which are the
  * same component (MenuContent.tsx) with differrent colors and alignment.
  */
-export const megaMenu = {
+interface MenuTheme {
+  primaryText: string;
+  secondaryText: string;
+  gray: string;
+  buttonContent: string;
+  buttonContentHover: string;
+  buttonBorder: string;
+  aboutUsContentAlignment: string;
+  aboutUsTextAlignment: string;
+}
+
+export const megaMenu: MenuTheme = {
   primaryText: 'black',
   secondaryText: COLOR_MAP.GREY_4,
   gray: COLOR_MAP.GREY_4,
@@ -15,7 +26,7 @@ export const megaMenu = {
   aboutUsTextAlignment: 'left',
 };
 
-export const megaMenuFooter = {
+export const megaMenuFooter: MenuTheme = {
   primaryText: 'white',
   secondaryText: 'white',
   gray: COLOR_MAP.GREY_3,

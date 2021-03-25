@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyledFooter } from './Menu.style';
 import MenuContent from './MenuContent';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, ThemeContext } from 'styled-components';
 import { megaMenuFooter } from 'assets/theme';
-import theme from 'assets/theme';
 import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { useIsEmbed } from 'common/utils/hooks';
 
 const Footer: React.FC = () => {
   const isEmbed = useIsEmbed();
+
+  const theme = useContext(ThemeContext);
 
   const onClick = (label: string) => {
     trackEvent(EventCategory.FOOTER, EventAction.NAVIGATE, label);

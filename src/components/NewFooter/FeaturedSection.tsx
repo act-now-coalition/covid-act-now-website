@@ -45,7 +45,7 @@ const FeaturedSection: React.FC<{
             : {};
 
         return (
-          <RowWithSpacing onClick={() => onClick(`Learn: ${cta}`)}>
+          <RowWithSpacing onClick={() => onClick(`Learn: ${cta}`)} key={cta}>
             <IconWrapper>
               <Icon height="36" width="40" aria-hidden="true" />
             </IconWrapper>

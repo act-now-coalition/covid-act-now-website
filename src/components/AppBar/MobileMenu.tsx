@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Fade from '@material-ui/core/Fade';
 import MapIcon from 'assets/images/mapIconTwoTone';
 import FAQIcon from 'assets/images/faqIconTwoTone';
-import palette from 'assets/theme/palette';
 import { StyledMenu } from './NavBar.style';
 import { trackNavigation } from './utils';
+import { ThemeContext } from 'styled-components';
 
 const MobileMenu: React.FC<{
   open: boolean;
   closeMenu: () => void;
   onMouseLeave: (e: React.MouseEvent<{}>) => void;
 }> = ({ open, closeMenu, onMouseLeave }) => {
+  const { palette } = useContext(ThemeContext);
+
   const onClick = (label: string) => {
     const isMobile = true;
     closeMenu();
@@ -20,7 +22,7 @@ const MobileMenu: React.FC<{
 
   return (
     <Fade in={open}>
-      <StyledMenu onMouseLeave={onMouseLeave}>
+      <StyledMenu onMouseLeave={onMouseLeave} role="navigation">
         <Link to="/" onClick={() => onClick('Map')}>
           <MapIcon color={palette.secondary.main} />
           <span>Map</span>
