@@ -2400,7 +2400,7 @@
       ]
     },
     {
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
