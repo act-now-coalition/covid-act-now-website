@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import InfoTooltip from './InfoTooltip';
-import DisclaimerTooltip from './DisclaimerTooltip';
+import TextTooltip from './TextTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';
-import { StyledMarkdown } from './Tooltip.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import {
+  StyledMarkdown,
+  SmallTooltipAnchorText,
+  LargeTooltipAnchorText,
+} from './Tooltip.style';
 
-export { InfoTooltip, DisclaimerTooltip };
+export {
+  InfoTooltip,
+  TextTooltip,
+  SmallTooltipAnchorText,
+  LargeTooltipAnchorText,
+};
 
 export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   trackOpenTooltip: () => void;
   mainCopy?: string;
+  altAnchorComponent?: ComponentType;
 };
 
 export function renderTooltipContent(body: string): React.ReactElement {

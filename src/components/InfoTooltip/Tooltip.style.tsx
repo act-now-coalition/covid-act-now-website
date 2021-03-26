@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownBody } from 'components/Markdown';
@@ -84,9 +84,20 @@ export const StyledMarkdown = styled(MarkdownBody)`
   }
 `;
 
-export const StyledSpan = styled.span`
+const tooltipAnchorText = css`
   text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
   cursor: pointer;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  color: ${COLOR_MAP.GREY_4};
+`;
+
+export const SmallTooltipAnchorText = styled.span`
+  ${tooltipAnchorText};
   font-size: 0.875rem;
+`;
+
+export const LargeTooltipAnchorText = styled.span`
+  ${tooltipAnchorText};
+  font-size: 1rem;
 `;

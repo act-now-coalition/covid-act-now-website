@@ -1,29 +1,9 @@
-import { TableHead, Typography } from '@material-ui/core';
+import { TableHead } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-
 import { COLOR_MAP } from 'common/colors';
-import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
 import styled from 'styled-components';
-
-export const TextWithTooltipContainer = styled.div`
-  ${InfoIcon} {
-    margin-left: 0.2rem;
-    vertical-align: middle;
-  }
-`;
-
-export const UnderlinedText = styled(Typography)`
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-underline-position: under;
-  vertical-align: middle;
-  font-size: 16px;
-  @media (max-width: ${materialSMBreakpoint}) {
-    font-size: 14px;
-  }
-`;
 
 export const StyledTableHead = styled(TableHead)`
   font-family: Roboto;
