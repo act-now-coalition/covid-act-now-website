@@ -14,7 +14,7 @@ import {
 import coverageSummary from 'components/DataCoverageTable/coverage-summary.json';
 import { formatPercent, pluralize } from 'common/utils';
 import { RegionType } from 'common/regions';
-import { TextTooltip, LargeTooltipAnchorText } from 'components/InfoTooltip';
+import { TextTooltip } from 'components/InfoTooltip';
 
 export const COVERAGE_SUMMARY = coverageSummary as MetricCoverage[];
 
@@ -70,7 +70,6 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
       title={tooltipContent}
       mainCopy={text}
       trackOpenTooltip={() => {}}
-      altAnchorComponent={LargeTooltipAnchorText}
     />
   );
 };

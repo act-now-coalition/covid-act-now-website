@@ -55,10 +55,18 @@ export const StyledCloseIcon = styled(CloseIcon)`
 export const InfoIcon = styled(InfoOutlinedIcon)<{ $isOpen: boolean }>`
   color: ${({ $isOpen }) =>
     $isOpen ? COLOR_MAP.BLUE : COLOR_MAP.GRAY_BODY_COPY};
-  cursor: pointer;
+  cursor: default;
   margin-left: 0.5rem;
   height: 18px;
   width: 18px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;
 
 export const StyledMarkdown = styled(MarkdownBody)`
@@ -84,20 +92,18 @@ export const StyledMarkdown = styled(MarkdownBody)`
   }
 `;
 
-const tooltipAnchorText = css`
+export const TooltipAnchorText = styled.span`
   text-decoration: underline;
   text-decoration-style: dashed;
   text-underline-offset: 3px;
-  cursor: pointer;
+  cursor: default;
   color: ${COLOR_MAP.GREY_4};
-`;
 
-export const SmallTooltipAnchorText = styled.span`
-  ${tooltipAnchorText};
-  font-size: 0.875rem;
-`;
+  &:focus {
+    outline: none;
+  }
 
-export const LargeTooltipAnchorText = styled.span`
-  ${tooltipAnchorText};
-  font-size: 1rem;
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;

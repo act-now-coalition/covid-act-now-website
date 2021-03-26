@@ -17,6 +17,7 @@ export const Tooltip = styled.div`
   border-radius: 4px;
   background-color: ${props => palette(props).tooltip.background};
   box-shadow: 2px 2px 6px ${props => palette(props).tooltip.shadow};
+  cursor: default;
 `;
 
 export const TooltipArrow = styled(Tooltip)`
