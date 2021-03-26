@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownBody } from 'components/Markdown';
@@ -55,10 +55,18 @@ export const StyledCloseIcon = styled(CloseIcon)`
 export const InfoIcon = styled(InfoOutlinedIcon)<{ $isOpen: boolean }>`
   color: ${({ $isOpen }) =>
     $isOpen ? COLOR_MAP.BLUE : COLOR_MAP.GRAY_BODY_COPY};
-  cursor: pointer;
+  cursor: default;
   margin-left: 0.5rem;
   height: 18px;
   width: 18px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;
 
 export const StyledMarkdown = styled(MarkdownBody)`
@@ -84,9 +92,18 @@ export const StyledMarkdown = styled(MarkdownBody)`
   }
 `;
 
-export const StyledSpan = styled.span`
+export const TooltipAnchorText = styled.span`
   text-decoration: underline;
-  cursor: pointer;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.875rem;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  cursor: default;
+  color: ${COLOR_MAP.GREY_4};
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
 `;

@@ -1,14 +1,10 @@
 import React from 'react';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import CheckIcon from '@material-ui/icons/Check';
-
 import {
-  TextWithTooltipContainer,
-  UnderlinedText,
   StyledTableHead,
   MetricTableCell,
   AvailabilityTableCell,
@@ -17,8 +13,8 @@ import {
 } from './DataCoverageTable.style';
 import coverageSummary from 'components/DataCoverageTable/coverage-summary.json';
 import { formatPercent, pluralize } from 'common/utils';
-import { InfoTooltip } from 'components/InfoTooltip';
 import { RegionType } from 'common/regions';
+import { TextTooltip } from 'components/InfoTooltip';
 
 export const COVERAGE_SUMMARY = coverageSummary as MetricCoverage[];
 
@@ -70,12 +66,11 @@ const TextWithTooltip: React.FC<{ text: string; tooltipContent: string }> = ({
   tooltipContent,
 }) => {
   return (
-    <TextWithTooltipContainer>
-      <UnderlinedText align="center">
-        {text}
-        <InfoTooltip trackOpenTooltip={() => {}} title={tooltipContent} />
-      </UnderlinedText>
-    </TextWithTooltipContainer>
+    <TextTooltip
+      title={tooltipContent}
+      mainCopy={text}
+      trackOpenTooltip={() => {}}
+    />
   );
 };
 
