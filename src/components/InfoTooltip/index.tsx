@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import InfoTooltip from './InfoTooltip';
 import TextTooltip from './TextTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';

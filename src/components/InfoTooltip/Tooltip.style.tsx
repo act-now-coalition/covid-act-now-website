@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { COLOR_MAP } from 'common/colors';
 import { MarkdownBody } from 'components/Markdown';
