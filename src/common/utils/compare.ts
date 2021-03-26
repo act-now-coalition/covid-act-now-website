@@ -107,83 +107,24 @@ export function getNeighboringCounties(
   return [...adjacentCounties, ...[getLocationObj(county)]];
 }
 
-export enum MetroFilter {
-  ALL,
-  METRO,
-  NON_METRO,
-}
-
-export const FILTER_LABEL = {
-  [MetroFilter.ALL]: 'Metro & Non-metro',
-  [MetroFilter.METRO]: 'Metro only',
-  [MetroFilter.NON_METRO]: 'Non-metro only',
-};
-
-export function getFilterLabel(filter: MetroFilter) {
-  return FILTER_LABEL[filter];
-}
-
-export function getAllCountiesSelection(countyTypeToView: MetroFilter) {
-  switch (countyTypeToView) {
-    case MetroFilter.ALL:
-      return getAllCounties();
-    case MetroFilter.METRO:
-      return getAllMetroCounties();
-    case MetroFilter.NON_METRO:
-      return getAllNonMetroCounties();
-    default:
-      return getAllCounties();
-  }
-}
-
-export function getLocationPageCountiesSelection(
-  stateCode: string,
-  countyTypeToView: MetroFilter,
-) {
-  switch (countyTypeToView) {
-    case MetroFilter.ALL:
-      return getAllCountiesOfState(stateCode);
-    case MetroFilter.METRO:
-      return getStateMetroCounties(stateCode);
-    case MetroFilter.NON_METRO:
-      return getStateNonMetroCounties(stateCode);
-    default:
-      return getAllCountiesOfState(stateCode);
-  }
-}
-
 export enum GeoScopeFilter {
   NEARBY,
   STATE,
   COUNTRY,
 }
 
-export function getMetroPrefixCopy(filter: MetroFilter, useAll?: boolean) {
-  if (filter === MetroFilter.METRO) {
-    return 'metro';
-  } else if (filter === MetroFilter.NON_METRO) {
-    return 'non-metro';
-  } else if (useAll) {
-    return 'all';
-  }
-  return '';
-}
-
 export function getLocationPageViewMoreCopy(
   geoscope: GeoScopeFilter,
-  countyTypeToView: MetroFilter,
   region: Region,
 ) {
   if (region instanceof MetroArea) {
     return `View all counties in ${region.shortName}`;
   } else if (geoscope === GeoScopeFilter.COUNTRY) {
-    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+    return `View top 100 counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
-    return `View all ${getMetroPrefixCopy(
-      countyTypeToView,
-    )} counties in ${getStateName(region)}`;
+    return `View all counties in ${getStateName(region)}`;
   }
 }
 
@@ -213,16 +154,13 @@ export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
   },
 };
 
-export function getHomePageViewMoreCopy(
-  homepageScope: HomepageLocationScope,
-  countyTypeToView: MetroFilter,
-) {
+export function getHomePageViewMoreCopy(homepageScope: HomepageLocationScope) {
   if (homepageScope === HomepageLocationScope.STATE) {
     return 'View all states';
   } else if (homepageScope === HomepageLocationScope.MSA) {
     return 'View top 100 metro areas';
   } else if (homepageScope === HomepageLocationScope.COUNTY) {
-    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+    return `View top 100 counties`;
   } else {
     return `View more`;
   }
@@ -262,11 +200,8 @@ export function getRegionNameForRow(region: Region, condensed?: boolean) {
   }
 }
 
-// For college tag:
-
 export function getShareQuote(
   sorter: Metric,
-  countyTypeToView: MetroFilter,
   sliderValue: GeoScopeFilter,
   totalLocations: number,
   sortDescending: boolean,
@@ -284,14 +219,11 @@ export function getShareQuote(
 
   const homepageShareCopy = `Compare all USA ${
     homepageScope === HomepageLocationScope.COUNTY
-      ? `${getMetroPrefixCopy(countyTypeToView)} counties`
+      ? 'counties'
       : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
   } by their local COVID metrics with @CovidActNow.`;
 
-  const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(
-    countyTypeToView,
-    true,
-  )} counties in ${stateName} with @CovidActNow.`;
+  const stateShareCopy = `Compare COVID metrics between counties in ${stateName} with @CovidActNow.`;
 
   const hasValidRank =
     currentLocation &&
@@ -312,11 +244,11 @@ export function getShareQuote(
   const countyShareCopy =
     currentLocation &&
     hasValidRank &&
-    `${currentLocation.region.name} ranks #${
+    `${currentLocation.region.shortName} ranks #${
       currentLocation.rank
-    } out of ${totalLocations} total ${geoScopeShareCopy[sliderValue]}${
-      countyTypeToView === MetroFilter.ALL ? '' : ' '
-    }${getMetroPrefixCopy(countyTypeToView)} counties when sorted by ${
+    } out of ${totalLocations} total ${
+      geoScopeShareCopy[sliderValue]
+    } counties when sorted by ${
       sortDescending ? descendingCopy : ascendingCopy
     } ${
       sortByPopulation

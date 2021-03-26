@@ -16,17 +16,16 @@ import {
 } from 'components/Compare/Compare.style';
 import {
   getAllStates,
-  getAllCountiesSelection,
+  getAllCounties,
   getHomePageViewMoreCopy,
   getNeighboringCounties,
-  getLocationPageCountiesSelection,
   getLocationPageViewMoreCopy,
-  MetroFilter,
   GeoScopeFilter,
   HomepageLocationScope,
   getAllMetroAreas,
   getAllCountiesOfMetroArea,
   SummaryForCompare,
+  getAllCountiesOfState,
 } from 'common/utils/compare';
 import { Metric } from 'common/metricEnum';
 import { getSummaryFromFips } from 'common/location_summaries';
@@ -108,13 +107,12 @@ const CompareMain = (props: {
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
   const [sortByPopulation, setSortByPopulation] = useState(true);
-  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
   const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTY]: getAllCountiesSelection(countyTypeToView),
+    [HomepageLocationScope.COUNTY]: getAllCounties(),
     [HomepageLocationScope.MSA]: getAllMetroAreas(),
     [HomepageLocationScope.STATE]: getAllStates(),
   };
@@ -125,10 +123,7 @@ const CompareMain = (props: {
 
   const homepageLocationsForCompare = getHomepageLocations(homepageScope);
 
-  const homepageViewMoreCopy = getHomePageViewMoreCopy(
-    homepageScope,
-    countyTypeToView,
-  );
+  const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
 
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
@@ -140,9 +135,9 @@ const CompareMain = (props: {
     } else if (geoScope === GeoScopeFilter.NEARBY) {
       return getNeighboringCounties(region.fipsCode);
     } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
-      return getLocationPageCountiesSelection(stateCode, countyTypeToView);
+      return getAllCountiesOfState(stateCode);
     } else {
-      return getAllCountiesSelection(countyTypeToView);
+      return getAllCounties();
     }
   }
 
@@ -155,7 +150,7 @@ const CompareMain = (props: {
   const locations = getFinalLocations(region);
 
   const viewMoreCopy = region
-    ? getLocationPageViewMoreCopy(geoScope, countyTypeToView, region)
+    ? getLocationPageViewMoreCopy(geoScope, region)
     : homepageViewMoreCopy;
 
   const [showModal, setShowModal] = useState(false);
@@ -173,7 +168,6 @@ const CompareMain = (props: {
     setSorter(Metric.CASE_DENSITY);
     setSortDescending(true);
     setSortByPopulation(true);
-    setCountyTypeToView(MetroFilter.ALL);
     setGeoScope(GeoScopeFilter.STATE);
   }, [location.pathname]);
 
@@ -183,7 +177,6 @@ const CompareMain = (props: {
     sorter,
     sortDescending,
     sortByPopulation,
-    countyTypeToView,
     homepageScope,
     geoScope,
     stateId,
@@ -223,7 +216,6 @@ const CompareMain = (props: {
       setSorter(sharedParams.sorter);
       setSortDescending(sharedParams.sortDescending);
       setSortByPopulation(sharedParams.sortByPopulation);
-      setCountyTypeToView(sharedParams.countyTypeToView);
       setHomepageScope(sharedParams.homepageScope);
       setGeoScope(sharedParams.geoScope);
 
@@ -270,7 +262,6 @@ const CompareMain = (props: {
     locations,
     currentCounty,
     ...uiState,
-    setCountyTypeToView,
     setGeoScope,
     setSorter,
     setSortDescending,
