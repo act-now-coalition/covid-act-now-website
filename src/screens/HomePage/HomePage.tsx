@@ -8,12 +8,12 @@ import Announcements from './Announcements';
 import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
-import Explore from 'components/Explore';
+import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { VaccinationsBanner } from 'components/Banner';
+import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import {
+import regions, {
   getFinalAutocompleteLocations,
   getGeolocatedRegions,
 } from 'common/regions';
@@ -57,7 +57,18 @@ export default function HomePage() {
       ? getGeolocatedRegions(geolocationData, countyToZipMap)
       : null;
 
-  const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
+  const exploreGeoLocations = useGeolocationInExplore(5, geolocationData);
+  const showRisingHospitalizations =
+    location.hash === '#explore-hospitalizations';
+  const risingHospitalizationStates = ['MD', 'MI', 'MN', 'NJ'];
+  const initialFipsListForExplore = showRisingHospitalizations
+    ? risingHospitalizationStates.map(
+        state => regions.findByStateCodeStrict(state).fipsCode,
+      )
+    : exploreGeoLocations;
+  const initialMetricForExplore = showRisingHospitalizations
+    ? ExploreMetric.HOSPITALIZATIONS
+    : ExploreMetric.CASES;
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -100,7 +111,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
-      <VaccinationsBanner />
+      <SpringSurgeBanner />
       <HomePageHeader />
       <main>
         <div className="App">
@@ -134,9 +145,11 @@ export default function HomePage() {
               />
             </Section>
             <Section ref={exploreSectionRef}>
+              <div id="explore-hospitalizations"></div>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
-                initialFipsList={initialFipsForExplore}
+                initialFipsList={initialFipsListForExplore}
+                defaultMetric={initialMetricForExplore}
                 initialChartIndigenousPopulations={false}
                 nationalSummaryText={getNationalText()}
               />

@@ -43,6 +43,7 @@ export enum EventCategory {
   FOOTER = 'footer',
   GEOLOCATION_CARDS = 'geolocation cards',
   GLOSSARY = 'glossary',
+  HOMEPAGE_BANNER = 'homepage banner',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
   MAP = 'map',
   METRICS = 'metrics',
