@@ -1,5 +1,7 @@
+import keyBy from 'lodash/keyBy';
+import groupBy from 'lodash/groupBy';
+import map from 'lodash/map';
 import { assert } from 'common/utils';
-import { keyBy, groupBy, map } from 'lodash';
 import stateVaccinationInfo from './state-vaccine-phases.json';
 
 export interface RegionPhaseGroup {

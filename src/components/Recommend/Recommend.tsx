@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Hidden } from '@material-ui/core';
-import { chunk, ceil, partition } from 'lodash';
+import chunk from 'lodash/chunk';
+import ceil from 'lodash/ceil';
+import partition from 'lodash/partition';
 import {
   Wrapper,
   HeaderCopy,

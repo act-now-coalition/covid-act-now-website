@@ -1,4 +1,5 @@
-import { isEqual, pickBy } from 'lodash';
+import pickBy from 'lodash/pickBy';
+import isEqual from 'lodash/isEqual';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { assert } from './utils';

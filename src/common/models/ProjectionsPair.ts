@@ -1,4 +1,9 @@
-import { find, findLast, filter, minBy, maxBy, findIndex } from 'lodash';
+import find from 'lodash/find';
+import findLast from 'lodash/findLast';
+import findIndex from 'lodash/findIndex';
+import filter from 'lodash/filter';
+import minBy from 'lodash/minBy';
+import maxBy from 'lodash/maxBy';
 import { Metric } from 'common/metricEnum';
 import { Projection, Column } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';

@@ -1,4 +1,7 @@
-import { sortBy, takeRight, values, Dictionary } from 'lodash';
+import sortBy from 'lodash/sortBy';
+import takeRight from 'lodash/takeRight';
+import values from 'lodash/values';
+import type { Dictionary } from 'lodash';
 import { Region, County, State, MetroArea, FipsCode } from './types';
 import {
   statesByFips,

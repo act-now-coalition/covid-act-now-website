@@ -6,7 +6,9 @@ import React, {
   useCallback,
 } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { some, uniq, max } from 'lodash';
+import some from 'lodash/some';
+import uniq from 'lodash/uniq';
+import max from 'lodash/max';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';

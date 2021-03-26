@@ -1,4 +1,9 @@
-import { keyBy, reject, partition, flatten, map, property } from 'lodash';
+import keyBy from 'lodash/keyBy';
+import reject from 'lodash/reject';
+import partition from 'lodash/partition';
+import flatten from 'lodash/flatten';
+import map from 'lodash/map';
+import property from 'lodash/property';
 import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';

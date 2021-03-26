@@ -1,5 +1,5 @@
 import React from 'react';
-import { remove } from 'lodash';
+import remove from 'lodash/remove';
 import { Table, TableBody } from '@material-ui/core';
 import {
   RankedLocationSummary,

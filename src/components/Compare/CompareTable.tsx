@@ -1,5 +1,9 @@
 import React from 'react';
-import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
+import sortBy from 'lodash/sortBy';
+import findIndex from 'lodash/findIndex';
+import partition from 'lodash/partition';
+import reverse from 'lodash/reverse';
+import isNumber from 'lodash/isNumber';
 import {
   Wrapper,
   Footer,

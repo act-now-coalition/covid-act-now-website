@@ -1,5 +1,10 @@
 import urlJoin from 'url-join';
-import { concat, deburr, flatten, isNumber, max, words } from 'lodash';
+import concat from 'lodash/concat';
+import deburr from 'lodash/deburr';
+import flatten from 'lodash/flatten';
+import isNumber from 'lodash/isNumber';
+import max from 'lodash/max';
+import words from 'lodash/words';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
