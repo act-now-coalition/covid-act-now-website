@@ -17,16 +17,16 @@ enum RecordSession {
   FALSE = 'false',
 }
 
-function isRecordingEnabled() {
+export function isRecordingEnabled(recordKey: string, recordPercent: number) {
   if (!storageAvailable('localStorage')) {
     return false;
   }
-  initStorage();
-  return localStorage.getItem(FULLSTORY_RECORD_KEY) === RecordSession.TRUE;
+  initStorage(recordKey, recordPercent);
+  return localStorage.getItem(recordKey) === RecordSession.TRUE;
 }
 
 async function getFullStory() {
-  if (isRecordingEnabled()) {
+  if (isRecordingEnabled(FULLSTORY_RECORD_KEY, FULLSTORY_RECORD_PERCENT)) {
     return import('@fullstory/browser');
   } else {
     return null;
@@ -50,14 +50,14 @@ export async function fullStoryTrackEvent(
   }
 }
 
-function initStorage() {
-  if (localStorage.getItem(FULLSTORY_RECORD_KEY)) {
+function initStorage(recordKey: string, recordPercent: number) {
+  if (localStorage.getItem(recordKey)) {
     return;
   }
-  const enableRecording = Math.random() < FULLSTORY_RECORD_PERCENT;
+  const enableRecording = Math.random() < recordPercent;
   try {
     localStorage.setItem(
-      FULLSTORY_RECORD_KEY,
+      recordKey,
       enableRecording ? RecordSession.TRUE : RecordSession.FALSE,
     );
   } catch (err) {

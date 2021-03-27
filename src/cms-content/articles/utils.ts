@@ -1,5 +1,6 @@
+import keyBy from 'lodash/keyBy';
+import sortBy from 'lodash/sortBy';
 import { Markdown, sanitizeID } from '../utils';
-import { keyBy, sortBy } from 'lodash';
 import {
   DateFormat,
   parseDateString,

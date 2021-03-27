@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 import regions from 'common/regions';
 import { getVaccineInfoByFips, verifyOneItemPerState } from './phases';
 

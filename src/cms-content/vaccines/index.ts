@@ -1,4 +1,4 @@
-import { keyBy } from 'lodash';
+import keyBy from 'lodash/keyBy';
 import { Region } from 'common/regions';
 import METRO_VACCINE_DATA from './msa.json';
 import COUNTY_VACCINE_DATA from './county.json';

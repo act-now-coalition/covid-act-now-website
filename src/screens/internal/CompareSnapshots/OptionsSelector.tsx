@@ -1,4 +1,4 @@
-import { get as _get } from 'lodash';
+import get from 'lodash/get';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
@@ -236,7 +236,7 @@ function getParamValue(
   param: string,
   defaultValue: number,
 ): number {
-  let value = _get(params, param, defaultValue);
+  let value = get(params, param, defaultValue);
   if (typeof value === 'string') {
     value = parseInt(value);
   }

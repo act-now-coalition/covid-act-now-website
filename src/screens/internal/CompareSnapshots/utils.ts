@@ -1,4 +1,4 @@
-import { takeRight as _takeRight } from 'lodash';
+import takeRight from 'lodash/takeRight';
 import { useEffect, useState } from 'react';
 import { Metric } from 'common/metricEnum';
 import { ProjectionsPair, SortType } from 'common/models/ProjectionsPair';
@@ -174,7 +174,7 @@ async function fetchInterestingRegions(
   if (regionDiffs === null) {
     return null;
   }
-  const interestingCounties = _takeRight(
+  const interestingCounties = takeRight(
     regionDiffs
       .filter(rd => rd.region instanceof County)
       .filter(
@@ -185,7 +185,7 @@ async function fetchInterestingRegions(
     INTERESTING_COUNTIES_TOP_DIFFS,
   );
 
-  const interestingMetros = _takeRight(
+  const interestingMetros = takeRight(
     regionDiffs.filter(rd => rd.region instanceof MetroArea),
     INTERESTING_METROS_TOP_DIFFS,
   );
@@ -251,7 +251,7 @@ async function fetchTopCountiesByDiff(
   if (regionDiffs === null) {
     return null;
   }
-  return _takeRight(
+  return takeRight(
     regionDiffs.filter(rd => rd.region instanceof County),
     COUNTIES_LIMIT,
   ).map(rd => rd.region);

@@ -1,4 +1,5 @@
-import { capitalize, words } from 'lodash';
+import capitalize from 'lodash/capitalize';
+import words from 'lodash/words';
 import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';

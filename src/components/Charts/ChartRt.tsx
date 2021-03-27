@@ -1,5 +1,5 @@
 import React from 'react';
-import { isDate } from 'lodash';
+import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveNatural } from '@vx/curve';
 import { GridRows } from '@vx/grid';

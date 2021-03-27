@@ -1,7 +1,7 @@
+import replace from 'lodash/replace';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { formatMetatagDate, formatPercent } from 'common/utils';
 import { Region, State, County, MetroArea } from 'common/regions';
-import { replace } from 'lodash';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { Metric } from 'common/metricEnum';
 
