@@ -3,13 +3,13 @@
     {
       "title": "Daily new cases",
       "id": "daily-new-cases",
-      "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.[](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)\n\n[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases).",
+      "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.\n\n[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases).",
       "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
     },
     {
       "title": "Infection rate",
       "id": "infection-rate",
-      "body": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.[](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)\n\n[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate).",
+      "body": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\n[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate).",
       "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
     },
     {
