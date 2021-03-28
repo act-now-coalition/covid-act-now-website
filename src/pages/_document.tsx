@@ -44,7 +44,7 @@ class MyDocument extends Document {
       let muiStyles = materialUiSheets.getStyleElement();
 
       // set this to true to minify MUI CSS, but it doesn't seem to make much difference
-      const minifyMui = false;
+      const minifyMui = true;
       if (minifyMui && process.env.NODE_ENV === 'production') {
         let css = materialUiSheets.toString();
         if (css) {
@@ -150,7 +150,7 @@ class MyDocument extends Document {
             src="https://www.googleoptimize.com/optimize.js?id=OPT-WT27VPR"
           ></script>
 
-          {/* Twitter universal website tag code */}
+          {/* Twitter universal website tag code }
           <script
             defer
             dangerouslySetInnerHTML={{
@@ -169,7 +169,7 @@ class MyDocument extends Document {
           />
           {/* End Twitter universal website tag code */}
 
-          {/* Facebook Pixel Code */}
+          {/* Facebook Pixel Code }
           <script
             defer
             dangerouslySetInnerHTML={{
@@ -192,7 +192,7 @@ class MyDocument extends Document {
           />
           {/* End Facebook Pixel Code */}
 
-          {/* Global site tag (gtag.js) - Google Ads: 527465414 */}
+          {/* Global site tag (gtag.js) - Google Ads: 527465414 }
           <script
             defer
             src="https://www.googletagmanager.com/gtag/js?id=AW-527465416"
@@ -210,7 +210,7 @@ class MyDocument extends Document {
           />
           {/* end google site tag */}
 
-          {/* Event snippet for Website traffic conversion page */}
+          {/* Event snippet for Website traffic conversion page }
           <script
             defer
             dangerouslySetInnerHTML={{
@@ -219,14 +219,16 @@ class MyDocument extends Document {
             `,
             }}
           />
+          {/* end event snippet */}
 
-          <noscript>
+          {/*<noscript>
             <img
               height="1"
               width="1"
               src="https://www.facebook.com/tr?id=692591964861759&ev=PageView&noscript=1"
             />
           </noscript>
+          */}
         </Head>
         <body>
           <Main />

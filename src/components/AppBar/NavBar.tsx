@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'common/utils/router';
+
+import dynamic from 'next/dynamic';
+
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'common/images/logo';
 import MegaMenu from 'components/NewFooter/MegaMenu';
@@ -14,6 +17,15 @@ import {
   VariantID,
 } from 'components/Experiment';
 import { useBreakpoint } from 'common/hooks';
+/*
+const MegaMenu = dynamic(() => import('components/NewFooter/MegaMenu'), {
+  ssr: false,
+});
+
+const MobileMenu = dynamic(() => import('./MobileMenu'), {
+  ssr: false,
+}
+*/
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
