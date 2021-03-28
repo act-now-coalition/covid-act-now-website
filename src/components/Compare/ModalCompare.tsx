@@ -66,7 +66,7 @@ const ModalCompare = (props: ModalCompareProps) => {
           <Filters
             isHomepage={props.isHomepage}
             stateId={props.stateId}
-            currentCounty={props.currentCounty}
+            isCounty={Boolean(props.currentCounty)}
             geoScope={props.geoScope}
             setGeoScope={props.setGeoScope}
             isModal

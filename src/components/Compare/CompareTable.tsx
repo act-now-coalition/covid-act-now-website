@@ -246,7 +246,7 @@ const CompareTable = (props: {
             <Filters
               isHomepage={props.isHomepage}
               stateId={props.stateId}
-              currentCounty={currentCounty}
+              isCounty={Boolean(currentCounty)}
               geoScope={props.geoScope}
               setGeoScope={props.setGeoScope}
               isModal={props.isModal}

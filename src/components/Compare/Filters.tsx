@@ -17,7 +17,7 @@ import HomepageSlider from './HomepageSlider';
 const Filters = (props: {
   isHomepage?: boolean;
   stateId?: string;
-  currentCounty?: any | null;
+  isCounty: boolean;
   geoScope: GeoScopeFilter;
   setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   isModal: boolean;
@@ -92,7 +92,7 @@ const Filters = (props: {
             $isModal={props.isModal}
           />
         )}
-        {props.currentCounty && (
+        {props.isCounty && (
           <SliderContainer $isModal={props.isModal}>
             <GeoSlider
               onChange={sliderHandleChange}
