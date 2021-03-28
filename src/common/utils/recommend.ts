@@ -24,7 +24,7 @@ import {
   getStateName,
   showExposureNotifications,
 } from 'components/LocationPage/Notifications';
-import regions, { getAbbreviatedCounty } from 'common/regions';
+import { getAbbreviatedCounty } from 'common/regions';
 import { TimeUnit, getStartOf, subtractTime } from 'common/utils/time-utils';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
@@ -42,7 +42,7 @@ const YELLOW_RECOMMENDATION_EXCEPTIONS = ['GYMS_YELLOW', 'BARS_YELLOW'];
 function getExposureRecommendation(
   projection: Projection,
 ): Recommendation | null {
-  const region = regions.findByFipsCode(projection.fips);
+  const region = projection.region;
   if (!region) {
     return null;
   }
