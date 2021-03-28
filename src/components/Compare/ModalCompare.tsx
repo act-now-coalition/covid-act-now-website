@@ -13,7 +13,6 @@ import { Region, MetroArea } from 'common/regions';
 
 interface ModalCompareProps {
   stateName?: string;
-  county: any | null;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isHomepage?: boolean;
   locations: SummaryForCompare[];
@@ -67,7 +66,7 @@ const ModalCompare = (props: ModalCompareProps) => {
           <Filters
             isHomepage={props.isHomepage}
             stateId={props.stateId}
-            county={props.county}
+            currentCounty={props.currentCounty}
             geoScope={props.geoScope}
             setGeoScope={props.setGeoScope}
             isModal
@@ -83,7 +82,6 @@ const ModalCompare = (props: ModalCompareProps) => {
       </ModalHeader>
       <CompareTable
         stateName={props.stateName}
-        county={props.county}
         setShowModal={props.setShowModal}
         isModal
         isHomepage={props.isHomepage}

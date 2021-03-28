@@ -44,7 +44,6 @@ function trackShare(label: string) {
 
 const CompareTable = (props: {
   stateName?: string;
-  county?: any | null;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isModal: boolean;
   locationsViewable?: number;
@@ -72,6 +71,7 @@ const CompareTable = (props: {
   vulnerabilityFirst?: boolean;
 }) => {
   const {
+    currentCounty,
     sorter,
     setSorter,
     sortDescending,
@@ -87,8 +87,6 @@ const CompareTable = (props: {
     vaccinesFirst,
     vulnerabilityFirst,
   } = props;
-
-  const currentCounty = props.county && props.currentCounty;
 
   const currentCountyFips = currentCounty ? currentCounty.region.fipsCode : 0;
 
@@ -175,7 +173,7 @@ const CompareTable = (props: {
       ...summary,
     }));
 
-  const currentLocation = props.county
+  const currentLocation = currentCounty
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
@@ -248,7 +246,7 @@ const CompareTable = (props: {
             <Filters
               isHomepage={props.isHomepage}
               stateId={props.stateId}
-              county={props.county}
+              currentCounty={currentCounty}
               geoScope={props.geoScope}
               setGeoScope={props.setGeoScope}
               isModal={props.isModal}
@@ -279,7 +277,7 @@ const CompareTable = (props: {
         region={region}
       />
       {!props.isModal && (
-        <Footer isCounty={props.county}>
+        <Footer>
           <div>
             <span>
               Displaying <strong>{amountDisplayed}</strong> of{' '}
