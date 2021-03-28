@@ -1,16 +1,5 @@
 /** Helpers for dealing with the State / Counties dataset. */
-import has from 'lodash/has';
 import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import countyAdjacencyMsa from './data/county_adjacency_msa.json';
-
-interface AdjacencyData {
-  [fips: string]: {
-    adjacent_counties: string[];
-    msa_code?: string;
-  };
-}
-
-const ADJACENT_COUNTIES: AdjacencyData = countyAdjacencyMsa.counties;
 
 /** Aggregations supported by the Explore chart. */
 export const AGGREGATED_LOCATIONS: Location[] = [
@@ -54,10 +43,4 @@ export function findCountyByFips(fips: string) {
     }
   }
   return undefined;
-}
-
-export function getCountyMsaCode(fips: string): string | undefined {
-  if (has(ADJACENT_COUNTIES, fips)) {
-    return ADJACENT_COUNTIES[fips].msa_code;
-  }
 }

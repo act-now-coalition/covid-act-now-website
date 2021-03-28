@@ -1,6 +1,5 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
 import isNumber from 'lodash/isNumber';
-import { getCountyMsaCode } from 'common/locations';
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -39,14 +38,6 @@ function getLocationObj(region: Region): SummaryForCompare {
   };
 }
 
-function isMetroCounty(region: Region) {
-  return getCountyMsaCode(region.fipsCode);
-}
-
-function isNonMetroCounty(region: Region) {
-  return !isMetroCounty(region);
-}
-
 export function getAllStates(): SummaryForCompare[] {
   return regions.states.map(getLocationObj);
 }
@@ -68,30 +59,6 @@ export function getAllCountiesOfMetroArea(
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
   return regions.counties
     .filter((region: County) => region.state.stateCode === stateCode)
-    .map(getLocationObj);
-}
-
-export function getAllMetroCounties(): SummaryForCompare[] {
-  return regions.counties.filter(isMetroCounty).map(getLocationObj);
-}
-
-export function getAllNonMetroCounties(): SummaryForCompare[] {
-  return regions.counties.filter(isNonMetroCounty).map(getLocationObj);
-}
-
-export function getStateMetroCounties(stateCode: string): SummaryForCompare[] {
-  return regions.counties
-    .filter((region: County) => region.state.stateCode === stateCode)
-    .filter(isMetroCounty)
-    .map(getLocationObj);
-}
-
-export function getStateNonMetroCounties(
-  stateCode: string,
-): SummaryForCompare[] {
-  return regions.counties
-    .filter((region: County) => region.state.stateCode === stateCode)
-    .filter(isNonMetroCounty)
     .map(getLocationObj);
 }
 
