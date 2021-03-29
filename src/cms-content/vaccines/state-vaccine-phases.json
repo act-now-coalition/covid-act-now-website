@@ -2326,7 +2326,7 @@
       ]
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Texas",
       "fips": "48",
       "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
