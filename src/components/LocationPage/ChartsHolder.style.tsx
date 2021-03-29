@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 

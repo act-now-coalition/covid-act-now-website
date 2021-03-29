@@ -21,7 +21,7 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import LocationPageHeading from './LocationPageHeading';
 import { ThermometerImage } from 'components/Thermometer';
-import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
+// import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 // import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 
@@ -104,12 +104,12 @@ const LocationHeader: React.FC<{
             </SectionHalf>
             <SectionHalf></SectionHalf>
           </HeaderSection>
-          <LocationHeaderStats
+          {/* <LocationHeaderStats
             stats={stats}
             onMetricClick={noop}
             isMobile={false}
             isHeader={true}
-          />
+          /> */}
         </TopContainer>
       </Wrapper>
     </ChartContentWrapper>

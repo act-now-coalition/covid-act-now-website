@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { County, State } from '../../../../src/common/regions/types';
 import LocationHeader from '../../../../src/components/LocationPage/LocationHeader';
+import { Block } from '../../../../src/components/LocationPage/LocationHeader.style';
 
-function CountyPage({ region, locationSummary }) {
+function CountyPage({ region, locationSummary, shareKey }) {
   if (!locationSummary) {
     return <h1>no data for {region.fullName}</h1>;
   }
@@ -29,12 +30,17 @@ function CountyPage({ region, locationSummary }) {
   return (
     <div>
       <LocationHeader region={county} locationSummary={locationSummary} />
+      <Block>Chart</Block>
+      <Block>Chart</Block>
+      <Block>Chart</Block>
+      <Block>Chart</Block>
+      <Block id="recommend">Recommendations</Block>
     </div>
   );
 }
 
 export async function getStaticProps({ params }) {
-  const { state, county } = params;
+  const { state, county, shareKey } = params;
   const { default: regions } = await import('../../../../src/common/regions');
 
   const region = regions.findCountyByUrlParams(state, county);
@@ -64,6 +70,7 @@ export async function getStaticProps({ params }) {
         urlSegment: region.urlSegment,
       },
       locationSummary,
+      shareKey: shareKey ? shareKey : null,
     },
   };
 }
@@ -71,9 +78,13 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   const { default: regions } = await import('../../../../src/common/regions');
 
-  const paths = regions.counties.map(
-    county => `/us/${county.state.urlSegment}/county/${county.urlSegment}/`,
-  );
+  const paths = regions.counties.map(county => ({
+    params: {
+      state: county.state.urlSegment,
+      county: county.urlSegment,
+      slug: [],
+    },
+  }));
   return { paths, fallback: false };
 }
 
