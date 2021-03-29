@@ -1834,7 +1834,7 @@
       ]
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Ohio",
       "fips": "39",
       "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
@@ -1894,8 +1894,8 @@
           "startDate": "March 19, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T23:25:30.263Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-29T04:10:53.263Z",
           "phase": "2D",
           "description": "* Individuals 16+",
           "startDate": "March 29, 2021"
