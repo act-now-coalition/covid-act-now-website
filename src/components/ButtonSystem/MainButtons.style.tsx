@@ -24,7 +24,6 @@ export function button(styles: ButtonsTheme) {
 
     svg {
       color: ${styles.icon};
-      margin-left: 0.5rem;
     }
 
     &:disabled {
@@ -38,14 +37,30 @@ export function button(styles: ButtonsTheme) {
   `;
 }
 
+/**
+ * max-height makes sure buttons with + without icons are the same height,
+ * since MUI icons have built-in padding that we are accounting for
+ */
 const standardButtonSizing = css`
   padding: 0.625rem;
   font-size: 0.875rem;
+  max-height: 2.25rem;
 `;
 
 const largeButtonSizing = css`
   padding: 1.125rem 1rem;
   font-size: 1rem;
+  max-height: 3.375rem;
+`;
+
+const textButtonSizing = css`
+  padding: 0.625rem;
+  font-size: 1rem;
+  max-height: 2.25rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 /**
@@ -69,4 +84,9 @@ export const LargeOutlinedButton = styled(BaseButton)`
 export const LargeFilledButton = styled(BaseButton)`
   ${largeButtonSizing};
   ${props => button(props.theme.palette.buttons[ButtonType.FILL])};
+`;
+
+export const StandardTextButton = styled(BaseButton)`
+  ${textButtonSizing};
+  ${props => button(props.theme.palette.buttons[ButtonType.TEXT])};
 `;

@@ -3,6 +3,7 @@ import {
   StandardFilledButton,
   LargeOutlinedButton,
   LargeFilledButton,
+  StandardTextButton,
 } from './MainButtons.style';
 
 export {
@@ -10,4 +11,5 @@ export {
   StandardFilledButton,
   LargeOutlinedButton,
   LargeFilledButton,
+  StandardTextButton,
 };

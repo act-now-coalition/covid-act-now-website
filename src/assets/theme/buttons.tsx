@@ -4,6 +4,7 @@ import fonts from 'common/theme/fonts';
 export enum ButtonType {
   FILL,
   OUTLINE,
+  TEXT,
 }
 
 export interface ButtonsTheme {
@@ -33,11 +34,11 @@ const buttons: { [key in ButtonType]: ButtonsTheme } = {
     backgroundHover: newBlueDark,
     borderHover: newBlueDark,
     textHover: 'white',
+    icon: 'white',
+    fontFamily: fonts.regularBookBold,
     disabledBackground: COLOR_MAP.GREY_1,
     disabledText: COLOR_MAP.GRAY_BODY_COPY,
-    icon: 'white',
     disabledIcon: COLOR_MAP.GREY_3,
-    fontFamily: fonts.regularBookBold,
   },
   [ButtonType.OUTLINE]: {
     background: 'white',
@@ -46,11 +47,24 @@ const buttons: { [key in ButtonType]: ButtonsTheme } = {
     backgroundHover: newBlueLight,
     borderHover: newBlueLight,
     textHover: newBlueDark,
+    icon: COLOR_MAP.GRAY_BODY_COPY,
+    fontFamily: fonts.regularBookMidWeight,
     disabledBackground: 'white',
     disabledText: COLOR_MAP.GRAY_BODY_COPY,
-    icon: COLOR_MAP.GRAY_BODY_COPY,
     disabledIcon: COLOR_MAP.GREY_3,
-    fontFamily: fonts.regularBookMidWeight,
+  },
+  [ButtonType.TEXT]: {
+    background: 'transparent',
+    border: 'transparent',
+    text: newBlue,
+    backgroundHover: 'transparent',
+    borderHover: 'transparent',
+    textHover: newBlueDark,
+    icon: COLOR_MAP.GRAY_BODY_COPY,
+    fontFamily: fonts.regularBook,
+    disabledBackground: COLOR_MAP.GREY_1, // ?
+    disabledText: COLOR_MAP.GRAY_BODY_COPY, // ?
+    disabledIcon: COLOR_MAP.GREY_3, // ?
   },
 };
 
