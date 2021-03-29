@@ -2335,10 +2335,16 @@
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-29T04:18:12.610Z",
+          "updatedAt": "2021-03-29T18:10:11.596Z",
           "phase": "2",
-          "description": "* All adults ",
-          "startDate": "March 29"
+          "description": "* All individuals 16+",
+          "startDate": "March 29, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-29T18:10:16.683Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ]
     },
