@@ -2326,7 +2326,7 @@
       ]
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Texas",
       "fips": "48",
       "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
@@ -2358,9 +2358,9 @@
           "startDate": "March 4"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T06:11:43.220Z",
-          "phase": "TBD",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-29T04:18:12.610Z",
+          "phase": "2",
           "description": "* All adults ",
           "startDate": "March 29"
         }
