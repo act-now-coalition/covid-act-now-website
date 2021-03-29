@@ -1255,7 +1255,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "eligibilityInfoUrl": "https://covidvaccine.mo.gov/priority/",
       "vaccinationSignupUrl": "https://covidvaccine.mo.gov/map/",
       "fips": "29",
@@ -1300,11 +1300,11 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* Other essential workers\n* Vulnerable populations",
+          "currentlyEligible": true,
+          "description": "* Additional essential workers\n* Vulnerable and disproportionately affected populations",
           "expandedDefinitionUrl": "https://covidvaccine.mo.gov/priority/Phase2",
           "startDate": "March 29, 2021",
-          "updatedAt": "2021-03-22T21:53:44.210Z"
+          "updatedAt": "2021-03-29T16:33:51.378Z"
         },
         {
           "phase": "3",
@@ -1367,7 +1367,7 @@
       "fips": "31",
       "eligibilityInfoUrl": "http://dhhs.ne.gov/Pages/COVID-19-Vaccine-Information.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "phaseGroups": [
         {
           "phase": "1",
@@ -1401,6 +1401,12 @@
           "updatedAt": "2021-03-22T22:00:49.786Z",
           "phase": "2A",
           "description": "Some counties may be vaccinating: \n\n* Individuals age 50-64 \n* Individuals with underlying medical conditions\n\nAdditional groups may be eligible in certain counties. Check your local health department website for county-specific information."
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-29T16:38:10.700Z",
+          "phase": "2A+",
+          "description": "All individuals 18 and older at select pharmacies statewide"
         },
         {
           "phase": "2B",
@@ -1444,7 +1450,7 @@
       "fips": "33",
       "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1483,22 +1489,30 @@
           "updatedAt": "2021-03-22T22:06:55.180Z"
         },
         {
-          "phase": "3A",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Adults with moderate-risk health conditions",
+          "phase": "3",
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* Adults 40-49",
           "expandedDefinitionUrl": "",
-          "startDate": "May 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 29, 2021",
+          "updatedAt": "2021-03-29T16:42:22.376Z"
         },
         {
-          "phase": "3B",
-          "tier": "",
+          "phase": "3",
+          "tier": "2",
           "currentlyEligible": false,
-          "description": "* General public",
+          "description": "* Adults 30-39",
           "expandedDefinitionUrl": "",
-          "startDate": "May 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 31, 2021",
+          "updatedAt": "2021-03-29T16:43:35.450Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-29T16:43:43.896Z",
+          "phase": "3",
+          "tier": "3",
+          "description": "All individuals 16+",
+          "startDate": "April 2, 2021"
         }
       ]
     },
