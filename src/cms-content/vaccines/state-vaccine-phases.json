@@ -2159,22 +2159,13 @@
           "updatedAt": "2021-03-08T17:54:21.927Z"
         },
         {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Ages 16-64 with certain underlying health conditions\n* Other essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "Late spring",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "Summer–fall",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 31",
+          "updatedAt": "2021-03-29T17:26:52.898Z"
         }
       ]
     },
