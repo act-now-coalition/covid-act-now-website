@@ -118,10 +118,10 @@
           "updatedAt": "2021-03-08T16:56:01.245Z"
         },
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "Moving forward, eligibility will be primarily determined by age. Eligibility will vary across counties and tribes, which may also choose to prioritize certain additional frontline workers. Counties are now vaccinating:\n\n* Age group 65+ (Santa Cruz)\n* Age group 55+ (Apache, Graham, Maricopa, Mohave, Pima, Yavapai, Yuma)\n* Age group 16+ or 18+ (Coconino, Cochise, Gila, Graham, Greenlee, La Paz, Navajo, Pinal, Yuma)\n\n(NEW) State-run sites in Maricopa, Pima, and Yuma counties are now vaccinating age group 16+",
+          "description": "Moving forward, eligibility will be primarily determined by age. Eligibility will vary across counties and tribes, which may also choose to prioritize certain additional frontline workers. Counties are now vaccinating:\n\n* Age group 55+ (Santa Cruz, Yavapai)\n* Age group 16+ or 18+ (All other counties)",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-25T14:13:53.139Z"
@@ -181,7 +181,7 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* People 16-64 with high-risk medical conditions\n* Additional essential workers\n* People residing in high-risk settings (incarceration/detention facilities, group homes, congregate settings, crowded housing, student housing)\n* (NEW) Veterans of all ages",
+          "description": "* People 16-64 with high-risk medical conditions\n* Additional essential workers\n* People residing in high-risk settings (incarceration/detention facilities, group homes, congregate settings, crowded housing, student housing)\n* Veterans of all ages",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-25T14:15:11.169Z"
@@ -230,10 +230,18 @@
         },
         {
           "currentlyEligible": false,
+          "updatedAt": "2021-03-29T14:05:33.391Z",
+          "phase": "1b",
+          "description": "* Individuals 50-64",
+          "tier": "3",
+          "startDate": "April 1, 2021"
+        },
+        {
+          "currentlyEligible": false,
           "updatedAt": "2021-03-22T16:22:56.551Z",
           "phase": "2",
           "description": "* General public",
-          "startDate": "May 1, 2021"
+          "startDate": "April 15, 2021"
         },
         {
           "currentlyEligible": false,
@@ -449,10 +457,10 @@
           "phase": "1C",
           "tier": "2",
           "currentlyEligible": false,
-          "description": "* Individuals working in non-public transit, logistics/delivery/courier services, media and mass communications",
+          "description": "* Individuals working in non-public transit\n* Individuals working in logistics/delivery/courier services\n* Essential employees working in media and mass communications",
           "expandedDefinitionUrl": "",
-          "startDate": "March 29, 2021",
-          "updatedAt": "2021-03-18T17:36:37.257Z"
+          "startDate": "Week of March 29",
+          "updatedAt": "2021-03-29T14:07:11.346Z"
         },
         {
           "phase": "1C",
