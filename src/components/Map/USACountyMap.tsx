@@ -105,6 +105,7 @@ const USACountyMap = React.memo(
                               strokeOpacity={expandTapArea ? 0 : 1}
                               role="img"
                               tabIndex={-1}
+                              aria-label={fullName}
                             />
                           )}
                         </Link>
