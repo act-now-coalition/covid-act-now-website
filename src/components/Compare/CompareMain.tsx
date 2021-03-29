@@ -29,7 +29,6 @@ import {
 } from 'common/utils/compare';
 import { Metric } from 'common/metricEnum';
 import { getSummaryFromFips } from 'common/location_summaries';
-import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import {
   SharedComponent,
@@ -249,14 +248,9 @@ const CompareMain = (props: {
     return null;
   }
 
-  // TODO(chris): pusing down use of county as far as possible, but underlying compare
-  // table code not yet ready to stop using county as an input, so querying the legacy Location
-  // county API here.
-  const locationCounty = findCountyByFips(currentCounty?.region.fipsCode || '');
   const sharedProps = {
     stateName: props.stateName,
     stateId,
-    county: locationCounty,
     setShowModal,
     isHomepage,
     locations,

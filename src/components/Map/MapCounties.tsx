@@ -22,6 +22,7 @@ const MapCounties: React.FC<{
             fill={getFillColor(geo.id)}
             strokeWidth={0}
             role="img"
+            aria-label={geo.properties.name}
           />
         ))
       }

@@ -199,6 +199,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
       `Location Header: Receive Alerts`,
     );
     scrollTo(shareBlockRef.current);
+    document.getElementById('fieldEmail')?.focus({ preventScroll: true });
   };
 
   const onClickShare = () => {

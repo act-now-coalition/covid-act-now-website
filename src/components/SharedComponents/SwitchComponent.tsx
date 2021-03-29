@@ -26,9 +26,14 @@ const SwitchComponent = (props: {
         <Switch
           checked={checked}
           onChange={event => onChange(event.target.checked)}
-          value="checked"
+          value={checked ? rightLabel : leftLabel}
           size="small"
           disableRipple
+          inputProps={{
+            'aria-label': 'Select states (off) or counties (on)',
+            'aria-checked': checked,
+            role: 'switch',
+          }}
         />
       </Grid>
       <SwitchLabel onClick={() => onChange(true)} item>
