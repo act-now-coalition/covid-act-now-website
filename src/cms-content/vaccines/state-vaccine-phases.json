@@ -1903,7 +1903,7 @@
       ]
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Oklahoma",
       "fips": "40",
       "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
