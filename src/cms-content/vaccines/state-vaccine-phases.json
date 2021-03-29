@@ -2420,10 +2420,10 @@
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-25T06:13:37.063Z",
+          "updatedAt": "2021-03-29T04:18:42.401Z",
           "phase": "6",
-          "description": "* Individuals 60+",
-          "startDate": "March 25"
+          "description": "* Individuals 50+",
+          "startDate": "March 29"
         },
         {
           "currentlyEligible": false,
