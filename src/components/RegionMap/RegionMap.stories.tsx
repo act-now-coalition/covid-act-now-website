@@ -1,6 +1,7 @@
 import React from 'react';
 import RegionMap from './RegionMap';
-import regions, { MetroArea, County, Region } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { MetroArea, County, Region } from 'common/regions';
 
 export default {
   title: 'Shared Components/Region Map',

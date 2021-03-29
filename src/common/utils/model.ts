@@ -3,27 +3,14 @@ import { Projections } from '../models/Projections';
 import { Api } from 'api';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, County, RegionType, State } from 'common/regions';
-import { RegionSummary } from 'api/schema/RegionSummary';
+import { getRegionDB } from 'common/regions/getRegionDB';
+import { Region, County, RegionType, State } from 'common/regions';
 import { parseDateString } from 'common/utils/time-utils';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
   STATES = 'states',
   CBSAS = 'cbsas',
-}
-
-function getSubpathFromRegionType(regionType: RegionType): APIRegionSubPath {
-  switch (regionType) {
-    case RegionType.COUNTY:
-      return APIRegionSubPath.COUNTIES;
-    case RegionType.MSA:
-      return APIRegionSubPath.CBSAS;
-    case RegionType.STATE:
-      return APIRegionSubPath.STATES;
-    default:
-      fail('Unsuported type');
-  }
 }
 
 const cachedProjections: { [key: string]: Promise<Projections> } = {};
@@ -51,29 +38,6 @@ export function fetchProjectionsRegion(
 }
 
 /** Returns an array of `Projections` instances for all states. */
-const cachedSummariesByRegionType: {
-  [key: string]: Promise<RegionSummary[]>;
-} = {};
-export function fetchSummariesForRegionType(
-  regionType: RegionType,
-  snapshotUrl: string | null = null,
-) {
-  snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
-  async function fetch() {
-    const all = (
-      await new Api(snapshotUrl).fetchAggregateRegionSummaries(
-        getSubpathFromRegionType(regionType),
-      )
-    ).filter(summary => regions.findByFipsCode(summary.fips) !== null);
-    return all;
-  }
-  const key = `${snapshotUrl}-${regionType}` || 'null';
-  cachedSummariesByRegionType[key] =
-    cachedSummariesByRegionType[key] || fetch();
-  return cachedSummariesByRegionType[key];
-}
-
-/** Returns an array of `Projections` instances for all states. */
 const cachedStatesProjections: { [key: string]: Promise<Projections[]> } = {};
 export function fetchAllStateProjections(snapshotUrl: string | null = null) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
@@ -81,6 +45,7 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       APIRegionSubPath.STATES,
     );
+    const regions = await getRegionDB();
     return all
       .filter(summaryWithTimeseries =>
         summaryWithTimeseries?.state
@@ -103,7 +68,7 @@ const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
 export function fetchAllCountyProjections(
   snapshotUrl: string | null = null,
   queryByState: boolean = true,
-) {
+): Promise<Projections[]> {
   if (queryByState) {
     return fetchAllCountyProjectionsByState();
   }
@@ -113,6 +78,7 @@ export function fetchAllCountyProjections(
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       APIRegionSubPath.COUNTIES,
     );
+    const regions = await getRegionDB();
     return all
       .filter(summaryWithTimeseries => {
         // We don't want to return county projections for counties that we
@@ -130,9 +96,12 @@ export function fetchAllCountyProjections(
   return cachedCountiesProjections[key];
 }
 
-export async function fetchAllCountyProjectionsByState() {
+export async function fetchAllCountyProjectionsByState(): Promise<
+  Projections[]
+> {
   // Query counties for states individually as the entire counties.timeseries.json is too large
   // to be parsed by node.
+  const regions = await getRegionDB();
   const allProjections = await Promise.all(
     regions.states.map(
       async (state: State) => await fetchCountyProjectionsForState(state),
@@ -154,6 +123,7 @@ export function fetchCountyProjectionsForState(
     const all = await new Api(
       snapshotUrl,
     ).fetchCountySummariesWithTimeseriesForState(state);
+    const regions = await getRegionDB();
     return all
       .filter(summaryWithTimeseries => {
         // We don't want to return county projections for counties that we
@@ -180,6 +150,7 @@ export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       APIRegionSubPath.CBSAS,
     );
+    const regions = await getRegionDB();
     return all
       .filter(
         summaryWithTimeseries =>

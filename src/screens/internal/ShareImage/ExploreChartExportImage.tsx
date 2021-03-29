@@ -21,7 +21,8 @@ import {
   getLocationNames,
   getMetricName,
 } from 'components/Explore/utils';
-import regions, { Region } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region } from 'common/regions';
 
 const ExploreChartExportImage = ({
   componentParams,

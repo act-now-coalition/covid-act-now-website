@@ -13,7 +13,8 @@ import { AGGREGATED_LOCATIONS } from 'common/locations';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
 import { importAggregations } from 'common/data';
-import regions, {
+import regions from 'common/regions/region_db';
+import {
   County,
   MetroArea,
   Region,

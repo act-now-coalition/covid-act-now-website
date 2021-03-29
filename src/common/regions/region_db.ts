@@ -155,4 +155,4 @@ const regions = new RegionDB(
 );
 
 export default regions;
-export { RegionDB };
+export type { RegionDB };

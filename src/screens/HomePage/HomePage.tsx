@@ -13,7 +13,8 @@ import { formatMetatagDate } from 'common/utils';
 import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import regions, {
+import regions from 'common/regions/region_db';
+import {
   getFinalAutocompleteLocations,
   getGeolocatedRegions,
 } from 'common/regions';

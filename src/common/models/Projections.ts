@@ -30,7 +30,7 @@ export class Projections {
   ) {
     this.region = region;
     this.isCounty = region instanceof County;
-    this.primary = new Projection(summaryWithTimeseries, {
+    this.primary = new Projection(summaryWithTimeseries, region, {
       isCounty: this.isCounty,
     });
   }

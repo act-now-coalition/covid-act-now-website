@@ -1,10 +1,5 @@
-import regions, {
-  County,
-  State,
-  getStateFips,
-  Region,
-  MetroArea,
-} from 'common/regions';
+import regions from 'common/regions/region_db';
+import { County, State, getStateFips, Region, MetroArea } from 'common/regions';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { COLOR_MAP } from 'common/colors';

@@ -1,5 +1,5 @@
 import sortBy from 'lodash/sortBy';
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 import { getVaccineInfoByFips, verifyOneItemPerState } from './phases';
 
 describe('vaccination info is complete for each state', () => {

@@ -1,4 +1,5 @@
-import regions, { Region, State, County, MetroArea } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region, State, County, MetroArea } from 'common/regions';
 import { fail } from 'common/utils';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 

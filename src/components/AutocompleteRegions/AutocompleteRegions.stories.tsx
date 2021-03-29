@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import AutocompleteRegions from './AutocompleteRegions';
-import regions, { Region, State } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region, State } from 'common/regions';
 import { AutocompleteGetTagProps } from '@material-ui/lab/Autocomplete';
 import Chip from '@material-ui/core/Chip';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';

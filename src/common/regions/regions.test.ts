@@ -1,4 +1,5 @@
-import regions, { RegionType } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { RegionType } from 'common/regions';
 
 // Common regions to test against.
 const alaska = regions.findByStateCodeStrict('AK');

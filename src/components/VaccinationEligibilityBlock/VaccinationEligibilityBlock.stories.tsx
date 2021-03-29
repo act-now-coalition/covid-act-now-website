@@ -1,6 +1,6 @@
 import React from 'react';
 import VaccinationEligibilityBlock from './VaccinationEligibilityBlock';
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 
 export default {
   title: 'Shared Components/VaccinationEligibilityBlock',

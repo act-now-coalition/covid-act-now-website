@@ -1,7 +1,7 @@
 import React from 'react';
 import VulnerabilitiesBlock from './VulnerabilitiesBlock';
 import { useCcviForFips } from 'common/hooks';
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 
 export default {
   title: 'Shared Components/Vulnerabilities/VulnerabilitiesBlock',

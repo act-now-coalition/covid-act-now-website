@@ -10,7 +10,7 @@ import { importFipsToCcviMap, RegionCcviItem } from 'common/data';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { getPageTitle, getPageDescription } from 'screens/LocationPage/utils';
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 import type { Region, RegionObject } from 'common/regions';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { summaryToStats } from 'common/utils/chart';

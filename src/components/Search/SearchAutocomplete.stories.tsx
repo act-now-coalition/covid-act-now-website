@@ -1,5 +1,6 @@
 import React from 'react';
-import regions, { getAutocompleteRegions } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { getAutocompleteRegions } from 'common/regions';
 import SearchAutocomplete from './SearchAutocomplete';
 import { getFilterLimit } from 'components/Search';
 

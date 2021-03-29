@@ -12,7 +12,8 @@ import {
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import AutocompleteRegions from 'components/AutocompleteRegions';
-import regions, { Region } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region } from 'common/regions';
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';

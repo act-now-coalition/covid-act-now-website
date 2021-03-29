@@ -20,7 +20,8 @@ import {
   getMetricName,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
-import regions, { Region } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region } from 'common/regions';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const theme = useContext(ThemeContext);

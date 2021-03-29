@@ -7,7 +7,7 @@ import {
   getStatePathParams,
 } from 'screens/utils/ssg_utils';
 
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 import { LocationEmbed, LocationEmbedProps } from 'screens/Embed/Embed';
 
 const getStaticPaths: GetStaticPaths = getStatePathParams;

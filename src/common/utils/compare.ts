@@ -4,7 +4,8 @@ import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, {
+import regions from 'common/regions/region_db';
+import {
   County,
   Region,
   State,

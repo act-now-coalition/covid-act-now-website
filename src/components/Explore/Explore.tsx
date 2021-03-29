@@ -43,7 +43,8 @@ import {
 } from 'common/sharing';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import regions, { Region, useRegionFromParams } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import NationalText from 'components/NationalText';
 
@@ -113,9 +114,6 @@ const Explore: React.FunctionComponent<{
   const { sharedComponentId } = useParams<{
     sharedComponentId?: string;
   }>();
-
-  // TODO (chris): Dont love the way of forcing a ''
-  //const region = useRegionFromParams();
 
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.

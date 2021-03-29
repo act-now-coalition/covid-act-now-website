@@ -9,7 +9,8 @@ import {
   fetchProjectionsRegion,
 } from 'common/utils/model';
 import { snapshotUrl } from 'common/utils/snapshots';
-import regions, { County, MetroArea, Region } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { County, MetroArea, Region } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { fetchSummaries } from 'common/location_summaries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';

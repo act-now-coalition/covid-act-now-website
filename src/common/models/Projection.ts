@@ -17,7 +17,7 @@ import {
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
-import regions, { Region } from 'common/regions';
+import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 
 /**
@@ -175,6 +175,7 @@ export class Projection {
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
+    region: Region,
     parameters: ProjectionParameters,
   ) {
     const {
@@ -194,7 +195,7 @@ export class Projection {
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
-    this.region = regions.findByFipsCodeStrict(this.fips);
+    this.region = region;
 
     // Set up our series data exposed via getDataset().
     this.rawDailyCases = this.actualTimeseries.map(row => row && row.newCases);

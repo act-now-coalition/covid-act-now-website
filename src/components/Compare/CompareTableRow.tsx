@@ -16,7 +16,7 @@ import {
 } from 'components/Compare/Compare.style';
 import { RankedLocationSummary } from 'common/utils/compare';
 import { formatEstimate } from 'common/utils';
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 import { fail } from 'assert';
 import { StyledRegionName } from 'components/SharedComponents';
 import { ColumnDefinition } from './columns';

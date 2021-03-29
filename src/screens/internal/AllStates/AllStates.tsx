@@ -3,7 +3,8 @@ import { LoadingScreen } from './AllStates.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { Metric } from 'common/metricEnum';
 import { MetricChart } from 'components/Charts';
-import regions, { State as StateType } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { State as StateType } from 'common/regions';
 
 function AllStates() {
   return (

@@ -35,12 +35,8 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import regions, {
-  Region,
-  MetroArea,
-  getStateCode,
-  County,
-} from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region, MetroArea, getStateCode, County } from 'common/regions';
 import { assert } from 'common/utils';
 import {
   useLocationPageCompareSliderMap,

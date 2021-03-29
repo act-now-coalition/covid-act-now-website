@@ -1,6 +1,6 @@
 import html from 'remark-html';
 import remark from 'remark';
-import regions from 'common/regions';
+import regions from 'common/regions/region_db';
 import { assert } from 'common/utils';
 import { getVaccinationDataByRegion } from './index';
 import { getVaccineInfoByFips, RegionPhaseGroup } from './phases';

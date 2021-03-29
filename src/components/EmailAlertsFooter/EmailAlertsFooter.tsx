@@ -1,5 +1,6 @@
 import React from 'react';
-import regions, { Region } from 'common/regions';
+import regions from 'common/regions/region_db';
+import { Region } from 'common/regions';
 import {
   Container,
   Content,
