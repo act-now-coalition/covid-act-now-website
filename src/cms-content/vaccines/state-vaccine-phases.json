@@ -1903,7 +1903,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Oklahoma",
       "fips": "40",
       "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
@@ -1948,11 +1948,11 @@
         {
           "phase": "4",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "March 29",
-          "updatedAt": "2021-03-25T06:06:00.578Z"
+          "updatedAt": "2021-03-29T04:11:23.583Z"
         }
       ]
     },
