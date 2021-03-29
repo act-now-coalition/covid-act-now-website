@@ -48,9 +48,9 @@ const standardButtonSizing = css`
 `;
 
 const largeButtonSizing = css`
-  padding: 1.125rem 1rem;
+  padding: 1rem;
   font-size: 1rem;
-  max-height: 3.375rem;
+  max-height: 3.125rem;
 `;
 
 const textButtonSizing = css`
@@ -66,12 +66,12 @@ const textButtonSizing = css`
 /**
  * Main button variations:
  */
-export const StandardOutlinedButton = styled(BaseButton)`
+export const OutlinedButton = styled(BaseButton)`
   ${standardButtonSizing};
   ${props => button(props.theme.palette.buttons[ButtonType.OUTLINE])};
 `;
 
-export const StandardFilledButton = styled(BaseButton)`
+export const FilledButton = styled(BaseButton)`
   ${standardButtonSizing};
   ${props => button(props.theme.palette.buttons[ButtonType.FILL])};
 `;
@@ -86,7 +86,7 @@ export const LargeFilledButton = styled(BaseButton)`
   ${props => button(props.theme.palette.buttons[ButtonType.FILL])};
 `;
 
-export const StandardTextButton = styled(BaseButton)`
+export const TextButton = styled(BaseButton)`
   ${textButtonSizing};
   ${props => button(props.theme.palette.buttons[ButtonType.TEXT])};
 `;

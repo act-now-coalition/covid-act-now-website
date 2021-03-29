@@ -1,45 +1,46 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import {
-  StandardOutlinedButton,
-  StandardFilledButton,
+  OutlinedButton,
+  FilledButton,
   LargeOutlinedButton,
   LargeFilledButton,
-  StandardTextButton,
+  TextButton,
 } from 'components/ButtonSystem';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const ButtonSystem = () => {
   return (
     <>
       <Grid container spacing={3}>
         <Grid item>
-          <StandardTextButton href="/">Text button</StandardTextButton>
+          <TextButton href="/">Text button</TextButton>
         </Grid>
         <Grid item>
-          <StandardTextButton href="/" endIcon={<ArrowForwardIcon />}>
+          <TextButton href="/" endIcon={<ArrowForwardIcon />}>
             Text button
-          </StandardTextButton>
+          </TextButton>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item>
-          <StandardFilledButton href="/">Standard Filled</StandardFilledButton>
+          <FilledButton href="/">Standard Filled</FilledButton>
         </Grid>
         <Grid item>
-          <StandardOutlinedButton href="/">
+          <OutlinedButton onClick={() => console.log('hi')}>
             Standard Outlined
-          </StandardOutlinedButton>
+          </OutlinedButton>
         </Grid>
         <Grid item>
-          <StandardFilledButton href="/" endIcon={<ArrowForwardIcon />}>
+          <FilledButton href="/" endIcon={<ArrowForwardIcon />}>
             Standard Filled
-          </StandardFilledButton>
+          </FilledButton>
         </Grid>
         <Grid item>
-          <StandardOutlinedButton href="/" endIcon={<ArrowForwardIcon />}>
+          <OutlinedButton href="/" endIcon={<ArrowForwardIcon />}>
             Standard Outlined
-          </StandardOutlinedButton>
+          </OutlinedButton>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
@@ -58,6 +59,15 @@ const ButtonSystem = () => {
           <LargeOutlinedButton href="/" endIcon={<ArrowForwardIcon />}>
             Large Outlined
           </LargeOutlinedButton>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item>
+          <ButtonGroup color="primary">
+            <OutlinedButton href="/">Button 1</OutlinedButton>
+            <OutlinedButton href="/">Button 2</OutlinedButton>
+            <OutlinedButton href="/">Button 3</OutlinedButton>
+          </ButtonGroup>
         </Grid>
       </Grid>
     </>

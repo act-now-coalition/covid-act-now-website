@@ -1,15 +1,15 @@
 import {
-  StandardOutlinedButton,
-  StandardFilledButton,
+  OutlinedButton,
+  FilledButton,
   LargeOutlinedButton,
   LargeFilledButton,
-  StandardTextButton,
+  TextButton,
 } from './MainButtons.style';
 
 export {
-  StandardOutlinedButton,
-  StandardFilledButton,
+  OutlinedButton,
+  FilledButton,
   LargeOutlinedButton,
   LargeFilledButton,
-  StandardTextButton,
+  TextButton,
 };
