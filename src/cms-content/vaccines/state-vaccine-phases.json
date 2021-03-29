@@ -897,7 +897,7 @@
       "fips": "22",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
       "vaccinationSignupUrl": "https://ldh.la.gov/covidvaccine-locations/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -927,8 +927,8 @@
           "updatedAt": "2021-03-22T21:14:34.326Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T17:16:51.894Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-29T16:25:33.735Z",
           "phase": "2",
           "description": "* All individuals 16 and older",
           "startDate": "March 29, 2021"
@@ -1224,17 +1224,17 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-11T15:25:40.577Z",
+          "updatedAt": "2021-03-29T16:28:40.203Z",
           "phase": "3",
-          "description": "* Individuals 16+ with any underlying medical condition\n* People 50-64\n* All other essential workforces",
-          "startDate": "May-June"
+          "description": "* Individuals 16+ with any underlying medical condition\n* People 50-64\n* All other essential workers",
+          "startDate": "March 30, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-02T00:41:05.529Z",
+          "updatedAt": "2021-03-29T16:28:36.961Z",
           "phase": "4",
-          "description": "* General public",
-          "startDate": "Summer"
+          "description": "* All individuals 16 and older",
+          "startDate": "March 30, 2021"
         }
       ],
       "notes": ""
