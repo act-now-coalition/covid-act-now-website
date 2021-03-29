@@ -79,7 +79,7 @@
       "fips": "04",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
       "vaccinationSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
