@@ -1757,7 +1757,7 @@
       "fips": "38",
       "eligibilityInfoUrl": "https://www.health.nd.gov/covid-19-vaccine-priority-groups",
       "vaccinationSignupUrl": "https://www.health.nd.gov/covidvaccinelocator",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1789,11 +1789,11 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "* General public (Individuals 16+)",
           "expandedDefinitionUrl": "",
           "startDate": "March 29",
-          "updatedAt": "2021-03-22T19:55:20.478Z"
+          "updatedAt": "2021-03-29T04:10:22.885Z"
         }
       ]
     },
