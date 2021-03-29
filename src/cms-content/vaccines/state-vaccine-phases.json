@@ -669,7 +669,7 @@
           "currentlyEligible": true,
           "updatedAt": "2021-03-22T16:46:52.360Z",
           "phase": "1B+",
-          "description": "* Persons aged 16 to 64 years with high-risk medical conditions (not eligible in Chicago until March 29)"
+          "description": "* Persons aged 16 to 64 years with high-risk medical conditions"
         },
         {
           "phase": "1C",
@@ -1775,10 +1775,10 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* General public (Individuals 16+)",
+          "description": "* General public (individuals 16+)",
           "expandedDefinitionUrl": "",
-          "startDate": "March 29",
-          "updatedAt": "2021-03-29T04:10:22.885Z"
+          "startDate": "March 29, 2021",
+          "updatedAt": "2021-03-29T18:05:01.445Z"
         }
       ]
     },
