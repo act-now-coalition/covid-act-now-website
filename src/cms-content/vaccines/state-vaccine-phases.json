@@ -1517,7 +1517,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "New Jersey",
       "fips": "34",
       "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
@@ -1549,12 +1549,19 @@
           "description": "* Educators and childcare workers\n* Additional public safety and transportation workers\n* Additional high-risk individuals (migrant farm workers, tribal communities, those experiencing homelessness or living in shelters)"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-18T18:23:46.771Z",
-          "phase": "1C",
-          "tier": "",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-29T16:45:30.909Z",
+          "phase": "1B",
+          "tier": "3",
           "description": "* Additional frontline essential workers",
           "startDate": "March 29, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-29T16:46:15.284Z",
+          "phase": "1C",
+          "description": "* Individuals aged 55-64\n* Individuals 16 and over with intellectual and developmental disabilities \n* Workers in additional industries",
+          "startDate": "April 5, 2021"
         },
         {
           "phase": "2",
@@ -1587,17 +1594,10 @@
           "phase": "1B",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Adults 75+\n* Individuals (16+) with at least one chronic high-risk condition",
+          "description": "* Adults 75+\n* Individuals (16+) with at least one chronic high-risk condition\n* K-12 educators, early childhood professionals, and school staff",
           "expandedDefinitionUrl": "",
           "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-18T18:24:46.266Z",
-          "phase": "1B",
-          "tier": "1+",
-          "description": "* K-12 educators, early childhood professionals, and school staff"
+          "updatedAt": "2021-03-29T16:48:37.843Z"
         },
         {
           "phase": "1B",
@@ -1723,17 +1723,17 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-18T18:31:33.335Z",
+          "updatedAt": "2021-03-29T16:50:06.106Z",
           "phase": "4B",
           "description": "* Residents of remaining congregate living settings\n* Additional essential workers",
-          "startDate": "April 7, 2021"
+          "startDate": "March 31, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-25T18:00:17.183Z",
+          "updatedAt": "2021-03-29T16:50:48.583Z",
           "description": "* All individuals 16+",
           "phase": "5",
-          "startDate": "By May 1, 2021"
+          "startDate": "April 7, 2021"
         }
       ]
     },
