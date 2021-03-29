@@ -44,8 +44,8 @@ const standardButtonSizing = css`
 `;
 
 const largeButtonSizing = css`
-  padding: 0.625rem;
-  font-size: 0.875rem;
+  padding: 1.125rem 1rem;
+  font-size: 1rem;
 `;
 
 /**
