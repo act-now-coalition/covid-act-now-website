@@ -72,8 +72,8 @@
       "productDescription": "The following data is available for all 50 states (plus D.C., Puerto Rico, and Northern Marina Islands), most or all counties and metro areas, except where noted. Refer to our [data definitions](https://apidocs.covidactnow.org/data-definitions) for all included fields."
     },
     {
-      "productName": "FAQs",
-      "productId": "faqs",
+      "productName": "FAQ",
+      "productId": "faq",
       "productSubtitle": "Frequently Asked Questions",
       "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.\n\n### Where can I see all data fields included in your API?\n\nAll fields can be found in our [data definitions](https://apidocs.covidactnow.org/data-definitions).  To see an overview of how to query data for states, counties, or metros visit our [getting started guide](https://apidocs.covidactnow.org/access#getting-started).\n\n### When does your data update and at what time?\n\nOur data is updated daily around noon Eastern Time.  Updates reflect the latest available data from each of our sources."
     },

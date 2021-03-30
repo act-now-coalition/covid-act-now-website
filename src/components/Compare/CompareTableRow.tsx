@@ -1,5 +1,5 @@
 import React from 'react';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
   DataCell,

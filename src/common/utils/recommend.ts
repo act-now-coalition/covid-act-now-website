@@ -1,4 +1,8 @@
-import { sum, isNumber, reject, isNull, partition } from 'lodash';
+import sum from 'lodash/sum';
+import isNumber from 'lodash/isNumber';
+import reject from 'lodash/reject';
+import isNull from 'lodash/isNull';
+import partition from 'lodash/partition';
 import { Projection, Column } from 'common/models/Projection';
 import { getLevel, getMetricNameForCompare, formatValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';

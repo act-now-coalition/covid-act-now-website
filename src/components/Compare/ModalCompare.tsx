@@ -4,7 +4,6 @@ import { ModalHeader } from 'components/Compare/Compare.style';
 import CloseIcon from '@material-ui/icons/Close';
 import {
   SummaryForCompare,
-  MetroFilter,
   GeoScopeFilter,
   HomepageLocationScope,
 } from 'common/utils/compare';
@@ -14,14 +13,11 @@ import { Region, MetroArea } from 'common/regions';
 
 interface ModalCompareProps {
   stateName?: string;
-  county: any | null;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isHomepage?: boolean;
   locations: SummaryForCompare[];
   currentCounty?: any;
   handleCloseModal: () => void;
-  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
-  countyTypeToView: MetroFilter;
   geoScope: GeoScopeFilter;
   setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
@@ -69,10 +65,8 @@ const ModalCompare = (props: ModalCompareProps) => {
         {!disableFilters && (
           <Filters
             isHomepage={props.isHomepage}
-            countyTypeToView={props.countyTypeToView}
-            setCountyTypeToView={props.setCountyTypeToView}
             stateId={props.stateId}
-            county={props.county}
+            isCounty={Boolean(props.currentCounty)}
             geoScope={props.geoScope}
             setGeoScope={props.setGeoScope}
             isModal
@@ -88,14 +82,11 @@ const ModalCompare = (props: ModalCompareProps) => {
       </ModalHeader>
       <CompareTable
         stateName={props.stateName}
-        county={props.county}
         setShowModal={props.setShowModal}
         isModal
         isHomepage={props.isHomepage}
         locations={props.locations}
         currentCounty={props.currentCounty}
-        countyTypeToView={props.countyTypeToView}
-        setCountyTypeToView={props.setCountyTypeToView}
         geoScope={props.geoScope}
         setGeoScope={props.setGeoScope}
         stateId={props.stateId}

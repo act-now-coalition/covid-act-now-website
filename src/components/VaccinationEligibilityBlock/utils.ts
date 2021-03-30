@@ -1,4 +1,5 @@
-import { last, partition } from 'lodash';
+import last from 'lodash/last';
+import partition from 'lodash/partition';
 import { Region, County, State, MetroArea, getStateName } from 'common/regions';
 import { assert } from 'common/utils';
 import {

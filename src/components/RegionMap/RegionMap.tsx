@@ -57,48 +57,63 @@ const RegionMap: React.FC<{
       >
         <Geographies key="states" geography={statesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => {
-              const region = regions.findByFipsCode(geo.id);
-              return (
-                <Link
-                  key={geo.id}
-                  to={region ? region.relativeUrl : '/'}
-                  aria-label={region?.fullName || ''}
-                  onMouseEnter={() => onMouseEnter(region?.fullName || '')}
-                  onMouseLeave={onMouseLeave}
-                >
-                  <Styles.StateShape key={geo.id} geography={geo} />
-                </Link>
-              );
-            })
+            geographies
+              .filter(geo => regions.findByFipsCode(geo.id))
+              .map(geo => {
+                const region = regions.findByFipsCode(geo.id);
+                return (
+                  <Link
+                    key={geo.id}
+                    to={region ? region.relativeUrl : '/'}
+                    aria-label={region?.fullName || ''}
+                    onMouseEnter={() => onMouseEnter(region?.fullName || '')}
+                    onMouseLeave={onMouseLeave}
+                  >
+                    <Styles.StateShape
+                      key={geo.id}
+                      geography={geo}
+                      aria-label={region?.fullName}
+                    />
+                  </Link>
+                );
+              })
           }
         </Geographies>
         <Geographies key="counties" geography={countiesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => {
-              const region = regions.findByFipsCode(geo.id);
-              return (
-                <Link
-                  key={geo.id}
-                  to={region ? region.relativeUrl : '/'}
-                  aria-label={region?.shortName || ''}
-                  onMouseEnter={() => onMouseEnter(region?.shortName || '')}
-                  onMouseLeave={onMouseLeave}
-                >
-                  <Styles.CountyWithLevel
-                    geography={geo}
-                    $locationSummary={LocationSummariesByFIPS[geo.id] || null}
-                  />
-                </Link>
-              );
-            })
+            geographies
+              .filter(geo => regions.findByFipsCode(geo.id))
+              .map(geo => {
+                const region = regions.findByFipsCode(geo.id);
+                return (
+                  <Link
+                    key={geo.id}
+                    to={region ? region.relativeUrl : '/'}
+                    aria-label={region?.shortName || ''}
+                    onMouseEnter={() => onMouseEnter(region?.shortName || '')}
+                    onMouseLeave={onMouseLeave}
+                  >
+                    <Styles.CountyWithLevel
+                      geography={geo}
+                      $locationSummary={LocationSummariesByFIPS[geo.id] || null}
+                      aria-label={region?.shortName}
+                    />
+                  </Link>
+                );
+              })
           }
         </Geographies>
         <Geographies key="state-borders" geography={statesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => (
-              <Styles.StateBorder key={geo.id} geography={geo} />
-            ))
+            geographies
+              .filter(geo => regions.findByFipsCode(geo.id))
+              .map(geo => (
+                <Styles.StateBorder
+                  key={geo.id}
+                  geography={geo}
+                  aria-hidden="true"
+                />
+              ))
           }
         </Geographies>
         {/* Highlight the current county if needed */}
@@ -108,7 +123,11 @@ const RegionMap: React.FC<{
               geographies
                 .filter(geo => geo.id === region.fipsCode)
                 .map(geo => (
-                  <Styles.CountyBorder key={geo.id} geography={geo} />
+                  <Styles.CountyBorder
+                    key={geo.id}
+                    geography={geo}
+                    aria-hidden="true"
+                  />
                 ))
             }
           </Geographies>

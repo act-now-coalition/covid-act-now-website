@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import AggregationsJSON from 'assets/data/aggregations.json';
-import { last, isNull } from 'lodash';
+import last from 'lodash/last';
+import isNull from 'lodash/isNull';
 import {
   formatPercent,
   formatDecimal,

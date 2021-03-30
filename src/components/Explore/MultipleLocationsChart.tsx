@@ -1,5 +1,8 @@
 import React, { useCallback, Fragment } from 'react';
-import { isNumber, last, max, sortBy } from 'lodash';
+import isNumber from 'lodash/isNumber';
+import last from 'lodash/last';
+import max from 'lodash/max';
+import sortBy from 'lodash/sortBy';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';

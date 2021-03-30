@@ -1,4 +1,5 @@
 import React from 'react';
+import sortBy from 'lodash/sortBy';
 import {
   RegionVaccinePhaseInfo,
   RegionPhaseGroup,
@@ -7,8 +8,6 @@ import {
 import { Container, Grid, Typography } from '@material-ui/core';
 import ExternalLink from 'components/ExternalLink';
 import { MarkdownContent } from 'components/Markdown';
-
-import { sortBy } from 'lodash';
 
 interface StateVaccineDataProps {
   regionData: RegionVaccinePhaseInfo;

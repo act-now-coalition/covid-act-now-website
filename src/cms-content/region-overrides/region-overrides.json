@@ -66,6 +66,13 @@
       "blocked": true,
       "region": "TX",
       "context": "https://trello.com/c/hrP6EYh1/1156-tx-vaccine-data-incomplete"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "04013",
+      "context": "https://trello.com/c/gLXOYZdT/1159-maricopa-county-az-fully-vaccinated-exceeds-partially-vaccinated"
     }
   ]
 }

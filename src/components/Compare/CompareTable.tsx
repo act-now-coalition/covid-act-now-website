@@ -1,5 +1,9 @@
 import React from 'react';
-import { sortBy, findIndex, partition, reverse, isNumber } from 'lodash';
+import sortBy from 'lodash/sortBy';
+import findIndex from 'lodash/findIndex';
+import partition from 'lodash/partition';
+import reverse from 'lodash/reverse';
+import isNumber from 'lodash/isNumber';
 import {
   Wrapper,
   Footer,
@@ -12,10 +16,8 @@ import Filters from 'components/Compare/Filters';
 import {
   SummaryForCompare,
   RankedLocationSummary,
-  MetroFilter,
   GeoScopeFilter,
   getShareQuote,
-  getMetroPrefixCopy,
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
@@ -42,7 +44,6 @@ function trackShare(label: string) {
 
 const CompareTable = (props: {
   stateName?: string;
-  county?: any | null;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isModal: boolean;
   locationsViewable?: number;
@@ -50,8 +51,6 @@ const CompareTable = (props: {
   locations: SummaryForCompare[];
   currentCounty: any | null;
   viewMoreCopy?: string;
-  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
-  countyTypeToView: MetroFilter;
   geoScope: GeoScopeFilter;
   setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   stateId?: string;
@@ -72,6 +71,7 @@ const CompareTable = (props: {
   vulnerabilityFirst?: boolean;
 }) => {
   const {
+    currentCounty,
     sorter,
     setSorter,
     sortDescending,
@@ -87,8 +87,6 @@ const CompareTable = (props: {
     vaccinesFirst,
     vulnerabilityFirst,
   } = props;
-
-  const currentCounty = props.county && props.currentCounty;
 
   const currentCountyFips = currentCounty ? currentCounty.region.fipsCode : 0;
 
@@ -159,18 +157,14 @@ const CompareTable = (props: {
 
   const firstColumnHeaderHomepage =
     props.homepageScope === HomepageLocationScope.COUNTY
-      ? `${getMetroPrefixCopy(props.countyTypeToView)} ${
-          homepageLabelMap[HomepageLocationScope.COUNTY].singular
-        }`
+      ? `${homepageLabelMap[HomepageLocationScope.COUNTY].singular}`
       : `${homepageLabelMap[homepageScope].singular}`;
 
   const firstColumnHeader = props.isHomepage
     ? firstColumnHeaderHomepage
     : props.isModal
-    ? `${getMetroPrefixCopy(props.countyTypeToView)} Counties (${
-        sortedLocationsArr.length
-      })`
-    : `${getMetroPrefixCopy(props.countyTypeToView)} County`;
+    ? `Counties (${sortedLocationsArr.length})`
+    : `County`;
 
   const sortedLocations: RankedLocationSummary[] = sortedLocationsArr
     .filter((location: SummaryForCompare) => location.metricsInfo !== null)
@@ -179,13 +173,12 @@ const CompareTable = (props: {
       ...summary,
     }));
 
-  const currentLocation = props.county
+  const currentLocation = currentCounty
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
   const shareQuote = getShareQuote(
     sorter,
-    props.countyTypeToView,
     sliderNumberToFilterMap[sliderValue],
     sortedLocationsArr.length,
     sortDescending,
@@ -252,10 +245,8 @@ const CompareTable = (props: {
           {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}
-              countyTypeToView={props.countyTypeToView}
-              setCountyTypeToView={props.setCountyTypeToView}
               stateId={props.stateId}
-              county={props.county}
+              isCounty={Boolean(currentCounty)}
               geoScope={props.geoScope}
               setGeoScope={props.setGeoScope}
               isModal={props.isModal}
@@ -286,7 +277,7 @@ const CompareTable = (props: {
         region={region}
       />
       {!props.isModal && (
-        <Footer isCounty={props.county}>
+        <Footer>
           <div>
             <span>
               Displaying <strong>{amountDisplayed}</strong> of{' '}

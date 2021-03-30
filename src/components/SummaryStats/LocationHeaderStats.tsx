@@ -1,5 +1,5 @@
 import React from 'react';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { getMetricName, getLevelInfo, formatValue } from 'common/metric';

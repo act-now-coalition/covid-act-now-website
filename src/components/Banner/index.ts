@@ -7,6 +7,7 @@ import VoteBanner from './VoteBanner';
 import FeatureBanner from './FeatureBanner';
 import ThirdWaveBanner from './ThirdWaveBanner';
 import VaccinationsBanner from './VaccinationsBanner';
+import SpringSurgeBanner from './SpringSurgeBanner';
 
 export default Banner;
 export {
@@ -17,4 +18,5 @@ export {
   FeatureBanner,
   ThirdWaveBanner,
   VaccinationsBanner,
+  SpringSurgeBanner,
 };

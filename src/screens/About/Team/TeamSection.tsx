@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { teams, teamsWithTitles } from 'cms-content/team';
 import { AboutHeading3 } from '../About.style';
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 import Grid from '@material-ui/core/Grid';
 import ActiveMember from './ActiveMember';
 import AlumniMember from './AlumniMember';

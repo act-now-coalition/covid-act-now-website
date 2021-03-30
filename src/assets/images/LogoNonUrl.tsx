@@ -1,9 +1,6 @@
 import React from 'react';
 
-const LogoNonUrl: React.FC<{ height?: string; width?: string }> = ({
-  height = 32,
-  width = 40,
-}) => {
+const LogoNonUrl: React.FC = () => {
   return (
     <svg
       width="164"

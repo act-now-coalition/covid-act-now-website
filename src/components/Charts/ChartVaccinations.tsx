@@ -1,5 +1,7 @@
 import React, { useCallback, Fragment } from 'react';
-import { last, isNumber, max } from 'lodash';
+import last from 'lodash/last';
+import isNumber from 'lodash/isNumber';
+import max from 'lodash/max';
 import { AxisLeft } from '@vx/axis';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';

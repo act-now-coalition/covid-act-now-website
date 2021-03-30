@@ -1,5 +1,5 @@
 import React from 'react';
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 import { Row, ThemeNameCell, LevelCell, Wrapper } from './ThemesBlock.style';
 import { orderedCcviThemes, CcviThemeInfo } from 'cms-content/tooltips';
 import { InfoTooltip } from 'components/InfoTooltip';

@@ -1,4 +1,5 @@
-import { take, isEmpty } from 'lodash';
+import take from 'lodash/take';
+import isEmpty from 'lodash/isEmpty';
 import { Projections } from 'common/models/Projections';
 import { ProjectionsPair, SortType } from './ProjectionsPair';
 import { Metric } from 'common/metricEnum';

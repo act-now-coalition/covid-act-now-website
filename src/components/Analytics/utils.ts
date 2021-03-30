@@ -1,4 +1,5 @@
-import { capitalize, words } from 'lodash';
+import capitalize from 'lodash/capitalize';
+import words from 'lodash/words';
 import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';
@@ -43,6 +44,7 @@ export enum EventCategory {
   FOOTER = 'footer',
   GEOLOCATION_CARDS = 'geolocation cards',
   GLOSSARY = 'glossary',
+  HOMEPAGE_BANNER = 'homepage banner',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
   MAP = 'map',
   METRICS = 'metrics',

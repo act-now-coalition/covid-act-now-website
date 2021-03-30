@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { isDate } from 'lodash';
+import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';

@@ -8,7 +8,8 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { smallPhoneBreakpoint } from 'assets/theme/sizes';
+import { smallPhoneBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { fonts } from 'common/theme';
 
 const desktopNavHeight = 64;
 
@@ -76,18 +77,19 @@ export const BackLink = styled(_NavLink)`
   }
 `;
 
-export const StyledMenu = styled.nav<{ open: boolean }>`
+export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   background: ${COLOR_MAP.GREY_1};
   border-top: 1px solid ${COLOR_MAP.GREY_2};
-  transform: ${({ open }) => (open ? 'translateY(64px)' : 'translateY(-100%)')};
+  transform: translateY(64px);
   text-align: left;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
+  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
 
   a {
     cursor: pointer;
@@ -142,8 +144,17 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
 }))`
-  &:focus {
+  ${fonts.regularBookMidWeight};
+  color: black;
+  font-size: 1rem;
+  line-height: 1.4rem;
+
+  &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
+  }
+
+  &:hover {
+    background-color: transparent;
   }
 `;
 
@@ -158,5 +169,14 @@ export const MenuIcon = styled(MuiMenuIcon)`
 export const ExperimentButtonsContainer = styled.div`
   & > :not(:last-child) {
     margin-right: 45px;
+  }
+`;
+
+export const MenuLabel = styled.span`
+  display: none;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: inherit;
+    margin-right: 0.5rem;
   }
 `;

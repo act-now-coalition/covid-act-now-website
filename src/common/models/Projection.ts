@@ -1,4 +1,7 @@
-import { first, last, findIndex, findLastIndex } from 'lodash';
+import first from 'lodash/first';
+import last from 'lodash/last';
+import findIndex from 'lodash/findIndex';
+import findLastIndex from 'lodash/findLastIndex';
 import moment from 'moment';
 import { ActualsTimeseries } from 'api';
 import {

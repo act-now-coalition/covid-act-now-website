@@ -1,5 +1,5 @@
 import React, { useCallback, Fragment } from 'react';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';

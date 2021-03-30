@@ -1,5 +1,6 @@
+import keyBy from 'lodash/keyBy';
+import sortBy from 'lodash/sortBy';
 import { Markdown, sanitizeID } from '../utils';
-import { keyBy, sortBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
 import canCompare from './can-compare.json';

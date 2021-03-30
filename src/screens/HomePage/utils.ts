@@ -1,4 +1,6 @@
-import { sortBy, reverse, take } from 'lodash';
+import sortBy from 'lodash/sortBy';
+import reverse from 'lodash/reverse';
+import take from 'lodash/take';
 import regions from 'common/regions';
 
 /* Gets fips of 5 largest metro areas to set as homepage explore presets */

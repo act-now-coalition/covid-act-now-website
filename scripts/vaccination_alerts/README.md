@@ -112,3 +112,5 @@ Writing the template for an email is hard because email clients often strip CSS 
 - Go to the [Foundation Style Inliner](https://get.foundation/emails/inliner.html) and paste the content of the rendered HTML file, unchecking the "Compress HTML" checkbox.
 
 The resulting HTML code contains the styles for each element, so we can manually copy the inline styles matching the classes from the `vaccination=alert-template-source.html` file.
+
+If you are just making copy changes, you can change the sections in both `vaccination-alert-template-source.html` and `vaccination-alert-template.html` and you should be good to go. If you only change copy in `vaccination-alert-template.html` there is a risk of regression the next time someone comes by and rebuilds it from source.

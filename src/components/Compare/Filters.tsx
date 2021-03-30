@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import {
-  MetroFilter,
   GeoScopeFilter,
   trackCompareEvent,
   HomepageLocationScope,
@@ -17,10 +16,8 @@ import HomepageSlider from './HomepageSlider';
 
 const Filters = (props: {
   isHomepage?: boolean;
-  setCountyTypeToView: React.Dispatch<React.SetStateAction<MetroFilter>>;
-  countyTypeToView: MetroFilter;
   stateId?: string;
-  county?: any | null;
+  isCounty: boolean;
   geoScope: GeoScopeFilter;
   setGeoScope: React.Dispatch<React.SetStateAction<GeoScopeFilter>>;
   isModal: boolean;
@@ -31,21 +28,10 @@ const Filters = (props: {
 }) => {
   const {
     sliderValue,
-    setCountyTypeToView,
     homepageScope,
     setHomepageScope,
     homepageSliderValue,
   } = props;
-
-  const disableMetroMenu = props.isHomepage
-    ? homepageScope !== HomepageLocationScope.COUNTY
-    : sliderValue === 0;
-
-  useEffect(() => {
-    if (disableMetroMenu) {
-      setCountyTypeToView(MetroFilter.ALL);
-    }
-  }, [disableMetroMenu, setCountyTypeToView]);
 
   const GeoFilterLabels = {
     [GeoScopeFilter.NEARBY]: 'Nearby',
@@ -106,7 +92,7 @@ const Filters = (props: {
             $isModal={props.isModal}
           />
         )}
-        {props.county && (
+        {props.isCounty && (
           <SliderContainer $isModal={props.isModal}>
             <GeoSlider
               onChange={sliderHandleChange}

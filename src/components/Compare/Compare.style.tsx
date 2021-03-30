@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { COLORS } from 'common';
@@ -412,7 +412,7 @@ export const Row = styled(TableRow)<{
   }
 `;
 
-export const Footer = styled.div<{ isCounty: any }>`
+export const Footer = styled.div`
   display: flex;
   padding: 1.25rem 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};

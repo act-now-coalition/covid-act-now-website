@@ -1,12 +1,10 @@
-import {
-  concat,
-  partition,
-  sortBy,
-  find,
-  values,
-  isNull,
-  without,
-} from 'lodash';
+import concat from 'lodash/concat';
+import partition from 'lodash/partition';
+import sortBy from 'lodash/sortBy';
+import find from 'lodash/find';
+import values from 'lodash/values';
+import isNull from 'lodash/isNull';
+import without from 'lodash/without';
 import regions from './region_db';
 import { getStateFips } from './regions_data';
 import { County, State, Region, MetroArea } from './types';

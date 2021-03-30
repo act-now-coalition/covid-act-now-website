@@ -1,4 +1,6 @@
-import { filter, find, findLastIndex } from 'lodash';
+import filter from 'lodash/filter';
+import find from 'lodash/find';
+import findLastIndex from 'lodash/findLastIndex';
 
 // TODO(michael): We should perhaps create a Timeseries class that wraps an
 // Array<Date> and Array<number | null> and hang these utility functions off of

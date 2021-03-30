@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { deburr, words } from 'lodash';
+import deburr from 'lodash/deburr';
+import words from 'lodash/words';
 import urlJoin from 'url-join';
 import SocialButtons from './SocialButtons';
 
