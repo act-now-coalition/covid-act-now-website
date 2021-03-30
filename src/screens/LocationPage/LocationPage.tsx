@@ -7,10 +7,10 @@ import type { RegionCcviItem } from 'common/data';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 //import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
-//import ChartsHolder from 'components/LocationPage/ChartsHolder';
+import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import type { /*getStateCode, MetroArea,*/ Region } from 'common/regions';
 import type { LocationSummary } from 'common/location_summaries';
-//import { useLocation } from 'common/utils/router';
+import { useLocation } from 'common/utils/router';
 /*
 
 const MiniMap = dynamic(() => import('components/MiniMap'), {
@@ -34,10 +34,10 @@ function LocationPage({
   ccviScores,
   lastUpdatedDateString,
 }: LocationPageProps) {
-  /*
   const location = useLocation();
   const chartIdMatch = location.hash.match(/chart-(?<chartId>\d+)/);
   const chartId = chartIdMatch?.groups?.chartId ?? '';
+  /*
   const defaultMapOption = getDefaultMapOption(region);
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,12 +57,11 @@ function LocationPage({
         pageDescription={description}
       />
       <div>
-        Woo
         {/*}
         <SearchHeader
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-  />}
+  />*/}
         <ChartsHolder
           chartId={chartId}
           region={region}
