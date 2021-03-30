@@ -35,7 +35,7 @@ export type LinkButtonProps = LinkProps & TrackingProps & StyledButtonProps;
 
 const BaseButton: React.FC<LinkButtonProps> = props => {
   const isLink = props.href || props.to;
-  const isNonLinkButton = props.OnClick && !isLink;
+  const isNonLinkButton = props.onClick && !isLink;
   assert(
     isLink || isNonLinkButton,
     "Button needs either a redirect ('href' or 'to' if triggering navigation) or an onClick (if triggering a non-redirect action)",
