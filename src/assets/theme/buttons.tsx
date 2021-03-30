@@ -1,5 +1,6 @@
 import { COLOR_MAP } from 'common/colors';
 import fonts from 'common/theme/fonts';
+import { FlattenSimpleInterpolation } from 'styled-components';
 
 export enum ButtonType {
   FILL,
@@ -18,7 +19,7 @@ export interface ButtonsTheme {
   disabledText: string;
   icon: string;
   disabledIcon: string;
-  fontFamily: any; // fix
+  fontFamily: FlattenSimpleInterpolation;
 }
 
 const newBlue = '#3567FD';
