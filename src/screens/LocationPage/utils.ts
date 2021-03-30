@@ -2,7 +2,7 @@ import replace from 'lodash/replace';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { formatMetatagDate, formatPercent } from 'common/utils';
 import { Region, State, County, MetroArea } from 'common/regions';
-import { LocationSummariesByFIPS } from 'common/location_summaries';
+import type { LocationSummary } from 'common/location_summaries';
 import { Metric } from 'common/metricEnum';
 
 function locationName(region: Region) {
@@ -21,22 +21,24 @@ export function getPageTitle(region: Region): string {
   return `${locationName(region)} - COVID Vaccine & Risk Tracker`;
 }
 
-export function getPageDescription(region: Region): string {
+export function getPageDescription(
+  summary: LocationSummary,
+  region: Region,
+): string {
   const date = formatMetatagDate();
-  const summary = LocationSummariesByFIPS?.[region.fipsCode];
   if (summary) {
     const { level: alarmLevel, metrics } = summary;
     const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
-  const vaccinationRatio = metrics[Metric.VACCINATIONS]?.value;
-  const vaccinationText = vaccinationRatio
-    ? ` and ${formatPercent(
-        vaccinationRatio,
-        1,
-      )} of the population has received at least one vaccine dose`
-    : '';
-  return `${date}: ${locationName(
-    region,
-  )} is at ${levelInfo.name.toLowerCase()} COVID risk level${vaccinationText}.`;
+    const vaccinationRatio = metrics[Metric.VACCINATIONS]?.value;
+    const vaccinationText = vaccinationRatio
+      ? ` and ${formatPercent(
+          vaccinationRatio,
+          1,
+        )} of the population has received at least one vaccine dose`
+      : '';
+    return `${date}: ${locationName(
+      region,
+    )} is at ${levelInfo.name.toLowerCase()} COVID risk level${vaccinationText}.`;
   } else {
     return '';
   }

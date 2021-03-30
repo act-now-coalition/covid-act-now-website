@@ -203,7 +203,7 @@ export const getLocationPageStaticProps = async (
   const locationSummary = getSummaryFromFips(region.fipsCode);
   const regionObject = region.toObject();
   const title = getPageTitle(region);
-  const description = getPageDescription(region);
+  const description = getPageDescription(locationSummary, region);
 
   const fipsToCcviMap = await importFipsToCcviMap();
   const ccviScores = fipsToCcviMap[region.fipsCode] ?? null;
