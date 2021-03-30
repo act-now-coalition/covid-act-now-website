@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { County, State } from '../../../../src/common/regions/types';
 import LocationHeader from '../../../../src/components/LocationPage/LocationHeader';
 import { Block } from '../../../../src/components/LocationPage/LocationHeader.style';
+import AsyncBlock from '../../../../src/components/LocationPage/AsyncBlock';
 
 function CountyPage({ region, locationSummary, shareKey }) {
   if (!locationSummary) {
@@ -30,11 +31,25 @@ function CountyPage({ region, locationSummary, shareKey }) {
   return (
     <div>
       <LocationHeader region={county} locationSummary={locationSummary} />
-      <Block>Chart</Block>
-      <Block>Chart</Block>
-      <Block>Chart</Block>
-      <Block>Chart</Block>
-      <Block id="recommend">Recommendations</Block>
+      <Block>
+        <h2>Chart</h2>
+      </Block>
+      <Block>
+        <h2>Chart</h2>
+      </Block>
+      <Block>
+        <h2>Chart</h2>
+      </Block>
+      <Block>
+        <h2>Chart</h2>
+      </Block>
+      <Block id="async-block">
+        <h2>Async Block</h2>
+        <AsyncBlock />
+      </Block>
+      <Block id="recommend">
+        <h2>Recommendations</h2>
+      </Block>
     </div>
   );
 }

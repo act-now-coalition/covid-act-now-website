@@ -70,7 +70,7 @@ const LocationHeader: React.FC<{
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
-  const stats = summaryToStats(locationSummary);
+  // const stats = summaryToStats(locationSummary);
 
   return (
     <ChartContentWrapper>
