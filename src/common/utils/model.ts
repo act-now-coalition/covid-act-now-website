@@ -209,7 +209,7 @@ export function useProjectionsFromRegion(region: Region | null) {
       }
     }
 
-    fetchData();
+    setTimeout(fetchData, 1000);
   }, [region]);
 
   return projections;
