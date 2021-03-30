@@ -988,7 +988,7 @@
       "fips": "24",
       "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "vaccinationSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1027,10 +1027,10 @@
           "updatedAt": "2021-03-25T17:22:25.584Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:31:54.562Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-30T14:31:59.454Z",
           "phase": "2B",
-          "description": "* Individuals 16+ with underlying medical conditions",
+          "description": "* Individuals 16+ with high-risk medical conditions or disabilities",
           "startDate": "March 30, 2021"
         },
         {
