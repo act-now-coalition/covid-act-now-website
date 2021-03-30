@@ -66,7 +66,7 @@ export default function HomePage() {
     'MN',
     'NJ',
     'WV',
-    'CN',
+    'CT',
     'IL',
     'MA',
   ]; // Updated on 29 March 2021
