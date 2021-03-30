@@ -255,6 +255,7 @@ const ChartsHolder = ({
       <ChartContentWrapper>
         <LocationPageHeader
           alarmLevel={alarmLevel}
+          ccvi={locationSummary.ccvi}
           stats={stats}
           onMetricClick={metric => onClickMetric(metric)}
           onHeaderShareClick={onClickShare}

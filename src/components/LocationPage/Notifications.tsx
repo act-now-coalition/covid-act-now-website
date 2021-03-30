@@ -12,7 +12,6 @@ import { State, County, Region, MetroArea } from 'common/regions';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { CcviLevel, getCcviLevel, getCcviLevelName } from 'common/ccvi';
 import { HashLink } from 'common/utils/router';
-import { getSummaryFromFips } from 'common/location_summaries';
 import { scrollWithOffset } from 'components/TableOfContents';
 
 const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
@@ -38,7 +37,10 @@ const EXPOSURE_NOTIFICATIONS_STATE_FIPS = [
   '56', // Wyoming
 ];
 
-const NotificationArea: React.FC<{ region: Region }> = ({ region }) => {
+const NotificationArea: React.FC<{ region: Region; ccvi: number }> = ({
+  region,
+  ccvi,
+}) => {
   enum Notification {
     HospitalizationsPeak,
     ExposureNotifications,
@@ -79,10 +81,7 @@ const NotificationArea: React.FC<{ region: Region }> = ({ region }) => {
         )}
 
         {notification === Notification.Vulnerability && (
-          <VulnerabilityCopy
-            locationName={region.shortName}
-            fips={region.fipsCode}
-          />
+          <VulnerabilityCopy locationName={region.shortName} ccvi={ccvi} />
         )}
       </SectionColumn>
     </React.Fragment>
@@ -91,10 +90,8 @@ const NotificationArea: React.FC<{ region: Region }> = ({ region }) => {
 
 const VulnerabilityCopy: React.FC<{
   locationName: string;
-  fips: string;
-}> = ({ locationName, fips }) => {
-  const locationSummary = getSummaryFromFips(fips);
-  const ccvi = locationSummary?.ccvi ?? 0;
+  ccvi: number;
+}> = ({ locationName, ccvi }) => {
   const level = getCcviLevel(ccvi);
   const levelName = getCcviLevelName(level).toLowerCase();
   const isHigh = level === CcviLevel.HIGH || level === CcviLevel.VERY_HIGH;

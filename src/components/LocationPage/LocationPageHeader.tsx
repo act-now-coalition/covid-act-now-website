@@ -47,8 +47,9 @@ function renderInfoTooltip(): React.ReactElement {
 
 const noop = () => {};
 
-const LocationPageHeader = (props: {
+const LocationPageHeader: React.FC<{
   alarmLevel: Level;
+  ccvi: number;
   condensed?: boolean;
   stats: MetricValues;
   onMetricClick: (metric: Metric) => void;
@@ -57,11 +58,21 @@ const LocationPageHeader = (props: {
   isMobile?: boolean;
   region: Region;
   lastUpdatedDateString: string;
+}> = ({
+  alarmLevel,
+  ccvi,
+  condensed,
+  stats,
+  onMetricClick,
+  onHeaderShareClick,
+  onHeaderSignupClick,
+  isMobile,
+  region,
+  lastUpdatedDateString,
 }) => {
-  const hasStats = !!Object.values(props.stats).filter(
+  const hasStats = !!Object.values(stats).filter(
     (val: number | null) => val !== null,
   ).length;
-  const { alarmLevel, region } = props;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
@@ -80,7 +91,7 @@ const LocationPageHeader = (props: {
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
       <Wrapper
-        $condensed={props.condensed}
+        $condensed={condensed}
         $headerTopMargin={headerTopMargin}
         $headerBottomMargin={headerBottomMargin}
       >
@@ -88,11 +99,11 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationPageHeading region={region} isEmbed={isEmbed} />
             <ButtonsWrapper>
-              <HeaderButton onClick={props.onHeaderShareClick || noop}>
+              <HeaderButton onClick={onHeaderShareClick || noop}>
                 <ShareOutlinedIcon />
                 Share
               </HeaderButton>
-              <HeaderButton onClick={props.onHeaderSignupClick || noop}>
+              <HeaderButton onClick={onHeaderSignupClick || noop}>
                 <NotificationsNoneIcon />
                 Receive alerts
               </HeaderButton>
@@ -114,22 +125,20 @@ const LocationPageHeader = (props: {
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
-              <NotificationArea region={region} />
+              <NotificationArea region={region} ccvi={ccvi} />
             </SectionHalf>
           </HeaderSection>
           <LocationHeaderStats
-            stats={props.stats}
-            onMetricClick={props.onMetricClick}
-            isMobile={props.isMobile}
+            stats={stats}
+            onMetricClick={onMetricClick}
+            isMobile={isMobile}
             isHeader={true}
           />
         </TopContainer>
         <FooterContainer>
           {!isEmbed && (
             <HeaderSubCopy>
-              <LastUpdatedDate>
-                Updated {props.lastUpdatedDateString}
-              </LastUpdatedDate>
+              <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
             </HeaderSubCopy>
           )}
         </FooterContainer>
