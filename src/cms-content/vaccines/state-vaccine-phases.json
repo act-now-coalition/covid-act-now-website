@@ -475,7 +475,7 @@
           "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* (NEW) Persons ages 40+\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of COVID\n* Certain sites (including CVS, Publix, Walmart, and Walgreens) are vaccinating teachers under 50",
+          "description": "* Persons ages 40+\n* Health care personnel with direct patient contact\n* Long-term care staff and residents\n* Individuals extremely at risk of COVID\n* Certain sites (including CVS, Publix, Walmart, and Walgreens) are vaccinating teachers under 50",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-29T16:02:51.552Z"
@@ -988,7 +988,7 @@
       "fips": "24",
       "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "vaccinationSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1027,10 +1027,10 @@
           "updatedAt": "2021-03-25T17:22:25.584Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:31:54.562Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-30T14:31:59.454Z",
           "phase": "2B",
-          "description": "* Individuals 16+ with underlying medical conditions",
+          "description": "* Individuals 16+ with high-risk medical conditions or disabilities",
           "startDate": "March 30, 2021"
         },
         {
@@ -1193,7 +1193,7 @@
       "fips": "27",
       "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
       "vaccinationSignupUrl": "https://mn.gov/covid19/vaccine/find-vaccine/index.jsp",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "phase": "1",
@@ -1223,15 +1223,15 @@
           "updatedAt": "2021-03-11T15:24:39.942Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T16:28:40.203Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-30T14:38:40.737Z",
           "phase": "3",
           "description": "* Individuals 16+ with any underlying medical condition\n* People 50-64\n* All other essential workers",
           "startDate": "March 30, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T16:28:36.961Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-30T14:38:48.469Z",
           "phase": "4",
           "description": "* All individuals 16 and older",
           "startDate": "March 30, 2021"
@@ -1629,7 +1629,7 @@
       ]
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "New York",
       "fips": "36",
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
@@ -1670,10 +1670,25 @@
           "startDate": "March 23, 2021"
         },
         {
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-30T14:43:36.314Z",
+          "phase": "1b",
+          "tier": "4",
+          "startDate": "March 30, 2021",
+          "description": "* Adults 30-49"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-30T14:44:33.787Z",
+          "phase": "2",
+          "startDate": "April 6, 2021",
+          "description": "* All individuals 16+"
+        },
+        {
           "currentlyEligible": false,
           "updatedAt": "2021-03-25T19:23:27.129Z",
           "phase": "TBD",
-          "description": "Still to be determined:\n\n* General population and individuals under 16",
+          "description": "Still to be determined:\n\n* Individuals under 16",
           "startDate": ""
         }
       ]
@@ -2090,7 +2105,7 @@
           "phase": "1",
           "tier": "3",
           "currentlyEligible": true,
-          "description": "* (NEW) Educators and child care personnel\n* Ages 65-74\n",
+          "description": "* Educators and child care personnel\n* Ages 65-74",
           "expandedDefinitionUrl": "",
           "startDate": "February 22",
           "updatedAt": "2021-02-18T01:52:35.985Z"
@@ -2330,8 +2345,8 @@
           "currentlyEligible": true,
           "updatedAt": "2021-03-11T17:28:58.485Z",
           "phase": "1C",
-          "description": "* (NEW) Adults 50+\n* Education and child care personnel\n",
-          "startDate": "March 4"
+          "description": "* Adults 50+\n* Education and child care personnel",
+          "startDate": "March 4, 2021"
         },
         {
           "currentlyEligible": true,
@@ -2444,7 +2459,7 @@
           "phase": "1C",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* (NEW) All veterans and their spouses/caregivers\nSome counties are now vaccinating:\n* Other essential workers",
+          "description": "* All veterans and their spouses/caregivers\n  Some counties are now vaccinating:\n* Other essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-25T06:14:26.374Z"
@@ -2495,7 +2510,7 @@
           "phase": "1B",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* High-risk critical workers who work in certain congregate settings (agriculture and fishing, food services, corrections, court system, public transit, remaining first responders, etc.)\n* (NEW) Individuals 16+ who are pregnant or have high-risk disabilities",
+          "description": "* High-risk critical workers who work in certain congregate settings (agriculture and fishing, food services, corrections, court system, public transit, remaining first responders, etc.)\n* Individuals 16+ who are pregnant or have high-risk disabilities",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-22T23:32:15.036Z"
