@@ -54,7 +54,7 @@ const largeButtonSizing = css`
 `;
 
 const textButtonSizing = css`
-  padding: 0.625rem;
+  padding: 0;
   font-size: 1rem;
   max-height: 2.25rem;
 

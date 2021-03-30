@@ -46,6 +46,7 @@ export enum EventCategory {
   GLOSSARY = 'glossary',
   HOMEPAGE_BANNER = 'homepage banner',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
+  LEARN = 'learn',
   MAP = 'map',
   METRICS = 'metrics',
   METRIC_EXPLAINERS = 'metric explainers',
