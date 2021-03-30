@@ -57,11 +57,8 @@ const LinkButton: React.FC<LinkButtonProps> = props => {
   }
 };
 
-const Button: React.FC<StyledButtonProps> = props => {
-  const hasOnClick = props.onClick;
-  assert(hasOnClick, 'Button needs an onClick');
-
-  const { onClick, ...otherProps } = props;
+const Button: React.FC<StyledButtonProps> = ({ onClick, ...otherProps }) => {
+  assert(onClick, 'Button needs an onClick');
 
   return <BaseMuiButton {...otherProps} onClick={onClick} />;
 };
@@ -77,10 +74,6 @@ type BaseButtonProps = TrackingProps & (LinkButtonProps | StyledButtonProps);
 const BaseButton: React.FC<BaseButtonProps> = props => {
   const isLink = props.href || props.to;
   const isButton = props.onClick && !isLink;
-  assert(
-    isLink || isButton,
-    "Button needs either a redirect ('href' or 'to' if triggering navigation) or an onClick (if triggering a non-redirect action)",
-  );
 
   const {
     trackingAction,

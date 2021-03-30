@@ -67,9 +67,9 @@ const buttons: ButtonMap = {
     textHover: newBlueDark,
     icon: COLOR_MAP.GRAY_BODY_COPY,
     fontFamily: fonts.regularBook,
-    disabledBackground: COLOR_MAP.GREY_1, // ?
-    disabledText: COLOR_MAP.GRAY_BODY_COPY, // ?
-    disabledIcon: COLOR_MAP.GREY_3, // ?
+    disabledBackground: COLOR_MAP.GREY_1, // TODO (chelsi) - ask UX about disable state
+    disabledText: COLOR_MAP.GRAY_BODY_COPY, // ditto^
+    disabledIcon: COLOR_MAP.GREY_3, // ditto^
   },
 };
 
