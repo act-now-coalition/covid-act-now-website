@@ -133,7 +133,11 @@ export default function HomePage() {
                 )}
                 filterLimit={getFilterLimit()}
               />
-              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
+              <HomepageItems
+                isLoading={isLoading}
+                userRegions={userRegions}
+                showMetro={false}
+              />
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}
