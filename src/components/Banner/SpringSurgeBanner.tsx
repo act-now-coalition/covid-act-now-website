@@ -25,7 +25,8 @@ const BannerInner: React.FC = () => {
   return (
     <InnerContainer>
       <Body>
-        Hospitalizations are rising in {SeveralStatesLink}. Help prevent another
+        Daily new cases are flat or rising in two-thirds of states and
+        hospitalizations are rising in {SeveralStatesLink}. Help prevent another
         COVID wave by continuing to take precautions and getting vaccinated when
         you are eligible.
       </Body>
