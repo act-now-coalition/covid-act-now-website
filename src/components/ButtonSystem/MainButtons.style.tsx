@@ -68,25 +68,25 @@ const textButtonSizing = css`
  */
 export const OutlinedButton = styled(BaseButton)`
   ${standardButtonSizing};
-  ${props => button(props.theme.palette.buttons[ButtonType.OUTLINE])};
+  ${props => button(props.theme.buttons[ButtonType.OUTLINE])};
 `;
 
 export const FilledButton = styled(BaseButton)`
   ${standardButtonSizing};
-  ${props => button(props.theme.palette.buttons[ButtonType.FILL])};
+  ${props => button(props.theme.buttons[ButtonType.FILL])};
 `;
 
 export const LargeOutlinedButton = styled(BaseButton)`
   ${largeButtonSizing};
-  ${props => button(props.theme.palette.buttons[ButtonType.OUTLINE])};
+  ${props => button(props.theme.buttons[ButtonType.OUTLINE])};
 `;
 
 export const LargeFilledButton = styled(BaseButton)`
   ${largeButtonSizing};
-  ${props => button(props.theme.palette.buttons[ButtonType.FILL])};
+  ${props => button(props.theme.buttons[ButtonType.FILL])};
 `;
 
 export const TextButton = styled(BaseButton)`
   ${textButtonSizing};
-  ${props => button(props.theme.palette.buttons[ButtonType.TEXT])};
+  ${props => button(props.theme.buttons[ButtonType.TEXT])};
 `;

@@ -27,7 +27,11 @@ const newBlueDark = '#002CB4';
 const newBlueLight = 'rgba(53, 103, 253, .15)';
 const lightGrayFigma = '#e0e0e0';
 
-const buttons: { [key in ButtonType]: ButtonsTheme } = {
+export type ButtonMap = {
+  [key in ButtonType]: ButtonsTheme;
+};
+
+const buttons: ButtonMap = {
   [ButtonType.FILL]: {
     background: newBlue,
     border: newBlue,
