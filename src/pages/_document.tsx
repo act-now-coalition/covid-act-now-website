@@ -136,13 +136,14 @@ class MyDocument extends Document {
             name="twitter:description"
             content="Covid Act Now has real-time COVID data and risk level for your community. See how your community is doing at covidactnow.org."
           />
-
+          {/* FIXME: reinstate. comment this out to leave it out of perf calculations }
           <link rel="preconnect" href="https://fonts.gstatic.com/" />
           <link
             href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
             rel="stylesheet"
             type="text/css"
           />
+          */}
 
           {/* Google Optimize for A/B testing */}
           <script
