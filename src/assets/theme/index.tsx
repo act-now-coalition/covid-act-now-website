@@ -5,6 +5,7 @@ import typography from './typography';
 import overrides from './overrides';
 import { COLOR_MAP } from 'common/colors';
 import { megaMenuFooter } from './customThemeBlocks';
+import buttons, { ButtonMap } from './buttons';
 
 export { megaMenuFooter };
 
@@ -51,6 +52,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     colors: ThemeColors;
     fonts: ThemeFonts;
+    buttons: ButtonMap;
   }
   interface ThemeOptions extends Theme {}
 }
@@ -65,6 +67,7 @@ const theme = createMuiTheme({
   },
   colors,
   fonts,
+  buttons,
 });
 
 export default theme;
