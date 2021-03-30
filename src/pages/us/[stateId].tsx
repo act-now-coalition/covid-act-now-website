@@ -1,32 +1,39 @@
 import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { InferGetStaticPropsType } from 'next';
 
 import { LocationPage } from 'screens/LocationPage';
 import PageWrapper from 'screens/utils/PageWrapper';
 
 import {
-  LocationPageWrapperProps,
-  makeLocationPageGetStaticProps,
+  getLocationPageStaticProps,
   getStatePathParams,
   stateParamsToRegion,
 } from 'screens/utils/ssg_utils';
-import { State, StateObject } from 'common/regions';
+import { State } from 'common/regions';
 
-const getStaticPaths: GetStaticPaths = getStatePathParams;
+import { getRegionDB } from 'common/regions';
 
-const getStaticProps: GetStaticProps = makeLocationPageGetStaticProps({
-  paramsToRegion: stateParamsToRegion,
-});
+export async function getStaticPaths() {
+  const regions = await getRegionDB();
+  return getStatePathParams(regions);
+}
 
-function Location({
+export async function getStaticProps({ params }: { params: any }) {
+  const regions = await getRegionDB();
+  const region = stateParamsToRegion(regions, params);
+  const props = getLocationPageStaticProps(region);
+  return props;
+}
+
+function Page({
   regionObject,
   locationSummary,
   title,
   description,
   ccviScores,
   lastUpdatedDateString,
-}: LocationPageWrapperProps) {
-  const region = State.fromObject(regionObject as StateObject);
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const region = State.fromObject(regionObject);
 
   return (
     <PageWrapper>
@@ -42,5 +49,4 @@ function Location({
   );
 }
 
-export { getStaticPaths, getStaticProps };
-export default Location;
+export default Page;

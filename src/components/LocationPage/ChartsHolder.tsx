@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import dynamic from 'next/dynamic';
+import React, { useRef /* useEffect */ } from 'react';
+//import { v4 as uuidv4 } from 'uuid';
+//import dynamic from 'next/dynamic';
 
-import { RegionCcviItem } from 'common/data';
-import { useLocation } from 'common/utils/router';
-import { useScrollToElement, useBreakpoint } from 'common/hooks';
+import type { RegionCcviItem } from 'common/data';
+//import { useLocation } from 'common/utils/router';
+import { /* useScrollToElement, */ useBreakpoint } from 'common/hooks';
 //import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region /* State, getStateName*/ } from 'common/regions';
@@ -22,13 +22,13 @@ import { mainContent } from 'cms-content/recommendations';
 */
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 //import ErrorBoundary from 'components/ErrorBoundary';
-import { ExploreMetric } from 'components/Explore';
+//import type { ExploreMetric } from 'components/Explore';
 //import LocationPageBlock from './LocationPageBlock';
 import LocationPageHeader from './LocationPageHeader';
 import { ChartContentWrapper } from './ChartsHolder.style';
 //import { useProjectionsFromRegion } from 'common/utils/model';
 //import { Projections } from 'common/models/Projections';
-import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
+//import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import type { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from 'common/utils/chart';
 /*
@@ -173,17 +173,17 @@ const ChartsHolder = ({
     [Metric.VACCINATIONS]: useRef<HTMLDivElement>(null),
   };
   const shareBlockRef = useRef<HTMLDivElement>(null);
-  const exploreChartRef = useRef<HTMLDivElement>(null);
-  const recommendationsRef = useRef<HTMLDivElement>(null);
+  //const exploreChartRef = useRef<HTMLDivElement>(null);
+  // const recommendationsRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useBreakpoint(600);
-  useScrollToElement();
+  // useScrollToElement();
 
-  const { hash } = useLocation();
-  const isRecommendationsShareUrl = hash.includes('recommendations');
+  // const { hash } = useLocation();
+  // const isRecommendationsShareUrl = hash.includes('recommendations');
 
-  const defaultExploreMetric = ExploreMetric.CASES;
-
+  //const defaultExploreMetric = ExploreMetric.CASES;
+  /*
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
@@ -211,8 +211,8 @@ const ChartsHolder = ({
     scrollToChart();
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
-
-  const initialFipsList = [region.fipsCode];
+*/
+  //const initialFipsList = [region.fipsCode];
 
   if (!locationSummary) {
     return null;

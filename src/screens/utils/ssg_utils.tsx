@@ -10,8 +10,8 @@ import { importFipsToCcviMap, RegionCcviItem } from 'common/data';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { getPageTitle, getPageDescription } from 'screens/LocationPage/utils';
-import regions from 'common/regions/region_db';
-import type { Region, RegionObject } from 'common/regions';
+import type { RegionDB } from 'common/regions/region_db';
+import type { Region } from 'common/regions';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { summaryToStats } from 'common/utils/chart';
 import type { LocationPageProps } from 'screens/LocationPage';
@@ -33,7 +33,7 @@ const allRegions = (region: any) => true;
 // used on all county and fips-based routes only
 const regionFilter = caOnly;
 
-export const getStatePathParams = async () => {
+export const getStatePathParams = async (regions: RegionDB) => {
   const pathParams = regions.states.map(state => {
     return {
       params: {
@@ -47,7 +47,7 @@ export const getStatePathParams = async () => {
   };
 };
 
-export const getCountyPathParams = async () => {
+export const getCountyPathParams = (regions: RegionDB) => {
   const pathParams = regions.counties
     .filter(regionFilter)
     .filter(county => !skipRegions.includes(county.fipsCode))
@@ -65,7 +65,7 @@ export const getCountyPathParams = async () => {
   };
 };
 
-export const getMetroAreaPathParams = async () => {
+export const getMetroAreaPathParams = (regions: RegionDB) => {
   const pathParams = regions.metroAreas.map(metro => {
     return {
       params: {
@@ -79,7 +79,7 @@ export const getMetroAreaPathParams = async () => {
   };
 };
 
-export const getCountyFipsPathParams = async () => {
+export const getCountyFipsPathParams = (regions: RegionDB) => {
   const pathParams = regions.counties
     .filter(regionFilter)
     .filter(county => !skipRegions.includes(county.fipsCode))
@@ -96,7 +96,7 @@ export const getCountyFipsPathParams = async () => {
   };
 };
 
-export const getFipsPathParams = async () => {
+export const getFipsPathParams = (regions: RegionDB) => {
   const pathParams = regions
     .all()
     .filter(regionFilter)
@@ -114,7 +114,7 @@ export const getFipsPathParams = async () => {
   };
 };
 
-export const getMetroAreaFipsPathParams = async () => {
+export const getMetroAreaFipsPathParams = (regions: RegionDB) => {
   const pathParams = regions.metroAreas.map(metro => {
     return {
       params: {
@@ -134,13 +134,13 @@ export const getMetroAreaFipsPathParams = async () => {
  * /embed/us/:stateId/county/:countyId -> the county
  */
 
-export const stateParamsToRegion = (params: any) => {
+export const stateParamsToRegion = (regions: RegionDB, params: any) => {
   const stateId = (params?.stateId ?? '') as string;
   const region = stateId ? regions.findStateByUrlParams(stateId) : null;
   return region;
 };
 
-export const countyParamsToRegion = (params: any) => {
+export const countyParamsToRegion = (regions: RegionDB, params: any) => {
   const stateId = (params?.stateId ?? '') as string;
   const countyId = (params?.countyId ?? '') as string;
   const county =
@@ -150,19 +150,19 @@ export const countyParamsToRegion = (params: any) => {
   return county;
 };
 
-export const metroAreaParamsToRegion = (params: any) => {
+export const metroAreaParamsToRegion = (regions: RegionDB, params: any) => {
   const metroAreaUrlSegment = (params?.metroAreaUrlSegment ?? '') as string;
   return metroAreaUrlSegment
     ? regions.findMetroAreaByUrlParams(metroAreaUrlSegment)
     : null;
 };
 
-export const countyFipsIdParamsToRegion = (params: any) => {
+export const countyFipsIdParamsToRegion = (regions: RegionDB, params: any) => {
   const countyFipsId = (params?.countyFipsId ?? '') as string;
   return countyFipsId ? regions.findByFipsCode(countyFipsId) : null;
 };
 
-export const fipsCodeParamsToRegion = (params: any) => {
+export const fipsCodeParamsToRegion = (regions: RegionDB, params: any) => {
   const fipsCode = (params?.fipsCode ?? '') as string;
   return fipsCode ? regions.findByFipsCode(fipsCode) : null;
 };
@@ -190,48 +190,42 @@ export const getLastUpdatedDateString = async () => {
 // whereas 'region' is not.
 export interface LocationPageWrapperProps
   extends Omit<LocationPageProps, 'region'> {
-  regionObject: RegionObject;
+  regionObject: any; //RegionObject;
 }
 
-export const makeLocationPageGetStaticProps = ({
-  paramsToRegion,
-}: {
-  paramsToRegion: (params: any) => Region | null;
-}) => {
-  const getStaticProps = async ({ params }: any): Promise<any> => {
-    const region = paramsToRegion(params);
-    if (!region) {
-      return NOT_FOUND;
-    }
+export const getLocationPageStaticProps = async (
+  region: Region,
+): Promise<any> => {
+  if (!region) {
+    return NOT_FOUND;
+  }
 
-    const locationSummary = getSummaryFromFips(region.fipsCode);
-    const regionObject = region.toObject();
-    const title = getPageTitle(region);
-    const description = getPageDescription(region);
+  const locationSummary = getSummaryFromFips(region.fipsCode);
+  const regionObject = region.toObject();
+  const title = getPageTitle(region);
+  const description = getPageDescription(region);
 
-    const fipsToCcviMap = await importFipsToCcviMap();
-    const ccviScores = fipsToCcviMap[region.fipsCode] ?? null;
+  const fipsToCcviMap = await importFipsToCcviMap();
+  const ccviScores = fipsToCcviMap[region.fipsCode] ?? null;
 
-    const lastUpdatedDateString = await getLastUpdatedDateString();
+  const lastUpdatedDateString = await getLastUpdatedDateString();
 
-    const props = {
-      regionObject,
-      locationSummary,
-      title,
-      description,
-      ccviScores,
-      lastUpdatedDateString,
-    };
-
-    if (!(locationSummary && title && description)) {
-      console.error('Missing data:', props);
-      return NOT_FOUND;
-    }
-    return {
-      props,
-    };
+  const props = {
+    regionObject,
+    locationSummary,
+    title,
+    description,
+    ccviScores,
+    lastUpdatedDateString,
   };
-  return getStaticProps;
+
+  if (!(locationSummary && title && description)) {
+    console.error('Missing data:', props);
+    return NOT_FOUND;
+  }
+  return {
+    props,
+  };
 };
 
 export const makeEmbedRegionGetStaticProps = ({

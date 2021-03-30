@@ -1,6 +1,19 @@
 const withImages = require('next-images');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = withImages({
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    if (process.env.ANALYZE) {
+     config.plugins.push(
+       new BundleAnalyzerPlugin({
+         analyzerMode: 'server',
+         analyzerPort: isServer ? 8888 : 8889,
+         openAnalyzer: true,
+       })
+     )
+    }
+    return config
+  },
     /* abortive attempt to reduce bundle size by eliminating locale handling : / 
     doesn't work with export
     i18n: {

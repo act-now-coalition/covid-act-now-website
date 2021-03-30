@@ -19,7 +19,7 @@
   },
   "include": [
     "src", "public/assets" 
-  ],
+, "nope/cms-content", "pages.nope"  ],
   "exclude": [
     "node_modules"
   ]

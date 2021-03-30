@@ -8,11 +8,11 @@ import {
   StylesProvider,
 } from '@material-ui/core/styles';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
-      
+
 import { isRecordingEnabled } from 'common/fullstory';
 
-import PageviewTracker from 'components/Analytics';
-import { trackWebVitals } from 'components/Analytics';
+//import PaIgeviewTracker from 'components/Analytics';
+//import { trackWebVitals } from 'components/Analytics';
 
 import theme from 'assets/theme';
 import '../index.css';
@@ -39,7 +39,7 @@ export function reportWebVitals(metric: NextWebVitalsMetric) {
     case 'FID':
     case 'TTFB':
       if (isRecordingEnabled(RECORD_KEY, RECORD_PERCENT)) {
-        trackWebVitals({ name: metric.name, delta: metric.value, id: metric.id });
+        //       trackWebVitals({ name: metric.name, delta: metric.value, id: metric.id });
       }
       break;
 
@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ScThemeProvider theme={theme}>
           <StylesProvider injectFirst>
             <CssBaseline />
-            <PageviewTracker />
+            {/*<PageviewTracker />*/}
             <Component {...pageProps} />
           </StylesProvider>
         </ScThemeProvider>

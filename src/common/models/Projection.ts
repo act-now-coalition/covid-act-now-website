@@ -18,7 +18,7 @@ import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
-import { getRegionMetricOverride } from 'cms-content/region-overrides';
+//import { getRegionMetricOverride } from 'cms-content/region-overrides';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -310,7 +310,7 @@ export class Projection {
   }
 
   isMetricDisabledIgnoreOverride(metric: Metric): boolean {
-    return getRegionMetricOverride(this.region, metric)?.blocked ?? false;
+    return false; //getRegionMetricOverride(this.region, metric)?.blocked ?? false;
   }
 
   private getIcuCapacityInfo(

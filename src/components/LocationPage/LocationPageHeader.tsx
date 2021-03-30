@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 
-import { useIsEmbed } from 'common/utils/hooks';
+//import { useIsEmbed } from 'common/utils/hooks';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
@@ -72,7 +72,7 @@ const LocationPageHeader = (props: {
   const fillColor =
     alarmLevel !== Level.UNKNOWN ? levelInfo.color : COLOR_MAP.GRAY.LIGHT;
 
-  const isEmbed = useIsEmbed();
+  const isEmbed = false; //useIsEmbed();
 
   const tooltip = renderInfoTooltip();
 
@@ -87,7 +87,7 @@ const LocationPageHeader = (props: {
         <TopContainer>
           <HeaderSection>
             <LocationPageHeading region={region} isEmbed={isEmbed} />
-            {/*<ButtonsWrapper>
+            <ButtonsWrapper>
               <HeaderButton onClick={props.onHeaderShareClick || noop}>
                 <ShareOutlinedIcon />
                 Share
@@ -97,7 +97,6 @@ const LocationPageHeader = (props: {
                 Receive alerts
               </HeaderButton>
             </ButtonsWrapper>
-            */}
           </HeaderSection>
           <HeaderSection>
             <SectionHalf>

@@ -89,6 +89,7 @@
     "topojson-client": "^3.1.0",
     "uuid": "^8.3.0",
     "web-vitals": "^1.1.0",
+    "webpack-bundle-analyzer": "^4.4.0",
     "yargs": "^16.2.0"
   },
   "scripts": {
@@ -137,7 +138,7 @@
     "vaccinations-parse-phases": "ts-node-script -r tsconfig-paths/register scripts/vaccination_alerts/parse-vaccination-phases.ts",
     "storybook": "start-storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -s public --no-dll",
-    "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/_next/static/**/*.js",
+    "analyze": "source-map-explorer build/_next/static/**/*.js",
     "generate-ccvi": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_ccvi.ts",
     "generate-surgo-percent-population-vulnerable": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_surgo_percent_population_vulnerable.ts"
   },
@@ -163,6 +164,7 @@
       "last 1 safari version"
     ]
   },
+  "sideEffects": false,
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@cypress/code-coverage": "^3.9.0",
