@@ -9,54 +9,88 @@ import {
 } from 'components/ButtonSystem';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { EventCategory } from 'components/Analytics';
 
 const ButtonSystem = () => {
+  const trackingProps = {
+    trackingCategory: EventCategory.NONE,
+    trackingLabel: 'storybook',
+  };
+
   return (
     <>
       <Grid container spacing={3}>
         <Grid item>
-          <TextButton href="/">Text button</TextButton>
+          <TextButton to="/" {...trackingProps}>
+            Text button
+          </TextButton>
         </Grid>
         <Grid item>
-          <TextButton href="/" endIcon={<ArrowForwardIcon />}>
+          <TextButton
+            to="/glossary#antibodies"
+            endIcon={<ArrowForwardIcon />}
+            {...trackingProps}
+          >
             Text button
           </TextButton>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item>
-          <FilledButton href="/">Standard Filled</FilledButton>
-        </Grid>
-        <Grid item>
-          <OutlinedButton onClick={() => console.log('hi')}>
-            Standard Outlined
-          </OutlinedButton>
-        </Grid>
-        <Grid item>
-          <FilledButton href="/" endIcon={<ArrowForwardIcon />}>
+          <FilledButton href="www.nytimes.com" {...trackingProps}>
             Standard Filled
           </FilledButton>
         </Grid>
         <Grid item>
-          <OutlinedButton href="/" endIcon={<ArrowForwardIcon />}>
+          <OutlinedButton onClick={() => console.log('hi')} {...trackingProps}>
+            Standard Outlined
+          </OutlinedButton>
+        </Grid>
+        <Grid item>
+          <FilledButton
+            href="/"
+            endIcon={<ArrowForwardIcon />}
+            {...trackingProps}
+          >
+            Standard Filled
+          </FilledButton>
+        </Grid>
+        <Grid item>
+          <OutlinedButton
+            href="/"
+            endIcon={<ArrowForwardIcon />}
+            {...trackingProps}
+          >
             Standard Outlined
           </OutlinedButton>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item>
-          <LargeFilledButton href="/">Large Filled</LargeFilledButton>
-        </Grid>
-        <Grid item>
-          <LargeOutlinedButton href="/">Large Outlined</LargeOutlinedButton>
-        </Grid>
-        <Grid item>
-          <LargeFilledButton href="/" endIcon={<ArrowForwardIcon />}>
+          <LargeFilledButton href="/" {...trackingProps}>
             Large Filled
           </LargeFilledButton>
         </Grid>
         <Grid item>
-          <LargeOutlinedButton href="/" endIcon={<ArrowForwardIcon />}>
+          <LargeOutlinedButton href="/" {...trackingProps}>
+            Large Outlined
+          </LargeOutlinedButton>
+        </Grid>
+        <Grid item>
+          <LargeFilledButton
+            href="/"
+            endIcon={<ArrowForwardIcon />}
+            {...trackingProps}
+          >
+            Large Filled
+          </LargeFilledButton>
+        </Grid>
+        <Grid item>
+          <LargeOutlinedButton
+            href="/"
+            endIcon={<ArrowForwardIcon />}
+            {...trackingProps}
+          >
             Large Outlined
           </LargeOutlinedButton>
         </Grid>
@@ -64,9 +98,15 @@ const ButtonSystem = () => {
       <Grid container spacing={3}>
         <Grid item>
           <ButtonGroup color="primary">
-            <OutlinedButton href="/">Button 1</OutlinedButton>
-            <OutlinedButton href="/">Button 2</OutlinedButton>
-            <OutlinedButton href="/">Button 3</OutlinedButton>
+            <OutlinedButton href="/" {...trackingProps}>
+              Button 1
+            </OutlinedButton>
+            <OutlinedButton href="/" {...trackingProps}>
+              Button 2
+            </OutlinedButton>
+            <OutlinedButton href="/" {...trackingProps}>
+              Button 3
+            </OutlinedButton>
           </ButtonGroup>
         </Grid>
       </Grid>

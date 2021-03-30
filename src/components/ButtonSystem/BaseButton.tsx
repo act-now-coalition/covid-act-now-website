@@ -25,46 +25,19 @@ type StyledButtonProps = ComponentProps<typeof BaseMuiButton>;
 
 type LinkProps = AnchorLinkType | RouterLinkProps | HashLinkProps;
 
-interface TrackingProps {
-  trackingCategory: EventCategory;
-  trackingAction?: EventAction;
-  trackingLabel: string;
-}
+type LinkButtonProps = LinkProps & StyledButtonProps;
 
-export type LinkButtonProps = LinkProps & TrackingProps & StyledButtonProps;
-
-const BaseButton: React.FC<LinkButtonProps> = props => {
+const LinkButton: React.FC<LinkButtonProps> = props => {
   const isLink = props.href || props.to;
-  const isButton = props.onClick && !isLink;
-  assert(
-    isLink || isButton,
-    "Button needs either a redirect ('href' or 'to' if triggering navigation) or an onClick (if triggering a non-redirect action)",
-  );
+  assert(isLink, "LinkButton needs either 'to' or 'href' as props");
 
   const isInternalLink = props.to;
+
   const isHashLink = props.to && props.to.includes('#');
 
-  const {
-    trackingAction,
-    trackingCategory,
-    trackingLabel,
-    ...otherProps
-  } = props;
+  const { onClick, ...otherProps } = props;
 
-  const onClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    const defaultAction = isButton
-      ? EventAction.CLICK
-      : isInternalLink
-      ? EventAction.NAVIGATE
-      : EventAction.CLICK_LINK;
-    const action = trackingAction || defaultAction;
-    trackEvent(trackingCategory, action, trackingLabel);
-    props.onClick && props.onClick(ev);
-  };
-
-  if (isButton) {
-    return <BaseMuiButton {...otherProps} onClick={onClick} />;
-  } else if (isHashLink) {
+  if (isHashLink) {
     return (
       <BaseMuiButton {...otherProps} component={HashLink} onClick={onClick} />
     );
@@ -81,6 +54,53 @@ const BaseButton: React.FC<LinkButtonProps> = props => {
         onClick={onClick}
       />
     );
+  }
+};
+
+const Button: React.FC<StyledButtonProps> = props => {
+  const hasOnClick = props.onClick;
+  assert(hasOnClick, 'Button needs an onClick');
+
+  const { onClick, ...otherProps } = props;
+
+  return <BaseMuiButton {...otherProps} onClick={onClick} />;
+};
+
+interface TrackingProps {
+  trackingCategory: EventCategory;
+  trackingAction?: EventAction;
+  trackingLabel: string;
+}
+
+type BaseButtonProps = (TrackingProps & LinkButtonProps) | StyledButtonProps;
+
+const BaseButton: React.FC<BaseButtonProps> = props => {
+  const isLink = props.href || props.to;
+  const isButton = props.onClick && !isLink;
+  assert(
+    isLink || isButton,
+    "Button needs either a redirect ('href' or 'to' if triggering navigation) or an onClick (if triggering a non-redirect action)",
+  );
+
+  const {
+    trackingAction,
+    trackingCategory,
+    trackingLabel,
+    ...otherProps
+  } = props;
+
+  const onClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const defaultAction = isButton ? EventAction.CLICK : EventAction.NAVIGATE;
+    const action = trackingAction || defaultAction;
+    trackEvent(trackingCategory, action, trackingLabel);
+    props.onClick && props.onClick(ev);
+    console.log('clicked!');
+  };
+
+  if (isLink) {
+    return <LinkButton {...otherProps} onClick={onClick} />;
+  } else {
+    return <Button {...otherProps} onClick={onClick} />;
   }
 };
 
