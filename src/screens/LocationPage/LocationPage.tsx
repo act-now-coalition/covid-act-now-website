@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import type { RegionCcviItem } from 'common/data';
 //import { MAP_FILTERS } from './Enums/MapFilterEnums';
 //import SearchHeader from 'components/Header/SearchHeader';
-//import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
+import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 //import MiniMap from 'components/MiniMap';
-//import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
+import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 //import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import type { /*getStateCode, MetroArea,*/ Region } from 'common/regions';
 import type { LocationSummary } from 'common/location_summaries';
@@ -50,13 +50,12 @@ function LocationPage({
 */
   return (
     <div>
-      {/*}
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl={region.canonicalUrl}
         pageTitle={title}
         pageDescription={description}
-  />*/}
+      />
       <div>
         Woo
         {/*}
