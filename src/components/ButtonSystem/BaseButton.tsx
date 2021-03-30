@@ -35,9 +35,9 @@ export type LinkButtonProps = LinkProps & TrackingProps & StyledButtonProps;
 
 const BaseButton: React.FC<LinkButtonProps> = props => {
   const isLink = props.href || props.to;
-  const isNonLinkButton = props.onClick && !isLink;
+  const isButton = props.onClick && !isLink;
   assert(
-    isLink || isNonLinkButton,
+    isLink || isButton,
     "Button needs either a redirect ('href' or 'to' if triggering navigation) or an onClick (if triggering a non-redirect action)",
   );
 
@@ -52,7 +52,9 @@ const BaseButton: React.FC<LinkButtonProps> = props => {
   } = props;
 
   const onClick = (ev: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    const defaultAction = isInternalLink
+    const defaultAction = isButton
+      ? EventAction.CLICK
+      : isInternalLink
       ? EventAction.NAVIGATE
       : EventAction.CLICK_LINK;
     const action = trackingAction || defaultAction;
@@ -60,7 +62,7 @@ const BaseButton: React.FC<LinkButtonProps> = props => {
     props.onClick && props.onClick(ev);
   };
 
-  if (isNonLinkButton) {
+  if (isButton) {
     return <BaseMuiButton {...otherProps} onClick={onClick} />;
   } else if (isHashLink) {
     return (

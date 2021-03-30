@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { ButtonType, ButtonsTheme } from 'assets/theme/buttons';
 import BaseButton from './BaseButton';
 
-export function button(styles: ButtonsTheme) {
+function button(styles: ButtonsTheme) {
   return css`
     text-decoration: none;
     text-transform: none;
