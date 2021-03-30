@@ -72,7 +72,7 @@ interface TrackingProps {
   trackingLabel: string;
 }
 
-type BaseButtonProps = (TrackingProps & LinkButtonProps) | StyledButtonProps;
+type BaseButtonProps = TrackingProps & (LinkButtonProps | StyledButtonProps);
 
 const BaseButton: React.FC<BaseButtonProps> = props => {
   const isLink = props.href || props.to;
@@ -94,7 +94,6 @@ const BaseButton: React.FC<BaseButtonProps> = props => {
     const action = trackingAction || defaultAction;
     trackEvent(trackingCategory, action, trackingLabel);
     props.onClick && props.onClick(ev);
-    console.log('clicked!');
   };
 
   if (isLink) {
