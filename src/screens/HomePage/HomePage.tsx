@@ -60,7 +60,16 @@ export default function HomePage() {
   const exploreGeoLocations = useGeolocationInExplore(5, geolocationData);
   const showRisingHospitalizations =
     location.hash === '#explore-hospitalizations';
-  const risingHospitalizationStates = ['MD', 'MI', 'MN', 'NJ'];
+  const risingHospitalizationStates = [
+    'MD',
+    'MI',
+    'MN',
+    'NJ',
+    'WV',
+    'CN',
+    'IL',
+    'MA',
+  ]; // Updated on 29 March 2021
   const initialFipsListForExplore = showRisingHospitalizations
     ? risingHospitalizationStates.map(
         state => regions.findByStateCodeStrict(state).fipsCode,
