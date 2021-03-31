@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import ReactMarkdown from 'react-markdown';
 import theme from 'assets/theme';
+import { newBlue, newBlueDark } from 'assets/theme/buttons';
 
 const baseCss = css`
   font-family: ${theme.typography.fontFamily};
@@ -125,6 +126,16 @@ export const StylesMarkdown = css`
 
   blockquote {
     ${blockquoteCss};
+  }
+
+  a {
+    color: ${newBlue};
+    text-decoration: none;
+
+    &:hover {
+      color: ${newBlueDark};
+      text-decoration: underline;
+    }
   }
 `;
 

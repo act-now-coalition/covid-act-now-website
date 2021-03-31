@@ -22,8 +22,8 @@ export interface ButtonsTheme {
   fontFamily: FlattenSimpleInterpolation;
 }
 
-const newBlue = '#3567FD';
-const newBlueDark = '#002CB4';
+export const newBlue = '#3567FD';
+export const newBlueDark = '#002CB4';
 const newBlueLight = 'rgba(53, 103, 253, .15)';
 const lightGrayFigma = '#e0e0e0';
 

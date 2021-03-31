@@ -111,6 +111,14 @@ export const RecommendationBody = styled(MarkdownContent)`
   strong {
     color: black;
   }
+
+  a {
+    text-decoration: underline;
+    color: ${COLOR_MAP.BLUE};
+    &:hover {
+      color: ${COLOR_MAP.BLUE};
+    }
+  }
 `;
 
 export const Icon = styled.img`
