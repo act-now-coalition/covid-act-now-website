@@ -707,32 +707,6 @@
       "emailAlertVersion": "7",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Patient-facing health care personnel \n* Long-term care facility residents \n* Congregate living facility workers who provide in-person care to residents \n* First responders",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1-6",
-          "currentlyEligible": true,
-          "description": "* Ages 40+\n* Teachers\n* Certain patients identified as highest risk by their healthcare provider",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-29T16:07:06.252Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-29T16:08:05.294Z",
-          "phase": "1B",
-          "tier": "7",
-          "description": "* Ages 30-39",
-          "startDate": "March 29, 2021"
-        },
-        {
           "currentlyEligible": true,
           "updatedAt": "2021-03-31T15:53:41.599Z",
           "phase": "2",
