@@ -75,14 +75,14 @@ describe('utc time formatting', () => {
 });
 
 describe('date string parsing', () => {
-  test('ISO format to date object', () => {
-    expect(parseDateString('2020-03-01T00:00:00.000')).toEqual(
-      new Date(2020, 1, 29, 16),
-    );
-  });
   test('ISO format in UTC to date object', () => {
     expect(parseDateString('2020-03-01T00:00:00.000Z')).toEqual(
       new Date(2020, 1, 29, 16),
+    );
+  });
+  test('ISO format to UTC date object with time', () => {
+    expect(parseDateString('2020-12-31T23:59:59.999Z')).toEqual(
+      new Date(2020, 11, 31, 15, 59, 59, 999),
     );
   });
   test('Date string to date object', () => {
