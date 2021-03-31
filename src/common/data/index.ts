@@ -76,5 +76,7 @@ export function importStateGeographies(): Promise<StatesTopology> {
 
 export type CountiesTopology = typeof import('./counties-10m.json');
 export function importCountyGeographies(): Promise<CountiesTopology> {
-  return importJson('counties-10m', import('./counties-10m.json'));
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(import('./counties-10m.json')), 30_000);
+  });
 }
