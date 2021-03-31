@@ -3,13 +3,14 @@ import {
   StyledLink,
   StyledCard,
   StyledCardContent,
-  ArrowIcon,
   CardLogo,
   CopyContainer,
   ReadMoreContainer,
 } from './CaseStudyCard.style';
 import { CaseStudy } from 'cms-content/learn';
-import { MarkdownContent, Heading3, Paragraph } from 'components/Markdown';
+import { MarkdownContent, Heading3 } from 'components/Markdown';
+import { TextButton } from 'components/ButtonSystem';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
   const { cardContent, url } = props;
@@ -24,8 +25,7 @@ const CaseStudyCard = (props: { cardContent: CaseStudy; url: string }) => {
             <MarkdownContent source={summary} />
           </CopyContainer>
           <ReadMoreContainer>
-            <Paragraph>Learn how</Paragraph>
-            <ArrowIcon />
+            <TextButton endIcon={<ArrowForwardIcon />}>Learn how</TextButton>
           </ReadMoreContainer>
         </StyledCardContent>
       </StyledCard>

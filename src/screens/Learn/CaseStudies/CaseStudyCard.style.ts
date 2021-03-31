@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@material-ui/core';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { COLOR_MAP } from 'common/colors';
 import { COLORS } from 'common';
 import theme from 'assets/theme';
 import { MarkdownContent, Heading3 } from 'components/Markdown';
+import { TextButton } from 'components/ButtonSystem';
+import { ButtonType } from 'assets/theme/buttons';
 
 /*
  TODO (Chelsi): we're almost always removing the underline
@@ -15,15 +16,6 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
   display: flex;
-`;
-
-export const ArrowIcon = styled(ArrowForwardIosIcon)`
-  color: ${COLOR_MAP.GRAY_ICON};
-  display: flex;
-  width: 14px;
-  height: 14px;
-  margin-top: 0.33rem;
-  margin-left: 0.5rem;
 `;
 
 export const StyledCard = styled(Card)`
@@ -40,9 +32,10 @@ export const StyledCard = styled(Card)`
 
   &:hover {
     border: 1px solid ${COLOR_MAP.GRAY.DARK};
-    /* Highlights the arrow icon on hover */
-    ${ArrowIcon} {
-      color: ${COLOR_MAP.GRAY.DARK};
+    /* Applies TextButton's hover styles when hovering anywhere on the entire card */
+    ${TextButton} {
+      text-decoration: underline;
+      color: ${props => props.theme.buttons[ButtonType.TEXT].textHover};
     }
   }
 `;
@@ -86,8 +79,4 @@ export const CopyContainer = styled.div`
 export const ReadMoreContainer = styled.div`
   display: flex;
   margin-top: 1rem;
-
-  p {
-    color: ${COLOR_MAP.BLUE};
-  }
 `;

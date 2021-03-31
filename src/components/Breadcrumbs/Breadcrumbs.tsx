@@ -10,16 +10,14 @@ export interface BreadcrumbItem {
 
 const Breadcrumbs: React.FC<{ item: BreadcrumbItem }> = ({ item }) => {
   return (
-    <nav aria-label="breadcrumbs">
-      <TextButton
-        to={item.to}
-        startIcon={<ArrowBackIcon />}
-        trackingCategory={EventCategory.LEARN}
-        trackingLabel="Breadcrumbs"
-      >
-        {item.label}
-      </TextButton>
-    </nav>
+    <TextButton
+      to={item.to}
+      startIcon={<ArrowBackIcon />}
+      trackingCategory={EventCategory.LEARN}
+      trackingLabel="Breadcrumbs"
+    >
+      {item.label}
+    </TextButton>
   );
 };
 export default Breadcrumbs;

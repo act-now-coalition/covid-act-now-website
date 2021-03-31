@@ -13,7 +13,9 @@ import { BaseMuiButton } from './BaseButton.style';
 import { StyledButtonProps } from './propTypes';
 
 const FakeButton: React.FC<StyledButtonProps> = props => {
-  return <BaseMuiButton as="span" style={{ cursor: 'default' }} {...props} />;
+  return (
+    <BaseMuiButton component="span" style={{ cursor: 'default' }} {...props} />
+  );
 };
 
 export default FakeButton;
