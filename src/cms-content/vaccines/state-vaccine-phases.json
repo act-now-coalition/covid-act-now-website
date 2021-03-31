@@ -2404,7 +2404,7 @@
       ]
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Wyoming",
       "fips": "56",
       "eligibilityInfoUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/",
@@ -2441,10 +2441,16 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "Some counties are now vaccinating:\n\n* Individuals 18+",
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-25T06:18:47.416Z"
+          "startDate": "March 31",
+          "updatedAt": "2021-03-31T19:15:36.363Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-31T19:16:12.871Z",
+          "phase": "TBD",
+          "description": "* Individuals under 16"
         }
       ]
     },
