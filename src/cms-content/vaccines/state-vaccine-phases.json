@@ -2390,16 +2390,16 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:29:35.625Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
-        },
-        {
-          "currentlyEligible": false,
           "updatedAt": "2021-03-31T19:14:21.616Z",
           "phase": "2",
           "description": "* Individuals 16+",
           "startDate": "April 5"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-08T17:29:35.625Z",
+          "phase": "TBD",
+          "description": "Still to be determined: \n\n* General public and under 16"
         }
       ]
     },
