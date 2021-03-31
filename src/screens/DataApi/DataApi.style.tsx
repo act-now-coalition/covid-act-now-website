@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';

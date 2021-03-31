@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@material-ui/core';
-import { COLOR_MAP } from 'common/colors';
-import { COLORS } from 'common';
 import theme from 'assets/theme';
 import { MarkdownContent, Heading3 } from 'components/Markdown';
 import { TextButton } from 'components/ButtonSystem';
@@ -20,7 +18,7 @@ export const StyledLink = styled(Link)`
 
 export const StyledCard = styled(Card)`
   box-shadow: none;
-  border: 1px solid ${COLORS.LIGHTGRAY};
+  border: 1px solid ${props => props.theme.buttons[ButtonType.OUTLINE].border};
 
   p {
     margin-bottom: 0;
@@ -30,11 +28,16 @@ export const StyledCard = styled(Card)`
     margin: 0.75rem 0;
   }
 
+  ${TextButton} {
+    font-weight: 500;
+  }
+
   &:hover {
-    border: 1px solid ${COLOR_MAP.GRAY.DARK};
-    /* Applies TextButton's hover styles when hovering anywhere on the entire card */
+    border: 1px solid
+      ${props => props.theme.buttons[ButtonType.OUTLINE].borderHover};
+    /* Sets TextButton's hover styles when hovering anywhere on the entire card */
     ${TextButton} {
-      text-decoration: underline;
+      text-decoration: none;
       color: ${props => props.theme.buttons[ButtonType.TEXT].textHover};
     }
   }
