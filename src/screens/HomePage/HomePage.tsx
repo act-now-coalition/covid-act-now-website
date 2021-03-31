@@ -144,7 +144,7 @@ export default function HomePage() {
                   <HomepageItems
                     isLoading={isLoading}
                     userRegions={userRegions}
-                    showMetro={true}
+                    showMetro
                   />
                 </Variant>
                 <Variant id={VariantID.B}>
