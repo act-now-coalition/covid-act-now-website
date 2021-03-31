@@ -244,11 +244,11 @@ const LocationTable: React.FunctionComponent<{
 
   // In the modal, if the rank of the pinned-location-row is #1, we remove
   // the location's inline row, so as to not have the location listed twice consecutively:
-  const removePinnedIfRankedFirst = (location: SummaryForCompare) =>
+  const removeInlineIfRankedFirst = (location: SummaryForCompare) =>
     location.region.fipsCode !== pinnedLocation?.region.fipsCode;
 
   const modalLocations = hideInlineLocation
-    ? remove(sortedLocations, removePinnedIfRankedFirst)
+    ? remove(sortedLocations, removeInlineIfRankedFirst)
     : sortedLocations;
 
   const getVisibleLocations = () => {
@@ -257,11 +257,11 @@ const LocationTable: React.FunctionComponent<{
     } else {
       if (region) {
         if (geoScope === GeoScopeFilter.COUNTRY)
-          return sortedLocations.slice(0, 100);
+          return modalLocations.slice(0, 100);
         else return modalLocations;
       } else {
         if (homepageScope === HomepageLocationScope.STATE)
-          return modalLocations;
+          return sortedLocations;
         else return sortedLocations.slice(0, 100);
       }
     }
