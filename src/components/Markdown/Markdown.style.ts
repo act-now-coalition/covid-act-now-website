@@ -110,7 +110,7 @@ export const StylesMarkdown = css`
     margin-top: ${theme.spacing(1)}px;
     margin-bottom: ${theme.spacing(1)}px;
     a {
-      color: ${COLOR_MAP.BLUE};
+      color: ${props => props.theme.colors.interactiveBase};
     }
   }
 

@@ -28,6 +28,7 @@ import PageviewTracker, {
 } from 'components/Analytics';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 import HomePage from 'screens/HomePage/HomePage';
+import GlobalStyles from 'components/GlobalStyles';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
 const About = lazy(() => import('screens/About/About'));
@@ -52,6 +53,7 @@ export default function App() {
       <ScThemeProvider theme={theme}>
         <StylesProvider injectFirst>
           <CssBaseline />
+          <GlobalStyles />
           <BrowserRouter>
             <PageviewTracker />
             <ScrollToTop />
