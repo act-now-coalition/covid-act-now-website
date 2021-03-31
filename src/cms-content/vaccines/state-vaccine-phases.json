@@ -769,33 +769,6 @@
       "emailAlertVersion": "3",
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Health care workers \n* Long-term care facilities\n* Workers critical to pandemic response continuity",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "2",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Persons ages 65+ \n* Congregate settings \n* High-contact critical workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "3 and 4",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Persons ages 16-64 with medical risks \n* Other critical workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 22, 2021",
-          "updatedAt": "2021-03-18T17:46:28.326Z"
-        },
-        {
           "phase": "5",
           "tier": "",
           "currentlyEligible": true,
@@ -803,6 +776,12 @@
           "expandedDefinitionUrl": "",
           "startDate": "March 29, 2021",
           "updatedAt": "2021-03-29T16:10:12.152Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-31T16:59:50.875Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ]
     },
