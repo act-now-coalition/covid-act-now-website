@@ -1722,24 +1722,6 @@
       "emailAlertVersion": "2",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* High-risk first responders\n* Home-bound/bed-bound patients\n* Individuals 65+",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* 55+ (Saipan)\n* CNMI essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
@@ -1747,6 +1729,12 @@
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-22T19:55:45.780Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-03-31T19:09:52.486Z",
+          "phase": "TBD",
+          "description": "* Individuals under 16"
         }
       ]
     },
