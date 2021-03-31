@@ -7,7 +7,7 @@
         {
           "question": "When will I be eligible to get the vaccine? ",
           "questionId": "when-will-i-be-eligible-vaccine",
-          "answer": "To learn when it will be your turn to get a COVID vaccine, contact your [state health department](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/hd-search/index.html). \n\nStates are following the distribution advice of the [Advisory Committee on Immunization Practices](https://www.cdc.gov/vaccines/acip/index.html) (ACIP), a group of medical and public health experts who develop recommendations on the use of vaccines. The ACIP determined that health care workers and staff and residents of nursing homes and assisted living facilities should be vaccinated first. But each state has adopted its own priorities for who to include in subsequent vaccination groups. Learn more through this analysis by the [Kaiser Family Foundation](https://www.kff.org/policy-watch/the-covid-19-vaccine-priority-line-continues-to-change-as-states-make-further-updates/).\n\nAs the vaccine supply increases, more groups will be added, with the goal of there being enough vaccines for everyone in the U.S. who wants one to be able to get one easily, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html)."
+          "answer": "To learn when it will be your turn to get a COVID vaccine, check the location page for your state or county on our website. President Biden has directed states to make all adults eligible [by May 1, 2021](https://www.whitehouse.gov/briefing-room/statements-releases/2021/03/11/fact-sheet-president-biden-to-announce-all-americans-to-be-eligible-for-vaccinations-by-may-1-puts-the-nation-on-a-path-to-get-closer-to-normal-by-july-4th/), though many states will do so even sooner."
         },
         {
           "question": "Who pays for vaccination? ",
@@ -52,12 +52,7 @@
         {
           "question": "Which locations do you have vaccine eligibility information for? ",
           "questionId": "what-locations-do-you-have-vaccine-eligibility-information-for",
-          "answer": "We currently have vaccine eligibility information for every U.S. state, two territories, and the District of Columbia."
-        },
-        {
-          "question": "Why do you have vaccine eligibility information for some locations and not others? ",
-          "questionId": "why-vaccine-eligibility-information-for-some-locations",
-          "answer": "Identifying vaccine eligibility information takes time, since the information is not standardized and cannot be processed automatically by a computer. It thus needs to be collected manually. What’s more, eligibility varies not only from state to state, but also sometimes by county, and even by city. Finally, vaccine eligibility information may change as states, counties, or cities adjust their roll-out plans, and making sure this information is up to date is a manual process of regularly checking government websites. For all those reasons, we currently have a limited number of locations that we are able to support with vaccine eligibility alerts."
+          "answer": "We currently have vaccine eligibility information for every U.S. state, the District of Columbia, Puerto Rico, and the Northern Mariana Islands.\n\nIdentifying vaccine eligibility information takes time, since the information is not standardized and cannot be processed automatically by a computer. It thus needs to be collected manually. What’s more, eligibility varies not only from state to state, but also sometimes by county, and even by city. Finally, vaccine eligibility information often changes frequently as states, counties, or cities adjust their roll-out plans, and making sure this information is up to date is a manual process of regularly checking government websites and press releases. For all those reasons, we focus on tracking vaccine eligibility at the state-level."
         },
         {
           "question": "Will vaccination for COVID cause me to test positive for COVID?",
