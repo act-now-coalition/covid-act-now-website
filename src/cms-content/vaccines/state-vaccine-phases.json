@@ -704,7 +704,7 @@
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -733,8 +733,8 @@
           "startDate": "March 29, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T14:23:21.118Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-31T15:53:41.599Z",
           "phase": "2",
           "description": "* Ages 16+",
           "startDate": "March 31, 2021"
@@ -1450,7 +1450,7 @@
       "fips": "33",
       "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -1500,11 +1500,11 @@
         {
           "phase": "3",
           "tier": "2",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Adults 30-39",
           "expandedDefinitionUrl": "",
           "startDate": "March 31, 2021",
-          "updatedAt": "2021-03-29T16:43:35.450Z"
+          "updatedAt": "2021-03-31T15:54:55.554Z"
         },
         {
           "currentlyEligible": false,
@@ -1694,7 +1694,7 @@
       ]
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "North Carolina",
       "fips": "37",
       "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot",
@@ -1731,16 +1731,16 @@
           "phase": "4A",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings\n\nSome counties may be vaccinating additional groups.",
+          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings",
           "expandedDefinitionUrl": "",
           "startDate": "March 17, 2021",
           "updatedAt": "2021-03-18T18:30:44.911Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T16:50:06.106Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-03-31T15:56:01.630Z",
           "phase": "4B",
-          "description": "* Residents of remaining congregate living settings\n* Additional essential workers",
+          "description": "* Remaining essential workers\n* Residents of remaining congregate living settings",
           "startDate": "March 31, 2021"
         },
         {
@@ -2153,7 +2153,7 @@
       "fips": "45",
       "eligibilityInfoUrl": "https://scdhec.gov/covid19/covid-19-vaccine",
       "vaccinationSignupUrl": "https://vaxlocator.dhec.sc.gov/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -2176,11 +2176,11 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 31",
-          "updatedAt": "2021-03-29T17:26:52.898Z"
+          "startDate": "March 31, 2021",
+          "updatedAt": "2021-03-31T16:05:16.078Z"
         }
       ]
     },
@@ -2473,7 +2473,7 @@
       ]
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Washington",
       "fips": "53",
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
@@ -2518,11 +2518,11 @@
         {
           "phase": "1B",
           "tier": "3 and 4",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* People 16 years and older with 2 or more co-morbidities or underlying conditions\n* People 60-64\n* People, staff and volunteers in certain congregate living settings (correctional facilities, group homes, etc.)\n* High-risk critical workers in certain congregate settings (restaurants, food services, construction, manufacturing)",
           "expandedDefinitionUrl": "",
-          "startDate": "Estimated March 31, 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "March 31, 2021",
+          "updatedAt": "2021-03-31T16:08:27.352Z"
         },
         {
           "currentlyEligible": false,
