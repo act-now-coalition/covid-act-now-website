@@ -13,12 +13,21 @@ interface ThemeColors {
   green: string;
   greenDark: string;
   lightBlue: string;
+  // Interactive colors
+  interactiveBase: string;
+  interactiveHover: string;
+  interactiveMedium: string;
+  interactiveLight: string;
 }
 
 const colors: ThemeColors = {
   green: COLOR_MAP.GREEN.BASE,
   greenDark: COLOR_MAP.GREEN.DARK,
   lightBlue: COLOR_MAP.BLUE,
+  interactiveBase: COLOR_MAP.interactiveBase,
+  interactiveHover: COLOR_MAP.interactiveHover,
+  interactiveMedium: COLOR_MAP.interactiveMedium,
+  interactiveLight: COLOR_MAP.interactiveLight,
 };
 
 interface ThemeFonts {

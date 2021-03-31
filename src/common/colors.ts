@@ -72,6 +72,13 @@ export const COLOR_MAP = {
   LIGHT_YELLOW: '#FFF1BF',
   LIGHT_YELLOW_EMAIL: 'rgba(255, 201, 0, 0.12)',
   BLACK: '#000000',
+
+  // Interactive Colors
+  // https://www.figma.com/file/h2CLX3VWnldAU3vfxFdrWV/Colors?node-id=454%3A17
+  interactiveBase: '#3567FD',
+  interactiveHover: '#002CB4',
+  interactiveMedium: 'rgba(53, 103, 253, 0.6)',
+  interactiveLight: 'rgba(53, 103, 253, .15)',
 };
 
 export const LEVEL_COLOR = {
