@@ -41,7 +41,6 @@ const InfoTooltip: React.FC<StyledTooltipProps> = props => {
         aria-describedby={idForAccessability}
       >
         <InfoIcon
-          $isOpen={isOpen}
           tabIndex={0}
           role="button"
           onClick={() => tooltipAnchorOnClick(isMobile, handleOpen)}
