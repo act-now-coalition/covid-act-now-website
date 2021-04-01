@@ -22,6 +22,8 @@ export interface RegionVaccinePhaseInfo {
   fips: string;
   notes?: string | null;
   phaseGroups: RegionPhaseGroup[];
+  stateSignupUrl?: string;
+  allAdultsEligible?: boolean;
 }
 
 export const stateVaccinationPhases: RegionVaccinePhaseInfo[] = stateVaccinationInfo.regions.map(
