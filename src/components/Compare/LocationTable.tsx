@@ -1,5 +1,4 @@
 import React from 'react';
-import remove from 'lodash/remove';
 import { Table, TableBody } from '@material-ui/core';
 import {
   RankedLocationSummary,
@@ -244,11 +243,11 @@ const LocationTable: React.FunctionComponent<{
 
   // In the modal, if the rank of the pinned-location-row is #1, we remove
   // the location's inline row, so as to not have the location listed twice consecutively:
-  const removePinnedIfRankedFirst = (location: SummaryForCompare) =>
+  const isNotPinnedLocation = (location: SummaryForCompare) =>
     location.region.fipsCode !== pinnedLocation?.region.fipsCode;
 
   const modalLocations = hideInlineLocation
-    ? remove(sortedLocations, removePinnedIfRankedFirst)
+    ? sortedLocations.filter(location => isNotPinnedLocation(location))
     : sortedLocations;
 
   const getVisibleLocations = () => {
@@ -257,11 +256,11 @@ const LocationTable: React.FunctionComponent<{
     } else {
       if (region) {
         if (geoScope === GeoScopeFilter.COUNTRY)
-          return sortedLocations.slice(0, 100);
+          return modalLocations.slice(0, 100);
         else return modalLocations;
       } else {
         if (homepageScope === HomepageLocationScope.STATE)
-          return modalLocations;
+          return sortedLocations;
         else return sortedLocations.slice(0, 100);
       }
     }

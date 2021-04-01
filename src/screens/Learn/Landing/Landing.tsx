@@ -5,8 +5,10 @@ import { Heading1, Heading2, MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { LandingSection, landingPageContent } from 'cms-content/learn/landing';
 import { learnPages } from 'cms-content/learn';
-import SectionButton, { ButtonTheme } from './SectionButton';
 import { ButtonContainer } from '../Learn.style';
+import { LargeOutlinedButton } from 'components/ButtonSystem';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { EventCategory } from 'components/Analytics';
 
 const Landing: React.FC = () => {
   const {
@@ -35,11 +37,14 @@ const Landing: React.FC = () => {
             <Heading2 id={section.sectionId}>{section.sectionTitle}</Heading2>
             <MarkdownContent source={section.description} />
             <ButtonContainer>
-              <SectionButton
-                cta={section.buttonCta}
-                redirect={section.buttonRedirect}
-                theme={ButtonTheme.WHITE}
-              />
+              <LargeOutlinedButton
+                to={section.buttonRedirect}
+                endIcon={<ArrowForwardIcon />}
+                trackingCategory={EventCategory.LEARN}
+                trackingLabel={`Learn landing: ${section.buttonCta}`}
+              >
+                {section.buttonCta}
+              </LargeOutlinedButton>
             </ButtonContainer>
           </Fragment>
         ))}

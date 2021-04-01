@@ -6,6 +6,7 @@ import {
   Heading3,
   Paragraph,
   MarkdownStyleContainer,
+  anchorStyles,
 } from './Markdown.style';
 import MarkdownContent from './MarkdownContent';
 
@@ -18,4 +19,5 @@ export {
   Heading3,
   Paragraph,
   MarkdownStyleContainer,
+  anchorStyles,
 };

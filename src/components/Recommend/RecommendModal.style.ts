@@ -62,6 +62,14 @@ export const SourceIntro = styled(MarkdownContent)`
   letter-spacing: 0em;
   text-align: left;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+
+  a {
+    text-decoration: underline;
+    color: ${COLOR_MAP.BLUE};
+    &:hover {
+      color: ${COLOR_MAP.BLUE};
+    }
+  }
 `;
 
 export const LevelContainer = styled.div`
