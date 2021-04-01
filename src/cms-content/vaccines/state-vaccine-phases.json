@@ -1065,7 +1065,7 @@
           "currentlyEligible": false,
           "updatedAt": "2021-04-01T16:26:09.621Z",
           "phase": "TBD",
-          "description": "Still to be determined\n\n* Individuals under 16"
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
       "notes": ""
@@ -1174,7 +1174,7 @@
           "currentlyEligible": false,
           "updatedAt": "2021-04-01T16:32:30.807Z",
           "phase": "TBD",
-          "description": "Still to be determined\n\n* Individuals under 16"
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ]
     },
