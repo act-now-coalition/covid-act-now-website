@@ -27,7 +27,7 @@ export enum TimeUnit {
  * Example: parseDateString('2020-03-01') // Return JS date object for March 1st 2020.
  */
 export function parseDateString(dateString: string): Date {
-  const parsedDate = DateTime.fromISO(dateString, { zone: 'utc' });
+  const parsedDate = DateTime.fromISO(dateString);
   assert(parsedDate.isValid, `Invalid input date string: ${dateString}`);
   return parsedDate.toJSDate();
 }
