@@ -1,34 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { MarkdownContent } from 'components/Markdown';
 import { COLOR_MAP } from 'common/colors';
 import theme from 'assets/theme';
-import LinkButton from 'components/LinkButton';
-
-const SharedButtonStyles = css`
-  font-size: 1rem;
-  text-transform: none;
-  text-decoration: none;
-  color: inherit;
-  padding: ${0.5 * theme.spacing(1)}px ${theme.spacing(2)};
-`;
-
-export const GreenLinkButton = styled(LinkButton)`
-  ${SharedButtonStyles};
-  color: white;
-  min-width: 120px;
-  background-color: ${COLOR_MAP.GREEN.BASE};
-  border: 1px solid ${COLOR_MAP.GREEN.BASE};
-
-  &:hover {
-    background-color: white;
-    color: ${COLOR_MAP.GREEN.BASE};
-  }
-`;
-
-export const BlueLinkButton = styled(LinkButton)`
-  color: ${COLOR_MAP.BLUE};
-  text-transform: none;
-`;
 
 export const MarkdownDataApi = styled(MarkdownContent)`
   /* The blockquote shows as the Notes section */

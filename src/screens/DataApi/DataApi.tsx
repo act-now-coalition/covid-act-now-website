@@ -8,12 +8,7 @@ import {
   productsLandingContent,
   ProductsLandingSection,
 } from 'cms-content/learn/data-api';
-import {
-  MarkdownDataApi,
-  DataApiSection,
-  GreenLinkButton,
-  BlueLinkButton,
-} from './DataApi.style';
+import { MarkdownDataApi, DataApiSection } from './DataApi.style';
 import { TocItem } from 'cms-content/utils';
 import DataCoverageTable, {
   FIELDS_PRETTY_NAMES,
@@ -21,6 +16,8 @@ import DataCoverageTable, {
 import LogoGrid from 'components/LogoGrid/LogoGrid';
 import { EventCategory } from 'components/Analytics';
 import { Grid } from '@material-ui/core';
+import { LargeFilledButton, TextButton } from 'components/ButtonSystem';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const {
   header,
@@ -43,18 +40,19 @@ export const sidebarSections: TocItem[] = [
 
 const DataCoverageSection: React.FC<{}> = () => {
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={3}>
       <Grid item xs={12}>
         <DataCoverageTable rows={FIELDS_PRETTY_NAMES} />
       </Grid>
       <Grid item xs={12}>
-        <BlueLinkButton
+        <TextButton
+          href="https://apidocs.covidactnow.org/data-definitions"
+          endIcon={<ArrowForwardIcon />}
           trackingCategory={EventCategory.API}
           trackingLabel="Data API: View all metrics"
-          href="https://apidocs.covidactnow.org/data-definitions"
         >
           View more metrics
-        </BlueLinkButton>
+        </TextButton>
       </Grid>
     </Grid>
   );
@@ -72,13 +70,13 @@ const DataApi = () => {
       <PageContent sidebarItems={sidebarSections}>
         <LearnHeading1>{header}</LearnHeading1>
         <MarkdownContent source={intro} />
-        <GreenLinkButton
+        <LargeFilledButton
           trackingCategory={EventCategory.API}
           trackingLabel="Data API: Register"
           href="https://apidocs.covidactnow.org/access/"
         >
           Register
-        </GreenLinkButton>
+        </LargeFilledButton>
         {productsList.map((product: ProductsLandingSection) => (
           <DataApiSection key={product.productId}>
             <Heading2 id={product.productId}>{product.productName}</Heading2>
