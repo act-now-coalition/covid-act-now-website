@@ -103,7 +103,7 @@
           "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "Moving forward, eligibility will be primarily determined by age. Eligibility will vary across counties and tribes, which may also choose to prioritize certain additional frontline workers. Counties are now vaccinating:\n\n* Age group 55+ (Santa Cruz, Yavapai)\n* Age group 16+ or 18+ (All other counties)",
+          "description": "Moving forward, eligibility will be primarily determined by age. Eligibility will vary across counties and tribes, which may also choose to prioritize certain additional frontline workers. Counties are now vaccinating:\n\n* Age group 55+ (Santa Cruz)\n* Age group 16+ or 18+ (All other counties)",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-25T14:13:53.139Z"
@@ -123,50 +123,14 @@
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations",
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care residents and staff\n* First responders",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.981Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* People ages 65 and older\n* Teacher and child care workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-25T21:22:59.509Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-04T20:04:31.034Z",
-          "phase": "1B",
-          "tier": "2",
-          "description": "* Manufacturing workers"
-        },
-        {
-          "phase": "1B",
-          "tier": "3",
-          "currentlyEligible": true,
-          "description": "* Essential government and community workers\n* People with intellectual or developmental disabilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-11T15:03:14.826Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* People 16-64 with high-risk medical conditions\n* Additional essential workers\n* People residing in high-risk settings (incarceration/detention facilities, group homes, congregate settings, crowded housing, student housing)\n* Veterans of all ages",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-25T14:15:11.169Z"
+          "updatedAt": "2021-04-01T16:59:42.196Z",
+          "phase": "2",
+          "description": "* All individuals 16+",
+          "startDate": "March 30, 2021"
         },
         {
           "currentlyEligible": false,
@@ -177,7 +141,7 @@
       ]
     },
     {
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "locationName": "California",
       "fips": "06",
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
@@ -211,8 +175,8 @@
           "updatedAt": "2021-03-25T14:16:07.123Z"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T14:05:33.391Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-01T17:01:48.996Z",
           "phase": "1b",
           "description": "* Individuals 50-64",
           "tier": "3",
@@ -302,48 +266,20 @@
       "fips": "09",
       "eligibilityInfoUrl": "https://portal.ct.gov/Coronavirus/COVID-19-Vaccinations",
       "vaccinationSignupUrl": "https://dphsubmissions.ct.gov/OnlineVaccine",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "1a",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Heath care workers\n* Long-term care residents\n* Medical first responders",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Individuals 65+",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "2",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Educators and child care providers\n* Individuals 55-64",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 1, 2021",
-          "updatedAt": "2021-02-24T16:35:12.090Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T16:30:00.887Z",
-          "phase": "3",
-          "description": "* Individuals 45-54",
-          "startDate": "March 19, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T17:41:04.730Z",
+          "updatedAt": "2021-04-01T17:06:41.937Z",
           "phase": "4",
           "description": "* Individuals 16+",
           "startDate": "April 1, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-01T17:07:04.635Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ]
     },
@@ -385,19 +321,10 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Based on supply, changes in eligibility will be made by age",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-18T17:32:43.822Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "May 1, 2021",
-          "updatedAt": "2021-03-18T17:33:10.992Z"
+          "startDate": "April 6, 2021",
+          "updatedAt": "2021-04-01T17:03:48.487Z"
         }
       ]
     },
@@ -406,7 +333,7 @@
       "fips": "11",
       "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine-information",
       "vaccinationSignupUrl": "https://coronavirus.dc.gov/vaccinatedc",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "phase": "1A",
@@ -438,11 +365,11 @@
         {
           "phase": "1C",
           "tier": "2",
-          "currentlyEligible": false,
-          "description": "* Individuals working in non-public transit\n* Individuals working in logistics/delivery/courier services\n* Essential employees working in media and mass communications",
+          "currentlyEligible": true,
+          "description": "* \\* Individuals working in non-public transit\n* Individuals working in logistics/delivery/courier services\n* Essential employees working in media and mass communications",
           "expandedDefinitionUrl": "",
-          "startDate": "Week of March 29",
-          "updatedAt": "2021-03-29T14:07:11.346Z"
+          "startDate": "Week of March 29, 2021",
+          "updatedAt": "2021-04-01T17:05:54.774Z"
         },
         {
           "phase": "1C",
@@ -482,10 +409,10 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-29T16:03:01.862Z",
+          "updatedAt": "2021-04-01T17:08:09.454Z",
           "phase": "2",
           "description": "* General public (16+)",
-          "startDate": "Before May 1, 2021"
+          "startDate": "April 5, 2021"
         },
         {
           "currentlyEligible": false,
@@ -565,8 +492,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
+          "startDate": "May 2021",
+          "updatedAt": "2021-04-01T17:08:37.692Z"
         }
       ]
     },
@@ -840,8 +767,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "April 12, 2021",
-          "updatedAt": "2021-03-22T16:59:45.343Z"
+          "startDate": "April 5, 2021",
+          "updatedAt": "2021-04-01T17:09:01.338Z"
         }
       ]
     },
