@@ -1749,7 +1749,7 @@
           "phase": "1A",
           "tier": "3",
           "currentlyEligible": true,
-          "description": "* Law enforcement, firefighters, grocery store employees, food/agricultural workers",
+          "description": "* Certain frontline groups: Law enforcement, firefighters, grocery store employees, food/agricultural workers",
           "expandedDefinitionUrl": "",
           "startDate": "March 31, 2021",
           "updatedAt": "2021-04-01T17:51:18.782Z"
@@ -1759,7 +1759,7 @@
           "updatedAt": "2021-03-04T18:46:00.987Z",
           "phase": "1B",
           "tier": "",
-          "description": "* First Responders\n* Frontline essential workers",
+          "description": "* First Responders\n* Other frontline essential workers",
           "startDate": "April 5, 2021"
         },
         {
