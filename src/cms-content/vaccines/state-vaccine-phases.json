@@ -1381,26 +1381,17 @@
           "phase": "3",
           "tier": "1",
           "currentlyEligible": true,
-          "description": "* Adults 40-49",
+          "description": "* Adults 30-49",
           "expandedDefinitionUrl": "",
           "startDate": "March 29, 2021",
-          "updatedAt": "2021-03-29T16:42:22.376Z"
-        },
-        {
-          "phase": "3",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Adults 30-39",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 31, 2021",
-          "updatedAt": "2021-03-31T15:54:55.554Z"
+          "updatedAt": "2021-04-01T16:36:07.990Z"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-29T16:43:43.896Z",
+          "updatedAt": "2021-04-01T16:35:59.366Z",
           "phase": "3",
-          "tier": "3",
-          "description": "All individuals 16+",
+          "tier": "2",
+          "description": "* All individuals 16+",
           "startDate": "April 2, 2021"
         }
       ]
