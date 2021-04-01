@@ -1128,45 +1128,17 @@
       "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "a",
-          "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care residents",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "b",
-          "currentlyEligible": true,
-          "description": "* Adults 65+\n* Teachers and childcare workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Essential frontline workers\n* People 50-64 in multi-generational housing\n* People 45-64 with one or more high-risk medical conditions\n* People 16-44 with two or more high-risk medical conditions\n* People of any age with certain other high-risk health conditions or disabilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-11T15:24:39.942Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-30T14:38:40.737Z",
-          "phase": "3",
-          "description": "* Individuals 16+ with any underlying medical condition\n* People 50-64\n* All other essential workers",
-          "startDate": "March 30, 2021"
-        },
-        {
           "currentlyEligible": true,
           "updatedAt": "2021-03-30T14:38:48.469Z",
           "phase": "4",
           "description": "* All individuals 16 and older",
           "startDate": "March 30, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-01T16:26:09.621Z",
+          "phase": "TBD",
+          "description": "Still to be determined\n\n* Individuals under 16"
         }
       ],
       "notes": ""
