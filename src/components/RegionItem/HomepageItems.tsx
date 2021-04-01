@@ -50,7 +50,7 @@ const HomepageItems: React.FC<{
 
 function getRegionList(
   geolocatedRegions: GeolocatedRegions,
-  showMetro: boolean = true,
+  showMetro: boolean,
 ): Region[] {
   const { county, state, metroArea } = geolocatedRegions;
   const items = [];
