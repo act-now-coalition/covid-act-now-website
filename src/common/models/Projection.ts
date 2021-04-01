@@ -2,6 +2,7 @@ import first from 'lodash/first';
 import last from 'lodash/last';
 import findIndex from 'lodash/findIndex';
 import findLastIndex from 'lodash/findLastIndex';
+import moment from 'moment';
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -17,14 +18,6 @@ import { assert, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
-import {
-  TimeUnit,
-  DateFormat,
-  parseDateString,
-  getTimeDiff,
-  formatDateTime,
-  addTime,
-} from 'common/utils/time-utils';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -497,14 +490,14 @@ export class Projection {
     // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
     // It cuts off some of the earlier dates
     if (metricsTimeseriesRaw.length > 0) {
-      earliestDate = parseDateString(first(metricsTimeseriesRaw)!.date);
-      latestDate = parseDateString(last(metricsTimeseriesRaw)!.date);
+      earliestDate = moment.utc(first(metricsTimeseriesRaw)!.date);
+      latestDate = moment.utc(last(metricsTimeseriesRaw)!.date);
     } else {
-      earliestDate = parseDateString(first(actualsTimeseriesRaw)!.date);
-      latestDate = parseDateString(last(actualsTimeseriesRaw)!.date);
+      earliestDate = moment.utc(first(actualsTimeseriesRaw)!.date);
+      latestDate = moment.utc(last(actualsTimeseriesRaw)!.date);
     }
 
-    earliestDate = parseDateString('2020-03-01');
+    earliestDate = moment.utc('2020-03-01');
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
@@ -517,9 +510,9 @@ export class Projection {
       metricsTimeseriesRaw,
     );
 
-    let currDate = earliestDate;
-    while (getTimeDiff(currDate, latestDate, TimeUnit.DAYS) <= 0) {
-      const ts = formatDateTime(currDate, DateFormat.YYYY_MM_DD);
+    let currDate = earliestDate.clone();
+    while (currDate.diff(latestDate) <= 0) {
+      const ts = currDate.format('YYYY-MM-DD');
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
         ts
       ] as ActualsTimeseriesRow;
@@ -528,10 +521,10 @@ export class Projection {
       ] as MetricsTimeseriesRow;
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
-      dates.push(currDate);
+      dates.push(currDate.toDate());
 
       // increment the date by one
-      currDate = addTime(currDate, 1, TimeUnit.DAYS);
+      currDate = currDate.clone().add(1, 'days');
     }
 
     // only keep futureDaysToInclude days ahead of today
