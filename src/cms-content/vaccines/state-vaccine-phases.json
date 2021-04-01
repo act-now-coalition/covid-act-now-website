@@ -1232,43 +1232,22 @@
       "fips": "30",
       "eligibilityInfoUrl": "https://dphhs.mt.gov/covid19vaccine",
       "vaccinationSignupUrl": "https://dphhs.mt.gov/publichealth/FCSS/countytribalhealthdepts",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
-        {
-          "phase": "1",
-          "tier": "A",
-          "currentlyEligible": true,
-          "description": "* Front-line workers\n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "B",
-          "currentlyEligible": true,
-          "description": "* Adults 70+\n* Adults with high-risk medical conditions\n* Vulnerable populations",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "B+",
-          "currentlyEligible": true,
-          "description": "* Adults 60+\n* Individuals 16+ with medium-risk medical conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 8, 2021",
-          "updatedAt": "2021-03-15T16:44:56.454Z"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "* All individuals 16 and older",
           "expandedDefinitionUrl": "",
           "startDate": "April 1, 2021",
-          "updatedAt": "2021-03-18T18:02:34.429Z"
+          "updatedAt": "2021-04-01T16:31:58.111Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-01T16:32:30.807Z",
+          "phase": "TBD",
+          "description": "Still to be determined\n\n* Individuals under 16"
         }
       ]
     },
