@@ -32,6 +32,12 @@ import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -133,7 +139,22 @@ export default function HomePage() {
                 )}
                 filterLimit={getFilterLimit()}
               />
-              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
+              <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
+                <Variant id={VariantID.A}>
+                  <HomepageItems
+                    isLoading={isLoading}
+                    userRegions={userRegions}
+                    showMetro
+                  />
+                </Variant>
+                <Variant id={VariantID.B}>
+                  <HomepageItems
+                    isLoading={isLoading}
+                    userRegions={userRegions}
+                    showMetro={false}
+                  />
+                </Variant>
+              </Experiment>
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}
