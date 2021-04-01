@@ -1730,7 +1730,7 @@
       "phaseGroups": [
         {
           "phase": "1A",
-          "tier": "",
+          "tier": "1",
           "currentlyEligible": true,
           "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions",
           "expandedDefinitionUrl": "",
@@ -1738,29 +1738,38 @@
           "updatedAt": "2021-02-18T01:52:35.985Z"
         },
         {
-          "phase": "1B",
-          "tier": "1",
           "currentlyEligible": true,
-          "description": "* (NEW) Law enforcement and firefighters\n* Education workers\n",
+          "updatedAt": "2021-04-01T17:51:34.341Z",
+          "phase": "1A",
+          "tier": "2",
+          "description": "* Education workers",
+          "startDate": "March 4, 2021"
+        },
+        {
+          "phase": "1A",
+          "tier": "3",
+          "currentlyEligible": true,
+          "description": "* Law enforcement, firefighters, grocery store employees, food/agricultural workers",
           "expandedDefinitionUrl": "",
-          "startDate": "March 4",
-          "updatedAt": "2021-03-31T19:11:11.766Z"
+          "startDate": "March 31, 2021",
+          "updatedAt": "2021-04-01T17:51:18.782Z"
         },
         {
           "currentlyEligible": false,
           "updatedAt": "2021-03-04T18:46:00.987Z",
           "phase": "1B",
-          "tier": "2",
-          "description": "* First Responders\n* Frontline essential workers"
+          "tier": "",
+          "description": "* First Responders\n* Frontline essential workers",
+          "startDate": "April 5, 2021"
         },
         {
           "phase": "1C",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* Additional front-line workers (transportation, food service, etc.)",
+          "description": "* Additional essential workers",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "April 12, 2021",
+          "updatedAt": "2021-04-01T17:54:22.437Z"
         },
         {
           "phase": "2",
@@ -1768,8 +1777,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
+          "startDate": "April 19, 2021",
+          "updatedAt": "2021-04-01T17:54:29.499Z"
         }
       ]
     },
