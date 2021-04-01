@@ -1,23 +1,72 @@
 import React from 'react';
-import { Wrapper, InnerContainer, Body } from './SpringSurgeBanner.style';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import { OutlinedButton } from 'components/ButtonSystem';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import {
+  BannerContainer,
+  InnerContainer,
+  Body,
+  ButtonsContainer,
+} from './Vaccinations100M.style';
 
-const BannerInner: React.FC = () => {
-  return (
-    <InnerContainer>
-      <Body>
-        Over 100M people in the US have received at least one dose of a COVID
-        vaccine! Stay safe and let’s keep it up so we can all get back to normal
-        as soon as possible. Share on facebook or twitter.
-      </Body>
-    </InnerContainer>
+const url = 'https://covidactnow.org';
+const quote = `Over 100M people in the US have received at least one dose of a COVID vaccine! Stay safe and let’s keep it up so we can all get back to normal as soon as possible.`;
+const hashtag = 'COVIDActNow';
+
+const trackShareFacebook = () => {
+  trackEvent(
+    EventCategory.HOMEPAGE_BANNER,
+    EventAction.SHARE,
+    'Facebook: 100M Vaccines',
+  );
+};
+
+const trackShareTwitter = () => {
+  trackEvent(
+    EventCategory.HOMEPAGE_BANNER,
+    EventAction.SHARE,
+    'Twitter: 100M Vaccines',
   );
 };
 
 const Vaccinations100M: React.FC = () => {
   return (
-    <Wrapper>
-      <BannerInner />
-    </Wrapper>
+    <BannerContainer>
+      <InnerContainer>
+        <Body>
+          <strong>
+            Over 100M people in the US have received at least one dose of a
+            COVID vaccine! 🎉{' '}
+          </strong>
+          <span>
+            Stay safe and let’s keep it up so we can all get back to normal as
+            soon as possible.
+          </span>
+        </Body>
+        <ButtonsContainer>
+          <OutlinedButton>
+            <FacebookShareButton
+              url={url}
+              quote={quote}
+              hashtag={hashtag}
+              onClick={trackShareFacebook}
+            >
+              Share on Facebook
+            </FacebookShareButton>
+          </OutlinedButton>
+          <OutlinedButton>
+            <TwitterShareButton
+              url={url}
+              title={quote}
+              hashtags={[hashtag]}
+              onClick={trackShareTwitter}
+            >
+              Share on Twitter
+            </TwitterShareButton>
+          </OutlinedButton>
+        </ButtonsContainer>
+      </InnerContainer>
+    </BannerContainer>
   );
 };
 
