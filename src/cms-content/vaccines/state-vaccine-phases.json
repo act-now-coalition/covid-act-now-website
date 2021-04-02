@@ -209,7 +209,7 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+ (beginning April 2)",
+          "description": "* All individuals 16+ (beginning April 2)",
           "expandedDefinitionUrl": "",
           "startDate": "April 2, 2021",
           "updatedAt": "2021-04-02T01:11:37.754Z"
@@ -1229,62 +1229,25 @@
       "fips": "33",
       "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* High-risk health workers\n* First responders\n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "December 2020",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* 65+ years of age\n* Adults with two or more high-risk conditions and their caregivers\n* Residents and staff at facilities for individuals with intellectual and developmental disabilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "December 2020",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* K-12 school and child care staff",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 12, 2021",
-          "updatedAt": "2021-03-15T16:45:56.825Z"
-        },
-        {
-          "phase": "2B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 50-64",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 22, 2021",
-          "updatedAt": "2021-03-22T22:06:55.180Z"
-        },
-        {
+          "updatedAt": "2021-04-01T16:35:59.366Z",
           "phase": "3",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Adults 30-49",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 29, 2021",
-          "updatedAt": "2021-04-01T16:36:07.990Z"
+          "tier": "",
+          "description": "* All individuals 16+ (beginning April 2)",
+          "startDate": "April 2, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-04-01T16:35:59.366Z",
-          "phase": "3",
-          "tier": "2",
-          "description": "* All individuals 16+",
-          "startDate": "April 2, 2021"
+          "updatedAt": "2021-04-02T01:13:25.153Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://www.vaccines.nh.gov/"
     },
     {
       "emailAlertVersion": "3",
