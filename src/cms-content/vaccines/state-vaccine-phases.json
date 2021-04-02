@@ -209,7 +209,7 @@
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+ (beginning April 2)",
+          "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 2, 2021",
           "updatedAt": "2021-04-02T01:11:37.754Z"
@@ -1236,7 +1236,7 @@
           "updatedAt": "2021-04-01T16:35:59.366Z",
           "phase": "3",
           "tier": "",
-          "description": "* All individuals 16+ (beginning April 2)",
+          "description": "* All individuals 16+",
           "startDate": "April 2, 2021"
         },
         {
