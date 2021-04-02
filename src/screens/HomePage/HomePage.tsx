@@ -10,7 +10,7 @@ import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { SpringSurgeBanner } from 'components/Banner';
+import { Vaccinations100M } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import regions, {
@@ -32,6 +32,12 @@ import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -120,7 +126,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
-      <SpringSurgeBanner />
+      <Vaccinations100M />
       <HomePageHeader />
       <main>
         <div className="App">
@@ -133,7 +139,22 @@ export default function HomePage() {
                 )}
                 filterLimit={getFilterLimit()}
               />
-              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
+              <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
+                <Variant id={VariantID.A}>
+                  <HomepageItems
+                    isLoading={isLoading}
+                    userRegions={userRegions}
+                    showMetro
+                  />
+                </Variant>
+                <Variant id={VariantID.B}>
+                  <HomepageItems
+                    isLoading={isLoading}
+                    userRegions={userRegions}
+                    showMetro={false}
+                  />
+                </Variant>
+              </Experiment>
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}

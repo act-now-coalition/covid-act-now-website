@@ -13,7 +13,8 @@ enum ItemsState {
 const HomepageItems: React.FC<{
   userRegions: GeolocatedRegions | null;
   isLoading: boolean;
-}> = ({ userRegions, isLoading }) => {
+  showMetro: boolean;
+}> = ({ userRegions, isLoading, showMetro }) => {
   const itemsState = isLoading
     ? ItemsState.LOADING
     : userRegions
@@ -24,7 +25,9 @@ const HomepageItems: React.FC<{
     return null;
   }
 
-  const visibleRegions = userRegions ? getRegionList(userRegions) : [];
+  const visibleRegions = userRegions
+    ? getRegionList(userRegions, showMetro)
+    : [];
 
   return (
     <RegionItemsWrapper>
@@ -45,23 +48,22 @@ const HomepageItems: React.FC<{
   );
 };
 
-function getRegionList(geolocatedRegions: GeolocatedRegions): Region[] {
+function getRegionList(
+  geolocatedRegions: GeolocatedRegions,
+  showMetro: boolean,
+): Region[] {
   const { county, state, metroArea } = geolocatedRegions;
-
   const items = [];
-
-  if (metroArea) {
-    items.push(metroArea);
+  if (showMetro) {
+    if (metroArea) items.push(metroArea);
+    if (county) items.push(county);
+    if (state && items.length < 2) items.push(state);
+  } else {
+    if (state) items.push(state);
+    if (county) items.push(county);
+    // Only show metro if at least one of state or county is unavailable.
+    if (metroArea && items.length < 2) items.push(metroArea);
   }
-
-  if (county) {
-    items.push(county);
-  }
-
-  if (state && items.length < 2) {
-    items.push(state);
-  }
-
   return items;
 }
 
