@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import { TwitterShareButton, FacebookShareButton } from 'react-share';
 import { OutlinedButton } from 'components/ButtonSystem';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import {
@@ -36,36 +36,36 @@ const Vaccinations100M: React.FC = () => {
         <Body>
           <strong>
             Over 100M people in the US have received at least one dose of a
-            COVID vaccine!{' '}
+            COVID vaccine!
           </strong>
           <span role="img" aria-label="party popper">
-            🎉
-          </span>{' '}
+            {' 🎉 '}
+          </span>
           <span>
             Stay safe and let’s keep it up so we can all get back to normal as
             soon as possible.
           </span>
         </Body>
         <ButtonsContainer>
-          <OutlinedButton>
-            <FacebookShareButton
-              url={url}
-              quote={quote}
-              hashtag={hashtag}
-              onClick={trackShareFacebook}
-            >
-              Share on Facebook
-            </FacebookShareButton>
+          <OutlinedButton
+            as={FacebookShareButton}
+            url={url}
+            quote={quote}
+            hashtag={hashtag}
+            onClick={trackShareFacebook}
+            resetButtonStyle={false}
+          >
+            Share on Facebook
           </OutlinedButton>
-          <OutlinedButton>
-            <TwitterShareButton
-              url={url}
-              title={quote}
-              hashtags={[hashtag]}
-              onClick={trackShareTwitter}
-            >
-              Share on Twitter
-            </TwitterShareButton>
+          <OutlinedButton
+            as={TwitterShareButton}
+            url={url}
+            title={quote}
+            hashtags={[hashtag]}
+            onClick={trackShareTwitter}
+            resetButtonStyle={false}
+          >
+            Share on Twitter
           </OutlinedButton>
         </ButtonsContainer>
       </InnerContainer>
