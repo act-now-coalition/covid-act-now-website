@@ -37,10 +37,7 @@ const Vaccinations100M: React.FC = () => {
           <strong>
             Over 100M people in the US have received at least one dose of a
             COVID vaccine!
-          </strong>
-          <span role="img" aria-label="party popper">
-            {' 🎉 '}
-          </span>
+          </strong>{' '}
           <span>
             Stay safe and let’s keep it up so we can all get back to normal as
             soon as possible.
