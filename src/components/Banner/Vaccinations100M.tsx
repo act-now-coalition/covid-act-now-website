@@ -7,7 +7,6 @@ import {
   InnerContainer,
   Body,
   ButtonsContainer,
-  EmojiContainer,
 } from './Vaccinations100M.style';
 
 const url = 'https://covidactnow.org';
@@ -39,7 +38,9 @@ const Vaccinations100M: React.FC = () => {
             Over 100M people in the US have received at least one dose of a
             COVID vaccine!
           </strong>
-          <EmojiContainer aria-label="party popper">🎉</EmojiContainer>
+          <span role="img" aria-label="party popper">
+            &nbsp;🎉&nbsp;
+          </span>
           <span>
             Stay safe and let’s keep it up so we can all get back to normal as
             soon as possible.

@@ -45,8 +45,3 @@ export const ButtonsContainer = styled.div`
     margin-right: 8px;
   }
 `;
-
-export const EmojiContainer = styled.span.attrs(props => ({ role: 'img' }))`
-  padding-left: 1ch;
-  padding-right: 1ch;
-`;
