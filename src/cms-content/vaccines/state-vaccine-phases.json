@@ -199,67 +199,30 @@
       "notes": ""
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Colorado",
       "fips": "08",
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
-      "vaccinationSignupUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/where-can-i-get-vaccinated",
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
-        {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Highest-risk health care workers (direct, prolonged COVID exposure) \n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "Winter 2020-2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Moderate-risk health care workers (less direct COVID exposure) \n* First responders \n* Adults 70+",
-          "expandedDefinitionUrl": "",
-          "startDate": "Winter 2020-2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Teachers \n* Child care workers \n* Adults 65-69",
-          "expandedDefinitionUrl": "",
-          "startDate": "February 8, 2021",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "3",
-          "currentlyEligible": true,
-          "description": "* Adults 60-64\n* Frontline essential workers in grocery and agriculture\n* People 16-59 with two or more high risk conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 5, 2021",
-          "updatedAt": "2021-03-08T16:59:01.146Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "4",
-          "currentlyEligible": true,
-          "description": "* Adults 50-59\n* People 16-49 with a high risk condition\n* Other frontline essential workers (including food services, state and local government, postal service, manufacturing, public transit, etc.)",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 19, 2021",
-          "updatedAt": "2021-03-22T16:26:44.340Z"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public (16+)",
+          "currentlyEligible": true,
+          "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 2, 2021",
-          "updatedAt": "2021-03-15T14:34:42.387Z"
+          "updatedAt": "2021-04-02T01:11:37.754Z"
+        },
+        {
+          "currentlyEligible": false,
+          "phase": "TBD",
+          "updatedAt": "2021-04-02T01:10:56.253Z",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/where-can-i-get-vaccinated#where"
     },
     {
       "locationName": "Connecticut",
@@ -1266,62 +1229,25 @@
       "fips": "33",
       "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* High-risk health workers\n* First responders\n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "December 2020",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* 65+ years of age\n* Adults with two or more high-risk conditions and their caregivers\n* Residents and staff at facilities for individuals with intellectual and developmental disabilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "December 2020",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* K-12 school and child care staff",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 12, 2021",
-          "updatedAt": "2021-03-15T16:45:56.825Z"
-        },
-        {
-          "phase": "2B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 50-64",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 22, 2021",
-          "updatedAt": "2021-03-22T22:06:55.180Z"
-        },
-        {
+          "updatedAt": "2021-04-01T16:35:59.366Z",
           "phase": "3",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Adults 30-49",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 29, 2021",
-          "updatedAt": "2021-04-01T16:36:07.990Z"
+          "tier": "",
+          "description": "* All individuals 16+",
+          "startDate": "April 2, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-04-01T16:35:59.366Z",
-          "phase": "3",
-          "tier": "2",
-          "description": "* All individuals 16+",
-          "startDate": "April 2, 2021"
+          "updatedAt": "2021-04-02T01:13:25.153Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://www.vaccines.nh.gov/"
     },
     {
       "emailAlertVersion": "3",
