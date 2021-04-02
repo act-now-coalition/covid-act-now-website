@@ -10,7 +10,7 @@ import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { SpringSurgeBanner } from 'components/Banner';
+import { Vaccinations100M } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import regions, {
@@ -126,7 +126,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
-      <SpringSurgeBanner />
+      <Vaccinations100M />
       <HomePageHeader />
       <main>
         <div className="App">
