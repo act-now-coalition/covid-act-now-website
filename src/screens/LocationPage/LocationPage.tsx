@@ -11,12 +11,13 @@ import { getStateCode, MetroArea, Region } from 'common/regions';
 
 interface LocationPageProps {
   region: Region;
+  defaultMapOption: typeof MAP_FILTERS;
 }
 
-function LocationPage({ region }: LocationPageProps) {
+function LocationPage({ region, defaultMapOption }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
-  const defaultMapOption = getDefaultMapOption(region);
+  //const defaultMapOption = getDefaultMapOption(region);
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -49,17 +50,6 @@ function LocationPage({ region }: LocationPageProps) {
       </div>
     </div>
   );
-}
-
-function getDefaultMapOption(region: Region) {
-  const stateCode = getStateCode(region);
-  if (stateCode === MAP_FILTERS.DC) {
-    return MAP_FILTERS.NATIONAL;
-  }
-  if (region instanceof MetroArea) {
-    return MAP_FILTERS.MSA;
-  }
-  return MAP_FILTERS.STATE;
 }
 
 export default LocationPage;

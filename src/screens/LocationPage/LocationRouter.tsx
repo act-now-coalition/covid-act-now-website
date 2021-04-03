@@ -3,6 +3,8 @@ import { useParams } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { useRegionFromParams, State, County } from 'common/regions';
 import LocationPage from './LocationPage';
+import { MAP_FILTERS } from './Enums/MapFilterEnums';
+import { getStateCode, MetroArea } from 'common/regions';
 
 const LocationRouter: React.FC = () => {
   const { stateId } = useParams<{
@@ -24,7 +26,16 @@ const LocationRouter: React.FC = () => {
     return <Redirect to={region.relativeUrl} />;
   }
 
-  return <LocationPage region={region} />;
+  let defaultMapOption = MAP_FILTERS.STATE;
+
+  const stateCode = getStateCode(region);
+  if (stateCode === MAP_FILTERS.DC) {
+    defaultMapOption = MAP_FILTERS.NATIONAL;
+  } else if (region instanceof MetroArea) {
+    defaultMapOption = MAP_FILTERS.MSA;
+  }
+
+  return <LocationPage region={region} defaultMapOption={defaultMapOption} />;
 };
 
 export default LocationRouter;
