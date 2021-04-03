@@ -1,73 +1,23 @@
+/*
+Should only be used by script for pre-processing regions data
+*/
+
 import flatten from 'lodash/flatten';
 import map from 'lodash/map';
 import keyBy from 'lodash/keyBy';
 import values from 'lodash/values';
 import type { Dictionary } from 'lodash';
-import US_STATE_DATASET from 'components/MapSelectors/datasets/us_states_dataset_01_02_2020.json';
-import countyAdjacencyMsa from 'common/data/county_adjacency_msa.json';
-import metroAreaDataset from 'common/data/msa-data.json';
+import US_STATE_DATASET from './us_states_dataset_01_02_2020.json';
+import countyAdjacencyMsa from './county_adjacency_msa.json';
+import metroAreaDataset from './msa-data.json';
 import {
-  RegionType,
   FipsCode,
-  Region,
   State,
   County,
   MetroArea,
-} from './types';
+} from '../../src/common/regions/types';
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
-
-// getStateName, getStateCode, and getStateFips are helper functions that make migrating
-// some of the existing state based logic over.  Ideally we will be able
-// to remove these at some point, but they are helpful in the meantime.
-export function getStateName(region: Region): string | null {
-  if (region.regionType === RegionType.COUNTY) {
-    return (region as County).state.fullName;
-  }
-  if (region.regionType === RegionType.STATE) {
-    return (region as State).fullName;
-  }
-  return null;
-}
-
-export function getStateCode(region: Region): string | null {
-  if (region.regionType === RegionType.COUNTY) {
-    return (region as County).state.stateCode;
-  }
-  if (region.regionType === RegionType.STATE) {
-    return (region as State).stateCode;
-  }
-  return null;
-}
-
-/*
-Goes one step beyond getStateCode(). Inludes MSAs and returns each regionType's 'version' of a stateCode:
-  metro -> dash-separated list of all states in which the MSA resides ('NY-NJ-PA')
-  state -> state's stateCode ('NY')
-  county -> stateCode of county's state ('NY')
-*/
-export function getFormattedStateCode(region: Region): string | null {
-  if (
-    region.regionType === RegionType.COUNTY ||
-    region.regionType === RegionType.STATE
-  ) {
-    return getStateCode(region);
-  } else if (region.regionType === RegionType.MSA) {
-    return (region as MetroArea).stateCodes;
-  } else {
-    return null;
-  }
-}
-
-export const getStateFips = (region: Region): string | null => {
-  if (region.regionType === RegionType.COUNTY) {
-    return (region as County).state.fipsCode;
-  }
-  if (region.regionType === RegionType.STATE) {
-    return (region as State).fipsCode;
-  }
-  return null;
-};
 
 function buildStates(): State[] {
   return map(
