@@ -8,7 +8,10 @@ import {
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
-  statesByStateCode,
+  stateCodesToFips,
+  stateUrlSegmentsToFips,
+  countyUrlSegmentsToFips,
+  metroAreaUrlSegmentsToFips,
 } from './preprocessed_regions_data';
 import { assert } from 'common/utils';
 
@@ -27,7 +30,10 @@ class RegionDB {
     countiesByFips: Dictionary<County>,
     metroAreasByFips: Dictionary<MetroArea>,
     customAreasByFips: Dictionary<State>,
-    private statesByStateCode: Dictionary<State>,
+    private stateCodesToFips: Dictionary<string>,
+    private stateUrlSegmentsToFips: Dictionary<string>,
+    private countyUrlSegmentsToFips: Dictionary<string>,
+    private metroAreaUrlSegmentsToFips: Dictionary<string>,
   ) {
     this.states = sortBy(values(statesByFips), state => state.name);
     this.counties = sortBy(values(countiesByFips), county => county.name);
@@ -53,68 +59,65 @@ class RegionDB {
   }
 
   findByStateCode(stateCode: string): State | null {
-    return this.statesByStateCode[stateCode.toUpperCase()] ?? null;
+    const fips = this.stateCodesToFips[stateCode.toUpperCase()] ?? null;
+    if (Boolean(fips)) {
+      const state = this.findByFipsCode(fips);
+      if (Boolean(state)) {
+        return state as State;
+      }
+    }
+    return null;
   }
 
   findByStateCodeStrict(stateCode: string): State {
-    const region = this.statesByStateCode[stateCode.toUpperCase()];
+    const region = this.findByStateCode(stateCode);
     assert(region, `Region unexpectedly not found for ${stateCode}`);
     return region;
   }
 
-  findByFullName(fullName: string): Region | null {
-    return this.all().find(region => region.fullName === fullName) || null;
-  }
-
-  findCountiesByStateCode(stateCode: string): County[] {
-    return this.counties.filter(county => county.stateCode === stateCode);
-  }
-
-  /** Find counties and metros that are in / overlap given state code. */
-  findCountiesAndMetrosByStateCode(stateCode: string): Region[] {
-    const counties = this.counties.filter(
-      county => county.stateCode === stateCode,
-    );
-    const metros = this.metroAreas.filter(metro =>
-      metro.states.map(state => state.stateCode).includes(stateCode),
-    );
-    return [...counties, ...metros];
-  }
-
   findStateByUrlParams(stateUrlSegment: string): State | null {
-    // The second condition is added to support legacy URLs with the 2-letter
-    // state code (`/us/wa`)
-    const foundState = this.states.find(
-      state =>
-        equalLower(state.urlSegment, stateUrlSegment) ||
-        equalLower(state.stateCode, stateUrlSegment),
-    );
-    return foundState || null;
-  }
+    const fips = this.stateUrlSegmentsToFips[stateUrlSegment] ?? null;
 
-  findMetroAreaByUrlParams(metroAreaUrlSegment: string) {
-    const foundMetro = this.metroAreas.find(
-      metro => metro.urlSegment === metroAreaUrlSegment,
-    );
-    return foundMetro || null;
+    // The first condition is added to support legacy URLs with the 2-letter
+    // state code (`/us/wa`)
+    if (!Boolean(fips)) {
+      return this.findByStateCode(stateUrlSegment);
+    } else {
+      const state = this.findByFipsCode(fips);
+      if (Boolean(state)) {
+        return state as State;
+      } else {
+        return null;
+      }
+    }
   }
 
   findCountyByUrlParams(
     stateUrlSegment: string,
     countyUrlSegment: string,
   ): County | null {
-    const foundState = this.findStateByUrlParams(stateUrlSegment);
-    if (!foundState) {
-      return null;
+    // must match key in prepare-regions-data.ts, which generates this mapping
+    const key = `${stateUrlSegment}-${countyUrlSegment}`;
+
+    const fips = this.countyUrlSegmentsToFips[key];
+    if (Boolean(fips)) {
+      const county = this.findByFipsCode(fips);
+      if (Boolean(county)) {
+        return county as County;
+      }
     }
+    return null;
+  }
 
-    const foundCounty = this.counties.find(
-      county =>
-        county.state.fipsCode === foundState.fipsCode &&
-        equalLower(county.urlSegment, countyUrlSegment),
-    );
-
-    return foundCounty || null;
+  findMetroAreaByUrlParams(metroAreaUrlSegment: string) {
+    const fips = this.metroAreaUrlSegmentsToFips[metroAreaUrlSegment];
+    if (Boolean(fips)) {
+      const metroArea = this.findByFipsCode(fips);
+      if (Boolean(metroArea)) {
+        return metroArea as MetroArea;
+      }
+    }
+    return null;
   }
 
   all(): Region[] {
@@ -136,16 +139,15 @@ class RegionDB {
   }
 }
 
-function equalLower(a: string, b: string) {
-  return a.toLowerCase() === b.toLowerCase();
-}
-
 const regions = new RegionDB(
   statesByFips,
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
-  statesByStateCode,
+  stateCodesToFips,
+  stateUrlSegmentsToFips,
+  countyUrlSegmentsToFips,
+  metroAreaUrlSegmentsToFips,
 );
 
 export default regions;

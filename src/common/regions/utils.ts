@@ -145,16 +145,6 @@ function countyIncludesZip(
   return countyToZipMap[county.fipsCode]?.includes(zipCode);
 }
 
-export function getStateRegionFromStateCode(
-  stateCode: string,
-): Region | undefined {
-  const regionFromStateCode = find(
-    regions.states,
-    (region: State) => region.stateCode === stateCode,
-  );
-  return regionFromStateCode;
-}
-
 export function getCountyRegionFromZipCode(
   zipCode: string,
   countyToZipMap: CountyToZipMap,
@@ -192,7 +182,7 @@ export function getGeolocatedRegions(
     return {
       metroArea: getMetroRegionFromZipCode(geolocation.zipCode, countyToZipMap),
       county: getCountyRegionFromZipCode(geolocation.zipCode, countyToZipMap),
-      state: getStateRegionFromStateCode(geolocation.stateCode),
+      state: regions.findByStateCode(geolocation.stateCode) ?? undefined,
     };
   }
 }
