@@ -12,7 +12,7 @@ const REPO_FOLDER = path.join(__dirname, '../..');
 const CENSUS_JSON_FILE = path.join(__dirname, '2018-census-fips-codes.json');
 const SEARCH_JSON_FILE = path.join(
   REPO_FOLDER,
-  'src/components/MapSelectors/datasets/us_states_dataset_01_02_2020.json',
+  '../prepare-regions-data/us_states_dataset_01_02_2020.json',
 );
 const TOPO_FOLDER = path.join(
   REPO_FOLDER,
