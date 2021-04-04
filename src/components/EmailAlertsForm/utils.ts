@@ -1,14 +1,14 @@
 import { getFirestore, getFirestoreFieldValue } from 'common/firebase';
-import { Region, County, MetroArea } from 'common/regions';
+import { Region, County, MetroArea, FipsCode } from 'common/regions';
 
-export function getDefaultRegions(region: Region): Region[] {
+export function getDefaultRegions(region: Region): FipsCode[] {
   if (region instanceof MetroArea) {
-    return [region, ...region.states];
+    return [region.fipsCode, ...region.states.map(state => state.fipsCode)];
   }
   if (region instanceof County) {
-    return [region, region.state];
+    return [region.fipsCode, region.state.fipsCode];
   } else {
-    return [region];
+    return [region.fipsCode];
   }
 }
 

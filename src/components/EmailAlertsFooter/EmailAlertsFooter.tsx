@@ -1,5 +1,5 @@
 import React from 'react';
-import regions, { Region } from 'common/regions';
+import regions, { FipsCode } from 'common/regions';
 import {
   Container,
   Content,
@@ -10,9 +10,10 @@ import {
 } from './EmailAlertsFooter.style';
 import EmailAlertsForm from 'components/EmailAlertsForm';
 
-const EmailAlertsFooter: React.FC<{ defaultRegions: Region[] }> = ({
-  defaultRegions,
+const EmailAlertsFooter: React.FC<{ defaultRegionsFips: FipsCode[] }> = ({
+  defaultRegionsFips,
 }) => {
+  const defaultRegions = defaultRegionsFips.map(regions.findByFipsCodeStrict);
   return (
     <Container>
       <Content>

@@ -8,5 +8,10 @@ export default {
 };
 
 export const Example = () => (
-  <EmailAlertsFooter defaultRegions={[regions.states[0], regions.states[10]]} />
+  <EmailAlertsFooter
+    defaultRegionsFips={[
+      regions.states[0].fipsCode,
+      regions.states[10].fipsCode,
+    ]}
+  />
 );
