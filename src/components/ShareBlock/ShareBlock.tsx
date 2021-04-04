@@ -76,13 +76,13 @@ const ShareBlock = ({
       <SocialLocationPreviewMap isEmbedPreview />
     );
 
-  const defaultSignupRegions = region
+  const defaultSignupRegionsFips = region
     ? getDefaultRegions(region)
-    : geolocatedRegions;
+    : geolocatedRegions.map((region: Region) => region.fipsCode);
 
   return (
     <ShareContainer id="share">
-      <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
+      <EmailAlertsFooter defaultRegionsFips={defaultSignupRegionsFips} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
           $isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
