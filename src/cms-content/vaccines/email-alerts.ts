@@ -57,7 +57,7 @@ export function getEmailAlertData(
   const region = regions.findByFipsCodeStrict(fipsCode);
 
   const vacinationInfo = getVaccineInfoByFips(fipsCode);
-  const vaccinationLinks = getVaccinationDataByRegion(region);
+  const vaccinationLinks = getVaccinationDataByRegion(fipsCode);
 
   assert(
     vacinationInfo,

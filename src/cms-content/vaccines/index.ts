@@ -1,5 +1,5 @@
 import keyBy from 'lodash/keyBy';
-import { Region } from 'common/regions';
+import { FipsCode } from 'common/regions';
 import METRO_VACCINE_DATA from './msa.json';
 import COUNTY_VACCINE_DATA from './county.json';
 import { stateVaccinationPhases } from './phases';
@@ -43,7 +43,7 @@ const VACCINATION_DATA_BY_FIPS: { [fips: string]: RegionVaccinationInfo } = {
 };
 
 export const getVaccinationDataByRegion = (
-  region: Region,
+  fipsCode: FipsCode,
 ): RegionVaccinationInfo | null => {
-  return VACCINATION_DATA_BY_FIPS[region.fipsCode] || null;
+  return VACCINATION_DATA_BY_FIPS[fipsCode] || null;
 };

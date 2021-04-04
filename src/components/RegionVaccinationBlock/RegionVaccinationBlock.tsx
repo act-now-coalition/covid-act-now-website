@@ -22,7 +22,7 @@ const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
   const vaccinationRegions = getVaccinationRegions(region);
 
   const vaccinationRegionsData = vaccinationRegions
-    .map(getVaccinationDataByRegion)
+    .map((region: Region) => getVaccinationDataByRegion(region.fipsCode))
     .filter((data): data is RegionVaccinationInfo => data !== null);
 
   if (!vaccinationRegionsData) {

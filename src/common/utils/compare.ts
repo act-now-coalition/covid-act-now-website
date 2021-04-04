@@ -9,6 +9,7 @@ import regions, {
   Region,
   State,
   MetroArea,
+  FipsCode,
   getStateName,
   getFormattedStateCode,
   getAbbreviatedCounty,

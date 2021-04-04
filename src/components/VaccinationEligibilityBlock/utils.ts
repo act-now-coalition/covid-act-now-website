@@ -10,8 +10,8 @@ import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 
 export function getEligibilityInfo(region: Region) {
   const { fipsCode } = region;
-  const vaccineInfo = getVaccineInfoByFips(region.fipsCode);
-  const vaccineLinks = getVaccinationDataByRegion(region);
+  const vaccineInfo = getVaccineInfoByFips(fipsCode);
+  const vaccineLinks = getVaccinationDataByRegion(fipsCode);
 
   assert(vaccineInfo !== null, `Missing vaccination data for ${fipsCode}`);
   assert(vaccineLinks, `Missing vaccination links for ${fipsCode}`);
