@@ -153,7 +153,7 @@ export class MetroArea extends Region {
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
-    public counties: County[],
+    public countiesFipsCodes: FipsCode[],
     public states: State[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
@@ -191,6 +191,9 @@ export class MetroArea extends Region {
   }
 
   contains(subregion: Region): boolean {
-    return subregion instanceof County && this.counties.includes(subregion);
+    return (
+      subregion instanceof County &&
+      this.countiesFipsCodes.includes(subregion.fipsCode)
+    );
   }
 }

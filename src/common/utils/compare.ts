@@ -53,7 +53,11 @@ export function getAllMetroAreas(): SummaryForCompare[] {
 export function getAllCountiesOfMetroArea(
   region: MetroArea,
 ): SummaryForCompare[] {
-  return region.counties.map(getLocationObj);
+  return region.countiesFipsCodes
+    .map(
+      (fipsCode: FipsCode) => regions.findByFipsCodeStrict(fipsCode) as County,
+    )
+    .map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {

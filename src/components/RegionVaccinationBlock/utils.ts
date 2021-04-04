@@ -19,7 +19,7 @@ export const getVaccinationRegions = (region: Region): Region[] => {
   if (region instanceof County) {
     const county = region as County;
     const metro = regions.metroAreas.find(metro =>
-      metro.counties.map(county => county.fipsCode).includes(county.fipsCode),
+      metro.countiesFipsCodes.includes(county.fipsCode),
     );
     if (metro) {
       return [county, metro, region.state];

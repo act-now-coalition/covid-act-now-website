@@ -57,7 +57,7 @@ export function getAutocompleteRegions(region?: Region): Region[] {
   // Location pages
   if (region instanceof MetroArea) {
     const [countiesInMetro, otherCounties] = partition(counties, county =>
-      region.counties.includes(county),
+      region.countiesFipsCodes.includes(county.fipsCode),
     );
     const sortedMetroCounties = sortByPopulation(countiesInMetro);
 
@@ -119,7 +119,7 @@ export function getMetroRegionFromZipCode(
 ): Region | undefined {
   const countyFromZip = getCountyRegionFromZipCode(zipCode, countyToZipMap);
   const metroFromZip = find(regions.metroAreas, (region: MetroArea) =>
-    region.counties.includes(countyFromZip as County),
+    region.countiesFipsCodes.includes((countyFromZip as County).fipsCode),
   );
   return metroFromZip;
 }
