@@ -990,55 +990,16 @@
       "fips": "31",
       "eligibilityInfoUrl": "http://dhhs.ne.gov/Pages/COVID-19-Vaccine-Information.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
-        {
-          "phase": "1",
-          "tier": "A",
-          "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care residents",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "B",
-          "currentlyEligible": true,
-          "description": "* Age 65+\n* Adults with high-risk medical conditions\n* First responders\n* Educators\n* Essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "C",
-          "currentlyEligible": true,
-          "description": "Some counties may be vaccinating: \n\n* Congregate living (residential treatments, corrections, homeless shelters)",
-          "expandedDefinitionUrl": "",
-          "startDate": "Mid March 2021",
-          "updatedAt": "2021-03-22T21:59:47.313Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T22:00:49.786Z",
-          "phase": "2A",
-          "description": "Some counties may be vaccinating: \n\n* Individuals age 50-64 \n* Individuals with underlying medical conditions\n\nAdditional groups may be eligible in certain counties. Check your local health department website for county-specific information."
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-29T16:38:10.700Z",
-          "phase": "2A+",
-          "description": "All individuals 18 and older at select pharmacies statewide"
-        },
         {
           "phase": "2B",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* All individuals 16 and older",
+          "currentlyEligible": true,
+          "description": "Eligibility varies by county. Counties are now vaccinating: \n\n* Age group 50+ and other priority groups (Lancaster)\n* Age group 16+ or 18+ (All other counties) \n\nIndividuals 18+ are also eligible statewide at pharmacies participating in the Federal Retail Pharmacy Program.",
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-01T16:33:45.779Z"
+          "updatedAt": "2021-04-05T17:51:04.845Z"
         }
       ],
       "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx"
