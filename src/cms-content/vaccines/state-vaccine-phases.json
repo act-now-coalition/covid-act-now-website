@@ -1868,13 +1868,20 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 5",
-          "updatedAt": "2021-03-31T19:12:10.763Z"
+          "updatedAt": "2021-04-05T06:22:01.891Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T06:22:20.278Z",
+          "phase": "TBD",
+          "description": "* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "5",
