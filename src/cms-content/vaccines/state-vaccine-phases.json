@@ -832,62 +832,17 @@
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care residents and staff",
-          "expandedDefinitionUrl": "",
-          "startDate": "December 1, 2020",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Persons 65 and over\n* Frontline responders\n* Teachers and child care providers\n* Corrections staff",
-          "expandedDefinitionUrl": "",
-          "startDate": "January 15, 2021",
-          "updatedAt": "2021-03-02T00:34:14.633Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-02T00:34:55.989Z",
-          "phase": "1B",
-          "tier": "2",
-          "description": "* Agriculture and food processing workers",
-          "startDate": "March 1, 2021"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-08T17:11:14.966Z",
-          "phase": "1B",
-          "tier": "3",
-          "description": "* Persons 50-64 with disabilities or pre-existing medical conditions\n* Caregivers of children with special health care needs",
-          "startDate": "March 8, 2021"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T21:48:55.116Z",
-          "phase": "1B",
-          "tier": "4",
-          "description": "* All other persons 50-64\n* Persons 16+ with disabilities or pre-existing medical conditions as well as their caregivers",
-          "startDate": "March 22, 2021"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* Other essential frontline workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-22T21:50:05.140Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:50:35.320Z",
+          "updatedAt": "2021-04-05T17:45:13.270Z",
           "phase": "2",
           "description": "* Individuals 16+",
           "startDate": "April 5, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T17:45:20.886Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
       "stateSignupUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341"
