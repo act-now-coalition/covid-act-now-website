@@ -1125,55 +1125,26 @@
       "fips": "35",
       "eligibilityInfoUrl": "https://cv.nmhealth.org/covid-vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
-        {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Health care personnel\n* Long-term care facilities\n* Congregate care facilities\n* Other personnel with direct exposure to infectious people or materials",
-          "expandedDefinitionUrl": "",
-          "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Adults 75+\n* Individuals (16+) with at least one chronic high-risk condition\n* K-12 educators, early childhood professionals, and school staff",
-          "expandedDefinitionUrl": "",
-          "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-03-29T16:48:37.843Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Frontline essential workers unable to work remotely\n* Vulnerable populations, including residents of congregate settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "Winter 2020 - Spring 2021",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 60+\n* Other essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-22T22:10:43.968Z"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-01T16:38:37.617Z"
+          "updatedAt": "2021-04-05T18:01:34.884Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T18:02:49.194Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "stateSignupUrl": "https://vaccinenm.org/"
+      "stateSignupUrl": "https://vaccinenm.org/",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "5",
