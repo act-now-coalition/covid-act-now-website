@@ -38,7 +38,7 @@ const Donate: React.FC = () => {
   return (
     <Container>
       {isMobile && <Intro />}
-      <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/covidactnow-mar2021" />
+      <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/D3wX7K" />
       <ContentWrapper>
         {!isMobile && (
           <Fragment>
