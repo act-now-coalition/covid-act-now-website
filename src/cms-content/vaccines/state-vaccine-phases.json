@@ -2213,36 +2213,11 @@
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Front-line health care personnel\n* Residents in skilled nursing and long-term care facilities\n* Police and fire personnel, correctional staff\n* Adults ages 65 and over",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Education and child care personnel\n* Individuals enrolled in Medicaid long-term care programs\n* Some public-facing essential workers\n* Non-front-line essential health care personnel\n* Facility staff and residents in congregate living settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-22T23:36:11.768Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T23:36:29.019Z",
-          "phase": "1C",
-          "description": "* Individuals (16+) with certain high-risk medical conditions",
-          "startDate": "March 22, 2021"
-        },
-        {
           "currentlyEligible": true,
           "updatedAt": "2021-04-05T06:27:20.554Z",
           "phase": "2",
-          "description": "* Individuals 16+",
-          "startDate": "April 5"
+          "description": "* All individuals 16+",
+          "startDate": "April 5, 2021"
         },
         {
           "currentlyEligible": false,
@@ -2251,7 +2226,8 @@
           "description": "Still to be determined: \n\n* General public and under 16"
         }
       ],
-      "allAdultsEligible": true
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-map.htm"
     },
     {
       "emailAlertVersion": "6",
@@ -2275,7 +2251,9 @@
           "phase": "TBD",
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/"
     },
     {
       "emailAlertVersion": "0",
@@ -2311,7 +2289,8 @@
           "phase": "2",
           "description": "* People 16+ with history of chronic conditions"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19"
     }
   ]
 }
