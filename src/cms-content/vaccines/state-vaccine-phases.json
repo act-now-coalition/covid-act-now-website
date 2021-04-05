@@ -2176,7 +2176,7 @@
       "fips": "54"
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Wisconsin",
       "fips": "55",
       "eligibilityInfoUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-about.htm",
