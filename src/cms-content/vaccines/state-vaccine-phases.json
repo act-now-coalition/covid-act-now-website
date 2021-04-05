@@ -1584,7 +1584,7 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "phase": "1A",
