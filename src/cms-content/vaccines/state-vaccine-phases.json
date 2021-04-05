@@ -1625,10 +1625,10 @@
           "currentlyEligible": false,
           "updatedAt": "2021-04-05T06:22:20.278Z",
           "phase": "TBD",
-          "description": "* Individuals under 16"
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "allAdultsEligible": false,
+      "allAdultsEligible": true,
       "stateSignupUrl": "https://doh.sd.gov/COVID/Vaccine/ProviderMap/default.aspx"
     },
     {
