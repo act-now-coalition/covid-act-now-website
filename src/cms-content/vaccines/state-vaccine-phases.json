@@ -2208,8 +2208,8 @@
           "startDate": "March 22, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T19:14:21.616Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-05T06:27:20.554Z",
           "phase": "2",
           "description": "* Individuals 16+",
           "startDate": "April 5"
@@ -2220,7 +2220,8 @@
           "phase": "TBD",
           "description": "Still to be determined: \n\n* General public and under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "6",
