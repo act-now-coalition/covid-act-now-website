@@ -1613,60 +1613,6 @@
       "emailAlertVersion": "5",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Front-line health care workers\n* Long-term care facility health care workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Long-term care residents",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Other health care workers, including laboratory and clinic staff\n* Public health workers\n* Emergency medical services\n* Law enforcement\n* Correctional officers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1D",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Persons aged 65 years and older\n* High-risk patients (dialysis, post-transplant, and active cancer)\n* High-risk residents in congregate settings\n* Starting from 2/25/21, those age 70+ will be able to be vaccinated, with new groups being made eligible per week in 5-year increments",
-          "expandedDefinitionUrl": "",
-          "startDate": "2/15/21",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1D",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Persons with two or more underlying medical conditions under the age of 65\n* Teachers and other school/college staff\n* Funeral service workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 9",
-          "updatedAt": "2021-03-11T17:25:43.315Z"
-        },
-        {
-          "phase": "1E",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Fire service personnel\n* Other critical infrastructure workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-25T06:09:45.844Z"
-        },
-        {
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
