@@ -110,9 +110,9 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:18:12.563Z",
+          "updatedAt": "2021-04-05T18:45:51.180Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ],
       "allAdultsEligible": true,
@@ -1022,7 +1022,7 @@
           "currentlyEligible": true,
           "updatedAt": "2021-04-05T17:55:12.172Z",
           "phase": "2",
-          "description": "* All people 16+",
+          "description": "* All individuals 16+",
           "startDate": "April 5, 2021"
         },
         {
