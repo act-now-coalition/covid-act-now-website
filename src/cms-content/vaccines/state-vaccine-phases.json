@@ -1718,32 +1718,50 @@
           "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Long-term care residents and staff\n* Health care workers\n* First responders",
+          "description": "* Long-term care residents and staff, health care, first responders\n* Ages 65+\n* Ages 16+ with certain high-risk health conditions\n* K-12 teachers and staff, child care, public safety",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2-5",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Individuals 65+\n* K-12 education and child care personnel\n* Public safety workers\n* Individuals 16+ with certain high-risk health conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-25T18:28:30.474Z"
+          "updatedAt": "2021-04-05T20:39:32.593Z"
         },
         {
           "currentlyEligible": true,
           "updatedAt": "2021-04-05T06:23:59.169Z",
+          "phase": "2",
+          "description": "* Ages 60+",
+          "startDate": "April 5, 2021"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-05T20:35:36.168Z",
+          "phase": "3",
+          "description": "* Ages 50+"
+        },
+        {
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-05T20:41:43.850Z",
+          "phase": "4",
+          "description": "* Ages 40+",
+          "startDate": "April 5, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T20:41:49.246Z",
+          "phase": "5",
+          "description": "* Ages 30+",
+          "startDate": "April 12, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T20:43:04.301Z",
           "phase": "6",
-          "description": "* Individuals 40+",
-          "startDate": "April 5"
+          "description": "* All individuals 16+",
+          "startDate": "April 19, 2021"
         },
         {
           "currentlyEligible": false,
           "updatedAt": "2021-03-08T17:28:03.295Z",
           "phase": "TBD",
-          "description": "Still to be determined: \n\n* General public and under 16"
+          "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ],
       "stateSignupUrl": "https://www.healthvermont.gov/covid-19/vaccine/getting-covid-19-vaccine"
