@@ -1622,8 +1622,8 @@
           "startDate": "March 25"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T04:15:42.552Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-05T06:18:43.173Z",
           "phase": "1B",
           "tier": "7",
           "description": "* Individuals 16+ with underlying health conditions\n* Frontline workers\n* Adults 50+ in a multigenerational household",
