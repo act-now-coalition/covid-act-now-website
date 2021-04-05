@@ -30,8 +30,8 @@ export const StyledMegaMenu = styled.nav`
   top: 0;
   left: 0;
   right: 0;
-  padding: 2rem 1.5rem 4rem;
-  height: calc(100vh - 160px);
+  padding: 2rem 1.5rem 6rem;
+  height: calc(100vh - 192px);
   overflow-y: auto;
   box-sizing: content-box;
   box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
