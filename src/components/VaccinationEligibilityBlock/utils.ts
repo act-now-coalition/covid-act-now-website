@@ -34,6 +34,8 @@ export function getEligibilityInfo(region: Region) {
     sourceName: `${stateName} Department of Health`,
     phasesEligibleNow,
     phasesEligibleLater,
+    allAdultsEligibleStateSignupUrl: vaccineInfo.stateSignupUrl,
+    allAdultsEligible: vaccineInfo.allAdultsEligible,
   };
 }
 

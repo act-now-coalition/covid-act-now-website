@@ -7,5 +7,5 @@ export default {
 };
 
 export const Example = () => {
-  return <AllAdultsEligibleBlock />;
+  return <AllAdultsEligibleBlock signupLink="/" />;
 };

@@ -20,6 +20,7 @@ import {
   Source,
 } from './VaccinationEligibilityBlock.style';
 import EligibilityPanel from './EligibilityPanel';
+import AllAdultsEligibleBlock from './AllAdultsEligibleBlock/AllAdultsEligibleBlock';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
@@ -41,7 +42,13 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   }
 
   const eligibilityData = getEligibilityInfo(state);
-  const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
+  const {
+    mostRecentPhaseName,
+    sourceName,
+    sourceUrl,
+    allAdultsEligibleStateSignupUrl,
+    allAdultsEligible,
+  } = eligibilityData;
 
   // Use local vaccine sign-up link but fall back to the state link
   // TODO: do we ever have county/ level links?
@@ -90,39 +97,48 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   return (
     <Container>
       <Heading2>Vaccine eligibility</Heading2>
-      <Paragraph>
-        {state.fullName} is currently in <strong>{mostRecentPhaseName}</strong>.{' '}
-        Eligibility varies throughout {state.fullName}, so you may also want to
-        check your county or city’s health department website.
-      </Paragraph>
-      <Section>
-        <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
-      </Section>
-      <Section>
-        <ButtonsContainer>
-          <StyledLinkButton
-            $highlighted={!signupLink || selectedTabIndex === 1}
-            to="#share"
-            {...sharedTrackingProps}
-            trackingLabel="Vaccination alerts"
-            startIcon={<EmailAlertIcon />}
-            scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
-          >
-            Get notified when eligibility changes
-          </StyledLinkButton>
-          {signupLink && (
-            <StyledLinkButton
-              $highlighted={selectedTabIndex === 0}
-              href={signupLink}
-              {...sharedTrackingProps}
-              trackingLabel="Where to get vaccinated"
-              endIcon={<OpenInNewIcon />}
-            >
-              See where and how to get vaccinated
-            </StyledLinkButton>
-          )}
-        </ButtonsContainer>
-      </Section>
+      {allAdultsEligible ? (
+        <AllAdultsEligibleBlock signupLink={allAdultsEligibleStateSignupUrl} />
+      ) : (
+        <>
+          <Paragraph>
+            {state.fullName} is currently in{' '}
+            <strong>{mostRecentPhaseName}</strong>. Eligibility varies
+            throughout {state.fullName}, so you may also want to check your
+            county or city’s health department website.
+          </Paragraph>
+          <Section>
+            <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
+          </Section>
+          <Section>
+            <ButtonsContainer>
+              <StyledLinkButton
+                $highlighted={!signupLink || selectedTabIndex === 1}
+                to="#share"
+                {...sharedTrackingProps}
+                trackingLabel="Vaccination alerts"
+                startIcon={<EmailAlertIcon />}
+                scroll={(element: HTMLElement) =>
+                  scrollWithOffset(element, -80)
+                }
+              >
+                Get notified when eligibility changes
+              </StyledLinkButton>
+              {signupLink && (
+                <StyledLinkButton
+                  $highlighted={selectedTabIndex === 0}
+                  href={signupLink}
+                  {...sharedTrackingProps}
+                  trackingLabel="Where to get vaccinated"
+                  endIcon={<OpenInNewIcon />}
+                >
+                  See where and how to get vaccinated
+                </StyledLinkButton>
+              )}
+            </ButtonsContainer>
+          </Section>
+        </>
+      )}
       <Section>
         <Source>
           Updated Mondays and Thursdays from:{' '}

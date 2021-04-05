@@ -22,7 +22,7 @@ export interface RegionVaccinePhaseInfo {
   fips: string;
   notes?: string | null;
   phaseGroups: RegionPhaseGroup[];
-  stateSignupUrl?: string;
+  stateSignupUrl: string;
   allAdultsEligible?: boolean;
 }
 
