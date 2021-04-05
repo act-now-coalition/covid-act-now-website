@@ -1000,6 +1000,12 @@
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
           "updatedAt": "2021-04-05T17:51:04.845Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T17:51:53.149Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
       "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx"
