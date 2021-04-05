@@ -51,7 +51,8 @@
           "startDate": "By May 1, 2021",
           "updatedAt": "2021-03-22T15:34:28.015Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://www.alabamapublichealth.gov/covid19vaccine/index.html"
     },
     {
       "locationName": "Alaska",
@@ -72,7 +73,9 @@
           "phase": "TBD",
           "description": "Still to be determined: \n\n* Individuals under 16"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://alaska-dhss.maps.arcgis.com/apps/instant/nearby/index.html?appid=31768fd9591c40cbbd17cbef5b745653",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Arizona",
@@ -116,7 +119,8 @@
           "startDate": ""
         }
       ],
-      "notes": ""
+      "notes": "",
+      "stateSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine"
     },
     {
       "locationName": "Arkansas",
@@ -138,7 +142,9 @@
           "phase": "TBD",
           "description": "Still to be determined: \n\n* General public and under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations"
     },
     {
       "emailAlertVersion": "3",
@@ -196,7 +202,8 @@
           "phase": "TBD"
         }
       ],
-      "notes": ""
+      "notes": "",
+      "stateSignupUrl": "https://covid19.ca.gov/vaccines/#How-to-get-vaccinated"
     },
     {
       "emailAlertVersion": "4",
@@ -244,7 +251,9 @@
           "phase": "TBD",
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://portal.ct.gov/vaccine-portal/COVID-19-Vaccination-Scheduling-Options"
     },
     {
       "locationName": "Delaware",
@@ -289,7 +298,8 @@
           "startDate": "April 6, 2021",
           "updatedAt": "2021-04-01T17:03:48.487Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://coronavirus.delaware.gov/vaccine/where-can-i-get-my-vaccine/"
     },
     {
       "locationName": "District of Columbia",
@@ -352,7 +362,8 @@
           "startDate": "May 1, 2021",
           "updatedAt": "2021-03-18T17:37:50.051Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://v51r5a21s.dc.gov/"
     },
     {
       "emailAlertVersion": "6",
@@ -384,7 +395,7 @@
           "description": "Still to be determined: \n\n* Individuals under 16"
         }
       ],
-      "stateSignupUrl": ""
+      "stateSignupUrl": "https://floridahealthcovid19.gov/vaccines/vaccine-locator/"
     },
     {
       "emailAlertVersion": "4",
@@ -406,7 +417,9 @@
           "phase": "TBD",
           "description": "Still to be determined: \n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://dph.georgia.gov/locations/covid-vaccination-site"
     },
     {
       "locationName": "Hawaii",
@@ -459,7 +472,8 @@
           "startDate": "May 2021",
           "updatedAt": "2021-04-01T17:08:37.692Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://hawaiicovid19.com/vaccination-registration/"
     },
     {
       "locationName": "Idaho",
@@ -529,7 +543,8 @@
           "startDate": "April 5, 2021",
           "updatedAt": "2021-03-25T14:20:34.443Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://healthandwelfare.idaho.gov/covid-19-vaccination"
     },
     {
       "emailAlertVersion": "4",
@@ -588,7 +603,8 @@
           "startDate": "April 12, 2021",
           "updatedAt": "2021-03-22T16:49:56.534Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://coronavirus.illinois.gov/s/vaccination-location"
     },
     {
       "locationName": "Indiana",
@@ -610,7 +626,9 @@
           "phase": "TBD",
           "description": "Still to be determined: \n\n* Individuals under 16"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://experience.arcgis.com/experience/24159814f1dd4f69b6c22e7e87bca65b",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Iowa",
@@ -650,7 +668,8 @@
           "phase": "TBD",
           "description": "Still to be determined: \n\n* Individuals under 16"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://vaccinate.iowa.gov/providers/"
     },
     {
       "locationName": "Kansas",
@@ -674,7 +693,9 @@
           "phase": "TBD",
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://www.kansasvaccine.gov/160/Find-My-Vaccine",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Kentucky",
@@ -734,7 +755,8 @@
           "startDate": "April 5, 2021",
           "updatedAt": "2021-04-01T17:09:01.338Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://govstatus.egov.com/kentucky-vaccine-map"
     },
     {
       "locationName": "Louisiana",
@@ -756,7 +778,9 @@
           "phase": "TBD",
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://ldh.la.gov/covidvaccine-locations/"
     },
     {
       "locationName": "Maine",
@@ -804,7 +828,8 @@
           "description": "* Individuals 16+",
           "startDate": "April 19, 2021"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://www.maine.gov/covid19/vaccines/vaccination-sites"
     },
     {
       "locationName": "Maryland",
@@ -872,7 +897,8 @@
           "startDate": "April 27, 2021",
           "updatedAt": "2021-03-22T21:37:01.986Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c"
     },
     {
       "emailAlertVersion": "3",
@@ -942,7 +968,8 @@
         }
       ],
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/"
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
+      "stateSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated"
     },
     {
       "emailAlertVersion": "4",
@@ -1009,14 +1036,14 @@
           "description": "* Individuals 16+",
           "startDate": "April 5, 2021"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341"
     },
     {
       "locationName": "Minnesota",
+      "notes": "",
       "fips": "27",
-      "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "4",
+      "stateSignupUrl": "https://mn.gov/covid19/vaccine/find-vaccine/locations/index.jsp",
       "phaseGroups": [
         {
           "currentlyEligible": true,
@@ -1032,7 +1059,10 @@
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "notes": ""
+      "allAdultsEligible": true,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
+      "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
+      "emailAlertVersion": "4"
     },
     {
       "locationName": "Mississippi",
@@ -1053,7 +1083,9 @@
           "phase": "TBD",
           "description": "Still to be determined\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://covidvaccine.umc.edu/"
     },
     {
       "emailAlertVersion": "3",
@@ -1116,7 +1148,8 @@
           "startDate": "April 9, 2021",
           "updatedAt": "2021-03-22T21:54:15.083Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://covidvaccine.mo.gov/map/"
     },
     {
       "locationName": "Montana",
@@ -1140,7 +1173,9 @@
           "phase": "TBD",
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
-      ]
+      ],
+      "allAdultsEligible": true,
+      "stateSignupUrl": "https://dphhs.mt.gov/publichealth/cdepi/diseases/coronavirusmt/covid19vaccineavailability"
     },
     {
       "locationName": "Nebraska",
@@ -1197,7 +1232,8 @@
           "startDate": "April 5, 2021",
           "updatedAt": "2021-04-01T16:33:45.779Z"
         }
-      ]
+      ],
+      "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx"
     },
     {
       "locationName": "Nevada",
