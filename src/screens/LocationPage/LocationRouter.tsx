@@ -1,41 +1,34 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import { useRegionFromParams, State, County } from 'common/regions';
+import { RegionType } from 'common/regions';
 import LocationPage from './LocationPage';
-import { MAP_FILTERS } from './Enums/MapFilterEnums';
-import { getStateCode, MetroArea } from 'common/regions';
+import { useFipsFromParams } from 'common/regions/useFipsFromParams';
+import { findStateByStateCodeStrict } from 'common/regions/statesByFips';
 
 const LocationRouter: React.FC = () => {
-  const { stateId } = useParams<{
+  const { stateId, countyId } = useParams<{
     stateId?: string;
+    countyId?: string;
   }>();
-  const region = useRegionFromParams();
+  const fips = useFipsFromParams();
 
-  if (!region) {
+  if (!fips) {
     return <Redirect to="/" />;
   }
 
   // Redirects deprecated URLs (/us/ca and us/ca/county/kern_county) to prompt
   // Google to update the canonical URL for location pages
-  const isDeprecatedUrl =
-    stateId?.length === 2 &&
-    (region instanceof State || region instanceof County);
-
-  if (isDeprecatedUrl) {
-    return <Redirect to={region.relativeUrl} />;
+  if (stateId?.length === 2) {
+    const state = findStateByStateCodeStrict(stateId!.toUpperCase());
+    let newUrl = `${state.relativeUrl}`;
+    if (countyId) {
+      newUrl += `/county/${countyId}`;
+    }
+    return <Redirect to={newUrl} />;
   }
 
-  let defaultMapOption: string = MAP_FILTERS.STATE;
-
-  const stateCode = getStateCode(region);
-  if (stateCode === MAP_FILTERS.DC) {
-    defaultMapOption = MAP_FILTERS.NATIONAL;
-  } else if (region instanceof MetroArea) {
-    defaultMapOption = MAP_FILTERS.MSA;
-  }
-
-  return <LocationPage region={region} defaultMapOption={defaultMapOption} />;
+  return <LocationPage fips={fips} />;
 };
 
 export default LocationRouter;

@@ -6,17 +6,27 @@ import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
-import { Region } from 'common/regions';
+import regions, { FipsCode, Region } from 'common/regions';
+import { MAP_FILTERS } from './Enums/MapFilterEnums';
+import { getStateCode } from 'common/regions';
+import { MetroArea } from 'common/regions/MetroArea';
 
 interface LocationPageProps {
-  region: Region;
-  defaultMapOption: string;
+  fips: FipsCode;
 }
 
-function LocationPage({ region, defaultMapOption }: LocationPageProps) {
+function LocationPage({ fips }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
+  const region = regions.findByFipsCodeStrict(fips);
 
-  //const defaultMapOption = getDefaultMapOption(region);
+  let defaultMapOption: string = MAP_FILTERS.STATE;
+  const stateCode = getStateCode(region);
+  if (stateCode === MAP_FILTERS.DC) {
+    defaultMapOption = MAP_FILTERS.NATIONAL;
+  } else if (region instanceof MetroArea) {
+    defaultMapOption = MAP_FILTERS.MSA;
+  }
+
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

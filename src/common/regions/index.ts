@@ -5,4 +5,5 @@ export * from './types';
 export * from './MetroArea';
 export * from './County';
 export * from './region_hooks';
+export * from './useFipsFromParams';
 export * from './utils';
