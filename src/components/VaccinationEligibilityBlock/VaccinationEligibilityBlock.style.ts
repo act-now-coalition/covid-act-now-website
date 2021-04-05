@@ -34,6 +34,15 @@ export const PhaseDescription = styled(MarkdownContent)<{
     margin: 12px auto;
     margin-inline-start: 1em;
     padding-inline-start: 0.5em;
+
+    &:last-child {
+      margin-bottom: 0;
+
+      li,
+      p {
+        margin-bottom: 0;
+      }
+    }
   }
 
   ${props => (props.$currentlyEligible ? listWithCheckmark : '')}
