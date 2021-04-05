@@ -52,6 +52,14 @@ function importJson<T>(
   return cachedImports[cacheToken];
 }
 
+export function importLocationPageProps(fips: string | null): Promise<any> {
+  if (fips !== null) {
+    return importJson(`location-props-${fips}`, import(`./fips/${fips}.json`));
+  } else {
+    return Promise.resolve(null);
+  }
+}
+
 /** Dynamic import for ccvi.json. */
 export function importFipsToCcviMap(): Promise<FipsToCcviMap> {
   return importJson('ccvi', import('./ccvi.json'));
