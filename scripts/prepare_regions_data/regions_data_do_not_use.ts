@@ -10,12 +10,9 @@ import type { Dictionary } from 'lodash';
 import US_STATE_DATASET from './us_states_dataset_01_02_2020.json';
 import countyAdjacencyMsa from './county_adjacency_msa.json';
 import metroAreaDataset from './msa-data.json';
-import {
-  FipsCode,
-  State,
-  County,
-  MetroArea,
-} from '../../src/common/regions/types';
+import { FipsCode, State } from '../../src/common/regions/types';
+import { County } from '../../src/common/regions/County';
+import { MetroArea } from '../../src/common/regions/MetroArea';
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
@@ -51,14 +48,13 @@ function buildCounties(
      * - Bronx County" (county_fips_code: 005)
      */
     const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
-    const state = statesByFips[countyInfo.state_fips_code];
     const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
     return new County(
       countyInfo.county,
       countyInfo.county_url_name,
       countyFips,
       countyInfo.population,
-      state,
+      countyInfo.state_fips_code,
       adjacentCounties || [],
     );
   });
@@ -71,24 +67,21 @@ function buildMetroAreas(
   const statesByCode = keyBy(values(statesByFips), state => state.stateCode);
 
   return map(metroAreaDataset.metro_areas, metro => {
-    const counties: County[] = metro.countyFipsCodes
-      .map(countyFips => countiesByFips[countyFips] || null)
-      .filter(county => county);
-
     const [name, statesText] = metro.cbsaTitle.split(', ');
     const stateCodes = statesText.split('-');
 
-    const states = stateCodes
+    const statesFipsCodes = stateCodes
       .map(stateCode => statesByCode[stateCode])
-      .filter(state => state);
+      .filter(state => state)
+      .map(state => state.fipsCode);
 
     return new MetroArea(
       name,
       metro.urlSegment,
       metro.cbsaCode,
       metro.population,
-      counties,
-      states,
+      metro.countyFipsCodes,
+      statesFipsCodes,
     );
   });
 }

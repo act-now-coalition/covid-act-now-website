@@ -1,4 +1,5 @@
 import regions, { RegionType } from 'common/regions';
+import * as region_hooks from 'common/regions/region_hooks';
 
 // Common regions to test against.
 const alaska = regions.findByStateCodeStrict('AK');
@@ -68,46 +69,51 @@ describe('regions', () => {
 
   describe('findStateByUrlParams', () => {
     test('returns the correct state when passing a state code', () => {
-      const state = regions.findStateByUrlParams('OR');
+      const fips = region_hooks.findStateByUrlParams('OR');
+      const state = regions.findByFipsCode(fips!);
       expect(state).not.toBeNull();
       expect(state?.fipsCode).toBe('41');
     });
 
     test('returns the correct state when passing a valid URL segment', () => {
-      const state = regions.findStateByUrlParams('oregon-or');
+      const fips = region_hooks.findStateByUrlParams('oregon-or');
+      const state = regions.findByFipsCode(fips!);
       expect(state).not.toBeNull();
       expect(state?.fipsCode).toBe('41');
     });
 
     test('returns null for invalid params "xxx"', () => {
-      const state = regions.findStateByUrlParams('xxx');
+      const fips = region_hooks.findStateByUrlParams('xxx');
+      const state = regions.findByFipsCode(fips!);
       expect(state).toBeNull();
     });
   });
 
   describe('findCountyByUrlParams', () => {
     test('returns the correct county for valid state and county IDs', () => {
-      const county = regions.findCountyByUrlParams(
+      const fips = region_hooks.findCountyByUrlParams(
         'washington-wa',
         'king_county',
       );
+      const county = regions.findByFipsCode(fips!);
       expect(county).not.toBeNull();
       expect(county?.fipsCode).toBe('53033');
     });
 
     test('returns the correct county when using state code as stateId', () => {
-      const county = regions.findCountyByUrlParams('wa', 'king_county');
+      const fips = region_hooks.findCountyByUrlParams('wa', 'king_county');
+      const county = regions.findByFipsCode(fips!);
       expect(county).not.toBeNull();
       expect(county?.fipsCode).toBe('53033');
     });
 
     test('returns null for invalid stateId and valid countyID', () => {
-      const county = regions.findCountyByUrlParams('xxx', 'king_county');
+      const county = region_hooks.findCountyByUrlParams('xxx', 'king_county');
       expect(county).toBe(null);
     });
 
     test('returns null for invalid stateId and countyID', () => {
-      const county = regions.findCountyByUrlParams('xxx', 'xxx');
+      const county = region_hooks.findCountyByUrlParams('xxx', 'xxx');
       expect(county).toBeNull();
     });
   });

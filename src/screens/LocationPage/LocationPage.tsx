@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
-import { getStateCode, MetroArea, Region } from 'common/regions';
+import { Region } from 'common/regions';
 
 interface LocationPageProps {
   region: Region;
-  defaultMapOption: typeof MAP_FILTERS;
+  defaultMapOption: string;
 }
 
 function LocationPage({ region, defaultMapOption }: LocationPageProps) {

@@ -6,7 +6,10 @@ import values from 'lodash/values';
 import isNull from 'lodash/isNull';
 import without from 'lodash/without';
 import regions from './region_db';
-import { County, State, Region, RegionType, MetroArea } from './types';
+import { State, Region, RegionType } from './types';
+import { County } from './County';
+import { MetroArea } from './MetroArea';
+import { findStateByStateCode } from './statesByFips';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
 import { CountyToZipMap } from 'common/data';
 
@@ -182,7 +185,7 @@ export function getGeolocatedRegions(
     return {
       metroArea: getMetroRegionFromZipCode(geolocation.zipCode, countyToZipMap),
       county: getCountyRegionFromZipCode(geolocation.zipCode, countyToZipMap),
-      state: regions.findByStateCode(geolocation.stateCode) ?? undefined,
+      state: findStateByStateCode(geolocation.stateCode) ?? undefined,
     };
   }
 }

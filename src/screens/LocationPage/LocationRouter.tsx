@@ -26,7 +26,7 @@ const LocationRouter: React.FC = () => {
     return <Redirect to={region.relativeUrl} />;
   }
 
-  let defaultMapOption = MAP_FILTERS.STATE;
+  let defaultMapOption: string = MAP_FILTERS.STATE;
 
   const stateCode = getStateCode(region);
   if (stateCode === MAP_FILTERS.DC) {

@@ -2,17 +2,22 @@ import sortBy from 'lodash/sortBy';
 import takeRight from 'lodash/takeRight';
 import values from 'lodash/values';
 import type { Dictionary } from 'lodash';
-import { Region, County, State, MetroArea, FipsCode } from './types';
+import { Region, State, FipsCode } from './types';
+import { County } from './County';
+import { MetroArea } from './MetroArea';
 import {
-  statesByFips,
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
+} from './preprocessed_regions_data';
+import { statesByFips } from './statesByFips';
+import {
   stateCodesToFips,
   stateUrlSegmentsToFips,
   countyUrlSegmentsToFips,
   metroAreaUrlSegmentsToFips,
-} from './preprocessed_regions_data';
+} from './urlSegmentsToFips';
+
 import { assert } from 'common/utils';
 
 class RegionDB {
@@ -73,51 +78,6 @@ class RegionDB {
     const region = this.findByStateCode(stateCode);
     assert(region, `Region unexpectedly not found for ${stateCode}`);
     return region;
-  }
-
-  findStateByUrlParams(stateUrlSegment: string): State | null {
-    const fips = this.stateUrlSegmentsToFips[stateUrlSegment] ?? null;
-
-    // The first condition is added to support legacy URLs with the 2-letter
-    // state code (`/us/wa`)
-    if (!Boolean(fips)) {
-      return this.findByStateCode(stateUrlSegment);
-    } else {
-      const state = this.findByFipsCode(fips);
-      if (Boolean(state)) {
-        return state as State;
-      } else {
-        return null;
-      }
-    }
-  }
-
-  findCountyByUrlParams(
-    stateUrlSegment: string,
-    countyUrlSegment: string,
-  ): County | null {
-    // must match key in prepare-regions-data.ts, which generates this mapping
-    const key = `${stateUrlSegment}-${countyUrlSegment}`;
-
-    const fips = this.countyUrlSegmentsToFips[key];
-    if (Boolean(fips)) {
-      const county = this.findByFipsCode(fips);
-      if (Boolean(county)) {
-        return county as County;
-      }
-    }
-    return null;
-  }
-
-  findMetroAreaByUrlParams(metroAreaUrlSegment: string) {
-    const fips = this.metroAreaUrlSegmentsToFips[metroAreaUrlSegment];
-    if (Boolean(fips)) {
-      const metroArea = this.findByFipsCode(fips);
-      if (Boolean(metroArea)) {
-        return metroArea as MetroArea;
-      }
-    }
-    return null;
   }
 
   all(): Region[] {
