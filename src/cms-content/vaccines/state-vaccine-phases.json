@@ -1008,34 +1008,33 @@
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx"
+      "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Nevada",
+      "notes": "",
       "fips": "32",
-      "eligibilityInfoUrl": "https://www.immunizenevada.org/county-specific-covid-19-vaccine-plan",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "1",
+      "stateSignupUrl": "https://www.immunizenevada.org/covid-19-vaccine-locator",
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "Each county has its own vaccination distribution plan but generally all are vaccinating:\n\n* Health care workers\n* Long-term care facility residents and workers\n* First responders\n* Adults 65+\n* Adults 16-64 with high-risk health conditions\n\nSome counties are also vaccinating:\n\n* All adults 55-64\n* Certain other frontline essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-22T22:05:44.313Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-18T18:16:56.441Z",
+          "updatedAt": "2021-04-05T17:55:12.172Z",
           "phase": "2",
           "description": "* All people 16+",
           "startDate": "April 5, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-05T17:55:20.015Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "notes": "",
-      "stateSignupUrl": "https://www.immunizenevada.org/covid-19-vaccine-locator"
+      "allAdultsEligible": true,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/",
+      "eligibilityInfoUrl": "https://www.immunizenevada.org/county-specific-covid-19-vaccine-plan",
+      "emailAlertVersion": "2"
     },
     {
       "locationName": "New Hampshire",
