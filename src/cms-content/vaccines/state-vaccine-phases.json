@@ -845,7 +845,8 @@
           "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "stateSignupUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341"
+      "stateSignupUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Minnesota",
