@@ -676,10 +676,10 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:28:31.430Z",
+          "updatedAt": "2021-04-05T17:37:57.030Z",
           "phase": "4",
           "description": "* Individuals 16+",
-          "startDate": "April 19, 2021"
+          "startDate": "April 7, 2021"
         }
       ],
       "stateSignupUrl": "https://www.maine.gov/covid19/vaccines/vaccination-sites"
@@ -754,7 +754,7 @@
       "stateSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c"
     },
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Massachusetts",
       "fips": "25",
       "phaseGroups": [
@@ -804,11 +804,11 @@
         {
           "phase": "2",
           "tier": "5",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Individuals 16+ with a high-risk medical condition\n* Adults 55-59",
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
-          "updatedAt": "2021-03-22T21:42:20.616Z"
+          "updatedAt": "2021-04-05T17:42:56.903Z"
         },
         {
           "phase": "3",
