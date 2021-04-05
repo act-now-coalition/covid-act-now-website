@@ -21,6 +21,8 @@ export const StyledFooter = styled.footer`
   }
 `;
 
+// Need to add a good amount of bottom padding for mobile screens to make sure the bottom
+// of the mega menu isn't covered by the browser's menu bar
 export const StyledMegaMenu = styled.nav`
   background: white;
   border-top: 1px solid ${COLOR_MAP.GREY_2};
