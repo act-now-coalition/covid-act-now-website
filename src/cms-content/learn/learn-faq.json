@@ -190,7 +190,7 @@
         },
         {
           "question": "How do I travel safely?",
-          "answer": "For the time being, it is safest not to travel. In particular, travel by plane, which may require you to sit close to others for hours, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html). If you must travel, look at the data on [our site](https://covidactnow.org/) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID. The CDC also strongly recommends wearing a face mask and offers guidance on choosing the best type.",
+          "answer": "For the time being, it is still safest not to travel, especially for people who have not yet received the vaccine. If you are fully vaccinated, the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html#anchor_1617376530945) now states that you can travel domestically with low risk to yourself. But, you should still take precautions including wearing a mask and social distancing.\n\nMore generally, the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html) recommends that you avoid non essential travel by plane, as it could require you to sit close to others for hours. If you must travel, look at the data on [our site](https://covidactnow.org/) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID.",
           "questionId": "how-to-travel-safely"
         },
         {
