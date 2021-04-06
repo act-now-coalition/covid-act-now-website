@@ -7,45 +7,9 @@ import * as Style from './NavBar.style';
 import { DonateButtonHeart } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
-import {
-  Experiment,
-  ExperimentID,
-  Variant,
-  VariantID,
-} from 'components/Experiment';
 import { useBreakpoint } from 'common/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
-
-const MenuVariant: React.FC<{ isMenuOpen: boolean; closeMenu: () => void }> = ({
-  isMenuOpen,
-  closeMenu,
-}) => {
-  const onMouseLeave = (e: React.MouseEvent<{}>) => {
-    // Do not close when the user hovers on the top bar (including the button to close the menu)
-    if (e.clientY > 64) {
-      closeMenu();
-    }
-  };
-
-  const menuProps = {
-    open: isMenuOpen,
-    closeMenu,
-    onMouseLeave,
-  };
-
-  return (
-    <Experiment id={ExperimentID.HAMBURGER_MENU_VARIATIONS}>
-      <Variant id={VariantID.A}>
-        <MegaMenu {...menuProps} />
-      </Variant>
-      <Variant id={VariantID.B}>
-        <MegaMenu {...menuProps} />
-        {/* <MobileMenu {...menuProps} /> */}
-      </Variant>
-    </Experiment>
-  );
-};
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -76,6 +40,19 @@ const NavBar: React.FC = () => {
   };
 
   const closeMenu = () => setMenuOpen(false);
+
+  const onMouseLeave = (e: React.MouseEvent<{}>) => {
+    // Do not close when the user hovers on the top bar (including the button to close the menu)
+    if (e.clientY > 64) {
+      closeMenu();
+    }
+  };
+
+  const menuProps = {
+    open: isMenuOpen,
+    closeMenu,
+    onMouseLeave,
+  };
 
   if (isEmbed) {
     return null;
@@ -113,7 +90,7 @@ const NavBar: React.FC = () => {
             {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
           </Style.IconButton>
         </>
-        <MenuVariant isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
+        <MegaMenu {...menuProps} />
       </Style.Toolbar>
     </Style.AppBar>
   );
