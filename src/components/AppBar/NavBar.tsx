@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
-import MegaMenu from 'components/NewFooter/MegaMenu';
-import MobileMenu from './MobileMenu';
+import MegaMenu from './MegaMenu/MegaMenu';
 import * as Style from './NavBar.style';
 import { DonateButtonHeart } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
@@ -41,7 +40,8 @@ const MenuVariant: React.FC<{ isMenuOpen: boolean; closeMenu: () => void }> = ({
         <MegaMenu {...menuProps} />
       </Variant>
       <Variant id={VariantID.B}>
-        <MobileMenu {...menuProps} />
+        <MegaMenu {...menuProps} />
+        {/* <MobileMenu {...menuProps} /> */}
       </Variant>
     </Experiment>
   );
