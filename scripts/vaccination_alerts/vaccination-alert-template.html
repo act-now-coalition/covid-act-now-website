@@ -28,32 +28,25 @@
         Updated Mondays and Thursdays from: <a style="color: #828282; font-size: 13px; margin-top: 24px; text-align: center;" href="{{sourceUrl}}">{{sourceName}}</a>
       </div>
 
-      {{#if eligibilityUrl}}
       <div class="section" style="margin-top: 24px;">
-        <a href="{{eligibilityUrl}}" class="main-cta-link" style="text-decoration: none;">
+        <a href="https://vaccinefinder.org/" class="main-cta-link" style="text-decoration: none;">
           <div class="eligibility-options center-text" style="border: solid 1px #f2f2f2; color: #5900EA; padding: 12px; text-align: center;">
-            See who is eligible next
+            Find vaccines with VaccineFinder
           </div>
         </a>
       </div>
-      {{/if}}
-
-      {{#if vaccinationSignupUrl}}
+      
+      {{#if stateSignupUrl}}
       <div class="section main-cta" style="margin-top: 24px;">
-        <a href="{{vaccinationSignupUrl}}" class="main-cta-link" style="text-decoration: none;">
+        <a href="{{stateSignupUrl}}" class="main-cta-link" style="text-decoration: none;">
           <div class="main-cta-btn center-text" style="background-color: #5900EA; border-radius: 4px; color: white; padding: 12px; text-align: center;">
             <div>
-              <strong>See where and how to get vaccinated</strong>
+              <strong>Learn more about getting vaccinated in {{locationName}}</strong>
             </div>
-            <div>on the {{sourceName}} website</div>
           </div>
         </a>
       </div>    
       {{/if}}
-
-      <div class="section description center-text" style="color: #4f4f4f; margin-top: 24px; text-align: center;">
-        Because eligibility varies throughout {{locationName}}, you may also want to check your county or city’s health department website.
-      </div>
       
     </div>
 

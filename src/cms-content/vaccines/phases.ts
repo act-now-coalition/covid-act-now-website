@@ -23,12 +23,13 @@ export interface RegionVaccinePhaseInfo {
   notes?: string | null;
   phaseGroups: RegionPhaseGroup[];
   stateSignupUrl: string;
-  allAdultsEligible?: boolean;
+  allAdultsEligible: boolean;
 }
 
 export const stateVaccinationPhases: RegionVaccinePhaseInfo[] = stateVaccinationInfo.regions.map(
-  ({ emailAlertVersion, ...otherProps }) => ({
+  ({ emailAlertVersion, allAdultsEligible, ...otherProps }) => ({
     emailAlertVersion: parseInt(emailAlertVersion, 10),
+    allAdultsEligible: allAdultsEligible || false,
     ...otherProps,
   }),
 );
