@@ -27,7 +27,7 @@
         {
           "question": "What are the ingredients of the vaccines? ",
           "questionId": "what-are-ingredients-vaccine",
-          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html), the two COVID vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s fact sheet:\n\n* [Pfizer-BioNTech COVID-19 vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID-19 vaccine](https://www.fda.gov/media/144638/download)"
+          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html), the two COVID vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s fact sheet:\n\n* [Pfizer-BioNTech COVID vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID vaccine](https://www.fda.gov/media/144638/download)\n* [Johnson & Johnson’s COVID vaccine](https://www.fda.gov/media/146305/download)"
         },
         {
           "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
@@ -45,9 +45,9 @@
           "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last."
         },
         {
-          "question": "How do you get your vaccine eligibility information?",
-          "questionId": "how-do-you-get-vaccine-eligibility-information ",
-          "answer": "Our team of staff and volunteers frequently reviews official state government sites and updates vaccine eligibility information on the site every Monday and Thursday. Please note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
+          "question": "How do you get your vaccine eligibility information, and how often is it updated?",
+          "questionId": "how-do-you-get-vaccine-eligibility-information-and-how-often-updated",
+          "answer": "Our team frequently reviews official state government sites and updates vaccine eligibility information on our site every Monday and Thursday. Please note that we are not a government or health care organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
         },
         {
           "question": "Which locations do you have vaccine eligibility information for? ",
@@ -226,5 +226,5 @@
   "intro": "\"When can I get a vaccine?\" to \"how soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
   "metadataTitle": "COVID-19 FAQ",
   "metadataDescription": "Find trusted answers to the most Frequently Asked Questions (FAQ) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.",
-  "lastUpdatedDate": "2021-03-31T21:52:10.190Z"
+  "lastUpdatedDate": "2021-04-06T16:41:30.064Z"
 }
