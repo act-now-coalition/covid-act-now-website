@@ -27,7 +27,7 @@
         {
           "question": "What are the ingredients of the vaccines? ",
           "questionId": "what-are-ingredients-vaccine",
-          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html), the two COVID vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s fact sheet:\n\n* [Pfizer-BioNTech COVID-19 vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID-19 vaccine](https://www.fda.gov/media/144638/download)"
+          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html), the two COVID vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s fact sheet:\n\n* [Pfizer-BioNTech COVID vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID vaccine](https://www.fda.gov/media/144638/download)\n* [Johnson & Johnson/Janssen COVID vaccine](https://www.fda.gov/media/146305/download)"
         },
         {
           "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
@@ -42,12 +42,12 @@
         {
           "question": "Does immunity protection last longer if you get a vaccine or if you have had COVID?",
           "questionId": "does-immunity-from-covid-or-vaccine-last-longer",
-          "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last."
+          "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last. For now, preliminary data from [Pfizer’s ongoing clinical trial](https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-confirm-high-efficacy-and-no-serious) suggests that its vaccine is over 90 percent effective for at least six months after the second dose."
         },
         {
-          "question": "How do you get your vaccine eligibility information?",
-          "questionId": "how-do-you-get-vaccine-eligibility-information ",
-          "answer": "Our team of staff and volunteers frequently reviews official state government sites and updates vaccine eligibility information on the site every Monday and Thursday. Please note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
+          "question": "How do you get your vaccine eligibility information, and how often is it updated?",
+          "questionId": "how-do-you-get-vaccine-eligibility-information-and-how-often-updated",
+          "answer": "Our team frequently reviews official state government sites and updates vaccine eligibility information on our site every Monday and Thursday. Please note that we are not a government or health care organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
         },
         {
           "question": "Which locations do you have vaccine eligibility information for? ",
@@ -60,9 +60,19 @@
           "answer": "Receiving a COVID vaccine will not cause you to test positive for COVID. The mRNA vaccines, like Pfizer and Moderna, give instructions for your cells to make a piece of the spike protein, not the entire viral genome. The vaccines simply do not have enough RNA or even the complete RNA sequence to give a positive signal in testing. Similarly, the Johnson & Johnson vaccine — which takes a piece of DNA from the COVID spike protein and combines it with an [adenovirus to carry instructions](https://www.covidactnow.org/covid-explained/roundup-current-vaccine-progress) to your immune system — cannot cause you to test positive for COVID.\n\nIf you receive a positive test result in the days or weeks after you have been vaccinated, it is likely because it takes time for the vaccines to work and protection is not 100 percent effective. Anyone who becomes infected with the SARS-CoV-2 virus should isolate as recommended.\n\nAfter vaccination, people may attempt to get a [serology, or antibody, test](https://covidactnow.org/glossary#serology-test) to see if the vaccine has “worked.” However, serology tests focus on a wide set of antibodies, and the vaccine stimulates your immune system to produce antibodies only against the spike protein. So, in order to determine if vaccination has stimulated antibody production, we would need a test that specifically looks for antibodies to the spike protein."
         },
         {
-          "question": "If I get a COVID vaccine, do I still need to wear a mask and practice social distancing? ",
-          "questionId": "If-COVID-vaccine-do-I-need-wear-mask-and-social-distance",
+          "question": "What can you do after you are fully vaccinated? ",
+          "questionId": "what-can-you-do-after-fully-vaccinated",
           "answer": "According to the March 2021 [CDC guidance](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html), if you are fully vaccinated, you can gather indoors with other fully vaccinated people without a mask. You can also gather with one other household of low risk, unvaccinated people. This means that if you’ve received the vaccine, you could socialize with another fully vaccinated family, but should not gather in larger groups or with high risk individuals.  \n\nHowever, it’s important to continue wearing a mask and practicing social distancing when you are in public. While there’s a growing amount of [evidence](https://academic.oup.com/cid/advance-article/doi/10.1093/cid/ciab229/6167855) that vaccines help reduce transmission, you should continue to take precautions, like wearing a mask and practicing social distancing, to protect those around you until enough people have received the vaccine. For now, the CDC also advises against travel. This means that grandparents could visit their low risk grandchildren if they live locally, but shouldn’t travel or meet with more than one other household at a time."
+        },
+        {
+          "question": "Can undocumented immigrants get a free COVID vaccine without legal risk?",
+          "questionId": "can-undocumented-immigrants-get-free-vaccine-without-legal-risk",
+          "answer": "Proof of citizenship, residence or immigration status [is not required to be vaccinated in the U.S.](https://www.dhs.gov/news/2021/02/01/dhs-statement-equal-access-covid-19-vaccines-and-vaccine-distribution-sites) Vaccine sites should not request your social security number, and you can’t be denied vaccination access if you do not provide this type of documentation.\n\nIn order to sign up for a vaccine, you will likely be asked demographic, occupational, or health information, as well as need to show some form of ID. This information is important data for public health purposes, and will not be used for immigration enforcement. \n\nAs vaccine requirements vary state to state, it's important to visit [your state’s public health department website](https://www.cdc.gov/coronavirus/2019-ncov/php/hd-search/index.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fphp%2Fopen-america%2Fhd-search%2Findex.html) to check out local vaccine signup requirements."
+        },
+        {
+          "question": "\nHow effective is the Johnson and Johnson vaccine?\n",
+          "questionId": "how-effective-Johnson-and-Johnson-covid-vaccine",
+          "answer": "Johnson and Johnson’s vaccine was the third COVID vaccine approved in the U.S. as of February 2021. It’s easier to transport and store than the other vaccines, and it only requires one shot. \n\nAs you can see in the table below, the Johnson and Johnson vaccine is equally effective at preventing hospitalization and death from COVID, and nearly as effective against severe COVID cases. While its efficacy against mild, symptomatic disease is lower than it is for the other two approved vaccines, the Johnson & Johnson/Janssen vaccine was tested after the rise of the B. 1.1.7 and B.1.351 variants, which are more transmissible. [Studies](https://www.medicalnewstoday.com/articles/pfizer-jab-may-not-be-as-potent-against-b-1-351-variant) suggest that if the mRNA vaccines (Pfizer and Moderna) were tested against these same variants, they may also have some decreased efficacy.\n\n![All three vaccines are 100% effective against COVID hospitalization and death.](/images_cms/screenshot-2021-03-29-211221.jpg \"Vaccine efficacy\")\n\nIn the future, boosters against the variants or for waning immunity might also become available, making the differences in these trials less important in the long run.\n\nTake away: The best vaccine is the one you can get soonest."
         }
       ]
     },
@@ -180,7 +190,7 @@
         },
         {
           "question": "How do I travel safely?",
-          "answer": "For the time being, it is safest not to travel. In particular, travel by plane, which may require you to sit close to others for hours, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html). If you must travel, look at the data on [our site](https://covidactnow.org/) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID. The CDC also strongly recommends wearing a face mask and offers guidance on choosing the best type.",
+          "answer": "For the time being, it is still safest not to travel, especially for people who have not yet received the vaccine. If you are fully vaccinated, the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html#anchor_1617376530945) now states that you can travel domestically with low risk to yourself. But, you should still take precautions including wearing a mask and social distancing.\n\nMore generally, the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html) recommends that you avoid non essential travel by plane, as it could require you to sit close to others for hours. If you must travel, look at the data on [our site](https://covidactnow.org/) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID.",
           "questionId": "how-to-travel-safely"
         },
         {
@@ -226,5 +236,5 @@
   "intro": "\"When can I get a vaccine?\" to \"how soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
   "metadataTitle": "COVID-19 FAQ",
   "metadataDescription": "Find trusted answers to the most Frequently Asked Questions (FAQ) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.",
-  "lastUpdatedDate": "2021-03-31T21:52:10.190Z"
+  "lastUpdatedDate": "2021-04-06T20:07:21.168Z"
 }
