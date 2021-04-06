@@ -31,8 +31,7 @@ const FeaturedSectionVariant: React.FC<{
   const orderedSectionsB = [...alertsLink, ...dailyDownloadLink, ...apiLink];
 
   return (
-    // Add new id:
-    <Experiment id={ExperimentID.HAMBURGER_MENU_VARIATIONS}>
+    <Experiment id={ExperimentID.MEGA_MENU_API_LINK}>
       <Variant id={VariantID.A}>
         <FeaturedSection
           featuredSections={orderedSectionsA}
