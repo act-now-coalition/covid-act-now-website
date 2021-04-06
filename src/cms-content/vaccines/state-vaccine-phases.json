@@ -232,22 +232,16 @@
       "fips": "10",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-05T16:47:50.668Z",
-          "phase": "TBD",
-          "description": "* Persons 50+ years of age or older\n* Health care personnel\n* Long-term care staff or resident\n* Persons 16-49 with high-risk underlying medical conditions\n* Frontline essential and other essential workers including educators or school staff, child care workers, first responders, food service, construction, transportation"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 6, 2021",
-          "updatedAt": "2021-04-01T17:03:48.487Z"
+          "updatedAt": "2021-04-06T14:39:12.802Z"
         },
         {
           "currentlyEligible": false,
@@ -257,7 +251,7 @@
         }
       ],
       "stateSignupUrl": "https://coronavirus.delaware.gov/vaccine/where-can-i-get-my-vaccine/",
-      "allAdultsEligible": false
+      "allAdultsEligible": true
     },
     {
       "locationName": "District of Columbia",
@@ -1148,70 +1142,29 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "7",
       "locationName": "New York",
       "fips": "36",
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
         {
-          "phase": "1a",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Adults 60+\n* Individuals (16+) with underlying high-risk medical conditions\n* First responders\n* Teachers and child care workers\n* Other essential workers\n* Congregate care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-25T17:53:15.717Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-25T17:53:38.491Z",
-          "phase": "1b",
-          "description": "* Public-facing government, not-for-profit, and building service workers",
-          "startDate": "March 17, 2021",
-          "tier": "2"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-25T19:22:16.477Z",
-          "phase": "1b",
-          "tier": "3",
-          "description": "* Adults 50-59",
-          "startDate": "March 23, 2021"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-30T14:43:36.314Z",
-          "phase": "1b",
-          "tier": "4",
-          "startDate": "March 30, 2021",
-          "description": "* Adults 30-49"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-30T14:44:33.787Z",
+          "updatedAt": "2021-04-06T14:36:00.825Z",
           "phase": "2",
-          "startDate": "April 6, 2021",
-          "description": "* All individuals 16+"
+          "description": "* All individuals 16+",
+          "startDate": "April 6, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-25T19:23:27.129Z",
+          "updatedAt": "2021-04-06T14:36:32.263Z",
           "phase": "TBD",
           "description": "Still to be determined:\n\n* Individuals under 16",
           "startDate": ""
         }
       ],
-      "stateSignupUrl": "https://am-i-eligible.covid19vaccine.health.ny.gov/"
+      "stateSignupUrl": "https://am-i-eligible.covid19vaccine.health.ny.gov/",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "4",
