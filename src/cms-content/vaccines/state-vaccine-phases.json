@@ -232,22 +232,16 @@
       "fips": "10",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-05T16:47:50.668Z",
-          "phase": "TBD",
-          "description": "* Persons 50+ years of age or older\n* Health care personnel\n* Long-term care staff or resident\n* Persons 16-49 with high-risk underlying medical conditions\n* Frontline essential and other essential workers including educators or school staff, child care workers, first responders, food service, construction, transportation"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 6, 2021",
-          "updatedAt": "2021-04-01T17:03:48.487Z"
+          "updatedAt": "2021-04-06T14:39:12.802Z"
         },
         {
           "currentlyEligible": false,
@@ -257,7 +251,7 @@
         }
       ],
       "stateSignupUrl": "https://coronavirus.delaware.gov/vaccine/where-can-i-get-my-vaccine/",
-      "allAdultsEligible": false
+      "allAdultsEligible": true
     },
     {
       "locationName": "District of Columbia",
