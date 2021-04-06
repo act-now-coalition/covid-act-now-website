@@ -27,7 +27,7 @@
         {
           "question": "What are the ingredients of the vaccines? ",
           "questionId": "what-are-ingredients-vaccine",
-          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html), the two COVID vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s fact sheet:\n\n* [Pfizer-BioNTech COVID vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID vaccine](https://www.fda.gov/media/144638/download)\n* [Johnson & Johnson’s COVID vaccine](https://www.fda.gov/media/146305/download)"
+          "answer": "According to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html), the two COVID vaccines currently available in the United States do not contain eggs, preservatives, or latex. For a full list of ingredients, please see each vaccine’s fact sheet:\n\n* [Pfizer-BioNTech COVID vaccine](https://www.fda.gov/media/144414/download)\n* [Moderna COVID vaccine](https://www.fda.gov/media/144638/download)\n* [Johnson & Johnson/Janssen COVID vaccine](https://www.fda.gov/media/146305/download)"
         },
         {
           "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
