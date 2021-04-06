@@ -27,8 +27,8 @@ const FeaturedSectionVariant: React.FC<{
     section => section.iconId === SectionId.ALERTS,
   );
 
-  const orderedSectionsA = [...apiLink, ...dailyDownloadLink, ...alertsLink];
-  const orderedSectionsB = [...dailyDownloadLink, ...alertsLink, ...apiLink];
+  const orderedSectionsA = [...apiLink, ...alertsLink, ...dailyDownloadLink];
+  const orderedSectionsB = [...alertsLink, ...dailyDownloadLink, ...apiLink];
 
   return (
     // Add new id:
