@@ -5,6 +5,49 @@ import LearnSection from './LearnSection';
 import AboutUsSection from './AboutUsSection';
 import { ContentWrapper } from './Menu.style';
 import { useBreakpoint } from 'common/hooks';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
+import { FeaturedItem, SectionId } from 'cms-content/footer';
+
+const FeaturedSectionVariant: React.FC<{
+  featuredSections: FeaturedItem[];
+  onClick: (label: string) => void;
+}> = ({ featuredSections, onClick }) => {
+  const apiLink = featuredSections.filter(
+    section => section.iconId === SectionId.API,
+  );
+  const dailyDownloadLink = featuredSections.filter(
+    section => section.iconId === SectionId.DAILY_DOWNLOAD,
+  );
+  const alertsLink = featuredSections.filter(
+    section => section.iconId === SectionId.ALERTS,
+  );
+
+  const orderedSectionsA = [...apiLink, ...dailyDownloadLink, ...alertsLink];
+  const orderedSectionsB = [...dailyDownloadLink, ...alertsLink, ...apiLink];
+
+  return (
+    // Add new id:
+    <Experiment id={ExperimentID.HAMBURGER_MENU_VARIATIONS}>
+      <Variant id={VariantID.A}>
+        <FeaturedSection
+          featuredSections={orderedSectionsA}
+          onClick={onClick}
+        />
+      </Variant>
+      <Variant id={VariantID.B}>
+        <FeaturedSection
+          featuredSections={orderedSectionsB}
+          onClick={onClick}
+        />
+      </Variant>
+    </Experiment>
+  );
+};
 
 const MenuContent: React.FC<{
   onClick: (label: string) => void;
@@ -18,7 +61,7 @@ const MenuContent: React.FC<{
     <ContentWrapper>
       {isMobile ? (
         <>
-          <FeaturedSection
+          <FeaturedSectionVariant
             featuredSections={featuredSections}
             onClick={onClick}
           />
@@ -28,10 +71,11 @@ const MenuContent: React.FC<{
       ) : (
         <>
           <LearnSection learnLinks={learnLinks} onClick={onClick} />
-          <FeaturedSection
+          <FeaturedSectionVariant
             featuredSections={featuredSections}
             onClick={onClick}
           />
+
           <AboutUsSection aboutUsCopy={aboutUs} onClick={onClick} Logo={Logo} />
         </>
       )}
