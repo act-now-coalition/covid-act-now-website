@@ -7,7 +7,7 @@
         {
           "question": "When will you be eligible to get the vaccine? ",
           "questionId": "when-will-you-be-eligible-vaccine",
-          "answer": "To learn when it will be your turn to get a COVID vaccine, check the location page for your state or county on our website. President Biden has directed states to make all adults eligible [by May 1, 2021](https://www.whitehouse.gov/briefing-room/statements-releases/2021/03/11/fact-sheet-president-biden-to-announce-all-americans-to-be-eligible-for-vaccinations-by-may-1-puts-the-nation-on-a-path-to-get-closer-to-normal-by-july-4th/), though many states will do so even sooner."
+          "answer": "To learn when it will be your turn to get a COVID vaccine, check the location page for your state or county on our website. President Biden has directed states to make all adults eligible by [April 19, 2021](https://www.whitehouse.gov/briefing-room/speeches-remarks/2021/04/06/remarks-by-president-biden-marking-the-150-millionth-covid-19-vaccine-shot/), though many states will do so even sooner."
         },
         {
           "question": "Who pays for vaccination? ",
@@ -236,5 +236,5 @@
   "intro": "\"When can you get a vaccine?\" to \"how soon after possible exposure to COVID should you get tested?\" Here are answers to some of the top COVID questions.",
   "metadataTitle": "COVID-19 FAQ",
   "metadataDescription": "Find trusted answers to the most Frequently Asked Questions (FAQ) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.",
-  "lastUpdatedDate": "2021-04-07T14:11:07.613Z"
+  "lastUpdatedDate": "2021-04-07T15:07:31.594Z"
 }
