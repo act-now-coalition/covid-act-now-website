@@ -40,10 +40,10 @@ const LocationPageHeaderVariant: React.FC<{
 
   return (
     <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
-      <Variant id={VariantID.B}>
+      <Variant id={VariantID.A}>
         <LocationPageHeader {...headerProps} />
       </Variant>
-      <Variant id={VariantID.A}>
+      <Variant id={VariantID.B}>
         <LocationPageHeader {...headerProps} showNewButton={true} />
       </Variant>
     </Experiment>
