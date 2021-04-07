@@ -61,3 +61,8 @@ export const StartDate = styled.span`
   color: ${COLOR_MAP.GREY_4};
   font-size: 14px;
 `;
+
+export const LinksDescription = styled.span`
+  font-size: 16px;
+  color: black;
+`;

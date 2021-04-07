@@ -164,32 +164,29 @@
         Updated Mondays and Thursdays from: <a href="{{sourceUrl}}">{{sourceName}}</a>
       </div>
 
-      {{#if eligibilityUrl}}
+      <div class="section description center-text">
+        Find your vaccine and other information from these official sources:
+      </div>
+
       <div class="section">
-        <a href="{{eligibilityUrl}}" class="main-cta-link">
+        <a href="https://vaccinefinder.org/" class="main-cta-link">
           <div class="eligibility-options center-text">
-            See who is eligible next
+            VaccineFinder
           </div>
         </a>
       </div>
-      {{/if}}
 
-      {{#if vaccinationSignupUrl}}
+      {{#if stateSignupUrl}}
       <div class="section main-cta">
-        <a href="{{vaccinationSignupUrl}}" class="main-cta-link">
+        <a href="{{stateSignupUrl}}" class="main-cta-link">
           <div class="main-cta-btn center-text">
             <div>
-              <strong>See where and how to get vaccinated</strong>
             </div>
-            <div>on the {{sourceName}} website</div>
+            <div>{{sourceName}}</div>
           </div>
         </a>
       </div>    
       {{/if}}
-
-      <div class="section description center-text">
-        Because eligibility varies throughout {{locationName}}, you may also want to check your county or city’s health department website.
-      </div>
       
     </div>
 

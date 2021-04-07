@@ -1,11 +1,8 @@
 import React from 'react';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { Region, MetroArea } from 'common/regions';
 import { COLOR_MAP } from 'common/colors';
 import { assert } from 'common/utils';
-import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
-import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
 import ExternalLink from 'components/ExternalLink';
 import { Heading2, Paragraph } from 'components/Markdown';
 import TabsPanel, { TabInfo } from 'components/TabsPanel';
@@ -16,24 +13,21 @@ import {
   Container,
   Section,
   Source,
+  LinksDescription,
 } from './VaccinationEligibilityBlock.style';
 import EligibilityPanel from './EligibilityPanel';
 import AllAdultsEligiblePanel from './AllAdultsEligiblePanel/AllAdultsEligiblePanel';
-import { useBreakpoint } from 'common/hooks';
+import ButtonBlock from './ButtonBlock';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
 }) => {
-  const isMobile = useBreakpoint(600);
-
   if (region instanceof MetroArea && !region.isSingleStateMetro) {
     return <RegionVaccinationBlock region={region} />;
   }
 
   const state = getRegionState(region);
   assert(state, `Couldn't find a state for region ${region.fipsCode}`);
-
-  const stateNameForButton = isMobile ? state.stateCode : state.fullName;
 
   // If we don't have vaccination information for a given state, we fallback to
   // show the eligibility links.
@@ -50,15 +44,6 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
     stateVaccinationUrl,
     allAdultsEligible,
   } = eligibilityData;
-
-  // Use local vaccine sign-up link but fall back to the state link
-  // TODO: do we ever have county/ level links?
-  // const vaccinationData =
-  //   getVaccinationDataByRegion(region) || stateVaccineInfo;
-  // const signupLink =
-  //   vaccinationData &&
-  //   (vaccinationData.vaccinationSignupUrl ||
-  //     vaccinationData.eligibilityInfoUrl);
 
   const tabList: TabInfo[] = [
     {
@@ -89,11 +74,6 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
     trackTabSelected(tabList[newSelectedTab].title);
   };
 
-  const sharedTrackingProps = {
-    trackingCategory: EventCategory.VACCINATION,
-    trackingAction: EventAction.CLICK_LINK,
-  };
-
   return (
     <Container>
       <Heading2>Vaccine eligibility</Heading2>
@@ -111,26 +91,14 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         </>
       )}
       <Section>
-        <ButtonsContainer>
-          <StyledLinkButton
-            $highlighted={false}
-            href={'https://vaccinefinder.org/'}
-            {...sharedTrackingProps}
-            trackingLabel="Find vaccines with VaccineFinder"
-            endIcon={<OpenInNewIcon />}
-          >
-            Find vaccines with VaccineFinder
-          </StyledLinkButton>
-          <StyledLinkButton
-            $highlighted={true}
-            href={stateVaccinationUrl}
-            {...sharedTrackingProps}
-            trackingLabel="State vaccination link"
-            endIcon={<OpenInNewIcon />}
-          >
-            Learn more about getting vaccinated in {stateNameForButton}
-          </StyledLinkButton>
-        </ButtonsContainer>
+        <LinksDescription>
+          Find your vaccine and other information from these official sources:
+        </LinksDescription>
+        <ButtonBlock
+          stateVaccinationUrl={stateVaccinationUrl}
+          stateCode={state.stateCode}
+          sourceName={sourceName}
+        />
       </Section>
       <Section>
         <Source>
