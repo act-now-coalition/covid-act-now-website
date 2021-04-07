@@ -634,49 +634,24 @@
       "fips": "23",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care personnel\n* Long-term care facilities\n* Public safety personnel",
-          "expandedDefinitionUrl": "",
-          "startDate": "Dec 2020",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 70+",
-          "expandedDefinitionUrl": "",
-          "startDate": "Feb 2021",
-          "updatedAt": "2021-03-02T00:28:10.094Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-02T00:27:10.721Z",
-          "phase": "2",
-          "description": "* Adults 60-69\n* Teachers, school staff, and child care workers",
-          "startDate": "March 3, 2021"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-25T17:20:02.856Z",
-          "phase": "3",
-          "description": "* Adults 50-59",
-          "startDate": "March 23, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T17:37:57.030Z",
+          "updatedAt": "2021-04-07T16:01:00.148Z",
           "phase": "4",
           "description": "* Individuals 16+",
           "startDate": "April 7, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-07T16:00:36.520Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "stateSignupUrl": "https://www.maine.gov/covid19/vaccines/vaccination-sites"
+      "stateSignupUrl": "https://www.maine.gov/covid19/vaccines/vaccination-sites",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Maryland",
@@ -1109,8 +1084,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "By May 1, 2021",
-          "updatedAt": "2021-04-01T16:37:14.573Z"
+          "startDate": "April 19, 2021",
+          "updatedAt": "2021-04-07T16:26:46.047Z"
         }
       ],
       "stateSignupUrl": "https://covid19.nj.gov/pages/covid-19-vaccine-locations-for-eligible-recipients"
@@ -1167,64 +1142,28 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "North Carolina",
       "fips": "37",
       "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot",
       "vaccinationSignupUrl": "https://vaccinefinder.org/",
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care staff and residents",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 65+",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "3",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Front-line essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 4",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "4A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Individuals 16-64 with at least one high-risk medical condition\n* Residents of some congregate living settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 17, 2021",
-          "updatedAt": "2021-03-18T18:30:44.911Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-01T16:40:20.971Z",
-          "phase": "4B",
-          "description": "* Remaining essential workers\n* Residents of remaining congregate living settings, including student dormitories",
-          "startDate": "March 31, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T16:50:48.583Z",
+          "updatedAt": "2021-04-07T16:02:49.156Z",
           "description": "* All individuals 16+",
           "phase": "5",
           "startDate": "April 7, 2021"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-07T16:02:53.503Z",
+          "phase": "TBD",
+          "description": "Still to be determined:\n\n* Individuals under 16"
         }
       ],
-      "stateSignupUrl": "https://myspot.nc.gov/"
+      "stateSignupUrl": "https://myspot.nc.gov/",
+      "allAdultsEligible": true
     },
     {
       "locationName": "North Dakota",
