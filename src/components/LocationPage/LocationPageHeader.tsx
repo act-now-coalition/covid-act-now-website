@@ -34,6 +34,7 @@ import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import type { MetricValues } from 'common/models/Projections';
+import GetAlertsButton from './Experiment/GetAlertsButton';
 
 function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
@@ -58,6 +59,7 @@ const LocationPageHeader = (props: {
   onHeaderSignupClick: () => void;
   isMobile?: boolean;
   region: Region;
+  showNewButton?: boolean;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
@@ -81,6 +83,8 @@ const LocationPageHeader = (props: {
 
   const tooltip = renderInfoTooltip();
 
+  const showExperimentButton = props.isMobile && props.showNewButton;
+
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -97,10 +101,12 @@ const LocationPageHeader = (props: {
                 <ShareOutlinedIcon />
                 Share
               </HeaderButton>
-              <HeaderButton onClick={props.onHeaderSignupClick || noop}>
-                <NotificationsNoneIcon />
-                Receive alerts
-              </HeaderButton>
+              {!showExperimentButton && (
+                <HeaderButton onClick={props.onHeaderSignupClick || noop}>
+                  <NotificationsNoneIcon />
+                  Receive alerts
+                </HeaderButton>
+              )}
             </ButtonsWrapper>
           </HeaderSection>
           <HeaderSection>
@@ -136,6 +142,9 @@ const LocationPageHeader = (props: {
             </HeaderSubCopy>
           )}
         </FooterContainer>
+        {showExperimentButton && (
+          <GetAlertsButton onClick={props.onHeaderSignupClick || noop} />
+        )}
       </Wrapper>
     </Fragment>
   );
