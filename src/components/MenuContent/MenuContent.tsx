@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-import { footerContent } from 'cms-content/footer';
+import { menuContent } from 'cms-content/footer';
 import FeaturedSection from './FeaturedSection';
 import LearnSection from './LearnSection';
 import AboutUsSection from './AboutUsSection';
@@ -52,7 +52,7 @@ const MenuContent: React.FC<{
   onClick: (label: string) => void;
   Logo?: ComponentType;
 }> = ({ onClick, Logo }) => {
-  const { learnLinks, aboutUs, featuredSections } = footerContent;
+  const { learnLinks, aboutUs, featuredSections } = menuContent;
 
   const isMobile = useBreakpoint(800);
 
