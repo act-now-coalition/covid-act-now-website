@@ -9,7 +9,7 @@ import {
   Subtext,
 } from './GetAlertsButton.style';
 
-const GetAlertsButton: React.FC<{ onClick: any }> = ({ onClick }) => {
+const GetAlertsButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <Button onClick={onClick}>
       <Row>
