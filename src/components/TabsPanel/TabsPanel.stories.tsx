@@ -36,7 +36,11 @@ export const UpdatingOutside = () => {
     <div>
       <h3>{label}</h3>
       <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
-      <ButtonBlock signupLink={exampleSignupLink} />
+      <ButtonBlock
+        stateVaccinationUrl={exampleSignupLink}
+        stateCode="CT"
+        sourceName="Connecticut Health Department"
+      />
     </div>
   );
 };

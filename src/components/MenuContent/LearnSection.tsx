@@ -36,7 +36,6 @@ const LearnSection: React.FC<{
       </Column>
       <OutlinedButton
         to="/learn"
-        desktopOnly
         onClick={() => onClick('Learn: View all topics')}
       >
         View all topics
