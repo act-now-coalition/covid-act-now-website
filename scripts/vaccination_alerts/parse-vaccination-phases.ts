@@ -63,6 +63,7 @@ const buildRegionGroup = (
     locationName: state,
     fips: regions.findByFullName(state.trimRight())!.fipsCode,
     eligibilityInfoUrl: firstRow.eligibilityUrl,
+    vaccinationSignupUrl: '', // this does not appear to be available in the spreadsheet
     emailAlertVersion: 1,
     phaseGroups: rows.map(row => ({
       phase: row.phase,

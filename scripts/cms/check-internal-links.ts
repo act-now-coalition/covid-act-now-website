@@ -1,6 +1,6 @@
 import remark from 'remark';
 import visit from 'unist-util-visit';
-import { glossaryContent } from '../../src/cms-content/learn';
+import { glossaryContent } from '../../src/cms-content/learn/glossary';
 
 function main() {
   const { terms } = glossaryContent;
