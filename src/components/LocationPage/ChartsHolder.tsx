@@ -30,12 +30,12 @@ import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock'
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
-import LocationPageHeader from './LocationPageHeader';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { MetricValues, Projections } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import { LocationSummary, useSummaries } from 'common/location_summaries';
+import LocationPageHeaderVariant from './Experiment/LocationPageHeaderVariant';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -220,19 +220,21 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     scrollTo(metricRefs[metric].current);
   };
 
+  const locationPageHeaderProps = {
+    alarmLevel,
+    stats,
+    onMetricClick: (metric: Metric) => onClickMetric(metric),
+    onHeaderShareClick: onClickShare,
+    onHeaderSignupClick: onClickAlertSignup,
+    isMobile,
+    region,
+  };
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       <ChartContentWrapper>
-        <LocationPageHeader
-          alarmLevel={alarmLevel}
-          stats={stats}
-          onMetricClick={metric => onClickMetric(metric)}
-          onHeaderShareClick={onClickShare}
-          onHeaderSignupClick={onClickAlertSignup}
-          isMobile={isMobile}
-          region={region}
-        />
+        <LocationPageHeaderVariant {...locationPageHeaderProps} />
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>
