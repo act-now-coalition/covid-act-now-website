@@ -5,9 +5,9 @@
       "sectionId": "vaccines",
       "questions": [
         {
-          "question": "When will I be eligible to get the vaccine? ",
-          "questionId": "when-will-i-be-eligible-vaccine",
-          "answer": "To learn when it will be your turn to get a COVID vaccine, check the location page for your state or county on our website. President Biden has directed states to make all adults eligible [by May 1, 2021](https://www.whitehouse.gov/briefing-room/statements-releases/2021/03/11/fact-sheet-president-biden-to-announce-all-americans-to-be-eligible-for-vaccinations-by-may-1-puts-the-nation-on-a-path-to-get-closer-to-normal-by-july-4th/), though many states will do so even sooner."
+          "question": "When will you be eligible to get the vaccine? ",
+          "questionId": "when-will-you-be-eligible-vaccine",
+          "answer": "To learn when it will be your turn to get a COVID vaccine, check the location page for your state or county on our website. President Biden has directed states to make all adults eligible by [April 19, 2021](https://www.whitehouse.gov/briefing-room/speeches-remarks/2021/04/06/remarks-by-president-biden-marking-the-150-millionth-covid-19-vaccine-shot/), though many states will do so even sooner."
         },
         {
           "question": "Who pays for vaccination? ",
@@ -35,9 +35,9 @@
           "answer": "[Herd immunity](https://covidactnow.org/glossary#herd-immunity) is when a large enough portion of a community is immune to a virus so that the virus can no longer spread easily from person to person. At this time, experts do not know what percentage of people need to be vaccinated to achieve herd immunity to COVID. The [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html) and other experts continue to study the topic and will provide more information as it is available."
         },
         {
-          "question": "If I’ve already had and recovered from COVID, should I still get vaccinated? ",
+          "question": "If you have already had and recovered from COVID, should you still get vaccinated? ",
           "answer": "Yes, even those who have had COVID should get vaccinated from the disease, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). While getting COVID may provide you with some natural immunity, it’s not clear how long this protection may last, says the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-vaccine/art-20484859#:~:text=Getting%20COVID%2D19%20might,COVID%2D19%20vaccine.). Some [studies](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30764-7/fulltext) have found that reinfection is possible, but a vaccine could boost your immune response.\n\n If you recently had COVID or were treated for COVID with monoclonal antibodies or convalescent plasma, the CDC recommends that you wait 90 days before getting a vaccine.",
-          "questionId": "if-i-recovered-should-i-get-vaccinated"
+          "questionId": "if-you-recovered-should-you-get-vaccinated"
         },
         {
           "question": "Does immunity protection last longer if you get a vaccine or if you have had COVID?",
@@ -45,8 +45,8 @@
           "answer": "Studies about immunity after COVID infection have had conflicting findings. Some [studies](https://www.technologyreview.com/2020/07/13/1005103/immunity-to-covid-19-could-disappear-in-months-a-new-study-suggests/) have found that immunity goes away quickly, but more recent [studies](https://www.technologyreview.com/2021/01/06/1015822/covid-19-immunity-likely-lasts-for-years/) have found that your body has robust immunity for many months. \n\nThe upshot: With any new disease, we don’t know how long infection-acquired immunity might last—or how much it might vary from person to person, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). This is also true for COVID vaccines. Until we have more data on how well the vaccines work in real-world conditions, we will not know how long immunity will last. For now, preliminary data from [Pfizer’s ongoing clinical trial](https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-confirm-high-efficacy-and-no-serious) suggests that its vaccine is over 90 percent effective for at least six months after the second dose."
         },
         {
-          "question": "How do you get your vaccine eligibility information, and how often is it updated?",
-          "questionId": "how-do-you-get-vaccine-eligibility-information-and-how-often-updated",
+          "question": "How does Covid Act Now get vaccine eligibility information, and how often is it updated?",
+          "questionId": "how-get-vaccine-eligibility-information-and-how-often-updated",
           "answer": "Our team frequently reviews official state government sites and updates vaccine eligibility information on our site every Monday and Thursday. Please note that we are not a government or health care organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
         },
         {
@@ -55,7 +55,7 @@
           "answer": "We currently have vaccine eligibility information for every U.S. state, the District of Columbia, Puerto Rico, and the Northern Mariana Islands.\n\nIdentifying vaccine eligibility information takes time, since the information is not standardized and cannot be processed automatically by a computer. It thus needs to be collected manually. What’s more, eligibility varies not only from state to state, but also sometimes by county, and even by city. Finally, vaccine eligibility information often changes frequently as states, counties, or cities adjust their roll-out plans, and making sure this information is up to date is a manual process of regularly checking government websites and press releases. For all those reasons, we focus on tracking vaccine eligibility at the state-level."
         },
         {
-          "question": "Will vaccination for COVID cause me to test positive for COVID?",
+          "question": "Will vaccination for COVID cause you to test positive for COVID?",
           "questionId": "vaccination-COVID-cause-positive-COVID",
           "answer": "Receiving a COVID vaccine will not cause you to test positive for COVID. The mRNA vaccines, like Pfizer and Moderna, give instructions for your cells to make a piece of the spike protein, not the entire viral genome. The vaccines simply do not have enough RNA or even the complete RNA sequence to give a positive signal in testing. Similarly, the Johnson & Johnson vaccine — which takes a piece of DNA from the COVID spike protein and combines it with an [adenovirus to carry instructions](https://www.covidactnow.org/covid-explained/roundup-current-vaccine-progress) to your immune system — cannot cause you to test positive for COVID.\n\nIf you receive a positive test result in the days or weeks after you have been vaccinated, it is likely because it takes time for the vaccines to work and protection is not 100 percent effective. Anyone who becomes infected with the SARS-CoV-2 virus should isolate as recommended.\n\nAfter vaccination, people may attempt to get a [serology, or antibody, test](https://covidactnow.org/glossary#serology-test) to see if the vaccine has “worked.” However, serology tests focus on a wide set of antibodies, and the vaccine stimulates your immune system to produce antibodies only against the spike protein. So, in order to determine if vaccination has stimulated antibody production, we would need a test that specifically looks for antibodies to the spike protein."
         },
@@ -189,12 +189,12 @@
           "questionId": "is-it-safe-to-reopen-schools"
         },
         {
-          "question": "How do I travel safely?",
+          "question": "How do you travel safely?",
           "answer": "For the time being, it is still safest not to travel, especially for people who have not yet received the vaccine. If you are fully vaccinated, the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html#anchor_1617376530945) now states that you can travel domestically with low risk to yourself. But, you should still take precautions including wearing a mask and social distancing.\n\nMore generally, the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/travelers/faqs.html) recommends that you avoid non essential travel by plane, as it could require you to sit close to others for hours. If you must travel, look at the data on [our site](https://covidactnow.org/) to compare the state and county risk levels where you will be. If you plan to fly, take time to research and assess the measures different airlines are taking to reduce risky behaviors and comply with local laws to contain the spread of COVID.",
           "questionId": "how-to-travel-safely"
         },
         {
-          "question": "How soon after a possible exposure to COVID should I get tested? ",
+          "question": "How soon after a possible exposure to COVID should you get tested? ",
           "answer": "It’s important to get tested for COVID after any potential [exposure](https://covidactnow.org/glossary#exposed) to the [virus](https://covidactnow.org/glossary#virus), whether that’s through contact with a [confirmed case](https://covidactnow.org/glossary#confirmed-case) or traveling in close company with strangers. Since COVID has a long [incubation period](https://covidactnow.org/glossary#incubation-period), it may take a few days before [PCR tests](https://covidactnow.org/glossary#pcr-test) detect a sufficient enough amount of the virus to report a positive result, leading to high rates of [false-negatives](https://covidactnow.org/glossary#false-negative) during the first few days after exposure. While it’s always recommended to [quarantine](https://covidactnow.org/glossary#quarantine) for 14 days, [experts recommend](https://medical.mit.edu/covid-19-updates/2020/07/when-should-i-be-tested) being tested five to seven days after a probable exposure for the most accurate test results.",
           "questionId": "covid-how-soon-after-exposure-tested"
         },
@@ -206,8 +206,8 @@
       ]
     },
     {
-      "sectionTitle": "How Can I Help?",
-      "sectionId": "how can I help?",
+      "sectionTitle": "How Can You Help?",
+      "sectionId": "how can you help?",
       "questions": [
         {
           "question": "Do masks help stop the spread of COVID?\n",
@@ -220,12 +220,12 @@
           "answer": "Wearing a [mask](/glossary#face-mask) is extremely important to help contain COVID and decreases the risks for both you and those around you. However, not all masks are created equal. [Experts](https://www.cnn.com/2020/11/11/health/cdc-face-mask-guidelines-wellness/index.html) recommend wearing two- or three-ply masks made with a tight weave of 100 percent cotton. Disposable and silk masks are also effective at repelling droplets. More people are wearing two layers of face masks, which some experts say makes common sense. Most important, however, is making sure your mask fits snugly over the bridge of your nose and below your chin. Studies have shown that loose-fitting masks, such as bandanas and gaiters, are the least effective. While N95 masks are the most effective at filtering out particles, they are still considered critical supplies and should be reserved for health care workers and first responders."
         },
         {
-          "question": "How do I discuss the pandemic with friends or family members who aren’t taking it seriously?",
+          "question": "How do you discuss the pandemic with friends or family members who aren’t taking it seriously?",
           "answer": "It can be challenging to discuss the pandemic with people who think it’s overblown and aren’t taking precautions. You may be tempted to immediately begin reciting the facts and what the data is showing, but sometimes this can put people off. Instead, it’s important to consider how you are presenting those facts. [Research](https://www.mikeyeomans.info/papers/receptiveness.pdf) finds that conversations are more productive when you avoid condescending tones and let the other person know that you are listening. Try these approaches:\n\n* Actively solicit their perspective on the issue, and show that you are listening (e.g., say “I hear you” or “I see what you mean”). When you understand the beliefs of your friends or family members, you can tailor how you communicate with them in a way that resonates with them instead of turning them off. \n* Avoid allowing your emotions to get the best of you. Stay calm and objective, using a friendly tone to share your thoughts. A collected and approachable tone improves the chances of your counterpart listening to the facts and learning from you.",
           "questionId": "discuss-covid-pandemic-friends-family"
         },
         {
-          "question": "What can I do to help end the pandemic and protect myself from COVID?",
+          "question": "What can you do to help end the pandemic and protect yourself from COVID?",
           "answer": "Covid Act Now is a small, independent 501(c)(3) nonprofit founded by volunteers to provide the most timely and accurate local COVID data so that every American can make informed decisions during the pandemic. If you'd like to join this effort, please consider supporting our organization with a tax-deductible [donation](https://www.covidactnow.org/donate).\n\nYour actions matter. You can help protect others and slow the spread of the virus by doing a few simple things:\n\n* Wear a [mask](/glossary#face-mask) unless there is a medical reason not to do so.\n* Practice physical distancing to limit person-to-person [transmission](/glossary#transmission).\n* Wash your hands or use hand sanitizer frequently.\n* Follow limits on gatherings, especially ones that take place indoors.\n* Stay home if you are feeling unwell.\n* If infected or exposed, strictly follow the rules on isolation and [quarantine](/glossary#quarantine).\n* As soon as you are eligible to do so, get vaccinated.",
           "questionId": "help-end-covid-pandemic"
         }
@@ -233,8 +233,8 @@
     }
   ],
   "header": "FAQ",
-  "intro": "\"When can I get a vaccine?\" to \"how soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
+  "intro": "\"When can you get a vaccine?\" to \"how soon after possible exposure to COVID should you get tested?\" Here are answers to some of the top COVID questions.",
   "metadataTitle": "COVID-19 FAQ",
   "metadataDescription": "Find trusted answers to the most Frequently Asked Questions (FAQ) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.",
-  "lastUpdatedDate": "2021-04-06T20:07:21.168Z"
+  "lastUpdatedDate": "2021-04-07T15:07:31.594Z"
 }

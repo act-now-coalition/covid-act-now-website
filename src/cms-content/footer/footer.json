@@ -2,16 +2,16 @@
   "aboutUs": "Covid Act Now is an independent nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.",
   "learnLinks": [
     {
-      "url": "/covid-explained/covid-variants-vaccines",
-      "cta": "How do variants affect vaccines?"
+      "cta": "What can you do after you’re fully vaccinated?",
+      "url": "/faq#what-can-you-do-after-fully-vaccinated"
     },
     {
-      "cta": "Are COVID vaccines safe?",
-      "url": "/faq#are-covid-vaccines-safe"
+      "cta": "Is it safe to travel?",
+      "url": "/faq#how-to-travel-safely"
     },
     {
-      "cta": "How can schools reopen safely?",
-      "url": "/covid-explained/school-guidance"
+      "url": "/faq#vaccination-COVID-cause-positive-COVID",
+      "cta": "Can vaccination cause you to test positive for COVID?"
     }
   ],
   "featuredSections": [
