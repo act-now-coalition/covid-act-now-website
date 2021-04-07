@@ -21,11 +21,14 @@ export const DonateButton = () => (
   </DonateButtonWrapper>
 );
 
-export const DonateButtonHeart = () => (
+export const DonateButtonHeart: React.FC<{ closeMenu: () => void }> = ({
+  closeMenu,
+}) => (
   <StyledDonateButtonHeart
     to="/donate"
     {...trackingProps}
     endIcon={<FavoriteIcon />}
+    onClick={closeMenu}
   >
     Donate
   </StyledDonateButtonHeart>
