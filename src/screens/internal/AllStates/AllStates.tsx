@@ -70,13 +70,13 @@ function StateEntry({ projections }: { projections: Projections }) {
         <div style={{ width: '48%' }}>
           <ExploreChart
             hasMultipleLocations={true}
-            height={300}
+            height={350}
             isMobile={false}
-            width={400}
+            width={600}
             seriesList={getProjectionsChartSeries(
               ExploreMetric.HOSPITALIZATIONS,
               projections,
-              false,
+              true,
             )}
           />
         </div>
