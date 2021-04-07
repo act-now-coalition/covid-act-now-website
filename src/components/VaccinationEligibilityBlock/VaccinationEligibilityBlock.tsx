@@ -1,31 +1,27 @@
-import React, { useState } from 'react';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import React from 'react';
 import { Region, MetroArea } from 'common/regions';
 import { COLOR_MAP } from 'common/colors';
 import { assert } from 'common/utils';
-import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
-import { StyledLinkButton, ButtonsContainer } from './ButtonBlock.style';
 import ExternalLink from 'components/ExternalLink';
 import { Heading2, Paragraph } from 'components/Markdown';
 import TabsPanel, { TabInfo } from 'components/TabsPanel';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
-import { EmailAlertIcon } from 'components/EmailAlertsFooter/EmailAlertsFooter.style';
-import { scrollWithOffset } from 'components/TableOfContents';
 import RegionVaccinationBlock from 'components/RegionVaccinationBlock';
 import { getEligibilityInfo, getRegionState } from './utils';
 import {
   Container,
   Section,
   Source,
+  LinksDescription,
 } from './VaccinationEligibilityBlock.style';
 import EligibilityPanel from './EligibilityPanel';
+import AllAdultsEligiblePanel from './AllAdultsEligiblePanel/AllAdultsEligiblePanel';
+import ButtonBlock from './ButtonBlock';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
 }) => {
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
-
   if (region instanceof MetroArea && !region.isSingleStateMetro) {
     return <RegionVaccinationBlock region={region} />;
   }
@@ -41,16 +37,13 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   }
 
   const eligibilityData = getEligibilityInfo(state);
-  const { mostRecentPhaseName, sourceName, sourceUrl } = eligibilityData;
-
-  // Use local vaccine sign-up link but fall back to the state link
-  // TODO: do we ever have county/ level links?
-  const vaccinationData =
-    getVaccinationDataByRegion(region) || stateVaccineInfo;
-  const signupLink =
-    vaccinationData &&
-    (vaccinationData.vaccinationSignupUrl ||
-      vaccinationData.eligibilityInfoUrl);
+  const {
+    mostRecentPhaseName,
+    sourceName,
+    sourceUrl,
+    stateVaccinationUrl,
+    allAdultsEligible,
+  } = eligibilityData;
 
   const tabList: TabInfo[] = [
     {
@@ -79,57 +72,43 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
 
   const onSelectTab = (newSelectedTab: number) => {
     trackTabSelected(tabList[newSelectedTab].title);
-    setSelectedTabIndex(newSelectedTab);
-  };
-
-  const sharedTrackingProps = {
-    trackingCategory: EventCategory.VACCINATION,
-    trackingAction: EventAction.CLICK_LINK,
   };
 
   return (
     <Container>
       <Heading2>Vaccine eligibility</Heading2>
-      <Paragraph>
-        {state.fullName} is currently in <strong>{mostRecentPhaseName}</strong>.{' '}
-        Eligibility varies throughout {state.fullName}, so you may also want to
-        check your county or city’s health department website.
-      </Paragraph>
+      {allAdultsEligible ? (
+        <AllAdultsEligiblePanel />
+      ) : (
+        <>
+          <Paragraph>
+            {state.fullName} is currently in{' '}
+            <strong>{mostRecentPhaseName}</strong>.
+          </Paragraph>
+          <Section>
+            <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
+          </Section>
+        </>
+      )}
       <Section>
-        <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
+        <LinksDescription>
+          Find your vaccine and other information from these official sources:
+        </LinksDescription>
+        <ButtonBlock
+          stateVaccinationUrl={stateVaccinationUrl}
+          stateCode={state.stateCode}
+          sourceName={sourceName}
+        />
       </Section>
       <Section>
-        <ButtonsContainer>
-          <StyledLinkButton
-            $highlighted={!signupLink || selectedTabIndex === 1}
-            to="#share"
-            {...sharedTrackingProps}
-            trackingLabel="Vaccination alerts"
-            startIcon={<EmailAlertIcon />}
-            scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
-          >
-            Get notified when eligibility changes
-          </StyledLinkButton>
-          {signupLink && (
-            <StyledLinkButton
-              $highlighted={selectedTabIndex === 0}
-              href={signupLink}
-              {...sharedTrackingProps}
-              trackingLabel="Where to get vaccinated"
-              endIcon={<OpenInNewIcon />}
-            >
-              See where and how to get vaccinated
-            </StyledLinkButton>
-          )}
-        </ButtonsContainer>
-      </Section>
-      <Section>
-        <Source>
-          Updated Mondays and Thursdays from:{' '}
-          <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
-            {sourceName}
-          </ExternalLink>
-        </Source>
+        {!allAdultsEligible && (
+          <Source>
+            Updated Mondays and Thursdays from:{' '}
+            <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
+              {sourceName}
+            </ExternalLink>
+          </Source>
+        )}
       </Section>
     </Container>
   );
