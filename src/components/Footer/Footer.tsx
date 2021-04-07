@@ -1,50 +1,36 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import Logo from 'assets/images/footerlogoDarkWithURL';
+import React, { useContext } from 'react';
+import { StyledFooter } from './Footer.style';
+import MenuContent from 'components/MenuContent';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+import { ThemeProvider, ThemeContext } from 'styled-components';
+import { megaMenuFooter } from 'assets/theme';
+import LogoNonUrl from 'assets/images/LogoNonUrl';
 import { useIsEmbed } from 'common/utils/hooks';
-import FooterSocialLinks from './FooterSocialLinks';
-import {
-  StyledFooter,
-  StyledFooterContent,
-  StyledFooterBodyLinks,
-  StyledFooterInner,
-  StyledFooterBodyNav,
-  StyledFooterDivider,
-} from './Footer.style';
 
-const Footer = () => {
-  const { pathname } = useLocation();
-  const isMapPage = pathname.startsWith('/us') || pathname.startsWith('/state');
+const Footer: React.FC = () => {
   const isEmbed = useIsEmbed();
+
+  const theme = useContext(ThemeContext);
+
+  const onClick = (label: string) => {
+    trackEvent(EventCategory.FOOTER, EventAction.NAVIGATE, label);
+  };
 
   if (isEmbed) {
     return null;
   }
 
   return (
-    <StyledFooter>
-      <StyledFooterInner isMapPage={isMapPage}>
-        <StyledFooterContent>
-          <Logo />
-          <StyledFooterBodyNav>
-            <Link to="/">Map</Link>
-            <Link to="/learn">Learn</Link>
-            <Link to="/data-api">Data API</Link>
-            <Link to="/about">About</Link>
-          </StyledFooterBodyNav>
-          <StyledFooterDivider />
-          <StyledFooterBodyLinks>
-            <FooterSocialLinks />
-          </StyledFooterBodyLinks>
-          <StyledFooterDivider />
-          <StyledFooterBodyLinks>
-            <Link to="/about#contact-us">Contact</Link>
-            {' ∙ '}
-            <Link to="/terms">Terms</Link>
-          </StyledFooterBodyLinks>
-        </StyledFooterContent>
-      </StyledFooterInner>
-    </StyledFooter>
+    <ThemeProvider
+      theme={{
+        ...theme,
+        palette: { ...theme.palette, megaMenu: megaMenuFooter },
+      }}
+    >
+      <StyledFooter role="contentinfo">
+        <MenuContent onClick={onClick} Logo={LogoNonUrl} />
+      </StyledFooter>
+    </ThemeProvider>
   );
 };
 

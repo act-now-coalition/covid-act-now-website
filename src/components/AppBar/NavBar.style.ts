@@ -8,7 +8,7 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { smallPhoneBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { fonts } from 'common/theme';
 
 const desktopNavHeight = 64;
@@ -16,13 +16,6 @@ const desktopNavHeight = 64;
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.GREY_1};
   background-color: white;
-`;
-
-export const StyledMobileMenu = styled.nav`
-  display: inherit;
-  @media print {
-    display: none;
-  }
 `;
 
 export const Toolbar = styled(MuiToolbar)`
@@ -54,16 +47,6 @@ export const TabStyle = css`
   }
 `;
 
-export const NavLink = styled(_NavLink).attrs(props => ({
-  activeClassName: 'active',
-}))`
-  ${TabStyle}
-`;
-
-export const TabLink = styled.a`
-  ${TabStyle}
-`;
-
 export const Spacer = styled.div`
   flex-grow: 1;
 `;
@@ -74,69 +57,6 @@ export const BackLink = styled(_NavLink)`
   svg {
     width: 32px;
     height: 32px;
-  }
-`;
-
-export const StyledMenu = styled.nav`
-  display: flex;
-  flex-direction: column;
-  background: ${COLOR_MAP.GREY_1};
-  border-top: 1px solid ${COLOR_MAP.GREY_2};
-  transform: translateY(64px);
-  text-align: left;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
-
-  a {
-    cursor: pointer;
-    font-size: 1rem;
-    color: ${palette.black};
-    text-decoration: none;
-    font-weight: bold;
-    padding: 1.75rem 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    background: white;
-
-    &:hover,
-    &:active {
-      background: ${COLOR_MAP.GREY_1};
-    }
-
-    display: flex;
-    align-items: center;
-
-    svg {
-      margin-right: 1rem;
-    }
-  }
-
-  // Mobile menu was larger than an iPhone5 screen (320px wide)
-  // Dropping the padding for screens up until that width
-  @media (min-width: ${smallPhoneBreakpoint}) {
-    a {
-      padding: 2rem 1rem;
-    }
-  }
-`;
-
-export const MobileOnly = styled.div<{ breakPoint: number }>`
-  display: flex;
-  align-items: center;
-  @media (min-width: ${props => `${props.breakPoint}px`}) {
-    display: none;
-  }
-`;
-
-export const DesktopOnly = styled.div<{ breakPoint: number }>`
-  display: none;
-  @media (min-width: ${props => `${props.breakPoint}px`}) {
-    display: flex;
-    align-items: center;
-    min-height: ${desktopNavHeight}px;
   }
 `;
 
@@ -164,12 +84,6 @@ export const CloseIcon = styled(MuiCloseIcon)`
 
 export const MenuIcon = styled(MuiMenuIcon)`
   color: ${COLOR_MAP.BLACK};
-`;
-
-export const ExperimentButtonsContainer = styled.div`
-  & > :not(:last-child) {
-    margin-right: 45px;
-  }
 `;
 
 export const MenuLabel = styled.span`
