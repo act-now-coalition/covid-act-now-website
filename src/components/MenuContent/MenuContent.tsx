@@ -1,4 +1,5 @@
 import React, { ComponentType } from 'react';
+import keyBy from 'lodash/keyBy';
 import { menuContent } from 'cms-content/footer';
 import FeaturedSection from './FeaturedSection';
 import LearnSection from './LearnSection';
@@ -17,18 +18,18 @@ const FeaturedSectionVariant: React.FC<{
   featuredSections: FeaturedItem[];
   onClick: (label: string) => void;
 }> = ({ featuredSections, onClick }) => {
-  const apiLink = featuredSections.filter(
-    section => section.iconId === SectionId.API,
-  );
-  const dailyDownloadLink = featuredSections.filter(
-    section => section.iconId === SectionId.DAILY_DOWNLOAD,
-  );
-  const alertsLink = featuredSections.filter(
-    section => section.iconId === SectionId.ALERTS,
-  );
+  const sectionById = keyBy(featuredSections, section => section.iconId);
 
-  const orderedSectionsA = [...apiLink, ...alertsLink, ...dailyDownloadLink];
-  const orderedSectionsB = [...alertsLink, ...dailyDownloadLink, ...apiLink];
+  const orderedSectionsA = [
+    sectionById[SectionId.ALERTS],
+    sectionById[SectionId.DAILY_DOWNLOAD],
+    sectionById[SectionId.API],
+  ];
+  const orderedSectionsB = [
+    sectionById[SectionId.API],
+    sectionById[SectionId.ALERTS],
+    sectionById[SectionId.DAILY_DOWNLOAD],
+  ];
 
   return (
     <Experiment id={ExperimentID.MEGA_MENU_API_LINK}>

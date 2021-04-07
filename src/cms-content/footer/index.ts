@@ -1,5 +1,5 @@
 import { Markdown } from '../utils';
-import { shuffle } from 'lodash';
+import shuffle from 'lodash/shuffle';
 import footer from './footer.json';
 
 export interface LinkItem {
