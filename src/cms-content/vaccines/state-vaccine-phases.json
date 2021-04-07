@@ -1858,7 +1858,7 @@
       "stateSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/"
     },
     {
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "0",
       "locationName": "Puerto Rico",
       "fips": "72",
       "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
