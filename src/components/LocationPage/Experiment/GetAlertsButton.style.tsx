@@ -12,6 +12,8 @@ export const Button = styled(MuiButton).attrs(props => ({
   margin-top: 2.5rem;
   padding: 1rem;
   font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
 `;
 
 export const Arrow = styled(ArrowForwardIcon)`
