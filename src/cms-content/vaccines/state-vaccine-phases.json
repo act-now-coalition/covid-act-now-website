@@ -1858,7 +1858,7 @@
       "stateSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/"
     },
     {
-      "emailAlertVersion": "0",
+      "emailAlertVersion": "1",
       "locationName": "Puerto Rico",
       "fips": "72",
       "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
@@ -1879,17 +1879,11 @@
           "description": "* Adults 65+\n* Essential workers (first responders, EMS, teachers, essential infrastructure)"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-23T14:50:57.180Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-07T19:17:11.996Z",
           "phase": "1",
           "tier": "C",
           "description": "* People 16+ with high-risk medical conditions\n* People in congregate settings\n* Other essential workers"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-02-23T14:51:00.628Z",
-          "phase": "2",
-          "description": "* People 16+ with history of chronic conditions"
         }
       ],
       "stateSignupUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19"
