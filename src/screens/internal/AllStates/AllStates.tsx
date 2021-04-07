@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { LoadingScreen } from './AllStates.style';
-import {
-  fetchAllStateProjections,
-  useProjectionsFromRegion,
-} from 'common/utils/model';
+import { fetchAllStateProjections } from 'common/utils/model';
 import { Metric } from 'common/metricEnum';
 import { MetricChart } from 'components/Charts';
 import regions, { State, State as StateType } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { sortBy } from 'lodash';
+import Explore, { ExploreChart, ExploreMetric } from 'components/Explore';
+import { getProjectionsChartSeries } from 'components/Explore/utils';
 
 export function useStateProjections(): Array<Projections> | null {
   const [projections, setProjections] = useState<Array<Projections> | null>(
@@ -65,11 +64,22 @@ function StateEntry({ projections }: { projections: Projections }) {
           justifyContent: 'space-between',
         }}
       >
-        {[Metric.CASE_DENSITY, Metric.CASE_GROWTH_RATE].map(metric => (
-          <div style={{ width: '48%' }}>
-            <MetricChart metric={metric} projections={projections} />
-          </div>
-        ))}
+        <div style={{ width: '48%' }}>
+          <MetricChart metric={Metric.CASE_DENSITY} projections={projections} />
+        </div>
+        <div style={{ width: '48%' }}>
+          <ExploreChart
+            hasMultipleLocations={true}
+            height={300}
+            isMobile={false}
+            width={400}
+            seriesList={getProjectionsChartSeries(
+              ExploreMetric.HOSPITALIZATIONS,
+              projections,
+              false,
+            )}
+          />
+        </div>
       </div>
     </>
   );

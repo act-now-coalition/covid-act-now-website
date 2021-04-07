@@ -30,6 +30,7 @@ import {
   getTimeDiff,
 } from 'common/utils/time-utils';
 import { formatDecimal } from 'common/utils/index';
+import { Projections } from 'common/models/Projections';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -495,6 +496,21 @@ export function getChartSeries(
       }),
     ).then(flatten);
   }
+}
+
+export function getProjectionsChartSeries(
+  metric: ExploreMetric,
+  projections: Projections,
+  normalizeData: boolean,
+): Series[] {
+  return [
+    getAveragedSeriesForMetric(
+      metric,
+      projections.primary,
+      SERIES_COLORS[0],
+      normalizeData,
+    ),
+  ];
 }
 
 export function getSeriesLabel(series: Series, isMobile: boolean) {
