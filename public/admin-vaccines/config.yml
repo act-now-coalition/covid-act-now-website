@@ -110,6 +110,7 @@ collections:
                 name: allAdultsEligible
                 widget: boolean
                 default: false
+                required: false
                 hint: Switch on if all individuals 16+ are eligible
               - label: Email alert version
                 name: emailAlertVersion
