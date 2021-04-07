@@ -1,4 +1,13 @@
+/**
+ * A script to preprocess regions data from the original/raw formats into
+ * whatever shapes we need for the frontend, so we can avoid expensive load-and-process
+ * operations on every site visit.
+ *
+ * For starters, just creates easily-deserialized versions of State, County,
+ * and MetroArea region data.
+ */
 import path from 'path';
+import _ from 'lodash';
 
 import * as script_regions_data from './regions_data';
 const fs = require('fs-extra');
@@ -15,27 +24,19 @@ const METRO_AREAS_JSON_FILE = path.join(
 async function main() {
   console.log('Preparing regions data');
 
-  //console.log('  Generating valid routes')
-
   // map of output filenames to source data
-  const files: { [index: string]: any } = {
+  const files = {
     [STATES_JSON_FILE]: script_regions_data.statesByFips,
     [COUNTIES_JSON_FILE]: script_regions_data.countiesByFips,
     [METRO_AREAS_JSON_FILE]: script_regions_data.metroAreasByFips,
   };
 
-  // convert the constructed object map to one suitable for serializing
-  const toObjMap = (m: { [index: string]: any }): { [index: string]: any } => {
-    const result: any = {};
-    Object.keys(m).forEach((k: string) => {
-      result[k] = m[k].toObject();
-    });
-    return result;
-  };
-
-  await Object.keys(files).forEach(async (file: any) => {
-    await fs.writeJson(file, toObjMap(files[file]));
-  });
+  for (const [destFile, regions] of Object.entries(files)) {
+    await fs.writeJson(
+      destFile,
+      _.mapValues(regions, r => r.toObject()),
+    );
+  }
 }
 
 if (require.main === module) {

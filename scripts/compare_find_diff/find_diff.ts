@@ -14,7 +14,7 @@ entered into county_adjacency_msa.json
 
 import path from 'path';
 import fs from 'fs-extra';
-import ADJACENCY_FILE from '../../src/common/data/county_adjacency_msa.json';
+import ADJACENCY_FILE from '../prepare_regions_data/county_adjacency_msa.json';
 import CENSUS_FIPS from '../what-the-fips/2018-census-fips-codes.json';
 
 function getCensusFipsArr(): string[] {

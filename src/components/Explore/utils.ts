@@ -9,7 +9,6 @@ import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId } from 'common/models/Projection';
-import { customAreasByFips } from 'common/regions/preprocessed_regions_data';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
 import AggregationsJSON from 'assets/data/aggregations.json';
@@ -280,11 +279,6 @@ function sanitizeLocationName(name: string) {
 }
 
 function getLocationFileName(region: Region) {
-  const fipsCode = region.fipsCode;
-  if (fipsCode in customAreasByFips) {
-    // TODO(michael): Fix any.
-    return sanitizeLocationName(customAreasByFips[fipsCode].state);
-  }
   return sanitizeLocationName(region.fullName);
 }
 
