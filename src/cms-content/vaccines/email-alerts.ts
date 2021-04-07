@@ -24,6 +24,7 @@ export interface VaccinationEmailAlertData {
   vaccinationSignupUrl?: string;
   currentPhases: EmailPhaseInfo[];
   stateSignupUrl: string;
+  showMondayThursdayCopy: boolean;
 }
 
 function markdownToHtml(markdownContent: string): string {
@@ -94,8 +95,10 @@ export function getEmailAlertData(
 
   const emailSubjectLine = `Current vaccine eligibility in ${region.fullName}`;
 
-  const { stateSignupUrl } = vacinationInfo;
+  const { allAdultsEligible, stateSignupUrl } = vacinationInfo;
   const { eligibilityInfoUrl, vaccinationSignupUrl } = vaccinationLinks;
+
+  const showMondayThursdayCopy = !allAdultsEligible;
 
   // TODO: Add source name to the CMS
   return {
@@ -112,5 +115,6 @@ export function getEmailAlertData(
     vaccinationSignupUrl,
     currentPhases,
     stateSignupUrl,
+    showMondayThursdayCopy,
   };
 }

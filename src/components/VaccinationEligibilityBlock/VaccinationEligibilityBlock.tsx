@@ -101,12 +101,14 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
         />
       </Section>
       <Section>
-        <Source>
-          Updated Mondays and Thursdays from:{' '}
-          <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
-            {sourceName}
-          </ExternalLink>
-        </Source>
+        {!allAdultsEligible && (
+          <Source>
+            Updated Mondays and Thursdays from:{' '}
+            <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
+              {sourceName}
+            </ExternalLink>
+          </Source>
+        )}
       </Section>
     </Container>
   );
