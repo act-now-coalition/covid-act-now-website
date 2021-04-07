@@ -39,7 +39,7 @@ const LocationPageHeaderVariant: React.FC<{
   };
 
   return (
-    <Experiment id={ExperimentID.MEGA_MENU_API_LINK}>
+    <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
       <Variant id={VariantID.B}>
         <LocationPageHeader {...headerProps} />
       </Variant>
