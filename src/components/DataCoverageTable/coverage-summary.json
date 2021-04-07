@@ -156,7 +156,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2991,
+      "regionsAvailable": 2996,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -345,13 +345,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2416,
+      "regionsAvailable": 2392,
       "totalStates": 53,
-      "statesAvailable": 37
+      "statesAvailable": 36
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 313,
+      "regionsAvailable": 311,
       "totalStates": 0,
       "statesAvailable": 0
     }
