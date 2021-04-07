@@ -4,7 +4,10 @@ import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-export const Button = styled(MuiButton)`
+export const Button = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
   border: 1px solid #e0e0e0;
   margin-top: 2.5rem;
   padding: 1rem;
