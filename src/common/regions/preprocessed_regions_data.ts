@@ -15,25 +15,21 @@ import {
   MetroAreaObject,
 } from './types';
 
-export const statesByFips: { [fips: string]: State } = mapValues(
-  statesByFipsJson,
-  State.fromObject,
+export const statesByFips = mapValues(
+  statesByFipsJson as { [fips: string]: StateObject },
+  v => State.fromObject(v),
 );
-/*(v: StateObject): State => {
-    return State.fromObject(v);
-  },
-);
-*/
-export const countiesByFips: { [fips: string]: County } = mapValues(
-  countiesByFipsJson,
-  (v: CountyObject): County => {
+
+export const countiesByFips = mapValues(
+  countiesByFipsJson as { [fips: string]: CountyObject },
+  v => {
     return County.fromObject(v, statesByFips);
   },
 );
 
-export const metroAreasByFips: { [fips: string]: MetroArea } = mapValues(
-  metroAreasByFipsJson,
-  (v: MetroAreaObject): MetroArea => {
+export const metroAreasByFips = mapValues(
+  metroAreasByFipsJson as { [fips: string]: MetroAreaObject },
+  v => {
     return MetroArea.fromObject(v, statesByFips, countiesByFips);
   },
 );

@@ -12,9 +12,10 @@ import { CountyToZipMap } from 'common/data';
 
 const UNITED_STATES = 'United States';
 
-// getStateName, getStateCode, and getStateFips are helper functions that make migrating
-// some of the existing state based logic over.  Ideally we will be able
-// to remove these at some point, but they are helpful in the meantime.
+// getStateName, getStateCode, and getStateFips are helper functions that make
+// it easier to migrate some of the existing state based logic over.
+// Ideally we will be able to remove these at some point,
+// but they are helpful in the meantime.
 
 export function getStateName(region: Region): string | null {
   if (region.regionType === RegionType.COUNTY) {
