@@ -4,7 +4,7 @@ import { COLOR_MAP } from 'common/colors';
  * Used for mega menu and footer, which are the
  * same component (MenuContent.tsx) with differrent colors and alignment.
  */
-interface MenuTheme {
+export interface MenuTheme {
   primaryText: string;
   secondaryText: string;
   gray: string;
