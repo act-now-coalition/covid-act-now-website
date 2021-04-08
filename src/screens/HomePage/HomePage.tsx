@@ -67,15 +67,15 @@ export default function HomePage() {
   const showRisingHospitalizations =
     location.hash === '#explore-hospitalizations';
   const risingHospitalizationStates = [
+    'DE',
+    'IL',
     'MD',
     'MI',
     'MN',
     'NJ',
-    'WV',
-    'CT',
-    'IL',
-    'MA',
-  ]; // Updated on 29 March 2021
+    'PA',
+    'PR',
+  ]; // Updated on 7 April 2021 -- this is an illustrative list but not exhaustive
   const initialFipsListForExplore = showRisingHospitalizations
     ? risingHospitalizationStates.map(
         state => regions.findByStateCodeStrict(state).fipsCode,
