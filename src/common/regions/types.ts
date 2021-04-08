@@ -1,4 +1,7 @@
 import urlJoin from 'url-join';
+import mapValues from 'lodash/mapValues';
+
+import statesByFipsJson from 'common/data/states_by_fips.json';
 
 export type FipsCode = string;
 export type ZipCode = string;
@@ -21,6 +24,11 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [DC_METRO_FIPS]: 'Washington DC',
   [NY_METRO_FIPS]: 'New York City',
 };
+
+export const statesByFips = mapValues(
+  statesByFipsJson as { [fips: string]: StateObject },
+  v => State.fromJSON(v),
+);
 
 // JSON-serializable representation of a Region object
 export interface RegionObject {
@@ -61,7 +69,7 @@ export abstract class Region {
     return `${this.name} (fips=${this.fipsCode})`;
   }
 
-  abstract toObject(): RegionObject;
+  abstract toJSON(): RegionObject;
 }
 
 export interface StateObject extends RegionObject {
@@ -102,7 +110,7 @@ export class State extends Region {
     );
   }
 
-  public toObject(): StateObject {
+  public toJSON(): StateObject {
     return {
       n: this.name,
       u: this.urlSegment,
@@ -112,9 +120,8 @@ export class State extends Region {
     };
   }
 
-  public static fromObject(obj: StateObject): State {
-    const s = new State(obj.n, obj.u, obj.f, obj.p, obj.s);
-    return s;
+  public static fromJSON(obj: StateObject): State {
+    return new State(obj.n, obj.u, obj.f, obj.p, obj.s);
   }
 }
 
@@ -142,15 +149,18 @@ export interface CountyObject extends RegionObject {
 }
 
 export class County extends Region {
+  public readonly state: State;
+
   constructor(
     name: string,
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
-    public readonly state: State,
+    stateFips: FipsCode,
     public readonly adjacentCountiesFips: FipsCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
+    this.state = statesByFips[stateFips];
   }
 
   get fullName() {
@@ -177,7 +187,7 @@ export class County extends Region {
     return false;
   }
 
-  public toObject(): CountyObject {
+  public toJSON(): CountyObject {
     return {
       n: this.name,
       u: this.urlSegment,
@@ -188,12 +198,8 @@ export class County extends Region {
     };
   }
 
-  public static fromObject(
-    obj: CountyObject,
-    stateLookup: { [fips: string]: State },
-  ): County {
-    const state = stateLookup[obj.s];
-    return new County(obj.n, obj.u, obj.f, obj.p, state, obj.a);
+  public static fromJSON(obj: CountyObject): County {
+    return new County(obj.n, obj.u, obj.f, obj.p, obj.s, obj.a);
   }
 }
 
@@ -206,15 +212,18 @@ export interface MetroAreaObject extends RegionObject {
  * Metropolitan Statistical Areas
  */
 export class MetroArea extends Region {
+  public readonly states: State[];
+
   constructor(
     name: string,
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
-    public counties: County[],
-    public states: State[],
+    statesFips: FipsCode[],
+    public readonly countiesFips: FipsCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
+    this.states = statesFips.map(fips => statesByFips[fips]);
   }
 
   private get principalCityName() {
@@ -249,27 +258,24 @@ export class MetroArea extends Region {
   }
 
   contains(subregion: Region): boolean {
-    return subregion instanceof County && this.counties.includes(subregion);
+    return (
+      subregion instanceof County &&
+      this.countiesFips.includes(subregion.fipsCode)
+    );
   }
 
-  public toObject(): MetroAreaObject {
+  public toJSON(): MetroAreaObject {
     return {
       n: this.name,
       u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
-      c: this.counties.map(county => county.fipsCode),
+      c: this.countiesFips,
       s: this.states.map(state => state.fipsCode),
     };
   }
 
-  public static fromObject(
-    obj: MetroAreaObject,
-    stateLookup: { [fips: string]: State },
-    countyLookup: { [fips: string]: County },
-  ): MetroArea {
-    const counties = obj.c.map((code: FipsCode) => countyLookup[code]);
-    const states = obj.s.map((code: FipsCode) => stateLookup[code]);
-    return new MetroArea(obj.n, obj.u, obj.f, obj.p, counties, states);
+  public static fromJSON(obj: MetroAreaObject): MetroArea {
+    return new MetroArea(obj.n, obj.u, obj.f, obj.p, obj.c, obj.s);
   }
 }

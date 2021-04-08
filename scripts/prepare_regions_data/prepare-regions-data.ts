@@ -34,7 +34,7 @@ async function main() {
   for (const [destFile, regions] of Object.entries(files)) {
     await fs.writeJson(
       destFile,
-      _.mapValues(regions, r => r.toObject()),
+      _.mapValues(regions, r => r.toJSON()),
     );
   }
 }
