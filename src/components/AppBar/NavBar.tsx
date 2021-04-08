@@ -85,7 +85,7 @@ const NavBar: React.FC = () => {
         </Link>
         <Style.Spacer />
         <>
-          <DonateButtonHeart closeMenu={closeMenu} />
+          <DonateButtonHeart onClick={closeMenu} />
           <Style.IconButton
             onMouseEnter={onHoverHamburger}
             onClick={onClickHamburger}
