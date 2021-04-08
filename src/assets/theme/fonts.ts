@@ -1,6 +1,15 @@
-import { css } from 'styled-components';
+import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-const fonts = {
+export interface ThemeFonts {
+  regularBook: FlattenSimpleInterpolation;
+  regularBookMidWeight: FlattenSimpleInterpolation;
+  regularBookBold: FlattenSimpleInterpolation;
+  monospace: FlattenSimpleInterpolation;
+  monospaceMidWeight: FlattenSimpleInterpolation;
+  monospaceBold: FlattenSimpleInterpolation;
+}
+
+const fonts: ThemeFonts = {
   regularBook: css`
     font-family: Roboto;
     font-weight: 400;

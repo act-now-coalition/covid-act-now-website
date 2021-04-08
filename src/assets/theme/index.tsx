@@ -1,14 +1,15 @@
 import { createMuiTheme } from '@material-ui/core';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
 import palette from './palette';
 import typography from './typography';
 import overrides from './overrides';
 import { COLOR_MAP } from 'common/colors';
 import { megaMenuFooter } from './customThemeBlocks';
 import buttons, { ButtonMap } from './buttons';
+import fonts, { ThemeFonts } from './fonts';
 
 export { megaMenuFooter };
 
+// todo (chelsi) - remove these colors from theme
 interface ThemeColors {
   green: string;
   greenDark: string;
@@ -19,33 +20,6 @@ const colors: ThemeColors = {
   green: COLOR_MAP.GREEN.BASE,
   greenDark: COLOR_MAP.GREEN.DARK,
   lightBlue: COLOR_MAP.BLUE,
-};
-
-interface ThemeFonts {
-  subtitle1: FlattenSimpleInterpolation;
-  disclaimer: FlattenSimpleInterpolation;
-  link: FlattenSimpleInterpolation;
-}
-
-/**
- * High-level typography groups
- */
-const fonts: ThemeFonts = {
-  subtitle1: css`
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    font-size: 0.875rem;
-    line-height: 1.125;
-    margin-bottom: 0.75rem;
-  `,
-  disclaimer: css`
-    font-size: 0.875rem;
-    line-height: 1.6;
-  `,
-  link: css`
-    color: ${colors.lightBlue};
-  `,
 };
 
 declare module '@material-ui/core/styles/createMuiTheme' {
