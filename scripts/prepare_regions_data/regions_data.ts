@@ -83,8 +83,8 @@ function buildMetroAreas(
       metro.urlSegment,
       metro.cbsaCode,
       metro.population,
-      counties.map(county => county.fipsCode),
       states.map(state => state.fipsCode),
+      counties.map(county => county.fipsCode),
     );
   });
 }
