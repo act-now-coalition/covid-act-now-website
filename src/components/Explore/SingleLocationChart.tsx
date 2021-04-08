@@ -1,5 +1,6 @@
 import React, { useCallback, Fragment } from 'react';
 import isNumber from 'lodash/isNumber';
+import min from 'lodash/min';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -9,7 +10,7 @@ import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, findPointByDate } from './utils';
+import { getMaxBy, findPointByDate, getChartStartDate } from './utils';
 import * as Styles from './Explore.style';
 import { ScreenshotReady } from 'components/Screenshot';
 import DateMarker from './DateMarker';
@@ -114,7 +115,7 @@ const SingleLocationChart: React.FC<{
   barOpacity,
   barOpacityHover,
 }) => {
-  const dateFrom = new Date('2020-03-01');
+  const dateFrom = getChartStartDate(seriesList);
   const today = new Date();
   const dateTo = today;
   const numDays = daysBetween(dateFrom, dateTo);

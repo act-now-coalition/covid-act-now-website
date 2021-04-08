@@ -29,6 +29,7 @@ import {
   getTimeDiff,
 } from 'common/utils/time-utils';
 import { formatDecimal } from 'common/utils/index';
+import min from 'lodash/min';
 
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
@@ -503,4 +504,17 @@ export function getSeriesLabel(series: Series, isMobile: boolean) {
 export function brightenColor(colorCode: string, amount = 1): string {
   const colorObject = color(colorCode);
   return colorObject ? colorObject.brighter(amount).hex() : colorCode;
+}
+
+export function getChartStartDate(seriesList: Series[]): Date {
+  const defaultStartDate = new Date('2020-03-01');
+  const minX = min(seriesList.map(series => series.data?.[0]?.x));
+  if (minX) {
+    // Allow 30 days of buffer to indicate that we are missing data.
+    const minXWithBuffer = minX - 30 * 24 * 60 * 60 * 1000;
+    if (minX > defaultStartDate.getTime()) {
+      return new Date(minXWithBuffer);
+    }
+  }
+  return defaultStartDate;
 }
