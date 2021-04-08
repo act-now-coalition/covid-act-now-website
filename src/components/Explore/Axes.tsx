@@ -37,7 +37,7 @@ const Axes: React.FC<{
         top={height}
         scale={dateScale}
         tickValues={finalTickValues}
-        tickFormat={(date: Date) => getXTickFormat(date)}
+        tickFormat={(date: Date) => (date < dateTo ? getXTickFormat(date) : '')}
       />
     </AxisStyle>
   );
