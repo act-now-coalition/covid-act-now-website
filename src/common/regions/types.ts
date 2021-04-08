@@ -22,6 +22,14 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [NY_METRO_FIPS]: 'New York City',
 };
 
+// JSON-serializable representation of a Region object
+export interface RegionObject {
+  n: string;
+  u: string;
+  f: FipsCode;
+  p: number;
+}
+
 export abstract class Region {
   constructor(
     public readonly name: string,
@@ -52,6 +60,12 @@ export abstract class Region {
   toString() {
     return `${this.name} (fips=${this.fipsCode})`;
   }
+
+  abstract toObject(): RegionObject;
+}
+
+export interface StateObject extends RegionObject {
+  s: string;
 }
 
 export class State extends Region {
@@ -87,6 +101,21 @@ export class State extends Region {
       (subregion instanceof County && subregion.state === this)
     );
   }
+
+  public toObject(): StateObject {
+    return {
+      n: this.name,
+      u: this.urlSegment,
+      f: this.fipsCode,
+      p: this.population,
+      s: this.stateCode,
+    };
+  }
+
+  public static fromObject(obj: StateObject): State {
+    const s = new State(obj.n, obj.u, obj.f, obj.p, obj.s);
+    return s;
+  }
 }
 
 /**
@@ -105,6 +134,11 @@ export function getAbbreviatedCounty(fullCountyName: string) {
   if (fullCountyName.includes('Municipio'))
     return fullCountyName.replace('Municipio', 'Mun.');
   else return fullCountyName.replace('County', 'Co.');
+}
+
+export interface CountyObject extends RegionObject {
+  s: FipsCode;
+  a: FipsCode[];
 }
 
 export class County extends Region {
@@ -142,6 +176,30 @@ export class County extends Region {
   contains(subregion: Region): boolean {
     return false;
   }
+
+  public toObject(): CountyObject {
+    return {
+      n: this.name,
+      u: this.urlSegment,
+      f: this.fipsCode,
+      p: this.population,
+      s: this.state.fipsCode,
+      a: this.adjacentCountiesFips,
+    };
+  }
+
+  public static fromObject(
+    obj: CountyObject,
+    stateLookup: { [fips: string]: State },
+  ): County {
+    const state = stateLookup[obj.s];
+    return new County(obj.n, obj.u, obj.f, obj.p, state, obj.a);
+  }
+}
+
+export interface MetroAreaObject extends RegionObject {
+  c: FipsCode[];
+  s: FipsCode[];
 }
 
 /**
@@ -192,5 +250,26 @@ export class MetroArea extends Region {
 
   contains(subregion: Region): boolean {
     return subregion instanceof County && this.counties.includes(subregion);
+  }
+
+  public toObject(): MetroAreaObject {
+    return {
+      n: this.name,
+      u: this.urlSegment,
+      f: this.fipsCode,
+      p: this.population,
+      c: this.counties.map(county => county.fipsCode),
+      s: this.states.map(state => state.fipsCode),
+    };
+  }
+
+  public static fromObject(
+    obj: MetroAreaObject,
+    stateLookup: { [fips: string]: State },
+    countyLookup: { [fips: string]: County },
+  ): MetroArea {
+    const counties = obj.c.map((code: FipsCode) => countyLookup[code]);
+    const states = obj.s.map((code: FipsCode) => stateLookup[code]);
+    return new MetroArea(obj.n, obj.u, obj.f, obj.p, counties, states);
   }
 }
