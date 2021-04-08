@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
+import Hidden from '@material-ui/core/Hidden';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import { Region, MetroArea } from 'common/regions';
 import {
@@ -9,8 +10,7 @@ import {
   DesktopSearchDirections,
   ListContainer,
   StyledPaper,
-  MobileSearchDirections,
-  BackArrowIcon,
+  CloseIcon,
 } from './HomepageSearchAutocomplete.style';
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
@@ -100,13 +100,8 @@ const HomepageSearchAutocomplete: React.FC<{
     <>
       {lockBackgroundScroll && <LockBodyScroll />}
       <Wrapper $isOpen={isOpen}>
-        <MobileSearchDirections $isOpen={isOpen}>
-          <BackArrowIcon onClick={() => setIsOpen(false)} />
-          <span>
-            Search by <br /> zip, city, county, or state
-          </span>
-        </MobileSearchDirections>
         <Autocomplete
+          open={isOpen}
           disableListWrap
           disableClearable
           disablePortal
@@ -144,16 +139,24 @@ const HomepageSearchAutocomplete: React.FC<{
           ListboxComponent={ListContainer}
           popupIcon={<span />} // adding an empty span removes default MUI arrow icon
           renderInput={params => (
-            <StyledTextField
-              placeholder={getPlaceholderText()}
-              {...params}
-              className={searchTextFieldStyles.root}
-              $isOpen={isOpen}
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: <SearchBarIcon />,
-              }}
-            />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <StyledTextField
+                placeholder={getPlaceholderText()}
+                {...params}
+                className={searchTextFieldStyles.root}
+                $isOpen={isOpen}
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: <SearchBarIcon />,
+                }}
+              />
+              <Hidden smUp>
+                <CloseIcon
+                  onClick={() => setIsOpen(false)}
+                  $showIcon={isOpen}
+                />
+              </Hidden>
+            </div>
           )}
           renderOption={option => {
             return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;

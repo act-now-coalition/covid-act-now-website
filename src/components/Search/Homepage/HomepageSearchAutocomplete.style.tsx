@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import { Paper, TextField } from '@material-ui/core';
-import COLORS, { COLOR_MAP } from 'common/colors';
+import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import SearchIcon from '@material-ui/icons/Search';
-import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+import MuiCloseIcon from '@material-ui/icons/Close';
 
 const maxMenuHeight = 240;
 const desktopWidth = 732;
@@ -12,15 +12,12 @@ const mobileWidth = 350;
 export const StyledTextField = styled(TextField).attrs(props => ({
   variant: 'outlined',
 }))<{ $isOpen: boolean }>`
-  background-color: ${({ $isOpen }) => !$isOpen && COLORS.LIGHTGRAY};
   transition: box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out;
-  margin-top: ${({ $isOpen }) => $isOpen && '-5rem'};
-  padding-top: ${({ $isOpen }) => $isOpen && '5rem'};
+  margin-right: ${({ $isOpen }) => $isOpen && '1rem'};
 
   &:hover {
     background-color: transparent;
-    box-shadow: ${({ $isOpen }) =>
-      !$isOpen && '0px 2px 24px rgba(0, 0, 0, 0.12)'};
+    box-shadow: ${({ $isOpen }) => !$isOpen && '0 0 6px rgba(0, 0, 0, 0.12)'};
   }
 
   &:focus {
@@ -29,15 +26,16 @@ export const StyledTextField = styled(TextField).attrs(props => ({
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-top: 0;
-    padding-top: 0;
+    margin-right: 0;
   }
 `;
 
-export const BackArrowIcon = styled(ArrowBackOutlinedIcon)`
-  position: absolute;
+export const CloseIcon = styled(MuiCloseIcon)<{ $showIcon: boolean }>`
   color: black;
   font-size: 1.5rem;
   z-index: 10005;
+  cursor: pointer;
+  display: ${({ $showIcon }) => !$showIcon && 'none'};
 `;
 
 const MobileWrapperOpened = css`
@@ -74,26 +72,8 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
 `;
 
 export const SearchBarIcon = styled(SearchIcon)`
-  margin-right: 0.75rem;
+  margin-right: -0.75rem; // we dont like it, but for now its fine
   margin-left: 0.5rem;
-`;
-
-export const MobileSearchDirections = styled.div<{ $isOpen: boolean }>`
-  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  margin-bottom: 1.25rem;
-  font-size: 1rem;
-  line-height: 1.4;
-
-  span {
-    position: relative;
-    width: 100%;
-    text-align: center;
-  }
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    display: none;
-  }
 `;
 
 export const DesktopSearchDirections = styled.span`
