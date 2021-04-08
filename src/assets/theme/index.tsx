@@ -6,6 +6,7 @@ import overrides from './overrides';
 import { COLOR_MAP } from 'common/colors';
 import { megaMenuFooter } from './customThemeBlocks';
 import buttons, { ButtonMap } from './buttons';
+import fontBlocks, { FontBlocks } from './fontBlocks';
 
 export { megaMenuFooter };
 
@@ -25,6 +26,7 @@ interface ThemeFonts {
   subtitle1: FlattenSimpleInterpolation;
   disclaimer: FlattenSimpleInterpolation;
   link: FlattenSimpleInterpolation;
+  fontBlocks: FontBlocks;
 }
 
 /**
@@ -46,6 +48,7 @@ const fonts: ThemeFonts = {
   link: css`
     color: ${colors.lightBlue};
   `,
+  fontBlocks,
 };
 
 declare module '@material-ui/core/styles/createMuiTheme' {

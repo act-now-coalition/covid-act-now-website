@@ -9,7 +9,6 @@ import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-import { fonts } from 'common/theme';
 
 const desktopNavHeight = 64;
 
@@ -64,7 +63,7 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
 }))`
-  ${fonts.regularBookMidWeight};
+  ${props => props.theme.fonts.fontBlocks.regularBookMidWeight};
   color: black;
   font-size: 1rem;
   line-height: 1.4rem;

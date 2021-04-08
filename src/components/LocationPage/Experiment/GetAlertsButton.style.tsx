@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import fonts from 'common/theme/fonts';
 import MuiButton from '@material-ui/core/Button';
 import { COLOR_MAP } from 'common/colors';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -37,10 +36,10 @@ export const Column = styled.div`
 `;
 
 export const Subtext = styled.span`
+  ${props => props.theme.fonts.fontBlocks.regularBook};
   color: ${COLOR_MAP.GREY_4};
   text-transform: none;
   line-height: 1.4;
-  ${fonts.regularBook};
   text-align: left;
   font-size: 1rem;
   margin-top: 0.25rem;
