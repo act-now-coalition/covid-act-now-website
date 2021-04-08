@@ -6,6 +6,7 @@ import {
 } from './DonateButton.style';
 import { EventAction, EventCategory } from 'components/Analytics';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { LinkProps } from 'components/LinkButton';
 
 const trackingProps = {
   trackingCategory: EventCategory.DONATE,
@@ -21,11 +22,12 @@ export const DonateButton = () => (
   </DonateButtonWrapper>
 );
 
-export const DonateButtonHeart = () => (
+export const DonateButtonHeart: React.FC<LinkProps> = ({ onClick }) => (
   <StyledDonateButtonHeart
     to="/donate"
     {...trackingProps}
     endIcon={<FavoriteIcon />}
+    onClick={onClick}
   >
     Donate
   </StyledDonateButtonHeart>
