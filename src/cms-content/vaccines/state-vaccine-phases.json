@@ -51,34 +51,15 @@
     },
     {
       "locationName": "Arizona",
+      "notes": "",
       "fips": "04",
-      "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "stateSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
       "phaseGroups": [
-        {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Health care workers\n* Emergency medical workers\n* Long-term care facility staff and residents",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.981Z"
-        },
-        {
-          "phase": "Priority 1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Education and child care workers\n* Adults 65 and older\n* Protective services occupations (law enforcement, corrections, etc.)",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-08T16:56:01.245Z"
-        },
         {
           "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "Eligibility varies by county. Counties are now vaccinating:\n\n* Age group 55+ (Santa Cruz)\n* Age group 16+ or 18+ (All other counties)",
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-03-25T14:13:53.139Z"
@@ -91,8 +72,10 @@
           "startDate": ""
         }
       ],
-      "notes": "",
-      "stateSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine"
+      "allAdultsEligible": true,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
+      "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
+      "emailAlertVersion": "6"
     },
     {
       "locationName": "Arkansas",
@@ -147,24 +130,24 @@
           "phase": "1b",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* Adults aged 16 to 64 with certain high-risk health conditions and disabilities\n* Adults living or working in congregate settings (incarceration/detention facilities, homeless shelters, behavioral health facilities, etc.)\n* Public transit workers\n\nCertain counties and localities may be vaccinating additional groups.",
+          "description": "* Adults aged 16 to 64 with certain high-risk health conditions and disabilities\n* Adults living or working in congregate settings (incarceration/detention facilities, homeless shelters, behavioral health facilities, etc.)\n* Public transit workers",
           "expandedDefinitionUrl": "",
           "startDate": "March 15, 2021",
-          "updatedAt": "2021-03-25T14:16:07.123Z"
+          "updatedAt": "2021-04-08T03:48:58.714Z"
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-01T17:01:48.996Z",
+          "updatedAt": "2021-04-08T03:49:37.008Z",
           "phase": "1b",
-          "description": "* Individuals 50-64",
+          "description": "* Individuals 50-64\n* Certain counties are vaccinating individuals 16+",
           "tier": "3",
           "startDate": "April 1, 2021"
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-22T16:22:56.551Z",
+          "updatedAt": "2021-04-08T03:49:38.553Z",
           "phase": "2",
-          "description": "* General public",
+          "description": "* All individuals 16+",
           "startDate": "April 15, 2021"
         },
         {
@@ -311,8 +294,8 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "May 1, 2021",
-          "updatedAt": "2021-03-18T17:37:50.051Z"
+          "startDate": "April 19, 2021",
+          "updatedAt": "2021-04-08T03:51:07.977Z"
         }
       ],
       "stateSignupUrl": "https://v51r5a21s.dc.gov/"
@@ -413,7 +396,7 @@
           "currentlyEligible": false,
           "description": "* General public",
           "expandedDefinitionUrl": "",
-          "startDate": "May 2021",
+          "startDate": "April 19, 2021",
           "updatedAt": "2021-04-01T17:08:37.692Z"
         }
       ],
@@ -487,20 +470,20 @@
         },
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-29T16:06:00.682Z",
+          "updatedAt": "2021-04-08T03:55:31.219Z",
           "phase": "1C",
           "tier": "2",
-          "description": "* Additional essential workers, including restaurant staff, construction workers, and religious leaders",
+          "description": "* Additional essential workers, including restaurant staff, construction workers, and religious leaders\n* Certain counties are vaccinating individuals 16+",
           "startDate": "March 29, 2021"
         },
         {
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* General public (except Chicago until May 1)",
+          "description": "* Individuals 16+ (statewide except Chicago until April 19)",
           "expandedDefinitionUrl": "",
           "startDate": "April 12, 2021",
-          "updatedAt": "2021-03-22T16:49:56.534Z"
+          "updatedAt": "2021-04-08T03:55:48.140Z"
         }
       ],
       "stateSignupUrl": "https://coronavirus.illinois.gov/s/vaccination-location"
