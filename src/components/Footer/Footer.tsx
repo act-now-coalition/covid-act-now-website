@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
     <ThemeProvider
       theme={{
         ...theme,
-        palette: { ...theme.palette, megaMenu: megaMenuFooter },
+        megaMenu: megaMenuFooter,
       }}
     >
       <StyledFooter role="contentinfo">
