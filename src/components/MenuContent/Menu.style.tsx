@@ -62,7 +62,7 @@ export const Section = styled.div`
 `;
 
 export const SectionHeader = styled.h2<{ $desktopOnly?: boolean }>`
-  ${props => props.theme.fonts.fontBlocks.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   color: ${props => props.theme.palette.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
@@ -92,7 +92,7 @@ export const Row = styled.div`
 `;
 
 export const BodyCopy = css`
-  ${props => props.theme.fonts.fontBlocks.regularBook};
+  ${props => props.theme.fonts.regularBook};
   line-height: 1.4;
   margin: 0;
 `;
@@ -115,7 +115,7 @@ export const AboutCopy = styled.p`
 `;
 
 export const ButtonBase = css`
-  ${props => props.theme.fonts.fontBlocks.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   width: fit-content;
   text-transform: none;
   line-height: 1.4;
@@ -123,7 +123,7 @@ export const ButtonBase = css`
 
 export const TextLink = styled(Link)`
   ${ButtonBase};
-  ${props => props.theme.fonts.fontBlocks.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   color: ${props => props.theme.palette.megaMenu.primaryText};
 
   font-size: 1rem;
@@ -226,5 +226,5 @@ export const LogoWrapper = styled(Link)`
 
 export const NonWrappingSpan = styled.span`
   white-space: nowrap;
-  ${props => props.theme.fonts.fontBlocks.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
 `;

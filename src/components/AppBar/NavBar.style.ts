@@ -63,7 +63,7 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   disableRipple: true,
   disableFocusRipple: true,
 }))`
-  ${props => props.theme.fonts.fontBlocks.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   color: black;
   font-size: 1rem;
   line-height: 1.4rem;

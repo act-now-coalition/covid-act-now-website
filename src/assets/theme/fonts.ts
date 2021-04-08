@@ -1,6 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-export interface FontBlocks {
+export interface ThemeFonts {
   regularBook: FlattenSimpleInterpolation;
   regularBookMidWeight: FlattenSimpleInterpolation;
   regularBookBold: FlattenSimpleInterpolation;
@@ -9,7 +9,7 @@ export interface FontBlocks {
   monospaceBold: FlattenSimpleInterpolation;
 }
 
-const fontBlocks: FontBlocks = {
+export const fonts: ThemeFonts = {
   regularBook: css`
     font-family: Roboto;
     font-weight: 400;
@@ -35,5 +35,3 @@ const fontBlocks: FontBlocks = {
     font-weight: 700;
   `,
 };
-
-export default fontBlocks;

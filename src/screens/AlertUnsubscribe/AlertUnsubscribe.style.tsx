@@ -19,14 +19,14 @@ export const Wrapper = styled(Box)`
 `;
 
 export const UnsubscribeHeader = styled(Typography)`
-  ${props => props.theme.fonts.fontBlocks.regularBookBold};
+  ${props => props.theme.fonts.regularBookBold};
   font-size: 2rem;
   margin-bottom: 2.5rem;
   line-height: 1.2;
 `;
 
 const Button = css`
-  ${props => props.theme.fonts.fontBlocks.regularBookBold};
+  ${props => props.theme.fonts.regularBookBold};
   font-size: 0.875rem;
   line-height: 1.1rem;
   text-transform: uppercase;
@@ -66,7 +66,7 @@ export const UnsubscribeButton = styled.button`
 `;
 
 export const BodyCopy = styled(Typography)`
-  ${props => props.theme.fonts.fontBlocks.regularBook};
+  ${props => props.theme.fonts.regularBook};
   font-size: 1.1rem;
   margin-bottom: 1.75rem;
   line-height: 1.4;

@@ -39,7 +39,7 @@ export const Header = styled(Typography)`
 `;
 
 export const Subheader = styled(Typography)`
-  ${props => props.theme.fonts.fontBlocks.monospace};
+  ${props => props.theme.fonts.monospace};
   font-size: 0.875rem;
   color: ${COLOR_MAP.GRAY.DARK};
   text-transform: uppercase;

@@ -36,7 +36,7 @@ export const Column = styled.div`
 `;
 
 export const Subtext = styled.span`
-  ${props => props.theme.fonts.fontBlocks.regularBook};
+  ${props => props.theme.fonts.regularBook};
   color: ${COLOR_MAP.GREY_4};
   text-transform: none;
   line-height: 1.4;

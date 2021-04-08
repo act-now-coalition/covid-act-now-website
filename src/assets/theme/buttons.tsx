@@ -1,5 +1,5 @@
 import { COLOR_MAP } from 'common/colors';
-import fontBlocks from './fontBlocks';
+import { fonts } from 'assets/theme/fonts';
 import { FlattenSimpleInterpolation } from 'styled-components';
 
 export enum ButtonType {
@@ -40,7 +40,7 @@ const buttons: ButtonMap = {
     borderHover: newBlueDark,
     textHover: 'white',
     icon: 'white',
-    fontFamily: fontBlocks.regularBookBold,
+    fontFamily: fonts.regularBookBold,
     disabledBackground: COLOR_MAP.GREY_1,
     disabledText: COLOR_MAP.GRAY_BODY_COPY,
     disabledIcon: COLOR_MAP.GREY_3,
@@ -53,7 +53,7 @@ const buttons: ButtonMap = {
     borderHover: newBlueLight,
     textHover: newBlueDark,
     icon: COLOR_MAP.GRAY_BODY_COPY,
-    fontFamily: fontBlocks.regularBookMidWeight,
+    fontFamily: fonts.regularBookMidWeight,
     disabledBackground: 'white',
     disabledText: COLOR_MAP.GRAY_BODY_COPY,
     disabledIcon: COLOR_MAP.GREY_3,
@@ -66,7 +66,7 @@ const buttons: ButtonMap = {
     borderHover: 'transparent',
     textHover: newBlueDark,
     icon: COLOR_MAP.GRAY_BODY_COPY,
-    fontFamily: fontBlocks.regularBook,
+    fontFamily: fonts.regularBook,
     disabledBackground: COLOR_MAP.GREY_1, // TODO (chelsi) - ask UX about disable state
     disabledText: COLOR_MAP.GRAY_BODY_COPY, // ditto^
     disabledIcon: COLOR_MAP.GREY_3, // ditto^
