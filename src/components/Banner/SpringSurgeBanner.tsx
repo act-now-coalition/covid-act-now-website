@@ -18,21 +18,21 @@ const BannerInner: React.FC = () => {
   const { totalVaccinationsInitiated } = usaAggregation;
   const millionVaccinations = Math.round(totalVaccinationsInitiated / 1000000);
 
-  const ManyStatesLink = (
+  const HospitalizationsAreRisingTooLink = (
     <HashLink
       to="#explore-hospitalizations"
       onClick={trackClick}
       scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
     >
-      many states
+      hospitalizations are rising too
     </HashLink>
   );
 
   return (
     <InnerContainer>
       <Body>
-        Daily new cases are rising in half of states and hospitalizations are
-        rising in {ManyStatesLink}. Help prevent another COVID wave by
+        Daily new cases are rising in about half of the states and{' '}
+        {HospitalizationsAreRisingTooLink}. Help prevent another COVID wave by
         continuing to take precautions and getting vaccinated when you are
         eligible. Join the {millionVaccinations}M Americans who have already
         gotten at least one vaccine dose.
