@@ -15,7 +15,7 @@ import { generateAlertEmailData } from './utils';
 const locationAlert: Alert = {
   fips: '11',
   locationName: 'District of Columbia',
-  locationURL: 'https://covidactnow.org/us/dc/',
+  locationURL: 'https://covidactnow.org/us/district_of_columbia-dc/',
   lastUpdated: '06/26/2020',
   oldLevel: 2,
   newLevel: 3,
