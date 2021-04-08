@@ -276,12 +276,12 @@ export class MetroArea extends Region {
       u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
-      c: this.countiesFips,
       s: this.states.map(state => state.fipsCode),
+      c: this.countiesFips,
     };
   }
 
   public static fromJSON(obj: MetroAreaObject): MetroArea {
-    return new MetroArea(obj.n, obj.u, obj.f, obj.p, obj.c, obj.s);
+    return new MetroArea(obj.n, obj.u, obj.f, obj.p, obj.s, obj.c);
   }
 }
