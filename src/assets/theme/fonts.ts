@@ -9,7 +9,7 @@ export interface ThemeFonts {
   monospaceBold: FlattenSimpleInterpolation;
 }
 
-export const fonts: ThemeFonts = {
+const fonts: ThemeFonts = {
   regularBook: css`
     font-family: Roboto;
     font-weight: 400;
@@ -35,3 +35,5 @@ export const fonts: ThemeFonts = {
     font-weight: 700;
   `,
 };
+
+export default fonts;

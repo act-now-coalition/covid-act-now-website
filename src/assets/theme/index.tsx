@@ -5,7 +5,7 @@ import overrides from './overrides';
 import { COLOR_MAP } from 'common/colors';
 import { megaMenuFooter } from './customThemeBlocks';
 import buttons, { ButtonMap } from './buttons';
-import { fonts, ThemeFonts } from './fonts';
+import fonts, { ThemeFonts } from './fonts';
 
 export { megaMenuFooter };
 
