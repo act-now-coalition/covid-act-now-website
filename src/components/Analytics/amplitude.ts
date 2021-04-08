@@ -16,7 +16,9 @@ export async function initializeAmplitude() {
 
   getAmplitude().then(amplitude => {
     if (amplitude) {
-      amplitude.getInstance().init(amplitudeKey);
+      amplitude.getInstance().init(amplitudeKey, /*userId=*/ undefined, {
+        includeUtm: true,
+      });
     }
   });
 }
