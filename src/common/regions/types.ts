@@ -22,13 +22,12 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [NY_METRO_FIPS]: 'New York City',
 };
 
-// PODT Region object to aid serialization/deserialization w/ JSON
+// JSON-serializable representation of a Region object
 export interface RegionObject {
   n: string;
   u: string;
   f: FipsCode;
   p: number;
-  t: RegionType;
 }
 
 export abstract class Region {
@@ -109,7 +108,6 @@ export class State extends Region {
       u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
-      t: this.regionType,
       s: this.stateCode,
     };
   }
@@ -185,7 +183,6 @@ export class County extends Region {
       u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
-      t: this.regionType,
       s: this.state.fipsCode,
       a: this.adjacentCountiesFips,
     };
@@ -261,7 +258,6 @@ export class MetroArea extends Region {
       u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
-      t: this.regionType,
       c: this.counties.map(county => county.fipsCode),
       s: this.states.map(state => state.fipsCode),
     };
