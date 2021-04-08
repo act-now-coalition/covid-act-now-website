@@ -25,11 +25,6 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [NY_METRO_FIPS]: 'New York City',
 };
 
-export const statesByFips = mapValues(
-  statesByFipsJson as { [fips: string]: StateObject },
-  v => State.fromJSON(v),
-);
-
 // JSON-serializable representation of a Region object
 export interface RegionObject {
   n: string;
@@ -124,6 +119,17 @@ export class State extends Region {
     return new State(obj.n, obj.u, obj.f, obj.p, obj.s);
   }
 }
+
+/**
+ * Construct this mapping here, so we can reference it to simplify reconstitution
+ * of County and MetroArea objects.  The overall size for ~50 states is quite small,
+ * so it's not worth trying to pull out of the main bundle, and having the lookup
+ * available is quite handy.
+ */
+export const statesByFips = mapValues(
+  statesByFipsJson as { [fips: string]: StateObject },
+  v => State.fromJSON(v),
+);
 
 /**
  * Shortens the county name by using the abbreviated version of 'county'
