@@ -2,10 +2,9 @@ import { createMuiTheme } from '@material-ui/core';
 import palette from './palette';
 import typography from './typography';
 import overrides from './overrides';
-import { megaMenuFooter } from './customThemeBlocks';
 import buttons, { ButtonMap } from './buttons';
 import { fonts, ThemeFonts } from './fonts';
-import { megaMenu, MenuTheme } from './customThemeBlocks';
+import { megaMenu, MenuTheme, megaMenuFooter } from './megaMenu';
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
