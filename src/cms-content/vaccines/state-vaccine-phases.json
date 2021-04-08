@@ -641,69 +641,34 @@
       "fips": "24",
       "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care facilities\n* First responders",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* People living in congregate settings\n* Adults age 75+\n* Education and continuity of government",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 65+\n* Essential workers (lab services, agriculture, manufacturing, postal service, etc)",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "2A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Adults 60+",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 23, 2021",
-          "updatedAt": "2021-03-25T17:22:25.584Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-30T14:31:59.454Z",
-          "phase": "2B",
-          "description": "* Individuals 16+ with high-risk medical conditions or disabilities",
-          "startDate": "March 30, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T21:33:49.363Z",
-          "phase": "2C",
-          "startDate": "April 13, 2021",
-          "description": "* Adults 55+\n* Essential workers (critical utilities, transportation, construction, food services, IT, financial services, etc)"
+          "updatedAt": "2021-04-08T15:36:16.762Z",
+          "phase": "1-2",
+          "description": "* Health care workers\n* Long-term care facilities\n* First responders\n* People living in congregate settings\n* Adults 60+\n* Education and continuity of government\n* Essential workers (lab services, agriculture, manufacturing, postal service, etc)\n* Individuals 16+ with high-risk medical conditions or disabilities"
         },
         {
           "phase": "3",
-          "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "tier": "1",
+          "currentlyEligible": true,
+          "description": "* All individuals 16+ at mass vaccination sites only",
           "expandedDefinitionUrl": "",
-          "startDate": "April 27, 2021",
-          "updatedAt": "2021-03-22T21:37:01.986Z"
+          "startDate": "",
+          "updatedAt": "2021-04-08T15:32:26.511Z"
+        },
+        {
+          "currentlyEligible": false,
+          "updatedAt": "2021-04-08T15:36:19.287Z",
+          "phase": "3",
+          "tier": "2",
+          "description": "* Individuals 16+ at all vaccination sites",
+          "startDate": "April 12, 2021"
         }
       ],
-      "stateSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c"
+      "stateSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
+      "allAdultsEligible": false
     },
     {
       "emailAlertVersion": "4",
