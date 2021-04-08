@@ -34,6 +34,7 @@ export enum ExperimentID {
   HAMBURGER_MENU_VARIATIONS = 'Osj4ZMGVTia8fMsmubSdnQ',
   GEOLOCATED_LINKS = 'Xel9axsHQgGPr5h0tcXRxA',
   MEGA_MENU_API_LINK = 'GQE21QIoSCisq65T5uThGg',
+  GET_ALERTS_BUTTON = '6XQaWVIBSS6rnRLILEf_0Q',
 }
 
 export type ExperimentProps = Omit<OptimizeExperimentProps, 'id'> & {
