@@ -9,6 +9,7 @@ import { fonts, ThemeFonts } from './fonts';
 
 export { megaMenuFooter };
 
+// todo (chelsi) - remove these colors from theme
 interface ThemeColors {
   green: string;
   greenDark: string;
