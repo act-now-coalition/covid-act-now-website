@@ -9,7 +9,13 @@
 import path from 'path';
 import _ from 'lodash';
 
-import * as script_regions_data from './regions_data';
+import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
+import {
+  generateStateUrlSegment,
+  generateCountyUrlSegment,
+  generateMetroAreaUrlSegment,
+} from '../../src/common/regions';
+
 const fs = require('fs-extra');
 
 const destinationDir = path.join(__dirname, '../../src/common/data/');
@@ -21,14 +27,14 @@ const METRO_AREAS_JSON_FILE = path.join(
   'metro_areas_by_fips.json',
 );
 
-async function main() {
+async function writeRegionsData() {
   console.log('Preparing regions data');
 
   // map of output filenames to source data
   const files = {
-    [STATES_JSON_FILE]: script_regions_data.statesByFips,
-    [COUNTIES_JSON_FILE]: script_regions_data.countiesByFips,
-    [METRO_AREAS_JSON_FILE]: script_regions_data.metroAreasByFips,
+    [STATES_JSON_FILE]: statesByFips,
+    [COUNTIES_JSON_FILE]: countiesByFips,
+    [METRO_AREAS_JSON_FILE]: metroAreasByFips,
   };
 
   for (const [destFile, regions] of Object.entries(files)) {
@@ -37,6 +43,48 @@ async function main() {
       _.mapValues(regions, r => r.toJSON()),
     );
   }
+}
+
+/**
+ * We optimize storing the URL segments, which can be computed from names.
+ * This ensures that our computation functions match the input data --
+ * if they don't, we need to fix them before regenerating region data.
+ */
+function validateUrlSegments() {
+  let foundInvalid = false;
+  for (const state of Object.values(statesByFips)) {
+    const urlSegment = generateStateUrlSegment(state.name, state.stateCode);
+    if (state.urlSegment !== urlSegment) {
+      foundInvalid = true;
+      console.log('state invalid:', state, urlSegment);
+    }
+  }
+  for (const county of Object.values(countiesByFips)) {
+    const urlSegment = generateCountyUrlSegment(county.name);
+    if (county.urlSegment !== urlSegment) {
+      foundInvalid = true;
+      console.log('county invalid:', county, urlSegment);
+    }
+  }
+  for (const metroArea of Object.values(metroAreasByFips)) {
+    const urlSegment = generateMetroAreaUrlSegment(
+      metroArea.name,
+      metroArea.states.map(state => state.fipsCode),
+    );
+    if (metroArea.urlSegment !== urlSegment) {
+      foundInvalid = true;
+      console.log('metro area invalid:', metroArea, urlSegment);
+    }
+  }
+  if (foundInvalid) {
+    throw new Error('Invalid URL segment(s), please fix');
+  }
+  console.log('validated urlSegments');
+}
+
+async function main() {
+  validateUrlSegments();
+  await writeRegionsData();
 }
 
 if (require.main === module) {

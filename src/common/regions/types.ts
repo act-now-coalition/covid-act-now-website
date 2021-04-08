@@ -27,12 +27,94 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [NY_METRO_FIPS]: 'New York City',
 };
 
+/**
+ * Common name-to-url-segment manipulation.
+ * Some have custom things to do though, which are handled below.
+ */
+const mungeName = (s: string) => {
+  let t = s;
+  // make lowercase (order of this matters for above)
+  t = t.toLowerCase();
+  // replace slashes with dashes
+  t = t.replace(/\//g, '-');
+  // replace double-dashes with dashes
+  t = t.replace(/--/g, '-');
+  // remove accents from characters
+  t = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  // replace O' with O_ (e.g., O'Brien)
+  t = t.replace(/^o'/, 'o_');
+  // remove periods
+  t = t.replace(/[.]/g, '');
+  // remove apostrophes
+  t = t.replace(/[']/g, '');
+  return t;
+};
+
+/**
+ * Compute the urlSegment for a state based on the name and stateCode.
+ * Must match the one that would have been provided by input data,
+ * the validator in the generator script will check that.
+ */
+export const generateStateUrlSegment = (name: string, stateCode: string) => {
+  let s = mungeName(name);
+  // for states, replace spaces with underscores
+  s = s.replace(/ /g, '_');
+  return `${s}-${stateCode.toLowerCase()}`;
+};
+
+/**
+ * Compute the urlSegment for a county based on the name.
+ * Must match the one that would have been provided by input data,
+ * the validator in the generator script will check that.
+ */
+export const generateCountyUrlSegment = (name: string) => {
+  // this one is misspelled, so special case it
+  if (name === 'Tinian Municipality') {
+    return 'tianian_municipality';
+  }
+
+  let s = name;
+  // for counties, split e.g. DeKalb into De_Kalb
+  s = s.replace(/([a-z])([A-Z])/g, '$1_$2');
+  // for counties, replace spaces with underscores
+  s = s.replace(/ /g, '_');
+  // for Counties, replace dashes with underscores
+  s = s.replace(/[-]/g, '_');
+  s = mungeName(s);
+  return s;
+};
+
+/**
+ * Compute the urlSegment for a metroArea based on the name and states.
+ * Must match the one that would have been provided by input data,
+ * the validator in the generator script will check that.
+ */
+export const generateMetroAreaUrlSegment = (
+  name: string,
+  statesFips: FipsCode[],
+) => {
+  // this one is missing 'city' so special case it:
+  if (name === 'New York-Newark-Jersey City') {
+    return 'new-york-city-newark-jersey-city_ny-nj-pa';
+  }
+
+  const states = statesFips
+    .map(fips => statesByFips[fips].stateCode.toLowerCase())
+    .join('-');
+  let s = name;
+  // for metroareas, replace apostrophes with dashes
+  s = s.replace(/[']/g, '-');
+  s = mungeName(s);
+  // for MetroAreas, replace spaces with dashes
+  s = s.replace(/ /g, '-');
+  return `${s}_${states}`;
+};
+
 // JSON-serializable representation of a Region object
 export interface RegionObject {
-  n: string;
-  u: string;
-  f: FipsCode;
-  p: number;
+  n: string; // name
+  f: FipsCode; // fips code
+  p: number; // population
 }
 
 export abstract class Region {
@@ -110,7 +192,6 @@ export class State extends Region {
   public toJSON(): StateObject {
     return {
       n: this.name,
-      u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
       s: this.stateCode,
@@ -118,7 +199,13 @@ export class State extends Region {
   }
 
   public static fromJSON(obj: StateObject): State {
-    return new State(obj.n, obj.u, obj.f, obj.p, obj.s);
+    return new State(
+      obj.n,
+      generateStateUrlSegment(obj.n, obj.s),
+      obj.f,
+      obj.p,
+      obj.s,
+    );
   }
 }
 
@@ -208,7 +295,6 @@ export class County extends Region {
   public toJSON(): CountyObject {
     return {
       n: this.name,
-      u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
       s: this.state.fipsCode,
@@ -217,7 +303,14 @@ export class County extends Region {
   }
 
   public static fromJSON(obj: CountyObject): County {
-    return new County(obj.n, obj.u, obj.f, obj.p, obj.s, obj.a);
+    return new County(
+      obj.n,
+      generateCountyUrlSegment(obj.n),
+      obj.f,
+      obj.p,
+      obj.s,
+      obj.a,
+    );
   }
 }
 
@@ -292,7 +385,6 @@ export class MetroArea extends Region {
   public toJSON(): MetroAreaObject {
     return {
       n: this.name,
-      u: this.urlSegment,
       f: this.fipsCode,
       p: this.population,
       s: this.states.map(state => state.fipsCode),
@@ -301,6 +393,13 @@ export class MetroArea extends Region {
   }
 
   public static fromJSON(obj: MetroAreaObject): MetroArea {
-    return new MetroArea(obj.n, obj.u, obj.f, obj.p, obj.s, obj.c);
+    return new MetroArea(
+      obj.n,
+      generateMetroAreaUrlSegment(obj.n, obj.s),
+      obj.f,
+      obj.p,
+      obj.s,
+      obj.c,
+    );
   }
 }
