@@ -1,7 +1,7 @@
 import RegionOverrides from './region-overrides.json';
 import { Markdown } from 'cms-content/utils';
 import { Metric } from 'common/metricEnum';
-import regions, { Region } from 'common/regions';
+import regions, { findStateByStateCodeStrict, Region } from 'common/regions';
 import { assert } from 'common/utils';
 
 enum Include {
@@ -83,7 +83,7 @@ function overrideAppliesToRegion(override: RegionOverride, region: Region) {
 /** Parses the string "region" out of the specified override and returns it as a Region class. */
 function getRegionFromOverride(override: RegionOverride): Region {
   if (/^[A-Z][A-Z]$/.test(override.region)) {
-    return regions.findByStateCodeStrict(override.region);
+    return findStateByStateCodeStrict(override.region);
   } else {
     return regions.findByFipsCodeStrict(override.region);
   }

@@ -13,7 +13,8 @@ import { formatMetatagDate } from 'common/utils';
 import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import regions, {
+import {
+  findStateByStateCodeStrict,
   getFinalAutocompleteLocations,
   getGeolocatedRegions,
 } from 'common/regions';
@@ -78,7 +79,7 @@ export default function HomePage() {
   ]; // Updated on 7 April 2021 -- this is an illustrative list but not exhaustive
   const initialFipsListForExplore = showRisingHospitalizations
     ? risingHospitalizationStates.map(
-        state => regions.findByStateCodeStrict(state).fipsCode,
+        state => findStateByStateCodeStrict(state).fipsCode,
       )
     : exploreGeoLocations;
   const initialMetricForExplore = showRisingHospitalizations

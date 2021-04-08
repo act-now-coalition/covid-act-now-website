@@ -5,3 +5,4 @@ export { getRegionsDB, RegionDB };
 export * from './types';
 export * from './region_hooks';
 export * from './utils';
+export * from './useFipsFromParams';

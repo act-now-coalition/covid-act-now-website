@@ -1,5 +1,4 @@
 import keyBy from 'lodash/keyBy';
-import values from 'lodash/values';
 import mapValues from 'lodash/mapValues';
 
 import countiesByFipsJson from 'common/data/counties_by_fips.json';
@@ -30,11 +29,6 @@ export const metroAreasByFips = mapValues(
 
 // re-export so others can import from the same place?
 export { statesByFips };
-
-export const statesByStateCode = keyBy(
-  values(statesByFips),
-  state => state.stateCode,
-);
 
 const customAreas = [
   new State('USA', '00001', 331486822, 'USA'),
