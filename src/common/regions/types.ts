@@ -1,9 +1,12 @@
 import urlJoin from 'url-join';
 import mapValues from 'lodash/mapValues';
+import keyBy from 'lodash/keyBy';
+import values from 'lodash/values';
 
 import { assert } from 'common/utils';
 
 import statesByFipsJson from 'common/data/states_by_fips.json';
+import { assert } from 'common/utils';
 
 export type FipsCode = string;
 export type ZipCode = string;
@@ -108,6 +111,17 @@ export const generateMetroAreaUrlSegment = (
   // for MetroAreas, replace spaces with dashes
   s = s.replace(/ /g, '-');
   return `${s}_${states}`;
+};
+
+/**
+ * Generate a unique per-county key for looking up url segments,
+ * in case counties in different states have the same ones.
+ */
+export const countyUrlParamsToUrlKey = (
+  stateUrlSegment: string,
+  countyUrlSegment: string,
+) => {
+  return `${stateUrlSegment}-${countyUrlSegment}`;
 };
 
 // JSON-serializable representation of a Region object
@@ -227,6 +241,21 @@ export const findStateByFipsCode = (fips: FipsCode): State | null => {
 export const findStateByFipsCodeStrict = (fips: FipsCode): State => {
   const state = findStateByFipsCode(fips);
   assert(state, `State unexpectedly not found for ${fips}`);
+  return state;
+};
+
+/**
+ * This mapping can likewise live here
+ */
+const statesByStateCode = keyBy(values(statesByFips), state => state.stateCode);
+
+export const findStateByStateCode = (stateCode: string): State | null => {
+  return statesByStateCode[stateCode.toUpperCase()] ?? null;
+};
+
+export const findStateByStateCodeStrict = (stateCode: string): State => {
+  const state = statesByStateCode[stateCode.toUpperCase()] ?? null;
+  assert(state, `State unexpectedly not found for ${stateCode}`);
   return state;
 };
 

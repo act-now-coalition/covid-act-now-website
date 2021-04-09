@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useFipsFromParams } from './useFipsFromParams';
 import regions from './region_db';
 import { Region } from './types';
 
@@ -7,39 +7,9 @@ import { Region } from './types';
 // value is non-nullable
 
 export const useRegionFromParams = (): Region | null => {
-  const {
-    stateId,
-    countyId,
-    countyFipsId,
-    metroAreaUrlSegment,
-    fipsCode,
-  } = useParams<{
-    stateId?: string;
-    countyId?: string;
-    countyFipsId: string;
-    metroAreaUrlSegment?: string;
-    fipsCode?: string;
-  }>();
-
-  if (fipsCode) {
-    return regions.findByFipsCode(fipsCode);
-  }
-  if (countyFipsId) {
-    return regions.findByFipsCode(countyFipsId);
-  }
-
-  if (metroAreaUrlSegment) {
-    return regions.findMetroAreaByUrlParams(metroAreaUrlSegment);
-  }
-
-  if (!stateId) {
+  const fips = useFipsFromParams();
+  if (fips === null) {
     return null;
   }
-
-  if (countyId) {
-    return regions.findCountyByUrlParams(stateId, countyId);
-  }
-  // This excludes the case where county is a value but we can't find the county,
-  // should it still return state?
-  return regions.findStateByUrlParams(stateId);
+  return regions.findByFipsCode(fips);
 };

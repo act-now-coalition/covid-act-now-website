@@ -3,7 +3,13 @@ import { Projections } from '../models/Projections';
 import { Api } from 'api';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, { Region, County, RegionType, State } from 'common/regions';
+import regions, {
+  findStateByStateCode,
+  Region,
+  County,
+  RegionType,
+  State,
+} from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
 import { parseDateString } from 'common/utils/time-utils';
 
@@ -84,7 +90,7 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
     return all
       .filter(summaryWithTimeseries =>
         summaryWithTimeseries?.state
-          ? Boolean(regions.findByStateCode(summaryWithTimeseries.state))
+          ? Boolean(findStateByStateCode(summaryWithTimeseries.state))
           : false,
       )
       .map(summaryWithTimeseries => {

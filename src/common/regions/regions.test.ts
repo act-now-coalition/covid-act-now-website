@@ -1,9 +1,16 @@
-import regions, { RegionType } from 'common/regions';
+import regions, {
+  findStateByStateCodeStrict,
+  RegionType,
+} from 'common/regions';
+import {
+  findStateFipsByUrlParams,
+  findCountyFipsByUrlParams,
+} from 'common/regions/urlSegmentsToFips';
 
 // Common regions to test against.
-const alaska = regions.findByStateCodeStrict('AK');
-const newYork = regions.findByStateCodeStrict('NY');
-const newJersey = regions.findByStateCodeStrict('NJ');
+const alaska = findStateByStateCodeStrict('AK');
+const newYork = findStateByStateCodeStrict('NY');
+const newJersey = findStateByStateCodeStrict('NJ');
 const anchorageCountyAK = regions.findByFipsCodeStrict('02020');
 const kingCountyWA = regions.findByFipsCodeStrict('53033');
 const anchorageMetro = regions.findByFipsCodeStrict('11260');
@@ -52,63 +59,68 @@ describe('regions', () => {
 
   describe('findByStateCodeStrict', () => {
     test('returns a state when passing a valid uppercase state code', () => {
-      const ca = regions.findByStateCodeStrict('CA');
+      const ca = findStateByStateCodeStrict('CA');
       expect(ca.regionType).toBe(RegionType.STATE);
     });
 
     test('returns a state when passing a valid lowercase state code', () => {
-      const ca = regions.findByStateCodeStrict('ca');
+      const ca = findStateByStateCodeStrict('ca');
       expect(ca.regionType).toBe(RegionType.STATE);
     });
 
     test('throws when passing an invalid state code', () => {
-      expect(() => regions.findByStateCodeStrict('cate')).toThrow();
+      expect(() => findStateByStateCodeStrict('cate')).toThrow();
     });
   });
 
   describe('findStateByUrlParams', () => {
     test('returns the correct state when passing a state code', () => {
-      const state = regions.findStateByUrlParams('OR');
+      const fips = findStateFipsByUrlParams('OR');
+      expect(fips).not.toBeNull();
+      const state = regions.findByFipsCode(fips!);
       expect(state).not.toBeNull();
       expect(state?.fipsCode).toBe('41');
     });
 
     test('returns the correct state when passing a valid URL segment', () => {
-      const state = regions.findStateByUrlParams('oregon-or');
+      const fips = findStateFipsByUrlParams('oregon-or');
+      expect(fips).not.toBeNull();
+      const state = regions.findByFipsCode(fips!);
       expect(state).not.toBeNull();
       expect(state?.fipsCode).toBe('41');
     });
 
     test('returns null for invalid params "xxx"', () => {
-      const state = regions.findStateByUrlParams('xxx');
-      expect(state).toBeNull();
+      const fips = findStateFipsByUrlParams('xxx');
+      expect(fips).toBeNull();
     });
   });
 
   describe('findCountyByUrlParams', () => {
     test('returns the correct county for valid state and county IDs', () => {
-      const county = regions.findCountyByUrlParams(
-        'washington-wa',
-        'king_county',
-      );
+      const fips = findCountyFipsByUrlParams('washington-wa', 'king_county');
+      expect(fips).not.toBeNull();
+      const county = regions.findByFipsCode(fips!);
       expect(county).not.toBeNull();
       expect(county?.fipsCode).toBe('53033');
     });
 
     test('returns the correct county when using state code as stateId', () => {
-      const county = regions.findCountyByUrlParams('wa', 'king_county');
+      const fips = findCountyFipsByUrlParams('wa', 'king_county');
+      expect(fips).not.toBeNull();
+      const county = regions.findByFipsCode(fips!);
       expect(county).not.toBeNull();
       expect(county?.fipsCode).toBe('53033');
     });
 
     test('returns null for invalid stateId and valid countyID', () => {
-      const county = regions.findCountyByUrlParams('xxx', 'king_county');
-      expect(county).toBe(null);
+      const fips = findCountyFipsByUrlParams('xxx', 'king_county');
+      expect(fips).toBeNull();
     });
 
     test('returns null for invalid stateId and countyID', () => {
-      const county = regions.findCountyByUrlParams('xxx', 'xxx');
-      expect(county).toBeNull();
+      const fips = findCountyFipsByUrlParams('xxx', 'xxx');
+      expect(fips).toBeNull();
     });
   });
 });

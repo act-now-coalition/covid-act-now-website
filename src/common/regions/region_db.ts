@@ -8,7 +8,6 @@ import {
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
-  statesByStateCode,
 } from './preprocessed_regions_data';
 import { assert } from 'common/utils';
 
@@ -27,7 +26,6 @@ class RegionDB {
     countiesByFips: Dictionary<County>,
     metroAreasByFips: Dictionary<MetroArea>,
     customAreasByFips: Dictionary<State>,
-    private statesByStateCode: Dictionary<State>,
   ) {
     this.states = sortBy(values(statesByFips), state => state.name);
     this.counties = sortBy(values(countiesByFips), county => county.name);
@@ -52,16 +50,6 @@ class RegionDB {
     return region;
   }
 
-  findByStateCode(stateCode: string): State | null {
-    return this.statesByStateCode[stateCode.toUpperCase()] ?? null;
-  }
-
-  findByStateCodeStrict(stateCode: string): State {
-    const region = this.statesByStateCode[stateCode.toUpperCase()];
-    assert(region, `Region unexpectedly not found for ${stateCode}`);
-    return region;
-  }
-
   findByFullName(fullName: string): Region | null {
     return this.all().find(region => region.fullName === fullName) || null;
   }
@@ -79,42 +67,6 @@ class RegionDB {
       metro.states.map(state => state.stateCode).includes(stateCode),
     );
     return [...counties, ...metros];
-  }
-
-  findStateByUrlParams(stateUrlSegment: string): State | null {
-    // The second condition is added to support legacy URLs with the 2-letter
-    // state code (`/us/wa`)
-    const foundState = this.states.find(
-      state =>
-        equalLower(state.urlSegment, stateUrlSegment) ||
-        equalLower(state.stateCode, stateUrlSegment),
-    );
-    return foundState || null;
-  }
-
-  findMetroAreaByUrlParams(metroAreaUrlSegment: string) {
-    const foundMetro = this.metroAreas.find(
-      metro => metro.urlSegment === metroAreaUrlSegment,
-    );
-    return foundMetro || null;
-  }
-
-  findCountyByUrlParams(
-    stateUrlSegment: string,
-    countyUrlSegment: string,
-  ): County | null {
-    const foundState = this.findStateByUrlParams(stateUrlSegment);
-    if (!foundState) {
-      return null;
-    }
-
-    const foundCounty = this.counties.find(
-      county =>
-        county.state.fipsCode === foundState.fipsCode &&
-        equalLower(county.urlSegment, countyUrlSegment),
-    );
-
-    return foundCounty || null;
   }
 
   all(): Region[] {
@@ -136,16 +88,11 @@ class RegionDB {
   }
 }
 
-function equalLower(a: string, b: string) {
-  return a.toLowerCase() === b.toLowerCase();
-}
-
 const regions = new RegionDB(
   statesByFips,
   countiesByFips,
   metroAreasByFips,
   customAreasByFips,
-  statesByStateCode,
 );
 
 export default regions;
