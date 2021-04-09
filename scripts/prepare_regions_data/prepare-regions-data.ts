@@ -46,9 +46,11 @@ async function writeRegionsData() {
 }
 
 /**
- * We optimize storing the URL segments, which can be computed from names.
- * This ensures that our computation functions match the input data --
- * if they don't, we need to fix them before regenerating region data.
+ * Our location URLs must be consistent over time to avoid broken URLs, but to
+ * save space we don't want to load them unnecessarily them in the frontend code.
+ * So this function validates that the computation functions used in the frontend
+ * code generate url segments that exactly match the url segments stored in the raw
+ * region data files.
  */
 function validateUrlSegments() {
   let foundInvalid = false;
