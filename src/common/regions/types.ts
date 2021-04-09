@@ -225,7 +225,14 @@ export class MetroArea extends Region {
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
+    // MetroAreas are constructed by FIPS for states, but the states are retrieved
+    // and stored as objects
     statesFips: FipsCode[],
+    // We intentionally only store counties by FIPS code instead of rich objects
+    // so we can construct MetroArea objects without loading the entire counties DB.
+    // This will be very useful for rendering things above the fold on location pages
+    // and deferred loading the big data for charts down below.
+    // If you need the county object, you  can look it up by FIPS from the regions_db.
     public readonly countiesFips: FipsCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
