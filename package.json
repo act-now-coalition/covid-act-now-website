@@ -100,7 +100,7 @@
     "cy.run": "cypress run",
     "jest": "TZ=America/Los_Angeles react-scripts test",
     "jest.ci": "CI=true yarn jest",
-    "lint": "eslint --ext .js,.ts,tsx src",
+    "lint": "eslint --ext .js,.ts,tsx src --max-warnings=0",
     "lint-fix": "eslint --ext .js,.ts,tsx --fix src",
     "tsc": "tsc",
     "tsc-watch": "tsc --watch",
