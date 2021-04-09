@@ -29,15 +29,18 @@ export default function useGeolocation(): UseGeolocationReturn {
     const fetchIpData = () => {
       setIsLoading(true);
       fetchGeolocationData()
-        .then(data =>
+        .then(data => {
           setIpData({
             zipCode: data.zip,
             stateCode: data.region,
             country: data.country,
-          }),
-        )
-        .catch(e => console.error(e))
-        .finally(() => setIsLoading(false));
+          });
+          setIsLoading(false);
+        })
+        .catch(e => {
+          console.error(e);
+          setIsLoading(false);
+        });
     };
     fetchIpData();
   }, [setIpData, setIsLoading]);

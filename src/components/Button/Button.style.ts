@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
 
 const disableRippleProps = {
@@ -46,11 +45,11 @@ const Outlined = styled(Button).attrs(props => ({
 `;
 
 export const ButtonPrimary = styled(Outlined)`
-  color: ${theme.colors.green};
+  color: ${COLOR_MAP.GREEN.BASE};
 `;
 
 export const ButtonSecondary = styled(Outlined)`
-  color: ${theme.colors.lightBlue};
+  color: ${COLOR_MAP.BLUE};
 `;
 
 export const BaseButton = styled(Button).attrs(props => ({
