@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import theme from 'assets/theme';
 import { COLOR_MAP } from 'common/colors';
 
 const disableRippleProps = {
