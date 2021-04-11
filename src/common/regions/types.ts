@@ -254,7 +254,7 @@ export const findStateByStateCode = (stateCode: string): State | null => {
 };
 
 export const findStateByStateCodeStrict = (stateCode: string): State => {
-  const state = statesByStateCode[stateCode.toUpperCase()] ?? null;
+  const state = findStateByStateCode(stateCode);
   assert(state, `State unexpectedly not found for ${stateCode}`);
   return state;
 };
