@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import {
   useCcviForFips,
   useScrollToElement,
@@ -9,22 +8,11 @@ import {
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
-import { getRecommendationsShareUrl } from 'common/urls';
-import {
-  getDynamicIntroCopy,
-  getRecommendations,
-  getShareQuote,
-  getFedLevel,
-  getHarvardLevel,
-  getModalCopyWithFedLevel,
-  getModalCopyWithHarvardLevel,
-} from 'common/utils/recommend';
-import { mainContent } from 'cms-content/recommendations';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
-import Recommend from 'components/Recommend';
+import Recommendations from './Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
@@ -32,7 +20,7 @@ import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
-import { MetricValues, Projections } from 'common/models/Projections';
+import { MetricValues } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import { LocationSummary, useSummaries } from 'common/location_summaries';
 import LocationPageHeaderVariant from './Experiment/LocationPageHeaderVariant';
@@ -46,71 +34,6 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
     top: div.offsetTop - offset,
     behavior: 'smooth',
   });
-
-interface RecommendationsProps {
-  projections: Projections;
-  recommendationsRef: React.RefObject<HTMLDivElement>;
-}
-
-const Recommendations = ({
-  projections,
-  recommendationsRef,
-}: RecommendationsProps) => {
-  const alarmLevel = projections.getAlarmLevel();
-  const region = projections.region;
-  const projection = projections.primary;
-
-  const recommendationsIntro = getDynamicIntroCopy(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
-
-  const recommendationsMainContent = getRecommendations(
-    projection,
-    mainContent.recommendations,
-  );
-
-  const recommendsShareUrl = getRecommendationsShareUrl(region);
-
-  const recommendsShareQuote = getShareQuote(
-    projections.locationName,
-    alarmLevel,
-  );
-
-  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
-    projection.fips
-  }`;
-
-  // TODO(Chelsi): make these 2 functions less redundant?
-  const recommendationsFedModalCopy = getModalCopyWithFedLevel(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
-
-  const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
-
-  return (
-    <Recommend
-      introCopy={recommendationsIntro}
-      recommendations={recommendationsMainContent}
-      locationName={region.fullName}
-      shareUrl={recommendsShareUrl}
-      shareQuote={recommendsShareQuote}
-      recommendationsRef={recommendationsRef}
-      feedbackFormUrl={recommendationsFeedbackForm}
-      fedLevel={getFedLevel(projections.primary)}
-      harvardLevel={getHarvardLevel(projections.primary)}
-      harvardModalLocationCopy={recommendationsHarvardModalCopy}
-      fedModalLocationCopy={recommendationsFedModalCopy}
-    />
-  );
-};
 
 interface ChartsHolderProps {
   region: Region;
