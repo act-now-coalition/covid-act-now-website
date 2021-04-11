@@ -131,6 +131,16 @@ export const statesByFips = mapValues(
   v => State.fromJSON(v),
 );
 
+export const findStateByFipsCode = (fips: FipsCode): State | null => {
+  return statesByFips[fips] ?? null;
+};
+
+export const findStateByFipsCodeStrict = (fips: FipsCode): State => {
+  const state = findStateByFipsCode(fips);
+  assert(state, `State unexpectedly not found for ${fips}`);
+  return state;
+};
+
 /**
  * Shortens the county name by using the abbreviated version of 'county'
  * or the equivalent administrative division.

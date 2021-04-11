@@ -6,7 +6,11 @@ import ReactTooltip from 'react-tooltip';
 import { colorFromLocationSummary } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-import regions, { State as StateType } from 'common/regions';
+import {
+  findStateByFipsCodeStrict,
+  statesByFips,
+  State as StateType,
+} from 'common/regions';
 import stateGeographies from 'common/data/states-10m.json';
 import { USMapWrapper, USStateMapWrapper } from './Map.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
@@ -16,7 +20,7 @@ function trackMapClick(label: string) {
   trackEvent(EventCategory.MAP, EventAction.NAVIGATE, label);
 }
 
-const stateFipsCodes = regions.states.map(state => state.fipsCode);
+const stateFipsCodes = Object.keys(statesByFips);
 
 /**
  * SVG element to represent the Northern Mariana Islands on the USA Country Map as a
@@ -68,7 +72,7 @@ const USACountyMap = React.memo(
                       const fipsCode = geo.id;
                       // we can coerce this to a state safely because we're only
                       // dealing with FIPS codes that are from states, because of that filter.
-                      const state = regions.findByFipsCodeStrict(
+                      const state = findStateByFipsCodeStrict(
                         fipsCode,
                       ) as StateType;
 
