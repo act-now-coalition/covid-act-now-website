@@ -54,7 +54,7 @@ function buildCounties(
       countyInfo.county_url_name,
       countyFips,
       countyInfo.population,
-      state,
+      state.fipsCode,
       adjacentCounties || [],
     );
   });
@@ -83,8 +83,8 @@ function buildMetroAreas(
       metro.urlSegment,
       metro.cbsaCode,
       metro.population,
-      counties,
-      states,
+      states.map(state => state.fipsCode),
+      counties.map(county => county.fipsCode),
     );
   });
 }
