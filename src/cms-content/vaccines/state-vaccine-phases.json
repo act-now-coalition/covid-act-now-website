@@ -1221,16 +1221,16 @@
           "description": "* Additional essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "April 12, 2021",
-          "updatedAt": "2021-04-12T17:35:25.024Z"
+          "updatedAt": "2021-04-12T18:00:09.914Z"
         },
         {
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* General public",
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-01T17:54:29.499Z"
+          "startDate": "April 13, 2021",
+          "updatedAt": "2021-04-12T18:00:20.970Z"
         }
       ],
       "stateSignupUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data"
