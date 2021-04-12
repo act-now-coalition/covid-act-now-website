@@ -20,7 +20,7 @@ export const getSearchAutocompleteStyles = makeStyles(theme => ({
     },
   },
   popperDisablePortal: {
-    marginTop: '40px',
+    marginTop: '1rem',
     left: 0,
     [theme.breakpoints.down('xs')]: {
       marginTop: '0',

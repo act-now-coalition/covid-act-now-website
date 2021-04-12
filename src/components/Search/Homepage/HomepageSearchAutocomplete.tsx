@@ -7,7 +7,6 @@ import {
   Wrapper,
   StyledTextField,
   SearchBarIcon,
-  DesktopSearchDirections,
   ListContainer,
   StyledPaper,
   CloseIcon,
@@ -92,8 +91,6 @@ const HomepageSearchAutocomplete: React.FC<{
     }
   };
 
-  const searchDirectionsText = isOpen ? 'Search city, county, or state' : '';
-
   const lockBackgroundScroll = isMobile && isOpen;
 
   return (
@@ -167,9 +164,6 @@ const HomepageSearchAutocomplete: React.FC<{
             popperDisablePortal: autocompleteStyles.popperDisablePortal,
           }}
         />
-        <DesktopSearchDirections>
-          {searchDirectionsText}
-        </DesktopSearchDirections>
       </Wrapper>
     </>
   );

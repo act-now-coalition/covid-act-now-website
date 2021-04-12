@@ -159,7 +159,7 @@ export function getRegionNameForRow(region: Region, condensed?: boolean) {
   } else if (region instanceof County) {
     return condensed
       ? splitRegionName(region.abbreviation)
-      : splitRegionName(region.name);
+      : splitRegionName(`${region.name},`);
   } else if (region instanceof MetroArea) {
     return splitRegionName(region.shortName);
   } else {

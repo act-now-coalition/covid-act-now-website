@@ -38,6 +38,7 @@ export const InnerContent = styled.div`
     width: 100%;
   }
 `;
+
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 1rem;

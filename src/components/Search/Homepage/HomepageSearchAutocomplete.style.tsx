@@ -67,7 +67,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
     position: relative;
     width: ${desktopWidth}px;
     height: unset;
-    padding: 1.5rem 1.5rem 0;
+    padding: 1rem 1.25rem;
   }
 `;
 
@@ -80,19 +80,6 @@ export const SearchBarIcon = styled(SearchIcon)`
   border-left: 1px solid ${COLOR_MAP.GREY_1};
 `;
 
-export const DesktopSearchDirections = styled.span`
-  display: none;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
-    display: flex;
-    justify-content: center;
-    height: 24px;
-    font-size: 1rem;
-    margin: 0.75rem 0 0.75rem;
-  }
-`;
-
 export const ListContainer = styled.ul`
   padding: 0 1.25rem 0;
   max-height: 70vh;
@@ -102,7 +89,7 @@ export const ListContainer = styled.ul`
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    padding: 0 1.75rem 0;
+    padding: 0 1rem 0;
     max-height: ${maxMenuHeight}px;
   }
 `;
@@ -117,5 +104,6 @@ export const StyledPaper = styled(Paper)`
     border-radius: 0 0 4px 4px;
     max-height: ${maxMenuHeight}px;
     width: ${desktopWidth}px;
+    margin: 0;
   }
 `;
