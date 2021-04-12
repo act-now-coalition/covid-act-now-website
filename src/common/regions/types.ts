@@ -1,6 +1,8 @@
 import urlJoin from 'url-join';
 import mapValues from 'lodash/mapValues';
 
+import { assert } from 'common/utils';
+
 import statesByFipsJson from 'common/data/states_by_fips.json';
 
 export type FipsCode = string;
