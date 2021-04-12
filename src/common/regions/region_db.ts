@@ -11,7 +11,7 @@ import {
 } from './preprocessed_regions_data';
 import { assert } from 'common/utils';
 
-class RegionDB {
+export class RegionDB {
   public states: State[];
   public counties: County[];
   public metroAreas: MetroArea[];
@@ -95,5 +95,11 @@ const regions = new RegionDB(
   customAreasByFips,
 );
 
+/**
+ * Async helper for decoupling regions DB incrementally
+ */
+export const getRegionsDB = async () => {
+  return regions;
+};
+
 export default regions;
-export { RegionDB };
