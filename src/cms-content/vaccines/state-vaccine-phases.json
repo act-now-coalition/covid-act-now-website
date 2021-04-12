@@ -645,22 +645,7 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-08T15:36:16.762Z",
-          "phase": "1-2",
-          "description": "* Health care workers\n* Long-term care facilities\n* First responders\n* People living in congregate settings\n* Adults 60+\n* Education and continuity of government\n* Essential workers (lab services, agriculture, manufacturing, postal service, etc)\n* Individuals 16+ with high-risk medical conditions or disabilities"
-        },
-        {
-          "phase": "3",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* All individuals 16+ at mass vaccination sites only",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-04-08T15:32:26.511Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-08T15:36:19.287Z",
+          "updatedAt": "2021-04-12T17:39:14.124Z",
           "phase": "3",
           "tier": "2",
           "description": "* Individuals 16+ at all vaccination sites",
@@ -668,7 +653,7 @@
         }
       ],
       "stateSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
-      "allAdultsEligible": false
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "4",
