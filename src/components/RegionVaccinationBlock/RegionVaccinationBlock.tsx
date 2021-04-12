@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Region } from 'common/regions';
+import { Region, useRegionsDB } from 'common/regions';
 import {
   RegionVaccinationInfo,
   getVaccinationDataByRegion,
@@ -19,7 +19,12 @@ import {
 } from './utils';
 
 const VaccinationBlock: React.FC<{ region: Region }> = ({ region }) => {
-  const vaccinationRegions = getVaccinationRegions(region);
+  const regions = useRegionsDB();
+  if (!regions) {
+    return null;
+  }
+
+  const vaccinationRegions = getVaccinationRegions(regions, region);
 
   const vaccinationRegionsData = vaccinationRegions
     .map(getVaccinationDataByRegion)

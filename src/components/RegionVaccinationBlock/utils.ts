@@ -1,4 +1,4 @@
-import regions, { Region, State, County, MetroArea } from 'common/regions';
+import { Region, RegionDB, State, County, MetroArea } from 'common/regions';
 import { fail } from 'common/utils';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
@@ -11,7 +11,10 @@ export interface VaccinationLink {
  * Get regions to show
  * @param region
  */
-export const getVaccinationRegions = (region: Region): Region[] => {
+export const getVaccinationRegions = (
+  regions: RegionDB,
+  region: Region,
+): Region[] => {
   if (region instanceof State) {
     return [region];
   }
