@@ -1223,19 +1223,11 @@
         },
         {
           "currentlyEligible": false,
-          "updatedAt": "2021-03-25T06:08:26.650Z",
+          "updatedAt": "2021-04-12T17:34:52.655Z",
           "phase": "2",
-          "tier": "1",
-          "description": "* Individuals 45+",
-          "startDate": "May 1"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T06:08:35.570Z",
-          "phase": "2",
-          "tier": "2",
+          "tier": "",
           "description": "* Individuals 16+",
-          "startDate": "May 1"
+          "startDate": "April 19"
         }
       ],
       "stateSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx"
