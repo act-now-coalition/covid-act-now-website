@@ -10,7 +10,7 @@ import {
 } from 'screens/AlertUnsubscribe/AlertUnsubscribe.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import AutocompleteRegions from 'components/AutocompleteRegions';
-import regions, { Region } from 'common/regions';
+import { getRegionsDB, Region } from 'common/regions';
 
 const unsubscribedCopy =
   'You are now unsubscribed and will no longer receive alerts.';
@@ -29,6 +29,7 @@ const AlertUnsubscribe = () => {
 
   const [selectedLocations, setSelectedLocations] = useState<Region[]>([]);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
+  const [autocompleteRegions, setAutocompleteRegions] = useState<Region[]>([]);
 
   useEffect(() => {
     async function onPageload() {
@@ -44,11 +45,13 @@ const AlertUnsubscribe = () => {
           return data.locations || [];
         });
 
+      const regions = await getRegionsDB();
       const defaultValues: Region[] = fipsList
         .map((fipsCode: string) => regions.findByFipsCode(fipsCode))
         .filter((region): region is Region => region !== null);
 
       setSelectedLocations(defaultValues);
+      setAutocompleteRegions(regions.all());
     }
 
     onPageload();
@@ -87,7 +90,7 @@ const AlertUnsubscribe = () => {
           <UpdatePreferencesFormWrapper>
             <div style={{ width: '100%' }}>
               <AutocompleteRegions
-                regions={regions.all()}
+                regions={autocompleteRegions}
                 selectedRegions={selectedLocations}
                 onChangeRegions={(e, newRegions) =>
                   handleSelectChange(newRegions)
