@@ -33,7 +33,7 @@ export function getFilterLimit(region?: Region) {
   }
 
   if (region instanceof MetroArea) {
-    return Math.max(20, region.counties.length);
+    return Math.max(20, region.countiesFips.length);
   } else if (region instanceof State || region instanceof County) {
     const stateFips = getStateFips(region);
     const countiesInState = regions.counties.filter(county =>
