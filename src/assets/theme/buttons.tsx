@@ -22,9 +22,6 @@ export interface ButtonsTheme {
   fontFamily: FlattenSimpleInterpolation;
 }
 
-export const newBlue = '#3567FD';
-export const newBlueDark = '#002CB4';
-const newBlueLight = 'rgba(53, 103, 253, .15)';
 const lightGrayFigma = '#e0e0e0';
 
 export type ButtonMap = {
@@ -33,11 +30,11 @@ export type ButtonMap = {
 
 const buttons: ButtonMap = {
   [ButtonType.FILL]: {
-    background: newBlue,
-    border: newBlue,
+    background: COLOR_MAP.NEW_BLUE.BASE,
+    border: COLOR_MAP.NEW_BLUE.BASE,
     text: 'white',
-    backgroundHover: newBlueDark,
-    borderHover: newBlueDark,
+    backgroundHover: COLOR_MAP.NEW_BLUE.DARK,
+    borderHover: COLOR_MAP.NEW_BLUE.DARK,
     textHover: 'white',
     icon: 'white',
     fontFamily: fonts.regularBookBold,
@@ -48,10 +45,10 @@ const buttons: ButtonMap = {
   [ButtonType.OUTLINE]: {
     background: 'white',
     border: lightGrayFigma,
-    text: newBlue,
-    backgroundHover: newBlueLight,
-    borderHover: newBlueLight,
-    textHover: newBlueDark,
+    text: COLOR_MAP.NEW_BLUE.BASE,
+    backgroundHover: COLOR_MAP.NEW_BLUE.LIGHT,
+    borderHover: COLOR_MAP.NEW_BLUE.LIGHT,
+    textHover: COLOR_MAP.NEW_BLUE.DARK,
     icon: COLOR_MAP.GRAY_BODY_COPY,
     fontFamily: fonts.regularBookMidWeight,
     disabledBackground: 'white',
@@ -61,10 +58,10 @@ const buttons: ButtonMap = {
   [ButtonType.TEXT]: {
     background: 'transparent',
     border: 'transparent',
-    text: newBlue,
+    text: COLOR_MAP.NEW_BLUE.BASE,
     backgroundHover: 'transparent',
     borderHover: 'transparent',
-    textHover: newBlueDark,
+    textHover: COLOR_MAP.NEW_BLUE.DARK,
     icon: COLOR_MAP.GRAY_BODY_COPY,
     fontFamily: fonts.regularBook,
     disabledBackground: COLOR_MAP.GREY_1, // TODO (chelsi) - ask UX about disable state

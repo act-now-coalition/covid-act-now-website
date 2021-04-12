@@ -72,8 +72,12 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
 `;
 
 export const SearchBarIcon = styled(SearchIcon)`
-  margin-right: -0.75rem; // we dont like it, but for now its fine
+  margin-right: -1.25rem; // we dont like a negative margin, but for now its fine
   margin-left: 0.5rem;
+  height: calc(100% - 14px);
+  width: 36px;
+  padding-left: 0.75rem;
+  border-left: 1px solid ${COLOR_MAP.GREY_1};
 `;
 
 export const DesktopSearchDirections = styled.span`
