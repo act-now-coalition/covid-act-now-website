@@ -1233,7 +1233,7 @@
       "stateSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx"
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Pennsylvania",
       "fips": "42",
       "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
