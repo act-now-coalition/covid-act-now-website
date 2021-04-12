@@ -2,50 +2,14 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
-import MegaMenu from 'components/NewFooter/MegaMenu';
-import MobileMenu from './MobileMenu';
+import MegaMenu from './MegaMenu/MegaMenu';
 import * as Style from './NavBar.style';
 import { DonateButtonHeart } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
-import {
-  Experiment,
-  ExperimentID,
-  Variant,
-  VariantID,
-} from 'components/Experiment';
 import { useBreakpoint } from 'common/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
-
-const MenuVariant: React.FC<{ isMenuOpen: boolean; closeMenu: () => void }> = ({
-  isMenuOpen,
-  closeMenu,
-}) => {
-  const onMouseLeave = (e: React.MouseEvent<{}>) => {
-    // Do not close when the user hovers on the top bar (including the button to close the menu)
-    if (e.clientY > 64) {
-      closeMenu();
-    }
-  };
-
-  const menuProps = {
-    open: isMenuOpen,
-    closeMenu,
-    onMouseLeave,
-  };
-
-  return (
-    <Experiment id={ExperimentID.HAMBURGER_MENU_VARIATIONS}>
-      <Variant id={VariantID.A}>
-        <MegaMenu {...menuProps} />
-      </Variant>
-      <Variant id={VariantID.B}>
-        <MobileMenu {...menuProps} />
-      </Variant>
-    </Experiment>
-  );
-};
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -77,6 +41,24 @@ const NavBar: React.FC = () => {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const onMouseLeave = (e: React.MouseEvent<{}>) => {
+    // Do not close when the user hovers on the top bar (including the button to close the menu)
+    if (e.clientY > 64) {
+      closeMenu();
+    }
+  };
+
+  const onClickTopNavItem = (label: string) => {
+    trackNavigation(label);
+    closeMenu();
+  };
+
+  const menuProps = {
+    open: isMenuOpen,
+    closeMenu,
+    onMouseLeave,
+  };
+
   if (isEmbed) {
     return null;
   }
@@ -87,7 +69,7 @@ const NavBar: React.FC = () => {
         {isLocationPage(pathname) && (
           <Style.BackLink
             to="/"
-            onClick={() => trackNavigation('Back Home')}
+            onClick={() => onClickTopNavItem('Back Home')}
             aria-label="Back to Covid Act Now"
           >
             <ArrowBack />
@@ -96,14 +78,14 @@ const NavBar: React.FC = () => {
         <Link
           to="/"
           style={{ display: 'inline-flex' }}
-          onClick={() => trackNavigation('Home (Logo)')}
+          onClick={() => onClickTopNavItem('Home (Logo)')}
           aria-label="Covid Act Now"
         >
           <Logo />
         </Link>
         <Style.Spacer />
         <>
-          <DonateButtonHeart />
+          <DonateButtonHeart onClick={closeMenu} />
           <Style.IconButton
             onMouseEnter={onHoverHamburger}
             onClick={onClickHamburger}
@@ -113,7 +95,7 @@ const NavBar: React.FC = () => {
             {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
           </Style.IconButton>
         </>
-        <MenuVariant isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
+        <MegaMenu {...menuProps} />
       </Style.Toolbar>
     </Style.AppBar>
   );

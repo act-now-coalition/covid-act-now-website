@@ -8,4 +8,4 @@ export default {
 
 export const DonatePurple = () => <DonateButton />;
 
-export const DonateHeart = () => <DonateButtonHeart />;
+export const DonateHeart = () => <DonateButtonHeart onClick={() => {}} />;

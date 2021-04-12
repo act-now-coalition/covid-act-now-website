@@ -3,6 +3,7 @@ import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { Wrapper, InnerContainer, Body } from './SpringSurgeBanner.style';
 import { scrollWithOffset } from 'components/TableOfContents';
 import { HashLink } from 'react-router-hash-link';
+import AggregationsJSON from 'assets/data/aggregations.json';
 
 const trackClick = () => {
   trackEvent(
@@ -13,22 +14,28 @@ const trackClick = () => {
 };
 
 const BannerInner: React.FC = () => {
-  const SeveralStatesLink = (
+  const usaAggregation = AggregationsJSON['00001'];
+  const { totalVaccinationsInitiated } = usaAggregation;
+  const millionVaccinations = Math.round(totalVaccinationsInitiated / 1000000);
+
+  const HospitalizationsAreRisingTooLink = (
     <HashLink
       to="#explore-hospitalizations"
       onClick={trackClick}
       scroll={(element: HTMLElement) => scrollWithOffset(element, -80)}
     >
-      several states
+      hospitalizations are rising too
     </HashLink>
   );
+
   return (
     <InnerContainer>
       <Body>
-        Daily new cases are flat or rising in two-thirds of states and
-        hospitalizations are rising in {SeveralStatesLink}. Help prevent another
-        COVID wave by continuing to take precautions and getting vaccinated when
-        you are eligible.
+        Daily new cases are rising in about half of the states and{' '}
+        {HospitalizationsAreRisingTooLink}. Help prevent another COVID wave by
+        continuing to take precautions and getting vaccinated when you are
+        eligible. Join the {millionVaccinations}M Americans who have already
+        gotten at least one vaccine dose.
       </Body>
     </InnerContainer>
   );

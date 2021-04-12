@@ -1,11 +1,11 @@
 import React from 'react';
-import AllAdultsEligibleBlock from './AllAdultsEligibleBlock';
+import AllAdultsEligiblePanel from './AllAdultsEligiblePanel';
 
 export default {
   title: 'Shared Components/VaccinationEligibilityBlock/AllAdultsEligible',
-  component: AllAdultsEligibleBlock,
+  component: AllAdultsEligiblePanel,
 };
 
 export const Example = () => {
-  return <AllAdultsEligibleBlock />;
+  return <AllAdultsEligiblePanel />;
 };

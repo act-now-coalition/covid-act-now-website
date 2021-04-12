@@ -87,7 +87,7 @@ function generateAlertEmailContent(
     img_alt: `Image depicting that ${locationName} went from "${oldLevelText}" to "${newLevelText}"`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
-    location_url: locationURL,
+    location_url: `${locationURL}?utm_source=risk_alerts&utm_medium=email`,
     unsubscribe_link: `${unsubscribeURL}?email=${encodeURI(emailAddress)}`, // would be nice to know dev/staging/prod
     feedback_subject_line: encodeURI(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,

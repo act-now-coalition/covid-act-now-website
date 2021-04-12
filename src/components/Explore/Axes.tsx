@@ -28,7 +28,9 @@ const Axes: React.FC<{
   const [dateFrom, dateTo] = dateScale.domain();
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
 
-  const finalTickValues = getFinalTicks(isMobile, timeTicks);
+  const finalTickValues = getFinalTicks(isMobile, timeTicks).filter(
+    date => date < dateTo,
+  );
 
   return (
     <AxisStyle>

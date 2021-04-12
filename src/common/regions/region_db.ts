@@ -9,7 +9,7 @@ import {
   metroAreasByFips,
   customAreasByFips,
   statesByStateCode,
-} from './regions_data';
+} from './preprocessed_regions_data';
 import { assert } from 'common/utils';
 
 class RegionDB {

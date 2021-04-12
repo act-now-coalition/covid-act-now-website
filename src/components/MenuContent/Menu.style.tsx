@@ -1,51 +1,11 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
 
-const mobileBreakpointPlus = '960px';
-
-export const StyledFooter = styled.footer`
-  box-sizing: content-box;
-  background: ${COLOR_MAP.BLACK};
-  padding: 2rem 1.5rem;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    padding: 3rem;
-  }
-
-  @media (min-width: ${mobileBreakpointPlus}) {
-    padding: 4rem;
-  }
-`;
-
-// Need to add a good amount of bottom padding for mobile screens to make sure the bottom
-// of the mega menu isn't covered by the browser's menu bar
-export const StyledMegaMenu = styled.nav`
-  background: white;
-  border-top: 1px solid ${COLOR_MAP.GREY_2};
-  border-bottom: 1px solid ${COLOR_MAP.GREY_2};
-  transform: translateY(64px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem 1.5rem 8rem;
-  height: calc(100vh - 224px);
-  overflow-y: auto;
-  box-sizing: content-box;
-  box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.2);
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    height: auto;
-  }
-
-  @media (min-width: ${mobileBreakpoint}) {
-    padding: 3rem;
-  }
-`;
+export const mobileBreakpointPlus = '960px';
 
 export const ContentWrapper = styled.div`
   display: flex;
@@ -79,8 +39,7 @@ export const Section = styled.div`
   }
 
   &:last-child {
-    align-items: ${props =>
-      props.theme.palette.megaMenu.aboutUsContentAlignment};
+    align-items: ${props => props.theme.megaMenu.aboutUsContentAlignment};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -103,7 +62,7 @@ export const Section = styled.div`
 
 export const SectionHeader = styled.h2<{ $desktopOnly?: boolean }>`
   ${props => props.theme.fonts.regularBookMidWeight};
-  color: ${props => props.theme.palette.megaMenu.gray};
+  color: ${props => props.theme.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
@@ -120,7 +79,7 @@ export const Column = styled.div`
 `;
 
 export const ArrowIcon = styled(ArrowForwardIcon)`
-  color: ${props => props.theme.palette.megaMenu.gray};
+  color: ${props => props.theme.megaMenu.gray};
   font-size: 1.25rem;
   margin-left: 0.5rem;
 `;
@@ -129,13 +88,6 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 0.25rem;
-`;
-
-export const RowWithSpacing = styled(Row)`
-  margin-bottom: 0;
-  &:not(:last-of-type) {
-    margin-bottom: 1.75rem;
-  }
 `;
 
 export const BodyCopy = css`
@@ -147,14 +99,14 @@ export const BodyCopy = css`
 export const FeaturedDescription = styled.p`
   ${BodyCopy};
   letter-spacing: 0;
-  color: ${props => props.theme.palette.megaMenu.secondaryText};
+  color: ${props => props.theme.megaMenu.secondaryText};
 `;
 
 export const AboutCopy = styled.p`
   ${BodyCopy};
-  color: ${props => props.theme.palette.megaMenu.primaryText};
+  color: ${props => props.theme.megaMenu.secondaryText};
   margin-bottom: 2rem;
-  text-align: ${props => props.theme.palette.megaMenu.aboutUsTextAlignment};
+  text-align: ${props => props.theme.megaMenu.aboutUsTextAlignment};
 
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
@@ -170,8 +122,8 @@ export const ButtonBase = css`
 
 export const TextLink = styled(Link)`
   ${ButtonBase};
-
-  color: ${props => props.theme.palette.megaMenu.primaryText};
+  ${props => props.theme.fonts.regularBookMidWeight};
+  color: ${props => props.theme.megaMenu.primaryText};
 
   font-size: 1rem;
   padding: 0;
@@ -201,16 +153,15 @@ export const LearnLink = styled(TextLink)`
   }
 `;
 
-export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
+export const OutlinedButton = styled(LinkButton)`
   ${ButtonBase};
-
-  color: ${props => props.theme.palette.megaMenu.buttonContent};
-
+  color: ${props => props.theme.megaMenu.buttonContent};
   font-size: 0.8725rem;
   padding: 0.4rem 0.75rem;
-  border: ${props => `1px solid ${props.theme.palette.megaMenu.buttonBorder}`};
-  display: ${({ desktopOnly }) => desktopOnly && 'none'};
+  border: ${props => `1px solid ${props.theme.megaMenu.buttonBorder}`};
   white-space: nowrap;
+  margin-top: 2rem;
+
   &:nth-child(2) {
     margin-left: 0.75rem;
   }
@@ -222,14 +173,25 @@ export const OutlinedButton = styled(LinkButton)<{ desktopOnly?: boolean }>`
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    display: inherit;
+    margin-top: 0;
+  }
+`;
+
+export const RowWithSpacing = styled(Row)`
+  margin-bottom: 0;
+  &:not(:last-of-type) {
+    margin-bottom: 1.75rem;
+  }
+
+  ${OutlinedButton} {
+    margin-top: 0;
   }
 `;
 
 export const SocialButtonsRow = styled.div`
     display: flex;
     svg {
-        fill: ${props => props.theme.palette.megaMenu.buttonContent};
+        fill: ${props => props.theme.megaMenu.buttonContent};
         font-size: 1.75rem;
         &:hover {
           fill: ${COLOR_MAP.NEW_BLUE_PURPLE};
@@ -263,4 +225,5 @@ export const LogoWrapper = styled(Link)`
 
 export const NonWrappingSpan = styled.span`
   white-space: nowrap;
+  ${props => props.theme.fonts.regularBookMidWeight};
 `;

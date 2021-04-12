@@ -1,5 +1,4 @@
 import { colors } from '@material-ui/core';
-import { megaMenu } from './customThemeBlocks';
 
 const white = '#FFFFFF';
 const black = '#000000';
@@ -84,5 +83,4 @@ export default {
   icon: colors.blueGrey[600],
   divider: colors.grey[200],
   chart,
-  megaMenu,
 };

@@ -1,4 +1,7 @@
 import urlJoin from 'url-join';
+import mapValues from 'lodash/mapValues';
+
+import statesByFipsJson from 'common/data/states_by_fips.json';
 
 export type FipsCode = string;
 export type ZipCode = string;
@@ -21,6 +24,14 @@ const fipsToPrincipalCityRenames: FipsToPrincipalCityName = {
   [DC_METRO_FIPS]: 'Washington DC',
   [NY_METRO_FIPS]: 'New York City',
 };
+
+// JSON-serializable representation of a Region object
+export interface RegionObject {
+  n: string;
+  u: string;
+  f: FipsCode;
+  p: number;
+}
 
 export abstract class Region {
   constructor(
@@ -52,6 +63,12 @@ export abstract class Region {
   toString() {
     return `${this.name} (fips=${this.fipsCode})`;
   }
+
+  abstract toJSON(): RegionObject;
+}
+
+export interface StateObject extends RegionObject {
+  s: string;
 }
 
 export class State extends Region {
@@ -87,7 +104,32 @@ export class State extends Region {
       (subregion instanceof County && subregion.state === this)
     );
   }
+
+  public toJSON(): StateObject {
+    return {
+      n: this.name,
+      u: this.urlSegment,
+      f: this.fipsCode,
+      p: this.population,
+      s: this.stateCode,
+    };
+  }
+
+  public static fromJSON(obj: StateObject): State {
+    return new State(obj.n, obj.u, obj.f, obj.p, obj.s);
+  }
 }
+
+/**
+ * Construct this mapping here, so we can reference it to simplify reconstitution
+ * of County and MetroArea objects.  The overall size for ~50 states is quite small,
+ * so it's not worth trying to pull out of the main bundle, and having the lookup
+ * available is quite handy.
+ */
+export const statesByFips = mapValues(
+  statesByFipsJson as { [fips: string]: StateObject },
+  v => State.fromJSON(v),
+);
 
 /**
  * Shortens the county name by using the abbreviated version of 'county'
@@ -107,16 +149,24 @@ export function getAbbreviatedCounty(fullCountyName: string) {
   else return fullCountyName.replace('County', 'Co.');
 }
 
+export interface CountyObject extends RegionObject {
+  s: FipsCode;
+  a: FipsCode[];
+}
+
 export class County extends Region {
+  public readonly state: State;
+
   constructor(
     name: string,
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
-    public readonly state: State,
+    stateFips: FipsCode,
     public readonly adjacentCountiesFips: FipsCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
+    this.state = statesByFips[stateFips];
   }
 
   get fullName() {
@@ -142,21 +192,51 @@ export class County extends Region {
   contains(subregion: Region): boolean {
     return false;
   }
+
+  public toJSON(): CountyObject {
+    return {
+      n: this.name,
+      u: this.urlSegment,
+      f: this.fipsCode,
+      p: this.population,
+      s: this.state.fipsCode,
+      a: this.adjacentCountiesFips,
+    };
+  }
+
+  public static fromJSON(obj: CountyObject): County {
+    return new County(obj.n, obj.u, obj.f, obj.p, obj.s, obj.a);
+  }
+}
+
+export interface MetroAreaObject extends RegionObject {
+  c: FipsCode[];
+  s: FipsCode[];
 }
 
 /**
  * Metropolitan Statistical Areas
  */
 export class MetroArea extends Region {
+  public readonly states: State[];
+
   constructor(
     name: string,
     urlSegment: string,
     fipsCode: FipsCode,
     population: number,
-    public counties: County[],
-    public states: State[],
+    // MetroAreas are constructed by FIPS for states, but the states are retrieved
+    // and stored as objects
+    statesFips: FipsCode[],
+    // We intentionally only store counties by FIPS code instead of rich objects
+    // so we can construct MetroArea objects without loading the entire counties DB.
+    // This will be very useful for rendering things above the fold on location pages
+    // and deferred loading the big data for charts down below.
+    // If you need the county object, you  can look it up by FIPS from the regions_db.
+    public readonly countiesFips: FipsCode[],
   ) {
     super(name, urlSegment, fipsCode, population, RegionType.MSA);
+    this.states = statesFips.map(fips => statesByFips[fips]);
   }
 
   private get principalCityName() {
@@ -191,6 +271,24 @@ export class MetroArea extends Region {
   }
 
   contains(subregion: Region): boolean {
-    return subregion instanceof County && this.counties.includes(subregion);
+    return (
+      subregion instanceof County &&
+      this.countiesFips.includes(subregion.fipsCode)
+    );
+  }
+
+  public toJSON(): MetroAreaObject {
+    return {
+      n: this.name,
+      u: this.urlSegment,
+      f: this.fipsCode,
+      p: this.population,
+      s: this.states.map(state => state.fipsCode),
+      c: this.countiesFips,
+    };
+  }
+
+  public static fromJSON(obj: MetroAreaObject): MetroArea {
+    return new MetroArea(obj.n, obj.u, obj.f, obj.p, obj.s, obj.c);
   }
 }

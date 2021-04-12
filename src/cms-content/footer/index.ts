@@ -1,4 +1,5 @@
 import { Markdown } from '../utils';
+import shuffle from 'lodash/shuffle';
 import footer from './footer.json';
 
 export interface LinkItem {
@@ -19,10 +20,18 @@ export interface FeaturedItem {
   iconId: SectionId;
 }
 
-interface FooterContent {
+interface MenuContent {
   learnLinks: LinkItem[];
   aboutUs: Markdown;
   featuredSections: FeaturedItem[];
 }
 
-export const footerContent = footer as FooterContent;
+const { learnLinks, aboutUs, featuredSections } = footer;
+
+const menuContentWithShuffleLearnLinks = {
+  learnLinks: shuffle(learnLinks),
+  aboutUs,
+  featuredSections,
+};
+
+export const menuContent = menuContentWithShuffleLearnLinks as MenuContent;

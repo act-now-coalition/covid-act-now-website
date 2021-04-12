@@ -1,7 +1,7 @@
 import React from 'react';
 import Fade from '@material-ui/core/Fade';
-import { StyledMegaMenu } from './Menu.style';
-import MenuContent from './MenuContent';
+import { StyledMegaMenu } from './MegaMenu.style';
+import MenuContent from 'components/MenuContent';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 import { LockBodyScroll } from 'components/Dialog';
 import { useBreakpoint } from 'common/hooks';
