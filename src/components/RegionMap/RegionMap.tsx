@@ -1,10 +1,17 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 import * as topojson from 'topojson-client';
 import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
-import regions, { County, MetroArea, State, Region } from 'common/regions';
+import {
+  useRegionsDB,
+  RegionDB,
+  County,
+  MetroArea,
+  State,
+  Region,
+} from 'common/regions';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { useCountyGeographies, useStateGeographies } from 'common/hooks';
 import * as Styles from './RegionMap.style';
@@ -17,14 +24,26 @@ const RegionMap: React.FC<{
 }> = ({ height = 600, width = 800, region }) => {
   const [tooltipContent, setTooltipContent] = useState('');
 
-  const countyFipsList = useMemo(() => getCountyFipsList(region), [region]);
+  const regions = useRegionsDB();
+
+  const [countyFipsList, setCountyFipsList] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      if (regions) {
+        const fipsList = getCountyFipsList(regions, region);
+        setCountyFipsList(fipsList);
+      }
+    };
+    load();
+  }, [regions, region]);
 
   const { result: allCountiesTopoJson } = useCountyGeographies();
   const { result: statesTopoJson } = useStateGeographies();
 
   const countiesTopoJson = useMemo(
     () =>
-      allCountiesTopoJson
+      countyFipsList !== null && allCountiesTopoJson
         ? buildCountyGeometries(allCountiesTopoJson, countyFipsList)
         : null,
     [countyFipsList, allCountiesTopoJson],
@@ -39,7 +58,7 @@ const RegionMap: React.FC<{
       : null;
   }, [countiesTopoJson, width, height]);
 
-  if (!statesTopoJson || !countiesTopoJson || !projectionConfig) {
+  if (!regions || !statesTopoJson || !countiesTopoJson || !projectionConfig) {
     return null;
   }
 
@@ -187,7 +206,7 @@ function buildCountyGeometries(
   };
 }
 
-function getCountyFipsList(region: Region): string[] {
+function getCountyFipsList(regions: RegionDB, region: Region): string[] {
   if (region instanceof MetroArea) {
     return region.countiesFips;
   } else if (region instanceof State) {
