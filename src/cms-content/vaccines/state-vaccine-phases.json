@@ -1496,7 +1496,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "10",
+      "emailAlertVersion": "11",
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
@@ -1532,8 +1532,8 @@
           "startDate": "April 5, 2021"
         },
         {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T20:41:49.246Z",
+          "currentlyEligible": true,
+          "updatedAt": "2021-04-12T17:37:10.100Z",
           "phase": "5",
           "description": "* Ages 30+",
           "startDate": "April 12, 2021"
