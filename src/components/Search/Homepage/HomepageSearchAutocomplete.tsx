@@ -79,17 +79,17 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  const getPlaceholderText = (): string => {
-    if (isOpen) {
-      return '';
-    } else {
-      if (isMobile) {
-        return 'City, county, or state';
-      } else {
-        return 'Search city, county, or state';
-      }
-    }
-  };
+  // const getPlaceholderText = (): string => {
+  //   if (isOpen) {
+  //     return '';
+  //   } else {
+  //     if (isMobile) {
+  //       return 'City, county, or state';
+  //     } else {
+  //       return 'Search city, county, or state';
+  //     }
+  //   }
+  // };
 
   const lockBackgroundScroll = isMobile && isOpen;
 
@@ -109,6 +109,7 @@ const HomepageSearchAutocomplete: React.FC<{
           onInputChange={onInputChange}
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
+          getOptionLabel={() => ''}
           filterOptions={createFilterOptions({
             matchFrom: checkForZipcodeMatch ? 'any' : 'start',
             limit: filterLimit,
@@ -138,7 +139,7 @@ const HomepageSearchAutocomplete: React.FC<{
           renderInput={params => (
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <StyledTextField
-                placeholder={getPlaceholderText()}
+                placeholder="City, county, state, or zip"
                 {...params}
                 className={searchTextFieldStyles.root}
                 $isOpen={isOpen}
