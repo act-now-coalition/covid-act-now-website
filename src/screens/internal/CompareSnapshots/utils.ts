@@ -9,7 +9,7 @@ import {
   fetchProjectionsRegion,
 } from 'common/utils/model';
 import { snapshotUrl } from 'common/utils/snapshots';
-import regions, { County, MetroArea, Region } from 'common/regions';
+import { County, MetroArea, Region, getRegionsDB } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { fetchSummaries } from 'common/location_summaries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
@@ -63,6 +63,7 @@ export function useProjectionsSet(
           ),
         );
       } else if (locations === CompareLocations.TOP_COUNTIES_BY_POPULATION) {
+        const regions = await getRegionsDB();
         const topCounties = regions.topCountiesByPopulation(COUNTIES_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
@@ -71,6 +72,7 @@ export function useProjectionsSet(
           ),
         );
       } else if (locations === CompareLocations.TOP_METROS_BY_POPULATION) {
+        const regions = await getRegionsDB();
         const topMetros = regions.topMetrosByPopulation(METROS_LIMIT);
         setProjectionsSet(
           ProjectionsSet.fromProjections(
@@ -140,6 +142,7 @@ export function useProjectionsSet(
           );
         }
       } else if (locations === CompareLocations.DISABLED) {
+        const regions = await getRegionsDB();
         const disabledRegions = regions
           .all()
           .filter(r => getRegionMetricOverride(r, metric)?.blocked);
@@ -223,6 +226,7 @@ async function fetchSortedRegionDiffs(
     return null;
   }
 
+  const regions = await getRegionsDB();
   return regions
     .all()
     .map(region => {
