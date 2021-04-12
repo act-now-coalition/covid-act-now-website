@@ -3,8 +3,6 @@ import mapValues from 'lodash/mapValues';
 import keyBy from 'lodash/keyBy';
 import values from 'lodash/values';
 
-import { assert } from 'common/utils';
-
 import statesByFipsJson from 'common/data/states_by_fips.json';
 import { assert } from 'common/utils';
 
