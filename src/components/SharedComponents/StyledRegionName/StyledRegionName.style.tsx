@@ -7,12 +7,9 @@ const textEllipsis = `
   overflow: hidden;
 `;
 
-export const Wrapper = styled.div<{
-  $condensed?: boolean;
-  $truncateText?: boolean;
-}>`
+export const Wrapper = styled.div<{ $truncateText?: boolean }>`
   font-weight: 500;
-  font-size: ${({ $condensed }) => ($condensed ? '1rem' : '1.125rem')};
+  font-size: 1rem;
   ${({ $truncateText }) => ($truncateText ? textEllipsis : '')}
   line-height: 1.4;
 `;
