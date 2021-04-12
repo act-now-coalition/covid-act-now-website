@@ -1276,11 +1276,11 @@
         {
           "phase": "1C",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Additional essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "April 12, 2021",
-          "updatedAt": "2021-04-01T17:54:22.437Z"
+          "updatedAt": "2021-04-12T17:35:25.024Z"
         },
         {
           "phase": "2",
