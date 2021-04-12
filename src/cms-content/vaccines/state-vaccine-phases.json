@@ -241,64 +241,20 @@
       "fips": "11",
       "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine-information",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
-        {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Long-term care residents\n* Health care personnel\n* Fire and emergency medical personnel\n* Front-line public health workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Older individuals (65+)\n* Staff and members of congregate settings\n* First responders\n* Teachers and childcare workers\n* Essential frontline workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-11T18:54:30.346Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* DC residents 16+ with a chronic medical condition \n* Additional essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* \\* Individuals working in non-public transit\n* Individuals working in logistics/delivery/courier services\n* Essential employees working in media and mass communications",
-          "expandedDefinitionUrl": "",
-          "startDate": "Week of March 29, 2021",
-          "updatedAt": "2021-04-01T17:05:54.774Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "3",
-          "currentlyEligible": false,
-          "description": "* Other essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "April 12, 2021",
-          "updatedAt": "2021-03-18T17:37:29.980Z"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-08T03:51:07.977Z"
+          "startDate": "April 12, 2021",
+          "updatedAt": "2021-04-12T17:50:53.263Z"
         }
       ],
-      "stateSignupUrl": "https://v51r5a21s.dc.gov/"
+      "stateSignupUrl": "https://v51r5a21s.dc.gov/",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "7",
@@ -385,19 +341,19 @@
           "phase": "1C",
           "tier": "2",
           "currentlyEligible": true,
-          "description": "* Older adults (65-69)\n* Persons (16+) with high risk medical conditions\n* Other essential workers\n* (NEW) Some counties are vaccinating all individuals 16+ (Hawaii Island, Kauai)",
+          "description": "* Older adults (65-69)\n* Persons (16+) with high risk medical conditions\n* Other essential workers\n* Some islands are vaccinating all individuals 16+ (Hawaii Island, Kauai, Maui, Lanai, Molokai)",
           "expandedDefinitionUrl": "",
           "startDate": "March 15, 2021",
-          "updatedAt": "2021-03-15T14:39:19.021Z"
+          "updatedAt": "2021-04-12T17:52:28.967Z"
         },
         {
           "phase": "2",
           "tier": "",
           "currentlyEligible": false,
-          "description": "* General public",
+          "description": "* All individuals 16+ (Oahu)",
           "expandedDefinitionUrl": "",
           "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-01T17:08:37.692Z"
+          "updatedAt": "2021-04-12T17:52:43.588Z"
         }
       ],
       "stateSignupUrl": "https://hawaiicovid19.com/vaccination-registration/"
@@ -429,7 +385,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Illinois",
       "fips": "17",
       "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
@@ -473,17 +429,17 @@
           "updatedAt": "2021-04-08T03:55:31.219Z",
           "phase": "1C",
           "tier": "2",
-          "description": "* Additional essential workers, including restaurant staff, construction workers, and religious leaders\n* Certain counties are vaccinating individuals 16+",
+          "description": "* Additional essential workers, including restaurant staff, construction workers, and religious leaders",
           "startDate": "March 29, 2021"
         },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Individuals 16+ (statewide except Chicago until April 19)",
           "expandedDefinitionUrl": "",
           "startDate": "April 12, 2021",
-          "updatedAt": "2021-04-08T03:55:48.140Z"
+          "updatedAt": "2021-04-12T17:53:53.915Z"
         }
       ],
       "stateSignupUrl": "https://coronavirus.illinois.gov/s/vaccination-location"
