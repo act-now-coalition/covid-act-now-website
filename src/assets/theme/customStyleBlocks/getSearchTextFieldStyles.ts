@@ -12,12 +12,9 @@ export const getSearchTextFieldStyles = makeStyles(theme => ({
     borderRadius: '99px',
     border: 'none',
     '& .MuiOutlinedInput-root': {
-      height: '72px',
+      height: '52px',
       padding: 'inherit',
       paddingLeft: '1rem',
-      [theme.breakpoints.down('xs')]: {
-        height: '52px',
-      },
       '& fieldset': {
         borderColor: COLOR_MAP.GRAY.LIGHT,
         border: `1.5px solid ${COLOR_MAP.GRAY.LIGHT}`,

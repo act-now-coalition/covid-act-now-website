@@ -40,6 +40,7 @@ export const RegionItemsWrapper = styled.div`
   flex-direction: column;
   width: fit-content;
   margin: auto;
+  margin-top: 1rem;
 
   ${StyledLink},${SkeletonWrapper} {
     &:last-of-type {
@@ -49,6 +50,7 @@ export const RegionItemsWrapper = styled.div`
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
+    margin-top: 2.5rem;
 
     ${StyledLink},${SkeletonWrapper} {
       &:last-of-type {

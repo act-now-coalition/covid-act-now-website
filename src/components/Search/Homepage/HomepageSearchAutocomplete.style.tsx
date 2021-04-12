@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import MuiCloseIcon from '@material-ui/icons/Close';
 
 const maxMenuHeight = 240;
-const desktopWidth = 732;
+const desktopWidth = 400;
 const mobileWidth = 350;
 
 export const StyledTextField = styled(TextField).attrs(props => ({
@@ -68,6 +68,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
     width: ${desktopWidth}px;
     height: unset;
     padding: 1rem 1.25rem;
+    margin: auto;
   }
 `;
 

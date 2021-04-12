@@ -14,6 +14,7 @@ export const Wrapper = styled.div<{
   font-weight: 500;
   font-size: ${({ $condensed }) => ($condensed ? '1rem' : '1.125rem')};
   ${({ $truncateText }) => ($truncateText ? textEllipsis : '')}
+  line-height: 1.4;
 `;
 
 export const Suffix = styled.span`
