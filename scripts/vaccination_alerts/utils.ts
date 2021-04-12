@@ -159,8 +159,11 @@ function renderEmail(data: VaccinationEmailAlertData) {
 /**
  * Generates the information that the email service needs to send the email
  */
-export function generateEmailData(emailAddress: string, fipsCode: string) {
-  const emailData = getEmailAlertData(emailAddress, fipsCode);
+export async function generateEmailData(
+  emailAddress: string,
+  fipsCode: string,
+) {
+  const emailData = await getEmailAlertData(emailAddress, fipsCode);
   const emailHtmlContent = renderEmail(emailData);
 
   // Writing the file locally is useful while styling

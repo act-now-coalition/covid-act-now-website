@@ -6,7 +6,7 @@ import { generateEmailData } from './utils';
 
 async function main(email: string, fipsCode: string) {
   const emailService = new EmailService();
-  const emailData = generateEmailData(email, fipsCode);
+  const emailData = await generateEmailData(email, fipsCode);
 
   try {
     await emailService.sendEmail(emailData);

@@ -86,7 +86,7 @@ class SendVaccinationAlertsService {
       return;
     }
 
-    let sendData: EmailSendData = generateEmailData(email, alert.fips);
+    let sendData: EmailSendData = await generateEmailData(email, alert.fips);
 
     try {
       await this.emailService.sendEmail(sendData);

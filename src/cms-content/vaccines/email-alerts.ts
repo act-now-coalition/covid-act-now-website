@@ -1,6 +1,6 @@
 import html from 'remark-html';
 import remark from 'remark';
-import regions from 'common/regions';
+import { getRegionsDB } from 'common/regions';
 import { assert } from 'common/utils';
 import { getVaccinationDataByRegion } from './index';
 import { getVaccineInfoByFips, RegionPhaseGroup } from './phases';
@@ -52,10 +52,11 @@ function formatVaccinationPhaseInfo(
  * to pass to the email template in
  * `scripts/vaccination_alerts/vaccination-alert-template.html`
  */
-export function getEmailAlertData(
+export async function getEmailAlertData(
   emailAddress: string,
   fipsCode: string,
-): VaccinationEmailAlertData {
+) {
+  const regions = await getRegionsDB();
   const region = regions.findByFipsCodeStrict(fipsCode);
 
   const vacinationInfo = getVaccineInfoByFips(fipsCode);
