@@ -1,6 +1,8 @@
 import urlJoin from 'url-join';
 import mapValues from 'lodash/mapValues';
 
+import { assert } from 'common/utils';
+
 import statesByFipsJson from 'common/data/states_by_fips.json';
 
 export type FipsCode = string;
@@ -130,6 +132,16 @@ export const statesByFips = mapValues(
   statesByFipsJson as { [fips: string]: StateObject },
   v => State.fromJSON(v),
 );
+
+export const findStateByFipsCode = (fips: FipsCode): State | null => {
+  return statesByFips[fips] ?? null;
+};
+
+export const findStateByFipsCodeStrict = (fips: FipsCode): State => {
+  const state = findStateByFipsCode(fips);
+  assert(state, `State unexpectedly not found for ${fips}`);
+  return state;
+};
 
 /**
  * Shortens the county name by using the abbreviated version of 'county'
