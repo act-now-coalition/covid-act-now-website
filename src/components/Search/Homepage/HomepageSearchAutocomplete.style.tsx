@@ -45,7 +45,7 @@ const MobileWrapperOpened = css`
   height: 100%;
   width: 100%;
   z-index: 10000;
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   background-color: white;
   touch-action: none;
 `;
