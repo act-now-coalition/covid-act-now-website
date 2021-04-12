@@ -1299,7 +1299,7 @@
       "fips": "44",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
           "phase": "1",
@@ -1349,10 +1349,10 @@
         {
           "phase": "1",
           "tier": "6",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Ages 40-49",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19",
+          "startDate": "April 12",
           "updatedAt": "2021-03-22T19:57:48.714Z"
         },
         {
