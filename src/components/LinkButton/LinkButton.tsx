@@ -15,7 +15,7 @@ type AnchorLinkType = DetailedHTMLProps<
 
 type StyledButtonProps = ComponentProps<typeof BaseButton>;
 
-type LinkProps = AnchorLinkType | RouterLinkProps | HashLinkProps;
+export type LinkProps = AnchorLinkType | RouterLinkProps | HashLinkProps;
 
 interface TrackingProps {
   trackingCategory: EventCategory;

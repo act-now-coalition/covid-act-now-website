@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import ShareBlock from './ShareBlock';
-import { County, MetroArea, Region, State } from 'common/regions';
+import { Region } from 'common/regions';
 
 import EmbedPreview from './EmbedPreview';
 import { Projections } from 'common/models/Projections';
-import { fail } from 'common/utils';
 
 const BASE_SHARE_URL = 'https://covidactnow.org/us';
 
@@ -43,23 +42,14 @@ const ShareModelBlock = ({
 };
 
 function getUrlAndShareQuote(region?: Region) {
-  let shareURL = BASE_SHARE_URL;
-  let displayName = 'the country';
-  if (region instanceof County) {
-    const county = region as County;
-    shareURL = `${BASE_SHARE_URL}/${region.state.urlSegment}/county/${region.urlSegment}`;
-    displayName = `${county.fullName}`;
-  } else if (region instanceof State) {
-    const state = region as State;
-    shareURL = `${BASE_SHARE_URL}/${state.urlSegment}`;
-    displayName = state.fullName;
-  } else if (region instanceof MetroArea) {
-    shareURL = region.canonicalUrl;
-    displayName = region.fullName;
-  } else if (region) {
-    fail('Unsupported region');
-  }
-
-  return { shareURL, displayName };
+  return region
+    ? {
+        shareURL: region.canonicalUrl,
+        displayName: region.fullName,
+      }
+    : {
+        shareURL: BASE_SHARE_URL,
+        displayName: 'the country',
+      };
 }
 export default ShareModelBlock;

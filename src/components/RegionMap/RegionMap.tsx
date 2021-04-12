@@ -189,7 +189,7 @@ function buildCountyGeometries(
 
 function getCountyFipsList(region: Region): string[] {
   if (region instanceof MetroArea) {
-    return region.counties.map(c => c.fipsCode);
+    return region.countiesFips;
   } else if (region instanceof State) {
     return regions.counties
       .filter(c => c.state.fipsCode === region.fipsCode)

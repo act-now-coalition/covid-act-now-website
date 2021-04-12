@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import { COLOR_MAP } from 'common/colors';
 
 /**
  * Notes:
@@ -29,5 +30,10 @@ import Typography from '@material-ui/core/Typography';
 export const Subtitle1 = styled(Typography).attrs(props => ({
   variant: 'body1',
 }))`
-  ${props => props.theme.fonts.subtitle1};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: 0.875rem;
+  line-height: 1.125;
+  margin-bottom: 0.75rem;
 `;

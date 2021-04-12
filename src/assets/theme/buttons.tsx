@@ -1,5 +1,5 @@
 import { COLOR_MAP } from 'common/colors';
-import fonts from 'common/theme/fonts';
+import fonts from 'assets/theme/fonts';
 import { FlattenSimpleInterpolation } from 'styled-components';
 
 export enum ButtonType {

@@ -48,6 +48,11 @@ const NavBar: React.FC = () => {
     }
   };
 
+  const onClickTopNavItem = (label: string) => {
+    trackNavigation(label);
+    closeMenu();
+  };
+
   const menuProps = {
     open: isMenuOpen,
     closeMenu,
@@ -64,7 +69,7 @@ const NavBar: React.FC = () => {
         {isLocationPage(pathname) && (
           <Style.BackLink
             to="/"
-            onClick={() => trackNavigation('Back Home')}
+            onClick={() => onClickTopNavItem('Back Home')}
             aria-label="Back to Covid Act Now"
           >
             <ArrowBack />
@@ -73,14 +78,14 @@ const NavBar: React.FC = () => {
         <Link
           to="/"
           style={{ display: 'inline-flex' }}
-          onClick={() => trackNavigation('Home (Logo)')}
+          onClick={() => onClickTopNavItem('Home (Logo)')}
           aria-label="Covid Act Now"
         >
           <Logo />
         </Link>
         <Style.Spacer />
         <>
-          <DonateButtonHeart />
+          <DonateButtonHeart onClick={closeMenu} />
           <Style.IconButton
             onMouseEnter={onHoverHamburger}
             onClick={onClickHamburger}

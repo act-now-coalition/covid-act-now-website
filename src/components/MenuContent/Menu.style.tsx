@@ -4,7 +4,6 @@ import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import LinkButton from 'components/LinkButton';
-import fonts from 'common/theme/fonts';
 
 export const mobileBreakpointPlus = '960px';
 
@@ -40,8 +39,7 @@ export const Section = styled.div`
   }
 
   &:last-child {
-    align-items: ${props =>
-      props.theme.palette.megaMenu.aboutUsContentAlignment};
+    align-items: ${props => props.theme.megaMenu.aboutUsContentAlignment};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -63,8 +61,8 @@ export const Section = styled.div`
 `;
 
 export const SectionHeader = styled.h2<{ $desktopOnly?: boolean }>`
-  ${fonts.regularBookMidWeight};
-  color: ${props => props.theme.palette.megaMenu.gray};
+  ${props => props.theme.fonts.regularBookMidWeight};
+  color: ${props => props.theme.megaMenu.gray};
   text-transform: uppercase;
   margin: 0 0 1.25rem;
   font-size: 1rem;
@@ -81,7 +79,7 @@ export const Column = styled.div`
 `;
 
 export const ArrowIcon = styled(ArrowForwardIcon)`
-  color: ${props => props.theme.palette.megaMenu.gray};
+  color: ${props => props.theme.megaMenu.gray};
   font-size: 1.25rem;
   margin-left: 0.5rem;
 `;
@@ -93,7 +91,7 @@ export const Row = styled.div`
 `;
 
 export const BodyCopy = css`
-  ${fonts.regularBook};
+  ${props => props.theme.fonts.regularBook};
   line-height: 1.4;
   margin: 0;
 `;
@@ -101,14 +99,14 @@ export const BodyCopy = css`
 export const FeaturedDescription = styled.p`
   ${BodyCopy};
   letter-spacing: 0;
-  color: ${props => props.theme.palette.megaMenu.secondaryText};
+  color: ${props => props.theme.megaMenu.secondaryText};
 `;
 
 export const AboutCopy = styled.p`
   ${BodyCopy};
-  color: ${props => props.theme.palette.megaMenu.secondaryText};
+  color: ${props => props.theme.megaMenu.secondaryText};
   margin-bottom: 2rem;
-  text-align: ${props => props.theme.palette.megaMenu.aboutUsTextAlignment};
+  text-align: ${props => props.theme.megaMenu.aboutUsTextAlignment};
 
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
@@ -116,7 +114,7 @@ export const AboutCopy = styled.p`
 `;
 
 export const ButtonBase = css`
-  ${fonts.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
   width: fit-content;
   text-transform: none;
   line-height: 1.4;
@@ -124,9 +122,8 @@ export const ButtonBase = css`
 
 export const TextLink = styled(Link)`
   ${ButtonBase};
-  ${fonts.regularBookMidWeight};
-
-  color: ${props => props.theme.palette.megaMenu.primaryText};
+  ${props => props.theme.fonts.regularBookMidWeight};
+  color: ${props => props.theme.megaMenu.primaryText};
 
   font-size: 1rem;
   padding: 0;
@@ -158,10 +155,10 @@ export const LearnLink = styled(TextLink)`
 
 export const OutlinedButton = styled(LinkButton)`
   ${ButtonBase};
-  color: ${props => props.theme.palette.megaMenu.buttonContent};
+  color: ${props => props.theme.megaMenu.buttonContent};
   font-size: 0.8725rem;
   padding: 0.4rem 0.75rem;
-  border: ${props => `1px solid ${props.theme.palette.megaMenu.buttonBorder}`};
+  border: ${props => `1px solid ${props.theme.megaMenu.buttonBorder}`};
   white-space: nowrap;
   margin-top: 2rem;
 
@@ -194,7 +191,7 @@ export const RowWithSpacing = styled(Row)`
 export const SocialButtonsRow = styled.div`
     display: flex;
     svg {
-        fill: ${props => props.theme.palette.megaMenu.buttonContent};
+        fill: ${props => props.theme.megaMenu.buttonContent};
         font-size: 1.75rem;
         &:hover {
           fill: ${COLOR_MAP.NEW_BLUE.PURPLE};
@@ -228,5 +225,5 @@ export const LogoWrapper = styled(Link)`
 
 export const NonWrappingSpan = styled.span`
   white-space: nowrap;
-  ${fonts.regularBookMidWeight};
+  ${props => props.theme.fonts.regularBookMidWeight};
 `;
