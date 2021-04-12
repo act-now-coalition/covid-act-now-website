@@ -1,5 +1,5 @@
-import React from 'react';
-import regions, { Region } from 'common/regions';
+import React, { useEffect, useState } from 'react';
+import { useRegionsDB, Region } from 'common/regions';
 import {
   Container,
   Content,
@@ -13,6 +13,7 @@ import EmailAlertsForm from 'components/EmailAlertsForm';
 const EmailAlertsFooter: React.FC<{ defaultRegions: Region[] }> = ({
   defaultRegions,
 }) => {
+  const regions = useRegionsDB();
   return (
     <Container>
       <Content>
@@ -28,7 +29,7 @@ const EmailAlertsFooter: React.FC<{ defaultRegions: Region[] }> = ({
         </Section>
         <Section key="email-form">
           <EmailAlertsForm
-            autocompleteRegions={regions.all()}
+            autocompleteRegions={regions?.all() ?? ([] as Region[])}
             defaultRegions={defaultRegions}
           />
         </Section>
