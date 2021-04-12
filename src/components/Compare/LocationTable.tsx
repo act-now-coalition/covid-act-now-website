@@ -16,7 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
 import { trackCompareEvent } from 'common/utils/compare';
 import { EventAction } from 'components/Analytics';
-import { Region, MetroArea } from 'common/regions';
+import { Region, RegionDB, MetroArea } from 'common/regions';
 import { ColumnDefinition } from './columns';
 
 const LocationTableHead: React.FunctionComponent<{
@@ -129,6 +129,7 @@ const LocationTableBody: React.FunctionComponent<{
   isHomepage?: boolean;
   showStateCode: boolean;
   columns: ColumnDefinition[];
+  regions: RegionDB;
 }> = ({
   sortedLocations,
   sorter,
@@ -137,6 +138,7 @@ const LocationTableBody: React.FunctionComponent<{
   isHomepage,
   showStateCode,
   columns,
+  regions,
 }) => (
   <Table>
     <TableBody>
@@ -150,6 +152,7 @@ const LocationTableBody: React.FunctionComponent<{
           isHomepage={isHomepage}
           showStateCode={showStateCode}
           columns={columns}
+          regions={regions}
         />
       ))}
     </TableBody>
@@ -187,6 +190,7 @@ const LocationTable: React.FunctionComponent<{
   geoScope: GeoScopeFilter;
   homepageScope: HomepageLocationScope;
   region?: Region;
+  regions: RegionDB;
 }> = ({
   setSorter,
   setSortDescending,
@@ -207,6 +211,7 @@ const LocationTable: React.FunctionComponent<{
   geoScope,
   homepageScope,
   region,
+  regions,
 }) => {
   const Container = isModal ? Styles.ModalContainer : Styles.Container;
 
@@ -302,6 +307,7 @@ const LocationTable: React.FunctionComponent<{
             <Table key="table-pinned-location">
               <TableBody>
                 <CompareTableRow
+                  regions={regions}
                   columns={columns}
                   location={pinnedLocation}
                   sorter={sorter}
@@ -323,6 +329,7 @@ const LocationTable: React.FunctionComponent<{
             isHomepage={isHomepage}
             showStateCode={showStateCode}
             columns={columns}
+            regions={regions}
           />
         </Styles.Body>
         {pinnedLocation && showBottom && !isModal && (
@@ -334,6 +341,7 @@ const LocationTable: React.FunctionComponent<{
               currentLocationRank={pinnedLocation?.rank}
               sortByPopulation={sortByPopulation}
               showStateCode={showStateCode}
+              regions={regions}
             />
           </Styles.Body>
         )}

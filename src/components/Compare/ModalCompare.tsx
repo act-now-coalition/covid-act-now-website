@@ -9,7 +9,7 @@ import {
 } from 'common/utils/compare';
 import Filters from 'components/Compare/Filters';
 import { LockBodyScroll } from 'components/Dialog';
-import { Region, MetroArea } from 'common/regions';
+import { Region, RegionDB, MetroArea } from 'common/regions';
 
 interface ModalCompareProps {
   stateName?: string;
@@ -34,6 +34,7 @@ interface ModalCompareProps {
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
   region?: Region;
+  regions: RegionDB;
   vaccinesFirst?: boolean;
   vulnerabilityFirst?: boolean;
 }
@@ -103,6 +104,7 @@ const ModalCompare = (props: ModalCompareProps) => {
         setHomepageScope={props.setHomepageScope}
         homepageSliderValue={props.homepageSliderValue}
         region={props.region}
+        regions={props.regions}
         vaccinesFirst={props.vaccinesFirst}
         vulnerabilityFirst={props.vulnerabilityFirst}
       />

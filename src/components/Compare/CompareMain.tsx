@@ -35,9 +35,11 @@ import {
   storeSharedComponentParams,
   useSharedComponentParams,
 } from 'common/sharing';
-import regions, {
+import {
   Region,
   MetroArea,
+  RegionDB,
+  useRegionsDB,
   getStateCode,
   County,
 } from 'common/regions';
@@ -57,6 +59,8 @@ const CompareMain = (props: {
   vulnerabilityFirst?: boolean;
 }) => {
   const tableRef = useRef<HTMLDivElement>(null);
+
+  const regions = useRegionsDB();
 
   const [region, setRegion] = useState(props.region);
 
@@ -199,7 +203,7 @@ const CompareMain = (props: {
   const homepageSliderValue = useHomepageCompareSliderMap(homepageScope);
 
   useEffect(() => {
-    if (sharedParams) {
+    if (regions && sharedParams) {
       const { stateId, countyId, regionFips } = sharedParams;
       if (stateId) {
         setStateId(stateId);
@@ -221,7 +225,7 @@ const CompareMain = (props: {
       // Now that the UI is populated, we can capture the screenshot.
       setScreenshotReady(true);
     }
-  }, [sharedParams]);
+  }, [regions, sharedParams]);
 
   // If the user clicks on the banner or the announcement, we put vaccinations in the first column
   // select states and sort by vaccination (desc)
@@ -244,13 +248,14 @@ const CompareMain = (props: {
   }, [props.vulnerabilityFirst]);
 
   /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
-  if (!locations || locations.length < 2) {
+  if (!regions || !locations || locations.length < 2) {
     return null;
   }
 
   const sharedProps = {
     stateName: props.stateName,
     stateId,
+    regions,
     setShowModal,
     isHomepage,
     locations,

@@ -16,7 +16,7 @@ import {
 } from 'components/Compare/Compare.style';
 import { RankedLocationSummary } from 'common/utils/compare';
 import { formatEstimate } from 'common/utils';
-import regions from 'common/regions';
+import { RegionDB } from 'common/regions';
 import { fail } from 'assert';
 import { StyledRegionName } from 'components/SharedComponents';
 import { ColumnDefinition } from './columns';
@@ -30,6 +30,7 @@ const CompareTableRow = (props: {
   sortByPopulation: boolean;
   isHomepage?: boolean;
   showStateCode: boolean;
+  regions: RegionDB;
 }) => {
   const {
     columns,
@@ -40,6 +41,7 @@ const CompareTableRow = (props: {
     sortByPopulation,
     isHomepage,
     showStateCode,
+    regions,
   } = props;
 
   const fipsCode = location.region.fipsCode;

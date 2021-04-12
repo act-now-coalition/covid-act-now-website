@@ -30,7 +30,7 @@ import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
 import { Subtitle1 } from 'components/Typography';
-import { Region, MetroArea } from 'common/regions';
+import { Region, RegionDB, MetroArea } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import {
   orderedColumns,
@@ -44,6 +44,7 @@ function trackShare(label: string) {
 
 const CompareTable = (props: {
   stateName?: string;
+  regions: RegionDB;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isModal: boolean;
   locationsViewable?: number;
@@ -72,6 +73,7 @@ const CompareTable = (props: {
 }) => {
   const {
     currentCounty,
+    regions,
     sorter,
     setSorter,
     sortDescending,
@@ -275,6 +277,7 @@ const CompareTable = (props: {
         geoScope={props.geoScope}
         homepageScope={homepageScope}
         region={region}
+        regions={regions}
       />
       {!props.isModal && (
         <Footer>
