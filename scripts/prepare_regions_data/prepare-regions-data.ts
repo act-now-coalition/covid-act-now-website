@@ -15,7 +15,12 @@ import {
   generateStateUrlSegment,
   generateCountyUrlSegment,
   generateMetroAreaUrlSegment,
+  getRegionsDB,
 } from '../../src/common/regions';
+import {
+  computeLargestMetroFipsForExplore,
+  DEFAULT_EXPLORE_GEOLOCATION_COUNT,
+} from '../../src/screens/HomePage/utils';
 
 const fs = require('fs-extra');
 
@@ -142,10 +147,28 @@ async function generateUrlToFipsMappings() {
   );
 }
 
+/**
+ * This is statically computable, and can help us break a runtime dependency on the regions DB.
+ */
+async function generateLargestMetroFipsForExplore() {
+  console.log('  Generating largest_metro_fips_for_explore.json...');
+
+  const regions = await getRegionsDB();
+  const fips = computeLargestMetroFipsForExplore(
+    regions,
+    DEFAULT_EXPLORE_GEOLOCATION_COUNT,
+  );
+  await fs.writeJson(
+    path.join(destinationDir, 'largest_metro_fips_for_explore.json'),
+    fips,
+  );
+}
+
 async function main() {
   validateUrlSegments();
   await writeRegionsData();
   await generateUrlToFipsMappings();
+  await generateLargestMetroFipsForExplore();
 }
 
 if (require.main === module) {
