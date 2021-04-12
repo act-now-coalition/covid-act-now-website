@@ -392,45 +392,13 @@
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "1A",
+          "phase": "1",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care residents",
+          "description": "* Health care workers, long-term care residents\n* Persons 65+\n* Persons 16+ with high-risk medical conditions\n* Essential workers",
           "expandedDefinitionUrl": "",
           "startDate": "",
           "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Persons ages 65 and over\n* Non-health care, front-line essential workers (first responders, education, food and agriculture, manufacturing, corrections, USPS, public transit, grocery stores, shelters)",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-22T16:46:52.360Z",
-          "phase": "1B+",
-          "description": "* Persons aged 16 to 64 years with high-risk medical conditions"
-        },
-        {
-          "phase": "1C",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Other essential workers, including higher education staff, government workers, and media",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 22, 2021",
-          "updatedAt": "2021-03-22T16:47:57.865Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-08T03:55:31.219Z",
-          "phase": "1C",
-          "tier": "2",
-          "description": "* Additional essential workers, including restaurant staff, construction workers, and religious leaders",
-          "startDate": "March 29, 2021"
         },
         {
           "phase": "2",
