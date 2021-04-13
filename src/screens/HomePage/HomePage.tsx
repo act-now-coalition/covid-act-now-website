@@ -15,8 +15,8 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { useFilterLimit } from 'components/Search';
 import {
   findStateByStateCodeStrict,
-  getFinalAutocompleteLocations,
-  getGeolocatedRegions,
+  useFinalAutocompleteLocations,
+  useGeolocatedRegions,
 } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
@@ -60,12 +60,14 @@ export default function HomePage() {
   const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
   const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
 
+  const autocompleteLocations = useFinalAutocompleteLocations(
+    geolocationData,
+    countyToZipMap,
+  );
+
   const isLoading = geoIsLoading || zipIsLoading;
 
-  const userRegions =
-    geolocationData && countyToZipMap
-      ? getGeolocatedRegions(geolocationData, countyToZipMap)
-      : null;
+  const userRegions = useGeolocatedRegions(geolocationData, countyToZipMap);
 
   const exploreGeoLocations = useGeolocationInExplore(
     DEFAULT_EXPLORE_GEOLOCATION_COUNT,
@@ -140,10 +142,7 @@ export default function HomePage() {
           <Content>
             <ColumnCentered id="search">
               <HomepageSearchAutocomplete
-                locations={getFinalAutocompleteLocations(
-                  geolocationData,
-                  countyToZipMap,
-                )}
+                locations={autocompleteLocations}
                 filterLimit={autocompleteLimit}
               />
               <Experiment id={ExperimentID.GEOLOCATED_LINKS}>

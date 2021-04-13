@@ -14,7 +14,7 @@ export const Home = async () => {
     stateCode: 'CT',
     country: 'United States',
   };
-  const locations = getFinalAutocompleteLocations(geolocation);
+  const locations = await getFinalAutocompleteLocations(geolocation);
   return (
     <HomepageSearchAutocomplete
       locations={locations}

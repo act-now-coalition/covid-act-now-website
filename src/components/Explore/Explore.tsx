@@ -153,10 +153,20 @@ const Explore: React.FunctionComponent<{
     () => ['00001', '00002'].map(fips => regions.findByFipsCode(fips)!),
     [],
   );
-  const autocompleteLocations = useMemo(
-    () => getExploreAutocompleteLocations(initialFipsList[0]),
-    [initialFipsList],
+
+  const [autocompleteLocations, setAutocompleteLocations] = useState<Region[]>(
+    [] as Region[],
   );
+
+  useEffect(() => {
+    const load = async () => {
+      const locations = await getExploreAutocompleteLocations(
+        initialFipsList[0],
+      );
+      setAutocompleteLocations(locations);
+    };
+    load();
+  }, [initialFipsList]);
 
   const [selectedLocations, setSelectedLocations] = useState<Region[]>(
     initialLocations,

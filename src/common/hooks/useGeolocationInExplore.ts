@@ -32,19 +32,25 @@ export default function useGeolocationInExplore(
   const { result: countyToZipMap } = useCountyToZipMap();
 
   useEffect(() => {
-    if (geolocation && countyToZipMap) {
-      const userRegions = getGeolocatedRegions(geolocation, countyToZipMap);
-      if (!isNull(userRegions)) {
-        const regionValues = values(userRegions);
-        const filteredUserRegions = filterUndefinedRegions(regionValues);
-        const userRegionsFips = (filteredUserRegions as []).map(
-          (region: Region) => region.fipsCode,
+    const load = async () => {
+      if (geolocation && countyToZipMap) {
+        const userRegions = await getGeolocatedRegions(
+          geolocation,
+          countyToZipMap,
         );
-        if (userRegionsFips.length) {
-          setInitialExploreFips(userRegionsFips);
+        if (!isNull(userRegions)) {
+          const regionValues = values(userRegions);
+          const filteredUserRegions = filterUndefinedRegions(regionValues);
+          const userRegionsFips = (filteredUserRegions as []).map(
+            (region: Region) => region.fipsCode,
+          );
+          if (userRegionsFips.length) {
+            setInitialExploreFips(userRegionsFips);
+          }
         }
       }
-    }
+    };
+    load();
   }, [geolocation, countyToZipMap]);
 
   return initialExploreFips;

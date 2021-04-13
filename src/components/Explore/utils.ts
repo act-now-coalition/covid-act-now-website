@@ -12,7 +12,8 @@ import { Column, DatasetId } from 'common/models/Projection';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
 import AggregationsJSON from 'assets/data/aggregations.json';
-import regions, {
+import {
+  getRegionsDB,
   County,
   MetroArea,
   Region,
@@ -225,14 +226,15 @@ function scalePer100k(data: Column[], population: number) {
  * used for the multiple-locations Explore chart. It receives a color
  * so we can differentiate the lines in the chart
  */
-function getAveragedSeriesForMetric(
+async function getAveragedSeriesForMetric(
   metric: ExploreMetric,
   projection: ProjectionLike,
   color: string,
   normalizeData: boolean,
-): Series {
+) {
   const { fips, totalPopulation } = projection;
   const datasetId = getDatasetIdByMetric(metric);
+  const regions = await getRegionsDB();
   const location = regions.findByFipsCode(fips)!;
   const data = cleanSeries(projection.getDataset(datasetId));
   const metricName = exploreMetricData[metric].seriesList[0].tooltipLabel;
@@ -416,9 +418,10 @@ export function getSubtitle(
     : `${metricName} ${textPer100k} in ${getLocationNames(regions)}`;
 }
 
-export function getExploreAutocompleteLocations(locationFips: string) {
+export async function getExploreAutocompleteLocations(locationFips: string) {
+  const regions = await getRegionsDB();
   const currentLocation = regions.findByFipsCode(locationFips)!;
-  const locations = getAutocompleteRegions(currentLocation);
+  const locations = await getAutocompleteRegions(currentLocation);
   return concat(regions.customAreas, locations);
 }
 
@@ -480,7 +483,7 @@ export function getChartSeries(
     return Promise.all(
       regions.map(async (region, i) => {
         const projection = await getProjectionForRegion(region);
-        return getAveragedSeriesForMetric(
+        return await getAveragedSeriesForMetric(
           metric,
           projection,
           SERIES_COLORS[i % SERIES_COLORS.length],

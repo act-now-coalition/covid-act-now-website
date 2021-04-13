@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MapIcon from 'assets/images/mapIcon';
-import { getFinalAutocompleteLocations } from 'common/regions';
+import { useFinalAutocompleteLocations } from 'common/regions';
 import { useCountyToZipMap, useGeolocation } from 'common/hooks';
 import SearchAutocomplete, { useFilterLimit } from 'components/Search';
 import {
@@ -31,6 +31,10 @@ const SearchHeader = ({
   /* We hide the minimap toggle button when the searchbar is in focus on mobile */
   const [hideMapToggle, setHideMapToggle] = useState(false);
 
+  const autocompleteLocations = useFinalAutocompleteLocations(
+    geolocationData,
+    countyToZipMap,
+  );
   const autocompleteFilterLimit = useFilterLimit();
 
   return (
@@ -43,10 +47,7 @@ const SearchHeader = ({
           <SearchAutocomplete
             filterLimit={autocompleteFilterLimit}
             setHideMapToggle={setHideMapToggle}
-            locations={getFinalAutocompleteLocations(
-              geolocationData,
-              countyToZipMap,
-            )}
+            locations={autocompleteLocations}
           />
         </SelectorWrapper>
         {isMobile && (

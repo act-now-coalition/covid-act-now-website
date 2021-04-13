@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import concat from 'lodash/concat';
 import partition from 'lodash/partition';
 import sortBy from 'lodash/sortBy';
@@ -5,8 +6,16 @@ import find from 'lodash/find';
 import values from 'lodash/values';
 import isNull from 'lodash/isNull';
 import without from 'lodash/without';
-import regions from './region_db';
-import { County, State, Region, RegionType, MetroArea } from './types';
+
+import { getRegionsDB, RegionDB } from './region_db';
+import {
+  findStateByStateCodeStrict,
+  County,
+  State,
+  Region,
+  RegionType,
+  MetroArea,
+} from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
 import { CountyToZipMap } from 'common/data';
 
@@ -95,7 +104,8 @@ function compareRegionsByNameAndPopulation(region1: Region, region2: Region) {
  * Metro: counties in metro, states, other counties, metros
  * State and County: counties in the state, states, metros, other counties
  */
-export function getAutocompleteRegions(region?: Region): Region[] {
+export async function getAutocompleteRegions(region?: Region) {
+  const regions = await getRegionsDB();
   const { states, metroAreas, counties } = regions;
 
   // Homepage
@@ -146,17 +156,8 @@ function countyIncludesZip(
   return countyToZipMap[county.fipsCode]?.includes(zipCode);
 }
 
-export function getStateRegionFromStateCode(
-  stateCode: string,
-): Region | undefined {
-  const regionFromStateCode = find(
-    regions.states,
-    (region: State) => region.stateCode === stateCode,
-  );
-  return regionFromStateCode;
-}
-
 export function getCountyRegionFromZipCode(
+  regions: RegionDB,
   zipCode: string,
   countyToZipMap: CountyToZipMap,
 ): Region | undefined {
@@ -167,10 +168,15 @@ export function getCountyRegionFromZipCode(
 }
 
 export function getMetroRegionFromZipCode(
+  regions: RegionDB,
   zipCode: string,
   countyToZipMap: CountyToZipMap,
 ): Region | undefined {
-  const countyFromZip = getCountyRegionFromZipCode(zipCode, countyToZipMap);
+  const countyFromZip = getCountyRegionFromZipCode(
+    regions,
+    zipCode,
+    countyToZipMap,
+  );
   const metroFromZip =
     countyFromZip &&
     find(regions.metroAreas, (region: MetroArea) =>
@@ -185,17 +191,47 @@ export interface GeolocatedRegions {
   state?: Region;
 }
 
-export function getGeolocatedRegions(
+export function useGeolocatedRegions(
+  geolocation?: GeolocationInfo,
+  countyToZipMap?: CountyToZipMap,
+) {
+  const [
+    geolocatedRegions,
+    setGeolocatedRegions,
+  ] = useState<GeolocatedRegions | null>(null);
+  useEffect(() => {
+    const load = async () => {
+      if (geolocation && countyToZipMap) {
+        setGeolocatedRegions(
+          await getGeolocatedRegions(geolocation, countyToZipMap),
+        );
+      }
+    };
+    load();
+  }, [geolocation, countyToZipMap]);
+  return geolocatedRegions;
+}
+
+export async function getGeolocatedRegions(
   geolocation: GeolocationInfo,
   countyToZipMap: CountyToZipMap,
-): GeolocatedRegions | null {
+): Promise<GeolocatedRegions | null> {
   if (geolocation.country !== UNITED_STATES) {
     return null;
   } else {
+    const regions = await getRegionsDB();
     return {
-      metroArea: getMetroRegionFromZipCode(geolocation.zipCode, countyToZipMap),
-      county: getCountyRegionFromZipCode(geolocation.zipCode, countyToZipMap),
-      state: getStateRegionFromStateCode(geolocation.stateCode),
+      metroArea: getMetroRegionFromZipCode(
+        regions,
+        geolocation.zipCode,
+        countyToZipMap,
+      ),
+      county: getCountyRegionFromZipCode(
+        regions,
+        geolocation.zipCode,
+        countyToZipMap,
+      ),
+      state: findStateByStateCodeStrict(geolocation.stateCode),
     };
   }
 }
@@ -232,7 +268,6 @@ export function getAutocompleteRegionsWithGeolocation(
   );
 
   const finalLocations = [...sanitizedGeolocatedRegions, ...otherRegions];
-
   return finalLocations;
 }
 
@@ -241,11 +276,11 @@ export function getAutocompleteRegionsWithGeolocation(
  * If so, returns autocomplete results with user's regions at the top.
  * If not, returns autocomplete results sorted for pagetype.
  */
-export function getFinalAutocompleteLocations(
+export async function getFinalAutocompleteLocations(
   geolocation?: GeolocationInfo,
   countyToZipMap?: CountyToZipMap,
-): Region[] {
-  const regionsSortedForPagetype = getAutocompleteRegions();
+) {
+  const regionsSortedForPagetype = await getAutocompleteRegions();
   if (!geolocation || !countyToZipMap) {
     return regionsSortedForPagetype;
   } else {
@@ -255,4 +290,25 @@ export function getFinalAutocompleteLocations(
       countyToZipMap,
     );
   }
+}
+
+export function useFinalAutocompleteLocations(
+  geolocation?: GeolocationInfo,
+  countyToZipMap?: CountyToZipMap,
+) {
+  const [autocompleteLocations, setAutocompleteLocations] = useState(
+    [] as Region[],
+  );
+
+  useEffect(() => {
+    const load = async () => {
+      const locations = await getFinalAutocompleteLocations(
+        geolocation,
+        countyToZipMap,
+      );
+      setAutocompleteLocations(locations);
+    };
+    load();
+  }, [geolocation, countyToZipMap]);
+  return autocompleteLocations;
 }

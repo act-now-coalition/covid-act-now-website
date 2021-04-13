@@ -9,7 +9,7 @@ export default {
 };
 
 export const Home = async () => {
-  const locations = getAutocompleteRegions(undefined);
+  const locations = await getAutocompleteRegions(undefined);
   return (
     <SearchAutocomplete
       locations={locations}
@@ -20,7 +20,7 @@ export const Home = async () => {
 
 export const State = async () => {
   const region = regions.findByFipsCodeStrict('02');
-  const locations = getAutocompleteRegions(region);
+  const locations = await getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
@@ -31,7 +31,7 @@ export const State = async () => {
 
 export const County = async () => {
   const region = regions.findByFipsCodeStrict('53033');
-  const locations = getAutocompleteRegions(region);
+  const locations = await getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
@@ -42,7 +42,7 @@ export const County = async () => {
 
 export const MetroArea = async () => {
   const region = regions.findByFipsCodeStrict('14460');
-  const locations = getAutocompleteRegions(region);
+  const locations = await getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
