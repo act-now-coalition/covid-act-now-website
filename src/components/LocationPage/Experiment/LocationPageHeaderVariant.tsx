@@ -1,11 +1,5 @@
 import React from 'react';
 import LocationPageHeader from '../LocationPageHeader';
-import {
-  Experiment,
-  ExperimentID,
-  Variant,
-  VariantID,
-} from 'components/Experiment';
 import { Level } from 'common/level';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
@@ -38,16 +32,7 @@ const LocationPageHeaderVariant: React.FC<{
     region,
   };
 
-  return (
-    <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
-      <Variant id={VariantID.B}>
-        <LocationPageHeader {...headerProps} />
-      </Variant>
-      <Variant id={VariantID.A}>
-        <LocationPageHeader {...headerProps} showNewButton={true} />
-      </Variant>
-    </Experiment>
-  );
+  return <LocationPageHeader {...headerProps} />;
 };
 
 export default LocationPageHeaderVariant;

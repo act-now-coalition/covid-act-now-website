@@ -8,7 +8,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Metric } from 'common/metricEnum';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { formatUtcDate } from 'common/utils';
-import { Region } from 'common/regions';
+import { Region, MetroArea } from 'common/regions';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { ThermometerImage } from 'components/Thermometer';
 import LocationPageHeading from './LocationPageHeading';
@@ -29,12 +29,17 @@ import {
   SectionColumn,
   LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { MetroArea } from 'common/regions';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import type { MetricValues } from 'common/models/Projections';
 import GetAlertsButton from './Experiment/GetAlertsButton';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
@@ -59,7 +64,6 @@ const LocationPageHeader = (props: {
   onHeaderSignupClick: () => void;
   isMobile?: boolean;
   region: Region;
-  showNewButton?: boolean;
 }) => {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
@@ -83,7 +87,12 @@ const LocationPageHeader = (props: {
 
   const tooltip = renderInfoTooltip();
 
-  const showExperimentButton = props.isMobile && props.showNewButton;
+  const headerButton = (
+    <HeaderButton onClick={props.onHeaderSignupClick || noop}>
+      <NotificationsNoneIcon />
+      Receive alerts
+    </HeaderButton>
+  );
 
   return (
     <Fragment>
@@ -101,11 +110,15 @@ const LocationPageHeader = (props: {
                 <ShareOutlinedIcon />
                 Share
               </HeaderButton>
-              {!showExperimentButton && (
-                <HeaderButton onClick={props.onHeaderSignupClick || noop}>
-                  <NotificationsNoneIcon />
-                  Receive alerts
-                </HeaderButton>
+              {props.isMobile ? (
+                <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
+                  <Variant id={VariantID.B}>{headerButton}</Variant>
+                  <Variant id={VariantID.A}>
+                    <></>
+                  </Variant>
+                </Experiment>
+              ) : (
+                headerButton
               )}
             </ButtonsWrapper>
           </HeaderSection>
@@ -142,8 +155,15 @@ const LocationPageHeader = (props: {
             </HeaderSubCopy>
           )}
         </FooterContainer>
-        {showExperimentButton && (
-          <GetAlertsButton onClick={props.onHeaderSignupClick || noop} />
+        {props.isMobile && (
+          <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
+            <Variant id={VariantID.B}>
+              <Fragment />
+            </Variant>
+            <Variant id={VariantID.A}>
+              <GetAlertsButton onClick={props.onHeaderSignupClick || noop} />
+            </Variant>
+          </Experiment>
         )}
       </Wrapper>
     </Fragment>
