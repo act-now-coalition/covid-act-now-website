@@ -4,9 +4,10 @@ import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import regions, {
+import {
   County,
   Region,
+  RegionDB,
   State,
   MetroArea,
   getStateName,
@@ -38,19 +39,20 @@ function getLocationObj(region: Region): SummaryForCompare {
   };
 }
 
-export function getAllStates(): SummaryForCompare[] {
+export function getAllStates(regions: RegionDB): SummaryForCompare[] {
   return regions.states.map(getLocationObj);
 }
 
-export function getAllCounties(): SummaryForCompare[] {
+export function getAllCounties(regions: RegionDB): SummaryForCompare[] {
   return regions.counties.map(getLocationObj);
 }
 
-export function getAllMetroAreas(): SummaryForCompare[] {
+export function getAllMetroAreas(regions: RegionDB): SummaryForCompare[] {
   return regions.metroAreas.map(getLocationObj);
 }
 
 export function getAllCountiesOfMetroArea(
+  regions: RegionDB,
   region: MetroArea,
 ): SummaryForCompare[] {
   return region.countiesFips
@@ -58,13 +60,17 @@ export function getAllCountiesOfMetroArea(
     .map(getLocationObj);
 }
 
-export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
+export function getAllCountiesOfState(
+  regions: RegionDB,
+  stateCode: string,
+): SummaryForCompare[] {
   return regions.counties
     .filter((region: County) => region.state.stateCode === stateCode)
     .map(getLocationObj);
 }
 
 export function getNeighboringCounties(
+  regions: RegionDB,
   countyFips: string,
 ): SummaryForCompare[] {
   const county = regions.findByFipsCodeStrict(countyFips) as County;

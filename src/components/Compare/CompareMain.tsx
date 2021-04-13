@@ -114,43 +114,43 @@ const CompareMain = (props: {
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
-  const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTY]: getAllCounties(),
-    [HomepageLocationScope.MSA]: getAllMetroAreas(),
-    [HomepageLocationScope.STATE]: getAllStates(),
-  };
-
-  function getHomepageLocations(scope: HomepageLocationScope) {
-    return homepageScopeToLocations[scope];
-  }
-
-  const homepageLocationsForCompare = getHomepageLocations(homepageScope);
-
-  const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
-
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
 
-  function getLocationPageLocations(region: Region) {
+  function getHomepageLocations(
+    regions: RegionDB,
+    scope: HomepageLocationScope,
+  ) {
+    const homepageScopeToLocations = {
+      [HomepageLocationScope.COUNTY]: getAllCounties(regions),
+      [HomepageLocationScope.MSA]: getAllMetroAreas(regions),
+      [HomepageLocationScope.STATE]: getAllStates(regions),
+    };
+    return homepageScopeToLocations[scope];
+  }
+
+  const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
+
+  function getLocationPageLocations(regions: RegionDB, region: Region) {
     const stateCode = getStateCode(region);
     if (region instanceof MetroArea) {
-      return getAllCountiesOfMetroArea(region);
+      return getAllCountiesOfMetroArea(regions, region);
     } else if (geoScope === GeoScopeFilter.NEARBY) {
-      return getNeighboringCounties(region.fipsCode);
+      return getNeighboringCounties(regions, region.fipsCode);
     } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
-      return getAllCountiesOfState(stateCode);
+      return getAllCountiesOfState(regions, stateCode);
     } else {
-      return getAllCounties();
+      return getAllCounties(regions);
     }
   }
 
-  function getFinalLocations(region?: Region) {
+  function getFinalLocations(regions: RegionDB, region?: Region) {
     return region
-      ? getLocationPageLocations(region)
-      : homepageLocationsForCompare;
+      ? getLocationPageLocations(regions, region)
+      : getHomepageLocations(regions, homepageScope);
   }
 
-  const locations = getFinalLocations(region);
+  const locations = regions ? getFinalLocations(regions, region) : [];
 
   const viewMoreCopy = region
     ? getLocationPageViewMoreCopy(geoScope, region)
@@ -203,28 +203,31 @@ const CompareMain = (props: {
   const homepageSliderValue = useHomepageCompareSliderMap(homepageScope);
 
   useEffect(() => {
-    if (regions && sharedParams) {
-      const { stateId, countyId, regionFips } = sharedParams;
-      if (stateId) {
-        setStateId(stateId);
-      }
-      if (regionFips) {
-        const regionFromFips = regions.findByFipsCodeStrict(regionFips);
-        setRegion(regionFromFips);
-      } else if (countyId) {
-        // Used by legacy share code to load region.
-        const regionFromFips = regions.findByFipsCodeStrict(countyId);
-        setRegion(regionFromFips);
-      }
-      setSorter(sharedParams.sorter);
-      setSortDescending(sharedParams.sortDescending);
-      setSortByPopulation(sharedParams.sortByPopulation);
-      setHomepageScope(sharedParams.homepageScope);
-      setGeoScope(sharedParams.geoScope);
+    const fetchData = async () => {
+      if (regions && sharedParams) {
+        const { stateId, countyId, regionFips } = sharedParams;
+        if (stateId) {
+          setStateId(stateId);
+        }
+        if (regionFips) {
+          const regionFromFips = regions.findByFipsCodeStrict(regionFips);
+          setRegion(regionFromFips);
+        } else if (countyId) {
+          // Used by legacy share code to load region.
+          const regionFromFips = regions.findByFipsCodeStrict(countyId);
+          setRegion(regionFromFips);
+        }
+        setSorter(sharedParams.sorter);
+        setSortDescending(sharedParams.sortDescending);
+        setSortByPopulation(sharedParams.sortByPopulation);
+        setHomepageScope(sharedParams.homepageScope);
+        setGeoScope(sharedParams.geoScope);
 
-      // Now that the UI is populated, we can capture the screenshot.
-      setScreenshotReady(true);
-    }
+        // Now that the UI is populated, we can capture the screenshot.
+        setScreenshotReady(true);
+      }
+    };
+    fetchData();
   }, [regions, sharedParams]);
 
   // If the user clicks on the banner or the announcement, we put vaccinations in the first column
