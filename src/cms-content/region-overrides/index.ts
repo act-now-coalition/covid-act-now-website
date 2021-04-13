@@ -1,7 +1,8 @@
 import RegionOverrides from './region-overrides.json';
 import { Markdown } from 'cms-content/utils';
 import { Metric } from 'common/metricEnum';
-import regions, { findStateByStateCodeStrict, Region } from 'common/regions';
+import { findStateByStateCodeStrict, Region } from 'common/regions';
+import regions from 'common/regions/global_regions';
 import { assert } from 'common/utils';
 
 enum Include {

@@ -1,6 +1,6 @@
 import React from 'react';
 import RegionItem from './RegionItem';
-import regions from 'common/regions';
+import regions from 'common/regions/global_regions';
 
 export default {
   title: 'Shared Components/HomepageRegionItem',

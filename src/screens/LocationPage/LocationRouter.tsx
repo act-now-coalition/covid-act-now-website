@@ -1,10 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import regions, {
-  findStateByStateCode,
-  useFipsFromParams,
-} from 'common/regions';
+import { findStateByStateCode, useFipsFromParams } from 'common/regions';
+import regions from 'common/regions/global_regions';
 import LocationPage from './LocationPage';
 
 const LocationRouter: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { findStateByStateCode, FipsCode } from './types';
+import { FipsCode } from './types';
 
 import {
   findStateFipsByUrlParams,

@@ -2,13 +2,10 @@ import sortBy from 'lodash/sortBy';
 import takeRight from 'lodash/takeRight';
 import values from 'lodash/values';
 import type { Dictionary } from 'lodash';
+
+import regions from './global_regions';
 import { Region, County, State, MetroArea, FipsCode } from './types';
-import {
-  statesByFips,
-  countiesByFips,
-  metroAreasByFips,
-  customAreasByFips,
-} from './preprocessed_regions_data';
+
 import { assert } from 'common/utils';
 
 export class RegionDB {
@@ -87,13 +84,6 @@ export class RegionDB {
     );
   }
 }
-
-const regions = new RegionDB(
-  statesByFips,
-  countiesByFips,
-  metroAreasByFips,
-  customAreasByFips,
-);
 
 /**
  * Async helper for decoupling regions DB incrementally

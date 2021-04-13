@@ -1,5 +1,5 @@
 import React from 'react';
-import regions from 'common/regions';
+import regions from 'common/regions/global_regions';
 import EmailAlertsForm from './EmailAlertsForm';
 
 export default {

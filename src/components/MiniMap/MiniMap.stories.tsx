@@ -1,6 +1,6 @@
 import React from 'react';
 import MiniMap from './MiniMap';
-import regions from 'common/regions';
+import regions from 'common/regions/global_regions';
 import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 
 export default {
