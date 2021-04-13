@@ -79,18 +79,6 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const zipCodeInput = checkForZipcodeMatch ? input : '';
 
-  // const getPlaceholderText = (): string => {
-  //   if (isOpen) {
-  //     return '';
-  //   } else {
-  //     if (isMobile) {
-  //       return 'City, county, or state';
-  //     } else {
-  //       return 'Search city, county, or state';
-  //     }
-  //   }
-  // };
-
   const lockBackgroundScroll = isMobile && isOpen;
 
   return (
@@ -109,7 +97,7 @@ const HomepageSearchAutocomplete: React.FC<{
           onInputChange={onInputChange}
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
-          getOptionLabel={() => ''}
+          getOptionLabel={() => ''} // to fix a warning in the console
           filterOptions={createFilterOptions({
             matchFrom: checkForZipcodeMatch ? 'any' : 'start',
             limit: filterLimit,
