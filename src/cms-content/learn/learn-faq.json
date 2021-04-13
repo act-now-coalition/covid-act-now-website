@@ -10,6 +10,16 @@
           "answer": "To learn when it will be your turn to get a COVID vaccine, check the location page for your state or county on our website. President Biden has directed states to make all adults eligible by [April 19, 2021](https://www.whitehouse.gov/briefing-room/speeches-remarks/2021/04/06/remarks-by-president-biden-marking-the-150-millionth-covid-19-vaccine-shot/), though many states will do so even sooner."
         },
         {
+          "question": "How can I get a vaccine for myself or someone I care about?",
+          "questionId": "how-get-vaccine-for-myself-or-someone",
+          "answer": "Nearly all COVID vaccine distributors require you to schedule an appointment in advance of getting a vaccine. When you or someone you care about becomes eligible, you can schedule an appointment online or over the phone. There are two primary ways you can find a vaccine appointment:\n\n1. [VaccineFinder](https://vaccinefinder.org/search/) is a federally supported website managed in partnership with the CDC. It allows individuals to see where vaccines are in stock near their selected zip code, and it provides the phone number, website link, and directions to these sites. VaccineFinder does not show every vaccine location in every state; it generally focuses on federally enrolled vaccine distributors such as pharmacies. In most cases, VaccineFinder is easier to navigate than websites run by state governments.\n\n2. [Your state department of health website](https://www.cdc.gov/publichealthgateway/healthdirectories/healthdepartments.html) will provide more comprehensive information about where and how you can get vaccinated in your state. These websites often highlight state-run vaccination sites, such as converted stadiums or convention centers. They also will likely provide more information on how to get vaccinated at locally-run sites, such as hospitals.\n\nIt is important to note that while vaccines remain in high demand, securing a vaccine appointment may require persistence and effort. New vaccine appointments are added daily, so you should frequently check back online or call vaccination sites to see if appointments have become available."
+        },
+        {
+          "question": "If you have already had and recovered from COVID, should you still get vaccinated? ",
+          "answer": "Yes, even those who have had COVID should get vaccinated from the disease, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). While getting COVID may provide you with some natural immunity, it’s not clear how long this protection may last, says the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-vaccine/art-20484859#:~:text=Getting%20COVID%2D19%20might,COVID%2D19%20vaccine.). Some [studies](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30764-7/fulltext) have found that reinfection is possible, but a vaccine could boost your immune response.\n\n If you recently had COVID or were treated for COVID with monoclonal antibodies or convalescent plasma, the CDC recommends that you wait 90 days before getting a vaccine.",
+          "questionId": "if-you-recovered-should-you-get-vaccinated"
+        },
+        {
           "question": "Who pays for vaccination? ",
           "questionId": "who-pays-vaccine",
           "answer": "Under the Coronavirus Aid, Relief, and Economic Security (CARES) Act, a COVID vaccine must be free of charge to anyone who wants it. The federal government has purchased millions of vaccine shots and distributed them to providers. While providers may charge a fee for administering the vaccine, both private insurance and public programs must cover 100 percent of the fee, according to the [Kaiser Family Foundation](https://www.kff.org/coronavirus-covid-19/issue-brief/vaccine-coverage-pricing-and-reimbursement-in-the-u-s/). Uninsured patients also face no charges, as providers are reimbursed for administrative costs by the [Provider Relief Fund](https://www.hrsa.gov/coronavirus), which was established under the CARES Act."
@@ -33,11 +43,6 @@
           "question": "What percentage of people need to be vaccinated to achieve herd immunity? ",
           "questionId": "what-percent-people-vaccinated-herd-immunity",
           "answer": "[Herd immunity](https://covidactnow.org/glossary#herd-immunity) is when a large enough portion of a community is immune to a virus so that the virus can no longer spread easily from person to person. At this time, experts do not know what percentage of people need to be vaccinated to achieve herd immunity to COVID. The [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html) and other experts continue to study the topic and will provide more information as it is available."
-        },
-        {
-          "question": "If you have already had and recovered from COVID, should you still get vaccinated? ",
-          "answer": "Yes, even those who have had COVID should get vaccinated from the disease, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html). While getting COVID may provide you with some natural immunity, it’s not clear how long this protection may last, says the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-vaccine/art-20484859#:~:text=Getting%20COVID%2D19%20might,COVID%2D19%20vaccine.). Some [studies](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30764-7/fulltext) have found that reinfection is possible, but a vaccine could boost your immune response.\n\n If you recently had COVID or were treated for COVID with monoclonal antibodies or convalescent plasma, the CDC recommends that you wait 90 days before getting a vaccine.",
-          "questionId": "if-you-recovered-should-you-get-vaccinated"
         },
         {
           "question": "Does immunity protection last longer if you get a vaccine or if you have had COVID?",
@@ -73,6 +78,11 @@
           "question": "\nHow effective is the Johnson and Johnson vaccine?\n",
           "questionId": "how-effective-Johnson-and-Johnson-covid-vaccine",
           "answer": "Johnson and Johnson’s vaccine was the third COVID vaccine approved in the U.S. as of February 2021. It’s easier to transport and store than the other vaccines, and it only requires one shot. \n\nAs you can see in the table below, the Johnson and Johnson vaccine is equally effective at preventing hospitalization and death from COVID, and nearly as effective against severe COVID cases. While its efficacy against mild, symptomatic disease is lower than it is for the other two approved vaccines, the Johnson & Johnson/Janssen vaccine was tested after the rise of the B. 1.1.7 and B.1.351 variants, which are more transmissible. [Studies](https://www.medicalnewstoday.com/articles/pfizer-jab-may-not-be-as-potent-against-b-1-351-variant) suggest that if the mRNA vaccines (Pfizer and Moderna) were tested against these same variants, they may also have some decreased efficacy.\n\n![All three vaccines are 100% effective against COVID hospitalization and death.](/images_cms/screenshot-2021-03-29-211221.jpg \"Vaccine efficacy\")\n\nIn the future, boosters against the variants or for waning immunity might also become available, making the differences in these trials less important in the long run.\n\nTake away: The best vaccine is the one you can get soonest."
+        },
+        {
+          "question": "Is it safe to get a COVID vaccine if you are pregnant or lactating? ",
+          "answer": "[Experts](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/recommendations/pregnancy.html) believe COVID vaccines are unlikely to pose a specific risk for people who are pregnant, but current data is limited, as pregnant and lactating people were not purposefully included in COVID vaccine trials. There is, however, a lot of data on other vaccinations during pregnancy. In general, inactivated, or killed virus, vaccines are considered safe to use in pregnancy. For instance, every year, pregnant people get the flu vaccine, which is a killed virus vaccine. This vaccine is new annually (i.e. targeting a new flu strain), and the [CDC recommends that pregnant women receive a seasonal flu shot](https://www.cdc.gov/vaccines/pregnancy/hcp-toolkit/flu-vaccine-pregnancy.html). This may provide guidance in how to think about COVID vaccine boosters should they become necessary. \n\nThere's also [evidence that antibodies present in breast milk can be transferred](https://www.ajog.org/article/S0002-9378(21)00187-3/fulltext) for added protection to the baby.",
+          "questionId": "safe-to-get-covid-vaccine-if-pregnant-or-lactating"
         }
       ]
     },
@@ -236,5 +246,5 @@
   "intro": "\"When can you get a vaccine?\" to \"how soon after possible exposure to COVID should you get tested?\" Here are answers to some of the top COVID questions.",
   "metadataTitle": "COVID-19 FAQ",
   "metadataDescription": "Find trusted answers to the most Frequently Asked Questions (FAQ) about the novel Coronavirus. Make informed decisions to stop the disease for you and your community.",
-  "lastUpdatedDate": "2021-04-07T15:07:31.594Z"
+  "lastUpdatedDate": "2021-04-12T20:51:15.738Z"
 }
