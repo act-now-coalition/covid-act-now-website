@@ -15,18 +15,21 @@ import {
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
+// used in the script to validate the generators
+export const stateFipsToUrlSegment: { [index: string]: string } = {};
+export const countyFipsToUrlSegment: { [index: string]: string } = {};
+export const metroAreaFipsToUrlSegment: { [index: string]: string } = {};
+
 function buildStates(): State[] {
-  return map(
-    state_dataset,
-    stateInfo =>
-      new State(
-        stateInfo.state,
-        stateInfo.state_url_name,
-        stateInfo.state_fips_code,
-        stateInfo.population,
-        stateInfo.state_code,
-      ),
-  );
+  return map(state_dataset, stateInfo => {
+    stateFipsToUrlSegment[stateInfo.state_fips_code] = stateInfo.state_url_name;
+    return new State(
+      stateInfo.state,
+      stateInfo.state_fips_code,
+      stateInfo.population,
+      stateInfo.state_code,
+    );
+  });
 }
 
 function buildCounties(
@@ -49,9 +52,9 @@ function buildCounties(
     const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
     const state = statesByFips[countyInfo.state_fips_code];
     const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
+    countyFipsToUrlSegment[countyFips] = countyInfo.county_url_name;
     return new County(
       countyInfo.county,
-      countyInfo.county_url_name,
       countyFips,
       countyInfo.population,
       state.fipsCode,
@@ -78,9 +81,10 @@ function buildMetroAreas(
       .map(stateCode => statesByCode[stateCode])
       .filter(state => state);
 
+    metroAreaFipsToUrlSegment[metro.cbsaCode] = metro.urlSegment;
+
     return new MetroArea(
       name,
-      metro.urlSegment,
       metro.cbsaCode,
       metro.population,
       states.map(state => state.fipsCode),
@@ -105,10 +109,3 @@ export const countiesByFips = keyBy(counties, county => county.fipsCode);
 
 const metroAreas = buildMetroAreas(countiesByFips, statesByFips);
 export const metroAreasByFips = keyBy(metroAreas, metro => metro.fipsCode);
-
-const customAreas = [
-  new State('USA', '', '00001', 331486822, 'USA'),
-  new State('Native American Majority Counties', '', '00002', 314704, 'NAMC'),
-];
-
-export const customAreasByFips = keyBy(customAreas, metro => metro.fipsCode);

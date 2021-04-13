@@ -9,7 +9,14 @@
 import path from 'path';
 import _ from 'lodash';
 
-import { statesByFips, countiesByFips, metroAreasByFips } from './regions_data';
+import {
+  statesByFips,
+  countiesByFips,
+  metroAreasByFips,
+  stateFipsToUrlSegment,
+  countyFipsToUrlSegment,
+  metroAreaFipsToUrlSegment,
+} from './regions_data';
 import {
   generateStateUrlSegment,
   generateCountyUrlSegment,
@@ -54,25 +61,22 @@ async function writeRegionsData() {
  */
 function validateUrlSegments() {
   let foundInvalid = false;
-  for (const state of Object.values(statesByFips)) {
-    const urlSegment = generateStateUrlSegment(state.name, state.stateCode);
+  for (const [fips, urlSegment] of Object.entries(stateFipsToUrlSegment)) {
+    const state = statesByFips[fips]!;
     if (state.urlSegment !== urlSegment) {
       foundInvalid = true;
       console.log('state invalid:', state, urlSegment);
     }
   }
-  for (const county of Object.values(countiesByFips)) {
-    const urlSegment = generateCountyUrlSegment(county.name);
+  for (const [fips, urlSegment] of Object.entries(countyFipsToUrlSegment)) {
+    const county = countiesByFips[fips]!;
     if (county.urlSegment !== urlSegment) {
       foundInvalid = true;
       console.log('county invalid:', county, urlSegment);
     }
   }
-  for (const metroArea of Object.values(metroAreasByFips)) {
-    const urlSegment = generateMetroAreaUrlSegment(
-      metroArea.name,
-      metroArea.states.map(state => state.fipsCode),
-    );
+  for (const [fips, urlSegment] of Object.entries(metroAreaFipsToUrlSegment)) {
+    const metroArea = metroAreasByFips[fips]!;
     if (metroArea.urlSegment !== urlSegment) {
       foundInvalid = true;
       console.log('metro area invalid:', metroArea, urlSegment);

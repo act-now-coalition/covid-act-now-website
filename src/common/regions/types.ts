@@ -120,7 +120,6 @@ export interface RegionObject {
 export abstract class Region {
   constructor(
     public readonly name: string,
-    public readonly urlSegment: string,
     public readonly fipsCode: FipsCode,
     public readonly population: number,
     public readonly regionType: RegionType,
@@ -158,12 +157,11 @@ export interface StateObject extends RegionObject {
 export class State extends Region {
   constructor(
     name: string,
-    urlSegment: string,
     fipsCode: FipsCode,
     population: number,
     public readonly stateCode: string,
   ) {
-    super(name, urlSegment, fipsCode, population, RegionType.STATE);
+    super(name, fipsCode, population, RegionType.STATE);
   }
 
   get fullName() {
@@ -176,6 +174,10 @@ export class State extends Region {
 
   get abbreviation() {
     return this.stateCode;
+  }
+
+  get urlSegment() {
+    return generateStateUrlSegment(this.name, this.stateCode);
   }
 
   get relativeUrl() {
@@ -199,13 +201,7 @@ export class State extends Region {
   }
 
   public static fromJSON(obj: StateObject): State {
-    return new State(
-      obj.n,
-      generateStateUrlSegment(obj.n, obj.s),
-      obj.f,
-      obj.p,
-      obj.s,
-    );
+    return new State(obj.n, obj.f, obj.p, obj.s);
   }
 }
 
@@ -258,13 +254,12 @@ export class County extends Region {
 
   constructor(
     name: string,
-    urlSegment: string,
     fipsCode: FipsCode,
     population: number,
     stateFips: FipsCode,
     public readonly adjacentCountiesFips: FipsCode[],
   ) {
-    super(name, urlSegment, fipsCode, population, RegionType.COUNTY);
+    super(name, fipsCode, population, RegionType.COUNTY);
     this.state = statesByFips[stateFips];
   }
 
@@ -278,6 +273,10 @@ export class County extends Region {
 
   get abbreviation() {
     return getAbbreviatedCounty(this.name);
+  }
+
+  get urlSegment() {
+    return generateCountyUrlSegment(this.name);
   }
 
   get relativeUrl() {
@@ -303,14 +302,7 @@ export class County extends Region {
   }
 
   public static fromJSON(obj: CountyObject): County {
-    return new County(
-      obj.n,
-      generateCountyUrlSegment(obj.n),
-      obj.f,
-      obj.p,
-      obj.s,
-      obj.a,
-    );
+    return new County(obj.n, obj.f, obj.p, obj.s, obj.a);
   }
 }
 
@@ -327,7 +319,6 @@ export class MetroArea extends Region {
 
   constructor(
     name: string,
-    urlSegment: string,
     fipsCode: FipsCode,
     population: number,
     // MetroAreas are constructed by FIPS for states, but the states are retrieved
@@ -340,7 +331,7 @@ export class MetroArea extends Region {
     // If you need the county object, you  can look it up by FIPS from the regions_db.
     public readonly countiesFips: FipsCode[],
   ) {
-    super(name, urlSegment, fipsCode, population, RegionType.MSA);
+    super(name, fipsCode, population, RegionType.MSA);
     this.states = statesFips.map(fips => statesByFips[fips]);
   }
 
@@ -365,6 +356,13 @@ export class MetroArea extends Region {
 
   get abbreviation() {
     return this.shortName;
+  }
+
+  get urlSegment() {
+    return generateMetroAreaUrlSegment(
+      this.name,
+      this.states.map(state => state.fipsCode),
+    );
   }
 
   get relativeUrl() {
@@ -393,13 +391,6 @@ export class MetroArea extends Region {
   }
 
   public static fromJSON(obj: MetroAreaObject): MetroArea {
-    return new MetroArea(
-      obj.n,
-      generateMetroAreaUrlSegment(obj.n, obj.s),
-      obj.f,
-      obj.p,
-      obj.s,
-      obj.c,
-    );
+    return new MetroArea(obj.n, obj.f, obj.p, obj.s, obj.c);
   }
 }
