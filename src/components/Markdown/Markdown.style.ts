@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import ReactMarkdown from 'react-markdown';
 import theme from 'assets/theme';
-import { newBlue, newBlueDark } from 'assets/theme/buttons';
 
 const baseCss = css`
   font-family: ${theme.typography.fontFamily};
@@ -61,11 +60,11 @@ const blockquoteCss = css`
 
 export const anchorStyles = css`
   a {
-    color: ${newBlue};
+    color: ${COLOR_MAP.NEW_BLUE.BASE};
     text-decoration: none;
 
     &:hover {
-      color: ${newBlueDark};
+      color: ${COLOR_MAP.NEW_BLUE.DARK};
       text-decoration: underline;
     }
   }
