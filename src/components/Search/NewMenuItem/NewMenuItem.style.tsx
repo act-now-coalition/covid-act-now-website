@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import COLORS, { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,10 +10,6 @@ export const Wrapper = styled.div`
   width: 100%;
   border-bottom: 1px solid ${COLORS.LIGHTGRAY};
   padding: 0.75rem 0.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    padding: 1.1rem 0.5rem;
-  }
 `;
 
 export const Subcopy = styled.span`
@@ -31,21 +26,12 @@ export const Icon = styled(FiberManualRecordIcon)<{ $fillColor: string }>`
 export const InnerContent = styled.div`
   display: flex;
   flex-direction: column;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-  }
 `;
+
 export const ArrowIcon = styled(ArrowForwardIosIcon)`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 1rem;
   margin-left: auto;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-left: 1.25rem;
-  }
 `;
 
 export const StyledLink = styled(Link)`

@@ -3,9 +3,8 @@ import { Autocomplete } from '@material-ui/lab';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Region, County, MetroArea } from 'common/regions';
-import { StyledPaper } from './Search.style';
+import { StyledPaper, SearchBarIcon } from './Search.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { SearchBarIcon } from 'components/Search/Homepage/HomepageSearchAutocomplete.style';
 import { useCountyToZipMap } from 'common/hooks';
 import MenuItem from './MenuItem';
 

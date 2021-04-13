@@ -168,7 +168,7 @@ export const OutlinedButton = styled(LinkButton)`
 
   &:hover {
     background-color: rgba(83, 97, 253, 0.6);
-    border-color: ${COLOR_MAP.NEW_BLUE_PURPLE};
+    border-color: ${COLOR_MAP.NEW_BLUE.PURPLE};
     color: white;
   }
 
@@ -194,7 +194,7 @@ export const SocialButtonsRow = styled.div`
         fill: ${props => props.theme.megaMenu.buttonContent};
         font-size: 1.75rem;
         &:hover {
-          fill: ${COLOR_MAP.NEW_BLUE_PURPLE};
+          fill: ${COLOR_MAP.NEW_BLUE.PURPLE};
         }
     }
     a {

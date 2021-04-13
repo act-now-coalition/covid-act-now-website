@@ -35,7 +35,7 @@ import { useProjectionsFromRegion } from 'common/utils/model';
 import { MetricValues, Projections } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import { LocationSummary, useSummaries } from 'common/location_summaries';
-import LocationPageHeaderVariant from './Experiment/LocationPageHeaderVariant';
+import LocationPageHeader from './LocationPageHeader';
 
 // TODO: 180 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -234,7 +234,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   return (
     <>
       <ChartContentWrapper>
-        <LocationPageHeaderVariant {...locationPageHeaderProps} />
+        <LocationPageHeader {...locationPageHeaderProps} />
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>
