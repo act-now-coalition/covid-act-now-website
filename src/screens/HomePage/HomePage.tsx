@@ -12,7 +12,7 @@ import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
 import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { getFilterLimit } from 'components/Search';
+import { useFilterLimit } from 'components/Search';
 import {
   findStateByStateCodeStrict,
   getFinalAutocompleteLocations,
@@ -50,6 +50,8 @@ export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
   const [showCounties, setShowCounties] = useState(false);
+
+  const autocompleteLimit = useFilterLimit();
 
   const isMobile = useBreakpoint(600);
 
@@ -142,7 +144,7 @@ export default function HomePage() {
                   geolocationData,
                   countyToZipMap,
                 )}
-                filterLimit={getFilterLimit()}
+                filterLimit={autocompleteLimit}
               />
               <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
                 <Variant id={VariantID.A}>

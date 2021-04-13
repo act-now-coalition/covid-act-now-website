@@ -1,4 +1,7 @@
-import regions, {
+import { useEffect, useState } from 'react';
+import {
+  getRegionsDB,
+  statesByFips,
   County,
   State,
   getStateFips,
@@ -27,24 +30,43 @@ export function getLocationIconFillColor(region: Region) {
   If on homepage, should only show states.
   If on location page, should only show counties within state.
 */
-export function getFilterLimit(region?: Region) {
+export async function getFilterLimit(region?: Region) {
+  const totalStates = Object.keys(statesByFips).length;
   if (!region) {
-    return regions.states.length;
+    return totalStates;
   }
 
   if (region instanceof MetroArea) {
     return Math.max(20, region.countiesFips.length);
   } else if (region instanceof State || region instanceof County) {
     const stateFips = getStateFips(region);
+    const regions = await getRegionsDB();
     const countiesInState = regions.counties.filter(county =>
       belongsToState(county, stateFips),
     );
     if (countiesInState.length) {
       return countiesInState.length;
     } else {
-      return regions.states.length;
+      return totalStates;
     }
   } else {
-    return regions.states.length;
+    return totalStates;
   }
 }
+
+/**
+ * Hook to provide filter limit for convenience
+ */
+export const useFilterLimit = () => {
+  // the default for no regions is # of states, this is close enough
+  const [autocompleteLimit, setAutocompleteLimit] = useState(50);
+
+  useEffect(() => {
+    const load = async () => {
+      const limit = await getFilterLimit();
+      setAutocompleteLimit(limit);
+    };
+    load();
+  });
+  return autocompleteLimit;
+};

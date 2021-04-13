@@ -8,42 +8,45 @@ export default {
   component: SearchAutocomplete,
 };
 
-export const Home = () => {
+export const Home = async () => {
   const locations = getAutocompleteRegions(undefined);
   return (
-    <SearchAutocomplete locations={locations} filterLimit={getFilterLimit()} />
+    <SearchAutocomplete
+      locations={locations}
+      filterLimit={await getFilterLimit()}
+    />
   );
 };
 
-export const State = () => {
+export const State = async () => {
   const region = regions.findByFipsCodeStrict('02');
   const locations = getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit(region)}
+      filterLimit={await getFilterLimit(region)}
     />
   );
 };
 
-export const County = () => {
+export const County = async () => {
   const region = regions.findByFipsCodeStrict('53033');
   const locations = getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit(region)}
+      filterLimit={await getFilterLimit(region)}
     />
   );
 };
 
-export const MetroArea = () => {
+export const MetroArea = async () => {
   const region = regions.findByFipsCodeStrict('14460');
   const locations = getAutocompleteRegions(region);
   return (
     <SearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit(region)}
+      filterLimit={await getFilterLimit(region)}
     />
   );
 };

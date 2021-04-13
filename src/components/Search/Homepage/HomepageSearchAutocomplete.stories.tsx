@@ -8,7 +8,7 @@ export default {
   component: HomepageSearchAutocomplete,
 };
 
-export const Home = () => {
+export const Home = async () => {
   const geolocation = {
     zipCode: '06903',
     stateCode: 'CT',
@@ -18,7 +18,7 @@ export const Home = () => {
   return (
     <HomepageSearchAutocomplete
       locations={locations}
-      filterLimit={getFilterLimit()}
+      filterLimit={await getFilterLimit()}
     />
   );
 };
