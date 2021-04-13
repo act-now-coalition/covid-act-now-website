@@ -3,7 +3,8 @@ import { Projections } from '../models/Projections';
 import { Api } from 'api';
 import { assert, fail } from '.';
 import { getSnapshotUrlOverride } from './snapshots';
-import regions, {
+import {
+  getRegionsDB,
   findStateByStateCode,
   Region,
   County,
@@ -66,6 +67,7 @@ export function fetchSummariesForRegionType(
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
+    const regions = await getRegionsDB();
     const all = (
       await new Api(snapshotUrl).fetchAggregateRegionSummaries(
         getSubpathFromRegionType(regionType),
@@ -84,6 +86,7 @@ const cachedStatesProjections: { [key: string]: Promise<Projections[]> } = {};
 export function fetchAllStateProjections(snapshotUrl: string | null = null) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
+    const regions = await getRegionsDB();
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       APIRegionSubPath.STATES,
     );
@@ -116,6 +119,7 @@ export function fetchAllCountyProjections(
 
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
+    const regions = await getRegionsDB();
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       APIRegionSubPath.COUNTIES,
     );
@@ -139,6 +143,7 @@ export function fetchAllCountyProjections(
 export async function fetchAllCountyProjectionsByState() {
   // Query counties for states individually as the entire counties.timeseries.json is too large
   // to be parsed by node.
+  const regions = await getRegionsDB();
   const allProjections = await Promise.all(
     regions.states.map(
       async (state: State) => await fetchCountyProjectionsForState(state),
@@ -157,6 +162,7 @@ export function fetchCountyProjectionsForState(
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
+    const regions = await getRegionsDB();
     const all = await new Api(
       snapshotUrl,
     ).fetchCountySummariesWithTimeseriesForState(state);
@@ -186,6 +192,7 @@ export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
       APIRegionSubPath.CBSAS,
     );
+    const regions = await getRegionsDB();
     return all
       .filter(
         summaryWithTimeseries =>
