@@ -171,9 +171,11 @@ export function getMetroRegionFromZipCode(
   countyToZipMap: CountyToZipMap,
 ): Region | undefined {
   const countyFromZip = getCountyRegionFromZipCode(zipCode, countyToZipMap);
-  const metroFromZip = find(regions.metroAreas, (region: MetroArea) =>
-    region.countiesFips.includes((countyFromZip as County).fipsCode),
-  );
+  const metroFromZip =
+    countyFromZip &&
+    find(regions.metroAreas, (region: MetroArea) =>
+      region.countiesFips.includes((countyFromZip as County).fipsCode),
+    );
   return metroFromZip;
 }
 
