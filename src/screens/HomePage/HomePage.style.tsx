@@ -7,6 +7,7 @@ import {
   StyledLink,
   SkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
+import { Wrapper } from 'components/SharedComponents/StyledRegionName/StyledRegionName.style';
 
 export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
   display: flex;
@@ -41,6 +42,10 @@ export const RegionItemsWrapper = styled.div`
   width: fit-content;
   margin: auto;
   margin-top: 1rem;
+
+  ${Wrapper}{
+    font-size: 1.125rem;
+  }
 
   ${StyledLink},${SkeletonWrapper} {
     &:last-of-type {
