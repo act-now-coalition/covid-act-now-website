@@ -43,7 +43,12 @@ import {
 } from 'common/sharing';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import regions, { Region, useRegionFromParams } from 'common/regions';
+import {
+  RegionDB,
+  getRegionsDB,
+  Region,
+  useRegionFromParams,
+} from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import NationalText from 'components/NationalText';
 
@@ -115,6 +120,16 @@ const Explore: React.FunctionComponent<{
   // TODO (chris): Dont love the way of forcing a ''
   const region = useRegionFromParams();
 
+  const [regions, setRegions] = useState<RegionDB | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const r = await getRegionsDB();
+      setRegions(r);
+    };
+    load();
+  });
+
   // Originally we had share URLs like /explore/cases instead of
   // /explore/<sharedComponentId> and so this code allows them to keep working.
   if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
@@ -144,17 +159,31 @@ const Explore: React.FunctionComponent<{
 
   const currentMetricName = getMetricName(currentMetric);
 
-  const initialLocations = useMemo(
-    () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
-    [initialFipsList],
-  );
+  const [initialLocations, setInitialLocations] = useState([] as Region[]);
 
-  const indigeneousPopulationsLocations = useMemo(
-    () => ['00001', '00002'].map(fips => regions.findByFipsCode(fips)!),
-    [],
-  );
+  useEffect(() => {
+    if (regions) {
+      setInitialLocations(
+        initialFipsList.map(fipsCode => regions.findByFipsCodeStrict(fipsCode)),
+      );
+    }
+  }, [regions, initialFipsList]);
 
-  const [autocompleteLocations, setAutocompleteLocations] = useState<Region[]>(
+  const [
+    indigenousPopulationsLocations,
+    setIndigenousPopulationsLocations,
+  ] = useState([] as Region[]);
+
+  useEffect(() => {
+    if (regions) {
+      const locations = ['00001', '00002'].map(fips =>
+        regions.findByFipsCodeStrict(fips),
+      );
+      setIndigenousPopulationsLocations(locations);
+    }
+  }, [regions]);
+
+  const [autocompleteLocations, setAutocompleteLocations] = useState(
     [] as Region[],
   );
 
@@ -219,7 +248,7 @@ const Explore: React.FunctionComponent<{
   // they are not carried over to the new location page.
   useEffect(() => {
     if (initialChartIndigenousPopulations) {
-      setSelectedLocations(indigeneousPopulationsLocations);
+      setSelectedLocations(indigenousPopulationsLocations);
       setNormalizeData(true);
     } else {
       setSelectedLocations(initialLocations);
@@ -230,7 +259,7 @@ const Explore: React.FunctionComponent<{
     initialLocations,
     initialChartIndigenousPopulations,
     defaultMetric,
-    indigeneousPopulationsLocations,
+    indigenousPopulationsLocations,
   ]);
 
   const [chartSeries, setChartSeries] = useState<Series[]>([]);
@@ -265,12 +294,16 @@ const Explore: React.FunctionComponent<{
   const sharedParams = useSharedComponentParams(SharedComponent.Explore);
   useEffect(() => {
     if (sharedParams) {
-      setCurrentMetric(sharedParams.currentMetric);
-      setNormalizeData(sharedParams.normalizeData);
-      const locations = sharedParams.selectedFips.map(
-        (fips: string) => regions.findByFipsCode(fips)!,
-      );
-      setSelectedLocations(locations);
+      const fetchData = async () => {
+        const regions = await getRegionsDB();
+        setCurrentMetric(sharedParams.currentMetric);
+        setNormalizeData(sharedParams.normalizeData);
+        const locations = sharedParams.selectedFips.map(
+          (fips: string) => regions.findByFipsCode(fips)!,
+        );
+        setSelectedLocations(locations);
+      };
+      fetchData();
     }
   }, [sharedParams]);
 
