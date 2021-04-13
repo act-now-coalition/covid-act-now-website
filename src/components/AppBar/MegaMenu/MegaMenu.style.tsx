@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { desktopNavHeight } from 'components/AppBar/NavBar.style';
 
 // Need to add a good amount of bottom padding for mobile screens to make sure the bottom
 // of the mega menu isn't covered by the browser's menu bar
@@ -8,7 +9,7 @@ export const StyledMegaMenu = styled.nav`
   background: white;
   border-top: 1px solid ${COLOR_MAP.GREY_2};
   border-bottom: 1px solid ${COLOR_MAP.GREY_2};
-  transform: translateY(64px);
+  transform: translateY(${desktopNavHeight}px);
   position: absolute;
   top: 0;
   left: 0;

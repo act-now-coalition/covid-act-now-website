@@ -14,7 +14,6 @@ import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots
 import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
 import ShareImage from 'screens/internal/ShareImage/ShareImage';
 import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-import NavBar from 'components/AppBar';
 import Footer from 'components/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
@@ -55,7 +54,6 @@ export default function App() {
           <BrowserRouter>
             <PageviewTracker />
             <ScrollToTop />
-            <NavBar />
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
                 <Switch>

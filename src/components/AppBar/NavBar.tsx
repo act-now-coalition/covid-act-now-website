@@ -12,7 +12,7 @@ import { useBreakpoint } from 'common/hooks';
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
 const NavBar: React.FC = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isEmbed = useIsEmbed();
 
@@ -21,8 +21,8 @@ const NavBar: React.FC = () => {
   const isMobile = useBreakpoint(800);
 
   const onClickHamburger = () => {
-    const updatedIsOpen = !isMenuOpen;
-    setMenuOpen(!isMenuOpen);
+    const updatedIsOpen = !menuOpen;
+    setMenuOpen(!menuOpen);
     if (updatedIsOpen) {
       trackMobileMenuOpen();
     }
@@ -32,7 +32,7 @@ const NavBar: React.FC = () => {
     if (isMobile) {
       return;
     } else {
-      if (!isMenuOpen) {
+      if (!menuOpen) {
         setMenuOpen(true);
         trackMobileMenuOpen();
       }
@@ -54,7 +54,7 @@ const NavBar: React.FC = () => {
   };
 
   const menuProps = {
-    open: isMenuOpen,
+    open: menuOpen,
     closeMenu,
     onMouseLeave,
   };
@@ -92,7 +92,7 @@ const NavBar: React.FC = () => {
             edge="end"
           >
             <Style.MenuLabel>Menu</Style.MenuLabel>
-            {isMenuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
+            {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
           </Style.IconButton>
         </>
         <MegaMenu {...menuProps} />

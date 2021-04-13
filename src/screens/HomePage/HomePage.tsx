@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Map from 'components/Map/Map';
+import NavBar from 'components/AppBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -125,6 +126,7 @@ export default function HomePage() {
         pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
+      <NavBar />
       <HomepageStructuredData />
       <SpringSurgeBanner />
       <HomePageHeader />

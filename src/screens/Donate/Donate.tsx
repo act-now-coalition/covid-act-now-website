@@ -3,6 +3,7 @@ import loveLetter from '@iconify/icons-twemoji/love-letter';
 import { Icon } from '@iconify/react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import NavBar from 'components/AppBar';
 import {
   Container,
   ContentWrapper,
@@ -38,6 +39,7 @@ const Donate: React.FC = () => {
 
   return (
     <>
+      <NavBar />
       <Container>
         {isMobile && <Intro />}
         <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/D3wX7K" />
