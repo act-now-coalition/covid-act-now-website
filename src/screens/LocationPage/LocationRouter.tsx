@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { findStateByStateCode, useFipsFromParams } from 'common/regions';
-import regions from 'common/regions/global_regions';
 import LocationPage from './LocationPage';
 
 const LocationRouter: React.FC = () => {
@@ -28,9 +27,7 @@ const LocationRouter: React.FC = () => {
     return <Redirect to={url} />;
   }
 
-  // breaking this out to the location page itself will be a good follow-on step
-  const region = regions.findByFipsCodeStrict(fips);
-  return <LocationPage region={region} />;
+  return <LocationPage fips={fips} />;
 };
 
 export default LocationRouter;

@@ -27,7 +27,8 @@ import PageviewTracker, {
   EventCategory,
 } from 'components/Analytics';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
-import HomePage from 'screens/HomePage/HomePage';
+
+const HomePage = lazy(() => import('screens/HomePage/HomePage'));
 
 /* We dynamically import the following components on initial visit to their respective routes: */
 const About = lazy(() => import('screens/About/About'));

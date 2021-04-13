@@ -88,8 +88,13 @@ export class RegionDB {
 /**
  * Async helper for decoupling regions DB incrementally
  */
-export const getRegionsDB = async () => {
-  return regions;
-};
+let regionsPromise: Promise<RegionDB> | null = null;
 
-export default regions;
+export const getRegionsDB = async () => {
+  if (!regionsPromise) {
+    regionsPromise = import('./global_regions').then(({ regions }) => {
+      return regions;
+    });
+  }
+  return regionsPromise;
+};

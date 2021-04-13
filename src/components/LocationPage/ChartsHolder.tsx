@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
@@ -7,16 +7,10 @@ import {
 } from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { Region, State, getStateName } from 'common/regions';
+import { getRegionsDB, Region, State, getStateName } from 'common/regions';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
-import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
-import Explore, { ExploreMetric } from 'components/Explore';
-import Recommendations from './Recommendations';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
-import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-import ChartBlock from './ChartBlock';
+import { ExploreMetric } from 'components/Explore';
 import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
@@ -34,11 +28,42 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
     top: div.offsetTop - offset,
     behavior: 'smooth',
   });
-
 interface ChartsHolderProps {
   region: Region;
   chartId: string;
 }
+
+const VaccinationEligibilityBlock = React.lazy(() =>
+  import('components/VaccinationEligibilityBlock'),
+);
+const CompareMain = React.lazy(() => import('components/Compare/CompareMain'));
+const VulnerabilitiesBlock = React.lazy(() =>
+  import('components/VulnerabilitiesBlock'),
+);
+const Recommendations = React.lazy(() => import('./Recommendations'));
+const ChartBlock = React.lazy(() => import('./ChartBlock'));
+const Explore = React.lazy(() => import('components/Explore'));
+const ShareModelBlock = React.lazy(() =>
+  import('components/ShareBlock/ShareModelBlock'),
+);
+
+// wraps location page items in a common suspense thing since we want
+// to treat them all the same.  we pass a "renderBelowFold" flag
+// to render the children (thus importing them) for the first time
+// once prerequisite data has been loaded
+const LocationSuspenseBlock: React.FC<{
+  renderBelowFold: boolean;
+  id?: string;
+  ref?: any;
+}> = React.forwardRef(({ renderBelowFold, children, id }, ref) => {
+  return (
+    <LocationPageBlock ref={ref} id={id}>
+      <Suspense fallback={<LoadingScreen />}>
+        {renderBelowFold ? children : null}
+      </Suspense>
+    </LocationPageBlock>
+  );
+});
 
 const summaryToStats = (summary: LocationSummary): MetricValues => {
   const stats = {} as MetricValues;
@@ -53,6 +78,17 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
   const summaries = useSummaries();
   const locationSummary = summaries?.[region.fipsCode];
+
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  // cheap way to prevent showing things below the fold before the regionDB is loaded
+  useEffect(() => {
+    const load = async () => {
+      const regions = await getRegionsDB();
+      setDataLoaded(regions !== null);
+    };
+    load();
+  }, []);
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -158,61 +194,64 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     <>
       <ChartContentWrapper>
         <LocationPageHeaderVariant {...locationPageHeaderProps} />
-        <LocationPageBlock>
+        <LocationSuspenseBlock renderBelowFold={dataLoaded}>
           <VaccinationEligibilityBlock region={region} />
-        </LocationPageBlock>
-        <LocationPageBlock>
+        </LocationSuspenseBlock>
+        <LocationSuspenseBlock renderBelowFold={dataLoaded}>
           <CompareMain
             stateName={getStateName(region) || region.name} // rename prop
             locationsViewable={6}
             stateId={(region as State).stateCode || undefined}
             region={region}
           />
-        </LocationPageBlock>
-        <LocationPageBlock id="vulnerabilities">
+        </LocationSuspenseBlock>
+        <LocationSuspenseBlock
+          renderBelowFold={dataLoaded}
+          id="vulnerabilities"
+        >
           <VulnerabilitiesBlock scores={ccviScores} region={region} />
-        </LocationPageBlock>
-        <LocationPageBlock>
-          {!projections ? (
-            <LoadingScreen />
-          ) : (
-            <Recommendations
-              projections={projections}
-              recommendationsRef={recommendationsRef}
-            />
-          )}
+        </LocationSuspenseBlock>
+        <LocationSuspenseBlock renderBelowFold={dataLoaded}>
+          <Recommendations
+            projections={projections! /*fixme!*/}
+            recommendationsRef={recommendationsRef}
+          />
           {ALL_METRICS.map(metric => (
             <ErrorBoundary>
-              {!projections ? (
-                <LoadingScreen />
-              ) : (
-                <ChartBlock
-                  key={metric}
-                  metric={metric}
-                  projections={projections}
-                  chartRef={metricRefs[metric]}
-                  isMobile={isMobile}
-                  region={region}
-                  stats={stats}
-                />
-              )}
+              <ChartBlock
+                key={metric}
+                metric={metric}
+                projections={projections! /*fixme!*/}
+                chartRef={metricRefs[metric]}
+                isMobile={isMobile}
+                region={region}
+                stats={stats}
+              />
             </ErrorBoundary>
           ))}
-        </LocationPageBlock>
-        <LocationPageBlock ref={exploreChartRef} id="explore-chart">
+        </LocationSuspenseBlock>
+        <LocationSuspenseBlock
+          renderBelowFold={dataLoaded}
+          ref={exploreChartRef}
+          id="explore-chart"
+        >
           <Explore
             initialFipsList={initialFipsList}
             title="Cases, Deaths, and Hospitalizations"
             defaultMetric={defaultExploreMetric}
           />
-        </LocationPageBlock>
+        </LocationSuspenseBlock>
       </ChartContentWrapper>
       <div ref={shareBlockRef} id="recommendationsTest">
-        <ShareModelBlock
-          region={region}
-          projections={projections}
-          stats={stats}
-        />
+        <Suspense fallback={<LoadingScreen />}>
+          {dataLoaded ? (
+            <ShareModelBlock
+              region={region}
+              projections={projections ?? undefined}
+              stats={stats}
+            />
+          ) : null}
+        </Suspense>
       </div>
     </>
   );

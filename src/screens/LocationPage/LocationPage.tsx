@@ -3,36 +3,59 @@ import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
-import { getStateCode, MetroArea, Region } from 'common/regions';
+import {
+  findStateByFipsCode,
+  isMetroArea,
+  useRegionsDB,
+  FipsCode,
+  Region,
+} from 'common/regions';
 
 interface LocationPageProps {
-  region: Region;
+  fips: FipsCode;
 }
 
-function LocationPage({ region }: LocationPageProps) {
+const MiniMap = React.lazy(() => import('components/MiniMap'));
+
+function LocationPage({ fips }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
-  const defaultMapOption = getDefaultMapOption(region);
-  const [mapOption, setMapOption] = useState(defaultMapOption);
+  const regions = useRegionsDB();
+  const [region, setRegion] = useState<Region | null>(null);
+  const [mapOption, setMapOption] = useState(getDefaultMapOption(fips));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [canonicalUrl, setCanonicalUrl] = useState<string>('');
+
   useEffect(() => {
-    setMapOption(defaultMapOption);
+    if (regions) {
+      const region = regions.findByFipsCodeStrict(fips);
+      setRegion(region);
+      setTitle(getPageTitle(region));
+      setDescription(getPageDescription(region));
+      setCanonicalUrl(region.canonicalUrl);
+    }
+    setMapOption(getDefaultMapOption(fips));
     // Close the map on mobile on any change to a region.
     setMobileMenuOpen(false);
-  }, [defaultMapOption, region]);
+  }, [regions, fips]);
+
+  if (!region) {
+    return null;
+  }
 
   return (
     <div>
       <EnsureSharingIdInUrl />
       <AppMetaTags
-        canonicalUrl={region.canonicalUrl}
-        pageTitle={getPageTitle(region)}
-        pageDescription={getPageDescription(region)}
+        canonicalUrl={canonicalUrl}
+        pageTitle={title}
+        pageDescription={description}
       />
       <div>
         <SearchHeader
