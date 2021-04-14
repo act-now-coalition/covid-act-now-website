@@ -15,6 +15,7 @@ import {
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import donateContent from 'cms-content/donate';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import { DesktopOnlyDonateButton } from 'components/AppBar/DonateButton';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;
@@ -39,7 +40,10 @@ const Donate: React.FC = () => {
 
   return (
     <>
-      <NavBar renderSearch={() => <NavBarSearch />} />
+      <NavBar
+        renderSearch={() => <NavBarSearch />}
+        renderSecondaryElement={() => <DesktopOnlyDonateButton />}
+      />
       <Container>
         {isMobile && <Intro />}
         <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/D3wX7K" />
