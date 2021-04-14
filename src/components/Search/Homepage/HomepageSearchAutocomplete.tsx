@@ -12,8 +12,10 @@ import {
   CloseIcon,
 } from './HomepageSearchAutocomplete.style';
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
-import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
-import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
+import {
+  getSearchTextFieldStyles,
+  getSearchAutocompleteStyles,
+} from 'assets/theme/customMuiStyleBlocks';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { LockBodyScroll } from 'components/Dialog';
@@ -26,8 +28,7 @@ const HomepageSearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
-  isNavBar?: boolean;
-}> = ({ locations, filterLimit, setHideMapToggle, isNavBar }) => {
+}> = ({ locations, filterLimit, setHideMapToggle }) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -85,7 +86,7 @@ const HomepageSearchAutocomplete: React.FC<{
   return (
     <>
       {lockBackgroundScroll && <LockBodyScroll />}
-      <Wrapper $isOpen={isOpen} isNavBar={isNavBar}>
+      <Wrapper $isOpen={isOpen}>
         <Autocomplete
           open={isOpen}
           disableListWrap

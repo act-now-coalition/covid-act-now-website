@@ -7,7 +7,7 @@ import MuiCloseIcon from '@material-ui/icons/Close';
 
 const maxMenuHeight = 240;
 const desktopWidth = 400;
-const mobileWidth = 350;
+export const mobileWidth = 350;
 
 export const StyledTextField = styled(TextField).attrs(props => ({
   variant: 'outlined',
@@ -52,26 +52,20 @@ const MobileWrapperOpened = css`
 
 const MobileWrapperClosed = css`
   width: ${mobileWidth}px;
+  width: ${props => props.theme.searchbar.mobileClosedWidth};
+
   position: relative;
   height: unset;
+
   padding: 0.75rem 0.5rem 1.5rem;
+  padding: ${props => props.theme.searchbar.mobileClosedPadding};
+
+  margin-left: ${props => props.theme.searchbar.mobileClosedMarginLeft};
+  max-width: ${props => props.theme.searchbar.mobileClosedMaxWidth};
 `;
 
-const MobileNavWrapperClosed = css`
-  ${MobileWrapperClosed};
-  width: 100%;
-  padding: 1rem 0.25rem 1rem 1.25rem;
-  max-width: 200px;
-  margin-left: auto;
-`;
-
-export const Wrapper = styled.div<{ $isOpen: boolean; isNavBar?: boolean }>`
-  ${({ $isOpen, isNavBar }) =>
-    $isOpen
-      ? MobileWrapperOpened
-      : isNavBar
-      ? MobileNavWrapperClosed
-      : MobileWrapperClosed};
+export const Wrapper = styled.div<{ $isOpen: boolean }>`
+  ${({ $isOpen }) => ($isOpen ? MobileWrapperOpened : MobileWrapperClosed)};
 
   @media (min-width: ${materialSMBreakpoint}) {
     box-shadow: ${({ $isOpen }) =>
