@@ -51,15 +51,10 @@ const MobileWrapperOpened = css`
 `;
 
 const MobileWrapperClosed = css`
-  width: ${mobileWidth}px;
-  width: ${props => props.theme.searchbar.mobileClosedWidth};
-
   position: relative;
   height: unset;
-
-  padding: 0.75rem 0.5rem 1.5rem;
+  width: ${props => props.theme.searchbar.mobileClosedWidth};
   padding: ${props => props.theme.searchbar.mobileClosedPadding};
-
   margin-left: ${props => props.theme.searchbar.mobileClosedMarginLeft};
   max-width: ${props => props.theme.searchbar.mobileClosedMaxWidth};
 `;
