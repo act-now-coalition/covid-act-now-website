@@ -3,14 +3,10 @@ import reverse from 'lodash/reverse';
 import take from 'lodash/take';
 import { RegionDB } from 'common/regions';
 
-// This is used to compute data at build time, because it governs a fixed list
-// we can precompute.  So if you need to change this value,
-// re-run `yarn prepare-regions-data` and check in the updated files.
-export const DEFAULT_EXPLORE_GEOLOCATION_COUNT = 5;
-
-/* Gets fips of 5 largest metro areas to set as homepage explore presets 
-  These are precomputed by hand using the function below.
-*/
+/**
+ * Gets fips of 5 largest metro areas to set as homepage explore presets.
+ * These are precomputed by hand using the function below.
+ */
 export function getLargestMetroFipsForExplore() {
   return ['35620', '31080', '16980', '19100', '26420'];
 }
