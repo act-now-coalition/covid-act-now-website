@@ -1142,66 +1142,24 @@
       "stateSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx"
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Pennsylvania",
       "fips": "42",
       "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Long-term care facility residents\n* Health care personnel\n* Persons ages 65 and older\n* Persons ages 16-64 with high-risk conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-01T17:51:34.341Z",
-          "phase": "1A",
-          "tier": "2",
-          "description": "* Education workers",
-          "startDate": "March 4, 2021"
-        },
-        {
-          "phase": "1A",
-          "tier": "3",
-          "currentlyEligible": true,
-          "description": "* Certain frontline groups: Law enforcement, firefighters, grocery store employees, food/agricultural workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 31, 2021",
-          "updatedAt": "2021-04-01T17:51:18.782Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-05T06:19:31.988Z",
-          "phase": "1B",
-          "tier": "",
-          "description": "* Other frontline essential workers (including manufacturing, higher education, postal service, clergy, public transit, corrections)",
-          "startDate": "April 5, 2021"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Additional essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "April 12, 2021",
-          "updatedAt": "2021-04-12T18:00:09.914Z"
-        },
-        {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 13, 2021",
-          "updatedAt": "2021-04-12T18:00:20.970Z"
+          "updatedAt": "2021-04-14T00:34:01.663Z"
         }
       ],
-      "stateSignupUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data"
+      "stateSignupUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Rhode Island",
@@ -1644,7 +1602,7 @@
       "stateSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/"
     },
     {
-      "emailAlertVersion": "0",
+      "emailAlertVersion": "1",
       "locationName": "Puerto Rico",
       "fips": "72",
       "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
@@ -1652,27 +1610,15 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-02-23T14:50:55.215Z",
-          "phase": "1",
-          "description": "* Health care workers\n* Long-term care facilities\n* Facilities for people with mental disabilities",
-          "tier": "A"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-02-23T14:50:56.315Z",
-          "phase": "1",
-          "tier": "B",
-          "description": "* Adults 65+\n* Essential workers (first responders, EMS, teachers, essential infrastructure)"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-07T19:17:11.996Z",
-          "phase": "1",
-          "tier": "C",
-          "description": "* People 16+ with high-risk medical conditions\n* People in congregate settings\n* Other essential workers"
+          "updatedAt": "2021-04-14T00:34:46.740Z",
+          "phase": "2",
+          "tier": "",
+          "description": "* Individuals 16+",
+          "startDate": ""
         }
       ],
-      "stateSignupUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19"
+      "stateSignupUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
+      "allAdultsEligible": true
     }
   ]
 }
