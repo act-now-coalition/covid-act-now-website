@@ -80,7 +80,7 @@ const NavBar: React.FC<{
         )}
         <Link
           to="/"
-          style={{ display: 'inline-flex', zIndex: 10000, marginRight: '1rem' }}
+          style={{ display: 'inline-flex', zIndex: 10000 }}
           onClick={() => onClickTopNavItem('Home (Logo)')}
           aria-label="Covid Act Now"
         >
