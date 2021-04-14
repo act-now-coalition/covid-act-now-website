@@ -2,7 +2,6 @@ import React, { useCallback, Fragment } from 'react';
 import isNumber from 'lodash/isNumber';
 import last from 'lodash/last';
 import max from 'lodash/max';
-import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
