@@ -10,7 +10,6 @@ import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-// const desktopNavHeight = 64;
 export const desktopNavHeight = 84;
 
 export const AppBar = styled(MuiAppBar)`

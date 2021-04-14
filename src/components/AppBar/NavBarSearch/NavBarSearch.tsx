@@ -1,10 +1,9 @@
 import React from 'react';
 import Fade from '@material-ui/core/Fade';
-import { HomepageSearchAutocomplete } from 'components/Search';
+import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
 import { Wrapper } from './NavBarSearch.style';
 import { useGeolocation, useCountyToZipMap } from 'common/hooks';
 import { getFinalAutocompleteLocations } from 'common/regions';
-import { getFilterLimit } from 'components/Search';
 
 const NavBarSearch: React.FC<{ showSearch?: boolean }> = ({
   showSearch = true,
