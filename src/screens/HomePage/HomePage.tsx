@@ -38,7 +38,6 @@ import {
   Variant,
   VariantID,
 } from 'components/Experiment';
-import { DEFAULT_EXPLORE_GEOLOCATION_COUNT } from './utils';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -64,10 +63,7 @@ export default function HomePage() {
       ? getGeolocatedRegions(geolocationData, countyToZipMap)
       : null;
 
-  const exploreGeoLocations = useGeolocationInExplore(
-    DEFAULT_EXPLORE_GEOLOCATION_COUNT,
-    geolocationData,
-  );
+  const exploreGeoLocations = useGeolocationInExplore(geolocationData);
   const showRisingHospitalizations =
     location.hash === '#explore-hospitalizations';
   const risingHospitalizationStates = [
