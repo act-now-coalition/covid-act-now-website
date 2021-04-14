@@ -11,7 +11,10 @@ import { useBreakpoint } from 'common/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<{
+  renderSearch?: any;
+  renderSecondaryElement?: any;
+}> = ({ renderSearch, renderSecondaryElement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isEmbed = useIsEmbed();
@@ -77,15 +80,20 @@ const NavBar: React.FC = () => {
         )}
         <Link
           to="/"
-          style={{ display: 'inline-flex' }}
+          style={{ display: 'inline-flex', zIndex: 10000 }}
           onClick={() => onClickTopNavItem('Home (Logo)')}
           aria-label="Covid Act Now"
         >
           <Logo />
         </Link>
+        {renderSearch && renderSearch()}
         <Style.Spacer />
         <>
-          <DonateButtonHeart onClick={closeMenu} />
+          {renderSecondaryElement ? (
+            renderSecondaryElement()
+          ) : (
+            <DonateButtonHeart onClick={closeMenu} />
+          )}
           <Style.IconButton
             onMouseEnter={onHoverHamburger}
             onClick={onClickHamburger}

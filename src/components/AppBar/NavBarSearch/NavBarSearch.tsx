@@ -1,23 +1,26 @@
 import React from 'react';
-import HomepageSearchAutocomplete from 'components/Search/Homepage/HomepageSearchAutocomplete';
-import { getFilterLimit } from 'components/Search';
-import { getFinalAutocompleteLocations } from 'common/regions';
 import Fade from '@material-ui/core/Fade';
+import { HomepageSearchAutocomplete } from 'components/Search';
 import { Wrapper } from './NavBarSearch.style';
+import { useGeolocation, useCountyToZipMap } from 'common/hooks';
+import { getFinalAutocompleteLocations } from 'common/regions';
+import { getFilterLimit } from 'components/Search';
 
-const NavBarSearch = () => {
-  const geolocation = {
-    zipCode: '06903',
-    stateCode: 'CT',
-    country: 'United States',
-  };
-  const locations = getFinalAutocompleteLocations(geolocation);
+const NavBarSearch: React.FC<{ showSearch?: boolean }> = ({
+  showSearch = true,
+}) => {
+  const { geolocationData } = useGeolocation();
+  const { result: countyToZipMap } = useCountyToZipMap();
+  const searchLocations = getFinalAutocompleteLocations(
+    geolocationData,
+    countyToZipMap,
+  );
 
   return (
-    <Fade in={true}>
+    <Fade in={showSearch}>
       <Wrapper>
         <HomepageSearchAutocomplete
-          locations={locations}
+          locations={searchLocations}
           filterLimit={getFilterLimit()}
         />
       </Wrapper>

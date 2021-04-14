@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import NavBar from 'components/AppBar';
+import NavBar, { NavBarSearch } from 'components/AppBar';
 import SidebarContents from 'components/SidebarContents';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { TocItem } from 'cms-content/utils';
@@ -20,7 +20,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
 
   return (
     <Fragment>
-      <NavBar />
+      <NavBar renderSearch={() => <NavBarSearch />} />
       <PageContainer>
         <MainContent>{children}</MainContent>
         <DesktopOnly>

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Fade from '@material-ui/core/Fade';
 import Map from 'components/Map/Map';
-import NavBar from 'components/AppBar';
+import NavBar, { NavBarSearch } from 'components/AppBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -20,7 +21,11 @@ import regions, {
 } from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
-import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
+import {
+  useGeolocation,
+  useGeolocationInExplore,
+  useShowPastPosition,
+} from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
@@ -39,6 +44,7 @@ import {
   Variant,
   VariantID,
 } from 'components/Experiment';
+import { DonateButtonHeart } from 'components/AppBar/DonateButton';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -116,6 +122,31 @@ export default function HomePage() {
     );
   };
 
+  const searchLocations = getFinalAutocompleteLocations(
+    geolocationData,
+    countyToZipMap,
+  );
+
+  const isMobileNavBar = useBreakpoint(800);
+  const hasScrolled = useShowPastPosition(560);
+  const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
+
+  const renderNavBarSearch = () => (
+    <>{hasScrolled && <NavBarSearch showSearch={hasScrolled} />}</>
+  );
+
+  const renderDonateButton = () => (
+    <>
+      {showDonateButton && (
+        <Fade in={showDonateButton}>
+          <div>
+            <DonateButtonHeart />
+          </div>
+        </Fade>
+      )}
+    </>
+  );
+
   // TODO (chelsi): add ids back in
 
   return (
@@ -126,7 +157,10 @@ export default function HomePage() {
         pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
-      <NavBar />
+      <NavBar
+        renderSearch={renderNavBarSearch}
+        renderSecondaryElement={renderDonateButton}
+      />
       <HomepageStructuredData />
       <SpringSurgeBanner />
       <HomePageHeader />
@@ -135,10 +169,7 @@ export default function HomePage() {
           <Content>
             <ColumnCentered id="search">
               <HomepageSearchAutocomplete
-                locations={getFinalAutocompleteLocations(
-                  geolocationData,
-                  countyToZipMap,
-                )}
+                locations={searchLocations}
                 filterLimit={getFilterLimit()}
               />
               <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
