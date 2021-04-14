@@ -65,7 +65,7 @@
           "answer": "Our team frequently reviews official state government sites and updates vaccine eligibility information on our site every Monday and Thursday. Please note that we are not a government or health care organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
         },
         {
-          "question": "Which locations do you have vaccine eligibility information for? ",
+          "question": "Which locations does Covid Act Now have vaccine eligibility information for? ",
           "questionId": "what-locations-do-you-have-vaccine-eligibility-information-for",
           "answer": "We currently have vaccine eligibility information for every U.S. state, the District of Columbia, Puerto Rico, and the Northern Mariana Islands.\n\nIdentifying vaccine eligibility information takes time, since the information is not standardized and cannot be processed automatically by a computer. It thus needs to be collected manually. What’s more, eligibility varies not only from state to state, but also sometimes by county, and even by city. Finally, vaccine eligibility information often changes frequently as states, counties, or cities adjust their roll-out plans, and making sure this information is up to date is a manual process of regularly checking government websites and press releases. For all those reasons, we focus on tracking vaccine eligibility at the state-level."
         },
