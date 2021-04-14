@@ -59,6 +59,7 @@ export enum EventCategory {
   VOTE_2020 = 'vote',
   VULNERABILITIES = 'vulnerabilities',
   WEB_VITALS = 'web vitals',
+  MINI_MAP = 'minimap',
 }
 
 /**
