@@ -53,8 +53,6 @@ function renderInfoTooltip(): React.ReactElement {
   );
 }
 
-const noop = () => {};
-
 const LocationPageHeader = (props: {
   alarmLevel: Level;
   condensed?: boolean;
@@ -87,13 +85,6 @@ const LocationPageHeader = (props: {
 
   const tooltip = renderInfoTooltip();
 
-  const headerButton = (
-    <HeaderButton onClick={props.onHeaderSignupClick || noop}>
-      <NotificationsNoneIcon />
-      Receive alerts
-    </HeaderButton>
-  );
-
   return (
     <Fragment>
       <ColoredHeaderBanner bgcolor={fillColor} />
@@ -106,19 +97,22 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationPageHeading region={region} isEmbed={isEmbed} />
             <ButtonsWrapper>
-              <HeaderButton onClick={props.onHeaderShareClick || noop}>
+              <HeaderButton onClick={props.onHeaderShareClick}>
                 <ShareOutlinedIcon />
                 Share
               </HeaderButton>
-              {props.isMobile ? (
-                <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
-                  <Variant id={VariantID.B}>{headerButton}</Variant>
-                  <Variant id={VariantID.A}>
-                    <></>
-                  </Variant>
-                </Experiment>
-              ) : (
-                headerButton
+              {!props.isMobile && (
+                <HeaderButton
+                  onClick={() => {
+                    props.onHeaderSignupClick();
+                    document
+                      .getElementById('fieldEmail')
+                      ?.focus({ preventScroll: true });
+                  }}
+                >
+                  <NotificationsNoneIcon />
+                  Receive alerts
+                </HeaderButton>
               )}
             </ButtonsWrapper>
           </HeaderSection>
@@ -156,12 +150,19 @@ const LocationPageHeader = (props: {
           )}
         </FooterContainer>
         {props.isMobile && (
-          <Experiment id={ExperimentID.GET_ALERTS_BUTTON}>
-            <Variant id={VariantID.B}>
-              <Fragment />
-            </Variant>
+          <Experiment id={ExperimentID.EMAIL_FIELD_AUTO_FOCUSED}>
             <Variant id={VariantID.A}>
-              <GetAlertsButton onClick={props.onHeaderSignupClick || noop} />
+              <GetAlertsButton
+                onClick={() => {
+                  props.onHeaderSignupClick();
+                  document
+                    .getElementById('fieldEmail')
+                    ?.focus({ preventScroll: true });
+                }}
+              />
+            </Variant>
+            <Variant id={VariantID.B}>
+              <GetAlertsButton onClick={() => props.onHeaderSignupClick()} />
             </Variant>
           </Experiment>
         )}
