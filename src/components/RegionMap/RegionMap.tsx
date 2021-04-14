@@ -9,6 +9,7 @@ import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { useCountyGeographies, useStateGeographies } from 'common/hooks';
 import * as Styles from './RegionMap.style';
 import { CountiesTopology } from 'common/data';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 const RegionMap: React.FC<{
   height?: number;
@@ -46,6 +47,10 @@ const RegionMap: React.FC<{
   const onMouseEnter = (content: string) => setTooltipContent(content);
   const onMouseLeave = () => setTooltipContent('');
 
+  const trackLocationClick = (eventLabel: string) => {
+    trackEvent(EventCategory.MINI_MAP, EventAction.NAVIGATE, eventLabel);
+  };
+
   return (
     <Styles.MapContainer>
       <ComposableMap
@@ -68,6 +73,9 @@ const RegionMap: React.FC<{
                     aria-label={region?.fullName || ''}
                     onMouseEnter={() => onMouseEnter(region?.fullName || '')}
                     onMouseLeave={onMouseLeave}
+                    onClick={() =>
+                      trackLocationClick(`State: ${region?.fullName}`)
+                    }
                   >
                     <Styles.StateShape
                       key={geo.id}
@@ -92,6 +100,9 @@ const RegionMap: React.FC<{
                     aria-label={region?.shortName || ''}
                     onMouseEnter={() => onMouseEnter(region?.shortName || '')}
                     onMouseLeave={onMouseLeave}
+                    onClick={() =>
+                      trackLocationClick(`County: ${region?.fullName}`)
+                    }
                   >
                     <Styles.CountyWithLevel
                       geography={geo}
