@@ -12,8 +12,8 @@ import { useBreakpoint } from 'common/hooks';
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
 const NavBar: React.FC<{
-  renderSearch?: any;
-  renderSecondaryElement?: any;
+  renderSearch?: () => React.ReactElement;
+  renderSecondaryElement?: () => React.ReactElement;
 }> = ({ renderSearch, renderSecondaryElement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
