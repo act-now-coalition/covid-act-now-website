@@ -22,11 +22,10 @@ import { GeolocationInfo } from './useGeolocation';
 import useCountyToZipMap from './useCountyToZipMap';
 
 export default function useGeolocationInExplore(
-  numLocations: number,
   geolocation?: GeolocationInfo,
 ): FipsCode[] {
   const [initialExploreFips, setInitialExploreFips] = useState(
-    getLargestMetroFipsForExplore(numLocations),
+    getLargestMetroFipsForExplore(),
   );
 
   const { result: countyToZipMap } = useCountyToZipMap();
