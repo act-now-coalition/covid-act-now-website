@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { findStateByStateCode, FipsCode } from './types';
+import { FipsCode } from './types';
 
 import {
   findStateFipsByUrlParams,
@@ -43,18 +43,3 @@ export const useFipsFromParams = (): FipsCode | null => {
 
   return fips;
 };
-/*
-import usePromise from 'common/hooks/usePromise';
-import { importLocationPageProps } from 'common/data';
-import { deserializeRegion } from './deserializeRegion';
-  export const useLocationPageProps = (fips: string | null): any => {
-    return usePromise(importLocationPageProps(fips));
-  };
-  
-    const props = useLocationPageProps(fips); // import(`common/data/fips/${fips}.json`);
-    if (props.region) {
-      return deserializeRegion(props.region);
-    }
-    return null;
-  };
-    */
