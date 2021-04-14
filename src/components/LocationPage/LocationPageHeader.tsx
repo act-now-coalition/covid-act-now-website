@@ -151,7 +151,7 @@ const LocationPageHeader = (props: {
         </FooterContainer>
         {props.isMobile && (
           <Experiment id={ExperimentID.EMAIL_FIELD_AUTO_FOCUSED}>
-            <Variant id={VariantID.B}>
+            <Variant id={VariantID.A}>
               <GetAlertsButton
                 onClick={() => {
                   props.onHeaderSignupClick();
@@ -161,7 +161,7 @@ const LocationPageHeader = (props: {
                 }}
               />
             </Variant>
-            <Variant id={VariantID.A}>
+            <Variant id={VariantID.B}>
               <GetAlertsButton onClick={() => props.onHeaderSignupClick()} />
             </Variant>
           </Experiment>
