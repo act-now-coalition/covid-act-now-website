@@ -57,8 +57,21 @@ const MobileWrapperClosed = css`
   padding: 0.75rem 0.5rem 1.5rem;
 `;
 
-export const Wrapper = styled.div<{ $isOpen: boolean }>`
-  ${({ $isOpen }) => ($isOpen ? MobileWrapperOpened : MobileWrapperClosed)};
+const MobileNavWrapperClosed = css`
+  ${MobileWrapperClosed};
+  width: 100%;
+  padding: 1rem 0.25rem 1rem 1.25rem;
+  max-width: 200px;
+  margin-left: auto;
+`;
+
+export const Wrapper = styled.div<{ $isOpen: boolean; isNavBar?: boolean }>`
+  ${({ $isOpen, isNavBar }) =>
+    $isOpen
+      ? MobileWrapperOpened
+      : isNavBar
+      ? MobileNavWrapperClosed
+      : MobileWrapperClosed};
 
   @media (min-width: ${materialSMBreakpoint}) {
     box-shadow: ${({ $isOpen }) =>
@@ -69,6 +82,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
     height: unset;
     padding: 1rem 1.25rem;
     margin: auto;
+    max-width: unset;
   }
 `;
 

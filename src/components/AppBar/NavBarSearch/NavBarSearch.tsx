@@ -21,6 +21,7 @@ const NavBarSearch: React.FC<{ showSearch?: boolean }> = ({
         <HomepageSearchAutocomplete
           locations={searchLocations}
           filterLimit={getFilterLimit()}
+          isNavBar
         />
       </Wrapper>
     </Fade>

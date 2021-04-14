@@ -26,7 +26,8 @@ const HomepageSearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
-}> = ({ locations, filterLimit, setHideMapToggle }) => {
+  isNavBar?: boolean;
+}> = ({ locations, filterLimit, setHideMapToggle, isNavBar }) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -84,7 +85,7 @@ const HomepageSearchAutocomplete: React.FC<{
   return (
     <>
       {lockBackgroundScroll && <LockBodyScroll />}
-      <Wrapper $isOpen={isOpen}>
+      <Wrapper $isOpen={isOpen} isNavBar={isNavBar}>
         <Autocomplete
           open={isOpen}
           disableListWrap
