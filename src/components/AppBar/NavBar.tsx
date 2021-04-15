@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ClickAwayListener } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import MegaMenu from './MegaMenu/MegaMenu';
 import * as Style from './NavBar.style';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
-import { useBreakpoint } from 'common/hooks';
 
 const isLocationPage = (pathname: string) => pathname.includes('/us');
 
@@ -20,8 +20,6 @@ const NavBar: React.FC<{
 
   const { pathname } = useLocation();
 
-  const isMobile = useBreakpoint(800);
-
   const onClickHamburger = () => {
     const updatedIsOpen = !menuOpen;
     setMenuOpen(!menuOpen);
@@ -30,25 +28,7 @@ const NavBar: React.FC<{
     }
   };
 
-  const onHoverHamburger = () => {
-    if (isMobile) {
-      return;
-    } else {
-      if (!menuOpen) {
-        setMenuOpen(true);
-        trackMobileMenuOpen();
-      }
-    }
-  };
-
   const closeMenu = () => setMenuOpen(false);
-
-  const onMouseLeave = (e: React.MouseEvent<{}>) => {
-    // Do not close when the user hovers on the top bar (including the button to close the menu)
-    if (e.clientY > 64) {
-      closeMenu();
-    }
-  };
 
   const onClickTopNavItem = (label: string) => {
     trackNavigation(label);
@@ -58,7 +38,6 @@ const NavBar: React.FC<{
   const menuProps = {
     open: menuOpen,
     closeMenu,
-    onMouseLeave,
   };
 
   if (isEmbed) {
@@ -89,14 +68,12 @@ const NavBar: React.FC<{
         <Style.Spacer />
         <>
           {renderSecondaryElement && renderSecondaryElement()}
-          <Style.IconButton
-            onMouseEnter={onHoverHamburger}
-            onClick={onClickHamburger}
-            edge="end"
-          >
-            <Style.MenuLabel>Menu</Style.MenuLabel>
-            {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-          </Style.IconButton>
+          <ClickAwayListener onClickAway={closeMenu}>
+            <Style.IconButton onClick={onClickHamburger} edge="end">
+              <Style.MenuLabel>Menu</Style.MenuLabel>
+              {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
+            </Style.IconButton>
+          </ClickAwayListener>
         </>
         <MegaMenu {...menuProps} />
       </Style.Toolbar>

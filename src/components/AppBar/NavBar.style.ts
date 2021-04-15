@@ -67,13 +67,14 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   color: black;
   font-size: 1rem;
   line-height: 1.4rem;
+  padding: 0.5rem;
 
   &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
   }
 
   &:hover {
-    background-color: transparent;
+    border-radius: 4px;
   }
 `;
 
