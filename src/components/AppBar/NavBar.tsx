@@ -4,7 +4,6 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import MegaMenu from './MegaMenu/MegaMenu';
 import * as Style from './NavBar.style';
-import { DonateButtonHeart } from './DonateButton';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from './utils';
 import { useBreakpoint } from 'common/hooks';
@@ -89,11 +88,7 @@ const NavBar: React.FC<{
         {renderSearch && renderSearch()}
         <Style.Spacer />
         <>
-          {renderSecondaryElement ? (
-            renderSecondaryElement()
-          ) : (
-            <DonateButtonHeart onClick={closeMenu} />
-          )}
+          {renderSecondaryElement && renderSecondaryElement()}
           <Style.IconButton
             onMouseEnter={onHoverHamburger}
             onClick={onClickHamburger}

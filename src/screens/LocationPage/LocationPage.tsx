@@ -9,6 +9,7 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
+import { DonateButtonHeart } from 'components/AppBar/DonateButton';
 
 interface LocationPageProps {
   region: Region;
@@ -35,7 +36,7 @@ function LocationPage({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      <NavBar />
+      <NavBar renderSecondaryElement={() => <DonateButtonHeart />} />
       <div>
         <SearchHeader
           mobileMenuOpen={mobileMenuOpen}
