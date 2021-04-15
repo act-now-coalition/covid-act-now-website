@@ -17,7 +17,7 @@ import {
   countyFipsToUrlSegment,
   metroAreaFipsToUrlSegment,
 } from './regions_data';
-} from '../../src/common/regions';
+import { countyUrlParamsToUrlKey } from '../../src/common/regions';
 
 const fs = require('fs-extra');
 
