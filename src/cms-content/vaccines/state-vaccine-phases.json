@@ -102,63 +102,23 @@
       "stateSignupUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-map-of-1-a-pharmacy-locations"
     },
     {
-      "emailAlertVersion": "3",
       "locationName": "California",
+      "notes": "",
       "fips": "06",
-      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
-      "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
+      "stateSignupUrl": "https://covid19.ca.gov/vaccines/#How-to-get-vaccinated",
       "phaseGroups": [
         {
-          "phase": "1a",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care residents",
-          "expandedDefinitionUrl": "CDPH Allocation Guidelines for Phase 1a",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "Now vaccinating as supplies allow (varies locally):\n\n* Adults 65+\n* Education and child care \n* Emergency services\n* Food and agriculture",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.982Z"
-        },
-        {
-          "phase": "1b",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Adults aged 16 to 64 with certain high-risk health conditions and disabilities\n* Adults living or working in congregate settings (incarceration/detention facilities, homeless shelters, behavioral health facilities, etc.)\n* Public transit workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 15, 2021",
-          "updatedAt": "2021-04-08T03:48:58.714Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-08T03:49:37.008Z",
-          "phase": "1b",
-          "description": "* Individuals 50-64\n* Certain counties are vaccinating individuals 16+",
-          "tier": "3",
-          "startDate": "April 1, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-08T03:49:38.553Z",
+          "updatedAt": "2021-04-15T15:44:57.522Z",
           "phase": "2",
-          "description": "* All individuals 16+",
+          "description": "* Individuals 16+",
           "startDate": "April 15, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:18:52.952Z",
-          "description": "Still to be determined: \n\n* Individuals under 16",
-          "phase": "TBD"
         }
       ],
-      "notes": "",
-      "stateSignupUrl": "https://covid19.ca.gov/vaccines/#How-to-get-vaccinated"
+      "allAdultsEligible": true,
+      "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
+      "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
+      "emailAlertVersion": "4"
     },
     {
       "emailAlertVersion": "4",
@@ -1453,78 +1413,22 @@
       "stateSignupUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/phase-by-health-district/"
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Washington",
       "fips": "53",
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "1",
           "currentlyEligible": true,
-          "description": "* High-risk workers in health care settings\n* High-risk first responders \n* Residents and staff of long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1A",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* All other workers at risk in health care settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Educators and child care personnel\n* All people 65 years and older\n* People 50 years and older in multigenerational households",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* High-risk critical workers who work in certain congregate settings (agriculture and fishing, food services, corrections, court system, public transit, remaining first responders, etc.)\n* Individuals 16+ who are pregnant or have high-risk disabilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-22T23:32:15.036Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "3 and 4",
-          "currentlyEligible": true,
-          "description": "* People 16 years and older with 2 or more co-morbidities or underlying conditions\n* People 60-64\n* People, staff and volunteers in certain congregate living settings (correctional facilities, group homes, etc.)\n* High-risk critical workers in certain congregate settings (restaurants, food services, construction, manufacturing)",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 31, 2021",
-          "updatedAt": "2021-03-31T16:08:27.352Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-22T23:34:38.906Z",
-          "phase": "2",
-          "description": "* Individuals 16+ with one comorbidity\n* Critical workers"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T06:26:15.304Z",
+          "updatedAt": "2021-04-15T15:05:46.346Z",
           "phase": "3",
           "description": "* Individuals 16+",
-          "startDate": "April 15"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T06:16:06.904Z",
-          "phase": "4",
-          "description": "* General Public (under 16)"
+          "startDate": "April 15, 2021"
         }
       ],
-      "stateSignupUrl": "https://vaccinelocator.doh.wa.gov/"
+      "stateSignupUrl": "https://vaccinelocator.doh.wa.gov/",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "4",
