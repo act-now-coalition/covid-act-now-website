@@ -39,9 +39,9 @@
           "url": "https://www.ibm.com/us-en/"
         },
         {
-          "altText": "Wayfair logo",
-          "image": "/images_cms/wayfair-logo.jpg",
-          "url": "https://www.wayfair.com/"
+          "altText": "Citizen Logo",
+          "url": "https://citizen.com/",
+          "image": "/images_cms/citizen-com_logo.png"
         },
         {
           "altText": "DC Department of Health logo",
@@ -49,9 +49,9 @@
           "url": "https://dchealth.dc.gov/"
         },
         {
-          "altText": "Citizen Logo",
-          "url": "https://citizen.com/",
-          "image": "/images_cms/citizen-com_logo.png"
+          "altText": "Wayfair logo",
+          "image": "/images_cms/wayfair-logo.jpg",
+          "url": "https://www.wayfair.com/"
         },
         {
           "altText": "Team Rubicon Logo",
