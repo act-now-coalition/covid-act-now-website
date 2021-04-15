@@ -63,7 +63,7 @@ export default function HomePage() {
       ? getGeolocatedRegions(geolocationData, countyToZipMap)
       : null;
 
-  const exploreGeoLocations = useGeolocationInExplore(5, geolocationData);
+  const exploreGeoLocations = useGeolocationInExplore(geolocationData);
   const showRisingHospitalizations =
     location.hash === '#explore-hospitalizations';
   const risingHospitalizationStates = [

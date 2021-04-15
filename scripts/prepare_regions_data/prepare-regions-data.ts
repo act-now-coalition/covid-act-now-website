@@ -17,25 +17,20 @@ import {
   countyFipsToUrlSegment,
   metroAreaFipsToUrlSegment,
 } from './regions_data';
-import {
-  generateStateUrlSegment,
-  generateCountyUrlSegment,
-  generateMetroAreaUrlSegment,
-} from '../../src/common/regions';
 
 const fs = require('fs-extra');
 
 const destinationDir = path.join(__dirname, '../../src/common/data/');
 
-const STATES_JSON_FILE = path.join(destinationDir, 'states_by_fips.json');
-const COUNTIES_JSON_FILE = path.join(destinationDir, 'counties_by_fips.json');
-const METRO_AREAS_JSON_FILE = path.join(
-  destinationDir,
-  'metro_areas_by_fips.json',
-);
-
 async function writeRegionsData() {
   console.log('Preparing regions data');
+
+  const STATES_JSON_FILE = path.join(destinationDir, 'states_by_fips.json');
+  const COUNTIES_JSON_FILE = path.join(destinationDir, 'counties_by_fips.json');
+  const METRO_AREAS_JSON_FILE = path.join(
+    destinationDir,
+    'metro_areas_by_fips.json',
+  );
 
   // map of output filenames to source data
   const files = {
