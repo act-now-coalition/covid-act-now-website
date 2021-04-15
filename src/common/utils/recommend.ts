@@ -185,10 +185,10 @@ export function getShareQuote(locationName: string, alarmLevel: Level): string {
   const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
 
   // This needs updating (still mentions WH):
-  const unknownShareQuote = `These are the White House Coronavirus Task Force’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
+  const unknownShareQuote = `These are the COVID guidelines set by the CDC:`;
 
   if (alarmLevel === Level.UNKNOWN) {
     return unknownShareQuote;
   }
-  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the White House Coronavirus Task Force’s official recommendations:`;
+  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the COVID guidelines set by the CDC:`;
 }
