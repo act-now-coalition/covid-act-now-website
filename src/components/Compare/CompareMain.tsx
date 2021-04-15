@@ -126,27 +126,34 @@ const CompareMain = (props: {
 
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
+  const [locations, setLocations] = useState<SummaryForCompare[]>([]);
 
-  function getLocationPageLocations(region: Region) {
-    const stateCode = getStateCode(region);
-    if (region instanceof MetroArea) {
-      return getAllCountiesOfMetroArea(region);
-    } else if (geoScope === GeoScopeFilter.NEARBY) {
-      return getNeighboringCounties(region.fipsCode);
-    } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
-      return getAllCountiesOfState(stateCode);
-    } else {
-      return getAllCounties();
+  useEffect(() => {
+    async function getLocationPageLocations(region: Region) {
+      const stateCode = getStateCode(region);
+      if (region instanceof MetroArea) {
+        return getAllCountiesOfMetroArea(region);
+      } else if (geoScope === GeoScopeFilter.NEARBY) {
+        return await getNeighboringCounties(region.fipsCode);
+      } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
+        return getAllCountiesOfState(stateCode);
+      } else {
+        return getAllCounties();
+      }
     }
-  }
 
-  function getFinalLocations(region?: Region) {
-    return region
-      ? getLocationPageLocations(region)
-      : homepageLocationsForCompare;
-  }
+    async function getFinalLocations(region?: Region) {
+      return region
+        ? await getLocationPageLocations(region)
+        : homepageLocationsForCompare;
+    }
 
-  const locations = getFinalLocations(region);
+    const load = async () => {
+      setLocations(await getFinalLocations(region));
+    };
+
+    load();
+  }, [region, geoScope, homepageLocationsForCompare]);
 
   const viewMoreCopy = region
     ? getLocationPageViewMoreCopy(geoScope, region)
