@@ -1424,13 +1424,7 @@
           "updatedAt": "2021-04-15T15:05:46.346Z",
           "phase": "3",
           "description": "* Individuals 16+",
-          "startDate": "April 15"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T06:16:06.904Z",
-          "phase": "4",
-          "description": "* General Public (under 16)"
+          "startDate": "April 15, 2021"
         }
       ],
       "stateSignupUrl": "https://vaccinelocator.doh.wa.gov/",
