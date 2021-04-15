@@ -67,7 +67,7 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   color: black;
   font-size: 1rem;
   line-height: 1.4rem;
-  padding: 0.5rem;
+  padding: 1rem;
 
   &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
@@ -75,6 +75,10 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
 
   &:hover {
     border-radius: 4px;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0.5rem 0.75rem;
   }
 `;
 

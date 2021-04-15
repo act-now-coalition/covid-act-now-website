@@ -1,15 +1,12 @@
 import React, { useContext } from 'react';
 import { ThemeProvider, ThemeContext } from 'styled-components';
-import Fade from '@material-ui/core/Fade';
 import { navSearchbar } from 'assets/theme';
 import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
 import { Wrapper } from './NavBarSearch.style';
 import { useGeolocation, useCountyToZipMap } from 'common/hooks';
 import { getFinalAutocompleteLocations } from 'common/regions';
 
-const NavBarSearch: React.FC<{ showSearch?: boolean }> = ({
-  showSearch = true,
-}) => {
+const NavBarSearch: React.FC = () => {
   const theme = useContext(ThemeContext);
 
   const { geolocationData } = useGeolocation();
@@ -26,14 +23,12 @@ const NavBarSearch: React.FC<{ showSearch?: boolean }> = ({
         searchbar: navSearchbar,
       }}
     >
-      <Fade in={showSearch}>
-        <Wrapper>
-          <HomepageSearchAutocomplete
-            locations={searchLocations}
-            filterLimit={getFilterLimit()}
-          />
-        </Wrapper>
-      </Fade>
+      <Wrapper>
+        <HomepageSearchAutocomplete
+          locations={searchLocations}
+          filterLimit={getFilterLimit()}
+        />
+      </Wrapper>
     </ThemeProvider>
   );
 };

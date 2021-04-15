@@ -128,12 +128,10 @@ export default function HomePage() {
   );
 
   const isMobileNavBar = useBreakpoint(800);
-  const hasScrolled = useShowPastPosition(560);
+  const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
-  const renderNavBarSearch = () => (
-    <>{hasScrolled && <NavBarSearch showSearch={hasScrolled} />}</>
-  );
+  const renderNavBarSearch = () => <>{hasScrolled && <NavBarSearch />}</>;
 
   const renderDonateButton = () => (
     <>
