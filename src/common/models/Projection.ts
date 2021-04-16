@@ -247,6 +247,7 @@ export class Projection {
     );
     this.smoothedDailyVaccinesAdministered = this.smoothWithRollingAverage(
       this.rawDailyVaccinesAdministered,
+      14,
     );
 
     this.rtRange = this.calcRtRange(metricsTimeseries);
