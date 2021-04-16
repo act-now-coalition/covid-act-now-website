@@ -8,7 +8,7 @@ import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
 import {
   InfoTooltip,
-  DisclaimerTooltip,
+  TextTooltip,
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
@@ -114,7 +114,7 @@ function renderDisclaimer(
       {region instanceof State ||
       (provenance && provenance[0].name && provenance[0].url) ? (
         <>
-          <DisclaimerTooltip
+          <TextTooltip
             title={getDataSourceTooltipContent(
               Metric.VACCINATIONS,
               region,
@@ -130,7 +130,7 @@ function renderDisclaimer(
       ) : (
         ''
       )}
-      <DisclaimerTooltip
+      <TextTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
         trackOpenTooltip={() =>

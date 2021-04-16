@@ -12,8 +12,19 @@ import {
   getTTFB,
 } from 'web-vitals';
 
+import { isRecordingEnabled } from 'common/fullstory';
+
+// Percentage of overall users that we want to record
+const RECORD_PERCENT = 1 / 10;
+
+const RECORD_KEY = 'WEB_VITALS_RECORD';
+
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
+  if (
+    onPerfEntry &&
+    onPerfEntry instanceof Function &&
+    isRecordingEnabled(RECORD_KEY, RECORD_PERCENT)
+  ) {
     getCLS(onPerfEntry);
     getFID(onPerfEntry);
     getFCP(onPerfEntry);

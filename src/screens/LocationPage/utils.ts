@@ -1,7 +1,7 @@
+import replace from 'lodash/replace';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { formatMetatagDate, formatPercent } from 'common/utils';
 import { Region, State, County, MetroArea } from 'common/regions';
-import { replace } from 'lodash';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { Metric } from 'common/metricEnum';
 
@@ -18,7 +18,7 @@ function locationName(region: Region) {
 }
 
 export function getPageTitle(region: Region): string {
-  return `${locationName(region)} - COVID Data & Key Metrics`;
+  return `${locationName(region)} - COVID Vaccine & Risk Tracker`;
 }
 
 export function getPageDescription(region: Region): string {

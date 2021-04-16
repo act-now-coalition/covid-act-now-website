@@ -25,7 +25,7 @@ import {
   EmbedHeader,
   EmbedSubheader,
 } from './Embed.style';
-import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
 import { useRegionFromParams } from 'common/regions';
 
 function LocationEmbed() {
@@ -91,7 +91,7 @@ export default function Embed({ isNational }: { isNational: boolean }) {
   if (isNational) {
     return (
       <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>
-        <SocialLocationPreview border isEmbed Footer={EmbedFooter} />
+        <SocialLocationPreviewMap border isEmbed Footer={EmbedFooter} />
       </EmbedContainer>
     );
   }

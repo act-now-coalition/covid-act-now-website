@@ -1,14 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { uniq } from 'lodash';
 import { ComposableMap, Geographies } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
 import * as topojson from 'topojson-client';
 import { geoBounds, geoCentroid, geoDistance } from 'd3-geo';
-import COUNTIES_JSON from 'components/Map/data/counties-10m.json';
 import regions, { County, MetroArea, State, Region } from 'common/regions';
-import * as Styles from './RegionMap.style';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
+import { useCountyGeographies, useStateGeographies } from 'common/hooks';
+import * as Styles from './RegionMap.style';
+import { CountiesTopology } from 'common/data';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 const RegionMap: React.FC<{
   height?: number;
@@ -18,21 +19,37 @@ const RegionMap: React.FC<{
   const [tooltipContent, setTooltipContent] = useState('');
 
   const countyFipsList = useMemo(() => getCountyFipsList(region), [region]);
+
+  const { result: allCountiesTopoJson } = useCountyGeographies();
+  const { result: statesTopoJson } = useStateGeographies();
+
   const countiesTopoJson = useMemo(
-    () => buildCountyGeometries(countyFipsList),
-    [countyFipsList],
-  );
-  const projectionConfig = useMemo(
-    () => getProjectionConfig(countiesTopoJson, width, height),
-    [countiesTopoJson, width, height],
+    () =>
+      allCountiesTopoJson
+        ? buildCountyGeometries(allCountiesTopoJson, countyFipsList)
+        : null,
+    [countyFipsList, allCountiesTopoJson],
   );
 
-  const statesTopoJson = useMemo(() => getStateGeometries(countyFipsList), [
-    countyFipsList,
-  ]);
+  // Calculating the projection config involves doing some complex map on the
+  // geographies of the counties, we memoize it to avoid recalculating that on
+  // each render.
+  const projectionConfig = useMemo(() => {
+    return countiesTopoJson
+      ? getProjectionConfig(countiesTopoJson, width, height)
+      : null;
+  }, [countiesTopoJson, width, height]);
+
+  if (!statesTopoJson || !countiesTopoJson || !projectionConfig) {
+    return null;
+  }
 
   const onMouseEnter = (content: string) => setTooltipContent(content);
   const onMouseLeave = () => setTooltipContent('');
+
+  const trackLocationClick = (eventLabel: string) => {
+    trackEvent(EventCategory.MINI_MAP, EventAction.NAVIGATE, eventLabel);
+  };
 
   return (
     <Styles.MapContainer>
@@ -45,51 +62,69 @@ const RegionMap: React.FC<{
       >
         <Geographies key="states" geography={statesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => {
-              const region = regions.findByFipsCode(geo.id);
-              return (
-                <Link
-                  key={geo.rsmKey}
-                  to={region ? region.relativeUrl : '/'}
-                  aria-label={region?.fullName || ''}
-                >
-                  <Styles.StateShape
-                    key={geo.rsmKey}
-                    geography={geo}
+            geographies
+              .filter(geo => regions.findByFipsCode(geo.id))
+              .map(geo => {
+                const region = regions.findByFipsCode(geo.id);
+                return (
+                  <Link
+                    key={geo.id}
+                    to={region ? region.relativeUrl : '/'}
+                    aria-label={region?.fullName || ''}
                     onMouseEnter={() => onMouseEnter(region?.fullName || '')}
                     onMouseLeave={onMouseLeave}
-                  />
-                </Link>
-              );
-            })
+                    onClick={() =>
+                      trackLocationClick(`State: ${region?.fullName}`)
+                    }
+                  >
+                    <Styles.StateShape
+                      key={geo.id}
+                      geography={geo}
+                      aria-label={region?.fullName}
+                    />
+                  </Link>
+                );
+              })
           }
         </Geographies>
         <Geographies key="counties" geography={countiesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => {
-              const region = regions.findByFipsCode(geo.id);
-              return (
-                <Link
-                  key={geo.id}
-                  to={region ? region.relativeUrl : '/'}
-                  aria-label={region?.shortName || ''}
-                >
-                  <Styles.CountyWithLevel
-                    geography={geo}
-                    $locationSummary={LocationSummariesByFIPS[geo.id] || null}
+            geographies
+              .filter(geo => regions.findByFipsCode(geo.id))
+              .map(geo => {
+                const region = regions.findByFipsCode(geo.id);
+                return (
+                  <Link
+                    key={geo.id}
+                    to={region ? region.relativeUrl : '/'}
+                    aria-label={region?.shortName || ''}
                     onMouseEnter={() => onMouseEnter(region?.shortName || '')}
                     onMouseLeave={onMouseLeave}
-                  />
-                </Link>
-              );
-            })
+                    onClick={() =>
+                      trackLocationClick(`County: ${region?.fullName}`)
+                    }
+                  >
+                    <Styles.CountyWithLevel
+                      geography={geo}
+                      $locationSummary={LocationSummariesByFIPS[geo.id] || null}
+                      aria-label={region?.shortName}
+                    />
+                  </Link>
+                );
+              })
           }
         </Geographies>
         <Geographies key="state-borders" geography={statesTopoJson}>
           {({ geographies }) =>
-            geographies.map(geo => (
-              <Styles.StateBorder key={geo.rsmKey} geography={geo} />
-            ))
+            geographies
+              .filter(geo => regions.findByFipsCode(geo.id))
+              .map(geo => (
+                <Styles.StateBorder
+                  key={geo.id}
+                  geography={geo}
+                  aria-hidden="true"
+                />
+              ))
           }
         </Geographies>
         {/* Highlight the current county if needed */}
@@ -99,7 +134,11 @@ const RegionMap: React.FC<{
               geographies
                 .filter(geo => geo.id === region.fipsCode)
                 .map(geo => (
-                  <Styles.CountyBorder key={geo.rsmKey} geography={geo} />
+                  <Styles.CountyBorder
+                    key={geo.id}
+                    geography={geo}
+                    aria-hidden="true"
+                  />
                 ))
             }
           </Geographies>
@@ -143,39 +182,25 @@ function getProjectionConfig(
   return { scale, center };
 }
 
-function buildCountyGeometries(countyFipsList: string[]) {
-  const objects = COUNTIES_JSON.objects;
-  const geometries = objects.counties.geometries.filter(geoCounty =>
-    countyFipsList.includes(geoCounty.id),
+function buildCountyGeometries(
+  countiesTopoJson: CountiesTopology,
+  countyFipsList: string[],
+) {
+  const objects = countiesTopoJson.objects;
+  const geometries = objects.counties.geometries.filter(
+    ({ id }: { id: string }) => countyFipsList.includes(id),
   );
   return {
-    ...COUNTIES_JSON,
+    ...countiesTopoJson,
     objects: {
       counties: { ...objects.counties, geometries },
     },
   };
 }
 
-function buildStateGeometries(stateFipsList: string[]) {
-  const { objects } = COUNTIES_JSON;
-  return {
-    ...COUNTIES_JSON,
-    objects: { states: objects.states },
-  };
-}
-
-function getStateFipsList(countyFipsList: string[]) {
-  return uniq(countyFipsList.map(countyFips => countyFips.substr(0, 2)));
-}
-
-function getStateGeometries(countyFipsList: string[]) {
-  const stateFipsList = getStateFipsList(countyFipsList);
-  return buildStateGeometries(stateFipsList);
-}
-
 function getCountyFipsList(region: Region): string[] {
   if (region instanceof MetroArea) {
-    return region.counties.map(c => c.fipsCode);
+    return region.countiesFips;
   } else if (region instanceof State) {
     return regions.counties
       .filter(c => c.state.fipsCode === region.fipsCode)

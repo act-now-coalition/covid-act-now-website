@@ -9,7 +9,8 @@
  */
 
 import { useEffect, useState } from 'react';
-import { isNull, values } from 'lodash';
+import isNull from 'lodash/isNull';
+import values from 'lodash/values';
 import {
   getGeolocatedRegions,
   filterUndefinedRegions,
@@ -21,11 +22,10 @@ import { GeolocationInfo } from './useGeolocation';
 import useCountyToZipMap from './useCountyToZipMap';
 
 export default function useGeolocationInExplore(
-  numLocations: number,
   geolocation?: GeolocationInfo,
 ): FipsCode[] {
   const [initialExploreFips, setInitialExploreFips] = useState(
-    getLargestMetroFipsForExplore(numLocations),
+    getLargestMetroFipsForExplore(),
   );
 
   const { result: countyToZipMap } = useCountyToZipMap();

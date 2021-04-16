@@ -1,10 +1,18 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import regions from './region_db';
+import regions, { getRegionsDB, RegionDB } from './region_db';
 import { Region } from './types';
 
-// We are careful to never call `useRegion()` in components that are not
-// nested inside `<RegionContext.Provider>` so we cheat and pretend that the
-// value is non-nullable
+export const useRegionsDB = () => {
+  const [regions, setRegions] = useState<RegionDB | null>(null);
+  useEffect(() => {
+    const load = async () => {
+      setRegions(await getRegionsDB());
+    };
+    load();
+  }, []);
+  return regions;
+};
 
 export const useRegionFromParams = (): Region | null => {
   const {

@@ -1,7 +1,9 @@
-import { deburr, words } from 'lodash';
+import deburr from 'lodash/deburr';
+import words from 'lodash/words';
+import trim from 'lodash/trim';
 
 export function sanitizeID(sectionId: string): string {
-  return deburr(words(sectionId).join('-')).toLowerCase();
+  return trim(deburr(words(sectionId).join('-')).toLowerCase());
 }
 
 export type Markdown = string;

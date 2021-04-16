@@ -1,0 +1,37 @@
+{
+  "aboutUs": "Covid Act Now is an independent nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.",
+  "learnLinks": [
+    {
+      "cta": "How can I get a vaccine for myself or someone I care about?",
+      "url": "/faq#how-get-vaccine-for-myself-or-someone"
+    },
+    {
+      "cta": "When can children get the COVID vaccine?",
+      "url": "/faq#when-can-children-get-covid-vaccine"
+    },
+    {
+      "url": "/faq#safe-to-get-covid-vaccine-if-pregnant-or-breastfeeding",
+      "cta": "Is it safe to get a COVID vaccine if you are pregnant or breastfeeding?"
+    }
+  ],
+  "featuredSections": [
+    {
+      "cta": "Alerts",
+      "url": "#share",
+      "description": "Receive emails when your location changes risk level or vaccine eligibility",
+      "iconId": "ALERTS"
+    },
+    {
+      "cta": "Daily Download",
+      "description": "Receive daily emails with the latest data and scientific findings",
+      "url": "/subscribe#daily-download",
+      "iconId": "DAILY_DOWNLOAD"
+    },
+    {
+      "cta": "Get our data",
+      "url": "/data-api",
+      "description": "Download all of our data in CSV or JSON files",
+      "iconId": "API"
+    }
+  ]
+}

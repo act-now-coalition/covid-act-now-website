@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import { Hidden } from '@material-ui/core';
-import { chunk, ceil, partition } from 'lodash';
+import chunk from 'lodash/chunk';
+import ceil from 'lodash/ceil';
+import partition from 'lodash/partition';
 import {
   Wrapper,
   HeaderCopy,
@@ -9,7 +10,6 @@ import {
   RecommendationBody,
   Icon,
   FooterLink,
-  ShareText,
   FooterHalf,
   FooterWrapper,
   Column,
@@ -18,24 +18,18 @@ import {
 import {
   RecommendationWithIcon,
   mainContent,
-  modalContent,
   FedLevel,
   HarvardLevel,
 } from 'cms-content/recommendations';
 import { HeaderWrapper } from 'components/LocationPage/ChartsHolder.style';
 import SmallShareButtons from 'components/SmallShareButtons';
-import RecommendModal from './RecommendModal';
-import Dialog, { useDialog } from 'components/Dialog';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { LinkButton } from 'components/Button';
 import { trackRecommendationsEvent } from 'common/utils/recommend';
-import * as ModalStyle from './RecommendModal.style';
 import ExternalLink from 'components/ExternalLink';
 import { Subtitle1 } from 'components/Typography';
 import { useBreakpoint } from 'common/hooks';
 
 const { header, footer } = mainContent;
-const { federalTaskForce } = modalContent;
 
 const trackShareFacebook = () =>
   trackRecommendationsEvent(EventAction.SHARE, 'facebook');
@@ -47,12 +41,8 @@ const trackCopyLink = () => {
   trackRecommendationsEvent(EventAction.COPY_LINK, 'recommendations');
 };
 
-const Header = (props: {
-  introCopy: string;
-  locationName: string;
-  onClickOpenModal: () => void;
-}) => {
-  const { introCopy, locationName, onClickOpenModal } = props;
+const Header = (props: { introCopy: string; locationName: string }) => {
+  const { introCopy, locationName } = props;
   return (
     <Fragment>
       <HeaderWrapper id="recommendations">
@@ -61,20 +51,17 @@ const Header = (props: {
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
         These recommendations match the guidelines set by the{' '}
-        <strong>{federalTaskForce.sourceName}</strong> and the{' '}
-        <strong>CDC</strong>. {introCopy}{' '}
-        <LinkButton onClick={onClickOpenModal}>Learn more</LinkButton>.
+        <strong>CDC</strong>. {introCopy}
       </Intro>
     </Fragment>
   );
 };
 
 const Footer: React.FC<{
-  onClickOpenModal: () => void;
   shareUrl: string;
   shareQuote: string;
   feedbackFormUrl: string;
-}> = ({ onClickOpenModal, feedbackFormUrl, shareUrl, shareQuote }) => {
+}> = ({ feedbackFormUrl, shareUrl, shareQuote }) => {
   const feedbackOnClick = () => {
     trackEvent(
       EventCategory.RECOMMENDATIONS,
@@ -86,16 +73,11 @@ const Footer: React.FC<{
   return (
     <FooterWrapper>
       <FooterHalf>
-        <FooterLink onClick={onClickOpenModal}>
-          {footer.modalButtonLabel}
-        </FooterLink>
-        <Hidden xsDown>
-          <ExternalLink href={feedbackFormUrl}>
-            <FooterLink onClick={feedbackOnClick}>
-              {footer.feedbackButtonLabel}
-            </FooterLink>
-          </ExternalLink>
-        </Hidden>
+        <ExternalLink href={feedbackFormUrl}>
+          <FooterLink onClick={feedbackOnClick}>
+            {footer.feedbackButtonLabel}
+          </FooterLink>
+        </ExternalLink>
       </FooterHalf>
       <FooterHalf>
         <SmallShareButtons
@@ -105,18 +87,10 @@ const Footer: React.FC<{
           onShareOnFacebook={trackShareFacebook}
           onShareOnTwitter={trackShareTwitter}
         />
-        <ShareText source={footer.shareText} />
       </FooterHalf>
     </FooterWrapper>
   );
 };
-
-const renderModalTitle = () => (
-  <Fragment>
-    <ModalStyle.Title>{modalContent.header}</ModalStyle.Title>
-    <ModalStyle.Subtitle>for official recommendations</ModalStyle.Subtitle>
-  </Fragment>
-);
 
 const Recommend = (props: {
   introCopy: string;
@@ -139,21 +113,7 @@ const Recommend = (props: {
     shareQuote,
     recommendationsRef,
     feedbackFormUrl,
-    fedLevel,
-    harvardLevel,
-    harvardModalLocationCopy,
-    fedModalLocationCopy,
   } = props;
-  const [isDialogOpen, openDialog, closeDialog] = useDialog(false);
-
-  const openModalRecommendations = () => {
-    openDialog();
-    trackEvent(
-      EventCategory.RECOMMENDATIONS,
-      EventAction.OPEN_MODAL,
-      'Methodology & Sources',
-    );
-  };
 
   /*
     Divides recommendations into 2 columns.
@@ -172,11 +132,7 @@ const Recommend = (props: {
 
   return (
     <Wrapper ref={recommendationsRef}>
-      <Header
-        introCopy={introCopy}
-        locationName={locationName}
-        onClickOpenModal={openModalRecommendations}
-      />
+      <Header introCopy={introCopy} locationName={locationName} />
       <RecommendationsContainer>
         {recommendationsColumns.map((half, j) => {
           return (
@@ -203,24 +159,10 @@ const Recommend = (props: {
         })}
       </RecommendationsContainer>
       <Footer
-        onClickOpenModal={openModalRecommendations}
         shareUrl={shareUrl}
         shareQuote={shareQuote}
         feedbackFormUrl={feedbackFormUrl}
       />
-      <Dialog
-        open={isDialogOpen}
-        closeDialog={closeDialog}
-        renderHeader={renderModalTitle}
-        style={{ maxWidth: '700px', margin: 'auto' }}
-      >
-        <RecommendModal
-          fedLevel={fedLevel}
-          harvardLevel={harvardLevel}
-          fedModalLocationCopy={fedModalLocationCopy}
-          harvardModalLocationCopy={harvardModalLocationCopy}
-        />
-      </Dialog>
     </Wrapper>
   );
 };

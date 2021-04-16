@@ -1,18 +1,30 @@
-import _ from 'lodash';
-import { range } from 'lodash';
-import moment from 'moment';
+import range from 'lodash/range';
+import ceil from 'lodash/ceil';
+import min from 'lodash/min';
+import max from 'lodash/max';
 import { scaleUtc } from '@vx/scale';
 import { LevelInfoMap, Level, LevelInfo } from 'common/level';
+import {
+  DateFormat,
+  formatDateTime,
+  TimeUnit,
+  addTime,
+  subtractTime,
+  formatUTCDateTime,
+  getStartOf,
+  getTimeDiff,
+} from 'common/utils/time-utils';
+import { Column } from 'common/models/Projection';
 
 export const last = (list: any[]) => list[list.length - 1];
 
 export const roundAxisLimits = (axisMin: number, axisMax: number) => [
   axisMin,
-  _.ceil(axisMax, 2),
+  ceil(axisMax, 2),
 ];
 
 export const getTruncationDate = (date: Date, truncationDays: number) =>
-  moment(date).subtract(truncationDays, 'days').toDate();
+  subtractTime(date, truncationDays, TimeUnit.DAYS);
 
 export const randomizeId = (name: string): string =>
   `${name}-${Math.random().toFixed(9)}`;
@@ -133,8 +145,8 @@ export const getAxisLimits = (
   zones: LevelInfoMap,
 ) => {
   const tickPositions = computeTickPositions(minY, maxY, zones);
-  const minTickPosition = _.min(tickPositions) || minY;
-  const maxTickPosition = _.max(tickPositions) || maxY;
+  const minTickPosition = min(tickPositions) || minY;
+  const maxTickPosition = max(tickPositions) || maxY;
   return roundAxisLimits(minTickPosition, maxTickPosition);
 };
 
@@ -163,12 +175,12 @@ export const getUtcScale = (
 };
 
 export const getXTickFormat = (date: Date) => {
-  const momentDate = moment(date);
-
   // Shows the year if the tick is in January (0) or December (11)
   const dateFormat =
-    momentDate.month() === 0 || momentDate.month() === 11 ? `MMM 'YY` : 'MMM';
-  return momentDate.format(dateFormat);
+    date.getMonth() === 0 || date.getMonth() === 11
+      ? DateFormat.MMM_YY
+      : DateFormat.MMM;
+  return formatDateTime(date, dateFormat).replace(' ', " '");
 };
 
 /**
@@ -186,9 +198,17 @@ export function getFinalTicks(isMobile: boolean, ticks: Date[]): Date[] {
 }
 
 export function getTimeAxisTicks(from: Date, to: Date) {
-  const dateFrom = moment(from).startOf('month').toDate();
-  const numMonths = moment(to).diff(dateFrom, 'months');
+  const dateFrom = getStartOf(from, TimeUnit.MONTHS);
+  const numMonths = getTimeDiff(to, dateFrom, TimeUnit.MONTHS);
   return range(1, numMonths + 1).map((i: number) =>
-    moment(dateFrom).add(i, 'month').toDate(),
+    addTime(dateFrom, i, TimeUnit.MONTHS),
   );
+}
+
+export function getColumnDate({ x }: Column): Date {
+  return new Date(x);
+}
+
+export function formatTooltipColumnDate(data: Column): string {
+  return formatUTCDateTime(getColumnDate(data), DateFormat.MMM_D_YYYY);
 }

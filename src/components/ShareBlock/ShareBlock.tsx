@@ -8,6 +8,7 @@ import {
   LinkedinIcon,
 } from 'react-share';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
+import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
 import { Projections } from 'common/models/Projections';
 import * as urls from 'common/urls';
 import {
@@ -25,7 +26,6 @@ import {
 } from './ShareBlock.style';
 import { trackShare } from 'components/Analytics';
 import { Region } from 'common/regions';
-import { STATES } from 'common';
 import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
@@ -54,7 +54,7 @@ const ShareBlock = ({
   const hashtag = 'COVIDActNow';
 
   const isMatchingProjectionsRoute = matchPath<{
-    id: keyof typeof STATES;
+    id: string;
     county?: string;
   }>(locationPath.pathname, {
     path: [
@@ -69,16 +69,23 @@ const ShareBlock = ({
 
   const geolocatedRegions = useGeolocationRegions();
 
+  const SocialPreview =
+    projections && stats ? (
+      <SocialLocationPreview projections={projections} stats={stats} />
+    ) : (
+      <SocialLocationPreviewMap isEmbedPreview />
+    );
+
   const defaultSignupRegions = region
     ? getDefaultRegions(region)
     : geolocatedRegions;
 
   return (
-    <ShareContainer id="share-container">
+    <ShareContainer id="share">
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
       <ShareRow newsletter={false}>
         <ShareRowContentArea
-          isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
+          $isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
         >
           <SocialTextAreaWrapper id="shareblock">
             <SocialTextArea>
@@ -147,13 +154,7 @@ const ShareBlock = ({
               </EmbedPrompt>
             </SocialTextArea>
           </SocialTextAreaWrapper>
-          <SocialMockupWrapper>
-            <SocialLocationPreview
-              isEmbedPreview
-              projections={projections}
-              stats={stats}
-            />
-          </SocialMockupWrapper>
+          <SocialMockupWrapper>{SocialPreview}</SocialMockupWrapper>
         </ShareRowContentArea>
       </ShareRow>
     </ShareContainer>

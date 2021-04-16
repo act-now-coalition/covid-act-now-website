@@ -60,7 +60,7 @@ const metricToSourceMap: RegionSourceMap = {
     state: {
       sourceName: 'HHS Protect',
       url:
-        'https://healthdata.gov/dataset/covid-19-diagnostic-laboratory-testing-pcr-testing-time-series',
+        'https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb',
     },
     metro: {
       sourceName: 'CDC Covid Tracker',
@@ -75,17 +75,17 @@ const metricToSourceMap: RegionSourceMap = {
     state: {
       sourceName: 'HHS Protect',
       url:
-        'https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state',
+        'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
     },
     metro: {
       sourceName: 'HHS Protect',
       url:
-        'https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility',
+        'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/anag-cw7u',
     },
     county: {
       sourceName: 'HHS Protect',
       url:
-        'https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility',
+        'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/anag-cw7u',
     },
   },
   [Metric.VACCINATIONS]: {

@@ -16,21 +16,19 @@ import {
 } from 'components/Compare/Compare.style';
 import {
   getAllStates,
-  getAllCountiesSelection,
+  getAllCounties,
   getHomePageViewMoreCopy,
   getNeighboringCounties,
-  getLocationPageCountiesSelection,
   getLocationPageViewMoreCopy,
-  MetroFilter,
   GeoScopeFilter,
   HomepageLocationScope,
   getAllMetroAreas,
   getAllCountiesOfMetroArea,
   SummaryForCompare,
+  getAllCountiesOfState,
 } from 'common/utils/compare';
 import { Metric } from 'common/metricEnum';
 import { getSummaryFromFips } from 'common/location_summaries';
-import { findCountyByFips } from 'common/locations';
 import { ScreenshotReady } from 'components/Screenshot';
 import {
   SharedComponent,
@@ -44,19 +42,10 @@ import regions, {
   County,
 } from 'common/regions';
 import { assert } from 'common/utils';
-
-// For filters (0, 50, and 99 are numerical values required by MUI Slider component):
-const scopeValueMap = {
-  [GeoScopeFilter.NEARBY]: 0,
-  [GeoScopeFilter.STATE]: 50,
-  [GeoScopeFilter.COUNTRY]: 99,
-};
-
-const homepageScopeValueMap = {
-  [HomepageLocationScope.COUNTY]: 0,
-  [HomepageLocationScope.MSA]: 50,
-  [HomepageLocationScope.STATE]: 99,
-};
+import {
+  useLocationPageCompareSliderMap,
+  useHomepageCompareSliderMap,
+} from 'common/hooks';
 
 const CompareMain = (props: {
   stateName?: string;
@@ -117,13 +106,12 @@ const CompareMain = (props: {
   const [sorter, setSorter] = useState(Metric.CASE_DENSITY);
   const [sortDescending, setSortDescending] = useState(true);
   const [sortByPopulation, setSortByPopulation] = useState(true);
-  const [countyTypeToView, setCountyTypeToView] = useState(MetroFilter.ALL);
 
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
   const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTY]: getAllCountiesSelection(countyTypeToView),
+    [HomepageLocationScope.COUNTY]: getAllCounties(),
     [HomepageLocationScope.MSA]: getAllMetroAreas(),
     [HomepageLocationScope.STATE]: getAllStates(),
   };
@@ -134,10 +122,7 @@ const CompareMain = (props: {
 
   const homepageLocationsForCompare = getHomepageLocations(homepageScope);
 
-  const homepageViewMoreCopy = getHomePageViewMoreCopy(
-    homepageScope,
-    countyTypeToView,
-  );
+  const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
 
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
@@ -149,9 +134,9 @@ const CompareMain = (props: {
     } else if (geoScope === GeoScopeFilter.NEARBY) {
       return getNeighboringCounties(region.fipsCode);
     } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
-      return getLocationPageCountiesSelection(stateCode, countyTypeToView);
+      return getAllCountiesOfState(stateCode);
     } else {
-      return getAllCountiesSelection(countyTypeToView);
+      return getAllCounties();
     }
   }
 
@@ -164,7 +149,7 @@ const CompareMain = (props: {
   const locations = getFinalLocations(region);
 
   const viewMoreCopy = region
-    ? getLocationPageViewMoreCopy(geoScope, countyTypeToView, region)
+    ? getLocationPageViewMoreCopy(geoScope, region)
     : homepageViewMoreCopy;
 
   const [showModal, setShowModal] = useState(false);
@@ -175,15 +160,15 @@ const CompareMain = (props: {
     scrollToCompare();
   };
 
-  // Location page slider:
-  const defaultSliderValue = scopeValueMap[geoScope];
-  const [sliderValue, setSliderValue] = useState(defaultSliderValue);
-
-  // Homepage slider:
-  const defaultHomepageSliderValue = homepageScopeValueMap[homepageScope];
-  const [homepageSliderValue, setHomepageSliderValue] = useState(
-    defaultHomepageSliderValue,
-  );
+  // Since the route isn't changing when navigating between county pages within the same state, state variables don't reset. This forces a reset:
+  useEffect(() => {
+    setShowModal(false);
+    setShowFaqModal(false);
+    setSorter(Metric.CASE_DENSITY);
+    setSortDescending(true);
+    setSortByPopulation(true);
+    setGeoScope(GeoScopeFilter.STATE);
+  }, [location.pathname]);
 
   // State needed to reconstruct the current sort / filters. Needs to be persisted
   // when we generate sharing URLs, etc.
@@ -191,7 +176,6 @@ const CompareMain = (props: {
     sorter,
     sortDescending,
     sortByPopulation,
-    countyTypeToView,
     homepageScope,
     geoScope,
     stateId,
@@ -208,6 +192,12 @@ const CompareMain = (props: {
   // Repopulate state from shared parameters if we're being rendered via a
   // sharing URL.
   const sharedParams = useSharedComponentParams(SharedComponent.Compare);
+
+  // For location page:
+  const sliderValue = useLocationPageCompareSliderMap(geoScope);
+  // For homepage:
+  const homepageSliderValue = useHomepageCompareSliderMap(homepageScope);
+
   useEffect(() => {
     if (sharedParams) {
       const { stateId, countyId, regionFips } = sharedParams;
@@ -222,19 +212,11 @@ const CompareMain = (props: {
         const regionFromFips = regions.findByFipsCodeStrict(countyId);
         setRegion(regionFromFips);
       }
-
       setSorter(sharedParams.sorter);
       setSortDescending(sharedParams.sortDescending);
       setSortByPopulation(sharedParams.sortByPopulation);
-      setCountyTypeToView(sharedParams.countyTypeToView);
       setHomepageScope(sharedParams.homepageScope);
-      setHomepageSliderValue(
-        homepageScopeValueMap[
-          sharedParams.homepageScope as HomepageLocationScope
-        ],
-      );
       setGeoScope(sharedParams.geoScope);
-      setSliderValue(scopeValueMap[sharedParams.geoScope as GeoScopeFilter]);
 
       // Now that the UI is populated, we can capture the screenshot.
       setScreenshotReady(true);
@@ -248,9 +230,6 @@ const CompareMain = (props: {
       setSorter(Metric.VACCINATIONS);
       setSortByPopulation(false);
       setSortDescending(true);
-      setHomepageSliderValue(
-        homepageScopeValueMap[HomepageLocationScope.STATE],
-      );
       setHomepageScope(HomepageLocationScope.STATE);
     }
   }, [props.vaccinesFirst]);
@@ -261,9 +240,6 @@ const CompareMain = (props: {
       setSortByPopulation(false);
       setSortDescending(true);
       setHomepageScope(HomepageLocationScope.COUNTY);
-      setHomepageSliderValue(
-        homepageScopeValueMap[HomepageLocationScope.COUNTY],
-      );
     }
   }, [props.vulnerabilityFirst]);
 
@@ -272,32 +248,24 @@ const CompareMain = (props: {
     return null;
   }
 
-  // TODO(chris): pusing down use of county as far as possible, but underlying compare
-  // table code not yet ready to stop using county as an input, so querying the legacy Location
-  // county API here.
-  const locationCounty = findCountyByFips(currentCounty?.region.fipsCode || '');
   const sharedProps = {
     stateName: props.stateName,
     stateId,
-    county: locationCounty,
     setShowModal,
     isHomepage,
     locations,
     currentCounty,
     ...uiState,
-    setCountyTypeToView,
     setGeoScope,
     setSorter,
     setSortDescending,
     setSortByPopulation,
     sliderValue,
-    setSliderValue,
     setShowFaqModal,
     createCompareShareId,
     homepageScope,
     setHomepageScope,
     homepageSliderValue,
-    setHomepageSliderValue,
     region: region,
     vaccinesFirst: props.vaccinesFirst,
     vulnerabilityFirst: props.vulnerabilityFirst,

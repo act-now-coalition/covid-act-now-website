@@ -9,7 +9,7 @@ import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
 import {
   InfoTooltip,
-  DisclaimerTooltip,
+  TextTooltip,
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
@@ -115,7 +115,7 @@ function renderDisclaimer(
   return (
     <Fragment>
       {'Learn more about '}
-      <DisclaimerTooltip
+      <TextTooltip
         title={getDataSourceTooltipContent(
           Metric.CASE_DENSITY,
           region,
@@ -127,7 +127,7 @@ function renderDisclaimer(
         }
       />
       {' and '}
-      <DisclaimerTooltip
+      <TextTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
         trackOpenTooltip={() =>

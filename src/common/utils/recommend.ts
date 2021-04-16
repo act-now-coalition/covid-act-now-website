@@ -1,5 +1,6 @@
-import moment from 'moment';
-import { sum, isNumber, reject, isNull, partition } from 'lodash';
+import sum from 'lodash/sum';
+import isNumber from 'lodash/isNumber';
+import partition from 'lodash/partition';
 import { Projection, Column } from 'common/models/Projection';
 import { getLevel, getMetricNameForCompare, formatValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -13,16 +14,16 @@ import {
   RecommendationWithIcon,
   RecommendCategory,
   RecommendID,
+  allIcons,
 } from 'cms-content/recommendations';
-import { allIcons } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { getAbbreviatedCounty } from 'common/utils/compare';
 import { formatDecimal } from '.';
 import {
   getStateName,
   showExposureNotifications,
 } from 'components/LocationPage/Notifications';
-import regions from 'common/regions';
+import { getAbbreviatedCounty, Region } from 'common/regions';
+import { TimeUnit, getStartOf, subtractTime } from 'common/utils/time-utils';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);
@@ -30,16 +31,9 @@ export function trackRecommendationsEvent(action: EventAction, label: string) {
 
 const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
 
-/**
- * TODO: Add the more nuanced levels for the Fed recommendations
- */
-
-const YELLOW_RECOMMENDATION_EXCEPTIONS = ['GYMS_YELLOW', 'BARS_YELLOW'];
-
 function getExposureRecommendation(
-  projection: Projection,
+  region: Region | null,
 ): Recommendation | null {
-  const region = regions.findByFipsCode(projection.fips);
   if (!region) {
     return null;
   }
@@ -63,68 +57,46 @@ function getExposureRecommendation(
 
 //TODO (Chelsi): fix the any
 export function getRecommendations(
-  projection: Projection,
+  region: Region | null,
   recommendations: Recommendation[],
 ): any[] {
-  const fedLevel = getFedLevel(projection);
-  const positiveTestRate = getPositiveTestRate(projection);
+  // Partitioning to control order:
 
-  let fedRecommendations = recommendations
-    .filter(item => item.source === RecommendationSource.FED)
-    .filter(item => {
-      // If the fedLevel is null, we return recommendations for the Green levels
-      return isNull(fedLevel)
-        ? item.level === FedLevel.GREEN
-        : item.level === fedLevel;
-    });
-
-  const travelRecommendation = recommendations.filter(
+  const [travelRecommendation, recommendationsWithoutTravel] = partition(
+    recommendations,
     item => item.category === RecommendCategory.TRAVEL,
   );
 
-  const schoolRecommendation = recommendations.filter(
+  const [schoolRecommendation, recommendationsWithoutSchool] = partition(
+    recommendationsWithoutTravel,
     item => item.category === RecommendCategory.SCHOOLS,
   );
 
-  /**
-   * Some Fed recommendations in the Yellow level only apply when the positive
-   * test rate is over 3% - we filter those out when that's the case.
-   */
-  const isLowYellowLevel =
-    isNumber(fedLevel) &&
-    fedLevel === FedLevel.YELLOW &&
-    isNumber(positiveTestRate) &&
-    positiveTestRate < 3 / 100;
-
-  // Limit gyms to 25% occupancy and close bars until percent positive rates are under 3%
-  if (isLowYellowLevel) {
-    fedRecommendations = reject(fedRecommendations, item =>
-      YELLOW_RECOMMENDATION_EXCEPTIONS.includes(item.id),
-    );
-  }
-
-  // Orders based on relevance:
-  const [gatheringRecommendation, otherFedRecommentations] = partition(
-    fedRecommendations,
+  const [
+    gatheringsRecommendation,
+    recommendationsWithoutGatherings,
+  ] = partition(
+    recommendationsWithoutSchool,
     item => item.category === RecommendCategory.GATHERINGS,
   );
-  const [masksRecommendation, finalOtherFedRecommendations] = partition(
-    otherFedRecommentations,
+
+  const [masksRecommendation, otherRecommendations] = partition(
+    recommendationsWithoutGatherings,
     item => item.category === RecommendCategory.MASKS,
   );
 
-  const notificatonRecommendation = getExposureRecommendation(projection);
-  const exposureRecommendations = notificatonRecommendation
-    ? [notificatonRecommendation]
+  const notificationRecommendation = getExposureRecommendation(region);
+  const exposureRecommendations = notificationRecommendation
+    ? [notificationRecommendation]
     : [];
 
   const allRecommendations = [
     ...exposureRecommendations,
-    ...gatheringRecommendation,
+    ...gatheringsRecommendation,
     ...masksRecommendation,
     ...schoolRecommendation,
-    ...finalOtherFedRecommendations,
     ...travelRecommendation,
+    ...otherRecommendations,
   ];
 
   return allRecommendations.map(getIcon);
@@ -250,8 +222,8 @@ export function getModalCopyWithHarvardLevel(
  */
 function getWeeklyNewCasesPer100k(projection: Projection): number | null {
   const { totalPopulation } = projection;
-  const dateTo = moment().startOf('day').toDate();
-  const dateFrom = moment(dateTo).subtract(1, 'week').toDate();
+  const dateTo = getStartOf(new Date(), TimeUnit.DAYS);
+  const dateFrom = subtractTime(dateTo, 1, TimeUnit.WEEKS);
 
   const getY = (point: Column) => point.y;
 

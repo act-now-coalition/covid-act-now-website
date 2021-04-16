@@ -15,7 +15,7 @@
         },
         {
           "altText": "Washington National Guard logo",
-          "image": "/images_cms/washington-nationa-guard-logo-red.svg",
+          "image": "/images_cms/us-national-guard-logo.jpeg",
           "url": "https://mil.wa.gov/national-guard"
         },
         {
@@ -39,9 +39,9 @@
           "url": "https://www.ibm.com/us-en/"
         },
         {
-          "altText": "Wayfair logo",
-          "image": "/images_cms/wayfair-logo.jpg",
-          "url": "https://www.wayfair.com/"
+          "altText": "Citizen Logo",
+          "url": "https://citizen.com/",
+          "image": "/images_cms/citizen-com_logo.png"
         },
         {
           "altText": "DC Department of Health logo",
@@ -49,9 +49,9 @@
           "url": "https://dchealth.dc.gov/"
         },
         {
-          "altText": "Citizen Logo",
-          "url": "https://citizen.com/",
-          "image": "/images_cms/citizen-com_logo.png"
+          "altText": "Wayfair logo",
+          "image": "/images_cms/wayfair-logo.jpg",
+          "url": "https://www.wayfair.com/"
         },
         {
           "altText": "Team Rubicon Logo",
@@ -61,13 +61,24 @@
         {
           "altText": "Boston Consulting Group",
           "url": "https://www.bcg.com/en-us/",
-          "image": "/images_cms/bcg_monogram.png"
+          "image": "/images_cms/bcg-logo-rect.png"
+        },
+        {
+          "altText": "Bayer Logo",
+          "image": "/images_cms/bayer-logo-2.jpeg",
+          "url": "https://www.bayer.com/en/"
         }
       ]
     },
     {
-      "productName": "FAQs",
-      "productId": "faqs",
+      "productName": "Coverage",
+      "productId": "coverage",
+      "productSubtitle": "coverage",
+      "productDescription": "The following data is available for all 50 states (plus D.C., Puerto Rico, and Northern Marina Islands), most or all counties and metro areas, except where noted. Refer to our [data definitions](https://apidocs.covidactnow.org/data-definitions) for all included fields."
+    },
+    {
+      "productName": "FAQ",
+      "productId": "faq",
       "productSubtitle": "Frequently Asked Questions",
       "productDescription": "### Where do you source your data from?\n\nOur data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards.\n\n### Where can I see all data fields included in your API?\n\nAll fields can be found in our [data definitions](https://apidocs.covidactnow.org/data-definitions).  To see an overview of how to query data for states, counties, or metros visit our [getting started guide](https://apidocs.covidactnow.org/access#getting-started).\n\n### When does your data update and at what time?\n\nOur data is updated daily around noon Eastern Time.  Updates reflect the latest available data from each of our sources."
     },
@@ -75,7 +86,7 @@
       "productName": "License",
       "productId": "license",
       "productSubtitle": "API License",
-      "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [info@covidactnow.org](mailto:info@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
+      "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [api@covidactnow.org](mailto:api@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
     }
   ],
   "metadataTitle": "Data API",

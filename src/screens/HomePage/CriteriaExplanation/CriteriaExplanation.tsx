@@ -9,8 +9,10 @@ import {
   ListSubheader,
   Content,
   KickerWrapper,
+  RiskLevelChangeExplainer,
 } from './CriteriaExplanation.style';
 import { Subtitle1 } from 'components/Typography';
+import ExternalLink from 'components/ExternalLink';
 
 const Kicker = (props: {
   number: string;
@@ -60,6 +62,13 @@ const CriteriaExplanation = (props: { isMobile: Boolean }) => {
           </Content>
         </Criterion>
       </CriteriaList>
+      <RiskLevelChangeExplainer component="p">
+        Learn more about{' '}
+        <ExternalLink href="/covid-risk-levels-metrics">
+          how we determine risk levels and calculate our metrics
+        </ExternalLink>
+        .
+      </RiskLevelChangeExplainer>
     </Wrapper>
   );
 };

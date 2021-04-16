@@ -4,8 +4,8 @@ import path from 'path';
 import _ from 'lodash';
 import {
   fetchAllStateProjections,
-  fetchAllCountyProjections,
   fetchAllMetroProjections,
+  fetchAllCountyProjections,
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
@@ -67,7 +67,11 @@ async function main() {
     ...allMetroProjections,
   ]);
   await buildAggregations(allStatesProjections, allCountiesProjections);
-  await buildSlackSummary();
+  try {
+    await buildSlackSummary();
+  } catch (e) {
+    console.warn("Couldn't generate slack summary.");
+  }
   console.log('done');
 }
 

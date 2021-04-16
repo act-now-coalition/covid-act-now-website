@@ -1,4 +1,7 @@
-import { sortBy, takeRight, values, Dictionary } from 'lodash';
+import sortBy from 'lodash/sortBy';
+import takeRight from 'lodash/takeRight';
+import values from 'lodash/values';
+import type { Dictionary } from 'lodash';
 import { Region, County, State, MetroArea, FipsCode } from './types';
 import {
   statesByFips,
@@ -6,10 +9,10 @@ import {
   metroAreasByFips,
   customAreasByFips,
   statesByStateCode,
-} from './regions_data';
+} from './preprocessed_regions_data';
 import { assert } from 'common/utils';
 
-class RegionDB {
+export class RegionDB {
   public states: State[];
   public counties: County[];
   public metroAreas: MetroArea[];
@@ -47,6 +50,10 @@ class RegionDB {
     const region = this.regionsByFips[fipsCode];
     assert(region, `Region unexpectedly not found for ${fipsCode}`);
     return region;
+  }
+
+  findByStateCode(stateCode: string): State | null {
+    return this.statesByStateCode[stateCode.toUpperCase()] ?? null;
   }
 
   findByStateCodeStrict(stateCode: string): State {
@@ -141,5 +148,11 @@ const regions = new RegionDB(
   statesByStateCode,
 );
 
+/**
+ * Async helper for decoupling regions DB incrementally
+ */
+export const getRegionsDB = async () => {
+  return regions;
+};
+
 export default regions;
-export { RegionDB };

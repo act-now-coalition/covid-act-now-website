@@ -1,12 +1,9 @@
-import {
-  chain,
-  keyBy,
-  reject,
-  partition,
-  flatten,
-  map,
-  property,
-} from 'lodash';
+import keyBy from 'lodash/keyBy';
+import reject from 'lodash/reject';
+import partition from 'lodash/partition';
+import flatten from 'lodash/flatten';
+import map from 'lodash/map';
+import property from 'lodash/property';
 import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
@@ -85,10 +82,9 @@ export interface CaseStudiesContent {
   metadataDescription: string;
 }
 
-export const allCaseStudies = chain(caseStudies.categories)
-  .map(category => category.caseStudies)
-  .flatten()
-  .value();
+export const allCaseStudies = flatten(
+  map(caseStudies.categories, category => category.caseStudies),
+);
 
 // Case studies indexed by caseStudyId for easier access on the
 // individual case study route.

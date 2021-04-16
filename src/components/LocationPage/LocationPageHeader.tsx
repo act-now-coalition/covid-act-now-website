@@ -7,9 +7,8 @@ import { Level } from 'common/level';
 import { COLOR_MAP } from 'common/colors';
 import { Metric } from 'common/metricEnum';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { Projections } from 'common/models/Projections';
 import { formatUtcDate } from 'common/utils';
-import { Region } from 'common/regions';
+import { Region, MetroArea } from 'common/regions';
 import LocationHeaderStats from 'components/SummaryStats/LocationHeaderStats';
 import { ThermometerImage } from 'components/Thermometer';
 import LocationPageHeading from './LocationPageHeading';
@@ -30,10 +29,17 @@ import {
   SectionColumn,
   LevelDescription,
 } from 'components/LocationPage/LocationPageHeader.style';
-import { MetroArea } from 'common/regions';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import type { MetricValues } from 'common/models/Projections';
+import GetAlertsButton from './Experiment/GetAlertsButton';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
@@ -47,12 +53,10 @@ function renderInfoTooltip(): React.ReactElement {
   );
 }
 
-const noop = () => {};
-
 const LocationPageHeader = (props: {
-  projections: Projections;
+  alarmLevel: Level;
   condensed?: boolean;
-  stats: { [key: string]: number | null };
+  stats: MetricValues;
   onMetricClick: (metric: Metric) => void;
   onHeaderShareClick: () => void;
   onHeaderSignupClick: () => void;
@@ -62,13 +66,11 @@ const LocationPageHeader = (props: {
   const hasStats = !!Object.values(props.stats).filter(
     (val: number | null) => val !== null,
   ).length;
-  const { projections, region } = props;
+  const { alarmLevel, region } = props;
 
   //TODO (chelsi): get rid of this use of 'magic' numbers
   const headerTopMargin = !hasStats ? -202 : -218;
   const headerBottomMargin = !hasStats ? 0 : 0;
-
-  const alarmLevel = projections.getAlarmLevel();
 
   const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
 
@@ -95,14 +97,23 @@ const LocationPageHeader = (props: {
           <HeaderSection>
             <LocationPageHeading region={region} isEmbed={isEmbed} />
             <ButtonsWrapper>
-              <HeaderButton onClick={props.onHeaderShareClick || noop}>
+              <HeaderButton onClick={props.onHeaderShareClick}>
                 <ShareOutlinedIcon />
                 Share
               </HeaderButton>
-              <HeaderButton onClick={props.onHeaderSignupClick || noop}>
-                <NotificationsNoneIcon />
-                Receive alerts
-              </HeaderButton>
+              {!props.isMobile && (
+                <HeaderButton
+                  onClick={() => {
+                    props.onHeaderSignupClick();
+                    document
+                      .getElementById('fieldEmail')
+                      ?.focus({ preventScroll: true });
+                  }}
+                >
+                  <NotificationsNoneIcon />
+                  Receive alerts
+                </HeaderButton>
+              )}
             </ButtonsWrapper>
           </HeaderSection>
           <HeaderSection>
@@ -121,7 +132,7 @@ const LocationPageHeader = (props: {
               </SectionColumn>
             </SectionHalf>
             <SectionHalf>
-              <NotificationArea projections={projections} />
+              <NotificationArea region={region} />
             </SectionHalf>
           </HeaderSection>
           <LocationHeaderStats
@@ -132,26 +143,29 @@ const LocationPageHeader = (props: {
           />
         </TopContainer>
         <FooterContainer>
-          {projections.isCounty && !isEmbed && (
-            <HeaderSubCopy>
-              <span>Updated {lastUpdatedDateString} · </span>
-              <span>See something wrong? </span>
-              <a
-                href="mailto:info@covidactnow.org?subject=[Website%20Feedback]"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Email us
-              </a>
-              .
-            </HeaderSubCopy>
-          )}
-          {!projections.isCounty && !isEmbed && (
+          {!isEmbed && (
             <HeaderSubCopy>
               <LastUpdatedDate>Updated {lastUpdatedDateString}</LastUpdatedDate>
             </HeaderSubCopy>
           )}
         </FooterContainer>
+        {props.isMobile && (
+          <Experiment id={ExperimentID.EMAIL_FIELD_AUTO_FOCUSED}>
+            <Variant id={VariantID.A}>
+              <GetAlertsButton
+                onClick={() => {
+                  props.onHeaderSignupClick();
+                  document
+                    .getElementById('fieldEmail')
+                    ?.focus({ preventScroll: true });
+                }}
+              />
+            </Variant>
+            <Variant id={VariantID.B}>
+              <GetAlertsButton onClick={() => props.onHeaderSignupClick()} />
+            </Variant>
+          </Experiment>
+        )}
       </Wrapper>
     </Fragment>
   );

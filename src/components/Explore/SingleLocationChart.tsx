@@ -1,10 +1,9 @@
 import React, { useCallback, Fragment } from 'react';
-import moment from 'moment';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal, formatUtcDate } from 'common/utils';
+import { formatInteger, formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
@@ -16,11 +15,15 @@ import { ScreenshotReady } from 'components/Screenshot';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
+import {
+  getColumnDate,
+  formatTooltipColumnDate,
+} from 'components/Charts/utils';
+import { TimeUnit, getTimeDiff } from 'common/utils/time-utils';
 
-const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
-  moment(dateTo).diff(dateFrom, 'days');
+  getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
 
 const SingleLocationTooltip: React.FC<{
   date: Date;
@@ -38,7 +41,7 @@ const SingleLocationTooltip: React.FC<{
       width={'210px'}
       top={top(pointSmooth)}
       left={left(pointSmooth)}
-      title={formatUtcDate(new Date(pointSmooth.x), 'MMM D, YYYY')}
+      title={formatTooltipColumnDate(pointSmooth)}
     >
       <Styles.TooltipSubtitle>
         {`${seriesRaw.tooltipLabel}: ${
@@ -147,7 +150,7 @@ const SingleLocationChart: React.FC<{
     [showTooltip, dateScale, marginLeft],
   );
 
-  const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
 
   return (

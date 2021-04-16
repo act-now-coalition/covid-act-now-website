@@ -6,7 +6,7 @@ import { Level } from '../../src/common/level';
 import regions from '../../src/common/regions';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
-import { timeFormats, formatDateTime } from '../../src/common/utils/time-utils';
+import { DateFormat, formatDateTime } from '../../src/common/utils/time-utils';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
@@ -15,7 +15,7 @@ const thermometerBaseURL =
 const unsubscribeURL = 'https://covidactnow.org/alert_unsubscribe';
 
 export function toISO8601(date: Date): string {
-  return formatDateTime(date, timeFormats.YYYY_MM_DD);
+  return formatDateTime(date, DateFormat.YYYY_MM_DD);
 }
 
 const alertTemplate = Handlebars.compile(
@@ -87,7 +87,7 @@ function generateAlertEmailContent(
     img_alt: `Image depicting that ${locationName} went from "${oldLevelText}" to "${newLevelText}"`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
-    location_url: locationURL,
+    location_url: `${locationURL}?utm_source=risk_alerts&utm_medium=email`,
     unsubscribe_link: `${unsubscribeURL}?email=${encodeURI(emailAddress)}`, // would be nice to know dev/staging/prod
     feedback_subject_line: encodeURI(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,

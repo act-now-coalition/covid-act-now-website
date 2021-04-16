@@ -8,12 +8,12 @@ import Announcements from './Announcements';
 import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
-import Explore from 'components/Explore';
+import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { VaccinationsBanner } from 'components/Banner';
+import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import {
+import regions, {
   getFinalAutocompleteLocations,
   getGeolocatedRegions,
 } from 'common/regions';
@@ -32,6 +32,12 @@ import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -57,7 +63,27 @@ export default function HomePage() {
       ? getGeolocatedRegions(geolocationData, countyToZipMap)
       : null;
 
-  const initialFipsForExplore = useGeolocationInExplore(5, geolocationData);
+  const exploreGeoLocations = useGeolocationInExplore(geolocationData);
+  const showRisingHospitalizations =
+    location.hash === '#explore-hospitalizations';
+  const risingHospitalizationStates = [
+    'DE',
+    'IL',
+    'MD',
+    'MI',
+    'MN',
+    'NJ',
+    'PA',
+    'PR',
+  ]; // Updated on 7 April 2021 -- this is an illustrative list but not exhaustive
+  const initialFipsListForExplore = showRisingHospitalizations
+    ? risingHospitalizationStates.map(
+        state => regions.findByStateCodeStrict(state).fipsCode,
+      )
+    : exploreGeoLocations;
+  const initialMetricForExplore = showRisingHospitalizations
+    ? ExploreMetric.HOSPITALIZATIONS
+    : ExploreMetric.CASES;
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -100,7 +126,7 @@ export default function HomePage() {
         pageDescription={getPageDescription()}
       />
       <HomepageStructuredData />
-      <VaccinationsBanner />
+      <SpringSurgeBanner />
       <HomePageHeader />
       <main>
         <div className="App">
@@ -113,7 +139,22 @@ export default function HomePage() {
                 )}
                 filterLimit={getFilterLimit()}
               />
-              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
+              <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
+                <Variant id={VariantID.A}>
+                  <HomepageItems
+                    isLoading={isLoading}
+                    userRegions={userRegions}
+                    showMetro
+                  />
+                </Variant>
+                <Variant id={VariantID.B}>
+                  <HomepageItems
+                    isLoading={isLoading}
+                    userRegions={userRegions}
+                    showMetro={false}
+                  />
+                </Variant>
+              </Experiment>
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}
@@ -134,9 +175,11 @@ export default function HomePage() {
               />
             </Section>
             <Section ref={exploreSectionRef}>
+              <div id="explore-hospitalizations"></div>
               <Explore
                 title="Cases, Deaths and Hospitalizations"
-                initialFipsList={initialFipsForExplore}
+                initialFipsList={initialFipsListForExplore}
+                defaultMetric={initialMetricForExplore}
                 initialChartIndigenousPopulations={false}
                 nationalSummaryText={getNationalText()}
               />

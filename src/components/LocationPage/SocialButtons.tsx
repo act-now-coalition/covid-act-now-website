@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -9,7 +8,6 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
-
 import {
   CopyLinkButton,
   SocialButtonsContainer,

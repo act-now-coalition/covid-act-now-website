@@ -58,6 +58,18 @@ const blockquoteCss = css`
   }
 `;
 
+export const anchorStyles = css`
+  a {
+    color: ${COLOR_MAP.NEW_BLUE.BASE};
+    text-decoration: none;
+
+    &:hover {
+      color: ${COLOR_MAP.NEW_BLUE.DARK};
+      text-decoration: underline;
+    }
+  }
+`;
+
 /**
  * These components should be used to ensure that the styles applied to markdown
  * blocks is also applied to elements outside markdown blocks.
@@ -109,9 +121,7 @@ export const StylesMarkdown = css`
     ${paragraphCss};
     margin-top: ${theme.spacing(1)}px;
     margin-bottom: ${theme.spacing(1)}px;
-    a {
-      color: ${COLOR_MAP.BLUE};
-    }
+    ${anchorStyles};
   }
 
   strong {
@@ -126,6 +136,8 @@ export const StylesMarkdown = css`
   blockquote {
     ${blockquoteCss};
   }
+
+  ${anchorStyles};
 `;
 
 /**

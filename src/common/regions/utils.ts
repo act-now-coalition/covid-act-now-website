@@ -1,19 +1,70 @@
-import {
-  concat,
-  partition,
-  sortBy,
-  find,
-  values,
-  isNull,
-  without,
-} from 'lodash';
+import concat from 'lodash/concat';
+import partition from 'lodash/partition';
+import sortBy from 'lodash/sortBy';
+import find from 'lodash/find';
+import values from 'lodash/values';
+import isNull from 'lodash/isNull';
+import without from 'lodash/without';
 import regions from './region_db';
-import { getStateFips } from './regions_data';
-import { County, State, Region, MetroArea } from './types';
+import { County, State, Region, RegionType, MetroArea } from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
 import { CountyToZipMap } from 'common/data';
 
 const UNITED_STATES = 'United States';
+
+// getStateName, getStateCode, and getStateFips are helper functions that make
+// it easier to migrate some of the existing state based logic over.
+// Ideally we will be able to remove these at some point,
+// but they are helpful in the meantime.
+
+export function getStateName(region: Region): string | null {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.fullName;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).fullName;
+  }
+  return null;
+}
+
+export function getStateCode(region: Region): string | null {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.stateCode;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).stateCode;
+  }
+  return null;
+}
+/*
+Goes one step beyond getStateCode(). Inludes MSAs and returns each regionType's 'version' of a stateCode:
+  metro -> dash-separated list of all states in which the MSA resides ('NY-NJ-PA')
+  state -> state's stateCode ('NY')
+  county -> stateCode of county's state ('NY')
+*/
+
+export function getFormattedStateCode(region: Region): string | null {
+  if (
+    region.regionType === RegionType.COUNTY ||
+    region.regionType === RegionType.STATE
+  ) {
+    return getStateCode(region);
+  } else if (region.regionType === RegionType.MSA) {
+    return (region as MetroArea).stateCodes;
+  } else {
+    return null;
+  }
+}
+
+export const getStateFips = (region: Region): string | null => {
+  if (region.regionType === RegionType.COUNTY) {
+    return (region as County).state.fipsCode;
+  }
+  if (region.regionType === RegionType.STATE) {
+    return (region as State).fipsCode;
+  }
+  return null;
+};
 
 export function belongsToState(county: County, stateFips: string | null) {
   return county.state.fipsCode === stateFips;
@@ -59,7 +110,7 @@ export function getAutocompleteRegions(region?: Region): Region[] {
   // Location pages
   if (region instanceof MetroArea) {
     const [countiesInMetro, otherCounties] = partition(counties, county =>
-      region.counties.includes(county),
+      region.countiesFips.includes(county.fipsCode),
     );
     const sortedMetroCounties = sortByPopulation(countiesInMetro);
 
@@ -120,9 +171,11 @@ export function getMetroRegionFromZipCode(
   countyToZipMap: CountyToZipMap,
 ): Region | undefined {
   const countyFromZip = getCountyRegionFromZipCode(zipCode, countyToZipMap);
-  const metroFromZip = find(regions.metroAreas, (region: MetroArea) =>
-    region.counties.includes(countyFromZip as County),
-  );
+  const metroFromZip =
+    countyFromZip &&
+    find(regions.metroAreas, (region: MetroArea) =>
+      region.countiesFips.includes((countyFromZip as County).fipsCode),
+    );
   return metroFromZip;
 }
 

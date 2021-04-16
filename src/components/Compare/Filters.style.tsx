@@ -6,7 +6,7 @@ import { GeoScopeFilter } from 'common/utils/compare';
 const returnSliderLabelColor = (
   filter: GeoScopeFilter,
   $isModal: boolean,
-  geoScope?: GeoScopeFilter,
+  geoScope: GeoScopeFilter,
 ) => {
   if (!$isModal) {
     if (geoScope === filter) return 'black';
@@ -45,7 +45,7 @@ export const SliderContainer = styled.div<{ $isModal: boolean }>`
 
 export const GeoSlider = styled(Slider)<{
   $isModal: boolean;
-  geoScope?: GeoScopeFilter;
+  geoScope: GeoScopeFilter;
 }>`
   color: ${COLOR_MAP.BLUE};
   opacity: 1;

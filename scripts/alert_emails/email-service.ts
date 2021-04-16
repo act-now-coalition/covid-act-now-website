@@ -19,13 +19,16 @@ export function isInvalidEmailError(error: any) {
   return error?.code === 'InvalidParameterValue';
 }
 
+// Our rate limit is 50/sec so we aim for 45/sec (22ms delay).
+const DEFAULT_DELAY_MS = 22;
+
 class EmailService {
   private ses = new AWS.SES({
     region: 'us-east-1',
   });
 
   private limiter = new Bottleneck({
-    minTime: 22, // Our rate limit is 50/sec so we aim for 45/sec (22ms delay).
+    minTime: DEFAULT_DELAY_MS,
   });
 
   async sendEmail(
@@ -82,7 +85,14 @@ class EmailService {
       // Generally we shouldn't hit the throttling delay, since we are using
       // this.limiter to schedule requests, but just in case.
       if (error.code === 'Throttling' && retriesLeft > 0) {
-        console.log('Waiting 60s and then retrying...');
+        // This can happen if we are doing 2 email sends at once (e.g. risk alerts and vaccine
+        // alerts), so just automatically fall back to ~half speed.
+        console.log(
+          `Received 'Throttling' error. Reducing to half speed and retrying in 60 seconds.`,
+        );
+        this.limiter.updateSettings({
+          minTime: DEFAULT_DELAY_MS * 2,
+        });
         await delay(60000);
         await this.sendEmail(sendData, retriesLeft - 1);
       } else {

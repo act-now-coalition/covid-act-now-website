@@ -16,6 +16,7 @@ export interface LandingSection {
 export interface LandingContent {
   header: string;
   intro: Markdown;
+  editorsNote: Markdown;
   sections: LandingSection[];
   metadataTitle: string;
   metadataDescription: string;

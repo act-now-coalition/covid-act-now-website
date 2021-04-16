@@ -1,15 +1,18 @@
 import React from 'react';
 
-const EmailAlertsIcon: React.FC = () => {
+const EmailAlertsIcon: React.FC<{ height?: string; width?: string }> = ({
+  height = 32,
+  width = 40,
+}) => {
   return (
     <svg
-      width="40"
-      height="32"
-      viewBox="0 0 40 32"
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clipPath="url(#clip0)" transform="translate(2, 0)">
+      <g transform="translate(2, 0)">
         <path
           d="M4.32046 6.87302C2.92646 6.87302 1.78546 8.01502 1.78546 9.40802V28.676C1.78546 30.071 2.92646 31.211 4.32046 31.211H29.6725C31.0665 31.211 32.2075 30.07 32.2075 28.676V6.87302H4.32046Z"
           fill="white"

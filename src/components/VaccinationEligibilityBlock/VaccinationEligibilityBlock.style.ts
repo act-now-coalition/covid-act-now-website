@@ -34,6 +34,15 @@ export const PhaseDescription = styled(MarkdownContent)<{
     margin: 12px auto;
     margin-inline-start: 1em;
     padding-inline-start: 0.5em;
+
+    &:last-child {
+      margin-bottom: 0;
+
+      li,
+      p {
+        margin-bottom: 0;
+      }
+    }
   }
 
   ${props => (props.$currentlyEligible ? listWithCheckmark : '')}
@@ -51,4 +60,9 @@ export const StyledEligibilityPanel = styled.div``;
 export const StartDate = styled.span`
   color: ${COLOR_MAP.GREY_4};
   font-size: 14px;
+`;
+
+export const LinksDescription = styled.span`
+  font-size: 16px;
+  color: black;
 `;

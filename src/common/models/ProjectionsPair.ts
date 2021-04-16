@@ -1,4 +1,9 @@
-import _ from 'lodash';
+import find from 'lodash/find';
+import findLast from 'lodash/findLast';
+import findIndex from 'lodash/findIndex';
+import filter from 'lodash/filter';
+import minBy from 'lodash/minBy';
+import maxBy from 'lodash/maxBy';
 import { Metric } from 'common/metricEnum';
 import { Projection, Column } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';
@@ -123,8 +128,8 @@ function rootMeanSquareDiff(
   leftDataset: Column[],
   rightDataset: Column[],
 ): number {
-  const leftDataPoints = _.filter(leftDataset, d => d.y != null).length;
-  const rightDataPoints = _.filter(rightDataset, d => d.y != null).length;
+  const leftDataPoints = filter(leftDataset, d => d.y != null).length;
+  const rightDataPoints = filter(rightDataset, d => d.y != null).length;
 
   // TODO(michael): Figure out how to incorporate missing data points better.
   if ((leftDataPoints === 0) !== (rightDataPoints === 0)) {
@@ -139,8 +144,8 @@ function rootMeanSquareDiff(
   assert(left.length === right.length, `Datasets should match`);
   const length = left.length;
 
-  const min = Math.min(_.minBy(left, d => d.y)!.y, _.minBy(right, d => d.y)!.y);
-  const max = Math.max(_.maxBy(left, d => d.y)!.y, _.maxBy(right, d => d.y)!.y);
+  const min = Math.min(minBy(left, d => d.y)!.y, minBy(right, d => d.y)!.y);
+  const max = Math.max(maxBy(left, d => d.y)!.y, maxBy(right, d => d.y)!.y);
   const range = max - min;
 
   let sumSquareDiffs = 0;
@@ -159,18 +164,18 @@ function rootMeanSquareDiff(
 /** Trims two datasets to the overlapping set of dates. */
 function trimDatasetsToMatch(left: Column[], right: Column[]) {
   const startTime = Math.max(
-    _.find(left, d => d.y != null)!.x,
-    _.find(right, d => d.y != null)!.x,
+    find(left, d => d.y != null)!.x,
+    find(right, d => d.y != null)!.x,
   );
   const endTime = Math.min(
-    _.findLast(left, d => d.y != null)!.x,
-    _.findLast(right, d => d.y != null)!.x,
+    findLast(left, d => d.y != null)!.x,
+    findLast(right, d => d.y != null)!.x,
   );
 
-  const leftStartIndex = _.findIndex(left, d => d.x === startTime);
-  const rightStartIndex = _.findIndex(right, d => d.x === startTime);
-  const leftEndIndex = _.findIndex(left, d => d.x === endTime);
-  const rightEndIndex = _.findIndex(right, d => d.x === endTime);
+  const leftStartIndex = findIndex(left, d => d.x === startTime);
+  const rightStartIndex = findIndex(right, d => d.x === startTime);
+  const leftEndIndex = findIndex(left, d => d.x === endTime);
+  const rightEndIndex = findIndex(right, d => d.x === endTime);
 
   return [
     left.slice(leftStartIndex, leftEndIndex + 1),

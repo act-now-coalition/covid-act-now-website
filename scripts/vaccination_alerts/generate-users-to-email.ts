@@ -1,8 +1,5 @@
-import _ from 'lodash';
-import delay from 'delay';
 import * as yargs from 'yargs';
-import { GrpcStatus as FirestoreErrorCode } from '@google-cloud/firestore';
-import { FipsCode } from '../../src/common/regions';
+import regions, { FipsCode } from '../../src/common/regions';
 import { RegionVaccinePhaseInfo } from '../../src/cms-content/vaccines/phases';
 import {
   EmailFips,
@@ -50,21 +47,14 @@ const markEmailAlertsToSend = async (
   emails: string[],
 ) => {
   const { fips, emailAlertVersion } = alert;
-  let alreadyMarked = 0;
   await Promise.all(
     emails.map(async (email: string) => {
-      const marked = await firestoreSubscriptions.markEmailToSend(
+      await firestoreSubscriptions.markEmailToSend(
         fips,
         emailAlertVersion,
         email,
       );
-      if (!marked) {
-        alreadyMarked++;
-      }
     }),
-  );
-  console.log(
-    `FIPS ${fips} had ${emails.length} emails to mark and ${alreadyMarked} were already marked.`,
   );
 };
 
@@ -88,27 +78,34 @@ async function main(alertsFilePath: string) {
 
   const vaccinationAlertsInfo = readVaccinationAlerts(alertsFilePath);
   const locationsToAlert = getLocationsToAlert(vaccinationAlertsInfo);
-  console.log('locationsToAlert', locationsToAlert);
   const alertSubscriptions = await firestoreSubscriptions.getAlertSubscriptions();
 
   const emailsToAlertByFips = buildEmailsToAlertByFips(
     locationsToAlert,
     alertSubscriptions,
   );
-  console.log('emailsToAlertByFips', Object.keys(emailsToAlertByFips));
 
-  console.info(`Locations to alert: ${locationsToAlert.join(', ')}`);
+  console.info(
+    `Locations to alert: ${locationsToAlert
+      .map(fips => regions.findByFipsCode(fips)?.name ?? fips)
+      .join(', ')}`,
+  );
 
+  let totalEmailsToSend = 0;
   for (const [fipsCode, emails] of Object.entries(emailsToAlertByFips)) {
     const updatedAlert = vaccinationAlertsInfo[fipsCode];
     try {
-      console.log(`Marking ${emails.length} emails for FIPS ${fipsCode}`);
+      totalEmailsToSend += emails.length;
       await markEmailAlertsToSend(firestoreSubscriptions, updatedAlert, emails);
     } catch (err) {
       console.error(`Error updating emails for location ${fipsCode}`, err);
       process.exit(1);
     }
   }
+
+  console.info(
+    `Recorded ${totalEmailsToSend} total emails to be sent in Firebase.`,
+  );
 }
 
 if (require.main === module) {

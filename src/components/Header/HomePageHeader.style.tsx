@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   text-align: center;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin: 2rem 2rem 1rem;
+    margin: 2rem;
   }
 `;
 

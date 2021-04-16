@@ -11,7 +11,7 @@ import { MetricDefinition } from './interfaces';
 import Thermometer from 'components/Thermometer';
 import {
   InfoTooltip,
-  DisclaimerTooltip,
+  TextTooltip,
   renderTooltipContent,
 } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
@@ -163,7 +163,7 @@ function renderDisclaimer(
   return (
     <Fragment>
       {'Learn more about '}
-      <DisclaimerTooltip
+      <TextTooltip
         title={getDataSourceTooltipContent(
           Metric.HOSPITAL_USAGE,
           region,
@@ -175,7 +175,7 @@ function renderDisclaimer(
         }
       />
       {' and '}
-      <DisclaimerTooltip
+      <TextTooltip
         title={renderTooltipContent(body)}
         mainCopy={'how we calculate our metrics'}
         trackOpenTooltip={() =>

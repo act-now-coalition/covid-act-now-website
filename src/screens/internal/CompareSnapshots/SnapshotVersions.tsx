@@ -1,8 +1,8 @@
 import { Grid } from '@material-ui/core';
 import { Api, SnapshotVersion } from 'api';
 import { snapshotUrl } from 'common/utils/snapshots';
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { parseDateString } from 'common/utils/time-utils';
 
 export function SnapshotVersions({
   leftSnapshot,
@@ -32,8 +32,7 @@ function VersionInfo({ version }: { version: SnapshotVersion | null }) {
   return (
     version && (
       <div style={{ fontSize: 'small' }}>
-        <b>Build finished:</b>{' '}
-        {moment.utc(version.timestamp).local().toDate().toString()}
+        <b>Build finished:</b> {parseDateString(version.timestamp).toString()}
         <br />
         <b>covid-data-model:</b>{' '}
         {JSON.stringify(version['covid-data-model']).replace(',', ', ')}

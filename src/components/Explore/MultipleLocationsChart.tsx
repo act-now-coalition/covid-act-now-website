@@ -1,9 +1,12 @@
 import React, { useCallback, Fragment } from 'react';
-import { isNumber, last, max, sortBy } from 'lodash';
+import isNumber from 'lodash/isNumber';
+import last from 'lodash/last';
+import max from 'lodash/max';
+import sortBy from 'lodash/sortBy';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatDecimal, formatUtcDate } from 'common/utils';
+import { formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
@@ -16,6 +19,10 @@ import { Line } from '@vx/shape';
 import DateMarker from './DateMarker';
 import GridLines from './GridLines';
 import Axes from './Axes';
+import {
+  getColumnDate,
+  formatTooltipColumnDate,
+} from 'components/Charts/utils';
 
 interface LabelInfo {
   x: number;
@@ -24,7 +31,6 @@ interface LabelInfo {
   stroke: string;
 }
 
-const getDate = (d: Column) => new Date(d.x);
 const getY = (d: Column) => d.y;
 
 function getSeriesOpacity(
@@ -52,7 +58,7 @@ const MultipleLocationsTooltip: React.FC<{
       width={'210px'}
       top={top}
       left={left}
-      title={formatUtcDate(new Date(pointInfo.x), 'MMM D, YYYY')}
+      title={formatTooltipColumnDate(pointInfo)}
     >
       <Styles.TooltipSubtitle>
         {currentSeries && currentSeries.tooltipLabel}
@@ -157,7 +163,7 @@ const MultipleLocationsChart: React.FC<{
     [showTooltip],
   );
 
-  const getXPosition = (d: Column) => dateScale(getDate(d)) || 0;
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
   const seriesLabels = formatCurrentValueLabels(
     seriesList,

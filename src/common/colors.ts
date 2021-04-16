@@ -1,11 +1,7 @@
 import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 
-import {
-  getSummaryFromStateCode,
-  getSummaryFromFips,
-  LocationSummary,
-} from './location_summaries';
+import { LocationSummary } from './location_summaries';
 
 export default {
   LIGHTGRAY: '#f2f2f2',
@@ -75,6 +71,13 @@ export const COLOR_MAP = {
   LIGHT_YELLOW: '#FFF1BF',
   LIGHT_YELLOW_EMAIL: 'rgba(255, 201, 0, 0.12)',
   BLACK: '#000000',
+  NEW_BLUE: {
+    // rename these
+    BASE: '#3567FD',
+    DARK: '#002CB4',
+    LIGHT: 'rgba(53, 103, 253, .15)',
+    PURPLE: '#5361FD',
+  },
 };
 
 export const LEVEL_COLOR = {
@@ -91,17 +94,4 @@ export function colorFromLocationSummary(
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
-}
-
-export function stateColor(stateCode: string) {
-  const summary = getSummaryFromStateCode(stateCode);
-  return colorFromLocationSummary(summary);
-}
-
-export function countyColor(
-  countyFipsCode: string,
-  defaultColor = COLOR_MAP.GRAY.LIGHT,
-) {
-  const summary = getSummaryFromFips(countyFipsCode);
-  return colorFromLocationSummary(summary, defaultColor);
 }

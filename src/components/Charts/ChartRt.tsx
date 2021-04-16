@@ -1,5 +1,5 @@
 import React from 'react';
-import { isDate } from 'lodash';
+import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveNatural } from '@vx/curve';
 import { GridRows } from '@vx/grid';
@@ -9,7 +9,7 @@ import { scaleLinear } from '@vx/scale';
 import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
-import { formatUtcDate, formatDecimal } from 'common/utils';
+import { formatDecimal } from 'common/utils';
 import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
@@ -30,18 +30,18 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
+import { formatTooltipColumnDate, getColumnDate } from './utils';
 
 type PointRt = Omit<Column, 'y'> & {
   y: RtRange;
 };
 
-const getDate = (d: PointRt) => new Date(d.x);
 const getRt = (d: PointRt) => d?.y?.rt;
 const getYAreaHigh = (d: PointRt) => d?.y?.high;
 const getYAreaLow = (d: PointRt) => d?.y?.low;
 
 const hasData = (d: any) =>
-  isDate(getDate(d)) &&
+  isDate(getColumnDate(d)) &&
   Number.isFinite(getRt(d)) &&
   Number.isFinite(getYAreaLow(d)) &&
   Number.isFinite(getYAreaHigh(d));
@@ -67,7 +67,7 @@ const ChartRt = ({
   const chartHeight = height - marginTop - marginBottom;
 
   const data: PointRt[] = columnData.filter(hasData);
-  const dates: Date[] = columnData.map(getDate).filter(isDate);
+  const dates: Date[] = columnData.map(getColumnDate).filter(isDate);
 
   const minDate = d3min(dates) || new Date('2020-01-01');
   const currDate = new Date();
@@ -85,24 +85,28 @@ const ChartRt = ({
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (d: PointRt) => xScale(getDate(d));
+  const getXCoord = (d: PointRt) => xScale(getColumnDate(d));
   const getYCoord = (d: PointRt) => yScale(getRt(d));
 
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
 
-  const lastValidDate = getDate(last(data));
+  const lastValidDate = getColumnDate(last(data));
 
   const truncationDate = getTruncationDate(lastValidDate, RT_TRUNCATION_DAYS);
-  const prevData = data.filter((d: PointRt) => getDate(d) <= truncationDate);
-  const restData = data.filter((d: PointRt) => getDate(d) >= truncationDate);
+  const prevData = data.filter(
+    (d: PointRt) => getColumnDate(d) <= truncationDate,
+  );
+  const restData = data.filter(
+    (d: PointRt) => getColumnDate(d) >= truncationDate,
+  );
   const truncationPoint = last(prevData);
   const truncationRt = getRt(truncationPoint);
   const yTruncationRt = yScale(truncationRt);
   const truncationZone = getZoneByValue(truncationRt, zones);
 
   const renderTooltip = (d: PointRt) => {
-    const isConfirmed = getDate(d) < truncationDate;
+    const isConfirmed = getColumnDate(d) < truncationDate;
     const rtLow = formatDecimal(getYAreaLow(d), 2);
     const rtHigh = formatDecimal(getYAreaHigh(d), 2);
     const rt = formatDecimal(getRt(d), 2);
@@ -110,7 +114,7 @@ const ChartRt = ({
       <Tooltip
         left={marginLeft + getXCoord(d)}
         top={marginTop + getYCoord(d)}
-        title={formatUtcDate(getDate(d), 'MMM D, YYYY')}
+        title={formatTooltipColumnDate(d)}
         subtitle="Infection rate"
         subtext={isConfirmed ? undefined : 'Data might change'}
         width="150px"
@@ -130,6 +134,8 @@ const ChartRt = ({
       fill={getZoneByValue(getRt(d), zones).color}
     />
   );
+
+  const xTruncationRt = xScale(getColumnDate(truncationPoint));
 
   return (
     <ChartContainer<PointRt>
@@ -194,22 +200,17 @@ const ChartRt = ({
       </Style.LineGrid>
       <Style.TextAnnotation>
         <BoxedAnnotation
-          x={xScale(getDate(truncationPoint))}
+          x={xTruncationRt}
           y={yTruncationRt < 60 ? yTruncationRt + 30 : yTruncationRt - 30}
           text={formatDecimal(truncationRt)}
         />
       </Style.TextAnnotation>
-      <Style.CircleMarker
-        cx={xScale(getDate(truncationPoint))}
-        cy={yTruncationRt}
-        r={6}
-      />
+      <Style.CircleMarker cx={xTruncationRt} cy={yTruncationRt} r={6} />
       <AxisBottom
         innerHeight={chartHeight}
         scale={xScale}
         tickValues={dateTicks}
       />
-      {/* <AxisBottom top={chartHeight} scale={xScale} /> */}
       <AxisLeft scale={yScale} tickValues={yTicks} />
     </ChartContainer>
   );

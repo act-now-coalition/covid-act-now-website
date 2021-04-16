@@ -1,4 +1,5 @@
-import { capitalize, words } from 'lodash';
+import capitalize from 'lodash/capitalize';
+import words from 'lodash/words';
 import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';
@@ -40,9 +41,12 @@ export enum EventCategory {
   EXPLORE = 'explore',
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
   FAQ = 'faq',
+  FOOTER = 'footer',
   GEOLOCATION_CARDS = 'geolocation cards',
   GLOSSARY = 'glossary',
+  HOMEPAGE_BANNER = 'homepage banner',
   INDIGENOUS_PEOPLES_DAY = 'indigenous peoples day',
+  LEARN = 'learn',
   MAP = 'map',
   METRICS = 'metrics',
   METRIC_EXPLAINERS = 'metric explainers',
@@ -55,6 +59,7 @@ export enum EventCategory {
   VOTE_2020 = 'vote',
   VULNERABILITIES = 'vulnerabilities',
   WEB_VITALS = 'web vitals',
+  MINI_MAP = 'minimap',
 }
 
 /**
@@ -81,7 +86,6 @@ export enum EventAction {
   LCP = 'Largest Contentful Paint (ms)',
   TTFB = 'Time to First Byte (ms)',
   OPEN_TOOLTIP = 'open tooltip',
-  CLOSE_TOOLTIP = 'close tooltip',
 }
 
 function toTitleCase(name: string) {

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import ReactMarkdown from 'react-markdown';
 import { FooterLinkStyles } from 'components/Compare/Compare.style';
 import { LinkButton } from 'components/Button';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
@@ -111,6 +110,14 @@ export const RecommendationBody = styled(MarkdownContent)`
   strong {
     color: black;
   }
+
+  a {
+    text-decoration: underline;
+    color: ${COLOR_MAP.BLUE};
+    &:hover {
+      color: ${COLOR_MAP.BLUE};
+    }
+  }
 `;
 
 export const Icon = styled.img`
@@ -160,15 +167,5 @@ export const FooterLink = styled(LinkButton)`
     &:last-child {
       margin-left: 1.5rem;
     }
-  }
-`;
-
-export const ShareText = styled(ReactMarkdown)`
-  max-width: 350px;
-
-  p {
-    line-height: 1.4;
-    color: ${COLOR_MAP.GRAY_BODY_COPY};
-    font-size: 13px;
   }
 `;

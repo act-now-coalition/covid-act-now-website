@@ -47,7 +47,7 @@
     {
       "term": "Cluster event",
       "termId": "cluster-event",
-      "definition": "A cluster event is a group of cases, usually at least 10 positive cases, tied to the same place at the same time. With COVID, large clusters result from [superspreading events](#superspreadingevent) such as [conferences](https://www.nytimes.com/2020/12/11/us/biogen-conference-covid-spread.html), [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), [weddings](https://www.forbes.com/sites/victoriaforster/2020/12/04/covid-19-superspreader-wedding-in-washington-state-linked-to-7-deaths-of-people-who-didnt-even-attend/?sh=1d19c7293124), and [cruises](https://www.thedailybeast.com/coronavirus-diamond-princess-cruise-ship-fiasco-points-to-possible-super-spreader).",
+      "definition": "A cluster event is a group of cases, usually at least 10 positive cases, tied to the same place at the same time. With COVID, large clusters result from [superspreading events](#superspreading-event) such as [conferences](https://www.nytimes.com/2020/12/11/us/biogen-conference-covid-spread.html), [choir practices](https://www.cdc.gov/mmwr/volumes/69/wr/mm6919e6.htm), [weddings](https://www.forbes.com/sites/victoriaforster/2020/12/04/covid-19-superspreader-wedding-in-washington-state-linked-to-7-deaths-of-people-who-didnt-even-attend/?sh=1d19c7293124), and [cruises](https://www.thedailybeast.com/coronavirus-diamond-princess-cruise-ship-fiasco-points-to-possible-super-spreader).",
       "category": "Transmission"
     },
     {

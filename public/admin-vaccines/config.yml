@@ -100,6 +100,17 @@ collections:
                 name: vaccinationSignupUrl
                 widget: string
                 required: false
+              - label: State Signup URL
+                name: stateSignupUrl
+                widget: string
+                default: 'URL'
+                hint: State-specific URL
+              - label: All individuals 16+ eligible?
+                name: allAdultsEligible
+                widget: boolean
+                default: false
+                required: false
+                hint: Switch on if all individuals 16+ are eligible
               - label: Email alert version
                 name: emailAlertVersion
                 default: '0'

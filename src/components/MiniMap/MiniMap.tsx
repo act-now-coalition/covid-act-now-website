@@ -4,6 +4,7 @@ import { MAP_FILTERS } from 'screens/LocationPage/Enums/MapFilterEnums';
 import * as Styles from './MiniMap.style';
 import { Region, State, County, MetroArea } from 'common/regions';
 import RegionMap from 'components/RegionMap';
+import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
 
 interface MiniMapProperties {
   region: Region;
@@ -25,13 +26,18 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
   // Exception for District of Columbia
   const showState = !region.fipsCode.startsWith('11');
 
+  const onSelectMapOption = (mapOption: string) => {
+    setMapOption(mapOption);
+    trackEvent(EventCategory.MINI_MAP, EventAction.CLICK, mapOption);
+  };
+
   return (
     <Styles.Container mobileMenuOpen={mobileMenuOpen}>
       <Styles.Tabs>
         {showState && !(region instanceof MetroArea) && (
           <Styles.TabItem
             selected={mapOption === MAP_FILTERS.STATE}
-            onClick={() => setMapOption(MAP_FILTERS.STATE)}
+            onClick={() => onSelectMapOption(MAP_FILTERS.STATE)}
           >
             {regionTabName(region)}
           </Styles.TabItem>
@@ -39,14 +45,14 @@ const MiniMap: FunctionComponent<MiniMapProperties> = ({
         {region instanceof MetroArea && (
           <Styles.TabItem
             selected={mapOption === MAP_FILTERS.MSA}
-            onClick={() => setMapOption(MAP_FILTERS.MSA)}
+            onClick={() => onSelectMapOption(MAP_FILTERS.MSA)}
           >
             {regionTabName(region)}
           </Styles.TabItem>
         )}
         <Styles.TabItem
           selected={mapOption === MAP_FILTERS.NATIONAL}
-          onClick={() => setMapOption(MAP_FILTERS.NATIONAL)}
+          onClick={() => onSelectMapOption(MAP_FILTERS.NATIONAL)}
         >
           USA
         </Styles.TabItem>

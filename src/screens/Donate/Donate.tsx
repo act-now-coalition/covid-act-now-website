@@ -13,6 +13,7 @@ import {
 } from 'screens/Donate/Donate.style';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import donateContent from 'cms-content/donate';
+import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;
@@ -36,24 +37,27 @@ const Donate: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down(800));
 
   return (
-    <Container>
-      {isMobile && <Intro />}
-      <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/covidactnow-mar2021" />
-      <ContentWrapper>
-        {!isMobile && (
-          <Fragment>
-            <Icon icon={loveLetter} />
-            <Intro />
-          </Fragment>
-        )}
-        {donateContent.sections.map((section, i) => (
-          <Fragment key={i}>
-            <SectionHeader>{section.title}</SectionHeader>
-            <BodyCopy source={section.copy} />
-          </Fragment>
-        ))}
-      </ContentWrapper>
-    </Container>
+    <>
+      <Container>
+        {isMobile && <Intro />}
+        <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/D3wX7K" />
+        <ContentWrapper>
+          {!isMobile && (
+            <Fragment>
+              <Icon icon={loveLetter} />
+              <Intro />
+            </Fragment>
+          )}
+          {donateContent.sections.map((section, i) => (
+            <Fragment key={i}>
+              <SectionHeader>{section.title}</SectionHeader>
+              <BodyCopy source={section.copy} />
+            </Fragment>
+          ))}
+        </ContentWrapper>
+      </Container>
+      <ShareModelBlock />
+    </>
   );
 };
 

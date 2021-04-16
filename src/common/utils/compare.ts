@@ -1,9 +1,8 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
-import { getCountyMsaCode } from 'common/locations';
+import isNumber from 'lodash/isNumber';
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { isNumber } from 'lodash';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import regions, {
   County,
@@ -12,6 +11,7 @@ import regions, {
   MetroArea,
   getStateName,
   getFormattedStateCode,
+  getAbbreviatedCounty,
 } from 'common/regions';
 import { fail } from 'assert';
 
@@ -38,14 +38,6 @@ function getLocationObj(region: Region): SummaryForCompare {
   };
 }
 
-function isMetroCounty(region: Region) {
-  return getCountyMsaCode(region.fipsCode);
-}
-
-function isNonMetroCounty(region: Region) {
-  return !isMetroCounty(region);
-}
-
 export function getAllStates(): SummaryForCompare[] {
   return regions.states.map(getLocationObj);
 }
@@ -61,36 +53,14 @@ export function getAllMetroAreas(): SummaryForCompare[] {
 export function getAllCountiesOfMetroArea(
   region: MetroArea,
 ): SummaryForCompare[] {
-  return region.counties.map(getLocationObj);
+  return region.countiesFips
+    .map(fips => regions.findByFipsCodeStrict(fips))
+    .map(getLocationObj);
 }
 
 export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
   return regions.counties
     .filter((region: County) => region.state.stateCode === stateCode)
-    .map(getLocationObj);
-}
-
-export function getAllMetroCounties(): SummaryForCompare[] {
-  return regions.counties.filter(isMetroCounty).map(getLocationObj);
-}
-
-export function getAllNonMetroCounties(): SummaryForCompare[] {
-  return regions.counties.filter(isNonMetroCounty).map(getLocationObj);
-}
-
-export function getStateMetroCounties(stateCode: string): SummaryForCompare[] {
-  return regions.counties
-    .filter((region: County) => region.state.stateCode === stateCode)
-    .filter(isMetroCounty)
-    .map(getLocationObj);
-}
-
-export function getStateNonMetroCounties(
-  stateCode: string,
-): SummaryForCompare[] {
-  return regions.counties
-    .filter((region: County) => region.state.stateCode === stateCode)
-    .filter(isNonMetroCounty)
     .map(getLocationObj);
 }
 
@@ -106,83 +76,24 @@ export function getNeighboringCounties(
   return [...adjacentCounties, ...[getLocationObj(county)]];
 }
 
-export enum MetroFilter {
-  ALL,
-  METRO,
-  NON_METRO,
-}
-
-export const FILTER_LABEL = {
-  [MetroFilter.ALL]: 'Metro & Non-metro',
-  [MetroFilter.METRO]: 'Metro only',
-  [MetroFilter.NON_METRO]: 'Non-metro only',
-};
-
-export function getFilterLabel(filter: MetroFilter) {
-  return FILTER_LABEL[filter];
-}
-
-export function getAllCountiesSelection(countyTypeToView: MetroFilter) {
-  switch (countyTypeToView) {
-    case MetroFilter.ALL:
-      return getAllCounties();
-    case MetroFilter.METRO:
-      return getAllMetroCounties();
-    case MetroFilter.NON_METRO:
-      return getAllNonMetroCounties();
-    default:
-      return getAllCounties();
-  }
-}
-
-export function getLocationPageCountiesSelection(
-  stateCode: string,
-  countyTypeToView: MetroFilter,
-) {
-  switch (countyTypeToView) {
-    case MetroFilter.ALL:
-      return getAllCountiesOfState(stateCode);
-    case MetroFilter.METRO:
-      return getStateMetroCounties(stateCode);
-    case MetroFilter.NON_METRO:
-      return getStateNonMetroCounties(stateCode);
-    default:
-      return getAllCountiesOfState(stateCode);
-  }
-}
-
 export enum GeoScopeFilter {
   NEARBY,
   STATE,
   COUNTRY,
 }
 
-export function getMetroPrefixCopy(filter: MetroFilter, useAll?: boolean) {
-  if (filter === MetroFilter.METRO) {
-    return 'metro';
-  } else if (filter === MetroFilter.NON_METRO) {
-    return 'non-metro';
-  } else if (useAll) {
-    return 'all';
-  }
-  return '';
-}
-
 export function getLocationPageViewMoreCopy(
   geoscope: GeoScopeFilter,
-  countyTypeToView: MetroFilter,
   region: Region,
 ) {
   if (region instanceof MetroArea) {
     return `View all counties in ${region.shortName}`;
   } else if (geoscope === GeoScopeFilter.COUNTRY) {
-    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+    return `View top 100 counties`;
   } else if (geoscope === GeoScopeFilter.NEARBY) {
     return 'View all nearby counties';
   } else {
-    return `View all ${getMetroPrefixCopy(
-      countyTypeToView,
-    )} counties in ${getStateName(region)}`;
+    return `View all counties in ${getStateName(region)}`;
   }
 }
 
@@ -212,32 +123,16 @@ export const homepageLabelMap: { [key in HomepageLocationScope]: LabelItem } = {
   },
 };
 
-export function getHomePageViewMoreCopy(
-  homepageScope: HomepageLocationScope,
-  countyTypeToView: MetroFilter,
-) {
+export function getHomePageViewMoreCopy(homepageScope: HomepageLocationScope) {
   if (homepageScope === HomepageLocationScope.STATE) {
     return 'View all states';
   } else if (homepageScope === HomepageLocationScope.MSA) {
     return 'View top 100 metro areas';
   } else if (homepageScope === HomepageLocationScope.COUNTY) {
-    return `View top 100 ${getMetroPrefixCopy(countyTypeToView)} counties`;
+    return `View top 100 counties`;
   } else {
     return `View more`;
   }
-}
-
-// For formatting and abbreviating location names:
-
-export function getAbbreviatedCounty(county: string) {
-  if (county.includes('Parish')) return county.replace('Parish', 'Par.');
-  if (county.includes('Borough')) return county.replace('Borough', 'Bor.');
-  if (county.includes('Census Area'))
-    return county.replace('Census Area', 'C.A.');
-  if (county.includes('Municipality'))
-    return county.replace('Municipality', 'Mun.');
-  if (county.includes('Municipio')) return county.replace('Municipio', 'Mun.');
-  else return county.replace('County', 'Co.');
 }
 
 /*
@@ -266,7 +161,7 @@ export function getRegionNameForRow(region: Region, condensed?: boolean) {
   } else if (region instanceof County) {
     return condensed
       ? splitRegionName(region.abbreviation)
-      : splitRegionName(region.name);
+      : splitRegionName(`${region.name},`);
   } else if (region instanceof MetroArea) {
     return splitRegionName(region.shortName);
   } else {
@@ -274,11 +169,8 @@ export function getRegionNameForRow(region: Region, condensed?: boolean) {
   }
 }
 
-// For college tag:
-
 export function getShareQuote(
   sorter: Metric,
-  countyTypeToView: MetroFilter,
   sliderValue: GeoScopeFilter,
   totalLocations: number,
   sortDescending: boolean,
@@ -296,14 +188,11 @@ export function getShareQuote(
 
   const homepageShareCopy = `Compare all USA ${
     homepageScope === HomepageLocationScope.COUNTY
-      ? `${getMetroPrefixCopy(countyTypeToView)} counties`
+      ? 'counties'
       : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
   } by their local COVID metrics with @CovidActNow.`;
 
-  const stateShareCopy = `Compare COVID metrics between ${getMetroPrefixCopy(
-    countyTypeToView,
-    true,
-  )} counties in ${stateName} with @CovidActNow.`;
+  const stateShareCopy = `Compare COVID metrics between counties in ${stateName} with @CovidActNow.`;
 
   const hasValidRank =
     currentLocation &&
@@ -324,11 +213,11 @@ export function getShareQuote(
   const countyShareCopy =
     currentLocation &&
     hasValidRank &&
-    `${currentLocation.region.name} ranks #${
+    `${currentLocation.region.shortName} ranks #${
       currentLocation.rank
-    } out of ${totalLocations} total ${geoScopeShareCopy[sliderValue]}${
-      countyTypeToView === MetroFilter.ALL ? '' : ' '
-    }${getMetroPrefixCopy(countyTypeToView)} counties when sorted by ${
+    } out of ${totalLocations} total ${
+      geoScopeShareCopy[sliderValue]
+    } counties when sorted by ${
       sortDescending ? descendingCopy : ascendingCopy
     } ${
       sortByPopulation
@@ -364,4 +253,35 @@ export const getCompareSubheader = (region: Region): string => {
   } else {
     return 'Compare counties';
   }
+};
+
+// Value maps for filters' slider components (0, 50, and 99 are numerical values required by MUI Slider).
+// Maps each numerical slider value to its corresponding scope:
+
+// For location page:
+export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
+  0: GeoScopeFilter.NEARBY,
+  50: GeoScopeFilter.STATE,
+  99: GeoScopeFilter.COUNTRY,
+};
+
+export const scopeValueMap = {
+  [GeoScopeFilter.NEARBY]: 0,
+  [GeoScopeFilter.STATE]: 50,
+  [GeoScopeFilter.COUNTRY]: 99,
+};
+
+// For homepage:
+export const homepageSliderNumberToFilterMap: {
+  [val: number]: HomepageLocationScope;
+} = {
+  0: HomepageLocationScope.COUNTY,
+  50: HomepageLocationScope.MSA,
+  99: HomepageLocationScope.STATE,
+};
+
+export const homepageScopeValueMap = {
+  [HomepageLocationScope.COUNTY]: 0,
+  [HomepageLocationScope.MSA]: 50,
+  [HomepageLocationScope.STATE]: 99,
 };

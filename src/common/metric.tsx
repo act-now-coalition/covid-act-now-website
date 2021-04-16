@@ -1,3 +1,4 @@
+import isNumber from 'lodash/isNumber';
 import * as CaseGrowth from 'common/metrics/case_growth';
 import * as TestRates from 'common/metrics/positive_rate';
 import * as Hospitalizations from 'common/metrics/hospitalizations';
@@ -8,7 +9,6 @@ import { ALL_LEVELS, Level, LevelInfo } from 'common/level';
 import { fail } from 'common/utils';
 import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
-import { isNumber } from 'lodash';
 import { Metric } from 'common/metricEnum';
 
 export const ALL_METRICS = [

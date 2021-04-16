@@ -1,9 +1,11 @@
-import { sortBy } from 'lodash';
-import regions from 'common/regions';
+import sortBy from 'lodash/sortBy';
+import values from 'lodash/values';
+
+import { statesByFips } from 'common/regions';
 import { getVaccineInfoByFips, verifyOneItemPerState } from './phases';
 
 describe('vaccination info is complete for each state', () => {
-  const states = sortBy(regions.states, state => state.fullName);
+  const states = sortBy(values(statesByFips), state => state.fullName);
 
   for (const state of states) {
     const { fipsCode } = state;

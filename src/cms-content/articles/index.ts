@@ -1,11 +1,12 @@
+import keyBy from 'lodash/keyBy';
+import sortBy from 'lodash/sortBy';
 import { Markdown, sanitizeID } from '../utils';
-import { keyBy, sortBy } from 'lodash';
 import indigenousPeoplesDay from './covid-impact-majority-native-american-counties.json';
 import thirdSurge from './third-surge.json';
 import canCompare from './can-compare.json';
 import metros from './metros.json';
 import {
-  timeFormats,
+  DateFormat,
   parseDateString,
   formatDateTime,
 } from 'common/utils/time-utils';
@@ -31,7 +32,7 @@ function sanitizeArticle(article: ArticleJSON): Article {
   return {
     ...article,
     articleID: sanitizeID(article.articleID),
-    date: formatDateTime(parseDateString(article.date), timeFormats.MM_DD_YYYY),
+    date: formatDateTime(parseDateString(article.date), DateFormat.MM_DD_YYYY),
   };
 }
 

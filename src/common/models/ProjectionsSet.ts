@@ -1,5 +1,6 @@
+import take from 'lodash/take';
+import isEmpty from 'lodash/isEmpty';
 import { Projections } from 'common/models/Projections';
-import _ from 'lodash';
 import { ProjectionsPair, SortType } from './ProjectionsPair';
 import { Metric } from 'common/metricEnum';
 
@@ -47,11 +48,11 @@ export class ProjectionsSet {
 
   top(limit: number, sortType: SortType, metric: Metric) {
     const sortedSet = this.sortBy(sortType, metric);
-    return new ProjectionsSet(_.take(sortedSet.pairs, limit), this.loadingText);
+    return new ProjectionsSet(take(sortedSet.pairs, limit), this.loadingText);
   }
 
   get isEmpty(): boolean {
-    return _.isEmpty(this.pairs);
+    return isEmpty(this.pairs);
   }
 
   map<T>(fn: (x: ProjectionsPair) => T): T[] {
