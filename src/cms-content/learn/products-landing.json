@@ -15,7 +15,7 @@
         },
         {
           "altText": "Washington National Guard logo",
-          "image": "/images_cms/washington-nationa-guard-logo-red.svg",
+          "image": "/images_cms/us-national-guard-logo.jpeg",
           "url": "https://mil.wa.gov/national-guard"
         },
         {
@@ -39,9 +39,9 @@
           "url": "https://www.ibm.com/us-en/"
         },
         {
-          "altText": "Wayfair logo",
-          "image": "/images_cms/wayfair-logo.jpg",
-          "url": "https://www.wayfair.com/"
+          "altText": "Citizen Logo",
+          "url": "https://citizen.com/",
+          "image": "/images_cms/citizen-com_logo.png"
         },
         {
           "altText": "DC Department of Health logo",
@@ -49,9 +49,9 @@
           "url": "https://dchealth.dc.gov/"
         },
         {
-          "altText": "Citizen Logo",
-          "url": "https://citizen.com/",
-          "image": "/images_cms/citizen-com_logo.png"
+          "altText": "Wayfair logo",
+          "image": "/images_cms/wayfair-logo.jpg",
+          "url": "https://www.wayfair.com/"
         },
         {
           "altText": "Team Rubicon Logo",
@@ -61,7 +61,12 @@
         {
           "altText": "Boston Consulting Group",
           "url": "https://www.bcg.com/en-us/",
-          "image": "/images_cms/bcg_monogram.png"
+          "image": "/images_cms/bcg-logo-rect.png"
+        },
+        {
+          "altText": "Bayer Logo",
+          "image": "/images_cms/bayer-logo-2.jpeg",
+          "url": "https://www.bayer.com/en/"
         }
       ]
     },
