@@ -110,18 +110,6 @@ const CompareMain = (props: {
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
-  const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTY]: getAllCounties(),
-    [HomepageLocationScope.MSA]: getAllMetroAreas(),
-    [HomepageLocationScope.STATE]: getAllStates(),
-  };
-
-  function getHomepageLocations(scope: HomepageLocationScope) {
-    return homepageScopeToLocations[scope];
-  }
-
-  const homepageLocationsForCompare = getHomepageLocations(homepageScope);
-
   const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
 
   // For location page:
@@ -129,6 +117,16 @@ const CompareMain = (props: {
   const [locations, setLocations] = useState<SummaryForCompare[]>([]);
 
   useEffect(() => {
+    const homepageScopeToLocations = {
+      [HomepageLocationScope.COUNTY]: getAllCounties(),
+      [HomepageLocationScope.MSA]: getAllMetroAreas(),
+      [HomepageLocationScope.STATE]: getAllStates(),
+    };
+
+    function getHomepageLocations(scope: HomepageLocationScope) {
+      return homepageScopeToLocations[scope];
+    }
+
     async function getLocationPageLocations(region: Region) {
       const stateCode = getStateCode(region);
       if (region instanceof MetroArea) {
@@ -145,7 +143,7 @@ const CompareMain = (props: {
     async function getFinalLocations(region?: Region) {
       return region
         ? await getLocationPageLocations(region)
-        : homepageLocationsForCompare;
+        : getHomepageLocations(homepageScope);
     }
 
     const load = async () => {
@@ -153,7 +151,7 @@ const CompareMain = (props: {
     };
 
     load();
-  }, [region, geoScope, homepageLocationsForCompare]);
+  }, [region, geoScope, homepageScope]);
 
   const viewMoreCopy = region
     ? getLocationPageViewMoreCopy(geoScope, region)
