@@ -121,6 +121,8 @@ const STATE_AGGREGATED_DATASETS: DatasetId[] = [
   'smoothedHospitalizations',
   'rawICUHospitalizations',
   'smoothedICUHospitalizations',
+  'rawDailyVaccinesAdministered',
+  'smoothedDailyVaccinesAdministered',
 ];
 
 function aggregate(
