@@ -63,7 +63,7 @@ const CompareMain = (props: {
   const isHomepage = !region;
 
   const scrollToCompare = useCallback(() => {
-    const scrollOffset = isHomepage ? 75 : 165;
+    const scrollOffset = isHomepage ? 95 : 185;
     // Note (Chelsi): short delay is needed to make scrollTo work
     return setTimeout(() => {
       if (tableRef.current) {

@@ -37,9 +37,9 @@ import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import { LocationSummary, useSummaries } from 'common/location_summaries';
 import LocationPageHeaderVariant from './Experiment/LocationPageHeaderVariant';
 
-// TODO: 180 is rough accounting for the navbar and searchbar;
+// TODO: 200 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
-const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
+const scrollTo = (div: null | HTMLDivElement, offset: number = 200) =>
   div &&
   window.scrollTo({
     left: 0,
@@ -208,7 +208,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
       EventAction.CLICK,
       'Location Header: Share',
     );
-    scrollTo(shareBlockRef.current, -372);
+    scrollTo(shareBlockRef.current, -352);
   };
 
   const onClickMetric = (metric: Metric) => {
