@@ -38,9 +38,15 @@ async function main() {
   const metroRows = await readCsv('ccvi_metros.csv');
 
   const rows = [...stateRows, ...countyRows, ...metroRows];
+
+  // Convert to a fixed-precision value w/ 2 decimal places of precision.
+  // There's no need to store (and transfer, and parse) those extra digits of precision
+  // when we convert it to a level by which band it falls into (0-.2, .2-.4, etc.).
+  // If we never need greater precision, update it here.
   const numberize = (x: any) => {
-    return Number(toNumber(x).toString().substring(0, 4));
+    return Number(toNumber(x).toFixed(2));
   };
+
   for (const row of rows) {
     if (row.FIPS === 'NA') {
       // ccvi_metros.csv includes some extra aggregations that are not MSA's
