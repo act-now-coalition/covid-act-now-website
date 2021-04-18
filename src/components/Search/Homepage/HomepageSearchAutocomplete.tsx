@@ -30,7 +30,6 @@ const HomepageSearchAutocomplete: React.FC<{
   setHideMapToggle?: any;
   menuOpen: boolean;
 }> = ({ locations, filterLimit, setHideMapToggle, menuOpen }) => {
-  console.log('menuOpen in search', menuOpen);
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -43,7 +42,6 @@ const HomepageSearchAutocomplete: React.FC<{
   const searchTextFieldStyles = getSearchTextFieldStyles();
   const autocompleteStyles = getSearchAutocompleteStyles();
 
-  console.log('menuOpen in search', menuOpen);
   useEffect(() => {
     if (menuOpen) setIsOpen(false);
   }, [menuOpen]);

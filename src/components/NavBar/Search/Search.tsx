@@ -16,8 +16,6 @@ const Search: React.FC<{ menuOpen: boolean }> = ({ menuOpen }) => {
     countyToZipMap,
   );
 
-  console.log('menuOpen in navbar search', menuOpen);
-
   return (
     <ThemeProvider
       theme={{
