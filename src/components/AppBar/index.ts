@@ -1,5 +1,5 @@
 import NavBar from './NavBar';
-import NavBarSearch from './NavBarSearch/NavBarSearch';
+import Search from './Search/Search';
 
-export { NavBarSearch };
+export { Search as NavBarSearch };
 export default NavBar;

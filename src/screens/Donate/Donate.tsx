@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import loveLetter from '@iconify/icons-twemoji/love-letter';
 import { Icon } from '@iconify/react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -15,7 +15,7 @@ import {
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import donateContent from 'cms-content/donate';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import { DesktopOnlyDonateButton } from 'components/AppBar/DonateButton';
+import { DesktopOnlyDonateButton } from 'components/DonateButton';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;
@@ -37,12 +37,15 @@ const Intro: React.FC = () => {
 const Donate: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down(800));
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       <NavBar
-        renderSearch={() => <NavBarSearch />}
+        renderSearch={menuOpen => <NavBarSearch menuOpen={menuOpen} />}
         renderSecondaryElement={() => <DesktopOnlyDonateButton />}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
       />
       <Container>
         {isMobile && <Intro />}

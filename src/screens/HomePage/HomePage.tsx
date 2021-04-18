@@ -44,7 +44,7 @@ import {
   Variant,
   VariantID,
 } from 'components/Experiment';
-import { DonateButtonHeart } from 'components/AppBar/DonateButton';
+import { DonateButtonHeart } from 'components/DonateButton';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -122,6 +122,8 @@ export default function HomePage() {
     );
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const searchLocations = getFinalAutocompleteLocations(
     geolocationData,
     countyToZipMap,
@@ -131,7 +133,9 @@ export default function HomePage() {
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
-  const renderNavBarSearch = () => <>{hasScrolled && <NavBarSearch />}</>;
+  const renderNavBarSearch = (menuOpen: any) => (
+    <>{hasScrolled && <NavBarSearch menuOpen={menuOpen} />}</>
+  );
 
   const renderDonateButton = () => (
     <>
@@ -145,8 +149,6 @@ export default function HomePage() {
     </>
   );
 
-  // TODO (chelsi): add ids back in
-
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -158,6 +160,8 @@ export default function HomePage() {
       <NavBar
         renderSearch={renderNavBarSearch}
         renderSecondaryElement={renderDonateButton}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
       <SpringSurgeBanner />
@@ -169,6 +173,7 @@ export default function HomePage() {
               <HomepageSearchAutocomplete
                 locations={searchLocations}
                 filterLimit={getFilterLimit()}
+                menuOpen={menuOpen}
               />
               <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
                 <Variant id={VariantID.A}>

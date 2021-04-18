@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import NavBar, { NavBarSearch } from 'components/AppBar';
 import SidebarContents from 'components/SidebarContents';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -11,19 +11,22 @@ import {
   DesktopOnly,
 } from './PageContent.style';
 import { useScrollToElement } from 'common/hooks';
-import { DesktopOnlyDonateButton } from 'components/AppBar/DonateButton';
+import { DesktopOnlyDonateButton } from 'components/DonateButton';
 
 const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
   children,
   sidebarItems,
 }) => {
   useScrollToElement();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <Fragment>
       <NavBar
-        renderSearch={() => <NavBarSearch />}
+        renderSearch={menuOpen => <NavBarSearch menuOpen={menuOpen} />}
         renderSecondaryElement={() => <DesktopOnlyDonateButton />}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
       />
       <PageContainer>
         <MainContent>{children}</MainContent>
