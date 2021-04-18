@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
-import NavBar from 'components/AppBar/NavBar';
+import NavBar from 'components/NavBar';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';

@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 import { ClickAwayListener } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
-import MegaMenu from 'components/AppBar/MegaMenu/MegaMenu';
-import * as Style from 'components/AppBar/NavBar.style';
+import MegaMenu from 'components/NavBar/MegaMenu/MegaMenu';
+import * as Style from 'components/NavBar/NavBar.style';
 import { useIsEmbed } from 'common/utils/hooks';
-import { trackNavigation, trackMobileMenuOpen } from 'components/AppBar/utils';
+import { trackNavigation, trackMobileMenuOpen } from 'components/NavBar/utils';
 import { useBreakpoint } from 'common/hooks';
 
 const NavBarWithoutSearch: React.FC<{

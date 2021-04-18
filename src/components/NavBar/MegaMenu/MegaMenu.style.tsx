@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
-import { desktopNavHeight } from 'components/AppBar/NavBar.style';
+import { desktopNavHeight } from 'components/NavBar/NavBar.style';
 
 // Need to add a good amount of bottom padding for mobile screens to make sure the bottom
 // of the mega menu isn't covered by the browser's menu bar

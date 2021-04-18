@@ -3,7 +3,7 @@ import loveLetter from '@iconify/icons-twemoji/love-letter';
 import { Icon } from '@iconify/react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import NavBar, { NavBarSearch } from 'components/AppBar';
+import NavBar, { NavBarSearch } from 'components/NavBar';
 import {
   Container,
   ContentWrapper,

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Fade from '@material-ui/core/Fade';
 import Map from 'components/Map/Map';
-import NavBar, { NavBarSearch } from 'components/AppBar';
+import NavBar, { NavBarSearch } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
