@@ -62,7 +62,7 @@ export function useSummaries(): SummariesMap | null {
       setSummaries(summaries);
     }
     fetch();
-  });
+  }, []);
 
   return summaries;
 }
