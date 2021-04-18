@@ -47,9 +47,9 @@ export async function fetchSummaries(snapshotNumber: number) {
 export function useSummaries(): SummariesMap | null {
   const [summaries, setSummaries] = useState<SummariesMap | null>(null);
 
-  const snapshot = getSnapshotOverride() || currentSnapshot();
   useEffect(() => {
     async function fetch() {
+      const snapshot = getSnapshotOverride() || currentSnapshot();
       let summaries;
       try {
         summaries = await fetchSummaries(snapshot);
@@ -62,7 +62,7 @@ export function useSummaries(): SummariesMap | null {
       setSummaries(summaries);
     }
     fetch();
-  }, [snapshot]);
+  }, []);
 
   return summaries;
 }
