@@ -1255,42 +1255,15 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "6",
       "locationName": "Virginia",
       "fips": "51",
       "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Health care staff\n* Residents of long-term care facilities",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Front-line essential workers\n* People age 65+\n* People age 16-64 with an underlying medical condition\n* People living in correctional facilities, homeless shelters, and migrant labor camps",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1C",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* All veterans and their spouses/caregivers\n  Some counties are now vaccinating:\n* Other essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-25T06:14:26.374Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:28:36.654Z",
+          "updatedAt": "2021-04-19T17:04:22.104Z",
           "phase": "2",
           "description": "\n* Individuals 16+",
           "startDate": "April 18"
@@ -1302,7 +1275,8 @@
           "description": "* Individuals under 16"
         }
       ],
-      "stateSignupUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/phase-by-health-district/"
+      "stateSignupUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/phase-by-health-district/",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "6",
