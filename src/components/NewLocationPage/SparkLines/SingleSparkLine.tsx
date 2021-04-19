@@ -4,21 +4,22 @@ import { LinePath } from '@vx/shape';
 import { curveNatural } from '@vx/curve';
 import { COLOR_MAP } from 'common/colors';
 import { Point } from './utils';
+import { max as d3Max } from 'd3-array';
 
 const SingleSparkLine: React.FC<{
   data: Point[];
-  chartWidth: number;
-  chartHeight: number;
-  capY: number;
-}> = ({ data, chartWidth, chartHeight, capY }) => {
+  width: number;
+  height: number;
+  padding?: number;
+}> = ({ data, width, height, padding = 10 }) => {
   const yScale = scaleLinear({
-    domain: [0, capY],
-    range: [chartHeight, 0],
+    domain: [0, d3Max(data, (d: any) => d.y)],
+    range: [height, padding],
   });
 
   const xScale = scaleLinear({
     domain: [0, 29],
-    range: [0, chartWidth],
+    range: [0, width],
   });
 
   const getXCoord = (p: Point) => xScale(p.x);
@@ -27,28 +28,28 @@ const SingleSparkLine: React.FC<{
   const barWidth = 2;
 
   return (
-    <svg
-      width={chartWidth}
-      height={chartHeight}
-      style={{ border: '1px solid blue' }}
-    >
+    <svg width={width} height={height}>
       <g>
         {data.map((p: Point) => {
           return (
             <rect
+              key={`rect-${p.y}`}
               fill={COLOR_MAP.GREY_1}
               x={xScale(p.x) - barWidth / 2}
               y={yScale(p.y)}
               width={barWidth}
-              height={chartHeight - getYCoord(p)}
+              height={height - getYCoord(p)}
             />
           );
         })}
       </g>
-      <g stroke="black" strokeWidth={1.5}>
+      <g>
         {data.map((p: Point) => {
           return (
             <LinePath
+              stroke="black"
+              strokeWidth={1.5}
+              key={`rect-${p.y}`}
               data={data}
               x={getXCoord}
               y={getYCoord}

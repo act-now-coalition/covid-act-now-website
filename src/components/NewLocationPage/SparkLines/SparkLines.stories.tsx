@@ -40,18 +40,6 @@ const data = [
   { x: 29, y: 50.15866676429975 },
 ];
 
-const chartWidth = 120;
-const chartHeight = 60;
-
 export const Example = () => {
-  const capY = getCapY(data);
-
-  return (
-    <SingleSparkLine
-      data={data}
-      chartWidth={chartWidth}
-      chartHeight={chartHeight}
-      capY={capY}
-    />
-  );
+  return <SingleSparkLine data={data} width={120} height={60} />;
 };

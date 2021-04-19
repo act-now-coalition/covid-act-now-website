@@ -3,7 +3,7 @@ import { mobileBreakpoint } from 'assets/theme/sizes';
 import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { COLOR_MAP } from 'common/colors';
 
-export const Container = styled.div`
+export const SectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
