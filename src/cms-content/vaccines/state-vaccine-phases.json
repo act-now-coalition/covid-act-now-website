@@ -907,7 +907,7 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
           "currentlyEligible": true,
@@ -1108,7 +1108,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "5",
       "locationName": "Virginia",
       "fips": "51",
       "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
