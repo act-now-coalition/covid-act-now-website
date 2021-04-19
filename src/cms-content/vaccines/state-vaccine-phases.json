@@ -1200,13 +1200,6 @@
           "phase": "2",
           "description": "* Individuals 16+",
           "startDate": "April 19, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-12T18:14:15.471Z",
-          "phase": "2+",
-          "description": "* Vermont college students with out of state addresses",
-          "startDate": "April 30, 2021"
         }
       ],
       "stateSignupUrl": "https://www.healthvermont.gov/covid-19/vaccine/getting-covid-19-vaccine",
