@@ -1,5 +1,6 @@
 import React from 'react';
 import SingleSparkLine from './SingleSparkLine';
+import { getCapY } from './utils';
 
 export default {
   title: 'Location page redesign/Spark lines',
@@ -41,9 +42,10 @@ const data = [
 
 const chartWidth = 120;
 const chartHeight = 60;
-const capY = 125;
 
 export const Example = () => {
+  const capY = getCapY(data);
+
   return (
     <SingleSparkLine
       data={data}

@@ -2,13 +2,8 @@ import React from 'react';
 import { scaleLinear } from '@vx/scale';
 import { LinePath } from '@vx/shape';
 import { curveNatural } from '@vx/curve';
-import { Bar } from '@vx/shape';
 import { COLOR_MAP } from 'common/colors';
-
-export interface Point {
-  x: number;
-  y: number;
-}
+import { Point } from './utils';
 
 const SingleSparkLine: React.FC<{
   data: Point[];
@@ -26,9 +21,10 @@ const SingleSparkLine: React.FC<{
     range: [0, chartWidth],
   });
 
-  const getXCoord = (p: any) => xScale(p.x);
+  const getXCoord = (p: Point) => xScale(p.x);
+  const getYCoord = (p: Point) => yScale(p.y);
 
-  const getYCoord = (p: any) => yScale(Math.min(p.y, capY));
+  const barWidth = 2;
 
   return (
     <svg
@@ -36,6 +32,19 @@ const SingleSparkLine: React.FC<{
       height={chartHeight}
       style={{ border: '1px solid blue' }}
     >
+      <g>
+        {data.map((p: Point) => {
+          return (
+            <rect
+              fill={COLOR_MAP.GREY_1}
+              x={xScale(p.x) - barWidth / 2}
+              y={yScale(p.y)}
+              width={barWidth}
+              height={chartHeight - getYCoord(p)}
+            />
+          );
+        })}
+      </g>
       <g stroke="black" strokeWidth={1.5}>
         {data.map((p: Point) => {
           return (
@@ -45,13 +54,6 @@ const SingleSparkLine: React.FC<{
               y={getYCoord}
               curve={curveNatural}
             />
-          );
-        })}
-      </g>
-      <g fill="red">
-        {data.map((p: Point) => {
-          return (
-            <Bar x={getXCoord(p.x)} y={-chartHeight} width={2} height={p.y} />
           );
         })}
       </g>

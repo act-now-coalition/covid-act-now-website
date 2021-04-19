@@ -1,10 +1,7 @@
-/**
- * Parent div for each module on the new location page
- */
-
-import React from 'react';
 import styled from 'styled-components';
 import { mobileBreakpoint } from 'assets/theme/sizes';
+import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { COLOR_MAP } from 'common/colors';
 
 export const Container = styled.div`
   display: flex;
@@ -18,8 +15,9 @@ export const Container = styled.div`
   }
 `;
 
-const SectionContainer: React.FC = ({ children }) => {
-  return <Container>{children}</Container>;
-};
-
-export default SectionContainer;
+export const Chevron = styled(MuiChevronRightIcon)`
+  color: ${COLOR_MAP.GREY_3};
+  transform: translateY(6px);
+  margin-left: 0.75rem;
+  font-size: 1.3rem;
+`;
