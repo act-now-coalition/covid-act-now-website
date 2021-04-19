@@ -1230,31 +1230,15 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "11",
+      "emailAlertVersion": "12",
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "",
           "currentlyEligible": true,
-          "description": "* Long-term care residents and staff, healthcare workers, first responders\n* Individuals 16+ with certain high-risk health conditions\n* K-12 teachers and staff, child care, public safety\n* BIPOC households and caregivers of kids with high-risk conditions\n* Individuals 40+",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-04-12T18:12:37.452Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-12T18:13:00.411Z",
-          "phase": "1+",
-          "description": "* Individuals 30+",
-          "startDate": "April 12, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:28:03.295Z",
+          "updatedAt": "2021-04-19T17:03:27.786Z",
           "phase": "2",
           "description": "* Individuals 16+",
           "startDate": "April 19, 2021"
@@ -1267,7 +1251,8 @@
           "startDate": "April 30, 2021"
         }
       ],
-      "stateSignupUrl": "https://www.healthvermont.gov/covid-19/vaccine/getting-covid-19-vaccine"
+      "stateSignupUrl": "https://www.healthvermont.gov/covid-19/vaccine/getting-covid-19-vaccine",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "4",
