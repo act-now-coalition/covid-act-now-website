@@ -540,7 +540,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Massachusetts",
       "fips": "25",
       "phaseGroups": [
@@ -599,16 +599,17 @@
         {
           "phase": "3",
           "tier": "",
-          "currentlyEligible": false,
+          "currentlyEligible": true,
           "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-12T17:43:25.977Z"
+          "updatedAt": "2021-04-19T16:40:46.185Z"
         }
       ],
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "stateSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated"
+      "stateSignupUrl": "https://www.mass.gov/info-details/covid-19-vaccine-locations-for-individuals-currently-eligible-to-be-vaccinated",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "5",
@@ -805,7 +806,7 @@
       "stateSignupUrl": "https://www.vaccines.nh.gov/"
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "New Jersey",
       "fips": "34",
       "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
@@ -854,14 +855,15 @@
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* General public",
+          "currentlyEligible": true,
+          "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-07T16:26:46.047Z"
+          "updatedAt": "2021-04-19T16:41:56.584Z"
         }
       ],
-      "stateSignupUrl": "https://covid19.nj.gov/pages/covid-19-vaccine-locations-for-eligible-recipients"
+      "stateSignupUrl": "https://covid19.nj.gov/pages/covid-19-vaccine-locations-for-eligible-recipients",
+      "allAdultsEligible": true
     },
     {
       "locationName": "New Mexico",
