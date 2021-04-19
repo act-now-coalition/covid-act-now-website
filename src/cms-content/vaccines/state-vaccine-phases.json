@@ -695,19 +695,13 @@
       "emailAlertVersion": "3",
       "phaseGroups": [
         {
-          "phase": "2B",
+          "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "Eligibility varies by county. Counties are now vaccinating: \n\n* Age group 50+ and other priority groups (Lancaster)\n* Age group 16+ or 18+ (All other counties) \n\nIndividuals 18+ are also eligible statewide at pharmacies participating in the Federal Retail Pharmacy Program.",
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T17:51:04.845Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T17:51:53.149Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-04-19T17:27:00.283Z"
         }
       ],
       "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx",
