@@ -1047,7 +1047,7 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "phaseGroups": [
         {
           "currentlyEligible": true,
@@ -1086,73 +1086,20 @@
       "fips": "44",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "phaseGroups": [
         {
           "phase": "1",
-          "tier": "1",
-          "currentlyEligible": true,
-          "description": "* Health care workers\n* First responders\n* Congregate settings",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Ages 75+",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "3",
-          "currentlyEligible": true,
-          "description": "* Educators and child care personnel\n* Ages 65-74",
-          "expandedDefinitionUrl": "",
-          "startDate": "February 22",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1",
-          "tier": "4",
-          "currentlyEligible": true,
-          "description": "* Ages 60-64\n* Ages 16-64 with underlying health conditions",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 12",
-          "updatedAt": "2021-03-15T16:50:46.161Z"
-        },
-        {
-          "phase": "1",
-          "tier": "5",
-          "currentlyEligible": true,
-          "description": "* Ages 50-59",
-          "expandedDefinitionUrl": "",
-          "startDate": "April 5",
-          "updatedAt": "2021-04-05T06:20:23.919Z"
-        },
-        {
-          "phase": "1",
-          "tier": "6",
-          "currentlyEligible": true,
-          "description": "* Ages 40-49",
-          "expandedDefinitionUrl": "",
-          "startDate": "April 12",
-          "updatedAt": "2021-03-22T19:57:48.714Z"
-        },
-        {
-          "phase": "1",
           "tier": "7",
-          "currentlyEligible": false,
-          "description": "* Ages 16-39",
+          "currentlyEligible": true,
+          "description": "* Ages 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 19",
-          "updatedAt": "2021-03-22T19:58:03.475Z"
+          "updatedAt": "2021-04-19T17:02:31.602Z"
         }
       ],
-      "stateSignupUrl": "https://covid.ri.gov/vaccination"
+      "stateSignupUrl": "https://covid.ri.gov/vaccination",
+      "allAdultsEligible": true
     },
     {
       "locationName": "South Carolina",
