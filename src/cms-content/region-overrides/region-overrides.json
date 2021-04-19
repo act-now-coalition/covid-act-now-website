@@ -68,13 +68,6 @@
       "context": "https://trello.com/c/J0tFdcUV/1221-disabled-carson-city-nv-had-huge-drop-in-vaccination-data"
     },
     {
-      "include": "region-and-subregions",
-      "metric": "metrics.testPositivityRatio",
-      "blocked": true,
-      "region": "21660",
-      "context": "https://trello.com/c/vbAKt2O3/1180-lane-county-or-test-positivity-spike-very-suspicious"
-    },
-    {
       "include": "region",
       "metric": "metrics.icuCapacityRatio",
       "blocked": true,

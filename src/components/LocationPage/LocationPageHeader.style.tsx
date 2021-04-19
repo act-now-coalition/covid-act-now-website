@@ -190,7 +190,6 @@ export const HeaderButton = styled(Button).attrs(props => ({
 
   &:first-child {
     color: ${COLOR_MAP.BLUE};
-    margin-right: 0.5rem;
 
     &:hover {
       border: 1px solid ${COLOR_MAP.BLUE};

@@ -45,7 +45,6 @@ export const COLOR_MAP = {
   },
   BLUE: '#3BBCE6',
   LIGHT_BLUE: '#00bfea',
-  NEW_BLUE_PURPLE: '#5361FD', // rename when new button/color system is implemented
   GRAY_BODY_COPY: GREY_4,
   GRAY_EXPLORE_CHART: '#e0e0e0',
   GRAY: {
@@ -72,6 +71,13 @@ export const COLOR_MAP = {
   LIGHT_YELLOW: '#FFF1BF',
   LIGHT_YELLOW_EMAIL: 'rgba(255, 201, 0, 0.12)',
   BLACK: '#000000',
+  NEW_BLUE: {
+    // rename these
+    BASE: '#3567FD',
+    DARK: '#002CB4',
+    LIGHT: 'rgba(53, 103, 253, .15)',
+    PURPLE: '#5361FD',
+  },
 };
 
 export const LEVEL_COLOR = {

@@ -38,6 +38,15 @@ async function main() {
   const metroRows = await readCsv('ccvi_metros.csv');
 
   const rows = [...stateRows, ...countyRows, ...metroRows];
+
+  // Convert to a fixed-precision value w/ 2 decimal places of precision.
+  // There's no need to store (and transfer, and parse) those extra digits of precision
+  // when we convert it to a level by which band it falls into (0-.2, .2-.4, etc.).
+  // If we never need greater precision, update it here.
+  const numberize = (x: any) => {
+    return Number(toNumber(x).toFixed(2));
+  };
+
   for (const row of rows) {
     if (row.FIPS === 'NA') {
       // ccvi_metros.csv includes some extra aggregations that are not MSA's
@@ -46,14 +55,14 @@ async function main() {
     }
     const formattedFips = formatFips(row.FIPS);
     fipsToCcviData[formattedFips] = {
-      overall: toNumber(row.ccvi),
-      theme1: toNumber(row.theme1),
-      theme2: toNumber(row.theme2),
-      theme3: toNumber(row.theme3),
-      theme4: toNumber(row.theme4),
-      theme5: toNumber(row.theme5),
-      theme6: toNumber(row.theme6),
-      theme7: toNumber(row.theme7),
+      overall: numberize(row.ccvi),
+      theme1: numberize(row.theme1),
+      theme2: numberize(row.theme2),
+      theme3: numberize(row.theme3),
+      theme4: numberize(row.theme4),
+      theme5: numberize(row.theme5),
+      theme6: numberize(row.theme6),
+      theme7: numberize(row.theme7),
     };
   }
 

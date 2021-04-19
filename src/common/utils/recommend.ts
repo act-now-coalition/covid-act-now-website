@@ -22,7 +22,7 @@ import {
   getStateName,
   showExposureNotifications,
 } from 'components/LocationPage/Notifications';
-import regions, { getAbbreviatedCounty } from 'common/regions';
+import { getAbbreviatedCounty, Region } from 'common/regions';
 import { TimeUnit, getStartOf, subtractTime } from 'common/utils/time-utils';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
@@ -32,9 +32,8 @@ export function trackRecommendationsEvent(action: EventAction, label: string) {
 const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
 
 function getExposureRecommendation(
-  projection: Projection,
+  region: Region | null,
 ): Recommendation | null {
-  const region = regions.findByFipsCode(projection.fips);
   if (!region) {
     return null;
   }
@@ -58,7 +57,7 @@ function getExposureRecommendation(
 
 //TODO (Chelsi): fix the any
 export function getRecommendations(
-  projection: Projection,
+  region: Region | null,
   recommendations: Recommendation[],
 ): any[] {
   // Partitioning to control order:
@@ -86,9 +85,9 @@ export function getRecommendations(
     item => item.category === RecommendCategory.MASKS,
   );
 
-  const notificatonRecommendation = getExposureRecommendation(projection);
-  const exposureRecommendations = notificatonRecommendation
-    ? [notificatonRecommendation]
+  const notificationRecommendation = getExposureRecommendation(region);
+  const exposureRecommendations = notificationRecommendation
+    ? [notificationRecommendation]
     : [];
 
   const allRecommendations = [

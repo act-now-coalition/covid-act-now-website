@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
 import { LoadingScreen } from './AllStates.style';
 import { fetchAllStateProjections } from 'common/utils/model';
 import { Metric } from 'common/metricEnum';
 import { MetricChart } from 'components/Charts';
-import regions, { State, State as StateType } from 'common/regions';
+import { State } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { sortBy } from 'lodash';
-import Explore, { ExploreChart, ExploreMetric } from 'components/Explore';
+import { ExploreChart, ExploreMetric } from 'components/Explore';
 import { getProjectionsChartSeries } from 'components/Explore/utils';
 
 export function useStateProjections(): Array<Projections> | null {

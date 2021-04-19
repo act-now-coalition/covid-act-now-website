@@ -31,11 +31,10 @@ const BannerInner: React.FC = () => {
   return (
     <InnerContainer>
       <Body>
-        Daily new cases are rising in about half of the states and{' '}
-        {HospitalizationsAreRisingTooLink}. Help prevent another COVID wave by
-        continuing to take precautions and getting vaccinated when you are
-        eligible. Join the {millionVaccinations}M Americans who have already
-        gotten at least one vaccine dose.
+        Daily new cases are rising in half of the states and{' '}
+        {HospitalizationsAreRisingTooLink}. Continue to take precautions and
+        join the {millionVaccinations}M Americans who have already gotten a
+        vaccine dose.
       </Body>
     </InnerContainer>
   );
