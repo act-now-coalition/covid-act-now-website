@@ -269,54 +269,20 @@
       "fips": "15",
       "eligibilityInfoUrl": "https://hawaiicovid19.com/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
-        {
-          "phase": "1A",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Healthcare personnel\n* Long-term care facility residents",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-15T14:38:11.500Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* First responders\n* Frontline essential workers\n* Older adults (75+)",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-03-15T14:38:38.895Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-08T17:05:18.171Z",
-          "phase": "1C",
-          "tier": "1",
-          "description": "* Older Adults (70-74)",
-          "startDate": "March 8, 2021"
-        },
-        {
-          "phase": "1C",
-          "tier": "2",
-          "currentlyEligible": true,
-          "description": "* Older adults (65-69)\n* Persons (16+) with high risk medical conditions\n* Other essential workers\n* Some islands are vaccinating all individuals 16+ (Hawaii Island, Kauai, Maui, Lanai, Molokai)",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 15, 2021",
-          "updatedAt": "2021-04-12T17:52:28.967Z"
-        },
         {
           "phase": "2",
           "tier": "",
-          "currentlyEligible": false,
-          "description": "* All individuals 16+ (Oahu)",
+          "currentlyEligible": true,
+          "description": "* All individuals 16+",
           "expandedDefinitionUrl": "",
           "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-12T17:52:43.588Z"
+          "updatedAt": "2021-04-19T17:24:15.364Z"
         }
       ],
-      "stateSignupUrl": "https://hawaiicovid19.com/vaccination-registration/"
+      "stateSignupUrl": "https://hawaiicovid19.com/vaccination-registration/",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Idaho",
@@ -352,25 +318,17 @@
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "1",
-          "tier": "",
-          "currentlyEligible": true,
-          "description": "* Health care workers, long-term care residents\n* Persons 65+\n* Persons 16+ with high-risk medical conditions\n* Essential workers",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.983Z"
-        },
-        {
           "phase": "2",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+ (statewide except Chicago until April 19)",
+          "description": "* Individuals 16+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 12, 2021",
-          "updatedAt": "2021-04-12T17:53:53.915Z"
+          "startDate": "April 12, 2021 (April 19 in Chicago)",
+          "updatedAt": "2021-04-19T17:25:04.856Z"
         }
       ],
-      "stateSignupUrl": "https://coronavirus.illinois.gov/s/vaccination-location"
+      "stateSignupUrl": "https://coronavirus.illinois.gov/s/vaccination-location",
+      "allAdultsEligible": true
     },
     {
       "locationName": "Indiana",
