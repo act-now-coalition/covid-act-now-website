@@ -1,6 +1,5 @@
 import React from 'react';
 import SingleSparkLine from './SingleSparkLine';
-import { getCapY } from './utils';
 
 export default {
   title: 'Location page redesign/Spark lines',
