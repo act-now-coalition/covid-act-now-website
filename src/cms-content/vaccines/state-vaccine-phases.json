@@ -1047,53 +1047,10 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
-          "phase": "1A",
-          "tier": "1",
           "currentlyEligible": true,
-          "description": "* Health care workers\n* Long-term care facility residents and workers\n* First responders",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "1-4",
-          "currentlyEligible": true,
-          "description": "* Teachers and child care workers\n* People 70 and older",
-          "expandedDefinitionUrl": "",
-          "startDate": "",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "phase": "1B",
-          "tier": "5",
-          "currentlyEligible": true,
-          "description": "* People 65 and older",
-          "expandedDefinitionUrl": "",
-          "startDate": "March 1",
-          "updatedAt": "2021-02-18T01:52:35.985Z"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-03-25T06:06:43.688Z",
-          "phase": "1B",
-          "tier": "6",
-          "description": "Some counties are now vaccinating:\n\n* Adults 45+ with underlying health conditions\n* Migrant and seasonal farm workers\n* Seafood and agricultural workers\n* Food processing workers\n* Individuals living in congregate settings",
-          "startDate": "March 25"
-        },
-        {
-          "currentlyEligible": true,
-          "updatedAt": "2021-04-05T06:18:43.173Z",
-          "phase": "1B",
-          "tier": "7",
-          "description": "* Individuals 16+ with underlying health conditions\n* Additional frontline workers\n* Adults 50+ in a multigenerational household",
-          "startDate": "April 5"
-        },
-        {
-          "currentlyEligible": false,
           "updatedAt": "2021-04-12T17:34:52.655Z",
           "phase": "2",
           "tier": "",
@@ -1101,7 +1058,8 @@
           "startDate": "April 19"
         }
       ],
-      "stateSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx"
+      "stateSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx",
+      "allAdultsEligible": true
     },
     {
       "emailAlertVersion": "6",
