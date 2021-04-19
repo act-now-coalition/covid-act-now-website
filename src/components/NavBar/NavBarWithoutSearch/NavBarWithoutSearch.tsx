@@ -46,7 +46,7 @@ const NavBarWithoutSearch: React.FC<{
 
   const onMouseLeave = (e: React.MouseEvent<{}>) => {
     // Do not close when the user hovers on the top bar (including the button to close the menu)
-    if (e.clientY > 64) {
+    if (e.clientY > 84) {
       closeMenu();
     }
   };
