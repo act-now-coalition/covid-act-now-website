@@ -9,7 +9,8 @@ import { useBreakpoint } from 'common/hooks';
 const MegaMenu: React.FC<{
   open: boolean;
   closeMenu: () => void;
-}> = ({ open, closeMenu }) => {
+  onMouseLeave: (e: React.MouseEvent<{}>) => void;
+}> = ({ open, closeMenu, onMouseLeave }) => {
   const isMobile = useBreakpoint(800);
 
   const onClick = (label: string) => {
@@ -21,7 +22,7 @@ const MegaMenu: React.FC<{
     <>
       {isMobile && open && <LockBodyScroll />}
       <Fade in={open}>
-        <StyledMegaMenu role="navigation">
+        <StyledMegaMenu role="navigation" onMouseLeave={onMouseLeave}>
           <MenuContent onClick={onClick} />
         </StyledMegaMenu>
       </Fade>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { desktopNavHeight } from 'components/AppBar/NavBar.style';
+import { desktopNavHeight } from 'components/NavBar/NavBar.style';
 
 export const SelectorWrapper = styled.div<{ $isNarrowMobile: boolean }>`
   flex: 1;
