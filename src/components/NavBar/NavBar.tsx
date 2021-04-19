@@ -2,12 +2,19 @@ import React from 'react';
 import NavBarWithSearch from './NavBarWithSearch/NavBarWithSearch';
 import NavBarWithoutSearch from './NavBarWithoutSearch/NavBarWithoutSearch';
 
+const noop = () => {};
+
 const NavBar: React.FC<{
-  renderSearch?: (menuOpen: boolean) => React.ReactElement;
+  renderSearch?: () => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
-  menuOpen?: any;
-  setMenuOpen?: any;
-}> = ({ renderSearch, renderSecondaryElement, menuOpen, setMenuOpen }) => {
+  menuOpen?: boolean;
+  setMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({
+  renderSearch,
+  renderSecondaryElement,
+  menuOpen = false,
+  setMenuOpen = noop,
+}) => {
   return (
     <>
       {renderSearch ? (

@@ -133,7 +133,7 @@ export default function HomePage() {
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
-  const renderNavBarSearch = (menuOpen: any) => (
+  const renderNavBarSearch = () => (
     <>{hasScrolled && <NavBarSearch menuOpen={menuOpen} />}</>
   );
 

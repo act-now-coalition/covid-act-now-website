@@ -23,7 +23,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
   return (
     <Fragment>
       <NavBar
-        renderSearch={menuOpen => <NavBarSearch menuOpen={menuOpen} />}
+        renderSearch={() => <NavBarSearch menuOpen={menuOpen} />}
         renderSecondaryElement={() => <DesktopOnlyDonateButton />}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}

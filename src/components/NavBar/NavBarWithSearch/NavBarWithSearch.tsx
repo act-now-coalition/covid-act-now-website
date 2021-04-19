@@ -1,6 +1,3 @@
-/**
- * Navbar for all non-location pages. Includes searchbar
- */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ClickAwayListener } from '@material-ui/core';
@@ -14,8 +11,8 @@ import { useBreakpoint } from 'common/hooks';
 const NavBarWithSearch: React.FC<{
   renderSearch: (menuOpen: boolean) => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
-  menuOpen: any;
-  setMenuOpen: any;
+  menuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ renderSearch, renderSecondaryElement, menuOpen, setMenuOpen }) => {
   const isEmbed = useIsEmbed();
 
