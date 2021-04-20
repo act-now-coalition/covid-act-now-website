@@ -18,10 +18,11 @@ export const ColorBlock = styled.div<{
   align-self: center;
   background: ${({ color, $levelUnknown }) =>
     $levelUnknown ? LEVEL_COLOR[Level.UNKNOWN] : color};
-  border: ${({ $isCurrentLevel }) => $isCurrentLevel && `4px solid black`};
+  border: ${({ $isCurrentLevel }) => $isCurrentLevel && `3px solid black`};
   border-radius: ${({ $isCurrentLevel }) => ($isCurrentLevel ? '1px' : '0')};
   height: ${({ $isCurrentLevel }) => ($isCurrentLevel ? '20px' : '16px')};
-  width: 100%;
+  width: ${({ $isCurrentLevel }) =>
+    $isCurrentLevel ? 'calc(100% - 6px)' : '100%'};
 
   &:first-child {
     border-radius: 99px 0 0 99px;
