@@ -9,7 +9,7 @@ export default function useScrollToElement(): void {
   const { pathname, hash } = useLocation();
 
   const isLocationPage = pathname.includes('/us/');
-  const offset = isLocationPage ? -180 : -80;
+  const offset = isLocationPage ? -200 : -100;
 
   useEffect(() => {
     const element = hash ? (document.querySelector(hash) as HTMLElement) : null;

@@ -31,6 +31,10 @@ export const StyledDonateButtonHeart = styled(LinkButton)`
   color: ${COLOR_MAP.PURPLE};
   letter-spacing: 0;
 
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
   @media (min-width: ${materialSMBreakpoint}) {
     padding-right: 1rem;
   }

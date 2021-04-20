@@ -91,8 +91,7 @@ function renderStatus(projections: Projections): React.ReactElement {
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose and {peopleVaccinated} ({percentVaccinated})
       are fully vaccinated. {distributedText} Fewer than 0.001% of people who
-      have received a dose experienced a severe adverse reaction, none of them
-      deadly.
+      have received a dose experienced a severe adverse reaction.
     </Fragment>
   );
 }

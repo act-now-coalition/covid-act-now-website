@@ -1,5 +1,6 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
 import isNumber from 'lodash/isNumber';
+
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -14,6 +15,7 @@ import regions, {
   getAbbreviatedCounty,
 } from 'common/regions';
 import { fail } from 'assert';
+import { importCountyAdjacency } from 'common/data';
 
 export function trackCompareEvent(
   action: EventAction,
@@ -64,11 +66,14 @@ export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
     .map(getLocationObj);
 }
 
-export function getNeighboringCounties(
+export async function getNeighboringCounties(
   countyFips: string,
-): SummaryForCompare[] {
+): Promise<SummaryForCompare[]> {
   const county = regions.findByFipsCodeStrict(countyFips) as County;
-  const adjacentCounties = county.adjacentCountiesFips.map(fips => {
+  const countyAdjacency = await importCountyAdjacency();
+  const adjacentCounties = countyAdjacency.counties[
+    countyFips
+  ].adjacent_counties.map(fips => {
     const region = regions.findByFipsCodeStrict(fips);
     return getLocationObj(region);
   });
