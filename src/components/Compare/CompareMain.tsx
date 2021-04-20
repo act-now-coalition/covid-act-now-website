@@ -110,43 +110,48 @@ const CompareMain = (props: {
   // For homepage:
   const [homepageScope, setHomepageScope] = useState(HomepageLocationScope.MSA);
 
-  const homepageScopeToLocations = {
-    [HomepageLocationScope.COUNTY]: getAllCounties(),
-    [HomepageLocationScope.MSA]: getAllMetroAreas(),
-    [HomepageLocationScope.STATE]: getAllStates(),
-  };
-
-  function getHomepageLocations(scope: HomepageLocationScope) {
-    return homepageScopeToLocations[scope];
-  }
-
-  const homepageLocationsForCompare = getHomepageLocations(homepageScope);
-
   const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
 
   // For location page:
   const [geoScope, setGeoScope] = useState(GeoScopeFilter.STATE);
+  const [locations, setLocations] = useState<SummaryForCompare[]>([]);
 
-  function getLocationPageLocations(region: Region) {
-    const stateCode = getStateCode(region);
-    if (region instanceof MetroArea) {
-      return getAllCountiesOfMetroArea(region);
-    } else if (geoScope === GeoScopeFilter.NEARBY) {
-      return getNeighboringCounties(region.fipsCode);
-    } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
-      return getAllCountiesOfState(stateCode);
-    } else {
-      return getAllCounties();
+  useEffect(() => {
+    const homepageScopeToLocations = {
+      [HomepageLocationScope.COUNTY]: getAllCounties(),
+      [HomepageLocationScope.MSA]: getAllMetroAreas(),
+      [HomepageLocationScope.STATE]: getAllStates(),
+    };
+
+    function getHomepageLocations(scope: HomepageLocationScope) {
+      return homepageScopeToLocations[scope];
     }
-  }
 
-  function getFinalLocations(region?: Region) {
-    return region
-      ? getLocationPageLocations(region)
-      : homepageLocationsForCompare;
-  }
+    async function getLocationPageLocations(region: Region) {
+      const stateCode = getStateCode(region);
+      if (region instanceof MetroArea) {
+        return getAllCountiesOfMetroArea(region);
+      } else if (geoScope === GeoScopeFilter.NEARBY) {
+        return await getNeighboringCounties(region.fipsCode);
+      } else if (geoScope === GeoScopeFilter.STATE && stateCode) {
+        return getAllCountiesOfState(stateCode);
+      } else {
+        return getAllCounties();
+      }
+    }
 
-  const locations = getFinalLocations(region);
+    async function getFinalLocations(region?: Region) {
+      return region
+        ? await getLocationPageLocations(region)
+        : getHomepageLocations(homepageScope);
+    }
+
+    const load = async () => {
+      setLocations(await getFinalLocations(region));
+    };
+
+    load();
+  }, [region, geoScope, homepageScope]);
 
   const viewMoreCopy = region
     ? getLocationPageViewMoreCopy(geoScope, region)
