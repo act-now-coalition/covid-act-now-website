@@ -1,19 +1,26 @@
 import React from 'react';
-import { COLOR_MAP } from 'common/colors';
+import { ParentSize } from '@vx/responsive';
 import { v4 as uuidv4 } from 'uuid';
+import { ProgressBarContainer } from './VaccinationProgressBar.style';
+import { COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
 
 function getOffsetPercentage(decimal: number) {
   return formatPercent(decimal, 1);
 }
 
-const VaccinationsProgressBar: React.FC<{
+const ProgressBar: React.FC<{
   vaccinationsInitiated: number;
   vaccinationsCompleted: number;
   locationName: string;
-}> = ({ vaccinationsInitiated, vaccinationsCompleted, locationName }) => {
-  const barWidth = 280;
-  const barHeight = 16;
+  width: number;
+}> = ({
+  vaccinationsInitiated,
+  vaccinationsCompleted,
+  locationName,
+  width,
+}) => {
+  const height = 16;
 
   const gradientId = uuidv4();
   const titleId = uuidv4();
@@ -23,12 +30,7 @@ const VaccinationsProgressBar: React.FC<{
   const backgroundFill = COLOR_MAP.GREY_1;
 
   return (
-    <svg
-      width={barWidth}
-      height={barHeight}
-      role="img"
-      aria-labelledby={titleId}
-    >
+    <svg width={width} height={height} role="img" aria-labelledby={titleId}>
       <title id={titleId}>
         Progress bar showing that in {locationName},{' '}
         {formatPercent(vaccinationsInitiated)} of the population has received at
@@ -59,8 +61,8 @@ const VaccinationsProgressBar: React.FC<{
       </defs>
       <rect
         fill={`url(#${gradientId})`}
-        width={barWidth}
-        height={barHeight}
+        width={width}
+        height={height}
         rx={4}
         ry={4}
       />
@@ -68,4 +70,25 @@ const VaccinationsProgressBar: React.FC<{
   );
 };
 
-export default VaccinationsProgressBar;
+const VaccinationProgressBarAutosize: React.FC<{
+  vaccinationsInitiated: number;
+  vaccinationsCompleted: number;
+  locationName: string;
+}> = ({ vaccinationsInitiated, vaccinationsCompleted, locationName }) => {
+  return (
+    <ProgressBarContainer>
+      <ParentSize>
+        {({ width }) => (
+          <ProgressBar
+            vaccinationsInitiated={vaccinationsInitiated}
+            vaccinationsCompleted={vaccinationsCompleted}
+            locationName={locationName}
+            width={width}
+          />
+        )}
+      </ParentSize>
+    </ProgressBarContainer>
+  );
+};
+
+export default VaccinationProgressBarAutosize;
