@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import Hidden from '@material-ui/core/Hidden';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
@@ -12,8 +12,10 @@ import {
   CloseIcon,
 } from './HomepageSearchAutocomplete.style';
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
-import { getSearchTextFieldStyles } from 'assets/theme/customStyleBlocks/getSearchTextFieldStyles';
-import { getSearchAutocompleteStyles } from 'assets/theme/customStyleBlocks/getSearchAutocompleteStyles';
+import {
+  getSearchTextFieldStyles,
+  getSearchAutocompleteStyles,
+} from 'assets/theme/customMuiStyleBlocks';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { LockBodyScroll } from 'components/Dialog';
@@ -26,7 +28,8 @@ const HomepageSearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
-}> = ({ locations, filterLimit, setHideMapToggle }) => {
+  menuOpen: boolean;
+}> = ({ locations, filterLimit, setHideMapToggle, menuOpen }) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -38,6 +41,10 @@ const HomepageSearchAutocomplete: React.FC<{
 
   const searchTextFieldStyles = getSearchTextFieldStyles();
   const autocompleteStyles = getSearchAutocompleteStyles();
+
+  useEffect(() => {
+    if (menuOpen) setIsOpen(false);
+  }, [menuOpen]);
 
   const onInputChange = (e: any, value: string) => {
     setInput(value);

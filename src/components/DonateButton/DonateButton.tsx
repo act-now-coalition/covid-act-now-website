@@ -7,6 +7,7 @@ import {
 import { EventAction, EventCategory } from 'components/Analytics';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { LinkProps } from 'components/LinkButton';
+import Hidden from '@material-ui/core/Hidden';
 
 const trackingProps = {
   trackingCategory: EventCategory.DONATE,
@@ -31,4 +32,10 @@ export const DonateButtonHeart: React.FC<LinkProps> = ({ onClick }) => (
   >
     Donate
   </StyledDonateButtonHeart>
+);
+
+export const DesktopOnlyDonateButton = () => (
+  <Hidden smDown>
+    <DonateButtonHeart />
+  </Hidden>
 );

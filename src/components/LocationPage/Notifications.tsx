@@ -117,7 +117,7 @@ const VulnerabilityCopy: React.FC<{
       <br />
       <HashLink
         smooth
-        scroll={(element: HTMLElement) => scrollWithOffset(element, -180)}
+        scroll={(element: HTMLElement) => scrollWithOffset(element, -200)}
         to="#vulnerabilities"
         onClick={() => trackClickVulnerability('Location Header Update')}
       >

@@ -10,7 +10,7 @@ import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-const desktopNavHeight = 64;
+export const desktopNavHeight = 84;
 
 export const AppBar = styled(MuiAppBar)`
   border-bottom: solid 1px ${COLOR_MAP.GREY_1};
@@ -67,13 +67,18 @@ export const IconButton = styled(MuiIconButton).attrs(props => ({
   color: black;
   font-size: 1rem;
   line-height: 1.4rem;
+  padding: 1rem;
 
   &:focus-visible {
     outline: rgb(0, 95, 204) 1px auto;
   }
 
   &:hover {
-    background-color: transparent;
+    border-radius: 4px;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0.5rem 0.75rem;
   }
 `;
 
