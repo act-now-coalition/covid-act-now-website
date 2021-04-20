@@ -34,15 +34,15 @@ export const ColorBlock = styled.div<{
 // Desktop:
 const GradientBackground = css`
   background: linear-gradient(
-    ${LEVEL_COLOR[Level.LOW]} 20%,
-    ${LEVEL_COLOR[Level.MEDIUM]} 20%,
-    ${LEVEL_COLOR[Level.MEDIUM]} 40%,
+    ${LEVEL_COLOR[Level.SUPER_CRITICAL]} 20%,
+    ${LEVEL_COLOR[Level.CRITICAL]} 20%,
+    ${LEVEL_COLOR[Level.CRITICAL]} 40%,
     ${LEVEL_COLOR[Level.HIGH]} 40%,
     ${LEVEL_COLOR[Level.HIGH]} 60%,
-    ${LEVEL_COLOR[Level.CRITICAL]} 60%,
-    ${LEVEL_COLOR[Level.CRITICAL]} 80%,
-    ${LEVEL_COLOR[Level.SUPER_CRITICAL]} 80%,
-    ${LEVEL_COLOR[Level.SUPER_CRITICAL]} 100%
+    ${LEVEL_COLOR[Level.MEDIUM]} 60%,
+    ${LEVEL_COLOR[Level.MEDIUM]} 80%,
+    ${LEVEL_COLOR[Level.LOW]} 80%,
+    ${LEVEL_COLOR[Level.LOW]} 100%
   );
 `;
 
