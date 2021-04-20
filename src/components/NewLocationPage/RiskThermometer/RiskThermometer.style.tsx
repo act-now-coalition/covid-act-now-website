@@ -5,7 +5,8 @@ import { LEVEL_COLOR } from 'common/colors';
 // Mobile:
 export const MobileThermometerContainer = styled.div`
   display: flex;
-  width: 160px;
+  max-width: 160px;
+  width: 100%;
 `;
 
 export const ColorBlock = styled.div<{
