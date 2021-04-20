@@ -184,7 +184,7 @@ const Explore: React.FunctionComponent<{
 
   const exploreRef = useRef<HTMLDivElement>(null);
   const scrollToExplore = useCallback(() => {
-    const scrollOffset = 180;
+    const scrollOffset = 200;
     return setTimeout(() => {
       if (exploreRef.current) {
         window.scrollTo({

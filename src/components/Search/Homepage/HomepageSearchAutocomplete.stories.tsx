@@ -19,6 +19,7 @@ export const Home = () => {
     <HomepageSearchAutocomplete
       locations={locations}
       filterLimit={getFilterLimit()}
+      menuOpen={false}
     />
   );
 };

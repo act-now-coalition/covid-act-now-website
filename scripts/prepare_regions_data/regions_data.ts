@@ -4,14 +4,8 @@ import keyBy from 'lodash/keyBy';
 import values from 'lodash/values';
 import type { Dictionary } from 'lodash';
 import US_STATE_DATASET from './us_states_dataset_01_02_2020.json';
-import countyAdjacencyMsa from './county_adjacency_msa.json';
 import metroAreaDataset from './msa-data.json';
-import {
-  FipsCode,
-  State,
-  County,
-  MetroArea,
-} from '../../src/common/regions/types';
+import { State, County, MetroArea } from '../../src/common/regions/types';
 
 const { state_dataset, state_county_map_dataset } = US_STATE_DATASET;
 
@@ -32,10 +26,7 @@ function buildStates(): State[] {
   });
 }
 
-function buildCounties(
-  statesByFips: Dictionary<State>,
-  countyAdjacency: { [fipsCode: string]: AdjacencyInfo },
-): County[] {
+function buildCounties(statesByFips: Dictionary<State>): County[] {
   return flatten(
     map(state_county_map_dataset, stateData => stateData.county_dataset),
   ).map(countyInfo => {
@@ -51,14 +42,12 @@ function buildCounties(
      */
     const countyFips = `${countyInfo.state_fips_code}${countyInfo.county_fips_code}`;
     const state = statesByFips[countyInfo.state_fips_code];
-    const adjacentCounties = countyAdjacency[countyFips]?.adjacent_counties;
     countyFipsToUrlSegment[countyFips] = countyInfo.county_url_name;
     return new County(
       countyInfo.county,
       countyFips,
       countyInfo.population,
       state.fipsCode,
-      adjacentCounties || [],
     );
   });
 }
@@ -98,13 +87,7 @@ export const statesByFips = keyBy(states, state => state.fipsCode);
 
 export const statesByStateCode = keyBy(states, state => state.stateCode);
 
-interface AdjacencyInfo {
-  adjacent_counties: FipsCode[];
-  msa_code?: string;
-}
-const adjacency: Dictionary<AdjacencyInfo> = countyAdjacencyMsa.counties;
-
-const counties: County[] = buildCounties(statesByFips, adjacency);
+const counties: County[] = buildCounties(statesByFips);
 export const countiesByFips = keyBy(counties, county => county.fipsCode);
 
 const metroAreas = buildMetroAreas(countiesByFips, statesByFips);

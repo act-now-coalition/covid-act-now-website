@@ -246,7 +246,6 @@ export function getAbbreviatedCounty(fullCountyName: string) {
 
 export interface CountyObject extends RegionObject {
   s: FipsCode;
-  a: FipsCode[];
 }
 
 export class County extends Region {
@@ -257,7 +256,6 @@ export class County extends Region {
     fipsCode: FipsCode,
     population: number,
     stateFips: FipsCode,
-    public readonly adjacentCountiesFips: FipsCode[],
   ) {
     super(name, fipsCode, population, RegionType.COUNTY);
     this.state = statesByFips[stateFips];
@@ -297,12 +295,11 @@ export class County extends Region {
       f: this.fipsCode,
       p: this.population,
       s: this.state.fipsCode,
-      a: this.adjacentCountiesFips,
     };
   }
 
   public static fromJSON(obj: CountyObject): County {
-    return new County(obj.n, obj.f, obj.p, obj.s, obj.a);
+    return new County(obj.n, obj.f, obj.p, obj.s);
   }
 }
 
