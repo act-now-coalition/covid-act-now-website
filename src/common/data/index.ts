@@ -84,14 +84,13 @@ export interface CountyAdjacencyMap {
   counties: {
     [fips: string]: {
       adjacent_counties: string[];
-      msa_code: string;
+      msa_code?: string;
     };
   };
 }
-export type CountyAdjacency = typeof import('./county_adjacency_msa.json');
 export function importCountyAdjacency(): Promise<CountyAdjacencyMap> {
-  return (importJson(
+  return importJson(
     'county_adjacency_msa',
     import('./county_adjacency_msa.json'),
-  ) as unknown) as Promise<CountyAdjacencyMap>;
+  ) as Promise<CountyAdjacencyMap>;
 }
