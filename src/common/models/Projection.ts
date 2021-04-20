@@ -1,14 +1,9 @@
-import first from 'lodash/first';
-import last from 'lodash/last';
 import findIndex from 'lodash/findIndex';
 import findLastIndex from 'lodash/findLastIndex';
-import moment from 'moment';
-import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
   RegionSummaryWithTimeseries,
   MetricsTimeseriesRow,
-  Metricstimeseries,
   Metrics,
   Actuals,
   Annotations,
@@ -181,10 +176,7 @@ export class Projection {
       actualTimeseries,
       metricsTimeseries,
       dates,
-    } = this.getAlignedTimeseriesAndDates(
-      summaryWithTimeseries,
-      PROJECTIONS_TRUNCATION_DAYS,
-    );
+    } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
 
     this.metrics = metrics || null;
@@ -449,93 +441,51 @@ export class Projection {
     return this.getColumn(dataset);
   }
 
-  /** Makes a dictionary from a timerseries to a row so that we can look up the values
-   * based off the date. Eventually would be nice to use this around instead of the
-   * two list scenario we have going right now.
-   */
-  private makeDateDictionary(ts: ActualsTimeseries | Metricstimeseries) {
-    const dict: {
-      [date: string]: ActualsTimeseriesRow | MetricsTimeseriesRow;
-    } = {};
-    ts.forEach((row: ActualsTimeseriesRow | MetricsTimeseriesRow) => {
-      dict[row.date] = row;
-    });
-    return dict;
-  }
-
-  /** getAlignedTimeseriesAndDates aligns all timeseries (both the actuals and predicted
-   * timeseries) as well as the dates to be consistent (since we keep track of
-   * three lists).
-   *
-   * In order to this grab the earliest and latest dates from the
-   * timeseries and for every single day in between them fill the each array
-   * (the dates, the actuals and the timeseres(predicted)) with the value at
-   * that date or null.
+  /**
+   * Ensure the actuals and metrics timeseries start at 2020-03-01.
    */
   private getAlignedTimeseriesAndDates(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
-    futureDaysToInclude: number,
   ) {
-    const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
-    const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
-    if (actualsTimeseriesRaw.length === 0) {
-      return {
-        actualTimeseries: [],
-        metricsTimeseries: [],
-        dates: [],
-      };
-    }
-    let earliestDate, latestDate;
-    // If we have projections, we use that time range; else we use the actuals.
-    // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
-    // It cuts off some of the earlier dates
-    if (metricsTimeseriesRaw.length > 0) {
-      earliestDate = moment.utc(first(metricsTimeseriesRaw)!.date);
-      latestDate = moment.utc(last(metricsTimeseriesRaw)!.date);
-    } else {
-      earliestDate = moment.utc(first(actualsTimeseriesRaw)!.date);
-      latestDate = moment.utc(last(actualsTimeseriesRaw)!.date);
-    }
+    const startDate = '2020-03-01';
 
-    earliestDate = moment.utc('2020-03-01');
-
-    const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
-    const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
-    const dates: Date[] = [];
-
-    const actualsTimeseriesDictionary = this.makeDateDictionary(
-      actualsTimeseriesRaw,
+    const actualTimeseries = summaryWithTimeseries.actualsTimeseries.filter(
+      row => row.date >= startDate,
     );
-    const metricsTimeseriesDictionary = this.makeDateDictionary(
-      metricsTimeseriesRaw,
+    const metricsTimeseries = summaryWithTimeseries.metricsTimeseries.filter(
+      row => row.date >= startDate,
+    );
+    assert(
+      actualTimeseries[0].date === metricsTimeseries[0].date,
+      'We only support actual / metric timeseries that start on the same date.',
+    );
+    assert(
+      actualTimeseries.length === metricsTimeseries.length,
+      'We only support equal length actual / metric timeseries.',
     );
 
-    let currDate = earliestDate.clone();
-    while (currDate.diff(latestDate) <= 0) {
-      const ts = currDate.format('YYYY-MM-DD');
-      const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
-        ts
-      ] as ActualsTimeseriesRow;
-      const metricsTimeseriesRowForDate = metricsTimeseriesDictionary[
-        ts
-      ] as MetricsTimeseriesRow;
-      actualsTimeseries.push(actualsTimeseriesrowForDate || null);
-      metricsTimeseries.push(metricsTimeseriesRowForDate || null);
-      dates.push(currDate.toDate());
+    const dates = actualTimeseries.map(row => new Date(row.date));
 
-      // increment the date by one
-      currDate = currDate.clone().add(1, 'days');
+    // May need to pad timeseries to start at startDate
+    let curDate = new Date(startDate);
+    const paddedDates = [];
+    const paddedNulls = [];
+    while (curDate.getTime() < dates[0].getTime()) {
+      paddedDates.push(curDate);
+      paddedNulls.push(null);
+      curDate = new Date(
+        Date.UTC(
+          curDate.getFullYear(),
+          curDate.getMonth(),
+          curDate.getDate() + 2,
+        ),
+      );
     }
 
-    // only keep futureDaysToInclude days ahead of today
-    const now = new Date();
-    const todayIndex = dates.findIndex(date => date > now);
-    const days =
-      todayIndex >= 0 ? todayIndex + futureDaysToInclude : dates.length;
     return {
-      actualTimeseries: actualsTimeseries.slice(0, days),
-      metricsTimeseries: metricsTimeseries.slice(0, days),
-      dates: dates.slice(0, days),
+      actualTimeseries: [...paddedNulls, ...actualTimeseries],
+      metricsTimeseries: [...paddedNulls, ...metricsTimeseries],
+      dates: [...paddedDates, ...dates],
     };
   }
 
