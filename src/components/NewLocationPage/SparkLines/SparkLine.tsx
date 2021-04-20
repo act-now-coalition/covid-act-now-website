@@ -1,24 +1,30 @@
 import React from 'react';
-import { scaleLinear } from '@vx/scale';
+import { scaleLinear, scaleUtc } from '@vx/scale';
 import { LinePath } from '@vx/shape';
 import { curveNatural } from '@vx/curve';
 import { COLOR_MAP } from 'common/colors';
 import { Point } from './utils';
-import { max as d3Max } from 'd3-array';
+import { getOverallMaxY, daysToChart } from './utils';
+import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 
-const SingleSparkLine: React.FC<{
-  data: Point[];
+const SparkLine: React.FC<{
+  smoothedData: Point[];
+  rawData: Point[];
   width: number;
   height: number;
-  padding?: number;
-}> = ({ data, width, height, padding = 10 }) => {
+}> = ({ smoothedData, rawData, width, height }) => {
+  const maxY = getOverallMaxY(smoothedData, rawData);
+
   const yScale = scaleLinear({
-    domain: [0, d3Max(data, (d: any) => d.y)],
-    range: [height, padding],
+    domain: [0, maxY],
+    range: [height, 0],
   });
 
-  const xScale = scaleLinear({
-    domain: [0, 29],
+  const dateTo = new Date();
+  const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
+
+  const xScale = scaleUtc({
+    domain: [dateFrom, dateTo],
     range: [0, width],
   });
 
@@ -30,10 +36,10 @@ const SingleSparkLine: React.FC<{
   return (
     <svg width={width} height={height}>
       <g>
-        {data.map((p: Point) => {
+        {rawData.map((p: Point) => {
           return (
             <rect
-              key={`rect-${p.y}`}
+              key={`rect-${p.x}`}
               fill={COLOR_MAP.GREY_1}
               x={xScale(p.x) - barWidth / 2}
               y={yScale(p.y)}
@@ -44,16 +50,17 @@ const SingleSparkLine: React.FC<{
         })}
       </g>
       <g>
-        {data.map((p: Point) => {
+        {smoothedData.map((p: Point) => {
           return (
             <LinePath
               stroke="black"
               strokeWidth={1.5}
-              key={`rect-${p.y}`}
-              data={data}
+              key={`line-${p.x}`}
+              data={smoothedData}
               x={getXCoord}
               y={getYCoord}
               curve={curveNatural}
+              stroke-linecap="round"
             />
           );
         })}
@@ -62,4 +69,4 @@ const SingleSparkLine: React.FC<{
   );
 };
 
-export default SingleSparkLine;
+export default SparkLine;
