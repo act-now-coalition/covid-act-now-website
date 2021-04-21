@@ -1,27 +1,18 @@
-import { fetchProjectionsRegion } from 'common/utils/model';
-import { Region } from 'common/regions';
-import { Column, DatasetId } from 'common/models/Projection';
+import takeRight from 'lodash/takeRight';
+import { max as d3Max } from 'd3-array';
 import { SeriesType } from 'components/Explore/interfaces';
 import { cleanSeries } from 'components/Explore/utils';
-import { max as d3Max } from 'd3-array';
+import { Column, DatasetId, Projection } from 'common/models/Projection';
+import { fetchProjectionsRegion } from 'common/utils/model';
 import { assert } from 'common/utils';
+import { Region } from 'common/regions';
 
 export const daysToChart = 30;
 
-interface ProjectionLike {
-  getDataset(datasetId: DatasetId): Column[];
-  fips: string;
-}
-
-export interface Point {
-  x: Date;
-  y: number;
-}
-
 export enum SparkLineMetric {
   CASES,
-  HOSPITALIZATIONS,
   DEATHS,
+  HOSPITALIZATIONS,
 }
 
 export const orderedSparkLineMetrics = [
@@ -32,11 +23,11 @@ export const orderedSparkLineMetrics = [
 
 export interface Series {
   datasetId: DatasetId;
-  type: SeriesType; // only keep if i want to pass in the array of series, rather than each individually
+  type: SeriesType; // only keep if i want to pass in the array of series (rather than raw+smoothed individually)
 }
 
 export interface SeriesWithData extends Series {
-  data: any[]; // fix this any
+  data: Column[];
 }
 
 interface MetricDescription {
@@ -88,42 +79,48 @@ export const sparkLinesMetricData: {
   },
 };
 
-export async function getProjectionForRegion(
-  region: Region,
-): Promise<ProjectionLike> {
-  const projections = await fetchProjectionsRegion(region);
-  return projections.primary;
-}
-
 /**
  * Returns both the raw and smoothed series for the given metric.
  * Raw series used by bar chart, smoothed series used by line chart.
  */
 export function getAllSeriesForMetric(
-  metric: SparkLineMetric,
-  projection: ProjectionLike,
+  seriesList: Series[],
+  projection: Projection,
 ): SeriesWithData[] {
-  const metricDefinition = sparkLinesMetricData[metric];
-  return metricDefinition.seriesList.map((item: Series) => ({
+  return seriesList.map((item: Series) => ({
     ...item,
     data: cleanSeries(projection.getDataset(item.datasetId)),
   }));
 }
 
-export function getSparkLineSeries(metric: SparkLineMetric, region: Region) {
-  return getProjectionForRegion(region).then(projection =>
-    getAllSeriesForMetric(metric, projection),
-  );
+export function getSparkLineSeriesFromProjection(
+  seriesList: Series[],
+  projection: Projection,
+) {
+  return getAllSeriesForMetric(seriesList, projection);
 }
 
-function getMaxY(series: Point[]) {
-  return d3Max(series, (d: Point) => d.y);
+function getMaxY(series: Column[]) {
+  return d3Max(series, (d: Column) => d.y);
 }
 
-export function getOverallMaxY(seriesA: Point[], seriesB: Point[]) {
+export function getOverallMaxY(seriesA: Column[], seriesB: Column[]) {
   const maxA = getMaxY(seriesA);
   const maxB = getMaxY(seriesB);
   assert(maxA, 'Maximum value unexpectedly not found'); // theres probably a better way
   assert(maxB, 'Maximum value unexpectedly not found');
   return Math.max(maxA, maxB);
+}
+
+// Gets most recent 30 days of data
+export function getDataFromSeries(series: SeriesWithData) {
+  return takeRight(series.data, daysToChart);
+}
+
+// For SparkLineBlock.stories.tsx
+export async function getProjectionForRegion(
+  region: Region,
+): Promise<Projection> {
+  const projections = await fetchProjectionsRegion(region);
+  return projections.primary;
 }
