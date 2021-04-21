@@ -30,3 +30,8 @@ export const MeasureText = styled.span`
   text-transform: uppercase;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
+
+export const MidWeightSpan = styled.span`
+  ${props => props.theme.fonts.regularBookMidWeight};
+  font-size: 1rem;
+`;
