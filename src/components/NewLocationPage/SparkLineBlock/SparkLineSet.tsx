@@ -29,7 +29,7 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
         const rawData = getDataFromSeries(metricSeries[0], dateFrom);
         const smoothedData = getDataFromSeries(metricSeries[1], dateFrom);
         return (
-          <StyledLink to="/">
+          <StyledLink to="/" key={title}>
             <ChartTitle title={title} />
             <SparkLine
               rawData={rawData}

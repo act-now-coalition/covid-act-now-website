@@ -1,7 +1,6 @@
 import React from 'react';
 import SparkLineSet from './SparkLineSet';
-import { SectionContainer } from '../Shared/Shared.style';
-import { BlockTitle } from './SparkLineBlock.style';
+import { SectionContainer, GrayTitle } from '../Shared/Shared.style';
 import { Projection } from 'common/models/Projection';
 import { daysToChart } from './utils';
 
@@ -10,7 +9,7 @@ const SparkLineBlock: React.FC<{ projection: Projection }> = ({
 }) => {
   return (
     <SectionContainer>
-      <BlockTitle>Past {daysToChart} days</BlockTitle>
+      <GrayTitle>Past {daysToChart} days</GrayTitle>
       <SparkLineSet projection={projection} />
     </SectionContainer>
   );

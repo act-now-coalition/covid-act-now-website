@@ -1,4 +1,3 @@
-import takeRight from 'lodash/takeRight';
 import { max as d3Max } from 'd3-array';
 import { cleanSeries } from 'components/Explore/utils';
 import { Column, DatasetId, Projection } from 'common/models/Projection';

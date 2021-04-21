@@ -1,8 +1,7 @@
-import { COLOR_MAP } from 'common/colors';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { Link } from 'react-router-dom';
 import { Chevron } from '../Shared/Shared.style';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const ChartTitleWrapper = styled.div`
   display: flex;
@@ -21,14 +20,6 @@ export const ChartTitle = styled.span`
   max-width: 65px;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
-
-export const BlockTitle = styled.h2`
-  margin: 0 0 1.5rem;
-  font-size: 1rem;
-  line-height: 1.4;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  text-transform: uppercase;
 `;
 
 export const SetContainer = styled.div`

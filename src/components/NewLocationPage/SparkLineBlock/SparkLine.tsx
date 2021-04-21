@@ -54,14 +54,14 @@ const SparkLineInner: React.FC<{
           {smoothedData.map((p: Column) => {
             return (
               <LinePath
-                stroke="black"
-                strokeWidth={1.5}
                 key={`line-${p.x}`}
                 data={smoothedData}
                 x={getXCoord}
                 y={getYCoord}
+                stroke="black"
+                strokeWidth={1.5}
                 curve={curveNatural}
-                stroke-linecap="round"
+                strokeLinecap="round"
               />
             );
           })}
