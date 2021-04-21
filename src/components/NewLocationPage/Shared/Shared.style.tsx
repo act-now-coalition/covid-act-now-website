@@ -21,3 +21,11 @@ export const Chevron = styled(MuiChevronRightIcon)`
   margin-left: 0.75rem;
   font-size: 1.3rem;
 `;
+
+export const GrayTitle = styled.h2`
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  text-transform: uppercase;
+`;
