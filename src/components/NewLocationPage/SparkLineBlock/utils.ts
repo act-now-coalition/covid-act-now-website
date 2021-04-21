@@ -1,6 +1,5 @@
 import takeRight from 'lodash/takeRight';
 import { max as d3Max } from 'd3-array';
-import { SeriesType } from 'components/Explore/interfaces';
 import { cleanSeries } from 'components/Explore/utils';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -23,7 +22,6 @@ export const SPARK_LINE_METRICS = [
 
 export interface Series {
   datasetId: DatasetId;
-  type: SeriesType; // only keep if i want to pass in the array of series (rather than raw+smoothed individually)
 }
 
 export interface SeriesWithData extends Series {
@@ -43,11 +41,9 @@ export const sparkLinesMetricData: {
     seriesList: [
       {
         datasetId: 'rawDailyCases',
-        type: SeriesType.BAR,
       },
       {
         datasetId: 'smoothedDailyCases',
-        type: SeriesType.LINE,
       },
     ],
   },
@@ -56,11 +52,9 @@ export const sparkLinesMetricData: {
     seriesList: [
       {
         datasetId: 'rawDailyDeaths',
-        type: SeriesType.BAR,
       },
       {
         datasetId: 'smoothedDailyDeaths',
-        type: SeriesType.LINE,
       },
     ],
   },
@@ -69,11 +63,9 @@ export const sparkLinesMetricData: {
     seriesList: [
       {
         datasetId: 'rawHospitalizations',
-        type: SeriesType.BAR,
       },
       {
         datasetId: 'smoothedHospitalizations',
-        type: SeriesType.LINE,
       },
     ],
   },
