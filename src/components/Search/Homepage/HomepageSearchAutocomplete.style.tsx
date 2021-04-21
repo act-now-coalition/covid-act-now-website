@@ -7,7 +7,7 @@ import MuiCloseIcon from '@material-ui/icons/Close';
 
 const maxMenuHeight = 240;
 const desktopWidth = 400;
-const mobileWidth = 350;
+export const mobileWidth = 350;
 
 export const StyledTextField = styled(TextField).attrs(props => ({
   variant: 'outlined',
@@ -51,10 +51,12 @@ const MobileWrapperOpened = css`
 `;
 
 const MobileWrapperClosed = css`
-  width: ${mobileWidth}px;
   position: relative;
   height: unset;
-  padding: 0.75rem 0.5rem 1.5rem;
+  width: ${props => props.theme.searchbar.mobileClosedWidth};
+  padding: ${props => props.theme.searchbar.mobileClosedPadding};
+  margin-left: ${props => props.theme.searchbar.mobileClosedMarginLeft};
+  max-width: ${props => props.theme.searchbar.mobileClosedMaxWidth};
 `;
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`
@@ -69,6 +71,7 @@ export const Wrapper = styled.div<{ $isOpen: boolean }>`
     height: unset;
     padding: 1rem 1.25rem;
     margin: auto;
+    max-width: unset;
   }
 `;
 

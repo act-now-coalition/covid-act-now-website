@@ -8,13 +8,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import Embed from 'screens/Embed/Embed';
-import AllStates from 'screens/internal/AllStates/AllStates';
 import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPhases';
-import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
-import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
-import ShareImage from 'screens/internal/ShareImage/ShareImage';
-import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-import NavBar from 'components/AppBar';
 import Footer from 'components/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
@@ -45,6 +39,17 @@ const Donate = lazy(() => import('screens/Donate/Donate'));
 const DeepDivesRedirect = lazy(() =>
   import('screens/Learn/Articles/DeepDivesRouter'),
 );
+const CompareSnapshots = lazy(() =>
+  import('screens/internal/CompareSnapshots/CompareSnapshots'),
+);
+const AllStates = lazy(() => import('screens/internal/AllStates/AllStates'));
+const ExportImage = lazy(() =>
+  import('screens/internal/ShareImage/ChartExportImage'),
+);
+const ShareImage = lazy(() => import('screens/internal/ShareImage/ShareImage'));
+const AlertUnsubscribe = lazy(() =>
+  import('screens/AlertUnsubscribe/AlertUnsubscribe'),
+);
 
 export default function App() {
   return (
@@ -55,7 +60,6 @@ export default function App() {
           <BrowserRouter>
             <PageviewTracker />
             <ScrollToTop />
-            <NavBar />
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
                 <Switch>

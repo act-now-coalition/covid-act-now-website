@@ -21,7 +21,7 @@ const LEGEND_SUMMARY_SUPER_CRITICAL = 'Severe risk';
 const recommendationsLink = (
   <HashLink
     smooth
-    scroll={(element: HTMLElement) => scrollWithOffset(element, -180)}
+    scroll={(element: HTMLElement) => scrollWithOffset(element, -200)}
     to="#recommendations"
   >
     official recommended actions

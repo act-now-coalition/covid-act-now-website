@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
+import { desktopNavHeight } from 'components/NavBar/NavBar.style';
 
 export const SelectorWrapper = styled.div<{ $isNarrowMobile: boolean }>`
   flex: 1;
@@ -51,7 +52,7 @@ export const MenuBarWrapper = styled.div`
 
 export const SearchHeaderWrapper = styled.div`
   position: fixed;
-  top: 64px;
+  top: ${desktopNavHeight}px;
   left: 0;
   right: 0;
   z-index: 900;

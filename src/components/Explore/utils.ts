@@ -194,7 +194,7 @@ export const EXPLORE_CHART_IDS = Object.values(exploreMetricData).map(
  * the implementation of the charts to handle segments instead of a continuous
  * series.
  */
-function cleanSeries(data: Column[]) {
+export function cleanSeries(data: Column[]) {
   return data.filter(point => isNumber(point.y));
 }
 
