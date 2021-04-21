@@ -1,5 +1,6 @@
 import React from 'react';
 import SparkLine from './SparkLine';
+import { SparkLineSetContainer } from './SparkLineBlock.style';
 import { Projection } from 'common/models/Projection';
 import {
   orderedSparkLineMetrics,
@@ -11,7 +12,7 @@ import {
 
 const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
   return (
-    <div>
+    <SparkLineSetContainer>
       {orderedSparkLineMetrics.map((metric: SparkLineMetric) => {
         const { title, seriesList } = sparkLinesMetricData[metric];
         const metricSeries = getSparkLineSeriesFromProjection(
@@ -25,12 +26,10 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
             rawData={rawData}
             smoothedData={smoothedData}
             title={title}
-            width={120}
-            height={60}
           />
         );
       })}
-    </div>
+    </SparkLineSetContainer>
   );
 };
 

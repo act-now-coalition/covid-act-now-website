@@ -1,19 +1,21 @@
 import React from 'react';
+import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleUtc } from '@vx/scale';
 import { LinePath } from '@vx/shape';
 import { curveNatural } from '@vx/curve';
+import { SingleSparkLineContainer } from './SparkLineBlock.style';
+import ChartTitle from './ChartTitle';
 import { Column } from 'common/models/Projection';
 import { COLOR_MAP } from 'common/colors';
 import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 import { getOverallMaxY, daysToChart } from './utils';
 
-const SparkLine: React.FC<{
+const SparkLineInner: React.FC<{
   rawData: Column[];
   smoothedData: Column[];
   width: number;
   height: number;
-  title: string;
-}> = ({ smoothedData, rawData, width, height, title }) => {
+}> = ({ smoothedData, rawData, width, height }) => {
   const maxY = getOverallMaxY(smoothedData, rawData);
 
   const yScale = scaleLinear({
@@ -36,7 +38,6 @@ const SparkLine: React.FC<{
 
   return (
     <>
-      <span>{title}</span>
       <svg width={width} height={height}>
         <g>
           {rawData.map((p: Column) => {
@@ -70,6 +71,28 @@ const SparkLine: React.FC<{
         </g>
       </svg>
     </>
+  );
+};
+
+const SparkLine: React.FC<{
+  rawData: Column[];
+  smoothedData: Column[];
+  title: string;
+}> = ({ smoothedData, rawData, title }) => {
+  return (
+    <SingleSparkLineContainer>
+      <ChartTitle title={title} />
+      <ParentSize>
+        {({ width, height }) => (
+          <SparkLineInner
+            rawData={rawData}
+            smoothedData={smoothedData}
+            width={width}
+            height={height - 30} // work on this
+          />
+        )}
+      </ParentSize>
+    </SingleSparkLineContainer>
   );
 };
 
