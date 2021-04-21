@@ -8,6 +8,12 @@ import { Region } from 'common/regions';
 
 export const daysToChart = 30;
 
+/**
+ * data.x is a date, but the Column interface defines x as a number.
+ * dateItem allows us to add a type for x that works for both.
+ */
+export type dateItem = number | Date;
+
 export enum SparkLineMetric {
   CASES,
   DEATHS,
@@ -105,8 +111,10 @@ export function getOverallMaxY(seriesA: Column[], seriesB: Column[]) {
 }
 
 // Gets most recent 30 days of data
-export function getDataFromSeries(series: SeriesWithData) {
-  return takeRight(series.data, daysToChart);
+export function getDataFromSeries(series: SeriesWithData, dateFrom: dateItem) {
+  const { data } = series;
+  const dataByDateFrom = data.filter((point: Column) => point.x >= dateFrom);
+  return dataByDateFrom;
 }
 
 // For SparkLineBlock.stories.tsx

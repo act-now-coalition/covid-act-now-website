@@ -6,24 +6,22 @@ import { curveNatural } from '@vx/curve';
 import { SingleSparkLineContainer as Container } from './SparkLineBlock.style';
 import { Column } from 'common/models/Projection';
 import { COLOR_MAP } from 'common/colors';
-import { subtractTime, TimeUnit } from 'common/utils/time-utils';
-import { getOverallMaxY, daysToChart } from './utils';
+import { getOverallMaxY, dateItem } from './utils';
 
 const SparkLineInner: React.FC<{
   rawData: Column[];
   smoothedData: Column[];
+  dateFrom: dateItem;
+  dateTo: dateItem;
   width: number;
   height: number;
-}> = ({ smoothedData, rawData, width, height }) => {
+}> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
   const maxY = getOverallMaxY(smoothedData, rawData);
 
   const yScale = scaleLinear({
     domain: [0, maxY],
     range: [height, 0],
   });
-
-  const dateTo = new Date();
-  const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
 
   const xScale = scaleUtc({
     domain: [dateFrom, dateTo],
@@ -76,7 +74,9 @@ const SparkLineInner: React.FC<{
 const SparkLine: React.FC<{
   rawData: Column[];
   smoothedData: Column[];
-}> = ({ smoothedData, rawData }) => {
+  dateFrom: dateItem;
+  dateTo: dateItem;
+}> = ({ smoothedData, rawData, dateFrom, dateTo }) => {
   return (
     <Container>
       <ParentSize>
@@ -84,6 +84,8 @@ const SparkLine: React.FC<{
           <SparkLineInner
             rawData={rawData}
             smoothedData={smoothedData}
+            dateFrom={dateFrom}
+            dateTo={dateTo}
             width={width}
             height={height}
           />
