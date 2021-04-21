@@ -1,16 +1,14 @@
 import styled from 'styled-components';
+import { COLOR_MAP } from 'common/colors';
 
-export const TextContainer = styled.div`
-  display: inline-block;
-  flex-direction: column;
-  font-weight: bold;
+export const SectionContentContainer = styled.div`
+  display: flex;
 `;
 
-export const TextComponent = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: normal;
-  color: #4f4f4f;
+export const TextContainer = styled.div``;
+
+export const TextComponent = styled.p`
+  color: ${COLOR_MAP.GREY_4};
 `;
 
 export const IconWrapper = styled.div`

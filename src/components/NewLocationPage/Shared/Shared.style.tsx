@@ -5,7 +5,7 @@ import { COLOR_MAP } from 'common/colors';
 
 export const SectionContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: white;
   border-radius: 4px;
   padding: 1.25rem;
