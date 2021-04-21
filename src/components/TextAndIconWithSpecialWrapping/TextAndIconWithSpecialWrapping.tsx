@@ -13,7 +13,12 @@
  */
 
 import React from 'react';
-import { NonWrappingSpan } from './Menu.style';
+import styled from 'styled-components';
+
+const SpanWithWrappingRule = styled.span<{ nonWrapping?: boolean }>`
+  ${props => props.theme.fonts.regularBookMidWeight};
+  white-space: ${({ nonWrapping }) => nonWrapping && 'nowrap'};
+`;
 
 const TextAndIconWithSpecialWrapping: React.FC<{ text: string; icon: any }> = ({
   text,
@@ -25,11 +30,11 @@ const TextAndIconWithSpecialWrapping: React.FC<{ text: string; icon: any }> = ({
 
   return (
     <>
-      <span>{reversedRest} </span>
-      <NonWrappingSpan>
+      <SpanWithWrappingRule>{reversedRest} </SpanWithWrappingRule>
+      <SpanWithWrappingRule nonWrapping>
         {first}
         {icon}
-      </NonWrappingSpan>
+      </SpanWithWrappingRule>
     </>
   );
 };
