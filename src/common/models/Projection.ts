@@ -180,10 +180,7 @@ export class Projection {
       actualTimeseries,
       metricsTimeseries,
       dates,
-    } = this.getAlignedTimeseriesAndDates(
-      summaryWithTimeseries,
-      PROJECTIONS_TRUNCATION_DAYS,
-    );
+    } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
 
     this.metrics = metrics || null;
@@ -473,7 +470,6 @@ export class Projection {
    */
   private getAlignedTimeseriesAndDates(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
-    futureDaysToInclude: number,
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
@@ -484,31 +480,19 @@ export class Projection {
         dates: [],
       };
     }
-    let earliestDate, latestDate, year, month, date;
+    let earliestDate, latestDate;
     // If we have projections, we use that time range; else we use the actuals.
     // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
     // It cuts off some of the earlier dates
     if (metricsTimeseriesRaw.length > 0) {
-      [year, month, date] = first(metricsTimeseriesRaw)!
-        .date.split('-')
-        .map(elem => parseInt(elem));
-      earliestDate = new Date(Date.UTC(year, month - 1, date));
-      [year, month, date] = last(metricsTimeseriesRaw)!
-        .date.split('-')
-        .map(elem => parseInt(elem));
-      latestDate = new Date(Date.UTC(year, month - 1, date));
+      earliestDate = new Date(first(metricsTimeseriesRaw)!.date);
+      latestDate = new Date(last(metricsTimeseriesRaw)!.date);
     } else {
-      [year, month, date] = first(actualsTimeseriesRaw)!
-        .date.split('-')
-        .map(elem => parseInt(elem));
-      earliestDate = new Date(Date.UTC(year, month - 1, date));
-      [year, month, date] = last(actualsTimeseriesRaw)!
-        .date.split('-')
-        .map(elem => parseInt(elem));
-      latestDate = new Date(Date.UTC(year, month - 1, date));
+      earliestDate = new Date(first(actualsTimeseriesRaw)!.date);
+      latestDate = new Date(last(actualsTimeseriesRaw)!.date);
     }
 
-    earliestDate = new Date(Date.UTC(2020, 2, 1));
+    earliestDate = new Date('2020-03-01');
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
@@ -533,17 +517,16 @@ export class Projection {
       ] as MetricsTimeseriesRow;
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
+      // Clone the date since we're about to mutate it below.
       dates.push(new Date(currDate.getTime()));
 
       // increment the date by one
       currDate.setUTCDate(currDate.getUTCDate() + 1);
     }
 
-    // only keep futureDaysToInclude days ahead of today
     const now = new Date();
     const todayIndex = dates.findIndex(date => date > now);
-    const days =
-      todayIndex >= 0 ? todayIndex + futureDaysToInclude : dates.length;
+    const days = todayIndex >= 0 ? todayIndex : dates.length;
     return {
       actualTimeseries: actualsTimeseries.slice(0, days),
       metricsTimeseries: metricsTimeseries.slice(0, days),
