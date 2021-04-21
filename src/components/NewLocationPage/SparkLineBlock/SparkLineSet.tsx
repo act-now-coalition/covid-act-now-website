@@ -1,19 +1,22 @@
 import React from 'react';
 import SparkLine from './SparkLine';
-import { SparkLineSetContainer } from './SparkLineBlock.style';
+import ChartTitle from './ChartTitle';
+import { SetContainer, StyledLink } from './SparkLineBlock.style';
 import { Projection } from 'common/models/Projection';
 import {
-  orderedSparkLineMetrics,
+  SPARK_LINE_METRICS,
   SparkLineMetric,
   getSparkLineSeriesFromProjection,
   sparkLinesMetricData,
   getDataFromSeries,
 } from './utils';
 
+// TODO (chelsi) - update link's 'to'
+
 const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
   return (
-    <SparkLineSetContainer>
-      {orderedSparkLineMetrics.map((metric: SparkLineMetric) => {
+    <SetContainer>
+      {SPARK_LINE_METRICS.map((metric: SparkLineMetric) => {
         const { title, seriesList } = sparkLinesMetricData[metric];
         const metricSeries = getSparkLineSeriesFromProjection(
           seriesList,
@@ -22,14 +25,13 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
         const rawData = getDataFromSeries(metricSeries[0]);
         const smoothedData = getDataFromSeries(metricSeries[1]);
         return (
-          <SparkLine
-            rawData={rawData}
-            smoothedData={smoothedData}
-            title={title}
-          />
+          <StyledLink to="/">
+            <ChartTitle title={title} />
+            <SparkLine rawData={rawData} smoothedData={smoothedData} />
+          </StyledLink>
         );
       })}
-    </SparkLineSetContainer>
+    </SetContainer>
   );
 };
 

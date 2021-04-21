@@ -3,8 +3,7 @@ import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleUtc } from '@vx/scale';
 import { LinePath } from '@vx/shape';
 import { curveNatural } from '@vx/curve';
-import { SingleSparkLineContainer } from './SparkLineBlock.style';
-import ChartTitle from './ChartTitle';
+import { SingleSparkLineContainer as Container } from './SparkLineBlock.style';
 import { Column } from 'common/models/Projection';
 import { COLOR_MAP } from 'common/colors';
 import { subtractTime, TimeUnit } from 'common/utils/time-utils';
@@ -77,22 +76,20 @@ const SparkLineInner: React.FC<{
 const SparkLine: React.FC<{
   rawData: Column[];
   smoothedData: Column[];
-  title: string;
-}> = ({ smoothedData, rawData, title }) => {
+}> = ({ smoothedData, rawData }) => {
   return (
-    <SingleSparkLineContainer>
-      <ChartTitle title={title} />
+    <Container>
       <ParentSize>
         {({ width, height }) => (
           <SparkLineInner
             rawData={rawData}
             smoothedData={smoothedData}
             width={width}
-            height={height - 30} // work on this
+            height={height}
           />
         )}
       </ParentSize>
-    </SingleSparkLineContainer>
+    </Container>
   );
 };
 

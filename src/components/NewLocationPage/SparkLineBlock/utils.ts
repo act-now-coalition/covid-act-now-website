@@ -15,7 +15,7 @@ export enum SparkLineMetric {
   HOSPITALIZATIONS,
 }
 
-export const orderedSparkLineMetrics = [
+export const SPARK_LINE_METRICS = [
   SparkLineMetric.CASES,
   SparkLineMetric.DEATHS,
   SparkLineMetric.HOSPITALIZATIONS,

@@ -1,4 +1,5 @@
 import { COLOR_MAP } from 'common/colors';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { Chevron } from '../Shared/Shared.style';
@@ -30,30 +31,44 @@ export const BlockTitle = styled.h2`
   text-transform: uppercase;
 `;
 
-export const SparkLineSetContainer = styled.div`
+export const SetContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 // Specific pixel dimensions via mocks
 export const SingleSparkLineContainer = styled.div`
-  max-width: 90px;
-  width: 100%;
-  height: 78px;
-
-  &:not(:last-of-type) {
-    margin-right: 1rem;
-  }
+  width: 90px;
+  height: 48px;
 
   @media (min-width: ${mobileBreakpoint}) {
-    max-width: 96px;
+    width: 96px;
   }
 
   @media (min-width: 1000px) {
-    max-width: 120px;
-    height: 90px;
+    width: 120px;
+    height: 60px;
   }
 
   @media (min-width: 1320px) {
-    max-width: 96px;
+    width: 96px;
+    height: 48px;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+
+  &:not(:last-of-type) {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &:hover {
+    ${Chevron} {
+      transform: translateX(6px);
+      transition: transform 0.06s ease-in-out;
+    }
   }
 `;
