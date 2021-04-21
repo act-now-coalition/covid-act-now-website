@@ -1,9 +1,9 @@
 import React from 'react';
-import VaccinationsProgressBar from './VaccinationsProgressBar';
+import { VaccinationProgressBar } from 'components/NewLocationPage/VaccinationProgressBar';
 
 export default {
   title: 'Location page redesign/Vaccinations progress bar',
-  component: VaccinationsProgressBar,
+  component: VaccinationProgressBar,
 };
 
 export const Example = () => {
@@ -13,7 +13,7 @@ export const Example = () => {
   const locationName = 'New York';
 
   return (
-    <VaccinationsProgressBar
+    <VaccinationProgressBar
       vaccinationsInitiated={vaccinationsInitiated}
       vaccinationsCompleted={vaccinationsCompleted}
       locationName={locationName}
