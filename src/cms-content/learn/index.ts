@@ -35,8 +35,22 @@ export interface FaqContent {
   metadataDescription: string;
 }
 
+// Hiding outdated FAQ questions pertaining to eligibility:
+const idsToHide = [
+  'when-will-you-be-eligible-vaccine',
+  'what-locations-do-you-have-vaccine-eligibility-information-for',
+  'how-get-vaccine-eligibility-information-and-how-often-updated',
+];
+
+const removeHiddenQuestionsById = (questions: Question[]) => {
+  return questions.filter(
+    (question: Question) => !idsToHide.includes(question.questionId),
+  );
+};
+
 const sanitizeSection = (section: FaqSection): FaqSection => ({
   ...section,
+  questions: removeHiddenQuestionsById(section.questions),
   sectionId: sanitizeID(section.sectionId),
 });
 
