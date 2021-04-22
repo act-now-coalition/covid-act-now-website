@@ -222,8 +222,3 @@ export const LogoWrapper = styled(Link)`
     margin: 0 0 1.25rem;
   }
 `;
-
-export const NonWrappingSpan = styled.span`
-  white-space: nowrap;
-  ${props => props.theme.fonts.regularBookMidWeight};
-`;

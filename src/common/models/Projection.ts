@@ -2,7 +2,6 @@ import first from 'lodash/first';
 import last from 'lodash/last';
 import findIndex from 'lodash/findIndex';
 import findLastIndex from 'lodash/findLastIndex';
-import moment from 'moment';
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -33,11 +32,6 @@ export function reenableDisabledMetrics(enable: boolean): void {
  * get future data points.
  */
 export const RT_TRUNCATION_DAYS = 7;
-
-/**
- * We truncate our projections to 4 weeks out.
- */
-export const PROJECTIONS_TRUNCATION_DAYS = 30;
 
 // We require at least 15 ICU beds in order to show ICU Capacity usage.
 // This still covers enough counties to cover 80% of the US population.
@@ -181,10 +175,7 @@ export class Projection {
       actualTimeseries,
       metricsTimeseries,
       dates,
-    } = this.getAlignedTimeseriesAndDates(
-      summaryWithTimeseries,
-      PROJECTIONS_TRUNCATION_DAYS,
-    );
+    } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
 
     this.metrics = metrics || null;
@@ -467,14 +458,13 @@ export class Projection {
    * timeseries) as well as the dates to be consistent (since we keep track of
    * three lists).
    *
-   * In order to this grab the earliest and latest dates from the
-   * timeseries and for every single day in between them fill the each array
-   * (the dates, the actuals and the timeseres(predicted)) with the value at
+   * In order to do this, we grab the earliest and latest dates from the
+   * timeseries and for every single day in between them fill each array
+   * (the dates, the actuals and the timeseries(predicted)) with the value at
    * that date or null.
    */
   private getAlignedTimeseriesAndDates(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
-    futureDaysToInclude: number,
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
@@ -490,14 +480,14 @@ export class Projection {
     // TODO(chris): Is there a reason that this was bound to the projections timeseries first?
     // It cuts off some of the earlier dates
     if (metricsTimeseriesRaw.length > 0) {
-      earliestDate = moment.utc(first(metricsTimeseriesRaw)!.date);
-      latestDate = moment.utc(last(metricsTimeseriesRaw)!.date);
+      earliestDate = new Date(first(metricsTimeseriesRaw)!.date);
+      latestDate = new Date(last(metricsTimeseriesRaw)!.date);
     } else {
-      earliestDate = moment.utc(first(actualsTimeseriesRaw)!.date);
-      latestDate = moment.utc(last(actualsTimeseriesRaw)!.date);
+      earliestDate = new Date(first(actualsTimeseriesRaw)!.date);
+      latestDate = new Date(last(actualsTimeseriesRaw)!.date);
     }
 
-    earliestDate = moment.utc('2020-03-01');
+    earliestDate = new Date('2020-03-01');
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
@@ -510,9 +500,10 @@ export class Projection {
       metricsTimeseriesRaw,
     );
 
-    let currDate = earliestDate.clone();
-    while (currDate.diff(latestDate) <= 0) {
-      const ts = currDate.format('YYYY-MM-DD');
+    let currDate = new Date(earliestDate.getTime());
+
+    while (currDate <= latestDate) {
+      const ts = currDate.toISOString().substring(0, 10);
       const actualsTimeseriesrowForDate = actualsTimeseriesDictionary[
         ts
       ] as ActualsTimeseriesRow;
@@ -521,21 +512,21 @@ export class Projection {
       ] as MetricsTimeseriesRow;
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
-      dates.push(currDate.toDate());
+      // Clone the date since we're about to mutate it below.
+      dates.push(new Date(currDate.getTime()));
 
-      // increment the date by one
-      currDate = currDate.clone().add(1, 'days');
+      // Increment the date by one.
+      // We specifically use setUTCDate and getUTCDate instead of setDate and getDate,
+      // as the latter two do not take daylight savings into account.
+      // This results in each day being incremented by 24 hours (although two days of the year should be 23 and 25),
+      // leading to days being shifted and displayed incorrectly.
+      currDate.setUTCDate(currDate.getUTCDate() + 1);
     }
 
-    // only keep futureDaysToInclude days ahead of today
-    const now = new Date();
-    const todayIndex = dates.findIndex(date => date > now);
-    const days =
-      todayIndex >= 0 ? todayIndex + futureDaysToInclude : dates.length;
     return {
-      actualTimeseries: actualsTimeseries.slice(0, days),
-      metricsTimeseries: metricsTimeseries.slice(0, days),
-      dates: dates.slice(0, days),
+      actualTimeseries: actualsTimeseries,
+      metricsTimeseries: metricsTimeseries,
+      dates: dates,
     };
   }
 
