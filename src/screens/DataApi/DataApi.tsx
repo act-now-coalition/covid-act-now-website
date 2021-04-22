@@ -1,3 +1,4 @@
+import * as QueryString from 'query-string';
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import PageContent from 'components/PageContent';
@@ -73,7 +74,7 @@ const DataApi = () => {
         <LargeFilledButton
           trackingCategory={EventCategory.API}
           trackingLabel="Data API: Register"
-          href="https://apidocs.covidactnow.org/access/"
+          href={getRegisterUrl()}
         >
           Register
         </LargeFilledButton>
@@ -89,5 +90,21 @@ const DataApi = () => {
     </Fragment>
   );
 };
+
+function getRegisterUrl(): string {
+  const search = window?.location?.search;
+  if (search !== undefined) {
+    const params = QueryString.parse(search);
+    const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
+    const utmEntries = Object.entries(params).filter(([key, value]) =>
+      UTM_KEYS.includes(key),
+    );
+    if (utmEntries.length > 0) {
+      const queryString = QueryString.stringify(Object.fromEntries(utmEntries));
+      return `https://apidocs.covidactnow.org/?${queryString}#register`;
+    }
+  }
+  return `https://apidocs.covidactnow.org/#register`;
+}
 
 export default DataApi;
