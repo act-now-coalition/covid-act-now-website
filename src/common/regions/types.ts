@@ -9,6 +9,7 @@ export type FipsCode = string;
 export type ZipCode = string;
 
 export enum RegionType {
+  NATION = 'nation',
   COUNTY = 'county',
   STATE = 'state',
   MSA = 'MSA',
@@ -152,6 +153,27 @@ export abstract class Region {
 
 export interface StateObject extends RegionObject {
   s: string;
+}
+
+export class USA extends Region {
+  private constructor() {
+    super('USA', '0', 331486822, RegionType.NATION);
+  }
+  static instance = new USA();
+
+  fullName = 'United States of America';
+  shortName = 'USA';
+  abbreviation = 'USA';
+
+  get relativeUrl(): string {
+    throw new Error('Method not implemented.');
+  }
+  contains(subregion: Region): boolean {
+    throw new Error('Method not implemented.');
+  }
+  toJSON(): RegionObject {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export class State extends Region {

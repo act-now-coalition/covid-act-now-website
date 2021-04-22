@@ -1,5 +1,4 @@
 import urlJoin from 'url-join';
-import concat from 'lodash/concat';
 import deburr from 'lodash/deburr';
 import flatten from 'lodash/flatten';
 import isNumber from 'lodash/isNumber';
@@ -8,10 +7,9 @@ import words from 'lodash/words';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
-import { Column, DatasetId } from 'common/models/Projection';
+import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { share_image_url } from 'assets/data/share_images_url.json';
 import { SeriesType, Series } from './interfaces';
-import AggregationsJSON from 'assets/data/aggregations.json';
 import regions, {
   County,
   MetroArea,
@@ -19,6 +17,7 @@ import regions, {
   RegionType,
   State,
   getAutocompleteRegions,
+  USA,
 } from 'common/regions';
 import { fail } from 'assert';
 import { pluralize } from 'common/utils';
@@ -29,13 +28,6 @@ import {
   getTimeDiff,
 } from 'common/utils/time-utils';
 import { formatDecimal } from 'common/utils/index';
-
-/** Common interface to represent real Projection objects as well as aggregated projections. */
-interface ProjectionLike {
-  getDataset(datasetId: DatasetId): Column[];
-  fips: string;
-  totalPopulation: number;
-}
 
 export function getMaxBy<T>(
   seriesList: Series[],
@@ -204,7 +196,7 @@ export function cleanSeries(data: Column[]) {
  */
 export function getAllSeriesForMetric(
   metric: ExploreMetric,
-  projection: ProjectionLike,
+  projection: Projection,
 ): Series[] {
   const metricDefinition = exploreMetricData[metric];
   return metricDefinition.seriesList.map(item => ({
@@ -227,7 +219,7 @@ function scalePer100k(data: Column[], population: number) {
  */
 function getAveragedSeriesForMetric(
   metric: ExploreMetric,
-  projection: ProjectionLike,
+  projection: Projection,
   color: string,
   normalizeData: boolean,
 ): Series {
@@ -372,6 +364,8 @@ export function getLocationLabel(location: Region) {
     return location.fullName;
   } else if (location instanceof MetroArea) {
     return location.fullName;
+  } else if (location instanceof USA) {
+    return location.shortName;
   } else {
     fail('unsupported region');
   }
@@ -419,7 +413,7 @@ export function getSubtitle(
 export function getExploreAutocompleteLocations(locationFips: string) {
   const currentLocation = regions.findByFipsCode(locationFips)!;
   const locations = getAutocompleteRegions(currentLocation);
-  return concat(regions.customAreas, locations);
+  return [regions.usa, ...locations];
 }
 
 /**
@@ -428,41 +422,7 @@ export function getExploreAutocompleteLocations(locationFips: string) {
  */
 const SERIES_COLORS = schemeCategory10;
 
-class AggregatedProjection implements ProjectionLike {
-  totalPopulation: number;
-
-  // TODO(michael): Fix any.
-  constructor(readonly fips: string, private aggregation: any) {
-    this.totalPopulation = aggregation.totalPopulation;
-  }
-
-  getDataset(datasetId: DatasetId): Column[] {
-    if (this.aggregation[datasetId]) {
-      let data: Column[] = [];
-      for (let i = 0; i < this.aggregation.dates.length; i++) {
-        data.push({
-          x: this.aggregation.dates[i],
-          y: this.aggregation[datasetId][i],
-        });
-      }
-      return data;
-    } else {
-      return [];
-    }
-  }
-}
-
-async function getProjectionForRegion(region: Region): Promise<ProjectionLike> {
-  const fullFips = region.fipsCode;
-  if (fullFips && fullFips in AggregationsJSON) {
-    // This is a special aggregate location.
-    // TODO(michael): Fix any.
-    console.log('returning aggregated data.');
-    return new AggregatedProjection(
-      fullFips,
-      (AggregationsJSON as any)[fullFips],
-    );
-  }
+async function getProjectionForRegion(region: Region): Promise<Projection> {
   const projections = await fetchProjectionsRegion(region);
   return projections.primary;
 }

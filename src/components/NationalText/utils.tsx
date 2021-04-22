@@ -1,28 +1,12 @@
 import React, { Fragment } from 'react';
-import AggregationsJSON from 'assets/data/aggregations.json';
-import last from 'lodash/last';
+import SiteSummaryJSON from 'assets/data/site-summary.json';
 import isNull from 'lodash/isNull';
-import {
-  formatPercent,
-  formatDecimal,
-  getPercentChange,
-  formatEstimate,
-} from 'common/utils';
+import { formatPercent, formatDecimal, formatEstimate } from 'common/utils';
 import {
   parseDateUnix,
   DateFormat,
   formatUTCDateTime,
 } from 'common/utils/time-utils';
-
-const getTwoWeekPercentChange = (series: any[]): number | null => {
-  const lastTwoWeeks = series.slice(-15);
-  const firstVal = lastTwoWeeks[0];
-  const lastVal = last(lastTwoWeeks);
-  if (!firstVal || !lastVal) {
-    return null;
-  }
-  return getPercentChange(firstVal, lastVal);
-};
 
 const getTotalCasesCopy = (summedRawCases: number): string => {
   const ONE_MILLION = 1000000;
@@ -31,25 +15,17 @@ const getTotalCasesCopy = (summedRawCases: number): string => {
 };
 
 export function getNationalText(): React.ReactElement {
-  const usaAggregation = AggregationsJSON['00001'];
+  const usa = SiteSummaryJSON.usa;
   const {
     totalCases,
     totalDeaths,
-    smoothedDailyCases,
-    smoothedDailyDeaths,
-    dates,
-  } = usaAggregation;
+    lastDate,
+    twoWeekPercentChangeInCases,
+    twoWeekPercentChangeInDeaths,
+  } = usa;
 
-  const percentChangeSmoothedCases = getTwoWeekPercentChange(
-    smoothedDailyCases,
-  );
-  const percentChangeSmoothedDeaths = getTwoWeekPercentChange(
-    smoothedDailyDeaths,
-  );
-
-  const lastDate = last(dates);
   const lastDateFormatted: string = formatUTCDateTime(
-    parseDateUnix(lastDate!),
+    parseDateUnix(lastDate),
     DateFormat.MMMM_D_YYYY,
   );
 
@@ -68,13 +44,13 @@ export function getNationalText(): React.ReactElement {
       {getTotalCasesCopy(totalCases)} cases and{' '}
       {formatEstimate(totalDeaths, 3).toLocaleString()} deaths from COVID in the
       United States.{' '}
-      {!isNull(percentChangeSmoothedCases) &&
-      !isNull(percentChangeSmoothedDeaths)
+      {!isNull(twoWeekPercentChangeInCases) &&
+      !isNull(twoWeekPercentChangeInDeaths)
         ? `Over the last 14 days, daily new
     cases have ${getChangeDescriptorCopy(
-      percentChangeSmoothedCases,
+      twoWeekPercentChangeInCases,
     )} and daily new
-    deaths have ${getChangeDescriptorCopy(percentChangeSmoothedDeaths)}.`
+    deaths have ${getChangeDescriptorCopy(twoWeekPercentChangeInDeaths)}.`
         : ''}
     </Fragment>
   );

@@ -12,7 +12,7 @@ import {
   MetricTableCellHeader,
 } from './DataCoverageTable.style';
 import coverageSummary from 'components/DataCoverageTable/coverage-summary.json';
-import { formatPercent, pluralize } from 'common/utils';
+import { fail, formatPercent, pluralize } from 'common/utils';
 import { RegionType } from 'common/regions';
 import { TextTooltip } from 'components/InfoTooltip';
 
@@ -85,6 +85,8 @@ const tooltipText = (coverage: CoverageDetails, regionType: RegionType) => {
       return `Supported in ${coverage.regionsAvailable} metros (of ${coverage.totalRegions}).`;
     case RegionType.STATE:
       return `Supported in ${coverage.regionsAvailable} states (of ${coverage.totalRegions}).`;
+    case RegionType.NATION:
+      fail('Unexpected RegionType.NATION');
   }
 };
 
