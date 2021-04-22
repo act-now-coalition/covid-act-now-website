@@ -6,12 +6,10 @@ const MetricValue: React.FC<{ value: string; iconColor: string }> = ({
   iconColor,
 }) => {
   return (
-    <>
-      <ValueWrapper>
-        <CircleIcon $iconColor={iconColor} />
-        <Value>{value}</Value>
-      </ValueWrapper>
-    </>
+    <ValueWrapper>
+      <CircleIcon $iconColor={iconColor} />
+      <Value>{value}</Value>
+    </ValueWrapper>
   );
 };
 

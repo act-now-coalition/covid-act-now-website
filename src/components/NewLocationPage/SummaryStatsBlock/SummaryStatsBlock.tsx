@@ -10,7 +10,7 @@ const SummaryStatsBlock: React.FC<{ stats: MetricValues }> = ({ stats }) => {
     <BlockWrapper>
       {orderedStatMetrics.map((metric: Metric) => {
         const value = stats[metric] as number;
-        return <SummaryStat metric={metric} value={value} />;
+        return <SummaryStat metric={metric} value={value} key={metric} />;
       })}
     </BlockWrapper>
   );

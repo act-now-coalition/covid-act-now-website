@@ -14,7 +14,6 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
   formattedValue,
   hasSubLabel,
   metricName,
-  isMobile,
   metric,
 }) => {
   return (
@@ -25,12 +24,7 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
       </Row>
       <Row>
         <MetricValue value={formattedValue} iconColor={levelInfo.color} />
-        {hasSubLabel && (
-          <MetricSubLabel
-            text={metricSubLabelText[metric]}
-            isMobile={isMobile}
-          />
-        )}
+        {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
       </Row>
     </StatContent>
   );
