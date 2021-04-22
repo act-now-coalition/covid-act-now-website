@@ -4,10 +4,12 @@ import { BlockContainer } from './LocationPageBlock.style';
 
 type LocationPageBlockProps = React.ComponentProps<typeof BlockContainer>;
 
-const LocationPageBlock: React.FC<LocationPageBlockProps> = props => (
-  <ErrorBoundary>
-    <BlockContainer {...props} />
-  </ErrorBoundary>
+const LocationPageBlock: React.FC<LocationPageBlockProps> = React.forwardRef(
+  (props, ref) => (
+    <ErrorBoundary>
+      <BlockContainer ref={ref} {...props} />
+    </ErrorBoundary>
+  ),
 );
 
 export default LocationPageBlock;
