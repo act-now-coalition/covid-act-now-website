@@ -101,6 +101,34 @@
       "blocked": true,
       "region": "33660",
       "context": "https://trello.com/c/oHUFzfnb/1282-disabled-large-outlier-in-mobile-county-al-daily-new-cases"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "region": "44007",
+      "context": "https://trello.com/c/uKGv3xhD/1287-disabled-providence-county-ri-dnc-has-large-outlier-due-to-late-weekly-reporting"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "region": "39300",
+      "context": "https://trello.com/c/uKGv3xhD/1287-disabled-providence-county-ri-dnc-has-large-outlier-due-to-late-weekly-reporting"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.infectionRate",
+      "blocked": true,
+      "region": "44007",
+      "context": "https://trello.com/c/uKGv3xhD/1287-disabled-providence-county-ri-dnc-has-large-outlier-due-to-late-weekly-reporting"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.infectionRate",
+      "blocked": true,
+      "region": "39300",
+      "context": "https://trello.com/c/uKGv3xhD/1287-disabled-providence-county-ri-dnc-has-large-outlier-due-to-late-weekly-reporting"
     }
   ]
 }
