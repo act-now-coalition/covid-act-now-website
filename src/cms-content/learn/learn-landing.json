@@ -14,14 +14,14 @@
     {
       "sectionTitle": "COVID news & updates",
       "sectionId": "news-and-updates",
-      "description": "To stay on top of COVID, sign up for risk-level email alerts or check out our free newsletters.",
+      "description": "To stay on top of COVID news and developments, sign up for our free newsletters and our risk email alerts.",
       "buttonCta": "View news & updates",
       "buttonRedirect": "/subscribe"
     },
     {
       "sectionTitle": "Risk levels & key metrics",
       "sectionId": "covid-risk-levels-metrics",
-      "description": "Learn about the five key metrics Covid Act Now uses to assess COVID across U.S. states, metros, and counties.",
+      "description": "Learn about the five key metrics Covid Act Now uses to assess COVID risk across U.S. states, metros, and counties.",
       "buttonCta": "View risk levels & key metrics",
       "buttonRedirect": "/covid-risk-levels-metrics"
     },
@@ -30,7 +30,7 @@
       "sectionId": "covid-explained",
       "buttonCta": "View COVID explained",
       "buttonRedirect": "/covid-explained",
-      "description": "Get the facts about how COVID is spread, how to prevent transmission, and the latest on treatments and vaccines from these articles, written by scientists, researchers and public health experts."
+      "description": "Articles that share the facts about how COVID is spread, how to prevent transmission, and the latest on treatments and vaccines, written by scientists, researchers and public health experts."
     },
     {
       "sectionTitle": "Glossary",
