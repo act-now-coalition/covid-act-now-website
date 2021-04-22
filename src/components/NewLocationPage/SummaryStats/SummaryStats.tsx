@@ -1,7 +1,7 @@
 import React from 'react';
 import Stat from './Stat';
 import { Metric } from 'common/metricEnum';
-import { SectionContainer } from '../Shared/Shared.style';
+// import { SectionContainer } from '../Shared/Shared.style';
 import { StatsWrapper } from './SummaryStats.style';
 
 const orderedStatMetrics = [
