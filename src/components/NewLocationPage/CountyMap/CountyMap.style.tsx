@@ -21,11 +21,3 @@ export const MapContainer = styled.div`
     ${PinnedContainer};
   }
 `;
-
-// The default aspect-ratio for the state and US maps is 800x600, so we
-// can use the width to calculate the height of the map container, which
-// makes it possible to center it vertically.
-export const MapContainerInner = styled.div<{ mapWidth: number }>`
-  width: ${({ mapWidth }) => `${mapWidth}px`};
-  height: ${({ mapWidth }) => `${0.75 * mapWidth}px`};
-`;
