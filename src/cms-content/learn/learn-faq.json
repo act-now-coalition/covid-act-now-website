@@ -93,6 +93,11 @@
           "question": "How does Covid Act Now get vaccine eligibility information, and how often is it updated?",
           "questionId": "how-get-vaccine-eligibility-information-and-how-often-updated",
           "answer": "Our team frequently reviews official state government sites and updates vaccine eligibility information on our site every Monday and Thursday. Please note that we are not a government or health care organization. We do not provide testing, vaccination, or other on-the-ground COVID services."
+        },
+        {
+          "question": "Will the COVID vaccines affect fertility?",
+          "questionId": "will-covid-vaccines-affect-fertility",
+          "answer": "There is no evidence that any of the COVID vaccines affect fertility, according to the [American College of Obstetricians and Gynecologists, the American Society for Reproductive Medicine, and the Society for Maternal-Fetal Medicine](https://www.acog.org/news/news-releases/2021/02/medical-experts-assert-covid-vaccines-do-not-impact-fertility).During clinical trials of the COVID vaccines, an equal number of pregnancies occurred in vaccinated and non-vaccinated groups, indicating that the vaccines do not interfere with fertility, according to [reports](https://drive.google.com/file/d/1_wHIYX-tGkGBPwuax7N8BxZPR4PTTCDm/view) compiled by a reproductive immunologist with Imperial College London."
         }
       ]
     },
