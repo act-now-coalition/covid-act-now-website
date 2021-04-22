@@ -4,6 +4,7 @@ import {
   useCcviForFips,
   useScrollToElement,
   useBreakpoint,
+  useLocationSummariesForFips,
 } from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -20,10 +21,9 @@ import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
-import { MetricValues } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import { LocationSummary, useSummaries } from 'common/location_summaries';
 import LocationPageHeader from './LocationPageHeader';
+import { summaryToStats } from 'components/NewLocationPage/SummaryStatsBlock/utils';
 
 // TODO: 200 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
@@ -40,19 +40,10 @@ interface ChartsHolderProps {
   chartId: string;
 }
 
-const summaryToStats = (summary: LocationSummary): MetricValues => {
-  const stats = {} as MetricValues;
-  for (const metric of ALL_METRICS) {
-    stats[metric] = summary.metrics[metric]?.value ?? null;
-  }
-  return stats;
-};
-
 const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
 
-  const summaries = useSummaries();
-  const locationSummary = summaries?.[region.fipsCode];
+  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
