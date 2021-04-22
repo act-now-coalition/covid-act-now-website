@@ -120,7 +120,10 @@ const LocationPageHeader = (props: {
             <SectionHalf>
               <ThermometerImage currentLevel={alarmLevel} />
               <SectionColumn>
-                <ColumnTitle>Covid risk level {tooltip}</ColumnTitle>
+                <div>
+                  <ColumnTitle>Covid risk level</ColumnTitle>
+                  {tooltip}
+                </div>
                 <LevelDescription>{levelInfo.summary}</LevelDescription>
                 <Copy>
                   {levelInfo.detail(
