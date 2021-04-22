@@ -218,11 +218,11 @@ export const aboutOurAlertsContent = aboutAlerts as AboutAlertsContent;
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
-    label: metricExplainersContent.pageHeader,
-    to: '/covid-risk-levels-metrics',
-    items: metricExplainersContent.sections.map(section => ({
-      to: `/covid-risk-levels-metrics#${section.sectionId}`,
-      label: section.sectionHeader,
+    label: faqContent.header,
+    to: '/faq',
+    items: faqContent.sections.map(section => ({
+      to: `/faq#${section.sectionId}`,
+      label: section.sectionTitle,
     })),
   },
   {
@@ -234,8 +234,12 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'COVID explained',
-    to: '/covid-explained',
+    label: metricExplainersContent.pageHeader,
+    to: '/covid-risk-levels-metrics',
+    items: metricExplainersContent.sections.map(section => ({
+      to: `/covid-risk-levels-metrics#${section.sectionId}`,
+      label: section.sectionHeader,
+    })),
   },
   {
     // TODO(pablo): Hardcoding the title to avoid importing the glossary content
@@ -243,12 +247,8 @@ export const learnPages: TocItem[] = [
     to: '/glossary',
   },
   {
-    label: faqContent.header,
-    to: '/faq',
-    items: faqContent.sections.map(section => ({
-      to: `/faq#${section.sectionId}`,
-      label: section.sectionTitle,
-    })),
+    label: 'COVID explained',
+    to: '/covid-explained',
   },
   {
     label: caseStudiesContent.header,
