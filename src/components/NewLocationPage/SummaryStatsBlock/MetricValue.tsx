@@ -1,7 +1,7 @@
 import React from 'react';
-import { CircleIcon, Value, ValueWrapper } from './SummaryStats.style';
+import { CircleIcon, Value, ValueWrapper } from './SummaryStatsBlock.style';
 
-const StatValue: React.FC<{ value: any; iconColor: string }> = ({
+const MetricValue: React.FC<{ value: string; iconColor: string }> = ({
   value,
   iconColor,
 }) => {
@@ -15,4 +15,4 @@ const StatValue: React.FC<{ value: any; iconColor: string }> = ({
   );
 };
 
-export default StatValue;
+export default MetricValue;

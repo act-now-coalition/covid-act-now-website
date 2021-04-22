@@ -1,12 +1,11 @@
 import React from 'react';
-import SummaryStats from './SummaryStats';
+import SummaryStatsBlock from './SummaryStatsBlock';
 import { useLocationSummariesForFips } from 'common/hooks';
 import { summaryToStats } from './utils';
-import regions from 'common/regions';
 
 export default {
   title: 'Location page redesign/Summary stats',
-  component: SummaryStats,
+  component: SummaryStatsBlock,
 };
 
 export const Connecticut = () => {
@@ -16,5 +15,5 @@ export const Connecticut = () => {
     return null;
   }
   const stats = summaryToStats(locationSummary);
-  return <SummaryStats stats={stats} />;
+  return <SummaryStatsBlock stats={stats} />;
 };

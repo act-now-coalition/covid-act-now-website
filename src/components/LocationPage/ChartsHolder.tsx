@@ -21,11 +21,9 @@ import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
-import { MetricValues } from 'common/models/Projections';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import { LocationSummary } from 'common/location_summaries';
 import LocationPageHeader from './LocationPageHeader';
-import { summaryToStats } from 'components/NewLocationPage/SummaryStats/utils';
+import { summaryToStats } from 'components/NewLocationPage/SummaryStatsBlock/utils';
 
 // TODO: 200 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
