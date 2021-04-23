@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import isNumber from 'lodash/isNumber';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -42,6 +43,8 @@ const CompareTableRow = (props: {
     showStateCode,
   } = props;
 
+  const history = useHistory();
+
   const fipsCode = location.region.fipsCode;
 
   const region = regions.findByFipsCode(fipsCode);
@@ -53,17 +56,22 @@ const CompareTableRow = (props: {
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
+  const navigate = () => {
+    history.push(locationLink);
+  };
+
   return (
-    <StyledLink to={locationLink}>
-      <Row
-        index={location.rank}
-        $isCurrentCounty={isCurrentCounty}
-        $isModal={isModal}
+    <Row
+      index={location.rank}
+      $isCurrentCounty={isCurrentCounty}
+      $isModal={isModal}
+      onClick={navigate}
+    >
+      <LocationNameCell
+        $iconColor={location.metricsInfo.level}
+        sortByPopulation={sortByPopulation}
       >
-        <LocationNameCell
-          $iconColor={location.metricsInfo.level}
-          sortByPopulation={sortByPopulation}
-        >
+        <StyledLink to={locationLink}>
           <LocationCellWrapper>
             <LocationRankWrapper>
               <Rank>{location.rank}</Rank>
@@ -86,19 +94,21 @@ const CompareTableRow = (props: {
               </LocationInfoWrapper>
             </LocationNameWrapper>
           </LocationCellWrapper>
-        </LocationNameCell>
-        {columns.map((column, i) => {
-          const metricValue = column.getValue(location);
-          const valueUnknown =
-            !isNumber(metricValue) || !Number.isFinite(metricValue);
-          const isSelected = !sortByPopulation && sorter === column.columnId;
+        </StyledLink>
+      </LocationNameCell>
+      {columns.map((column, i) => {
+        const metricValue = column.getValue(location);
+        const valueUnknown =
+          !isNumber(metricValue) || !Number.isFinite(metricValue);
+        const isSelected = !sortByPopulation && sorter === column.columnId;
 
-          return (
-            <DataCell
-              key={`data-cell-${i}`}
-              $isSelected={isSelected}
-              $iconColor={column.getIconColor(location)}
-            >
+        return (
+          <DataCell
+            key={`data-cell-${i}`}
+            $isSelected={isSelected}
+            $iconColor={column.getIconColor(location)}
+          >
+            <StyledLink to={locationLink}>
               <FiberManualRecordIcon />
               <DataCellValue
                 $valueUnknown={valueUnknown}
@@ -107,11 +117,11 @@ const CompareTableRow = (props: {
               >
                 {column.getFormattedValue(location)}
               </DataCellValue>
-            </DataCell>
-          );
-        })}
-      </Row>
-    </StyledLink>
+            </StyledLink>
+          </DataCell>
+        );
+      })}
+    </Row>
   );
 };
 
