@@ -172,12 +172,11 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             />
           )}
           {ALL_METRICS.map(metric => (
-            <ErrorBoundary>
+            <ErrorBoundary key={metric}>
               {!projections ? (
                 <LoadingScreen />
               ) : (
                 <ChartBlock
-                  key={metric}
                   metric={metric}
                   projections={projections}
                   chartRef={metricRefs[metric]}
