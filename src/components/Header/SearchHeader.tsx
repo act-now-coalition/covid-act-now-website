@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MapIcon from 'assets/images/mapIcon';
-import { getFinalAutocompleteLocations } from 'common/regions';
-import { useCountyToZipMap, useGeolocation } from 'common/hooks';
+import { useFinalAutocompleteLocations } from 'common/hooks';
 import SearchAutocomplete, { getFilterLimit } from 'components/Search';
 import {
   SelectorWrapper,
@@ -21,8 +20,7 @@ const SearchHeader = ({
   const isMobile = useMediaQuery('(max-width:1349px)');
   const isNarrowMobile = useMediaQuery('(max-width:500px)');
 
-  const { geolocationData } = useGeolocation();
-  const { result: countyToZipMap } = useCountyToZipMap();
+  const locations = useFinalAutocompleteLocations();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen((mobileMenuOpen = !mobileMenuOpen));
@@ -41,10 +39,7 @@ const SearchHeader = ({
           <SearchAutocomplete
             filterLimit={getFilterLimit()}
             setHideMapToggle={setHideMapToggle}
-            locations={getFinalAutocompleteLocations(
-              geolocationData,
-              countyToZipMap,
-            )}
+            locations={locations}
           />
         </SelectorWrapper>
         {isMobile && (

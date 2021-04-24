@@ -204,17 +204,27 @@ export function filterUndefinedRegions(regions: any[]): Region[] | [] {
   );
 }
 
+// flattens and filters a map of region-type to regions to a list of valid regions
+export const filterGeolocatedRegions = (
+  geolocatedRegions: GeolocatedRegions | null,
+): Region[] => {
+  if (isNull(geolocatedRegions)) {
+    return [];
+  } else {
+    const regionValues = values(geolocatedRegions);
+    const filteredRegions = filterUndefinedRegions(regionValues);
+    return filteredRegions;
+  }
+};
+
 /**
  * We rank a user's geolocated regions (state, county, metro if applicable) first
  * in the searchbar dropdown menu. This sorts the Region[] accordingly.
  */
 export function getAutocompleteRegionsWithGeolocation(
-  geolocation: GeolocationInfo,
+  geolocatedRegions: GeolocatedRegions,
   locations: Region[],
-  countyToZipMap: CountyToZipMap,
 ): Region[] {
-  const geolocatedRegions = getGeolocatedRegions(geolocation, countyToZipMap);
-
   if (isNull(geolocatedRegions)) {
     return locations;
   }
@@ -240,17 +250,15 @@ export function getAutocompleteRegionsWithGeolocation(
  * If not, returns autocomplete results sorted for pagetype.
  */
 export function getFinalAutocompleteLocations(
-  geolocation?: GeolocationInfo,
-  countyToZipMap?: CountyToZipMap,
+  geolocatedRegions: GeolocatedRegions | null,
 ): Region[] {
   const regionsSortedForPagetype = getAutocompleteRegions();
-  if (!geolocation || !countyToZipMap) {
+  if (!geolocatedRegions) {
     return regionsSortedForPagetype;
   } else {
     return getAutocompleteRegionsWithGeolocation(
-      geolocation,
+      geolocatedRegions,
       regionsSortedForPagetype,
-      countyToZipMap,
     );
   }
 }

@@ -1,4 +1,5 @@
 import { singletonHook } from 'react-singleton-hook';
+
 import usePromise from './usePromise';
 import { importCountyToZipCodeMap } from 'common/data';
 
