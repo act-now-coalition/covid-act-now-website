@@ -6,6 +6,7 @@ import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
+import SkipLink from 'components/SkipLink/SkipLink';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
@@ -30,6 +31,7 @@ function LocationPage({ region }: LocationPageProps) {
 
   return (
     <div>
+      <SkipLink />
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl={region.canonicalUrl}
@@ -37,7 +39,7 @@ function LocationPage({ region }: LocationPageProps) {
         pageDescription={getPageDescription(region)}
       />
       <NavBar renderSecondaryElement={() => <DonateButtonHeart />} />
-      <div>
+      <main id="main">
         <SearchHeader
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
@@ -49,7 +51,7 @@ function LocationPage({ region }: LocationPageProps) {
           mapOption={mapOption}
           setMapOption={setMapOption}
         />
-      </div>
+      </main>
     </div>
   );
 }

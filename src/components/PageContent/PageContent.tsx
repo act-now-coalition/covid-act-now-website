@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import NavBar, { NavBarSearch } from 'components/NavBar';
 import SidebarContents from 'components/SidebarContents';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import SkipLink from 'components/SkipLink/SkipLink';
 import { TocItem } from 'cms-content/utils';
 import {
   PageContainer,
@@ -22,6 +23,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
 
   return (
     <Fragment>
+      <SkipLink />
       <NavBar
         renderSearch={() => <NavBarSearch menuOpen={menuOpen} />}
         renderSecondaryElement={() => <DesktopOnlyDonateButton />}
@@ -29,7 +31,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
         setMenuOpen={setMenuOpen}
       />
       <PageContainer>
-        <MainContent>{children}</MainContent>
+        <MainContent id="main">{children}</MainContent>
         <DesktopOnly>
           <Sidebar>
             <Sticky>

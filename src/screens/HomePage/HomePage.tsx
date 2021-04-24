@@ -5,6 +5,7 @@ import NavBar, { NavBarSearch } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
+import SkipLink from 'components/SkipLink/SkipLink';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements';
 import { useLocation } from 'react-router-dom';
@@ -151,6 +152,7 @@ export default function HomePage() {
 
   return (
     <>
+      <SkipLink />
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
@@ -166,7 +168,7 @@ export default function HomePage() {
       <HomepageStructuredData />
       <SpringSurgeBanner />
       <HomePageHeader />
-      <main>
+      <main id="main">
         <div className="App">
           <Content>
             <ColumnCentered id="search">
