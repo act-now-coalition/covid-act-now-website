@@ -21,21 +21,28 @@ const SearchAutocomplete: React.FC<{
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
-  const { result: countyToZipMap, pending: isLoading } = useCountyToZipMap();
+  const { result: countyToZipMap } = useCountyToZipMap();
 
-  const onInputChange = (e: any, value: string) => {
+  const onInputChange = (e: React.ChangeEvent<{}>, value: string) => {
     setInput(value);
     const isStringOfDigits = /^\d+$/.test(value);
     if (isStringOfDigits) {
       setNoOptionsCopy('Enter a valid 5-digit zip code');
       if (value.length === 5) setCheckForZipcodeMatch(true);
       else setCheckForZipcodeMatch(false);
-    } else setNoOptionsCopy('No location found');
+    } else {
+      if (value.length) {
+        setNoOptionsCopy(
+          `No locations named ${value} found. You can also try searching by zip code.`,
+        );
+      } else setNoOptionsCopy('No location found');
+    }
   };
 
   const stringifyOption = (option: Region) => {
-    if (checkForZipcodeMatch && !isLoading && countyToZipMap) {
-      return `${countyToZipMap[(option as County).fipsCode]?.join(' ')}`;
+    const zipCodes = countyToZipMap?.[option.fipsCode];
+    if (checkForZipcodeMatch && zipCodes) {
+      return `${zipCodes.join(' ')}`;
     } else {
       if (option instanceof MetroArea) {
         return `${option.shortName}, ${(option as MetroArea).stateCodes}`;
@@ -58,13 +65,14 @@ const SearchAutocomplete: React.FC<{
 
   return (
     <Autocomplete
-      noOptionsText={noOptionsCopy}
-      onInputChange={onInputChange}
-      options={locations}
       disableListWrap
       disableClearable
+      options={locations}
+      noOptionsText={noOptionsCopy}
+      onInputChange={onInputChange}
       onChange={onSelect}
       getOptionSelected={getOptionSelected}
+      getOptionLabel={() => ''} // we don't want the location name to populate the searchbar after selecting
       filterOptions={createFilterOptions({
         matchFrom: checkForZipcodeMatch ? 'any' : 'start',
         limit: filterLimit,
@@ -85,9 +93,6 @@ const SearchAutocomplete: React.FC<{
       renderOption={option => {
         return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
       }}
-      getOptionLabel={() => {
-        return '';
-      }} // we don't want the location name to populate the searchbar after selecting
       openOnFocus
       onOpen={() => {
         trackEvent(EventCategory.SEARCH, EventAction.FOCUS, 'Search Focused');
