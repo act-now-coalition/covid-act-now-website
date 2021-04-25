@@ -6,6 +6,7 @@
   fetchGeolocationData() with mockGeolocationData() in the effect.
 */
 
+import { singletonHook } from 'react-singleton-hook';
 import { useEffect, useState } from 'react';
 import { IP_API_KEY } from 'common/ip-api';
 
@@ -21,37 +22,40 @@ export interface UseGeolocationReturn {
   isLoading: boolean;
 }
 
-export default function useGeolocation(): UseGeolocationReturn {
-  const [ipData, setIpData] = useState<GeolocationInfo | undefined>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+const useGeolocation = singletonHook(
+  { geolocationData: undefined, isLoading: true },
+  (): UseGeolocationReturn => {
+    const [ipData, setIpData] = useState<GeolocationInfo | undefined>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const fetchIpData = () => {
-      setIsLoading(true);
-      fetchGeolocationData()
-        .then(data => {
-          setIpData({
-            zipCode: data.zip,
-            stateCode: data.region,
-            country: data.country,
+    useEffect(() => {
+      const fetchIpData = () => {
+        setIsLoading(true);
+        fetchGeolocationData()
+          .then(data => {
+            setIpData({
+              zipCode: data.zip,
+              stateCode: data.region,
+              country: data.country,
+            });
+            setIsLoading(false);
+          })
+          .catch(e => {
+            console.error(e);
+            setIsLoading(false);
           });
-          setIsLoading(false);
-        })
-        .catch(e => {
-          console.error(e);
-          setIsLoading(false);
-        });
+      };
+      fetchIpData();
+    }, [setIpData, setIsLoading]);
+
+    const geolocationReturnObj: UseGeolocationReturn = {
+      geolocationData: ipData,
+      isLoading,
     };
-    fetchIpData();
-  }, [setIpData, setIsLoading]);
 
-  const geolocationReturnObj: UseGeolocationReturn = {
-    geolocationData: ipData,
-    isLoading,
-  };
-
-  return geolocationReturnObj;
-}
+    return geolocationReturnObj;
+  },
+);
 
 function fetchGeolocationData() {
   return fetch(
@@ -89,3 +93,5 @@ function fetchGeolocationData() {
 //     hosting: true,
 //   });
 // }
+
+export default useGeolocation;
