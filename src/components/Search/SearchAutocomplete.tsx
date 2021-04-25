@@ -28,9 +28,9 @@ const SearchAutocomplete: React.FC<{
     const isStringOfDigits = /^\d+$/.test(value);
     if (isStringOfDigits) {
       setNoOptionsCopy('Enter a valid 5-digit zip code');
-      if (value.length === 5) setCheckForZipcodeMatch(true);
-      else setCheckForZipcodeMatch(false);
+      setCheckForZipcodeMatch(value.length === 5);
     } else {
+      setCheckForZipcodeMatch(false);
       if (value.length) {
         setNoOptionsCopy(
           `No locations named ${value} found. You can also try searching by zip code.`,
