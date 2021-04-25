@@ -46,14 +46,14 @@ const HomepageSearchAutocomplete: React.FC<{
     if (menuOpen) setIsOpen(false);
   }, [menuOpen]);
 
-  const onInputChange = (e: any, value: string) => {
+  const onInputChange = (e: React.ChangeEvent<{}>, value: string) => {
     setInput(value);
     const isStringOfDigits = /^\d+$/.test(value);
     if (isStringOfDigits) {
       setNoOptionsCopy('Enter a valid 5-digit zip code');
-      if (value.length === 5) setCheckForZipcodeMatch(true);
-      else setCheckForZipcodeMatch(false);
+      setCheckForZipcodeMatch(value.length === 5);
     } else {
+      setCheckForZipcodeMatch(false);
       if (value.length) {
         setNoOptionsCopy(
           `No locations named ${value} found. You can also try searching by zip code.`,
@@ -75,7 +75,7 @@ const HomepageSearchAutocomplete: React.FC<{
     }
   };
 
-  const onSelect = (e: any, value: Region) => {
+  const onSelect = (e: React.ChangeEvent<{}>, value: Region) => {
     trackEvent(
       EventCategory.SEARCH,
       EventAction.NAVIGATE,
@@ -104,32 +104,12 @@ const HomepageSearchAutocomplete: React.FC<{
           onInputChange={onInputChange}
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
-          getOptionLabel={() => ''} // to fix a warning in the console
+          getOptionLabel={() => ''} // we don't want the location name to populate the searchbar after selecting
           filterOptions={createFilterOptions({
             matchFrom: checkForZipcodeMatch ? 'any' : 'start',
             limit: filterLimit,
             stringify: stringifyOption,
           })}
-          openOnFocus
-          onOpen={() => {
-            trackEvent(
-              EventCategory.SEARCH,
-              EventAction.FOCUS,
-              'Search Focused',
-            );
-            setIsOpen(true);
-            if (setHideMapToggle) {
-              setHideMapToggle(true);
-            }
-          }}
-          onClose={() => {
-            setIsOpen(false);
-            if (setHideMapToggle) {
-              setHideMapToggle(false);
-            }
-          }}
-          PaperComponent={StyledPaper}
-          ListboxComponent={ListContainer}
           popupIcon={<span />} // adding an empty span removes default MUI arrow icon
           renderInput={params => (
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -154,6 +134,26 @@ const HomepageSearchAutocomplete: React.FC<{
           renderOption={option => {
             return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
           }}
+          openOnFocus
+          onOpen={() => {
+            trackEvent(
+              EventCategory.SEARCH,
+              EventAction.FOCUS,
+              'Search Focused',
+            );
+            setIsOpen(true);
+            if (setHideMapToggle) {
+              setHideMapToggle(true);
+            }
+          }}
+          onClose={() => {
+            setIsOpen(false);
+            if (setHideMapToggle) {
+              setHideMapToggle(false);
+            }
+          }}
+          PaperComponent={StyledPaper}
+          ListboxComponent={ListContainer}
           classes={{
             option: autocompleteStyles.option,
             noOptions: autocompleteStyles.noOptions,
