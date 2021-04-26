@@ -1,7 +1,7 @@
 import React from 'react';
 import NotesBlock from './NotesBlock';
 import VulnerabilityIcon from 'assets/images/VulnerabilityIcon';
-import BaseButton from 'components/ButtonSystem/BaseButton/BaseButton';
+import { StyledBaseButton } from './NotesBlock.style';
 import { EventAction, EventCategory } from 'components/Analytics';
 import { isHighVulnerability } from './utils';
 
@@ -21,7 +21,7 @@ export const Example = () => {
     return null;
   }
   return (
-    <BaseButton
+    <StyledBaseButton
       trackingCategory={EventCategory.NONE}
       trackingAction={EventAction.NAVIGATE}
       trackingLabel="Test vulnerability block"
@@ -30,6 +30,6 @@ export const Example = () => {
       <NotesBlock icon={<VulnerabilityIcon />} title={title}>
         {body}
       </NotesBlock>
-    </BaseButton>
+    </StyledBaseButton>
   );
 };
