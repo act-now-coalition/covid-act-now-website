@@ -194,12 +194,28 @@ export const LegendLabel = styled.span`
 `;
 
 // Vaccination Label
-export const VaccinationLabel = styled.text.attrs(props => ({ dx: 8, dy: 7 }))`
-  font-family: Roboto;
-  font-size: 13px;
-  fill: ${props => palette(props).annotation || '#4f4f4f'};
+export const VaccinationLabel = styled.g`
+  rect {
+    fill: white;
+  }
+  text {
+    font-family: Roboto;
+    font-size: 13px;
+    text-anchor: end;
+    fill: ${props => palette(props).annotation || '#4f4f4f'};
+    dominant-baseline: middle;
+  }
 `;
 
-export const VaccinationLabelBold = styled.tspan`
-  font-weight: bold;
+export const VaccinationLabelBold = styled.g`
+  rect {
+    fill: white;
+  }
+  text {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: bold;
+    text-anchor: start;
+    dominant-baseline: middle;
+  }
 `;
