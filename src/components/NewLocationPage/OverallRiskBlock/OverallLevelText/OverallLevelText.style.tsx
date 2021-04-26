@@ -3,7 +3,7 @@ import {
   GrayTitle,
   CircleIcon,
 } from 'components/NewLocationPage/Shared/Shared.style';
-import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
+import { InfoIcon } from 'components/InfoTooltip';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div`
