@@ -58,8 +58,6 @@ export default function HomePage() {
 
   const isMobile = useBreakpoint(600);
 
-  const indicatorsRef = useRef(null);
-
   const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
   const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
 
@@ -220,7 +218,7 @@ export default function HomePage() {
                 nationalSummaryText={getNationalText()}
               />
             </Section>
-            <SectionWrapper ref={indicatorsRef}>
+            <SectionWrapper>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
             <Announcements />
