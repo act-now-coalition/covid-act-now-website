@@ -6,15 +6,17 @@ export const SectionContentContainer = styled.div`
   display: flex;
 `;
 
-export const TextContainer = styled.div``;
+export const TextContainer = styled.div`
+  font-size: 1rem;
+`;
 
 export const TextComponent = styled.p`
   color: ${COLOR_MAP.GREY_4};
-  margin: 0.25rem 0 0;
+  margin: 0.63rem 0 0;
 `;
 
 export const IconWrapper = styled.div`
-  margin-right: 10px;
+  margin-right: 1rem;
 `;
 
 export const StyledBaseButton = styled(BaseButton)`
@@ -22,4 +24,5 @@ export const StyledBaseButton = styled(BaseButton)`
   font-size: inherit;
   text-transform: none;
   letter-spacing: 0;
+  padding: 0;
 `;
