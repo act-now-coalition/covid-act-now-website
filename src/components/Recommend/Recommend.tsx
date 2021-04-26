@@ -18,8 +18,6 @@ import {
 import {
   RecommendationWithIcon,
   mainContent,
-  FedLevel,
-  HarvardLevel,
 } from 'cms-content/recommendations';
 import { HeaderWrapper } from 'components/LocationPage/ChartsHolder.style';
 import SmallShareButtons from 'components/SmallShareButtons';
@@ -100,10 +98,6 @@ const Recommend = (props: {
   shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
   feedbackFormUrl: string;
-  fedLevel: FedLevel | null;
-  harvardLevel: HarvardLevel | null;
-  harvardModalLocationCopy: string;
-  fedModalLocationCopy: string;
 }) => {
   const {
     introCopy,
