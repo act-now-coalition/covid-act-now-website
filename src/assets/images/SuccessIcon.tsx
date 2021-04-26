@@ -6,6 +6,7 @@ const SuccessIcon: React.FC<{ height?: string; width?: string }> = ({
 }) => {
   return (
     <svg
+      aria-hidden="true"
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
@@ -16,9 +17,9 @@ const SuccessIcon: React.FC<{ height?: string; width?: string }> = ({
       <path
         d="M18.6667 7L9.50001 16.1667L5.33334 12"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

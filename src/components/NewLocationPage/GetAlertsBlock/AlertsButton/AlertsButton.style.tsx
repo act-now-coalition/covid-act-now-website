@@ -14,7 +14,7 @@ export const Button = styled(MuiButton).attrs(props => ({
   align-items: flex-start;
 
   &:hover {
-    background-color: transparent;
+    background-color: inherit;
   }
 `;
 
