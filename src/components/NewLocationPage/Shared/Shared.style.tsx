@@ -32,6 +32,11 @@ export const GrayTitle = styled.h2`
   text-transform: uppercase;
 `;
 
+export const GrayBodyCopy = styled.p`
+  margin: 0;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+`;
+
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
   circle {
