@@ -17,6 +17,16 @@ export const Medium = () => {
   );
 };
 
+export const High = () => {
+  return <OverallRiskBlock currentLevel={Level.HIGH} locationName="New York" />;
+};
+
+export const Critical = () => {
+  return (
+    <OverallRiskBlock currentLevel={Level.CRITICAL} locationName="New York" />
+  );
+};
+
 export const SuperCritical = () => {
   return (
     <OverallRiskBlock

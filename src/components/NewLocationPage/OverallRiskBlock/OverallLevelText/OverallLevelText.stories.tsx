@@ -7,14 +7,14 @@ export default {
   component: OverallLevelText,
 };
 
-export const Low = () => {
+export const LowLabel = () => {
   return <OverallLevelText currentLevel={Level.LOW} />;
 };
 
-export const Medium = () => {
+export const MediumLabel = () => {
   return <OverallLevelText currentLevel={Level.MEDIUM} />;
 };
 
-export const SuperCritical = () => {
+export const SuperCriticalLabel = () => {
   return <OverallLevelText currentLevel={Level.SUPER_CRITICAL} />;
 };
