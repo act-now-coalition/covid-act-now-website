@@ -95,14 +95,6 @@ export default function HomePage() {
   const compareShowVulnerabilityFirst =
     location.hash === '#compare-vulnerabilities';
 
-  const scrollTo = (div: null | HTMLDivElement) =>
-    div &&
-    window.scrollTo({
-      left: 0,
-      top: div.offsetTop - 48,
-      behavior: 'smooth',
-    });
-
   useEffect(() => {
     if (location.pathname.includes('alert_signup')) {
       window.location.href = '#alert_signup';
