@@ -106,10 +106,10 @@ export default function HomePage() {
     });
 
   useEffect(() => {
-    if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
-      scrollTo(shareBlockRef.current);
+    if (location.pathname.includes('alert_signup')) {
+      window.location.href = '#alert_signup';
     }
-  }, [location.pathname, shareBlockRef]);
+  }, [location.pathname]);
 
   const exploreSectionRef = useRef(null);
 
@@ -226,7 +226,7 @@ export default function HomePage() {
             <Announcements />
           </Content>
           <PartnersSection />
-          <div ref={shareBlockRef}>
+          <div ref={shareBlockRef} id="alert_signup">
             <ShareModelBlock />
           </div>
         </div>
