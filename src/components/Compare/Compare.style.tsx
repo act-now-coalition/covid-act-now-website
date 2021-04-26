@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
-import isNumber from 'lodash/isNumber';
-import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
-import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
-import { COLORS } from 'common';
-import { Level } from 'common/level';
-import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
 import { Link } from 'react-router-dom';
+import { TableHead, TableCell, TableRow, Modal } from '@material-ui/core';
+import isNumber from 'lodash/isNumber';
+import { ChartLocationName } from 'components/LocationPage/ChartsHolder.style';
+import { Wrapper as LocationName } from 'components/SharedComponents/StyledRegionName/StyledRegionName.style';
+import { COLORS } from 'common';
+import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
+import { Level } from 'common/level';
 
 // TODO (Chelsi): consolidate into a theme:
 
@@ -408,6 +409,9 @@ export const Row = styled(TableRow)<{
       ${Tag} {
         color: ${COLOR_MAP.BLUE};
       }
+    }
+    ${LocationName} {
+      color: ${COLOR_MAP.BLUE};
     }
   }
 `;

@@ -14,3 +14,5 @@ export { default as useCountyGeographies } from './useCountyGeographies';
 export { default as useStateGeographies } from './useStateGeographies';
 export { default as useLocationPageCompareSliderMap } from './useLocationPageCompareSliderMap';
 export { default as useHomepageCompareSliderMap } from './useHomepageCompareSliderMap';
+export { default as useLocationSummariesForFips } from './useLocationSummariesForFips';
+export { default as useDynamicVaccineButton } from './useDynamicVaccineButton';
