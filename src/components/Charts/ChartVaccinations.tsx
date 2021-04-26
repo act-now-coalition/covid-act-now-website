@@ -232,7 +232,7 @@ const VaccinationLines: React.FC<{
           {/* Current Value Labels */}
           {currentValueLabels.map(labelInfo => {
             return (
-              <>
+              <Group key={`label-info-${labelInfo.label}`}>
                 <ChartStyle.VaccinationLabel>
                   <BoxedAnnotation
                     y={labelInfo.y}
@@ -247,7 +247,7 @@ const VaccinationLines: React.FC<{
                     text={labelInfo.formattedValue}
                   />
                 </ChartStyle.VaccinationLabelBold>
-              </>
+              </Group>
             );
           })}
           {tooltipOpen && tooltipData && (

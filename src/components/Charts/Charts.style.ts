@@ -199,23 +199,17 @@ export const VaccinationLabel = styled.g`
     fill: white;
   }
   text {
-    font-family: Roboto;
-    font-size: 13px;
+    ${props => props.theme.fonts.regularBook};
+    font-size: 0.85rem;
     text-anchor: end;
     fill: ${props => palette(props).annotation || '#4f4f4f'};
     dominant-baseline: middle;
   }
 `;
 
-export const VaccinationLabelBold = styled.g`
-  rect {
-    fill: white;
-  }
+export const VaccinationLabelBold = styled(VaccinationLabel)`
   text {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: bold;
+    ${props => props.theme.fonts.regularBookBold};
     text-anchor: start;
-    dominant-baseline: middle;
   }
 `;
