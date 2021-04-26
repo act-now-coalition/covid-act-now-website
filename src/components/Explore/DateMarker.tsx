@@ -5,6 +5,11 @@ import { Series } from './interfaces';
 import { findPointByDate } from 'components/Explore/utils';
 import { getColumnDate } from 'components/Charts/utils';
 
+/**
+ * DateMarker uses findPointByDate function in the same manner as SingleLocationToolTip.
+ * This ensures that the delta between today and the date shown on hover ("x days ago")
+ * corresponds to the date shown in the tooltip (e.g. "Apr 1, 2021").
+ */
 const DateMarker: React.FC<{
   left: number;
   seriesList: Series[];
