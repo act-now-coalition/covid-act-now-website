@@ -29,3 +29,8 @@ export const GrayTitle = styled.h2`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   text-transform: uppercase;
 `;
+
+export const GrayBodyCopy = styled.p`
+  margin: 0;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+`;
