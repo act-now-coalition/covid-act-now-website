@@ -55,3 +55,15 @@ In order to test out the emails and see what they look like:
 1. Open template.html in your local browser to get a good sense of what it looks like.
 2. Set the environment variables for a valid AWS access key (see https://docs.google.com/document/d/1LJkCgikoTByi3xKF87f9nA6X2DwiMwa_FFk_CFa8Feo/edit).
 3. Run: `yarn send-test-email <your-email>`
+
+## Open / Click Rate tracking in Cloud Watch
+AWS automatically tracks opens / clicks, but we manually maintain a dashboard with this data. After sending alerts, you can include it in the dashboard via:
+1. Go to https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Email-Alerts (request access from Michael or Igor if you need it).
+2. Duplicate the latest widget (Click the menu button on the widget and choose Duplicate).
+3. Edit the duplicated widget (Click the menu button on the widget and choose Edit).
+4. Edit the source of the widget to reference the date of the alert send
+   1. Click the "Source" tab.
+   2. Update the date in the source in 3 places.
+   3. Click "Update" under the source menu.
+5. Click "Update widget"
+6. Click "Save dashboard"
