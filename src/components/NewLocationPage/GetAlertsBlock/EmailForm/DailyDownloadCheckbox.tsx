@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import {
   StyledFormGroup,
   StyledCheckbox,
@@ -8,7 +8,7 @@ import { GrayBodyCopy } from 'components/NewLocationPage/Shared/Shared.style';
 
 const DailyDownloadCheckbox: React.FC<{
   checkDailyDownload: boolean;
-  onChangeDailyDownload: any;
+  onChangeDailyDownload: (event: ChangeEvent<HTMLInputElement>) => void;
 }> = ({ checkDailyDownload, onChangeDailyDownload }) => {
   return (
     <StyledFormGroup>
