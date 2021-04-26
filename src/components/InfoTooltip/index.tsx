@@ -3,8 +3,10 @@ import InfoTooltip from './InfoTooltip';
 import TextTooltip from './TextTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { StyledMarkdown } from './Tooltip.style';
+import { StyledMarkdown, InfoIcon } from './Tooltip.style';
 export { InfoTooltip, TextTooltip };
+
+export { InfoIcon };
 
 export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   trackOpenTooltip: () => void;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
 import { mainContent } from 'cms-content/recommendations';
 import { Projections } from 'common/models/Projections';
 import Recommend from 'components/Recommend';
@@ -9,10 +8,6 @@ import {
   getDynamicIntroCopy,
   getRecommendations,
   getShareQuote,
-  getFedLevel,
-  getHarvardLevel,
-  getModalCopyWithFedLevel,
-  getModalCopyWithHarvardLevel,
 } from 'common/utils/recommend';
 
 interface RecommendationsProps {
@@ -50,19 +45,6 @@ const Recommendations = ({
     projection.fips
   }`;
 
-  // TODO(Chelsi): make these 2 functions less redundant?
-  const recommendationsFedModalCopy = getModalCopyWithFedLevel(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
-
-  const recommendationsHarvardModalCopy = getModalCopyWithHarvardLevel(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
-
   return (
     <Recommend
       introCopy={recommendationsIntro}
@@ -72,10 +54,6 @@ const Recommendations = ({
       shareQuote={recommendsShareQuote}
       recommendationsRef={recommendationsRef}
       feedbackFormUrl={recommendationsFeedbackForm}
-      fedLevel={getFedLevel(projections.primary)}
-      harvardLevel={getHarvardLevel(projections.primary)}
-      harvardModalLocationCopy={recommendationsHarvardModalCopy}
-      fedModalLocationCopy={recommendationsFedModalCopy}
     />
   );
 };

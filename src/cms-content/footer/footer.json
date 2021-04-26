@@ -2,16 +2,16 @@
   "aboutUs": "Covid Act Now is an independent nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.",
   "learnLinks": [
     {
-      "cta": "How can I get a vaccine for myself or someone I care about?",
-      "url": "/faq#how-get-vaccine-for-myself-or-someone"
+      "cta": "Can you get COVID even after being vaccinated? ",
+      "url": "/faq#can-you-get-covid-after-vaccination"
     },
     {
-      "cta": "When can children get the COVID vaccine?",
-      "url": "/faq#when-can-children-get-covid-vaccine"
+      "cta": "What should you do with your COVID vaccine card? ",
+      "url": "/faq#what-to-do-with-covid-vaccine-card"
     },
     {
-      "url": "/faq#safe-to-get-covid-vaccine-if-pregnant-or-breastfeeding",
-      "cta": "Is it safe to get a COVID vaccine if you are pregnant or breastfeeding?"
+      "url": "/faq#what-can-you-do-after-fully-vaccinated",
+      "cta": "What can you do after you are fully vaccinated? "
     }
   ],
   "featuredSections": [

@@ -58,8 +58,6 @@ export default function HomePage() {
 
   const isMobile = useBreakpoint(600);
 
-  const indicatorsRef = useRef(null);
-
   const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
   const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
 
@@ -97,19 +95,11 @@ export default function HomePage() {
   const compareShowVulnerabilityFirst =
     location.hash === '#compare-vulnerabilities';
 
-  const scrollTo = (div: null | HTMLDivElement) =>
-    div &&
-    window.scrollTo({
-      left: 0,
-      top: div.offsetTop - 48,
-      behavior: 'smooth',
-    });
-
   useEffect(() => {
-    if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
-      scrollTo(shareBlockRef.current);
+    if (location.pathname.includes('alert_signup')) {
+      window.location.href = '#alert_signup';
     }
-  }, [location.pathname, shareBlockRef]);
+  }, [location.pathname]);
 
   const exploreSectionRef = useRef(null);
 
@@ -220,13 +210,13 @@ export default function HomePage() {
                 nationalSummaryText={getNationalText()}
               />
             </Section>
-            <SectionWrapper ref={indicatorsRef}>
+            <SectionWrapper>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
             <Announcements />
           </Content>
           <PartnersSection />
-          <div ref={shareBlockRef}>
+          <div ref={shareBlockRef} id="alert_signup">
             <ShareModelBlock />
           </div>
         </div>
