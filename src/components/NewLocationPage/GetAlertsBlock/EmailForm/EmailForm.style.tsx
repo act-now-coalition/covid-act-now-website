@@ -7,6 +7,7 @@ import MuiFormControlLabel from '@material-ui/core/FormControlLabel';
 import { LargeFilledButton } from 'components/ButtonSystem';
 import { COLOR_MAP } from 'common/colors';
 
+// Email form:
 export const StyledForm = styled.form`
   text-align: left;
 `;
