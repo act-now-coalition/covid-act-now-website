@@ -1,7 +1,7 @@
 import React from 'react';
 import MobileSummaryStat from './MobileSummaryStat';
 import DesktopSummaryStat from './DesktopSummaryStat';
-import { MobileOnly, DesktopOnly } from './SummaryStatsBlock.style';
+import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import { formatValue, getLevelInfo } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
