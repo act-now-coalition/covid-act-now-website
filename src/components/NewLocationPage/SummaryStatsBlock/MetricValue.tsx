@@ -1,5 +1,6 @@
 import React from 'react';
-import { CircleIcon, Value, ValueWrapper } from './SummaryStatsBlock.style';
+import { Value, ValueWrapper } from './SummaryStatsBlock.style';
+import { CircleIcon } from '../Shared/Shared.style';
 
 const MetricValue: React.FC<{ value: string; iconColor: string }> = ({
   value,

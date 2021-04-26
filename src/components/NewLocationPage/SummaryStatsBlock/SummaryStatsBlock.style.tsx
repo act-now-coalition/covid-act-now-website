@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import Hidden from '@material-ui/core/Hidden';
 import { Chevron } from '../Shared/Shared.style';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
@@ -37,18 +35,6 @@ export const StatContent = styled.div`
 // put this somewhere in Shared:
 export const StyledChevron = styled(Chevron)`
   transform: none;
-`;
-
-export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
-  color: ${({ $iconColor }) => $iconColor};
-  circle {
-    r: 4;
-  }
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    // counteracts the svg's built-in padding, so the icon is aligned with the text above it:
-    margin-left: -6px;
-  }
 `;
 
 export const ValueWrapper = styled.div`
@@ -105,11 +91,3 @@ export const Row = styled.div`
     }
   }
 `;
-
-export const MobileOnly = styled(Hidden).attrs(props => ({
-  smUp: true,
-}))``;
-
-export const DesktopOnly = styled(Hidden).attrs(props => ({
-  xsDown: true,
-}))``;

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import Hidden from '@material-ui/core/Hidden';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { COLOR_MAP } from 'common/colors';
 
@@ -29,3 +31,23 @@ export const GrayTitle = styled.h2`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   text-transform: uppercase;
 `;
+
+export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
+  color: ${({ $iconColor }) => $iconColor};
+  circle {
+    r: 4;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    // counteracts the svg's built-in padding, so the icon is aligned with the text above it:
+    margin-left: -6px;
+  }
+`;
+
+export const MobileOnly = styled(Hidden).attrs(props => ({
+  smUp: true,
+}))``;
+
+export const DesktopOnly = styled(Hidden).attrs(props => ({
+  xsDown: true,
+}))``;
