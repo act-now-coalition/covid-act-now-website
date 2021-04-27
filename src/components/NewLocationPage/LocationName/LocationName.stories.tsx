@@ -12,6 +12,16 @@ export const NewYork = () => {
   return <LocationName region={state} />;
 };
 
+export const FairFieldCounty = () => {
+  const county = regions.findByFipsCodeStrict('09001');
+  return <LocationName region={county} />;
+};
+
+export const EastBatonRougeParish = () => {
+  const county = regions.findByFipsCodeStrict('22033');
+  return <LocationName region={county} />;
+};
+
 export const AbileneMetro = () => {
   const metroArea = regions.findByFipsCodeStrict('10180');
   return <LocationName region={metroArea} />;
@@ -20,9 +30,4 @@ export const AbileneMetro = () => {
 export const BostonMetro = () => {
   const metroArea = regions.findByFipsCodeStrict('14460');
   return <LocationName region={metroArea} />;
-};
-
-export const FairFieldCounty = () => {
-  const county = regions.findByFipsCodeStrict('09001');
-  return <LocationName region={county} />;
 };
