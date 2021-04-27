@@ -10,12 +10,7 @@ function getOffsetPercentage(decimal: number) {
   return formatPercent(decimal, 1);
 }
 
-const ProgressBar: React.FC<{
-  vaccinationsInitiated: number;
-  vaccinationsCompleted: number;
-  locationName: string;
-  width: number;
-}> = ({
+const ProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
   vaccinationsInitiated,
   vaccinationsCompleted,
   locationName,
