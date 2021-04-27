@@ -4,12 +4,12 @@ import SummaryStat from '../SummaryStatsBlock';
 import VaccinationProgressBarBlock from '../VaccinationProgressBarBlock';
 import {
   GridContainer,
-  GridItemHeader,
-  GridItemV1,
-  GridItemVP,
-  GridItemM1,
-  GridItemM2,
-  GridItemM3,
+  GridItemLevel,
+  GridItemProgress,
+  GridItemMetricVax,
+  GridItemMetric1,
+  GridItemMetric2,
+  GridItemMetric3,
 } from './LocationOverview.style';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
@@ -24,43 +24,43 @@ const LocationOverview: React.FC<{
 
   return (
     <GridContainer>
-      <GridItemHeader>
+      <GridItemLevel>
         <OverallRiskBlock
           currentLevel={locationSummary.level}
           locationName={region.name}
         />
-      </GridItemHeader>
-      <GridItemV1>
+      </GridItemLevel>
+      <GridItemProgress>
         <VaccinationProgressBarBlock
           vaccinationsInitiated={0.6}
           vaccinationsCompleted={0.4}
           locationName={region.name}
         />
-      </GridItemV1>
-      <GridItemVP>
+      </GridItemProgress>
+      <GridItemMetricVax>
         <SummaryStat
           metric={Metric.VACCINATIONS}
           value={stats[Metric.VACCINATIONS]}
         />
-      </GridItemVP>
-      <GridItemM1>
+      </GridItemMetricVax>
+      <GridItemMetric1>
         <SummaryStat
           metric={Metric.CASE_DENSITY}
           value={stats[Metric.CASE_DENSITY]}
         />
-      </GridItemM1>
-      <GridItemM2>
+      </GridItemMetric1>
+      <GridItemMetric2>
         <SummaryStat
           metric={Metric.POSITIVE_TESTS}
           value={stats[Metric.POSITIVE_TESTS]}
         />
-      </GridItemM2>
-      <GridItemM3>
+      </GridItemMetric2>
+      <GridItemMetric3>
         <SummaryStat
           metric={Metric.CASE_GROWTH_RATE}
           value={stats[Metric.CASE_GROWTH_RATE]}
         />
-      </GridItemM3>
+      </GridItemMetric3>
     </GridContainer>
   );
 };

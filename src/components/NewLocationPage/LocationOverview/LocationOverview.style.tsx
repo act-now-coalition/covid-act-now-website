@@ -7,20 +7,20 @@ export const GridContainer = styled.div`
 
   grid-template-columns: auto;
   grid-template-rows: auto auto auto auto auto auto;
-  grid-template-areas: 'header' 'm1' 'm2' 'm3' 'vp' 'v1';
+  grid-template-areas: 'level' 'metric1' 'metric2' 'metric3' 'metricVax' 'progress';
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: [vl-start] 20 [vl-1] 20 [vl-2] 20 [vl-3] auto [vl-end];
     grid-template-rows: [hl-start] 50 [hl-1] auto [hl-end];
     grid-template-areas:
-      'header header v1 v1'
-      'm1 m2 m3 vp';
+      'level level progress progress'
+      'metric1 metric2 metric3 metricVax';
   }
 
   @media (min-width: ${mobileBreakpoint}) {
     grid-template-areas:
-      'header header header v1'
-      'm1 m2 m3 vp';
+      'level level level progress'
+      'metric1 metric2 metric3 metricVax';
   }
 `;
 
@@ -29,31 +29,31 @@ const GridItemCss = css`
   border: dashed 1px blue;
 `;
 
-export const GridItemHeader = styled.div`
+export const GridItemLevel = styled.div`
   ${GridItemCss};
-  grid-area: header;
+  grid-area: level;
 `;
 
-export const GridItemV1 = styled.div`
+export const GridItemProgress = styled.div`
   ${GridItemCss};
-  grid-area: v1;
+  grid-area: progress;
 `;
 
-export const GridItemVP = styled.div`
+export const GridItemMetricVax = styled.div`
   ${GridItemCss};
-  grid-area: vp;
+  grid-area: metricVax;
 `;
 
-export const GridItemM1 = styled.div`
+export const GridItemMetric1 = styled.div`
   ${GridItemCss};
-  grid-area: m1;
+  grid-area: metric1;
 `;
 
-export const GridItemM2 = styled.div`
+export const GridItemMetric2 = styled.div`
   ${GridItemCss};
-  grid-area: m2;
+  grid-area: metric2;
 `;
-export const GridItemM3 = styled.div`
+export const GridItemMetric3 = styled.div`
   ${GridItemCss};
-  grid-area: m3;
+  grid-area: metric3;
 `;
