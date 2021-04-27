@@ -38,12 +38,6 @@ import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
-import {
-  Experiment,
-  ExperimentID,
-  Variant,
-  VariantID,
-} from 'components/Experiment';
 import { DonateButtonHeart } from 'components/DonateButton';
 
 function getPageDescription() {
@@ -165,22 +159,7 @@ export default function HomePage() {
                 filterLimit={getFilterLimit()}
                 menuOpen={menuOpen}
               />
-              <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
-                <Variant id={VariantID.A}>
-                  <HomepageItems
-                    isLoading={isLoading}
-                    userRegions={userRegions}
-                    showMetro
-                  />
-                </Variant>
-                <Variant id={VariantID.B}>
-                  <HomepageItems
-                    isLoading={isLoading}
-                    userRegions={userRegions}
-                    showMetro={false}
-                  />
-                </Variant>
-              </Experiment>
+              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}
@@ -192,7 +171,6 @@ export default function HomePage() {
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />
             </ColumnCentered>
-
             <Section>
               <CompareMain
                 locationsViewable={8}
