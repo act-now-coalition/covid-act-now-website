@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ProgressBarContainer } from './VaccinationProgressBar.style';
 import { COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
+import { ProgressBarProps } from './VaccinationProgressBlock';
 
 function getOffsetPercentage(decimal: number) {
   return formatPercent(decimal, 1);
@@ -70,11 +71,11 @@ const ProgressBar: React.FC<{
   );
 };
 
-const VaccinationProgressBarAutosize: React.FC<{
-  vaccinationsInitiated: number;
-  vaccinationsCompleted: number;
-  locationName: string;
-}> = ({ vaccinationsInitiated, vaccinationsCompleted, locationName }) => {
+const VaccinationProgressBarAutosize: React.FC<ProgressBarProps> = ({
+  vaccinationsInitiated,
+  vaccinationsCompleted,
+  locationName,
+}) => {
   return (
     <ProgressBarContainer>
       <ParentSize>

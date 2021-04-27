@@ -1,37 +1,51 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-export const Wrapper = styled.div`
-  display: flex;
+const ColumnToRow = css`
   flex-direction: column;
-
-  > * {
-    height: 100%;
-  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
   }
 `;
 
-export const Section = styled.div`
-  flex-direction: column;
-  height: 100%;
+export const Wrapper = styled.div`
+  display: flex;
+  ${ColumnToRow};
+`;
 
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
-  }
+export const Section = styled.div`
+  ${ColumnToRow};
+  border: dotted 1px black;
 `;
 
 export const MultiStatsWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  ${ColumnToRow};
+`;
+
+export const StatWrapper = styled.div`
+  border: 1px solid blue;
+
+  &:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
+    margin-right: 0.75rem;
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
   }
 `;
 
 export const Item = styled.div`
   border: 1px solid red;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    &:first-child {
+      margin-bottom: 1.25rem;
+    }
+  }
 `;

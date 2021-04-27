@@ -1,12 +1,14 @@
 import React from 'react';
 import OverallRiskBlock from '../OverallRiskBlock';
 import SummaryStat from '../SummaryStatsBlock';
-import { VaccinationProgressBar } from '../VaccinationProgressBar';
+// import { VaccinationProgressBar } from '../VaccinationProgressBar';
+import VaccinationProgressBlock from '../VaccinationProgressBar/VaccinationProgressBlock';
 import {
   Item,
   Section,
   MultiStatsWrapper,
   Wrapper,
+  StatWrapper,
 } from './RiskOverview.style';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
@@ -32,16 +34,16 @@ const RiskOverview: React.FC<{
         <MultiStatsWrapper>
           {orderedStatMetrics.map((metric: Metric) => {
             return (
-              <Item style={{ flex: 1 }}>
+              <StatWrapper style={{ flex: 1 }}>
                 <SummaryStat metric={metric} value={stats[metric]} />
-              </Item>
+              </StatWrapper>
             );
           })}
         </MultiStatsWrapper>
       </Section>
       <Section style={{ flex: 2 }}>
         <Item>
-          <VaccinationProgressBar
+          <VaccinationProgressBlock
             vaccinationsInitiated={0.2}
             vaccinationsCompleted={0.4}
             locationName={region.name}
