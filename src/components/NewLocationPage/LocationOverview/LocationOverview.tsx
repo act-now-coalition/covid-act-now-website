@@ -11,6 +11,7 @@ import {
   GridItemMetric2,
   GridItemMetric3,
 } from './LocationOverview.style';
+import { SectionContainer } from '../Shared/Shared.style';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from '../SummaryStatsBlock/utils';
@@ -23,45 +24,47 @@ const LocationOverview: React.FC<{
   const stats = summaryToStats(locationSummary);
 
   return (
-    <GridContainer>
-      <GridItemLevel>
-        <OverallRiskBlock
-          currentLevel={locationSummary.level}
-          locationName={region.name}
-        />
-      </GridItemLevel>
-      <GridItemProgress>
-        <VaccinationProgressBarBlock
-          vaccinationsInitiated={0.6}
-          vaccinationsCompleted={0.4}
-          locationName={region.name}
-        />
-      </GridItemProgress>
-      <GridItemMetricVax>
-        <SummaryStat
-          metric={Metric.VACCINATIONS}
-          value={stats[Metric.VACCINATIONS]}
-        />
-      </GridItemMetricVax>
-      <GridItemMetric1>
-        <SummaryStat
-          metric={Metric.CASE_DENSITY}
-          value={stats[Metric.CASE_DENSITY]}
-        />
-      </GridItemMetric1>
-      <GridItemMetric2>
-        <SummaryStat
-          metric={Metric.POSITIVE_TESTS}
-          value={stats[Metric.POSITIVE_TESTS]}
-        />
-      </GridItemMetric2>
-      <GridItemMetric3>
-        <SummaryStat
-          metric={Metric.CASE_GROWTH_RATE}
-          value={stats[Metric.CASE_GROWTH_RATE]}
-        />
-      </GridItemMetric3>
-    </GridContainer>
+    <SectionContainer style={{ border: '1px dotted gray' }}>
+      <GridContainer>
+        <GridItemLevel>
+          <OverallRiskBlock
+            currentLevel={locationSummary.level}
+            locationName={region.name}
+          />
+        </GridItemLevel>
+        <GridItemProgress>
+          <VaccinationProgressBarBlock
+            vaccinationsInitiated={0.6}
+            vaccinationsCompleted={0.4}
+            locationName={region.name}
+          />
+        </GridItemProgress>
+        <GridItemMetricVax>
+          <SummaryStat
+            metric={Metric.VACCINATIONS}
+            value={stats[Metric.VACCINATIONS]}
+          />
+        </GridItemMetricVax>
+        <GridItemMetric1>
+          <SummaryStat
+            metric={Metric.CASE_DENSITY}
+            value={stats[Metric.CASE_DENSITY]}
+          />
+        </GridItemMetric1>
+        <GridItemMetric2>
+          <SummaryStat
+            metric={Metric.POSITIVE_TESTS}
+            value={stats[Metric.POSITIVE_TESTS]}
+          />
+        </GridItemMetric2>
+        <GridItemMetric3>
+          <SummaryStat
+            metric={Metric.CASE_GROWTH_RATE}
+            value={stats[Metric.CASE_GROWTH_RATE]}
+          />
+        </GridItemMetric3>
+      </GridContainer>
+    </SectionContainer>
   );
 };
 
