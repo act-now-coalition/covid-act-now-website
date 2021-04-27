@@ -13,13 +13,6 @@ export interface SummaryStatProps {
   metric: Metric;
 }
 
-export const orderedStatMetrics = [
-  Metric.CASE_DENSITY,
-  Metric.CASE_GROWTH_RATE,
-  Metric.POSITIVE_TESTS,
-  // Metric.VACCINATIONS,
-];
-
 export const metricSubLabelText: { [key in Metric]: string[] } = {
   [Metric.CASE_DENSITY]: ['per', '100k'],
   [Metric.VACCINATIONS]: ['1+', 'dose'],

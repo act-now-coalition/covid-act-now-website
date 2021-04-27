@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { SubLabel, SubLabelWrapper } from './SummaryStatsBlock.style';
+import { SubLabel, SubLabelWrapper } from './SummaryStat.style';
 
 const MetricSubLabel: React.FC<{ text: string[]; isMobile?: boolean }> = ({
   text,

@@ -2,38 +2,32 @@ import React from 'react';
 import MetricSubLabel from './MetricSubLabel';
 import MetricValue from './MetricValue';
 import {
-  MetricLabel,
   StatContent,
   Row,
+  MetricLabel,
   StyledChevron,
-} from './SummaryStatsBlock.style';
+} from './SummaryStat.style';
 import { metricSubLabelText, SummaryStatProps } from './utils';
 
-const MobileSummaryStat: React.FC<SummaryStatProps> = ({
+const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
   levelInfo,
   formattedValue,
   hasSubLabel,
   metricName,
-  isMobile,
   metric,
 }) => {
   return (
     <StatContent>
       <Row>
         <MetricLabel>{metricName}</MetricLabel>
-        {hasSubLabel && (
-          <MetricSubLabel
-            text={metricSubLabelText[metric]}
-            isMobile={isMobile}
-          />
-        )}
+        <StyledChevron />
       </Row>
       <Row>
         <MetricValue value={formattedValue} iconColor={levelInfo.color} />
-        <StyledChevron />
+        {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
       </Row>
     </StatContent>
   );
 };
 
-export default MobileSummaryStat;
+export default DesktopSummaryStat;

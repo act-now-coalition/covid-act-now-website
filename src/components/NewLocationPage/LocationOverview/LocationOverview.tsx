@@ -1,6 +1,6 @@
 import React from 'react';
 import OverallRiskBlock from '../OverallRiskBlock';
-import SummaryStat from '../SummaryStatsBlock';
+import SummaryStat from '../SummaryStat';
 import VaccinationProgressBarBlock from '../VaccinationProgressBarBlock';
 import {
   GridContainer,
@@ -14,7 +14,7 @@ import {
 import { SectionContainer } from '../Shared/Shared.style';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
-import { summaryToStats } from '../SummaryStatsBlock/utils';
+import { summaryToStats } from '../SummaryStat/utils';
 import { Metric } from 'common/metricEnum';
 
 const LocationOverview: React.FC<{

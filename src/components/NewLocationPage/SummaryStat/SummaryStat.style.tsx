@@ -3,15 +3,6 @@ import { Chevron } from '../Shared/Shared.style';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-export const BlockWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
-  }
-`;
-
 export const StatContent = styled.div`
   display: flex;
   justify-content: space-between;
