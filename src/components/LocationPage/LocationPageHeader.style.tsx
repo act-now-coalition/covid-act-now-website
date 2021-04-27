@@ -7,7 +7,7 @@ import { Level } from 'common/level';
 import MuiWarningIcon from '@material-ui/icons/Warning';
 import MuiInfoIcon from '@material-ui/icons/Info';
 import Button from '@material-ui/core/Button';
-import { InfoIcon } from 'components/InfoTooltip/Tooltip.style';
+import { InfoIcon } from 'components/InfoTooltip';
 
 export const ColoredHeaderBanner = styled(Box)`
   display: flex;

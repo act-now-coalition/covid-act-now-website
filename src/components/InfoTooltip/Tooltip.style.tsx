@@ -79,6 +79,13 @@ export const StyledMarkdown = styled(MarkdownBody)`
     margin: 0;
   }
 
+  a {
+    text-decoration: underline;
+    &:hover {
+      color: white;
+    }
+  }
+
   ul {
     margin-bottom: 0.5rem;
     a {

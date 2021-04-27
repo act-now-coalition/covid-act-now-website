@@ -1,21 +1,21 @@
 import React from 'react';
 import { Table, TableBody } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import CompareTableRow from './CompareTableRow';
+import HeaderCell from './HeaderCell';
+import * as Styles from './LocationTable.style';
+import * as CompareStyles from './Compare.style';
+import { SCREENSHOT_CLASS } from 'components/Screenshot';
+import { EventAction } from 'components/Analytics';
 import {
   RankedLocationSummary,
   GeoScopeFilter,
   SummaryForCompare,
   HomepageLocationScope,
 } from 'common/utils/compare';
-import CompareTableRow from './CompareTableRow';
-import HeaderCell from './HeaderCell';
-import * as Styles from './LocationTable.style';
-import * as CompareStyles from './Compare.style';
 import { COLOR_MAP } from 'common/colors';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { SCREENSHOT_CLASS } from 'components/Screenshot';
 import { trackCompareEvent } from 'common/utils/compare';
-import { EventAction } from 'components/Analytics';
 import { Region, MetroArea } from 'common/regions';
 import { ColumnDefinition } from './columns';
 

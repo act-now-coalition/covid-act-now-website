@@ -250,6 +250,7 @@ const MultipleLocationsChart: React.FC<{
           />
           <DateMarker
             left={getXPosition(tooltipData) + marginLeft}
+            seriesList={seriesList}
             date={new Date(tooltipData.x)}
           />
         </Fragment>

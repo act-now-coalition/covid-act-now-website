@@ -18,9 +18,15 @@ import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
 import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
-import { getUtcScale, getTimeAxisTicks } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
-import { getColumnDate, formatTooltipColumnDate } from './utils';
+import {
+  getColumnDate,
+  formatTooltipColumnDate,
+  getUtcScale,
+  getTimeAxisTicks,
+} from './utils';
+import BoxedAnnotation from './BoxedAnnotation';
+import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
 
@@ -30,6 +36,7 @@ interface LabelInfo {
   label: string;
   formattedValue: string;
 }
+
 function formatCurrentValueLabels(
   seriesList: Series[],
   getXPosition: (p: Column) => number,
@@ -140,11 +147,13 @@ const VaccinationLines: React.FC<{
   const innerHeight = height - marginTop - marginBottom;
   const innerWidth = width - marginLeft - marginRight;
 
-  // Note: The end date and 35% bounds are set to approximately match the goal of 100M
-  // vaccines in the first 100 days of the Biden administration
-  const dateFrom = new Date('2020-12-01');
-  const dateTo = new Date('2021-05-01');
-
+  const dateFrom = new Date('2021-01-01');
+  const currDate = new Date();
+  const dateTo = addTime(
+    getStartOf(currDate, TimeUnit.MONTHS),
+    1,
+    TimeUnit.MONTHS,
+  );
   const dateScale = getUtcScale(dateFrom, dateTo, 0, innerWidth);
 
   const dataMaxY = max(seriesList.map(series => last(series.data)?.y ?? 0));
@@ -223,16 +232,22 @@ const VaccinationLines: React.FC<{
           {/* Current Value Labels */}
           {currentValueLabels.map(labelInfo => {
             return (
-              <ChartStyle.VaccinationLabel
-                key={labelInfo.label}
-                x={labelInfo.x}
-                y={labelInfo.y}
-              >
+              <Group key={`label-info-${labelInfo.label}`}>
+                <ChartStyle.VaccinationLabel>
+                  <BoxedAnnotation
+                    y={labelInfo.y}
+                    x={labelInfo.x - 10}
+                    text={labelInfo.label}
+                  />
+                </ChartStyle.VaccinationLabel>
                 <ChartStyle.VaccinationLabelBold>
-                  {labelInfo.formattedValue}
-                </ChartStyle.VaccinationLabelBold>{' '}
-                {labelInfo.label}
-              </ChartStyle.VaccinationLabel>
+                  <BoxedAnnotation
+                    y={labelInfo.y}
+                    x={labelInfo.x + 5}
+                    text={labelInfo.formattedValue}
+                  />
+                </ChartStyle.VaccinationLabelBold>
+              </Group>
             );
           })}
           {tooltipOpen && tooltipData && (

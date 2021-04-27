@@ -35,8 +35,22 @@ export interface FaqContent {
   metadataDescription: string;
 }
 
+// Hiding outdated FAQ questions pertaining to eligibility:
+const idsToHide = [
+  'when-will-you-be-eligible-vaccine',
+  'what-locations-do-you-have-vaccine-eligibility-information-for',
+  'how-get-vaccine-eligibility-information-and-how-often-updated',
+];
+
+const removeHiddenQuestionsById = (questions: Question[]) => {
+  return questions.filter(
+    (question: Question) => !idsToHide.includes(question.questionId),
+  );
+};
+
 const sanitizeSection = (section: FaqSection): FaqSection => ({
   ...section,
+  questions: removeHiddenQuestionsById(section.questions),
   sectionId: sanitizeID(section.sectionId),
 });
 
@@ -204,11 +218,11 @@ export const aboutOurAlertsContent = aboutAlerts as AboutAlertsContent;
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
   {
-    label: metricExplainersContent.pageHeader,
-    to: '/covid-risk-levels-metrics',
-    items: metricExplainersContent.sections.map(section => ({
-      to: `/covid-risk-levels-metrics#${section.sectionId}`,
-      label: section.sectionHeader,
+    label: faqContent.header,
+    to: '/faq',
+    items: faqContent.sections.map(section => ({
+      to: `/faq#${section.sectionId}`,
+      label: section.sectionTitle,
     })),
   },
   {
@@ -220,8 +234,12 @@ export const learnPages: TocItem[] = [
     })),
   },
   {
-    label: 'COVID explained',
-    to: '/covid-explained',
+    label: metricExplainersContent.pageHeader,
+    to: '/covid-risk-levels-metrics',
+    items: metricExplainersContent.sections.map(section => ({
+      to: `/covid-risk-levels-metrics#${section.sectionId}`,
+      label: section.sectionHeader,
+    })),
   },
   {
     // TODO(pablo): Hardcoding the title to avoid importing the glossary content
@@ -229,12 +247,8 @@ export const learnPages: TocItem[] = [
     to: '/glossary',
   },
   {
-    label: faqContent.header,
-    to: '/faq',
-    items: faqContent.sections.map(section => ({
-      to: `/faq#${section.sectionId}`,
-      label: section.sectionTitle,
-    })),
+    label: 'COVID explained',
+    to: '/covid-explained',
   },
   {
     label: caseStudiesContent.header,
