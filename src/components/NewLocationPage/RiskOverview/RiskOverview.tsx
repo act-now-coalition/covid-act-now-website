@@ -1,4 +1,7 @@
 import React from 'react';
+import OverallRiskBlock from '../OverallRiskBlock';
+import SummaryStat from '../SummaryStatsBlock';
+import { VaccinationProgressBar } from '../VaccinationProgressBar';
 import {
   Item,
   Section,
@@ -8,6 +11,8 @@ import {
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from '../SummaryStatsBlock/utils';
+import { orderedStatMetrics } from '../SummaryStatsBlock/utils';
+import { Metric } from 'common/metricEnum';
 
 const RiskOverview: React.FC<{
   region: Region;
@@ -18,16 +23,36 @@ const RiskOverview: React.FC<{
   return (
     <Wrapper>
       <Section style={{ flex: 3 }}>
-        <Item>Overall</Item>
+        <Item>
+          <OverallRiskBlock
+            currentLevel={locationSummary.level}
+            locationName={region.name}
+          />
+        </Item>
         <MultiStatsWrapper>
-          <Item style={{ flex: 1 }}>Stat: DNC</Item>
-          <Item style={{ flex: 1 }}>Stat: Rt</Item>
-          <Item style={{ flex: 1 }}>Stat: Pos rate</Item>
+          {orderedStatMetrics.map((metric: Metric) => {
+            return (
+              <Item style={{ flex: 1 }}>
+                <SummaryStat metric={metric} value={stats[metric]} />
+              </Item>
+            );
+          })}
         </MultiStatsWrapper>
       </Section>
       <Section style={{ flex: 2 }}>
-        <Item>Vax progress bar</Item>
-        <Item>Stat: Vax</Item>
+        <Item>
+          <VaccinationProgressBar
+            vaccinationsInitiated={0.2}
+            vaccinationsCompleted={0.4}
+            locationName={region.name}
+          />
+        </Item>
+        <Item style={{ flex: 1 }}>
+          <SummaryStat
+            metric={Metric.VACCINATIONS}
+            value={stats[Metric.VACCINATIONS]}
+          />
+        </Item>
       </Section>
     </Wrapper>
   );

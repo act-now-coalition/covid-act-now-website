@@ -5,6 +5,10 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  > * {
+    height: 100%;
+  }
+
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
   }
@@ -12,6 +16,7 @@ export const Wrapper = styled.div`
 
 export const Section = styled.div`
   flex-direction: column;
+  height: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;

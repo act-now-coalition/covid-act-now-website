@@ -17,7 +17,7 @@ export const orderedStatMetrics = [
   Metric.CASE_DENSITY,
   Metric.CASE_GROWTH_RATE,
   Metric.POSITIVE_TESTS,
-  Metric.VACCINATIONS,
+  // Metric.VACCINATIONS,
 ];
 
 export const metricSubLabelText: { [key in Metric]: string[] } = {

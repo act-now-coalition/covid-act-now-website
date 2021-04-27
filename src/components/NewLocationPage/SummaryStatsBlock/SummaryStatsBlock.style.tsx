@@ -15,20 +15,10 @@ export const BlockWrapper = styled.div`
 export const StatContent = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0 1rem;
-
-  &:not(:last-of-type) {
-    margin-bottom: 1.5rem;
-  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
     justify-content: unset;
-    padding: 0 1.25rem;
-
-    &:not(:last-of-type) {
-      margin-bottom: 0;
-    }
   }
 `;
 
