@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 
 export const GridContainer = styled.div`
@@ -37,7 +38,7 @@ export const GridItemLevel = styled.div`
 export const GridItemProgress = styled.div`
   grid-area: progress;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid ${COLOR_MAP.GREY_1};
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-bottom: 2rem;
@@ -73,7 +74,7 @@ export const GridItemMetric3 = styled.div`
 export const GridItemMetricVax = styled.div`
   grid-area: metricVax;
   padding-top: 1.5rem;
-  border-top: 1px solid gray;
+  border-top: 1px solid ${COLOR_MAP.GREY_1};
   margin-bottom: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
