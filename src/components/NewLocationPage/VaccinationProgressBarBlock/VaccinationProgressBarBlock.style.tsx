@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { GrayTitle } from 'components/NewLocationPage/Shared/Shared.style';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const ProgressBarContainer = styled.div`
   max-width: 288px;
@@ -7,5 +8,10 @@ export const ProgressBarContainer = styled.div`
 `;
 
 export const Title = styled(GrayTitle)`
-  margin: 0 0 0.75rem;
+  display: none;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: inherit;
+    margin: 0 0 0.75rem;
+  }
 `;

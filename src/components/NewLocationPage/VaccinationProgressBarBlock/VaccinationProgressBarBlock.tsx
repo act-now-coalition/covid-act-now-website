@@ -1,6 +1,6 @@
 import React from 'react';
-import VaccinationProgressBarAutosize from './VaccinationProgressBar';
-import { Title } from './VaccinationProgressBar.style';
+import { ProgressBar } from './ProgressBar';
+import { Title } from './VaccinationProgressBarBlock.style';
 
 export interface ProgressBarProps {
   vaccinationsInitiated: number;
@@ -8,7 +8,7 @@ export interface ProgressBarProps {
   locationName: string;
 }
 
-const VaccinationProgressBlock: React.FC<ProgressBarProps> = ({
+const VaccinationProgressBarBlock: React.FC<ProgressBarProps> = ({
   vaccinationsInitiated,
   vaccinationsCompleted,
   locationName,
@@ -16,7 +16,7 @@ const VaccinationProgressBlock: React.FC<ProgressBarProps> = ({
   return (
     <>
       <Title>Vaccination Progress</Title>
-      <VaccinationProgressBarAutosize
+      <ProgressBar
         vaccinationsInitiated={vaccinationsInitiated}
         vaccinationsCompleted={vaccinationsCompleted}
         locationName={locationName}
@@ -25,4 +25,4 @@ const VaccinationProgressBlock: React.FC<ProgressBarProps> = ({
   );
 };
 
-export default VaccinationProgressBlock;
+export default VaccinationProgressBarBlock;

@@ -1,7 +1,7 @@
 import React from 'react';
-import OverallRiskBlock from '../../OverallRiskBlock';
-import SummaryStat from '../../SummaryStatsBlock';
-import VaccinationProgressBlock from '../../VaccinationProgressBar/VaccinationProgressBlock';
+import OverallRiskBlock from '../OverallRiskBlock';
+import SummaryStat from '../SummaryStatsBlock';
+import VaccinationProgressBarBlock from '../VaccinationProgressBarBlock';
 import {
   GridContainer,
   GridItemHeader,
@@ -10,13 +10,13 @@ import {
   GridItemM1,
   GridItemM2,
   GridItemM3,
-} from './../RiskOverview.style';
+} from './LocationOverview.style';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
-import { summaryToStats } from '../../SummaryStatsBlock/utils';
+import { summaryToStats } from '../SummaryStatsBlock/utils';
 import { Metric } from 'common/metricEnum';
 
-const RiskOverviewGrid: React.FC<{
+const LocationOverview: React.FC<{
   region: Region;
   locationSummary: LocationSummary;
 }> = ({ region, locationSummary }) => {
@@ -31,8 +31,8 @@ const RiskOverviewGrid: React.FC<{
         />
       </GridItemHeader>
       <GridItemV1>
-        <VaccinationProgressBlock
-          vaccinationsInitiated={0.2}
+        <VaccinationProgressBarBlock
+          vaccinationsInitiated={0.6}
           vaccinationsCompleted={0.4}
           locationName={region.name}
         />
@@ -65,4 +65,4 @@ const RiskOverviewGrid: React.FC<{
   );
 };
 
-export default RiskOverviewGrid;
+export default LocationOverview;
