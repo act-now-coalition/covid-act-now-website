@@ -16,6 +16,12 @@ import {
   SectionHeader,
 } from './Menu.style';
 import { scrollWithOffset } from 'components/TableOfContents';
+import {
+  Experiment,
+  ExperimentID,
+  Variant,
+  VariantID,
+} from 'components/Experiment';
 
 const FeaturedSection: React.FC<{
   featuredSections: FeaturedItem[];
@@ -44,19 +50,47 @@ const FeaturedSection: React.FC<{
               }
             : {};
 
+        const testAPITitle = 'Data API';
+        const testAPIDescription =
+          'Get realtime, local data including daily new cases, % vaccinated, and more.';
+
         return (
           <RowWithSpacing onClick={() => onClick(cta)} key={cta}>
             <IconWrapper>
               <Icon height="36" width="40" aria-hidden="true" />
             </IconWrapper>
             <TextLink to={url} {...hashlinkProps}>
-              <Column>
-                <Row>
-                  {cta}
-                  <ArrowIcon />
-                </Row>
-                <FeaturedDescription>{description}</FeaturedDescription>
-              </Column>
+              {iconId === 'API' && (
+                <Column>
+                  <Experiment id={ExperimentID.HAMBURGER_MENU_DESKTOP}>
+                    <Variant id={VariantID.A}>
+                      <Row>
+                        {cta}
+                        <ArrowIcon />
+                      </Row>
+                      <FeaturedDescription>{description}</FeaturedDescription>
+                    </Variant>
+                    <Variant id={VariantID.B}>
+                      <Row>
+                        {testAPITitle}
+                        <ArrowIcon />
+                      </Row>
+                      <FeaturedDescription>
+                        {testAPIDescription}
+                      </FeaturedDescription>
+                    </Variant>
+                  </Experiment>
+                </Column>
+              )}
+              {iconId !== 'API' && (
+                <Column>
+                  <Row>
+                    {cta}
+                    <ArrowIcon />
+                  </Row>
+                  <FeaturedDescription>{description}</FeaturedDescription>
+                </Column>
+              )}
             </TextLink>
           </RowWithSpacing>
         );
