@@ -24,7 +24,7 @@ const LocationOverview: React.FC<{
   const stats = summaryToStats(locationSummary);
 
   return (
-    <SectionContainer style={{ border: '1px dotted gray', maxWidth: '880px' }}>
+    <SectionContainer>
       <GridContainer>
         <GridItemLevel>
           <OverallRiskBlock
