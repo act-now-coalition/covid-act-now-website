@@ -14,7 +14,7 @@ export const SectionContainer = styled.div`
   background-color: white;
   border-radius: 4px;
   padding: 1.25rem;
-  max-width: ${maxContentWidth};
+  // max-width: ${maxContentWidth};
 
   @media (min-width: ${mobileBreakpoint}) {
     padding: 1.5rem;

@@ -31,3 +31,20 @@ export const Example = () => {
     </NotesBlock>
   );
 };
+
+export const OverviewStandIn = () => {
+  if (!highVulnerability) {
+    return null;
+  }
+
+  return (
+    <NotesBlock
+      icon={<VulnerabilityIcon />}
+      title="Overview stand-in"
+      redirectUrl={redirectUrl}
+      trackingCategory={EventCategory.VULNERABILITIES}
+    >
+      {body}
+    </NotesBlock>
+  );
+};

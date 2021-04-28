@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 const desktopMapWidth = 320;
 
@@ -13,7 +14,7 @@ export const PinnedContainer = css`
 export const MapContainer = styled.div`
   width: 100%;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     width: ${desktopMapWidth}px;
   }
 
