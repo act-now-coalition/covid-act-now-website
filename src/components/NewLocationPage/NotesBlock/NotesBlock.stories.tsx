@@ -1,9 +1,8 @@
 import React from 'react';
 import NotesBlock from './NotesBlock';
 import VulnerabilityIcon from 'assets/images/VulnerabilityIcon';
-import { StyledBaseButton } from './NotesBlock.style';
-import { EventAction, EventCategory } from 'components/Analytics';
 import { isHighVulnerability } from './utils';
+import { EventCategory } from 'components/Analytics';
 
 export default {
   title: 'Location page redesign/Notes Block',
@@ -20,16 +19,15 @@ export const Example = () => {
   if (!highVulnerability) {
     return null;
   }
+
   return (
-    <StyledBaseButton
-      trackingCategory={EventCategory.NONE}
-      trackingAction={EventAction.NAVIGATE}
-      trackingLabel="Test vulnerability block"
-      href={redirectUrl}
+    <NotesBlock
+      icon={<VulnerabilityIcon />}
+      title={title}
+      redirectUrl={redirectUrl}
+      trackingCategory={EventCategory.VULNERABILITIES}
     >
-      <NotesBlock icon={<VulnerabilityIcon />} title={title}>
-        {body}
-      </NotesBlock>
-    </StyledBaseButton>
+      {body}
+    </NotesBlock>
   );
 };
