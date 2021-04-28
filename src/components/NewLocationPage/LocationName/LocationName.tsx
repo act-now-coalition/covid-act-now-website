@@ -1,8 +1,8 @@
 import React from 'react';
 import { Region, State, County, MetroArea } from 'common/regions';
-import { inMultipleStates, getRegionName } from './utils';
+import { isMultiStateMetro, getRegionName } from './utils';
 import {
-  RegionContainer,
+  RegionNameContainer,
   RegionNameText,
   MultiStateText,
 } from './LocationName.style';
@@ -10,43 +10,43 @@ import {
 const LocationName: React.FC<{ region: Region }> = ({ region }) => {
   if (region instanceof State) {
     return (
-      <RegionContainer>
+      <RegionNameContainer>
         <RegionNameText>
           <strong>{getRegionName(region)}</strong>
         </RegionNameText>
-      </RegionContainer>
+      </RegionNameContainer>
     );
   } else if (region instanceof County) {
     const [countyName, countySuffix] = getRegionName(region);
     return (
-      <RegionContainer>
+      <RegionNameContainer>
         <RegionNameText>
           <strong>{countyName}</strong>
           {` ${countySuffix}, `}
           <strong>{region.state.stateCode}</strong>
         </RegionNameText>
-      </RegionContainer>
+      </RegionNameContainer>
     );
   } else if (region instanceof MetroArea) {
     const [metroName, metroSuffix] = getRegionName(region);
-    if (inMultipleStates(region)) {
+    if (isMultiStateMetro(region)) {
       return (
-        <RegionContainer>
+        <RegionNameContainer>
           <RegionNameText>
             <strong>{metroName}</strong>
             {` ${metroSuffix}`}
           </RegionNameText>
           <MultiStateText>{region.stateCodes}</MultiStateText>
-        </RegionContainer>
+        </RegionNameContainer>
       );
     } else {
       return (
-        <RegionContainer>
+        <RegionNameContainer>
           <RegionNameText>
             <strong>{`${metroName}, ${region.stateCodes}`}</strong>
             {` ${metroSuffix}`}
           </RegionNameText>
-        </RegionContainer>
+        </RegionNameContainer>
       );
     }
   } else {

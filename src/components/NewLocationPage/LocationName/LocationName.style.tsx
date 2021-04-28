@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-export const RegionContainer = styled.div`
-  @media (max-width: ${materialSMBreakpoint}) {
-    text-align: center;
+export const RegionNameContainer = styled.div`
+  text-align: center;
+  @media (min-width: ${materialSMBreakpoint}) {
+    text-align: left;
   }
 `;
 
-export const RegionNameText = styled.div`
+export const RegionNameText = styled.h1`
+  font-weight: normal;
   font-size: 2rem;
-  line-height: 128%;
+  line-height: 1.3;
+  margin: 0.1rem 0;
 `;
 
 export const MultiStateText = styled.div`
-  margin-top: 0.13rem;
   font-size: 1rem;
   font-weight: 500;
 `;

@@ -1,10 +1,10 @@
-import { State, County, MetroArea } from 'common/regions';
+import { Region, State, County, MetroArea } from 'common/regions';
 
-export function inMultipleStates(region: MetroArea): boolean {
+export function isMultiStateMetro(region: MetroArea): boolean {
   return region.stateCodes.includes('-');
 }
 
-export function getRegionName(region: State | County | MetroArea) {
+export function getRegionName(region: Region) {
   if (region instanceof State) {
     return [region.name];
   } else if (region instanceof County) {
