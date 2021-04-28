@@ -9,9 +9,8 @@ backend:
   branch: test-cms
   base_url: https://api.netlify.com
 
-# TODO(Michael): Do I need these?
-#media_folder: 'public/images_cms'
-#public_folder: '/images_cms'
+media_folder: 'public/images_cms'
+public_folder: '/images_cms'
 
 collections:
   - name: regionOverrides
