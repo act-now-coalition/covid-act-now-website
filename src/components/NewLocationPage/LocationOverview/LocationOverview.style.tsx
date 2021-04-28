@@ -13,7 +13,6 @@ export const GridContainer = styled.div`
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
