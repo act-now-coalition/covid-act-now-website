@@ -168,7 +168,7 @@
         },
         {
           "question": "What are the long-term effects of COVID?",
-          "answer": "While some people recover quickly from COVID, others suffer debilitating, long-term symptoms, according to the [Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/coronavirus-long-term-effects/art-20490351). In Italy, which was one of the first countries to be hit hard by the disease, many survivors are still experiencing health problems after having COVID. In one [study](https://jamanetwork.com/journals/jama/fullarticle/2768351), more than 87 percent of individuals experienced one or more symptoms (most commonly fatigue and difficulty breathing) after recovery from COVID. Meanwhile, a German [study](https://jamanetwork.com/journals/jamacardiology/fullarticle/2768916) found that 78 of 100 recovered COVID patients continued to experience heart abnormalities months after [infection](/glossary#infection).",
+          "answer": "Most people who have COVID recover relatively quickly, within several weeks. However, some do not. One [study](https://www.nature.com/articles/s41591-021-01292-y) of approximately 4,000 COVID patients found that about 20 percent had symptoms lasting for more than 28 days to more than 12 weeks. Research is ongoing about why certain individuals experience [post-COVID conditions](https://www.cdc.gov/coronavirus/2019-ncov/long-term-effects.html), or “long COVID.” Long-lasting symptoms vary in severity, but most commonly include fatigue, headaches, and difficulty breathing.",
           "questionId": "long-term-effects-covid"
         },
         {
