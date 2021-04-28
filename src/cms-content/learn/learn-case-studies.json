@@ -91,6 +91,7 @@
           "logoAltText": "Unilever logo",
           "header": "Unilever North America Counts on CAN Data to Inform COVID Response",
           "caseStudyId": "unilever",
+          "tags": ["api"],
           "showCaseStudy": true,
           "shortTitle": "Unilever"
         }
