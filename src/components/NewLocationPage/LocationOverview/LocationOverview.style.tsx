@@ -13,23 +13,18 @@ export const GridContainer = styled.div`
   row-gap: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    grid-template-columns: 20% 20% 20% auto;
+    grid-template-columns: 1fr 1fr 1fr 2fr;
     grid-template-rows: auto;
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
-    row-gap: 2rem;
-    column-gap: 2rem;
+    grid-gap: 2rem;
   }
 
   @media (min-width: ${gridBreakpoint}) {
-    grid-template-columns: 20% 20% 20% auto;
-    grid-template-rows: auto;
     grid-template-areas:
       'level level level progress'
       'metric1 metric2 metric3 metricVax';
-      row-gap: 2rem;
-      column-gap: 2rem;
   }
 `;
 
