@@ -25,4 +25,8 @@ export const StyledBaseButton = styled(BaseButton)`
   text-transform: none;
   letter-spacing: 0;
   padding: 0;
+
+  &:hover {
+    background-color: transparent;
+  }
 `;
