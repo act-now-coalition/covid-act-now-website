@@ -1,5 +1,5 @@
 import { CcviLevel, getCcviLevel } from 'common/ccvi/index';
 
-export function isHighVulnerability(score: number) {
+export function hasVeryHighVulnerability(score: number) {
   return getCcviLevel(score) === CcviLevel.VERY_HIGH;
 }

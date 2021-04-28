@@ -6,7 +6,7 @@ import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { COLOR_MAP } from 'common/colors';
 
 // Move elsewhere--max content width for the whole page
-export const maxContentWidth = '880px';
+export const maxContentWidth = '960px';
 
 export const SectionContainer = styled.div`
   display: flex;
@@ -14,7 +14,6 @@ export const SectionContainer = styled.div`
   background-color: white;
   border-radius: 4px;
   padding: 1.25rem;
-  // max-width: ${maxContentWidth};
 
   @media (min-width: ${mobileBreakpoint}) {
     padding: 1.5rem;

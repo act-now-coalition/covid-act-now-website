@@ -4,7 +4,7 @@ import VaccineButton from './VaccineButton';
 
 const HeaderButtons: React.FC = () => {
   return (
-    <div style={{ maxWidth: '880px', display: 'flex' }}>
+    <div style={{ display: 'flex' }}>
       <ShareButton />
       <VaccineButton />
     </div>

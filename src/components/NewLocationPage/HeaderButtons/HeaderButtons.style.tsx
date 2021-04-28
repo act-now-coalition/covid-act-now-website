@@ -35,10 +35,9 @@ export const ShareButtonWrapper = styled.div`
     border: 1px solid transparent;
     background-color: inherit;
     width: 100%;
+    border-radius: 0 0 4px 4px;
 
     &:hover {
-      border: ${props =>
-        `1px solid ${props.theme.buttons[ButtonType.OUTLINE].borderHover}`};
       background-color: ${props =>
         props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
     }
@@ -48,6 +47,14 @@ export const ShareButtonWrapper = styled.div`
     margin: 0 0.5rem 0 0.5rem;
     ${LargeOutlinedButton} {
       width: unset;
+      border-radius: 4px;
+
+      &:hover {
+        border: ${props =>
+          `1px solid ${props.theme.buttons[ButtonType.OUTLINE].borderHover}`};
+        background-color: ${props =>
+          props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
+      }
     }
   }
 `;

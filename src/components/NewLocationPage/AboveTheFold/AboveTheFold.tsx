@@ -12,34 +12,45 @@ import {
 } from './AboveTheFold.style';
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
-// import NotesBlock from '../NotesBlock'
-import {
-  Example as NotesBlockExample,
-  OverviewStandIn,
-} from '../NotesBlock/NotesBlock.stories';
+import LocationOverview from '../LocationOverview';
+import VulnerabilityNote from '../NotesBlock/VulnerabilityNote';
 import GetAlertsBlock from '../GetAlertsBlock';
 import { CountyMap } from '../CountyMap';
 import HeaderButtons from '../HeaderButtons';
 import { Projection } from 'common/models/Projection';
 import { Region } from 'common/regions';
+import { LocationSummary } from 'common/location_summaries';
+import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
+import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButton';
 
 interface AboveTheFoldProps {
   projection: Projection;
   region: Region;
+  locationSummary: LocationSummary;
 }
 
-const AboveTheFold: React.FC<AboveTheFoldProps> = ({ projection, region }) => {
+const AboveTheFold: React.FC<AboveTheFoldProps> = ({
+  projection,
+  region,
+  locationSummary,
+}) => {
+  console.log('locationSummary', locationSummary);
   return (
     <MainWrapper>
       <GridContainer>
         <GridItemHeader>
           <HeaderContainer>
             <LocationName region={region} />
-            <HeaderButtons />
+            <DesktopOnly>
+              <HeaderButtons />
+            </DesktopOnly>
+            <MobileOnly>
+              <VaccineButton />
+            </MobileOnly>
           </HeaderContainer>
         </GridItemHeader>
         <GridItemOverview>
-          <OverviewStandIn />
+          <LocationOverview region={region} locationSummary={locationSummary} />
         </GridItemOverview>
         <GridItemSparkLines>
           <SparkLineBlock projection={projection} />
@@ -51,7 +62,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({ projection, region }) => {
           <CountyMap region={region} />
         </GridItemMap>
         <GridItemNote>
-          <NotesBlockExample />
+          <VulnerabilityNote ccviScore={locationSummary.ccvi} />
         </GridItemNote>
       </GridContainer>
     </MainWrapper>
