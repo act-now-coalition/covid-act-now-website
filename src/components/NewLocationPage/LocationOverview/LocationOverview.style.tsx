@@ -1,34 +1,42 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
+
+// adding 100px to the large mobile breakpoint to minimize the wrapping of metric names:
+const gridBreakpoint = '900px';
 
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-rows: grid-template-rows: repeat(6, auto);
   grid-template-areas: 'level' 'metric1' 'metric2' 'metric3' 'metricVax' 'progress';
+  row-gap: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    grid-template-columns: [vl-start] 20 [vl-1] 20 [vl-2] 20 [vl-3] auto [vl-end];
-    grid-template-rows: [hl-start] 50 [hl-1] auto [hl-end];
+    grid-template-columns: 20% 20% 20% auto;
+    grid-template-rows: auto;
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
+    row-gap: 2rem;
+    column-gap: 2rem;
   }
 
-  @media (min-width: ${mobileBreakpoint}) {
-    grid-template-columns: [vl-start] 20 [vl-1] 20 [vl-2] 20 [vl-3] auto [vl-end];
-    grid-template-rows: [hl-start] 50 [hl-1] auto [hl-end];
+  @media (min-width: ${gridBreakpoint}) {
+    grid-template-columns: 20% 20% 20% auto;
+    grid-template-rows: auto;
     grid-template-areas:
       'level level level progress'
       'metric1 metric2 metric3 metricVax';
+      row-gap: 2rem;
+      column-gap: 2rem;
   }
 `;
 
 export const GridItemLevel = styled.div`
   grid-area: level;
+  padding-bottom: 0.5rem;
   justify-self: center;
-  margin-bottom: 2rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     justify-self: inherit;
@@ -41,44 +49,29 @@ export const GridItemProgress = styled.div`
   border-bottom: 1px solid ${COLOR_MAP.GREY_1};
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 2rem;
     padding-bottom: 0;
     border-bottom: none;
   }
 `;
 
-const NonVaxMetricStyles = css`
-  margin-bottom: 1.75rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 0;
-    margin-right: 1rem;
-  }
-`;
-
 export const GridItemMetric1 = styled.div`
   grid-area: metric1;
-  ${NonVaxMetricStyles};
 `;
 
 export const GridItemMetric2 = styled.div`
   grid-area: metric2;
-  ${NonVaxMetricStyles};
 `;
 
 export const GridItemMetric3 = styled.div`
   grid-area: metric3;
-  ${NonVaxMetricStyles};
 `;
 
 export const GridItemMetricVax = styled.div`
   grid-area: metricVax;
   padding-top: 1.5rem;
   border-top: 1px solid ${COLOR_MAP.GREY_1};
-  margin-bottom: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin-bottom: 0;
     padding-top: 0;
     border-top: none;
   }
