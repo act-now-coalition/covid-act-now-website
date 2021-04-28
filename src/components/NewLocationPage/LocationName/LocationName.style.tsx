@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { COLOR_MAP } from 'common/colors';
 
 export const RegionNameContainer = styled.div`
   text-align: center;
@@ -18,4 +19,12 @@ export const RegionNameText = styled.h1`
 export const MultiStateText = styled.div`
   font-size: 1rem;
   font-weight: 500;
+`;
+
+export const UpdatedOnText = styled.h2`
+  font-size: 1rem;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0.25rem 0;
+  color: ${COLOR_MAP.GREY_4};
 `;
