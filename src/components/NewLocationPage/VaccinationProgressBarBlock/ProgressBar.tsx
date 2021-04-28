@@ -1,20 +1,16 @@
 import React from 'react';
 import { ParentSize } from '@vx/responsive';
 import { v4 as uuidv4 } from 'uuid';
-import { ProgressBarContainer } from './VaccinationProgressBar.style';
+import { ProgressBarContainer } from './VaccinationProgressBarBlock.style';
 import { COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
+import { ProgressBarProps } from './VaccinationProgressBarBlock';
 
 function getOffsetPercentage(decimal: number) {
   return formatPercent(decimal, 1);
 }
 
-const ProgressBar: React.FC<{
-  vaccinationsInitiated: number;
-  vaccinationsCompleted: number;
-  locationName: string;
-  width: number;
-}> = ({
+const ProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
   vaccinationsInitiated,
   vaccinationsCompleted,
   locationName,
@@ -41,19 +37,19 @@ const ProgressBar: React.FC<{
       <defs>
         <linearGradient id={gradientId}>
           <stop
-            offset={getOffsetPercentage(vaccinationsInitiated)}
+            offset={getOffsetPercentage(vaccinationsCompleted)}
             stopColor={initiatedFill}
           />
           <stop
+            offset={getOffsetPercentage(vaccinationsCompleted)}
+            stopColor={completedFill}
+          />
+          <stop
             offset={getOffsetPercentage(vaccinationsInitiated)}
             stopColor={completedFill}
           />
           <stop
-            offset={getOffsetPercentage(vaccinationsCompleted)}
-            stopColor={completedFill}
-          />
-          <stop
-            offset={getOffsetPercentage(vaccinationsCompleted)}
+            offset={getOffsetPercentage(vaccinationsInitiated)}
             stopColor={backgroundFill}
           />
           <stop offset="100%" stopColor={backgroundFill} />
@@ -70,11 +66,11 @@ const ProgressBar: React.FC<{
   );
 };
 
-const VaccinationProgressBarAutosize: React.FC<{
-  vaccinationsInitiated: number;
-  vaccinationsCompleted: number;
-  locationName: string;
-}> = ({ vaccinationsInitiated, vaccinationsCompleted, locationName }) => {
+const ProgressBarAutosize: React.FC<ProgressBarProps> = ({
+  vaccinationsInitiated,
+  vaccinationsCompleted,
+  locationName,
+}) => {
   return (
     <ProgressBarContainer>
       <ParentSize>
@@ -91,4 +87,4 @@ const VaccinationProgressBarAutosize: React.FC<{
   );
 };
 
-export default VaccinationProgressBarAutosize;
+export { ProgressBarAutosize as ProgressBar };
