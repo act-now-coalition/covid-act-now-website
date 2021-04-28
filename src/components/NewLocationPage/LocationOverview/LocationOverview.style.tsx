@@ -8,12 +8,11 @@ const gridBreakpoint = '900px';
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: grid-template-rows: repeat(6, auto);
   grid-template-areas: 'level' 'metric1' 'metric2' 'metric3' 'metricVax' 'progress';
   row-gap: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas:
       'level level progress progress'
@@ -22,6 +21,7 @@ export const GridContainer = styled.div`
   }
 
   @media (min-width: ${gridBreakpoint}) {
+    grid-template-columns: 1fr 1fr 1fr 2fr;
     grid-template-areas:
       'level level level progress'
       'metric1 metric2 metric3 metricVax';
