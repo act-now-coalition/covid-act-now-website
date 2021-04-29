@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
 import NavBar from 'components/NavBar';
-import SearchHeader from 'components/Header/SearchHeader';
+// import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import MiniMap from 'components/MiniMap';
+// import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
@@ -21,6 +21,9 @@ function LocationPage({ region }: LocationPageProps) {
   const defaultMapOption = getDefaultMapOption(region);
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  console.log('mapOption', mapOption);
+  console.log('mobileMenuOpen', mobileMenuOpen);
 
   useEffect(() => {
     setMapOption(defaultMapOption);
