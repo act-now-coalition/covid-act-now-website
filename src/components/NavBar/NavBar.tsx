@@ -1,11 +1,12 @@
 import React from 'react';
-import NavBarWithSearch from './NavBarWithSearch/NavBarWithSearch';
-// import NavBarWithoutSearch from './NavBarWithoutSearch/NavBarWithoutSearch';
+import { useLocation } from 'react-router-dom';
+import NavAllOtherPages from './NavAllOtherPages/NavAllOtherPages';
+import NavLocationPage from './NavLocationPage/NavLocationPage';
 
 const noop = () => {};
 
 const NavBar: React.FC<{
-  renderSearch?: () => React.ReactElement;
+  renderSearch: () => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
   menuOpen?: boolean;
   setMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,18 +16,25 @@ const NavBar: React.FC<{
   menuOpen = false,
   setMenuOpen = noop,
 }) => {
+  const { pathname } = useLocation();
+  const isLocationPage = pathname.includes('/us');
+
   return (
     <>
-      {renderSearch ? (
-        <NavBarWithSearch
+      {isLocationPage ? (
+        <NavLocationPage
           renderSecondaryElement={renderSecondaryElement}
           renderSearch={renderSearch}
           menuOpen={menuOpen}
           setMenuOpen={setMenuOpen}
         />
       ) : (
-        <div>Hello</div>
-        // <NavBarWithoutSearch renderSecondaryElement={renderSecondaryElement} />
+        <NavAllOtherPages
+          renderSecondaryElement={renderSecondaryElement}
+          renderSearch={renderSearch}
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+        />
       )}
     </>
   );

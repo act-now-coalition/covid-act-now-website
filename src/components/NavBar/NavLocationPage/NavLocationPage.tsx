@@ -1,9 +1,7 @@
 /**
- * Navbar for the location page
- *
- * Unlike all other pages, the location page does not render search in the navbar
+ * Navbar for the location page.
+ * Renders search+other items differently than on other pages.
  */
-// import React, { useState } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ClickAwayListener } from '@material-ui/core';
@@ -15,14 +13,12 @@ import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from 'components/NavBar/utils';
 import { useBreakpoint } from 'common/hooks';
 
-const NavBarWithoutSearch: React.FC<{
+const NavLocationPage: React.FC<{
   renderSearch: (menuOpen: boolean) => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ renderSearch, renderSecondaryElement, menuOpen, setMenuOpen }) => {
-  // const [menuOpen, setMenuOpen] = useState(false);
-
   const isEmbed = useIsEmbed();
 
   const isMobile = useBreakpoint(800);
@@ -87,7 +83,6 @@ const NavBarWithoutSearch: React.FC<{
           <Style.GridItemLogo>
             <Link
               to="/"
-              // style={{ display: 'inline-flex', zIndex: 10000 }}
               onClick={() => onClickTopNavItem('Home (Logo)')}
               aria-label="Covid Act Now"
             >
@@ -118,4 +113,4 @@ const NavBarWithoutSearch: React.FC<{
   );
 };
 
-export default NavBarWithoutSearch;
+export default NavLocationPage;

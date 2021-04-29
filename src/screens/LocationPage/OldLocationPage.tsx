@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
-// import NavBar, { NavBarSearch } from 'components/NavBar';
-import { NavBarSearch } from 'components/NavBar';
-import NavBarWithoutSearch from 'components/NavBar/NavBarWithoutSearch/NavBarWithoutSearch';
-// import SearchHeader from 'components/Header/SearchHeader';
+import NavBar from 'components/NavBar';
+import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
@@ -17,19 +15,12 @@ interface LocationPageProps {
   region: Region;
 }
 
-function WithSearchInNav({ region }: LocationPageProps) {
+function LocationPage({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
   const defaultMapOption = getDefaultMapOption(region);
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const [menuOpen, setMenuOpen] = useState(false);
-  const hasScrolled = true;
-
-  const renderNavBarSearch = () => (
-    <>{hasScrolled && <NavBarSearch menuOpen={menuOpen} />}</>
-  );
 
   useEffect(() => {
     setMapOption(defaultMapOption);
@@ -45,17 +36,15 @@ function WithSearchInNav({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      <NavBarWithoutSearch
+      <NavBar
+        renderSearch={() => <></>}
         renderSecondaryElement={() => <DonateButtonHeart />}
-        renderSearch={renderNavBarSearch}
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
       />
       <div>
-        {/* <SearchHeader
+        <SearchHeader
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-        /> */}
+        />
         <ChartsHolder chartId={chartId} region={region} />
         <MiniMap
           region={region}
@@ -79,4 +68,4 @@ function getDefaultMapOption(region: Region) {
   return MAP_FILTERS.STATE;
 }
 
-export default WithSearchInNav;
+export default LocationPage;

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
-import NavBar from 'components/NavBar';
-import SearchHeader from 'components/Header/SearchHeader';
+import NavBar, { NavBarSearch } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
@@ -15,12 +14,23 @@ interface LocationPageProps {
   region: Region;
 }
 
-function LocationPage({ region }: LocationPageProps) {
+function WithSearchInNav({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
 
   const defaultMapOption = getDefaultMapOption(region);
   const [mapOption, setMapOption] = useState(defaultMapOption);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const hasScrolled = true;
+
+  const renderNavBarSearch = () => (
+    <>
+      {hasScrolled && (
+        <NavBarSearch menuOpen={menuOpen} WrappingDiv={Fragment} />
+      )}
+    </>
+  );
 
   useEffect(() => {
     setMapOption(defaultMapOption);
@@ -36,12 +46,13 @@ function LocationPage({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      <NavBar renderSecondaryElement={() => <DonateButtonHeart />} />
+      <NavBar
+        renderSecondaryElement={() => <DonateButtonHeart />}
+        renderSearch={renderNavBarSearch}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+      />
       <div>
-        <SearchHeader
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-        />
         <ChartsHolder chartId={chartId} region={region} />
         <MiniMap
           region={region}
@@ -65,4 +76,4 @@ function getDefaultMapOption(region: Region) {
   return MAP_FILTERS.STATE;
 }
 
-export default LocationPage;
+export default WithSearchInNav;

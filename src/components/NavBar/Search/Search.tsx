@@ -7,7 +7,10 @@ import { Wrapper } from './Search.style';
 import { useGeolocation, useCountyToZipMap } from 'common/hooks';
 import { getFinalAutocompleteLocations } from 'common/regions';
 
-const Search: React.FC<{ menuOpen: boolean }> = ({ menuOpen }) => {
+const Search: React.FC<{ menuOpen: boolean; WrappingDiv?: any }> = ({
+  menuOpen,
+  WrappingDiv = Wrapper,
+}) => {
   const theme = useContext(ThemeContext);
 
   const { pathname } = useLocation();
@@ -28,13 +31,13 @@ const Search: React.FC<{ menuOpen: boolean }> = ({ menuOpen }) => {
         searchbar: navTheme,
       }}
     >
-      <Wrapper>
+      <WrappingDiv>
         <HomepageSearchAutocomplete
           locations={searchLocations}
           filterLimit={getFilterLimit()}
           menuOpen={menuOpen}
         />
-      </Wrapper>
+      </WrappingDiv>
     </ThemeProvider>
   );
 };

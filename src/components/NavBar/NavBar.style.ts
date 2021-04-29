@@ -180,7 +180,7 @@ export const MenuIcon = styled(MuiMenuIcon)`
 export const MenuLabel = styled.span`
   display: none;
 
-  @media (min-width: ${materialSMBreakpoint}) {
+  @media (min-width: ${mobileBreakpoint}) {
     display: inherit;
     margin-right: 0.5rem;
   }
