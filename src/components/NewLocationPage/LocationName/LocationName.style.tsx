@@ -23,7 +23,6 @@ export const MultiStateText = styled.div`
 
 export const UpdatedOnText = styled.h2`
   font-size: 1rem;
-  text-transform: uppercase;
   line-height: 1;
   margin: 0.25rem 0;
   color: ${COLOR_MAP.GREY_4};
