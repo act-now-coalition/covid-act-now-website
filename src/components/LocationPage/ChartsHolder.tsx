@@ -24,6 +24,7 @@ import { useProjectionsFromRegion } from 'common/utils/model';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import LocationPageHeader from './LocationPageHeader';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
+import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
 
 // TODO: 200 is rough accounting for the navbar and searchbar;
 // could make these constants so we don't have to manually update
