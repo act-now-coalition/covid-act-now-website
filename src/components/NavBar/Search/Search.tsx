@@ -4,8 +4,7 @@ import { ThemeProvider, ThemeContext } from 'styled-components';
 import { navSearchbar, navSearchbarLocPage } from 'assets/theme';
 import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
 import { Wrapper } from './Search.style';
-import { useGeolocation, useCountyToZipMap } from 'common/hooks';
-import { getFinalAutocompleteLocations } from 'common/regions';
+import { useFinalAutocompleteLocations } from 'common/hooks';
 
 const Search: React.FC<{ menuOpen: boolean; WrappingDiv?: any }> = ({
   menuOpen,
@@ -17,12 +16,7 @@ const Search: React.FC<{ menuOpen: boolean; WrappingDiv?: any }> = ({
   const isLocationPage = pathname.includes('/us');
   const navTheme = isLocationPage ? navSearchbarLocPage : navSearchbar;
 
-  const { geolocationData } = useGeolocation();
-  const { result: countyToZipMap } = useCountyToZipMap();
-  const searchLocations = getFinalAutocompleteLocations(
-    geolocationData,
-    countyToZipMap,
-  );
+  const searchLocations = useFinalAutocompleteLocations();
 
   return (
     <ThemeProvider
