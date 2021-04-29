@@ -1,4 +1,5 @@
 import React from 'react';
+import GetVaccinatedBanner from './GetVaccinatedBanner';
 import {
   DonationBanner,
   SpringSurgeBanner,
@@ -18,3 +19,5 @@ export const SummerSurge = () => <SpringSurgeBanner />;
 export const Vaccinations = () => <VaccinationsBanner />;
 
 export const Vaccinations100 = () => <Vaccinations100M />;
+
+export const GetVaccinated = () => <GetVaccinatedBanner />;
