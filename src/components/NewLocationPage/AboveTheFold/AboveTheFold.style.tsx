@@ -63,9 +63,8 @@ export const GridItemAlerts = styled.div`
 `;
 
 export const GridItemMap = styled.div`
-  align-self: start;
   grid-area: map;
-  background-color: white;
+  align-self: start;
 `;
 
 export const GridItemNote = styled.div`

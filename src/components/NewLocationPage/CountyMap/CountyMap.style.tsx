@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { FixedAspectRatioContainer } from 'components/FixedAspectRatio/FixedAspectRatio.style';
 
 const desktopMapWidth = 320;
 export const mapToFixedBreakpoint = 1320;
@@ -14,6 +15,12 @@ export const PinnedContainer = css`
 
 export const MapContainer = styled.div`
   width: 100%;
+  background: white;
+  border-radius: 4px;
+
+  ${FixedAspectRatioContainer} {
+    border-radius: 4px;
+  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     width: ${desktopMapWidth}px;

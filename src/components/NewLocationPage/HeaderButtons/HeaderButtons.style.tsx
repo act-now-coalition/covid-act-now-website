@@ -11,6 +11,7 @@ export const VaccineButtonWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
 
   ${LargeFilledButton} {
     width: 100%;
@@ -31,7 +32,6 @@ export const VaccineButtonWrapper = styled.div`
 `;
 
 export const ShareButtonWrapper = styled.div`
-  z-index: 1;
   ${LargeOutlinedButton} {
     border: 1px solid transparent;
     background-color: inherit;
