@@ -6,7 +6,7 @@ import { mapToFixedBreakpoint } from '../CountyMap';
 
 export const MainWrapper = styled.div`
   background-color: ${COLOR_MAP.GREY_0};
-  padding: 15px; //remove
+  padding: 2rem 1rem 1rem; //change this
 `;
 
 export const HeaderContainer = styled.div`
@@ -22,6 +22,7 @@ export const HeaderContainer = styled.div`
 export const GridContainer = styled.div`
   display: grid;
   max-width: ${maxContentWidth};
+  margin: auto;
   row-gap: 1rem;
   grid-template-areas: 'header' 'overview' 'spark' 'map' 'note' 'alerts';
 
@@ -37,12 +38,17 @@ export const GridContainer = styled.div`
   }
 
   @media (min-width: ${mapToFixedBreakpoint}px) {
+    margin: 0 350px 0 auto;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'header header'
       'overview overview'
       'spark alerts'
       'note note';
+  }
+
+  @media (min-width: 1750px) {
+    margin: auto;
   }
 `;
 

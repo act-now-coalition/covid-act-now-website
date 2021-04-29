@@ -1,9 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
+
 import { NavBarSearch } from 'components/NavBar';
+
+// import NavBar from 'components/NavBar';
+// import SearchHeader from 'components/Header/SearchHeader';
+
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import MiniMap from 'components/MiniMap';
+// import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
@@ -32,6 +37,9 @@ function WithSearchInNav({ region }: LocationPageProps) {
     </>
   );
 
+  console.log('mapOption', mapOption);
+  console.log('mobileMenuOpen', mobileMenuOpen);
+
   useEffect(() => {
     setMapOption(defaultMapOption);
     // Close the map on mobile on any change to a region.
@@ -54,13 +62,17 @@ function WithSearchInNav({ region }: LocationPageProps) {
         hasScrolled={hasScrolled}
       />
       <div>
+        {/* <SearchHeader
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+        /> */}
         <ChartsHolder chartId={chartId} region={region} />
-        <MiniMap
+        {/* <MiniMap
           region={region}
           mobileMenuOpen={mobileMenuOpen}
           mapOption={mapOption}
           setMapOption={setMapOption}
-        />
+        /> */}
       </div>
     </div>
   );
