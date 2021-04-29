@@ -5,51 +5,31 @@ import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const ChartTitleWrapper = styled.div`
   display: flex;
-  flex-wrap: nowrap;
   margin-bottom: 0.5rem;
-
   ${Chevron} {
     transform: none;
     margin-left: 0.25rem;
   }
 `;
 
-export const ChartTitle = styled.span`
-  ${props => props.theme.fonts.regularBookMidweight};
-  font-size: 1rem;
-  max-width: 65px;
+export const TitleItem = styled.div`
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-export const SetContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+export const IconItem = styled.div`
+  flex: 1 0 24px;
+`;
 
-  @media (min-width: ${mobileBreakpoint}) {
-    justify-content: space-between;
-  }
+export const ChartTitle = styled.span`
+  ${props => props.theme.fonts.regularBookMidweight};
+  font-size: 1rem;
 `;
 
 // Specific pixel dimensions via mocks
 export const SingleSparkLineContainer = styled.div`
-  width: 90px;
   height: 48px;
-  margin-bottom: 1.5rem;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    width: 96px;
-  }
-
-  @media (min-width: 1000px) {
-    width: 120px;
-    height: 60px;
-  }
-
-  @media (min-width: 1320px) {
-    width: 96px;
-    height: 48px;
-  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -67,3 +47,17 @@ export const StyledLink = styled(Link)`
     }
   }
 `;
+
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+`;
+
+export const GridItem = styled.div``;

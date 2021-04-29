@@ -1,7 +1,8 @@
 import React from 'react';
 import SparkLine from './SparkLine';
+import { ParentSize } from '@vx/responsive';
 import ChartTitle from './ChartTitle';
-import { SetContainer, StyledLink } from './SparkLineBlock.style';
+import { StyledLink, GridContainer, GridItem } from './SparkLineBlock.style';
 import { Projection } from 'common/models/Projection';
 import {
   SPARK_LINE_METRICS,
@@ -19,7 +20,7 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
   const dateTo = new Date();
   const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
   return (
-    <SetContainer>
+    <GridContainer>
       {SPARK_LINE_METRICS.map((metric: SparkLineMetric) => {
         const { title, seriesList } = sparkLinesMetricData[metric];
         const metricSeries = getSparkLineSeriesFromProjection(
@@ -29,18 +30,26 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
         const rawData = getDataFromSeries(metricSeries[0], dateFrom);
         const smoothedData = getDataFromSeries(metricSeries[1], dateFrom);
         return (
-          <StyledLink to="/" key={title}>
-            <ChartTitle title={title} />
-            <SparkLine
-              rawData={rawData}
-              smoothedData={smoothedData}
-              dateFrom={dateFrom}
-              dateTo={dateTo}
-            />
-          </StyledLink>
+          <GridItem key={title}>
+            <ParentSize>
+              {({ width }) => (
+                <div style={{ width }}>
+                  <StyledLink to="/">
+                    <ChartTitle title={title} />
+                    <SparkLine
+                      rawData={rawData}
+                      smoothedData={smoothedData}
+                      dateFrom={dateFrom}
+                      dateTo={dateTo}
+                    />
+                  </StyledLink>
+                </div>
+              )}
+            </ParentSize>
+          </GridItem>
         );
       })}
-    </SetContainer>
+    </GridContainer>
   );
 };
 
