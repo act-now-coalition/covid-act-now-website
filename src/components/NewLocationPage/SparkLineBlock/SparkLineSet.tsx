@@ -34,7 +34,7 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
             <ParentSize>
               {({ width }) => (
                 <div style={{ width }}>
-                  <StyledLink to="/">
+                  <StyledLink to="#explore-chart" key={title}>
                     <ChartTitle title={title} />
                     <SparkLine
                       rawData={rawData}
