@@ -17,10 +17,11 @@ const SparkLineInner: React.FC<{
   height: number;
 }> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
   const maxY = getOverallMaxY(smoothedData, rawData);
+  const paddingTop = 5;
 
   const yScale = scaleLinear({
     domain: [0, maxY],
-    range: [height, 0],
+    range: [height, paddingTop],
   });
 
   const xScale = scaleUtc({

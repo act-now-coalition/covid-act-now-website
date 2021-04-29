@@ -25,12 +25,17 @@ export const ChartTitle = styled.span`
 export const SetContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    justify-content: space-between;
+  }
 `;
 
 // Specific pixel dimensions via mocks
 export const SingleSparkLineContainer = styled.div`
   width: 90px;
   height: 48px;
+  margin-bottom: 1.5rem;
 
   @media (min-width: ${mobileBreakpoint}) {
     width: 96px;
