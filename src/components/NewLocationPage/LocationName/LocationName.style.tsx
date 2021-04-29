@@ -10,20 +10,12 @@ export const RegionNameContainer = styled.div`
 `;
 
 export const RegionNameText = styled.h1`
-  font-weight: normal;
+  ${props => props.theme.fonts.regularBook};
   font-size: 2rem;
   line-height: 1.3;
-  margin: 0.1rem 0;
-`;
-
-export const MultiStateText = styled.div`
-  font-size: 1rem;
-  font-weight: 500;
+  margin: 0 0 0.5rem;
 `;
 
 export const UpdatedOnText = styled.span`
-  font-size: 1rem;
-  line-height: 1;
-  margin-top: 0.5rem;
   color: ${COLOR_MAP.GREY_4};
 `;
