@@ -32,15 +32,15 @@ const FeaturedSection: React.FC<{
     [SectionId.DAILY_DOWNLOAD]: DailyDownloadIcon,
     [SectionId.ALERTS]: AlertsIcon,
   };
-
+  const testAPITitle = 'Data API';
+  const testAPIDescription =
+    'Get realtime, local data including daily new cases, % vaccinated, and more.';
   return (
     <Section>
       <SectionHeader $desktopOnly={true}>Featured</SectionHeader>
       {featuredSections.map((section: FeaturedItem) => {
         const { url, cta, description, iconId } = section;
-
         const Icon = idToIconMap[iconId];
-
         const hashlinkProps =
           iconId === SectionId.ALERTS
             ? {
@@ -49,11 +49,6 @@ const FeaturedSection: React.FC<{
                   scrollWithOffset(element, -80),
               }
             : {};
-
-        const testAPITitle = 'Data API';
-        const testAPIDescription =
-          'Get realtime, local data including daily new cases, % vaccinated, and more.';
-
         return (
           <RowWithSpacing onClick={() => onClick(cta)} key={cta}>
             <IconWrapper>
