@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Fade from '@material-ui/core/Fade';
 import Map from 'components/Map/Map';
-import NavBar, { NavBarSearch } from 'components/NavBar';
+import { NavBarSearch } from 'components/NavBar';
+import NavAllOtherPages from 'components/NavBar/NavAllOtherPages/NavAllOtherPages';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -141,7 +142,7 @@ export default function HomePage() {
         pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
-      <NavBar
+      <NavAllOtherPages
         renderSearch={renderNavBarSearch}
         renderSecondaryElement={renderDonateButton}
         menuOpen={menuOpen}

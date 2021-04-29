@@ -15,9 +15,6 @@ const NavBar: React.FC<{
   menuOpen = false,
   setMenuOpen = noop,
 }) => {
-  // const { pathname } = useLocation();
-  // const isLocationPage = pathname.includes('/us');
-
   return (
     <>
       {/* {isLocationPage ? (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
-import NavBar from 'components/NavBar';
+// import NavBar from 'components/NavBar';
 import SearchHeader from 'components/Header/SearchHeader';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
@@ -36,10 +36,10 @@ function LocationPage({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      <NavBar
+      {/* <NavBar
         renderSearch={() => <></>}
         renderSecondaryElement={() => <DonateButtonHeart />}
-      />
+      /> */}
       <div>
         <SearchHeader
           mobileMenuOpen={mobileMenuOpen}
