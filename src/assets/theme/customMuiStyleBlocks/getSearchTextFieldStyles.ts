@@ -35,3 +35,38 @@ export const getSearchTextFieldStyles = makeStyles(theme => ({
     },
   },
 }));
+
+// export const getSearchTextFieldStyles = makeStyles(theme => ({
+//   root: {
+//     backgroundColor: 'transparent',
+//     background: 'transparent',
+//     borderRadius: '99px',
+//     border: 'none',
+//     '& .MuiOutlinedInput-root': {
+//       height: '52px',
+//       padding: 'inherit',
+//       paddingLeft: '1rem',
+//       '& fieldset': {
+//         // borderColor: COLOR_MAP.GRAY.LIGHT,
+//         // border: `1.5px solid ${COLOR_MAP.GRAY.LIGHT}`,
+//         borderRadius: '99px',
+//         borderColor: 'transparent',
+//         border: '1.5px solid transparent',
+//       },
+//       '&:hover fieldset': {
+//         // borderColor: COLOR_MAP.GRAY.LIGHT,
+//         borderColor: 'transparent',
+//       },
+//       '&.Mui-focused fieldset': {
+//         borderColor: COLOR_MAP.BLUE,
+//         border: `1.5px solid ${COLOR_MAP.BLUE}`,
+//         borderRadius: '99px',
+//       },
+//       '& input::placeholder': {
+//         color: COLOR_MAP.GRAY_BODY_COPY,
+//         opacity: 1,
+//         fontSize: 0
+//       },
+//     },
+//   },
+// }));

@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBarWithSearch from './NavBarWithSearch/NavBarWithSearch';
-import NavBarWithoutSearch from './NavBarWithoutSearch/NavBarWithoutSearch';
+// import NavBarWithoutSearch from './NavBarWithoutSearch/NavBarWithoutSearch';
 
 const noop = () => {};
 
@@ -25,7 +25,8 @@ const NavBar: React.FC<{
           setMenuOpen={setMenuOpen}
         />
       ) : (
-        <NavBarWithoutSearch renderSecondaryElement={renderSecondaryElement} />
+        <div>Hello</div>
+        // <NavBarWithoutSearch renderSecondaryElement={renderSecondaryElement} />
       )}
     </>
   );

@@ -3,11 +3,12 @@
  *
  * Unlike all other pages, the location page does not render search in the navbar
  */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import React, { useState } from 'react';
+import React from 'react';
+// import { Link } from 'react-router-dom';
 import { ClickAwayListener } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import Logo from 'assets/images/logo';
+// import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NavBar/MegaMenu/MegaMenu';
 import * as Style from 'components/NavBar/NavBar.style';
 import { useIsEmbed } from 'common/utils/hooks';
@@ -15,9 +16,12 @@ import { trackNavigation, trackMobileMenuOpen } from 'components/NavBar/utils';
 import { useBreakpoint } from 'common/hooks';
 
 const NavBarWithoutSearch: React.FC<{
+  renderSearch: (menuOpen: boolean) => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
-}> = ({ renderSecondaryElement }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  menuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ renderSearch, renderSecondaryElement, menuOpen, setMenuOpen }) => {
+  // const [menuOpen, setMenuOpen] = useState(false);
 
   const isEmbed = useIsEmbed();
 
@@ -76,17 +80,18 @@ const NavBarWithoutSearch: React.FC<{
         >
           <ArrowBack />
         </Style.BackLink>
-        <Link
+        {/* <Link
           to="/"
           style={{ display: 'inline-flex', zIndex: 10000 }}
           onClick={() => onClickTopNavItem('Home (Logo)')}
           aria-label="Covid Act Now"
         >
           <Logo />
-        </Link>
+        </Link> */}
+        {renderSearch(menuOpen)}
         <Style.Spacer />
         <>
-          {renderSecondaryElement()}
+          {/* {renderSecondaryElement()} */}
           <ClickAwayListener onClickAway={closeMenu}>
             <Style.IconButton
               onClick={onClickHamburger}

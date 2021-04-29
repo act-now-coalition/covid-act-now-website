@@ -2,7 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { useRegionFromParams, State, County } from 'common/regions';
-import LocationPage from './LocationPage';
+// import LocationPage from './LocationPage';
+import WithSearchInNav from './WithSearchInNav';
 
 const LocationRouter: React.FC = () => {
   const { stateId } = useParams<{
@@ -24,7 +25,7 @@ const LocationRouter: React.FC = () => {
     return <Redirect to={region.relativeUrl} />;
   }
 
-  return <LocationPage region={region} />;
+  return <WithSearchInNav region={region} />;
 };
 
 export default LocationRouter;
