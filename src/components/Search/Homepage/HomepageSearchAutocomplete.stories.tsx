@@ -1,7 +1,11 @@
 import React from 'react';
 import HomepageSearchAutocomplete from './HomepageSearchAutocomplete';
 import { getFilterLimit } from 'components/Search';
-import { getFinalAutocompleteLocations } from 'common/regions';
+import {
+  getFinalAutocompleteLocations,
+  getGeolocatedRegions,
+} from 'common/regions';
+import countyToZipMap from 'common/data/county-zipcode.json';
 
 export default {
   title: 'Shared Components/HomepageSearchAutocomplete',
@@ -14,7 +18,8 @@ export const Home = () => {
     stateCode: 'CT',
     country: 'United States',
   };
-  const locations = getFinalAutocompleteLocations(geolocation);
+  const geolocatedRegions = getGeolocatedRegions(geolocation, countyToZipMap);
+  const locations = getFinalAutocompleteLocations(geolocatedRegions);
   return (
     <HomepageSearchAutocomplete
       locations={locations}

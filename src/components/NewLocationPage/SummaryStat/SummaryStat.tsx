@@ -7,7 +7,7 @@ import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
 import { getMetricNameForStat, metricSubLabelText } from './utils';
 
-const SummaryStat: React.FC<{ metric: Metric; value: number }> = ({
+const SummaryStat: React.FC<{ metric: Metric; value: number | null }> = ({
   metric,
   value,
 }) => {

@@ -3,18 +3,12 @@ import { ThemeProvider, ThemeContext } from 'styled-components';
 import { navSearchbar } from 'assets/theme';
 import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
 import { Wrapper } from './Search.style';
-import { useGeolocation, useCountyToZipMap } from 'common/hooks';
-import { getFinalAutocompleteLocations } from 'common/regions';
+import { useFinalAutocompleteLocations } from 'common/hooks';
 
 const Search: React.FC<{ menuOpen: boolean }> = ({ menuOpen }) => {
   const theme = useContext(ThemeContext);
 
-  const { geolocationData } = useGeolocation();
-  const { result: countyToZipMap } = useCountyToZipMap();
-  const searchLocations = getFinalAutocompleteLocations(
-    geolocationData,
-    countyToZipMap,
-  );
+  const searchLocations = useFinalAutocompleteLocations();
 
   return (
     <ThemeProvider
