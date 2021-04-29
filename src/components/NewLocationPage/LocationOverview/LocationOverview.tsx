@@ -10,12 +10,14 @@ import {
   GridItemMetric1,
   GridItemMetric2,
   GridItemMetric3,
+  OverviewSectionContainer,
 } from './LocationOverview.style';
-import { SectionContainer } from '../Shared/Shared.style';
+import { MobileOnly } from '../Shared/Shared.style';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from '../SummaryStat/utils';
 import { Metric } from 'common/metricEnum';
+import ShareButton from 'components/NewLocationPage/HeaderButtons/ShareButton';
 
 const LocationOverview: React.FC<{
   region: Region;
@@ -24,7 +26,7 @@ const LocationOverview: React.FC<{
   const stats = summaryToStats(locationSummary);
 
   return (
-    <SectionContainer>
+    <OverviewSectionContainer>
       <GridContainer>
         <GridItemLevel>
           <OverallRiskBlock
@@ -64,7 +66,10 @@ const LocationOverview: React.FC<{
           />
         </GridItemMetric3>
       </GridContainer>
-    </SectionContainer>
+      <MobileOnly>
+        <ShareButton />
+      </MobileOnly>
+    </OverviewSectionContainer>
   );
 };
 

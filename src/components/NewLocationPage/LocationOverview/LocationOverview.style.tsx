@@ -1,9 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { SectionContainer } from '../Shared/Shared.style';
 
-// adding 100px to the large mobile breakpoint to minimize the wrapping of metric names:
+// Adding 100px to the largest mobile breakpoint to minimize the wrapping of metric names
 const gridBreakpoint = '900px';
+
+// This section container is styled a bit differently than the rest.
+// Removing padding to allow for full width section borders and
+// proper styling of the mobile share button at the bottom of the container
+export const OverviewSectionContainer = styled(SectionContainer)`
+  padding: 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 1.5rem;
+  }
+`;
 
 export const GridContainer = styled.div`
   display: grid;
@@ -16,7 +28,8 @@ export const GridContainer = styled.div`
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
-    grid-gap: 2rem;
+    row-gap: 2rem;
+    column-gap: 1.5rem;
   }
 
   @media (min-width: ${gridBreakpoint}) {
@@ -27,9 +40,19 @@ export const GridContainer = styled.div`
   }
 `;
 
+const ItemBasePadding = css`
+  padding: 0 1.25rem 0 1.25rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0;
+  }
+`;
+
 export const GridItemLevel = styled.div`
+  ${ItemBasePadding};
   grid-area: level;
   padding-bottom: 0.5rem;
+  padding-top: 1.25rem;
   justify-self: center;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -38,6 +61,7 @@ export const GridItemLevel = styled.div`
 `;
 
 export const GridItemProgress = styled.div`
+  ${ItemBasePadding};
   grid-area: progress;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid ${COLOR_MAP.GREY_1};
@@ -49,18 +73,22 @@ export const GridItemProgress = styled.div`
 `;
 
 export const GridItemMetric1 = styled.div`
+  ${ItemBasePadding};
   grid-area: metric1;
 `;
 
 export const GridItemMetric2 = styled.div`
+  ${ItemBasePadding};
   grid-area: metric2;
 `;
 
 export const GridItemMetric3 = styled.div`
+  ${ItemBasePadding};
   grid-area: metric3;
 `;
 
 export const GridItemMetricVax = styled.div`
+  ${ItemBasePadding};
   grid-area: metricVax;
   padding-top: 1.5rem;
   border-top: 1px solid ${COLOR_MAP.GREY_1};

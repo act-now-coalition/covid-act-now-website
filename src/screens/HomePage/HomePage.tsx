@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Fade from '@material-ui/core/Fade';
+import { useLocation } from 'react-router-dom';
+
 import Map from 'components/Map/Map';
 import { NavBarSearch } from 'components/NavBar';
 import NavAllOtherPages from 'components/NavBar/NavAllOtherPages/NavAllOtherPages';
@@ -8,25 +10,16 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements';
-import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import regions, {
-  getFinalAutocompleteLocations,
-  getGeolocatedRegions,
-} from 'common/regions';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
-import {
-  useGeolocation,
-  useGeolocationInExplore,
-  useShowPastPosition,
-} from 'common/hooks';
+import regions, { filterGeolocatedRegions } from 'common/regions';
+import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
@@ -38,8 +31,10 @@ import { HomepageSearchAutocomplete } from 'components/Search';
 import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
-import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
+import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
+import { getLargestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
+import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -53,17 +48,13 @@ export default function HomePage() {
 
   const isMobile = useBreakpoint(600);
 
-  const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
-  const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
+  const { userRegions, isLoading } = useGeolocatedRegions();
 
-  const isLoading = geoIsLoading || zipIsLoading;
+  const largestMetroFips = getLargestMetroFipsForExplore();
+  const exploreGeoLocations = userRegions
+    ? filterGeolocatedRegions(userRegions).map(region => region.fipsCode)
+    : largestMetroFips;
 
-  const userRegions =
-    geolocationData && countyToZipMap
-      ? getGeolocatedRegions(geolocationData, countyToZipMap)
-      : null;
-
-  const exploreGeoLocations = useGeolocationInExplore(geolocationData);
   const showRisingHospitalizations =
     location.hash === '#explore-hospitalizations';
   const risingHospitalizationStates = [
@@ -109,10 +100,7 @@ export default function HomePage() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const searchLocations = getFinalAutocompleteLocations(
-    geolocationData,
-    countyToZipMap,
-  );
+  const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
   const hasScrolled = useShowPastPosition(450);
@@ -149,7 +137,7 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
-      <SpringSurgeBanner />
+      <GetVaccinatedBanner />
       <HomePageHeader />
       <main>
         <div className="App">
