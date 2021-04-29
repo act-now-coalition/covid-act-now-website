@@ -7,8 +7,8 @@ export const mapToFixedBreakpoint = 1320;
 
 export const PinnedContainer = css`
   position: fixed;
-  top: 1rem; //edit when put into context
-  right: 20px; //edit when put into context
+  top: 115px; // estimating here, edit
+  right: 40px; //edit when put into context
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.08);
   z-index: 901;
 `;

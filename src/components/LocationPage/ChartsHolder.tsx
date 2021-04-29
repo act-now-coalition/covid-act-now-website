@@ -148,7 +148,14 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   return (
     <>
       <ChartContentWrapper>
-        <LocationPageHeader {...locationPageHeaderProps} />
+        {/* <LocationPageHeader {...locationPageHeaderProps} /> */}
+        {projections && projections.primary && (
+          <AboveTheFold
+            projection={projections.primary}
+            region={region}
+            locationSummary={locationSummary}
+          />
+        )}
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>

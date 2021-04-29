@@ -38,17 +38,17 @@ function LocationPage({ region }: LocationPageProps) {
       />
       <NavBar renderSecondaryElement={() => <DonateButtonHeart />} />
       <div>
-        <SearchHeader
+        {/* <SearchHeader
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-        />
+        /> */}
         <ChartsHolder chartId={chartId} region={region} />
-        <MiniMap
+        {/* <MiniMap
           region={region}
           mobileMenuOpen={mobileMenuOpen}
           mapOption={mapOption}
           setMapOption={setMapOption}
-        />
+        /> */}
       </div>
     </div>
   );
