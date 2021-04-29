@@ -5,10 +5,10 @@
  */
 // import React, { useState } from 'react';
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ClickAwayListener } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-// import Logo from 'assets/images/logo';
+import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NavBar/MegaMenu/MegaMenu';
 import * as Style from 'components/NavBar/NavBar.style';
 import { useIsEmbed } from 'common/utils/hooks';
@@ -73,36 +73,45 @@ const NavBarWithoutSearch: React.FC<{
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
       <Style.Toolbar>
-        <Style.BackLink
-          to="/"
-          onClick={() => onClickTopNavItem('Back Home')}
-          aria-label="Back to Covid Act Now"
-        >
-          <ArrowBack />
-        </Style.BackLink>
-        {/* <Link
-          to="/"
-          style={{ display: 'inline-flex', zIndex: 10000 }}
-          onClick={() => onClickTopNavItem('Home (Logo)')}
-          aria-label="Covid Act Now"
-        >
-          <Logo />
-        </Link> */}
-        {renderSearch(menuOpen)}
-        <Style.Spacer />
-        <>
-          {/* {renderSecondaryElement()} */}
-          <ClickAwayListener onClickAway={closeMenu}>
-            <Style.IconButton
-              onClick={onClickHamburger}
-              edge="end"
-              onMouseEnter={onHoverHamburger}
+        <Style.GridContainer>
+          <Style.GridItemBackLink>
+            <Style.BackLink
+              to="/"
+              onClick={() => onClickTopNavItem('Back Home')}
+              aria-label="Back to Covid Act Now"
             >
-              <Style.MenuLabel>Menu</Style.MenuLabel>
-              {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-            </Style.IconButton>
-          </ClickAwayListener>
-        </>
+              <ArrowBack />
+            </Style.BackLink>
+          </Style.GridItemBackLink>
+
+          <Style.GridItemLogo>
+            <Link
+              to="/"
+              // style={{ display: 'inline-flex', zIndex: 10000 }}
+              onClick={() => onClickTopNavItem('Home (Logo)')}
+              aria-label="Covid Act Now"
+            >
+              <Logo />
+            </Link>
+          </Style.GridItemLogo>
+          <Style.GridItemSearch>{renderSearch(menuOpen)}</Style.GridItemSearch>
+          <Style.GridItemSecondaryEl>
+            {renderSecondaryElement()}
+          </Style.GridItemSecondaryEl>
+
+          <Style.GridItemMenuIcon>
+            <ClickAwayListener onClickAway={closeMenu}>
+              <Style.IconButton
+                onClick={onClickHamburger}
+                edge="end"
+                onMouseEnter={onHoverHamburger}
+              >
+                <Style.MenuLabel>Menu</Style.MenuLabel>
+                {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
+              </Style.IconButton>
+            </ClickAwayListener>
+          </Style.GridItemMenuIcon>
+        </Style.GridContainer>
         <MegaMenu {...menuProps} />
       </Style.Toolbar>
     </Style.AppBar>
