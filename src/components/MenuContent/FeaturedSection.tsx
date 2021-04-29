@@ -60,8 +60,8 @@ const FeaturedSection: React.FC<{
               <Icon height="36" width="40" aria-hidden="true" />
             </IconWrapper>
             <TextLink to={url} {...hashlinkProps}>
-              {iconId === 'API' && (
-                <Column>
+              <Column>
+                {iconId === SectionId.API ? (
                   <Experiment id={ExperimentID.HAMBURGER_MENU_DESKTOP}>
                     <Variant id={VariantID.A}>
                       <Row>
@@ -80,17 +80,16 @@ const FeaturedSection: React.FC<{
                       </FeaturedDescription>
                     </Variant>
                   </Experiment>
-                </Column>
-              )}
-              {iconId !== 'API' && (
-                <Column>
-                  <Row>
-                    {cta}
-                    <ArrowIcon />
-                  </Row>
-                  <FeaturedDescription>{description}</FeaturedDescription>
-                </Column>
-              )}
+                ) : (
+                  <>
+                    <Row>
+                      {cta}
+                      <ArrowIcon />
+                    </Row>
+                    <FeaturedDescription>{description}</FeaturedDescription>
+                  </>
+                )}
+              </Column>
             </TextLink>
           </RowWithSpacing>
         );
