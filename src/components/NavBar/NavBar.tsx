@@ -1,7 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import NavAllOtherPages from './NavAllOtherPages/NavAllOtherPages';
-import NavLocationPage from './NavLocationPage/NavLocationPage';
 
 const noop = () => {};
 
@@ -16,26 +15,26 @@ const NavBar: React.FC<{
   menuOpen = false,
   setMenuOpen = noop,
 }) => {
-  const { pathname } = useLocation();
-  const isLocationPage = pathname.includes('/us');
+  // const { pathname } = useLocation();
+  // const isLocationPage = pathname.includes('/us');
 
   return (
     <>
-      {isLocationPage ? (
+      {/* {isLocationPage ? (
         <NavLocationPage
           renderSecondaryElement={renderSecondaryElement}
           renderSearch={renderSearch}
           menuOpen={menuOpen}
           setMenuOpen={setMenuOpen}
         />
-      ) : (
-        <NavAllOtherPages
-          renderSecondaryElement={renderSecondaryElement}
-          renderSearch={renderSearch}
-          menuOpen={menuOpen}
-          setMenuOpen={setMenuOpen}
-        />
-      )}
+      ) : ( */}
+      <NavAllOtherPages
+        renderSecondaryElement={renderSecondaryElement}
+        renderSearch={renderSearch}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+      />
+      {/* // )} */}
     </>
   );
 };

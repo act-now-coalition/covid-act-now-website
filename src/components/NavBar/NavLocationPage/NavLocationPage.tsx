@@ -18,7 +18,14 @@ const NavLocationPage: React.FC<{
   renderSecondaryElement: () => React.ReactElement;
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ renderSearch, renderSecondaryElement, menuOpen, setMenuOpen }) => {
+  hasScrolled: boolean;
+}> = ({
+  renderSearch,
+  renderSecondaryElement,
+  menuOpen,
+  setMenuOpen,
+  hasScrolled,
+}) => {
   const isEmbed = useIsEmbed();
 
   const isMobile = useBreakpoint(800);
@@ -80,7 +87,7 @@ const NavLocationPage: React.FC<{
             </Style.BackLink>
           </Style.GridItemBackLink>
 
-          <Style.GridItemLogo>
+          <Style.GridItemLogo hasScrolled={hasScrolled}>
             <Link
               to="/"
               onClick={() => onClickTopNavItem('Home (Logo)')}
@@ -89,7 +96,11 @@ const NavLocationPage: React.FC<{
               <Logo />
             </Link>
           </Style.GridItemLogo>
-          <Style.GridItemSearch>{renderSearch(menuOpen)}</Style.GridItemSearch>
+
+          <Style.GridItemSearch hasScrolled={hasScrolled}>
+            {renderSearch(menuOpen)}
+          </Style.GridItemSearch>
+
           <Style.GridItemSecondaryEl>
             {renderSecondaryElement()}
           </Style.GridItemSecondaryEl>

@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MAP_FILTERS } from './Enums/MapFilterEnums';
-import NavBar, { NavBarSearch } from 'components/NavBar';
+import { NavBarSearch } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import MiniMap from 'components/MiniMap';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
@@ -9,6 +9,8 @@ import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
 import { getStateCode, MetroArea, Region } from 'common/regions';
 import { DonateButtonHeart } from 'components/DonateButton';
+import { useShowPastPosition } from 'common/hooks';
+import NavLocationPage from 'components/NavBar/NavLocationPage/NavLocationPage';
 
 interface LocationPageProps {
   region: Region;
@@ -22,13 +24,11 @@ function WithSearchInNav({ region }: LocationPageProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const hasScrolled = true;
+  const hasScrolled = useShowPastPosition(850);
 
   const renderNavBarSearch = () => (
     <>
-      {hasScrolled && (
-        <NavBarSearch menuOpen={menuOpen} WrappingDiv={Fragment} />
-      )}
+      <NavBarSearch menuOpen={menuOpen} WrappingDiv={Fragment} />
     </>
   );
 
@@ -46,11 +46,12 @@ function WithSearchInNav({ region }: LocationPageProps) {
         pageTitle={getPageTitle(region)}
         pageDescription={getPageDescription(region)}
       />
-      <NavBar
+      <NavLocationPage
         renderSecondaryElement={() => <DonateButtonHeart />}
         renderSearch={renderNavBarSearch}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
+        hasScrolled={hasScrolled}
       />
       <div>
         <ChartsHolder chartId={chartId} region={region} />
