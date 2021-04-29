@@ -13,7 +13,6 @@ import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import { getNationalText } from 'components/NationalText';
@@ -34,6 +33,7 @@ import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { getLargestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
+import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -136,7 +136,7 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
-      <SpringSurgeBanner />
+      <GetVaccinatedBanner />
       <HomePageHeader />
       <main>
         <div className="App">
