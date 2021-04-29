@@ -28,8 +28,6 @@ const LocationOverview: React.FC<{
 }> = ({ region, locationSummary, onClickMetric = noop }) => {
   const stats = summaryToStats(locationSummary);
 
-  // const statOnClick = onClickMetric ? (metric:Metric) => onClickMetric(metric) : noop;
-
   return (
     <OverviewSectionContainer>
       <GridContainer>
