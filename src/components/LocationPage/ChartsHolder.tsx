@@ -9,7 +9,7 @@ import {
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
-// import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
+import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
@@ -22,13 +22,12 @@ import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-// import LocationPageHeader from './LocationPageHeader';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
 
-// TODO: 200 is rough accounting for the navbar and searchbar;
+// TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
-const scrollTo = (div: null | HTMLDivElement, offset: number = 200) =>
+const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   div &&
   window.scrollTo({
     left: 0,
@@ -105,55 +104,25 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   }
   const stats = summaryToStats(locationSummary);
 
-  // const alarmLevel = locationSummary.level;
-
-  // const onClickAlertSignup = () => {
-  //   trackEvent(
-  //     EventCategory.ENGAGEMENT,
-  //     EventAction.CLICK,
-  //     `Location Header: Receive Alerts`,
-  //   );
-  //   scrollTo(shareBlockRef.current);
-  // };
-
-  // const onClickShare = () => {
-  //   trackEvent(
-  //     EventCategory.ENGAGEMENT,
-  //     EventAction.CLICK,
-  //     'Location Header: Share',
-  //   );
-  //   scrollTo(shareBlockRef.current, -352);
-  // };
-
-  // const onClickMetric = (metric: Metric) => {
-  //   trackEvent(
-  //     EventCategory.METRICS,
-  //     EventAction.CLICK,
-  //     `Location Header Stats: ${Metric[metric]}`,
-  //   );
-  //   scrollTo(metricRefs[metric].current);
-  // };
-
-  // const locationPageHeaderProps = {
-  //   alarmLevel,
-  //   stats,
-  //   onMetricClick: (metric: Metric) => onClickMetric(metric),
-  //   onHeaderShareClick: onClickShare,
-  //   onHeaderSignupClick: onClickAlertSignup,
-  //   isMobile,
-  //   region,
-  // };
+  const onClickMetric = (metric: Metric) => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      `Location Header Stats: ${Metric[metric]}`,
+    );
+    scrollTo(metricRefs[metric].current);
+  };
 
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       <ChartContentWrapper>
-        {/* <LocationPageHeader {...locationPageHeaderProps} /> */}
         {projections && projections.primary && (
           <AboveTheFold
             projection={projections.primary}
             region={region}
             locationSummary={locationSummary}
+            onClickMetric={(metric: Metric) => onClickMetric(metric)}
           />
         )}
         <LocationPageBlock>

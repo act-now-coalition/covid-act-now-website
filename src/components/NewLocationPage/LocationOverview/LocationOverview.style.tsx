@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { SectionContainer } from '../Shared/Shared.style';
+import { Chevron } from '../Shared/Shared.style';
 
 // Adding 100px to the largest mobile breakpoint to minimize the wrapping of metric names
 const gridBreakpoint = '900px';
@@ -48,6 +49,16 @@ const ItemBasePadding = css`
   }
 `;
 
+const ClickableMetric = css`
+  cursor: pointer;
+  &:hover {
+    ${Chevron} {
+      transform: translate(6px, -2px);
+      transition: transform 0.06s ease-in-out;
+    }
+  }
+`;
+
 export const GridItemLevel = styled.div`
   ${ItemBasePadding};
   grid-area: level;
@@ -74,21 +85,26 @@ export const GridItemProgress = styled.div`
 
 export const GridItemMetric1 = styled.div`
   ${ItemBasePadding};
+  ${ClickableMetric};
   grid-area: metric1;
+  cursor: pointer;
 `;
 
 export const GridItemMetric2 = styled.div`
   ${ItemBasePadding};
+  ${ClickableMetric};
   grid-area: metric2;
 `;
 
 export const GridItemMetric3 = styled.div`
   ${ItemBasePadding};
+  ${ClickableMetric};
   grid-area: metric3;
 `;
 
 export const GridItemMetricVax = styled.div`
   ${ItemBasePadding};
+  ${ClickableMetric};
   grid-area: metricVax;
   padding-top: 1.5rem;
   border-top: 1px solid ${COLOR_MAP.GREY_1};
