@@ -21,9 +21,9 @@ export const MultiStateText = styled.div`
   font-weight: 500;
 `;
 
-export const UpdatedOnText = styled.h2`
+export const UpdatedOnText = styled.span`
   font-size: 1rem;
   line-height: 1;
-  margin: 0.25rem 0;
+  margin-top: 0.5rem;
   color: ${COLOR_MAP.GREY_4};
 `;
