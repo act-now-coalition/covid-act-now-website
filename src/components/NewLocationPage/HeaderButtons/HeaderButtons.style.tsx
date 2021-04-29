@@ -31,6 +31,7 @@ export const VaccineButtonWrapper = styled.div`
 `;
 
 export const ShareButtonWrapper = styled.div`
+  z-index: 1;
   ${LargeOutlinedButton} {
     border: 1px solid transparent;
     background-color: inherit;

@@ -15,6 +15,7 @@ export const HeaderContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 1.5rem;
   }
 `;
 
