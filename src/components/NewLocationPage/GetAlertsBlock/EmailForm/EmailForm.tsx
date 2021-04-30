@@ -1,4 +1,11 @@
-import React, { useState, createRef, ChangeEvent, FormEvent } from 'react';
+import React, {
+  useState,
+  createRef,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+} from 'react';
+import { useLocation } from 'react-router-dom';
 import AlertsIcon from 'assets/images/AlertsIcon';
 import DailyDownloadCheckbox from './DailyDownloadCheckbox';
 import SuccessNote from './SuccessNote';
@@ -44,6 +51,14 @@ const EmailForm: React.FC<{
     setEmail(value);
     setEmailError(!isValidEmail(value) && value !== '');
   };
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setShowConfirmation(false);
+    setEmail('');
+    setCheckDailyDownload(true);
+  }, [pathname]);
 
   async function subscribeToAlerts() {
     if (!isValidEmail(email)) {
