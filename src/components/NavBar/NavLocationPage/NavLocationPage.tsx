@@ -86,7 +86,6 @@ const NavLocationPage: React.FC<{
               <ArrowBack />
             </Style.BackLink>
           </Style.GridItemBackLink>
-
           <Style.GridItemLogo hasScrolled={hasScrolled}>
             <Link
               to="/"
@@ -96,15 +95,12 @@ const NavLocationPage: React.FC<{
               <Logo />
             </Link>
           </Style.GridItemLogo>
-
           <Style.GridItemSearch hasScrolled={hasScrolled}>
             {renderSearch(menuOpen)}
           </Style.GridItemSearch>
-
           <Style.GridItemSecondaryEl>
             {renderSecondaryElement()}
           </Style.GridItemSecondaryEl>
-
           <Style.GridItemMenuIcon>
             <ClickAwayListener onClickAway={closeMenu}>
               <Style.IconButton
