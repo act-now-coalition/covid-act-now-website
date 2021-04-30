@@ -8,8 +8,7 @@ const SparkLineBlock: React.FC<{ projection: Projection }> = ({
   projection,
 }) => {
   return (
-    // Placing margins on the bottom of each spark line container, so removing this padding bottom:
-    <SectionContainer style={{ paddingBottom: 0 }}>
+    <SectionContainer>
       <GrayTitle>Past {daysToChart} days</GrayTitle>
       <SparkLineSet projection={projection} />
     </SectionContainer>
