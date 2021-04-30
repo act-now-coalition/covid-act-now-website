@@ -22,19 +22,23 @@ import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
 import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButton';
+import { Metric } from 'common/metricEnum';
+
+const noop = () => {};
 
 interface AboveTheFoldProps {
   projection: Projection;
   region: Region;
   locationSummary: LocationSummary;
+  onClickMetric?: (metric: Metric) => void;
 }
 
 const AboveTheFold: React.FC<AboveTheFoldProps> = ({
   projection,
   region,
   locationSummary,
+  onClickMetric,
 }) => {
-  console.log('locationSummary', locationSummary);
   return (
     <MainWrapper>
       <GridContainer>
@@ -50,7 +54,11 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
           </HeaderContainer>
         </GridItemHeader>
         <GridItemOverview>
-          <LocationOverview region={region} locationSummary={locationSummary} />
+          <LocationOverview
+            region={region}
+            locationSummary={locationSummary}
+            onClickMetric={onClickMetric || noop}
+          />
         </GridItemOverview>
         <GridItemSparkLines>
           <SparkLineBlock projection={projection} />
