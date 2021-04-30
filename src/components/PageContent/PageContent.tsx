@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { NavBarSearch } from 'components/NavBar';
-import NavAllOtherPages from 'components/NavBar/NavAllOtherPages/NavAllOtherPages';
+import { NavAllOtherPages } from 'components/NavBar';
 import SidebarContents from 'components/SidebarContents';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { TocItem } from 'cms-content/utils';

@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { NavBarSearch } from 'components/NavBar';
-import NavAllOtherPages from 'components/NavBar/NavAllOtherPages/NavAllOtherPages';
+import { NavAllOtherPages } from 'components/NavBar';
 import {
   Container,
   ContentWrapper,

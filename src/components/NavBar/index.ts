@@ -1,5 +1,5 @@
-import NavBar from './NavBar';
+import NavLocationPage from './NavLocationPage/NavLocationPage';
+import NavAllOtherPages from './NavAllOtherPages/NavAllOtherPages';
 import Search from './Search/Search';
 
-export { Search as NavBarSearch };
-export default NavBar;
+export { Search as NavBarSearch, NavLocationPage, NavAllOtherPages };

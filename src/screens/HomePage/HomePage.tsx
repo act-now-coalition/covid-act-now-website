@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import Map from 'components/Map/Map';
 import { NavBarSearch } from 'components/NavBar';
-import NavAllOtherPages from 'components/NavBar/NavAllOtherPages/NavAllOtherPages';
+import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
