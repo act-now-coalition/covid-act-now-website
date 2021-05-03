@@ -10,12 +10,12 @@ export const MainWrapper = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
   }
 `;
 
@@ -23,12 +23,12 @@ export const GridContainer = styled.div`
   display: grid;
   max-width: ${maxContentWidth};
   margin: auto;
-  row-gap: 1rem;
+  row-gap: 1.25rem;
   grid-template-areas: 'header' 'overview' 'spark' 'map' 'note' 'alerts';
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 1.75rem;
     grid-template-areas:
       'header header'
       'overview overview'
