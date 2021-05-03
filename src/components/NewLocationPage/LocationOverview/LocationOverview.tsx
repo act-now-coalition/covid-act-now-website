@@ -26,7 +26,8 @@ const LocationOverview: React.FC<{
   region: Region;
   locationSummary: LocationSummary;
   onClickMetric?: (metric: Metric) => void;
-}> = ({ region, locationSummary, onClickMetric = noop }) => {
+  onClickShare: () => void;
+}> = ({ region, locationSummary, onClickMetric = noop, onClickShare }) => {
   const stats = summaryToStats(locationSummary);
   const projections = useProjectionsFromRegion(region);
 
@@ -59,21 +60,21 @@ const LocationOverview: React.FC<{
             value={stats[Metric.CASE_DENSITY]}
           />
         </GridItemMetric1>
-        <GridItemMetric2 onClick={() => onClickMetric(Metric.POSITIVE_TESTS)}>
-          <SummaryStat
-            metric={Metric.POSITIVE_TESTS}
-            value={stats[Metric.POSITIVE_TESTS]}
-          />
-        </GridItemMetric2>
-        <GridItemMetric3 onClick={() => onClickMetric(Metric.CASE_GROWTH_RATE)}>
+        <GridItemMetric2 onClick={() => onClickMetric(Metric.CASE_GROWTH_RATE)}>
           <SummaryStat
             metric={Metric.CASE_GROWTH_RATE}
             value={stats[Metric.CASE_GROWTH_RATE]}
           />
+        </GridItemMetric2>
+        <GridItemMetric3 onClick={() => onClickMetric(Metric.POSITIVE_TESTS)}>
+          <SummaryStat
+            metric={Metric.POSITIVE_TESTS}
+            value={stats[Metric.POSITIVE_TESTS]}
+          />
         </GridItemMetric3>
       </GridContainer>
       <MobileOnly>
-        <ShareButton />
+        <ShareButton onClickShare={onClickShare} />
       </MobileOnly>
     </OverviewSectionContainer>
   );

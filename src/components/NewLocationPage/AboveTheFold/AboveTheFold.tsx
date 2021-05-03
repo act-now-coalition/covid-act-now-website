@@ -28,6 +28,8 @@ const noop = () => {};
 interface AboveTheFoldProps {
   region: Region;
   locationSummary: LocationSummary;
+  onClickAlertSignup: () => void;
+  onClickShare: () => void;
   onClickMetric?: (metric: Metric) => void;
 }
 
@@ -35,6 +37,8 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
   region,
   locationSummary,
   onClickMetric,
+  onClickAlertSignup,
+  onClickShare,
 }) => {
   return (
     <MainWrapper>
@@ -43,7 +47,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
           <HeaderContainer>
             <LocationName region={region} />
             <DesktopOnly>
-              <HeaderButtons />
+              <HeaderButtons onClickShare={onClickShare} />
             </DesktopOnly>
             <MobileOnly>
               <VaccineButton />
@@ -55,19 +59,26 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
             region={region}
             locationSummary={locationSummary}
             onClickMetric={onClickMetric || noop}
+            onClickShare={onClickShare || noop}
           />
         </GridItemOverview>
         <GridItemSparkLines>
           <SparkLineBlock region={region} />
         </GridItemSparkLines>
         <GridItemAlerts>
-          <GetAlertsBlock region={region} onClickGetAlerts={() => {}} />
+          <GetAlertsBlock
+            region={region}
+            onClickGetAlerts={onClickAlertSignup}
+          />
         </GridItemAlerts>
         <GridItemMap>
           <CountyMap region={region} />
         </GridItemMap>
         <GridItemNote>
-          <VulnerabilityNote ccviScore={locationSummary.ccvi} />
+          <VulnerabilityNote
+            ccviScore={locationSummary.ccvi}
+            locationName={region.shortName}
+          />
         </GridItemNote>
       </GridContainer>
     </MainWrapper>

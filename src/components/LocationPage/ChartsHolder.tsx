@@ -104,6 +104,19 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   }
   const stats = summaryToStats(locationSummary);
 
+  const onClickAlertSignup = () => {
+    trackEvent(
+      EventCategory.ENGAGEMENT,
+      EventAction.CLICK,
+      `Location Header: Receive Alerts`,
+    );
+    scrollTo(shareBlockRef.current);
+  };
+
+  const onClickShare = () => {
+    scrollTo(shareBlockRef.current, -352);
+  };
+
   const onClickMetric = (metric: Metric) => {
     trackEvent(
       EventCategory.METRICS,
@@ -121,6 +134,8 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           region={region}
           locationSummary={locationSummary}
           onClickMetric={(metric: Metric) => onClickMetric(metric)}
+          onClickAlertSignup={onClickAlertSignup}
+          onClickShare={onClickShare}
         />
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />

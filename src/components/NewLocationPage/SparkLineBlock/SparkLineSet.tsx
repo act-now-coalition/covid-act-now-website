@@ -14,7 +14,7 @@ import {
 } from './utils';
 import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 
-// TODO (chelsi) - update link's 'to'
+// TODO (chelsi) - update onClick scrolling functionality
 
 const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
   const dateTo = new Date();
