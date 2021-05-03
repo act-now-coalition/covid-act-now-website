@@ -26,15 +26,7 @@ const LocationOverview: React.FC<{
   region: Region;
   locationSummary: LocationSummary;
   onClickMetric?: (metric: Metric) => void;
-  // vaxInitiated: number | undefined;
-  // vaxCompleted: number | undefined;
-}> = ({
-  region,
-  locationSummary,
-  onClickMetric = noop,
-  // vaxInitiated,
-  // vaxCompleted,
-}) => {
+}> = ({ region, locationSummary, onClickMetric = noop }) => {
   const stats = summaryToStats(locationSummary);
   const projections = useProjectionsFromRegion(region);
 
@@ -52,8 +44,6 @@ const LocationOverview: React.FC<{
             <VaccinationProgressBarBlock
               locationName={region.name}
               projection={projections.primary}
-              // vaccinationsInitiated={vaxInitiated}
-              // vaccinationsCompleted={vaxCompleted}
             />
           )}
         </GridItemProgress>

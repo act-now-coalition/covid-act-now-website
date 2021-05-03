@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import AboveTheFold from './AboveTheFold';
 import regions from 'common/regions';
-import { Projection } from 'common/models/Projection';
-import { getProjectionForRegion } from '../SparkLineBlock/utils';
 import { useLocationSummariesForFips } from 'common/hooks';
 
 export default {
@@ -23,13 +21,7 @@ export const California = () => {
 
 export const Missouri = () => {
   const region = regions.findByFipsCodeStrict('29');
-  const [projection, setProjection] = useState<Projection>();
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
-
-  useEffect(() => {
-    const fetchProjection = () => getProjectionForRegion(region);
-    fetchProjection().then(setProjection);
-  }, [region]);
 
   if (!locationSummary) {
     return null;
