@@ -117,14 +117,14 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   return (
     <>
       <ChartContentWrapper>
-        {projections && projections.primary && (
-          <AboveTheFold
-            projection={projections.primary}
-            region={region}
-            locationSummary={locationSummary}
-            onClickMetric={(metric: Metric) => onClickMetric(metric)}
-          />
-        )}
+        {/* {projections && projections.primary && ( */}
+        <AboveTheFold
+          // projection={projections.primary}
+          region={region}
+          locationSummary={locationSummary}
+          onClickMetric={(metric: Metric) => onClickMetric(metric)}
+        />
+        {/* )} */}
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>

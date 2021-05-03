@@ -19,8 +19,8 @@ export const NewYork = () => {
     <LocationOverview
       region={region}
       locationSummary={locationSummary}
-      vaxInitiated={0.6}
-      vaxCompleted={0.4}
+      // vaxInitiated={0.6}
+      // vaxCompleted={0.4}
     />
   );
 };

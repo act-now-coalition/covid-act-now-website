@@ -18,6 +18,7 @@ import { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from '../SummaryStat/utils';
 import { Metric } from 'common/metricEnum';
 import ShareButton from 'components/NewLocationPage/HeaderButtons/ShareButton';
+import { useProjectionsFromRegion } from 'common/utils/model';
 
 const noop = () => {};
 
@@ -25,16 +26,17 @@ const LocationOverview: React.FC<{
   region: Region;
   locationSummary: LocationSummary;
   onClickMetric?: (metric: Metric) => void;
-  vaxInitiated: number | undefined;
-  vaxCompleted: number | undefined;
+  // vaxInitiated: number | undefined;
+  // vaxCompleted: number | undefined;
 }> = ({
   region,
   locationSummary,
   onClickMetric = noop,
-  vaxInitiated,
-  vaxCompleted,
+  // vaxInitiated,
+  // vaxCompleted,
 }) => {
   const stats = summaryToStats(locationSummary);
+  const projections = useProjectionsFromRegion(region);
 
   return (
     <OverviewSectionContainer>
@@ -46,11 +48,12 @@ const LocationOverview: React.FC<{
           />
         </GridItemLevel>
         <GridItemProgress>
-          {vaxInitiated && vaxCompleted && (
+          {projections && projections.primary && (
             <VaccinationProgressBarBlock
               locationName={region.name}
-              vaccinationsInitiated={vaxInitiated}
-              vaccinationsCompleted={vaxCompleted}
+              projection={projections.primary}
+              // vaccinationsInitiated={vaxInitiated}
+              // vaccinationsCompleted={vaxCompleted}
             />
           )}
         </GridItemProgress>
