@@ -8,7 +8,11 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import {
+  materialSMBreakpoint,
+  mobileBreakpoint,
+  smallPhoneBreakpoint,
+} from 'assets/theme/sizes';
 
 export const desktopNavHeight = 84;
 
@@ -93,8 +97,73 @@ export const MenuIcon = styled(MuiMenuIcon)`
 export const MenuLabel = styled.span`
   display: none;
 
-  @media (min-width: ${materialSMBreakpoint}) {
+  @media (min-width: ${mobileBreakpoint}) {
     display: inherit;
     margin-right: 0.5rem;
+  }
+`;
+
+// Location page:
+export const GridContainer = styled.div`
+  display: grid;
+  grid-auto-columns: min-content auto auto min-content;
+  align-items: center;
+  width: 100%;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    grid-auto-columns: min-content min-content 1fr min-content min-content;
+    grid-gap: 1rem;
+  }
+`;
+
+const row = css`
+  grid-row: 1;
+`;
+
+export const GridItemBackLink = styled.div`
+  ${row};
+  grid-column: 1/2;
+  display: none;
+
+  @media (min-width: ${smallPhoneBreakpoint}) {
+    display: inherit;
+  }
+`;
+
+export const GridItemLogo = styled.div<{ hasScrolled: boolean }>`
+  ${row};
+  grid-column: 2/3;
+  display: ${({ hasScrolled }) => hasScrolled && 'none'};
+
+  @media (min-width: ${mobileBreakpoint}) {
+    display: inherit;
+  }
+`;
+
+export const GridItemSearch = styled.div<{ hasScrolled: boolean }>`
+  ${row};
+  grid-column: ${({ hasScrolled }) => (hasScrolled ? '2/4' : '3/4')};
+
+  @media (min-width: ${mobileBreakpoint}) {
+    grid-column: 1/6;
+  }
+`;
+
+export const GridItemSecondaryEl = styled.div`
+  ${row};
+  grid-column: 4/5;
+  display: none;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    display: inherit;
+  }
+`;
+
+export const GridItemMenuIcon = styled.div`
+  ${row};
+  grid-column: 4/5;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    grid-column: 5/6;
   }
 `;

@@ -27,3 +27,10 @@ export const navSearchbar: SearchbarTheme = {
   mobileClosedMaxWidth: '200px',
   mobileClosedMarginLeft: 'auto',
 };
+
+export const navSearchbarLocPage: SearchbarTheme = {
+  mobileClosedWidth: '100%',
+  mobileClosedPadding: '1rem .5rem',
+  mobileClosedMaxWidth: '100%',
+  mobileClosedMarginLeft: 'auto',
+};

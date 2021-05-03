@@ -8,7 +8,7 @@ import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from '../utils';
 import { useBreakpoint } from 'common/hooks';
 
-const NavBarWithSearch: React.FC<{
+const NavAllOtherPages: React.FC<{
   renderSearch: (menuOpen: boolean) => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
   menuOpen: boolean;
@@ -93,4 +93,4 @@ const NavBarWithSearch: React.FC<{
   );
 };
 
-export default NavBarWithSearch;
+export default NavAllOtherPages;
