@@ -6,10 +6,10 @@ import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
 import { Wrapper } from './Search.style';
 import { useFinalAutocompleteLocations } from 'common/hooks';
 
-const Search: React.FC<{ menuOpen: boolean; WrappingDiv?: any }> = ({
-  menuOpen,
-  WrappingDiv = Wrapper,
-}) => {
+const Search: React.FC<{
+  menuOpen: boolean;
+  WrappingDiv?: any /* Chelsi: fix this any */;
+}> = ({ menuOpen, WrappingDiv = Wrapper }) => {
   const theme = useContext(ThemeContext);
 
   const { pathname } = useLocation();

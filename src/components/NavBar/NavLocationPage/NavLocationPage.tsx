@@ -2,30 +2,24 @@
  * Navbar for the location page.
  * Renders search+other items differently than on other pages.
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ClickAwayListener } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NavBar/MegaMenu/MegaMenu';
 import * as Style from 'components/NavBar/NavBar.style';
-import { useIsEmbed } from 'common/utils/hooks';
+import { NavBarSearch } from 'components/NavBar';
 import { trackNavigation, trackMobileMenuOpen } from 'components/NavBar/utils';
+import { useIsEmbed } from 'common/utils/hooks';
 import { useBreakpoint } from 'common/hooks';
 
 const NavLocationPage: React.FC<{
-  renderSearch: (menuOpen: boolean) => React.ReactElement;
   renderSecondaryElement: () => React.ReactElement;
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   hasScrolled: boolean;
-}> = ({
-  renderSearch,
-  renderSecondaryElement,
-  menuOpen,
-  setMenuOpen,
-  hasScrolled,
-}) => {
+}> = ({ renderSecondaryElement, menuOpen, setMenuOpen, hasScrolled }) => {
   const isEmbed = useIsEmbed();
 
   const isMobile = useBreakpoint(800);
@@ -96,7 +90,7 @@ const NavLocationPage: React.FC<{
             </Link>
           </Style.GridItemLogo>
           <Style.GridItemSearch hasScrolled={hasScrolled}>
-            {renderSearch(menuOpen)}
+            <NavBarSearch menuOpen={menuOpen} WrappingDiv={Fragment} />
           </Style.GridItemSearch>
           <Style.GridItemSecondaryEl>
             {renderSecondaryElement()}

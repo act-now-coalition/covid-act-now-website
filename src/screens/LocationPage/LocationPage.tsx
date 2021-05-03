@@ -1,6 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { NavBarSearch } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
@@ -19,12 +18,6 @@ function WithSearchInNav({ region }: LocationPageProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const hasScrolled = useShowPastPosition(850);
 
-  const renderNavBarSearch = () => (
-    <>
-      <NavBarSearch menuOpen={menuOpen} WrappingDiv={Fragment} />
-    </>
-  );
-
   return (
     <div>
       <EnsureSharingIdInUrl />
@@ -35,7 +28,6 @@ function WithSearchInNav({ region }: LocationPageProps) {
       />
       <NavLocationPage
         renderSecondaryElement={() => <DonateButtonHeart />}
-        renderSearch={renderNavBarSearch}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
         hasScrolled={hasScrolled}
