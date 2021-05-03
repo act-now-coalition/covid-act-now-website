@@ -58,6 +58,8 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
             region={region}
             locationSummary={locationSummary}
             onClickMetric={onClickMetric || noop}
+            vaxInitiated={projection.vaccinationsInfo?.ratioInitiated}
+            vaxCompleted={projection.vaccinationsInfo?.ratioVaccinated}
           />
         </GridItemOverview>
         <GridItemSparkLines>

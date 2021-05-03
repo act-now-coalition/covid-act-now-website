@@ -25,7 +25,15 @@ const LocationOverview: React.FC<{
   region: Region;
   locationSummary: LocationSummary;
   onClickMetric?: (metric: Metric) => void;
-}> = ({ region, locationSummary, onClickMetric = noop }) => {
+  vaxInitiated: number | undefined;
+  vaxCompleted: number | undefined;
+}> = ({
+  region,
+  locationSummary,
+  onClickMetric = noop,
+  vaxInitiated,
+  vaxCompleted,
+}) => {
   const stats = summaryToStats(locationSummary);
 
   return (
@@ -38,11 +46,13 @@ const LocationOverview: React.FC<{
           />
         </GridItemLevel>
         <GridItemProgress>
-          <VaccinationProgressBarBlock
-            vaccinationsInitiated={0.6}
-            vaccinationsCompleted={0.4}
-            locationName={region.name}
-          />
+          {vaxInitiated && vaxCompleted && (
+            <VaccinationProgressBarBlock
+              locationName={region.name}
+              vaccinationsInitiated={vaxInitiated}
+              vaccinationsCompleted={vaxCompleted}
+            />
+          )}
         </GridItemProgress>
         <GridItemMetricVax onClick={() => onClickMetric(Metric.VACCINATIONS)}>
           <SummaryStat

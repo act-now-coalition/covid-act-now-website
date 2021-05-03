@@ -15,5 +15,12 @@ export const NewYork = () => {
   if (!locationSummary) {
     return null;
   }
-  return <LocationOverview region={region} locationSummary={locationSummary} />;
+  return (
+    <LocationOverview
+      region={region}
+      locationSummary={locationSummary}
+      vaxInitiated={0.6}
+      vaxCompleted={0.4}
+    />
+  );
 };
