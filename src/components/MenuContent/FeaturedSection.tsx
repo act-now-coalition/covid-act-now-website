@@ -57,7 +57,7 @@ const FeaturedSection: React.FC<{
             <TextLink to={url} {...hashlinkProps}>
               <Column>
                 {iconId === SectionId.API ? (
-                  <Experiment id={ExperimentID.HAMBURGER_MENU_DESKTOP}>
+                  <Experiment id={ExperimentID.MEGA_MENU_API_COPY}>
                     <Variant id={VariantID.A}>
                       <Row>
                         {cta}
