@@ -8,7 +8,11 @@ import MuiIconButton from '@material-ui/core/IconButton';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import {
+  materialSMBreakpoint,
+  mobileBreakpoint,
+  smallPhoneBreakpoint,
+} from 'assets/theme/sizes';
 
 export const desktopNavHeight = 84;
 
@@ -119,6 +123,11 @@ const row = css`
 export const GridItemBackLink = styled.div`
   ${row};
   grid-column: 1/2;
+  display: none;
+
+  @media (min-width: ${smallPhoneBreakpoint}) {
+    display: inherit;
+  }
 `;
 
 export const GridItemLogo = styled.div<{ hasScrolled: boolean }>`
