@@ -82,6 +82,7 @@ const NavLocationPage: React.FC<{
           </Style.GridItemBackLink>
           <Style.GridItemLogo hasScrolled={hasScrolled}>
             <Link
+              style={{ display: 'flex' }}
               to="/"
               onClick={() => onClickTopNavItem('Home (Logo)')}
               aria-label="Covid Act Now"

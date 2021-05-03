@@ -56,10 +56,15 @@ export const Spacer = styled.div`
 
 export const BackLink = styled(_NavLink)`
   margin-right: ${theme.spacing(2)}px;
+  display: flex;
   color: black;
   svg {
     width: 32px;
     height: 32px;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin-right: 0;
   }
 `;
 
