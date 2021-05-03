@@ -110,11 +110,6 @@
           "answer": "There is no evidence that any of the COVID vaccines affect fertility, according to the [American College of Obstetricians and Gynecologists, the American Society for Reproductive Medicine, and the Society for Maternal-Fetal Medicine](https://www.acog.org/news/news-releases/2021/02/medical-experts-assert-covid-vaccines-do-not-impact-fertility).During clinical trials of the COVID vaccines, an equal number of pregnancies occurred in vaccinated and non-vaccinated groups, indicating that the vaccines do not interfere with fertility, according to [reports](https://drive.google.com/file/d/1_wHIYX-tGkGBPwuax7N8BxZPR4PTTCDm/view) compiled by a reproductive immunologist with Imperial College London."
         },
         {
-          "question": "Will a COVID vaccine change your DNA?",
-          "questionId": "vaccine-DNA",
-          "answer": "No, the vaccines do not interact with your DNA in any way, according to the [Mayo Clinic](https://www.mayoclinic.org/mrna-vaccines-immunity/vid-20507649). The vaccines deliver instructions to your cells to start building protection against the virus that causes COVID, but those instructions don’t become part of your DNA."
-        },
-        {
           "question": "Why do you need to get both doses of your Pfizer or Moderna vaccine? ",
           "questionId": "why-two-doses-moderna-pfizer-vaccines",
           "answer": "While some vaccines, like the Johnson & Johnson shot, require only one dose, Pfizer and Moderna both require two. Initial research on Pfizer and Moderna vaccines indicated that there was a much stronger immune response when given in two doses. The first dose of the vaccine helps build your immune response, while the second reinforces protective immunity against COVID. This means that in order to be fully vaccinated against COVID, you must complete both doses of Pfizer and Moderna vaccines within their respective three or four week windows. \n\n[Preliminary studies](https://www.cdc.gov/mmwr/volumes/70/wr/mm7013e3.htm?s_cid=mm7013e3_w) suggest that just one dose of the Pfizer or Moderna vaccine is about 80 percent effective at preventing infection after two weeks. While 80 percent is a very high efficacy rate, researchers are unsure how long this protection lasts because all study participants received second doses shortly after. Since both the Pfizer and Moderna shots were tested and authorized as two dose vaccines, it’s important to get both doses to be protected against COVID."
@@ -123,6 +118,11 @@
           "question": "Should you get the second dose if you had an allergic reaction to the first?",
           "questionId": "should-you-get-covid-vaccine-if-allergic",
           "answer": "No. If you had a severe allergic reaction to your first shot — one requiring hospital care or treatment with epinephrine — you should not get a second shot of the Pfizer-BioNTech or Moderna vaccine, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/safety/allergic-reaction.html). Even if you had a mild allergic reaction (hives, swelling, or wheezing) within four hours of your first shot, you should not have a second shot. However, if your reaction to your first dose was limited to an itchy, or red, rash around the injection site, you should still get a second shot. For those with general allergy concerns, you may wish to review the [vaccine ingredients](https://covidactnow.org/faq#what-are-ingredients-vaccine)."
+        },
+        {
+          "question": "Will a COVID vaccine change your DNA?",
+          "questionId": "vaccine-DNA",
+          "answer": "No, the vaccines do not interact with your DNA in any way, according to the [Mayo Clinic](https://www.mayoclinic.org/mrna-vaccines-immunity/vid-20507649). The vaccines deliver instructions to your cells to start building protection against the virus that causes COVID, but those instructions don’t become part of your DNA."
         }
       ]
     },
