@@ -13,20 +13,19 @@ import { EventAction, EventCategory } from 'components/Analytics';
 interface NotesProps {
   icon: any;
   title: string;
-  redirectUrl?: string;
   trackingCategory?: EventCategory;
+  to?: string;
+  href?: string;
 }
 
 const NotesBlock: React.FC<NotesProps> = ({
   icon,
   title,
-  redirectUrl,
   trackingCategory = EventCategory.NONE,
   children,
+  ...props
 }) => {
-  // If there is no href/to/onClick prop passed,
-  // BaseButton knows to render as a span and not a button
-  const buttonProps = redirectUrl ? { href: redirectUrl } : {};
+  const usePointer = props.to || props.href ? 'pointer' : 'default';
 
   return (
     <SectionContainer>
@@ -34,8 +33,8 @@ const NotesBlock: React.FC<NotesProps> = ({
         trackingCategory={trackingCategory}
         trackingAction={EventAction.CLICK}
         trackingLabel={`Header notes block: ${title}`}
-        style={{ cursor: redirectUrl ? 'pointer' : 'default' }}
-        {...buttonProps}
+        style={{ cursor: usePointer }}
+        {...props}
       >
         <SectionContentContainer>
           <IconWrapper>{icon}</IconWrapper>
