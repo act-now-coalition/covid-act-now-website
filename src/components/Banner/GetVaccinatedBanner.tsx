@@ -9,7 +9,7 @@ import {
   ButtonsContainer,
 } from './GetVaccinatedBanner.style';
 import AggregationsJSON from 'assets/data/aggregations.json';
-import { formatPercent } from 'common/utils';
+import { formatPercent, formatInteger } from 'common/utils';
 
 const GetVaccinatedBanner: React.FC = () => {
   const usaAggregation = AggregationsJSON['00001'];
@@ -22,18 +22,19 @@ const GetVaccinatedBanner: React.FC = () => {
     <BannerContainer>
       <InnerContainer>
         <Body>
-          <strong>{percentVaccinated}</strong> of people in the U.S. have
-          received at least one dose of the vaccine. Find a vaccine appointment
-          and learn more about vaccine safety and effectiveness.
+          <strong>{formatInteger(totalVaccinationsInitiated)}</strong> people (
+          <strong>{percentVaccinated}</strong> of the U.S. population) have
+          received at least one dose of the vaccine. Find a vaccine near you and
+          learn more about vaccine safety and effectiveness.
         </Body>
         <ButtonsContainer>
           <FilledButton
-            href="https://vaccinefinder.org/"
+            href="https://www.vaccines.gov/search/"
             endIcon={<OpenInNewIcon />}
             trackingCategory={EventCategory.HOMEPAGE_BANNER}
             trackingLabel="Homepage Banner: VaccineFinder"
           >
-            VaccineFinder
+            Find a vaccine
           </FilledButton>
           <OutlinedButton
             href="/faq#vaccines"
