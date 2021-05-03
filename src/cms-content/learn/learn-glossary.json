@@ -485,7 +485,7 @@
     {
       "term": "Vaccine",
       "termId": "vaccine",
-      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of mid December 2020, the [F.D.A has approved two COVID vaccines](https://covidactnow.org/covid-explained/roundup-current-vaccine-progress)--one by Pfizer and one by Moderna--for distribution in the U.S.",
+      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of May 2021, the [F.D.A has approved three COVID vaccines](https://www.fda.gov/consumers/consumer-updates/learn-more-about-covid-19-vaccines-fda)--one by Pfizer, one by Moderna, and one by Johnson & Johnson--for distribution in the U.S.",
       "category": "Treatment"
     },
     {
