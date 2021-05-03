@@ -17,7 +17,6 @@ import VulnerabilityNote from '../NotesBlock/VulnerabilityNote';
 import GetAlertsBlock from '../GetAlertsBlock';
 import { CountyMap } from '../CountyMap';
 import HeaderButtons from '../HeaderButtons';
-import { Projection } from 'common/models/Projection';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
@@ -27,14 +26,12 @@ import { Metric } from 'common/metricEnum';
 const noop = () => {};
 
 interface AboveTheFoldProps {
-  projection: Projection;
   region: Region;
   locationSummary: LocationSummary;
   onClickMetric?: (metric: Metric) => void;
 }
 
 const AboveTheFold: React.FC<AboveTheFoldProps> = ({
-  projection,
   region,
   locationSummary,
   onClickMetric,
@@ -58,12 +55,10 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
             region={region}
             locationSummary={locationSummary}
             onClickMetric={onClickMetric || noop}
-            vaxInitiated={projection.vaccinationsInfo?.ratioInitiated}
-            vaxCompleted={projection.vaccinationsInfo?.ratioVaccinated}
           />
         </GridItemOverview>
         <GridItemSparkLines>
-          <SparkLineBlock projection={projection} />
+          <SparkLineBlock region={region} />
         </GridItemSparkLines>
         <GridItemAlerts>
           <GetAlertsBlock region={region} onClickGetAlerts={() => {}} />

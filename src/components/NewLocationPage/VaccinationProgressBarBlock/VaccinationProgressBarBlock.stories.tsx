@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Projection } from 'common/models/Projection';
 import VaccinationProgressBlock from './VaccinationProgressBarBlock';
+import { getProjectionForRegion } from '../SparkLineBlock/utils';
+import regions from 'common/regions';
 
 export default {
   title: 'Location page redesign/Vaccinations progress bar block',
@@ -7,16 +10,21 @@ export default {
 };
 
 export const Example = () => {
-  const vaccinationsInitiated = 0.4036805522539912;
-  const vaccinationsCompleted = 0.2408335789697175;
+  const region = regions.findByFipsCodeStrict('36');
+  const [projection, setProjection] = useState<Projection>();
 
-  const locationName = 'New York';
+  useEffect(() => {
+    const fetchProjection = () => getProjectionForRegion(region);
+    fetchProjection().then(setProjection);
+  }, [region]);
 
+  if (!projection) {
+    return null;
+  }
   return (
     <VaccinationProgressBlock
-      vaccinationsInitiated={vaccinationsInitiated}
-      vaccinationsCompleted={vaccinationsCompleted}
-      locationName={locationName}
+      locationName={region.name}
+      projection={projection}
     />
   );
 };

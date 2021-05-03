@@ -2,7 +2,7 @@ import React from 'react';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear, scaleUtc } from '@vx/scale';
 import { LinePath } from '@vx/shape';
-import { curveNatural } from '@vx/curve';
+import { curveMonotoneX } from '@vx/curve';
 import { SingleSparkLineContainer as Container } from './SparkLineBlock.style';
 import { Column } from 'common/models/Projection';
 import { COLOR_MAP } from 'common/colors';
@@ -60,8 +60,8 @@ const SparkLineInner: React.FC<{
                 x={getXCoord}
                 y={getYCoord}
                 stroke="black"
-                strokeWidth={1.5}
-                curve={curveNatural}
+                strokeWidth={2}
+                curve={curveMonotoneX}
                 strokeLinecap="round"
               />
             );
