@@ -36,6 +36,9 @@ const SparkLineSet: React.FC<{
         );
         const rawData = getDataFromSeries(metricSeries[0], dateFrom);
         const smoothedData = getDataFromSeries(metricSeries[1], dateFrom);
+        if (!rawData.length || !smoothedData.length) {
+          return null;
+        }
         return (
           <GridItem key={title}>
             <ParentSize>
