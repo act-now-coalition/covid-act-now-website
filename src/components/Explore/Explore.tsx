@@ -92,322 +92,318 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 
 const Explore: React.FunctionComponent<{
   initialFipsList: string[];
-  initialChartIndigenousPopulations?: boolean;
   title?: string;
   defaultMetric?: ExploreMetric;
-  nationalSummaryText?: React.ReactElement;
-}> = ({
-  initialFipsList,
-  initialChartIndigenousPopulations,
-  defaultMetric = ExploreMetric.CASES,
-  title = 'Trends',
-  nationalSummaryText,
-}) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
-  const metricLabels = getMetricLabels();
+  showNationalSummary?: boolean;
+}> = React.memo(
+  ({
+    initialFipsList,
+    defaultMetric = ExploreMetric.CASES,
+    title = 'Trends',
+    showNationalSummary = false,
+  }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
+    const metricLabels = getMetricLabels();
 
-  const { sharedComponentId } = useParams<{
-    sharedComponentId?: string;
-  }>();
+    const { sharedComponentId } = useParams<{
+      sharedComponentId?: string;
+    }>();
 
-  // TODO (chris): Dont love the way of forcing a ''
-  const region = useRegionFromParams();
+    // TODO (chris): Dont love the way of forcing a ''
+    const region = useRegionFromParams();
 
-  // Originally we had share URLs like /explore/cases instead of
-  // /explore/<sharedComponentId> and so this code allows them to keep working.
-  if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
-    defaultMetric = getMetricByChartId(sharedComponentId)!;
-  }
-  const [currentMetric, setCurrentMetric] = useState(defaultMetric);
+    // Originally we had share URLs like /explore/cases instead of
+    // /explore/<sharedComponentId> and so this code allows them to keep working.
+    if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
+      defaultMetric = getMetricByChartId(sharedComponentId)!;
+    }
+    const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-  const [normalizeData, setNormalizeData] = useState(
-    initialFipsList.length > 1,
-  );
-
-  const onChangeTab = (newMetric: number) => {
-    const newMetricName = metricLabels[newMetric];
-    setCurrentMetric(newMetric);
-    trackExploreEvent(EventAction.SELECT, `Metric: ${newMetricName}`);
-  };
-
-  const onClickNormalize = () => {
-    const newNormalizeData = !normalizeData;
-    setNormalizeData(newNormalizeData);
-    trackExploreEvent(
-      EventAction.SELECT,
-      'Normalize Data',
-      newNormalizeData ? 1 : 0,
+    const [normalizeData, setNormalizeData] = useState(
+      initialFipsList.length > 1,
     );
-  };
 
-  const currentMetricName = getMetricName(currentMetric);
+    const onChangeTab = (newMetric: number) => {
+      const newMetricName = metricLabels[newMetric];
+      setCurrentMetric(newMetric);
+      trackExploreEvent(EventAction.SELECT, `Metric: ${newMetricName}`);
+    };
 
-  const initialLocations = useMemo(
-    () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
-    [initialFipsList],
-  );
+    const onClickNormalize = () => {
+      const newNormalizeData = !normalizeData;
+      setNormalizeData(newNormalizeData);
+      trackExploreEvent(
+        EventAction.SELECT,
+        'Normalize Data',
+        newNormalizeData ? 1 : 0,
+      );
+    };
 
-  const indigeneousPopulationsLocations = useMemo(
-    () => ['00001', '00002'].map(fips => regions.findByFipsCode(fips)!),
-    [],
-  );
-  const autocompleteLocations = useMemo(
-    () => getExploreAutocompleteLocations(initialFipsList[0]),
-    [initialFipsList],
-  );
+    const currentMetricName = getMetricName(currentMetric);
 
-  const [selectedLocations, setSelectedLocations] = useState<Region[]>(
-    initialLocations,
-  );
+    const initialLocations = useMemo(
+      () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
+      [initialFipsList],
+    );
 
-  const onChangeSelectedLocations = (newLocations: Region[]) => {
-    const changedLocations = uniq(newLocations);
-    if (selectedLocations.length > 1 && changedLocations.length === 1) {
-      // if switching from multiple to a single location, disable normalization
-      setNormalizeData(false);
-    } else if (selectedLocations.length === 1 && changedLocations.length > 1) {
-      // if switching from single to multiple locations, enable normalization
-      setNormalizeData(true);
-    }
+    const autocompleteLocations = useMemo(
+      () => getExploreAutocompleteLocations(initialFipsList[0]),
+      [initialFipsList],
+    );
 
-    const eventLabel =
-      selectedLocations.length < changedLocations.length
-        ? 'Adding Location'
-        : 'Removing Location';
-    trackExploreEvent(EventAction.SELECT, eventLabel, changedLocations.length);
+    const [selectedLocations, setSelectedLocations] = useState<Region[]>(
+      initialLocations,
+    );
 
-    // make sure that the current location is always selected
-    setSelectedLocations(changedLocations);
-  };
-
-  const exploreRef = useRef<HTMLDivElement>(null);
-  const scrollToExplore = useCallback(() => {
-    const scrollOffset = 200;
-    return setTimeout(() => {
-      if (exploreRef.current) {
-        window.scrollTo({
-          left: 0,
-          top: exploreRef.current.offsetTop - scrollOffset,
-          behavior: 'smooth',
-        });
+    const onChangeSelectedLocations = (newLocations: Region[]) => {
+      const changedLocations = uniq(newLocations);
+      if (selectedLocations.length > 1 && changedLocations.length === 1) {
+        // if switching from multiple to a single location, disable normalization
+        setNormalizeData(false);
+      } else if (
+        selectedLocations.length === 1 &&
+        changedLocations.length > 1
+      ) {
+        // if switching from single to multiple locations, enable normalization
+        setNormalizeData(true);
       }
-    }, 200);
-  }, [exploreRef]);
 
-  const location = useLocation();
-  useEffect(() => {
-    if (location.pathname.includes('/explore')) {
-      const timeoutId = scrollToExplore();
-      return () => clearTimeout(timeoutId);
-    }
-  }, [location.pathname, scrollToExplore]);
+      const eventLabel =
+        selectedLocations.length < changedLocations.length
+          ? 'Adding Location'
+          : 'Removing Location';
+      trackExploreEvent(
+        EventAction.SELECT,
+        eventLabel,
+        changedLocations.length,
+      );
 
-  // We need to reset the selected locations and the default metric when
-  // the user clicks a location on the Compare table or on the mini map so
-  // they are not carried over to the new location page.
-  useEffect(() => {
-    if (initialChartIndigenousPopulations) {
-      setSelectedLocations(indigeneousPopulationsLocations);
-      setNormalizeData(true);
-    } else {
+      // make sure that the current location is always selected
+      setSelectedLocations(changedLocations);
+    };
+
+    const exploreRef = useRef<HTMLDivElement>(null);
+    const scrollToExplore = useCallback(() => {
+      const scrollOffset = 200;
+      return setTimeout(() => {
+        if (exploreRef.current) {
+          window.scrollTo({
+            left: 0,
+            top: exploreRef.current.offsetTop - scrollOffset,
+            behavior: 'smooth',
+          });
+        }
+      }, 200);
+    }, [exploreRef]);
+
+    const location = useLocation();
+    useEffect(() => {
+      if (location.pathname.includes('/explore')) {
+        const timeoutId = scrollToExplore();
+        return () => clearTimeout(timeoutId);
+      }
+    }, [location.pathname, scrollToExplore]);
+
+    // We need to reset the selected locations and the default metric when
+    // the user clicks a location on the Compare table or on the mini map so
+    // they are not carried over to the new location page.
+    useEffect(() => {
       setSelectedLocations(initialLocations);
       setNormalizeData(initialLocations.length > 1);
-    }
-    setCurrentMetric(defaultMetric);
-  }, [
-    initialLocations,
-    initialChartIndigenousPopulations,
-    defaultMetric,
-    indigeneousPopulationsLocations,
-  ]);
+      setCurrentMetric(defaultMetric);
+    }, [initialLocations, defaultMetric]);
 
-  const [chartSeries, setChartSeries] = useState<Series[]>([]);
-  useEffect(() => {
-    const fetchSeries = () =>
-      getChartSeries(currentMetric, selectedLocations, normalizeData);
-    fetchSeries().then(setChartSeries);
-  }, [selectedLocations, currentMetric, normalizeData]);
+    const [chartSeries, setChartSeries] = useState<Series[]>([]);
+    useEffect(() => {
+      const fetchSeries = () =>
+        getChartSeries(currentMetric, selectedLocations, normalizeData);
+      fetchSeries().then(setChartSeries);
+    }, [selectedLocations, currentMetric, normalizeData]);
 
-  const hasData = some(chartSeries, ({ data }) => data.length > 0);
-  const hasMultipleLocations = selectedLocations.length > 1;
+    const hasData = some(chartSeries, ({ data }) => data.length > 0);
+    const hasMultipleLocations = selectedLocations.length > 1;
 
-  const modalNormalizeCheckboxProps = {
-    hasMultipleLocations,
-    normalizeData,
-    setNormalizeData,
-  };
-
-  const marginRight = useMemo(
-    () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
-    [hasMultipleLocations, isMobileXs, chartSeries],
-  );
-
-  const createSharedComponentId = async () => {
-    return storeSharedComponentParams(SharedComponent.Explore, {
-      currentMetric,
+    const modalNormalizeCheckboxProps = {
+      hasMultipleLocations,
       normalizeData,
-      selectedFips: selectedLocations.map(location => location.fipsCode),
-    });
-  };
+      setNormalizeData,
+    };
 
-  const sharedParams = useSharedComponentParams(SharedComponent.Explore);
-  useEffect(() => {
-    if (sharedParams) {
-      setCurrentMetric(sharedParams.currentMetric);
-      setNormalizeData(sharedParams.normalizeData);
-      const locations = sharedParams.selectedFips.map(
-        (fips: string) => regions.findByFipsCode(fips)!,
-      );
-      setSelectedLocations(locations);
-    }
-  }, [sharedParams]);
+    const marginRight = useMemo(
+      () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
+      [hasMultipleLocations, isMobileXs, chartSeries],
+    );
 
-  const trackingLabel = hasMultipleLocations
-    ? `Multiple Locations`
-    : 'Single Location';
-  const numLocations = selectedLocations.length;
+    const createSharedComponentId = async () => {
+      return storeSharedComponentParams(SharedComponent.Explore, {
+        currentMetric,
+        normalizeData,
+        selectedFips: selectedLocations.map(location => location.fipsCode),
+      });
+    };
 
-  return (
-    <Styles.Container ref={exploreRef}>
-      <Grid container spacing={1}>
-        <Grid container item sm={9} xs={12} alignContent="center">
-          <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
+    const sharedParams = useSharedComponentParams(SharedComponent.Explore);
+    useEffect(() => {
+      if (sharedParams) {
+        setCurrentMetric(sharedParams.currentMetric);
+        setNormalizeData(sharedParams.normalizeData);
+        const locations = sharedParams.selectedFips.map(
+          (fips: string) => regions.findByFipsCode(fips)!,
+        );
+        setSelectedLocations(locations);
+      }
+    }, [sharedParams]);
+
+    const trackingLabel = hasMultipleLocations
+      ? `Multiple Locations`
+      : 'Single Location';
+    const numLocations = selectedLocations.length;
+
+    return (
+      <Styles.Container ref={exploreRef}>
+        <Grid container spacing={1}>
+          <Grid container item sm={9} xs={12} alignContent="center">
+            <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
+          </Grid>
+          <Grid item sm xs={12}>
+            <Styles.ShareBlock>
+              <ShareImageButtonGroup
+                disabled={selectedLocations.length === 0 || !hasData}
+                imageUrl={() =>
+                  createSharedComponentId().then(getExportImageUrl)
+                }
+                imageFilename={getImageFilename(
+                  selectedLocations,
+                  currentMetric,
+                )}
+                url={() =>
+                  createSharedComponentId().then(sharingId =>
+                    getChartUrl(sharingId, region),
+                  )
+                }
+                quote={getSocialQuote(selectedLocations, currentMetric)}
+                onSaveImage={() => {
+                  trackExploreEvent(
+                    EventAction.SAVE_IMAGE,
+                    trackingLabel,
+                    selectedLocations.length,
+                  );
+                }}
+                onCopyLink={() => {
+                  trackExploreEvent(
+                    EventAction.COPY_LINK,
+                    trackingLabel,
+                    selectedLocations.length,
+                  );
+                }}
+                onShareOnFacebook={() =>
+                  trackShare(`Facebook: ${trackingLabel}`, numLocations)
+                }
+                onShareOnTwitter={() =>
+                  trackShare(`Twitter: ${trackingLabel}`, numLocations)
+                }
+                onShareOnLinkedin={() =>
+                  trackShare(`Linkedin: ${trackingLabel}`, numLocations)
+                }
+              />
+            </Styles.ShareBlock>
+          </Grid>
         </Grid>
-        <Grid item sm xs={12}>
-          <Styles.ShareBlock>
-            <ShareImageButtonGroup
-              disabled={selectedLocations.length === 0 || !hasData}
-              imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
-              imageFilename={getImageFilename(selectedLocations, currentMetric)}
-              url={() =>
-                createSharedComponentId().then(sharingId =>
-                  getChartUrl(sharingId, region),
+        {showNationalSummary && <NationalText />}
+        <ExploreTabs
+          activeTabIndex={currentMetric}
+          labels={metricLabels}
+          onChangeTab={onChangeTab}
+        />
+        <Styles.ChartControlsContainer>
+          <Styles.TableAutocompleteHeader>
+            Compare states, counties, or metro areas
+          </Styles.TableAutocompleteHeader>
+          <Grid container spacing={1}>
+            <Grid key="location-selector" item sm={9} xs={12}>
+              <LocationSelector
+                regions={autocompleteLocations}
+                selectedRegions={selectedLocations}
+                onChangeSelectedRegions={onChangeSelectedLocations}
+                {...modalNormalizeCheckboxProps}
+              />
+            </Grid>
+            {!hasMultipleLocations && (
+              <Grid key="legend" item sm={3} xs={12}>
+                <Legend seriesList={chartSeries} />
+              </Grid>
+            )}
+            {hasMultipleLocations && !isMobileXs && (
+              <Grid key="legend" item sm={3} xs={12}>
+                <Styles.NormalizeDataContainer>
+                  <FormControlLabel
+                    control={
+                      <Styles.NormalizeCheckbox
+                        checked={normalizeData}
+                        onChange={onClickNormalize}
+                        name="normalize data"
+                        disableRipple
+                        id="normalize-data-control"
+                      />
+                    }
+                    label="Normalize Data"
+                  />
+                  <Styles.NormalizeSubLabel>
+                    Per 100k population
+                  </Styles.NormalizeSubLabel>
+                </Styles.NormalizeDataContainer>
+              </Grid>
+            )}
+          </Grid>
+        </Styles.ChartControlsContainer>
+        <Styles.Subtitle>
+          {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
+        </Styles.Subtitle>
+        {selectedLocations.length > 0 && hasData && (
+          <Styles.ChartContainer>
+            {/**
+             * The width is set to zero while the parent div is rendering, the
+             * placeholder div below prevents the page from jumping.
+             */}
+            <ParentSize>
+              {({ width }) =>
+                width > 0 ? (
+                  <ExploreChart
+                    seriesList={chartSeries}
+                    isMobile={isMobile}
+                    width={width}
+                    height={400}
+                    tooltipSubtext={`in ${getLocationNames(selectedLocations)}`}
+                    hasMultipleLocations={hasMultipleLocations}
+                    isMobileXs={isMobileXs}
+                    marginRight={marginRight}
+                  />
+                ) : (
+                  <div style={{ height: 400 }} />
                 )
               }
-              quote={getSocialQuote(selectedLocations, currentMetric)}
-              onSaveImage={() => {
-                trackExploreEvent(
-                  EventAction.SAVE_IMAGE,
-                  trackingLabel,
-                  selectedLocations.length,
-                );
-              }}
-              onCopyLink={() => {
-                trackExploreEvent(
-                  EventAction.COPY_LINK,
-                  trackingLabel,
-                  selectedLocations.length,
-                );
-              }}
-              onShareOnFacebook={() =>
-                trackShare(`Facebook: ${trackingLabel}`, numLocations)
-              }
-              onShareOnTwitter={() =>
-                trackShare(`Twitter: ${trackingLabel}`, numLocations)
-              }
-              onShareOnLinkedin={() =>
-                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
-              }
-            />
-          </Styles.ShareBlock>
-        </Grid>
-      </Grid>
-      {nationalSummaryText && (
-        <NationalText nationalSummaryText={nationalSummaryText} />
-      )}
-      <ExploreTabs
-        activeTabIndex={currentMetric}
-        labels={metricLabels}
-        onChangeTab={onChangeTab}
-      />
-      <Styles.ChartControlsContainer>
-        <Styles.TableAutocompleteHeader>
-          Compare states, counties, or metro areas
-        </Styles.TableAutocompleteHeader>
-        <Grid container spacing={1}>
-          <Grid key="location-selector" item sm={9} xs={12}>
-            <LocationSelector
-              regions={autocompleteLocations}
-              selectedRegions={selectedLocations}
-              onChangeSelectedRegions={onChangeSelectedLocations}
-              {...modalNormalizeCheckboxProps}
-            />
-          </Grid>
-          {!hasMultipleLocations && (
-            <Grid key="legend" item sm={3} xs={12}>
-              <Legend seriesList={chartSeries} />
-            </Grid>
-          )}
-          {hasMultipleLocations && !isMobileXs && (
-            <Grid key="legend" item sm={3} xs={12}>
-              <Styles.NormalizeDataContainer>
-                <FormControlLabel
-                  control={
-                    <Styles.NormalizeCheckbox
-                      checked={normalizeData}
-                      onChange={onClickNormalize}
-                      name="normalize data"
-                      disableRipple
-                      id="normalize-data-control"
-                    />
-                  }
-                  label="Normalize Data"
-                />
-                <Styles.NormalizeSubLabel>
-                  Per 100k population
-                </Styles.NormalizeSubLabel>
-              </Styles.NormalizeDataContainer>
-            </Grid>
-          )}
-        </Grid>
-      </Styles.ChartControlsContainer>
-      <Styles.Subtitle>
-        {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
-      </Styles.Subtitle>
-      {selectedLocations.length > 0 && hasData && (
-        <Styles.ChartContainer>
-          {/**
-           * The width is set to zero while the parent div is rendering, the
-           * placeholder div below prevents the page from jumping.
-           */}
-          <ParentSize>
-            {({ width }) =>
-              width > 0 ? (
-                <ExploreChart
-                  seriesList={chartSeries}
-                  isMobile={isMobile}
-                  width={width}
-                  height={400}
-                  tooltipSubtext={`in ${getLocationNames(selectedLocations)}`}
-                  hasMultipleLocations={hasMultipleLocations}
-                  isMobileXs={isMobileXs}
-                  marginRight={marginRight}
-                />
-              ) : (
-                <div style={{ height: 400 }} />
-              )
-            }
-          </ParentSize>
-        </Styles.ChartContainer>
-      )}
-      {selectedLocations.length > 0 && !hasData && (
-        <Styles.EmptyPanel style={{ height: 400 }}>
-          {getNoDataCopy(
-            currentMetricName,
-            getLocationNames(selectedLocations),
-          )}
-        </Styles.EmptyPanel>
-      )}
-      {selectedLocations.length === 0 && (
-        <Styles.EmptyPanel style={{ height: 400 }}>
-          <p>Please select states or counties to explore trends.</p>
-          <ScreenshotReady />
-        </Styles.EmptyPanel>
-      )}
-    </Styles.Container>
-  );
-};
+            </ParentSize>
+          </Styles.ChartContainer>
+        )}
+        {selectedLocations.length > 0 && !hasData && (
+          <Styles.EmptyPanel style={{ height: 400 }}>
+            {getNoDataCopy(
+              currentMetricName,
+              getLocationNames(selectedLocations),
+            )}
+          </Styles.EmptyPanel>
+        )}
+        {selectedLocations.length === 0 && (
+          <Styles.EmptyPanel style={{ height: 400 }}>
+            <p>Please select states or counties to explore trends.</p>
+            <ScreenshotReady />
+          </Styles.EmptyPanel>
+        )}
+      </Styles.Container>
+    );
+  },
+);
 
 export default Explore;

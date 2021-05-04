@@ -15,7 +15,6 @@ import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
@@ -158,8 +157,7 @@ export default function HomePage() {
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsListForExplore}
                 defaultMetric={initialMetricForExplore}
-                initialChartIndigenousPopulations={false}
-                nationalSummaryText={getNationalText()}
+                showNationalSummary={true}
               />
             </Section>
             <SectionWrapper>
