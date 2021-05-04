@@ -45,7 +45,8 @@ const LocationName: React.FC<{ region: Region }> = ({ region }) => {
       <RegionNameContainer>
         <RegionNameText>
           <strong>{countyName}</strong>
-          {` ${countySuffix}, ${region.state.stateCode}`}
+          {countySuffix && ` ${countySuffix}`}
+          {`, ${region.state.stateCode}`}
         </RegionNameText>
         <UpdatedDate />
       </RegionNameContainer>
@@ -57,7 +58,8 @@ const LocationName: React.FC<{ region: Region }> = ({ region }) => {
         <RegionNameContainer>
           <RegionNameText>
             <strong>{metroName}</strong>
-            {` ${metroSuffix}, ${region.stateCodes}`}
+            {metroSuffix && ` ${metroSuffix}`}
+            {`, ${region.stateCodes}`}
           </RegionNameText>
           <UpdatedDate />
         </RegionNameContainer>
@@ -67,7 +69,7 @@ const LocationName: React.FC<{ region: Region }> = ({ region }) => {
         <RegionNameContainer>
           <RegionNameText>
             <strong>{`${metroName}, ${region.stateCodes}`}</strong>
-            {` ${metroSuffix}`}
+            {metroSuffix && ` ${metroSuffix}`}
           </RegionNameText>
           <UpdatedDate />
         </RegionNameContainer>

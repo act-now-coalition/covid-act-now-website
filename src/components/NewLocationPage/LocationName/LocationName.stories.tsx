@@ -22,6 +22,21 @@ export const EastBatonRougeParish = () => {
   return <LocationName region={county} />;
 };
 
+export const DistrictOfColumbia = () => {
+  const county = regions.findByFipsCodeStrict('11001');
+  return <LocationName region={county} />;
+};
+
+export const ValdezCordovaCensusArea = () => {
+  const county = regions.findByFipsCodeStrict('02261');
+  return <LocationName region={county} />;
+};
+
+export const YakutatCityAndBorough = () => {
+  const county = regions.findByFipsCodeStrict('02282');
+  return <LocationName region={county} />;
+};
+
 export const AbileneMetro = () => {
   const metroArea = regions.findByFipsCodeStrict('10180');
   return <LocationName region={metroArea} />;
