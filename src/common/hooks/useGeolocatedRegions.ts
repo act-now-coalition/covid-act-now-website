@@ -1,6 +1,7 @@
 import { getGeolocatedRegions } from 'common/regions';
 import useGeolocation from './useGeolocation';
 import useCountyToZipMap from './useCountyToZipMap';
+import { useMemo } from 'react';
 
 /**
  * Hook to provide a map of region type (metroArea, county, state) to region
@@ -13,10 +14,13 @@ const useGeolocatedRegions = () => {
   const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
 
   const isLoading = geoIsLoading || zipIsLoading;
-  const userRegions =
-    geolocationData && countyToZipMap
-      ? getGeolocatedRegions(geolocationData, countyToZipMap)
-      : null;
+  const userRegions = useMemo(
+    () =>
+      geolocationData && countyToZipMap
+        ? getGeolocatedRegions(geolocationData, countyToZipMap)
+        : null,
+    [geolocationData, countyToZipMap],
+  );
 
   return {
     userRegions,
