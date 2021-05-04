@@ -74,8 +74,7 @@ export const GridContainer = styled.div`
   grid-gap: 1.25rem;
 
   @media (min-width: ${mobileBreakpoint}) {
-    grid-template-rows: minmax(0, 1fr);
-    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
   }
 `;
 
