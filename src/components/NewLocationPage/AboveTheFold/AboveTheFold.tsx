@@ -1,4 +1,5 @@
 import React from 'react';
+import isNull from 'lodash/isNull';
 import {
   MainWrapper,
   HeaderContainer,
@@ -17,32 +18,43 @@ import VulnerabilityNote from '../NotesBlock/VulnerabilityNote';
 import GetAlertsBlock from '../GetAlertsBlock';
 import { CountyMap } from '../CountyMap';
 import HeaderButtons from '../HeaderButtons';
-import { Projection } from 'common/models/Projection';
 import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
 import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButton';
+import { Metric } from 'common/metricEnum';
+import { SparkLineMetric } from '../SparkLineBlock/utils';
+import { hasVeryHighVulnerability } from '../NotesBlock/utils';
 
 interface AboveTheFoldProps {
-  projection: Projection;
   region: Region;
   locationSummary: LocationSummary;
+  onClickAlertSignup: () => void;
+  onClickShare: () => void;
+  onClickMetric?: (metric: Metric) => void;
+  onClickSparkLine: (metric: SparkLineMetric) => void;
 }
 
 const AboveTheFold: React.FC<AboveTheFoldProps> = ({
-  projection,
   region,
   locationSummary,
+  onClickMetric,
+  onClickAlertSignup,
+  onClickShare,
+  onClickSparkLine,
 }) => {
-  console.log('locationSummary', locationSummary);
+  const showVulnerabilityNote =
+    !isNull(locationSummary.ccvi) &&
+    hasVeryHighVulnerability(locationSummary.ccvi);
+
   return (
     <MainWrapper>
-      <GridContainer>
+      <GridContainer showNote={showVulnerabilityNote}>
         <GridItemHeader>
           <HeaderContainer>
             <LocationName region={region} />
             <DesktopOnly>
-              <HeaderButtons />
+              <HeaderButtons onClickShare={onClickShare} />
             </DesktopOnly>
             <MobileOnly>
               <VaccineButton />
@@ -50,20 +62,33 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
           </HeaderContainer>
         </GridItemHeader>
         <GridItemOverview>
-          <LocationOverview region={region} locationSummary={locationSummary} />
+          <LocationOverview
+            region={region}
+            locationSummary={locationSummary}
+            onClickMetric={onClickMetric}
+            onClickShare={onClickShare}
+          />
         </GridItemOverview>
         <GridItemSparkLines>
-          <SparkLineBlock projection={projection} />
+          <SparkLineBlock region={region} onClickSparkLine={onClickSparkLine} />
         </GridItemSparkLines>
         <GridItemAlerts>
-          <GetAlertsBlock region={region} onClickGetAlerts={() => {}} />
+          <GetAlertsBlock
+            region={region}
+            onClickGetAlerts={onClickAlertSignup}
+          />
         </GridItemAlerts>
         <GridItemMap>
           <CountyMap region={region} />
         </GridItemMap>
-        <GridItemNote>
-          <VulnerabilityNote ccviScore={locationSummary.ccvi} />
-        </GridItemNote>
+        {showVulnerabilityNote && (
+          <GridItemNote>
+            <VulnerabilityNote
+              ccviScore={locationSummary.ccvi}
+              region={region}
+            />
+          </GridItemNote>
+        )}
       </GridContainer>
     </MainWrapper>
   );

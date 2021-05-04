@@ -3,7 +3,8 @@ import loveLetter from '@iconify/icons-twemoji/love-letter';
 import { Icon } from '@iconify/react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import NavBar, { NavBarSearch } from 'components/NavBar';
+import { NavBarSearch } from 'components/NavBar';
+import { NavAllOtherPages } from 'components/NavBar';
 import {
   Container,
   ContentWrapper,
@@ -41,7 +42,7 @@ const Donate: React.FC = () => {
 
   return (
     <>
-      <NavBar
+      <NavAllOtherPages
         renderSearch={() => <NavBarSearch menuOpen={menuOpen} />}
         renderSecondaryElement={() => <DesktopOnlyDonateButton />}
         menuOpen={menuOpen}

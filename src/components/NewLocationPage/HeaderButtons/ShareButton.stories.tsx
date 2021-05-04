@@ -7,5 +7,5 @@ export default {
 };
 
 export const Share = () => {
-  return <ShareButton />;
+  return <ShareButton onClickShare={() => {}} />;
 };

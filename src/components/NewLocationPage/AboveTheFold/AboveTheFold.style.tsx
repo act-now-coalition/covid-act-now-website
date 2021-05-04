@@ -1,48 +1,84 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { maxContentWidth } from 'components/NewLocationPage/Shared/Shared.style';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 import { mapToFixedBreakpoint } from '../CountyMap';
 
 export const MainWrapper = styled.div`
   background-color: ${COLOR_MAP.GREY_0};
-  padding: 15px; //remove
+  padding: 2rem 1rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 2rem;
+  }
 `;
 
 export const HeaderContainer = styled.div`
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
   }
 `;
 
-export const GridContainer = styled.div`
+export const GridContainer = styled.div<{ showNote: boolean }>`
   display: grid;
   max-width: ${maxContentWidth};
-  row-gap: 1rem;
-  grid-template-areas: 'header' 'overview' 'spark' 'map' 'note' 'alerts';
+  margin: auto;
+  row-gap: 1.25rem;
+  grid-template-areas: ${({ showNote }) =>
+    showNote
+      ? `'header' 'overview' 'spark' 'map' 'note' 'alerts'`
+      : `'header' 'overview' 'spark' 'map' 'alerts'`};
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
-    grid-gap: 1rem;
-    grid-template-areas:
-      'header header'
+    grid-gap: 1.75rem;
+    grid-template-areas: ${({ showNote }) =>
+      showNote
+        ? `'header header'
+    'overview overview'
+    'spark map'
+    'alerts alerts'
+    'note note'`
+        : `'header header'
+    'overview overview'
+    'spark map'
+    'alerts alerts'`};
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    grid-template-areas: ${({ showNote }) =>
+      showNote
+        ? `'header header'
       'overview overview'
       'spark map'
       'alerts map'
-      'note note';
+      'note note'`
+        : `'header header'
+      'overview overview'
+      'spark map'
+      'alerts map'`};
   }
 
   @media (min-width: ${mapToFixedBreakpoint}px) {
+    margin: 0 350px 0 auto;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      'header header'
+    grid-template-areas: ${({ showNote }) =>
+      showNote
+        ? `'header header'
       'overview overview'
       'spark alerts'
-      'note note';
+      'note note'`
+        : `'header header'
+      'overview overview'
+      'spark alerts'`};
+  }
+
+  @media (min-width: 1750px) {
+    margin: auto;
   }
 `;
 
