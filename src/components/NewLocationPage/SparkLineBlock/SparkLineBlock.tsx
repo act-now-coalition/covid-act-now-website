@@ -5,6 +5,7 @@ import { daysToChart } from './utils';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { Region } from 'common/regions';
 import { SparkLineMetric } from './utils';
+import ErrorBoundary from 'components/ErrorBoundary';
 
 const SparkLineBlock: React.FC<{
   region: Region;
@@ -17,13 +18,15 @@ const SparkLineBlock: React.FC<{
   }
 
   return (
-    <SectionContainer>
-      <GrayTitle>Past {daysToChart} days</GrayTitle>
-      <SparkLineSet
-        projection={projections.primary}
-        onClickSparkLine={onClickSparkLine}
-      />
-    </SectionContainer>
+    <ErrorBoundary>
+      <SectionContainer>
+        <GrayTitle>Past {daysToChart} days</GrayTitle>
+        <SparkLineSet
+          projection={projections.primary}
+          onClickSparkLine={onClickSparkLine}
+        />
+      </SectionContainer>
+    </ErrorBoundary>
   );
 };
 

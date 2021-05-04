@@ -3,7 +3,6 @@ import { cleanSeries } from 'components/Explore/utils';
 import { ExploreMetric } from 'components/Explore';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
-import { assert } from 'common/utils';
 import { Region } from 'common/regions';
 
 export const daysToChart = 30;
@@ -101,16 +100,9 @@ export function getSparkLineSeriesFromProjection(
   }));
 }
 
-function getMaxY(series: Column[]) {
-  return d3Max(series, (d: Column) => d.y);
-}
-
-export function getOverallMaxY(seriesA: Column[], seriesB: Column[]) {
-  const maxA = getMaxY(seriesA);
-  const maxB = getMaxY(seriesB);
-  assert(maxA, 'Maximum value unexpectedly not found'); // theres probably a better way
-  assert(maxB, 'Maximum value unexpectedly not found');
-  return Math.max(maxA, maxB);
+export function getMaxY(series: Column[]) {
+  const maxY = d3Max(series, (d: Column) => d.y);
+  return maxY;
 }
 
 // Gets most recent 30 days of data
