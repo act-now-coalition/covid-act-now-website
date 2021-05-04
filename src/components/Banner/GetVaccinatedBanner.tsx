@@ -24,8 +24,7 @@ const GetVaccinatedBanner: React.FC = () => {
         <Body>
           <strong>{formatInteger(totalVaccinationsInitiated)}</strong> people (
           <strong>{percentVaccinated}</strong> of the U.S. population) have
-          received at least one dose of the vaccine. Find a vaccine near you and
-          learn more about vaccine safety and effectiveness.
+          received at least one dose of the vaccine.
         </Body>
         <ButtonsContainer>
           <FilledButton
