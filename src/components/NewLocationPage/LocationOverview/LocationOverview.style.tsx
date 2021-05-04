@@ -54,7 +54,7 @@ const ClickableItemStyles = css`
   cursor: pointer;
   &:hover {
     ${Chevron} {
-      transform: translate(6px, -3px);
+      transform: translate(6px, -1px);
       transition: transform 0.06s ease-in-out;
     }
   }

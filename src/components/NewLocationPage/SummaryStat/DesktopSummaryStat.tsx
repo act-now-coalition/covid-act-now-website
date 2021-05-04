@@ -23,7 +23,11 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
         <StyledChevron />
       </Row>
       <Row>
-        <MetricValue value={formattedValue} iconColor={levelInfo.color} />
+        <MetricValue
+          value={formattedValue}
+          iconColor={levelInfo.color}
+          metric={metric}
+        />
         {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
       </Row>
     </StatContent>
