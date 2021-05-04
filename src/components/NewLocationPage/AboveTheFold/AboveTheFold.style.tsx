@@ -6,7 +6,11 @@ import { mapToFixedBreakpoint } from '../CountyMap';
 
 export const MainWrapper = styled.div`
   background-color: ${COLOR_MAP.GREY_0};
-  padding: 2rem 1rem 1rem; //change this
+  padding: 2rem 1rem;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 2rem;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -19,41 +23,58 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const GridContainer = styled.div`
+export const GridContainer = styled.div<{ showNote: boolean }>`
   display: grid;
   max-width: ${maxContentWidth};
   margin: auto;
   row-gap: 1.25rem;
-  grid-template-areas: 'header' 'overview' 'spark' 'map' 'note' 'alerts';
+  grid-template-areas: ${({ showNote }) =>
+    showNote
+      ? `'header' 'overview' 'spark' 'map' 'note' 'alerts'`
+      : `'header' 'overview' 'spark' 'map' 'alerts'`};
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
     grid-gap: 1.75rem;
-    grid-template-areas:
-      'header header'
-      'overview overview'
-      'spark map'
-      'alerts alerts'
-      'note note';
+    grid-template-areas: ${({ showNote }) =>
+      showNote
+        ? `'header header'
+    'overview overview'
+    'spark map'
+    'alerts alerts'
+    'note note'`
+        : `'header header'
+    'overview overview'
+    'spark map'
+    'alerts alerts'`};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    grid-template-areas:
-      'header header'
+    grid-template-areas: ${({ showNote }) =>
+      showNote
+        ? `'header header'
       'overview overview'
       'spark map'
       'alerts map'
-      'note note';
+      'note note'`
+        : `'header header'
+      'overview overview'
+      'spark map'
+      'alerts map'`};
   }
 
   @media (min-width: ${mapToFixedBreakpoint}px) {
     margin: 0 350px 0 auto;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      'header header'
+    grid-template-areas: ${({ showNote }) =>
+      showNote
+        ? `'header header'
       'overview overview'
       'spark alerts'
-      'note note';
+      'note note'`
+        : `'header header'
+      'overview overview'
+      'spark alerts'`};
   }
 
   @media (min-width: 1750px) {
