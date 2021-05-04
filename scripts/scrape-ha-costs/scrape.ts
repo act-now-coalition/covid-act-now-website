@@ -5,8 +5,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 import path from 'path';
-import find from 'lodash/find';
-import findLast from 'lodash/findLast';
+import uniq from 'lodash/uniq';
 import countyZipcodes from '../../src/common/data/county-zipcode.json';
 import regions, { belongsToState } from '../../src/common/regions';
 
@@ -16,22 +15,23 @@ import regions, { belongsToState } from '../../src/common/regions';
 // in the Chrome network tab is:
 // https://www.homeadvisor.com/sm/cost/widget/updateGeo?zipCode=94107&costGuideId=88&...
 // so the cost guide ID is '88'
-const COST_GUIDE_ID = '263';
+// Some known IDs:
+// https://www.homeadvisor.com/cost/heating-and-cooling/install-a-heat-pump/ => 116
+// https://www.homeadvisor.com/cost/heating-and-cooling/install-a-furnace/ => 88
+// https://www.homeadvisor.com/cost/plumbing/install-a-water-heater/ => 263
+const COST_GUIDE_ID = '116';
 
 async function main() {
   const result = {};
   for (const state of regions.states) {
-    // Find a county with some zipcodes that we can lookup to try to get state-level data.
-    const county = find(regions.counties, c =>
+    // Find counties in state.
+    const counties = regions.counties.filter(c =>
       belongsToState(c, state.fipsCode),
-    )!;
-    let zipcodes = (countyZipcodes as any)[county.fipsCode];
-    if (!zipcodes || zipcodes.length < 1) {
-      const county2 = findLast(regions.counties, c =>
-        belongsToState(c, state.fipsCode),
-      )!;
-      zipcodes = (countyZipcodes as any)[county2.fipsCode];
-    }
+    );
+    // Find zipcodes in counties.
+    const zipcodes = uniq(
+      counties.map(c => (countyZipcodes as any)[c.fipsCode] || []).flat(),
+    );
 
     // Check up to 3 zipcodes
     for (const zip of zipcodes.slice(0, 3)) {
