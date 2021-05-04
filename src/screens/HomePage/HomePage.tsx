@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
 import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
-import regions, { filterGeolocatedRegions } from 'common/regions';
+import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
@@ -31,7 +31,7 @@ import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
-import { getLargestMetroFipsForExplore } from 'screens/HomePage/utils';
+import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 
@@ -49,31 +49,17 @@ export default function HomePage() {
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
-  const largestMetroFips = getLargestMetroFipsForExplore();
-  const exploreGeoLocations = userRegions
-    ? filterGeolocatedRegions(userRegions).map(region => region.fipsCode)
-    : largestMetroFips;
+  const largestMetroFips = largestMetroFipsForExplore;
+  const exploreGeoLocations = useMemo(
+    () =>
+      userRegions
+        ? filterGeolocatedRegions(userRegions).map(region => region.fipsCode)
+        : largestMetroFips,
+    [largestMetroFips, userRegions],
+  );
 
-  const showRisingHospitalizations =
-    location.hash === '#explore-hospitalizations';
-  const risingHospitalizationStates = [
-    'DE',
-    'FL',
-    'IL',
-    'MD',
-    'MI',
-    'NH',
-    'PA',
-    'PR',
-  ]; // Updated on 21 April 2021 -- this is an illustrative list but not exhaustive
-  const initialFipsListForExplore = showRisingHospitalizations
-    ? risingHospitalizationStates.map(
-        state => regions.findByStateCodeStrict(state).fipsCode,
-      )
-    : exploreGeoLocations;
-  const initialMetricForExplore = showRisingHospitalizations
-    ? ExploreMetric.HOSPITALIZATIONS
-    : ExploreMetric.CASES;
+  const initialFipsListForExplore = exploreGeoLocations;
+  const initialMetricForExplore = ExploreMetric.CASES;
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
