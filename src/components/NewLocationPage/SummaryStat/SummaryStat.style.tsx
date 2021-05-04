@@ -49,6 +49,7 @@ export const MetricLabel = styled.span`
   ${props => props.theme.fonts.regularBookMidWeight};
   font-size: 1rem;
   margin-right: 0.5rem;
+  letter-spacing: 0;
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-right: 0;

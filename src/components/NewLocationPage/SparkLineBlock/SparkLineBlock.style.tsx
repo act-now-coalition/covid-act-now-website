@@ -8,6 +8,7 @@ export const ChartTitleWrapper = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
   line-height: 1.2;
+  letter-spacing: 0;
   ${Chevron} {
     transform: none;
     margin-left: 0.25rem;
