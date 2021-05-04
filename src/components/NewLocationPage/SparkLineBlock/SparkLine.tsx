@@ -18,10 +18,12 @@ const SparkLineInner: React.FC<{
 }> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
   const maxY = getMaxY(smoothedData);
   const paddingTop = 5;
+  const strokeWidth = 2;
 
+  // subtracking strokeWidth from the bottom of the yScale range so the line is never cut off
   const yScale = scaleLinear({
     domain: [0, maxY],
-    range: [height, paddingTop],
+    range: [height - strokeWidth, paddingTop],
   });
 
   const xScale = scaleUtc({
@@ -60,7 +62,7 @@ const SparkLineInner: React.FC<{
                 x={getXCoord}
                 y={getYCoord}
                 stroke="black"
-                strokeWidth={2}
+                strokeWidth={strokeWidth}
                 curve={curveMonotoneX}
                 strokeLinecap="round"
               />
