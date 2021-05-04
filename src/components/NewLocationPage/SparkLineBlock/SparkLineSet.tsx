@@ -2,7 +2,11 @@ import React from 'react';
 import SparkLine from './SparkLine';
 import { ParentSize } from '@vx/responsive';
 import ChartTitle from './ChartTitle';
-import { StyledLink, GridContainer, GridItem } from './SparkLineBlock.style';
+import {
+  WrappingButton,
+  GridContainer,
+  GridItem,
+} from './SparkLineBlock.style';
 import { Projection } from 'common/models/Projection';
 import {
   SPARK_LINE_METRICS,
@@ -16,7 +20,10 @@ import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 
 // TODO (chelsi) - update onClick scrolling functionality
 
-const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
+const SparkLineSet: React.FC<{
+  projection: Projection;
+  onClickSparkLine: (metric: SparkLineMetric) => void;
+}> = ({ projection, onClickSparkLine }) => {
   const dateTo = new Date();
   const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
   return (
@@ -34,7 +41,10 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
             <ParentSize>
               {({ width }) => (
                 <div style={{ width }}>
-                  <StyledLink to="#explore-chart" key={title}>
+                  <WrappingButton
+                    style={{ width }}
+                    onClick={() => onClickSparkLine(metric)}
+                  >
                     <ChartTitle title={title} />
                     <SparkLine
                       rawData={rawData}
@@ -42,7 +52,7 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
                       dateFrom={dateFrom}
                       dateTo={dateTo}
                     />
-                  </StyledLink>
+                  </WrappingButton>
                 </div>
               )}
             </ParentSize>
