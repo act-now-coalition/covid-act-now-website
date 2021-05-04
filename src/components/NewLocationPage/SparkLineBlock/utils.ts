@@ -90,7 +90,8 @@ export const sparkLinesMetricData: {
  * Returns both the raw and smoothed series for the given metric.
  * Raw series used by bar chart, smoothed series used by line chart.
  */
-export function getAllSeriesForMetric(
+
+export function getSparkLineSeriesFromProjection(
   seriesList: Series[],
   projection: Projection,
 ): SeriesWithData[] {
@@ -98,13 +99,6 @@ export function getAllSeriesForMetric(
     ...item,
     data: cleanSeries(projection.getDataset(item.datasetId)),
   }));
-}
-
-export function getSparkLineSeriesFromProjection(
-  seriesList: Series[],
-  projection: Projection,
-) {
-  return getAllSeriesForMetric(seriesList, projection);
 }
 
 function getMaxY(series: Column[]) {
