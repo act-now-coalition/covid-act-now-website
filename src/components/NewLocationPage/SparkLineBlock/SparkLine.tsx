@@ -6,7 +6,7 @@ import { curveMonotoneX } from '@vx/curve';
 import { SingleSparkLineContainer as Container } from './SparkLineBlock.style';
 import { Column } from 'common/models/Projection';
 import { COLOR_MAP } from 'common/colors';
-import { getOverallMaxY, dateItem } from './utils';
+import { getMaxY, dateItem } from './utils';
 
 const SparkLineInner: React.FC<{
   rawData: Column[];
@@ -16,7 +16,7 @@ const SparkLineInner: React.FC<{
   width: number;
   height: number;
 }> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
-  const maxY = getOverallMaxY(smoothedData, rawData);
+  const maxY = getMaxY(smoothedData);
   const paddingTop = 5;
 
   const yScale = scaleLinear({
