@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Chevron } from '../Shared/Shared.style';
+import { BaseButton } from 'components/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const ChartTitleWrapper = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: 0;
   ${Chevron} {
     transform: none;
     margin-left: 0.25rem;
@@ -41,6 +44,23 @@ export const StyledLink = styled(Link)`
   }
 
   &:hover {
+    ${Chevron} {
+      transform: translateX(6px);
+      transition: transform 0.06s ease-in-out;
+    }
+  }
+`;
+
+export const WrappingButton = styled(BaseButton)`
+  ${props => props.theme.fonts.regularBookMidWeight};
+  font-size: inherit;
+  text-transform: inherit;
+  text-align: left;
+  display: inherit;
+  padding: 0;
+
+  &:hover {
+    background-color: transparent;
     ${Chevron} {
       transform: translateX(6px);
       transition: transform 0.06s ease-in-out;

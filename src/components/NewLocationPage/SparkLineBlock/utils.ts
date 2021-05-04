@@ -1,5 +1,6 @@
 import { max as d3Max } from 'd3-array';
 import { cleanSeries } from 'components/Explore/utils';
+import { ExploreMetric } from 'components/Explore';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { assert } from 'common/utils';
@@ -24,6 +25,15 @@ export const SPARK_LINE_METRICS = [
   SparkLineMetric.DEATHS,
   SparkLineMetric.HOSPITALIZATIONS,
 ];
+
+// Used to select explore tab when clicking corresponding metric's spark line:
+export const SparkLineToExploreMetric: {
+  [metric in SparkLineMetric]: ExploreMetric;
+} = {
+  [SparkLineMetric.CASES]: ExploreMetric.CASES,
+  [SparkLineMetric.DEATHS]: ExploreMetric.DEATHS,
+  [SparkLineMetric.HOSPITALIZATIONS]: ExploreMetric.HOSPITALIZATIONS,
+};
 
 export interface Series {
   datasetId: DatasetId;

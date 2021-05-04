@@ -8,6 +8,12 @@ export default {
   component: AboveTheFold,
 };
 
+const onClickProps = {
+  onClickAlertSignup: () => {},
+  onClickShare: () => {},
+  onClickSparkLine: () => {},
+};
+
 export const California = () => {
   const region = regions.findByFipsCodeStrict('06');
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
@@ -20,8 +26,7 @@ export const California = () => {
     <AboveTheFold
       region={region}
       locationSummary={locationSummary}
-      onClickAlertSignup={() => {}}
-      onClickShare={() => {}}
+      {...onClickProps}
     />
   );
 };
@@ -38,8 +43,7 @@ export const Missouri = () => {
     <AboveTheFold
       region={region}
       locationSummary={locationSummary}
-      onClickAlertSignup={() => {}}
-      onClickShare={() => {}}
+      {...onClickProps}
     />
   );
 };
@@ -56,8 +60,7 @@ export const MaricopaCounty = () => {
     <AboveTheFold
       region={region}
       locationSummary={locationSummary}
-      onClickAlertSignup={() => {}}
-      onClickShare={() => {}}
+      {...onClickProps}
     />
   );
 };
@@ -74,8 +77,7 @@ export const EastBatonRougeParish = () => {
     <AboveTheFold
       region={region}
       locationSummary={locationSummary}
-      onClickAlertSignup={() => {}}
-      onClickShare={() => {}}
+      {...onClickProps}
     />
   );
 };
@@ -92,8 +94,7 @@ export const AtlantaMetro = () => {
     <AboveTheFold
       region={region}
       locationSummary={locationSummary}
-      onClickAlertSignup={() => {}}
-      onClickShare={() => {}}
+      {...onClickProps}
     />
   );
 };
@@ -110,8 +111,7 @@ export const BostonMetro = () => {
     <AboveTheFold
       region={region}
       locationSummary={locationSummary}
-      onClickAlertSignup={() => {}}
-      onClickShare={() => {}}
+      {...onClickProps}
     />
   );
 };

@@ -15,7 +15,7 @@ export const StatContent = styled.div`
 
 // put this somewhere in Shared:
 export const StyledChevron = styled(Chevron)`
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   margin-left: 0.5rem;
 `;
 
@@ -49,6 +49,8 @@ export const MetricLabel = styled.span`
   ${props => props.theme.fonts.regularBookMidWeight};
   font-size: 1rem;
   margin-right: 0.5rem;
+  letter-spacing: 0;
+  line-height: 1.2;
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-right: 0;

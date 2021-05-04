@@ -40,7 +40,7 @@ const LocationOverview: React.FC<{
             locationName={region.name}
           />
         </GridItemLevel>
-        <GridItemProgress>
+        <GridItemProgress onClick={() => onClickMetric(Metric.VACCINATIONS)}>
           {projections && projections.primary && (
             <VaccinationProgressBarBlock
               locationName={region.name}
