@@ -16,4 +16,5 @@ export { default as useLocationPageCompareSliderMap } from './useLocationPageCom
 export { default as useHomepageCompareSliderMap } from './useHomepageCompareSliderMap';
 export { default as useLocationSummariesForFips } from './useLocationSummariesForFips';
 export { default as useDynamicVaccineButton } from './useDynamicVaccineButton';
+export { default as useLogChanges } from './useLogChanges';
 export * from './useGeolocatedRegions';

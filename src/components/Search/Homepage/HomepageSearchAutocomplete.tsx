@@ -147,9 +147,13 @@ const HomepageSearchAutocomplete: React.FC<{
             }
           }}
           onClose={() => {
-            setIsOpen(false);
-            if (setHideMapToggle) {
-              setHideMapToggle(false);
+            // Only close the dropdown if the user clicks outside the dropdown
+            // (i.e. Element in focus will not have a 'placeholder' attribute).
+            if (!document.activeElement?.hasAttribute('placeholder')) {
+              setIsOpen(false);
+              if (setHideMapToggle) {
+                setHideMapToggle(false);
+              }
             }
           }}
           PaperComponent={StyledPaper}

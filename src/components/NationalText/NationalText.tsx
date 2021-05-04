@@ -1,13 +1,12 @@
 import React from 'react';
 import { Paragraph } from 'components/Markdown';
 import { Wrapper } from './NationalText.style';
+import { getNationalText } from './utils';
 
-const NationalText: React.FC<{
-  nationalSummaryText: React.ReactElement;
-}> = ({ nationalSummaryText }) => {
+const NationalText: React.FC = () => {
   return (
     <Wrapper>
-      <Paragraph>{nationalSummaryText}</Paragraph>
+      <Paragraph>{getNationalText()}</Paragraph>
     </Wrapper>
   );
 };
