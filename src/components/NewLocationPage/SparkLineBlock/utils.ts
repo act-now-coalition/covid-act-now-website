@@ -3,7 +3,6 @@ import { cleanSeries } from 'components/Explore/utils';
 import { ExploreMetric } from 'components/Explore';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
-import { assert } from 'common/utils';
 import { Region } from 'common/regions';
 
 export const daysToChart = 30;
@@ -103,7 +102,6 @@ export function getSparkLineSeriesFromProjection(
 
 export function getMaxY(series: Column[]) {
   const maxY = d3Max(series, (d: Column) => d.y);
-  assert(maxY, 'Maximum value unexpectedly not found'); // theres probably a better way
   return maxY;
 }
 
