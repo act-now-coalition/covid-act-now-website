@@ -49,7 +49,8 @@ const ItemBasePadding = css`
   }
 `;
 
-const ClickableMetric = css`
+const ClickableItemStyles = css`
+  ${ItemBasePadding};
   cursor: pointer;
   &:hover {
     ${Chevron} {
@@ -72,7 +73,7 @@ export const GridItemLevel = styled.div`
 `;
 
 export const GridItemProgress = styled.div`
-  ${ItemBasePadding};
+  ${ClickableItemStyles};
   grid-area: progress;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid ${COLOR_MAP.GREY_1};
@@ -84,27 +85,23 @@ export const GridItemProgress = styled.div`
 `;
 
 export const GridItemMetric1 = styled.div`
-  ${ItemBasePadding};
-  ${ClickableMetric};
+  ${ClickableItemStyles};
   grid-area: metric1;
   cursor: pointer;
 `;
 
 export const GridItemMetric2 = styled.div`
-  ${ItemBasePadding};
-  ${ClickableMetric};
+  ${ClickableItemStyles};
   grid-area: metric2;
 `;
 
 export const GridItemMetric3 = styled.div`
-  ${ItemBasePadding};
-  ${ClickableMetric};
+  ${ClickableItemStyles};
   grid-area: metric3;
 `;
 
 export const GridItemMetricVax = styled.div`
-  ${ItemBasePadding};
-  ${ClickableMetric};
+  ${ClickableItemStyles};
   grid-area: metricVax;
   padding-top: 1.5rem;
   border-top: 1px solid ${COLOR_MAP.GREY_1};
