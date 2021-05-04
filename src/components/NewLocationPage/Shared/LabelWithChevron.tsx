@@ -4,7 +4,7 @@ import TextAndIconWithSpecialWrapping from 'components/TextAndIconWithSpecialWra
 
 const LabelWithChevron: React.FC<{ text: string }> = ({ text }) => {
   return (
-    <div>
+    <div style={{ lineHeight: 1.2 }}>
       <TextAndIconWithSpecialWrapping text={text} icon={<Chevron />} />
     </div>
   );

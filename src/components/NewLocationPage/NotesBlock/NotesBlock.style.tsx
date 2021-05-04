@@ -12,7 +12,7 @@ export const TextContainer = styled.div`
 
 export const TextComponent = styled.p`
   color: ${COLOR_MAP.GREY_4};
-  margin: 0.63rem 0 0;
+  margin: 0.7rem 0 0;
 `;
 
 export const IconWrapper = styled.div`
