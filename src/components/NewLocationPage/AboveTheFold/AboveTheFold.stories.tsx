@@ -16,7 +16,14 @@ export const California = () => {
     return null;
   }
 
-  return <AboveTheFold region={region} locationSummary={locationSummary} />;
+  return (
+    <AboveTheFold
+      region={region}
+      locationSummary={locationSummary}
+      onClickAlertSignup={() => {}}
+      onClickShare={() => {}}
+    />
+  );
 };
 
 export const Missouri = () => {
@@ -27,7 +34,14 @@ export const Missouri = () => {
     return null;
   }
 
-  return <AboveTheFold region={region} locationSummary={locationSummary} />;
+  return (
+    <AboveTheFold
+      region={region}
+      locationSummary={locationSummary}
+      onClickAlertSignup={() => {}}
+      onClickShare={() => {}}
+    />
+  );
 };
 
 export const MaricopaCounty = () => {
@@ -38,7 +52,14 @@ export const MaricopaCounty = () => {
     return null;
   }
 
-  return <AboveTheFold region={region} locationSummary={locationSummary} />;
+  return (
+    <AboveTheFold
+      region={region}
+      locationSummary={locationSummary}
+      onClickAlertSignup={() => {}}
+      onClickShare={() => {}}
+    />
+  );
 };
 
 export const EastBatonRougeParish = () => {
@@ -49,7 +70,14 @@ export const EastBatonRougeParish = () => {
     return null;
   }
 
-  return <AboveTheFold region={region} locationSummary={locationSummary} />;
+  return (
+    <AboveTheFold
+      region={region}
+      locationSummary={locationSummary}
+      onClickAlertSignup={() => {}}
+      onClickShare={() => {}}
+    />
+  );
 };
 
 export const AtlantaMetro = () => {
@@ -60,7 +88,14 @@ export const AtlantaMetro = () => {
     return null;
   }
 
-  return <AboveTheFold region={region} locationSummary={locationSummary} />;
+  return (
+    <AboveTheFold
+      region={region}
+      locationSummary={locationSummary}
+      onClickAlertSignup={() => {}}
+      onClickShare={() => {}}
+    />
+  );
 };
 
 export const BostonMetro = () => {
@@ -71,5 +106,12 @@ export const BostonMetro = () => {
     return null;
   }
 
-  return <AboveTheFold region={region} locationSummary={locationSummary} />;
+  return (
+    <AboveTheFold
+      region={region}
+      locationSummary={locationSummary}
+      onClickAlertSignup={() => {}}
+      onClickShare={() => {}}
+    />
+  );
 };

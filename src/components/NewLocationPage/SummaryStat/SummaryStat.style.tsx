@@ -42,7 +42,7 @@ export const SubLabelWrapper = styled.div`
 export const SubLabel = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.9rem;
 `;
 
 export const MetricLabel = styled.span`

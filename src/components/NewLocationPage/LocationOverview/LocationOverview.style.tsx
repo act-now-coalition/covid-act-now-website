@@ -14,7 +14,7 @@ export const OverviewSectionContainer = styled(SectionContainer)`
   padding: 0;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    padding: 1.5rem;
+    padding: 1.75rem;
   }
 `;
 
@@ -29,7 +29,7 @@ export const GridContainer = styled.div`
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
-    row-gap: 2rem;
+    row-gap: 2.5rem;
     column-gap: 1.5rem;
   }
 

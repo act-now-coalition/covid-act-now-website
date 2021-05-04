@@ -15,5 +15,11 @@ export const NewYork = () => {
   if (!locationSummary) {
     return null;
   }
-  return <LocationOverview region={region} locationSummary={locationSummary} />;
+  return (
+    <LocationOverview
+      region={region}
+      locationSummary={locationSummary}
+      onClickShare={() => {}}
+    />
+  );
 };

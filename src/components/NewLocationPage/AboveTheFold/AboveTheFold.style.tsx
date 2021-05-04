@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { maxContentWidth } from 'components/NewLocationPage/Shared/Shared.style';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 import { mapToFixedBreakpoint } from '../CountyMap';
 
 export const MainWrapper = styled.div`
@@ -29,6 +29,15 @@ export const GridContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
     grid-gap: 1.75rem;
+    grid-template-areas:
+      'header header'
+      'overview overview'
+      'spark map'
+      'alerts alerts'
+      'note note';
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
     grid-template-areas:
       'header header'
       'overview overview'
