@@ -75,10 +75,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
           <CountyMap region={region} />
         </GridItemMap>
         <GridItemNote>
-          <VulnerabilityNote
-            ccviScore={locationSummary.ccvi}
-            locationName={region.shortName}
-          />
+          <VulnerabilityNote ccviScore={locationSummary.ccvi} region={region} />
         </GridItemNote>
       </GridContainer>
     </MainWrapper>
