@@ -15,7 +15,7 @@ export const StatContent = styled.div`
 
 // put this somewhere in Shared:
 export const StyledChevron = styled(Chevron)`
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   margin-left: 0.5rem;
 `;
 
