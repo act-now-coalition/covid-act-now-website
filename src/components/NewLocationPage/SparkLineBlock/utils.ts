@@ -21,8 +21,8 @@ export enum SparkLineMetric {
 
 export const SPARK_LINE_METRICS = [
   SparkLineMetric.CASES,
-  SparkLineMetric.DEATHS,
   SparkLineMetric.HOSPITALIZATIONS,
+  SparkLineMetric.DEATHS,
 ];
 
 // Used to select explore tab when clicking corresponding metric's spark line:
