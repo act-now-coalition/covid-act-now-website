@@ -1,4 +1,3 @@
-import { Metric } from 'common/metricEnum';
 import React from 'react';
 import MetricSubLabel from './MetricSubLabel';
 import MetricValue from './MetricValue';
