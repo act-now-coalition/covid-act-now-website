@@ -13,9 +13,10 @@ export const RegionNameText = styled.h1`
   ${props => props.theme.fonts.regularBook};
   font-size: 2rem;
   line-height: 1.3;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.25rem;
 `;
 
 export const UpdatedOnText = styled.span`
   color: ${COLOR_MAP.GREY_4};
+  font-size: 0.9rem;
 `;

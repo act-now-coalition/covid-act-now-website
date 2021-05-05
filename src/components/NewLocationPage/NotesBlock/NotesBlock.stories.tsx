@@ -1,5 +1,6 @@
 import React from 'react';
 import VulnerabilityNote from './VulnerabilityNote';
+import regions from 'common/regions';
 
 export default {
   title: 'Location page redesign/Notes Block',
@@ -7,5 +8,6 @@ export default {
 };
 
 export const VulnerabilityExample = () => {
-  return <VulnerabilityNote ccviScore={0.9} />;
+  const region = regions.findByFipsCodeStrict('36');
+  return <VulnerabilityNote ccviScore={0.9} region={region} />;
 };

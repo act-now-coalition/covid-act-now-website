@@ -29,7 +29,11 @@ const MobileSummaryStat: React.FC<SummaryStatProps> = ({
         )}
       </Row>
       <Row>
-        <MetricValue value={formattedValue} iconColor={levelInfo.color} />
+        <MetricValue
+          value={formattedValue}
+          iconColor={levelInfo.color}
+          metric={metric}
+        />
         <StyledChevron />
       </Row>
     </StatContent>

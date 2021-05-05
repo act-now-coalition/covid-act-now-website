@@ -2,10 +2,12 @@ import React from 'react';
 import ShareButton from './ShareButton';
 import VaccineButton from './VaccineButton';
 
-const HeaderButtons: React.FC = () => {
+const HeaderButtons: React.FC<{ onClickShare: () => void }> = ({
+  onClickShare,
+}) => {
   return (
     <div style={{ display: 'flex' }}>
-      <ShareButton />
+      <ShareButton onClickShare={onClickShare} />
       <VaccineButton />
     </div>
   );

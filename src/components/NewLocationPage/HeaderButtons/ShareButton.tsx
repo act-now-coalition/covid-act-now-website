@@ -4,13 +4,15 @@ import { EventCategory } from 'components/Analytics';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
 import { ShareButtonWrapper as Wrapper } from './HeaderButtons.style';
 
-const ShareButton: React.FC = () => {
+const ShareButton: React.FC<{ onClickShare: () => void }> = ({
+  onClickShare,
+}) => {
   return (
     <Wrapper>
       <LargeOutlinedButton
         trackingCategory={EventCategory.ENGAGEMENT}
         trackingLabel="Location page header: Share"
-        to="#share"
+        onClick={onClickShare}
         endIcon={<ShareOutlinedIcon />}
       >
         Share

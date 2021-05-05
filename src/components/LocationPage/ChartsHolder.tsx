@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
@@ -9,6 +9,8 @@ import {
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
+import { useProjectionsFromRegion } from 'common/utils/model';
+import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
@@ -20,14 +22,16 @@ import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
-import { useProjectionsFromRegion } from 'common/utils/model';
-import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import LocationPageHeader from './LocationPageHeader';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
+import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
+import {
+  SparkLineMetric,
+  SparkLineToExploreMetric,
+} from 'components/NewLocationPage/SparkLineBlock/utils';
 
-// TODO: 200 is rough accounting for the navbar and searchbar;
+// TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
-const scrollTo = (div: null | HTMLDivElement, offset: number = 200) =>
+const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   div &&
   window.scrollTo({
     left: 0,
@@ -62,10 +66,15 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
-  const defaultExploreMetric =
-    hash === '#explore-chart'
-      ? ExploreMetric.HOSPITALIZATIONS
-      : ExploreMetric.CASES;
+  const [defaultExploreMetric, setDefaultExploreMetric] = useState<
+    ExploreMetric
+  >(ExploreMetric.CASES);
+
+  useEffect(() => {
+    if (hash === '#explore-chart') {
+      setDefaultExploreMetric(ExploreMetric.HOSPITALIZATIONS);
+    }
+  }, [hash]);
 
   useEffect(() => {
     const scrollToChart = () => {
@@ -104,8 +113,6 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   }
   const stats = summaryToStats(locationSummary);
 
-  const alarmLevel = locationSummary.level;
-
   const onClickAlertSignup = () => {
     trackEvent(
       EventCategory.ENGAGEMENT,
@@ -116,11 +123,6 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   };
 
   const onClickShare = () => {
-    trackEvent(
-      EventCategory.ENGAGEMENT,
-      EventAction.CLICK,
-      'Location Header: Share',
-    );
     scrollTo(shareBlockRef.current, -352);
   };
 
@@ -133,21 +135,28 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     scrollTo(metricRefs[metric].current);
   };
 
-  const locationPageHeaderProps = {
-    alarmLevel,
-    stats,
-    onMetricClick: (metric: Metric) => onClickMetric(metric),
-    onHeaderShareClick: onClickShare,
-    onHeaderSignupClick: onClickAlertSignup,
-    isMobile,
-    region,
+  const onClickSparkLine = (metric: SparkLineMetric) => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      `Spark line: ${SparkLineMetric[metric]}`,
+    );
+    setDefaultExploreMetric(SparkLineToExploreMetric[metric]);
+    scrollTo(exploreChartRef.current);
   };
 
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       <ChartContentWrapper>
-        <LocationPageHeader {...locationPageHeaderProps} />
+        <AboveTheFold
+          region={region}
+          locationSummary={locationSummary}
+          onClickMetric={(metric: Metric) => onClickMetric(metric)}
+          onClickAlertSignup={onClickAlertSignup}
+          onClickShare={onClickShare}
+          onClickSparkLine={onClickSparkLine}
+        />
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>
