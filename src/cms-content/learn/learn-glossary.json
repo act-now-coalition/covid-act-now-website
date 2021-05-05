@@ -231,7 +231,7 @@
       "category": "Transmission"
     },
     {
-      "definition": "Infection fatality rate (IFR) is a metric to calculate how deadly a new disease is, based on the  proportion of infected people who will die from the disease. The IFR  should ideally include infected people who don’t get tested or show symptoms. It is difficult to calculate the infection fatality rate of COVID, because we do not know what percentage of people with COVID are [asymptomatic](#asymptomatic) and/or have not been identified as a case. \n\nThe severity of COVID and the chance of dying from COVID depend on a range of factors, including age, underlying health conditions, and racial and socio-economic factors. [Studies](http://ceepr.mit.edu/files/papers/2020-009.pdf) have shown that in the United States, race may be as important a factor as age to gauge how likely a person is to die from COVID. It has been shown that the higher the percentage of Black residents in a county, the higher the county’s death rate from COVID, even when accounting for access to health insurance, use of public transit, and rates of diabetes and obesity.",
+      "definition": "Infection fatality rate (IFR) is a metric to calculate how deadly a new disease is, based on the  proportion of infected people who will die from the disease. The IFR should ideally include infected people who don’t get tested or show symptoms. It is difficult to calculate the infection fatality rate of COVID, because we do not know what percentage of people with COVID are [asymptomatic](#asymptomatic) and/or have not been identified as a case. \n\nThe severity of COVID and the chance of dying from COVID depend on a range of factors, including age, underlying health conditions, and racial and socio-economic factors. [Studies](http://ceepr.mit.edu/files/papers/2020-009.pdf) have shown that in the United States, race may be as important a factor as age to gauge how likely a person is to die from COVID. It has been shown that the higher the percentage of Black residents in a county, the higher the county’s death rate from COVID, even when accounting for access to health insurance, use of public transit, and rates of diabetes and obesity.",
       "term": "Infection fatality rate",
       "termId": "infection-fatality-rate",
       "category": "Metrics"
@@ -485,7 +485,7 @@
     {
       "term": "Vaccine",
       "termId": "vaccine",
-      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of mid December 2020, the [F.D.A has approved two COVID vaccines](https://covidactnow.org/covid-explained/roundup-current-vaccine-progress)--one by Pfizer and one by Moderna--for distribution in the U.S.",
+      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of May 2021, the [F.D.A has approved three COVID vaccines](https://www.fda.gov/consumers/consumer-updates/learn-more-about-covid-19-vaccines-fda)--one by Pfizer, one by Moderna, and one by Johnson & Johnson--for distribution in the U.S.",
       "category": "Treatment"
     },
     {

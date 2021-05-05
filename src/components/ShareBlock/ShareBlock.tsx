@@ -7,6 +7,10 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from 'react-share';
+import { matchPath, useLocation } from 'react-router';
+
+import { filterGeolocatedRegions, Region } from 'common/regions';
+import { useGeolocatedRegions } from 'common/hooks';
 import SocialLocationPreview from 'components/SocialLocationPreview/SocialLocationPreview';
 import SocialLocationPreviewMap from 'components/SocialLocationPreview/SocialLocationPreviewMap';
 import { Projections } from 'common/models/Projections';
@@ -25,11 +29,8 @@ import {
   EmbedPrompt,
 } from './ShareBlock.style';
 import { trackShare } from 'components/Analytics';
-import { Region } from 'common/regions';
-import { matchPath, useLocation } from 'react-router';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { getDefaultRegions } from 'components/EmailAlertsForm/utils';
-import { useGeolocationRegions } from 'common/hooks';
 
 const ShareBlock = ({
   region,
@@ -67,7 +68,12 @@ const ShareBlock = ({
     strict: false,
   });
 
-  const geolocatedRegions = useGeolocationRegions();
+  const { userRegions } = useGeolocatedRegions();
+  const geolocatedRegions = filterGeolocatedRegions(userRegions);
+
+  const defaultSignupRegions = region
+    ? getDefaultRegions(region)
+    : geolocatedRegions;
 
   const SocialPreview =
     projections && stats ? (
@@ -75,10 +81,6 @@ const ShareBlock = ({
     ) : (
       <SocialLocationPreviewMap isEmbedPreview />
     );
-
-  const defaultSignupRegions = region
-    ? getDefaultRegions(region)
-    : geolocatedRegions;
 
   return (
     <ShareContainer id="share">

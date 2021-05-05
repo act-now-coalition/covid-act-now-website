@@ -5,11 +5,6 @@ import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
 export const ChartContentWrapper = styled.div`
-  margin-top: 85px;
-  @media (min-width: 1350px) {
-    margin-top: 90px;
-  }
-
   @media print {
     margin-top: 0;
   }

@@ -168,6 +168,12 @@ export function getSourcesForMetric(
     case Metric.HOSPITAL_USAGE:
       return annotations.icuCapacityRatio?.sources;
     case Metric.VACCINATIONS:
-      return annotations.vaccinationsInitiated?.sources;
+      // TODO(michael): Ideally the backend would be more consistent about where it sticks sources.
+      const provenance =
+        annotations.vaccinationsInitiated ||
+        annotations.vaccinationsInitiatedRatio ||
+        annotations.vaccinationsCompleted ||
+        annotations.vaccinationsCompletedRatio;
+      return provenance?.sources;
   }
 }

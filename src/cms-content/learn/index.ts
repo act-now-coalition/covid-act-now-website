@@ -35,11 +35,12 @@ export interface FaqContent {
   metadataDescription: string;
 }
 
-// Hiding outdated FAQ questions pertaining to eligibility:
+// Hiding outdated FAQ questions:
 const idsToHide = [
   'when-will-you-be-eligible-vaccine',
   'what-locations-do-you-have-vaccine-eligibility-information-for',
   'how-get-vaccine-eligibility-information-and-how-often-updated',
+  'long-term-effects-covid',
 ];
 
 const removeHiddenQuestionsById = (questions: Question[]) => {

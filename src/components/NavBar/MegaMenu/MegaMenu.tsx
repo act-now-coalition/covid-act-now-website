@@ -1,5 +1,4 @@
 import React from 'react';
-import Fade from '@material-ui/core/Fade';
 import { StyledMegaMenu } from './MegaMenu.style';
 import MenuContent from 'components/MenuContent';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
@@ -21,11 +20,11 @@ const MegaMenu: React.FC<{
   return (
     <>
       {isMobile && open && <LockBodyScroll />}
-      <Fade in={open}>
+      {open && (
         <StyledMegaMenu role="navigation" onMouseLeave={onMouseLeave}>
           <MenuContent onClick={onClick} />
         </StyledMegaMenu>
-      </Fade>
+      )}
     </>
   );
 };

@@ -1,7 +1,12 @@
 import React from 'react';
 import SparkLine from './SparkLine';
+import { ParentSize } from '@vx/responsive';
 import ChartTitle from './ChartTitle';
-import { SetContainer, StyledLink } from './SparkLineBlock.style';
+import {
+  WrappingButton,
+  GridContainer,
+  GridItem,
+} from './SparkLineBlock.style';
 import { Projection } from 'common/models/Projection';
 import {
   SPARK_LINE_METRICS,
@@ -13,13 +18,16 @@ import {
 } from './utils';
 import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 
-// TODO (chelsi) - update link's 'to'
+// TODO (chelsi) - update onClick scrolling functionality
 
-const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
+const SparkLineSet: React.FC<{
+  projection: Projection;
+  onClickSparkLine: (metric: SparkLineMetric) => void;
+}> = ({ projection, onClickSparkLine }) => {
   const dateTo = new Date();
   const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
   return (
-    <SetContainer>
+    <GridContainer>
       {SPARK_LINE_METRICS.map((metric: SparkLineMetric) => {
         const { title, seriesList } = sparkLinesMetricData[metric];
         const metricSeries = getSparkLineSeriesFromProjection(
@@ -28,19 +36,33 @@ const SparkLineSet: React.FC<{ projection: Projection }> = ({ projection }) => {
         );
         const rawData = getDataFromSeries(metricSeries[0], dateFrom);
         const smoothedData = getDataFromSeries(metricSeries[1], dateFrom);
+        if (!rawData.length || !smoothedData.length) {
+          return null;
+        }
         return (
-          <StyledLink to="/" key={title}>
-            <ChartTitle title={title} />
-            <SparkLine
-              rawData={rawData}
-              smoothedData={smoothedData}
-              dateFrom={dateFrom}
-              dateTo={dateTo}
-            />
-          </StyledLink>
+          <GridItem key={title}>
+            <ParentSize>
+              {({ width }) => (
+                <div style={{ width }}>
+                  <WrappingButton
+                    style={{ width }}
+                    onClick={() => onClickSparkLine(metric)}
+                  >
+                    <ChartTitle title={title} />
+                    <SparkLine
+                      rawData={rawData}
+                      smoothedData={smoothedData}
+                      dateFrom={dateFrom}
+                      dateTo={dateTo}
+                    />
+                  </WrappingButton>
+                </div>
+              )}
+            </ParentSize>
+          </GridItem>
         );
       })}
-    </SetContainer>
+    </GridContainer>
   );
 };
 

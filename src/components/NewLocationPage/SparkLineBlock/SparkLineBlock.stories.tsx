@@ -22,7 +22,7 @@ export const Michigan = () => {
     return null;
   }
 
-  return <SparkLineBlock projection={projection} />;
+  return <SparkLineBlock region={testRegion} onClickSparkLine={() => {}} />;
 };
 
 export const BostonMetro = () => {
@@ -38,7 +38,7 @@ export const BostonMetro = () => {
     return null;
   }
 
-  return <SparkLineBlock projection={projection} />;
+  return <SparkLineBlock region={testRegion} onClickSparkLine={() => {}} />;
 };
 
 export const MaricopaCounty = () => {
@@ -54,5 +54,5 @@ export const MaricopaCounty = () => {
     return null;
   }
 
-  return <SparkLineBlock projection={projection} />;
+  return <SparkLineBlock region={testRegion} onClickSparkLine={() => {}} />;
 };

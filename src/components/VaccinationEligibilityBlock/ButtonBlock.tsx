@@ -21,12 +21,12 @@ const ButtonBlock: React.FC<{
     <ButtonsContainer>
       <LargeFilledButton
         $highlighted={true}
-        href={'https://vaccinefinder.org/'}
+        href="https://www.vaccines.gov/search/"
         {...sharedTrackingProps}
         trackingLabel="VaccineFinder"
         endIcon={<OpenInNewIcon />}
       >
-        VaccineFinder
+        Find a vaccine
       </LargeFilledButton>
       <LargeOutlinedButton
         $highlighted={false}

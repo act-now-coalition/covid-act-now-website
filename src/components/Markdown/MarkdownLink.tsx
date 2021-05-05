@@ -25,7 +25,7 @@ import EmbedPreview from '../ShareBlock/EmbedPreview';
 export const scrollWithTimeout = (element: any, offset: number) => {
   return setTimeout(() => {
     scrollWithOffset(element, offset);
-  }, 600);
+  }, 1000);
 };
 
 const EmbedBox: React.FC<{ href: string }> = ({ href }) => {

@@ -264,6 +264,65 @@ export default function App() {
                     component={ExportImage}
                   />
 
+                  {/** Old blog.covidactnow.org URLs that we now redirect to the right places in Learn. */}
+                  <Redirect
+                    from="/covid-contact-tracing-reopening-warning-system"
+                    to="/learn"
+                  />
+                  <Redirect
+                    from="/changes-to-how-we-assess-contact-tracing"
+                    to="/learn"
+                  />
+                  <Redirect from="/types-of-covid-tests" to="/learn" />
+                  <Redirect
+                    from="/covid-act-now-api-intervention-model"
+                    to="/data-api"
+                  />
+                  <Redirect
+                    from="/export-covid-act-now-data-spreadsheet"
+                    to="/data-api"
+                  />
+                  <Redirect
+                    from="/alerting-to-changes-in-covid-risk"
+                    to="/subscribe"
+                  />
+                  <Redirect
+                    from="/covid-infection-rate"
+                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                  />
+                  <Redirect
+                    from="/what-is-covid-incidence"
+                    to="/covid-risk-levels-metrics#daily-new-cases"
+                  />
+                  <Redirect
+                    from="/new-daily-covid-cases"
+                    to="/covid-risk-levels-metrics#daily-new-cases"
+                  />
+                  <Redirect
+                    from="/old-hospitalization-projections"
+                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                  />
+                  <Redirect
+                    from="/daily-new-cases-explained"
+                    to="/covid-risk-levels-metrics#daily-new-cases"
+                  />
+                  <Redirect
+                    from="/test-positivity-explained"
+                    to="/covid-risk-levels-metrics#positive-test-rate"
+                  />
+                  <Redirect
+                    from="/icu-headroom-used-explained"
+                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                  />
+                  <Redirect
+                    from="/infection-rate-explained-2"
+                    to="/covid-risk-levels-metrics#infection-rate"
+                  />
+                  <Redirect
+                    from="/covid-native-american-counties"
+                    to="/covid-explained/covid-spread-native-american"
+                  />
+
                   {/** Handle bad paths by redirecting to the root homepage. */}
                   <Route path="/*">
                     <Redirect to="/" />
