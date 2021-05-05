@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { GrayBodyCopy } from 'components/NewLocationPage/Shared/Shared.style';
+import { Chevron } from '../../Shared/Shared.style';
 
 export const Button = styled(MuiButton).attrs(props => ({
   disableRipple: true,
@@ -15,6 +16,10 @@ export const Button = styled(MuiButton).attrs(props => ({
 
   &:hover {
     background-color: inherit;
+    ${Chevron} {
+      transform: translate(6px, 5.5px);
+      transition: transform 0.06s ease-in-out;
+    }
   }
 `;
 
