@@ -1,5 +1,5 @@
 import React from 'react';
-import { Region, State, County, MetroArea } from 'common/regions';
+import { Region, County, MetroArea } from 'common/regions';
 import { isMultiStateMetro, getRegionName } from './utils';
 import {
   RegionNameContainer,
@@ -29,55 +29,46 @@ const UpdatedDate: React.FC = () => {
   );
 };
 
-const LocationName: React.FC<{ region: Region }> = ({ region }) => {
-  if (region instanceof State) {
-    return (
-      <RegionNameContainer>
-        <RegionNameText>
-          <strong>{getRegionName(region)}</strong>
-        </RegionNameText>
-        <UpdatedDate />
-      </RegionNameContainer>
-    );
-  } else if (region instanceof County) {
+function renderStyledRegionName(region: Region) {
+  if (region instanceof County) {
     const [countyName, countySuffix] = getRegionName(region);
     return (
-      <RegionNameContainer>
-        <RegionNameText>
-          <strong>{countyName}</strong>
-          {countySuffix && ` ${countySuffix}`}
-          {`, ${region.state.stateCode}`}
-        </RegionNameText>
-        <UpdatedDate />
-      </RegionNameContainer>
+      <>
+        <strong>{countyName}</strong>
+        {countySuffix && ` ${countySuffix}`}
+        {`, ${region.state.stateCode}`}
+      </>
     );
   } else if (region instanceof MetroArea) {
     const [metroName, metroSuffix] = getRegionName(region);
-    if (isMultiStateMetro(region)) {
-      return (
-        <RegionNameContainer>
-          <RegionNameText>
+    return (
+      <>
+        {isMultiStateMetro(region) ? (
+          <>
             <strong>{metroName}</strong>
             {metroSuffix && ` ${metroSuffix}`}
             {`, ${region.stateCodes}`}
-          </RegionNameText>
-          <UpdatedDate />
-        </RegionNameContainer>
-      );
-    } else {
-      return (
-        <RegionNameContainer>
-          <RegionNameText>
+          </>
+        ) : (
+          <>
             <strong>{`${metroName}, ${region.stateCodes}`}</strong>
             {metroSuffix && ` ${metroSuffix}`}
-          </RegionNameText>
-          <UpdatedDate />
-        </RegionNameContainer>
-      );
-    }
+          </>
+        )}
+      </>
+    );
   } else {
-    return null;
+    return <strong>{getRegionName(region)}</strong>;
   }
+}
+
+const LocationName: React.FC<{ region: Region }> = ({ region }) => {
+  return (
+    <RegionNameContainer>
+      <RegionNameText>{renderStyledRegionName(region)}</RegionNameText>
+      <UpdatedDate />
+    </RegionNameContainer>
+  );
 };
 
 export default LocationName;
