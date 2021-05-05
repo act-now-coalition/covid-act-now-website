@@ -1,6 +1,6 @@
 import React from 'react';
 import { Region, County, MetroArea } from 'common/regions';
-import { isMultiStateMetro, getRegionName } from './utils';
+import { isMultiStateMetro, getSplitRegionName } from './utils';
 import {
   RegionNameContainer,
   RegionNameText,
@@ -31,7 +31,7 @@ const UpdatedDate: React.FC = () => {
 
 function renderStyledRegionName(region: Region) {
   if (region instanceof County) {
-    const [countyName, countySuffix] = getRegionName(region);
+    const [countyName, countySuffix] = getSplitRegionName(region);
     return (
       <>
         <strong>{countyName}</strong>
@@ -40,7 +40,7 @@ function renderStyledRegionName(region: Region) {
       </>
     );
   } else if (region instanceof MetroArea) {
-    const [metroName, metroSuffix] = getRegionName(region);
+    const [metroName, metroSuffix] = getSplitRegionName(region);
     return (
       <>
         {isMultiStateMetro(region) ? (
@@ -58,7 +58,7 @@ function renderStyledRegionName(region: Region) {
       </>
     );
   } else {
-    return <strong>{getRegionName(region)}</strong>;
+    return <strong>{getSplitRegionName(region)}</strong>;
   }
 }
 

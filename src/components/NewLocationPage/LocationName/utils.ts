@@ -1,26 +1,19 @@
 import { Region, State, County, MetroArea } from 'common/regions';
 
-const regionSuffixes = new Set([
-  'metro',
-  'city',
-  'county',
-  'parish',
-  'area',
-  'borough',
-]);
+const regionSuffixes = ['metro', 'city', 'county', 'parish', 'area', 'borough'];
 
 /**
  * Common indicators of regions with multiple-word suffixes
  * include region names with 'and' and 'census'
  * (e.g. 'City and Borough', 'Census Area').
  */
-const multipleWordSuffixIndicator = new Set(['and', 'census']);
+const multipleWordSuffixIndicator = ['and', 'census'];
 
 export function isMultiStateMetro(region: MetroArea): boolean {
   return region.stateCodes.includes('-');
 }
 
-export function getRegionName(region: Region) {
+export function getSplitRegionName(region: Region) {
   if (region instanceof State) {
     return [region.name];
   } else if (region instanceof County) {
@@ -36,13 +29,13 @@ function splitRegionName(regionName: string) {
   // Don't separate name from suffix for regions with multiple-word suffix.
   // Example: "Valdez-Cordova Census Area", "Yakutat City and Borough"
   if (
-    multipleWordSuffixIndicator.has(
+    multipleWordSuffixIndicator.includes(
       splitRegion[splitRegion.length - 2].toLowerCase(),
     )
   ) {
     suffix = null;
   } else if (
-    regionSuffixes.has(splitRegion[splitRegion.length - 1].toLowerCase())
+    regionSuffixes.includes(splitRegion[splitRegion.length - 1].toLowerCase())
   ) {
     suffix = splitRegion.pop();
   } else suffix = null;
