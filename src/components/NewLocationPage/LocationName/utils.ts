@@ -1,6 +1,20 @@
 import { Region, State, County, MetroArea } from 'common/regions';
 
-const regionSuffixes = ['metro', 'city', 'county', 'parish', 'area', 'borough'];
+const regionSuffixes = [
+  'metro',
+  'city',
+  'municipality',
+  'municipio',
+  'mun.',
+  'county',
+  'co.',
+  'parish',
+  'par.',
+  'area',
+  'c.a.',
+  'borough',
+  'bor.',
+];
 
 /**
  * Common indicators of regions with multiple-word suffixes
@@ -13,11 +27,13 @@ export function isMultiStateMetro(region: MetroArea): boolean {
   return region.stateCodes.includes('-');
 }
 
-export function getSplitRegionName(region: Region) {
+export function getSplitRegionName(region: Region, condensed?: boolean) {
   if (region instanceof State) {
     return [region.name];
   } else if (region instanceof County) {
-    return splitRegionName(region.name);
+    return condensed
+      ? splitRegionName(region.abbreviation)
+      : splitRegionName(region.name);
   } else {
     return splitRegionName(region.shortName);
   }

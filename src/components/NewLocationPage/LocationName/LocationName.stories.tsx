@@ -12,6 +12,11 @@ export const NewYork = () => {
   return <LocationName region={state} />;
 };
 
+export const DistrictOfColumbiaState = () => {
+  const state = regions.findByFipsCodeStrict('11');
+  return <LocationName region={state} />;
+};
+
 export const FairFieldCounty = () => {
   const county = regions.findByFipsCodeStrict('09001');
   return <LocationName region={county} />;
