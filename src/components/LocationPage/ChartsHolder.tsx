@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
@@ -104,7 +104,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     scrollToRecommendations();
   }, [chartId, metricRefs, isRecommendationsShareUrl]);
 
-  const initialFipsList = [region.fipsCode];
+  const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
   const ccviScores = useCcviForFips(region.fipsCode);
 
