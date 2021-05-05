@@ -3,7 +3,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Hidden from '@material-ui/core/Hidden';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { COLOR_MAP, GREY_5 } from 'common/colors';
+import { COLOR_MAP } from 'common/colors';
 
 // Move elsewhere--max content width for the whole page
 // export const maxContentWidth = '960px';
@@ -33,7 +33,7 @@ export const GrayTitle = styled.h2`
   margin: 0 0 1.5rem;
   font-size: 0.8rem;
   line-height: 1.4;
-  color: ${GREY_5};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
   text-transform: uppercase;
 `;
 

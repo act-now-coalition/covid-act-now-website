@@ -13,7 +13,6 @@ export const GREY_1 = '#f2f2f2';
 export const GREY_2 = '#e5e5e5';
 export const GREY_3 = '#bdbdbd';
 export const GREY_4 = '#4f4f4f';
-export const GREY_5 = '#828282';
 
 export const PURPLE_MAP = {
   PURPLE_1: '#8539FF',
