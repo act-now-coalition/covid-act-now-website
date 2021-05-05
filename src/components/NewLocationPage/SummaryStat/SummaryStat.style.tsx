@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Chevron } from '../Shared/Shared.style';
-import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { GrayTitle } from '../Shared/Shared.style';
 
 export const StatContent = styled.div`
   display: flex;
@@ -33,15 +33,19 @@ export const Value = styled.span`
 `;
 
 export const SubLabelWrapper = styled.div`
+  display: flex;
+  align-self: center;
+
   @media (min-width: ${materialSMBreakpoint}) {
     margin-left: 0.75rem;
   }
 `;
 
-export const SubLabel = styled.span`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  text-transform: uppercase;
-  font-size: 0.9rem;
+export const SubLabel = styled(GrayTitle).attrs(props => ({
+  as: 'span',
+}))`
+  line-height: 1;
+  margin: 0;
 `;
 
 export const MetricLabel = styled.span`

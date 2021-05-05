@@ -8,6 +8,7 @@ import {
   StyledChevron,
 } from './SummaryStat.style';
 import { metricSubLabelText, SummaryStatProps } from './utils';
+import { Metric } from 'common/metricEnum';
 
 const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
   levelInfo,
@@ -28,7 +29,12 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
           iconColor={levelInfo.color}
           metric={metric}
         />
-        {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
+        {hasSubLabel && (
+          <MetricSubLabel
+            text={metricSubLabelText[metric]}
+            splitText={metric === Metric.CASE_DENSITY}
+          />
+        )}
       </Row>
     </StatContent>
   );

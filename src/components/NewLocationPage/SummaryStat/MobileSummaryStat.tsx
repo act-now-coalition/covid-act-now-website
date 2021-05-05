@@ -1,3 +1,4 @@
+import { Metric } from 'common/metricEnum';
 import React from 'react';
 import MetricSubLabel from './MetricSubLabel';
 import MetricValue from './MetricValue';
@@ -21,12 +22,7 @@ const MobileSummaryStat: React.FC<SummaryStatProps> = ({
     <StatContent>
       <Row>
         <MetricLabel>{metricName}</MetricLabel>
-        {hasSubLabel && (
-          <MetricSubLabel
-            text={metricSubLabelText[metric]}
-            isMobile={isMobile}
-          />
-        )}
+        {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
       </Row>
       <Row>
         <MetricValue

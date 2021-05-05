@@ -3,7 +3,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Hidden from '@material-ui/core/Hidden';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import MuiChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { COLOR_MAP } from 'common/colors';
+import { COLOR_MAP, GREY_5 } from 'common/colors';
 
 // Move elsewhere--max content width for the whole page
 // export const maxContentWidth = '960px';
@@ -29,10 +29,11 @@ export const Chevron = styled(MuiChevronRightIcon)`
 `;
 
 export const GrayTitle = styled.h2`
+  ${props => props.theme.fonts.regularBookMidWeight};
   margin: 0 0 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.4;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  color: ${GREY_5};
   text-transform: uppercase;
 `;
 
