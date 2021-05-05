@@ -6,56 +6,34 @@ import {
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { ButtonType } from 'assets/theme/buttons';
 
-export const VaccineButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-
-  ${LargeFilledButton} {
-    width: 100%;
-    border-radius: 0;
-  }
+export const StyledVaccineButton = styled(LargeFilledButton)`
+  display: none;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    position: unset;
-    bottom: unset;
-    left: unset;
-    right: unset;
-
-    ${LargeFilledButton} {
-      width: unset;
-      border-radius: 4px;
-    }
+    display: inherit;
   }
 `;
 
-export const ShareButtonWrapper = styled.div`
-  ${LargeOutlinedButton} {
-    border: 1px solid transparent;
-    background-color: inherit;
-    width: 100%;
-    border-radius: 0 0 4px 4px;
+export const StyledShareButton = styled(LargeOutlinedButton)`
+  border: 1px solid transparent;
+  background-color: inherit;
+  border-radius: 0 0 4px 4px;
 
-    &:hover {
-      background-color: ${props =>
-        props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
-    }
+  &:hover {
+    background-color: ${props =>
+      props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
+    border: 1px solid transparent;
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin: 0 0.5rem 0 0.5rem;
-    ${LargeOutlinedButton} {
-      width: unset;
-      border-radius: 4px;
+    border-radius: 4px;
 
-      &:hover {
-        border: ${props =>
-          `1px solid ${props.theme.buttons[ButtonType.OUTLINE].borderHover}`};
-        background-color: ${props =>
-          props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
-      }
+    &:hover {
+      border: ${props =>
+        `1px solid ${props.theme.buttons[ButtonType.OUTLINE].borderHover}`};
+      background-color: ${props =>
+        props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
     }
   }
 `;

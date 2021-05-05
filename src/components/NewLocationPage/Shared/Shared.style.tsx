@@ -23,8 +23,8 @@ export const SectionContainer = styled.div`
 
 export const Chevron = styled(MuiChevronRightIcon)`
   color: ${COLOR_MAP.GREY_3};
-  transform: translateY(6px);
-  margin-left: 0.75rem;
+  transform: translateY(5.5px);
+  margin-left: 0.5rem;
   font-size: 1.3rem;
 `;
 
@@ -43,14 +43,10 @@ export const GrayBodyCopy = styled.p`
 
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
-  circle {
-    r: 4;
-  }
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    // counteracts the svg's built-in padding, so the icon is aligned with the text above it:
-    margin-left: -6px;
-  }
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-self: center;
 `;
 
 export const MobileOnly = styled(Hidden).attrs(props => ({

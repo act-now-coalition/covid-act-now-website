@@ -10,8 +10,7 @@ export const ChartTitleWrapper = styled.div`
   line-height: 1.2;
   letter-spacing: 0;
   ${Chevron} {
-    transform: none;
-    margin-left: 0.25rem;
+    transform: translateY(-1px);
   }
 `;
 
@@ -45,7 +44,7 @@ export const StyledLink = styled(Link)`
 
   &:hover {
     ${Chevron} {
-      transform: translateX(6px);
+      transform: translate(6px, -1px);
       transition: transform 0.06s ease-in-out;
     }
   }
@@ -62,7 +61,7 @@ export const WrappingButton = styled(BaseButton)`
   &:hover {
     background-color: transparent;
     ${Chevron} {
-      transform: translateX(6px);
+      transform: translate(6px, -1px);
       transition: transform 0.06s ease-in-out;
     }
   }
