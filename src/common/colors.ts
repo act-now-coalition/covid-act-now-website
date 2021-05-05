@@ -96,3 +96,8 @@ export function colorFromLocationSummary(
 ) {
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
 }
+
+export const VACCINATIONS_COLOR_MAP = {
+  INITIATED: COLOR_MAP.NEW_BLUE.MEDIUM,
+  COMPLETED: COLOR_MAP.NEW_BLUE.DARK,
+};

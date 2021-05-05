@@ -10,6 +10,7 @@ import {
 } from 'components/Charts';
 import { Metric } from 'common/metricEnum';
 import { SeriesType, Series } from 'components/Explore/interfaces';
+import { VACCINATIONS_COLOR_MAP } from 'common/colors';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -71,8 +72,8 @@ function getVaccinationSeries(projection: Projection): Series[] {
       shortLabel: '1+ dose',
       tooltipLabel: '1+ dose',
       params: {
-        stroke: '#bdbdbd',
-        fill: '#bdbdbd',
+        stroke: VACCINATIONS_COLOR_MAP.INITIATED,
+        fill: VACCINATIONS_COLOR_MAP.INITIATED,
       },
     },
     {
@@ -82,8 +83,8 @@ function getVaccinationSeries(projection: Projection): Series[] {
       shortLabel: 'Fully vaccinated',
       tooltipLabel: 'Fully vaccinated',
       params: {
-        stroke: '#000',
-        fill: '#000',
+        stroke: VACCINATIONS_COLOR_MAP.COMPLETED,
+        fill: VACCINATIONS_COLOR_MAP.COMPLETED,
       },
     },
   ].filter(series => series.data.length > 0);
