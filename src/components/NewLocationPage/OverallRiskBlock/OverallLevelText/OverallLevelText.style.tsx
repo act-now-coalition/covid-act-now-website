@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import {
-  GrayTitle,
-  CircleIcon,
-} from 'components/NewLocationPage/Shared/Shared.style';
+import { GrayTitle } from 'components/NewLocationPage/Shared/Shared.style';
 import { InfoIcon } from 'components/InfoTooltip';
 import { materialSMBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
 
@@ -10,10 +7,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-
-  ${CircleIcon} {
-    margin-right: 0.25rem;
-  }
 
   ${InfoIcon} {
     margin-left: 0.75rem;
