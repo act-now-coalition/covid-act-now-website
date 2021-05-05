@@ -29,8 +29,9 @@ export const Chevron = styled(MuiChevronRightIcon)`
 `;
 
 export const GrayTitle = styled.h2`
+  ${props => props.theme.fonts.regularBookMidWeight};
   margin: 0 0 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.4;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   text-transform: uppercase;
