@@ -69,5 +69,8 @@ export const Row = styled.div`
       margin-bottom: 0.75rem;
       flex-wrap: nowrap;
     }
+    &:last-child {
+      align-items: center;
+    }
   }
 `;
