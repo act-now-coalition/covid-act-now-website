@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import BaseButton from 'components/ButtonSystem/BaseButton/BaseButton';
+import { Chevron } from '../Shared/Shared.style';
 
 export const SectionContentContainer = styled.div`
   display: flex;
@@ -28,5 +29,9 @@ export const StyledBaseButton = styled(BaseButton)`
 
   &:hover {
     background-color: transparent;
+    ${Chevron} {
+      transform: translate(6px, 5.5px);
+      transition: transform 0.06s ease-in-out;
+    }
   }
 `;

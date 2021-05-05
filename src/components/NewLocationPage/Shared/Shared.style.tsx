@@ -23,8 +23,8 @@ export const SectionContainer = styled.div`
 
 export const Chevron = styled(MuiChevronRightIcon)`
   color: ${COLOR_MAP.GREY_3};
-  transform: translateY(6px);
-  margin-left: 0.75rem;
+  transform: translateY(5.5px);
+  margin-left: 0.5rem;
   font-size: 1.3rem;
 `;
 
