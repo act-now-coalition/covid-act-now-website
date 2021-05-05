@@ -6,8 +6,14 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 import path from 'path';
 import uniq from 'lodash/uniq';
+import fromPairs from 'lodash/fromPairs';
 import countyZipcodes from '../../src/common/data/county-zipcode.json';
-import regions, { belongsToState } from '../../src/common/regions';
+import regions, {
+  belongsToState,
+  County,
+  State,
+} from '../../src/common/regions';
+import { assert } from '../../src/common/utils';
 
 // Refers to the HomeAdvisor input data that we're collecting costs for.  E.g.
 // if you visit https://www.homeadvisor.com/cost/heating-and-cooling/install-a-furnace/ and
@@ -21,48 +27,55 @@ import regions, { belongsToState } from '../../src/common/regions';
 // https://www.homeadvisor.com/cost/plumbing/install-a-water-heater/ => 263
 const COST_GUIDE_ID = '116';
 
+// false = just states; true = include metros
+const SCRAPE_METROS = false;
+
 async function main() {
-  const result = {};
-  for (const state of regions.states) {
-    // Find counties in state.
-    const counties = regions.counties.filter(c =>
-      belongsToState(c, state.fipsCode),
-    );
+  const states = {};
+  const cbsas = {};
+
+  let countySets = getCountySets();
+  for (const [name, counties] of Object.entries(countySets)) {
     // Find zipcodes in counties.
     const zipcodes = uniq(
       counties.map(c => (countyZipcodes as any)[c.fipsCode] || []).flat(),
     );
 
-    // Check up to 3 zipcodes
-    for (const zip of zipcodes.slice(0, 3)) {
+    // Check up to 5 zipcodes
+    for (const zip of pickEvenly(zipcodes, 5)) {
       const url = `https://www.homeadvisor.com/sm/cost/widget/updateGeo?zipCode=${zip}&costGuideId=${COST_GUIDE_ID}`;
       const res = await fetch(url);
       const json = await res.json();
       const costData = json['costGuideWidgetDataHolder'];
       const regionCostData = costData['regionCostData'];
+      const localCostData = costData['localCostData'];
 
       // See if we got state data.
       if (regionCostData) {
         // Make sure it's the right state, since zipcodes cross state boundaries.
-        if (
-          state.fullName !== 'District of Columbia' &&
-          regionCostData['geoName'] !== state.fullName
-        ) {
+        let stateName = regionCostData['geoName'];
+        if (stateName === 'Washington DC') {
+          stateName = 'District of Columbia';
+        }
+        const state = regions.findByFullName(stateName) as State | undefined;
+        if (!state) {
           console.log(
-            `Skipping zip ${zip} which returned ${regionCostData['geoName']} instead of ${state.fullName}`,
+            `Skipping zip ${zip} which returned unknown state ${regionCostData['geoName']}`,
           );
           continue;
         }
         // Store state data.
-        (result as any)[state.fipsCode] = {
+        (states as any)[state.fipsCode] = {
           fipsCode: state.fipsCode,
           stateCode: state.stateCode,
           stateName: state.fullName,
           ...regionCostData,
         };
-        break; // we can go to next state
+      }
+
+      if (SCRAPE_METROS && localCostData) {
       } else {
-        console.log(`No ${state.name} data via zipcode ${zip}`);
+        console.log(`No data via zipcode ${zip}`);
       }
     }
   }
@@ -83,7 +96,7 @@ async function main() {
   // Output CSV.
   const lines = [];
   lines.push(keys.join(','));
-  for (const entry of Object.values(result)) {
+  for (const entry of Object.values(states)) {
     lines.push(
       keys
         .map(key => (entry as any)[key])
@@ -95,6 +108,36 @@ async function main() {
   const file = path.join(__dirname, 'costs.csv');
   fs.writeFileSync(file, lines.join('\n'));
   console.log('Wrote results to', file);
+}
+
+function getCountySets(): { [name: string]: County[] } {
+  if (SCRAPE_METROS) {
+    return fromPairs(
+      regions.metroAreas.map(metro => [
+        metro.name,
+        metro.countiesFips.map(
+          fips => regions.findByFipsCodeStrict(fips) as County,
+        ),
+      ]),
+    );
+  } else {
+    return fromPairs(
+      regions.states.map(state => [
+        state.name,
+        regions.counties.filter(c => belongsToState(c, state.fipsCode)),
+      ]),
+    );
+  }
+}
+
+function pickEvenly<T>(array: T[], n: number): T[] {
+  const result = [] as T[];
+  const skip = Math.floor(array.length / n) || 1;
+  for (let i = 0; i < array.length && result.length < n; i += skip) {
+    result.push(array[i]);
+  }
+  assert(result.length === n || n > array.length);
+  return result;
 }
 
 if (require.main === module) {
