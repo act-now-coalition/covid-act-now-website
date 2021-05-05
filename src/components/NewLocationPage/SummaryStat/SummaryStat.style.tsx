@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Chevron } from '../Shared/Shared.style';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { GrayTitle } from '../Shared/Shared.style';
 
@@ -11,11 +10,6 @@ export const StatContent = styled.div`
     flex-direction: column;
     justify-content: unset;
   }
-`;
-
-// put this somewhere in Shared:
-export const StyledChevron = styled(Chevron)`
-  transform: translateY(-1px);
 `;
 
 export const ValueWrapper = styled.div`
@@ -34,7 +28,7 @@ export const Value = styled.span`
 
 export const SubLabelWrapper = styled.div`
   display: flex;
-  align-self: center;
+  align-items: baseline;
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-left: 0.75rem;
@@ -63,15 +57,14 @@ export const MetricLabel = styled.span`
 export const Row = styled.div`
   display: flex;
   line-height: 1;
-  align-items: center;
+  align-items: baseline;
+  align-content: flex-end;
 
   &:first-child {
     flex-wrap: wrap;
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    align-items: flex-start;
-
     &:first-child {
       margin-bottom: 0.75rem;
       flex-wrap: nowrap;
