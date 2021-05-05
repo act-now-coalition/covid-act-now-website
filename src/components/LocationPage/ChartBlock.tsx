@@ -16,7 +16,7 @@ import {
 import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { Subtitle1 } from 'components/Typography';
-import { Region } from 'common/regions';
+import { County, Region } from 'common/regions';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
@@ -106,6 +106,7 @@ function renderDisclaimer(
 
   if (
     !overrideDisclaimer &&
+    region instanceof County &&
     metric === Metric.VACCINATIONS &&
     provenance?.[0]?.url?.includes('cdc.gov')
   ) {

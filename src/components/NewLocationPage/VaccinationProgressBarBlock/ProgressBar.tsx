@@ -2,7 +2,7 @@ import React from 'react';
 import { ParentSize } from '@vx/responsive';
 import { v4 as uuidv4 } from 'uuid';
 import { ProgressBarContainer } from './VaccinationProgressBarBlock.style';
-import { COLOR_MAP } from 'common/colors';
+import { VACCINATIONS_COLOR_MAP, COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
 import { ProgressBarProps } from './VaccinationProgressBarBlock';
 
@@ -21,10 +21,6 @@ const ProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
   const gradientId = uuidv4();
   const titleId = uuidv4();
 
-  const initiatedFill = COLOR_MAP.NEW_BLUE.BASE;
-  const completedFill = COLOR_MAP.NEW_BLUE.MEDIUM;
-  const backgroundFill = COLOR_MAP.GREY_1;
-
   return (
     <svg width={width} height={height} role="img" aria-labelledby={titleId}>
       <title id={titleId}>
@@ -38,21 +34,21 @@ const ProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
         <linearGradient id={gradientId}>
           <stop
             offset={getOffsetPercentage(vaccinationsCompleted)}
-            stopColor={initiatedFill}
+            stopColor={VACCINATIONS_COLOR_MAP.COMPLETED}
           />
           <stop
             offset={getOffsetPercentage(vaccinationsCompleted)}
-            stopColor={completedFill}
+            stopColor={VACCINATIONS_COLOR_MAP.INITIATED}
           />
           <stop
             offset={getOffsetPercentage(vaccinationsInitiated)}
-            stopColor={completedFill}
+            stopColor={VACCINATIONS_COLOR_MAP.INITIATED}
           />
           <stop
             offset={getOffsetPercentage(vaccinationsInitiated)}
-            stopColor={backgroundFill}
+            stopColor={COLOR_MAP.GREY_1}
           />
-          <stop offset="100%" stopColor={backgroundFill} />
+          <stop offset="100%" stopColor={COLOR_MAP.GREY_1} />
         </linearGradient>
       </defs>
       <rect
