@@ -20,6 +20,11 @@ export const HeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
     padding-bottom: 0.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: ${mapToFixedBreakpoint}px) {
+    align-items: start;
   }
 `;
 
