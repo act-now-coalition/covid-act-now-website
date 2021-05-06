@@ -15,9 +15,9 @@ const DateMarker: React.FC<{
   seriesList: Series[];
   date: Date;
 }> = ({ left, seriesList, date }) => {
-  const [, seriesSmooth] = seriesList;
-  const pointSmooth = findPointByDate(seriesSmooth.data, date);
-  const dateToCompareTo = pointSmooth ? getColumnDate(pointSmooth) : date;
+  const series = seriesList[0];
+  const point = findPointByDate(series.data, date);
+  const dateToCompareTo = point ? getColumnDate(point) : date;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return today < dateToCompareTo ? null : (
