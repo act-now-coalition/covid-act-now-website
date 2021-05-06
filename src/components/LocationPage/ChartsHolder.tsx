@@ -143,7 +143,6 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   };
 
   const showHomepageUpsell = useShowPastPosition(3000);
-  console.log('showHomepageUpsell', showHomepageUpsell);
 
   if (!locationSummary) {
     return null;
