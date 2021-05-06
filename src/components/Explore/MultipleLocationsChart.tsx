@@ -136,7 +136,6 @@ const MultipleLocationsChart: React.FC<{
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
   );
-
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
   const maxY = getMaxBy<number>(seriesList, getY, 1);
