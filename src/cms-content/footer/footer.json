@@ -2,16 +2,16 @@
   "aboutUs": "Covid Act Now is an independent nonprofit founded by volunteers in March 2020. We help people make informed decisions by providing timely and accurate data about COVID in the U.S.",
   "learnLinks": [
     {
-      "cta": "Can you get COVID even after being vaccinated? ",
-      "url": "/faq#can-you-get-covid-after-vaccination"
+      "cta": "Do COVID vaccines protect against new variants?",
+      "url": "/faq#vaccines-new-variants"
     },
     {
-      "cta": "What should you do with your COVID vaccine card? ",
-      "url": "/faq#what-to-do-with-covid-vaccine-card"
+      "cta": "Can you transmit COVID after vaccination?",
+      "url": "/faq#can-you-transmit-covid-after-vaccination"
     },
     {
-      "url": "/faq#what-can-you-do-after-fully-vaccinated",
-      "cta": "What can you do after you are fully vaccinated? "
+      "url": "/faq#why-two-doses-moderna-pfizer-vaccines",
+      "cta": "Why do you need to get both doses of your Pfizer or Moderna vaccine?"
     }
   ],
   "featuredSections": [
