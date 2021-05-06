@@ -39,12 +39,12 @@ const Footer: React.FC = () => {
       }}
     >
       <Experiment id={ExperimentID.HOMEPAGE_UPSELL}>
-        <Variant id={VariantID.B}>
+        <Variant id={VariantID.A}>
           <StyledFooter role="contentinfo">
             <MenuContent onClick={onClick} Logo={LogoNonUrl} />
           </StyledFooter>
         </Variant>
-        <Variant id={VariantID.A}>
+        <Variant id={VariantID.B}>
           <StyledFooter
             role="contentinfo"
             extraPaddingBottom={extraPaddingBottom}
