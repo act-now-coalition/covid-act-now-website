@@ -216,7 +216,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           stats={stats}
         />
       </div>
-      {showHomepageUpsell && <HomepageUpsell />}
+      <HomepageUpsell showHomepageUpsell={showHomepageUpsell} />
     </>
   );
 };
