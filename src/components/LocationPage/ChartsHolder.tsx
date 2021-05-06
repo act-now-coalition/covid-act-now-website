@@ -142,7 +142,8 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     scrollTo(exploreChartRef.current);
   };
 
-  const showHomepageUpsell = useShowPastPosition(3000);
+  const experimentTriggerPoint = isMobile ? 8000 : 5000;
+  const showHomepageUpsell = useShowPastPosition(experimentTriggerPoint);
 
   if (!locationSummary) {
     return null;
