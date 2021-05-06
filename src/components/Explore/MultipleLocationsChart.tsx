@@ -1,7 +1,7 @@
 import React, { useCallback, Fragment } from 'react';
 import isNumber from 'lodash/isNumber';
 import last from 'lodash/last';
-import max from 'lodash/max';
+import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
@@ -133,7 +133,9 @@ const MultipleLocationsChart: React.FC<{
   barOpacity,
   isMobileXs = false,
 }) => {
-  const seriesList = sortSeriesByLast(unsortedSeriesList);
+  const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
+    series => series.data.length > 0,
+  );
 
   const dateFrom = new Date('2020-03-01');
   const dateTo = new Date();
@@ -169,6 +171,7 @@ const MultipleLocationsChart: React.FC<{
     seriesList,
     (p: Column) => innerWidth + 5,
     getYPosition,
+    height,
   );
 
   return (
@@ -263,15 +266,19 @@ function formatCurrentValueLabels(
   seriesList: Series[],
   getXPosition: (p: Column) => number,
   getYPosition: (p: Column) => number,
+  height: number,
 ): LabelInfo[] {
   return seriesList.reduce((labelInfoList: LabelInfo[], currSeries: Series) => {
     const lastPoint = last(currSeries.data);
-    const currMaxY = max(labelInfoList.map(info => info.y)) || 0;
+    const currMinY = min(labelInfoList.map(info => info.y)) || height;
     return [
       ...labelInfoList,
       {
-        x: lastPoint?.x ? getXPosition(lastPoint) : 0,
-        y: lastPoint?.y ? Math.max(getYPosition(lastPoint), currMaxY + 14) : 0,
+        x: lastPoint?.x != null ? getXPosition(lastPoint) : 0,
+        y:
+          lastPoint?.y != null
+            ? Math.min(getYPosition(lastPoint), currMinY - 14)
+            : 0,
         label: currSeries.shortLabel,
         stroke: currSeries.params?.stroke || '#000',
       },
@@ -283,6 +290,6 @@ function sortSeriesByLast(seriesList: Series[]) {
   return sortBy(seriesList, series => {
     const lastPoint = last(series.data);
     return lastPoint?.y || 0;
-  }).reverse();
+  });
 }
 export default MultipleLocationsChart;
