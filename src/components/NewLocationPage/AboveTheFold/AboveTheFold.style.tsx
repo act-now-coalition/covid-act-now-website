@@ -35,7 +35,7 @@ export const GridContainer = styled.div<{ showNote: boolean }>`
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
-    grid-gap: 1.75rem;
+    grid-gap: 2rem;
     grid-template-areas: ${({ showNote }) =>
       showNote
         ? `'header header'
@@ -101,8 +101,21 @@ export const GridItemAlerts = styled.div`
 export const GridItemMap = styled.div`
   grid-area: map;
   align-self: start;
+
+  @media (min-width: ${mapToFixedBreakpoint}px) {
+    display: none;
+  }
 `;
 
 export const GridItemNote = styled.div`
   grid-area: note;
+`;
+
+// Need to remove the map from the grid container when it becomes position:fixed
+// so there is no extra grid-gap for an empty grid item:
+export const MapOutsideGrid = styled.div`
+  display: none;
+  @media (min-width: ${mapToFixedBreakpoint}px) {
+    display: inherit;
+  }
 `;

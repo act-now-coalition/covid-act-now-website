@@ -13,13 +13,21 @@ import { NavBarSearch } from 'components/NavBar';
 import { trackNavigation, trackMobileMenuOpen } from 'components/NavBar/utils';
 import { useIsEmbed } from 'common/utils/hooks';
 import { useBreakpoint } from 'common/hooks';
+import { Region } from 'common/regions';
 
 const NavLocationPage: React.FC<{
   renderSecondaryElement: () => React.ReactElement;
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   hasScrolled: boolean;
-}> = ({ renderSecondaryElement, menuOpen, setMenuOpen, hasScrolled }) => {
+  region: Region;
+}> = ({
+  renderSecondaryElement,
+  menuOpen,
+  setMenuOpen,
+  hasScrolled,
+  region,
+}) => {
   const isEmbed = useIsEmbed();
 
   const isMobile = useBreakpoint(800);
@@ -91,7 +99,11 @@ const NavLocationPage: React.FC<{
             </Link>
           </Style.GridItemLogo>
           <Style.GridItemSearch hasScrolled={hasScrolled}>
-            <NavBarSearch menuOpen={menuOpen} WrappingDiv={Fragment} />
+            <NavBarSearch
+              menuOpen={menuOpen}
+              WrappingDiv={Fragment}
+              region={region}
+            />
           </Style.GridItemSearch>
           <Style.GridItemSecondaryEl>
             {renderSecondaryElement()}
