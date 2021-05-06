@@ -10,6 +10,7 @@ export const StyledVaccineButton = styled(LargeFilledButton)`
   display: none;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    white-space: nowrap;
     display: inherit;
   }
 `;

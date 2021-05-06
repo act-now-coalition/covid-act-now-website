@@ -10,6 +10,7 @@ import {
   GridItemNote,
   GridItemOverview,
   GridItemSparkLines,
+  MapOutsideGrid,
 } from './AboveTheFold.style';
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
@@ -90,6 +91,9 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = ({
           </GridItemNote>
         )}
       </GridContainer>
+      <MapOutsideGrid>
+        <CountyMap region={region} />
+      </MapOutsideGrid>
     </MainWrapper>
   );
 };

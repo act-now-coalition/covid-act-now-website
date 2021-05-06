@@ -31,6 +31,7 @@ function WithSearchInNav({ region }: LocationPageProps) {
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
         hasScrolled={hasScrolled}
+        region={region}
       />
       <div>
         <ChartsHolder chartId={chartId} region={region} />

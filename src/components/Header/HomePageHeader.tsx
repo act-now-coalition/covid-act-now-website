@@ -2,20 +2,17 @@ import React, { ReactElement } from 'react';
 import { Wrapper, Content, Subcopy, Header } from './HomePageHeader.style';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
-import { trackOpenTooltip } from 'components/InfoTooltip';
-import { DateTime } from 'luxon';
+import {
+  trackOpenTooltip,
+  getLastUpdatedTooltipCopy,
+} from 'components/InfoTooltip';
 import { formatDateTime, DateFormat } from 'common/utils/time-utils';
 
 function renderInfoTooltip(updatedDate: Date): ReactElement {
-  const updatedDateStr = formatDateTime(updatedDate, DateFormat.YYYY_MM_DD);
-  // 5 pm UTC = 10 am PST
-  // TODO (Fai): Create time util to set hour of the day.
-  const updatedTime = DateTime.fromISO(`${updatedDateStr}T17:00:00.000Z`);
-  const updatedTimeStr = updatedTime.toFormat('h a ZZZZ');
-  const body = `We aim to update our data by ${updatedTimeStr} daily. Occasionally, when additional review is required, an update can be delayed by several hours. Note that certain data sources that we use (eg. ICU hospitalizations) are only updated once per week.`;
+  const tooltipCopy = getLastUpdatedTooltipCopy(updatedDate);
   return (
     <InfoTooltip
-      title={renderTooltipContent(body)}
+      title={renderTooltipContent(tooltipCopy)}
       aria-label="Description of when data is updated"
       trackOpenTooltip={() => trackOpenTooltip('Home page header')}
     />
