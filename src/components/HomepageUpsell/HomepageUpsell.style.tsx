@@ -10,10 +10,13 @@ export const StyledButton = styled(BaseButton)`
   right: 0;
   background-color: white;
   text-transform: none;
-  padding: 1.25rem;
+  padding: 1rem 1.25rem;
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.08);
   border-radius: 0;
   z-index: 1;
+  display: flex;
+  font-size: 1rem;
+  line-height: 1;
 
   &:hover {
     background-color: white;
@@ -28,4 +31,16 @@ export const BodyText = styled.p`
   ${props => props.theme.fonts.regularBook};
   color: ${COLOR_MAP.GREY_4};
   margin: 0.7rem 0 0;
+  line-height: 1.4;
+`;
+
+export const MapWrapper = styled.div`
+  max-width: 100px;
+  width: 100%;
+  pointer-events: none;
+  margin-right: 1rem;
+`;
+
+export const TextContainer = styled.div`
+  font-size: 1rem;
 `;

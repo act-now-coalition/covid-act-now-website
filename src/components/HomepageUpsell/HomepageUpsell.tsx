@@ -1,12 +1,8 @@
 import React, { Fragment } from 'react';
-import { StyledButton, BodyText } from './HomepageUpsell.style';
+import { StyledButton, BodyText, MapWrapper } from './HomepageUpsell.style';
 import { EventAction, EventCategory } from 'components/Analytics';
+import Map from 'components/Map/Map';
 import LabelWithChevron from 'components/NewLocationPage/Shared/LabelWithChevron';
-import {
-  SectionContentContainer,
-  IconWrapper,
-  TextContainer,
-} from 'components/NewLocationPage/NotesBlock/NotesBlock.style';
 import {
   Experiment,
   ExperimentID,
@@ -28,13 +24,19 @@ const HomepageUpsell = () => {
           trackingLabel="Homepage upsell experiment"
           to="/"
         >
-          <SectionContentContainer>
-            <IconWrapper>Map image</IconWrapper>
-            <TextContainer>
-              <LabelWithChevron text="Risk &amp; vaccine tracker" />
-              <BodyText>See COVID data for any U.S. location</BodyText>
-            </TextContainer>
-          </SectionContentContainer>
+          <MapWrapper>
+            <Map
+              onClick={undefined}
+              hideLegend={true}
+              hideLegendTitle={true}
+              hideInstructions={true}
+              showCounties={false}
+            />
+          </MapWrapper>
+          <div>
+            <LabelWithChevron text="Risk &amp; vaccine tracker" />
+            <BodyText>See COVID data for any U.S. location</BodyText>
+          </div>
         </StyledButton>
       </Variant>
     </Experiment>
