@@ -523,6 +523,12 @@
       "termId": "wave",
       "definition": "During a [pandemic](#pandemic), a “wave” is a phenomenon in which there is a period of increased case growth which [peaks](#peak) and is followed by a substantial, sustained reduction in cases. COVID cases seem to come in waves: first wave, second wave, and so on. There is no official definition of when one wave ends and another begins, and COVID has peaked in different states at different times.\n\n[Data suggests](https://www.covidactnow.org/covid-explained/us-third-wave) the U.S. on the whole experienced its first peak mid April, second peak in mid July, and entered its third wave of cases in the late fall of 2020. The term wave is often used alongside or interchangeably with [surge](#surge), which describes the increase in cases seen before and during the peak of a wave.",
       "category": "Disease science"
+    },
+    {
+      "term": "Fully vaccinated",
+      "termId": "fully-vaccinated",
+      "definition": "People are considered fully vaccinated two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection and severe illness.",
+      "category": "Prevention and mitigation"
     }
   ],
   "metadataTitle": "Glossary of COVID-19 Terminology",
