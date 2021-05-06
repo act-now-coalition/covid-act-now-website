@@ -8,19 +8,19 @@ import {
 } from './LocationName.style';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { DateFormat, formatDateTime } from 'common/utils/time-utils';
-import { TextTooltip, trackOpenTooltip } from 'components/InfoTooltip';
+import {
+  TextTooltip,
+  trackOpenTooltip,
+  getLastUpdatedTooltipCopy,
+} from 'components/InfoTooltip';
 
 const UpdatedDate: React.FC = () => {
   const updatedDate = useModelLastUpdatedDate() || new Date();
-  const updatedTimeStamp = updatedDate;
-  updatedTimeStamp.setUTCHours(17, 0, 0, 0);
-  const updatedTimeStr = formatDateTime(updatedTimeStamp, DateFormat.H_A_ZZZZ);
-  const content = `We aim to update our data by ${updatedTimeStr} daily. Occasionally, when additional review is required, an update can be delayed by several hours. Note that certain data sources that we use (eg. ICU hospitalizations) are only updated once per week.`;
   return (
     <UpdatedOnText>
       {'Updated on '}
       <TextTooltip
-        title={content}
+        title={getLastUpdatedTooltipCopy(updatedDate)}
         mainCopy={formatDateTime(updatedDate, DateFormat.MMMM_D)}
         aria-label="Description of when data is updated"
         trackOpenTooltip={() => trackOpenTooltip(`Updated date`)}
