@@ -24,11 +24,12 @@ const FooterLinks: React.FC<{ region: Region }> = ({ region }) => {
         </li>
         {surgoUrl && (
           <li>
+            Learn about&nbsp;
             <ExternalLink
               href={surgoUrl}
               onClick={() => trackLinkClick('Surgo link')}
             >
-              {`Learn about ${surgoUrlCta}`}
+              {surgoUrlCta}
             </ExternalLink>
           </li>
         )}
