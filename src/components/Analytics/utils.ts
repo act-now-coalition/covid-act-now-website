@@ -40,6 +40,7 @@ export enum EventCategory {
   ENGAGEMENT = 'engagement',
   EXPLORE = 'explore',
   EXPOSURE_NOTIFICATIONS = 'exposure notifications',
+  EXPERIMENT = 'experiment',
   FAQ = 'faq',
   FOOTER = 'footer',
   GEOLOCATION_CARDS = 'geolocation cards',
