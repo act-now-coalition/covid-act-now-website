@@ -81,6 +81,7 @@ const HomepageSearchAutocomplete: React.FC<{
       EventAction.NAVIGATE,
       `Selected: ${value.fullName} (${input})`,
     );
+    setIsOpen(false);
     window.location.href = value.relativeUrl;
   };
 
