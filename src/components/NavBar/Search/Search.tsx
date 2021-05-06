@@ -5,11 +5,13 @@ import { navSearchbar, navSearchbarLocPage } from 'assets/theme';
 import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
 import { Wrapper } from './Search.style';
 import { useFinalAutocompleteLocations } from 'common/hooks';
+import { Region } from 'common/regions';
 
 const Search: React.FC<{
   menuOpen: boolean;
   WrappingDiv?: any /* Chelsi: fix this any */;
-}> = ({ menuOpen, WrappingDiv = Wrapper }) => {
+  region?: Region;
+}> = ({ menuOpen, WrappingDiv = Wrapper, region }) => {
   const theme = useContext(ThemeContext);
 
   const { pathname } = useLocation();
@@ -30,6 +32,7 @@ const Search: React.FC<{
           locations={searchLocations}
           filterLimit={getFilterLimit()}
           menuOpen={menuOpen}
+          region={region}
         />
       </WrappingDiv>
     </ThemeProvider>
