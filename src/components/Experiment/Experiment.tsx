@@ -37,6 +37,7 @@ export enum ExperimentID {
   GET_ALERTS_BUTTON = '6XQaWVIBSS6rnRLILEf_0Q',
   EMAIL_FIELD_AUTO_FOCUSED = '6XQaWVIBSS6rnRLILEf_0Q',
   MEGA_MENU_API_COPY = 'amQNQteeQUaF0hGIXrMVTA',
+  HOMEPAGE_UPSELL = 'TOrsAIZGSZWLzW4xmrBxJA',
 }
 
 export type ExperimentProps = Omit<OptimizeExperimentProps, 'id'> & {

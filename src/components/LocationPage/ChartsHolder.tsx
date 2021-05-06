@@ -5,6 +5,7 @@ import {
   useScrollToElement,
   useBreakpoint,
   useLocationSummariesForFips,
+  useShowPastPosition,
 } from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -28,6 +29,7 @@ import {
   SparkLineMetric,
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
+import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
 
 // TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
@@ -108,11 +110,6 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
   const ccviScores = useCcviForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-  const stats = summaryToStats(locationSummary);
-
   const onClickAlertSignup = () => {
     trackEvent(
       EventCategory.ENGAGEMENT,
@@ -144,6 +141,13 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     setDefaultExploreMetric(SparkLineToExploreMetric[metric]);
     scrollTo(exploreChartRef.current);
   };
+
+  const showHomepageUpsell = useShowPastPosition(3000);
+
+  if (!locationSummary) {
+    return null;
+  }
+  const stats = summaryToStats(locationSummary);
 
   // TODO(pablo): Create separate refs for signup and share
   return (
@@ -212,6 +216,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           stats={stats}
         />
       </div>
+      <HomepageUpsell showHomepageUpsell={showHomepageUpsell} />
     </>
   );
 };
