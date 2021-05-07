@@ -25,8 +25,9 @@ export async function initializeAmplitude() {
 
 export function amplitudeLogEvent(eventType: string, properties: any) {
   getAmplitude().then(amplitude => {
+    const { pathname: path } = window.location;
     if (amplitude) {
-      amplitude.getInstance().logEvent(eventType, properties);
+      amplitude.getInstance().logEvent(eventType, { ...properties, path });
     }
   });
 }
