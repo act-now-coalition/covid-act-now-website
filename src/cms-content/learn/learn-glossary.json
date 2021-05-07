@@ -189,6 +189,12 @@
       "category": "Disease science"
     },
     {
+      "term": "Fully vaccinated",
+      "termId": "fully-vaccinated",
+      "definition": "People are considered fully vaccinated two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection and severe illness.",
+      "category": "Prevention and mitigation"
+    },
+    {
       "definition": "Herd immunity is achieved when a large portion of a community (the herd) becomes immune to a disease, making the spread of disease from person to person unlikely. There are a lot of challenges in relying on natural herd immunity as a method of COVID disease eradication.\n\n* Generally, the percentage of the population that would need to be immune to a disease to achieve herd immunity is estimated to be [at least 60 percent](https://www.thelancet.com/article/S0140-6736(20)32318-7/fulltext).\n* It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if COVID antibodies protect people from getting reinfected. It is also incredibly difficult to protect vulnerable people, such as people who are [immunocompromised](#immunocompromised) or elderly, and would require continued isolation for these people.\n* No countries have even come close to achieving the percentage of infections necessary to achieve herd immunity for COVID.\n\nThe concept of herd immunity is also used when [talking about vaccination](https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19). With successful vaccination, herd immunity may be achieved by protecting people from COVID without needing vast amounts of people to get sick with COVID. The overall amount of virus that can spread in a population is lowered if the majority of that population gets vaccinated.",
       "term": "Herd immunity",
       "termId": "herd-immunity",
