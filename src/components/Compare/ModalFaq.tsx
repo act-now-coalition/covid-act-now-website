@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Wrapper,
   Question,
@@ -29,17 +28,16 @@ const ModalFaq = ({ handleCloseModal }: ModalFaqProps) => {
           <Subheader>Frequently asked questions</Subheader>
           <Question>How do you define “vulnerability”?</Question>
           <Answer>
-            Higher vulnerability areas are more likely to experience severe
-            physical and economic suffering from COVID, and to face a harder,
-            longer recovery.
+            Our vulnerability metric is calculated using government and health
+            data sources. It is a static metric.
             <br />
             <br />
-            As of April 15, 2021, people in the <i>most</i> vulnerable third of
+            As of May 4, 2021, people in the <i>most</i> vulnerable third of
             U.S. counties are 47 percent more likely to have died from COVID
             than people in the <i>least</i> vulnerable third of U.S. counties.
             <br />
             <br />
-            To calculate vulnerability, we use Surgo Ventures’{' '}
+            Read more about Surgo Ventures’&nbsp;
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -47,10 +45,6 @@ const ModalFaq = ({ handleCloseModal }: ModalFaqProps) => {
             >
               COVID-19 Community Vulnerability Index (CCVI)
             </a>
-            .{' '}
-            <Link to="/covid-explained/covid-vulnerability-data">
-              Learn more
-            </Link>
             .
           </Answer>
         </Content>

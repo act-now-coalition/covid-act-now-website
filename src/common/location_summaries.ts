@@ -26,15 +26,26 @@ export function getSummaryFromFips(fips: string): LocationSummary | null {
   return LocationSummariesByFIPS[fips] || null;
 }
 
-/**
- * A bit hacky, but this tries to fetch the summaries to match a given snapshot.
- */
-export async function fetchSummaries(snapshotNumber: number) {
+function getSummariesSyncIfPossible(
+  snapshotNumber: number,
+): SummariesMap | null {
   if (snapshotNumber === currentSnapshot()) {
     // This is the current snapshot; we can use the compiled-in summaries file
     // (this is preferable to loading from develop since unshipped snapshots may
     // not be available.)
     return LocationSummariesByFIPS;
+  } else {
+    return null;
+  }
+}
+
+/**
+ * A bit hacky, but this tries to fetch the summaries to match a given snapshot.
+ */
+export async function fetchSummaries(snapshotNumber: number) {
+  const syncSummaries = getSummariesSyncIfPossible(snapshotNumber);
+  if (syncSummaries) {
+    return syncSummaries;
   } else {
     // Try to fetch from github.
     const url = `https://raw.githubusercontent.com/covid-projections/covid-projections/develop/scripts/alert_emails/summaries/${snapshotNumber}.json`;
@@ -45,11 +56,13 @@ export async function fetchSummaries(snapshotNumber: number) {
 }
 
 export function useSummaries(): SummariesMap | null {
-  const [summaries, setSummaries] = useState<SummariesMap | null>(null);
+  const snapshot = getSnapshotOverride() || currentSnapshot();
+  const [summaries, setSummaries] = useState<SummariesMap | null>(
+    getSummariesSyncIfPossible(snapshot),
+  );
 
   useEffect(() => {
     async function fetch() {
-      const snapshot = getSnapshotOverride() || currentSnapshot();
       let summaries;
       try {
         summaries = await fetchSummaries(snapshot);
@@ -62,7 +75,7 @@ export function useSummaries(): SummariesMap | null {
       setSummaries(summaries);
     }
     fetch();
-  }, []);
+  }, [snapshot]);
 
   return summaries;
 }

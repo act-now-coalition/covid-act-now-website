@@ -47,6 +47,8 @@ const VulnerabilitiesBlock: React.FC<{
     region,
     percentPopulationVulnerable,
   );
+  const communityVulnerabilityQuote =
+    'Communities with higher vulnerability levels have pre-existing economic, social, and physical conditions that may make it hard to respond to and recover from a COVID outbreak.';
 
   return (
     <>
@@ -70,15 +72,16 @@ const VulnerabilitiesBlock: React.FC<{
           />
           <RegionDescription>
             {region.shortName} {regionDescription}
+            <p>{communityVulnerabilityQuote}</p>
           </RegionDescription>
         </FirstColumn>
         <SecondColumn>
-          <TextSmall>SPECIFIC VULNERABILITIES</TextSmall>
+          <TextSmall>WHAT MAKES THIS AREA VULNERABLE</TextSmall>
           <ThemesBlock scores={scores} />
         </SecondColumn>
       </BorderedContainer>
       <StyledLink to="/covid-risk-levels-metrics#vulnerability">
-        How vulnerability is calculated
+        How we calculate vulnerability
       </StyledLink>
       <FooterLinks region={region} />
     </>
