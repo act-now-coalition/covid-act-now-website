@@ -1,4 +1,4 @@
-import HomepageSearchAutocomplete from './Homepage/HomepageSearchAutocomplete';
+import SearchAutocomplete from './SearchAutocomplete/SearchAutocomplete';
 
 export * from './utils';
-export { HomepageSearchAutocomplete };
+export default SearchAutocomplete;

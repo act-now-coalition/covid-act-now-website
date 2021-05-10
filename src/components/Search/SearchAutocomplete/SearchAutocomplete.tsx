@@ -10,7 +10,7 @@ import {
   ListContainer,
   StyledPaper,
   CloseIcon,
-} from './HomepageSearchAutocomplete.style';
+} from './SearchAutocomplete.style';
 import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
 import {
   getSearchTextFieldStyles,
@@ -24,7 +24,7 @@ function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
 
-const HomepageSearchAutocomplete: React.FC<{
+const SearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
@@ -173,4 +173,4 @@ const HomepageSearchAutocomplete: React.FC<{
   );
 };
 
-export default HomepageSearchAutocomplete;
+export default SearchAutocomplete;

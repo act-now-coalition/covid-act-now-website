@@ -1,5 +1,5 @@
 import React from 'react';
-import HomepageSearchAutocomplete from './HomepageSearchAutocomplete';
+import SearchAutocomplete from './SearchAutocomplete';
 import { getFilterLimit } from 'components/Search';
 import {
   getFinalAutocompleteLocations,
@@ -9,7 +9,7 @@ import countyToZipMap from 'common/data/county-zipcode.json';
 
 export default {
   title: 'Shared Components/HomepageSearchAutocomplete',
-  component: HomepageSearchAutocomplete,
+  component: SearchAutocomplete,
 };
 
 export const Home = () => {
@@ -21,7 +21,7 @@ export const Home = () => {
   const geolocatedRegions = getGeolocatedRegions(geolocation, countyToZipMap);
   const locations = getFinalAutocompleteLocations(geolocatedRegions);
   return (
-    <HomepageSearchAutocomplete
+    <SearchAutocomplete
       locations={locations}
       filterLimit={getFilterLimit()}
       menuOpen={false}
