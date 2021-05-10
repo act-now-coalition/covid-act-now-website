@@ -18,7 +18,8 @@ const StyledRegionName: React.FC<{
   /**
    * regionNameMain: Region name seperated from the suffix.
    *
-   * regionSuffix: Detected suffix derived from the region name. If the region name contains a multiple-word suffix or does not contain a recognizable suffix, this variable is null.
+   * regionSuffix: Detected suffix derived from the region name.
+   * If the region name contains a multiple-word suffix or does not contain a recognizable suffix, this variable is null.
    *
    * Examples:
    *  'Fairfield County' => regionNameMain: 'Fairfield', regionSuffix: 'County'
