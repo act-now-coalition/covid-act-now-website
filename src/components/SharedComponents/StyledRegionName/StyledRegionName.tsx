@@ -15,6 +15,17 @@ const StyledRegionName: React.FC<{
 }> = ({ showStateCode, region, condensed, truncateText = false }) => {
   const [regionNameMain, regionSuffix] = getSplitRegionName(region, condensed);
 
+  /**
+   * regionNameMain: Region name seperated from the suffix.
+   *
+   * regionSuffix: Detected suffix derived from the region name. If the region name contains a multiple-word suffix or does not contain a recognizable suffix, this variable is null.
+   *
+   * Examples:
+   *  'Fairfield County' => regionNameMain: 'Fairfield', regionSuffix: 'County'
+   *  'Valdez-Cordova Census Area' => regionNameMain: 'Valdez-Cordova', regionSuffix: null ('Census Area' contains 2 words).
+   *
+   * More info in splitRegionName() in utils.ts.
+   */
   return (
     <Wrapper $truncateText={truncateText}>
       {regionNameMain}
