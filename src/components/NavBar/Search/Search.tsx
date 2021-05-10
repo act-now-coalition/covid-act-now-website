@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import { navSearchbar, navSearchbarLocPage } from 'assets/theme';
-import { HomepageSearchAutocomplete, getFilterLimit } from 'components/Search';
+import SearchAutocomplete, { getFilterLimit } from 'components/Search';
 import { Wrapper } from './Search.style';
 import { useFinalAutocompleteLocations } from 'common/hooks';
 import { Region } from 'common/regions';
@@ -29,7 +29,7 @@ const Search: React.FC<{
       }}
     >
       <WrappingDiv>
-        <HomepageSearchAutocomplete
+        <SearchAutocomplete
           locations={searchLocations}
           filterLimit={getFilterLimit()}
           menuOpen={menuOpen}

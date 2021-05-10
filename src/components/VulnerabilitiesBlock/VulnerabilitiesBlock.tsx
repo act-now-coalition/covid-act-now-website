@@ -48,7 +48,7 @@ const VulnerabilitiesBlock: React.FC<{
     percentPopulationVulnerable,
   );
   const communityVulnerabilityQuote =
-    'Communities with higher vulnerability levels have pre-existing economic, social, and physical conditions that may make it hard to respond to and recover from a COVID outbreak.';
+    'Communities with higher vulnerability have pre-existing economic, social, and physical conditions that may make it hard to respond to and recover from a COVID outbreak.';
 
   return (
     <>
