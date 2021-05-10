@@ -10,8 +10,8 @@ import {
   ListContainer,
   StyledPaper,
   CloseIcon,
-} from './HomepageSearchAutocomplete.style';
-import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
+} from './SearchAutocomplete.style';
+import MenuItem from 'components/Search/MenuItem/MenuItem';
 import {
   getSearchTextFieldStyles,
   getSearchAutocompleteStyles,
@@ -24,7 +24,7 @@ function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
 
-const HomepageSearchAutocomplete: React.FC<{
+const SearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
@@ -136,7 +136,7 @@ const HomepageSearchAutocomplete: React.FC<{
             </div>
           )}
           renderOption={option => {
-            return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
+            return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
           }}
           openOnFocus
           onOpen={() => {
@@ -173,4 +173,4 @@ const HomepageSearchAutocomplete: React.FC<{
   );
 };
 
-export default HomepageSearchAutocomplete;
+export default SearchAutocomplete;

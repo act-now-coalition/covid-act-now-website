@@ -6,14 +6,14 @@ import {
   Icon,
   InnerContent,
   ArrowIcon,
-} from './NewMenuItem.style';
+} from './MenuItem.style';
 import { Region, MetroArea, County } from 'common/regions';
 import { formatEstimate } from 'common/utils';
 import { getLocationIconFillColor } from 'components/Search';
 import { StyledRegionName } from 'components/SharedComponents';
 
 // todo (chelsi) - rename
-const NewMenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
+const MenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   region,
   zipCodeInput,
 }) => {
@@ -38,4 +38,4 @@ const NewMenuItem: React.FC<{ region: Region; zipCodeInput: string }> = ({
   );
 };
 
-export default NewMenuItem;
+export default MenuItem;

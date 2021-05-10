@@ -1,10 +1,10 @@
-import { mobileWidth } from 'components/Search/Homepage/HomepageSearchAutocomplete.style';
+import { mobileWidth } from 'components/Search/SearchAutocomplete/SearchAutocomplete.style';
 
 /**
  * Used for the searchbar on the homepage + in the navbar across the site
  *
  * There are a few minor style differences in the wrapping div
- * (MobileWrapperClosed in HomepageSearchAutocomplete.style.tsx)
+ * (MobileWrapperClosed in SearchAutocomplete.style.tsx)
  */
 
 export interface SearchbarTheme {
