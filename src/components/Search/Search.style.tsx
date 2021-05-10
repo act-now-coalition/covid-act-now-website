@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import { COLOR_MAP } from 'common/colors';
-import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 
 // Note (chelsi): These random 1px margins solve an alignment bug that I cannot figure out otherwise :)
