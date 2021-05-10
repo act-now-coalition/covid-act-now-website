@@ -103,6 +103,9 @@ const NavLocationPage: React.FC<{
               menuOpen={menuOpen}
               WrappingDiv={Fragment}
               region={region}
+              placeholder={
+                hasScrolled ? region.shortName : 'City, county, state, or zip'
+              }
             />
           </Style.GridItemSearch>
           <Style.GridItemSecondaryEl>
