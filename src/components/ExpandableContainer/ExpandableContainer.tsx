@@ -5,25 +5,25 @@ import {
   ExpandButton,
   InnerContent,
 } from './ExpandableContainer.style';
-import {
-  ExpandableSection,
-  sectionDetails,
-} from 'components/ExpandableContainer';
 import { EventCategory } from 'components/Analytics';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
-const ExpandableContainer: React.FC<{ section: ExpandableSection }> = ({
-  section,
+export interface ExpandableContainerProps {
+  collapsedHeight: number;
+  tabTextCollapsed: React.ReactElement;
+  tabTextExpanded: React.ReactElement;
+  trackingLabel: string;
+}
+
+const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
+  collapsedHeight,
+  tabTextCollapsed,
+  tabTextExpanded,
+  trackingLabel,
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(true);
-  const {
-    collapsedHeight,
-    tabTextCollapsed,
-    tabTextExpanded,
-    trackingLabel,
-  } = sectionDetails[section];
 
   const { pathname } = useLocation();
 
