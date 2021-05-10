@@ -132,6 +132,7 @@ export default function HomePage() {
                 locations={searchLocations}
                 filterLimit={getFilterLimit()}
                 menuOpen={menuOpen}
+                placeholder="City, county, state, or zip"
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle

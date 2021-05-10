@@ -25,6 +25,7 @@ export const Home = () => {
       locations={locations}
       filterLimit={getFilterLimit()}
       menuOpen={false}
+      placeholder="City, county, state, or zip"
     />
   );
 };

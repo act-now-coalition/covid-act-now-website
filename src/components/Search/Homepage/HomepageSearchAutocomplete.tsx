@@ -30,7 +30,15 @@ const HomepageSearchAutocomplete: React.FC<{
   setHideMapToggle?: any;
   menuOpen: boolean;
   region?: Region;
-}> = ({ locations, filterLimit, setHideMapToggle, menuOpen, region }) => {
+  placeholder: string;
+}> = ({
+  locations,
+  filterLimit,
+  setHideMapToggle,
+  menuOpen,
+  region,
+  placeholder,
+}) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -117,7 +125,7 @@ const HomepageSearchAutocomplete: React.FC<{
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <StyledTextField
                 placeholder={
-                  region ? region.shortName : 'City, county, state, or zip'
+                  isOpen ? 'City, county, state, or zip' : placeholder
                 }
                 {...params}
                 className={searchTextFieldStyles.root}
