@@ -11,7 +11,7 @@ import {
   StyledPaper,
   CloseIcon,
 } from './SearchAutocomplete.style';
-import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
+import MenuItem from 'components/Search/MenuItem/MenuItem';
 import {
   getSearchTextFieldStyles,
   getSearchAutocompleteStyles,
@@ -136,7 +136,7 @@ const SearchAutocomplete: React.FC<{
             </div>
           )}
           renderOption={option => {
-            return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
+            return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
           }}
           openOnFocus
           onOpen={() => {

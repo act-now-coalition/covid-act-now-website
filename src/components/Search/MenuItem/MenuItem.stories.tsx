@@ -1,23 +1,23 @@
 import React from 'react';
-import NewMenuItem from './NewMenuItem';
+import MenuItem from './MenuItem';
 import regions from 'common/regions';
 
 export default {
-  title: 'Shared Components/NewMenuItem',
-  component: NewMenuItem,
+  title: 'Shared Components/MenuItem',
+  component: MenuItem,
 };
 
 export const County = () => {
   const region = regions.findByFipsCodeStrict('09001');
-  return <NewMenuItem region={region} zipCodeInput="" />;
+  return <MenuItem region={region} zipCodeInput="" />;
 };
 
 export const State = () => {
   const region = regions.findByFipsCodeStrict('15');
-  return <NewMenuItem region={region} zipCodeInput="" />;
+  return <MenuItem region={region} zipCodeInput="" />;
 };
 
 export const Metro = () => {
   const region = regions.findByFipsCodeStrict('35620');
-  return <NewMenuItem region={region} zipCodeInput="" />;
+  return <MenuItem region={region} zipCodeInput="" />;
 };
