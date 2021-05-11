@@ -10,6 +10,8 @@ import {
   getShareQuote,
 } from 'common/utils/recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import { Header } from 'components/Compare/Compare.style';
 
 interface RecommendationsProps {
   projections: Projections;
@@ -54,17 +56,22 @@ const Recommendations = ({
   };
 
   return (
-    <ExpandableContainer {...containerProps}>
-      <Recommend
-        introCopy={recommendationsIntro}
-        recommendations={recommendationsMainContent}
-        locationName={region.fullName}
-        shareUrl={recommendsShareUrl}
-        shareQuote={recommendsShareQuote}
-        recommendationsRef={recommendationsRef}
-        feedbackFormUrl={recommendationsFeedbackForm}
-      />
-    </ExpandableContainer>
+    <>
+      <Header id="recommendations">
+        <LocationPageSectionHeader>Recommendations</LocationPageSectionHeader>
+      </Header>
+      <ExpandableContainer {...containerProps}>
+        <Recommend
+          introCopy={recommendationsIntro}
+          recommendations={recommendationsMainContent}
+          locationName={region.fullName}
+          shareUrl={recommendsShareUrl}
+          shareQuote={recommendsShareQuote}
+          recommendationsRef={recommendationsRef}
+          feedbackFormUrl={recommendationsFeedbackForm}
+        />
+      </ExpandableContainer>
+    </>
   );
 };
 

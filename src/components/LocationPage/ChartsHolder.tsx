@@ -173,9 +173,6 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             region={region}
           />
         </LocationPageBlock>
-        <LocationPageBlock id="vulnerabilities">
-          <VulnerabilitiesBlock scores={ccviScores} region={region} />
-        </LocationPageBlock>
         <LocationPageBlock>
           {!projections ? (
             <LoadingScreen />
@@ -201,6 +198,9 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
               )}
             </ErrorBoundary>
           ))}
+        </LocationPageBlock>
+        <LocationPageBlock id="vulnerabilities">
+          <VulnerabilitiesBlock scores={ccviScores} region={region} />
         </LocationPageBlock>
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore

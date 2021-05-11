@@ -3,6 +3,8 @@ import { Region } from 'common/regions';
 import { RegionCcviItem } from 'common/data';
 import ExpandableContainer from 'components/ExpandableContainer';
 import VulnerabilitiesBlockInner from './VulnerabilitiesBlockInner';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import { Header } from 'components/Compare/Compare.style';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
@@ -21,6 +23,9 @@ const VulnerabilitiesBlock: React.FC<{
 
   return (
     <>
+      <Header>
+        <LocationPageSectionHeader>Vulnerabilities</LocationPageSectionHeader>
+      </Header>
       <ExpandableContainer {...containerProps}>
         <VulnerabilitiesBlockInner scores={scores} region={region} />
       </ExpandableContainer>

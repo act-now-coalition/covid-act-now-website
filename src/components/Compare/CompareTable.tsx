@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import sortBy from 'lodash/sortBy';
 import findIndex from 'lodash/findIndex';
 import partition from 'lodash/partition';
@@ -21,7 +21,6 @@ import {
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
-  getCompareSubheader,
   sliderNumberToFilterMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
@@ -29,7 +28,6 @@ import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { MoreInfoButton } from 'components/SharedComponents';
-import { Subtitle1 } from 'components/Typography';
 import { Region, MetroArea } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import {
@@ -240,9 +238,8 @@ const CompareTable = (props: {
                 onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
               />
             </Header>
-            {region && <Subtitle1>{getCompareSubheader(region)}</Subtitle1>}
           </HeaderWrapper>
-          {!disableFilters && (
+          {!disableFilters ? (
             <Filters
               isHomepage={props.isHomepage}
               stateId={props.stateId}
@@ -255,6 +252,8 @@ const CompareTable = (props: {
               setHomepageScope={setHomepageScope}
               homepageSliderValue={homepageSliderValue}
             />
+          ) : (
+            <Fragment />
           )}
         </div>
       )}

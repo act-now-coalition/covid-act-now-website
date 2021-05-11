@@ -15,7 +15,7 @@ import {
 } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
-import { Subtitle1 } from 'components/Typography';
+// import { Subtitle1 } from 'components/Typography';
 import { County, Region } from 'common/regions';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
@@ -64,7 +64,7 @@ function ChartBlock(props: {
           />
         )}
       </HeaderWrapper>
-      <Subtitle1>{region.fullName}</Subtitle1>
+      {/* <Subtitle1>{region.fullName}</Subtitle1> */}
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
