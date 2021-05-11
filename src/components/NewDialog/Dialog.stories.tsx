@@ -3,12 +3,12 @@ import NewDialog from './NewDialog';
 import { vulnerabilitiesModal } from 'cms-content/modals';
 
 export default {
-  title: 'Below the fold/VulnerabilitiesModal',
+  title: 'Below the fold/Vulnerabilities Modal',
   component: NewDialog,
 };
 
 export const VulnerabilitiesModal = () => {
-  const [dialogOpen, setDialogOpen] = useState(true);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const closeDialog = () => setDialogOpen(false);
 
   const { header, body, links } = vulnerabilitiesModal;

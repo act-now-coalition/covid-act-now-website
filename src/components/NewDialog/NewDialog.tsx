@@ -20,7 +20,12 @@ const NewDialog: React.FC<{
   links: Link[];
 }> = ({ open, closeDialog, header, body, links }) => {
   return (
-    <Dialog open={open} PaperComponent={StyledPaper}>
+    <Dialog
+      open={open}
+      PaperComponent={StyledPaper}
+      onEscapeKeyDown={closeDialog}
+      onBackdropClick={closeDialog}
+    >
       <HeaderWrapper>
         <Header>{header}</Header>
         <StyledIconButton aria-label="close" onClick={closeDialog}>
@@ -32,7 +37,7 @@ const NewDialog: React.FC<{
         {links.length && (
           <>
             {links.map((link: Link) => (
-              <LargeOutlinedButton to={link.url}>
+              <LargeOutlinedButton to={link.url} key={link.cta}>
                 {link.cta}
               </LargeOutlinedButton>
             ))}
