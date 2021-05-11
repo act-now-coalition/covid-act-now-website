@@ -16,13 +16,6 @@ const regionSuffixes = [
   'bor.',
 ];
 
-/**
- * Common indicators of regions with multiple-word suffixes
- * include region names with 'and' and 'census' as the second-last word of the region name.
- * Examples: 'Census Area', 'City and Borough'
- */
-const multipleWordSuffixIndicator = ['and', 'census'];
-
 export function isMultiStateMetro(region: MetroArea): boolean {
   return region.stateCodes.includes('-');
 }
@@ -39,31 +32,24 @@ export function getSplitRegionName(region: Region, condensed?: boolean) {
   }
 }
 
+/**
+ * We only split the region name into [main, suffix] and apply unique
+ * styles to each if it is a single word suffix (ie. 'County').
+ *
+ * We don't split the region name for regions with multiple-word suffix (ie. 'Census Area', 'City and Borough'),
+ * as it is unknown how many words exactly make up a multiple-word suffix.
+ * In this case, we style the whole region name the same.
+ */
 function splitRegionName(regionName: string) {
-  let suffix;
   const splitRegion = regionName.split(' ');
-  /**
-   * Don't separate name from suffix for regions with multiple-word suffix,
-   * as it is unknown how many words exactly make up a multiple-word suffix.
-   * Example: 'Valdez-Cordova Census Area', 'Yakutat City and Borough'
-   */
   if (
-    multipleWordSuffixIndicator.includes(
-      splitRegion[splitRegion.length - 2].toLowerCase(),
-    )
-  ) {
-    suffix = null;
-    /**
-     * Separate suffix from the region name if the suffix is a recognizable one-word suffix (most common case).
-     */
-  } else if (
     regionSuffixes.includes(splitRegion[splitRegion.length - 1].toLowerCase())
   ) {
-    suffix = splitRegion.pop();
-    /**
-     * Cases where it is unknown whether the region name contains a suffix.
-     */
-  } else suffix = null;
-  const regionNameMain = splitRegion.join(' ');
-  return [regionNameMain, suffix];
+    const suffix = splitRegion.pop();
+    const regionNameMain = splitRegion.join(' ');
+    return [regionNameMain, suffix];
+  } else {
+    const regionNameMain = splitRegion.join(' ');
+    return [regionNameMain];
+  }
 }

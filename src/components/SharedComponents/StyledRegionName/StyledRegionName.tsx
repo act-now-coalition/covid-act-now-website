@@ -3,7 +3,7 @@
  * Used in Compare table + geolocated region links on the homepage.
  */
 import React, { Fragment } from 'react';
-import { Region, getFormattedStateCode } from 'common/regions';
+import { Region, State, getFormattedStateCode } from 'common/regions';
 import { Suffix, Wrapper } from './StyledRegionName.style';
 import { getSplitRegionName } from 'components/NewLocationPage/LocationName/utils';
 
@@ -35,7 +35,7 @@ const StyledRegionName: React.FC<{
           {regionSuffix !== 'metro' ? ` ${regionSuffix}` : ` ${regionSuffix},`}
         </Suffix>
       )}
-      {!regionSuffix && region.regionType !== 'state' && <Suffix>,</Suffix>}
+      {!regionSuffix && !(region instanceof State) && <Suffix>,</Suffix>}
       {showStateCode && <Fragment>{getFormattedStateCode(region)}</Fragment>}
     </Wrapper>
   );
