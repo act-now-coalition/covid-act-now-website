@@ -50,7 +50,7 @@ const Donate: React.FC = () => {
       />
       <Container>
         {isMobile && <Intro />}
-        <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/D3wX7K" />
+        <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/VT7Yvu" />
         <ContentWrapper>
           {!isMobile && (
             <Fragment>
