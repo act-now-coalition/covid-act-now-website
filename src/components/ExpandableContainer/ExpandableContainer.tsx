@@ -41,6 +41,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
         trackingCategory={EventCategory.NONE} // Change when implementing beyond storybook
         trackingLabel={`Expand location page module: ${trackingLabel}`}
         endIcon={collapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+        collapsed={collapsed}
       >
         {collapsed ? tabTextCollapsed : tabTextExpanded}
       </ExpandButton>

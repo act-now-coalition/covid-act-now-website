@@ -4,11 +4,14 @@ import { LargeOutlinedButton } from 'components/ButtonSystem';
 
 export const Container = styled.div``;
 
-export const ExpandButton = styled(LargeOutlinedButton)`
+export const ExpandButton = styled(LargeOutlinedButton)<{
+  collapsed: boolean;
+}>`
   width: 100%;
   border-radius: 0 0 4px 4px;
   border: 1px solid ${COLOR_MAP.GREY_2};
-  box-shadow: 0 -5px 8px -5px ${COLOR_MAP.GREY_2};
+  box-shadow: ${({ collapsed }) =>
+    collapsed ? '0 -5px 8px -5px rgba(0, 0, 0, 0.12)' : 'none'};
 
   &:hover {
     border: 1px solid ${COLOR_MAP.GREY_2};

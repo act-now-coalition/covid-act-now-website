@@ -2,13 +2,10 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
-import { HeaderWrapperStyles } from 'components/LocationPage/ChartsHolder.style';
 
-export const BorderedContainer = styled.div`
+export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
-  border-radius: 4px;
   max-width: 900px;
   width: 100%;
 
@@ -60,10 +57,9 @@ export const TextSmall = styled.span`
   }
 `;
 
-export const RegionDescription = styled.span`
+const BodyCopy = css`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 1rem;
-  margin: 1rem 0 1.25rem;
   text-align: center;
 
   strong {
@@ -71,9 +67,25 @@ export const RegionDescription = styled.span`
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    margin: 1rem 0 0;
     text-align: left;
     max-width: 385px;
+  }
+`;
+
+export const SummaryText = styled.span`
+  ${BodyCopy};
+  margin: 1.25rem 0 0.5rem;
+
+  &:last-child {
+    margin: 0.5rem 0 1.25rem;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    margin: 1.25rem 0 0;
+
+    &:last-child {
+      margin: 1.25rem 0 0;
+    }
   }
 `;
 
@@ -95,13 +107,5 @@ export const LevelName = styled.span`
   @media (min-width: ${mobileBreakpoint}) {
     margin-bottom: 0.5rem;
     text-align: left;
-  }
-`;
-
-export const HeaderWrapper = styled.div`
-  ${HeaderWrapperStyles};
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
   }
 `;
