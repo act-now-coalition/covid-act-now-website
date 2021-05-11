@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
-import Dialog from '@material-ui/core/Dialog';
 import NewDialog from './NewDialog';
+import { vulnerabilitiesModal } from 'cms-content/modals';
 
 export default {
-  title: 'Below the fold/Dialog',
+  title: 'Below the fold/VulnerabilitiesModal',
   component: NewDialog,
 };
 
-export const Example = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+export const VulnerabilitiesModal = () => {
+  const [dialogOpen, setDialogOpen] = useState(true);
   const closeDialog = () => setDialogOpen(false);
+
+  const { header, body, links } = vulnerabilitiesModal;
 
   return (
     <>
       <div onClick={() => setDialogOpen(true)}>Open dialog</div>
-      <Dialog open={dialogOpen}>
-        <NewDialog closeDialog={closeDialog} />
-      </Dialog>
+      <NewDialog
+        open={dialogOpen}
+        closeDialog={closeDialog}
+        header={header}
+        body={body}
+        links={links}
+      />
     </>
   );
 };
