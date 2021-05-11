@@ -1,6 +1,6 @@
 import React from 'react';
-import { Region, State, County, MetroArea } from 'common/regions';
-import { isMultiStateMetro, getRegionName } from './utils';
+import { Region, County, MetroArea } from 'common/regions';
+import { isMultiStateMetro, getSplitRegionName } from './utils';
 import {
   RegionNameContainer,
   RegionNameText,
@@ -29,53 +29,46 @@ const UpdatedDate: React.FC = () => {
   );
 };
 
-const LocationName: React.FC<{ region: Region }> = ({ region }) => {
-  if (region instanceof State) {
+function renderStyledRegionName(region: Region) {
+  if (region instanceof County) {
+    const [countyName, countySuffix] = getSplitRegionName(region);
     return (
-      <RegionNameContainer>
-        <RegionNameText>
-          <strong>{getRegionName(region)}</strong>
-        </RegionNameText>
-        <UpdatedDate />
-      </RegionNameContainer>
-    );
-  } else if (region instanceof County) {
-    const [countyName, countySuffix] = getRegionName(region);
-    return (
-      <RegionNameContainer>
-        <RegionNameText>
-          <strong>{countyName}</strong>
-          {` ${countySuffix}, ${region.state.stateCode}`}
-        </RegionNameText>
-        <UpdatedDate />
-      </RegionNameContainer>
+      <>
+        <strong>{countyName}</strong>
+        {countySuffix && ` ${countySuffix}`}
+        {`, ${region.state.stateCode}`}
+      </>
     );
   } else if (region instanceof MetroArea) {
-    const [metroName, metroSuffix] = getRegionName(region);
-    if (isMultiStateMetro(region)) {
-      return (
-        <RegionNameContainer>
-          <RegionNameText>
+    const [metroName, metroSuffix] = getSplitRegionName(region);
+    return (
+      <>
+        {isMultiStateMetro(region) ? (
+          <>
             <strong>{metroName}</strong>
-            {` ${metroSuffix}, ${region.stateCodes}`}
-          </RegionNameText>
-          <UpdatedDate />
-        </RegionNameContainer>
-      );
-    } else {
-      return (
-        <RegionNameContainer>
-          <RegionNameText>
+            {metroSuffix && ` ${metroSuffix}`}
+            {`, ${region.stateCodes}`}
+          </>
+        ) : (
+          <>
             <strong>{`${metroName}, ${region.stateCodes}`}</strong>
-            {` ${metroSuffix}`}
-          </RegionNameText>
-          <UpdatedDate />
-        </RegionNameContainer>
-      );
-    }
+            {metroSuffix && ` ${metroSuffix}`}
+          </>
+        )}
+      </>
+    );
   } else {
-    return null;
+    return <strong>{getSplitRegionName(region)}</strong>;
   }
+}
+
+const LocationName: React.FC<{ region: Region }> = ({ region }) => {
+  return (
+    <RegionNameContainer>
+      <RegionNameText>{renderStyledRegionName(region)}</RegionNameText>
+      <UpdatedDate />
+    </RegionNameContainer>
+  );
 };
 
 export default LocationName;
