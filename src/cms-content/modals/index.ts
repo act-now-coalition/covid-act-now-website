@@ -1,7 +1,7 @@
 import vulnerabilities from './vulnerabilities.json';
 import { Markdown, sanitizeID } from '../utils';
 
-interface Link {
+export interface Link {
   cta: string;
   url: string;
 }
@@ -10,7 +10,7 @@ export interface Modal {
   body: Markdown;
   header: string;
   modalId: string;
-  links?: Link[];
+  links: Link[];
 }
 
 function sanitizeModal(modal: Modal): Modal {
