@@ -16,6 +16,7 @@ export interface Modal {
 function sanitizeModal(modal: Modal): Modal {
   return {
     ...modal,
+    links: modal.links || [],
     modalId: sanitizeID(modal.modalId),
   };
 }
