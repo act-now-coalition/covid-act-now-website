@@ -141,6 +141,12 @@
       "category": "Testing"
     },
     {
+      "term": "Efficacy",
+      "termId": "efficacy",
+      "definition": "Efficacy measures how well a treatment is able to prevent disease in a clinical trial. Researchers calculate efficacy by looking at the difference in new cases of disease between the treatment and placebo groups. For example, Moderna’s efficacy rate during initial clinical trials was [94.1 percent](https://www.modernatx.com/covid19vaccine-eua/providers/clinical-trial-data). This means that the shot was able to reduce new cases by 94.1 percent in the group of people who received the vaccine, compared to those who received the placebo, during the clinical trial. \n\nEffectiveness, on the other hand, measures how well a treatment works in the real world beyond the specific conditions of the clinical trials. For this reason, effectiveness helps us understand how well the treatment protects people of all health levels and demographic backgrounds.",
+      "category": "Treatment"
+    },
+    {
       "term": "Epidemic",
       "termId": "epidemic",
       "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which is an epidemic occurring over a wide geographic area, often across continents and even worldwide.",
