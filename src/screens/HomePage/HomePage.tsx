@@ -26,7 +26,7 @@ import {
   Section,
   ColumnCentered,
 } from './HomePage.style';
-import { HomepageSearchAutocomplete } from 'components/Search';
+import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -128,10 +128,11 @@ export default function HomePage() {
         <div className="App">
           <Content>
             <ColumnCentered id="search">
-              <HomepageSearchAutocomplete
+              <SearchAutocomplete
                 locations={searchLocations}
                 filterLimit={getFilterLimit()}
                 menuOpen={menuOpen}
+                placeholder="City, county, state, or zip"
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle

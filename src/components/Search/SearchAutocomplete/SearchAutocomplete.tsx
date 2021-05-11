@@ -10,8 +10,8 @@ import {
   ListContainer,
   StyledPaper,
   CloseIcon,
-} from './HomepageSearchAutocomplete.style';
-import NewMenuItem from 'components/Search/NewMenuItem/NewMenuItem';
+} from './SearchAutocomplete.style';
+import MenuItem from 'components/Search/MenuItem/MenuItem';
 import {
   getSearchTextFieldStyles,
   getSearchAutocompleteStyles,
@@ -24,13 +24,21 @@ function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
 
-const HomepageSearchAutocomplete: React.FC<{
+const SearchAutocomplete: React.FC<{
   locations: Region[];
   filterLimit: number;
   setHideMapToggle?: any;
   menuOpen: boolean;
   region?: Region;
-}> = ({ locations, filterLimit, setHideMapToggle, menuOpen, region }) => {
+  placeholder: string;
+}> = ({
+  locations,
+  filterLimit,
+  setHideMapToggle,
+  menuOpen,
+  region,
+  placeholder,
+}) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
@@ -117,7 +125,7 @@ const HomepageSearchAutocomplete: React.FC<{
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <StyledTextField
                 placeholder={
-                  region ? region.shortName : 'City, county, state, or zip'
+                  isOpen ? 'City, county, state, or zip' : placeholder
                 }
                 {...params}
                 className={searchTextFieldStyles.root}
@@ -136,7 +144,7 @@ const HomepageSearchAutocomplete: React.FC<{
             </div>
           )}
           renderOption={option => {
-            return <NewMenuItem region={option} zipCodeInput={zipCodeInput} />;
+            return <MenuItem region={option} zipCodeInput={zipCodeInput} />;
           }}
           openOnFocus
           onOpen={() => {
@@ -173,4 +181,4 @@ const HomepageSearchAutocomplete: React.FC<{
   );
 };
 
-export default HomepageSearchAutocomplete;
+export default SearchAutocomplete;
