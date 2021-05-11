@@ -1,49 +1,18 @@
 import React, { useState } from 'react';
-import deburr from 'lodash/deburr';
-import words from 'lodash/words';
 import urlJoin from 'url-join';
 import SocialButtons from './SocialButtons';
-
 import {
   SaveOrShareContainer,
-  SaveOrShareButton,
   DesktopButtonsWrapper,
   MobileButtonsWrapper,
   ClickAwayWrapper,
   SocialButtonsWrapper,
-  CircularProgress,
 } from './ShareButtons.style';
+import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import { ClickAwayListener } from '@material-ui/core';
 import makeChartShareQuote from 'common/utils/makeChartShareQuote';
-import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import * as urls from 'common/urls';
-import { County, MetroArea, Region, State } from 'common/regions';
-import { fail } from 'common/utils';
-import { Metric } from 'common/metricEnum';
-import { DateFormat, formatDateTime } from 'common/utils/time-utils';
-
-const getShareImageUrl = (region: Region, chartIdentifier: number): string => {
-  const imageBaseUrl = ShareImageUrlJSON.share_image_url;
-  if (region instanceof County) {
-    return urlJoin(
-      imageBaseUrl,
-      `counties/${region.fipsCode}/chart/${chartIdentifier}/export.png`,
-    );
-  }
-  if (region instanceof State) {
-    const state = region as State;
-    return urlJoin(
-      imageBaseUrl,
-      `states/${state.stateCode.toLowerCase()}/chart/${chartIdentifier}/export.png`,
-    );
-  } else if (region instanceof MetroArea) {
-    return urlJoin(
-      imageBaseUrl,
-      `metros/${region.fipsCode}/chart/${chartIdentifier}/export.png`,
-    );
-  }
-  fail('Unsupported region');
-};
+import { Region } from 'common/regions';
 
 interface InnerContentProps {
   region: Region;
@@ -58,10 +27,8 @@ const InnerContent = ({
   iconSize,
   shareURL,
   shareQuote,
-  chartIdentifier,
 }: InnerContentProps) => {
   const [showShareIcons, setShowShareIcons] = useState(false);
-  const [saveInProgress, setSaveInProgress] = useState(false);
 
   // Delay allows the user to briefly see copy-link button text change when clicked
   const hideSocialButtons = () => {
@@ -71,69 +38,15 @@ const InnerContent = ({
     return () => clearTimeout(timeoutId);
   };
 
-  const downloadLink = getShareImageUrl(region, chartIdentifier);
-  const downloadDate = formatDateTime(new Date(), DateFormat.YYYY_MM_DD);
-
-  function makeDownloadFilename(chartIdentifier: number) {
-    const chartDownloadType = {
-      [Metric.CASE_DENSITY]: 'infection_rate',
-      [Metric.POSITIVE_TESTS]: 'positive_test_rate',
-      [Metric.HOSPITAL_USAGE]: 'hospital_usage',
-      [Metric.CASE_DENSITY]: 'case_incidence',
-      [Metric.VACCINATIONS]: 'vaccinations',
-    };
-
-    // @ts-ignore
-    const chartType = chartDownloadType[chartIdentifier];
-    const location = deburr(words(region.fullName).join('_')).toLowerCase();
-    return `${location}_${chartType}_${downloadDate}`;
-  }
-
-  // The following is a little hacky, adds a link to the blob and immediately clicks it
-  // As described in https://stackoverflow.com/a/49500465
-  function downloadChart(blob: string, filename: string) {
-    var a = document.createElement('a');
-    a.download = filename;
-    a.href = blob;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }
-
-  function downloadChartOnClick(url: string) {
-    const filename =
-      makeDownloadFilename(chartIdentifier) || `CovidActNow_${downloadDate}`;
-    setSaveInProgress(true);
-    fetch(url)
-      .then(response => response.blob())
-      .then(blob => {
-        let blobUrl = window.URL.createObjectURL(blob);
-        downloadChart(blobUrl, filename);
-        setSaveInProgress(false);
-      })
-      .catch(error => console.error(error));
-  }
-
   return (
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <ClickAwayWrapper>
         <SaveOrShareContainer>
-          <SaveOrShareButton
-            onClick={() => {
-              setShowShareIcons(false);
-              downloadChartOnClick(downloadLink);
-            }}
-          >
-            {saveInProgress ? <CircularProgress size={25} /> : 'Save'}
-          </SaveOrShareButton>
-          <SaveOrShareButton
-            isLast
-            onClick={() => {
+          <ShareButton
+            onClickShare={() => {
               setShowShareIcons(!showShareIcons);
             }}
-          >
-            Share
-          </SaveOrShareButton>
+          />
         </SaveOrShareContainer>
         <SocialButtonsWrapper
           onClick={() => {
