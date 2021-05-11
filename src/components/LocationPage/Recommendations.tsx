@@ -9,6 +9,7 @@ import {
   getRecommendations,
   getShareQuote,
 } from 'common/utils/recommend';
+import ExpandableContainer from 'components/ExpandableContainer';
 
 interface RecommendationsProps {
   projections: Projections;
@@ -45,16 +46,25 @@ const Recommendations = ({
     projection.fips
   }`;
 
+  const containerProps = {
+    collapsedHeight: 240,
+    tabTextCollapsed: <>More</>,
+    tabTextExpanded: <>Less</>,
+    trackingLabel: 'Vulnerabilities',
+  };
+
   return (
-    <Recommend
-      introCopy={recommendationsIntro}
-      recommendations={recommendationsMainContent}
-      locationName={region.fullName}
-      shareUrl={recommendsShareUrl}
-      shareQuote={recommendsShareQuote}
-      recommendationsRef={recommendationsRef}
-      feedbackFormUrl={recommendationsFeedbackForm}
-    />
+    <ExpandableContainer {...containerProps}>
+      <Recommend
+        introCopy={recommendationsIntro}
+        recommendations={recommendationsMainContent}
+        locationName={region.fullName}
+        shareUrl={recommendsShareUrl}
+        shareQuote={recommendsShareQuote}
+        recommendationsRef={recommendationsRef}
+        feedbackFormUrl={recommendationsFeedbackForm}
+      />
+    </ExpandableContainer>
   );
 };
 
