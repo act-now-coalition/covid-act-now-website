@@ -10,10 +10,11 @@ export const BlockContainer = styled.div`
 
   @media (min-width: 932px) {
     max-width: 900px;
+    width: 100%;
     margin: 4.25rem auto 0;
   }
 
-  @media (min-width: 1350px) {
+  @media (min-width: 1320px) {
     margin: 4.25rem 445px 0 auto;
   }
 
