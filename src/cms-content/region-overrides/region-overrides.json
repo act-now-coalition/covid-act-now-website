@@ -77,7 +77,7 @@
     {
       "include": "region",
       "metric": "metrics.vaccinationsInitiatedRatio",
-      "blocked": false,
+      "blocked": true,
       "region": "51683",
       "context": "https://trello.com/c/DfXi7QFD/1346-virginia-city-county-mismatch-leading-to-one-place-with-100"
     }
