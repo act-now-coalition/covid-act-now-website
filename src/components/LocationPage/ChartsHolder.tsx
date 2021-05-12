@@ -78,12 +78,15 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     }
   }, [hash]);
 
+  const [scrolledWithRef, setScrolledWithRef] = useState(false);
+
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
           const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current) {
+          if (metricRef.current && !scrolledWithRef) {
+            setScrolledWithRef(true);
             scrollTo(metricRef.current);
           }
         }
@@ -94,7 +97,8 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     const scrollToRecommendations = () => {
       const timeoutId = setTimeout(() => {
         if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current) {
+          if (recommendationsRef.current && !scrolledWithRef) {
+            setScrolledWithRef(true);
             scrollTo(recommendationsRef.current);
           }
         }
@@ -104,7 +108,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
     scrollToChart();
     scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl]);
+  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithRef]);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 

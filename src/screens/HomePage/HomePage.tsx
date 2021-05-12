@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
-
 import Map from 'components/Map/Map';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
