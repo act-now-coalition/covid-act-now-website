@@ -86,7 +86,7 @@ const Recommend = (props: {
   const recommendationsColumns = isMobile ? halvedInOrder : partitionedByIndex;
 
   return (
-    <Wrapper ref={recommendationsRef}>
+    <div ref={recommendationsRef}>
       <Header
         introCopy={introCopy}
         locationName={locationName}
@@ -118,7 +118,7 @@ const Recommend = (props: {
           );
         })}
       </RecommendationsContainer>
-    </Wrapper>
+    </div>
   );
 };
 
