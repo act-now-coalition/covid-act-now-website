@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
-
 import Map from 'components/Map/Map';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
@@ -92,7 +91,11 @@ export default function HomePage() {
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
   const renderNavBarSearch = () => (
-    <>{hasScrolled && <NavBarSearch menuOpen={menuOpen} />}</>
+    <>
+      {hasScrolled && (
+        <NavBarSearch menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      )}
+    </>
   );
 
   const renderDonateButton = () => (
@@ -133,6 +136,7 @@ export default function HomePage() {
                 filterLimit={getFilterLimit()}
                 menuOpen={menuOpen}
                 placeholder="City, county, state, or zip"
+                setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
@@ -153,8 +157,7 @@ export default function HomePage() {
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
               />
             </Section>
-            <Section ref={exploreSectionRef}>
-              <div id="explore-hospitalizations"></div>
+            <Section ref={exploreSectionRef} id="explore-hospitalizations">
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsListForExplore}

@@ -50,6 +50,12 @@ const ShareImage = lazy(() => import('screens/internal/ShareImage/ShareImage'));
 const AlertUnsubscribe = lazy(() =>
   import('screens/AlertUnsubscribe/AlertUnsubscribe'),
 );
+const AfterSubscribe = lazy(() =>
+  import('screens/Subscriptions/AfterSubscribe'),
+);
+const AfterUnsubscribe = lazy(() =>
+  import('screens/Subscriptions/AfterUnsubscribe'),
+);
 
 export default function App() {
   return (
@@ -81,6 +87,16 @@ export default function App() {
                     exact
                     path="/alert_unsubscribe"
                     component={AlertUnsubscribe}
+                  />
+                  <Route
+                    exact
+                    path="/after_subscribe"
+                    component={AfterSubscribe}
+                  />
+                  <Route
+                    exact
+                    path="/after_unsubscribe"
+                    component={AfterUnsubscribe}
                   />
                   <Route exact path="/donate" component={Donate} />
 

@@ -78,12 +78,15 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     }
   }, [hash]);
 
+  const [scrolledWithRef, setScrolledWithRef] = useState(false);
+
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
           const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current) {
+          if (metricRef.current && !scrolledWithRef) {
+            setScrolledWithRef(true);
             scrollTo(metricRef.current);
           }
         }
@@ -94,7 +97,8 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     const scrollToRecommendations = () => {
       const timeoutId = setTimeout(() => {
         if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current) {
+          if (recommendationsRef.current && !scrolledWithRef) {
+            setScrolledWithRef(true);
             scrollTo(recommendationsRef.current);
           }
         }
@@ -104,7 +108,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
     scrollToChart();
     scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl]);
+  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithRef]);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
@@ -173,20 +177,25 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             region={region}
           />
         </LocationPageBlock>
-        <LocationPageBlock>
-          {!projections ? (
-            <LoadingScreen />
-          ) : (
+        <LocationPageBlock id="vulnerabilities">
+          <VulnerabilitiesBlock scores={ccviScores} region={region} />
+        </LocationPageBlock>
+        {!projections ? (
+          <LoadingScreen />
+        ) : (
+          <LocationPageBlock>
             <Recommendations
               projections={projections}
               recommendationsRef={recommendationsRef}
             />
-          )}
-          {ALL_METRICS.map(metric => (
-            <ErrorBoundary key={metric}>
-              {!projections ? (
-                <LoadingScreen />
-              ) : (
+          </LocationPageBlock>
+        )}
+        {ALL_METRICS.map(metric => (
+          <ErrorBoundary key={metric}>
+            {!projections ? (
+              <LoadingScreen />
+            ) : (
+              <LocationPageBlock>
                 <ChartBlock
                   metric={metric}
                   projections={projections}
@@ -195,13 +204,10 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
                   region={region}
                   stats={stats}
                 />
-              )}
-            </ErrorBoundary>
-          ))}
-        </LocationPageBlock>
-        <LocationPageBlock id="vulnerabilities">
-          <VulnerabilitiesBlock scores={ccviScores} region={region} />
-        </LocationPageBlock>
+              </LocationPageBlock>
+            )}
+          </ErrorBoundary>
+        ))}
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
             initialFipsList={initialFipsList}
@@ -210,7 +216,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           />
         </LocationPageBlock>
       </ChartContentWrapper>
-      <div ref={shareBlockRef} id="recommendationsTest">
+      <div ref={shareBlockRef}>
         <ShareModelBlock
           region={region}
           projections={projections}

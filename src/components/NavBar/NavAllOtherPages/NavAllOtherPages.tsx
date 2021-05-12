@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ClickAwayListener } from '@material-ui/core';
 import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NavBar/MegaMenu/MegaMenu';
 import * as Style from 'components/NavBar/NavBar.style';
@@ -76,16 +75,14 @@ const NavAllOtherPages: React.FC<{
         <Style.Spacer />
         <>
           {renderSecondaryElement()}
-          <ClickAwayListener onClickAway={closeMenu}>
-            <Style.IconButton
-              onClick={onClickHamburger}
-              edge="end"
-              onMouseEnter={onHoverHamburger}
-            >
-              <Style.MenuLabel>Menu</Style.MenuLabel>
-              {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-            </Style.IconButton>
-          </ClickAwayListener>
+          <Style.IconButton
+            onClick={onClickHamburger}
+            edge="end"
+            onMouseEnter={onHoverHamburger}
+          >
+            <Style.MenuLabel>Menu</Style.MenuLabel>
+            {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
+          </Style.IconButton>
         </>
         <MegaMenu {...menuProps} />
       </Style.Toolbar>

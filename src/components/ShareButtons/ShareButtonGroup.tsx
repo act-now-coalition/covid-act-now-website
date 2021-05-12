@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { ClickAwayListener } from '@material-ui/core';
-import { downloadImage } from './utils';
-import { ShareButton } from './ShareButtons.style';
+import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from './SocialButtonBlock';
 
@@ -18,21 +17,15 @@ const ShareImageButtons: React.FC<{
   onShareOnTwitter: () => void;
   onShareOnLinkedin: () => void;
 }> = ({
-  imageUrl,
-  imageFilename,
   url,
   quote,
-  disabled = false,
   onShareOnFacebook,
   onShareOnTwitter,
   onShareOnLinkedin,
-  onSaveImage = () => {},
   onCopyLink = () => {},
 }) => {
   // Turn url / imageUrl into asynchronous getters if they aren't already.
   const getUrl = typeof url === 'string' ? () => Promise.resolve(url) : url;
-  const getImageUrl =
-    typeof imageUrl === 'string' ? () => Promise.resolve(imageUrl) : imageUrl;
 
   const [socialSharingProps, setSocialSharingProps] = useState<{
     url: string;
@@ -73,21 +66,7 @@ const ShareImageButtons: React.FC<{
     <ClickAwayListener onClickAway={() => hideSocialButtons()}>
       <div style={{ position: 'relative' }}>
         <ButtonGroup aria-label="share buttons" variant="outlined">
-          <ShareButton
-            onClick={() => {
-              hideSocialButtons();
-              getImageUrl().then(imageUrl =>
-                downloadImage(imageUrl, imageFilename),
-              );
-              onSaveImage();
-            }}
-            disabled={disabled}
-          >
-            Save
-          </ShareButton>
-          <ShareButton onClick={toggleSocialButtons} disabled={disabled}>
-            Share
-          </ShareButton>
+          <ShareButton onClickShare={toggleSocialButtons} />
         </ButtonGroup>
         {socialSharingProps && (
           <SocialButtonBlock

@@ -16,7 +16,7 @@ function palette(props: any) {
 }
 
 export const Container = styled.div`
-  margin: ${theme.spacing(4)}px 0;
+  padding-bottom: 1.5rem; // Leaves some space below the 'xx days ago' tooltip
 `;
 
 export const Header = styled.div`
