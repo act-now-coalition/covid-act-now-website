@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
-import { mapToFixedBreakpoint } from 'components/NewLocationPage/CountyMap/CountyMap.style';
+import {
+  materialSMBreakpoint,
+  countyMapToFixedBreakpoint,
+} from 'assets/theme/sizes';
 
 export const BlockContainer = styled.div`
   margin: 3rem 1rem 0;
@@ -15,7 +17,7 @@ export const BlockContainer = styled.div`
     margin: 4.25rem auto 0;
   }
 
-  @media (min-width: ${mapToFixedBreakpoint}px) {
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
     margin: 4.25rem 445px 0 auto;
   }
 

@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import {
+  materialSMBreakpoint,
+  countyMapToFixedBreakpoint,
+} from 'assets/theme/sizes';
 import { FixedAspectRatioContainer } from 'components/FixedAspectRatio/FixedAspectRatio.style';
 
 const desktopMapWidth = 320;
-export const mapToFixedBreakpoint = 1320;
 
 export const PinnedContainer = css`
   position: fixed;
@@ -26,7 +28,7 @@ export const MapContainer = styled.div`
     width: ${desktopMapWidth}px;
   }
 
-  @media (min-width: ${mapToFixedBreakpoint}px) {
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
     ${PinnedContainer};
   }
 `;
