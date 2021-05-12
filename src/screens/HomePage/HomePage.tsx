@@ -91,7 +91,11 @@ export default function HomePage() {
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
   const renderNavBarSearch = () => (
-    <>{hasScrolled && <NavBarSearch menuOpen={menuOpen} />}</>
+    <>
+      {hasScrolled && (
+        <NavBarSearch menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      )}
+    </>
   );
 
   const renderDonateButton = () => (
@@ -132,6 +136,7 @@ export default function HomePage() {
                 filterLimit={getFilterLimit()}
                 menuOpen={menuOpen}
                 placeholder="City, county, state, or zip"
+                setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
