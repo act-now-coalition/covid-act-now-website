@@ -14,7 +14,7 @@ export default function useShowPastPosition(y: number): boolean {
       }
     };
 
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, [y]);
 
