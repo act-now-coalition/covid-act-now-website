@@ -15,7 +15,7 @@ export const BlockContainer = styled.div`
     margin: 4.25rem auto 0;
   }
 
-  @media (min-width: ${mapToFixedBreakpoint}) {
+  @media (min-width: ${mapToFixedBreakpoint}px) {
     margin: 4.25rem 445px 0 auto;
   }
 
