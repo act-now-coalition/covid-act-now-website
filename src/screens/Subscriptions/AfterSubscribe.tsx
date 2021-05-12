@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Wrapper, Header, BodyCopy } from './Subscriptions.style';
 
 const AfterSubscribe = () => {
@@ -11,7 +12,7 @@ const AfterSubscribe = () => {
           and will hear from us soon.
         </p>
         <p>
-          <a href="/">Click here</a> to return to the site.
+          <Link to="/">Click here</Link> to return to the site.
         </p>
       </BodyCopy>
     </Wrapper>

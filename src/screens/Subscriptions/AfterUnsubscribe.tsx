@@ -9,6 +9,8 @@ const AfterUnsubscribe = () => {
   const email = params.get('email') || '';
   const formRef = createRef<HTMLFormElement>();
 
+  // We'll go ahead and prefetch the link so it's ready if/when they click the
+  // subscribe link.
   const formAction = getFormActionLink(email);
 
   const onSubscribeClick = async () => {
@@ -53,6 +55,10 @@ const AfterUnsubscribe = () => {
         Alert me about future projects
       </LargeFilledButton>
 
+      {/*
+          Form originally generated from https://covidactnow.createsend.com/subscribers/signupformbuilder/CF15EB108C36FA37
+          (including the weird IDs, etc.)
+         */}
       <form
         ref={formRef}
         className="js-cm-form"
@@ -64,9 +70,8 @@ const AfterUnsubscribe = () => {
           className="js-cm-email-input qa-input-email"
           id="fieldEmail"
           name="cm-jrjjlhr-jrjjlhr"
-          style={{ display: 'none' }}
+          type="hidden"
           value={email}
-          readOnly
         />
       </form>
     </Wrapper>
