@@ -418,7 +418,7 @@ export const Row = styled(TableRow)<{
 
 export const Footer = styled.div`
   display: flex;
-  padding: 1rem 1rem 0;
+  padding-top: 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
   justify-content: space-between;
@@ -436,10 +436,6 @@ export const Footer = styled.div`
         flex-direction: row;
       }
     }
-  }
-
-  @media (min-width: 932px) {
-    padding: 1rem 0 0;
   }
 `;
 
