@@ -418,14 +418,10 @@ export const Row = styled(TableRow)<{
 
 export const Footer = styled.div`
   display: flex;
-  padding: 1.25rem 1rem;
+  padding: 1rem 1rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
   justify-content: space-between;
-
-  span {
-    margin-right: 1rem;
-  }
 
   div {
     &:first-child {
@@ -443,8 +439,13 @@ export const Footer = styled.div`
   }
 
   @media (min-width: 932px) {
-    padding: 1.25rem 0;
+    padding: 1rem 0;
   }
+`;
+
+export const FooterText = styled.p`
+  line-height: 0.25;
+  margin-right: 1rem;
 `;
 
 export const FooterLinkStyles = css`

@@ -7,7 +7,7 @@ import isNumber from 'lodash/isNumber';
 import {
   Wrapper,
   Footer,
-  FooterLink,
+  FooterText,
   HeaderWrapper,
   Header,
 } from 'components/Compare/Compare.style';
@@ -37,6 +37,7 @@ import {
   orderedColumnsVaccineFirst,
   orderedColumnsVulnerabilityFirst,
 } from './columns';
+import { TextButton } from 'components/ButtonSystem/MainButtons.style';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -279,14 +280,14 @@ const CompareTable = (props: {
       {!props.isModal && (
         <Footer>
           <div>
-            <span>
+            <FooterText>
               Displaying <strong>{amountDisplayed}</strong> of{' '}
               <strong>{sortedLocationsArr.length}</strong>{' '}
-            </span>
+            </FooterText>
             {showViewMore && (
-              <FooterLink onClick={onClickShowAll}>
+              <TextButton onClick={onClickShowAll}>
                 {props.viewMoreCopy}
-              </FooterLink>
+              </TextButton>
             )}
           </div>
           <MoreInfoButton onClick={onClickFAQ} />
