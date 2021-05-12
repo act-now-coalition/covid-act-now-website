@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import chunk from 'lodash/chunk';
 import ceil from 'lodash/ceil';
 import partition from 'lodash/partition';
@@ -9,9 +9,6 @@ import {
   RecommendationsContainer,
   RecommendationBody,
   Icon,
-  FooterLink,
-  FooterHalf,
-  FooterWrapper,
   Column,
   RecommendationItem,
 } from './Recommend.style';
@@ -19,74 +16,40 @@ import {
   RecommendationWithIcon,
   mainContent,
 } from 'cms-content/recommendations';
-import { HeaderWrapper } from 'components/LocationPage/ChartsHolder.style';
-import SmallShareButtons from 'components/SmallShareButtons';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { trackRecommendationsEvent } from 'common/utils/recommend';
-import ExternalLink from 'components/ExternalLink';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import { HeaderWrapper } from 'components/VulnerabilitiesBlock/VulnerabilitiesBlock.style';
+import ShareButtons from 'components/SharedComponents/ShareButtons';
+import { EventCategory } from 'components/Analytics';
 import { Subtitle1 } from 'components/Typography';
 import { useBreakpoint } from 'common/hooks';
 
-const { header, footer } = mainContent;
+const { header } = mainContent;
 
-const trackShareFacebook = () =>
-  trackRecommendationsEvent(EventAction.SHARE, 'facebook');
-
-const trackShareTwitter = () =>
-  trackRecommendationsEvent(EventAction.SHARE, 'twitter');
-
-const trackCopyLink = () => {
-  trackRecommendationsEvent(EventAction.COPY_LINK, 'recommendations');
-};
-
-const Header = (props: { introCopy: string; locationName: string }) => {
-  const { introCopy, locationName } = props;
+const Header = (props: {
+  introCopy: string;
+  locationName: string;
+  shareUrl: string;
+  shareQuote: string;
+}) => {
+  const { introCopy, locationName, shareUrl, shareQuote } = props;
   return (
-    <Fragment>
+    <>
       <HeaderWrapper id="recommendations">
-        <HeaderCopy>{header}</HeaderCopy>
+        <LocationPageSectionHeader>
+          <HeaderCopy>{header}</HeaderCopy>
+        </LocationPageSectionHeader>
+        <ShareButtons
+          eventCategory={EventCategory.RECOMMENDATIONS}
+          shareUrl={shareUrl}
+          shareQuote={shareQuote}
+        ></ShareButtons>
       </HeaderWrapper>
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
         These recommendations match the guidelines set by the{' '}
         <strong>CDC</strong>. {introCopy}
       </Intro>
-    </Fragment>
-  );
-};
-
-const Footer: React.FC<{
-  shareUrl: string;
-  shareQuote: string;
-  feedbackFormUrl: string;
-}> = ({ feedbackFormUrl, shareUrl, shareQuote }) => {
-  const feedbackOnClick = () => {
-    trackEvent(
-      EventCategory.RECOMMENDATIONS,
-      EventAction.CLICK_LINK,
-      'Feedback Form',
-    );
-  };
-
-  return (
-    <FooterWrapper>
-      <FooterHalf>
-        <ExternalLink href={feedbackFormUrl}>
-          <FooterLink onClick={feedbackOnClick}>
-            {footer.feedbackButtonLabel}
-          </FooterLink>
-        </ExternalLink>
-      </FooterHalf>
-      <FooterHalf>
-        <SmallShareButtons
-          shareUrl={shareUrl}
-          shareQuote={shareQuote}
-          onCopyLink={trackCopyLink}
-          onShareOnFacebook={trackShareFacebook}
-          onShareOnTwitter={trackShareTwitter}
-        />
-      </FooterHalf>
-    </FooterWrapper>
+    </>
   );
 };
 
@@ -106,7 +69,6 @@ const Recommend = (props: {
     shareUrl,
     shareQuote,
     recommendationsRef,
-    feedbackFormUrl,
   } = props;
 
   /*
@@ -126,7 +88,12 @@ const Recommend = (props: {
 
   return (
     <Wrapper ref={recommendationsRef}>
-      <Header introCopy={introCopy} locationName={locationName} />
+      <Header
+        introCopy={introCopy}
+        locationName={locationName}
+        shareUrl={shareUrl}
+        shareQuote={shareQuote}
+      />
       <RecommendationsContainer>
         {recommendationsColumns.map((half, j) => {
           return (
@@ -152,11 +119,6 @@ const Recommend = (props: {
           );
         })}
       </RecommendationsContainer>
-      <Footer
-        shareUrl={shareUrl}
-        shareQuote={shareQuote}
-        feedbackFormUrl={feedbackFormUrl}
-      />
     </Wrapper>
   );
 };

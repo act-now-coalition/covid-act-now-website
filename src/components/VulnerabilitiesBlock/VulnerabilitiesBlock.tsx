@@ -15,7 +15,8 @@ import {
 } from './VulnerabilitiesBlock.style';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { trackOpenTooltip } from 'components/InfoTooltip';
-import ShareButtons from './ShareButtons';
+import ShareButtons from '../SharedComponents/ShareButtons';
+import { EventCategory } from 'components/Analytics';
 import FooterLinks from './FooterLinks/FooterLinks';
 import CcviThermometer from './CcviThermometer/CcviThermometer';
 import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
@@ -57,7 +58,11 @@ const VulnerabilitiesBlock: React.FC<{
           Vulnerabilities
           <>{renderVulnerabilitiesTooltip()}</>
         </LocationPageSectionHeader>
-        <ShareButtons shareUrl={shareUrl} shareQuote={shareQuote} />
+        <ShareButtons
+          eventCategory={EventCategory.VULNERABILITIES}
+          shareUrl={shareUrl}
+          shareQuote={shareQuote}
+        />
       </HeaderWrapper>
       <Subtitle1>In {region.fullName}</Subtitle1>
       <BorderedContainer>
