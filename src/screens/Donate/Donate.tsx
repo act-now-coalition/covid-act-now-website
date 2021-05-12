@@ -43,7 +43,9 @@ const Donate: React.FC = () => {
   return (
     <>
       <NavAllOtherPages
-        renderSearch={() => <NavBarSearch menuOpen={menuOpen} />}
+        renderSearch={() => (
+          <NavBarSearch menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        )}
         renderSecondaryElement={() => <DesktopOnlyDonateButton />}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}

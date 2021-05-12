@@ -12,7 +12,14 @@ const Search: React.FC<{
   WrappingDiv?: any /* Chelsi: fix this any */;
   region?: Region;
   placeholder?: string;
-}> = ({ menuOpen, WrappingDiv = Wrapper, region, placeholder }) => {
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({
+  menuOpen,
+  WrappingDiv = Wrapper,
+  region,
+  placeholder,
+  setMenuOpen,
+}) => {
   const theme = useContext(ThemeContext);
 
   const { pathname } = useLocation();
@@ -35,6 +42,7 @@ const Search: React.FC<{
           menuOpen={menuOpen}
           region={region}
           placeholder={placeholder || 'City, county, state, or zip'}
+          setMenuOpen={setMenuOpen}
         />
       </WrappingDiv>
     </ThemeProvider>

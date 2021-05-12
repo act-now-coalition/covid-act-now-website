@@ -31,6 +31,7 @@ const SearchAutocomplete: React.FC<{
   menuOpen: boolean;
   region?: Region;
   placeholder: string;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({
   locations,
   filterLimit,
@@ -38,6 +39,7 @@ const SearchAutocomplete: React.FC<{
   menuOpen,
   region,
   placeholder,
+  setMenuOpen,
 }) => {
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
@@ -153,6 +155,7 @@ const SearchAutocomplete: React.FC<{
               EventAction.FOCUS,
               'Search Focused',
             );
+            setMenuOpen(false); // Makes sure mega menu is closed when clicking into the search bar
             setIsOpen(true);
             if (setHideMapToggle) {
               setHideMapToggle(true);
