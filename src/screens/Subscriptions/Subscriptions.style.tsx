@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Typography, Box } from '@material-ui/core';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled(Box)`
   max-width: 700px;
@@ -10,7 +11,7 @@ export const Wrapper = styled(Box)`
   flex-direction: column;
   padding: 1.2rem;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     align-items: center;
     margin: 100px auto 125px;
     min-height: 50vh;
