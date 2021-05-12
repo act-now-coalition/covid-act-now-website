@@ -45,20 +45,20 @@ export const Wrapper = styled.div<{
   max-height: ${({ $isModal }) => $isModal && '100vh'};
 
   @media (min-width: 600px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
     max-height: ${({ $isModal }) => ($isModal ? '80vh' : 'unset')};
   }
 
   @media (min-width: 1060px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto 2rem')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
   }
 
   @media (min-width: 1350px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem 445px 2rem auto')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 445px 0 auto')};
   }
 
   @media (min-width: 1750px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '3rem auto 2rem')};
+    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
   }
 
   table {
@@ -418,7 +418,7 @@ export const Row = styled(TableRow)<{
 
 export const Footer = styled.div`
   display: flex;
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 1rem 0;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
   justify-content: space-between;
@@ -443,7 +443,7 @@ export const Footer = styled.div`
   }
 
   @media (min-width: 932px) {
-    padding: 1.25rem 0;
+    padding: 1.25rem 0 0;
   }
 `;
 
@@ -473,11 +473,11 @@ export const Header = styled.div<{ isHomepage?: boolean }>`
   font-weight: bold;
   font-size: 1.5rem;
   justify-content: space-between;
-  margin: ${({ isHomepage }) => (isHomepage ? '12px 0 0' : '28px 0 12px')};
+  margin: ${({ isHomepage }) => (isHomepage ? '12px 0 0' : '0 0 12px')};
 
   @media (min-width: 600px) {
     font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
-    margin: ${({ isHomepage }) => (isHomepage ? '0' : '20px 0 12px')};
+    margin: ${({ isHomepage }) => (isHomepage ? '0' : '0 0 12px')};
   }
 `;
 

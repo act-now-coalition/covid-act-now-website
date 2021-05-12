@@ -3,7 +3,6 @@ import chunk from 'lodash/chunk';
 import ceil from 'lodash/ceil';
 import partition from 'lodash/partition';
 import {
-  Wrapper,
   HeaderCopy,
   Intro,
   RecommendationsContainer,
@@ -125,7 +124,7 @@ const Recommend = (props: {
   const recommendationsColumns = isMobile ? halvedInOrder : partitionedByIndex;
 
   return (
-    <Wrapper ref={recommendationsRef}>
+    <div ref={recommendationsRef}>
       <Header introCopy={introCopy} locationName={locationName} />
       <RecommendationsContainer>
         {recommendationsColumns.map((half, j) => {
@@ -157,7 +156,7 @@ const Recommend = (props: {
         shareQuote={shareQuote}
         feedbackFormUrl={feedbackFormUrl}
       />
-    </Wrapper>
+    </div>
   );
 };
 

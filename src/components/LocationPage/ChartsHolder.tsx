@@ -210,7 +210,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           />
         </LocationPageBlock>
       </ChartContentWrapper>
-      <div ref={shareBlockRef} id="recommendationsTest">
+      <div ref={shareBlockRef}>
         <ShareModelBlock
           region={region}
           projections={projections}
