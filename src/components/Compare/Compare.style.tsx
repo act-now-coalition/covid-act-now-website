@@ -40,17 +40,17 @@ export const Wrapper = styled.div<{
 }>`
   max-width: ${({ $isHomepage }) => ($isHomepage ? '1000px' : '900px')};
   width: 100%;
-  margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
+  margin: 0 auto;
   background: ${({ $isModal }) => $isModal && `${COLOR_MAP.GRAY_BODY_COPY}`};
   max-height: ${({ $isModal }) => $isModal && '100vh'};
 
   @media (min-width: 600px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
+    margin: 0 auto;
     max-height: ${({ $isModal }) => ($isModal ? '80vh' : 'unset')};
   }
 
   @media (min-width: 1060px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
+    margin: 0 auto;
   }
 
   @media (min-width: 1350px) {
@@ -58,7 +58,7 @@ export const Wrapper = styled.div<{
   }
 
   @media (min-width: 1750px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 auto')};
+    margin: 0 auto;
   }
 
   table {
