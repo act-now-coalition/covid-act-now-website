@@ -176,20 +176,22 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
         <LocationPageBlock id="vulnerabilities">
           <VulnerabilitiesBlock scores={ccviScores} region={region} />
         </LocationPageBlock>
-        <LocationPageBlock>
-          {!projections ? (
-            <LoadingScreen />
-          ) : (
+        {!projections ? (
+          <LoadingScreen />
+        ) : (
+          <LocationPageBlock>
             <Recommendations
               projections={projections}
               recommendationsRef={recommendationsRef}
             />
-          )}
-          {ALL_METRICS.map(metric => (
-            <ErrorBoundary key={metric}>
-              {!projections ? (
-                <LoadingScreen />
-              ) : (
+          </LocationPageBlock>
+        )}
+        {ALL_METRICS.map(metric => (
+          <ErrorBoundary key={metric}>
+            {!projections ? (
+              <LoadingScreen />
+            ) : (
+              <LocationPageBlock>
                 <ChartBlock
                   metric={metric}
                   projections={projections}
@@ -198,10 +200,10 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
                   region={region}
                   stats={stats}
                 />
-              )}
-            </ErrorBoundary>
-          ))}
-        </LocationPageBlock>
+              </LocationPageBlock>
+            )}
+          </ErrorBoundary>
+        ))}
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
             initialFipsList={initialFipsList}

@@ -21,7 +21,6 @@ import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { MarkdownContent } from 'components/Markdown';
-import LocationPageBlock from './LocationPageBlock';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
@@ -49,7 +48,7 @@ function ChartBlock(props: {
   const chartHeight = isMobile ? 280 : 400;
 
   return (
-    <LocationPageBlock>
+    <>
       <HeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
@@ -87,7 +86,7 @@ function ChartBlock(props: {
           <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
         </>
       )}
-    </LocationPageBlock>
+    </>
   );
 }
 
