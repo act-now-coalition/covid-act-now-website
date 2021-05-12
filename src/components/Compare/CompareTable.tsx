@@ -38,6 +38,7 @@ import {
   orderedColumnsVulnerabilityFirst,
 } from './columns';
 import { TextButton } from 'components/ButtonSystem/MainButtons.style';
+import { EventCategory } from 'components/Analytics/utils';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -285,7 +286,11 @@ const CompareTable = (props: {
               <strong>{sortedLocationsArr.length}</strong>{' '}
             </FooterText>
             {showViewMore && (
-              <TextButton onClick={onClickShowAll}>
+              <TextButton
+                onClick={onClickShowAll}
+                trackingCategory={EventCategory.COMPARE}
+                trackingLabel="view all regions button"
+              >
                 {props.viewMoreCopy}
               </TextButton>
             )}
