@@ -66,6 +66,20 @@
       "blocked": true,
       "region": "33660",
       "context": "https://trello.com/c/qPpRRjqw/1295-disabled-mobile-county-metro-al-test-positivity-spike"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "51685",
+      "context": "https://trello.com/c/DfXi7QFD/1346-virginia-city-county-mismatch-leading-to-one-place-with-100"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "region": "51683",
+      "context": "https://trello.com/c/DfXi7QFD/1346-virginia-city-county-mismatch-leading-to-one-place-with-100"
     }
   ]
 }
