@@ -11,9 +11,8 @@ import {
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import AutocompleteRegions from 'components/AutocompleteRegions';
 import regions, { Region } from 'common/regions';
+import { useHistory } from 'react-router-dom';
 
-const unsubscribedCopy =
-  'You are now unsubscribed and will no longer receive alerts.';
 const resubscribedCopy = 'Your COVID alert preferences have been updated.';
 
 async function getAlertsSubscriptions(): Promise<
@@ -26,6 +25,7 @@ async function getAlertsSubscriptions(): Promise<
 const AlertUnsubscribe = () => {
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email') || '';
+  const history = useHistory();
 
   const [selectedLocations, setSelectedLocations] = useState<Region[]>([]);
   const [formSubmittedCopy, setFormSubmittedCopy] = useState('');
@@ -58,7 +58,8 @@ const AlertUnsubscribe = () => {
     trackEvent(EventCategory.ENGAGEMENT, EventAction.ALERTS_UNSUBSCRIBE);
     const subscriptions = await getAlertsSubscriptions();
     await subscriptions.doc(email).delete();
-    setFormSubmittedCopy(unsubscribedCopy);
+
+    history.push(`/after_unsubscribe?email=${encodeURIComponent(email)}`);
   }
 
   function handleSelectChange(selectedLocation: any) {

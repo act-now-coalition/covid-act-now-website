@@ -90,8 +90,10 @@ function generateAlertEmailContent(
     last_updated: lastUpdated,
     location_url: `${locationURL}?utm_source=risk_alerts&utm_medium=email`,
     subscribe_link: `https://covidactnow.org/alert_signup?utm_campaign=risk_alert_forward_subscribe&utm_source=risk_alerts&utm_medium=email`,
-    unsubscribe_link: `${unsubscribeURL}?email=${encodeURI(emailAddress)}`, // would be nice to know dev/staging/prod
-    feedback_subject_line: encodeURI(
+    unsubscribe_link: `${unsubscribeURL}?email=${encodeURIComponent(
+      emailAddress,
+    )}`, // would be nice to know dev/staging/prod
+    feedback_subject_line: encodeURIComponent(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,
     ),
     disclaimer,
