@@ -1,11 +1,22 @@
 /* Determines whether or not you've scrolled past a specified y position */
 
-import useScrollPosition from '@react-hook/window-scroll';
+import { useEffect, useState } from 'react';
 
 export default function useShowPastPosition(y: number): boolean {
-  const scrollY = useScrollPosition();
-  if (scrollY > y) {
-    return true;
-  }
-  return false;
+  const [pastPosition, setPastPosition] = useState<boolean>(false);
+  useEffect(() => {
+    const onScroll = () => {
+      let currentPosition = window.pageYOffset;
+      if (currentPosition > y) {
+        setPastPosition(true);
+      } else {
+        setPastPosition(false);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [y]);
+
+  return pastPosition;
 }
