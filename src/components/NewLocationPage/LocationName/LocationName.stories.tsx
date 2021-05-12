@@ -12,6 +12,11 @@ export const NewYork = () => {
   return <LocationName region={state} />;
 };
 
+export const DistrictOfColumbiaState = () => {
+  const state = regions.findByFipsCodeStrict('11');
+  return <LocationName region={state} />;
+};
+
 export const FairFieldCounty = () => {
   const county = regions.findByFipsCodeStrict('09001');
   return <LocationName region={county} />;
@@ -19,6 +24,21 @@ export const FairFieldCounty = () => {
 
 export const EastBatonRougeParish = () => {
   const county = regions.findByFipsCodeStrict('22033');
+  return <LocationName region={county} />;
+};
+
+export const DistrictOfColumbia = () => {
+  const county = regions.findByFipsCodeStrict('11001');
+  return <LocationName region={county} />;
+};
+
+export const ValdezCordovaCensusArea = () => {
+  const county = regions.findByFipsCodeStrict('02261');
+  return <LocationName region={county} />;
+};
+
+export const YakutatCityAndBorough = () => {
+  const county = regions.findByFipsCodeStrict('02282');
   return <LocationName region={county} />;
 };
 

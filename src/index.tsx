@@ -14,6 +14,7 @@ Sentry.init({
     // Ignoring cancelled API requests.  We should improve error handling in
     // src/api/index.ts, but cancelled error messages are crowding sentry.
     'TypeError: cancelled',
+    'ChunkLoadError',
   ],
   denyUrls: [
     // Chrome extensions

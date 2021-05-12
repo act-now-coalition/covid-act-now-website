@@ -19,7 +19,7 @@ export const HeaderWrapperStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3.5rem 0 0.25rem;
+  margin: 0 0 0.25rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
@@ -84,12 +84,12 @@ export const BetaTag = styled.div`
 
 export const DisclaimerWrapper = styled.div`
   max-width: 600px;
-  padding: 1.5rem 0 0.75rem;
+  padding: 1.5rem 0 0;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    padding: 1.5rem 0 2rem;
+    padding: 1.5rem 0 0;
   }
 
   p {

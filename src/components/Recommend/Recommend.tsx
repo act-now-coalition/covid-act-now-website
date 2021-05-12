@@ -3,7 +3,6 @@ import chunk from 'lodash/chunk';
 import ceil from 'lodash/ceil';
 import partition from 'lodash/partition';
 import {
-  Wrapper,
   HeaderCopy,
   Intro,
   RecommendationsContainer,

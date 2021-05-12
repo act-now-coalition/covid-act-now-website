@@ -5,32 +5,6 @@ import { LinkButton } from 'components/Button';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { MarkdownContent } from 'components/Markdown';
 
-/*
-TODO (chelsi): these breakpoints and margins are the same as
-the location header and compare. we should centralize them.
-*/
-export const Wrapper = styled.div`
-  max-width: 900px;
-  width: 100%;
-  margin: 1rem auto;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin: 3rem auto;
-  }
-
-  @media (min-width: 1060px) {
-    margin: 3rem auto 2rem;
-  }
-
-  @media (min-width: 1350px) {
-    margin: 3rem 445px 2rem auto;
-  }
-
-  @media (min-width: 1750px) {
-    margin: 3rem auto 2rem;
-  }
-`;
-
 export const Column = styled.div`
   display: flex;
   flex-direction: column;

@@ -109,7 +109,7 @@ export function getEmailAlertData(
     sourceName: `${region.fullName} Health Department`,
     sourceUrl: eligibilityInfoUrl,
     eligibilityUrl: eligibilityInfoUrl,
-    unsubscribeUrl: `https://covidactnow.org/alert_unsubscribe?email=${encodeURI(
+    unsubscribeUrl: `https://covidactnow.org/alert_unsubscribe?email=${encodeURIComponent(
       emailAddress,
     )}`,
     vaccinationSignupUrl,

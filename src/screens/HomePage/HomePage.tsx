@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
-
 import Map from 'components/Map/Map';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
@@ -26,7 +25,7 @@ import {
   Section,
   ColumnCentered,
 } from './HomePage.style';
-import { HomepageSearchAutocomplete } from 'components/Search';
+import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -128,10 +127,11 @@ export default function HomePage() {
         <div className="App">
           <Content>
             <ColumnCentered id="search">
-              <HomepageSearchAutocomplete
+              <SearchAutocomplete
                 locations={searchLocations}
                 filterLimit={getFilterLimit()}
                 menuOpen={menuOpen}
+                placeholder="City, county, state, or zip"
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
@@ -152,8 +152,7 @@ export default function HomePage() {
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
               />
             </Section>
-            <Section ref={exploreSectionRef}>
-              <div id="explore-hospitalizations"></div>
+            <Section ref={exploreSectionRef} id="explore-hospitalizations">
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsListForExplore}

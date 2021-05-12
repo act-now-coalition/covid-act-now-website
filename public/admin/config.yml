@@ -879,3 +879,38 @@ collections:
                 hint: Determines the associated icon
                 widget: select
                 options: ["ALERTS", "API", "DAILY_DOWNLOAD"]
+  - name: modals
+    label: Modals
+    folder: 'src/cms-content/modals'
+    create: true
+    label_singular: Modal
+    format: json
+    description: Information modals (ie. Vulnerabilities 'About this data' modal, Daily new cases 'About this data' modal)
+    slug: '{{header}}'
+    summary: '{{header}}'
+    fields:
+      - label: Header
+        name: header
+        widget: string
+        hint: Modal header (ie. 'Vulnerabilities')
+      - label: Modal ID
+        name: modalId
+        widget: string
+        hint: 'Header, all lowercase, dash-separated if multi word (ie. daily-new-cases)'
+      - label: Body
+        name: body
+        widget: markdown
+        hint: Content of the modal
+      - label: Links
+        name: links
+        widget: list
+        required: false
+        fields:
+          - name: cta
+            label: CTA
+            widget: string
+            hint: 'Ex: Learn more'
+          - name: url
+            label: URL
+            widget: string
+            hint: 'Ex: /covid-risk-levels-metrics#vulnerability'

@@ -263,8 +263,8 @@ const Explore: React.FunctionComponent<{
 
     return (
       <Styles.Container ref={exploreRef}>
-        <Grid container spacing={1}>
-          <Grid container item sm={9} xs={12} alignContent="center">
+        <Grid container>
+          <Grid container item sm={9} xs={12}>
             <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
           </Grid>
           <Grid item sm xs={12}>
