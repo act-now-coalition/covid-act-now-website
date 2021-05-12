@@ -5,8 +5,10 @@ import { COLOR_MAP } from 'common/colors';
 export const Container = styled.div``;
 
 export const Section = styled.div`
-  &:not(:last-child) {
-    margin-bottom: 16px;
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
   }
 `;
 
