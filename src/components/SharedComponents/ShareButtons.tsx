@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { ClickAwayListener } from '@material-ui/core';
-import { ShareButton } from 'components/ShareButtons/ShareButtons.style';
+import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from 'components/ShareButtons/SocialButtonBlock';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
-function trackShare(label: string) {
-  trackEvent(EventCategory.VULNERABILITIES, EventAction.SHARE, label);
+function trackShare(eventCategory: EventCategory, label: string) {
+  trackEvent(eventCategory, EventAction.SHARE, label);
 }
 
-const ShareButtons: React.FC<{ shareUrl: string; shareQuote: string }> = ({
-  shareUrl,
-  shareQuote,
-}) => {
+const ShareButtons: React.FC<{
+  eventCategory: EventCategory;
+  shareUrl: string;
+  shareQuote: string;
+}> = ({ eventCategory, shareUrl, shareQuote }) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
   const hideSocialButtons = () => {
@@ -36,21 +37,16 @@ const ShareButtons: React.FC<{ shareUrl: string; shareQuote: string }> = ({
       <div style={{ position: 'relative', width: 'fit-content' }}>
         <ButtonGroup aria-label="share buttons" variant="outlined">
           <ShareButton
-            onClick={() => setShowSocialButtons(!showSocialButtons)}
-            disabled={false}
-          >
-            Share
-          </ShareButton>
+            onClickShare={() => setShowSocialButtons(!showSocialButtons)}
+          />
         </ButtonGroup>
         {showSocialButtons && (
           <SocialButtonBlock
             onClickContainer={() => hideSocialButtons()}
-            onShareOnFacebook={() => trackShare('facebook')}
-            onShareOnTwitter={() => trackShare('twitter')}
-            onShareOnLinkedin={() => trackShare('linkedin')}
-            onCopyLink={() =>
-              trackEvent(EventCategory.VULNERABILITIES, EventAction.COPY_LINK)
-            }
+            onShareOnFacebook={() => trackShare(eventCategory, 'facebook')}
+            onShareOnTwitter={() => trackShare(eventCategory, 'twitter')}
+            onShareOnLinkedin={() => trackShare(eventCategory, 'linkedin')}
+            onCopyLink={() => trackEvent(eventCategory, EventAction.COPY_LINK)}
             {...socialSharingProps}
           />
         )}
