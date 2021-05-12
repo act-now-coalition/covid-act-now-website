@@ -29,7 +29,6 @@ const VulnerabilitiesBlock: React.FC<{
       <ExpandableContainer {...containerProps}>
         <VulnerabilitiesBlockInner scores={scores} region={region} />
       </ExpandableContainer>
-      {/* <div style={{ marginBottom: '4.25rem' }}>Footer content</div> */}
     </>
   );
 };

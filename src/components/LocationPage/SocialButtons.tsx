@@ -18,10 +18,12 @@ const SocialButtons = ({
   iconSize,
   shareURL,
   shareQuote,
+  closeOnClick,
 }: {
   iconSize: number;
   shareURL: string;
   shareQuote: string;
+  closeOnClick: () => void;
 }) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
@@ -44,7 +46,7 @@ const SocialButtons = ({
   };
 
   return (
-    <SocialButtonsContainer>
+    <SocialButtonsContainer onClick={closeOnClick}>
       <SocialShareButton {...buttonProps} color="#3b5998">
         <FacebookShareButton url={url} quote={quote}>
           <FacebookIcon {...iconProps} />
