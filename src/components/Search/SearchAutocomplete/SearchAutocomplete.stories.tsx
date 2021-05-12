@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchAutocomplete from './SearchAutocomplete';
 import { getFilterLimit } from 'components/Search';
 import {
@@ -20,11 +20,13 @@ export const Home = () => {
   };
   const geolocatedRegions = getGeolocatedRegions(geolocation, countyToZipMap);
   const locations = getFinalAutocompleteLocations(geolocatedRegions);
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <SearchAutocomplete
       locations={locations}
       filterLimit={getFilterLimit()}
-      menuOpen={false}
+      menuOpen={menuOpen}
+      setMenuOpen={setMenuOpen}
       placeholder="City, county, state, or zip"
     />
   );

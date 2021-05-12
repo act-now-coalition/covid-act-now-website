@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { maxContentWidth } from 'components/NewLocationPage/Shared/Shared.style';
-import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
-import { mapToFixedBreakpoint } from '../CountyMap';
+import {
+  materialSMBreakpoint,
+  mobileBreakpoint,
+  countyMapToFixedBreakpoint,
+} from 'assets/theme/sizes';
 
 export const MainWrapper = styled.div`
   background-color: ${COLOR_MAP.GREY_0};
@@ -23,7 +26,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
   }
 
-  @media (min-width: ${mapToFixedBreakpoint}px) {
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
     align-items: start;
   }
 `;
@@ -68,7 +71,7 @@ export const GridContainer = styled.div<{ showNote: boolean }>`
       'alerts map'`};
   }
 
-  @media (min-width: ${mapToFixedBreakpoint}px) {
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
     margin: 0 350px 0 auto;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: ${({ showNote }) =>
@@ -107,7 +110,7 @@ export const GridItemMap = styled.div`
   grid-area: map;
   align-self: start;
 
-  @media (min-width: ${mapToFixedBreakpoint}px) {
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
     display: none;
   }
 `;
@@ -120,7 +123,7 @@ export const GridItemNote = styled.div`
 // so there is no extra grid-gap for an empty grid item:
 export const MapOutsideGrid = styled.div`
   display: none;
-  @media (min-width: ${mapToFixedBreakpoint}px) {
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
     display: inherit;
   }
 `;

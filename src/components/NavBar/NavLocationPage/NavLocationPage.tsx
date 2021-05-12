@@ -4,7 +4,6 @@
  */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { ClickAwayListener } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Logo from 'assets/images/logo';
 import MegaMenu from 'components/NavBar/MegaMenu/MegaMenu';
@@ -106,22 +105,21 @@ const NavLocationPage: React.FC<{
               placeholder={
                 hasScrolled ? region.shortName : 'City, county, state, or zip'
               }
+              setMenuOpen={setMenuOpen}
             />
           </Style.GridItemSearch>
           <Style.GridItemSecondaryEl>
             {renderSecondaryElement()}
           </Style.GridItemSecondaryEl>
           <Style.GridItemMenuIcon>
-            <ClickAwayListener onClickAway={closeMenu}>
-              <Style.IconButton
-                onClick={onClickHamburger}
-                edge="end"
-                onMouseEnter={onHoverHamburger}
-              >
-                <Style.MenuLabel>Menu</Style.MenuLabel>
-                {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
-              </Style.IconButton>
-            </ClickAwayListener>
+            <Style.IconButton
+              onClick={onClickHamburger}
+              edge="end"
+              onMouseEnter={onHoverHamburger}
+            >
+              <Style.MenuLabel>Menu</Style.MenuLabel>
+              {menuOpen ? <Style.CloseIcon /> : <Style.MenuIcon />}
+            </Style.IconButton>
           </Style.GridItemMenuIcon>
         </Style.GridContainer>
         <MegaMenu {...menuProps} />

@@ -76,7 +76,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
 
   return (
     <Container>
-      <Heading2>Vaccine eligibility</Heading2>
+      <Heading2 style={{ marginTop: 0 }}>Vaccine eligibility</Heading2>
       {allAdultsEligible ? (
         <AllAdultsEligiblePanel />
       ) : (
@@ -100,16 +100,16 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
           sourceName={sourceName}
         />
       </Section>
-      <Section>
-        {!allAdultsEligible && (
+      {!allAdultsEligible && (
+        <Section>
           <Source>
             Updated Mondays and Thursdays from:{' '}
             <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
               {sourceName}
             </ExternalLink>
           </Source>
-        )}
-      </Section>
+        </Section>
+      )}
     </Container>
   );
 };

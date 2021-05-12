@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   LocationPageSectionHeader,
   ChartDescription,
@@ -48,7 +48,7 @@ function ChartBlock(props: {
   const chartHeight = isMobile ? 280 : 400;
 
   return (
-    <Fragment>
+    <>
       <HeaderWrapper>
         <LocationPageSectionHeader ref={props.chartRef}>
           {getMetricNameExtended(metric)}
@@ -86,7 +86,7 @@ function ChartBlock(props: {
           <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
         </>
       )}
-    </Fragment>
+    </>
   );
 }
 
