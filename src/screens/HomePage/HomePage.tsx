@@ -152,8 +152,7 @@ export default function HomePage() {
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
               />
             </Section>
-            <Section ref={exploreSectionRef}>
-              <div id="explore-hospitalizations"></div>
+            <Section ref={exploreSectionRef} id="explore-hospitalizations">
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsListForExplore}

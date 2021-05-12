@@ -19,7 +19,7 @@ function WithSearchInNav({ region }: LocationPageProps) {
   const hasScrolled = useShowPastPosition(850);
 
   return (
-    <div>
+    <>
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl={region.canonicalUrl}
@@ -33,10 +33,8 @@ function WithSearchInNav({ region }: LocationPageProps) {
         hasScrolled={hasScrolled}
         region={region}
       />
-      <div>
-        <ChartsHolder chartId={chartId} region={region} />
-      </div>
-    </div>
+      <ChartsHolder chartId={chartId} region={region} />
+    </>
   );
 }
 
