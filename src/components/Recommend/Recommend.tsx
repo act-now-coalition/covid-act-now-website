@@ -42,7 +42,7 @@ const Header = (props: {
           eventCategory={EventCategory.RECOMMENDATIONS}
           shareUrl={shareUrl}
           shareQuote={shareQuote}
-        ></ShareButtons>
+        />
       </HeaderWrapper>
       <Subtitle1>for {locationName}</Subtitle1>
       <Intro>
