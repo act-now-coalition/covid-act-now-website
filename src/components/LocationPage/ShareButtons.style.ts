@@ -39,7 +39,6 @@ export const ButtonContainerStyles = css`
 
 export const SaveOrShareContainer = styled.div`
   ${ButtonContainerStyles};
-  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   height: auto;
   margin-left: auto;
 `;
