@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { LargeFilledButton } from 'components/ButtonSystem';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
-import { FilledButton } from 'components/ButtonSystem';
 
 export const BannerContainer = styled.div`
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
@@ -24,8 +24,6 @@ export const InnerContainer = styled.div`
   text-align: center;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    align-items: flex-start;
-    text-align: left;
     max-width: 520px;
   }
 `;
@@ -44,8 +42,15 @@ export const Body = styled.span`
 export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+`;
 
-  ${FilledButton} {
-    margin-right: 12px;
+// NOTE: We are customizing this button because the text wraps on mobile
+// ideally, we should move this to all the LargeButton variants
+export const LargeButton = styled(LargeFilledButton)`
+  max-height: unset;
+  min-height: 3.125rem;
+  .MuiButton-label {
+    line-height: 1.2;
   }
 `;
