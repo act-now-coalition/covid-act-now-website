@@ -1,95 +1,38 @@
 import React from 'react';
-import { Region, MetroArea } from 'common/regions';
-import { COLOR_MAP } from 'common/colors';
+import { Region } from 'common/regions';
 import { assert } from 'common/utils';
-import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
-import ExternalLink from 'components/ExternalLink';
-import { Heading2, Paragraph } from 'components/Markdown';
-import TabsPanel, { TabInfo } from 'components/TabsPanel';
-import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
-import RegionVaccinationBlock from 'components/RegionVaccinationBlock';
+import { Heading2 } from 'components/Markdown';
 import { getEligibilityInfo, getRegionState } from './utils';
 import {
   Container,
   Section,
-  Source,
   LinksDescription,
+  EligibleList,
+  EligibleListContainer,
 } from './VaccinationEligibilityBlock.style';
-import EligibilityPanel from './EligibilityPanel';
-import AllAdultsEligiblePanel from './AllAdultsEligiblePanel/AllAdultsEligiblePanel';
 import ButtonBlock from './ButtonBlock';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
 }) => {
-  if (region instanceof MetroArea && !region.isSingleStateMetro) {
-    return <RegionVaccinationBlock region={region} />;
-  }
-
   const state = getRegionState(region);
   assert(state, `Couldn't find a state for region ${region.fipsCode}`);
 
   // If we don't have vaccination information for a given state, we fallback to
   // show the eligibility links.
-  const stateVaccineInfo = getVaccineInfoByFips(state.fipsCode);
-  if (!stateVaccineInfo) {
-    return <RegionVaccinationBlock region={region} />;
-  }
-
   const eligibilityData = getEligibilityInfo(state);
-  const {
-    mostRecentPhaseName,
-    sourceName,
-    sourceUrl,
-    stateVaccinationUrl,
-    allAdultsEligible,
-  } = eligibilityData;
-
-  const tabList: TabInfo[] = [
-    {
-      title: 'Eligible now',
-      indicatorColor: COLOR_MAP.GREEN.BASE,
-      renderPanel: () => (
-        <EligibilityPanel
-          phaseList={eligibilityData.phasesEligibleNow}
-          currentlyEligible={true}
-          stateName={state.fullName}
-        />
-      ),
-    },
-    {
-      title: 'Eligible later',
-      indicatorColor: COLOR_MAP.BLACK,
-      renderPanel: () => (
-        <EligibilityPanel
-          phaseList={eligibilityData.phasesEligibleLater}
-          currentlyEligible={false}
-          stateName={state.fullName}
-        />
-      ),
-    },
-  ];
-
-  const onSelectTab = (newSelectedTab: number) => {
-    trackTabSelected(tabList[newSelectedTab].title);
-  };
+  const { sourceName, stateVaccinationUrl } = eligibilityData;
 
   return (
     <Container>
       <Heading2 style={{ marginTop: 0 }}>Vaccine eligibility</Heading2>
-      {allAdultsEligible ? (
-        <AllAdultsEligiblePanel />
-      ) : (
-        <>
-          <Paragraph>
-            {state.fullName} is currently in{' '}
-            <strong>{mostRecentPhaseName}</strong>.
-          </Paragraph>
-          <Section>
-            <TabsPanel tabList={tabList} onSelectTab={onSelectTab} />
-          </Section>
-        </>
-      )}
+      <Section>
+        <EligibleListContainer>
+          <EligibleList>
+            <li>Individuals 12+</li>
+          </EligibleList>
+        </EligibleListContainer>
+      </Section>
       <Section>
         <LinksDescription>
           Find your vaccine and other information from these official sources:
@@ -100,30 +43,8 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
           sourceName={sourceName}
         />
       </Section>
-      {!allAdultsEligible && (
-        <Section>
-          <Source>
-            Updated Mondays and Thursdays from:{' '}
-            <ExternalLink href={sourceUrl} onClick={trackSourceClick}>
-              {sourceName}
-            </ExternalLink>
-          </Source>
-        </Section>
-      )}
     </Container>
   );
 };
-
-function trackSourceClick() {
-  trackEvent(EventCategory.VACCINATION, EventAction.CLICK_LINK, 'Source');
-}
-
-function trackTabSelected(tabName: string) {
-  trackEvent(
-    EventCategory.VACCINATION,
-    EventAction.CLICK,
-    `Selected: ${tabName}`,
-  );
-}
 
 export default VaccinationEligibilityBlock;

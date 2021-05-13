@@ -1,8 +1,17 @@
-import styled, { css } from 'styled-components';
-import { MarkdownContent, Heading3 } from 'components/Markdown';
+import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 
 export const Container = styled.div``;
+
+export const EligibleListContainer = styled.div`
+  padding: 1.5rem;
+  border: solid 1px ${COLOR_MAP.GREY_1};
+  border-radius: 4px;
+
+  p {
+    margin-bottom: 0;
+  }
+`;
 
 export const Section = styled.div`
   margin-bottom: 1rem;
@@ -12,57 +21,18 @@ export const Section = styled.div`
   }
 `;
 
-export const Source = styled.div`
-  font-size: 14px;
-  color: ${COLOR_MAP.GREY_4};
+export const EligibleList = styled.ul`
+  margin: 0px auto;
+  margin-inline-start: 1em;
+  padding-inline-start: 0.5em;
 
-  a {
-    color: ${COLOR_MAP.GREY_4};
-  }
-`;
-
-// TODO: Use a better marker (SVG checkbox from Material UI)
-const listWithCheckmark = css`
-  ul > li::marker {
+  li::marker {
     content: '✓  ';
     color: ${COLOR_MAP.GREEN.BASE};
   }
 `;
 
-export const PhaseDescription = styled(MarkdownContent)<{
-  $currentlyEligible: boolean;
-}>`
-  ul {
-    margin: 12px auto;
-    margin-inline-start: 1em;
-    padding-inline-start: 0.5em;
-
-    &:last-child {
-      margin-bottom: 0;
-
-      li,
-      p {
-        margin-bottom: 0;
-      }
-    }
-  }
-
-  ${props => (props.$currentlyEligible ? listWithCheckmark : '')}
-`;
-
-export const PhaseTitle = styled(Heading3)`
-  &:first-child {
-    margin-top: 0;
-  }
-  margin-bottom: 4px;
-`;
-
 export const StyledEligibilityPanel = styled.div``;
-
-export const StartDate = styled.span`
-  color: ${COLOR_MAP.GREY_4};
-  font-size: 14px;
-`;
 
 export const LinksDescription = styled.span`
   font-size: 16px;
