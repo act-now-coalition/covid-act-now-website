@@ -15,7 +15,7 @@ const regionSuffixes = [
   'bor.',
 ];
 
-const multiSuffixIndicator = ['and', 'census'];
+const multiWordSuffixIndicator = ['and', 'census'];
 
 export function isMultiStateMetro(region: MetroArea): boolean {
   return region.stateCodes.includes('-');
@@ -43,14 +43,14 @@ export function getSplitRegionName(region: Region, condensed?: boolean) {
  */
 function splitRegionName(regionName: string) {
   const splitRegion = regionName.split(' ');
-  if (
+  const isSingleWordSuffix =
     regionSuffixes.includes(
       splitRegion[splitRegion.length - 1].toLowerCase(),
     ) &&
-    !multiSuffixIndicator.includes(
+    !multiWordSuffixIndicator.includes(
       splitRegion[splitRegion.length - 2].toLowerCase(),
-    )
-  ) {
+    );
+  if (isSingleWordSuffix) {
     const suffix = splitRegion.pop();
     const regionNameMain = splitRegion.join(' ');
     return [regionNameMain, suffix];
