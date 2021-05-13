@@ -1,11 +1,11 @@
 import React from 'react';
-import { LargeFilledButton } from 'components/ButtonSystem';
 import { EventCategory } from 'components/Analytics';
 import {
   BannerContainer,
   InnerContainer,
   Body,
   ButtonsContainer,
+  LargeButton,
 } from './GetVaccinatedBanner.style';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import { formatPercent, formatInteger } from 'common/utils';
@@ -26,13 +26,13 @@ const GetVaccinatedBanner: React.FC = () => {
           received at least one dose of the vaccine.
         </Body>
         <ButtonsContainer>
-          <LargeFilledButton
+          <LargeButton
             href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/talk-about-vaccines.html"
             trackingCategory={EventCategory.HOMEPAGE_BANNER}
             trackingLabel="Homepage Banner: CDC Talk About Vaccines"
           >
             How to talk with friends and family about getting vaccinated
-          </LargeFilledButton>
+          </LargeButton>
         </ButtonsContainer>
       </InnerContainer>
     </BannerContainer>

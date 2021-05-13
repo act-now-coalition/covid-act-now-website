@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LargeFilledButton } from 'components/ButtonSystem';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
@@ -44,4 +45,14 @@ export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+`;
+
+// NOTE: We are customizing this button because the text wraps on mobile
+// ideally, we should move this to all the LargeButton variants
+export const LargeButton = styled(LargeFilledButton)`
+  max-height: unset;
+  min-height: 3.125rem;
+  .MuiButton-label {
+    line-height: 1.2;
+  }
 `;
