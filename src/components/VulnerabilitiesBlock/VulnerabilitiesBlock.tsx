@@ -30,7 +30,8 @@ const VulnerabilitiesBlock: React.FC<{
     collapsedHeightDesktop: 250,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
-    trackingLabel: 'Vulnerabilities',
+    trackingLabel: 'Vulnerabilities module',
+    trackingCategory: EventCategory.VULNERABILITIES,
   };
 
   const percentPopulationVulnerable = getVulnPopulationPercentForFips(

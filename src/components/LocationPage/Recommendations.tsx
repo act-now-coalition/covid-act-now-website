@@ -46,7 +46,8 @@ const Recommendations = ({
     collapsedHeightDesktop: 200,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
-    trackingLabel: 'Vulnerabilities',
+    trackingLabel: 'Recommendations module',
+    trackingCategory: EventCategory.RECOMMENDATIONS,
   };
 
   const trackSourceClick = () => {

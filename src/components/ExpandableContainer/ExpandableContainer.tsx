@@ -16,6 +16,7 @@ export interface ExpandableContainerProps {
   tabTextCollapsed: React.ReactElement;
   tabTextExpanded: React.ReactElement;
   trackingLabel: string;
+  trackingCategory: EventCategory;
 }
 
 const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
@@ -49,7 +50,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
       <ExpandButton
         onClick={() => setCollapsed(!collapsed)}
         trackingCategory={EventCategory.NONE} // Change when implementing beyond storybook
-        trackingLabel={`Expand location page module: ${trackingLabel}`}
+        trackingLabel={`${collapsed ? 'Expand' : 'Collapse'}: ${trackingLabel}`}
         endIcon={collapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         collapsed={collapsed}
       >
