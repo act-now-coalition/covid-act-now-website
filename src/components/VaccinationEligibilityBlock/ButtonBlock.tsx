@@ -8,9 +8,9 @@ import {
 } from 'components/ButtonSystem';
 
 const ButtonBlock: React.FC<{
-  stateVaccinationUrl: string;
-  stateCode: string;
-  sourceName: string;
+  stateVaccinationUrl?: string;
+  stateCode?: string;
+  sourceName?: string;
 }> = ({ stateVaccinationUrl, stateCode, sourceName }) => {
   const sharedTrackingProps = {
     trackingCategory: EventCategory.VACCINATION,
@@ -28,15 +28,17 @@ const ButtonBlock: React.FC<{
       >
         Find a vaccine
       </LargeFilledButton>
-      <LargeOutlinedButton
-        $highlighted={false}
-        href={stateVaccinationUrl}
-        {...sharedTrackingProps}
-        trackingLabel={`State source, ${stateCode}`}
-        endIcon={<OpenInNewIcon />}
-      >
-        {sourceName}
-      </LargeOutlinedButton>
+      {stateCode && stateVaccinationUrl && sourceName && (
+        <LargeOutlinedButton
+          $highlighted={false}
+          href={stateVaccinationUrl}
+          {...sharedTrackingProps}
+          trackingLabel={`State source, ${stateCode}`}
+          endIcon={<OpenInNewIcon />}
+        >
+          {sourceName}
+        </LargeOutlinedButton>
+      )}
     </ButtonsContainer>
   );
 };
