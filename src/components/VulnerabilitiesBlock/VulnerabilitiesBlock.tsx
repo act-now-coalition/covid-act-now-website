@@ -6,12 +6,12 @@ import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.
 import { Header } from 'components/Compare/Compare.style';
 import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
-import { EventCategory } from 'components/Analytics';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ShareButtons from '../SharedComponents/ShareButtons';
 import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
 import NewDialog from 'components/NewDialog/NewDialog';
 import { vulnerabilitiesModal } from 'cms-content/modals';
-import { TextButton } from 'components/ButtonSystem';
+import { ModalOpenButton } from './VulnerabilitiesBlock.style';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
@@ -26,8 +26,8 @@ const VulnerabilitiesBlock: React.FC<{
   }
 
   const containerProps = {
-    collapsedHeightMobile: 350,
-    collapsedHeightDesktop: 250,
+    collapsedHeightMobile: 315,
+    collapsedHeightDesktop: 215,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Vulnerabilities module',
@@ -44,6 +44,15 @@ const VulnerabilitiesBlock: React.FC<{
     percentPopulationVulnerable,
   );
 
+  const modalOpenOnClick = () => {
+    setDialogOpen(true);
+    trackEvent(
+      EventCategory.VULNERABILITIES,
+      EventAction.OPEN_MODAL,
+      'About this data modal',
+    );
+  };
+
   return (
     <>
       <Header>
@@ -57,13 +66,9 @@ const VulnerabilitiesBlock: React.FC<{
         />
       </ExpandableContainer>
       <LocationPageSectionFooter>
-        <TextButton
-          onClick={() => setDialogOpen(true)}
-          trackingCategory={EventCategory.VULNERABILITIES}
-          trackingLabel="Vulnerabilities modal"
-        >
+        <ModalOpenButton onClick={modalOpenOnClick}>
           About this data
-        </TextButton>
+        </ModalOpenButton>
         <NewDialog
           open={dialogOpen}
           closeDialog={closeDialog}

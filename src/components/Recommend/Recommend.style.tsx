@@ -38,7 +38,7 @@ export const RecommendationsContainer = styled.div`
   border-radius: 4px;
   display: flex;
   flex-wrap: wrap;
-  padding: 1.5rem;
+  padding: 0.75rem;
   flex-direction: column;
 
   max-width: 900px;
@@ -46,6 +46,7 @@ export const RecommendationsContainer = styled.div`
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
+    padding: 1rem;
   }
 `;
 

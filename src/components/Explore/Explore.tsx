@@ -267,49 +267,6 @@ const Explore: React.FunctionComponent<{
           <Grid container item sm={9} xs={12}>
             <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
           </Grid>
-          <Grid item sm xs={12}>
-            <Styles.ShareBlock>
-              <ShareImageButtonGroup
-                disabled={selectedLocations.length === 0 || !hasData}
-                imageUrl={() =>
-                  createSharedComponentId().then(getExportImageUrl)
-                }
-                imageFilename={getImageFilename(
-                  selectedLocations,
-                  currentMetric,
-                )}
-                url={() =>
-                  createSharedComponentId().then(sharingId =>
-                    getChartUrl(sharingId, region),
-                  )
-                }
-                quote={getSocialQuote(selectedLocations, currentMetric)}
-                onSaveImage={() => {
-                  trackExploreEvent(
-                    EventAction.SAVE_IMAGE,
-                    trackingLabel,
-                    selectedLocations.length,
-                  );
-                }}
-                onCopyLink={() => {
-                  trackExploreEvent(
-                    EventAction.COPY_LINK,
-                    trackingLabel,
-                    selectedLocations.length,
-                  );
-                }}
-                onShareOnFacebook={() =>
-                  trackShare(`Facebook: ${trackingLabel}`, numLocations)
-                }
-                onShareOnTwitter={() =>
-                  trackShare(`Twitter: ${trackingLabel}`, numLocations)
-                }
-                onShareOnLinkedin={() =>
-                  trackShare(`Linkedin: ${trackingLabel}`, numLocations)
-                }
-              />
-            </Styles.ShareBlock>
-          </Grid>
         </Grid>
         {showNationalSummary && <NationalText />}
         <ExploreTabs
@@ -401,6 +358,44 @@ const Explore: React.FunctionComponent<{
             <ScreenshotReady />
           </Styles.EmptyPanel>
         )}
+        <div style={{ paddingTop: '1rem' }}>
+          <Styles.ShareBlock>
+            <ShareImageButtonGroup
+              disabled={selectedLocations.length === 0 || !hasData}
+              imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
+              imageFilename={getImageFilename(selectedLocations, currentMetric)}
+              url={() =>
+                createSharedComponentId().then(sharingId =>
+                  getChartUrl(sharingId, region),
+                )
+              }
+              quote={getSocialQuote(selectedLocations, currentMetric)}
+              onSaveImage={() => {
+                trackExploreEvent(
+                  EventAction.SAVE_IMAGE,
+                  trackingLabel,
+                  selectedLocations.length,
+                );
+              }}
+              onCopyLink={() => {
+                trackExploreEvent(
+                  EventAction.COPY_LINK,
+                  trackingLabel,
+                  selectedLocations.length,
+                );
+              }}
+              onShareOnFacebook={() =>
+                trackShare(`Facebook: ${trackingLabel}`, numLocations)
+              }
+              onShareOnTwitter={() =>
+                trackShare(`Twitter: ${trackingLabel}`, numLocations)
+              }
+              onShareOnLinkedin={() =>
+                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
+              }
+            />
+          </Styles.ShareBlock>
+        </div>
       </div>
     );
   },

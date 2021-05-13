@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
+import { TooltipAnchorText } from 'components/InfoTooltip/Tooltip.style';
 
 export const Content = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ export const Content = styled.div`
   width: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -49,7 +50,7 @@ export const SecondColumn = styled.div`
 export const TextSmall = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -108,4 +109,12 @@ export const LevelName = styled.span`
     margin-bottom: 0.5rem;
     text-align: left;
   }
+`;
+
+export const ModalOpenButton = styled(TooltipAnchorText).attrs(props => ({
+  as: 'button',
+}))`
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 `;
