@@ -1,7 +1,6 @@
 import React from 'react';
-import { FilledButton } from 'components/ButtonSystem';
+import { LargeFilledButton } from 'components/ButtonSystem';
 import { EventCategory } from 'components/Analytics';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import {
   BannerContainer,
   InnerContainer,
@@ -27,14 +26,13 @@ const GetVaccinatedBanner: React.FC = () => {
           received at least one dose of the vaccine.
         </Body>
         <ButtonsContainer>
-          <FilledButton
+          <LargeFilledButton
             href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/talk-about-vaccines.html"
-            endIcon={<OpenInNewIcon />}
             trackingCategory={EventCategory.HOMEPAGE_BANNER}
             trackingLabel="Homepage Banner: CDC Talk About Vaccines"
           >
             How to talk with friends and family about getting vaccinated
-          </FilledButton>
+          </LargeFilledButton>
         </ButtonsContainer>
       </InnerContainer>
     </BannerContainer>

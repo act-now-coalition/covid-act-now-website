@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
-import { FilledButton } from 'components/ButtonSystem';
 
 export const BannerContainer = styled.div`
   background-color: ${COLOR_MAP.LIGHTGRAY_BG};
@@ -44,8 +43,5 @@ export const Body = styled.span`
 export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
-
-  ${FilledButton} {
-    margin-right: 12px;
-  }
+  justify-content: center;
 `;
