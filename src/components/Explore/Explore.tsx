@@ -262,7 +262,7 @@ const Explore: React.FunctionComponent<{
     const numLocations = selectedLocations.length;
 
     return (
-      <Styles.Container ref={exploreRef}>
+      <div ref={exploreRef}>
         <Grid container>
           <Grid container item sm={9} xs={12}>
             <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
@@ -401,7 +401,7 @@ const Explore: React.FunctionComponent<{
             <ScreenshotReady />
           </Styles.EmptyPanel>
         )}
-      </Styles.Container>
+      </div>
     );
   },
 );
