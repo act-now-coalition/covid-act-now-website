@@ -1,36 +1,31 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { mainContent } from 'cms-content/recommendations';
 import { Projections } from 'common/models/Projections';
 import Recommend from 'components/Recommend';
 import { getRecommendationsShareUrl } from 'common/urls';
-import {
-  getDynamicIntroCopy,
-  getRecommendations,
-  getShareQuote,
-} from 'common/utils/recommend';
+import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import { Header } from 'components/Compare/Compare.style';
+import ShareButtons from 'components/SharedComponents/ShareButtons';
+import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
+import { Region } from 'common/regions';
+import { DisclaimerWrapper } from 'components/LocationPage/ChartsHolder.style';
+import ExternalLink from 'components/ExternalLink';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 interface RecommendationsProps {
   projections: Projections;
   recommendationsRef: React.RefObject<HTMLDivElement>;
+  region: Region;
 }
 
 const Recommendations = ({
+  region,
   projections,
   recommendationsRef,
 }: RecommendationsProps) => {
   const alarmLevel = projections.getAlarmLevel();
-  const region = projections.region;
-  const projection = projections.primary;
-
-  const recommendationsIntro = getDynamicIntroCopy(
-    projection,
-    projections.locationName,
-    projections.getMetricValues(),
-  );
 
   const recommendationsMainContent = getRecommendations(
     region,
@@ -44,15 +39,15 @@ const Recommendations = ({
     alarmLevel,
   );
 
-  const recommendationsFeedbackForm = `https://can386399.typeform.com/to/WSPYSGPe#source=can&id=${uuidv4()}&fips=${
-    projection.fips
-  }`;
-
   const containerProps = {
     collapsedHeight: 240,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Vulnerabilities',
+  };
+
+  const trackSourceClick = () => {
+    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.REDIRECT, 'CDC');
   };
 
   return (
@@ -62,15 +57,27 @@ const Recommendations = ({
       </Header>
       <ExpandableContainer {...containerProps}>
         <Recommend
-          introCopy={recommendationsIntro}
           recommendations={recommendationsMainContent}
-          locationName={region.fullName}
-          shareUrl={recommendsShareUrl}
-          shareQuote={recommendsShareQuote}
           recommendationsRef={recommendationsRef}
-          feedbackFormUrl={recommendationsFeedbackForm}
         />
       </ExpandableContainer>
+      <LocationPageSectionFooter>
+        <DisclaimerWrapper>
+          Source:{' '}
+          <ExternalLink
+            style={{ color: 'inherit' }}
+            href="https://www.cdc.gov/"
+            onClick={trackSourceClick}
+          >
+            CDC
+          </ExternalLink>
+        </DisclaimerWrapper>
+        <ShareButtons
+          eventCategory={EventCategory.RECOMMENDATIONS}
+          shareUrl={recommendsShareUrl}
+          shareQuote={recommendsShareQuote}
+        />
+      </LocationPageSectionFooter>
     </>
   );
 };

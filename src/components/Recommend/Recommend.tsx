@@ -13,23 +13,10 @@ import { RecommendationWithIcon } from 'cms-content/recommendations';
 import { useBreakpoint } from 'common/hooks';
 
 const Recommend = (props: {
-  introCopy: string;
   recommendations: RecommendationWithIcon[];
-  locationName: string;
-  shareUrl: string;
-  shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
-  feedbackFormUrl: string;
 }) => {
-  const {
-    // introCopy,
-    recommendations,
-    // locationName,
-    // shareUrl,
-    // shareQuote,
-    recommendationsRef,
-    // feedbackFormUrl,
-  } = props;
+  const { recommendations, recommendationsRef } = props;
 
   /*
     Divides recommendations into 2 columns.

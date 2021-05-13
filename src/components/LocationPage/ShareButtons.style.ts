@@ -7,7 +7,6 @@ import MuiCircularProgress from '@material-ui/core/CircularProgress';
 
 export const Wrapper = styled.div`
   position: relative;
-  margin-left: auto;
 `;
 
 export const ButtonContainerStyles = css`

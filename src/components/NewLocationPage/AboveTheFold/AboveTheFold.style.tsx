@@ -10,6 +10,7 @@ import {
 export const MainWrapper = styled.div`
   background-color: ${COLOR_MAP.GREY_0};
   padding: 2rem 1rem;
+  margin-bottom: 3rem;
 
   @media (min-width: ${mobileBreakpoint}) {
     padding: 2rem;
