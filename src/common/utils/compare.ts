@@ -1,6 +1,5 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
 import isNumber from 'lodash/isNumber';
-
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
 import { getMetricNameForCompare } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -11,8 +10,6 @@ import regions, {
   State,
   MetroArea,
   getStateName,
-  getFormattedStateCode,
-  getAbbreviatedCounty,
 } from 'common/regions';
 import { fail } from 'assert';
 import { importCountyAdjacency } from 'common/data';
@@ -246,19 +243,6 @@ export function getShareQuote(
     }
   }
 }
-
-// Determines which location field is shown under the main Compare feature header + formats it
-export const getCompareSubheader = (region: Region): string => {
-  if (region instanceof County) {
-    return `${getAbbreviatedCounty(region.name)}, ${getFormattedStateCode(
-      region,
-    )} to other counties`;
-  } else if (region instanceof MetroArea || region instanceof State) {
-    return `Counties in ${region.fullName}`;
-  } else {
-    return 'Compare counties';
-  }
-};
 
 // Value maps for filters' slider components (0, 50, and 99 are numerical values required by MUI Slider).
 // Maps each numerical slider value to its corresponding scope:

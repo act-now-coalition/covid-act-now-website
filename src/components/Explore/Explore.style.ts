@@ -15,10 +15,6 @@ function palette(props: any) {
   return props.theme.palette.chart;
 }
 
-export const Container = styled.div`
-  padding-bottom: 1.5rem; // Leaves some space below the 'xx days ago' tooltip
-`;
-
 export const Header = styled.div`
   margin-bottom: ${theme.spacing(2)}px;
 `;

@@ -15,16 +15,16 @@ import {
 } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
-import { Subtitle1 } from 'components/Typography';
 import { County, Region } from 'common/regions';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { MarkdownContent } from 'components/Markdown';
+import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
-  isMobile: Boolean;
+  isMobile: boolean;
   region: Region;
   stats: any;
   metric: Metric;
@@ -55,27 +55,10 @@ function ChartBlock(props: {
           <>{chartHeaderTooltip}</>
           {showBetaTag && <BetaTag>New</BetaTag>}
         </LocationPageSectionHeader>
-        {hasMetric && !isMobile && (
-          <ShareButtons
-            chartIdentifier={metric}
-            region={region}
-            stats={stats}
-            isMobile={isMobile}
-          />
-        )}
       </HeaderWrapper>
-      <Subtitle1>{region.fullName}</Subtitle1>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>
-      {hasMetric && isMobile && (
-        <ShareButtons
-          chartIdentifier={metric}
-          region={region}
-          stats={stats}
-          isMobile={isMobile}
-        />
-      )}
       {hasMetric && (
         <>
           <MetricChart
@@ -83,7 +66,14 @@ function ChartBlock(props: {
             projections={projections}
             height={chartHeight}
           />
-          <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
+          <LocationPageSectionFooter>
+            <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
+            <ShareButtons
+              chartIdentifier={metric}
+              region={region}
+              stats={stats}
+            />
+          </LocationPageSectionFooter>
         </>
       )}
     </>
