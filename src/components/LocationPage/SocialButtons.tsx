@@ -69,7 +69,7 @@ const SocialButtons = ({
           setCopyLinkButtonTextB('');
         }}
       >
-        <SocialShareButton {...buttonProps} color="#007fb1" isLast>
+        <SocialShareButton {...buttonProps} color="#007fb1">
           <CopyLinkButton>
             {copyLinkButtonTextA}
             <br />

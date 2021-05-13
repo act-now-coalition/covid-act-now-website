@@ -24,12 +24,11 @@ export const SocialButtonsContainer = styled.div`
   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   margin: 10px 0 0 auto;
-
   position: absolute;
   right: 0;
 `;
 
-export const SocialShareButton = styled.div<{ isLast?: boolean }>`
+export const SocialShareButton = styled.div`
   ${StyledShareButtonStyles}
   width: 60px;
   height: 42px;
