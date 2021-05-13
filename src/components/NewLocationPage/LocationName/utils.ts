@@ -10,7 +10,6 @@ const regionSuffixes = [
   'co.',
   'parish',
   'par.',
-  'area',
   'c.a.',
   'borough',
   'bor.',
