@@ -24,8 +24,6 @@ export const InnerContainer = styled.div`
   text-align: center;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    align-items: flex-start;
-    text-align: left;
     max-width: 520px;
   }
 `;
