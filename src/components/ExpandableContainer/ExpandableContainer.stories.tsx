@@ -13,7 +13,8 @@ export const Example = () => {
   const ccviScores = useCcviForFips(region.fipsCode);
 
   const props = {
-    collapsedHeight: 240,
+    collapsedHeightMobile: 300,
+    collapsedHeightDesktop: 200,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Vulnerabilities',

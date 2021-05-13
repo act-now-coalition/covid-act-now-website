@@ -1,18 +1,20 @@
 import React from 'react';
 import { mainContent } from 'cms-content/recommendations';
-import { Projections } from 'common/models/Projections';
 import Recommend from 'components/Recommend';
-import { getRecommendationsShareUrl } from 'common/urls';
-import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
-import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import { Header } from 'components/Compare/Compare.style';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
 import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
-import { Region } from 'common/regions';
-import { DisclaimerWrapper } from 'components/LocationPage/ChartsHolder.style';
-import ExternalLink from 'components/ExternalLink';
+import {
+  DisclaimerWrapper,
+  LocationPageSectionHeader,
+} from 'components/LocationPage/ChartsHolder.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import ExternalLink from 'components/ExternalLink';
+import { Projections } from 'common/models/Projections';
+import { getRecommendationsShareUrl } from 'common/urls';
+import { getRecommendations, getShareQuote } from 'common/utils/recommend';
+import { Region } from 'common/regions';
 
 interface RecommendationsProps {
   projections: Projections;
@@ -40,7 +42,8 @@ const Recommendations = ({
   );
 
   const containerProps = {
-    collapsedHeight: 240,
+    collapsedHeightMobile: 310,
+    collapsedHeightDesktop: 200,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Vulnerabilities',

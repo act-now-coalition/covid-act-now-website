@@ -2,6 +2,7 @@ import React from 'react';
 import chunk from 'lodash/chunk';
 import ceil from 'lodash/ceil';
 import partition from 'lodash/partition';
+import { RecommendationWithIcon } from 'cms-content/recommendations';
 import {
   RecommendationsContainer,
   RecommendationBody,
@@ -9,7 +10,6 @@ import {
   Column,
   RecommendationItem,
 } from './Recommend.style';
-import { RecommendationWithIcon } from 'cms-content/recommendations';
 import { useBreakpoint } from 'common/hooks';
 
 const Recommend = (props: {

@@ -26,7 +26,8 @@ const VulnerabilitiesBlock: React.FC<{
   }
 
   const containerProps = {
-    collapsedHeight: 240,
+    collapsedHeightMobile: 350,
+    collapsedHeightDesktop: 250,
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Vulnerabilities',
