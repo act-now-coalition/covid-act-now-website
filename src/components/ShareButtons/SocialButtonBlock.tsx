@@ -1,7 +1,6 @@
 import React from 'react';
 import FacebookShareButton from './FacebookShareButton';
 import TwitterShareButton from './TwitterShareButton';
-import LinkedinShareButton from './LinkedinShareButton';
 import CopyLinkButton from './CopyLinkButton';
 import { SocialButtonsContainer } from './ShareButtons.style';
 
@@ -12,7 +11,6 @@ const SocialButtonBlock: React.FC<{
   onClickContainer: () => void;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
-  onShareOnLinkedin: () => void;
   onCopyLink: () => void;
 }> = ({
   url,
@@ -21,7 +19,6 @@ const SocialButtonBlock: React.FC<{
   onClickContainer,
   onShareOnFacebook,
   onShareOnTwitter,
-  onShareOnLinkedin,
   onCopyLink,
 }) => {
   const socialSharingProps = {
@@ -39,10 +36,6 @@ const SocialButtonBlock: React.FC<{
         onClickShare={onShareOnTwitter}
         {...socialSharingProps}
         hashtags={['COVIDActNow']}
-      />
-      <LinkedinShareButton
-        onClickShare={onShareOnLinkedin}
-        {...socialSharingProps}
       />
       <CopyLinkButton url={socialSharingProps.url} onCopyLink={onCopyLink} />
     </SocialButtonsContainer>

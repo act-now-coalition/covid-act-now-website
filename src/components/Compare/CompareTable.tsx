@@ -286,7 +286,6 @@ const CompareTable = (props: {
             }
             onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
             onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
-            onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
           />
         </Footer>
       )}

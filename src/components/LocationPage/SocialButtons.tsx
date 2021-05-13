@@ -3,10 +3,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   FacebookShareButton,
   TwitterShareButton,
-  LinkedinShareButton,
   FacebookIcon,
   TwitterIcon,
-  LinkedinIcon,
 } from 'react-share';
 import {
   CopyLinkButton,
@@ -56,11 +54,6 @@ const SocialButtons = ({
         <TwitterShareButton url={url} hashtags={[hashtag]} title={quote}>
           <TwitterIcon {...iconProps} />
         </TwitterShareButton>
-      </SocialShareButton>
-      <SocialShareButton {...buttonProps} color="#007fb1">
-        <LinkedinShareButton url={url} title={quote}>
-          <LinkedinIcon {...iconProps} />
-        </LinkedinShareButton>
       </SocialShareButton>
       <CopyToClipboard
         text={url}

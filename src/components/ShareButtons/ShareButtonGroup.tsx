@@ -15,13 +15,11 @@ const ShareImageButtons: React.FC<{
   onCopyLink?: () => void;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
-  onShareOnLinkedin: () => void;
 }> = ({
   url,
   quote,
   onShareOnFacebook,
   onShareOnTwitter,
-  onShareOnLinkedin,
   onCopyLink = () => {},
 }) => {
   // Turn url / imageUrl into asynchronous getters if they aren't already.
@@ -74,7 +72,6 @@ const ShareImageButtons: React.FC<{
             onClickContainer={() => hideSocialButtons(1500)}
             onShareOnFacebook={onShareOnFacebook}
             onShareOnTwitter={onShareOnTwitter}
-            onShareOnLinkedin={onShareOnLinkedin}
             onCopyLink={onCopyLink}
           />
         )}

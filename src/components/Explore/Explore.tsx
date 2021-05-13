@@ -390,9 +390,6 @@ const Explore: React.FunctionComponent<{
               onShareOnTwitter={() =>
                 trackShare(`Twitter: ${trackingLabel}`, numLocations)
               }
-              onShareOnLinkedin={() =>
-                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
-              }
             />
           </Styles.ShareBlock>
         </div>

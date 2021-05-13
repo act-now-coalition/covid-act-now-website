@@ -45,7 +45,6 @@ const ShareButtons: React.FC<{
             onClickContainer={() => hideSocialButtons()}
             onShareOnFacebook={() => trackShare(eventCategory, 'facebook')}
             onShareOnTwitter={() => trackShare(eventCategory, 'twitter')}
-            onShareOnLinkedin={() => trackShare(eventCategory, 'linkedin')}
             onCopyLink={() => trackEvent(eventCategory, EventAction.COPY_LINK)}
             {...socialSharingProps}
           />

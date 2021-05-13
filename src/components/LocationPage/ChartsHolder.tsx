@@ -170,6 +170,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>
         <LocationPageBlock>
+          <>yoyoyo</>
           <CompareMain
             stateName={getStateName(region) || region.name} // rename prop
             locationsViewable={6}
