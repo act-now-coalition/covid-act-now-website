@@ -1,26 +1,20 @@
 {
   "regions": [
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Alabama",
       "fips": "01",
       "eligibilityInfoUrl": "https://www.alabamapublichealth.gov/covid19vaccine/assets/adph-covid19-vaccination-allocation-plan.pdf",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T16:37:05.989Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:34:50.994Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:33:46.656Z"
         }
       ],
       "stateSignupUrl": "https://www.alabamapublichealth.gov/covid19vaccine/index.html",
@@ -31,19 +25,13 @@
       "fips": "02",
       "eligibilityInfoUrl": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/VaccineAvailability.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-11T14:59:20.583Z",
-          "phase": "2",
-          "description": "* General population (individuals aged 16+)"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:16:50.132Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:34:38.539Z",
+          "phase": "3",
+          "description": "* Individuals 12+"
         }
       ],
       "stateSignupUrl": "https://alaska-dhss.maps.arcgis.com/apps/instant/nearby/index.html?appid=31768fd9591c40cbbd17cbef5b745653",
@@ -56,46 +44,33 @@
       "stateSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-25T14:13:53.139Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T14:08:33.873Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16",
-          "startDate": ""
+          "updatedAt": "2021-05-14T00:35:29.809Z"
         }
       ],
       "allAdultsEligible": true,
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
-      "emailAlertVersion": "6"
+      "emailAlertVersion": "7"
     },
     {
       "locationName": "Arkansas",
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-01T16:59:42.196Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "March 30, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T18:45:51.180Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:38:37.415Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
@@ -109,38 +84,32 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-15T15:44:57.522Z",
-          "phase": "2",
-          "description": "* Individuals 16+",
-          "startDate": "April 15, 2021"
+          "updatedAt": "2021-05-14T00:39:34.969Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
-      "emailAlertVersion": "4"
+      "emailAlertVersion": "5"
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Colorado",
       "fips": "08",
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 2, 2021",
-          "updatedAt": "2021-04-02T01:11:37.754Z"
-        },
-        {
-          "currentlyEligible": false,
-          "phase": "TBD",
-          "updatedAt": "2021-04-02T01:10:56.253Z",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:40:44.537Z"
         }
       ],
       "allAdultsEligible": true,
@@ -151,20 +120,14 @@
       "fips": "09",
       "eligibilityInfoUrl": "https://portal.ct.gov/Coronavirus/COVID-19-Vaccinations",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-01T17:06:41.937Z",
-          "phase": "4",
-          "description": "* Individuals 16+",
-          "startDate": "April 1, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-01T17:07:04.635Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:42:06.289Z",
+          "phase": "5",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
@@ -175,22 +138,16 @@
       "fips": "10",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 6, 2021",
-          "updatedAt": "2021-04-06T14:39:12.802Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:44:41.733Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:42:51.751Z"
         }
       ],
       "stateSignupUrl": "https://coronavirus.delaware.gov/vaccine/where-can-i-get-my-vaccine/",
@@ -201,23 +158,23 @@
       "fips": "11",
       "eligibilityInfoUrl": "https://coronavirus.dc.gov/vaccine-information",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 12, 2021",
-          "updatedAt": "2021-04-12T17:50:53.263Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:44:06.184Z"
         }
       ],
       "stateSignupUrl": "https://v51r5a21s.dc.gov/",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "locationName": "Florida",
       "fips": "12",
       "eligibilityInfoUrl": "https://myvaccine.fl.gov/",
@@ -225,23 +182,17 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-05T16:49:08.525Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "April 5, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:49:27.570Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:45:51.565Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://floridahealthcovid19.gov/vaccines/vaccine-locator/",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Georgia",
       "fips": "13",
       "eligibilityInfoUrl": "https://dph.georgia.gov/covid-vaccine",
@@ -249,16 +200,10 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-25T14:19:21.935Z",
-          "phase": "2",
-          "description": "* All individuals 16 years and older",
-          "startDate": "March 25, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:20:35.037Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:47:14.012Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
@@ -269,16 +214,16 @@
       "fips": "15",
       "eligibilityInfoUrl": "https://hawaiicovid19.com/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-19T17:24:15.364Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:47:43.974Z"
         }
       ],
       "stateSignupUrl": "https://hawaiicovid19.com/vaccination-registration/",
@@ -289,42 +234,36 @@
       "fips": "16",
       "eligibilityInfoUrl": "https://coronavirus.idaho.gov/covid-19-vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T16:51:34.381Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:51:07.027Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:48:51.072Z"
         }
       ],
       "stateSignupUrl": "https://healthandwelfare.idaho.gov/covid-19-vaccination",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Illinois",
       "fips": "17",
       "eligibilityInfoUrl": "https://www.dph.illinois.gov/covid19/vaccine-distribution",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 12, 2021 (April 19 in Chicago)",
-          "updatedAt": "2021-04-19T17:25:04.856Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:49:34.600Z"
         }
       ],
       "stateSignupUrl": "https://coronavirus.illinois.gov/s/vaccination-location",
@@ -335,20 +274,14 @@
       "fips": "18",
       "eligibilityInfoUrl": "https://www.coronavirus.in.gov/vaccine/index.htm",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-31T15:53:41.599Z",
-          "phase": "2",
-          "description": "* Ages 16+",
-          "startDate": "March 31, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T14:23:52.250Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:50:26.521Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://experience.arcgis.com/experience/24159814f1dd4f69b6c22e7e87bca65b",
@@ -359,20 +292,14 @@
       "fips": "19",
       "eligibilityInfoUrl": "https://idph.iowa.gov/Emerging-Health-Issues/Novel-Coronavirus/Vaccine/Information-for-the-Public",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-05T16:54:38.599Z",
-          "phase": "2",
-          "startDate": "April 5, 2021",
-          "description": "* All individuals 16+"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T14:26:15.069Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:50:59.247Z",
+          "phase": "3",
+          "startDate": "",
+          "description": "* Individuals 12+"
         }
       ],
       "stateSignupUrl": "https://vaccinate.iowa.gov/providers/",
@@ -383,22 +310,16 @@
       "fips": "20",
       "eligibilityInfoUrl": "https://www.kansasvaccine.gov/157/Availability",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "5",
+          "phase": "6",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 29, 2021",
-          "updatedAt": "2021-03-29T16:10:12.152Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:59:50.875Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:51:30.284Z"
         }
       ],
       "stateSignupUrl": "https://www.kansasvaccine.gov/160/Find-My-Vaccine",
@@ -409,22 +330,16 @@
       "fips": "21",
       "eligibilityInfoUrl": "https://govstatus.egov.com/ky-covid-vaccine",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T16:56:12.466Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:56:16.859Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:52:03.888Z"
         }
       ],
       "stateSignupUrl": "https://govstatus.egov.com/kentucky-vaccine-map",
@@ -435,20 +350,14 @@
       "fips": "22",
       "eligibilityInfoUrl": "https://ldh.la.gov/covidvaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-29T16:25:33.735Z",
-          "phase": "2",
-          "description": "* All individuals 16 and older",
-          "startDate": "March 29, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:12:29.553Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:52:40.778Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
@@ -459,20 +368,14 @@
       "fips": "23",
       "eligibilityInfoUrl": "https://www.maine.gov/covid19/vaccines",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-07T16:01:00.148Z",
-          "phase": "4",
-          "description": "* Individuals 16+",
-          "startDate": "April 7, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-07T16:00:36.520Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:53:07.580Z",
+          "phase": "5",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://www.maine.gov/covid19/vaccines/vaccination-sites",
@@ -483,33 +386,33 @@
       "fips": "24",
       "eligibilityInfoUrl": "https://covidlink.maryland.gov/content/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-12T17:39:14.124Z",
-          "phase": "3",
-          "tier": "2",
-          "description": "* Individuals 16+ at all vaccination sites",
-          "startDate": "April 12, 2021"
+          "updatedAt": "2021-05-14T00:53:52.429Z",
+          "phase": "4",
+          "tier": "",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://maryland.maps.arcgis.com/apps/instant/nearby/index.html?appid=0dbfb100676346ed9758be319ab3f40c",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Massachusetts",
       "fips": "25",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-19T16:40:46.185Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:54:45.741Z"
         }
       ],
       "eligibilityInfoUrl": "https://www.mass.gov/info-details/massachusetts-covid-19-vaccination-phases",
@@ -518,7 +421,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Michigan",
       "fips": "26",
       "eligibilityInfoUrl": "https://www.michigan.gov/documents/coronavirus/1-12_Vaccine_Timeline_712927_7.pdf",
@@ -526,16 +429,10 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-05T17:45:13.270Z",
-          "phase": "2",
-          "description": "* Individuals 16+",
-          "startDate": "April 5, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T17:45:20.886Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:55:28.742Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://www.michigan.gov/coronavirus/0,9753,7-406-98178_103214_104822---,00.html#comp_121341",
@@ -549,61 +446,49 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-30T14:38:48.469Z",
-          "phase": "4",
-          "description": "* All individuals 16 and older",
-          "startDate": "March 30, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-01T16:26:09.621Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:55:53.907Z",
+          "phase": "5",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "eligibilityInfoUrl": "https://mn.gov/covid19/vaccine/whos-getting-vaccinated/index.jsp",
-      "emailAlertVersion": "4"
+      "emailAlertVersion": "5"
     },
     {
       "locationName": "Mississippi",
       "fips": "28",
       "eligibilityInfoUrl": "https://msdh.ms.gov/msdhsite/_static/14,22816,420,976.html#eligible",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-25T17:24:29.725Z",
-          "phase": "3",
-          "description": "* All individuals age 16 and older"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:42:56.408Z",
-          "phase": "TBD",
-          "description": "Still to be determined\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:56:58.324Z",
+          "phase": "4",
+          "description": "* Individuals 12+"
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://covidvaccine.umc.edu/"
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "eligibilityInfoUrl": "https://covidvaccine.mo.gov/priority/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "fips": "29",
       "locationName": "Missouri",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 9, 2021",
-          "updatedAt": "2021-04-09T05:54:57.832Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:57:45.086Z"
         }
       ],
       "stateSignupUrl": "https://covidvaccine.mo.gov/map/",
@@ -614,22 +499,16 @@
       "fips": "30",
       "eligibilityInfoUrl": "https://dphhs.mt.gov/covid19vaccine",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16 and older",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 1, 2021",
-          "updatedAt": "2021-04-01T16:31:58.111Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-01T16:32:30.807Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:58:07.774Z"
         }
       ],
       "allAdultsEligible": true,
@@ -640,16 +519,16 @@
       "fips": "31",
       "eligibilityInfoUrl": "http://dhhs.ne.gov/Pages/COVID-19-Vaccine-Information.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-19T17:27:00.283Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:58:39.333Z"
         }
       ],
       "stateSignupUrl": "https://dhhs.ne.gov/Pages/FinishStrong.aspx",
@@ -663,63 +542,51 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-05T17:55:12.172Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "April 5, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T17:55:20.015Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:59:14.186Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "eligibilityInfoUrl": "https://www.immunizenevada.org/county-specific-covid-19-vaccine-plan",
-      "emailAlertVersion": "2"
+      "emailAlertVersion": "3"
     },
     {
       "locationName": "New Hampshire",
       "fips": "33",
       "eligibilityInfoUrl": "https://www.vaccines.nh.gov/covid-19-vaccine-schedule-nh-residents",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-01T16:35:59.366Z",
-          "phase": "3",
+          "updatedAt": "2021-05-14T00:59:43.258Z",
+          "phase": "4",
           "tier": "",
-          "description": "* All individuals 16+",
-          "startDate": "April 2, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-02T01:13:25.153Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://www.vaccines.nh.gov/"
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "New Jersey",
       "fips": "34",
       "eligibilityInfoUrl": "https://covid19.nj.gov/faqs/nj-information/slowing-the-spread/who-is-eligible-for-vaccination-in-new-jersey-who-is-included-in-the-vaccination-phases",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-19T16:41:56.584Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:00:16.226Z"
         }
       ],
       "stateSignupUrl": "https://covid19.nj.gov/pages/covid-19-vaccine-locations-for-eligible-recipients",
@@ -730,29 +597,23 @@
       "fips": "35",
       "eligibilityInfoUrl": "https://cv.nmhealth.org/covid-vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T18:01:34.884Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T18:02:49.194Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:00:37.879Z"
         }
       ],
       "stateSignupUrl": "https://vaccinenm.org/",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "locationName": "New York",
       "fips": "36",
       "eligibilityInfoUrl": "https://covid19vaccine.health.ny.gov/phased-distribution-vaccine",
@@ -760,16 +621,9 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-06T14:36:00.825Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "April 6, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-06T14:36:32.263Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16",
+          "updatedAt": "2021-05-14T01:01:37.915Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
           "startDate": ""
         }
       ],
@@ -777,7 +631,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "North Carolina",
       "fips": "37",
       "eligibilityInfoUrl": "https://covid19.ncdhhs.gov/vaccines/find-your-spot-take-your-shot",
@@ -785,16 +639,10 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-07T16:02:49.156Z",
-          "description": "* All individuals 16+",
-          "phase": "5",
-          "startDate": "April 7, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-07T16:02:53.503Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T01:02:13.835Z",
+          "description": "* Individuals 12+",
+          "phase": "6",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://myspot.nc.gov/",
@@ -805,22 +653,16 @@
       "fips": "38",
       "eligibilityInfoUrl": "https://www.health.nd.gov/covid-19-vaccine-priority-groups",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* General public (individuals 16+)",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 29, 2021",
-          "updatedAt": "2021-03-29T18:05:01.445Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:43:18.907Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:03:17.129Z"
         }
       ],
       "stateSignupUrl": "https://www.health.nd.gov/covidvaccinelocator",
@@ -831,29 +673,23 @@
       "fips": "69",
       "eligibilityInfoUrl": "https://www.vaccinatecnmi.com/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "2",
+      "emailAlertVersion": "3",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+ (Saipan)\n* Individuals 18+ (Tinian, Rota)",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-22T19:55:45.780Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T19:09:52.486Z",
-          "phase": "TBD",
-          "description": "* Individuals under 16"
+          "updatedAt": "2021-05-14T01:03:43.660Z"
         }
       ],
       "stateSignupUrl": "https://www.vaccinatecnmi.com/",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "locationName": "Ohio",
       "fips": "39",
       "eligibilityInfoUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/covid-19-vaccination-program",
@@ -861,42 +697,30 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-29T04:10:53.263Z",
-          "phase": "2",
-          "description": "* Individuals 16+",
-          "startDate": "March 29, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:45:31.662Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T01:04:23.086Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards/covid-19-vaccine/covid-19-vaccine-provider-dashboard",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Oklahoma",
       "fips": "40",
       "eligibilityInfoUrl": "https://oklahoma.gov/covid19/vaccine-information.html",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "4",
+          "phase": "5",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 29, 2021",
-          "updatedAt": "2021-03-31T16:47:07.585Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:47:38.423Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:05:15.743Z"
         }
       ],
       "stateSignupUrl": "https://vaccinate.oklahoma.gov/en-US/",
@@ -907,35 +731,35 @@
       "fips": "41",
       "eligibilityInfoUrl": "https://covidvaccine.oregon.gov/#prioritization",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "8",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-12T17:34:52.655Z",
-          "phase": "2",
+          "updatedAt": "2021-05-14T01:05:45.718Z",
+          "phase": "3",
           "tier": "",
-          "description": "* Individuals 16+",
-          "startDate": "April 19"
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://www.oregon.gov/oha/covid19/Pages/vaccine-information-by-county.aspx",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Pennsylvania",
       "fips": "42",
       "eligibilityInfoUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 13, 2021",
-          "updatedAt": "2021-04-14T00:34:01.663Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:06:47.977Z"
         }
       ],
       "stateSignupUrl": "https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx#data",
@@ -946,16 +770,16 @@
       "fips": "44",
       "eligibilityInfoUrl": "https://covid.ri.gov/vaccination",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 19, 2021",
-          "updatedAt": "2021-04-19T17:02:31.602Z"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:07:19.125Z"
         }
       ],
       "stateSignupUrl": "https://covid.ri.gov/vaccination",
@@ -966,22 +790,16 @@
       "fips": "45",
       "eligibilityInfoUrl": "https://scdhec.gov/covid19/covid-19-vaccine",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 31, 2021",
-          "updatedAt": "2021-03-31T16:05:16.078Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:49:06.387Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:07:49.735Z"
         }
       ],
       "stateSignupUrl": "https://vaxlocator.dhec.sc.gov/",
@@ -992,55 +810,43 @@
       "fips": "46",
       "eligibilityInfoUrl": "https://doh.sd.gov/Covid/Vaccine/Public.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 5",
-          "updatedAt": "2021-04-05T06:22:01.891Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T06:22:20.278Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:08:49.393Z"
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://doh.sd.gov/COVID/Vaccine/ProviderMap/default.aspx"
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Tennessee",
       "fips": "47",
       "eligibilityInfoUrl": "https://covid19.tn.gov/covid-19-vaccines/vaccine-phases/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T16:21:39.245Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:26:05.795Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:09:26.440Z"
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://covid19.tn.gov/covid-19-vaccines/county-vaccine-information/"
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Texas",
       "fips": "48",
       "eligibilityInfoUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine.aspx",
@@ -1048,49 +854,37 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-29T18:10:11.596Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "March 29, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-29T18:10:16.683Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T01:09:51.569Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://www.dshs.state.tx.us/coronavirus/immunize/vaccine-hubs.aspx"
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Utah",
       "fips": "49",
       "eligibilityInfoUrl": "https://coronavirus.utah.gov/vaccine-distribution/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 24",
-          "updatedAt": "2021-03-25T06:12:38.931Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:50:51.019Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:10:46.793Z"
         }
       ],
       "stateSignupUrl": "https://coronavirus.utah.gov/vaccine-distribution/#lhd",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "12",
+      "emailAlertVersion": "13",
       "locationName": "Vermont",
       "fips": "50",
       "eligibilityInfoUrl": "https://www.healthvermont.gov/covid-19/vaccine/about-covid-19-vaccines-vermont",
@@ -1098,17 +892,17 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-19T17:03:27.786Z",
-          "phase": "2",
-          "description": "* Individuals 16+",
-          "startDate": "April 19, 2021"
+          "updatedAt": "2021-05-14T01:11:13.263Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://www.healthvermont.gov/covid-19/vaccine/getting-covid-19-vaccine",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "7",
       "locationName": "Virginia",
       "fips": "51",
       "eligibilityInfoUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/",
@@ -1116,17 +910,17 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-19T17:04:22.104Z",
-          "phase": "2",
-          "description": "\n* Individuals 16+",
-          "startDate": "April 18, 2021"
+          "updatedAt": "2021-05-14T01:11:46.764Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://www.vdh.virginia.gov/covid-19-vaccine/phase-by-health-district/",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Washington",
       "fips": "53",
       "eligibilityInfoUrl": "https://www.doh.wa.gov/Emergencies/COVID19/vaccine",
@@ -1134,34 +928,28 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-15T15:05:46.346Z",
-          "phase": "3",
-          "description": "* Individuals 16+",
-          "startDate": "April 15, 2021"
+          "updatedAt": "2021-05-14T01:12:13.458Z",
+          "phase": "4",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "stateSignupUrl": "https://vaccinelocator.doh.wa.gov/",
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "West Virginia",
       "eligibilityInfoUrl": "https://dhhr.wv.gov/covid-19/pages/vaccine.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-25T06:17:41.197Z",
-          "phase": "2",
+          "updatedAt": "2021-05-14T01:13:01.747Z",
+          "phase": "3",
           "tier": "",
-          "description": "* All individuals 16+",
-          "startDate": "March 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T16:51:19.166Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "fips": "54",
@@ -1169,7 +957,7 @@
       "allAdultsEligible": true
     },
     {
-      "emailAlertVersion": "5",
+      "emailAlertVersion": "6",
       "locationName": "Wisconsin",
       "fips": "55",
       "eligibilityInfoUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-about.htm",
@@ -1177,49 +965,37 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-05T06:27:20.554Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "April 5, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:29:35.625Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T01:13:31.735Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://www.dhs.wisconsin.gov/covid-19/vaccine-map.htm"
     },
     {
-      "emailAlertVersion": "6",
+      "emailAlertVersion": "7",
       "locationName": "Wyoming",
       "fips": "56",
       "eligibilityInfoUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "March 31, 2021",
-          "updatedAt": "2021-03-31T19:15:36.363Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-31T19:16:12.871Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T01:13:58.002Z"
         }
       ],
       "allAdultsEligible": true,
       "stateSignupUrl": "https://health.wyo.gov/publichealth/immunization/wyoming-covid-19-vaccine-information/county-covid-19-vaccine-information/"
     },
     {
-      "emailAlertVersion": "1",
+      "emailAlertVersion": "2",
       "locationName": "Puerto Rico",
       "fips": "72",
       "eligibilityInfoUrl": "https://www.vacunatepr.com/fases-vacunacion-covid-19",
@@ -1227,10 +1003,10 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-14T00:34:46.740Z",
-          "phase": "2",
+          "updatedAt": "2021-05-14T01:15:23.293Z",
+          "phase": "3",
           "tier": "",
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "startDate": ""
         }
       ],
