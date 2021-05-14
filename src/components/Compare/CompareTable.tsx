@@ -278,6 +278,7 @@ const CompareTable = (props: {
             imageFilename="CovidActNow-compare.png"
             url={getShareUrl}
             quote={shareQuote}
+            region={region}
             onCopyLink={() =>
               trackCompareEvent(EventAction.COPY_LINK, trackLabel)
             }

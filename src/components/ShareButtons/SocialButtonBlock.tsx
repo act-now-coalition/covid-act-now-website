@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import FacebookShareButton from './FacebookShareButton';
 import TwitterShareButton from './TwitterShareButton';
 import CopyLinkButton from './CopyLinkButton';
-import { SocialButtonsContainer } from './ShareButtons.style';
+import {
+  SocialButtonsContainer,
+  SocialButton,
+  SocialShareButton,
+} from './ShareButtons.style';
+import EmbedPreview from 'components/ShareBlock/EmbedPreview';
+import { Region } from 'common/regions';
 
 const SocialButtonBlock: React.FC<{
   url: string;
   quote: string;
   socialIconSize: number;
-  onClickContainer: () => void;
+  region?: Region;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
   onCopyLink: () => void;
@@ -16,18 +22,19 @@ const SocialButtonBlock: React.FC<{
   url,
   quote,
   socialIconSize,
-  onClickContainer,
   onShareOnFacebook,
   onShareOnTwitter,
   onCopyLink,
+  region,
 }) => {
   const socialSharingProps = {
     url,
     quote,
     socialIconSize,
   };
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
   return (
-    <SocialButtonsContainer onClick={onClickContainer}>
+    <SocialButtonsContainer>
       <FacebookShareButton
         onClickShare={onShareOnFacebook}
         {...socialSharingProps}
@@ -38,6 +45,21 @@ const SocialButtonBlock: React.FC<{
         hashtags={['COVIDActNow']}
       />
       <CopyLinkButton url={socialSharingProps.url} onCopyLink={onCopyLink} />
+      <SocialShareButton variant="contained" color="#007fb1">
+        <SocialButton
+          disableRipple
+          disableFocusRipple
+          disableTouchRipple
+          onClick={() => setShowEmbedPreviewModal(true)}
+        >
+          <Fragment>Embed</Fragment>
+        </SocialButton>
+        <EmbedPreview
+          open={showEmbedPreviewModal}
+          onClose={() => setShowEmbedPreviewModal(false)}
+          region={region}
+        />
+      </SocialShareButton>
     </SocialButtonsContainer>
   );
 };

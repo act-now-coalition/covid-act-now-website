@@ -28,14 +28,6 @@ const ShareButtons: React.FC<{
 
   const [showShareIcons, setShowShareIcons] = useState(false);
 
-  // Delay allows the user to briefly see copy-link button text change when clicked
-  const hideSocialButtons = () => {
-    const timeoutId = setTimeout(() => {
-      setShowShareIcons(false);
-    }, 1500);
-    return () => clearTimeout(timeoutId);
-  };
-
   return (
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <Wrapper>
@@ -46,10 +38,10 @@ const ShareButtons: React.FC<{
         />
         {showShareIcons && (
           <SocialButtons
-            closeOnClick={hideSocialButtons}
             iconSize={40}
             shareURL={shareURL}
             shareQuote={shareQuote}
+            region={region}
           />
         )}
       </Wrapper>

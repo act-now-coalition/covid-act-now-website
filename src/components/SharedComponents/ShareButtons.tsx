@@ -5,6 +5,7 @@ import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from 'components/ShareButtons/SocialButtonBlock';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { Region } from 'common/regions';
 
 function trackShare(eventCategory: EventCategory, label: string) {
   trackEvent(eventCategory, EventAction.SHARE, label);
@@ -14,7 +15,8 @@ const ShareButtons: React.FC<{
   eventCategory: EventCategory;
   shareUrl: string;
   shareQuote: string;
-}> = ({ eventCategory, shareUrl, shareQuote }) => {
+  region?: Region;
+}> = ({ eventCategory, shareUrl, shareQuote, region }) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
   const hideSocialButtons = () => {
@@ -42,10 +44,10 @@ const ShareButtons: React.FC<{
         </ButtonGroup>
         {showSocialButtons && (
           <SocialButtonBlock
-            onClickContainer={() => hideSocialButtons()}
             onShareOnFacebook={() => trackShare(eventCategory, 'facebook')}
             onShareOnTwitter={() => trackShare(eventCategory, 'twitter')}
             onCopyLink={() => trackEvent(eventCategory, EventAction.COPY_LINK)}
+            region={region}
             {...socialSharingProps}
           />
         )}

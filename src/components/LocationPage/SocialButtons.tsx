@@ -11,17 +11,20 @@ import {
   SocialButtonsContainer,
   SocialShareButton,
 } from './ShareButtons.style';
+import { SocialButton } from 'components/ShareButtons/ShareButtons.style';
+import EmbedPreview from 'components/ShareBlock/EmbedPreview';
+import { Region } from 'common/regions';
 
 const SocialButtons = ({
   iconSize,
   shareURL,
   shareQuote,
-  closeOnClick,
+  region,
 }: {
   iconSize: number;
   shareURL: string;
   shareQuote: string;
-  closeOnClick: () => void;
+  region: Region;
 }) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
@@ -43,8 +46,10 @@ const SocialButtons = ({
     variant: 'contained',
   };
 
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
+
   return (
-    <SocialButtonsContainer onClick={closeOnClick}>
+    <SocialButtonsContainer>
       <SocialShareButton {...buttonProps} color="#3b5998">
         <FacebookShareButton url={url} quote={quote}>
           <FacebookIcon {...iconProps} />
@@ -70,6 +75,21 @@ const SocialButtons = ({
           </CopyLinkButton>
         </SocialShareButton>
       </CopyToClipboard>
+      <SocialShareButton variant="contained" color="#007fb1">
+        <SocialButton
+          disableRipple
+          disableFocusRipple
+          disableTouchRipple
+          onClick={() => setShowEmbedPreviewModal(true)}
+        >
+          Embed
+        </SocialButton>
+        <EmbedPreview
+          open={showEmbedPreviewModal}
+          onClose={() => setShowEmbedPreviewModal(false)}
+          region={region}
+        />
+      </SocialShareButton>
     </SocialButtonsContainer>
   );
 };

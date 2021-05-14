@@ -370,6 +370,7 @@ const Explore: React.FunctionComponent<{
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
+              region={region ? region : undefined}
               onSaveImage={() => {
                 trackExploreEvent(
                   EventAction.SAVE_IMAGE,
