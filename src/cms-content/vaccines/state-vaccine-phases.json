@@ -1,26 +1,20 @@
 {
   "regions": [
     {
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "locationName": "Alabama",
       "fips": "01",
       "eligibilityInfoUrl": "https://www.alabamapublichealth.gov/covid19vaccine/assets/adph-covid19-vaccination-allocation-plan.pdf",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
           "startDate": "April 5, 2021",
-          "updatedAt": "2021-04-05T16:37:05.989Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:34:50.994Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:33:46.656Z"
         }
       ],
       "stateSignupUrl": "https://www.alabamapublichealth.gov/covid19vaccine/index.html",
@@ -31,19 +25,13 @@
       "fips": "02",
       "eligibilityInfoUrl": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/VaccineAvailability.aspx",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-03-11T14:59:20.583Z",
-          "phase": "2",
-          "description": "* General population (individuals aged 16+)"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-08T17:16:50.132Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:34:38.539Z",
+          "phase": "3",
+          "description": "* Individuals 12+"
         }
       ],
       "stateSignupUrl": "https://alaska-dhss.maps.arcgis.com/apps/instant/nearby/index.html?appid=31768fd9591c40cbbd17cbef5b745653",
@@ -56,46 +44,33 @@
       "stateSignupUrl": "https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-find-vaccine",
       "phaseGroups": [
         {
-          "phase": "3",
+          "phase": "4",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* Individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
           "startDate": "",
-          "updatedAt": "2021-03-25T14:13:53.139Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-03-25T14:08:33.873Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16",
-          "startDate": ""
+          "updatedAt": "2021-05-14T00:35:29.809Z"
         }
       ],
       "allAdultsEligible": true,
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "eligibilityInfoUrl": "https://www.azdhs.gov/documents/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/novel-coronavirus/vaccine/covid19-vp-infographic-eng.pdf",
-      "emailAlertVersion": "6"
+      "emailAlertVersion": "7"
     },
     {
       "locationName": "Arkansas",
       "fips": "05",
       "eligibilityInfoUrl": "https://www.healthy.arkansas.gov/programs-services/topics/covid-19-vaccination-plan",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "7",
+      "emailAlertVersion": "8",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-01T16:59:42.196Z",
-          "phase": "2",
-          "description": "* All individuals 16+",
-          "startDate": "March 30, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T18:45:51.180Z",
-          "phase": "TBD",
-          "description": "Still to be determined: \n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:38:37.415Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
@@ -109,38 +84,32 @@
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-15T15:44:57.522Z",
-          "phase": "2",
-          "description": "* Individuals 16+",
-          "startDate": "April 15, 2021"
+          "updatedAt": "2021-05-14T00:39:34.969Z",
+          "phase": "3",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "eligibilityInfoUrl": "https://covid19.ca.gov/vaccines/#California's-vaccination-plan",
-      "emailAlertVersion": "4"
+      "emailAlertVersion": "5"
     },
     {
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "locationName": "Colorado",
       "fips": "08",
       "eligibilityInfoUrl": "https://covid19.colorado.gov/for-coloradans/vaccine/vaccine-for-coloradans",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 2, 2021",
-          "updatedAt": "2021-04-02T01:11:37.754Z"
-        },
-        {
-          "currentlyEligible": false,
-          "phase": "TBD",
-          "updatedAt": "2021-04-02T01:10:56.253Z",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:40:44.537Z"
         }
       ],
       "allAdultsEligible": true,
@@ -151,20 +120,14 @@
       "fips": "09",
       "eligibilityInfoUrl": "https://portal.ct.gov/Coronavirus/COVID-19-Vaccinations",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "4",
+      "emailAlertVersion": "5",
       "phaseGroups": [
         {
           "currentlyEligible": true,
-          "updatedAt": "2021-04-01T17:06:41.937Z",
-          "phase": "4",
-          "description": "* Individuals 16+",
-          "startDate": "April 1, 2021"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-01T17:07:04.635Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "updatedAt": "2021-05-14T00:42:06.289Z",
+          "phase": "5",
+          "description": "* Individuals 12+",
+          "startDate": ""
         }
       ],
       "allAdultsEligible": true,
@@ -175,22 +138,16 @@
       "fips": "10",
       "eligibilityInfoUrl": "https://coronavirus.delaware.gov/vaccine/",
       "vaccinationSignupUrl": "https://vaccinefinder.org/search/",
-      "emailAlertVersion": "3",
+      "emailAlertVersion": "4",
       "phaseGroups": [
         {
-          "phase": "2",
+          "phase": "3",
           "tier": "",
           "currentlyEligible": true,
-          "description": "* All individuals 16+",
+          "description": "* Individuals 12+",
           "expandedDefinitionUrl": "",
-          "startDate": "April 6, 2021",
-          "updatedAt": "2021-04-06T14:39:12.802Z"
-        },
-        {
-          "currentlyEligible": false,
-          "updatedAt": "2021-04-05T16:44:41.733Z",
-          "phase": "TBD",
-          "description": "Still to be determined:\n\n* Individuals under 16"
+          "startDate": "",
+          "updatedAt": "2021-05-14T00:42:51.751Z"
         }
       ],
       "stateSignupUrl": "https://coronavirus.delaware.gov/vaccine/where-can-i-get-my-vaccine/",
