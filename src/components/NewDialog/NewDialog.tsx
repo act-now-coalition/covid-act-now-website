@@ -1,4 +1,7 @@
 import React from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import CloseIcon from '@material-ui/icons/Close';
+import { Link } from 'cms-content/modals';
 import {
   HeaderWrapper,
   Header,
@@ -6,11 +9,9 @@ import {
   StyledIconButton,
   StyledPaper,
 } from './Dialog.style';
-import CloseIcon from '@material-ui/icons/Close';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
 import { MarkdownBody } from 'components/Markdown';
-import { Link } from 'cms-content/modals';
-import Dialog from '@material-ui/core/Dialog';
+import { LockBodyScroll } from 'components/Dialog';
 
 const NewDialog: React.FC<{
   open: boolean;
@@ -26,6 +27,7 @@ const NewDialog: React.FC<{
       onEscapeKeyDown={closeDialog}
       onBackdropClick={closeDialog}
     >
+      <LockBodyScroll />
       <HeaderWrapper>
         <Header>{header}</Header>
         <StyledIconButton aria-label="close" onClick={closeDialog}>

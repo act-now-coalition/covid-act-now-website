@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import sortBy from 'lodash/sortBy';
 import findIndex from 'lodash/findIndex';
 import partition from 'lodash/partition';
@@ -21,15 +21,12 @@ import {
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
-  getCompareSubheader,
   sliderNumberToFilterMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
-import { MoreInfoButton } from 'components/SharedComponents';
-import { Subtitle1 } from 'components/Typography';
 import { Region, MetroArea } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import {
@@ -214,11 +211,6 @@ const CompareTable = (props: {
     trackCompareEvent(EventAction.OPEN_MODAL, 'Show All Locations');
   };
 
-  const onClickFAQ = () => {
-    props.setShowFaqModal(true);
-    trackCompareEvent(EventAction.OPEN_MODAL, 'FAQ');
-  };
-
   return (
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -226,25 +218,9 @@ const CompareTable = (props: {
           <HeaderWrapper>
             <Header isHomepage={props.isHomepage}>
               <LocationPageSectionHeader>Compare</LocationPageSectionHeader>
-              <ShareImageButtons
-                imageUrl={getDownloadImageUrl}
-                imageFilename="CovidActNow-compare.png"
-                url={getShareUrl}
-                quote={shareQuote}
-                onCopyLink={() =>
-                  trackCompareEvent(EventAction.COPY_LINK, trackLabel)
-                }
-                onSaveImage={() =>
-                  trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
-                }
-                onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
-                onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
-                onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
-              />
             </Header>
-            {region && <Subtitle1>{getCompareSubheader(region)}</Subtitle1>}
           </HeaderWrapper>
-          {!disableFilters && (
+          {!disableFilters ? (
             <Filters
               isHomepage={props.isHomepage}
               stateId={props.stateId}
@@ -257,6 +233,8 @@ const CompareTable = (props: {
               setHomepageScope={setHomepageScope}
               homepageSliderValue={homepageSliderValue}
             />
+          ) : (
+            <Fragment />
           )}
         </div>
       )}
@@ -295,7 +273,21 @@ const CompareTable = (props: {
               </TextButton>
             )}
           </div>
-          <MoreInfoButton onClick={onClickFAQ} />
+          <ShareImageButtons
+            imageUrl={getDownloadImageUrl}
+            imageFilename="CovidActNow-compare.png"
+            url={getShareUrl}
+            quote={shareQuote}
+            onCopyLink={() =>
+              trackCompareEvent(EventAction.COPY_LINK, trackLabel)
+            }
+            onSaveImage={() =>
+              trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
+            }
+            onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
+            onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
+            onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
+          />
         </Footer>
       )}
     </Wrapper>

@@ -2,73 +2,21 @@ import React from 'react';
 import chunk from 'lodash/chunk';
 import ceil from 'lodash/ceil';
 import partition from 'lodash/partition';
+import { RecommendationWithIcon } from 'cms-content/recommendations';
 import {
-  HeaderCopy,
-  Intro,
   RecommendationsContainer,
   RecommendationBody,
   Icon,
   Column,
   RecommendationItem,
 } from './Recommend.style';
-import {
-  RecommendationWithIcon,
-  mainContent,
-} from 'cms-content/recommendations';
-import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
-import { HeaderWrapper } from 'components/VulnerabilitiesBlock/VulnerabilitiesBlock.style';
-import ShareButtons from 'components/SharedComponents/ShareButtons';
-import { EventCategory } from 'components/Analytics';
-import { Subtitle1 } from 'components/Typography';
 import { useBreakpoint } from 'common/hooks';
 
-const { header } = mainContent;
-
-const Header = (props: {
-  introCopy: string;
-  locationName: string;
-  shareUrl: string;
-  shareQuote: string;
-}) => {
-  const { introCopy, locationName, shareUrl, shareQuote } = props;
-  return (
-    <>
-      <HeaderWrapper id="recommendations">
-        <LocationPageSectionHeader>
-          <HeaderCopy>{header}</HeaderCopy>
-        </LocationPageSectionHeader>
-        <ShareButtons
-          eventCategory={EventCategory.RECOMMENDATIONS}
-          shareUrl={shareUrl}
-          shareQuote={shareQuote}
-        />
-      </HeaderWrapper>
-      <Subtitle1>for {locationName}</Subtitle1>
-      <Intro>
-        These recommendations match the guidelines set by the{' '}
-        <strong>CDC</strong>. {introCopy}
-      </Intro>
-    </>
-  );
-};
-
 const Recommend = (props: {
-  introCopy: string;
   recommendations: RecommendationWithIcon[];
-  locationName: string;
-  shareUrl: string;
-  shareQuote: string;
   recommendationsRef: React.RefObject<HTMLDivElement>;
-  feedbackFormUrl: string;
 }) => {
-  const {
-    introCopy,
-    recommendations,
-    locationName,
-    shareUrl,
-    shareQuote,
-    recommendationsRef,
-  } = props;
+  const { recommendations, recommendationsRef } = props;
 
   /*
     Divides recommendations into 2 columns.
@@ -86,39 +34,31 @@ const Recommend = (props: {
   const recommendationsColumns = isMobile ? halvedInOrder : partitionedByIndex;
 
   return (
-    <div ref={recommendationsRef}>
-      <Header
-        introCopy={introCopy}
-        locationName={locationName}
-        shareUrl={shareUrl}
-        shareQuote={shareQuote}
-      />
-      <RecommendationsContainer>
-        {recommendationsColumns.map((half, j) => {
-          return (
-            <Column key={`half-${j}`}>
-              {half.map((recommendation, i) => {
-                return (
-                  <RecommendationItem
-                    key={`recommendation-${i}`}
-                    highlight={false}
-                  >
-                    <Icon
-                      src={recommendation.iconInfo.iconImage}
-                      alt={recommendation.iconInfo.altText}
-                    />
-                    <RecommendationBody
-                      className={recommendation.recommendationInfo.category}
-                      source={recommendation.recommendationInfo.body}
-                    />
-                  </RecommendationItem>
-                );
-              })}
-            </Column>
-          );
-        })}
-      </RecommendationsContainer>
-    </div>
+    <RecommendationsContainer ref={recommendationsRef}>
+      {recommendationsColumns.map((half, j) => {
+        return (
+          <Column key={`half-${j}`}>
+            {half.map((recommendation, i) => {
+              return (
+                <RecommendationItem
+                  key={`recommendation-${i}`}
+                  highlight={false}
+                >
+                  <Icon
+                    src={recommendation.iconInfo.iconImage}
+                    alt={recommendation.iconInfo.altText}
+                  />
+                  <RecommendationBody
+                    className={recommendation.recommendationInfo.category}
+                    source={recommendation.recommendationInfo.body}
+                  />
+                </RecommendationItem>
+              );
+            })}
+          </Column>
+        );
+      })}
+    </RecommendationsContainer>
   );
 };
 

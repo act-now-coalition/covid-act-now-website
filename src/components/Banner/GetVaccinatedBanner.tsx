@@ -1,12 +1,11 @@
 import React from 'react';
-import { FilledButton, OutlinedButton } from 'components/ButtonSystem';
 import { EventCategory } from 'components/Analytics';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import {
   BannerContainer,
   InnerContainer,
   Body,
   ButtonsContainer,
+  LargeButton,
 } from './GetVaccinatedBanner.style';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import { formatPercent, formatInteger } from 'common/utils';
@@ -27,21 +26,13 @@ const GetVaccinatedBanner: React.FC = () => {
           received at least one dose of the vaccine.
         </Body>
         <ButtonsContainer>
-          <FilledButton
-            href="https://www.vaccines.gov/search/"
-            endIcon={<OpenInNewIcon />}
+          <LargeButton
+            href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/talk-about-vaccines.html"
             trackingCategory={EventCategory.HOMEPAGE_BANNER}
-            trackingLabel="Homepage Banner: VaccineFinder"
+            trackingLabel="Homepage Banner: CDC Talk About Vaccines"
           >
-            Find a vaccine
-          </FilledButton>
-          <OutlinedButton
-            href="/faq#vaccines"
-            trackingCategory={EventCategory.HOMEPAGE_BANNER}
-            trackingLabel="Homepage Banner: Vaccine FAQs"
-          >
-            Vaccine FAQs
-          </OutlinedButton>
+            How to talk with friends and family about getting vaccinated
+          </LargeButton>
         </ButtonsContainer>
       </InnerContainer>
     </BannerContainer>

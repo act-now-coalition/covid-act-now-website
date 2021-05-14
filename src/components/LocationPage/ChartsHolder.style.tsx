@@ -84,13 +84,9 @@ export const BetaTag = styled.div`
 
 export const DisclaimerWrapper = styled.div`
   max-width: 600px;
-  padding: 1.5rem 0 0;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    padding: 1.5rem 0 0;
-  }
+  padding-right: 2rem;
 
   p {
     font-size: inherit;

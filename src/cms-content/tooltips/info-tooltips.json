@@ -31,7 +31,7 @@
       "id": "icu-capacity-used"
     },
     {
-      "body": "Percent vaccinated is the percentage of people in a given location that have started the vaccination process by receiving at least their first shot.\n\n[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "body": "Percent vaccinated is the percentage of the total population of a location (not just those eligible) that have started the vaccination process by receiving at least their first shot.\n\n[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"

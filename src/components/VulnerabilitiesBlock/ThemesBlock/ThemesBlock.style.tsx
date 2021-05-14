@@ -3,7 +3,6 @@ import { GREY_0, COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div`
-  border-radius: 0 0 4px 4px;
   overflow: hidden;
   width: 100%;
 

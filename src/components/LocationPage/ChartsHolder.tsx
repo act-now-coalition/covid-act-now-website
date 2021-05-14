@@ -177,14 +177,12 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             region={region}
           />
         </LocationPageBlock>
-        <LocationPageBlock id="vulnerabilities">
-          <VulnerabilitiesBlock scores={ccviScores} region={region} />
-        </LocationPageBlock>
         {!projections ? (
           <LoadingScreen />
         ) : (
           <LocationPageBlock>
             <Recommendations
+              region={region}
               projections={projections}
               recommendationsRef={recommendationsRef}
             />
@@ -208,6 +206,9 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             )}
           </ErrorBoundary>
         ))}
+        <LocationPageBlock id="vulnerabilities">
+          <VulnerabilitiesBlock scores={ccviScores} region={region} />
+        </LocationPageBlock>
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
             initialFipsList={initialFipsList}
