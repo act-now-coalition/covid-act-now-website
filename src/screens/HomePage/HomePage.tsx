@@ -1,25 +1,23 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
+import Fade from '@material-ui/core/Fade';
+import { useLocation } from 'react-router-dom';
 import Map from 'components/Map/Map';
+import { NavBarSearch } from 'components/NavBar';
+import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements';
-import { useLocation } from 'react-router-dom';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
 import { formatMetatagDate } from 'common/utils';
-import { SpringSurgeBanner } from 'components/Banner';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { getFilterLimit } from 'components/Search';
-import regions, {
-  getFinalAutocompleteLocations,
-  getGeolocatedRegions,
-} from 'common/regions';
-import { getNationalText } from 'components/NationalText';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
-import { useGeolocation, useGeolocationInExplore } from 'common/hooks';
+import { filterGeolocatedRegions } from 'common/regions';
+import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
@@ -27,17 +25,14 @@ import {
   Section,
   ColumnCentered,
 } from './HomePage.style';
-import { HomepageSearchAutocomplete } from 'components/Search';
+import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
-import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
-import {
-  Experiment,
-  ExperimentID,
-  Variant,
-  VariantID,
-} from 'components/Experiment';
+import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
+import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
+import { DonateButtonHeart } from 'components/DonateButton';
+import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -51,58 +46,30 @@ export default function HomePage() {
 
   const isMobile = useBreakpoint(600);
 
-  const indicatorsRef = useRef(null);
+  const { userRegions, isLoading } = useGeolocatedRegions();
 
-  const { geolocationData, isLoading: geoIsLoading } = useGeolocation();
-  const { result: countyToZipMap, pending: zipIsLoading } = useCountyToZipMap();
+  const largestMetroFips = largestMetroFipsForExplore;
+  const exploreGeoLocations = useMemo(
+    () =>
+      userRegions
+        ? filterGeolocatedRegions(userRegions).map(region => region.fipsCode)
+        : largestMetroFips,
+    [largestMetroFips, userRegions],
+  );
 
-  const isLoading = geoIsLoading || zipIsLoading;
-
-  const userRegions =
-    geolocationData && countyToZipMap
-      ? getGeolocatedRegions(geolocationData, countyToZipMap)
-      : null;
-
-  const exploreGeoLocations = useGeolocationInExplore(geolocationData);
-  const showRisingHospitalizations =
-    location.hash === '#explore-hospitalizations';
-  const risingHospitalizationStates = [
-    'DE',
-    'IL',
-    'MD',
-    'MI',
-    'MN',
-    'NJ',
-    'PA',
-    'PR',
-  ]; // Updated on 7 April 2021 -- this is an illustrative list but not exhaustive
-  const initialFipsListForExplore = showRisingHospitalizations
-    ? risingHospitalizationStates.map(
-        state => regions.findByStateCodeStrict(state).fipsCode,
-      )
-    : exploreGeoLocations;
-  const initialMetricForExplore = showRisingHospitalizations
-    ? ExploreMetric.HOSPITALIZATIONS
-    : ExploreMetric.CASES;
+  const initialFipsListForExplore = exploreGeoLocations;
+  const initialMetricForExplore = ExploreMetric.CASES;
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
   const compareShowVulnerabilityFirst =
     location.hash === '#compare-vulnerabilities';
 
-  const scrollTo = (div: null | HTMLDivElement) =>
-    div &&
-    window.scrollTo({
-      left: 0,
-      top: div.offsetTop - 48,
-      behavior: 'smooth',
-    });
-
   useEffect(() => {
-    if (location.pathname.includes('alert_signup') && shareBlockRef.current) {
-      scrollTo(shareBlockRef.current);
+    if (location.pathname.includes('alert_signup')) {
+      window.location.href = '#alert_signup';
     }
-  }, [location.pathname, shareBlockRef]);
+  }, [location.pathname]);
 
   const exploreSectionRef = useRef(null);
 
@@ -115,7 +82,33 @@ export default function HomePage() {
     );
   };
 
-  // TODO (chelsi): add ids back in
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const searchLocations = useFinalAutocompleteLocations();
+
+  const isMobileNavBar = useBreakpoint(800);
+  const hasScrolled = useShowPastPosition(450);
+  const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
+
+  const renderNavBarSearch = () => (
+    <>
+      {hasScrolled && (
+        <NavBarSearch menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      )}
+    </>
+  );
+
+  const renderDonateButton = () => (
+    <>
+      {showDonateButton && (
+        <Fade in={showDonateButton}>
+          <div>
+            <DonateButtonHeart />
+          </div>
+        </Fade>
+      )}
+    </>
+  );
 
   return (
     <>
@@ -125,36 +118,27 @@ export default function HomePage() {
         pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
+      <NavAllOtherPages
+        renderSearch={renderNavBarSearch}
+        renderSecondaryElement={renderDonateButton}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+      />
       <HomepageStructuredData />
-      <SpringSurgeBanner />
+      <GetVaccinatedBanner />
       <HomePageHeader />
       <main>
         <div className="App">
           <Content>
             <ColumnCentered id="search">
-              <HomepageSearchAutocomplete
-                locations={getFinalAutocompleteLocations(
-                  geolocationData,
-                  countyToZipMap,
-                )}
+              <SearchAutocomplete
+                locations={searchLocations}
                 filterLimit={getFilterLimit()}
+                menuOpen={menuOpen}
+                placeholder="City, county, state, or zip"
+                setMenuOpen={setMenuOpen}
               />
-              <Experiment id={ExperimentID.GEOLOCATED_LINKS}>
-                <Variant id={VariantID.A}>
-                  <HomepageItems
-                    isLoading={isLoading}
-                    userRegions={userRegions}
-                    showMetro
-                  />
-                </Variant>
-                <Variant id={VariantID.B}>
-                  <HomepageItems
-                    isLoading={isLoading}
-                    userRegions={userRegions}
-                    showMetro={false}
-                  />
-                </Variant>
-              </Experiment>
+              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
               <Toggle
                 showCounties={showCounties}
                 onClickSwitch={onClickSwitch}
@@ -166,7 +150,6 @@ export default function HomePage() {
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />
             </ColumnCentered>
-
             <Section>
               <CompareMain
                 locationsViewable={8}
@@ -174,23 +157,21 @@ export default function HomePage() {
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
               />
             </Section>
-            <Section ref={exploreSectionRef}>
-              <div id="explore-hospitalizations"></div>
+            <Section ref={exploreSectionRef} id="explore-hospitalizations">
               <Explore
                 title="Cases, Deaths and Hospitalizations"
                 initialFipsList={initialFipsListForExplore}
                 defaultMetric={initialMetricForExplore}
-                initialChartIndigenousPopulations={false}
-                nationalSummaryText={getNationalText()}
+                showNationalSummary={true}
               />
             </Section>
-            <SectionWrapper ref={indicatorsRef}>
+            <SectionWrapper>
               <CriteriaExplanation isMobile={isMobile} />
             </SectionWrapper>
             <Announcements />
           </Content>
           <PartnersSection />
-          <div ref={shareBlockRef}>
+          <div ref={shareBlockRef} id="alert_signup">
             <ShareModelBlock />
           </div>
         </div>

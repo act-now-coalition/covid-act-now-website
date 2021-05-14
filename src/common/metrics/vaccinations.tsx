@@ -15,6 +15,7 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region, State } from 'common/regions';
 import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { Link } from 'react-router-dom';
 
 const METRIC_NAME = 'Vaccinated';
 
@@ -91,8 +92,8 @@ function renderStatus(projections: Projections): React.ReactElement {
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose and {peopleVaccinated} ({percentVaccinated})
       are fully vaccinated. {distributedText} Fewer than 0.001% of people who
-      have received a dose experienced a severe adverse reaction, none of them
-      deadly.
+      have received a dose experienced a severe adverse reaction.{' '}
+      <Link to="/faq#vaccines">See more vaccine resources and FAQs.</Link>
     </Fragment>
   );
 }

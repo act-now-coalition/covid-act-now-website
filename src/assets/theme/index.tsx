@@ -5,12 +5,19 @@ import overrides from './overrides';
 import buttons, { ButtonMap } from './buttons';
 import fonts, { ThemeFonts } from './fonts';
 import { megaMenu, MenuTheme, megaMenuFooter } from './megaMenu';
+import {
+  SearchbarTheme,
+  searchbar,
+  navSearchbar,
+  navSearchbarLocPage,
+} from './searchbar';
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     fonts: ThemeFonts;
     buttons: ButtonMap;
     megaMenu: MenuTheme;
+    searchbar: SearchbarTheme;
   }
   interface ThemeOptions extends Theme {}
 }
@@ -26,7 +33,8 @@ const theme = createMuiTheme({
   fonts,
   buttons,
   megaMenu,
+  searchbar,
 });
 
-export { megaMenuFooter };
+export { megaMenuFooter, navSearchbar, navSearchbarLocPage };
 export default theme;

@@ -10,10 +10,9 @@ import regions, {
   State,
   MetroArea,
   getStateName,
-  getFormattedStateCode,
-  getAbbreviatedCounty,
 } from 'common/regions';
 import { fail } from 'assert';
+import { importCountyAdjacency } from 'common/data';
 
 export function trackCompareEvent(
   action: EventAction,
@@ -64,11 +63,14 @@ export function getAllCountiesOfState(stateCode: string): SummaryForCompare[] {
     .map(getLocationObj);
 }
 
-export function getNeighboringCounties(
+export async function getNeighboringCounties(
   countyFips: string,
-): SummaryForCompare[] {
+): Promise<SummaryForCompare[]> {
   const county = regions.findByFipsCodeStrict(countyFips) as County;
-  const adjacentCounties = county.adjacentCountiesFips.map(fips => {
+  const countyAdjacency = await importCountyAdjacency();
+  const adjacentCounties = countyAdjacency.counties[
+    countyFips
+  ].adjacent_counties.map(fips => {
     const region = regions.findByFipsCodeStrict(fips);
     return getLocationObj(region);
   });
@@ -241,19 +243,6 @@ export function getShareQuote(
     }
   }
 }
-
-// Determines which location field is shown under the main Compare feature header + formats it
-export const getCompareSubheader = (region: Region): string => {
-  if (region instanceof County) {
-    return `${getAbbreviatedCounty(region.name)}, ${getFormattedStateCode(
-      region,
-    )} to other counties`;
-  } else if (region instanceof MetroArea || region instanceof State) {
-    return `Counties in ${region.fullName}`;
-  } else {
-    return 'Compare counties';
-  }
-};
 
 // Value maps for filters' slider components (0, 50, and 99 are numerical values required by MUI Slider).
 // Maps each numerical slider value to its corresponding scope:

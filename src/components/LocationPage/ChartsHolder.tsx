@@ -1,13 +1,17 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
   useScrollToElement,
   useBreakpoint,
+  useLocationSummariesForFips,
+  useShowPastPosition,
 } from 'common/hooks';
 import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
+import { useProjectionsFromRegion } from 'common/utils/model';
+import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
@@ -19,15 +23,17 @@ import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { ChartContentWrapper } from './ChartsHolder.style';
-import { useProjectionsFromRegion } from 'common/utils/model';
-import { MetricValues } from 'common/models/Projections';
-import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import { LocationSummary, useSummaries } from 'common/location_summaries';
-import LocationPageHeader from './LocationPageHeader';
+import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
+import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
+import {
+  SparkLineMetric,
+  SparkLineToExploreMetric,
+} from 'components/NewLocationPage/SparkLineBlock/utils';
+import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
 
-// TODO: 180 is rough accounting for the navbar and searchbar;
+// TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
-const scrollTo = (div: null | HTMLDivElement, offset: number = 180) =>
+const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   div &&
   window.scrollTo({
     left: 0,
@@ -40,19 +46,10 @@ interface ChartsHolderProps {
   chartId: string;
 }
 
-const summaryToStats = (summary: LocationSummary): MetricValues => {
-  const stats = {} as MetricValues;
-  for (const metric of ALL_METRICS) {
-    stats[metric] = summary.metrics[metric]?.value ?? null;
-  }
-  return stats;
-};
-
 const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
 
-  const summaries = useSummaries();
-  const locationSummary = summaries?.[region.fipsCode];
+  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
   const metricRefs = {
     [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
@@ -71,17 +68,25 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
-  const defaultExploreMetric =
-    hash === '#explore-chart'
-      ? ExploreMetric.HOSPITALIZATIONS
-      : ExploreMetric.CASES;
+  const [defaultExploreMetric, setDefaultExploreMetric] = useState<
+    ExploreMetric
+  >(ExploreMetric.CASES);
+
+  useEffect(() => {
+    if (hash === '#explore-chart') {
+      setDefaultExploreMetric(ExploreMetric.HOSPITALIZATIONS);
+    }
+  }, [hash]);
+
+  const [scrolledWithRef, setScrolledWithRef] = useState(false);
 
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
           const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current) {
+          if (metricRef.current && !scrolledWithRef) {
+            setScrolledWithRef(true);
             scrollTo(metricRef.current);
           }
         }
@@ -92,7 +97,8 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     const scrollToRecommendations = () => {
       const timeoutId = setTimeout(() => {
         if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current) {
+          if (recommendationsRef.current && !scrolledWithRef) {
+            setScrolledWithRef(true);
             scrollTo(recommendationsRef.current);
           }
         }
@@ -102,18 +108,11 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
     scrollToChart();
     scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl]);
+  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithRef]);
 
-  const initialFipsList = [region.fipsCode];
+  const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
   const ccviScores = useCcviForFips(region.fipsCode);
-
-  if (!locationSummary) {
-    return null;
-  }
-  const stats = summaryToStats(locationSummary);
-
-  const alarmLevel = locationSummary.level;
 
   const onClickAlertSignup = () => {
     trackEvent(
@@ -125,12 +124,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   };
 
   const onClickShare = () => {
-    trackEvent(
-      EventCategory.ENGAGEMENT,
-      EventAction.CLICK,
-      'Location Header: Share',
-    );
-    scrollTo(shareBlockRef.current, -372);
+    scrollTo(shareBlockRef.current, -352);
   };
 
   const onClickMetric = (metric: Metric) => {
@@ -142,21 +136,36 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     scrollTo(metricRefs[metric].current);
   };
 
-  const locationPageHeaderProps = {
-    alarmLevel,
-    stats,
-    onMetricClick: (metric: Metric) => onClickMetric(metric),
-    onHeaderShareClick: onClickShare,
-    onHeaderSignupClick: onClickAlertSignup,
-    isMobile,
-    region,
+  const onClickSparkLine = (metric: SparkLineMetric) => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      `Spark line: ${SparkLineMetric[metric]}`,
+    );
+    setDefaultExploreMetric(SparkLineToExploreMetric[metric]);
+    scrollTo(exploreChartRef.current);
   };
+
+  const experimentTriggerPoint = isMobile ? 8000 : 5000;
+  const showHomepageUpsell = useShowPastPosition(experimentTriggerPoint);
+
+  if (!locationSummary) {
+    return null;
+  }
+  const stats = summaryToStats(locationSummary);
 
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       <ChartContentWrapper>
-        <LocationPageHeader {...locationPageHeaderProps} />
+        <AboveTheFold
+          region={region}
+          locationSummary={locationSummary}
+          onClickMetric={(metric: Metric) => onClickMetric(metric)}
+          onClickAlertSignup={onClickAlertSignup}
+          onClickShare={onClickShare}
+          onClickSparkLine={onClickSparkLine}
+        />
         <LocationPageBlock>
           <VaccinationEligibilityBlock region={region} />
         </LocationPageBlock>
@@ -168,25 +177,24 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
             region={region}
           />
         </LocationPageBlock>
-        <LocationPageBlock id="vulnerabilities">
-          <VulnerabilitiesBlock scores={ccviScores} region={region} />
-        </LocationPageBlock>
-        <LocationPageBlock>
-          {!projections ? (
-            <LoadingScreen />
-          ) : (
+        {!projections ? (
+          <LoadingScreen />
+        ) : (
+          <LocationPageBlock>
             <Recommendations
+              region={region}
               projections={projections}
               recommendationsRef={recommendationsRef}
             />
-          )}
-          {ALL_METRICS.map(metric => (
-            <ErrorBoundary>
-              {!projections ? (
-                <LoadingScreen />
-              ) : (
+          </LocationPageBlock>
+        )}
+        {ALL_METRICS.map(metric => (
+          <ErrorBoundary key={metric}>
+            {!projections ? (
+              <LoadingScreen />
+            ) : (
+              <LocationPageBlock>
                 <ChartBlock
-                  key={metric}
                   metric={metric}
                   projections={projections}
                   chartRef={metricRefs[metric]}
@@ -194,9 +202,12 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
                   region={region}
                   stats={stats}
                 />
-              )}
-            </ErrorBoundary>
-          ))}
+              </LocationPageBlock>
+            )}
+          </ErrorBoundary>
+        ))}
+        <LocationPageBlock id="vulnerabilities">
+          <VulnerabilitiesBlock scores={ccviScores} region={region} />
         </LocationPageBlock>
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
@@ -206,13 +217,14 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
           />
         </LocationPageBlock>
       </ChartContentWrapper>
-      <div ref={shareBlockRef} id="recommendationsTest">
+      <div ref={shareBlockRef}>
         <ShareModelBlock
           region={region}
           projections={projections}
           stats={stats}
         />
       </div>
+      <HomepageUpsell showHomepageUpsell={showHomepageUpsell} />
     </>
   );
 };

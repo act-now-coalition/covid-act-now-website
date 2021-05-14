@@ -6,7 +6,14 @@ import values from 'lodash/values';
 import isNull from 'lodash/isNull';
 import without from 'lodash/without';
 import regions from './region_db';
-import { County, State, Region, RegionType, MetroArea } from './types';
+import {
+  FipsCode,
+  County,
+  State,
+  Region,
+  RegionType,
+  MetroArea,
+} from './types';
 import { GeolocationInfo } from 'common/hooks/useGeolocation';
 import { CountyToZipMap } from 'common/data';
 
@@ -146,17 +153,7 @@ function countyIncludesZip(
   return countyToZipMap[county.fipsCode]?.includes(zipCode);
 }
 
-export function getStateRegionFromStateCode(
-  stateCode: string,
-): Region | undefined {
-  const regionFromStateCode = find(
-    regions.states,
-    (region: State) => region.stateCode === stateCode,
-  );
-  return regionFromStateCode;
-}
-
-export function getCountyRegionFromZipCode(
+function getCountyRegionFromZipCode(
   zipCode: string,
   countyToZipMap: CountyToZipMap,
 ): Region | undefined {
@@ -166,17 +163,11 @@ export function getCountyRegionFromZipCode(
   return countyFromZip;
 }
 
-export function getMetroRegionFromZipCode(
-  zipCode: string,
-  countyToZipMap: CountyToZipMap,
-): Region | undefined {
-  const countyFromZip = getCountyRegionFromZipCode(zipCode, countyToZipMap);
-  const metroFromZip =
-    countyFromZip &&
-    find(regions.metroAreas, (region: MetroArea) =>
-      region.countiesFips.includes((countyFromZip as County).fipsCode),
-    );
-  return metroFromZip;
+function getMetroRegionFromCounty(fipsCode: FipsCode): MetroArea | undefined {
+  const metroArea = find(regions.metroAreas, (region: MetroArea) => {
+    return region.countiesFips.includes(fipsCode);
+  });
+  return metroArea;
 }
 
 export interface GeolocatedRegions {
@@ -192,10 +183,17 @@ export function getGeolocatedRegions(
   if (geolocation.country !== UNITED_STATES) {
     return null;
   } else {
+    const county = getCountyRegionFromZipCode(
+      geolocation.zipCode,
+      countyToZipMap,
+    );
+    const metroArea = county
+      ? getMetroRegionFromCounty(county.fipsCode)
+      : undefined;
     return {
-      metroArea: getMetroRegionFromZipCode(geolocation.zipCode, countyToZipMap),
-      county: getCountyRegionFromZipCode(geolocation.zipCode, countyToZipMap),
-      state: getStateRegionFromStateCode(geolocation.stateCode),
+      metroArea,
+      county,
+      state: regions.findByStateCodeStrict(geolocation.stateCode),
     };
   }
 }
@@ -206,17 +204,27 @@ export function filterUndefinedRegions(regions: any[]): Region[] | [] {
   );
 }
 
+// flattens and filters a map of region-type to regions to a list of valid regions
+export const filterGeolocatedRegions = (
+  geolocatedRegions: GeolocatedRegions | null,
+): Region[] => {
+  if (isNull(geolocatedRegions)) {
+    return [];
+  } else {
+    const regionValues = values(geolocatedRegions);
+    const filteredRegions = filterUndefinedRegions(regionValues);
+    return filteredRegions;
+  }
+};
+
 /**
  * We rank a user's geolocated regions (state, county, metro if applicable) first
  * in the searchbar dropdown menu. This sorts the Region[] accordingly.
  */
 export function getAutocompleteRegionsWithGeolocation(
-  geolocation: GeolocationInfo,
+  geolocatedRegions: GeolocatedRegions,
   locations: Region[],
-  countyToZipMap: CountyToZipMap,
 ): Region[] {
-  const geolocatedRegions = getGeolocatedRegions(geolocation, countyToZipMap);
-
   if (isNull(geolocatedRegions)) {
     return locations;
   }
@@ -242,17 +250,15 @@ export function getAutocompleteRegionsWithGeolocation(
  * If not, returns autocomplete results sorted for pagetype.
  */
 export function getFinalAutocompleteLocations(
-  geolocation?: GeolocationInfo,
-  countyToZipMap?: CountyToZipMap,
+  geolocatedRegions: GeolocatedRegions | null,
 ): Region[] {
   const regionsSortedForPagetype = getAutocompleteRegions();
-  if (!geolocation || !countyToZipMap) {
+  if (!geolocatedRegions) {
     return regionsSortedForPagetype;
   } else {
     return getAutocompleteRegionsWithGeolocation(
-      geolocation,
+      geolocatedRegions,
       regionsSortedForPagetype,
-      countyToZipMap,
     );
   }
 }

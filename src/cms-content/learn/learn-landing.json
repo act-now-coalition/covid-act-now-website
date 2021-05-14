@@ -1,29 +1,29 @@
 {
-  "intro": "Here you can find clear, trusted, shareable information to make informed decisions around COVID, as well as essential resources that will help you understand, interpret, and apply Covid Act Now’s data. You can also sign up for alerts to learn when the vaccine eligibility or the risk level in your area has changed.",
+  "intro": "A source of clear, trusted, shareable information about COVID and the available vaccines to help you make informed decisions about how to protect yourself and curb transmission. We offer essential resources to help you understand, interpret, and apply Covid Act Now’s data as well as sign ups for newsletters and alerts to stay on top of COVID news and developments.",
   "header": "Learn about COVID",
   "metadataTitle": "COVID-19 Essential Information & Resources",
   "metadataDescription": "Find recent and trusted information & resources about the novel Coronavirus (2019-nCoV). Learn about Symptoms, Tests, Risks, and more. Backed by medical experts. Make informed decisions to stop the disease for you and your community.",
   "sections": [
     {
-      "sectionTitle": "Risk levels & key metrics",
-      "sectionId": "covid-risk-levels-metrics",
-      "description": "Learn about the five key metrics Covid Act Now uses to assess COVID across U.S. states, metros, and counties.",
-      "buttonCta": "View risk levels & key metrics",
-      "buttonRedirect": "/covid-risk-levels-metrics"
+      "sectionTitle": "FAQ",
+      "sectionId": "faq",
+      "description": "Here are answers to some of the most common COVID questions such as: Are COVID vaccines safe? Should you get a vaccine if you've already had COVID? How soon after possible exposure to COVID should you get tested?",
+      "buttonCta": "View FAQ",
+      "buttonRedirect": "/faq"
     },
     {
       "sectionTitle": "COVID news & updates",
       "sectionId": "news-and-updates",
-      "description": "To stay on top of COVID, sign up for risk & vaccine eligibility email alerts or check out our free newsletters.",
+      "description": "To stay on top of COVID news and developments, sign up for our free newsletters and our risk email alerts.",
       "buttonCta": "View news & updates",
       "buttonRedirect": "/subscribe"
     },
     {
-      "sectionTitle": "COVID explained",
-      "sectionId": "covid-explained",
-      "buttonCta": "View COVID explained",
-      "buttonRedirect": "/covid-explained",
-      "description": "Get the facts about how COVID is spread, how to prevent transmission, and the latest on treatments and vaccines from these articles, written by scientists, researchers and public health experts."
+      "sectionTitle": "Risk levels & key metrics",
+      "sectionId": "covid-risk-levels-metrics",
+      "description": "Learn about the five key metrics Covid Act Now uses to assess COVID risk across U.S. states, metros, and counties.",
+      "buttonCta": "View risk levels & key metrics",
+      "buttonRedirect": "/covid-risk-levels-metrics"
     },
     {
       "sectionTitle": "Glossary",
@@ -33,11 +33,11 @@
       "buttonRedirect": "/glossary"
     },
     {
-      "sectionTitle": "FAQ",
-      "sectionId": "faq",
-      "description": "\"When can I get a vaccine?\" to \"how soon after possible exposure to COVID should I get tested?\" Here are answers to some of the top COVID questions.",
-      "buttonCta": "View FAQ",
-      "buttonRedirect": "/faq"
+      "sectionTitle": "COVID explained",
+      "sectionId": "covid-explained",
+      "buttonCta": "View COVID explained",
+      "buttonRedirect": "/covid-explained",
+      "description": "Articles that share the facts about how COVID is spread, how to prevent transmission, and the latest on treatments and vaccines, written by scientists, researchers and public health experts."
     },
     {
       "sectionTitle": "Case studies",

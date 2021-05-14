@@ -7,9 +7,13 @@ import { RegionDB } from 'common/regions';
  * Gets fips of 5 largest metro areas to set as homepage explore presets.
  * These are precomputed by hand using the function below.
  */
-export function getLargestMetroFipsForExplore() {
-  return ['35620', '31080', '16980', '19100', '26420'];
-}
+export const largestMetroFipsForExplore = [
+  '35620',
+  '31080',
+  '16980',
+  '19100',
+  '26420',
+];
 
 /**
  * Use this function to re-compute the values for the function above, if needed

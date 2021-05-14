@@ -5,11 +5,6 @@ import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
 export const ChartContentWrapper = styled.div`
-  margin-top: 85px;
-  @media (min-width: 1350px) {
-    margin-top: 90px;
-  }
-
   @media print {
     margin-top: 0;
   }
@@ -24,7 +19,7 @@ export const HeaderWrapperStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3.5rem 0 0.25rem;
+  margin: 0 0 0.25rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
@@ -89,13 +84,9 @@ export const BetaTag = styled.div`
 
 export const DisclaimerWrapper = styled.div`
   max-width: 600px;
-  padding: 1.5rem 0 0.75rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.875rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    padding: 1.5rem 0 2rem;
-  }
+  padding-right: 2rem;
 
   p {
     font-size: inherit;

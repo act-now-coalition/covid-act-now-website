@@ -1,45 +1,41 @@
-import React from 'react';
-import { vulnerabilitiesHeaderTooltip } from 'cms-content/tooltips';
-import ThemesBlock from './ThemesBlock/ThemesBlock';
-import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
-import { Subtitle1 } from 'components/Typography';
-import {
-  BorderedContainer,
-  FirstColumn,
-  SecondColumn,
-  TextSmall,
-  LevelName,
-  RegionDescription,
-  StyledLink,
-  HeaderWrapper,
-} from './VulnerabilitiesBlock.style';
-import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
-import { trackOpenTooltip } from 'components/InfoTooltip';
-import ShareButtons from './ShareButtons';
-import FooterLinks from './FooterLinks/FooterLinks';
-import CcviThermometer from './CcviThermometer/CcviThermometer';
-import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
-import { getCcviLevelNameFromScore } from 'common/ccvi';
-import { getShareQuote } from 'common/ccvi/getShareQuote';
+import React, { useState } from 'react';
 import { Region } from 'common/regions';
+import ExpandableContainer from 'components/ExpandableContainer';
+import VulnerabilitiesBlockInner from './VulnerabilitiesBlockInner';
+import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import { Header } from 'components/Compare/Compare.style';
+import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import ShareButtons from '../SharedComponents/ShareButtons';
+import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
+import NewDialog from 'components/NewDialog/NewDialog';
+import { vulnerabilitiesModal } from 'cms-content/modals';
+import { ModalOpenButton } from './VulnerabilitiesBlock.style';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
   region: Region;
 }> = ({ scores, region }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const closeDialog = () => setDialogOpen(false);
+  const { header, body, links } = vulnerabilitiesModal;
+
   if (!scores) {
     return null;
   }
 
-  const levelName = getCcviLevelNameFromScore(scores.overall);
+  const containerProps = {
+    collapsedHeightMobile: 315,
+    collapsedHeightDesktop: 215,
+    tabTextCollapsed: <>More</>,
+    tabTextExpanded: <>Less</>,
+    trackingLabel: 'Vulnerabilities module',
+    trackingCategory: EventCategory.VULNERABILITIES,
+  };
+
   const percentPopulationVulnerable = getVulnPopulationPercentForFips(
     region.fipsCode,
-  );
-  const regionDescription = renderRegionDescription(
-    scores.overall,
-    region,
-    percentPopulationVulnerable,
   );
   const shareUrl = `${region.canonicalUrl}#vulnerabilities`;
   const shareQuote = getShareQuote(
@@ -48,51 +44,46 @@ const VulnerabilitiesBlock: React.FC<{
     percentPopulationVulnerable,
   );
 
+  const modalOpenOnClick = () => {
+    setDialogOpen(true);
+    trackEvent(
+      EventCategory.VULNERABILITIES,
+      EventAction.OPEN_MODAL,
+      'About this data modal',
+    );
+  };
+
   return (
     <>
-      <HeaderWrapper>
-        <LocationPageSectionHeader>
-          Vulnerabilities
-          <>{renderVulnerabilitiesTooltip()}</>
-        </LocationPageSectionHeader>
-        <ShareButtons shareUrl={shareUrl} shareQuote={shareQuote} />
-      </HeaderWrapper>
-      <Subtitle1>In {region.fullName}</Subtitle1>
-      <BorderedContainer>
-        <FirstColumn>
-          <TextSmall>OVERALL</TextSmall>
-          <LevelName aria-label={levelName.toLowerCase()}>
-            {levelName}
-          </LevelName>
-          <CcviThermometer
-            overallScore={scores.overall}
-            regionName={region.shortName}
-          />
-          <RegionDescription>
-            {region.shortName} {regionDescription}
-          </RegionDescription>
-        </FirstColumn>
-        <SecondColumn>
-          <TextSmall>SPECIFIC VULNERABILITIES</TextSmall>
-          <ThemesBlock scores={scores} />
-        </SecondColumn>
-      </BorderedContainer>
-      <StyledLink to="/covid-risk-levels-metrics#vulnerability">
-        How vulnerability is calculated
-      </StyledLink>
-      <FooterLinks region={region} />
+      <Header>
+        <LocationPageSectionHeader>Vulnerabilities</LocationPageSectionHeader>
+      </Header>
+      <ExpandableContainer {...containerProps}>
+        <VulnerabilitiesBlockInner
+          scores={scores}
+          region={region}
+          percentPopulationVulnerable={percentPopulationVulnerable}
+        />
+      </ExpandableContainer>
+      <LocationPageSectionFooter>
+        <ModalOpenButton onClick={modalOpenOnClick}>
+          About this data
+        </ModalOpenButton>
+        <NewDialog
+          open={dialogOpen}
+          closeDialog={closeDialog}
+          header={header}
+          body={body}
+          links={links}
+        />
+        <ShareButtons
+          eventCategory={EventCategory.VULNERABILITIES}
+          shareUrl={shareUrl}
+          shareQuote={shareQuote}
+        />
+      </LocationPageSectionFooter>
     </>
   );
 };
-
-function renderVulnerabilitiesTooltip(): React.ReactElement {
-  return (
-    <InfoTooltip
-      title={renderTooltipContent(vulnerabilitiesHeaderTooltip)}
-      aria-label="Description of vulnerabilities"
-      trackOpenTooltip={() => trackOpenTooltip('Vulnerabilities header')}
-    />
-  );
-}
 
 export default VulnerabilitiesBlock;

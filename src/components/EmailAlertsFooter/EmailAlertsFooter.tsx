@@ -22,8 +22,7 @@ const EmailAlertsFooter: React.FC<{ defaultRegions: Region[] }> = ({
         <Section key="header">
           <Heading2>Get alerts</Heading2>
           <Paragraph>
-            We’ll email you when selected locations see a change in{' '}
-            <strong>risk level</strong> or <strong>vaccine eligibility</strong>.
+            We’ll email you when selected locations see a change in risk level.
           </Paragraph>
         </Section>
         <Section key="email-form">

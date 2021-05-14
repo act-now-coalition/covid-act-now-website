@@ -75,6 +75,8 @@ export const COLOR_MAP = {
     // rename these
     BASE: '#3567FD',
     DARK: '#002CB4',
+    MEDIUM_DARK: 'rgba(53, 103, 253, 0.8)',
+    MEDIUM: 'rgba(53, 103, 253, .6)',
     LIGHT: 'rgba(53, 103, 253, .15)',
     PURPLE: '#5361FD',
   },
@@ -95,3 +97,8 @@ export function colorFromLocationSummary(
 ) {
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
 }
+
+export const VACCINATIONS_COLOR_MAP = {
+  INITIATED: COLOR_MAP.NEW_BLUE.MEDIUM_DARK,
+  COMPLETED: COLOR_MAP.NEW_BLUE.DARK,
+};

@@ -141,6 +141,12 @@
       "category": "Testing"
     },
     {
+      "term": "Efficacy",
+      "termId": "efficacy",
+      "definition": "Efficacy measures how well a treatment is able to prevent disease in a clinical trial. Researchers calculate efficacy by looking at the difference in new cases of disease between the treatment and placebo groups. For example, Moderna’s efficacy rate during initial clinical trials was [94.1 percent](https://www.modernatx.com/covid19vaccine-eua/providers/clinical-trial-data). This means that the shot was able to reduce new cases by 94.1 percent in the group of people who received the vaccine, compared to those who received the placebo, during the clinical trial. \n\nEffectiveness, on the other hand, measures how well a treatment works in the real world beyond the specific conditions of the clinical trials. For this reason, effectiveness helps us understand how well the treatment protects people of all health levels and demographic backgrounds.",
+      "category": "Treatment"
+    },
+    {
       "term": "Epidemic",
       "termId": "epidemic",
       "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which is an epidemic occurring over a wide geographic area, often across continents and even worldwide.",
@@ -189,6 +195,12 @@
       "category": "Disease science"
     },
     {
+      "term": "Fully vaccinated",
+      "termId": "fully-vaccinated",
+      "definition": "People are considered fully vaccinated two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection and severe illness.",
+      "category": "Prevention and mitigation"
+    },
+    {
       "definition": "Herd immunity is achieved when a large portion of a community (the herd) becomes immune to a disease, making the spread of disease from person to person unlikely. There are a lot of challenges in relying on natural herd immunity as a method of COVID disease eradication.\n\n* Generally, the percentage of the population that would need to be immune to a disease to achieve herd immunity is estimated to be [at least 60 percent](https://www.thelancet.com/article/S0140-6736(20)32318-7/fulltext).\n* It is [not yet known](https://www.who.int/news-room/commentaries/detail/immunity-passports-in-the-context-of-covid-19) if COVID antibodies protect people from getting reinfected. It is also incredibly difficult to protect vulnerable people, such as people who are [immunocompromised](#immunocompromised) or elderly, and would require continued isolation for these people.\n* No countries have even come close to achieving the percentage of infections necessary to achieve herd immunity for COVID.\n\nThe concept of herd immunity is also used when [talking about vaccination](https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19). With successful vaccination, herd immunity may be achieved by protecting people from COVID without needing vast amounts of people to get sick with COVID. The overall amount of virus that can spread in a population is lowered if the majority of that population gets vaccinated.",
       "term": "Herd immunity",
       "termId": "herd-immunity",
@@ -231,7 +243,7 @@
       "category": "Transmission"
     },
     {
-      "definition": "Infection fatality rate (IFR) is a metric to calculate how deadly a new disease is, based on the  proportion of infected people who will die from the disease. The IFR  should ideally include infected people who don’t get tested or show symptoms. It is difficult to calculate the infection fatality rate of COVID, because we do not know what percentage of people with COVID are [asymptomatic](#asymptomatic) and/or have not been identified as a case. \n\nThe severity of COVID and the chance of dying from COVID depend on a range of factors, including age, underlying health conditions, and racial and socio-economic factors. [Studies](http://ceepr.mit.edu/files/papers/2020-009.pdf) have shown that in the United States, race may be as important a factor as age to gauge how likely a person is to die from COVID. It has been shown that the higher the percentage of Black residents in a county, the higher the county’s death rate from COVID, even when accounting for access to health insurance, use of public transit, and rates of diabetes and obesity.",
+      "definition": "Infection fatality rate (IFR) is a metric to calculate how deadly a new disease is, based on the  proportion of infected people who will die from the disease. The IFR should ideally include infected people who don’t get tested or show symptoms. It is difficult to calculate the infection fatality rate of COVID, because we do not know what percentage of people with COVID are [asymptomatic](#asymptomatic) and/or have not been identified as a case. \n\nThe severity of COVID and the chance of dying from COVID depend on a range of factors, including age, underlying health conditions, and racial and socio-economic factors. [Studies](http://ceepr.mit.edu/files/papers/2020-009.pdf) have shown that in the United States, race may be as important a factor as age to gauge how likely a person is to die from COVID. It has been shown that the higher the percentage of Black residents in a county, the higher the county’s death rate from COVID, even when accounting for access to health insurance, use of public transit, and rates of diabetes and obesity.",
       "term": "Infection fatality rate",
       "termId": "infection-fatality-rate",
       "category": "Metrics"
@@ -485,7 +497,7 @@
     {
       "term": "Vaccine",
       "termId": "vaccine",
-      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of mid December 2020, the [F.D.A has approved two COVID vaccines](https://covidactnow.org/covid-explained/roundup-current-vaccine-progress)--one by Pfizer and one by Moderna--for distribution in the U.S.",
+      "definition": "A vaccine helps protect against certain diseases, stimulating a person's immune system to help them build [immunity](#immunity) against a specific disease. Vaccines are usually administered through needle injections, but can also be administered by mouth or sprayed into the nose.\n\nAs of May 2021, the [F.D.A has approved three COVID vaccines](https://www.fda.gov/consumers/consumer-updates/learn-more-about-covid-19-vaccines-fda)--one by Pfizer, one by Moderna, and one by Johnson & Johnson--for distribution in the U.S.",
       "category": "Treatment"
     },
     {

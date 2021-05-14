@@ -79,6 +79,13 @@ export const StyledMarkdown = styled(MarkdownBody)`
     margin: 0;
   }
 
+  a {
+    text-decoration: underline;
+    &:hover {
+      color: white;
+    }
+  }
+
   ul {
     margin-bottom: 0.5rem;
     a {
@@ -93,7 +100,7 @@ export const StyledMarkdown = styled(MarkdownBody)`
 
 export const TooltipAnchorText = styled.span`
   text-decoration: underline;
-  text-decoration-style: dashed;
+  text-decoration-style: dotted;
   text-underline-offset: 3px;
   cursor: default;
   color: ${COLOR_MAP.GREY_4};

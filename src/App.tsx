@@ -8,13 +8,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import LocationPage from 'screens/LocationPage';
 import Embed from 'screens/Embed/Embed';
-import AllStates from 'screens/internal/AllStates/AllStates';
 import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPhases';
-import CompareSnapshots from 'screens/internal/CompareSnapshots/CompareSnapshots';
-import ExportImage from 'screens/internal/ShareImage/ChartExportImage';
-import ShareImage from 'screens/internal/ShareImage/ShareImage';
-import AlertUnsubscribe from 'screens/AlertUnsubscribe/AlertUnsubscribe';
-import NavBar from 'components/AppBar';
 import Footer from 'components/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
@@ -45,6 +39,23 @@ const Donate = lazy(() => import('screens/Donate/Donate'));
 const DeepDivesRedirect = lazy(() =>
   import('screens/Learn/Articles/DeepDivesRouter'),
 );
+const CompareSnapshots = lazy(() =>
+  import('screens/internal/CompareSnapshots/CompareSnapshots'),
+);
+const AllStates = lazy(() => import('screens/internal/AllStates/AllStates'));
+const ExportImage = lazy(() =>
+  import('screens/internal/ShareImage/ChartExportImage'),
+);
+const ShareImage = lazy(() => import('screens/internal/ShareImage/ShareImage'));
+const AlertUnsubscribe = lazy(() =>
+  import('screens/AlertUnsubscribe/AlertUnsubscribe'),
+);
+const AfterSubscribe = lazy(() =>
+  import('screens/Subscriptions/AfterSubscribe'),
+);
+const AfterUnsubscribe = lazy(() =>
+  import('screens/Subscriptions/AfterUnsubscribe'),
+);
 
 export default function App() {
   return (
@@ -55,7 +66,6 @@ export default function App() {
           <BrowserRouter>
             <PageviewTracker />
             <ScrollToTop />
-            <NavBar />
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
                 <Switch>
@@ -77,6 +87,16 @@ export default function App() {
                     exact
                     path="/alert_unsubscribe"
                     component={AlertUnsubscribe}
+                  />
+                  <Route
+                    exact
+                    path="/after_subscribe"
+                    component={AfterSubscribe}
+                  />
+                  <Route
+                    exact
+                    path="/after_unsubscribe"
+                    component={AfterUnsubscribe}
                   />
                   <Route exact path="/donate" component={Donate} />
 
@@ -258,6 +278,65 @@ export default function App() {
                   <Route
                     path="/internal/export-image/"
                     component={ExportImage}
+                  />
+
+                  {/** Old blog.covidactnow.org URLs that we now redirect to the right places in Learn. */}
+                  <Redirect
+                    from="/covid-contact-tracing-reopening-warning-system"
+                    to="/learn"
+                  />
+                  <Redirect
+                    from="/changes-to-how-we-assess-contact-tracing"
+                    to="/learn"
+                  />
+                  <Redirect from="/types-of-covid-tests" to="/learn" />
+                  <Redirect
+                    from="/covid-act-now-api-intervention-model"
+                    to="/data-api"
+                  />
+                  <Redirect
+                    from="/export-covid-act-now-data-spreadsheet"
+                    to="/data-api"
+                  />
+                  <Redirect
+                    from="/alerting-to-changes-in-covid-risk"
+                    to="/subscribe"
+                  />
+                  <Redirect
+                    from="/covid-infection-rate"
+                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                  />
+                  <Redirect
+                    from="/what-is-covid-incidence"
+                    to="/covid-risk-levels-metrics#daily-new-cases"
+                  />
+                  <Redirect
+                    from="/new-daily-covid-cases"
+                    to="/covid-risk-levels-metrics#daily-new-cases"
+                  />
+                  <Redirect
+                    from="/old-hospitalization-projections"
+                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                  />
+                  <Redirect
+                    from="/daily-new-cases-explained"
+                    to="/covid-risk-levels-metrics#daily-new-cases"
+                  />
+                  <Redirect
+                    from="/test-positivity-explained"
+                    to="/covid-risk-levels-metrics#positive-test-rate"
+                  />
+                  <Redirect
+                    from="/icu-headroom-used-explained"
+                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                  />
+                  <Redirect
+                    from="/infection-rate-explained-2"
+                    to="/covid-risk-levels-metrics#infection-rate"
+                  />
+                  <Redirect
+                    from="/covid-native-american-counties"
+                    to="/covid-explained/covid-spread-native-american"
                   />
 
                   {/** Handle bad paths by redirecting to the root homepage. */}

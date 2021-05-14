@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkItem } from 'cms-content/footer';
-import TextAndIconWithSpecialWrapping from './TextAndIconWithSpecialWrapping';
+import TextAndIconWithSpecialWrapping from 'components/TextAndIconWithSpecialWrapping/TextAndIconWithSpecialWrapping';
 import {
   Section,
   Column,

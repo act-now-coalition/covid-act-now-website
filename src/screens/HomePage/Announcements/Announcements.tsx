@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
 import {
@@ -19,23 +18,16 @@ const Announcements: React.FC = () => {
       </AnnouncementIntro>
       <Date>THURSDAY, Mar 4, 2021</Date>
       <AnnouncementBodyCopy>
-        You can now see which counties and metros are most and least vulnerable.
-        Higher vulnerability areas are more likely to experience severe physical
-        and economic suffering from COVID, and to face a harder, longer
-        recovery.
+        Our vulnerability metric is calculated using government and health data
+        sources. It is a static metric.
         <br />
         <br />
-        As of April 15, 2021, people in the <i>most</i> vulnerable third of U.S.
+        As of May 4, 2021, people in the <i>most</i> vulnerable third of U.S.
         counties are 47 percent more likely to have died from COVID than people
         in the <i>least</i> vulnerable third of U.S. counties.
         <br />
         <br />
-        This is due to a number of factors such as a community members’ income,
-        age, and underlying health, as well as their access to transportation
-        and health care.
-        <br />
-        <br />
-        To calculate vulnerability, we use Surgo Ventures’{' '}
+        Read more about Surgo Ventures’&nbsp;
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -52,8 +44,6 @@ const Announcements: React.FC = () => {
         >
           See the most vulnerable counties
         </HashLink>
-        <br />
-        <Link to="covid-explained/covid-vulnerability-data">Learn more</Link>
       </AnnouncementBodyCopy>
     </Wrapper>
   );

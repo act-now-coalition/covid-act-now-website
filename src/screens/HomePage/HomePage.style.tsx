@@ -27,12 +27,9 @@ export const SectionWrapper = styled.div`
 `;
 
 export const Section = styled.div`
-  margin-bottom: 2.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 3.5rem 1rem;
   @media (min-width: ${mobileBreakpoint}) {
-    margin-left: 0;
-    margin-right: 0;
+    margin: 3.5rem 0;
   }
 `;
 

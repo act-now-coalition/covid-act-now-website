@@ -216,6 +216,7 @@ const SingleLocationChart: React.FC<{
           />
           <DateMarker
             left={dateScale(tooltipData.date) + marginLeft}
+            seriesList={seriesList}
             date={tooltipData.date}
           />
         </Fragment>

@@ -2,12 +2,11 @@ import sum from 'lodash/sum';
 import isNumber from 'lodash/isNumber';
 import partition from 'lodash/partition';
 import { Projection, Column } from 'common/models/Projection';
-import { getLevel, getMetricNameForCompare, formatValue } from 'common/metric';
+import { getMetricNameForCompare, formatValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import {
   FedLevel,
-  HarvardLevel,
   Recommendation,
   RecommendationSource,
   RecommendIcon,
@@ -55,7 +54,6 @@ function getExposureRecommendation(
   return showExposureNotifications(region) ? exposureRecommendation : null;
 }
 
-//TODO (Chelsi): fix the any
 export function getRecommendations(
   region: Region | null,
   recommendations: Recommendation[],
@@ -103,120 +101,6 @@ export function getRecommendations(
 }
 
 /**
- * The Fed Task Force recommendations are based on the total number of new cases in a week
- * per 100k population and the positive tests rate.
- *
- * https://www.nytimes.com/interactive/2020/07/28/us/states-report-virus-response-july-26.html
- */
-export function getFedLevel(projection: Projection): FedLevel | null {
-  const weeklyCasesPer100k = getWeeklyNewCasesPer100k(projection);
-  const positiveTestRate = getPositiveTestRate(projection);
-
-  if (!isNumber(weeklyCasesPer100k) || !isNumber(positiveTestRate)) {
-    return null;
-  }
-
-  const redPosTest = positiveTestRate > 0.1;
-  const redCases = weeklyCasesPer100k > 100;
-  const yellowPosTest = 0.05 < positiveTestRate && positiveTestRate <= 0.1;
-  const yellowCases = 10 < weeklyCasesPer100k && weeklyCasesPer100k <= 100;
-
-  if (redPosTest && redCases) {
-    return FedLevel.RED;
-  } else if ((redPosTest || redCases) && (yellowPosTest || yellowCases)) {
-    return FedLevel.YELLOW;
-  } else if (yellowPosTest && yellowCases) {
-    return FedLevel.YELLOW;
-  } else {
-    return FedLevel.GREEN;
-  }
-}
-
-/**
- * Harvard GLobal Health Institute uses daily new cases per 100k population to determine
- * recommendations for schools and online learning.
- *
- * https://globalepidemics.org/wp-content/uploads/2020/07/pandemic_resilient_schools_briefing_72020.pdf
- */
-export function getHarvardLevel(projection: Projection): HarvardLevel {
-  const currentCaseDensity = projection.getMetricValue(Metric.CASE_DENSITY);
-  const newCasesLevel = getLevel(Metric.CASE_DENSITY, currentCaseDensity);
-
-  switch (newCasesLevel) {
-    case Level.SUPER_CRITICAL:
-    case Level.CRITICAL:
-      return HarvardLevel.RED;
-    case Level.HIGH:
-      return HarvardLevel.ORANGE;
-    case Level.MEDIUM:
-      return HarvardLevel.YELLOW;
-    case Level.LOW:
-      return HarvardLevel.GREEN;
-    default:
-      return HarvardLevel.RED;
-  }
-}
-
-export function getModalCopyWithFedLevel(
-  projection: Projection,
-  locationName: string,
-  metricValues: { [metric in Metric]: number | null },
-): string {
-  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
-  const numCasesPerWeek = getWeeklyNewCasesPer100k(projection);
-  const numCasesperWeekText = formatDecimal(numCasesPerWeek || 0, 1);
-  const positiveTestRate = formatValue(
-    Metric.POSITIVE_TESTS,
-    metricValues[Metric.POSITIVE_TESTS],
-    '',
-  );
-  const positiveTestRateMetricName = getMetricNameForCompare(
-    Metric.POSITIVE_TESTS,
-  ).toLowerCase();
-
-  const fedLevel = getFedLevel(projection)?.toLowerCase();
-
-  if (!hasPositiveTest) {
-    return '';
-  } else {
-    return `${locationName} is in its ${fedLevel} zone with ${numCasesperWeekText} ${casesPerWeekMetricName}
-      and ${positiveTestRate} ${positiveTestRateMetricName}.`;
-  }
-}
-
-export function getModalCopyWithHarvardLevel(
-  projection: Projection,
-  locationName: string,
-  metricValues: { [metric in Metric]: number | null },
-): string {
-  const harvardLevel = getHarvardLevel(projection).toLowerCase();
-  const hasPositiveTest = isNumber(getPositiveTestRate(projection));
-
-  const dailyNewCasesPer100k = formatValue(
-    Metric.CASE_DENSITY,
-    metricValues[Metric.CASE_DENSITY],
-    '',
-  );
-  const newCasesMetricName = getMetricNameForCompare(
-    Metric.CASE_DENSITY,
-  ).toLowerCase();
-  const positiveTestRate = formatValue(
-    Metric.POSITIVE_TESTS,
-    metricValues[Metric.POSITIVE_TESTS],
-    '',
-  );
-  const positiveTestRateMetricName = getMetricNameForCompare(
-    Metric.POSITIVE_TESTS,
-  ).toLowerCase();
-
-  return `${locationName} is in its ${harvardLevel} zone with ${dailyNewCasesPer100k} ${newCasesMetricName}${
-    hasPositiveTest
-      ? ` and ${positiveTestRate} ${positiveTestRateMetricName}`
-      : ''
-  }.`;
-}
-
-/**
  * The Fed Task Force document bases the risk levels on the total number of new
  * cases in a week per 100,000 population.
  */
@@ -236,10 +120,6 @@ function getWeeklyNewCasesPer100k(projection: Projection): number | null {
     sum(dailyNewCases.map(getY)) / (totalPopulation / 100_000);
 
   return isNumber(weeklyNewCasesPer100k) ? weeklyNewCasesPer100k : null;
-}
-
-function getPositiveTestRate(projection: Projection) {
-  return projection.getMetricValue(Metric.POSITIVE_TESTS);
 }
 
 function isBetweenDates(point: Column, dateFrom: Date, dateTo: Date) {
@@ -304,10 +184,11 @@ export const summaryByLevel = {
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
   const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
 
-  const unknownShareQuote = `These are the White House Coronavirus Task Force’s official COVID recommendations for ${locationNameWithAbbreviation}:`;
+  // This needs updating (still mentions WH):
+  const unknownShareQuote = `These are the COVID guidelines set by the CDC:`;
 
   if (alarmLevel === Level.UNKNOWN) {
     return unknownShareQuote;
   }
-  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the White House Coronavirus Task Force’s official recommendations:`;
+  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the COVID guidelines set by the CDC:`;
 }
