@@ -9,11 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
-import ModalFaq from 'components/Compare/ModalFaq';
-import {
-  DivForRef,
-  CenteredContentModal,
-} from 'components/Compare/Compare.style';
+import { DivForRef } from 'components/Compare/Compare.style';
 import {
   getAllStates,
   getAllCounties,
@@ -290,9 +286,6 @@ const CompareMain = (props: {
       <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
-      <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
-        <ModalFaq handleCloseModal={handleCloseModal} />
-      </CenteredContentModal>
       {screenshotReady && <ScreenshotReady />}
     </Fragment>
   );
