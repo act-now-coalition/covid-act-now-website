@@ -40,6 +40,7 @@ export const ArrowIcon = styled(ArrowForwardIosIcon)`
 export const LevelDescription = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 14px;
+  line-height: 150%;
 `;
 
 export const StyledLink = styled(Link)`
@@ -51,8 +52,8 @@ export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
   border: 1px solid ${COLORS.LIGHTGRAY};
-  width: 330px;
-  padding: 1.25rem 1.75rem 1.25rem 1.25rem;
+  width: 296px;
+  padding: 1rem 1.25rem 1rem 1rem;
   border-radius: 4px;
 `;
 

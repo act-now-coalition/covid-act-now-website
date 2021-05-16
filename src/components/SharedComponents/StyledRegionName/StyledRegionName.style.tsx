@@ -11,7 +11,7 @@ export const Wrapper = styled.div<{ $truncateText?: boolean }>`
   font-weight: 500;
   font-size: 1rem;
   ${({ $truncateText }) => ($truncateText ? textEllipsis : '')}
-  line-height: 1.4;
+  line-height: 150%;
 `;
 
 export const Suffix = styled.span`
