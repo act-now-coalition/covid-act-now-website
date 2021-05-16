@@ -8,6 +8,6 @@ export const Wrapper = styled.div`
     width: fit-content;
     padding: 0.75rem 2.25rem;
     border-radius: 4px;
-    margin: 2.25rem auto 0;
+    margin: 2rem auto 0;
   }
 `;

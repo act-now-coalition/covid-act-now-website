@@ -4,6 +4,7 @@ import COLORS, { COLOR_MAP } from 'common/colors';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Skeleton } from '@material-ui/lab';
+import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
@@ -52,9 +53,13 @@ export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
   border: 1px solid ${COLORS.LIGHTGRAY};
-  width: 296px;
+  max-width: 296px;
   padding: 1rem 1.25rem 1rem 1rem;
   border-radius: 4px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: 296px;
+  }
 `;
 
 export const Wrapper = styled.div`
