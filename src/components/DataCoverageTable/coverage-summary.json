@@ -156,13 +156,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2996,
+      "regionsAvailable": 2997,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 390,
+      "regionsAvailable": 391,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -345,13 +345,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3215,
+      "regionsAvailable": 3216,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 390,
+      "regionsAvailable": 391,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -366,13 +366,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3215,
+      "regionsAvailable": 3216,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 390,
+      "regionsAvailable": 391,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -597,13 +597,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3216,
+      "regionsAvailable": 3217,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 390,
+      "regionsAvailable": 391,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -618,13 +618,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3216,
+      "regionsAvailable": 3217,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 390,
+      "regionsAvailable": 391,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -639,13 +639,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 1367,
+      "regionsAvailable": 1368,
       "totalStates": 53,
       "statesAvailable": 20
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 171,
+      "regionsAvailable": 172,
       "totalStates": 0,
       "statesAvailable": 0
     }
