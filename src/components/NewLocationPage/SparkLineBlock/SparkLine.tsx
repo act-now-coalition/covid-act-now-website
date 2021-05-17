@@ -16,6 +16,12 @@ const SparkLineInner: React.FC<{
   width: number;
   height: number;
 }> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
+  // in some cases, the rendered size is 0x0, so don't render.
+  // it doesn't show, it adds a lot of invisible DOM nodes
+  if (width === 0 || height === 0) {
+    return null;
+  }
+
   const maxY = getMaxY(smoothedData);
   const paddingTop = 5;
   const strokeWidth = 2;
@@ -41,6 +47,8 @@ const SparkLineInner: React.FC<{
       <svg width={width} height={height}>
         <g>
           {rawData.map((p: Column) => {
+            // make sure this doesn't come out negative.
+            const barHeight = Math.max(height - getYCoord(p), 0);
             return (
               <rect
                 key={`rect-${p.x}`}
@@ -48,7 +56,7 @@ const SparkLineInner: React.FC<{
                 x={xScale(p.x) - barWidth / 2}
                 y={yScale(p.y)}
                 width={barWidth}
-                height={height - getYCoord(p)}
+                height={barHeight}
               />
             );
           })}
