@@ -1,12 +1,5 @@
 {
-  "teamMembers": [
-    {
-      "profileImgUrl": "/images_cms/gil.png",
-      "fullName": "Gil Rosen",
-      "description": "Enterprise lead",
-      "profileUrl": "https://www.linkedin.com/in/rosengil/"
-    }
-  ],
+  "teamMembers": [],
   "teamName": "Enterprise",
   "teamID": "enterprise"
 }
