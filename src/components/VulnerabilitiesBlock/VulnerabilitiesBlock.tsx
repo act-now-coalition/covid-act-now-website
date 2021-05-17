@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Region } from 'common/regions';
 import ExpandableContainer from 'components/ExpandableContainer';
 import VulnerabilitiesBlockInner from './VulnerabilitiesBlockInner';
-import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
-import { Header } from 'components/Compare/Compare.style';
 import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -12,6 +10,7 @@ import LocationPageSectionFooter from 'components/LocationPageSectionFooter/Loca
 import NewDialog from 'components/NewDialog/NewDialog';
 import { vulnerabilitiesModal } from 'cms-content/modals';
 import { ModalOpenButton } from './VulnerabilitiesBlock.style';
+import { SectionHeader } from 'components/SharedComponents';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
@@ -55,9 +54,7 @@ const VulnerabilitiesBlock: React.FC<{
 
   return (
     <>
-      <Header>
-        <LocationPageSectionHeader>Vulnerabilities</LocationPageSectionHeader>
-      </Header>
+      <SectionHeader>Vulnerabilities</SectionHeader>
       <ExpandableContainer {...containerProps}>
         <VulnerabilitiesBlockInner
           scores={scores}

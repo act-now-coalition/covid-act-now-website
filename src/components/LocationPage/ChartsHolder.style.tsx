@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
-import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
 export const ChartContentWrapper = styled.div`
@@ -12,40 +11,6 @@ export const ChartContentWrapper = styled.div`
   @media print {
     max-width: 7.5in;
     margin: 0 auto;
-  }
-`;
-
-export const HeaderWrapperStyles = css`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 0 0.25rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: column;
-  }
-
-  @media print {
-    page-break-before: always;
-  }
-`;
-
-export const HeaderWrapper = styled.div`
-  ${HeaderWrapperStyles};
-`;
-
-export const LocationPageSectionHeader = styled(Typography).attrs(props => ({
-  component: 'h2',
-}))`
-  font-weight: 700;
-  font-size: 1.5rem;
-  max-width: 440px;
-  line-height: 1.1;
-  width: fit-content;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    max-width: unset;
-    line-height: 1;
   }
 `;
 

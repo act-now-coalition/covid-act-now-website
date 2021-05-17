@@ -21,7 +21,7 @@ export const Container = styled.div<{
 }>`
   display: flex;
   margin: ${({ $isModal }) => $isModal && '1rem auto 0'};
-  padding: ${({ $isModal }) => ($isModal ? '0 0 0 1.75rem' : '0.75rem 0')};
+  padding: ${({ $isModal }) => ($isModal ? '0 0 0 1.75rem' : '0 0 0.75rem')};
   justify-content: ${({ $isHomepage, $isModal }) =>
     $isHomepage && $isModal && 'center'};
   flex-direction: column;
@@ -37,10 +37,6 @@ export const Container = styled.div<{
 export const SliderContainer = styled.div<{ $isModal: boolean }>`
   width: 200px;
   margin-left: ${({ $isModal }) => !$isModal && '1.75rem'};
-
-  @media (min-width: 600px) {
-    margin-left: ${({ $isModal }) => !$isModal && '2rem'};
-  }
 `;
 
 export const GeoSlider = styled(Slider)<{
