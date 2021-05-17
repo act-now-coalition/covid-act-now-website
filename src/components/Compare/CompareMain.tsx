@@ -154,9 +154,7 @@ const CompareMain = (props: {
     : homepageViewMoreCopy;
 
   const [showModal, setShowModal] = useState(false);
-  const [showFaqModal, setShowFaqModal] = useState(false);
   const handleCloseModal = () => {
-    setShowFaqModal(false);
     setShowModal(false);
     scrollToCompare();
   };
@@ -164,7 +162,6 @@ const CompareMain = (props: {
   // Since the route isn't changing when navigating between county pages within the same state, state variables don't reset. This forces a reset:
   useEffect(() => {
     setShowModal(false);
-    setShowFaqModal(false);
     setSorter(Metric.CASE_DENSITY);
     setSortDescending(true);
     setSortByPopulation(true);
@@ -262,7 +259,6 @@ const CompareMain = (props: {
     setSortDescending,
     setSortByPopulation,
     sliderValue,
-    setShowFaqModal,
     createCompareShareId,
     homepageScope,
     setHomepageScope,

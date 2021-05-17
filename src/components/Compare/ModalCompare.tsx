@@ -28,7 +28,6 @@ interface ModalCompareProps {
   sortByPopulation: boolean;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
-  setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
@@ -97,7 +96,6 @@ const ModalCompare = (props: ModalCompareProps) => {
         sortByPopulation={props.sortByPopulation}
         setSortByPopulation={props.setSortByPopulation}
         sliderValue={props.sliderValue}
-        setShowFaqModal={props.setShowFaqModal}
         createCompareShareId={props.createCompareShareId}
         homepageScope={props.homepageScope}
         setHomepageScope={props.setHomepageScope}
