@@ -61,6 +61,8 @@ const MobileWrapperClosed = css`
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`
   ${({ $isOpen }) => ($isOpen ? MobileWrapperOpened : MobileWrapperClosed)};
+  width: 100%;
+  max-width: ${mobileWidth}px;
 
   @media (min-width: ${materialSMBreakpoint}) {
     box-shadow: ${({ $isOpen }) =>
