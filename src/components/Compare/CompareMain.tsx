@@ -9,11 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { Modal } from '@material-ui/core';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
-import ModalFaq from 'components/Compare/ModalFaq';
-import {
-  DivForRef,
-  CenteredContentModal,
-} from 'components/Compare/Compare.style';
+import { DivForRef } from 'components/Compare/Compare.style';
 import {
   getAllStates,
   getAllCounties,
@@ -158,9 +154,7 @@ const CompareMain = (props: {
     : homepageViewMoreCopy;
 
   const [showModal, setShowModal] = useState(false);
-  const [showFaqModal, setShowFaqModal] = useState(false);
   const handleCloseModal = () => {
-    setShowFaqModal(false);
     setShowModal(false);
     scrollToCompare();
   };
@@ -168,7 +162,6 @@ const CompareMain = (props: {
   // Since the route isn't changing when navigating between county pages within the same state, state variables don't reset. This forces a reset:
   useEffect(() => {
     setShowModal(false);
-    setShowFaqModal(false);
     setSorter(Metric.CASE_DENSITY);
     setSortDescending(true);
     setSortByPopulation(true);
@@ -266,7 +259,6 @@ const CompareMain = (props: {
     setSortDescending,
     setSortByPopulation,
     sliderValue,
-    setShowFaqModal,
     createCompareShareId,
     homepageScope,
     setHomepageScope,
@@ -290,9 +282,6 @@ const CompareMain = (props: {
       <Modal open={showModal} onClose={handleCloseModal}>
         <ModalCompare {...sharedProps} handleCloseModal={handleCloseModal} />
       </Modal>
-      <CenteredContentModal open={showFaqModal} onClose={handleCloseModal}>
-        <ModalFaq handleCloseModal={handleCloseModal} />
-      </CenteredContentModal>
       {screenshotReady && <ScreenshotReady />}
     </Fragment>
   );
