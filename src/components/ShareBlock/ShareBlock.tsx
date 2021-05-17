@@ -39,7 +39,6 @@ const ShareBlock = ({
   onClickEmbed,
   projections,
   stats,
-  isLocationPage,
 }: {
   region?: Region;
   shareQuote?: string;
@@ -47,7 +46,6 @@ const ShareBlock = ({
   onClickEmbed?: any;
   projections?: Projections;
   stats?: { [key: string]: number | null };
-  isLocationPage?: boolean;
 }) => {
   const locationPath = useLocation();
   const url = urls.addSharingId(shareURL || 'https://covidactnow.org/');
@@ -87,7 +85,7 @@ const ShareBlock = ({
   return (
     <ShareContainer id="share">
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
-      {!isLocationPage && (
+      {!region && (
         <ShareRow newsletter={false}>
           <ShareRowContentArea
             $isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}

@@ -44,14 +44,9 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
 interface ChartsHolderProps {
   region: Region;
   chartId: string;
-  isLocationPage?: boolean;
 }
 
-const ChartsHolder = ({
-  region,
-  chartId,
-  isLocationPage,
-}: ChartsHolderProps) => {
+const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
 
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
@@ -227,7 +222,6 @@ const ChartsHolder = ({
           region={region}
           projections={projections}
           stats={stats}
-          isLocationPage={isLocationPage}
         />
       </div>
       <HomepageUpsell showHomepageUpsell={showHomepageUpsell} />

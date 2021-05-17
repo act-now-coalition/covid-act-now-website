@@ -6,7 +6,7 @@ import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from './SocialButtonBlock';
 import { Region } from 'common/regions';
 
-const ShareImageButtons: React.FC<{
+const ShareButtonGroup: React.FC<{
   imageUrl: string | (() => Promise<string>);
   imageFilename: string;
   url: string | (() => Promise<string>);
@@ -83,4 +83,4 @@ const ShareImageButtons: React.FC<{
   );
 };
 
-export default ShareImageButtons;
+export default ShareButtonGroup;
