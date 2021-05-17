@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import FacebookShareButton from './FacebookShareButton';
 import TwitterShareButton from './TwitterShareButton';
 import CopyLinkButton from './CopyLinkButton';
@@ -52,7 +52,7 @@ const SocialButtonBlock: React.FC<{
           disableTouchRipple
           onClick={() => setShowEmbedPreviewModal(true)}
         >
-          <Fragment>Embed</Fragment>
+          Embed
         </SocialButton>
         <EmbedPreview
           open={showEmbedPreviewModal}

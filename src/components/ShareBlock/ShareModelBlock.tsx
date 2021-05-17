@@ -11,12 +11,14 @@ interface ShareModelBlockParams {
   region?: Region;
   projections?: Projections;
   stats?: any;
+  isLocationPage?: boolean;
 }
 
 const ShareModelBlock = ({
   region,
   projections,
   stats,
+  isLocationPage,
 }: ShareModelBlockParams) => {
   const { displayName, shareURL } = getUrlAndShareQuote(region);
   const shareQuote = `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
@@ -30,6 +32,7 @@ const ShareModelBlock = ({
         projections={projections}
         onClickEmbed={() => setShowEmbedPreviewModal(true)}
         stats={stats}
+        isLocationPage={isLocationPage}
       />
       {/* todo: add region to this. county={county} */}
       <EmbedPreview

@@ -33,7 +33,7 @@ function WithSearchInNav({ region }: LocationPageProps) {
         hasScrolled={hasScrolled}
         region={region}
       />
-      <ChartsHolder chartId={chartId} region={region} />
+      <ChartsHolder chartId={chartId} region={region} isLocationPage={true} />
     </>
   );
 }

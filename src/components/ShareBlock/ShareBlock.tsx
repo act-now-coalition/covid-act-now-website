@@ -39,6 +39,7 @@ const ShareBlock = ({
   onClickEmbed,
   projections,
   stats,
+  isLocationPage,
 }: {
   region?: Region;
   shareQuote?: string;
@@ -46,6 +47,7 @@ const ShareBlock = ({
   onClickEmbed?: any;
   projections?: Projections;
   stats?: { [key: string]: number | null };
+  isLocationPage?: boolean;
 }) => {
   const locationPath = useLocation();
   const url = urls.addSharingId(shareURL || 'https://covidactnow.org/');
@@ -85,80 +87,82 @@ const ShareBlock = ({
   return (
     <ShareContainer id="share">
       <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
-      <ShareRow newsletter={false}>
-        <ShareRowContentArea
-          $isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
-        >
-          <SocialTextAreaWrapper id="shareblock">
-            <SocialTextArea>
-              <ShareInstructionHeader>
-                Share COVID risk in your community
-              </ShareInstructionHeader>
-              <ShareInstructionBody>
-                Share real-time, local COVID data with your neighbors, friends,
-                and family.
-              </ShareInstructionBody>
-              <ShareButtonContainer reflow>
-                <StyledShareButton variant="contained" color="#3b5998">
-                  <FacebookShareButton
-                    url={url}
-                    quote={quote}
-                    beforeOnClick={() => {
-                      trackShare('facebook');
-                      return Promise.resolve();
-                    }}
-                  >
-                    <FacebookIcon
-                      size={40}
-                      round={false}
-                      bgStyle={{ fill: 'auto' }}
-                    />
-                  </FacebookShareButton>
-                </StyledShareButton>
-                <StyledShareButton variant="contained" color="#00acee">
-                  <TwitterShareButton
-                    url={url}
-                    title={quote}
-                    hashtags={[hashtag]}
-                    beforeOnClick={() => {
-                      trackShare('twitter');
-                      return Promise.resolve();
-                    }}
-                  >
-                    <TwitterIcon
-                      size={40}
-                      round={false}
-                      bgStyle={{ fill: 'auto' }}
-                    />
-                  </TwitterShareButton>
-                </StyledShareButton>
-                <StyledShareButton variant="contained" color="#007fb1">
-                  <LinkedinShareButton
-                    url={url}
-                    title={quote}
-                    // @ts-ignore: seems to not be available for linkedin?
-                    hashtags={[hashtag]}
-                    beforeOnClick={() => {
-                      trackShare('linkedin');
-                      return Promise.resolve();
-                    }}
-                  >
-                    <LinkedinIcon
-                      size={40}
-                      round={false}
-                      bgStyle={{ fill: 'auto' }}
-                    />
-                  </LinkedinShareButton>
-                </StyledShareButton>
-              </ShareButtonContainer>
-              <EmbedPrompt>
-                Or <span onClick={onClickEmbed}>embed on your website</span>
-              </EmbedPrompt>
-            </SocialTextArea>
-          </SocialTextAreaWrapper>
-          <SocialMockupWrapper>{SocialPreview}</SocialMockupWrapper>
-        </ShareRowContentArea>
-      </ShareRow>
+      {!isLocationPage && (
+        <ShareRow newsletter={false}>
+          <ShareRowContentArea
+            $isMatchingProjectionsRoute={isMatchingProjectionsRoute !== null}
+          >
+            <SocialTextAreaWrapper id="shareblock">
+              <SocialTextArea>
+                <ShareInstructionHeader>
+                  Share COVID risk in your community
+                </ShareInstructionHeader>
+                <ShareInstructionBody>
+                  Share real-time, local COVID data with your neighbors,
+                  friends, and family.
+                </ShareInstructionBody>
+                <ShareButtonContainer reflow>
+                  <StyledShareButton variant="contained" color="#3b5998">
+                    <FacebookShareButton
+                      url={url}
+                      quote={quote}
+                      beforeOnClick={() => {
+                        trackShare('facebook');
+                        return Promise.resolve();
+                      }}
+                    >
+                      <FacebookIcon
+                        size={40}
+                        round={false}
+                        bgStyle={{ fill: 'auto' }}
+                      />
+                    </FacebookShareButton>
+                  </StyledShareButton>
+                  <StyledShareButton variant="contained" color="#00acee">
+                    <TwitterShareButton
+                      url={url}
+                      title={quote}
+                      hashtags={[hashtag]}
+                      beforeOnClick={() => {
+                        trackShare('twitter');
+                        return Promise.resolve();
+                      }}
+                    >
+                      <TwitterIcon
+                        size={40}
+                        round={false}
+                        bgStyle={{ fill: 'auto' }}
+                      />
+                    </TwitterShareButton>
+                  </StyledShareButton>
+                  <StyledShareButton variant="contained" color="#007fb1">
+                    <LinkedinShareButton
+                      url={url}
+                      title={quote}
+                      // @ts-ignore: seems to not be available for linkedin?
+                      hashtags={[hashtag]}
+                      beforeOnClick={() => {
+                        trackShare('linkedin');
+                        return Promise.resolve();
+                      }}
+                    >
+                      <LinkedinIcon
+                        size={40}
+                        round={false}
+                        bgStyle={{ fill: 'auto' }}
+                      />
+                    </LinkedinShareButton>
+                  </StyledShareButton>
+                </ShareButtonContainer>
+                <EmbedPrompt>
+                  Or <span onClick={onClickEmbed}>embed on your website</span>
+                </EmbedPrompt>
+              </SocialTextArea>
+            </SocialTextAreaWrapper>
+            <SocialMockupWrapper>{SocialPreview}</SocialMockupWrapper>
+          </ShareRowContentArea>
+        </ShareRow>
+      )}
     </ShareContainer>
   );
 };
