@@ -15,12 +15,6 @@
       "profileUrl": "https://www.linkedin.com/in/tomdbrown/"
     },
     {
-      "profileImgUrl": "/images_cms/chasecoleman.jpeg",
-      "fullName": "Chase Coleman",
-      "description": "Data engineering ",
-      "profileUrl": "https://www.linkedin.com/in/chasegcoleman/"
-    },
-    {
       "profileImgUrl": "/images_cms/faihegberg.jpeg",
       "fullName": "Fai Hegberg",
       "description": "Front-end engineering",
@@ -73,12 +67,6 @@
       "fullName": "Derek Stevenson",
       "description": "Engineering",
       "profileUrl": "https://www.linkedin.com/in/derekstevenson/"
-    },
-    {
-      "profileImgUrl": "/images_cms/christopherturner.jpeg",
-      "fullName": "Christopher Turner",
-      "description": "Data engineering",
-      "profileUrl": "https://www.linkedin.com/in/christophermatthewturner/"
     },
     {
       "profileImgUrl": "/images_cms/mime-cuvalo.jpg",
