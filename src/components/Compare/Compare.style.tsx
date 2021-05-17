@@ -459,25 +459,6 @@ export const FooterLink = styled.div`
   ${FooterLinkStyles}
 `;
 
-export const HeaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Header = styled.div<{ isHomepage?: boolean }>`
-  display: flex;
-  font-family: Roboto;
-  font-weight: bold;
-  font-size: 1.5rem;
-  justify-content: space-between;
-  margin: ${({ isHomepage }) => (isHomepage ? '12px 0 0' : '0 0 12px')};
-
-  @media (min-width: 600px) {
-    font-size: ${({ isHomepage }) => (isHomepage ? '2rem' : '1.5rem')};
-    margin: ${({ isHomepage }) => (isHomepage ? '0' : '0 0 12px')};
-  }
-`;
-
 export const ModalHeader = styled.div<{ isHomepage?: boolean }>`
   background-color: ${COLOR_MAP.GRAY_BODY_COPY};
   color: white;

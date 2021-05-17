@@ -2,19 +2,16 @@ import React from 'react';
 import { mainContent } from 'cms-content/recommendations';
 import Recommend from 'components/Recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
-import { Header } from 'components/Compare/Compare.style';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
 import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
-import {
-  DisclaimerWrapper,
-  LocationPageSectionHeader,
-} from 'components/LocationPage/ChartsHolder.style';
+import { DisclaimerWrapper } from 'components/LocationPage/ChartsHolder.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
 import { Projections } from 'common/models/Projections';
 import { getRecommendationsShareUrl } from 'common/urls';
 import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import { Region } from 'common/regions';
+import { SectionHeader } from 'components/SharedComponents';
 
 interface RecommendationsProps {
   projections: Projections;
@@ -56,9 +53,7 @@ const Recommendations = ({
 
   return (
     <>
-      <Header id="recommendations">
-        <LocationPageSectionHeader>Recommendations</LocationPageSectionHeader>
-      </Header>
+      <SectionHeader id="recommendations">Recommendations</SectionHeader>
       <ExpandableContainer {...containerProps}>
         <Recommend
           recommendations={recommendationsMainContent}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Region } from 'common/regions';
-import { Heading2 } from 'components/Markdown';
 import { getEligibilityInfo, getRegionState } from './utils';
 import {
   Container,
@@ -10,6 +9,7 @@ import {
   EligibleListContainer,
 } from './VaccinationEligibilityBlock.style';
 import ButtonBlock from './ButtonBlock';
+import { SectionHeader } from 'components/SharedComponents';
 
 const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
   region,
@@ -22,7 +22,7 @@ const VaccinationEligibilityBlock: React.FC<{ region: Region }> = ({
 
   return (
     <Container>
-      <Heading2 style={{ marginTop: 0 }}>Vaccine eligibility</Heading2>
+      <SectionHeader>Vaccine eligibility</SectionHeader>
       <Section>
         <EligibleListContainer>
           <EligibleList>
