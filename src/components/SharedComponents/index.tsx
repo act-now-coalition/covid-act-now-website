@@ -8,5 +8,6 @@ them separate for future use, so...
 import SwitchComponent from './SwitchComponent';
 import StyledAccordion from './Accordion';
 import StyledRegionName from './StyledRegionName/StyledRegionName';
+import { SectionHeader } from './SharedComponents.style';
 
-export { SwitchComponent, StyledAccordion, StyledRegionName };
+export { SwitchComponent, StyledAccordion, StyledRegionName, SectionHeader };

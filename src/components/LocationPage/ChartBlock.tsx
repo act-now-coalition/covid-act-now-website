@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  LocationPageSectionHeader,
   ChartDescription,
   BetaTag,
-  HeaderWrapper,
   DisclaimerWrapper,
 } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
@@ -21,6 +19,7 @@ import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { MarkdownContent } from 'components/Markdown';
 import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
+import { SectionHeader } from 'components/SharedComponents';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
@@ -49,13 +48,11 @@ function ChartBlock(props: {
 
   return (
     <>
-      <HeaderWrapper>
-        <LocationPageSectionHeader ref={props.chartRef}>
-          {getMetricNameExtended(metric)}
-          <>{chartHeaderTooltip}</>
-          {showBetaTag && <BetaTag>New</BetaTag>}
-        </LocationPageSectionHeader>
-      </HeaderWrapper>
+      <SectionHeader ref={props.chartRef}>
+        {getMetricNameExtended(metric)}
+        <>{chartHeaderTooltip}</>
+        {showBetaTag && <BetaTag>New</BetaTag>}
+      </SectionHeader>
       <ChartDescription>
         {getMetricStatusText(metric, projections)}
       </ChartDescription>

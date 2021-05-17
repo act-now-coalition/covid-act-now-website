@@ -18,6 +18,6 @@ export const Title = styled(GrayTitle)`
 
   @media (min-width: ${materialSMBreakpoint}) {
     display: inherit;
-    margin: 0 0 0.75rem;
+    margin: 0 0 1rem;
   }
 `;
