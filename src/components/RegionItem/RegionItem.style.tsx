@@ -4,7 +4,7 @@ import COLORS, { COLOR_MAP } from 'common/colors';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Skeleton } from '@material-ui/lab';
-import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
@@ -22,10 +22,22 @@ export const CopyContainer = styled.div`
   overflow: hidden;
 `;
 
+// The 0.5px margin-top is to get the dot to align to the center of the text :facepalm:
+export const LevelContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  line-height: 1rem;
+
+  &:first-child {
+    margin-top: 0.5px;
+  }
+`;
+
 export const IconContainer = styled.div`
   flex: 0 0 auto;
   &:first-child {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
   &:last-child {
     margin-left: 1rem;
@@ -54,7 +66,7 @@ export const SharedWrapperStyles = css`
   align-items: center;
   border: 1px solid ${COLORS.LIGHTGRAY};
   max-width: 296px;
-  padding: 1rem 1.25rem 1rem 1rem;
+  padding: 1rem 1.25rem 1rem 1.25rem;
   border-radius: 4px;
 
   @media (min-width: ${materialSMBreakpoint}) {

@@ -3,11 +3,6 @@ import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
-import {
-  StyledLink,
-  SkeletonWrapper,
-} from 'components/RegionItem/RegionItem.style';
-import { Wrapper } from 'components/SharedComponents/StyledRegionName/StyledRegionName.style';
 
 export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
   display: flex;
