@@ -63,12 +63,6 @@
       "profileImgUrl": "/images_cms/pablo.jpeg"
     },
     {
-      "profileImgUrl": "/images_cms/joerybacek.jpeg",
-      "fullName": "Joe Rybacek",
-      "profileUrl": "https://www.linkedin.com/in/joe-rybacek/",
-      "description": "Data engineering"
-    },
-    {
       "profileImgUrl": "/images_cms/copy-of-andrewschamp.jpeg",
       "fullName": "Andrew Schamp",
       "description": "Engineering",
@@ -91,12 +85,6 @@
       "fullName": "Christopher Turner",
       "description": "Data engineering",
       "profileUrl": "https://www.linkedin.com/in/christophermatthewturner/"
-    },
-    {
-      "profileImgUrl": "/images_cms/zethweissman.jpeg",
-      "fullName": "Zeth Weissman",
-      "description": "Data engineering",
-      "profileUrl": "https://www.linkedin.com/in/zeth-weissman-b010271/"
     },
     {
       "profileImgUrl": "/images_cms/mime-cuvalo.jpg",
