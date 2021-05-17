@@ -20,12 +20,11 @@ const HomepageUpsell: React.FC<{ showHomepageUpsell: boolean }> = ({
   showHomepageUpsell,
 }) => {
   return (
-    // Switch back before merging
     <Experiment id={ExperimentID.HOMEPAGE_UPSELL}>
-      <Variant id={VariantID.B}>
+      <Variant id={VariantID.A}>
         <Fragment />
       </Variant>
-      <Variant id={VariantID.A}>
+      <Variant id={VariantID.B}>
         {showHomepageUpsell && (
           <Slide in={showHomepageUpsell} direction="up">
             <Wrapper>
