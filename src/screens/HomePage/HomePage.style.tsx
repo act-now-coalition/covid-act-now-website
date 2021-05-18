@@ -3,17 +3,11 @@ import { Box } from '@material-ui/core';
 import palette from 'assets/theme/palette';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
-import {
-  StyledLink,
-  SkeletonWrapper,
-} from 'components/RegionItem/RegionItem.style';
-import { Wrapper } from 'components/SharedComponents/StyledRegionName/StyledRegionName.style';
 
 export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
   display: flex;
   margin: ${({ $topBottomSpacing }) =>
     $topBottomSpacing ? '1rem auto' : 'auto'};
-  width: fit-content;
   flex-direction: column;
 `;
 
@@ -33,32 +27,22 @@ export const Section = styled.div`
   }
 `;
 
+// zero right margin so that it's full bleed on mobile when overflowing
 export const RegionItemsWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  width: fit-content;
-  margin: auto;
-  margin-top: 1rem;
-
-  ${Wrapper}{
-    font-size: 1.125rem;
-  }
-
-  ${StyledLink},${SkeletonWrapper} {
-    &:last-of-type {
-      margin: .5rem 0 2.5rem;
-    }
-  }
+  flex-direction: row;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  margin-bottom: 2.25rem;
+  margin-left: 1rem;
+  margin-right: 0;
+  flex: 1;
+  overflow-x: auto;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
-    margin-top: 2.5rem;
-
-    ${StyledLink},${SkeletonWrapper} {
-      &:last-of-type {
-        margin: 0 0 0 1.5rem;
-      }
-    }
+    margin: auto;
+    margin-top: 0.75rem;
   }
 `;
 
