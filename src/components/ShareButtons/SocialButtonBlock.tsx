@@ -33,29 +33,52 @@ const SocialButtonBlock: React.FC<{
     socialIconSize,
   };
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
+  const [shareButtonClicked, setShareButtonClicked] = useState(false);
+  function closeShareButtonGroup() {
+    setTimeout(() => setShareButtonClicked(true), 1000);
+  }
   return (
-    <SocialButtonsContainer>
-      <FacebookShareButton
-        onClickShare={onShareOnFacebook}
-        {...socialSharingProps}
-      />
-      <TwitterShareButton
-        onClickShare={onShareOnTwitter}
-        {...socialSharingProps}
-        hashtags={['COVIDActNow']}
-      />
-      <CopyLinkButton url={socialSharingProps.url} onCopyLink={onCopyLink} />
-      <SocialShareButton variant="contained" color="#007fb1">
-        <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
-          Embed
-        </SocialButton>
-        <EmbedPreview
-          open={showEmbedPreviewModal}
-          onClose={() => setShowEmbedPreviewModal(false)}
-          region={region}
-        />
-      </SocialShareButton>
-    </SocialButtonsContainer>
+    <>
+      {!shareButtonClicked && (
+        <SocialButtonsContainer>
+          <FacebookShareButton
+            onClickShare={() => {
+              onShareOnFacebook();
+              closeShareButtonGroup();
+            }}
+            {...socialSharingProps}
+          />
+          <TwitterShareButton
+            onClickShare={() => {
+              onShareOnTwitter();
+              closeShareButtonGroup();
+            }}
+            {...socialSharingProps}
+            hashtags={['COVIDActNow']}
+          />
+          <CopyLinkButton
+            url={socialSharingProps.url}
+            onCopyLink={() => {
+              onCopyLink();
+              closeShareButtonGroup();
+            }}
+          />
+          <SocialShareButton variant="contained" color="#007fb1">
+            <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
+              Embed
+            </SocialButton>
+            <EmbedPreview
+              open={showEmbedPreviewModal}
+              onClose={() => {
+                setShowEmbedPreviewModal(false);
+                closeShareButtonGroup();
+              }}
+              region={region}
+            />
+          </SocialShareButton>
+        </SocialButtonsContainer>
+      )}
+    </>
   );
 };
 

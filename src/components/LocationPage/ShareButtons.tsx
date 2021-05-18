@@ -31,11 +31,7 @@ const ShareButtons: React.FC<{
   return (
     <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
       <Wrapper>
-        <ShareButton
-          onClickShare={() => {
-            setShowShareIcons(!showShareIcons);
-          }}
-        />
+        <ShareButton onClickShare={() => setShowShareIcons(!showShareIcons)} />
         {showShareIcons && (
           <SocialButtons
             iconSize={40}
