@@ -27,6 +27,7 @@ export const Section = styled.div`
   }
 `;
 
+// zero right margin so that it's full bleed on mobile when overflowing
 export const RegionItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -34,7 +35,7 @@ export const RegionItemsWrapper = styled.div`
   margin-top: 0.75rem;
   margin-bottom: 2.25rem;
   margin-left: 1rem;
-  margin-right: 1rem;
+  margin-right: 0;
   flex: 1;
   overflow-x: auto;
 

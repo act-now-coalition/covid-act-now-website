@@ -15,7 +15,7 @@ export interface SearchbarTheme {
 }
 
 export const searchbar: SearchbarTheme = {
-  mobileClosedWidth: `${mobileWidth}px`,
+  mobileClosedWidth: '100%',
   mobileClosedPadding: '0.75rem 0.5rem 1rem',
   mobileClosedMaxWidth: 'unset',
   mobileClosedMarginLeft: '0',

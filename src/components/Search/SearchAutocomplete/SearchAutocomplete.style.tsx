@@ -56,13 +56,11 @@ const MobileWrapperClosed = css`
   width: ${props => props.theme.searchbar.mobileClosedWidth};
   padding: ${props => props.theme.searchbar.mobileClosedPadding};
   max-width: ${props => props.theme.searchbar.mobileClosedMaxWidth};
-  margin: auto;
+  margin-left: $(props => props.theme.searchbar.mobileClosedMarginLeft);
 `;
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`
   ${({ $isOpen }) => ($isOpen ? MobileWrapperOpened : MobileWrapperClosed)};
-  width: 100%;
-  max-width: ${mobileWidth}px;
 
   @media (min-width: ${materialSMBreakpoint}) {
     box-shadow: ${({ $isOpen }) =>

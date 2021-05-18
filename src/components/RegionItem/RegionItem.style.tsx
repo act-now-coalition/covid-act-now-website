@@ -6,6 +6,8 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Skeleton } from '@material-ui/lab';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
+const regionItemWidth = '296px';
+
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
   font-size: 1rem;
@@ -65,12 +67,12 @@ export const SharedWrapperStyles = css`
   display: flex;
   align-items: center;
   border: 1px solid ${COLORS.LIGHTGRAY};
-  max-width: 296px;
+  max-width: ${regionItemWidth};
   padding: 1rem 1.25rem 1rem 1.25rem;
   border-radius: 4px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    width: 296px;
+    width: ${regionItemWidth};
   }
 `;
 
