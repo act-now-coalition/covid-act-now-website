@@ -1,5 +1,3 @@
-import { mobileWidth } from 'components/Search/SearchAutocomplete/SearchAutocomplete.style';
-
 /**
  * Used for the searchbar on the homepage + in the navbar across the site
  *
