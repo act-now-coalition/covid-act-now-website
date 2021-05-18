@@ -149,14 +149,9 @@
           "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated. \n2. **Number of shots**: For the Pfizer and Moderna vaccines, we require two shots to consider someone as having completed vaccination. This stays close to the available science and the advice of experts, including many of our advisors. The J&J vaccine is designed to only require one shot to count as completed.\n3. **Permanence of immunity**: Until we know more, we assume that someone who has completed vaccination stays immune for the foreseeable future, and we do not try to estimate waning immunity. \n4. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n5. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public."
         },
         {
-          "question": "More information on % vaccinated",
-          "questionId": "more-info-percent-vaccinated",
-          "answer": "[Why is % vaccinated important?](https://covidactnow.org/faq#why-percent-vaccinated-important)"
-        },
-        {
           "question": "More information on COVID vaccines",
           "questionId": "more-info-vaccines",
-          "answer": "[Sign up for vaccine eligibility updates in locations of your choice](https://covidactnow.org/alert_signup)\n\n[Information on vaccine safety, eligibility, and immunity](https://covidactnow.org/faq#vaccines)\n\n[Variants and Vaccines ](https://covidactnow.org/covid-explained/covid-variants-vaccines)\n\n[A Round up of Current Vaccine Progress](https://covidactnow.org/covid-explained/roundup-current-vaccine-progress)\n\n[The Basics of COVID Vaccine Development](https://covidactnow.org/covid-explained/covid-vaccine-basics)"
+          "answer": "[Information on vaccine safety, eligibility, and immunity](https://covidactnow.org/faq#vaccines)\n\n[Variants and Vaccines ](https://covidactnow.org/covid-explained/covid-variants-vaccines)\n\n[A Round up of Current Vaccine Progress](https://covidactnow.org/covid-explained/roundup-current-vaccine-progress)\n\n[The Demographic Make-Up of COVID Vaccine Trials](https://covidactnow.org/covid-explained/covid-vaccine-trials)\n\n[The Basics of COVID Vaccine Development](https://covidactnow.org/covid-explained/covid-vaccine-basics)"
         }
       ]
     },
