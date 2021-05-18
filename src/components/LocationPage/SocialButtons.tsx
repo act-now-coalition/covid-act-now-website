@@ -48,14 +48,14 @@ const SocialButtons = ({
 
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
-  const [shareButtonClicked, setShareButtonClicked] = useState(false);
+  const [shareMenuOpen, setShareMenuOpen] = useState(false);
   function closeShareButtonGroup() {
-    setTimeout(() => setShareButtonClicked(true), 1000);
+    setTimeout(() => setShareMenuOpen(!shareMenuOpen), 1000);
   }
 
   return (
     <>
-      {!shareButtonClicked && (
+      {!shareMenuOpen && (
         <SocialButtonsContainer>
           <SocialShareButton
             {...buttonProps}
