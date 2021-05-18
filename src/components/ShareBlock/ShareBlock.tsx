@@ -2,10 +2,8 @@ import React from 'react';
 import {
   FacebookShareButton,
   TwitterShareButton,
-  LinkedinShareButton,
   FacebookIcon,
   TwitterIcon,
-  LinkedinIcon,
 } from 'react-share';
 import { matchPath, useLocation } from 'react-router';
 
@@ -132,24 +130,6 @@ const ShareBlock = ({
                         bgStyle={{ fill: 'auto' }}
                       />
                     </TwitterShareButton>
-                  </StyledShareButton>
-                  <StyledShareButton variant="contained" color="#007fb1">
-                    <LinkedinShareButton
-                      url={url}
-                      title={quote}
-                      // @ts-ignore: seems to not be available for linkedin?
-                      hashtags={[hashtag]}
-                      beforeOnClick={() => {
-                        trackShare('linkedin');
-                        return Promise.resolve();
-                      }}
-                    >
-                      <LinkedinIcon
-                        size={40}
-                        round={false}
-                        bgStyle={{ fill: 'auto' }}
-                      />
-                    </LinkedinShareButton>
                   </StyledShareButton>
                 </ShareButtonContainer>
                 <EmbedPrompt>

@@ -46,12 +46,7 @@ const SocialButtonBlock: React.FC<{
       />
       <CopyLinkButton url={socialSharingProps.url} onCopyLink={onCopyLink} />
       <SocialShareButton variant="contained" color="#007fb1">
-        <SocialButton
-          disableRipple
-          disableFocusRipple
-          disableTouchRipple
-          onClick={() => setShowEmbedPreviewModal(true)}
-        >
+        <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
           Embed
         </SocialButton>
         <EmbedPreview

@@ -39,6 +39,9 @@ export const SocialButtonsContainer = styled.div`
 
 export const SocialButton = styled(Button).attrs(props => ({
   disableElevation: true,
+  disableRipple: true,
+  disableFocusRipple: true,
+  disableTouchRipple: true,
 }))`
   width: 60px;
   height: 42px;
