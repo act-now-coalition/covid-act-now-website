@@ -21,12 +21,6 @@
       "profileImgUrl": "/images_cms/amandafassler.jpeg"
     },
     {
-      "fullName": "Jordan Dunaway-Barlow",
-      "profileUrl": "https://www.linkedin.com/in/jordandunawaybarlow/",
-      "description": "",
-      "profileImgUrl": "/images_cms/jordandunaway-barlow.jpeg"
-    },
-    {
       "fullName": "Jillian Graver",
       "profileUrl": "https://www.linkedin.com/in/jilliangraver/",
       "description": "",
@@ -36,6 +30,11 @@
       "profileImgUrl": "/images_cms/ryan-headshot.png",
       "fullName": "Ryan Fuentes",
       "profileUrl": "https://www.linkedin.com/in/ryan-fuentes-0944301a7/"
+    },
+    {
+      "profileImgUrl": "/images_cms/natmarkey.jpeg",
+      "fullName": "Nat Markey",
+      "profileUrl": "https://www.linkedin.com/in/nat-markey-80a5a31a4/"
     }
   ]
 }
