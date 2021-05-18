@@ -76,6 +76,7 @@ const ShareButtonGroup: React.FC<{
             onShareOnFacebook={onShareOnFacebook}
             onShareOnTwitter={onShareOnTwitter}
             onCopyLink={onCopyLink}
+            hideSocialButton={() => hideSocialButtons(0)}
           />
         )}
       </div>

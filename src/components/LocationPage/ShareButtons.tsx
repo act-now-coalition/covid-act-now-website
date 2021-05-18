@@ -8,6 +8,7 @@ import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import * as urls from 'common/urls';
 import { Region } from 'common/regions';
 import type { MetricValues } from 'common/models/Projections';
+import { useEscToClose } from 'common/hooks';
 
 const ShareButtons: React.FC<{
   region: Region;
@@ -26,18 +27,28 @@ const ShareButtons: React.FC<{
     urlJoin(shareBaseURL, `chart/${chartIdentifier}`),
   );
 
-  const [showShareIcons, setShowShareIcons] = useState(false);
+  const [showSocialButtons, setShowSocialButtons] = useState(false);
+
+  const hideSocialButtons = () => {
+    const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
+    return () => clearTimeout(timeoutId);
+  };
+
+  useEscToClose(hideSocialButtons);
 
   return (
-    <ClickAwayListener onClickAway={() => setShowShareIcons(false)}>
+    <ClickAwayListener onClickAway={() => setShowSocialButtons(false)}>
       <Wrapper>
-        <ShareButton onClickShare={() => setShowShareIcons(!showShareIcons)} />
-        {showShareIcons && (
+        <ShareButton
+          onClickShare={() => setShowSocialButtons(!showSocialButtons)}
+        />
+        {showSocialButtons && (
           <SocialButtons
             iconSize={40}
             shareURL={shareURL}
             shareQuote={shareQuote}
             region={region}
+            hideSocialButtons={() => hideSocialButtons()}
           />
         )}
       </Wrapper>

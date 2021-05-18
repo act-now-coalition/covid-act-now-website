@@ -20,11 +20,13 @@ const SocialButtons = ({
   shareURL,
   shareQuote,
   region,
+  hideSocialButtons,
 }: {
   iconSize: number;
   shareURL: string;
   shareQuote: string;
   region: Region;
+  hideSocialButtons: () => void;
 }) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
@@ -48,68 +50,63 @@ const SocialButtons = ({
 
   const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
 
-  const [shareMenuOpen, setShareMenuOpen] = useState(false);
   function closeShareButtonGroup() {
-    setTimeout(() => setShareMenuOpen(!shareMenuOpen), 1000);
+    setTimeout(() => hideSocialButtons(), 1000);
   }
 
   return (
-    <>
-      {!shareMenuOpen && (
-        <SocialButtonsContainer>
-          <SocialShareButton
-            {...buttonProps}
-            color="#3b5998"
-            onClick={closeShareButtonGroup}
-          >
-            <FacebookShareButton url={url} quote={quote}>
-              <FacebookIcon {...iconProps} />
-            </FacebookShareButton>
-          </SocialShareButton>
-          <SocialShareButton
-            {...buttonProps}
-            color="#00acee"
-            onClick={closeShareButtonGroup}
-          >
-            <TwitterShareButton url={url} hashtags={[hashtag]} title={quote}>
-              <TwitterIcon {...iconProps} />
-            </TwitterShareButton>
-          </SocialShareButton>
-          <CopyToClipboard
-            text={url}
-            onCopy={() => {
-              setCopyLinkButtonTextA('Copied!');
-              setCopyLinkButtonTextB('');
-            }}
-          >
-            <SocialShareButton
-              {...buttonProps}
-              color="#007fb1"
-              onClick={closeShareButtonGroup}
-            >
-              <CopyLinkButton>
-                {copyLinkButtonTextA}
-                <br />
-                {copyLinkButtonTextB}
-              </CopyLinkButton>
-            </SocialShareButton>
-          </CopyToClipboard>
-          <SocialShareButton variant="contained" color="#007fb1">
-            <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
-              Embed
-            </SocialButton>
-            <EmbedPreview
-              open={showEmbedPreviewModal}
-              onClose={() => {
-                setShowEmbedPreviewModal(false);
-                closeShareButtonGroup();
-              }}
-              region={region}
-            />
-          </SocialShareButton>
-        </SocialButtonsContainer>
-      )}
-    </>
+    <SocialButtonsContainer>
+      <SocialShareButton
+        {...buttonProps}
+        color="#3b5998"
+        onClick={closeShareButtonGroup}
+      >
+        <FacebookShareButton url={url} quote={quote}>
+          <FacebookIcon {...iconProps} />
+        </FacebookShareButton>
+      </SocialShareButton>
+      <SocialShareButton
+        {...buttonProps}
+        color="#00acee"
+        onClick={closeShareButtonGroup}
+      >
+        <TwitterShareButton url={url} hashtags={[hashtag]} title={quote}>
+          <TwitterIcon {...iconProps} />
+        </TwitterShareButton>
+      </SocialShareButton>
+      <CopyToClipboard
+        text={url}
+        onCopy={() => {
+          setCopyLinkButtonTextA('Copied!');
+          setCopyLinkButtonTextB('');
+        }}
+      >
+        <SocialShareButton
+          {...buttonProps}
+          color="#007fb1"
+          onClick={closeShareButtonGroup}
+        >
+          <CopyLinkButton>
+            {copyLinkButtonTextA}
+            <br />
+            {copyLinkButtonTextB}
+          </CopyLinkButton>
+        </SocialShareButton>
+      </CopyToClipboard>
+      <SocialShareButton variant="contained" color="#007fb1">
+        <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
+          Embed
+        </SocialButton>
+        <EmbedPreview
+          open={showEmbedPreviewModal}
+          onClose={() => {
+            setShowEmbedPreviewModal(false);
+            closeShareButtonGroup();
+          }}
+          region={region}
+        />
+      </SocialShareButton>
+    </SocialButtonsContainer>
   );
 };
 
