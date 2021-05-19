@@ -3,13 +3,18 @@ import { COLOR_MAP } from 'common/colors';
 import BaseButton from 'components/ButtonSystem/BaseButton/BaseButton';
 import { Chevron } from '../Shared/Shared.style';
 
-export const SectionContentContainer = styled.div`
+export const Footer = styled.div`
   display: flex;
 `;
 
-export const TextContainer = styled.div`
+export const Disclaimer = styled.p`
+  width: 42rem;
   font-size: 1rem;
+  line-height: 1.5rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
+
+export const StyledSpan = styled.span``;
 
 export const TextComponent = styled.p`
   color: ${COLOR_MAP.GREY_4};
