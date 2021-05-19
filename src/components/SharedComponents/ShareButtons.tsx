@@ -19,8 +19,8 @@ const ShareButtons: React.FC<{
 }> = ({ eventCategory, shareUrl, shareQuote, region }) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
-  const hideSocialButtons = () => {
-    const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
+  const hideSocialButtons = (delay: number = 0) => {
+    const timeoutId = setTimeout(() => setShowSocialButtons(false), delay);
     return () => clearTimeout(timeoutId);
   };
 
