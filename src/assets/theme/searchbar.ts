@@ -1,5 +1,3 @@
-import { mobileWidth } from 'components/Search/SearchAutocomplete/SearchAutocomplete.style';
-
 /**
  * Used for the searchbar on the homepage + in the navbar across the site
  *
@@ -15,8 +13,8 @@ export interface SearchbarTheme {
 }
 
 export const searchbar: SearchbarTheme = {
-  mobileClosedWidth: `${mobileWidth}px`,
-  mobileClosedPadding: '0.75rem 0.5rem 1.5rem',
+  mobileClosedWidth: '100%',
+  mobileClosedPadding: '0.75rem 1rem 1rem',
   mobileClosedMaxWidth: 'unset',
   mobileClosedMarginLeft: '0',
 };

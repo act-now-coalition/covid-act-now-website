@@ -55,8 +55,8 @@ const MobileWrapperClosed = css`
   height: unset;
   width: ${props => props.theme.searchbar.mobileClosedWidth};
   padding: ${props => props.theme.searchbar.mobileClosedPadding};
-  margin-left: ${props => props.theme.searchbar.mobileClosedMarginLeft};
   max-width: ${props => props.theme.searchbar.mobileClosedMaxWidth};
+  margin-left: ${props => props.theme.searchbar.mobileClosedMarginLeft};
 `;
 
 export const Wrapper = styled.div<{ $isOpen: boolean }>`

@@ -5,6 +5,7 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 export const Wrapper = styled.div`
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

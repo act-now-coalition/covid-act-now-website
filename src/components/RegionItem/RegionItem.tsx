@@ -4,6 +4,7 @@ import {
   CopyContainer,
   ArrowIcon,
   LevelDescription,
+  LevelContainer,
   CircleIcon,
   StyledLink,
   IconContainer,
@@ -37,16 +38,18 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
       }}
     >
       <Wrapper>
-        <IconContainer>
-          <CircleIcon $iconColor={iconColor} />
-        </IconContainer>
         <CopyContainer>
           <StyledRegionName
             region={region}
             showStateCode={showStateCode}
             truncateText
           />
-          <LevelDescription>{levelDescriptionCopy}</LevelDescription>
+          <LevelContainer>
+            <IconContainer>
+              <CircleIcon $iconColor={iconColor} />
+            </IconContainer>
+            <LevelDescription>{levelDescriptionCopy}</LevelDescription>
+          </LevelContainer>
         </CopyContainer>
         <IconContainer>
           <ArrowIcon />
