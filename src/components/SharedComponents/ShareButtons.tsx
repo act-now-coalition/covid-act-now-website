@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { ClickAwayListener } from '@material-ui/core';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
+import { default as HeaderShareButton } from 'components/NewLocationPage/HeaderButtons/ShareButton';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from 'components/ShareButtons/SocialButtonBlock';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -16,7 +17,14 @@ const ShareButtons: React.FC<{
   shareUrl: string;
   shareQuote: string;
   region?: Region;
-}> = ({ eventCategory, shareUrl, shareQuote, region }) => {
+  isLocationPageHeader?: boolean;
+}> = ({
+  eventCategory,
+  shareUrl,
+  shareQuote,
+  region,
+  isLocationPageHeader,
+}) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
   const hideSocialButtons = (delay: number = 0) => {
@@ -38,9 +46,16 @@ const ShareButtons: React.FC<{
     <ClickAwayListener onClickAway={() => hideSocialButtons()}>
       <div style={{ position: 'relative', width: 'fit-content' }}>
         <ButtonGroup aria-label="share buttons" variant="outlined">
-          <ShareButton
-            onClickShare={() => setShowSocialButtons(!showSocialButtons)}
-          />
+          {!isLocationPageHeader && (
+            <ShareButton
+              onClickShare={() => setShowSocialButtons(!showSocialButtons)}
+            />
+          )}
+          {isLocationPageHeader && (
+            <HeaderShareButton
+              onClickShare={() => setShowSocialButtons(!showSocialButtons)}
+            />
+          )}
         </ButtonGroup>
         {showSocialButtons && (
           <SocialButtonBlock
