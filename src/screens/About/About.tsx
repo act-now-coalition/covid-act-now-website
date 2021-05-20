@@ -110,7 +110,6 @@ const About = () => {
         <HashWrapper id="future-projects">
           <AboutHeading2>{aboutContent.futureProjectsHeader}</AboutHeading2>
           <MarkdownContent source={aboutContent.futureProjectsContent} />
-          <TeamSection />
         </HashWrapper>
         <AboutHeading2 id="join-us">{aboutContent.joinUsHeader}</AboutHeading2>
         <MarkdownContent source={aboutContent.joinUsContent} />
