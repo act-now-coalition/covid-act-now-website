@@ -28,9 +28,9 @@
       "iconId": "DAILY_DOWNLOAD"
     },
     {
-      "cta": "Get our data",
+      "cta": "Data API",
       "url": "/data-api",
-      "description": "Download all of our data in CSV or JSON files",
+      "description": "Get realtime, local data including daily new cases, % vaccinated, and more.",
       "iconId": "API"
     }
   ]
