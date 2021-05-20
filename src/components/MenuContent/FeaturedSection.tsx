@@ -16,12 +16,6 @@ import {
   SectionHeader,
 } from './Menu.style';
 import { scrollWithOffset } from 'components/TableOfContents';
-import {
-  Experiment,
-  ExperimentID,
-  Variant,
-  VariantID,
-} from 'components/Experiment';
 
 const FeaturedSection: React.FC<{
   featuredSections: FeaturedItem[];
@@ -32,9 +26,6 @@ const FeaturedSection: React.FC<{
     [SectionId.DAILY_DOWNLOAD]: DailyDownloadIcon,
     [SectionId.ALERTS]: AlertsIcon,
   };
-  const testAPITitle = 'Data API';
-  const testAPIDescription =
-    'Get realtime, local data including daily new cases, % vaccinated, and more.';
   return (
     <Section>
       <SectionHeader $desktopOnly={true}>Featured</SectionHeader>
@@ -56,34 +47,11 @@ const FeaturedSection: React.FC<{
             </IconWrapper>
             <TextLink to={url} {...hashlinkProps}>
               <Column>
-                {iconId === SectionId.API ? (
-                  <Experiment id={ExperimentID.MEGA_MENU_API_COPY}>
-                    <Variant id={VariantID.A}>
-                      <Row>
-                        {cta}
-                        <ArrowIcon />
-                      </Row>
-                      <FeaturedDescription>{description}</FeaturedDescription>
-                    </Variant>
-                    <Variant id={VariantID.B}>
-                      <Row>
-                        {testAPITitle}
-                        <ArrowIcon />
-                      </Row>
-                      <FeaturedDescription>
-                        {testAPIDescription}
-                      </FeaturedDescription>
-                    </Variant>
-                  </Experiment>
-                ) : (
-                  <>
-                    <Row>
-                      {cta}
-                      <ArrowIcon />
-                    </Row>
-                    <FeaturedDescription>{description}</FeaturedDescription>
-                  </>
-                )}
+                <Row>
+                  {cta}
+                  <ArrowIcon />
+                </Row>
+                <FeaturedDescription>{description}</FeaturedDescription>
               </Column>
             </TextLink>
           </RowWithSpacing>
