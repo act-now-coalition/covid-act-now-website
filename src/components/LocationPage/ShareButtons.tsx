@@ -29,10 +29,7 @@ const ShareButtons: React.FC<{
 
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
-  const hideSocialButtons = () => {
-    const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
-    return () => clearTimeout(timeoutId);
-  };
+  const hideSocialButtons = () => setShowSocialButtons(false);
 
   useEscToClose(hideSocialButtons);
 
