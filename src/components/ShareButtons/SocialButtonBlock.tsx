@@ -1,50 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FacebookShareButton from './FacebookShareButton';
 import TwitterShareButton from './TwitterShareButton';
-import LinkedinShareButton from './LinkedinShareButton';
 import CopyLinkButton from './CopyLinkButton';
-import { SocialButtonsContainer } from './ShareButtons.style';
+import {
+  SocialButtonsContainer,
+  SocialButton,
+  SocialShareButton,
+} from './ShareButtons.style';
+import EmbedPreview from 'components/ShareBlock/EmbedPreview';
+import { Region } from 'common/regions';
 
 const SocialButtonBlock: React.FC<{
   url: string;
   quote: string;
   socialIconSize: number;
-  onClickContainer: () => void;
+  region?: Region;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
-  onShareOnLinkedin: () => void;
   onCopyLink: () => void;
+  hideSocialButton: () => void;
 }> = ({
   url,
   quote,
   socialIconSize,
-  onClickContainer,
   onShareOnFacebook,
   onShareOnTwitter,
-  onShareOnLinkedin,
   onCopyLink,
+  hideSocialButton,
+  region,
 }) => {
   const socialSharingProps = {
     url,
     quote,
     socialIconSize,
   };
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
+  function closeShareButtonGroup() {
+    setTimeout(() => hideSocialButton(), 1000);
+  }
   return (
-    <SocialButtonsContainer onClick={onClickContainer}>
+    <SocialButtonsContainer>
       <FacebookShareButton
-        onClickShare={onShareOnFacebook}
+        onClickShare={() => {
+          onShareOnFacebook();
+          closeShareButtonGroup();
+        }}
         {...socialSharingProps}
       />
       <TwitterShareButton
-        onClickShare={onShareOnTwitter}
+        onClickShare={() => {
+          onShareOnTwitter();
+          closeShareButtonGroup();
+        }}
         {...socialSharingProps}
         hashtags={['COVIDActNow']}
       />
-      <LinkedinShareButton
-        onClickShare={onShareOnLinkedin}
-        {...socialSharingProps}
+      <CopyLinkButton
+        url={socialSharingProps.url}
+        onCopyLink={() => {
+          onCopyLink();
+          closeShareButtonGroup();
+        }}
       />
-      <CopyLinkButton url={socialSharingProps.url} onCopyLink={onCopyLink} />
+      <SocialShareButton variant="contained" color="#007fb1">
+        <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
+          Embed
+        </SocialButton>
+        <EmbedPreview
+          open={showEmbedPreviewModal}
+          onClose={() => {
+            setShowEmbedPreviewModal(false);
+            closeShareButtonGroup();
+          }}
+          region={region}
+        />
+      </SocialShareButton>
     </SocialButtonsContainer>
   );
 };

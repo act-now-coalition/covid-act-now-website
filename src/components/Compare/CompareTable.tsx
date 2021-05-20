@@ -18,7 +18,7 @@ import {
   sliderNumberToFilterMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
-import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
+import ShareButtonGroup from 'components/ShareButtons/ShareButtonGroup';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { Region, MetroArea, State } from 'common/regions';
@@ -262,11 +262,12 @@ const CompareTable = (props: {
               </TextButton>
             )}
           </div>
-          <ShareImageButtons
+          <ShareButtonGroup
             imageUrl={getDownloadImageUrl}
             imageFilename="CovidActNow-compare.png"
             url={getShareUrl}
             quote={shareQuote}
+            region={region}
             onCopyLink={() =>
               trackCompareEvent(EventAction.COPY_LINK, trackLabel)
             }
@@ -275,7 +276,6 @@ const CompareTable = (props: {
             }
             onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
             onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
-            onShareOnLinkedin={() => trackShare(`Linkedin: ${trackLabel}`)}
           />
         </Footer>
       )}

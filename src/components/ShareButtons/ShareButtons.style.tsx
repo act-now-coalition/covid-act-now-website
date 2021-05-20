@@ -39,12 +39,15 @@ export const SocialButtonsContainer = styled.div`
 
 export const SocialButton = styled(Button).attrs(props => ({
   disableElevation: true,
+  disableRipple: true,
+  disableFocusRipple: true,
+  disableTouchRipple: true,
 }))`
   width: 60px;
   height: 42px;
   text-transform: none;
-  font-size: 0.775rem;
-  line-height: 1.3;
+  font-size: 0.75rem;
+  line-height: 1.2;
   text-transform: none;
   color: rgba(0, 0, 0, 0.7);
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -55,6 +58,7 @@ export const SocialButton = styled(Button).attrs(props => ({
   }
 
   @media (min-width: 600px) {
+    font-size: 0.875rem;
     width: 80px;
     height: 56px;
   }
