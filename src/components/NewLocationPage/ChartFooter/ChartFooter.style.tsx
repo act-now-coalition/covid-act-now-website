@@ -15,5 +15,21 @@ export const ButtonContainer = styled.div`
 
 export const Disclaimer = styled.p`
   flex-grow: 1;
+  padding-right: 120px;
   margin: 0;
+`;
+
+export const LegendContainer = styled.div`
+  display: flex;
+  font-size: 0.9rem;
+  margin-right: 24px;
+`;
+
+export const IconWrapper = styled.div`
+  margin-right: 12px;
+`;
+
+export const LegendGroup = styled.div`
+  display: flex;
+  justify-content: flex-start;
 `;
