@@ -1,5 +1,4 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
 import { Subtitle1 } from 'components/Typography';
 import {
   AnnouncementIntro,
@@ -7,7 +6,6 @@ import {
   Date,
   AnnouncementBodyCopy,
 } from './Announcements.style';
-import { scrollWithOffset } from 'components/TableOfContents';
 import ExternalLink from 'components/ExternalLink';
 
 const Announcements: React.FC = () => {
