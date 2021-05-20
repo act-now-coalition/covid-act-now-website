@@ -111,9 +111,9 @@ function renderStatus(projections: Projections): React.ReactElement {
   const epidemiologyReasoning = levelText(
     level,
     `Because each person is infecting less than one other person, the total number of current cases in ${locationName} is shrinking.`,
-    `Because this number is around 1.0, it means that COVID continues to spread, but in a slow and controlled fashion.`,
-    `As such, the total number of active cases in ${locationName} is growing at an unsustainable rate. If this trend continues, the hospital system may become overloaded. Caution is warranted.`,
-    `As such, the total number of current cases in ${locationName} is exploding, putting the hospital system at risk. Aggressive action urgently needed.`,
+    `Because this number is around 1.0, it means that COVID continues to spread at about a constant rate.`,
+    `As such, the total number of active cases in ${locationName} is growing.`,
+    `As such, the total number of current cases in ${locationName} is quickly growing.`,
   );
 
   return (
