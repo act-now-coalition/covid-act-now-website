@@ -5,6 +5,7 @@ import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
 import { MapInstructions, MobileLineBreak } from './Map.style';
+import noop from 'lodash/noop';
 
 interface MapProps {
   hideLegend?: boolean;
@@ -18,7 +19,7 @@ function Map({
   hideLegend = false,
   hideInstructions = false,
   hideLegendTitle = false,
-  onClick = () => {},
+  onClick = noop,
   showCounties = false,
 }: MapProps) {
   // TODO(chris): The only user of `onClick` is the embed. When you click on a state
