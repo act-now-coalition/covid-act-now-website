@@ -26,7 +26,11 @@ const Announcements: React.FC = () => {
         to build accessible data models and share clear, comprehensive
         information that will support the electrification of American households
         to slow climate change, save people money and create new American jobs.
-        {/* TODO(michael): Add link to press announcement / RA tweet. */}
+        Read more{' '}
+        <ExternalLink href="https://www.rewiringamerica.org/newsletter/we-had-a-very-big-week-here-at-rewiring-america">
+          here
+        </ExternalLink>
+        .
       </AnnouncementBodyCopy>
     </Wrapper>
   );
