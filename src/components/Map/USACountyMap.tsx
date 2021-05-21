@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
@@ -41,25 +41,25 @@ interface USACountyMapProps {
   showCounties: boolean;
 }
 
+const projection = geoAlbersUsaTerritories().scale(1070).translate([400, 300]);
+
 const USACountyMap = React.memo(
   ({ stateClickHandler, showCounties }: USACountyMapProps) => {
     const [tooltipContent, setTooltipContent] = useState('');
     const locationSummaries = useSummaries();
 
-    const getFillColor = (fips: string) => {
-      const summary = (locationSummaries && locationSummaries[fips]) || null;
-      return colorFromLocationSummary(summary);
-    };
-
-    const projection = geoAlbersUsaTerritories()
-      .scale(1070)
-      .translate([400, 300]);
+    const getFillColor = useCallback(
+      (fips: string) => {
+        const summary = (locationSummaries && locationSummaries[fips]) || null;
+        return colorFromLocationSummary(summary);
+      },
+      [locationSummaries],
+    );
 
     const onMouseLeave = () => setTooltipContent('');
 
-    return (
-      <USMapWrapper>
-        {/** Map with shaded background colors for states. */}
+    const mapContent = useMemo(
+      () => (
         <USStateMapWrapper $showCounties={showCounties}>
           <ComposableMap data-tip="" projection={projection} height={500}>
             <g transform="translate(0, -50)">
@@ -120,6 +120,14 @@ const USACountyMap = React.memo(
             </g>
           </ComposableMap>
         </USStateMapWrapper>
+      ),
+      [showCounties, getFillColor, stateClickHandler],
+    );
+
+    return (
+      <USMapWrapper>
+        {/** Map with shaded background colors for states. */}
+        {mapContent}
         {locationSummaries && <ScreenshotReady />}
         <ReactTooltip>{tooltipContent}</ReactTooltip>
       </USMapWrapper>

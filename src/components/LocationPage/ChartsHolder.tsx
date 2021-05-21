@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
@@ -46,18 +52,26 @@ interface ChartsHolderProps {
   chartId: string;
 }
 
-const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
+const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
 
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  const metricRefs = {
-    [Metric.CASE_DENSITY]: useRef<HTMLDivElement>(null),
-    [Metric.CASE_GROWTH_RATE]: useRef<HTMLDivElement>(null),
-    [Metric.POSITIVE_TESTS]: useRef<HTMLDivElement>(null),
-    [Metric.HOSPITAL_USAGE]: useRef<HTMLDivElement>(null),
-    [Metric.VACCINATIONS]: useRef<HTMLDivElement>(null),
-  };
+  const caseDensityRef = useRef<HTMLDivElement>(null);
+  const caseGrowthRateRef = useRef<HTMLDivElement>(null);
+  const positiveTestsRef = useRef<HTMLDivElement>(null);
+  const hospitalUsageRef = useRef<HTMLDivElement>(null);
+  const vaccinationsRef = useRef<HTMLDivElement>(null);
+  const metricRefs = useMemo(
+    () => ({
+      [Metric.CASE_DENSITY]: caseDensityRef,
+      [Metric.CASE_GROWTH_RATE]: caseGrowthRateRef,
+      [Metric.POSITIVE_TESTS]: positiveTestsRef,
+      [Metric.HOSPITAL_USAGE]: hospitalUsageRef,
+      [Metric.VACCINATIONS]: vaccinationsRef,
+    }),
+    [],
+  );
   const shareBlockRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
@@ -114,29 +128,32 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
 
   const ccviScores = useCcviForFips(region.fipsCode);
 
-  const onClickAlertSignup = () => {
+  const onClickAlertSignup = useCallback(() => {
     trackEvent(
       EventCategory.ENGAGEMENT,
       EventAction.CLICK,
       `Location Header: Receive Alerts`,
     );
     scrollTo(shareBlockRef.current);
-  };
+  }, []);
 
-  const onClickShare = () => {
+  const onClickShare = useCallback(() => {
     scrollTo(shareBlockRef.current, -352);
-  };
+  }, []);
 
-  const onClickMetric = (metric: Metric) => {
-    trackEvent(
-      EventCategory.METRICS,
-      EventAction.CLICK,
-      `Location Header Stats: ${Metric[metric]}`,
-    );
-    scrollTo(metricRefs[metric].current);
-  };
+  const onClickMetric = useCallback(
+    (metric: Metric) => {
+      trackEvent(
+        EventCategory.METRICS,
+        EventAction.CLICK,
+        `Location Header Stats: ${Metric[metric]}`,
+      );
+      scrollTo(metricRefs[metric].current);
+    },
+    [metricRefs],
+  );
 
-  const onClickSparkLine = (metric: SparkLineMetric) => {
+  const onClickSparkLine = useCallback((metric: SparkLineMetric) => {
     trackEvent(
       EventCategory.METRICS,
       EventAction.CLICK,
@@ -144,7 +161,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
     );
     setDefaultExploreMetric(SparkLineToExploreMetric[metric]);
     scrollTo(exploreChartRef.current);
-  };
+  }, []);
 
   const showHomepageUpsell = useShowPastPosition(3000);
 
@@ -160,7 +177,7 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
         <AboveTheFold
           region={region}
           locationSummary={locationSummary}
-          onClickMetric={(metric: Metric) => onClickMetric(metric)}
+          onClickMetric={onClickMetric}
           onClickAlertSignup={onClickAlertSignup}
           onClickShare={onClickShare}
           onClickSparkLine={onClickSparkLine}
@@ -226,6 +243,6 @@ const ChartsHolder = ({ region, chartId }: ChartsHolderProps) => {
       <HomepageUpsell showHomepageUpsell={showHomepageUpsell} />
     </>
   );
-};
+});
 
 export default ChartsHolder;

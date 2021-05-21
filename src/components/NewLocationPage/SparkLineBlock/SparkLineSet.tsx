@@ -23,7 +23,7 @@ import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 const SparkLineSet: React.FC<{
   projection: Projection;
   onClickSparkLine: (metric: SparkLineMetric) => void;
-}> = ({ projection, onClickSparkLine }) => {
+}> = React.memo(({ projection, onClickSparkLine }) => {
   const dateTo = new Date();
   const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
   return (
@@ -64,6 +64,6 @@ const SparkLineSet: React.FC<{
       })}
     </GridContainer>
   );
-};
+});
 
 export default SparkLineSet;
