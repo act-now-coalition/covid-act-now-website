@@ -15,7 +15,7 @@ async function main() {
   const allProjections = await fetchAllCountyProjectionsByState();
   const result = {} as {
     [date: string]: {
-      [fips: string]: { population: number; caseDensity: number };
+      [fips: string]: { population: number; caseDensity: number | null };
     };
   };
 
@@ -25,13 +25,11 @@ async function main() {
     const caseDensityData = (projections.primary as Projection).getDataset(
       'caseDensityByCases',
     );
+    let lastValue: number | null = null;
     for (const point of caseDensityData) {
       const date = new Date(point.x);
-      const caseDensity = point.y;
-      if (date >= new Date() && caseDensity === null) {
-        // trim the future days with no data.
-        continue;
-      }
+      const caseDensity: number | null = point.y ?? lastValue;
+      lastValue = caseDensity;
       const dateString = date.toISOString().replace(/T.*$/, '');
       result[dateString] = result[dateString] || {};
       result[dateString][fips] = {

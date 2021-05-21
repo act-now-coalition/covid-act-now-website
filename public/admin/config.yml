@@ -10,7 +10,7 @@ backend:
 # To use the CMS locally during development, run:
 #   npx netlify-cms-proxy-server
 #
-# And uncomment the following line:
+# Then uncomment the following line and visit http://localhost:3000/admin/
 #local_backend: true
 
 media_folder: 'public/images_cms'
@@ -94,6 +94,8 @@ collections:
             }
           - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
           - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
+          - { label: 'Future Projects: Header', name: 'futureProjectsHeader', widget: 'string' }
+          - { label: 'Future Projects: Content', name: 'futureProjectsContent', widget: 'markdown' }
           - { label: 'Join us: Header', name: 'joinUsHeader', widget: 'string' }
           - {
               label: 'Join us: Content',

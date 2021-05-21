@@ -21,27 +21,31 @@ export const sidebarItems: TocItem[] = [
     items: [
       {
         to: '/about#mission',
-        label: 'Our mission',
+        label: aboutContent.introHeader,
       },
       {
         to: '/about#contact-us',
-        label: 'Contact us',
+        label: aboutContent.contactUsHeader,
       },
       {
         to: '/about#partners',
-        label: 'Who we work with',
+        label: aboutContent.partnersHeader,
       },
       {
         to: '/about#who-we-serve',
-        label: 'Who we serve',
+        label: aboutContent.whoWeServeHeader,
       },
       {
         to: '/about#team',
-        label: 'Who we are',
+        label: aboutContent.teamHeader,
+      },
+      {
+        to: '/about#future-projects',
+        label: aboutContent.futureProjectsHeader,
       },
       {
         to: '/about#join-us',
-        label: 'Join us',
+        label: aboutContent.joinUsHeader,
       },
     ],
   },
@@ -102,6 +106,10 @@ const About = () => {
           <AboutHeading2>{aboutContent.teamHeader}</AboutHeading2>
           <MarkdownContent source={aboutContent.teamIntro} />
           <TeamSection />
+        </HashWrapper>
+        <HashWrapper id="future-projects">
+          <AboutHeading2>{aboutContent.futureProjectsHeader}</AboutHeading2>
+          <MarkdownContent source={aboutContent.futureProjectsContent} />
         </HashWrapper>
         <AboutHeading2 id="join-us">{aboutContent.joinUsHeader}</AboutHeading2>
         <MarkdownContent source={aboutContent.joinUsContent} />
