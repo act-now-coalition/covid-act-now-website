@@ -2,6 +2,7 @@ import React from 'react';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import {
   FooterContainer,
+  MobileFooterContainer,
   ButtonContainer,
   Disclaimer,
   LegendContainer,
@@ -67,5 +68,33 @@ export const ChartFooterWithLegends = () => {
         <ShareButton onClickShare={() => {}} />
       </ButtonContainer>
     </FooterContainer>
+  );
+};
+
+export const ChartFooterWithTextAndLegend = () => {
+  return (
+    <MobileFooterContainer>
+      <Disclaimer>{footerText}</Disclaimer>
+      <FooterContainer>
+        <LegendContainer>Legend Copy</LegendContainer>
+        <ButtonContainer>
+          <ShareButton onClickShare={() => {}} />
+        </ButtonContainer>
+      </FooterContainer>
+    </MobileFooterContainer>
+  );
+};
+
+export const ChartFooterWithTextAndLegends = () => {
+  return (
+    <MobileFooterContainer>
+      <Disclaimer>{footerText}</Disclaimer>
+      <FooterContainer>
+        <LegendContainer>Legend Copy</LegendContainer>
+        <ButtonContainer>
+          <ShareButton onClickShare={() => {}} />
+        </ButtonContainer>
+      </FooterContainer>
+    </MobileFooterContainer>
   );
 };

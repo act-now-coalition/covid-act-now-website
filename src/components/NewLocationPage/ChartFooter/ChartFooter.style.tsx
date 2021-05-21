@@ -1,21 +1,36 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const FooterContainer = styled.div`
   display: flex;
+  margin-top: 12px;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-top: 24px;
+    margin-bottom: 1.5rem;
+  }
+`;
+
+export const MobileFooterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const ButtonContainer = styled.div`
   flex-grow: 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-left: 120px;
+  }
 `;
 
 export const Disclaimer = styled.p`
   flex-grow: 1;
-  padding-right: 120px;
   margin: 0;
 `;
 
