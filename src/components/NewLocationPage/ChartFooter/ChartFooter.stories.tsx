@@ -1,6 +1,13 @@
 import React from 'react';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import {
+  Footer,
+  FooterSection,
+  SingleButtonWrapper,
+  ButtonContainerA,
+  LegendContainerA,
+  LegendContent,
+  AboutText,
   FooterContainer,
   MobileFooterContainer,
   ButtonContainer,
@@ -29,16 +36,69 @@ const legendIcon = (
   </svg>
 );
 
-export const ChartFooterButtonOnly = () => {
+export const ChartFooterButtonOnlyA = () => {
   return (
-    <FooterContainer>
-      <Disclaimer />
-      <ButtonContainer>
-        <ShareButton onClickShare={() => {}} />
-      </ButtonContainer>
-    </FooterContainer>
+    <Footer>
+      <FooterSection>
+        <SingleButtonWrapper>
+          <ButtonContainerA>
+            <ShareButton onClickShare={() => {}} />
+          </ButtonContainerA>
+        </SingleButtonWrapper>
+      </FooterSection>
+    </Footer>
   );
 };
+
+export const ChartFooterWithAboutText = () => {
+  return (
+    <Footer>
+      <FooterSection>
+        <LegendContainerA>
+          <LegendContent>
+            <AboutText>About this data</AboutText>
+          </LegendContent>
+        </LegendContainerA>
+        <ButtonContainerA>
+          <ShareButton onClickShare={() => {}} />
+        </ButtonContainerA>
+      </FooterSection>
+    </Footer>
+  );
+};
+
+export const ChartFooterWithLegend = () => {
+  return (
+    <Footer>
+      <FooterSection>
+        <LegendContainerA>
+          <LegendContent>
+            <IconWrapper>{legendIcon}</IconWrapper>
+            Legend Copy
+          </LegendContent>
+          <LegendContent>
+            <IconWrapper>{legendIcon}</IconWrapper>
+            Copy to explain bars. This copy may be long.
+          </LegendContent>
+        </LegendContainerA>
+        <ButtonContainerA>
+          <ShareButton onClickShare={() => {}} />
+        </ButtonContainerA>
+      </FooterSection>
+    </Footer>
+  );
+};
+
+// export const ChartFooterButtonOnly = () => {
+//   return (
+//     <FooterContainer>
+//       <Disclaimer />
+//       <ButtonContainer>
+//         <ShareButton onClickShare={() => {}} />
+//       </ButtonContainer>
+//     </FooterContainer>
+//   );
+// };
 
 export const ChartFooterWithText = () => {
   return (
