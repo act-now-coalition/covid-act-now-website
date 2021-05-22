@@ -7,29 +7,43 @@ export interface LogoItem {
   url: string;
 }
 
-interface PartnersContent {
+export interface CommitmentsContent {
+  icon: string;
+  altText: string;
+  copy: Markdown;
+}
+
+export interface PartnersContent {
+  header: string;
   copy: Markdown;
   logos: LogoItem[];
 }
 
 interface AboutContent {
-  pageHeader: string;
-  introHeader: string;
-  introContent: Markdown;
+  pageHeader: string; // deprecated
+  introHeader: string; // deprecated
+  introContent: Markdown; // deprecated
+  aboutHeader: string;
+  aboutContent: Markdown;
+  missionHeader: string;
+  missionContent: Markdown;
+  commitmentsContent: CommitmentsContent[];
+  impactHeader: string;
+  impactContent: Markdown;
   contactUsHeader: string;
   contactUsContent: Markdown;
   partnersHeader: string;
   partnersContent: PartnersContent[];
-  whoWeServeHeader: string;
-  whoWeServeContentA: Markdown;
-  whoWeServeContentB: Markdown;
-  governmentLogos: LogoItem[];
+  whoWeServeHeader: string; // deprecated
+  whoWeServeContentA: Markdown; // deprecated
+  whoWeServeContentB: Markdown; // deprecated
+  governmentLogos: LogoItem[]; // deprecated
   teamHeader: string;
   teamIntro: Markdown;
   futureProjectsHeader: string;
   futureProjectsContent: Markdown;
-  joinUsHeader: string;
-  joinUsContent: Markdown;
+  joinUsHeader: string; // deprecated
+  joinUsContent: Markdown; // deprecated
 }
 
 const aboutContent = aboutPage as AboutContent;
