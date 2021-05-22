@@ -1,12 +1,12 @@
 {
-  "futureProjectsHeader": "Future projects",
-  "teamHeader": "Who we are",
+  "futureProjectsHeader": "Our future projects",
+  "teamHeader": "Our team",
   "contactUsHeader": "Contact us",
   "whoWeServeContentA": "We've worked with more than 100 federal, state, and county officials to develop data-driven COVID responses.",
-  "aboutContent": "placeholder",
+  "aboutContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020.  Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
   "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
   "introContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. \n\nWe help people make informed decisions by providing timely and accurate data about COVID in every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge\n\nPlease note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services.",
-  "missionContent": "placeholder",
+  "missionContent": "We help people make informed decisions by providing **timely and accurate data** about COVID in the United States.\n\n We are committed to:",
   "partnersContent": [
     {
       "copy": "Georgetown University Center for Global Health Science and Security, Stanford University Clinical Excellence Research Center, and Harvard Global Health Institute",
@@ -26,7 +26,8 @@
           "altText": "Harvard Global Health Institute logo",
           "image": "/images_cms/harvard-logo.png"
         }
-      ]
+      ],
+      "header": "Institutional partners"
     },
     {
       "copy": "We are funded by Schmidt Futures and the Patrick J. McGovern Foundation, as well as other philanthropists and small donations.",
@@ -41,7 +42,8 @@
           "url": "https://www.mcgovern.org/",
           "image": "/images_cms/patrick-j-mcgovern-foundation-logo.png"
         }
-      ]
+      ],
+      "header": "Funders"
     },
     {
       "copy": "Our data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards. Our Covid-19 Community Vulnerability Index comes from Surgo Ventures.",
@@ -50,14 +52,60 @@
           "altText": "Surgo Ventures Logo",
           "image": "/images_cms/screen-shot-2021-03-03-at-3.30.40-pm.png",
           "url": "https://precisionforcovid.org/"
+        },
+        {
+          "image": "/images_cms/anchorage-1-.png",
+          "altText": "Municipality of Anchorage Logo",
+          "url": "https://www.muni.org/pages/default.aspx"
+        },
+        {
+          "image": "/images_cms/cdph-1-.png",
+          "altText": "California Department of Public Health Logo",
+          "url": "https://www.cdph.ca.gov/"
+        },
+        {
+          "image": "/images_cms/new-orleans-mayor-s-office.png",
+          "altText": "New Orleans Mayor's Office Logo",
+          "url": "https://www.nola.gov/mayor/"
+        },
+        {
+          "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
+          "altText": "Washington, DC Department of Health Logo",
+          "url": "https://dchealth.dc.gov/"
+        },
+        {
+          "image": "/images_cms/hardy_county-1-.jpg",
+          "altText": "Hardy County Sheriff's Office Logo",
+          "url": "http://hardycounty.com/law-enforcement"
+        },
+        {
+          "image": "/images_cms/steuben_county-1-.jpg",
+          "altText": "Steuben County, New York Logo",
+          "url": "https://www.steubencony.org/"
+        },
+        {
+          "image": "/images_cms/civil-air-patrol-logo.jpg",
+          "altText": "Civil Air Patrol Logo",
+          "url": "https://www.gocivilairpatrol.com/"
+        },
+        {
+          "image": "/images_cms/naco-logo.png",
+          "altText": "National Association of Counties Logo",
+          "url": "https://www.naco.org/"
+        },
+        {
+          "altText": "Washington National Guard Logo",
+          "image": "/images_cms/washington-nationa-guard-logo-red.svg",
+          "url": "https://mil.wa.gov/national-guard"
         }
-      ]
+      ],
+      "header": "Notable users"
     }
   ],
   "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
   "whoWeServeHeader": "Who we serve",
   "joinUsContent": "Want to join us? [Let us know](https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform).\n\nSome roles that we need:\n\n* UI/UX Designers\n* JavaScript/React, Python engineers\n* Epidemiologists\n* Data Modelers\n* User Support Representatives\n* Product Managers\n* Social Media Managers\n* ...and more!",
-  "impactContent": "placeholder",
+  "impactContent": "Our COVID data and risk assessment includes every U.S. State, 380+ metros, 3,100+ counties, and two U.S. territories.\n\nWe have served over **12m website users** since the beginning of the pandemic, and keep almost **200k subscribers** up to date on COVID news and developments through our daily newsletter.\n\nWe've worked with more than 100 federal, state, and county officials as well as numerous multinational corporations and NGOs to develop data-driven COVID responses.",
   "impactHeader": "Our impact",
   "joinUsHeader": "Join us",
   "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
@@ -108,15 +156,25 @@
       "url": "https://mil.wa.gov/national-guard"
     }
   ],
-  "partnersHeader": "Who we work with",
+  "partnersHeader": "Our partners",
   "introHeader": "Our mission",
   "missionHeader": "Our mission",
   "aboutHeader": "About us",
   "commitmentsContent": [
     {
-      "altText": "placeholder",
-      "copy": "placeholder",
-      "icon": "/images_cms/bayer-logo-3.png"
+      "copy": "**Data:** We support data- and science-backed policies and decision-making",
+      "icon": "/images_cms/about-commitment-data.svg",
+      "altText": "Data"
+    },
+    {
+      "copy": "**Transparency:** Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work.",
+      "icon": "/images_cms/about-commitment-transparency.svg",
+      "altText": "Transparency"
+    },
+    {
+      "copy": "**Accessibility:** We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge.",
+      "icon": "/images_cms/about-commitment-accessibility.svg",
+      "altText": "Accessibility"
     }
   ],
   "contactUsContent": "For general questions, email [info@covidactnow.org](mailto:info@covidactnow.org).\n\nFor press inquiries, email [press@covidactnow.org](mailto:press@covidactnow.org).\n\nIf you are with a state or local government, reach out to us at [gov@covidactnow.org](mailto:gov@covidactnow.org).",

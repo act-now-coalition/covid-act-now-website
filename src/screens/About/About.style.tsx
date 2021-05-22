@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'assets/theme';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { Heading1, Heading2, Heading3 } from 'components/Markdown';
 import Grid from '@material-ui/core/Grid';
@@ -8,11 +9,7 @@ export const AboutHeading1 = styled(Heading1)`
 `;
 
 export const AboutHeading2 = styled(Heading2)`
-  margin: 2.5rem 0 1.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin: 3.5rem 0 1.5rem;
-  }
+  margin: 0rem 0 1.5rem;
 `;
 
 export const AboutHeading3 = styled(Heading3)`
@@ -40,6 +37,7 @@ export const AboutHeading3 = styled(Heading3)`
 export const HashWrapper = styled.div``;
 
 export const PartnersSectionWrapper = styled.div`
+  padding: 1rem;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -47,4 +45,38 @@ export const PartnersSectionWrapper = styled.div`
 
 export const StyledGridContainer = styled(Grid)`
   margin: 0.5rem 0 1.25rem;
+`;
+
+export const CommitmentItem = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
+export const CommitmentIcon = styled.img`
+  margin: 1rem;
+`;
+
+// needed to override end margin for markdown text.
+export const CommitmentBody = styled.div`
+  p {
+    margin-block-end: 0;
+  }
+`;
+
+export const SectionContent = styled.div`
+  margin-bottom: 2.25rem;
+`;
+
+export const ButtonContainer = styled.div`
+  margin-top: ${theme.spacing(2)}px;
+  margin-bottom: ${theme.spacing(6)}px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
 `;
