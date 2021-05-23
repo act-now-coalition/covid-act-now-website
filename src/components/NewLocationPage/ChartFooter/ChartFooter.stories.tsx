@@ -4,18 +4,14 @@ import {
   Footer,
   FooterSection,
   SingleButtonWrapper,
-  ButtonContainerA,
-  LegendContainerA,
-  LegendContent,
-  AboutText,
-  FooterContainer,
-  MobileFooterContainer,
   ButtonContainer,
-  Disclaimer,
   LegendContainer,
+  LegendContent,
+  FooterText,
+  AboutText,
   IconWrapper,
-  LegendGroup,
 } from './ChartFooter.style';
+import { useBreakpoint } from 'common/hooks';
 
 export default {
   title: 'Location page redesign/Chart Footer',
@@ -36,14 +32,14 @@ const legendIcon = (
   </svg>
 );
 
-export const ChartFooterButtonOnlyA = () => {
+export const ChartFooterButtonOnly = () => {
   return (
     <Footer>
       <FooterSection>
         <SingleButtonWrapper>
-          <ButtonContainerA>
+          <ButtonContainer>
             <ShareButton onClickShare={() => {}} />
-          </ButtonContainerA>
+          </ButtonContainer>
         </SingleButtonWrapper>
       </FooterSection>
     </Footer>
@@ -54,14 +50,14 @@ export const ChartFooterWithAboutText = () => {
   return (
     <Footer>
       <FooterSection>
-        <LegendContainerA>
+        <LegendContainer>
           <LegendContent>
             <AboutText>About this data</AboutText>
           </LegendContent>
-        </LegendContainerA>
-        <ButtonContainerA>
+        </LegendContainer>
+        <ButtonContainer>
           <ShareButton onClickShare={() => {}} />
-        </ButtonContainerA>
+        </ButtonContainer>
       </FooterSection>
     </Footer>
   );
@@ -71,7 +67,7 @@ export const ChartFooterWithLegend = () => {
   return (
     <Footer>
       <FooterSection>
-        <LegendContainerA>
+        <LegendContainer>
           <LegendContent>
             <IconWrapper>{legendIcon}</IconWrapper>
             Legend Copy
@@ -80,81 +76,42 @@ export const ChartFooterWithLegend = () => {
             <IconWrapper>{legendIcon}</IconWrapper>
             Copy to explain bars. This copy may be long.
           </LegendContent>
-        </LegendContainerA>
-        <ButtonContainerA>
+        </LegendContainer>
+        <ButtonContainer>
           <ShareButton onClickShare={() => {}} />
-        </ButtonContainerA>
+        </ButtonContainer>
       </FooterSection>
     </Footer>
   );
 };
 
-// export const ChartFooterButtonOnly = () => {
-//   return (
-//     <FooterContainer>
-//       <Disclaimer />
-//       <ButtonContainer>
-//         <ShareButton onClickShare={() => {}} />
-//       </ButtonContainer>
-//     </FooterContainer>
-//   );
-// };
-
-export const ChartFooterWithText = () => {
-  return (
-    <FooterContainer>
-      <Disclaimer>{footerText}</Disclaimer>
-      <ButtonContainer>
-        <ShareButton onClickShare={() => {}} />
-      </ButtonContainer>
-    </FooterContainer>
-  );
-};
-
-export const ChartFooterWithLegends = () => {
-  return (
-    <FooterContainer>
-      <LegendGroup>
-        <LegendContainer>
-          <IconWrapper>{legendIcon}</IconWrapper>
-          Legend Copy
-        </LegendContainer>
-        <LegendContainer>
-          <IconWrapper>{legendIcon}</IconWrapper>
-          Legend Copy 1
-        </LegendContainer>
-      </LegendGroup>
-      <ButtonContainer>
-        <ShareButton onClickShare={() => {}} />
-      </ButtonContainer>
-    </FooterContainer>
-  );
-};
-
 export const ChartFooterWithTextAndLegend = () => {
+  const isMobile = useBreakpoint(600);
   return (
-    <MobileFooterContainer>
-      <Disclaimer>{footerText}</Disclaimer>
-      <FooterContainer>
-        <LegendContainer>Legend Copy</LegendContainer>
-        <ButtonContainer>
-          <ShareButton onClickShare={() => {}} />
-        </ButtonContainer>
-      </FooterContainer>
-    </MobileFooterContainer>
-  );
-};
-
-export const ChartFooterWithTextAndLegends = () => {
-  return (
-    <MobileFooterContainer>
-      <Disclaimer>{footerText}</Disclaimer>
-      <FooterContainer>
-        <LegendContainer>Legend Copy</LegendContainer>
-        <ButtonContainer>
-          <ShareButton onClickShare={() => {}} />
-        </ButtonContainer>
-      </FooterContainer>
-    </MobileFooterContainer>
+    <Footer>
+      <FooterSection>
+        <FooterText>
+          {footerText}&nbsp;
+          {!isMobile && <AboutText>About this data</AboutText>}
+        </FooterText>
+        {!isMobile && (
+          <ButtonContainer>
+            <ShareButton onClickShare={() => {}} />
+          </ButtonContainer>
+        )}
+      </FooterSection>
+      {isMobile && (
+        <FooterSection>
+          <LegendContainer>
+            <LegendContent>
+              <AboutText>About this data</AboutText>
+            </LegendContent>
+          </LegendContainer>
+          <ButtonContainer>
+            <ShareButton onClickShare={() => {}} />
+          </ButtonContainer>
+        </FooterSection>
+      )}
+    </Footer>
   );
 };

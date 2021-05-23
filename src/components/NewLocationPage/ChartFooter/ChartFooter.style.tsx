@@ -8,11 +8,14 @@ export const Footer = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
-// Position relative needed?
 export const FooterSection = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
+`;
+
+export const FooterText = styled.p`
+  margin: 0 0 12px 0;
 `;
 
 export const SingleButtonWrapper = styled.div`
@@ -21,10 +24,8 @@ export const SingleButtonWrapper = styled.div`
   right: 0;
 `;
 
-// Padding needed?
-export const ButtonContainerA = styled.div`
+export const ButtonContainer = styled.div`
   flex-grow: 0;
-  padding: 0;
   margin-left: 8px;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -32,16 +33,28 @@ export const ButtonContainerA = styled.div`
   }
 `;
 
-export const LegendContainerA = styled.div`
+export const LegendContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    flex-direction: row;
+  }
 `;
 
 export const LegendContent = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 0.9rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-right: 24px;
+  }
+`;
+
+export const IconWrapper = styled.div`
+  margin-right: 12px;
 `;
 
 export const AboutText = styled.span`
@@ -49,51 +62,9 @@ export const AboutText = styled.span`
   text-decoration: underline;
   text-decoration-style: dotted;
   text-underline-offset: 3px;
-`;
-
-export const FooterContainer = styled.div`
-  display: flex;
-  margin-top: 12px;
-  flex-direction: row;
-  justify-content: space-between;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin-top: 24px;
-    margin-bottom: 1.5rem;
+    line-height: 24px;
+    text-decoration-style: solid;
   }
-`;
-
-export const MobileFooterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-`;
-
-export const ButtonContainer = styled.div`
-  flex-grow: 0;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-left: 120px;
-  }
-`;
-
-export const Disclaimer = styled.p`
-  flex-grow: 1;
-  margin: 0;
-`;
-
-export const LegendContainer = styled.div`
-  display: flex;
-  font-size: 0.9rem;
-  margin-right: 24px;
-`;
-
-export const IconWrapper = styled.div`
-  margin-right: 12px;
-`;
-
-export const LegendGroup = styled.div`
-  display: flex;
-  justify-content: flex-start;
 `;
