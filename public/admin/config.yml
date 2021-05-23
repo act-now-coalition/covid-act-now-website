@@ -29,21 +29,45 @@ collections:
         label: 'About page content'
         file: 'src/cms-content/about/about-page.json'
         fields:
-          - { label: 'Page Header', name: 'pageHeader', widget: 'string' }
-          - { label: 'Intro: Header', name: 'introHeader', widget: 'string' }
           - {
-              label: 'Intro: Content',
-              name: 'introContent',
+              label: 'About us: Header',
+              name: 'aboutHeader',
+              widget: 'string', 
+            }
+          - {
+              label: 'About us: Content',
+              name: 'aboutContent',
               widget: 'markdown',
             }
           - {
-              label: 'Contact us: Header',
-              name: 'contactUsHeader',
-              widget: 'string',
+              label: 'Mission: Header',
+              name: 'missionHeader',
+              widget: 'string', 
             }
           - {
-              label: 'Contact us: Content',
-              name: 'contactUsContent',
+              label: 'Mission: Content',
+              name: 'missionContent',
+              widget: 'markdown',
+            }
+          - label: 'Commitments: Content'
+            name: 'commitmentsContent'
+            widget: 'list'
+            fields:
+              - label: 'Alt text'
+                name: 'altText'
+                widget: 'string'
+              - label: 'Icon'
+                name: 'icon'
+                widget: 'image'
+              - { label: 'Section copy', name: 'copy', widget: 'markdown' }
+          - {
+              label: 'Impact: Header',
+              name: 'impactHeader',
+              widget: 'string', 
+            }
+          - {
+              label: 'Impact: Content',
+              name: 'impactContent',
               widget: 'markdown',
             }
           - {
@@ -55,6 +79,7 @@ collections:
             name: 'partnersContent'
             widget: 'list'
             fields:
+              - { label: 'Section header', name: 'header', widget: 'string' }
               - { label: 'Section copy', name: 'copy', widget: 'markdown' }
               - label: 'Logos'
                 name: 'logos'
@@ -68,18 +93,40 @@ collections:
                       widget: 'string',
                       required: false,
                     }
+
+          - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
+          - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
+          - { label: 'Future Projects: Header', name: 'futureProjectsHeader', widget: 'string' }
+          - { label: 'Future Projects: Content', name: 'futureProjectsContent', widget: 'markdown' }
           - {
-              label: 'Who we serve: Header',
+              label: 'Contact us: Header',
+              name: 'contactUsHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Contact us: Content',
+              name: 'contactUsContent',
+              widget: 'markdown',
+            }
+          - { label: 'Page Header (deprecated)', name: 'pageHeader', widget: 'string' }
+          - { label: 'Intro: Header (deprecated)', name: 'introHeader', widget: 'string' }
+          - {
+              label: 'Intro: Content (deprecated)',
+              name: 'introContent',
+              widget: 'markdown',
+            }
+          - {
+              label: 'Who we serve: Header (deprecated)',
               name: 'whoWeServeHeader',
               widget: 'string',
             }
           - {
-              label: 'Who we serve: Content A',
+              label: 'Who we serve: Content A (deprecated)',
               name: 'whoWeServeContentA',
               widget: 'markdown',
               hint: Copy above logos,
             }
-          - label: 'Government logos'
+          - label: 'Government logos (deprecated)'
             name: 'governmentLogos'
             widget: 'list'
             fields:
@@ -87,18 +134,14 @@ collections:
               - { label: 'Image', name: 'image', widget: 'image' }
               - { label: 'Url', name: 'url', widget: 'string', required: false }
           - {
-              label: 'Who we serve: Content B',
+              label: 'Who we serve: Content B (deprecated)',
               name: 'whoWeServeContentB',
               widget: 'markdown',
               hint: Copy below logos,
             }
-          - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
-          - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
-          - { label: 'Future Projects: Header', name: 'futureProjectsHeader', widget: 'string' }
-          - { label: 'Future Projects: Content', name: 'futureProjectsContent', widget: 'markdown' }
-          - { label: 'Join us: Header', name: 'joinUsHeader', widget: 'string' }
+          - { label: 'Join us: Header (deprecated)', name: 'joinUsHeader', widget: 'string' }
           - {
-              label: 'Join us: Content',
+              label: 'Join us: Content (deprecated)',
               name: 'joinUsContent',
               widget: 'markdown',
             }
