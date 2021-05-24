@@ -102,7 +102,9 @@ export function useProjectionsSet(
             ProjectionsSet.fromProjections(
               await fetchAllCountyProjections(snapshotUrl(leftSnapshot)),
               await fetchAllCountyProjections(snapshotUrl(rightSnapshot)),
-            ).top(COUNTIES_LIMIT, SortType.METRIC_DIFF, metric),
+            )
+              .sortBy(SortType.METRIC_DIFF, metric)
+              .top(COUNTIES_LIMIT),
           );
         }
       } else if (
