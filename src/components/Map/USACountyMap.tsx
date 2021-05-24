@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import * as QueryString from 'query-string';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import ReactTooltip from 'react-tooltip';
-import { colorFromLocationSummary } from 'common/colors';
+import { colorFromLocationSummary, ColorScheme } from 'common/colors';
 import { useSummaries } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
 import {
@@ -48,12 +49,22 @@ const USACountyMap = React.memo(
     const [tooltipContent, setTooltipContent] = useState('');
     const locationSummaries = useSummaries();
 
+    const search = window?.location?.search;
+    let scheme = ColorScheme.NORMAL;
+    if (search) {
+      const params = QueryString.parse(search);
+      const colors = params['colors'];
+      if (colors === 'risk') {
+        scheme = ColorScheme.RISK;
+      }
+    }
+
     const getFillColor = useCallback(
       (fips: string) => {
         const summary = (locationSummaries && locationSummaries[fips]) || null;
-        return colorFromLocationSummary(summary);
+        return colorFromLocationSummary(summary, scheme);
       },
-      [locationSummaries],
+      [locationSummaries, scheme],
     );
 
     const onMouseLeave = () => setTooltipContent('');

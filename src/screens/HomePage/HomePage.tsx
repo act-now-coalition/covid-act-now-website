@@ -27,7 +27,6 @@ import {
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
-import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
@@ -147,9 +146,6 @@ export default function HomePage() {
 
             <Map hideLegend hideInstructions showCounties={showCounties} />
 
-            <ColumnCentered $topBottomSpacing={true}>
-              <HorizontalThermometer />
-            </ColumnCentered>
             <Section>
               <CompareMain
                 locationsViewable={8}

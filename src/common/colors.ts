@@ -2,6 +2,7 @@ import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 
 import { LocationSummary } from './location_summaries';
+import { Metric } from './metricEnum';
 
 export default {
   LIGHTGRAY: '#f2f2f2',
@@ -91,11 +92,48 @@ export const LEVEL_COLOR = {
   [Level.UNKNOWN]: COLOR_MAP.GRAY.BASE,
 };
 
+export enum ColorScheme {
+  NORMAL,
+  RISK,
+}
+
 export function colorFromLocationSummary(
   summary: LocationSummary | null,
+  scheme: ColorScheme = ColorScheme.NORMAL,
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
-  return summary ? LEVEL_COLOR[summary.level] : defaultColor;
+  const val = summary?.metrics[Metric.VACCINATIONS]?.value ?? null;
+  if (val === null) {
+    return defaultColor;
+  }
+
+  if (scheme === ColorScheme.NORMAL) {
+    if (val < 0.4) {
+      return '#B7C8FF';
+    } else if (val < 0.5) {
+      return '#6F93FF';
+    } else if (val < 0.6) {
+      return '#3567FD';
+    } else if (val < 0.7) {
+      return '#002CB4';
+    } else {
+      return '#00175D';
+    }
+  } else if (scheme === ColorScheme.RISK) {
+    if (val < 0.4) {
+      return LEVEL_COLOR[Level.SUPER_CRITICAL];
+    } else if (val < 0.5) {
+      return LEVEL_COLOR[Level.CRITICAL];
+    } else if (val < 0.6) {
+      return LEVEL_COLOR[Level.HIGH];
+    } else if (val < 0.7) {
+      return LEVEL_COLOR[Level.MEDIUM];
+    } else {
+      return LEVEL_COLOR[Level.LOW];
+    }
+  } else {
+    return defaultColor;
+  }
 }
 
 export const VACCINATIONS_COLOR_MAP = {
