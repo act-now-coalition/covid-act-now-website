@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import {
   Footer,
@@ -10,8 +10,11 @@ import {
   FooterText,
   AboutText,
   IconWrapper,
+  ModalButton,
 } from './ChartFooter.style';
 import { useBreakpoint } from 'common/hooks';
+import ExternalLink from 'components/ExternalLink/ExternalLink';
+import NewDialog from 'components/NewDialog/NewDialog';
 
 export default {
   title: 'Location page redesign/Chart Footer',
@@ -46,13 +49,46 @@ export const ChartFooterButtonOnly = () => {
   );
 };
 
-export const ChartFooterWithAboutText = () => {
+export const ChartFooterWithSourceText = () => {
   return (
     <Footer>
       <FooterSection>
         <LegendContainer>
           <LegendContent>
-            <AboutText>About this data</AboutText>
+            Source:&nbsp;
+            <ExternalLink
+              href="https://www.cdc.gov/"
+              style={{ color: 'inherit' }}
+            >
+              CDC
+            </ExternalLink>
+          </LegendContent>
+        </LegendContainer>
+        <ButtonContainer>
+          <ShareButton onClickShare={() => {}} />
+        </ButtonContainer>
+      </FooterSection>
+    </Footer>
+  );
+};
+
+export const ChartFooterWithAboutText = () => {
+  const [openModal, setOpenModal] = useState(false);
+  return (
+    <Footer>
+      <FooterSection>
+        <LegendContainer>
+          <LegendContent>
+            <ModalButton onClick={() => setOpenModal(true)}>
+              <AboutText>About this data</AboutText>
+            </ModalButton>
+            <NewDialog
+              open={openModal}
+              closeDialog={() => setOpenModal(false)}
+              header="Header text"
+              body="Body text"
+              links={[]}
+            />
           </LegendContent>
         </LegendContainer>
         <ButtonContainer>
