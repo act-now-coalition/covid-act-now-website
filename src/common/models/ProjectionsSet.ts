@@ -46,9 +46,12 @@ export class ProjectionsSet {
     );
   }
 
-  top(limit: number, sortType: SortType, metric: Metric) {
-    const sortedSet = this.sortBy(sortType, metric);
-    return new ProjectionsSet(take(sortedSet.pairs, limit), this.loadingText);
+  top(limit: number) {
+    return new ProjectionsSet(take(this.pairs, limit), this.loadingText);
+  }
+
+  get length(): number {
+    return this.pairs.length;
   }
 
   get isEmpty(): boolean {
