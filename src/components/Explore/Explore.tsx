@@ -117,7 +117,8 @@ const Explore: React.FunctionComponent<{
     // Originally we had share URLs like /explore/cases instead of
     // /explore/<sharedComponentId> and so this code allows them to keep working.
     if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
-      defaultMetric = getMetricByChartId(sharedComponentId)!;
+      // defaultMetric = getMetricByChartId(sharedComponentId)!;
+      defaultMetric = ExploreMetric.CASES; // Fix
     }
     const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 

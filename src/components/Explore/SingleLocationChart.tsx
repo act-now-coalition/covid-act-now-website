@@ -32,29 +32,31 @@ const SingleLocationTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
 }> = ({ seriesList, left, top, date, subtext }) => {
-  const [seriesRaw, seriesSmooth] = seriesList;
-  const pointSmooth = findPointByDate(seriesSmooth.data, date);
-  const pointRaw = findPointByDate(seriesRaw.data, date);
+  // const [seriesRaw, seriesSmooth] = seriesList;
+  // const pointSmooth = findPointByDate(seriesSmooth.data, date);
+  // const pointRaw = findPointByDate(seriesRaw.data, date);
 
-  return pointSmooth && pointRaw ? (
-    <Tooltip
-      width={'210px'}
-      top={top(pointSmooth)}
-      left={left(pointSmooth)}
-      title={formatTooltipColumnDate(pointSmooth)}
-    >
-      <Styles.TooltipSubtitle>
-        {`${seriesRaw.tooltipLabel}: ${
-          isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
-        }`}
-      </Styles.TooltipSubtitle>
-      <Styles.TooltipMetric>
-        {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
-      </Styles.TooltipMetric>
-      <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
-      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
-    </Tooltip>
-  ) : null;
+  // return pointSmooth && pointRaw ? (
+  //   <Tooltip
+  //     width={'210px'}
+  //     top={top(pointSmooth)}
+  //     left={left(pointSmooth)}
+  //     title={formatTooltipColumnDate(pointSmooth)}
+  //   >
+  //     <Styles.TooltipSubtitle>
+  //       {`${seriesRaw.tooltipLabel}: ${
+  //         isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
+  //       }`}
+  //     </Styles.TooltipSubtitle>
+  //     <Styles.TooltipMetric>
+  //       {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
+  //     </Styles.TooltipMetric>
+  //     <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
+  //     <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
+  //   </Tooltip>
+  // ) : null;
+
+  return <div>Hello</div>;
 };
 
 /**

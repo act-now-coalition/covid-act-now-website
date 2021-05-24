@@ -51,6 +51,10 @@ export enum ExploreMetric {
   DEATHS,
   HOSPITALIZATIONS,
   ICU_HOSPITALIZATIONS,
+  VACCINATIONS_FIRST_DOSE,
+  VACCINATIONS_COMPLETED,
+  ICU_USED,
+  POSITIVITY_RATE,
 }
 
 export const EXPLORE_METRICS = [
@@ -58,6 +62,10 @@ export const EXPLORE_METRICS = [
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
+  ExploreMetric.VACCINATIONS_FIRST_DOSE,
+  ExploreMetric.VACCINATIONS_COMPLETED,
+  ExploreMetric.ICU_USED,
+  ExploreMetric.POSITIVITY_RATE,
 ];
 
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
@@ -70,6 +78,14 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.HOSPITALIZATIONS;
     case 'icu-hospitalizations':
       return ExploreMetric.ICU_HOSPITALIZATIONS;
+    case 'vaccinations':
+      return ExploreMetric.VACCINATIONS_FIRST_DOSE;
+    case 'vaccinationsCompleted':
+      return ExploreMetric.VACCINATIONS_COMPLETED;
+    case 'icuUtilization':
+      return ExploreMetric.ICU_USED;
+    case 'testPositiveRate':
+      return ExploreMetric.POSITIVITY_RATE;
   }
 }
 
@@ -83,6 +99,14 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'smoothedHospitalizations';
     case ExploreMetric.ICU_HOSPITALIZATIONS:
       return 'smoothedICUHospitalizations';
+    case ExploreMetric.VACCINATIONS_FIRST_DOSE:
+      return 'vaccinations';
+    case ExploreMetric.VACCINATIONS_COMPLETED:
+      return 'vaccinationsCompleted';
+    case ExploreMetric.ICU_USED:
+      return 'icuUtilization';
+    case ExploreMetric.POSITIVITY_RATE:
+      return 'testPositiveRate';
   }
 }
 
@@ -175,6 +199,82 @@ export const exploreMetricData: {
         label: '7 Day Average',
         tooltipLabel: 'COVID ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.VACCINATIONS_FIRST_DOSE]: {
+    title: 'Percent Vaccinated (1+ dose)',
+    name: 'Percent Vaccinated (1+ dose)',
+    chartId: 'vaccinations_first_dose',
+    seriesList: [
+      // {
+      //   label: 'Percent Vaccinated (1+ dose)',
+      //   tooltipLabel: 'Percent Vaccinated (1+ dose)',
+      //   datasetId: 'vaccinations',
+      //   type: SeriesType.BAR,
+      // },
+      {
+        label: 'Percent Vaccinated (1+ dose)',
+        tooltipLabel: 'Percent Vaccinated (1+ dose)',
+        datasetId: 'vaccinations',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.VACCINATIONS_COMPLETED]: {
+    title: 'Percent Vaccinated (fully)',
+    name: 'Percent Vaccinated (fully)',
+    chartId: 'vaccinations_completed',
+    seriesList: [
+      // {
+      //   label: 'Percent Vaccinated (fully)',
+      //   tooltipLabel: 'Percent Vaccinated (fully)',
+      //   datasetId: 'vaccinationsCompleted',
+      //   type: SeriesType.BAR,
+      // },
+      {
+        label: 'Percent Vaccinated (fully)',
+        tooltipLabel: 'Percent Vaccinated (fully)',
+        datasetId: 'vaccinationsCompleted',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.ICU_USED]: {
+    title: 'ICU capacity used',
+    name: 'ICU capacity used',
+    chartId: 'icu_capacity_used',
+    seriesList: [
+      // {
+      //   label: 'Percent Vaccinated (fully)',
+      //   tooltipLabel: 'Percent Vaccinated (fully)',
+      //   datasetId: 'vaccinationsCompleted',
+      //   type: SeriesType.BAR,
+      // },
+      {
+        label: 'ICU capacity used',
+        tooltipLabel: 'ICU capacity used',
+        datasetId: 'icuUtilization',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.POSITIVITY_RATE]: {
+    title: 'Positive test rate',
+    name: 'Positive test rate',
+    chartId: 'positivity_rate',
+    seriesList: [
+      // {
+      //   label: 'Percent Vaccinated (fully)',
+      //   tooltipLabel: 'Percent Vaccinated (fully)',
+      //   datasetId: 'vaccinationsCompleted',
+      //   type: SeriesType.BAR,
+      // },
+      {
+        label: 'Positive test rate',
+        tooltipLabel: 'Positive test rate',
+        datasetId: 'testPositiveRate',
         type: SeriesType.LINE,
       },
     ],
