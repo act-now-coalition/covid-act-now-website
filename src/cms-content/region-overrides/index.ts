@@ -24,6 +24,8 @@ interface RegionOverride {
   region: string;
   context: string;
   blocked: boolean;
+  start_date?: string;
+  end_date?: string;
   disclaimer?: Markdown;
 }
 
