@@ -45,7 +45,7 @@ function getSeriesOpacity(
     : 1;
 }
 
-const MultipleLocationsTooltip: React.FC<{
+export const MultipleLocationsTooltip: React.FC<{
   top: number;
   left: number;
   seriesList: Series[];

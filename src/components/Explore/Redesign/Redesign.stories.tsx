@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
-import { ExploreMetric } from 'components/Explore';
-import ExploreCopy from './ExploreCopy';
+import Explore, { ExploreMetric } from 'components/Explore';
 
 export default {
   title: 'Location page redesign/Explore',
-  component: ExploreCopy,
+  component: Explore,
 };
 
 export const RedesignExample = () => {
@@ -12,7 +11,7 @@ export const RedesignExample = () => {
 
   return (
     <>
-      <ExploreCopy
+      <Explore
         initialFipsList={initialFipsList}
         title="Trends"
         defaultMetric={ExploreMetric.CASES}

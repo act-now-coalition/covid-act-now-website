@@ -29,7 +29,7 @@ import {
 } from 'common/utils/time-utils';
 import { formatDecimal } from 'common/utils/index';
 
-import { min as d3min, max as d3max } from 'd3-array';
+import { max as d3max } from 'd3-array';
 import { subtractTime } from 'common/utils/time-utils';
 import isDate from 'lodash/isDate';
 
@@ -108,17 +108,6 @@ export function getMaxBy<T>(
   const maxValue = max(seriesList.map(({ data }) => max(data.map(getValue))));
   return maxValue || defaultValue;
 }
-
-// export enum ExploreMetric {
-//   CASES,
-//   DEATHS,
-//   HOSPITALIZATIONS,
-//   ICU_HOSPITALIZATIONS,
-//   VACCINATIONS_FIRST_DOSE,
-//   VACCINATIONS_COMPLETED,
-//   ICU_USED,
-//   POSITIVITY_RATE,
-// }
 
 export const EXPLORE_METRICS = [
   ExploreMetric.CASES,

@@ -20,6 +20,8 @@ import {
   getChartSeries,
   getLocationNames,
   getMetricName,
+  getDateRange,
+  Period,
 } from 'components/Explore/utils';
 import regions, { Region } from 'common/regions';
 
@@ -55,6 +57,10 @@ const ExploreChartExportImage = ({
 
   const url = `https://covidactnow.org/`;
 
+  const dateRange = chartSeries.map(series =>
+    getDateRange(series.data, Period.ALL),
+  );
+
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
@@ -79,6 +85,7 @@ const ExploreChartExportImage = ({
                 height={chartHeight}
                 isMobile={false}
                 hasMultipleLocations={selectedLocations.length > 1}
+                dateRange={dateRange}
               />
             )}
           </ParentSize>

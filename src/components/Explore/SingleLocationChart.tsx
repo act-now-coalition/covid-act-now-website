@@ -3,7 +3,7 @@ import isNumber from 'lodash/isNumber';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal } from 'common/utils';
+import { formatInteger, formatDecimal, formatPercent } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
@@ -25,6 +25,30 @@ const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
 
+const SingleSeriesTooltip: React.FC<{
+  date: Date;
+  series: Series;
+  left: (d: Column) => number;
+  top: (d: Column) => number;
+  subtext: string;
+}> = ({ series, left, top, date, subtext }) => {
+  const point = findPointByDate(series.data, date);
+
+  return point ? (
+    <Tooltip
+      width={'210px'}
+      top={top(point)}
+      left={left(point)}
+      title={formatTooltipColumnDate(point)}
+    >
+      <Styles.TooltipMetric>
+        {isNumber(point.y) ? formatPercent(point.y, 1) : '-'}
+      </Styles.TooltipMetric>
+      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
+    </Tooltip>
+  ) : null;
+};
+
 const SingleLocationTooltip: React.FC<{
   date: Date;
   seriesList: Series[];
@@ -32,31 +56,41 @@ const SingleLocationTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
 }> = ({ seriesList, left, top, date, subtext }) => {
-  // const [seriesRaw, seriesSmooth] = seriesList;
-  // const pointSmooth = findPointByDate(seriesSmooth.data, date);
-  // const pointRaw = findPointByDate(seriesRaw.data, date);
+  if (seriesList.length === 1) {
+    return (
+      <SingleSeriesTooltip
+        series={seriesList[0]}
+        date={date}
+        left={left}
+        top={top}
+        subtext={subtext}
+      />
+    );
+  }
 
-  // return pointSmooth && pointRaw ? (
-  //   <Tooltip
-  //     width={'210px'}
-  //     top={top(pointSmooth)}
-  //     left={left(pointSmooth)}
-  //     title={formatTooltipColumnDate(pointSmooth)}
-  //   >
-  //     <Styles.TooltipSubtitle>
-  //       {`${seriesRaw.tooltipLabel}: ${
-  //         isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
-  //       }`}
-  //     </Styles.TooltipSubtitle>
-  //     <Styles.TooltipMetric>
-  //       {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
-  //     </Styles.TooltipMetric>
-  //     <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
-  //     <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
-  //   </Tooltip>
-  // ) : null;
+  const [seriesRaw, seriesSmooth] = seriesList;
+  const pointSmooth = findPointByDate(seriesSmooth.data, date);
+  const pointRaw = findPointByDate(seriesRaw.data, date);
 
-  return <div>Hello</div>;
+  return pointSmooth && pointRaw ? (
+    <Tooltip
+      width={'210px'}
+      top={top(pointSmooth)}
+      left={left(pointSmooth)}
+      title={formatTooltipColumnDate(pointSmooth)}
+    >
+      <Styles.TooltipSubtitle>
+        {`${seriesRaw.tooltipLabel}: ${
+          isNumber(pointRaw.y) ? formatInteger(pointRaw.y) : '-'
+        }`}
+      </Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {isNumber(pointSmooth.y) ? formatDecimal(pointSmooth.y, 1) : '-'}
+      </Styles.TooltipMetric>
+      <Styles.TooltipSubtitle>7-day avg.</Styles.TooltipSubtitle>
+      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
+    </Tooltip>
+  ) : null;
 };
 
 /**
@@ -129,7 +163,7 @@ const SingleLocationChart: React.FC<{
   // const maxY = getMaxBy<number>(seriesList, getY, 1);
 
   const dateFrom = from;
-  const today = new Date(); // do we want today, or computed 'to'?
+  // const today = new Date(); // do we want today, or computed 'to'?
   const dateTo = to;
   const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(seriesList, getY, 1);
