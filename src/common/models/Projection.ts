@@ -320,7 +320,8 @@ export class Projection {
   }
 
   private getTwoWeekPercentChange(series: any[]): number | null {
-    const lastIndex = indexOfLastValue(series) ?? series.length;
+    const lastIndex = indexOfLastValue(series);
+    assert(lastIndex != null, 'series is empty');
     const lastTwoWeeks = series.slice(lastIndex - 14, lastIndex + 1);
     const firstVal = lastTwoWeeks[0];
     const lastVal = last(lastTwoWeeks);

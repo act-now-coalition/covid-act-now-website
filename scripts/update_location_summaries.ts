@@ -19,44 +19,12 @@ import {
   SummariesMap,
 } from '../src/common/location_summaries';
 import { Projections } from '../src/common/models/Projections';
-import { DatasetId } from '../src/common/models/Projection';
-import { assert } from '../src/common/utils';
 import { Level } from '../src/common/level';
 import regions from '../src/common/regions';
 import { importFipsToCcviMap } from '../src/common/data';
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
 const SUMMARIES_FOLDER = path.join(__dirname, 'alert_emails/summaries');
-
-// Via https://en.wikipedia.org/wiki/List_of_U.S._counties_with_Native_American_majority_populations
-const INDIGENOUS_FIPS = [
-  '02050',
-  '02070',
-  '02164',
-  '02180',
-  '02185',
-  '02188',
-  '02158',
-  '02290',
-  '04001',
-  '30003',
-  '30035',
-  '30085',
-  '31173',
-  '35031',
-  '38079',
-  '38085',
-  '46007',
-  '46017',
-  '46031',
-  '46041',
-  '46095',
-  '46102',
-  '46121',
-  '46137',
-  '49037',
-  '55078',
-];
 
 async function main() {
   const allStatesProjections = await fetchAllStateProjections();
