@@ -25,9 +25,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: yarn install
+
+      # Copy region-overrides.json file from backend repo.
+      - run: curl https://raw.githubusercontent.com/covid-projections/covid-data-model/main/data/region-overrides.json > src/cms-content/region-overrides/region-overrides.json
 
       # Update snapshot URL and regenerate map colors.
-      - run: yarn install
       - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/v2/\" }" | python -mjson.tool > src/assets/data/data_url.json'
       - run: yarn update-location-summaries
 
