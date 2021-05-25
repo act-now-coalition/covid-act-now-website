@@ -271,12 +271,6 @@ export const exploreMetricData: {
     name: 'Percent Vaccinated (1+ dose)',
     chartId: 'vaccinations_first_dose',
     seriesList: [
-      // {
-      //   label: 'Percent Vaccinated (1+ dose)',
-      //   tooltipLabel: 'Percent Vaccinated (1+ dose)',
-      //   datasetId: 'vaccinations',
-      //   type: SeriesType.BAR,
-      // },
       {
         label: 'Percent Vaccinated (1+ dose)',
         tooltipLabel: 'Percent Vaccinated (1+ dose)',
@@ -290,12 +284,6 @@ export const exploreMetricData: {
     name: 'Percent Vaccinated (fully)',
     chartId: 'vaccinations_completed',
     seriesList: [
-      // {
-      //   label: 'Percent Vaccinated (fully)',
-      //   tooltipLabel: 'Percent Vaccinated (fully)',
-      //   datasetId: 'vaccinationsCompleted',
-      //   type: SeriesType.BAR,
-      // },
       {
         label: 'Percent Vaccinated (fully)',
         tooltipLabel: 'Percent Vaccinated (fully)',
@@ -309,12 +297,6 @@ export const exploreMetricData: {
     name: 'ICU capacity used',
     chartId: 'icu_capacity_used',
     seriesList: [
-      // {
-      //   label: 'Percent Vaccinated (fully)',
-      //   tooltipLabel: 'Percent Vaccinated (fully)',
-      //   datasetId: 'vaccinationsCompleted',
-      //   type: SeriesType.BAR,
-      // },
       {
         label: 'ICU capacity used',
         tooltipLabel: 'ICU capacity used',
@@ -328,12 +310,6 @@ export const exploreMetricData: {
     name: 'Positive test rate',
     chartId: 'positivity_rate',
     seriesList: [
-      // {
-      //   label: 'Percent Vaccinated (fully)',
-      //   tooltipLabel: 'Percent Vaccinated (fully)',
-      //   datasetId: 'vaccinationsCompleted',
-      //   type: SeriesType.BAR,
-      // },
       {
         label: 'Positive test rate',
         tooltipLabel: 'Positive test rate',
