@@ -103,6 +103,7 @@ const SingleLocationChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
+  dateRange: any;
 }> = ({
   width,
   height,
@@ -115,10 +116,21 @@ const SingleLocationChart: React.FC<{
   marginRight = 20,
   barOpacity,
   barOpacityHover,
+  dateRange,
 }) => {
-  const dateFrom = new Date('2020-03-01');
-  const today = new Date();
-  const dateTo = today;
+  console.log('dateRange:::', dateRange.length);
+  const [from, to] = dateRange[0]; // change
+  console.log('from', from);
+  console.log('to', to);
+  // const dateFrom = new Date('2020-03-01');
+  // const today = new Date();
+  // const dateTo = today;
+  // const numDays = daysBetween(dateFrom, dateTo);
+  // const maxY = getMaxBy<number>(seriesList, getY, 1);
+
+  const dateFrom = from;
+  const today = new Date(); // do we want today, or computed 'to'?
+  const dateTo = to;
   const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(seriesList, getY, 1);
 

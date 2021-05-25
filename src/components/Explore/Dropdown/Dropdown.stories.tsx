@@ -6,6 +6,12 @@ export default {
   component: Dropdown,
 };
 
-export const Example = () => {
-  return <Dropdown menuLabel="Menu label" />;
+export const DropdownMenu = () => {
+  const props = {
+    menuLabel: 'Menu label',
+    itemLabels: ['item 1', 'item 2', 'item 3', 'item 4'],
+    onSelect: () => {},
+    defaultSelectionLabel: 'Default selection',
+  };
+  return <Dropdown {...props} />;
 };

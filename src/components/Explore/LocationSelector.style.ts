@@ -40,9 +40,3 @@ export const DoneButton = styled(Button)`
   color: ${palette.lightBlue};
   min-width: fit-content;
 `;
-
-export const ModalOpenButton = styled(Button)`
-  white-space: nowrap;
-  width: fit-content;
-  margin-bottom: 0.5rem;
-`;

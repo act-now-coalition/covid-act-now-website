@@ -9,6 +9,7 @@ import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
 import { COLOR_MAP } from 'common/colors';
 import { brightenColor } from './utils';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -68,6 +69,13 @@ export const Tab = styled(MuiTab)`
 // CHART CONTROLS
 export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    flex-direction: row;
+  }
 `;
 
 export const TableAutocompleteHeader = styled.div`

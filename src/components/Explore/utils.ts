@@ -10,7 +10,7 @@ import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId } from 'common/models/Projection';
 import { share_image_url } from 'assets/data/share_images_url.json';
-import { SeriesType, Series } from './interfaces';
+import { SeriesType, Series, ExploreMetric } from './interfaces';
 import AggregationsJSON from 'assets/data/aggregations.json';
 import regions, {
   County,
@@ -30,6 +30,70 @@ import {
 } from 'common/utils/time-utils';
 import { formatDecimal } from 'common/utils/index';
 
+import { min as d3min, max as d3max } from 'd3-array';
+import { subtractTime } from 'common/utils/time-utils';
+import isDate from 'lodash/isDate';
+
+export enum Period {
+  DAYS_60,
+  DAYS_180,
+  ALL,
+}
+
+const EXPLORE_PERIODS = [Period.DAYS_60, Period.DAYS_180, Period.ALL];
+
+interface PeriodDefinition {
+  increment: number;
+  label: string;
+}
+
+export const periodMap: {
+  [period in Period]: PeriodDefinition;
+} = {
+  [Period.DAYS_60]: {
+    increment: 60,
+    label: 'Past 60 days',
+  },
+  [Period.DAYS_180]: {
+    increment: 180,
+    label: 'Past 180 days',
+  },
+  [Period.ALL]: {
+    increment: -1,
+    label: 'All time',
+  },
+};
+
+export function getPeriodLabel(period: Period) {
+  return periodMap[period].label;
+}
+
+export function getAllPeriodLabels() {
+  return EXPLORE_PERIODS.map(getPeriodLabel);
+}
+
+type Point = {
+  x: number;
+  y: any;
+};
+const getDate = (d: Point) => new Date(d.x);
+const getY = (d: Column) => d.y;
+const hasData = (d: Column) => isDate(getDate(d)) && Number.isFinite(getY(d));
+
+export function getDateRange(columnData: Column[], period: Period) {
+  const data: any[] = columnData.filter(hasData);
+  const dates = data.map(getDate);
+  // const minDate = d3min(dates) || new Date('2020-03-01');
+  const minDate = new Date('2020-03-01');
+  const dateTo = d3max(dates) || new Date();
+  const dateFrom =
+    period === Period.ALL
+      ? minDate
+      : subtractTime(new Date(), periodMap[period].increment, TimeUnit.DAYS);
+
+  return [dateFrom, dateTo || new Date()];
+}
+
 /** Common interface to represent real Projection objects as well as aggregated projections. */
 interface ProjectionLike {
   getDataset(datasetId: DatasetId): Column[];
@@ -46,16 +110,16 @@ export function getMaxBy<T>(
   return maxValue || defaultValue;
 }
 
-export enum ExploreMetric {
-  CASES,
-  DEATHS,
-  HOSPITALIZATIONS,
-  ICU_HOSPITALIZATIONS,
-  VACCINATIONS_FIRST_DOSE,
-  VACCINATIONS_COMPLETED,
-  ICU_USED,
-  POSITIVITY_RATE,
-}
+// export enum ExploreMetric {
+//   CASES,
+//   DEATHS,
+//   HOSPITALIZATIONS,
+//   ICU_HOSPITALIZATIONS,
+//   VACCINATIONS_FIRST_DOSE,
+//   VACCINATIONS_COMPLETED,
+//   ICU_USED,
+//   POSITIVITY_RATE,
+// }
 
 export const EXPLORE_METRICS = [
   ExploreMetric.CASES,

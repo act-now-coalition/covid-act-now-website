@@ -1,4 +1,4 @@
-import AutocompleteRegions from './AutocompleteRegions';
+import AutocompleteRegions, { getLocationLabel } from './AutocompleteRegions';
 
 export default AutocompleteRegions;
-export { AutocompleteRegions };
+export { getLocationLabel };

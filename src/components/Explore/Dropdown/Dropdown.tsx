@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {
-  Menu,
-  MenuButton,
-  MenuLabel,
-  ItemLabel,
-  ButtonCopy,
-  MenuItem,
-} from './Dropdown.style';
+import { Menu, MenuItem } from './Dropdown.style';
+import MenuButton from './MenuButton';
 
-const Dropdown: React.FC<{ menuLabel: string }> = ({ menuLabel }) => {
+const Dropdown: React.FC<{
+  menuLabel: string;
+  itemLabels: string[];
+  onSelect: (itemIndex: number) => void;
+  defaultSelectionLabel: string;
+}> = ({ menuLabel, itemLabels, onSelect, defaultSelectionLabel }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [buttonLabel, setButtonLabel] = useState(defaultSelectionLabel);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -26,20 +24,13 @@ const Dropdown: React.FC<{ menuLabel: string }> = ({ menuLabel }) => {
   return (
     <>
       <MenuButton
-        aria-controls="menu-label" // edit this
-        aria-haspopup="true"
-        disableRipple
         onClick={handleClick}
-        endIcon={open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        $open={open}
-      >
-        <ButtonCopy>
-          <MenuLabel>{menuLabel}</MenuLabel>
-          <ItemLabel>Daily new cases (per 100k)</ItemLabel>
-        </ButtonCopy>
-      </MenuButton>
+        open={open}
+        menuLabel={menuLabel}
+        buttonLabel={buttonLabel}
+      />
       <Menu
-        id="menu-label" // edit this
+        id="menu-label" // edit this to be more descriptive
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         getContentAnchorEl={null}
@@ -54,11 +45,19 @@ const Dropdown: React.FC<{ menuLabel: string }> = ({ menuLabel }) => {
           horizontal: 'center',
         }}
       >
-        <MenuItem>Daily new cases (per 100k)</MenuItem>
-        <MenuItem>
-          Percent vaccinated vaccinated vaccinated (completed)
-        </MenuItem>
-        <MenuItem>Deaths</MenuItem>
+        {itemLabels.map((label: string, i: number) => {
+          return (
+            <MenuItem
+              onClick={() => {
+                onSelect(i);
+                handleClose();
+                setButtonLabel(label);
+              }}
+            >
+              {label}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </>
   );

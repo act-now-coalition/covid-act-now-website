@@ -1,32 +1,18 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
 import { Region } from 'common/regions';
 import * as Styles from './LocationSelector.style';
-
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import * as ExploreStyles from './Explore.style';
-import AutocompleteRegions from 'components/AutocompleteRegions';
+import AutocompleteRegions, {
+  getLocationLabel,
+} from 'components/AutocompleteRegions';
+import MenuButton from './Dropdown/MenuButton';
 
 const LocationSelector: React.FC<{
   regions: Region[];
   selectedRegions: Region[];
   onChangeSelectedRegions: (newLocations: Region[]) => void;
-  normalizeData: boolean;
-  setNormalizeData: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({
-  regions,
-  selectedRegions,
-  onChangeSelectedRegions,
-  normalizeData,
-  setNormalizeData,
-}) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const hasMultipleLocations = selectedRegions.length > 1;
-
+}> = ({ regions, selectedRegions, onChangeSelectedRegions }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onChangeRegions = (
@@ -39,17 +25,15 @@ const LocationSelector: React.FC<{
   const onClickButton = () => setModalOpen(!modalOpen);
   const closeModal = () => setModalOpen(false);
 
-  return isMobile ? (
+  const regionNames = selectedRegions.map(getLocationLabel).join(', ');
+
+  return (
     <React.Fragment>
-      <Styles.ModalOpenButton
-        variant="outlined"
-        disableRipple
-        disableFocusRipple
-        disableTouchRipple
+      <MenuButton
         onClick={onClickButton}
-      >
-        Compare states or counties
-      </Styles.ModalOpenButton>
+        menuLabel="Locations"
+        buttonLabel={regionNames}
+      />
       {modalOpen && (
         <Modal
           open={modalOpen}
@@ -77,40 +61,11 @@ const LocationSelector: React.FC<{
                 onChangeRegions={onChangeRegions}
                 selectedRegions={selectedRegions}
               />
-              {hasMultipleLocations && (
-                <ExploreStyles.NormalizeDataContainer>
-                  <Grid key="legend" item sm xs={12}>
-                    <FormControlLabel
-                      control={
-                        <ExploreStyles.NormalizeCheckbox
-                          checked={normalizeData}
-                          onChange={() => {
-                            setNormalizeData(!normalizeData);
-                          }}
-                          name="normalize data"
-                          disableRipple
-                          id="normalize-data-control"
-                        />
-                      }
-                      label="Normalize Data"
-                    />
-                  </Grid>
-                  <ExploreStyles.NormalizeSubLabel>
-                    Per 100k population
-                  </ExploreStyles.NormalizeSubLabel>
-                </ExploreStyles.NormalizeDataContainer>
-              )}
             </Styles.ModalBody>
           </Styles.ModalContainer>
         </Modal>
       )}
     </React.Fragment>
-  ) : (
-    <AutocompleteRegions
-      regions={regions}
-      onChangeRegions={onChangeRegions}
-      selectedRegions={selectedRegions}
-    />
   );
 };
 

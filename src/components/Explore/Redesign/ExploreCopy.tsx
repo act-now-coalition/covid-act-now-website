@@ -12,14 +12,12 @@ import max from 'lodash/max';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
 import ShareImageButtonGroup from 'components/ShareButtons';
-import ExploreTabs from './ExploreTabs';
-import ExploreChart from './ExploreChart';
-import Legend from './Legend';
-import { ExploreMetric, Series } from './interfaces';
-import LocationSelector from './LocationSelector';
+import ExploreChart from '../ExploreChart';
+// import Legend from '../Legend';
+import { ExploreMetric, Series } from '../interfaces';
+import LocationSelector from '../LocationSelector';
 import {
   getMetricLabels,
   getMetricByChartId,
@@ -33,9 +31,13 @@ import {
   getMetricName,
   getSeriesLabel,
   EXPLORE_CHART_IDS,
-  getSubtitle,
-} from './utils';
-import * as Styles from './Explore.style';
+  // getSubtitle,
+  getDateRange,
+  Period,
+  periodMap,
+  getAllPeriodLabels,
+} from '../utils';
+import * as Styles from '../Explore.style';
 import {
   SharedComponent,
   storeSharedComponentParams,
@@ -46,6 +48,7 @@ import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import NationalText from 'components/NationalText';
+import Dropdown from 'components/Explore/Dropdown/Dropdown';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -90,7 +93,7 @@ function getLabelLength(series: Series, shortLabel: boolean) {
   return label.length;
 }
 
-const Explore: React.FunctionComponent<{
+const ExploreCopy: React.FunctionComponent<{
   initialFipsList: string[];
   title?: string;
   defaultMetric?: ExploreMetric;
@@ -117,29 +120,14 @@ const Explore: React.FunctionComponent<{
     // Originally we had share URLs like /explore/cases instead of
     // /explore/<sharedComponentId> and so this code allows them to keep working.
     if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
-      // defaultMetric = getMetricByChartId(sharedComponentId)!;
-      defaultMetric = ExploreMetric.CASES; // (Chelsi)-Fix
+      defaultMetric = getMetricByChartId(sharedComponentId)!;
     }
     const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-    const [normalizeData, setNormalizeData] = useState(
-      initialFipsList.length > 1,
-    );
-
-    const onChangeTab = (newMetric: number) => {
+    const onSelectCurrentMetric = (newMetric: number) => {
       const newMetricName = metricLabels[newMetric];
       setCurrentMetric(newMetric);
       trackExploreEvent(EventAction.SELECT, `Metric: ${newMetricName}`);
-    };
-
-    const onClickNormalize = () => {
-      const newNormalizeData = !normalizeData;
-      setNormalizeData(newNormalizeData);
-      trackExploreEvent(
-        EventAction.SELECT,
-        'Normalize Data',
-        newNormalizeData ? 1 : 0,
-      );
     };
 
     const currentMetricName = getMetricName(currentMetric);
@@ -156,6 +144,10 @@ const Explore: React.FunctionComponent<{
 
     const [selectedLocations, setSelectedLocations] = useState<Region[]>(
       initialLocations,
+    );
+
+    const [normalizeData, setNormalizeData] = useState(
+      selectedLocations.length > 1,
     );
 
     const onChangeSelectedLocations = (newLocations: Region[]) => {
@@ -226,10 +218,16 @@ const Explore: React.FunctionComponent<{
     const hasData = some(chartSeries, ({ data }) => data.length > 0);
     const hasMultipleLocations = selectedLocations.length > 1;
 
-    const modalNormalizeCheckboxProps = {
-      hasMultipleLocations,
-      normalizeData,
-      setNormalizeData,
+    const [period, setPeriod] = useState<Period>(Period.ALL);
+    const dateRange = chartSeries.map(series =>
+      getDateRange(series.data, period),
+    );
+    const allPeriodLabels = getAllPeriodLabels();
+
+    const onSelectPeriod = (newPeriod: Period) => {
+      const newPeriodLabel = periodMap[newPeriod].label;
+      setPeriod(newPeriod);
+      trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
     };
 
     const marginRight = useMemo(
@@ -270,55 +268,25 @@ const Explore: React.FunctionComponent<{
           </Grid>
         </Grid>
         {showNationalSummary && <NationalText />}
-        <ExploreTabs
-          activeTabIndex={currentMetric}
-          labels={metricLabels}
-          onChangeTab={onChangeTab}
-        />
         <Styles.ChartControlsContainer>
-          <Styles.TableAutocompleteHeader>
-            Compare states, counties, or metro areas
-          </Styles.TableAutocompleteHeader>
-          <Grid container spacing={1}>
-            <Grid key="location-selector" item sm={9} xs={12}>
-              <LocationSelector
-                regions={autocompleteLocations}
-                selectedRegions={selectedLocations}
-                onChangeSelectedRegions={onChangeSelectedLocations}
-                {...modalNormalizeCheckboxProps}
-              />
-            </Grid>
-            {!hasMultipleLocations && (
-              <Grid key="legend" item sm={3} xs={12}>
-                <Legend seriesList={chartSeries} />
-              </Grid>
-            )}
-            {hasMultipleLocations && !isMobileXs && (
-              <Grid key="legend" item sm={3} xs={12}>
-                <Styles.NormalizeDataContainer>
-                  <FormControlLabel
-                    control={
-                      <Styles.NormalizeCheckbox
-                        checked={normalizeData}
-                        onChange={onClickNormalize}
-                        name="normalize data"
-                        disableRipple
-                        id="normalize-data-control"
-                      />
-                    }
-                    label="Normalize Data"
-                  />
-                  <Styles.NormalizeSubLabel>
-                    Per 100k population
-                  </Styles.NormalizeSubLabel>
-                </Styles.NormalizeDataContainer>
-              </Grid>
-            )}
-          </Grid>
+          <Dropdown
+            menuLabel="Metric"
+            defaultSelectionLabel={metricLabels[defaultMetric]}
+            itemLabels={metricLabels}
+            onSelect={onSelectCurrentMetric}
+          />
+          <Dropdown
+            menuLabel="Past # of days"
+            defaultSelectionLabel={allPeriodLabels[period]}
+            itemLabels={allPeriodLabels}
+            onSelect={onSelectPeriod}
+          />
+          <LocationSelector
+            regions={autocompleteLocations}
+            selectedRegions={selectedLocations}
+            onChangeSelectedRegions={onChangeSelectedLocations}
+          />
         </Styles.ChartControlsContainer>
-        <Styles.Subtitle>
-          {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
-        </Styles.Subtitle>
         {selectedLocations.length > 0 && hasData && (
           <Styles.ChartContainer>
             {/**
@@ -337,6 +305,7 @@ const Explore: React.FunctionComponent<{
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
                     marginRight={marginRight}
+                    dateRange={dateRange}
                   />
                 ) : (
                   <div style={{ height: 400 }} />
@@ -402,4 +371,4 @@ const Explore: React.FunctionComponent<{
   },
 );
 
-export default Explore;
+export default ExploreCopy;

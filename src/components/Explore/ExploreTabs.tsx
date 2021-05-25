@@ -1,3 +1,5 @@
+// (Chelsi) - delete
+
 import React, { FunctionComponent } from 'react';
 import { Tab, Tabs } from './Explore.style';
 
