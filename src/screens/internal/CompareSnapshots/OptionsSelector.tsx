@@ -208,6 +208,16 @@ function OptionsSelectorInner({
           }}
         />
       </FormControl>
+      <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
+        <InputLabel focused={false}>Metric:</InputLabel>
+        <Select value={metric} onChange={changeMetric}>
+          {ALL_METRICS.map(metric => (
+            <MenuItem key={metric} value={metric}>
+              {getMetricName(metric)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <FormControl style={{ width: '14rem', marginLeft: '1rem' }}>
         <InputLabel focused={false}>Show:</InputLabel>
         <Select value={locations} onChange={changeLocations}>
@@ -227,16 +237,6 @@ function OptionsSelectorInner({
           <MenuItem value={CompareLocations.DISABLED}>
             Blocked Locations
           </MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
-        <InputLabel focused={false}>Metric:</InputLabel>
-        <Select value={metric} onChange={changeMetric}>
-          {ALL_METRICS.map(metric => (
-            <MenuItem key={metric} value={metric}>
-              {getMetricName(metric)}
-            </MenuItem>
-          ))}
         </Select>
       </FormControl>
       <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
