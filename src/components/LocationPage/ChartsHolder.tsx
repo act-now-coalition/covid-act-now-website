@@ -228,7 +228,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         <LocationPageBlock ref={exploreChartRef} id="explore-chart">
           <Explore
             initialFipsList={initialFipsList}
-            title="Cases, Deaths, and Hospitalizations"
+            title="Trends"
             defaultMetric={defaultExploreMetric}
           />
         </LocationPageBlock>
