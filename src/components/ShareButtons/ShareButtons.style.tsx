@@ -23,13 +23,15 @@ export const Container = styled.div`
   border: solid 1px red;
 `;
 
-export const SocialButtonsContainer = styled.div`
+export const SocialButtonsContainer = styled.div<{
+  isHeader?: boolean;
+}>`
   display: flex;
   transform: translate(0, 42px);
   z-index: 100;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
+  top: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
   margin-top: ${theme.spacing(1)}px;
   box-shadow: 0px ${theme.spacing(1)}px ${theme.spacing(4)}px rgba(0, 0, 0, 0.2);
   background-color: ${palette.white};
@@ -83,4 +85,11 @@ export const SocialShareButton = styled.div`
   button {
     align-items: center;
   }
+`;
+
+export const ShareButtonWrapper = styled.div<{
+  isMobile?: boolean;
+}>`
+  position: relative;
+  width: ${({ isMobile }) => (isMobile ? '100%' : 'fit-content')};
 `;

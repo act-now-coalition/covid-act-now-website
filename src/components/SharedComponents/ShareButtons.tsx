@@ -7,6 +7,7 @@ import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from 'components/ShareButtons/SocialButtonBlock';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { Region } from 'common/regions';
+import { ShareButtonWrapper } from 'components/ShareButtons/ShareButtons.style';
 
 function trackShare(eventCategory: EventCategory, label: string) {
   trackEvent(eventCategory, EventAction.SHARE, label);
@@ -44,15 +45,18 @@ const ShareButtons: React.FC<{
 
   return (
     <ClickAwayListener onClickAway={() => hideSocialButtons()}>
-      <div style={{ position: 'relative', width: 'fit-content' }}>
-        <ButtonGroup aria-label="share buttons" variant="outlined">
-          {!isLocationPageHeader && (
-            <ShareButton
+      <ShareButtonWrapper isMobile={isMobile}>
+        <ButtonGroup
+          aria-label="share buttons"
+          variant="outlined"
+          style={{ width: '100%' }}
+        >
+          {isLocationPageHeader ? (
+            <HeaderShareButton
               onClickShare={() => setShowSocialButtons(!showSocialButtons)}
             />
-          )}
-          {isLocationPageHeader && (
-            <HeaderShareButton
+          ) : (
+            <ShareButton
               onClickShare={() => setShowSocialButtons(!showSocialButtons)}
             />
           )}
@@ -64,10 +68,11 @@ const ShareButtons: React.FC<{
             onCopyLink={() => trackEvent(eventCategory, EventAction.COPY_LINK)}
             hideSocialButton={() => hideSocialButtons()}
             region={region}
+            isHeader={isLocationPageHeader}
             {...socialSharingProps}
           />
         )}
-      </div>
+      </ShareButtonWrapper>
     </ClickAwayListener>
   );
 };

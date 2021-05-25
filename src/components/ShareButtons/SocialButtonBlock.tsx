@@ -15,6 +15,7 @@ const SocialButtonBlock: React.FC<{
   quote: string;
   socialIconSize: number;
   region?: Region;
+  isHeader?: boolean;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
   onCopyLink: () => void;
@@ -28,6 +29,7 @@ const SocialButtonBlock: React.FC<{
   onCopyLink,
   hideSocialButton,
   region,
+  isHeader,
 }) => {
   const socialSharingProps = {
     url,
@@ -39,7 +41,7 @@ const SocialButtonBlock: React.FC<{
     setTimeout(() => hideSocialButton(), 1000);
   }
   return (
-    <SocialButtonsContainer>
+    <SocialButtonsContainer isHeader={isHeader}>
       <FacebookShareButton
         onClickShare={() => {
           onShareOnFacebook();

@@ -17,7 +17,6 @@ import { Region } from 'common/regions';
 import { LocationSummary } from 'common/location_summaries';
 import { summaryToStats } from '../SummaryStat/utils';
 import { Metric } from 'common/metricEnum';
-import ShareButton from 'components/NewLocationPage/HeaderButtons/ShareButton';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
 import { EventCategory } from 'components/Analytics';
@@ -78,7 +77,6 @@ const LocationOverview: React.FC<{
         </GridItemMetric3>
       </GridContainer>
       <MobileOnly>
-        <ShareButton onClickShare={onClickShare} />
         <ShareButtons
           eventCategory={EventCategory.ENGAGEMENT}
           shareUrl={shareUrl}
