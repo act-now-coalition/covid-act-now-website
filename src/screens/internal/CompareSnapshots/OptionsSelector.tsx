@@ -17,7 +17,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  Select,
+  Select as MuiSelect,
   TextField,
 } from '@material-ui/core';
 import {
@@ -26,10 +26,31 @@ import {
   METROS_LIMIT,
   CompareOptions,
 } from './utils';
+import { SelectProps } from '@material-ui/core/Select';
 
 interface OptionsSelectorProps {
   onNewOptions: (options: CompareOptions) => void;
 }
+
+/**
+ * Wrapper for material-ui Select component that disables scroll-lock to prevent
+ * material-ui from modifying the body tag on open since that caused the entire
+ * page (all graphs, etc.) to re-render causing a big perf hiccup.  See:
+ * https://stackoverflow.com/q/60682426
+ */
+const Select: React.FunctionComponent<SelectProps> = ({
+  children,
+  ...props
+}) => {
+  return (
+    <MuiSelect
+      {...props}
+      inputProps={{ MenuProps: { disableScrollLock: true } }}
+    >
+      {children}
+    </MuiSelect>
+  );
+};
 
 export function OptionsSelector(props: OptionsSelectorProps) {
   const mainSnapshot = useMainSnapshot();
@@ -187,6 +208,16 @@ function OptionsSelectorInner({
           }}
         />
       </FormControl>
+      <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
+        <InputLabel focused={false}>Metric:</InputLabel>
+        <Select value={metric} onChange={changeMetric}>
+          {ALL_METRICS.map(metric => (
+            <MenuItem key={metric} value={metric}>
+              {getMetricName(metric)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <FormControl style={{ width: '14rem', marginLeft: '1rem' }}>
         <InputLabel focused={false}>Show:</InputLabel>
         <Select value={locations} onChange={changeLocations}>
@@ -206,16 +237,6 @@ function OptionsSelectorInner({
           <MenuItem value={CompareLocations.DISABLED}>
             Blocked Locations
           </MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
-        <InputLabel focused={false}>Metric:</InputLabel>
-        <Select value={metric} onChange={changeMetric}>
-          {ALL_METRICS.map(metric => (
-            <MenuItem key={metric} value={metric}>
-              {getMetricName(metric)}
-            </MenuItem>
-          ))}
         </Select>
       </FormControl>
       <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>

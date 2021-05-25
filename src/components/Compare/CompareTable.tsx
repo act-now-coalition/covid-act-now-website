@@ -1,16 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import sortBy from 'lodash/sortBy';
 import findIndex from 'lodash/findIndex';
 import partition from 'lodash/partition';
 import reverse from 'lodash/reverse';
 import isNumber from 'lodash/isNumber';
-import {
-  Wrapper,
-  Footer,
-  FooterText,
-  HeaderWrapper,
-  Header,
-} from 'components/Compare/Compare.style';
+import { Wrapper, Footer, FooterText } from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
 import Filters from 'components/Compare/Filters';
 import {
@@ -27,8 +21,7 @@ import { COLOR_MAP } from 'common/colors';
 import ShareImageButtons from 'components/ShareButtons/ShareButtonGroup';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
-import { Region, MetroArea } from 'common/regions';
-import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
+import { Region, MetroArea, State } from 'common/regions';
 import {
   orderedColumns,
   orderedColumnsVaccineFirst,
@@ -36,6 +29,7 @@ import {
 } from './columns';
 import { TextButton } from 'components/ButtonSystem/MainButtons.style';
 import { EventCategory } from 'components/Analytics/utils';
+import { SectionHeader } from 'components/SharedComponents';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -60,7 +54,6 @@ const CompareTable = (props: {
   sortByPopulation: boolean;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
-  setShowFaqModal: React.Dispatch<React.SetStateAction<boolean>>;
   createCompareShareId: () => Promise<string>;
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
@@ -193,7 +186,9 @@ const CompareTable = (props: {
   // that better handle any region without metro/non-metro regions.
   // TODO(chris): https://trello.com/c/KdfFwRvf/430-handle-filters-in-compare-table-with-no-results-more-cleanly
   const disableFilters =
-    stateId === 'MP' || (region && region instanceof MetroArea);
+    stateId === 'MP' ||
+    (region && region instanceof MetroArea) ||
+    (region && region instanceof State);
 
   // Only showing the view more text when all locations are not available.
   const showViewMore = amountDisplayed !== sortedLocationsArr.length;
@@ -214,13 +209,9 @@ const CompareTable = (props: {
   return (
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
-        <div>
-          <HeaderWrapper>
-            <Header isHomepage={props.isHomepage}>
-              <LocationPageSectionHeader>Compare</LocationPageSectionHeader>
-            </Header>
-          </HeaderWrapper>
-          {!disableFilters ? (
+        <>
+          <SectionHeader>Compare</SectionHeader>
+          {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}
               stateId={props.stateId}
@@ -233,10 +224,8 @@ const CompareTable = (props: {
               setHomepageScope={setHomepageScope}
               homepageSliderValue={homepageSliderValue}
             />
-          ) : (
-            <Fragment />
           )}
-        </div>
+        </>
       )}
       <LocationTable
         firstColumnHeader={firstColumnHeader}

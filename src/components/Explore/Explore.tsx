@@ -44,8 +44,8 @@ import {
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
-import { LocationPageSectionHeader } from 'components/LocationPage/ChartsHolder.style';
 import NationalText from 'components/NationalText';
+import { SectionHeader } from 'components/SharedComponents';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -264,11 +264,7 @@ const Explore: React.FunctionComponent<{
 
     return (
       <div ref={exploreRef}>
-        <Grid container>
-          <Grid container item sm={9} xs={12}>
-            <LocationPageSectionHeader>{title}</LocationPageSectionHeader>
-          </Grid>
-        </Grid>
+        <SectionHeader>{title}</SectionHeader>
         {showNationalSummary && <NationalText />}
         <ExploreTabs
           activeTabIndex={currentMetric}

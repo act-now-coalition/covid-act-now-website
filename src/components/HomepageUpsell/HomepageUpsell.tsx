@@ -20,7 +20,6 @@ const HomepageUpsell: React.FC<{ showHomepageUpsell: boolean }> = ({
   showHomepageUpsell,
 }) => {
   return (
-    // Swap A and B before merging:
     <Experiment id={ExperimentID.HOMEPAGE_UPSELL}>
       <Variant id={VariantID.A}>
         <Fragment />

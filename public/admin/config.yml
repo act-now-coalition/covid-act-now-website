@@ -10,7 +10,7 @@ backend:
 # To use the CMS locally during development, run:
 #   npx netlify-cms-proxy-server
 #
-# And uncomment the following line:
+# Then uncomment the following line and visit http://localhost:3000/admin/
 #local_backend: true
 
 media_folder: 'public/images_cms'
@@ -29,21 +29,45 @@ collections:
         label: 'About page content'
         file: 'src/cms-content/about/about-page.json'
         fields:
-          - { label: 'Page Header', name: 'pageHeader', widget: 'string' }
-          - { label: 'Intro: Header', name: 'introHeader', widget: 'string' }
           - {
-              label: 'Intro: Content',
-              name: 'introContent',
-              widget: 'markdown',
-            }
-          - {
-              label: 'Contact us: Header',
-              name: 'contactUsHeader',
+              label: 'About us: Header',
+              name: 'aboutHeader',
               widget: 'string',
             }
           - {
-              label: 'Contact us: Content',
-              name: 'contactUsContent',
+              label: 'About us: Content',
+              name: 'aboutContent',
+              widget: 'markdown',
+            }
+          - {
+              label: 'Mission: Header',
+              name: 'missionHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Mission: Content',
+              name: 'missionContent',
+              widget: 'markdown',
+            }
+          - label: 'Commitments: Content'
+            name: 'commitmentsContent'
+            widget: 'list'
+            fields:
+              - label: 'Alt text'
+                name: 'altText'
+                widget: 'string'
+              - label: 'Icon'
+                name: 'icon'
+                widget: 'image'
+              - { label: 'Section copy', name: 'copy', widget: 'markdown' }
+          - {
+              label: 'Impact: Header',
+              name: 'impactHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Impact: Content',
+              name: 'impactContent',
               widget: 'markdown',
             }
           - {
@@ -55,6 +79,7 @@ collections:
             name: 'partnersContent'
             widget: 'list'
             fields:
+              - { label: 'Section header', name: 'header', widget: 'string' }
               - { label: 'Section copy', name: 'copy', widget: 'markdown' }
               - label: 'Logos'
                 name: 'logos'
@@ -68,18 +93,40 @@ collections:
                       widget: 'string',
                       required: false,
                     }
+
+          - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
+          - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
+          - { label: 'Future Projects: Header', name: 'futureProjectsHeader', widget: 'string' }
+          - { label: 'Future Projects: Content', name: 'futureProjectsContent', widget: 'markdown' }
           - {
-              label: 'Who we serve: Header',
+              label: 'Contact us: Header',
+              name: 'contactUsHeader',
+              widget: 'string',
+            }
+          - {
+              label: 'Contact us: Content',
+              name: 'contactUsContent',
+              widget: 'markdown',
+            }
+          - { label: 'Page Header (deprecated)', name: 'pageHeader', widget: 'string' }
+          - { label: 'Intro: Header (deprecated)', name: 'introHeader', widget: 'string' }
+          - {
+              label: 'Intro: Content (deprecated)',
+              name: 'introContent',
+              widget: 'markdown',
+            }
+          - {
+              label: 'Who we serve: Header (deprecated)',
               name: 'whoWeServeHeader',
               widget: 'string',
             }
           - {
-              label: 'Who we serve: Content A',
+              label: 'Who we serve: Content A (deprecated)',
               name: 'whoWeServeContentA',
               widget: 'markdown',
               hint: Copy above logos,
             }
-          - label: 'Government logos'
+          - label: 'Government logos (deprecated)'
             name: 'governmentLogos'
             widget: 'list'
             fields:
@@ -87,16 +134,14 @@ collections:
               - { label: 'Image', name: 'image', widget: 'image' }
               - { label: 'Url', name: 'url', widget: 'string', required: false }
           - {
-              label: 'Who we serve: Content B',
+              label: 'Who we serve: Content B (deprecated)',
               name: 'whoWeServeContentB',
               widget: 'markdown',
               hint: Copy below logos,
             }
-          - { label: 'Team: Header', name: 'teamHeader', widget: 'string' }
-          - { label: 'Team: Intro', name: 'teamIntro', widget: 'markdown' }
-          - { label: 'Join us: Header', name: 'joinUsHeader', widget: 'string' }
+          - { label: 'Join us: Header (deprecated)', name: 'joinUsHeader', widget: 'string' }
           - {
-              label: 'Join us: Content',
+              label: 'Join us: Content (deprecated)',
               name: 'joinUsContent',
               widget: 'markdown',
             }
@@ -780,65 +825,6 @@ collections:
                 widget: markdown
                 hint: subscore definition
 
-  - name: regionOverrides
-    label: Region Overrides
-    description: Block metrics, add metric disclaimers, etc.
-    format: json
-    files:
-      - name: regionOverrides
-        label: Region Overrides
-        file: src/cms-content/region-overrides/region-overrides.json
-        fields:
-          - name: overrides
-            label: Overrides
-            widget: list
-            fields:
-              - name: region
-                label: Region
-                hint: State code (2 letters) or FIPS code (2 or 5 digits)
-                widget: string
-                pattern: ['^([A-Z][A-Z]|\d{2}|\d{5})$', 'Must be a 2-letter state code or 2 or 5-digit FIPS code']
-              - name: include
-                label: Include
-                widget: select
-                default: region
-                options:
-                  - label: Region only
-                    value: region
-                  - label: Region and its subregions (e.g. state and its counties & metros)
-                    value: region-and-subregions
-                  - label: Subregions only (e.g. counties & metros in a state but not the state itself)
-                    value: subregions
-              - name: metric
-                label: Metric
-                widget: select
-                default: 'metrics.testPositivityRatio'
-                options:
-                  - label: 'Metric: Daily New Cases'
-                    value: 'metrics.caseDensity'
-                  - label: 'Metric: Infection Rate'
-                    value: 'metrics.infectionRate'
-                  - label: 'Metric: Positive Test Rate'
-                    value: 'metrics.testPositivityRatio'
-                  - label: 'Metric: ICU Capacity Used'
-                    value: 'metrics.icuCapacityRatio'
-                  - label: 'Metric: Vaccinated'
-                    value: 'metrics.vaccinationsInitiatedRatio'
-              - name: context
-                label: '[Internal] Context'
-                widget: string
-                hint: Context about this issue (trello links, owner, etc.) - not displayed externally
-              - name: blocked
-                label: Block Metric
-                widget: boolean
-                default: false
-                hint: Block the metric from appearing and being used in the risk level calculation.
-              - name: disclaimer
-                label: Add Disclaimer
-                required: false
-                hint: Disclaimer to show below metric chart. Not used if metric is blocked.
-                widget: markdown
-                minimal: true
   - name: footer
     label: Footer
     description: Website footer content

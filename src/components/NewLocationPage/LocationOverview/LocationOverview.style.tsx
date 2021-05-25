@@ -29,8 +29,7 @@ export const GridContainer = styled.div`
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
-    row-gap: 2.5rem;
-    column-gap: 1.5rem;
+    grid-gap: 1.5rem;
   }
 
   @media (min-width: ${gridBreakpoint}) {

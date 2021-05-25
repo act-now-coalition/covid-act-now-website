@@ -65,10 +65,29 @@ collections:
                 widget: string
                 hint: Context about this issue (trello links, owner, etc.) - not displayed externally
               - name: blocked
-                label: Block Metric
+                label: Block Data
                 widget: boolean
                 default: false
-                hint: Block the metric from appearing and being used in the risk level calculation.
+                hint: Block metric data from appearing and being used in the risk level calculation (use start date and end date to only block a subset).
+              - name: start_date
+                label: "Block Data: Start Date"
+                required: false
+                widget: datetime
+                default: ""
+                date_format: "YYYY-MM-DD"
+                time_format: ""
+                format: "YYYY-MM-DD"
+                picker_utc: false
+              - name: end_date
+                label: "Block Data: End Date"
+                required: false
+                widget: datetime
+                default: ""
+                date_format: "YYYY-MM-DD"
+                time_format: ""
+                format: "YYYY-MM-DD"
+                picker_utc: false
+
               - name: disclaimer
                 label: Add Disclaimer
                 required: false

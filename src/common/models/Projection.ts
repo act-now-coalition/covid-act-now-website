@@ -13,7 +13,7 @@ import {
   Annotations,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
-import { assert, formatPercent } from 'common/utils';
+import { assert, formatPercent, getPercentChange } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
@@ -261,9 +261,11 @@ export class Projection {
     return lastValue(this.smoothedDailyCases);
   }
 
-  /** Returns the date when projections end (should be 30 days out). */
+  /** Returns the last date we have (case) data for. */
   get finalDate(): Date {
-    return this.dates[this.dates.length - 1];
+    const lastIndex =
+      indexOfLastValue(this.smoothedDailyCases) ?? this.dates.length - 1;
+    return this.dates[lastIndex];
   }
 
   get testPositiveRateSource(): string | null {
@@ -300,7 +302,33 @@ export class Projection {
   }
 
   isMetricDisabledIgnoreOverride(metric: Metric): boolean {
-    return getRegionMetricOverride(this.region, metric)?.blocked ?? false;
+    const override = getRegionMetricOverride(this.region, metric);
+    if (override) {
+      if (override.blocked && !override.start_date && !override.end_date) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  get twoWeekPercentChangeInCases() {
+    return this.getTwoWeekPercentChange(this.smoothedDailyCases);
+  }
+
+  get twoWeekPercentChangeInDeaths() {
+    return this.getTwoWeekPercentChange(this.smoothedDailyDeaths);
+  }
+
+  private getTwoWeekPercentChange(series: any[]): number | null {
+    const lastIndex = indexOfLastValue(series);
+    assert(lastIndex != null, 'series is empty');
+    const lastTwoWeeks = series.slice(lastIndex - 14, lastIndex + 1);
+    const firstVal = lastTwoWeeks[0];
+    const lastVal = last(lastTwoWeeks);
+    if (!firstVal || !lastVal) {
+      return null;
+    }
+    return getPercentChange(firstVal, lastVal);
   }
 
   private getIcuCapacityInfo(

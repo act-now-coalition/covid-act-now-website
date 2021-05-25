@@ -26,6 +26,8 @@ interface AboutContent {
   governmentLogos: LogoItem[];
   teamHeader: string;
   teamIntro: Markdown;
+  futureProjectsHeader: string;
+  futureProjectsContent: Markdown;
   joinUsHeader: string;
   joinUsContent: Markdown;
 }
