@@ -300,7 +300,13 @@ export class Projection {
   }
 
   isMetricDisabledIgnoreOverride(metric: Metric): boolean {
-    return getRegionMetricOverride(this.region, metric)?.blocked ?? false;
+    const override = getRegionMetricOverride(this.region, metric);
+    if (override) {
+      if (override.blocked && !override.start_date && !override.end_date) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private getIcuCapacityInfo(
