@@ -7,12 +7,11 @@ import {
   ButtonsContainer,
   LargeButton,
 } from './GetVaccinatedBanner.style';
-import AggregationsJSON from 'assets/data/aggregations.json';
+import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { formatPercent, formatInteger } from 'common/utils';
 
 const GetVaccinatedBanner: React.FC = () => {
-  const usaAggregation = AggregationsJSON['00001'];
-  const { totalVaccinationsInitiated, totalPopulation } = usaAggregation;
+  const { totalVaccinationsInitiated, totalPopulation } = SiteSummaryJSON.usa;
   const percentVaccinated = formatPercent(
     totalVaccinationsInitiated / totalPopulation,
   );

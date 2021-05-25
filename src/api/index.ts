@@ -12,7 +12,7 @@ import { AggregateRegionSummaryWithTimeseries } from './schema/AggregateRegionSu
 import { APIRegionSubPath } from '../common/utils/model';
 import { fail, assert } from 'common/utils';
 import fetch from 'node-fetch';
-import { County, MetroArea, Region, State } from 'common/regions';
+import { County, MetroArea, Region, State, USA } from 'common/regions';
 import {
   AggregateRegionSummary,
   RegionSummary,
@@ -84,7 +84,11 @@ export class Api {
   async fetchSummaryWithTimeseries(
     region: Region,
   ): Promise<RegionSummaryWithTimeseries | null> {
-    if (region instanceof State) {
+    if (region instanceof USA) {
+      return await this.fetchApiJson<RegionSummaryWithTimeseries>(
+        `country/US.timeseries.json`,
+      );
+    } else if (region instanceof State) {
       return await this.fetchApiJson<RegionSummaryWithTimeseries>(
         `state/${(region as State).stateCode}.timeseries.json`,
       );

@@ -3,7 +3,7 @@ import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { Wrapper, InnerContainer, Body } from './SpringSurgeBanner.style';
 import { scrollWithOffset } from 'components/TableOfContents';
 import { HashLink } from 'react-router-hash-link';
-import AggregationsJSON from 'assets/data/aggregations.json';
+import SiteSummaryJSON from 'assets/data/site-summary.json';
 
 const trackClick = () => {
   trackEvent(
@@ -14,8 +14,7 @@ const trackClick = () => {
 };
 
 const BannerInner: React.FC = () => {
-  const usaAggregation = AggregationsJSON['00001'];
-  const { totalVaccinationsInitiated } = usaAggregation;
+  const { totalVaccinationsInitiated } = SiteSummaryJSON.usa;
   const millionVaccinations = Math.round(totalVaccinationsInitiated / 1000000);
 
   const HospitalizationsAreRisingTooLink = (

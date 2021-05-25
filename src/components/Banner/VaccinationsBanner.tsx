@@ -9,7 +9,7 @@ import {
   SearchButton,
   CompareButton,
 } from './VaccinationsBanner.style';
-import AggregationsJSON from 'assets/data/aggregations.json';
+import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { formatEstimate } from 'common/utils';
 import { scrollWithOffset } from 'components/TableOfContents';
 
@@ -39,8 +39,7 @@ const Buttons: React.FC = () => {
 };
 
 const VaccinationsBannerInner: React.FC = () => {
-  const usaAggregation = AggregationsJSON['00001'];
-  const { totalVaccinationsInitiated } = usaAggregation;
+  const { totalVaccinationsInitiated } = SiteSummaryJSON.usa;
 
   return (
     <InnerContainer>
