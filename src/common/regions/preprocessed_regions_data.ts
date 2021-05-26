@@ -7,7 +7,6 @@ import metroAreasByFipsJson from 'common/data/metro_areas_by_fips.json';
 
 import {
   statesByFips,
-  State,
   County,
   CountyObject,
   MetroArea,
@@ -35,10 +34,3 @@ export const statesByStateCode = keyBy(
   values(statesByFips),
   state => state.stateCode,
 );
-
-const customAreas = [
-  new State('USA', '00001', 331486822, 'USA'),
-  new State('Native American Majority Counties', '00002', 314704, 'NAMC'),
-];
-
-export const customAreasByFips = keyBy(customAreas, metro => metro.fipsCode);

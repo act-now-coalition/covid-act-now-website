@@ -2,12 +2,11 @@ import sortBy from 'lodash/sortBy';
 import takeRight from 'lodash/takeRight';
 import values from 'lodash/values';
 import type { Dictionary } from 'lodash';
-import { Region, County, State, MetroArea, FipsCode } from './types';
+import { Region, County, State, MetroArea, FipsCode, USA } from './types';
 import {
   statesByFips,
   countiesByFips,
   metroAreasByFips,
-  customAreasByFips,
   statesByStateCode,
 } from './preprocessed_regions_data';
 import { assert } from 'common/utils';
@@ -16,29 +15,25 @@ export class RegionDB {
   public states: State[];
   public counties: County[];
   public metroAreas: MetroArea[];
-  // Custom areas are additional locations that are manually created.
-  // It is created in the service of USA + NAMC aggregations and should
-  // be used sparingly.
-  public customAreas: State[];
+  public usa: USA;
   private regionsByFips: Dictionary<Region>;
 
   constructor(
     statesByFips: Dictionary<State>,
     countiesByFips: Dictionary<County>,
     metroAreasByFips: Dictionary<MetroArea>,
-    customAreasByFips: Dictionary<State>,
     private statesByStateCode: Dictionary<State>,
   ) {
+    this.usa = USA.instance;
     this.states = sortBy(values(statesByFips), state => state.name);
     this.counties = sortBy(values(countiesByFips), county => county.name);
     this.metroAreas = sortBy(values(metroAreasByFips), metro => metro.name);
-    this.customAreas = values(customAreasByFips);
 
     this.regionsByFips = {
+      [USA.instance.fipsCode]: USA.instance,
       ...statesByFips,
       ...countiesByFips,
       ...metroAreasByFips,
-      ...customAreasByFips,
     };
   }
 
@@ -144,7 +139,6 @@ const regions = new RegionDB(
   statesByFips,
   countiesByFips,
   metroAreasByFips,
-  customAreasByFips,
   statesByStateCode,
 );
 

@@ -25,6 +25,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
   tabTextCollapsed,
   tabTextExpanded,
   trackingLabel,
+  trackingCategory,
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -49,7 +50,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
       </InnerContent>
       <ExpandButton
         onClick={() => setCollapsed(!collapsed)}
-        trackingCategory={EventCategory.NONE} // Change when implementing beyond storybook
+        trackingCategory={trackingCategory}
         trackingLabel={`${collapsed ? 'Expand' : 'Collapse'}: ${trackingLabel}`}
         endIcon={collapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         collapsed={collapsed}
