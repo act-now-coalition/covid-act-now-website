@@ -14,9 +14,8 @@ import { getCcviLevelNameFromScore } from 'common/ccvi';
 import { Region, County } from 'common/regions';
 import { RegionCcviItem } from 'common/data';
 import { getSurgoUrlByRegion } from 'common/ccvi/index';
-import ExternalLink from 'components/ExternalLink';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
-import { COLOR_MAP } from 'common/colors';
+import { TextButton } from 'components/ButtonSystem';
 
 const VulnerabilitiesBlockInner: React.FC<{
   scores: RegionCcviItem;
@@ -53,7 +52,7 @@ const VulnerabilitiesBlockInner: React.FC<{
         <SummaryText>{communityVulnerabilityQuote}</SummaryText>
         {surgoUrl && (
           <SummaryText>
-            <ExternalLink
+            <TextButton
               href={surgoUrl}
               onClick={() =>
                 trackEvent(
@@ -62,10 +61,9 @@ const VulnerabilitiesBlockInner: React.FC<{
                   'Surgo link',
                 )
               }
-              style={{ color: COLOR_MAP.NEW_BLUE.BASE }}
             >
               {surgoUrlCta}
-            </ExternalLink>
+            </TextButton>
           </SummaryText>
         )}
       </FirstColumn>
