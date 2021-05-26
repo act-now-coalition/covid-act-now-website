@@ -9,7 +9,7 @@ import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { share_image_url } from 'assets/data/share_images_url.json';
-import { SeriesType, Series, ExploreMetric } from './interfaces';
+import { SeriesType, Series, ExploreMetric, DataMeasure } from './interfaces';
 import regions, {
   County,
   MetroArea,
@@ -51,11 +51,11 @@ export const periodMap: {
 } = {
   [Period.DAYS_60]: {
     increment: 60,
-    label: 'Past 60 days',
+    label: '60',
   },
   [Period.DAYS_180]: {
     increment: 180,
-    label: 'Past 180 days',
+    label: '180',
   },
   [Period.ALL]: {
     increment: -1,
@@ -120,6 +120,13 @@ export const EXPLORE_METRICS = [
   ExploreMetric.POSITIVITY_RATE,
 ];
 
+export const metricsToNormalize = [
+  ExploreMetric.CASES,
+  ExploreMetric.DEATHS,
+  ExploreMetric.HOSPITALIZATIONS,
+  ExploreMetric.ICU_HOSPITALIZATIONS,
+];
+
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   switch (chartId) {
     case 'cases':
@@ -174,6 +181,7 @@ interface ExploreMetricDescription {
   name: string;
   chartId: string;
   seriesList: SerieDescription[];
+  dataMeasure: DataMeasure;
 }
 
 export const exploreMetricData: {
@@ -183,6 +191,7 @@ export const exploreMetricData: {
     title: 'Cases',
     name: 'Cases',
     chartId: 'cases',
+    dataMeasure: DataMeasure.INTEGER,
     seriesList: [
       {
         label: 'Cases',
@@ -202,6 +211,7 @@ export const exploreMetricData: {
     title: 'Deaths',
     name: 'Deaths',
     chartId: 'deaths',
+    dataMeasure: DataMeasure.INTEGER,
     seriesList: [
       {
         label: 'Deaths',
@@ -221,6 +231,7 @@ export const exploreMetricData: {
     title: 'Hospitalizations',
     name: 'Current COVID Hospitalizations',
     chartId: 'hospitalizations',
+    dataMeasure: DataMeasure.INTEGER,
     seriesList: [
       {
         label: 'Current COVID Hospitalizations',
@@ -240,6 +251,7 @@ export const exploreMetricData: {
     title: 'ICU Hospitalizations',
     name: 'Current COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
+    dataMeasure: DataMeasure.INTEGER,
     seriesList: [
       {
         label: 'Current COVID ICU Hospitalizations',
@@ -259,6 +271,7 @@ export const exploreMetricData: {
     title: 'Percent Vaccinated (1+ dose)',
     name: 'Percent Vaccinated (1+ dose)',
     chartId: 'vaccinations_first_dose',
+    dataMeasure: DataMeasure.PERCENT,
     seriesList: [
       {
         label: 'Percent Vaccinated (1+ dose)',
@@ -272,6 +285,7 @@ export const exploreMetricData: {
     title: 'Percent Vaccinated (fully)',
     name: 'Percent Vaccinated (fully)',
     chartId: 'vaccinations_completed',
+    dataMeasure: DataMeasure.PERCENT,
     seriesList: [
       {
         label: 'Percent Vaccinated (fully)',
@@ -285,6 +299,7 @@ export const exploreMetricData: {
     title: 'ICU capacity used',
     name: 'ICU capacity used',
     chartId: 'icu_capacity_used',
+    dataMeasure: DataMeasure.PERCENT,
     seriesList: [
       {
         label: 'ICU capacity used',
@@ -298,6 +313,7 @@ export const exploreMetricData: {
     title: 'Positive test rate',
     name: 'Positive test rate',
     chartId: 'positivity_rate',
+    dataMeasure: DataMeasure.PERCENT,
     seriesList: [
       {
         label: 'Positive test rate',
@@ -381,6 +397,10 @@ function getAveragedSeriesForMetric(
 
 export function getTitle(metric: ExploreMetric) {
   return exploreMetricData[metric].title;
+}
+
+export function getMetricDataMeasure(metric: ExploreMetric) {
+  return exploreMetricData[metric].dataMeasure;
 }
 
 export function getMetricName(metric: ExploreMetric) {

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Menu, MenuItem } from './Dropdown.style';
 import MenuButton from './MenuButton';
+import { LockBodyScroll } from 'components/Dialog';
 
 const Dropdown: React.FC<{
   menuLabel: string;
   itemLabels: string[];
   onSelect: (itemIndex: number) => void;
   defaultSelectionLabel: string;
-}> = ({ menuLabel, itemLabels, onSelect, defaultSelectionLabel }) => {
+  maxWidth: number;
+}> = ({ menuLabel, itemLabels, onSelect, defaultSelectionLabel, maxWidth }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [buttonLabel, setButtonLabel] = useState(defaultSelectionLabel);
 
@@ -28,10 +30,13 @@ const Dropdown: React.FC<{
         open={open}
         menuLabel={menuLabel}
         buttonLabel={buttonLabel}
+        maxWidth={maxWidth}
       />
+      {open && <LockBodyScroll />}
       <Menu
         id="menu-label" // edit this to be more descriptive
         open={Boolean(anchorEl)}
+        maxWidth={maxWidth}
         anchorEl={anchorEl}
         getContentAnchorEl={null}
         onClose={handleClose}
@@ -50,8 +55,8 @@ const Dropdown: React.FC<{
             <MenuItem
               onClick={() => {
                 onSelect(i);
-                handleClose();
                 setButtonLabel(label);
+                handleClose();
               }}
             >
               {label}

@@ -9,7 +9,7 @@ import { useTooltip } from '@vx/tooltip';
 import { formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
-import { Series } from './interfaces';
+import { DataMeasure, Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import { getMaxBy, getSeriesLabel } from './utils';
 import * as Styles from './Explore.style';
@@ -121,6 +121,8 @@ const MultipleLocationsChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   isMobileXs?: boolean;
+  dateRange: any; // (chelsi) fix this any
+  dataMeasure: DataMeasure;
 }> = ({
   width,
   height,
@@ -132,12 +134,17 @@ const MultipleLocationsChart: React.FC<{
   marginRight = 100,
   barOpacity,
   isMobileXs = false,
+  dateRange,
+  dataMeasure,
 }) => {
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
   );
-  const dateFrom = new Date('2020-03-01');
-  const dateTo = new Date();
+
+  const [from, to] = dateRange[0]; // change
+  const dateFrom = from;
+  const dateTo = to;
+
   const maxY = getMaxBy<number>(seriesList, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
@@ -190,6 +197,7 @@ const MultipleLocationsChart: React.FC<{
             yScale={yScale}
             isMobile={isMobile}
             yNumTicks={5}
+            dataMeasure={dataMeasure}
           />
           {seriesLabels.map((label, i) => (
             <Styles.LineLabel

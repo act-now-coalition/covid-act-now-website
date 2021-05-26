@@ -30,3 +30,8 @@ export enum ExploreMetric {
   ICU_USED,
   POSITIVITY_RATE,
 }
+
+export enum DataMeasure {
+  INTEGER,
+  PERCENT,
+}

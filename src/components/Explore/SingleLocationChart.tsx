@@ -6,7 +6,7 @@ import { useTooltip } from '@vx/tooltip';
 import { formatInteger, formatDecimal, formatPercent } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
-import { Series } from './interfaces';
+import { DataMeasure, Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, findPointByDate } from './utils';
@@ -137,7 +137,8 @@ const SingleLocationChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-  dateRange: any;
+  dateRange: any; // (chelsi) fix this any
+  dataMeasure: DataMeasure;
 }> = ({
   width,
   height,
@@ -151,20 +152,13 @@ const SingleLocationChart: React.FC<{
   barOpacity,
   barOpacityHover,
   dateRange,
+  dataMeasure,
 }) => {
-  console.log('dateRange:::', dateRange.length);
   const [from, to] = dateRange[0]; // change
-  console.log('from', from);
-  console.log('to', to);
-  // const dateFrom = new Date('2020-03-01');
-  // const today = new Date();
-  // const dateTo = today;
-  // const numDays = daysBetween(dateFrom, dateTo);
-  // const maxY = getMaxBy<number>(seriesList, getY, 1);
-
   const dateFrom = from;
   // const today = new Date(); // do we want today, or computed 'to'?
   const dateTo = to;
+
   const numDays = daysBetween(dateFrom, dateTo);
   const maxY = getMaxBy<number>(seriesList, getY, 1);
 
@@ -217,6 +211,7 @@ const SingleLocationChart: React.FC<{
             yScale={yScale}
             isMobile={isMobile}
             yNumTicks={5}
+            dataMeasure={dataMeasure}
           />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }) => (

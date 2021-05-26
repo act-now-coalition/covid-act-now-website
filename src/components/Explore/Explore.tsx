@@ -35,6 +35,8 @@ import {
   Period,
   periodMap,
   getAllPeriodLabels,
+  metricsToNormalize,
+  getMetricDataMeasure,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -131,6 +133,8 @@ const ExploreCopy: React.FunctionComponent<{
 
     const currentMetricName = getMetricName(currentMetric);
 
+    const dataMeasure = getMetricDataMeasure(currentMetric);
+
     const initialLocations = useMemo(
       () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
       [initialFipsList],
@@ -146,22 +150,19 @@ const ExploreCopy: React.FunctionComponent<{
     );
 
     const [normalizeData, setNormalizeData] = useState(
-      selectedLocations.length > 1,
+      selectedLocations.length > 1 &&
+        metricsToNormalize.includes(currentMetric),
     );
+
+    useEffect(() => {
+      setNormalizeData(
+        selectedLocations.length > 1 &&
+          metricsToNormalize.includes(currentMetric),
+      );
+    }, [currentMetric, selectedLocations]);
 
     const onChangeSelectedLocations = (newLocations: Region[]) => {
       const changedLocations = uniq(newLocations);
-      if (selectedLocations.length > 1 && changedLocations.length === 1) {
-        // if switching from multiple to a single location, disable normalization
-        setNormalizeData(false);
-      } else if (
-        selectedLocations.length === 1 &&
-        changedLocations.length > 1
-      ) {
-        // if switching from single to multiple locations, enable normalization
-        setNormalizeData(true);
-      }
-
       const eventLabel =
         selectedLocations.length < changedLocations.length
           ? 'Adding Location'
@@ -203,9 +204,12 @@ const ExploreCopy: React.FunctionComponent<{
     // they are not carried over to the new location page.
     useEffect(() => {
       setSelectedLocations(initialLocations);
-      setNormalizeData(initialLocations.length > 1);
       setCurrentMetric(defaultMetric);
-    }, [initialLocations, defaultMetric]);
+      setNormalizeData(
+        initialLocations.length > 1 &&
+          metricsToNormalize.includes(currentMetric),
+      );
+    }, [initialLocations, defaultMetric, currentMetric]);
 
     const [chartSeries, setChartSeries] = useState<Series[]>([]);
     useEffect(() => {
@@ -269,17 +273,20 @@ const ExploreCopy: React.FunctionComponent<{
             defaultSelectionLabel={metricLabels[defaultMetric]}
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
+            maxWidth={250}
           />
           <Dropdown
             menuLabel="Past # of days"
             defaultSelectionLabel={allPeriodLabels[period]}
             itemLabels={allPeriodLabels}
             onSelect={onSelectPeriod}
+            maxWidth={150}
           />
           <LocationSelector
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
+            maxWidth={325}
           />
         </Styles.ChartControlsContainer>
         {selectedLocations.length > 0 && hasData && (
@@ -301,6 +308,7 @@ const ExploreCopy: React.FunctionComponent<{
                     isMobileXs={isMobileXs}
                     marginRight={marginRight}
                     dateRange={dateRange}
+                    dataMeasure={dataMeasure}
                   />
                 ) : (
                   <div style={{ height: 400 }} />

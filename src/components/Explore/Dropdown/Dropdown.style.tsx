@@ -5,35 +5,34 @@ import MuiMenuItem from '@material-ui/core/MenuItem';
 import { COLOR_MAP, GREY_5, GREY_0 } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-const testWidth = '275px';
-
-export const Button = styled(MuiButton)<{ $open?: boolean }>`
+export const Button = styled(MuiButton)<{ $open?: boolean; maxWidth: number }>`
   border: 1px solid ${GREY_5};
+  border-bottom: ${({ $open }) => $open && 'none'};
   padding: 0.5rem 0.75rem;
   border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
   width: 100%;
+  letter-spacing: 0;
 
   &:hover {
     background-color: ${GREY_0};
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    max-width: ${testWidth};
+    max-width: ${({ maxWidth }) => `${maxWidth}px`};
   }
 `;
 
-export const ButtonCopy = styled.div`
+export const ButtonContent = styled.div`
   display: flex;
-  flex-direction: column;
   text-align: left;
-  letter-spacing: 0;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const MenuLabel = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   font-size: 0.75rem;
-  margin-bottom: 0.25rem;
   text-transform: uppercase;
 `;
 
@@ -41,19 +40,22 @@ export const ItemLabel = styled.span`
   ${props => props.theme.fonts.regularBookMidWeight};
   font-size: 1rem;
   line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: none;
 `;
 
-export const Menu = styled(MuiMenu)`
+export const Menu = styled(MuiMenu)<{ maxWidth: number }>`
   .MuiMenu-paper {
     border: 1px solid ${GREY_5};
-    border-top: none;
-    border-radius: 0 0 4px 4px;
+    border-radius: 0;
     width: 100%;
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
     .MuiMenu-paper {
-      max-width: ${testWidth};
+      max-width: ${({ maxWidth }) => `${maxWidth}px`};
     }
   }
 `;
@@ -62,4 +64,10 @@ export const MenuItem = styled(MuiMenuItem)`
   white-space: normal;
   padding: 0.75rem 1rem;
   line-height: 1.4;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;

@@ -22,6 +22,7 @@ import {
   getMetricName,
   getDateRange,
   Period,
+  getMetricDataMeasure,
 } from 'components/Explore/utils';
 import regions, { Region } from 'common/regions';
 
@@ -61,6 +62,8 @@ const ExploreChartExportImage = ({
     getDateRange(series.data, Period.ALL),
   );
 
+  const dataMeasure = getMetricDataMeasure(currentMetric);
+
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
@@ -86,6 +89,7 @@ const ExploreChartExportImage = ({
                 isMobile={false}
                 hasMultipleLocations={selectedLocations.length > 1}
                 dateRange={dateRange}
+                dataMeasure={dataMeasure}
               />
             )}
           </ParentSize>

@@ -20,6 +20,7 @@ import {
   getMetricName,
   getDateRange,
   Period,
+  getMetricDataMeasure,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
@@ -47,6 +48,8 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const dateRange = chartSeries.map(series =>
     getDateRange(series.data, Period.ALL),
   );
+
+  const dataMeasure = getMetricDataMeasure(currentMetric);
 
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
@@ -78,6 +81,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   barOpacityHover={0.8}
                   hasMultipleLocations={selectedLocations.length > 1}
                   dateRange={dateRange}
+                  dataMeasure={dataMeasure}
                 />
               )}
             </ParentSize>
