@@ -45,7 +45,7 @@ const ShareButtons: React.FC<{
 
   return (
     <ClickAwayListener onClickAway={() => hideSocialButtons()}>
-      <ShareButtonWrapper isMobile={isMobile}>
+      <ShareButtonWrapper>
         <ButtonGroup
           aria-label="share buttons"
           variant="outlined"

@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import theme from 'assets/theme';
 import palette from 'assets/theme/palette';
 import { StyledShareButtonStyles } from 'components/ShareBlock/ShareBlock.style';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const ShareButton = styled(Button).attrs(props => ({
   disableRipple: true,
@@ -30,13 +31,21 @@ export const SocialButtonsContainer = styled.div<{
   transform: translate(0, 42px);
   z-index: 100;
   position: absolute;
-  right: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
-  top: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
-  margin-top: ${theme.spacing(1)}px;
+  top: 1rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
   box-shadow: 0px ${theme.spacing(1)}px ${theme.spacing(4)}px rgba(0, 0, 0, 0.2);
   background-color: ${palette.white};
   border-radius: ${theme.spacing(1) / 2}px;
   width: fit-content;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    top: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
+    margin-top: ${theme.spacing(1)}px;
+    left: initial;
+    right: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
+  }
 `;
 
 export const SocialButton = styled(Button).attrs(props => ({
@@ -59,7 +68,7 @@ export const SocialButton = styled(Button).attrs(props => ({
     outline: rgb(0, 95, 204) 1px auto;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     font-size: 0.875rem;
     width: 80px;
     height: 56px;
@@ -77,7 +86,7 @@ export const SocialShareButton = styled.div`
     border-right: none;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: ${materialSMBreakpoint}) {
     width: 80px;
     height: 56px;
   }
@@ -87,9 +96,11 @@ export const SocialShareButton = styled.div`
   }
 `;
 
-export const ShareButtonWrapper = styled.div<{
-  isMobile?: boolean;
-}>`
+export const ShareButtonWrapper = styled.div`
   position: relative;
-  width: ${({ isMobile }) => (isMobile ? '100%' : 'fit-content')};
+  width: '100%';
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: 'fit-content';
+  }
 `;
