@@ -31,8 +31,8 @@ export const SocialButtonsContainer = styled.div<{
   transform: translate(0, 42px);
   z-index: 100;
   position: absolute;
-  top: 1rem;
-  margin: 0 auto;
+  top: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
+  margin: ${({ isHeader }) => (isHeader ? '0.5rem auto 0' : 'auto 0')};
   left: ${({ isHeader }) => (isHeader ? '0' : 'initial')};
   right: 0;
   box-shadow: 0px ${theme.spacing(1)}px ${theme.spacing(4)}px rgba(0, 0, 0, 0.2);
@@ -41,8 +41,7 @@ export const SocialButtonsContainer = styled.div<{
   width: fit-content;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    top: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
-    margin-top: ${theme.spacing(1)}px;
+    margin-top: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
     left: initial;
     right: ${({ isHeader }) => (isHeader ? '0.5rem' : '0')};
   }
