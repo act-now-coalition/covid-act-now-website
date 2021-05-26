@@ -16,6 +16,7 @@ import { RegionCcviItem } from 'common/data';
 import { getSurgoUrlByRegion } from 'common/ccvi/index';
 import { EventCategory } from 'components/Analytics';
 import { TextButton } from 'components/ButtonSystem';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const VulnerabilitiesBlockInner: React.FC<{
   scores: RegionCcviItem;
@@ -56,6 +57,7 @@ const VulnerabilitiesBlockInner: React.FC<{
               href={surgoUrl}
               trackingCategory={EventCategory.VULNERABILITIES}
               trackingLabel={'Surgo link'}
+              endIcon={<OpenInNewIcon />}
             >
               {surgoUrlCta}
             </TextButton>
