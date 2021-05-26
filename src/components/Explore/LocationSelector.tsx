@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Grid from '@material-ui/core/Grid';
 import { Modal } from '@material-ui/core';
 import { Region } from 'common/regions';
@@ -29,6 +30,8 @@ const LocationSelector: React.FC<{
 
   const regionNames = selectedRegions.map(getLocationLabel).join(', ');
 
+  const id = uuidv4();
+
   return (
     <React.Fragment>
       <MenuButton
@@ -36,6 +39,7 @@ const LocationSelector: React.FC<{
         menuLabel="Locations"
         buttonLabel={regionNames}
         maxWidth={maxWidth}
+        ariaControlsId={id}
       />
       {modalOpen && (
         <>

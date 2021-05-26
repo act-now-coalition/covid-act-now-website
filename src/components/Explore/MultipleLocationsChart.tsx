@@ -121,7 +121,7 @@ const MultipleLocationsChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   isMobileXs?: boolean;
-  dateRange: any; // (chelsi) fix this any
+  dateRange: Date[];
   dataMeasure: DataMeasure;
 }> = ({
   width,
@@ -141,7 +141,7 @@ const MultipleLocationsChart: React.FC<{
     series => series.data.length > 0,
   );
 
-  const [from, to] = dateRange[0]; // change
+  const [from, to] = dateRange;
   const dateFrom = from;
   const dateTo = to;
 

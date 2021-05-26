@@ -16,17 +16,8 @@ const Axes: React.FC<{
   yScale: ScaleLinear<number, number>;
   isMobile: boolean;
   yNumTicks?: number;
-  // yTickFormat?: (value: number) => string;
   dataMeasure: DataMeasure;
-}> = ({
-  height,
-  dateScale,
-  yScale,
-  isMobile,
-  yNumTicks = 10,
-  // yTickFormat = yTickFormatDefault,
-  dataMeasure,
-}) => {
+}> = ({ height, dateScale, yScale, isMobile, yNumTicks = 10, dataMeasure }) => {
   const [dateFrom, dateTo] = dateScale.domain();
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
 
@@ -38,6 +29,7 @@ const Axes: React.FC<{
     dataMeasure === DataMeasure.PERCENT
       ? formatPercent(value).toString()
       : value.toString();
+
   return (
     <AxisStyle>
       <AxisLeft scale={yScale} numTicks={yNumTicks} tickFormat={yTickFormat} />

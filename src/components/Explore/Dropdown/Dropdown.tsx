@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Menu, MenuItem } from './Dropdown.style';
 import MenuButton from './MenuButton';
 import { LockBodyScroll } from 'components/Dialog';
@@ -23,6 +24,8 @@ const Dropdown: React.FC<{
 
   const open = Boolean(anchorEl);
 
+  const menuId = uuidv4();
+
   return (
     <>
       <MenuButton
@@ -31,12 +34,13 @@ const Dropdown: React.FC<{
         menuLabel={menuLabel}
         buttonLabel={buttonLabel}
         maxWidth={maxWidth}
+        ariaControlsId={menuId}
       />
       {open && <LockBodyScroll />}
       <Menu
-        id="menu-label" // edit this to be more descriptive
+        id={menuId}
         open={Boolean(anchorEl)}
-        maxWidth={maxWidth}
+        $maxWidth={maxWidth}
         anchorEl={anchorEl}
         getContentAnchorEl={null}
         onClose={handleClose}

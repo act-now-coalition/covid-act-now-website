@@ -5,7 +5,7 @@ import MuiMenuItem from '@material-ui/core/MenuItem';
 import { COLOR_MAP, GREY_5, GREY_0 } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-export const Button = styled(MuiButton)<{ $open?: boolean; maxWidth: number }>`
+export const Button = styled(MuiButton)<{ $open?: boolean; $maxWidth: number }>`
   border: 1px solid ${GREY_5};
   border-bottom: ${({ $open }) => $open && 'none'};
   padding: 0.5rem 0.75rem;
@@ -18,7 +18,7 @@ export const Button = styled(MuiButton)<{ $open?: boolean; maxWidth: number }>`
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    max-width: ${({ maxWidth }) => `${maxWidth}px`};
+    max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
   }
 `;
 
@@ -46,7 +46,7 @@ export const ItemLabel = styled.span`
   text-transform: none;
 `;
 
-export const Menu = styled(MuiMenu)<{ maxWidth: number }>`
+export const Menu = styled(MuiMenu)<{ $maxWidth: number }>`
   .MuiMenu-paper {
     border: 1px solid ${GREY_5};
     border-radius: 0;
@@ -55,7 +55,7 @@ export const Menu = styled(MuiMenu)<{ maxWidth: number }>`
 
   @media (min-width: ${materialSMBreakpoint}) {
     .MuiMenu-paper {
-      max-width: ${({ maxWidth }) => `${maxWidth}px`};
+      max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
     }
   }
 `;

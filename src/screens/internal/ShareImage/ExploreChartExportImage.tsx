@@ -88,7 +88,7 @@ const ExploreChartExportImage = ({
                 height={chartHeight}
                 isMobile={false}
                 hasMultipleLocations={selectedLocations.length > 1}
-                dateRange={dateRange}
+                dateRange={dateRange[0]}
                 dataMeasure={dataMeasure}
               />
             )}

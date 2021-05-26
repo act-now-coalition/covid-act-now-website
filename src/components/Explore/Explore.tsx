@@ -30,7 +30,6 @@ import {
   getMetricName,
   getSeriesLabel,
   EXPLORE_CHART_IDS,
-  // getSubtitle,
   getDateRange,
   Period,
   periodMap,
@@ -307,7 +306,7 @@ const ExploreCopy: React.FunctionComponent<{
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
                     marginRight={marginRight}
-                    dateRange={dateRange}
+                    dateRange={dateRange[0]} // hmm
                     dataMeasure={dataMeasure}
                   />
                 ) : (

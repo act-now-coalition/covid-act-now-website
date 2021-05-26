@@ -137,7 +137,7 @@ const SingleLocationChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-  dateRange: any; // (chelsi) fix this any
+  dateRange: Date[];
   dataMeasure: DataMeasure;
 }> = ({
   width,
@@ -154,7 +154,7 @@ const SingleLocationChart: React.FC<{
   dateRange,
   dataMeasure,
 }) => {
-  const [from, to] = dateRange[0]; // change
+  const [from, to] = dateRange;
   const dateFrom = from;
   // const today = new Date(); // do we want today, or computed 'to'?
   const dateTo = to;

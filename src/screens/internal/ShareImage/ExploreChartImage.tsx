@@ -80,7 +80,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   barOpacity={0.4}
                   barOpacityHover={0.8}
                   hasMultipleLocations={selectedLocations.length > 1}
-                  dateRange={dateRange}
+                  dateRange={dateRange[0]}
                   dataMeasure={dataMeasure}
                 />
               )}

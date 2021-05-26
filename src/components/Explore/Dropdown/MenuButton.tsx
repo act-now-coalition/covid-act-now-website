@@ -15,15 +15,16 @@ const MenuButton: React.FC<{
   buttonLabel: string;
   open?: boolean;
   maxWidth: number;
-}> = ({ onClick, open, menuLabel, buttonLabel, maxWidth }) => {
+  ariaControlsId: string;
+}> = ({ onClick, open, menuLabel, buttonLabel, maxWidth, ariaControlsId }) => {
   return (
     <Button
-      aria-controls="menu-label" // edit this to be more descriptive
+      aria-controls={ariaControlsId}
       aria-haspopup="true"
       disableRipple
       onClick={onClick}
       $open={open}
-      maxWidth={maxWidth}
+      $maxWidth={maxWidth}
     >
       <ButtonContent>
         <Column>

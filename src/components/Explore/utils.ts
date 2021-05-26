@@ -75,6 +75,7 @@ type Point = {
   x: number;
   y: any;
 };
+
 const getDate = (d: Point) => new Date(d.x);
 const getY = (d: Column) => d.y;
 const hasData = (d: Column) => isDate(getDate(d)) && Number.isFinite(getY(d));
@@ -82,7 +83,6 @@ const hasData = (d: Column) => isDate(getDate(d)) && Number.isFinite(getY(d));
 export function getDateRange(columnData: Column[], period: Period) {
   const data: any[] = columnData.filter(hasData);
   const dates = data.map(getDate);
-  // const minDate = d3min(dates) || new Date('2020-03-01');
   const minDate = new Date('2020-03-01');
   const dateTo = d3max(dates) || new Date();
   const dateFrom =
@@ -91,13 +91,6 @@ export function getDateRange(columnData: Column[], period: Period) {
       : subtractTime(new Date(), periodMap[period].increment, TimeUnit.DAYS);
 
   return [dateFrom, dateTo || new Date()];
-}
-
-/** Common interface to represent real Projection objects as well as aggregated projections. */
-interface ProjectionLike {
-  getDataset(datasetId: DatasetId): Column[];
-  fips: string;
-  totalPopulation: number;
 }
 
 export function getMaxBy<T>(
@@ -553,17 +546,6 @@ export function getLocationNames(
     : [labels.slice(0, labels.length - 1), labels[labels.length - 1]];
 
   return `${firstLabels.join(', ')} and ${lastLabel}`;
-}
-
-export function getSubtitle(
-  metricName: string,
-  normalizeData: boolean,
-  regions: Region[],
-) {
-  const textPer100k = normalizeData ? 'per 100k population' : '';
-  return regions.length === 0
-    ? 'Select states, counties, or metro areas to explore trends'
-    : `${metricName} ${textPer100k} in ${getLocationNames(regions)}`;
 }
 
 export function getExploreAutocompleteLocations(locationFips: string) {

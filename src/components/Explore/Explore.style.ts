@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import MuiCheckbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
-import MuiTab from '@material-ui/core/Tab';
-import MuiTabs from '@material-ui/core/Tabs';
 import theme from 'assets/theme';
 import colorPalette from 'assets/theme/palette';
 import { charts } from 'components/Charts/Charts.style';
@@ -40,29 +38,6 @@ export const Subtitle = styled.div`
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-`;
-
-export const Tabs = styled(MuiTabs)`
-  .MuiTabs-indicator {
-    background-color: ${colorPalette.lightBlue};
-  }
-
-  border-bottom: solid 1px ${theme.palette.grey[300]};
-`;
-
-export const Tab = styled(MuiTab)`
-  /* TODO(pablo): Use Typography */
-  font-family: Roboto;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 18px;
-  text-transform: none;
-  color: ${theme.palette.text.secondary};
-
-  &.Mui-selected {
-    font-weight: 500;
-    color: ${theme.palette.text.primary};
-  }
 `;
 
 // CHART CONTROLS
