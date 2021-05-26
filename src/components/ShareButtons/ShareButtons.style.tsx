@@ -33,7 +33,7 @@ export const SocialButtonsContainer = styled.div<{
   position: absolute;
   top: 1rem;
   margin: 0 auto;
-  left: 0;
+  left: ${({ isHeader }) => (isHeader ? '0' : 'initial')};
   right: 0;
   box-shadow: 0px ${theme.spacing(1)}px ${theme.spacing(4)}px rgba(0, 0, 0, 0.2);
   background-color: ${palette.white};
