@@ -77,6 +77,7 @@ const VulnerabilitiesBlock: React.FC<{
           eventCategory={EventCategory.VULNERABILITIES}
           shareUrl={shareUrl}
           shareQuote={shareQuote}
+          region={region}
         />
       </LocationPageSectionFooter>
     </>

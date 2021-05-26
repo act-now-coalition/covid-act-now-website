@@ -19,7 +19,7 @@ const CopyLinkButton = ({
       }}
     >
       <SocialShareButton variant="contained" color="#007fb1">
-        <SocialButton disableRipple disableFocusRipple disableTouchRipple>
+        <SocialButton>
           {copiedLink ? (
             'Copied!'
           ) : (
