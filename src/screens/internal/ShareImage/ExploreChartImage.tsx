@@ -18,9 +18,9 @@ import {
   getChartSeries,
   getLocationNames,
   getMetricName,
-  getDateRange,
   Period,
   getMetricDataMeasure,
+  getDateRange,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
@@ -45,11 +45,8 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
     fetchSeries().then(setChartSeries);
   }, [selectedLocations, currentMetric, normalizeData]);
 
-  const dateRange = chartSeries.map(series =>
-    getDateRange(series.data, Period.ALL),
-  );
-
   const dataMeasure = getMetricDataMeasure(currentMetric);
+  const dateRange = getDateRange(Period.ALL);
 
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
@@ -80,8 +77,8 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   barOpacity={0.4}
                   barOpacityHover={0.8}
                   hasMultipleLocations={selectedLocations.length > 1}
-                  dateRange={dateRange[0]}
                   dataMeasure={dataMeasure}
+                  dateRange={dateRange}
                 />
               )}
             </ParentSize>

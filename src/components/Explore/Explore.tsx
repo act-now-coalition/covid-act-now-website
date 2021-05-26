@@ -30,12 +30,12 @@ import {
   getMetricName,
   getSeriesLabel,
   EXPLORE_CHART_IDS,
-  getDateRange,
   Period,
   periodMap,
   getAllPeriodLabels,
   metricsToNormalize,
   getMetricDataMeasure,
+  getDateRange,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -221,10 +221,8 @@ const ExploreCopy: React.FunctionComponent<{
     const hasMultipleLocations = selectedLocations.length > 1;
 
     const [period, setPeriod] = useState<Period>(Period.ALL);
-    const dateRange = chartSeries.map(series =>
-      getDateRange(series.data, period),
-    );
     const allPeriodLabels = getAllPeriodLabels();
+    const dateRange = getDateRange(period);
 
     const onSelectPeriod = (newPeriod: Period) => {
       const newPeriodLabel = periodMap[newPeriod].label;
@@ -306,8 +304,8 @@ const ExploreCopy: React.FunctionComponent<{
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
                     marginRight={marginRight}
-                    dateRange={dateRange[0]} // hmm
                     dataMeasure={dataMeasure}
+                    dateRange={dateRange}
                   />
                 ) : (
                   <div style={{ height: 400 }} />

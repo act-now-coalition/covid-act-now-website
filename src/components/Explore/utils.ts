@@ -28,10 +28,7 @@ import {
   getTimeDiff,
 } from 'common/utils/time-utils';
 import { formatDecimal } from 'common/utils/index';
-
-import { max as d3max } from 'd3-array';
 import { subtractTime } from 'common/utils/time-utils';
-import isDate from 'lodash/isDate';
 
 export enum Period {
   DAYS_60,
@@ -71,26 +68,13 @@ export function getAllPeriodLabels() {
   return EXPLORE_PERIODS.map(getPeriodLabel);
 }
 
-type Point = {
-  x: number;
-  y: any;
-};
-
-const getDate = (d: Point) => new Date(d.x);
-const getY = (d: Column) => d.y;
-const hasData = (d: Column) => isDate(getDate(d)) && Number.isFinite(getY(d));
-
-export function getDateRange(columnData: Column[], period: Period) {
-  const data: any[] = columnData.filter(hasData);
-  const dates = data.map(getDate);
-  const minDate = new Date('2020-03-01');
-  const dateTo = d3max(dates) || new Date();
+export function getDateRange(period: Period): Date[] {
+  const dateTo = new Date();
   const dateFrom =
     period === Period.ALL
-      ? minDate
-      : subtractTime(new Date(), periodMap[period].increment, TimeUnit.DAYS);
-
-  return [dateFrom, dateTo || new Date()];
+      ? new Date('2020-03-01')
+      : subtractTime(dateTo, periodMap[period].increment, TimeUnit.DAYS);
+  return [dateFrom, dateTo];
 }
 
 export function getMaxBy<T>(

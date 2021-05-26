@@ -57,6 +57,7 @@ const Dropdown: React.FC<{
         {itemLabels.map((label: string, i: number) => {
           return (
             <MenuItem
+              key={`Menu item: ${label}`}
               onClick={() => {
                 onSelect(i);
                 setButtonLabel(label);

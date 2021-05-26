@@ -121,8 +121,8 @@ const MultipleLocationsChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   isMobileXs?: boolean;
-  dateRange: Date[];
   dataMeasure: DataMeasure;
+  dateRange: Date[];
 }> = ({
   width,
   height,
@@ -134,16 +134,14 @@ const MultipleLocationsChart: React.FC<{
   marginRight = 100,
   barOpacity,
   isMobileXs = false,
-  dateRange,
   dataMeasure,
+  dateRange,
 }) => {
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
   );
 
-  const [from, to] = dateRange;
-  const dateFrom = from;
-  const dateTo = to;
+  const [dateFrom, dateTo] = dateRange;
 
   const maxY = getMaxBy<number>(seriesList, getY, 1);
 

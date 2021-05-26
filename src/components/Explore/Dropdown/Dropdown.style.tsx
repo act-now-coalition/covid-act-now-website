@@ -1,21 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import MuiMenu from '@material-ui/core/Menu';
 import MuiMenuItem from '@material-ui/core/MenuItem';
-import { COLOR_MAP, GREY_5, GREY_0 } from 'common/colors';
+import { COLOR_MAP, GREY_2, GREY_0 } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-export const Button = styled(MuiButton)<{ $open?: boolean; $maxWidth: number }>`
-  border: 1px solid ${GREY_5};
+const SharedStyles = css`
+  &:hover {
+    background-color: ${GREY_0};
+  }
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
+`;
+
+export const Button = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))<{ $open?: boolean; $maxWidth: number }>`
+  ${SharedStyles};
+  border: 1px solid ${GREY_2};
   border-bottom: ${({ $open }) => $open && 'none'};
   padding: 0.5rem 0.75rem;
   border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
   width: 100%;
   letter-spacing: 0;
-
-  &:hover {
-    background-color: ${GREY_0};
-  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
@@ -48,7 +58,7 @@ export const ItemLabel = styled.span`
 
 export const Menu = styled(MuiMenu)<{ $maxWidth: number }>`
   .MuiMenu-paper {
-    border: 1px solid ${GREY_5};
+    border: 1px solid ${GREY_2};
     border-radius: 0;
     width: 100%;
   }
@@ -60,7 +70,11 @@ export const Menu = styled(MuiMenu)<{ $maxWidth: number }>`
   }
 `;
 
-export const MenuItem = styled(MuiMenuItem)`
+export const MenuItem = styled(MuiMenuItem).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
+  ${SharedStyles};
   white-space: normal;
   padding: 0.75rem 1rem;
   line-height: 1.4;
