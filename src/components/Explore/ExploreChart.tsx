@@ -1,5 +1,5 @@
 import React from 'react';
-import { Series, DataMeasure } from './interfaces';
+import { Series } from './interfaces';
 import SingleLocationChart from './SingleLocationChart';
 import MultipleLocationsChart from './MultipleLocationsChart';
 
@@ -17,8 +17,8 @@ const ExploreChart: React.FC<{
   barOpacity?: number;
   barOpacityHover?: number;
   isMobileXs?: boolean;
-  dataMeasure: DataMeasure;
   dateRange: Date[];
+  yTickFormat: (val: number) => string;
 }> = ({
   hasMultipleLocations,
   barOpacity,

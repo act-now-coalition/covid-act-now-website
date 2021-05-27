@@ -7,8 +7,6 @@ import {
   getXTickFormat,
   getTimeAxisTicks,
 } from 'components/Charts/utils';
-import { formatPercent } from 'common/utils';
-import { DataMeasure } from './interfaces';
 
 const Axes: React.FC<{
   height: number;
@@ -16,19 +14,14 @@ const Axes: React.FC<{
   yScale: ScaleLinear<number, number>;
   isMobile: boolean;
   yNumTicks?: number;
-  dataMeasure: DataMeasure;
-}> = ({ height, dateScale, yScale, isMobile, yNumTicks = 10, dataMeasure }) => {
+  yTickFormat: (val: number) => string;
+}> = ({ height, dateScale, yScale, isMobile, yNumTicks = 10, yTickFormat }) => {
   const [dateFrom, dateTo] = dateScale.domain();
   const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
 
   const finalTickValues = getFinalTicks(isMobile, timeTicks).filter(
     date => date < dateTo,
   );
-
-  const yTickFormat = (value: number) =>
-    dataMeasure === DataMeasure.PERCENT
-      ? formatPercent(value).toString()
-      : value.toString();
 
   return (
     <AxisStyle>

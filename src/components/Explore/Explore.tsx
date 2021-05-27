@@ -9,13 +9,14 @@ import { useLocation, useParams } from 'react-router-dom';
 import some from 'lodash/some';
 import uniq from 'lodash/uniq';
 import max from 'lodash/max';
+import { formatPercent, formatDecimal } from 'common/utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
-import { ExploreMetric, Series } from './interfaces';
+import { ExploreMetric, Series, DataMeasure } from './interfaces';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
@@ -133,6 +134,10 @@ const ExploreCopy: React.FunctionComponent<{
     const currentMetricName = getMetricName(currentMetric);
 
     const dataMeasure = getMetricDataMeasure(currentMetric);
+    const yTickFormat = (value: number) =>
+      dataMeasure === DataMeasure.PERCENT
+        ? formatPercent(value, 1).toString()
+        : formatDecimal(value, 1).toString();
 
     const initialLocations = useMemo(
       () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
@@ -307,8 +312,8 @@ const ExploreCopy: React.FunctionComponent<{
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
                     marginRight={marginRight}
-                    dataMeasure={dataMeasure}
                     dateRange={dateRange}
+                    yTickFormat={yTickFormat}
                   />
                 ) : (
                   <div style={{ height: 400 }} />
@@ -331,7 +336,7 @@ const ExploreCopy: React.FunctionComponent<{
             <ScreenshotReady />
           </Styles.EmptyPanel>
         )}
-        <div style={{ paddingTop: '1rem' }}>
+        <Styles.FooterContainer>
           {showLegend && <Legend seriesList={chartSeries} />}
           <Styles.ShareBlock>
             <ShareImageButtonGroup
@@ -369,7 +374,7 @@ const ExploreCopy: React.FunctionComponent<{
               }
             />
           </Styles.ShareBlock>
-        </div>
+        </Styles.FooterContainer>
       </div>
     );
   },

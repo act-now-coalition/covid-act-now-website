@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import { ParentSize } from '@vx/responsive';
 import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ExploreChart } from 'components/Explore';
+import { formatPercent, formatDecimal } from 'common/utils';
 import {
   ExploreChartWrapper,
   Wrapper,
@@ -22,7 +22,7 @@ import {
   getMetricDataMeasure,
   getDateRange,
 } from 'components/Explore/utils';
-import { Series } from 'components/Explore/interfaces';
+import { Series, DataMeasure } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
@@ -46,6 +46,11 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   }, [selectedLocations, currentMetric, normalizeData]);
 
   const dataMeasure = getMetricDataMeasure(currentMetric);
+  const yTickFormat = (value: number) =>
+    dataMeasure === DataMeasure.PERCENT
+      ? formatPercent(value, 1).toString()
+      : formatDecimal(value, 1).toString();
+
   const dateRange = getDateRange(Period.ALL);
 
   return (
@@ -77,8 +82,8 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   barOpacity={0.4}
                   barOpacityHover={0.8}
                   hasMultipleLocations={selectedLocations.length > 1}
-                  dataMeasure={dataMeasure}
                   dateRange={dateRange}
+                  yTickFormat={yTickFormat}
                 />
               )}
             </ParentSize>

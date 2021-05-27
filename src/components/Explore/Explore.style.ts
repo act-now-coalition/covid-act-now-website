@@ -25,7 +25,7 @@ export const Heading = styled(Typography)`
 
 export const ShareBlock = styled.div`
   display: flex;
-  justify-content: flex-end;
+  margin-left: auto;
 `;
 
 export const Subtitle = styled.div`
@@ -72,14 +72,7 @@ export const NormalizeCheckbox = styled(MuiCheckbox)`
 
 export const LegendContainer = styled(Box)`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  @media (min-width: 600px) {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 2rem;
-  }
+  flex-wrap: wrap;
 `;
 
 export const LegendItem = styled(Box)`
@@ -352,4 +345,12 @@ export const DisclaimerWrapper = styled.div`
 export const DisclaimerBody = styled(Typography)`
   font-size: 0.875rem;
   color: rgba(0, 0, 0, 0.7);
+`;
+
+export const FooterContainer = styled.div`
+  padding-top: 1rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  padding-top: 1rem;
 `;

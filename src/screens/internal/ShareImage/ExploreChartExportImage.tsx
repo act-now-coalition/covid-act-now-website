@@ -12,10 +12,10 @@ import {
 } from './ChartExportImage.style';
 import LogoUrlLight from 'assets/images/logoUrlLight';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { formatUtcDate } from 'common/utils';
+import { formatUtcDate, formatPercent, formatDecimal } from 'common/utils';
 import { ExploreChart } from 'components/Explore';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
-import { Series } from 'components/Explore/interfaces';
+import { Series, DataMeasure } from 'components/Explore/interfaces';
 import {
   getChartSeries,
   getLocationNames,
@@ -59,6 +59,10 @@ const ExploreChartExportImage = ({
   const url = `https://covidactnow.org/`;
 
   const dataMeasure = getMetricDataMeasure(currentMetric);
+  const yTickFormat = (value: number) =>
+    dataMeasure === DataMeasure.PERCENT
+      ? formatPercent(value, 1).toString()
+      : formatDecimal(value, 1).toString();
 
   const dateRange = getDateRange(Period.ALL);
 
@@ -86,8 +90,8 @@ const ExploreChartExportImage = ({
                 height={chartHeight}
                 isMobile={false}
                 hasMultipleLocations={selectedLocations.length > 1}
-                dataMeasure={dataMeasure}
                 dateRange={dateRange}
+                yTickFormat={yTickFormat}
               />
             )}
           </ParentSize>

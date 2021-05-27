@@ -6,10 +6,9 @@ import sortBy from 'lodash/sortBy';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
-import { DataMeasure, Series } from './interfaces';
+import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import { getMaxBy, getSeriesLabel } from './utils';
 import * as Styles from './Explore.style';
@@ -50,7 +49,8 @@ export const MultipleLocationsTooltip: React.FC<{
   left: number;
   seriesList: Series[];
   pointInfo: HoverPointInfo;
-}> = ({ top, left, seriesList: series, pointInfo }) => {
+  yTickFormat: (val: number) => string;
+}> = ({ top, left, seriesList: series, pointInfo, yTickFormat }) => {
   const { seriesIndex } = pointInfo;
   const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
   return (
@@ -64,7 +64,7 @@ export const MultipleLocationsTooltip: React.FC<{
         {currentSeries && currentSeries.tooltipLabel}
       </Styles.TooltipSubtitle>
       <Styles.TooltipMetric>
-        {isNumber(pointInfo.y) ? formatDecimal(pointInfo.y, 1) : '-'}
+        {isNumber(pointInfo.y) ? yTickFormat(pointInfo.y) : '-'}
       </Styles.TooltipMetric>
       <Styles.TooltipLocation>
         {currentSeries && `in ${currentSeries.label}`}
@@ -121,8 +121,8 @@ const MultipleLocationsChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   isMobileXs?: boolean;
-  dataMeasure: DataMeasure;
   dateRange: Date[];
+  yTickFormat: (val: number) => string;
 }> = ({
   width,
   height,
@@ -134,8 +134,8 @@ const MultipleLocationsChart: React.FC<{
   marginRight = 100,
   barOpacity,
   isMobileXs = false,
-  dataMeasure,
   dateRange,
+  yTickFormat,
 }) => {
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
@@ -195,7 +195,7 @@ const MultipleLocationsChart: React.FC<{
             yScale={yScale}
             isMobile={isMobile}
             yNumTicks={5}
-            dataMeasure={dataMeasure}
+            yTickFormat={yTickFormat}
           />
           {seriesLabels.map((label, i) => (
             <Styles.LineLabel
@@ -255,6 +255,7 @@ const MultipleLocationsChart: React.FC<{
             pointInfo={tooltipData}
             left={getXPosition(tooltipData) + marginLeft}
             top={getYPosition(tooltipData) + marginTop}
+            yTickFormat={yTickFormat}
           />
           <DateMarker
             left={getXPosition(tooltipData) + marginLeft}

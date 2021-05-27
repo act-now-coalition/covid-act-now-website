@@ -3,10 +3,10 @@ import isNumber from 'lodash/isNumber';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal, formatPercent } from 'common/utils';
+import { formatInteger, formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
-import { DataMeasure, Series } from './interfaces';
+import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
 import { getMaxBy, findPointByDate } from './utils';
@@ -31,7 +31,8 @@ const SingleSeriesTooltip: React.FC<{
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-}> = ({ series, left, top, date, subtext }) => {
+  yTickFormat: (val: number) => string;
+}> = ({ series, left, top, date, subtext, yTickFormat }) => {
   const point = findPointByDate(series.data, date);
 
   return point ? (
@@ -41,8 +42,9 @@ const SingleSeriesTooltip: React.FC<{
       left={left(point)}
       title={formatTooltipColumnDate(point)}
     >
+      <Styles.TooltipSubtitle>{series.tooltipLabel}</Styles.TooltipSubtitle>
       <Styles.TooltipMetric>
-        {isNumber(point.y) ? formatPercent(point.y, 1) : '-'}
+        {isNumber(point.y) ? yTickFormat(point.y) : '-'}
       </Styles.TooltipMetric>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
@@ -55,7 +57,8 @@ const SingleLocationTooltip: React.FC<{
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-}> = ({ seriesList, left, top, date, subtext }) => {
+  yTickFormat: (val: number) => string;
+}> = ({ seriesList, left, top, date, subtext, yTickFormat }) => {
   if (seriesList.length === 1) {
     return (
       <SingleSeriesTooltip
@@ -64,6 +67,7 @@ const SingleLocationTooltip: React.FC<{
         left={left}
         top={top}
         subtext={subtext}
+        yTickFormat={yTickFormat}
       />
     );
   }
@@ -137,8 +141,8 @@ const SingleLocationChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
-  dataMeasure: DataMeasure;
   dateRange: Date[];
+  yTickFormat: (val: number) => string;
 }> = ({
   width,
   height,
@@ -151,8 +155,8 @@ const SingleLocationChart: React.FC<{
   marginRight = 20,
   barOpacity,
   barOpacityHover,
-  dataMeasure,
   dateRange,
+  yTickFormat,
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
@@ -208,7 +212,7 @@ const SingleLocationChart: React.FC<{
             yScale={yScale}
             isMobile={isMobile}
             yNumTicks={5}
-            dataMeasure={dataMeasure}
+            yTickFormat={yTickFormat}
           />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }) => (
@@ -253,6 +257,7 @@ const SingleLocationChart: React.FC<{
             date={tooltipData.date}
             seriesList={seriesList}
             subtext={tooltipSubtext}
+            yTickFormat={yTickFormat}
           />
           <DateMarker
             left={dateScale(tooltipData.date) + marginLeft}
