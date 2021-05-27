@@ -255,7 +255,7 @@
       "category": "Metrics"
     },
     {
-      "term": "Infectious*",
+      "term": "Infectious",
       "termId": "infectious",
       "definition": "A person is infectious if they are contagious — that is, easily capable of spreading a disease through contact with other people. Diseases also can be referred to as infectious, which simply means that they are caused by foreign substances (usually viruses and bacteria) invading the body.",
       "category": "Disease science"
