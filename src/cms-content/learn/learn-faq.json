@@ -249,7 +249,7 @@
           "questionId": "covid-how-soon-after-exposure-tested"
         },
         {
-          "answer": "Rapid tests, also known as antigen tests, and PCR tests are the two types of diagnostic tests for COVID. Both tests are performed by collecting nasal or throat swabs, but antigen tests report results in minutes while PCR tests can take up to a week to return results depending on lab capacity. While rapid tests are more convenient and often cheaper, they report significantly higher rates of false negatives of [up to 50 percent](https://www.health.harvard.edu/blog/which-test-is-best-for-covid-19-2020081020734). PCR tests, on the other hand, report between 2 percent to 37 percent false negatives. PCR tests are most accurate for detecting active infections, while rapid tests are [best used](https://twitter.com/covidactnow/status/1321254254997204992?s=21) to confirm COVID symptoms.",
+          "answer": "Rapid tests, also known as [antigen tests](https://covidactnow.org/glossary#antigen-test), and [PCR tests](https://covidactnow.org/glossary#pcr-test) are the two types of diagnostic tests for COVID. Both tests are performed by collecting nasal or throat swabs, but rapid tests report results more swiftly, as all PCR tests require lab processing. While rapid tests are more convenient and often cheaper, they report significantly higher rates of false negatives. PCR tests are most accurate for detecting active infections, while rapid tests are best used to quickly confirm COVID symptoms.",
           "question": "Are rapid tests less accurate than PCR tests?",
           "questionId": "rapid-tests-less-accurate-than-pcr"
         }
