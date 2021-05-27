@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from 'assets/theme';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { Heading1, Heading2, Heading3 } from 'components/Markdown';
 import Grid from '@material-ui/core/Grid';
 
@@ -13,19 +12,7 @@ export const AboutHeading2 = styled(Heading2)`
 `;
 
 export const AboutHeading3 = styled(Heading3)`
-  margin: 3rem 0 2rem;
-
-  &:first-of-type {
-    margin: 2rem 0;
-  }
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin: 4rem 0 2rem;
-
-    &:first-of-type {
-      margin: 3rem 0;
-    }
-  }
+  margin: 2rem 0;
 `;
 
 /*

@@ -18,17 +18,12 @@ const TeamSection = () => {
           team.teamName === 'Leadership' ? team.teamMembers : alphabetizedTeam;
         const isAlumni = team.teamName === 'Alumni';
         const includeTitle = teamsWithTitles.includes(team.teamName);
-        return (
+        return !isAlumni ? (
           <Fragment key={team.teamName}>
             <AboutHeading3>{team.teamName}</AboutHeading3>
             <Grid container spacing={3}>
               {teamMembers.map((teamMember, i) => {
-                return isAlumni ? (
-                  <AlumniMember
-                    teamMember={teamMember}
-                    key={teamMember.fullName}
-                  />
-                ) : (
+                return (
                   <ActiveMember
                     teamMember={teamMember}
                     includeTitle={includeTitle}
@@ -37,6 +32,22 @@ const TeamSection = () => {
                 );
               })}
             </Grid>
+          </Fragment>
+        ) : (
+          <Fragment key={team.teamName}>
+            <AboutHeading3>{team.teamName}</AboutHeading3>
+            <div>
+              {teamMembers
+                .map<React.ReactNode>(teamMember => {
+                  return (
+                    <AlumniMember
+                      teamMember={teamMember}
+                      key={teamMember.fullName}
+                    />
+                  );
+                })
+                .reduce((prev, curr) => [prev, ', ', curr])}
+            </div>
           </Fragment>
         );
       })}

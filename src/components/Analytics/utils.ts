@@ -33,6 +33,7 @@ export const legacyTracker: Tracker = {
  * Categories represent high-level groups of events in the application.
  */
 export enum EventCategory {
+  ABOUT = 'about',
   API = 'api',
   ARTICLES = 'articles',
   COMPARE = 'compare',
