@@ -2,7 +2,6 @@ import urlJoin from 'url-join';
 import deburr from 'lodash/deburr';
 import flatten from 'lodash/flatten';
 import isNumber from 'lodash/isNumber';
-import max from 'lodash/max';
 import words from 'lodash/words';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
@@ -74,15 +73,6 @@ export function getDateRange(period: Period): Date[] {
       ? new Date('2020-03-01')
       : subtractTime(dateTo, periodMap[period].increment, TimeUnit.DAYS);
   return [dateFrom, dateTo];
-}
-
-export function getMaxBy<T>(
-  seriesList: Series[],
-  getValue: (d: Column) => T,
-  defaultValue: T,
-): T {
-  const maxValue = max(seriesList.map(({ data }) => max(data.map(getValue))));
-  return maxValue || defaultValue;
 }
 
 export const EXPLORE_METRICS = [

@@ -1,5 +1,6 @@
 import React, { useCallback, Fragment } from 'react';
 import isNumber from 'lodash/isNumber';
+import max from 'lodash/max';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -9,7 +10,7 @@ import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, findPointByDate } from './utils';
+import { findPointByDate } from './utils';
 import * as Styles from './Explore.style';
 import { ScreenshotReady } from 'components/Screenshot';
 import DateMarker from './DateMarker';
@@ -162,8 +163,18 @@ const SingleLocationChart: React.FC<{
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
+  const inDateRange = (date: Date): boolean =>
+    dateFrom <= date && date <= dateTo;
+
+  const maxPerSeries = seriesList.map(series => {
+    const dataInRange = series.data.filter(d => inDateRange(new Date(d.x)));
+    const seriesMax = max(dataInRange.map(getY)) || 1;
+    return seriesMax;
+  });
+
+  const maxY = max(maxPerSeries);
+
   const numDays = daysBetween(dateFrom, dateTo);
-  const maxY = getMaxBy<number>(seriesList, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
