@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Grid from '@material-ui/core/Grid';
 import { Modal } from '@material-ui/core';
 import { Region } from 'common/regions';
 import * as Styles from './LocationSelector.style';
@@ -9,6 +8,8 @@ import AutocompleteRegions, {
 } from 'components/AutocompleteRegions';
 import MenuButton from './Dropdown/MenuButton';
 import { LockBodyScroll } from 'components/Dialog';
+import { FilledButton } from 'components/ButtonSystem';
+import { EventCategory } from 'components/Analytics';
 
 const LocationSelector: React.FC<{
   regions: Region[];
@@ -47,22 +48,20 @@ const LocationSelector: React.FC<{
           <Modal
             open={modalOpen}
             onClose={closeModal}
-            style={{ touchAction: 'none' }}
+            style={{ touchAction: 'none', display: 'flex' }}
           >
             <Styles.ModalContainer>
               <Styles.ModalHeader>
-                <Grid container>
-                  <Grid item xs={9}>
-                    <Styles.ModalTitle>
-                      Compare states or counties
-                    </Styles.ModalTitle>
-                  </Grid>
-                  <Grid item xs container justify="flex-end">
-                    <Styles.DoneButton size="small" onClick={closeModal}>
-                      Done
-                    </Styles.DoneButton>
-                  </Grid>
-                </Grid>
+                <Styles.ModalTitle>
+                  Compare states, counties, or metro areas
+                </Styles.ModalTitle>
+                <FilledButton
+                  onClick={closeModal}
+                  trackingLabel="Close trends modal"
+                  trackingCategory={EventCategory.EXPLORE}
+                >
+                  Done
+                </FilledButton>
               </Styles.ModalHeader>
               <Styles.ModalBody>
                 <AutocompleteRegions
