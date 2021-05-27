@@ -42,12 +42,27 @@ const SocialButtonBlock: React.FC<{
   }
   return (
     <SocialButtonsContainer isHeader={isHeader}>
-      <FacebookShareButton
-        onClickShare={() => {
-          onShareOnFacebook();
+      {isHeader && (
+        <SocialShareButton variant="contained" color="#007fb1">
+          <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
+            Embed
+          </SocialButton>
+          <EmbedPreview
+            open={showEmbedPreviewModal}
+            onClose={() => {
+              setShowEmbedPreviewModal(false);
+              closeShareButtonGroup();
+            }}
+            region={region}
+          />
+        </SocialShareButton>
+      )}
+      <CopyLinkButton
+        url={socialSharingProps.url}
+        onCopyLink={() => {
+          onCopyLink();
           closeShareButtonGroup();
         }}
-        {...socialSharingProps}
       />
       <TwitterShareButton
         onClickShare={() => {
@@ -57,26 +72,13 @@ const SocialButtonBlock: React.FC<{
         {...socialSharingProps}
         hashtags={['COVIDActNow']}
       />
-      <CopyLinkButton
-        url={socialSharingProps.url}
-        onCopyLink={() => {
-          onCopyLink();
+      <FacebookShareButton
+        onClickShare={() => {
+          onShareOnFacebook();
           closeShareButtonGroup();
         }}
+        {...socialSharingProps}
       />
-      <SocialShareButton variant="contained" color="#007fb1">
-        <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
-          Embed
-        </SocialButton>
-        <EmbedPreview
-          open={showEmbedPreviewModal}
-          onClose={() => {
-            setShowEmbedPreviewModal(false);
-            closeShareButtonGroup();
-          }}
-          region={region}
-        />
-      </SocialShareButton>
     </SocialButtonsContainer>
   );
 };
