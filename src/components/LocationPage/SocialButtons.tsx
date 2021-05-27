@@ -21,14 +21,14 @@ const SocialButtons = ({
   shareQuote,
   region,
   hideSocialButtons,
-  isHeader,
+  showEmbedButton,
 }: {
   iconSize: number;
   shareURL: string;
   shareQuote: string;
   region: Region;
   hideSocialButtons: () => void;
-  isHeader?: boolean;
+  showEmbedButton?: boolean;
 }) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
@@ -58,7 +58,7 @@ const SocialButtons = ({
 
   return (
     <SocialButtonsContainer>
-      {isHeader && (
+      {showEmbedButton && (
         <SocialShareButton variant="contained" color="#007fb1">
           <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
             Embed

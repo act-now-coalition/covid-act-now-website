@@ -14,8 +14,8 @@ const ShareButtons: React.FC<{
   region: Region;
   stats: MetricValues;
   chartIdentifier: number;
-  isHeader?: boolean;
-}> = ({ region, stats, chartIdentifier, isHeader }) => {
+  showEmbedButton?: boolean;
+}> = ({ region, stats, chartIdentifier, showEmbedButton }) => {
   const shareQuote = makeChartShareQuote(
     region.fullName,
     stats,
@@ -47,7 +47,7 @@ const ShareButtons: React.FC<{
             shareQuote={shareQuote}
             region={region}
             hideSocialButtons={() => hideSocialButtons()}
-            isHeader={isHeader}
+            showEmbedButton={showEmbedButton}
           />
         )}
       </Wrapper>
