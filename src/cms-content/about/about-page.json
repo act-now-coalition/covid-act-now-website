@@ -3,8 +3,10 @@
   "teamHeader": "Who we are",
   "contactUsHeader": "Contact us",
   "whoWeServeContentA": "We've worked with more than 100 federal, state, and county officials to develop data-driven COVID responses.",
+  "aboutContent": "placeholder",
   "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
   "introContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. \n\nWe help people make informed decisions by providing timely and accurate data about COVID in every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge\n\nPlease note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services.",
+  "missionContent": "placeholder",
   "partnersContent": [
     {
       "copy": "Georgetown University Center for Global Health Science and Security, Stanford University Clinical Excellence Research Center, and Harvard Global Health Institute",
@@ -55,6 +57,8 @@
   "teamIntro": "Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
   "whoWeServeHeader": "Who we serve",
   "joinUsContent": "Want to join us? [Let us know](https://docs.google.com/forms/d/e/1FAIpQLSfQkdwXsbDbwLHhWwBD6wzNiw54_0P6A60r8hujP3qnaxxFkA/viewform).\n\nSome roles that we need:\n\n* UI/UX Designers\n* JavaScript/React, Python engineers\n* Epidemiologists\n* Data Modelers\n* User Support Representatives\n* Product Managers\n* Social Media Managers\n* ...and more!",
+  "impactContent": "placeholder",
+  "impactHeader": "Our impact",
   "joinUsHeader": "Join us",
   "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
   "governmentLogos": [
@@ -106,6 +110,15 @@
   ],
   "partnersHeader": "Who we work with",
   "introHeader": "Our mission",
+  "missionHeader": "Our mission",
+  "aboutHeader": "About us",
+  "commitmentsContent": [
+    {
+      "altText": "placeholder",
+      "copy": "placeholder",
+      "icon": "/images_cms/bayer-logo-3.png"
+    }
+  ],
   "contactUsContent": "For general questions, email [info@covidactnow.org](mailto:info@covidactnow.org).\n\nFor press inquiries, email [press@covidactnow.org](mailto:press@covidactnow.org).\n\nIf you are with a state or local government, reach out to us at [gov@covidactnow.org](mailto:gov@covidactnow.org).",
   "pageHeader": "About Covid Act Now",
   "futureProjectsContent": "### Act Now Coalition and Rewiring America\n\nCovid Act Now is the COVID-focused initiative of the Act Now Coalition, a non-profit that’s mission is to leverage the power of accurate, accessible, and actionable data to help people make informed decisions. \n\nAct Now Coalition is proud to announce our next project: a partnership with the non-profit [Rewiring America](https://www.rewiringamerica.org/) to build best-in-class data models that support the electrification of U.S. households at all income levels, and modernize America’s energy infrastructure. \n\nWe believe that it is possible to solve the climate crisis in our lifetime and that America has a responsibility in this endeavor to both lead and inspire. America pioneered the collection of energy generation and consumption data. Fresh analysis indicates that electrification and the subsequent decarbonization of our energy grid will slow climate change while saving millions of American households thousands of dollars a year. It will create millions of new, local jobs and restore American economic leadership. 2020 is the decade to decarbonize.\n\nWe are very excited about this next venture and the opportunity it provides to apply data- and science-backed decision-making, as well as open-source, accessible tools to the critical initiative of electrification.\n\nAs ever, we remain committed to our work on COVID, to maintaining our data, and to helping people navigate the pandemic as it continues to evolve.\n\nIf you have any questions please email: [info@covidactnow.org](mailto:info@covidactnow.org)"

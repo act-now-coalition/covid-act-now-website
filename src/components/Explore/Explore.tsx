@@ -14,7 +14,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
-import ShareImageButtonGroup from 'components/ShareButtons';
+import ShareButtonGroup from 'components/ShareButtons';
 import ExploreTabs from './ExploreTabs';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
@@ -356,7 +356,7 @@ const Explore: React.FunctionComponent<{
         )}
         <div style={{ paddingTop: '1rem' }}>
           <Styles.ShareBlock>
-            <ShareImageButtonGroup
+            <ShareButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
               imageFilename={getImageFilename(selectedLocations, currentMetric)}
@@ -366,6 +366,7 @@ const Explore: React.FunctionComponent<{
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
+              region={region ? region : undefined}
               onSaveImage={() => {
                 trackExploreEvent(
                   EventAction.SAVE_IMAGE,
@@ -385,9 +386,6 @@ const Explore: React.FunctionComponent<{
               }
               onShareOnTwitter={() =>
                 trackShare(`Twitter: ${trackingLabel}`, numLocations)
-              }
-              onShareOnLinkedin={() =>
-                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
               }
             />
           </Styles.ShareBlock>

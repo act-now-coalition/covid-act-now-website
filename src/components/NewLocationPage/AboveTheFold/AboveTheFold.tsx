@@ -56,7 +56,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
             <HeaderContainer>
               <LocationName region={region} />
               <DesktopOnly>
-                <HeaderButtons onClickShare={onClickShare} />
+                <HeaderButtons region={region} onClickShare={onClickShare} />
               </DesktopOnly>
               <MobileOnly>
                 <VaccineButton />

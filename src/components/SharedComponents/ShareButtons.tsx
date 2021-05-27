@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { ClickAwayListener } from '@material-ui/core';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
+import { default as HeaderShareButton } from 'components/NewLocationPage/HeaderButtons/ShareButton';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from 'components/ShareButtons/SocialButtonBlock';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { Region } from 'common/regions';
+import { ShareButtonWrapper } from 'components/ShareButtons/ShareButtons.style';
 
 function trackShare(eventCategory: EventCategory, label: string) {
   trackEvent(eventCategory, EventAction.SHARE, label);
@@ -14,11 +17,19 @@ const ShareButtons: React.FC<{
   eventCategory: EventCategory;
   shareUrl: string;
   shareQuote: string;
-}> = ({ eventCategory, shareUrl, shareQuote }) => {
+  region?: Region;
+  isLocationPageHeader?: boolean;
+}> = ({
+  eventCategory,
+  shareUrl,
+  shareQuote,
+  region,
+  isLocationPageHeader,
+}) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
-  const hideSocialButtons = () => {
-    const timeoutId = setTimeout(() => setShowSocialButtons(false), 1500);
+  const hideSocialButtons = (delay: number = 0) => {
+    const timeoutId = setTimeout(() => setShowSocialButtons(false), delay);
     return () => clearTimeout(timeoutId);
   };
 
@@ -34,23 +45,34 @@ const ShareButtons: React.FC<{
 
   return (
     <ClickAwayListener onClickAway={() => hideSocialButtons()}>
-      <div style={{ position: 'relative', width: 'fit-content' }}>
-        <ButtonGroup aria-label="share buttons" variant="outlined">
-          <ShareButton
-            onClickShare={() => setShowSocialButtons(!showSocialButtons)}
-          />
+      <ShareButtonWrapper>
+        <ButtonGroup
+          aria-label="share buttons"
+          variant="outlined"
+          style={{ width: '100%' }}
+        >
+          {isLocationPageHeader ? (
+            <HeaderShareButton
+              onClickShare={() => setShowSocialButtons(!showSocialButtons)}
+            />
+          ) : (
+            <ShareButton
+              onClickShare={() => setShowSocialButtons(!showSocialButtons)}
+            />
+          )}
         </ButtonGroup>
         {showSocialButtons && (
           <SocialButtonBlock
-            onClickContainer={() => hideSocialButtons()}
             onShareOnFacebook={() => trackShare(eventCategory, 'facebook')}
             onShareOnTwitter={() => trackShare(eventCategory, 'twitter')}
-            onShareOnLinkedin={() => trackShare(eventCategory, 'linkedin')}
             onCopyLink={() => trackEvent(eventCategory, EventAction.COPY_LINK)}
+            hideSocialButton={() => hideSocialButtons()}
+            region={region}
+            isHeader={isLocationPageHeader}
             {...socialSharingProps}
           />
         )}
-      </div>
+      </ShareButtonWrapper>
     </ClickAwayListener>
   );
 };

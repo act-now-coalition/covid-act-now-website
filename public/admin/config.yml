@@ -79,7 +79,6 @@ collections:
             name: 'partnersContent'
             widget: 'list'
             fields:
-              - { label: 'Section header', name: 'header', widget: 'string' }
               - { label: 'Section copy', name: 'copy', widget: 'markdown' }
               - label: 'Logos'
                 name: 'logos'
