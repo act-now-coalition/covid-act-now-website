@@ -110,6 +110,20 @@
           ],
           "showCaseStudy": true,
           "shortTitle": "Mercer Advisors"
+        },
+        {
+          "body": "[RoadGoat](https://www.roadgoat.com/) is an interactive travel website that helps users plan their ideal trip. CEO Kurosh Hashemi calls RoadGoat “the Yelp of travel destinations,'' where users find “cool destinations they want to go to that line up with their interests.” The site’s travel guides provide everything a traveler would need to know about locations, including what a location is known for, nearby attractions, safety ratings, budgetary estimates, and more – including, since 2020, COVID risk.\n\n## What is the challenge?\n\nRoadGoat aims to offer travelers all of the resources they need to make informed decisions about where to travel. In 2020, as the pandemic unfolded, it became necessary to offer information about local COVID conditions for all destinations. As a result, Hashemi says, “We wanted to equip our users with \\[COVID data] one way or another.” To give travelers the best sense of conditions at each destination, the data needed to be reliable, up-to-date, and location-specific. It also needed to be available through an API to allow seamless integration into RoadGoat’s location pages.\n\n## How is RoadGoat responding to COVID?\n\nRoadGoat sources local COVID data for every destination through the Covid Act Now (CAN) API. On each of RoadGoat’s location pages within the U.S., the “Covid Risk” category shows a color-coded risk level for surrounding counties. By clicking on the displayed risk, users can view a pop-up window with more specific information on daily new cases in the destination’s county, state and U.S. as a whole. The pop-up also links directly to CAN for more comprehensive data. \n\n![Image shows an example of RoadGoat's COVID Safety pop-up window. It includes local, state, and national COVID risk-level for the destination.](/images_cms/roadgoat.png \"Clicking on a location’s risk level brings up a pop-up window, like this one for Boston, with state and local COVID data sourced through the CAN API.\")\n\nClicking on a location’s risk level brings up a pop-up window, like this one for Boston, with state and local COVID data sourced through the CAN API.\n\nWhen RoadGoat decided to add COVID data to the site, an API was clearly the best data-sourcing method. Among the available API options, CAN stood out for its reliability, design, and local focus. Hashemi says, “It wasn’t just a matter of getting data on there; that was pretty easy. It was more that we also wanted to connect our travelers to an informative, inspiring online community whose data we trusted.” Through CAN, RoadGoat puts users in contact with trustworthy, accessible, comprehensive, and location-specific data. \n\nAccording to Hashemi, RoadGoat’s mission is to provide travelers with “all the information they need in a concise and consumable way.” Drawing data from the CAN API and linking to CAN resources helps RoadGoat achieve this goal.",
+          "logoUrl": "/images_cms/goatmascot.png",
+          "summary": "RoadGoat uses CAN to surface local COVID risk at U.S. travel destinations.",
+          "author": "Nat Markey",
+          "logoAltText": "RoadGoat logo",
+          "header": "RoadGoat Informs Travelers of Local COVID Risk with CAN Data",
+          "caseStudyId": "roadgoat",
+          "tags": [
+            "api"
+          ],
+          "showCaseStudy": true,
+          "shortTitle": "RoadGoat"
         }
       ]
     },
