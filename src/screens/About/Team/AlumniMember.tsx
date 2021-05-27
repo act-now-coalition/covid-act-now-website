@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  TeamMemberWrapper,
-  DescriptionWrapper,
-  AlumniName,
-} from './Team.style';
+import { AlumniWrapper, AlumniName } from './Team.style';
 import ExternalLink from 'components/ExternalLink';
 import { UserProfile } from 'cms-content/team';
 
@@ -11,13 +7,11 @@ const AlumniMember = (props: { teamMember: UserProfile }) => {
   const { teamMember } = props;
 
   return (
-    <TeamMemberWrapper item sm={4} xs={6}>
+    <AlumniWrapper>
       <ExternalLink href={teamMember.profileUrl}>
-        <DescriptionWrapper>
-          <AlumniName>{teamMember.fullName}</AlumniName>
-        </DescriptionWrapper>
+        <AlumniName>{teamMember.fullName}</AlumniName>
       </ExternalLink>
-    </TeamMemberWrapper>
+    </AlumniWrapper>
   );
 };
 

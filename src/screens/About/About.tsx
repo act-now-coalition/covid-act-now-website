@@ -9,6 +9,7 @@ import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
 import {
   AboutHeading1,
   AboutHeading2,
+  AboutHeading3,
   ButtonContainer,
   CommitmentBody,
   CommitmentIcon,
@@ -66,9 +67,13 @@ export const sidebarItems: TocItem[] = [
 ];
 
 // TODO(Chelsi): put these ids into the CMS
-const Button: React.FC<{ to: string; cta: string }> = ({ to, cta }) => {
+const Button: React.FC<{ to?: string; href?: string; cta: string }> = ({
+  to,
+  href,
+  cta,
+}) => {
   return (
-    <LargeOutlinedButton to={to} endIcon={<ArrowForwardIcon />}>
+    <LargeOutlinedButton to={to} href={href} endIcon={<ArrowForwardIcon />}>
       {cta}
     </LargeOutlinedButton>
   );
@@ -92,7 +97,7 @@ const About = () => {
           </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="mission">
-          <AboutHeading1>{aboutContent.missionHeader}</AboutHeading1>
+          <AboutHeading2>{aboutContent.missionHeader}</AboutHeading2>
           <SectionContent>
             <MarkdownContent source={aboutContent.missionContent} />
             {aboutContent.commitmentsContent.map(
@@ -111,14 +116,16 @@ const About = () => {
               },
             )}
             <ButtonContainer>
-              {/* fixme: find the right urls for this section */}
               <Button to="/data-api#faq" cta="See our data sources" />
-              <Button to="/data-api#faq" cta="Download our data" />
+              <Button
+                href="https://apidocs.covidactnow.org/#register"
+                cta="Download our data"
+              />
             </ButtonContainer>
           </SectionContent>
         </HashWrapper>
         <HashWrapper id="impact">
-          <AboutHeading1>{aboutContent.impactHeader}</AboutHeading1>
+          <AboutHeading2>{aboutContent.impactHeader}</AboutHeading2>
           <SectionContent>
             <MarkdownContent source={aboutContent.impactContent} />
           </SectionContent>
@@ -127,22 +134,22 @@ const About = () => {
           </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="partners">
-          <AboutHeading1>{aboutContent.partnersHeader}</AboutHeading1>
+          <AboutHeading2>{aboutContent.partnersHeader}</AboutHeading2>
           <SectionContent>
             <ExpandableContainer
               collapsedHeightMobile={275}
               collapsedHeightDesktop={565}
               tabTextCollapsed={<>More</>}
               tabTextExpanded={<>Less</>}
-              trackingLabel="Partners"
-              trackingCategory={EventCategory.NONE}
+              trackingLabel="Partners logos"
+              trackingCategory={EventCategory.ABOUT}
             >
               <PartnersSectionWrapper>
                 {aboutContent.partnersContent.map(
                   (section: PartnersContent, idx: number) => {
                     return (
                       <Fragment key={`Partner-section-${idx}`}>
-                        <AboutHeading2>{section.header}</AboutHeading2>
+                        <AboutHeading3>{section.header}</AboutHeading3>
                         <StyledGridContainer
                           container
                           spacing={1}
