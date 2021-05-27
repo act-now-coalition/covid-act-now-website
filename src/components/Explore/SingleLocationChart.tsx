@@ -31,8 +31,8 @@ const SingleSeriesTooltip: React.FC<{
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-  yTickFormat: (val: number) => string;
-}> = ({ series, left, top, date, subtext, yTickFormat }) => {
+  yTooltipFormat: (val: number) => string;
+}> = ({ series, left, top, date, subtext, yTooltipFormat }) => {
   const point = findPointByDate(series.data, date);
 
   return point ? (
@@ -44,7 +44,7 @@ const SingleSeriesTooltip: React.FC<{
     >
       <Styles.TooltipSubtitle>{series.tooltipLabel}</Styles.TooltipSubtitle>
       <Styles.TooltipMetric>
-        {isNumber(point.y) ? yTickFormat(point.y) : '-'}
+        {isNumber(point.y) ? yTooltipFormat(point.y) : '-'}
       </Styles.TooltipMetric>
       <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
     </Tooltip>
@@ -57,8 +57,8 @@ const SingleLocationTooltip: React.FC<{
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-  yTickFormat: (val: number) => string;
-}> = ({ seriesList, left, top, date, subtext, yTickFormat }) => {
+  yTooltipFormat: (val: number) => string;
+}> = ({ seriesList, left, top, date, subtext, yTooltipFormat }) => {
   if (seriesList.length === 1) {
     return (
       <SingleSeriesTooltip
@@ -67,7 +67,7 @@ const SingleLocationTooltip: React.FC<{
         left={left}
         top={top}
         subtext={subtext}
-        yTickFormat={yTickFormat}
+        yTooltipFormat={yTooltipFormat}
       />
     );
   }
@@ -143,6 +143,7 @@ const SingleLocationChart: React.FC<{
   barOpacityHover?: number;
   dateRange: Date[];
   yTickFormat: (val: number) => string;
+  yTooltipFormat: (val: number) => string;
 }> = ({
   width,
   height,
@@ -157,6 +158,7 @@ const SingleLocationChart: React.FC<{
   barOpacityHover,
   dateRange,
   yTickFormat,
+  yTooltipFormat,
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
@@ -257,7 +259,7 @@ const SingleLocationChart: React.FC<{
             date={tooltipData.date}
             seriesList={seriesList}
             subtext={tooltipSubtext}
-            yTickFormat={yTickFormat}
+            yTooltipFormat={yTooltipFormat}
           />
           <DateMarker
             left={dateScale(tooltipData.date) + marginLeft}

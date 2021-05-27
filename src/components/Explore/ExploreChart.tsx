@@ -19,6 +19,7 @@ const ExploreChart: React.FC<{
   isMobileXs?: boolean;
   dateRange: Date[];
   yTickFormat: (val: number) => string;
+  yTooltipFormat: (val: number) => string;
 }> = ({
   hasMultipleLocations,
   barOpacity,

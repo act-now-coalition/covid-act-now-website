@@ -12,10 +12,10 @@ import {
 } from './ChartExportImage.style';
 import LogoUrlLight from 'assets/images/logoUrlLight';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { formatUtcDate, formatPercent, formatDecimal } from 'common/utils';
+import { formatUtcDate } from 'common/utils';
 import { ExploreChart } from 'components/Explore';
 import { SCREENSHOT_CLASS } from 'components/Screenshot';
-import { Series, DataMeasure } from 'components/Explore/interfaces';
+import { Series } from 'components/Explore/interfaces';
 import {
   getChartSeries,
   getLocationNames,
@@ -23,6 +23,7 @@ import {
   Period,
   getMetricDataMeasure,
   getDateRange,
+  getYFormat,
 } from 'components/Explore/utils';
 import regions, { Region } from 'common/regions';
 
@@ -59,10 +60,8 @@ const ExploreChartExportImage = ({
   const url = `https://covidactnow.org/`;
 
   const dataMeasure = getMetricDataMeasure(currentMetric);
-  const yTickFormat = (value: number) =>
-    dataMeasure === DataMeasure.PERCENT
-      ? formatPercent(value, 1).toString()
-      : formatDecimal(value, 1).toString();
+  const yTickFormat = getYFormat(dataMeasure, 0);
+  const yTooltipFormat = getYFormat(dataMeasure, 1);
 
   const dateRange = getDateRange(Period.ALL);
 
@@ -92,6 +91,7 @@ const ExploreChartExportImage = ({
                 hasMultipleLocations={selectedLocations.length > 1}
                 dateRange={dateRange}
                 yTickFormat={yTickFormat}
+                yTooltipFormat={yTooltipFormat}
               />
             )}
           </ParentSize>

@@ -20,14 +20,13 @@ import regions, {
   USA,
 } from 'common/regions';
 import { fail } from 'assert';
-import { pluralize } from 'common/utils';
+import { pluralize, formatPercent, formatDecimal } from 'common/utils';
 import {
   TimeUnit,
   DateFormat,
   formatDateTime,
   getTimeDiff,
 } from 'common/utils/time-utils';
-import { formatDecimal } from 'common/utils/index';
 import { subtractTime } from 'common/utils/time-utils';
 
 export enum Period {
@@ -586,3 +585,12 @@ export function brightenColor(colorCode: string, amount = 1): string {
   const colorObject = color(colorCode);
   return colorObject ? colorObject.brighter(amount).hex() : colorCode;
 }
+
+export const getYFormat = (dataMeasure: DataMeasure, places: number) => {
+  const yFormat = (value: number) =>
+    dataMeasure === DataMeasure.PERCENT
+      ? formatPercent(value, places).toString()
+      : formatDecimal(value, places).toString();
+
+  return yFormat;
+};

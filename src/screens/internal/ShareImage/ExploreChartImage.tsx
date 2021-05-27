@@ -5,7 +5,6 @@ import LogoDark from 'assets/images/logoDark';
 import { chartDarkMode } from 'assets/theme/palette';
 import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ExploreChart } from 'components/Explore';
-import { formatPercent, formatDecimal } from 'common/utils';
 import {
   ExploreChartWrapper,
   Wrapper,
@@ -21,8 +20,9 @@ import {
   Period,
   getMetricDataMeasure,
   getDateRange,
+  getYFormat,
 } from 'components/Explore/utils';
-import { Series, DataMeasure } from 'components/Explore/interfaces';
+import { Series } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
@@ -46,10 +46,8 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   }, [selectedLocations, currentMetric, normalizeData]);
 
   const dataMeasure = getMetricDataMeasure(currentMetric);
-  const yTickFormat = (value: number) =>
-    dataMeasure === DataMeasure.PERCENT
-      ? formatPercent(value, 1).toString()
-      : formatDecimal(value, 1).toString();
+  const yTickFormat = getYFormat(dataMeasure, 0);
+  const yTooltipFormat = getYFormat(dataMeasure, 1);
 
   const dateRange = getDateRange(Period.ALL);
 
@@ -84,6 +82,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   hasMultipleLocations={selectedLocations.length > 1}
                   dateRange={dateRange}
                   yTickFormat={yTickFormat}
+                  yTooltipFormat={yTooltipFormat}
                 />
               )}
             </ParentSize>

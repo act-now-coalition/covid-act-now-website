@@ -9,14 +9,13 @@ import { useLocation, useParams } from 'react-router-dom';
 import some from 'lodash/some';
 import uniq from 'lodash/uniq';
 import max from 'lodash/max';
-import { formatPercent, formatDecimal } from 'common/utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
-import { ExploreMetric, Series, DataMeasure } from './interfaces';
+import { ExploreMetric, Series } from './interfaces';
 import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
@@ -37,6 +36,7 @@ import {
   ORIGINAL_EXPLORE_METRICS,
   getMetricDataMeasure,
   getDateRange,
+  getYFormat,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -134,10 +134,8 @@ const ExploreCopy: React.FunctionComponent<{
     const currentMetricName = getMetricName(currentMetric);
 
     const dataMeasure = getMetricDataMeasure(currentMetric);
-    const yTickFormat = (value: number) =>
-      dataMeasure === DataMeasure.PERCENT
-        ? formatPercent(value, 1).toString()
-        : formatDecimal(value, 1).toString();
+    const yTickFormat = getYFormat(dataMeasure, 0);
+    const yTooltipFormat = getYFormat(dataMeasure, 1);
 
     const initialLocations = useMemo(
       () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
@@ -314,6 +312,7 @@ const ExploreCopy: React.FunctionComponent<{
                     marginRight={marginRight}
                     dateRange={dateRange}
                     yTickFormat={yTickFormat}
+                    yTooltipFormat={yTooltipFormat}
                   />
                 ) : (
                   <div style={{ height: 400 }} />
