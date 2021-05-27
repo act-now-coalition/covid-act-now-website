@@ -97,7 +97,7 @@ export const EXPLORE_METRICS = [
   ExploreMetric.POSITIVITY_RATE,
 ];
 
-export const metricsToNormalize = [
+export const ORIGINAL_EXPLORE_METRICS = [
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,

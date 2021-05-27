@@ -14,7 +14,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
 import ShareImageButtonGroup from 'components/ShareButtons';
 import ExploreChart from './ExploreChart';
-// import Legend from '../Legend';
+import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
 import LocationSelector from './LocationSelector';
 import {
@@ -33,7 +33,7 @@ import {
   Period,
   periodMap,
   getAllPeriodLabels,
-  metricsToNormalize,
+  ORIGINAL_EXPLORE_METRICS,
   getMetricDataMeasure,
   getDateRange,
 } from './utils';
@@ -150,13 +150,13 @@ const ExploreCopy: React.FunctionComponent<{
 
     const [normalizeData, setNormalizeData] = useState(
       selectedLocations.length > 1 &&
-        metricsToNormalize.includes(currentMetric),
+        ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
     );
 
     useEffect(() => {
       setNormalizeData(
         selectedLocations.length > 1 &&
-          metricsToNormalize.includes(currentMetric),
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
       );
     }, [currentMetric, selectedLocations]);
 
@@ -206,9 +206,9 @@ const ExploreCopy: React.FunctionComponent<{
       setCurrentMetric(defaultMetric);
       setNormalizeData(
         initialLocations.length > 1 &&
-          metricsToNormalize.includes(currentMetric),
+          ORIGINAL_EXPLORE_METRICS.includes(defaultMetric),
       );
-    }, [initialLocations, defaultMetric, currentMetric]);
+    }, [initialLocations, defaultMetric]);
 
     const [chartSeries, setChartSeries] = useState<Series[]>([]);
     useEffect(() => {
@@ -259,6 +259,9 @@ const ExploreCopy: React.FunctionComponent<{
       ? `Multiple Locations`
       : 'Single Location';
     const numLocations = selectedLocations.length;
+
+    const showLegend =
+      ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
 
     return (
       <div ref={exploreRef}>
@@ -329,6 +332,7 @@ const ExploreCopy: React.FunctionComponent<{
           </Styles.EmptyPanel>
         )}
         <div style={{ paddingTop: '1rem' }}>
+          {showLegend && <Legend seriesList={chartSeries} />}
           <Styles.ShareBlock>
             <ShareImageButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
