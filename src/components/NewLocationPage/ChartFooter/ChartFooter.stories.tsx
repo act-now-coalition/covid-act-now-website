@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import {
   Footer,
-  FooterSection,
-  SingleButtonWrapper,
   ButtonContainer,
   LegendContainer,
   LegendContent,
@@ -38,13 +36,9 @@ const legendIcon = (
 export const ChartFooterButtonOnly = () => {
   return (
     <Footer>
-      <FooterSection>
-        <SingleButtonWrapper>
-          <ButtonContainer>
-            <ShareButton onClickShare={() => {}} />
-          </ButtonContainer>
-        </SingleButtonWrapper>
-      </FooterSection>
+      <ButtonContainer>
+        <ShareButton onClickShare={() => {}} />
+      </ButtonContainer>
     </Footer>
   );
 };
@@ -52,22 +46,13 @@ export const ChartFooterButtonOnly = () => {
 export const ChartFooterWithSourceText = () => {
   return (
     <Footer>
-      <FooterSection>
-        <LegendContainer>
-          <LegendContent>
-            Source:&nbsp;
-            <ExternalLink
-              href="https://www.cdc.gov/"
-              style={{ color: 'inherit' }}
-            >
-              CDC
-            </ExternalLink>
-          </LegendContent>
-        </LegendContainer>
-        <ButtonContainer>
-          <ShareButton onClickShare={() => {}} />
-        </ButtonContainer>
-      </FooterSection>
+      Source:&nbsp;
+      <ExternalLink href="https://www.cdc.gov/" style={{ color: 'inherit' }}>
+        CDC
+      </ExternalLink>
+      <ButtonContainer>
+        <ShareButton onClickShare={() => {}} />
+      </ButtonContainer>
     </Footer>
   );
 };
@@ -76,25 +61,19 @@ export const ChartFooterWithAboutText = () => {
   const [openModal, setOpenModal] = useState(false);
   return (
     <Footer>
-      <FooterSection>
-        <LegendContainer>
-          <LegendContent>
-            <ModalButton onClick={() => setOpenModal(true)}>
-              <AboutText>About this data</AboutText>
-            </ModalButton>
-            <NewDialog
-              open={openModal}
-              closeDialog={() => setOpenModal(false)}
-              header="Header text"
-              body="Body text"
-              links={[]}
-            />
-          </LegendContent>
-        </LegendContainer>
-        <ButtonContainer>
-          <ShareButton onClickShare={() => {}} />
-        </ButtonContainer>
-      </FooterSection>
+      <ModalButton onClick={() => setOpenModal(true)}>
+        <AboutText>About this data</AboutText>
+      </ModalButton>
+      <NewDialog
+        open={openModal}
+        closeDialog={() => setOpenModal(false)}
+        header="Header text"
+        body="Body text"
+        links={[]}
+      />
+      <ButtonContainer>
+        <ShareButton onClickShare={() => {}} />
+      </ButtonContainer>
     </Footer>
   );
 };
@@ -102,30 +81,28 @@ export const ChartFooterWithAboutText = () => {
 export const ChartFooterWithLegend = () => {
   return (
     <Footer>
-      <FooterSection>
-        <LegendContainer>
-          <LegendContent>
-            <IconWrapper>{legendIcon}</IconWrapper>
-            Legend Copy
-          </LegendContent>
-          <LegendContent>
-            <IconWrapper>{legendIcon}</IconWrapper>
-            Copy to explain bars. This copy may be long.
-          </LegendContent>
-        </LegendContainer>
-        <ButtonContainer>
-          <ShareButton onClickShare={() => {}} />
-        </ButtonContainer>
-      </FooterSection>
+      <LegendContainer>
+        <LegendContent>
+          <IconWrapper>{legendIcon}</IconWrapper>
+          Legend Copy
+        </LegendContent>
+        <LegendContent>
+          <IconWrapper>{legendIcon}</IconWrapper>
+          Copy to explain bars. This copy may be long.
+        </LegendContent>
+      </LegendContainer>
+      <ButtonContainer>
+        <ShareButton onClickShare={() => {}} />
+      </ButtonContainer>
     </Footer>
   );
 };
 
-export const ChartFooterWithTextAndLegend = () => {
+export const ChartFooterWithTextAndAboutSection = () => {
   const isMobile = useBreakpoint(600);
   return (
-    <Footer>
-      <FooterSection>
+    <>
+      <Footer>
         <FooterText>
           {footerText}&nbsp;
           {!isMobile && <AboutText>About this data</AboutText>}
@@ -135,19 +112,15 @@ export const ChartFooterWithTextAndLegend = () => {
             <ShareButton onClickShare={() => {}} />
           </ButtonContainer>
         )}
-      </FooterSection>
+      </Footer>
       {isMobile && (
-        <FooterSection>
-          <LegendContainer>
-            <LegendContent>
-              <AboutText>About this data</AboutText>
-            </LegendContent>
-          </LegendContainer>
+        <Footer>
+          <AboutText>About this data</AboutText>
           <ButtonContainer>
             <ShareButton onClickShare={() => {}} />
           </ButtonContainer>
-        </FooterSection>
+        </Footer>
       )}
-    </Footer>
+    </>
   );
 };
