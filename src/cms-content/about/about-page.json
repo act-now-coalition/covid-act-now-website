@@ -9,54 +9,94 @@
   "missionContent": "We help people make informed decisions by providing **timely and accurate data** about COVID in the United States.\n\n We are committed to:",
   "partnersContent": [
     {
-      "copy": "Georgetown University Center for Global Health Science and Security, Stanford University Clinical Excellence Research Center, and Harvard Global Health Institute",
+      "copy": "...",
       "logos": [
         {
-          "image": "/images_cms/georgetown-logo.png",
+          "image": "/images_cms/about-notable-users-gumc.png",
           "url": "https://ghss.georgetown.edu/",
           "altText": "Georgetown University logo"
         },
         {
           "altText": "Stanford Medicine Clinical Excellence Research Center logo",
           "url": "http://med.stanford.edu/cerc.html",
-          "image": "/images_cms/cerc-1.png"
+          "image": "/images_cms/about-notable-users-stanford-medicine.png"
         },
         {
           "url": "https://globalhealth.harvard.edu/",
           "altText": "Harvard Global Health Institute logo",
-          "image": "/images_cms/harvard-logo.png"
+          "image": "/images_cms/about-notable-users-harvard.png"
         }
       ],
       "header": "Institutional partners"
     },
     {
-      "copy": "We are funded by Schmidt Futures and the Patrick J. McGovern Foundation, as well as other philanthropists and small donations.",
+      "copy": "...",
       "logos": [
         {
           "url": "https://schmidtfutures.com",
           "altText": "Schmidt Futures logo",
-          "image": "/images_cms/schmidt-futues.jpeg"
+          "image": "/images_cms/about-notable-users-schmidt-futures.png"
         },
         {
           "altText": "Patrick J. McGovern Foundation Logo",
           "url": "https://www.mcgovern.org/",
-          "image": "/images_cms/patrick-j-mcgovern-foundation-logo.png"
+          "image": "/images_cms/about-notable-users-pjmf.png"
         }
       ],
       "header": "Funders"
     },
     {
-      "copy": "Our data comes from official sources including the U.S. Department of Health and Human Services, the Centers for Disease Control and Prevention, The New York Times, and official state and county dashboards. Our Covid-19 Community Vulnerability Index comes from Surgo Ventures.",
+      "copy": "...",
       "logos": [
         {
-          "altText": "Surgo Ventures Logo",
-          "image": "/images_cms/screen-shot-2021-03-03-at-3.30.40-pm.png",
-          "url": "https://precisionforcovid.org/"
+          "altText": "IBM",
+          "image": "/images_cms/about-notable-users-ibm.png",
+          "url": "https://ibm.com"
+        },
+        {
+          "altText": "General Mills",
+          "image": "/images_cms/about-notable-users-general-mills.png",
+          "url": "https://www.generalmills.com"
+        },
+        {
+          "altText": "Wayfair",
+          "image": "/images_cms/about-notable-users-wayfair.png",
+          "url": "https://www.wayfair.com"
+        },
+        {
+          "altText": "Unilever",
+          "image": "/images_cms/about-notable-users-unilever.png",
+          "url": "https://www.unilever.com/"
+        },
+        {
+          "altText": "Bayer",
+          "image": "/images_cms/about-notable-users-bayer.png",
+          "url": "https://www.bayer.com/"
+        },
+        {
+          "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
+          "altText": "Washington, DC Department of Health Logo",
+          "url": "https://dchealth.dc.gov/"
+        },
+        {
+          "image": "/images_cms/steuben_county-1-.jpg",
+          "altText": "Steuben County, New York Logo",
+          "url": "https://www.steubencony.org/"
+        },
+        {
+          "image": "/images_cms/hardy_county-1-.jpg",
+          "altText": "Hardy County Sheriff's Office Logo",
+          "url": "http://hardycounty.com/law-enforcement"
         },
         {
           "image": "/images_cms/anchorage-1-.png",
           "altText": "Municipality of Anchorage Logo",
           "url": "https://www.muni.org/pages/default.aspx"
+        },
+        {
+          "altText": "Citizen",
+          "image": "/images_cms/about-notable-users-citizen.png",
+          "url": "https://www.citizen.com"
         },
         {
           "image": "/images_cms/cdph-1-.png",
@@ -67,21 +107,6 @@
           "image": "/images_cms/new-orleans-mayor-s-office.png",
           "altText": "New Orleans Mayor's Office Logo",
           "url": "https://www.nola.gov/mayor/"
-        },
-        {
-          "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
-          "altText": "Washington, DC Department of Health Logo",
-          "url": "https://dchealth.dc.gov/"
-        },
-        {
-          "image": "/images_cms/hardy_county-1-.jpg",
-          "altText": "Hardy County Sheriff's Office Logo",
-          "url": "http://hardycounty.com/law-enforcement"
-        },
-        {
-          "image": "/images_cms/steuben_county-1-.jpg",
-          "altText": "Steuben County, New York Logo",
-          "url": "https://www.steubencony.org/"
         },
         {
           "image": "/images_cms/civil-air-patrol-logo.jpg",

@@ -5,7 +5,7 @@ import { EventCategory } from 'components/Analytics';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
 import ExpandableContainer from 'components/ExpandableContainer';
-import { LogoGridItem } from 'components/LogoGrid/LogoGrid';
+import { LogoElement } from 'components/LogoGrid/LogoGrid';
 import {
   AboutHeading1,
   AboutHeading2,
@@ -16,6 +16,8 @@ import {
   CommitmentItem,
   HashWrapper,
   PartnersSectionWrapper,
+  PartnersContainer,
+  LogoWrapper,
   SectionContent,
 } from './About.style';
 import aboutContent, {
@@ -27,7 +29,6 @@ import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { TocItem } from 'cms-content/utils';
 import TeamSection from './Team/TeamSection';
-import { StyledGridContainer } from './About.style';
 
 export const sidebarItems: TocItem[] = [
   {
@@ -150,21 +151,17 @@ const About = () => {
                     return (
                       <Fragment key={`Partner-section-${idx}`}>
                         <AboutHeading3>{section.header}</AboutHeading3>
-                        <StyledGridContainer
-                          container
-                          spacing={1}
-                          alignItems="center"
-                          justify="center"
-                        >
+                        <PartnersContainer>
                           {section.logos.map((logo: LogoItem) => (
-                            <LogoGridItem
-                              image={logo.image}
-                              url={logo.url}
-                              altText={logo.altText}
-                              key={logo.altText}
-                            />
+                            <LogoWrapper key={logo.altText}>
+                              <LogoElement
+                                image={logo.image}
+                                url={logo.url}
+                                altText={logo.altText}
+                              />
+                            </LogoWrapper>
                           ))}
-                        </StyledGridContainer>
+                        </PartnersContainer>
                       </Fragment>
                     );
                   },

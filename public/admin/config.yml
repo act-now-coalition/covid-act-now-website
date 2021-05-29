@@ -79,7 +79,7 @@ collections:
             name: 'partnersContent'
             widget: 'list'
             fields:
-              - { label: 'Section copy', name: 'copy', widget: 'markdown' }
+              - { label: 'Header', name: 'header', widget: 'string' }
               - label: 'Logos'
                 name: 'logos'
                 widget: 'list'
@@ -105,43 +105,6 @@ collections:
           - {
               label: 'Contact us: Content',
               name: 'contactUsContent',
-              widget: 'markdown',
-            }
-          - { label: 'Page Header (deprecated)', name: 'pageHeader', widget: 'string' }
-          - { label: 'Intro: Header (deprecated)', name: 'introHeader', widget: 'string' }
-          - {
-              label: 'Intro: Content (deprecated)',
-              name: 'introContent',
-              widget: 'markdown',
-            }
-          - {
-              label: 'Who we serve: Header (deprecated)',
-              name: 'whoWeServeHeader',
-              widget: 'string',
-            }
-          - {
-              label: 'Who we serve: Content A (deprecated)',
-              name: 'whoWeServeContentA',
-              widget: 'markdown',
-              hint: Copy above logos,
-            }
-          - label: 'Government logos (deprecated)'
-            name: 'governmentLogos'
-            widget: 'list'
-            fields:
-              - { label: 'Alt text', name: 'altText', widget: 'string' }
-              - { label: 'Image', name: 'image', widget: 'image' }
-              - { label: 'Url', name: 'url', widget: 'string', required: false }
-          - {
-              label: 'Who we serve: Content B (deprecated)',
-              name: 'whoWeServeContentB',
-              widget: 'markdown',
-              hint: Copy below logos,
-            }
-          - { label: 'Join us: Header (deprecated)', name: 'joinUsHeader', widget: 'string' }
-          - {
-              label: 'Join us: Content (deprecated)',
-              name: 'joinUsContent',
               widget: 'markdown',
             }
   - label: Team directory
