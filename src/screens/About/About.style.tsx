@@ -34,6 +34,21 @@ export const StyledGridContainer = styled(Grid)`
   margin: 0.5rem 0 1.25rem;
 `;
 
+export const PartnersContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0rem 3rem;
+  gap: 3rem;
+  flex-wrap: wrap;
+`;
+
+// set a max width so that if a row has two items they won't grow to fill
+// the remaining space, instead, they'll be centered via justify-content
+export const LogoWrapper = styled.div`
+  max-width: 26%;
+`;
+
 export const CommitmentItem = styled.div`
   display: flex;
   align-items: center;
