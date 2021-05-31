@@ -18,8 +18,12 @@ import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { MarkdownContent } from 'components/Markdown';
-import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
 import { SectionHeader } from 'components/SharedComponents';
+import {
+  FooterWrapper,
+  Footer,
+  ButtonContainer,
+} from 'components/NewLocationPage/ChartFooter/ChartFooter.style';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
@@ -63,15 +67,19 @@ function ChartBlock(props: {
             projections={projections}
             height={chartHeight}
           />
-          <LocationPageSectionFooter>
-            <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
-            <ShareButtons
-              chartIdentifier={metric}
-              region={region}
-              stats={stats}
-              showEmbedButton={false}
-            />
-          </LocationPageSectionFooter>
+          <FooterWrapper>
+            <Footer>
+              <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
+              <ButtonContainer>
+                <ShareButtons
+                  chartIdentifier={metric}
+                  region={region}
+                  stats={stats}
+                  showEmbedButton={false}
+                />
+              </ButtonContainer>
+            </Footer>
+          </FooterWrapper>
         </>
       )}
     </>
