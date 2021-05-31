@@ -46,6 +46,10 @@ import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import NationalText from 'components/NationalText';
 import { SectionHeader } from 'components/SharedComponents';
+import {
+  Footer,
+  ButtonContainer,
+} from 'components/NewLocationPage/ChartFooter/ChartFooter.style';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -354,8 +358,8 @@ const Explore: React.FunctionComponent<{
             <ScreenshotReady />
           </Styles.EmptyPanel>
         )}
-        <div style={{ paddingTop: '1rem' }}>
-          <Styles.ShareBlock>
+        <Footer>
+          <ButtonContainer>
             <ShareButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
@@ -388,8 +392,8 @@ const Explore: React.FunctionComponent<{
                 trackShare(`Twitter: ${trackingLabel}`, numLocations)
               }
             />
-          </Styles.ShareBlock>
-        </div>
+          </ButtonContainer>
+        </Footer>
       </div>
     );
   },

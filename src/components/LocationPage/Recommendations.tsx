@@ -3,8 +3,6 @@ import { mainContent } from 'cms-content/recommendations';
 import Recommend from 'components/Recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
-import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
-import { DisclaimerWrapper } from 'components/LocationPage/ChartsHolder.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
 import { Projections } from 'common/models/Projections';
@@ -12,6 +10,11 @@ import { getRecommendationsShareUrl } from 'common/urls';
 import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import { Region } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
+import {
+  FooterWrapper,
+  Footer,
+  ButtonContainer,
+} from 'components/NewLocationPage/ChartFooter/ChartFooter.style';
 
 interface RecommendationsProps {
   projections: Projections;
@@ -60,24 +63,26 @@ const Recommendations = ({
           recommendationsRef={recommendationsRef}
         />
       </ExpandableContainer>
-      <LocationPageSectionFooter>
-        <DisclaimerWrapper>
-          Source:{' '}
+      <FooterWrapper>
+        <Footer>
+          Source:&nbsp;
           <ExternalLink
-            style={{ color: 'inherit' }}
             href="https://www.cdc.gov/"
+            style={{ color: 'inherit' }}
             onClick={trackSourceClick}
           >
             CDC
           </ExternalLink>
-        </DisclaimerWrapper>
-        <ShareButtons
-          eventCategory={EventCategory.RECOMMENDATIONS}
-          shareUrl={recommendsShareUrl}
-          shareQuote={recommendsShareQuote}
-          region={region}
-        />
-      </LocationPageSectionFooter>
+          <ButtonContainer>
+            <ShareButtons
+              eventCategory={EventCategory.RECOMMENDATIONS}
+              shareUrl={recommendsShareUrl}
+              shareQuote={recommendsShareQuote}
+              region={region}
+            />
+          </ButtonContainer>
+        </Footer>
+      </FooterWrapper>
     </>
   );
 };

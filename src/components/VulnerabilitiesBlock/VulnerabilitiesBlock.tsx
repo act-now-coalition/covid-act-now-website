@@ -6,11 +6,16 @@ import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ShareButtons from '../SharedComponents/ShareButtons';
-import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
 import NewDialog from 'components/NewDialog/NewDialog';
 import { vulnerabilitiesModal } from 'cms-content/modals';
-import { ModalOpenButton } from './VulnerabilitiesBlock.style';
 import { SectionHeader } from 'components/SharedComponents';
+import {
+  FooterWrapper,
+  Footer,
+  ModalButton,
+  AboutText,
+  ButtonContainer,
+} from 'components/NewLocationPage/ChartFooter/ChartFooter.style';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
@@ -62,24 +67,28 @@ const VulnerabilitiesBlock: React.FC<{
           percentPopulationVulnerable={percentPopulationVulnerable}
         />
       </ExpandableContainer>
-      <LocationPageSectionFooter>
-        <ModalOpenButton onClick={modalOpenOnClick}>
-          About this data
-        </ModalOpenButton>
-        <NewDialog
-          open={dialogOpen}
-          closeDialog={closeDialog}
-          header={header}
-          body={body}
-          links={links}
-        />
-        <ShareButtons
-          eventCategory={EventCategory.VULNERABILITIES}
-          shareUrl={shareUrl}
-          shareQuote={shareQuote}
-          region={region}
-        />
-      </LocationPageSectionFooter>
+      <FooterWrapper>
+        <Footer>
+          <ModalButton onClick={modalOpenOnClick}>
+            <AboutText>About this data</AboutText>
+          </ModalButton>
+          <NewDialog
+            open={dialogOpen}
+            closeDialog={closeDialog}
+            header={header}
+            body={body}
+            links={links}
+          />
+          <ButtonContainer>
+            <ShareButtons
+              eventCategory={EventCategory.VULNERABILITIES}
+              shareUrl={shareUrl}
+              shareQuote={shareQuote}
+              region={region}
+            />
+          </ButtonContainer>
+        </Footer>
+      </FooterWrapper>
     </>
   );
 };

@@ -3,6 +3,10 @@ import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { TooltipAnchorText } from 'components/InfoTooltip/Tooltip.style';
 
+export const FooterWrapper = styled.div`
+  margin-top: 1.5rem;
+`;
+
 export const Footer = styled.div`
   position: relative;
   display: flex;
