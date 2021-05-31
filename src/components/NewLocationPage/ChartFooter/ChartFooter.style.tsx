@@ -10,8 +10,9 @@ export const Footer = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
-export const FooterText = styled.p`
+export const FooterText = styled.div`
   margin: 0 0.5rem 0.75rem 0;
+  max-width: 42.5rem;
 `;
 
 export const ButtonContainer = styled.div`
@@ -45,6 +46,7 @@ export const IconWrapper = styled.div`
 `;
 
 export const AboutText = styled.span`
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   line-height: 2.25rem;
   text-decoration: underline;
   text-decoration-style: dotted;
