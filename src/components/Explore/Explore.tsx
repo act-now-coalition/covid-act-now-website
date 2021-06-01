@@ -37,6 +37,7 @@ import {
   getMetricDataMeasure,
   getDateRange,
   getYFormat,
+  getYAxisDecimalPlaces,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -134,7 +135,8 @@ const ExploreCopy: React.FunctionComponent<{
     const currentMetricName = getMetricName(currentMetric);
 
     const dataMeasure = getMetricDataMeasure(currentMetric);
-    const yTickFormat = getYFormat(dataMeasure, 0);
+    const yAxisDecimalPlaces = getYAxisDecimalPlaces(currentMetric);
+    const yTickFormat = getYFormat(dataMeasure, yAxisDecimalPlaces);
     const yTooltipFormat = getYFormat(dataMeasure, 1);
 
     const initialLocations = useMemo(

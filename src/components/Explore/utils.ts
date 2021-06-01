@@ -135,6 +135,15 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
   }
 }
 
+export const getYFormat = (dataMeasure: DataMeasure, places: number) => {
+  const yFormat = (value: number) =>
+    dataMeasure === DataMeasure.PERCENT
+      ? formatPercent(value, places).toString()
+      : formatDecimal(value, places).toString();
+
+  return yFormat;
+};
+
 interface SerieDescription {
   label: string;
   tooltipLabel: string;
@@ -148,6 +157,7 @@ interface ExploreMetricDescription {
   chartId: string;
   seriesList: SerieDescription[];
   dataMeasure: DataMeasure;
+  yAxisDecimalPlaces: number;
 }
 
 export const exploreMetricData: {
@@ -158,6 +168,7 @@ export const exploreMetricData: {
     name: 'Cases',
     chartId: 'cases',
     dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Cases',
@@ -178,6 +189,7 @@ export const exploreMetricData: {
     name: 'Deaths',
     chartId: 'deaths',
     dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Deaths',
@@ -198,6 +210,7 @@ export const exploreMetricData: {
     name: 'Current COVID Hospitalizations',
     chartId: 'hospitalizations',
     dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Current COVID Hospitalizations',
@@ -218,6 +231,7 @@ export const exploreMetricData: {
     name: 'Current COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
     dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Current COVID ICU Hospitalizations',
@@ -238,6 +252,7 @@ export const exploreMetricData: {
     name: 'Percent Vaccinated (1+ dose)',
     chartId: 'vaccinations_first_dose',
     dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Percent Vaccinated (1+ dose)',
@@ -252,6 +267,7 @@ export const exploreMetricData: {
     name: 'Percent Vaccinated (fully)',
     chartId: 'vaccinations_completed',
     dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Percent Vaccinated (fully)',
@@ -266,6 +282,7 @@ export const exploreMetricData: {
     name: 'ICU capacity used',
     chartId: 'icu_capacity_used',
     dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'ICU capacity used',
@@ -280,6 +297,7 @@ export const exploreMetricData: {
     name: 'Positive test rate',
     chartId: 'positivity_rate',
     dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Positive test rate',
@@ -367,6 +385,10 @@ export function getTitle(metric: ExploreMetric) {
 
 export function getMetricDataMeasure(metric: ExploreMetric) {
   return exploreMetricData[metric].dataMeasure;
+}
+
+export function getYAxisDecimalPlaces(metric: ExploreMetric) {
+  return exploreMetricData[metric].yAxisDecimalPlaces;
 }
 
 export function getMetricName(metric: ExploreMetric) {
@@ -575,12 +597,3 @@ export function brightenColor(colorCode: string, amount = 1): string {
   const colorObject = color(colorCode);
   return colorObject ? colorObject.brighter(amount).hex() : colorCode;
 }
-
-export const getYFormat = (dataMeasure: DataMeasure, places: number) => {
-  const yFormat = (value: number) =>
-    dataMeasure === DataMeasure.PERCENT
-      ? formatPercent(value, places).toString()
-      : formatDecimal(value, places).toString();
-
-  return yFormat;
-};
