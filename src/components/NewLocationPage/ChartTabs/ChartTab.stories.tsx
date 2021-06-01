@@ -13,3 +13,15 @@ export const CaseDensityTab = () => {
 export const ChartGrowthRateTab = () => {
   return <ChartTab metric={Metric.CASE_GROWTH_RATE} value={0.25} />;
 };
+
+export const HospitalUsageTab = () => {
+  return <ChartTab metric={Metric.HOSPITAL_USAGE} value={0.5} />;
+};
+
+export const PositiveTestTab = () => {
+  return <ChartTab metric={Metric.POSITIVE_TESTS} value={0.75} />;
+};
+
+export const VaccinationTab = () => {
+  return <ChartTab metric={Metric.VACCINATIONS} value={1} />;
+};

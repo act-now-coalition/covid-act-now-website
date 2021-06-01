@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const TabsContainer = styled.div`
   display: flex;
@@ -9,12 +10,14 @@ export const TabsContainer = styled.div`
 export const Tab = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 8rem;
+  max-width: 10.5rem;
 `;
 
 // TODO: Figure out transforming color to black on hover or click?
 export const TabTitle = styled.div`
   text-transform: uppercase;
+  font-size: 0.8rem;
+  line-height: 1;
   color: ${COLOR_MAP.GREY_4};
   margin-bottom: 0.5rem;
 `;
@@ -26,6 +29,12 @@ export const TabContent = styled.div`
 `;
 
 export const MetricSubLabel = styled.div`
+  font-size: 0.8rem;
   text-transform: uppercase;
   color: ${COLOR_MAP.GREY_4};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    color: ${COLOR_MAP.GREY_3};
+    padding: 0.5rem 0 0 0.5rem;
+  }
 `;
