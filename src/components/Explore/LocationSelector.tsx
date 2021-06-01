@@ -9,7 +9,7 @@ import AutocompleteRegions, {
 import MenuButton from './Dropdown/MenuButton';
 import { LockBodyScroll } from 'components/Dialog';
 import { FilledButton } from 'components/ButtonSystem';
-import { EventCategory } from 'components/Analytics';
+import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 const LocationSelector: React.FC<{
   regions: Region[];
@@ -26,7 +26,17 @@ const LocationSelector: React.FC<{
     onChangeSelectedRegions(newRegions);
   };
 
-  const onClickButton = () => setModalOpen(!modalOpen);
+  const onClickButton = () => {
+    if (!modalOpen) {
+      trackEvent(
+        EventCategory.EXPLORE,
+        EventAction.OPEN_MODAL,
+        'Trends location selector modal',
+      );
+    }
+    setModalOpen(!modalOpen);
+  };
+
   const closeModal = () => setModalOpen(false);
 
   const regionNames = selectedRegions.map(getLocationLabel).join(', ');
