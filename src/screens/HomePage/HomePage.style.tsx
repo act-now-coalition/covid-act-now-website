@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
-import palette from 'assets/theme/palette';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
 
@@ -18,9 +17,6 @@ export const Content = styled.div`
 
 export const Section = styled.div`
   margin: 3.5rem 1rem;
-  @media (min-width: ${mobileBreakpoint}) {
-    margin: 3.5rem 0;
-  }
 `;
 
 // zero right margin so that it's full bleed on mobile when overflowing
@@ -51,24 +47,6 @@ export const SearchBarThermometerWrapper = styled(Box)`
   }
 `;
 
-export const PartnerSection = styled.div`
-  padding: 0 1rem 1rem;
-`;
-
-export const PartnerHeader = styled(Subtitle1)`
-  padding-top: 2.5rem;
-  margin-top: 2.5rem;
-  border-top: 1px solid ${palette.lightGray};
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
-export const FeaturedHeader = styled(Subtitle1)`
-  margin-top: 4rem;
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
 export const BannerContainer = styled.div`
   margin: 0 auto;
 
@@ -84,4 +62,15 @@ export const ElectionCountdownContainer = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     margin-top: 2rem;
   }
+`;
+
+export const SectionWrapper = styled.div`
+  max-width: 1000px;
+  margin: auto 1rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid ${props => props.theme.palette.lightGray};
+`;
+
+export const SectionHeader = styled(Subtitle1)`
+  text-align: center;
 `;
