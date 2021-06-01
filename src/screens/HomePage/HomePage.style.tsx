@@ -73,4 +73,5 @@ export const SectionWrapper = styled.div`
 
 export const SectionHeader = styled(Subtitle1)`
   text-align: center;
+  margin-bottom: 1.25rem;
 `;
