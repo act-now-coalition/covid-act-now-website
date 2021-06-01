@@ -11,9 +11,14 @@ export const Tab = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 10.5rem;
+
+  &:hover {
+    color: ${COLOR_MAP.BLACK};
+    font-weight: 500;
+    border-bottom: 3px solid ${COLOR_MAP.BLACK};
+  }
 `;
 
-// TODO: Figure out transforming color to black on hover or click?
 export const TabTitle = styled.div`
   text-transform: uppercase;
   font-size: 0.8rem;
