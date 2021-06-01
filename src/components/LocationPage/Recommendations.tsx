@@ -75,6 +75,7 @@ const Recommendations = ({
           eventCategory={EventCategory.RECOMMENDATIONS}
           shareUrl={recommendsShareUrl}
           shareQuote={recommendsShareQuote}
+          region={region}
         />
       </LocationPageSectionFooter>
     </>

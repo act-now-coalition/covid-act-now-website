@@ -4,24 +4,25 @@ import { ClickAwayListener } from '@material-ui/core';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 import SocialButtonBlock from './SocialButtonBlock';
+import { Region } from 'common/regions';
 
-const ShareImageButtons: React.FC<{
+const ShareButtonGroup: React.FC<{
   imageUrl: string | (() => Promise<string>);
   imageFilename: string;
   url: string | (() => Promise<string>);
   quote: string;
   disabled?: boolean;
+  region?: Region;
   onSaveImage?: () => void;
   onCopyLink?: () => void;
   onShareOnFacebook: () => void;
   onShareOnTwitter: () => void;
-  onShareOnLinkedin: () => void;
 }> = ({
   url,
   quote,
+  region,
   onShareOnFacebook,
   onShareOnTwitter,
-  onShareOnLinkedin,
   onCopyLink = () => {},
 }) => {
   // Turn url / imageUrl into asynchronous getters if they aren't already.
@@ -71,11 +72,11 @@ const ShareImageButtons: React.FC<{
         {socialSharingProps && (
           <SocialButtonBlock
             {...socialSharingProps}
-            onClickContainer={() => hideSocialButtons(1500)}
+            region={region}
             onShareOnFacebook={onShareOnFacebook}
             onShareOnTwitter={onShareOnTwitter}
-            onShareOnLinkedin={onShareOnLinkedin}
             onCopyLink={onCopyLink}
+            hideSocialButton={() => hideSocialButtons()}
           />
         )}
       </div>
@@ -83,4 +84,4 @@ const ShareImageButtons: React.FC<{
   );
 };
 
-export default ShareImageButtons;
+export default ShareButtonGroup;

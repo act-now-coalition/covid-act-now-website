@@ -11,8 +11,12 @@ import {
 import CcviThermometer from './CcviThermometer/CcviThermometer';
 import { renderRegionDescription } from 'common/ccvi/renderRegionDescription';
 import { getCcviLevelNameFromScore } from 'common/ccvi';
-import { Region } from 'common/regions';
+import { Region, County } from 'common/regions';
 import { RegionCcviItem } from 'common/data';
+import { getSurgoUrlByRegion } from 'common/ccvi/index';
+import { EventCategory } from 'components/Analytics';
+import { TextButton } from 'components/ButtonSystem';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 const VulnerabilitiesBlockInner: React.FC<{
   scores: RegionCcviItem;
@@ -30,6 +34,10 @@ const VulnerabilitiesBlockInner: React.FC<{
   const communityVulnerabilityQuote =
     'Communities with higher vulnerability have pre-existing economic, social, and physical conditions that may make it hard to respond to and recover from a COVID outbreak.';
 
+  const surgoUrl = getSurgoUrlByRegion(region);
+  const surgoUrlCta =
+    region instanceof County ? 'View by neighborhood' : 'View by county';
+
   return (
     <Content>
       <FirstColumn>
@@ -43,6 +51,18 @@ const VulnerabilitiesBlockInner: React.FC<{
           {region.shortName} {regionDescription}
         </SummaryText>
         <SummaryText>{communityVulnerabilityQuote}</SummaryText>
+        {surgoUrl && (
+          <SummaryText>
+            <TextButton
+              href={surgoUrl}
+              trackingCategory={EventCategory.VULNERABILITIES}
+              trackingLabel={'Surgo link'}
+              endIcon={<OpenInNewIcon />}
+            >
+              {surgoUrlCta}
+            </TextButton>
+          </SummaryText>
+        )}
       </FirstColumn>
       <SecondColumn>
         <TextSmall>WHAT MAKES THIS AREA VULNERABLE</TextSmall>

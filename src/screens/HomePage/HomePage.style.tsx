@@ -16,10 +16,6 @@ export const Content = styled.div`
   margin: auto auto 3rem;
 `;
 
-export const SectionWrapper = styled.div`
-  margin-bottom: 2.5rem;
-`;
-
 export const Section = styled.div`
   margin: 3.5rem 1rem;
   @media (min-width: ${mobileBreakpoint}) {

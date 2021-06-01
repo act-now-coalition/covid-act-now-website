@@ -7,7 +7,6 @@ import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import CriteriaExplanation from './CriteriaExplanation/CriteriaExplanation';
 import Announcements from './Announcements';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
@@ -19,12 +18,7 @@ import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import {
-  Content,
-  SectionWrapper,
-  Section,
-  ColumnCentered,
-} from './HomePage.style';
+import { Content, Section, ColumnCentered } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
@@ -43,8 +37,6 @@ export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
   const [showCounties, setShowCounties] = useState(false);
-
-  const isMobile = useBreakpoint(600);
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -165,9 +157,6 @@ export default function HomePage() {
                 showNationalSummary={true}
               />
             </Section>
-            <SectionWrapper>
-              <CriteriaExplanation isMobile={isMobile} />
-            </SectionWrapper>
             <Announcements />
           </Content>
           <PartnersSection />

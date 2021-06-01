@@ -69,6 +69,7 @@ function ChartBlock(props: {
               chartIdentifier={metric}
               region={region}
               stats={stats}
+              showEmbedButton={false}
             />
           </LocationPageSectionFooter>
         </>

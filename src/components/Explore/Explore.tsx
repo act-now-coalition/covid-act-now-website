@@ -12,7 +12,7 @@ import max from 'lodash/max';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
-import ShareImageButtonGroup from 'components/ShareButtons';
+import ShareButtonGroup from 'components/ShareButtons';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
@@ -338,7 +338,7 @@ const ExploreCopy: React.FunctionComponent<{
         <Styles.FooterContainer>
           {showLegend && <Legend seriesList={chartSeries} />}
           <Styles.ShareBlock>
-            <ShareImageButtonGroup
+            <ShareButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
               imageFilename={getImageFilename(selectedLocations, currentMetric)}
@@ -348,6 +348,7 @@ const ExploreCopy: React.FunctionComponent<{
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
+              region={region ? region : undefined}
               onSaveImage={() => {
                 trackExploreEvent(
                   EventAction.SAVE_IMAGE,
@@ -367,9 +368,6 @@ const ExploreCopy: React.FunctionComponent<{
               }
               onShareOnTwitter={() =>
                 trackShare(`Twitter: ${trackingLabel}`, numLocations)
-              }
-              onShareOnLinkedin={() =>
-                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
               }
             />
           </Styles.ShareBlock>
