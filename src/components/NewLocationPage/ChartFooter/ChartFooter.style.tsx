@@ -65,4 +65,5 @@ export const ModalButton = styled(TooltipAnchorText).attrs(props => ({
   cursor: pointer;
   background-color: transparent;
   border: none;
+  padding: 0;
 `;

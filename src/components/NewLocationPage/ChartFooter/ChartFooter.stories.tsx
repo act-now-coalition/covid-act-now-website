@@ -13,6 +13,7 @@ import {
 import { useBreakpoint } from 'common/hooks';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
 import NewDialog from 'components/NewDialog/NewDialog';
+import MetricChartFooter from './MetricChartFooter';
 
 export default {
   title: 'Location page redesign/Chart Footer',
@@ -122,5 +123,20 @@ export const ChartFooterWithTextAndAboutSection = () => {
         </Footer>
       )}
     </>
+  );
+};
+
+export const MetricChartFooterExample = () => {
+  const footerText =
+    'Over the last week, Texas has averaged 3,173 new confirmed cases per day (10.9 for every 100,000 residents).';
+  const header = 'This is the modal header.';
+  const body = 'This is the modal body.';
+  const links = [{ cta: 'Learn more', url: '/' }];
+  return (
+    <MetricChartFooter
+      footerText={footerText}
+      shareButton={<ShareButton onClickShare={() => {}} />}
+      aboutModal={{ header: header, body: body, links: links }}
+    />
   );
 };
