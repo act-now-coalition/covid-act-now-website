@@ -3,18 +3,8 @@ import { Typography, Box } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-export const Wrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  max-width: 570px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
 export const AnnouncementIntro = styled(Typography)`
-  font-family: Roboto;
-  font-weight: 900;
+  ${props => props.theme.fonts.regularBookBold};
   font-size: 24px;
   line-height: 130%;
   margin-bottom: 1rem;
@@ -25,21 +15,16 @@ export const AnnouncementIntro = styled(Typography)`
 `;
 
 export const Date = styled(Typography)`
-  font-family: Source Code Pro;
+  ${props => props.theme.fonts.monospace};
   font-size: 13px;
   line-height: 16px;
-  letter-spacing: 0.01em;
   text-transform: uppercase;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-bottom: 1rem;
 `;
 
 export const AnnouncementBodyCopy = styled(Typography)`
-  font-family: Roboto;
-  font-size: 1rem;
   line-height: 160%;
-  letter-spacing: 0.01em;
-  margin-bottom: 1.5rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
@@ -55,7 +40,6 @@ export const ButtonsContainer = styled(Box)`
 `;
 
 const SharedButtonStyles = css`
-  font-family: Roboto;
   font-size: 1rem;
   line-height: 1.4;
   color: ${COLOR_MAP.BLUE};
@@ -91,4 +75,10 @@ export const ViewAllLink = styled.a`
       margin-left: 0;
     }
   }
+`;
+
+export const Content = styled.div`
+  max-width: 570px;
+  width: 100%;
+  margin: auto;
 `;
