@@ -4,15 +4,18 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const TabsContainer = styled.div`
   display: flex;
-  flex-direction: row;
 `;
 
 export const Tab = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 4rem;
   max-width: 10.5rem;
+  margin-right: 1.5rem;
+  justify-content: space-between;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: ${COLOR_MAP.BLACK};
     font-weight: 500;
     border-bottom: 3px solid ${COLOR_MAP.BLACK};
@@ -29,7 +32,6 @@ export const TabTitle = styled.div`
 
 export const TabContent = styled.div`
   display: flex;
-  flex-direction: row;
   margin-bottom: 1rem;
 `;
 
@@ -37,6 +39,7 @@ export const MetricSubLabel = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
   color: ${COLOR_MAP.GREY_4};
+  line-height: 1;
 
   @media (min-width: ${materialSMBreakpoint}) {
     color: ${COLOR_MAP.GREY_3};
