@@ -9,6 +9,7 @@ export enum DateFormat {
   MMMM_D_YYYY = 'MMMM d, yyyy', // March 1, 2020
   MMM_YY = 'MMM yy', // Mar 20
   MMMM_D = 'MMMM d', // March 1
+  MMM_D = 'MMM d', // Mar 1
   MMM = 'MMM', // Mar
   H_A_ZZZZ = 'h a ZZZZ', // 8 AM PDT
 }

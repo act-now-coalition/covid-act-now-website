@@ -26,6 +26,7 @@ import {
   getYFormat,
 } from 'components/Explore/utils';
 import regions, { Region } from 'common/regions';
+import { TimeUnit } from 'common/utils/time-utils';
 
 const ExploreChartExportImage = ({
   componentParams,
@@ -92,6 +93,7 @@ const ExploreChartExportImage = ({
                 dateRange={dateRange}
                 yTickFormat={yTickFormat}
                 yTooltipFormat={yTooltipFormat}
+                xTickTimeUnit={TimeUnit.MONTHS}
               />
             )}
           </ParentSize>

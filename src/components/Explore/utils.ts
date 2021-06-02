@@ -39,6 +39,7 @@ const EXPLORE_PERIODS = [Period.DAYS_60, Period.DAYS_180, Period.ALL];
 interface PeriodDefinition {
   increment: number;
   label: string;
+  xTicktimeUnit: TimeUnit;
 }
 
 export const periodMap: {
@@ -47,19 +48,26 @@ export const periodMap: {
   [Period.DAYS_60]: {
     increment: 60,
     label: '60',
+    xTicktimeUnit: TimeUnit.WEEKS,
   },
   [Period.DAYS_180]: {
     increment: 180,
     label: '180',
+    xTicktimeUnit: TimeUnit.MONTHS,
   },
   [Period.ALL]: {
     increment: -1,
     label: 'All time',
+    xTicktimeUnit: TimeUnit.MONTHS,
   },
 };
 
 export function getPeriodLabel(period: Period) {
   return periodMap[period].label;
+}
+
+export function getXTickTimeUnitForPeriod(period: Period) {
+  return periodMap[period].xTicktimeUnit;
 }
 
 export function getAllPeriodLabels() {

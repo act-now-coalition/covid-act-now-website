@@ -145,6 +145,7 @@ const SingleLocationChart: React.FC<{
   dateRange: Date[];
   yTickFormat: (val: number) => string;
   yTooltipFormat: (val: number) => string;
+  xTickTimeUnit: TimeUnit;
 }> = ({
   width,
   height,
@@ -160,6 +161,7 @@ const SingleLocationChart: React.FC<{
   dateRange,
   yTickFormat,
   yTooltipFormat,
+  xTickTimeUnit,
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
@@ -226,6 +228,7 @@ const SingleLocationChart: React.FC<{
             isMobile={isMobile}
             yNumTicks={5}
             yTickFormat={yTickFormat}
+            xTickTimeUnit={xTickTimeUnit}
           />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }) => (

@@ -23,6 +23,7 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from 'components/Charts/utils';
+import { TimeUnit } from 'common/utils/time-utils';
 
 interface LabelInfo {
   x: number;
@@ -125,6 +126,7 @@ const MultipleLocationsChart: React.FC<{
   dateRange: Date[];
   yTickFormat: (val: number) => string;
   yTooltipFormat: (val: number) => string;
+  xTickTimeUnit: TimeUnit;
 }> = ({
   width,
   height,
@@ -139,6 +141,7 @@ const MultipleLocationsChart: React.FC<{
   dateRange,
   yTickFormat,
   yTooltipFormat,
+  xTickTimeUnit,
 }) => {
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
@@ -208,6 +211,7 @@ const MultipleLocationsChart: React.FC<{
             isMobile={isMobile}
             yNumTicks={5}
             yTickFormat={yTickFormat}
+            xTickTimeUnit={xTickTimeUnit}
           />
           {seriesLabels.map((label, i) => (
             <Styles.LineLabel

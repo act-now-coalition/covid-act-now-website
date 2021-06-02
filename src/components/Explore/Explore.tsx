@@ -38,6 +38,7 @@ import {
   getDateRange,
   getYFormat,
   getYAxisDecimalPlaces,
+  getXTickTimeUnitForPeriod,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -315,6 +316,7 @@ const ExploreCopy: React.FunctionComponent<{
                     dateRange={dateRange}
                     yTickFormat={yTickFormat}
                     yTooltipFormat={yTooltipFormat}
+                    xTickTimeUnit={getXTickTimeUnitForPeriod(period)}
                   />
                 ) : (
                   <div style={{ height: 400 }} />

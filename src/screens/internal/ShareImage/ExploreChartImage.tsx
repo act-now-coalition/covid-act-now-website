@@ -24,6 +24,7 @@ import {
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
+import { TimeUnit } from 'common/utils/time-utils';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const theme = useContext(ThemeContext);
@@ -83,6 +84,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   dateRange={dateRange}
                   yTickFormat={yTickFormat}
                   yTooltipFormat={yTooltipFormat}
+                  xTickTimeUnit={TimeUnit.MONTHS}
                 />
               )}
             </ParentSize>
