@@ -21,55 +21,16 @@ export const Button = styled(MuiButton).attrs(props => ({
 }))<{ $open?: boolean; $maxWidth: number }>`
   ${SharedStyles};
   border: 1px solid ${GREY_2};
-  // border-bottom: ${({ $open }) => $open && 'none'};
+  border-bottom: ${({ $open }) => $open && 'none'};
   padding: 0.5rem 0.75rem;
   border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
   width: 100%;
   letter-spacing: 0;
-  position: relative
 
   @media (min-width: ${materialSMBreakpoint}) {
     max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
   }
 `;
-
-export const ListContainer = styled.div<{ open: boolean; $maxWidth: number }>`
-  display: ${({ open }) => (open ? 'flex' : 'none')};
-  flex-direction: column;
-  border: 1px solid red;
-  max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-`;
-
-export const Wrapper = styled.div<{ $maxWidth: number }>`
-  max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
-  width: 100%;
-`;
-
-export const ListButton = styled(MuiButton).attrs(props => ({
-  disableRipple: true,
-  disableFocusRipple: true,
-}))<{ $open?: boolean; $maxWidth: number }>`
-  ${SharedStyles};
-  white-space: normal;
-  padding: 0.75rem 1rem;
-  line-height: 1.4;
-  background-color: white;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
-  }
-`;
-
-// ${SharedStyles};
-// border: 1px solid ${GREY_2};
-// border-bottom: ${({ $open }) => $open && 'none'};
-// padding: 0.5rem 0.75rem;
-// border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
-// width: 100%;
-// letter-spacing: 0;
 
 export const ButtonContent = styled.div`
   display: flex;
