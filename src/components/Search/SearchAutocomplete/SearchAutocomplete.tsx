@@ -84,12 +84,12 @@ const SearchAutocomplete: React.FC<{
       let zipCodes = null;
       if (option instanceof MetroArea) {
         zipCodes = uniq(flatten(option.countiesFips.map(zipsForFips)));
+      } else if (option instanceof County) {
+        zipCodes = zipsForFips(option.fipsCode);
       } else if (option instanceof State) {
         // going from state -> zips requires mapping all counties for the state
         // which we don't have and won't be cheap (a list of all zip-codes per state? oof)
-        // so maybe defer this oen for now
-      } else if (option instanceof County) {
-        zipCodes = zipsForFips(option.fipsCode);
+        // so maybe defer this one for now
       }
       if (zipCodes) {
         return `${zipCodes.join(' ')}`;
