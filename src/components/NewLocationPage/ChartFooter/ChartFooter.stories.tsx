@@ -14,6 +14,10 @@ import { useBreakpoint } from 'common/hooks';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
 import NewDialog from 'components/NewDialog/NewDialog';
 import MetricChartFooter from './MetricChartFooter';
+import regions from 'common/regions';
+import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
+import { useSummaries } from 'common/location_summaries';
+import { Metric } from 'common/metricEnum';
 
 export default {
   title: 'Location page redesign/Chart Footer',
@@ -132,10 +136,21 @@ export const MetricChartFooterExample = () => {
   const header = 'This is the modal header.';
   const body = 'This is the modal body.';
   const links = [{ cta: 'Learn more', url: '/' }];
+  const region = regions.findByFipsCodeStrict('48');
+  const locationSummary = useSummaries()?.[48];
+  if (!locationSummary) {
+    return null;
+  }
+  const stats = summaryToStats(locationSummary);
   return (
     <MetricChartFooter
       footerText={footerText}
-      shareButton={<ShareButton onClickShare={() => {}} />}
+      shareButtonProps={{
+        region: region,
+        stats: stats,
+        chartIdentifier: Metric.CASE_DENSITY,
+        showEmbedButton: false,
+      }}
       aboutModal={{ header: header, body: body, links: links }}
     />
   );

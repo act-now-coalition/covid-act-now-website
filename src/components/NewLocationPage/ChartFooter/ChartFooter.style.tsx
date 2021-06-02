@@ -4,15 +4,13 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { TooltipAnchorText } from 'components/InfoTooltip/Tooltip.style';
 
 export const Footer = styled.div`
-  position: relative;
   display: flex;
-  flex-direction: row;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const FooterText = styled.div`
   margin: 0 0.5rem 0.75rem 0;
   max-width: 42.5rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const ButtonContainer = styled.div`
