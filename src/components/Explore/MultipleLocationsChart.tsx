@@ -52,10 +52,18 @@ export const MultipleLocationsTooltip: React.FC<{
   seriesList: Series[];
   pointInfo: HoverPointInfo;
   yTooltipFormat: (val: number) => string;
-}> = ({ top, left, seriesList: series, pointInfo, yTooltipFormat }) => {
+  marginLeft: number;
+}> = ({
+  top,
+  left,
+  seriesList: series,
+  pointInfo,
+  yTooltipFormat,
+  marginLeft,
+}) => {
   const { seriesIndex } = pointInfo;
   const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
-  return (
+  return left > marginLeft ? (
     <Tooltip
       width={'210px'}
       top={top}
@@ -72,7 +80,7 @@ export const MultipleLocationsTooltip: React.FC<{
         {currentSeries && `in ${currentSeries.label}`}
       </Styles.TooltipLocation>
     </Tooltip>
-  );
+  ) : null;
 };
 
 const HoverDataMarker: React.FC<{
@@ -272,6 +280,7 @@ const MultipleLocationsChart: React.FC<{
             left={getXPosition(tooltipData) + marginLeft}
             top={getYPosition(tooltipData) + marginTop}
             yTooltipFormat={yTooltipFormat}
+            marginLeft={marginLeft}
           />
           <DateMarker
             left={getXPosition(tooltipData) + marginLeft}

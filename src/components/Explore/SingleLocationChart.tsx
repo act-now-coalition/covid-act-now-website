@@ -33,10 +33,11 @@ const SingleSeriesTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
   yTooltipFormat: (val: number) => string;
-}> = ({ series, left, top, date, subtext, yTooltipFormat }) => {
+  marginLeft: number;
+}> = ({ series, left, top, date, subtext, yTooltipFormat, marginLeft }) => {
   const point = findPointByDate(series.data, date);
 
-  return point ? (
+  return point && left(point) > marginLeft ? (
     <Tooltip
       width={'210px'}
       top={top(point)}
@@ -59,7 +60,8 @@ const SingleLocationTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
   yTooltipFormat: (val: number) => string;
-}> = ({ seriesList, left, top, date, subtext, yTooltipFormat }) => {
+  marginLeft: number;
+}> = ({ seriesList, left, top, date, subtext, yTooltipFormat, marginLeft }) => {
   if (seriesList.length === 1) {
     return (
       <SingleSeriesTooltip
@@ -69,6 +71,7 @@ const SingleLocationTooltip: React.FC<{
         top={top}
         subtext={subtext}
         yTooltipFormat={yTooltipFormat}
+        marginLeft={marginLeft}
       />
     );
   }
@@ -77,7 +80,7 @@ const SingleLocationTooltip: React.FC<{
   const pointSmooth = findPointByDate(seriesSmooth.data, date);
   const pointRaw = findPointByDate(seriesRaw.data, date);
 
-  return pointSmooth && pointRaw ? (
+  return pointSmooth && pointRaw && left(pointSmooth) > marginLeft ? (
     <Tooltip
       width={'210px'}
       top={top(pointSmooth)}
@@ -274,6 +277,7 @@ const SingleLocationChart: React.FC<{
             seriesList={seriesList}
             subtext={tooltipSubtext}
             yTooltipFormat={yTooltipFormat}
+            marginLeft={marginLeft}
           />
           <DateMarker
             left={dateScale(tooltipData.date) + marginLeft}
