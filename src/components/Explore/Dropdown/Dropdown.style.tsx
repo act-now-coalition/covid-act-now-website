@@ -48,7 +48,7 @@ export const ListContainer = styled.div<{ open: boolean; $maxWidth: number }>`
   flex-direction: column;
   border: 1px solid ${GREY_2};
   border-top: none;
-  width: 100%;
+  width: calc(100% - 2rem);
   position: absolute;
   z-index: 1;
   border-radius: 0 0 4px 4px;
@@ -56,6 +56,7 @@ export const ListContainer = styled.div<{ open: boolean; $maxWidth: number }>`
   background-color: white;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    width: 100%;
     max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
   }
 `;
