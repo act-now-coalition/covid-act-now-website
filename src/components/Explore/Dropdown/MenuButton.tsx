@@ -21,7 +21,6 @@ const MenuButton: React.FC<{
     <MainButton
       aria-controls={ariaControlsId}
       aria-haspopup="true"
-      disableRipple
       onClick={onClick}
       $open={open}
       $maxWidth={maxWidth}

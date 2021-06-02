@@ -68,7 +68,7 @@ const LocationSelector: React.FC<{
                 <FilledButton
                   onClick={closeModal}
                   trackingLabel="Close trends modal"
-                  trackingCategory={EventCategory.EXPLORE}
+                  trackingCategory={EventCategory.NONE} // Setting to NONE since this isn't useful tracking, just including the props because they're required
                 >
                   Done
                 </FilledButton>

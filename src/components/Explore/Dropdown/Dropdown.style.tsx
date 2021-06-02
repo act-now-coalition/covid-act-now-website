@@ -39,12 +39,13 @@ export const MainButton = styled(BaseButton)<{
   position: relative;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    max-width: ${({ $maxWidth }) => $maxWidth && `${$maxWidth}px`};
+    max-width: ${({ $maxWidth }) =>
+      Number.isFinite($maxWidth) && `${$maxWidth}px`};
   }
 `;
 
-export const ListContainer = styled.div<{ open: boolean; $maxWidth: number }>`
-  display: ${({ open }) => (open ? 'flex' : 'none')};
+export const ListContainer = styled.div<{ $open: boolean; $maxWidth: number }>`
+  display: ${({ $open }) => ($open ? 'flex' : 'none')};
   flex-direction: column;
   border: 1px solid ${GREY_2};
   border-top: none;
@@ -62,7 +63,6 @@ export const ListContainer = styled.div<{ open: boolean; $maxWidth: number }>`
 `;
 
 export const ListButton = styled(BaseButton)<{
-  $open?: boolean;
   $maxWidth: number;
 }>`
   ${props => props.theme.fonts.regularBook};
@@ -98,7 +98,6 @@ export const MenuLabel = styled.span`
 `;
 
 export const ItemLabel = styled.span`
-  ${props => props.theme.fonts.regularBookMidWeight};
   font-size: 1rem;
   line-height: 1.3;
   white-space: nowrap;

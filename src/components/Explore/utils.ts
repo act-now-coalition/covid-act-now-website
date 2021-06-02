@@ -146,8 +146,8 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
 export const getYFormat = (dataMeasure: DataMeasure, places: number) => {
   const yFormat = (value: number) =>
     dataMeasure === DataMeasure.PERCENT
-      ? formatPercent(value, places).toString()
-      : formatDecimal(value, places).toString();
+      ? formatPercent(value, places)
+      : formatDecimal(value, places);
 
   return yFormat;
 };

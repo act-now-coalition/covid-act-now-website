@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { ClickAwayListener } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import { ListButton, ListContainer, DropdownWrapper } from './Dropdown.style';
 import MenuButton from './MenuButton';
-import { ClickAwayListener } from '@material-ui/core';
+import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 
 const Dropdown: React.FC<{
   menuLabel: string;
@@ -14,7 +15,14 @@ const Dropdown: React.FC<{
   const [open, setOpen] = useState(false);
   const [buttonLabel, setButtonLabel] = useState(defaultSelectionLabel);
 
-  const handleClick = (event: any) => {
+  const handleMenuButtonClick = () => {
+    if (!open) {
+      trackEvent(
+        EventCategory.EXPLORE,
+        EventAction.CLICK,
+        `Open menu: ${menuLabel}`,
+      );
+    }
     setOpen(!open);
   };
 
@@ -28,13 +36,13 @@ const Dropdown: React.FC<{
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <DropdownWrapper $maxWidth={maxWidth}>
         <MenuButton
-          onClick={handleClick}
+          onClick={handleMenuButtonClick}
           open={open}
           menuLabel={menuLabel}
           buttonLabel={buttonLabel}
           ariaControlsId={menuId}
         />
-        <ListContainer open={open} $maxWidth={maxWidth}>
+        <ListContainer $open={open} $maxWidth={maxWidth}>
           {itemLabels.map((label: string, i: number) => {
             return (
               <ListButton
@@ -43,6 +51,11 @@ const Dropdown: React.FC<{
                 onClick={() => {
                   onSelect(i);
                   setButtonLabel(label);
+                  trackEvent(
+                    EventCategory.EXPLORE,
+                    EventAction.CLICK,
+                    `${menuLabel}: ${label}`,
+                  );
                   handleClose();
                 }}
               >
