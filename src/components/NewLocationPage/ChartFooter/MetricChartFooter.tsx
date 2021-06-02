@@ -48,13 +48,7 @@ const MetricChartFooter: React.FC<{
             <ModalButton onClick={() => setOpenModal(true)}>
               <AboutText>About this data</AboutText>
             </ModalButton>
-            <NewDialog
-              open={openModal}
-              closeDialog={() => setOpenModal(false)}
-              header={aboutModal.header}
-              body={aboutModal.body}
-              links={aboutModal.links}
-            />
+            <NewDialog {...dialogProps} />
           </FooterText>
           <ButtonContainer>
             <ShareButtons {...shareButtonProps} />
