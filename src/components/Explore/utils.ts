@@ -3,6 +3,7 @@ import deburr from 'lodash/deburr';
 import flatten from 'lodash/flatten';
 import isNumber from 'lodash/isNumber';
 import words from 'lodash/words';
+import max from 'lodash/max';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
@@ -604,4 +605,25 @@ export function getSeriesLabel(series: Series, isMobile: boolean) {
 export function brightenColor(colorCode: string, amount = 1): string {
   const colorObject = color(colorCode);
   return colorObject ? colorObject.brighter(amount).hex() : colorCode;
+}
+
+const getY = (d: Column) => d.y;
+
+function isInDateRange(date: Date, dateFrom: Date, dateTo: Date) {
+  return dateFrom <= date && date <= dateTo;
+}
+
+/* Gets overall maxY value to adjust y-axis when a new date range is selected from dropdown menu */
+export function getMaxY(seriesList: Series[], dateFrom: Date, dateTo: Date) {
+  const maxPerSeries = seriesList.map(series => {
+    const dataInRange = series.data.filter(d =>
+      isInDateRange(new Date(d.x), dateFrom, dateTo),
+    );
+    const seriesMax = max(dataInRange.map(getY)) || 1;
+    return seriesMax;
+  });
+
+  const overallMaxY = max(maxPerSeries);
+
+  return overallMaxY;
 }
