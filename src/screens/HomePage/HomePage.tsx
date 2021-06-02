@@ -158,8 +158,8 @@ export default function HomePage() {
               />
             </Section>
             <Announcements />
+            <PartnersSection />
           </Content>
-          <PartnersSection />
           <div ref={shareBlockRef} id="alert_signup">
             <ShareModelBlock />
           </div>

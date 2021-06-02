@@ -5,21 +5,13 @@ import { navSearchbar, navSearchbarLocPage } from 'assets/theme';
 import SearchAutocomplete, { getFilterLimit } from 'components/Search';
 import { Wrapper } from './Search.style';
 import { useFinalAutocompleteLocations } from 'common/hooks';
-import { Region } from 'common/regions';
 
 const Search: React.FC<{
   menuOpen: boolean;
   WrappingDiv?: any /* Chelsi: fix this any */;
-  region?: Region;
   placeholder?: string;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({
-  menuOpen,
-  WrappingDiv = Wrapper,
-  region,
-  placeholder,
-  setMenuOpen,
-}) => {
+}> = ({ menuOpen, WrappingDiv = Wrapper, placeholder, setMenuOpen }) => {
   const theme = useContext(ThemeContext);
 
   const { pathname } = useLocation();
@@ -40,7 +32,6 @@ const Search: React.FC<{
           locations={searchLocations}
           filterLimit={getFilterLimit()}
           menuOpen={menuOpen}
-          region={region}
           placeholder={placeholder || 'City, county, state, or zip'}
           setMenuOpen={setMenuOpen}
         />
