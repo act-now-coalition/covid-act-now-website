@@ -1,11 +1,25 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
-import MuiMenu from '@material-ui/core/Menu';
-import MuiMenuItem from '@material-ui/core/MenuItem';
 import { COLOR_MAP, GREY_2, GREY_0 } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 
-const SharedStyles = css`
+export const DropdownWrapper = styled.div<{ $maxWidth: number }>`
+  width: 100%;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
+  }
+`;
+
+const BaseButton = styled(MuiButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
+  letter-spacing: 0;
+  padding: 0.5rem 0.75rem;
+  background-color: white;
+  border-radius: 0;
+
   &:hover {
     background-color: ${GREY_0};
   }
@@ -15,47 +29,30 @@ const SharedStyles = css`
   }
 `;
 
-export const Button = styled(MuiButton).attrs(props => ({
-  disableRipple: true,
-  disableFocusRipple: true,
-}))<{ $open?: boolean; $maxWidth: number }>`
-  ${SharedStyles};
+export const MainButton = styled(BaseButton)<{
+  $open?: boolean;
+  $maxWidth?: number;
+}>`
   border: 1px solid ${GREY_2};
-  // border-bottom: ${({ $open }) => $open && 'none'};
-  padding: 0.5rem 0.75rem;
   border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
   width: 100%;
-  letter-spacing: 0;
-  position: relative
+  position: relative;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
+    max-width: ${({ $maxWidth }) => $maxWidth && `${$maxWidth}px`};
   }
 `;
 
 export const ListContainer = styled.div<{ open: boolean; $maxWidth: number }>`
   display: ${({ open }) => (open ? 'flex' : 'none')};
   flex-direction: column;
-  border: 1px solid red;
-  max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
+  border: 1px solid ${GREY_2};
+  border-top: none;
   width: 100%;
   position: absolute;
   z-index: 1;
-`;
-
-export const Wrapper = styled.div<{ $maxWidth: number }>`
-  max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
-  width: 100%;
-`;
-
-export const ListButton = styled(MuiButton).attrs(props => ({
-  disableRipple: true,
-  disableFocusRipple: true,
-}))<{ $open?: boolean; $maxWidth: number }>`
-  ${SharedStyles};
-  white-space: normal;
-  padding: 0.75rem 1rem;
-  line-height: 1.4;
+  border-radius: 0 0 4px 4px;
+  padding: 0.5rem 0;
   background-color: white;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -63,13 +60,27 @@ export const ListButton = styled(MuiButton).attrs(props => ({
   }
 `;
 
-// ${SharedStyles};
-// border: 1px solid ${GREY_2};
-// border-bottom: ${({ $open }) => $open && 'none'};
-// padding: 0.5rem 0.75rem;
-// border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
-// width: 100%;
-// letter-spacing: 0;
+export const ListButton = styled(BaseButton)<{
+  $open?: boolean;
+  $maxWidth: number;
+}>`
+  ${props => props.theme.fonts.regularBook};
+  white-space: normal;
+  line-height: 1.4;
+  text-transform: none;
+  font-size: 1rem;
+
+  .MuiButton-label {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
+  }
+`;
+
+/* Used in MenuButton.tsx */
 
 export const ButtonContent = styled.div`
   display: flex;
@@ -93,30 +104,6 @@ export const ItemLabel = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: none;
-`;
-
-export const Menu = styled(MuiMenu)<{ $maxWidth: number }>`
-  .MuiMenu-paper {
-    border: 1px solid ${GREY_2};
-    border-radius: 0;
-    width: 100%;
-  }
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    .MuiMenu-paper {
-      max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
-    }
-  }
-`;
-
-export const MenuItem = styled(MuiMenuItem).attrs(props => ({
-  disableRipple: true,
-  disableFocusRipple: true,
-}))`
-  ${SharedStyles};
-  white-space: normal;
-  padding: 0.75rem 1rem;
-  line-height: 1.4;
 `;
 
 export const Column = styled.div`

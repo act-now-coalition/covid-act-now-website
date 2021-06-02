@@ -2,7 +2,7 @@ import React from 'react';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
-  Button,
+  MainButton,
   MenuLabel,
   ItemLabel,
   ButtonContent,
@@ -14,11 +14,11 @@ const MenuButton: React.FC<{
   menuLabel: string;
   buttonLabel: string;
   open?: boolean;
-  maxWidth: number;
   ariaControlsId: string;
-}> = ({ onClick, open, menuLabel, buttonLabel, maxWidth, ariaControlsId }) => {
+  maxWidth?: number;
+}> = ({ onClick, open, menuLabel, buttonLabel, ariaControlsId, maxWidth }) => {
   return (
-    <Button
+    <MainButton
       aria-controls={ariaControlsId}
       aria-haspopup="true"
       disableRipple
@@ -33,7 +33,7 @@ const MenuButton: React.FC<{
         </Column>
         {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ButtonContent>
-    </Button>
+    </MainButton>
   );
 };
 

@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  Menu,
-  MenuItem,
-  ListButton,
-  ListContainer,
-  Wrapper,
-} from './Dropdown.style';
+import { ListButton, ListContainer, DropdownWrapper } from './Dropdown.style';
 import MenuButton from './MenuButton';
 import { ClickAwayListener } from '@material-ui/core';
-import { LockBodyScroll } from 'components/Dialog';
 
 const Dropdown: React.FC<{
   menuLabel: string;
@@ -18,7 +11,6 @@ const Dropdown: React.FC<{
   defaultSelectionLabel: string;
   maxWidth: number;
 }> = ({ menuLabel, itemLabels, onSelect, defaultSelectionLabel, maxWidth }) => {
-  // const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [buttonLabel, setButtonLabel] = useState(defaultSelectionLabel);
 
@@ -34,13 +26,12 @@ const Dropdown: React.FC<{
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
-      <Wrapper $maxWidth={maxWidth}>
+      <DropdownWrapper $maxWidth={maxWidth}>
         <MenuButton
           onClick={handleClick}
           open={open}
           menuLabel={menuLabel}
           buttonLabel={buttonLabel}
-          maxWidth={maxWidth}
           ariaControlsId={menuId}
         />
         <ListContainer open={open} $maxWidth={maxWidth}>
@@ -60,7 +51,7 @@ const Dropdown: React.FC<{
             );
           })}
         </ListContainer>
-      </Wrapper>
+      </DropdownWrapper>
     </ClickAwayListener>
   );
 };
