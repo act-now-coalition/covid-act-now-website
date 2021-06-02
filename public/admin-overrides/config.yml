@@ -31,9 +31,9 @@ collections:
             fields:
               - name: region
                 label: Region
-                hint: State code (2 letters) or FIPS code (2 or 5 digits)
+                hint: Comma-separated string of state codes (2 letters) and FIPS codes (2 or 5 digits)
                 widget: string
-                pattern: ['^([A-Z][A-Z]|\d{2}|\d{5})$', 'Must be a 2-letter state code or 2 or 5-digit FIPS code']
+                pattern: ['^([A-Z][A-Z]|\d{2}|\d{5})(,([A-Z][A-Z]|\d{2}|\d{5}))*$', 'Must be a 2-letter state code or 2 or 5-digit FIPS code']
               - name: include
                 label: Include
                 widget: select
