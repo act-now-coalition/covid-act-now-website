@@ -52,18 +52,10 @@ export const MultipleLocationsTooltip: React.FC<{
   seriesList: Series[];
   pointInfo: HoverPointInfo;
   yTooltipFormat: (val: number) => string;
-  marginLeft: number;
-}> = ({
-  top,
-  left,
-  seriesList: series,
-  pointInfo,
-  yTooltipFormat,
-  marginLeft,
-}) => {
+}> = ({ top, left, seriesList: series, pointInfo, yTooltipFormat }) => {
   const { seriesIndex } = pointInfo;
   const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
-  return left > marginLeft ? (
+  return (
     <Tooltip
       width={'210px'}
       top={top}
@@ -80,7 +72,7 @@ export const MultipleLocationsTooltip: React.FC<{
         {currentSeries && `in ${currentSeries.label}`}
       </Styles.TooltipLocation>
     </Tooltip>
-  ) : null;
+  );
 };
 
 const HoverDataMarker: React.FC<{
@@ -185,15 +177,21 @@ const MultipleLocationsChart: React.FC<{
     HoverPointInfo
   >();
 
+  const getXPosition = useCallback(
+    (d: Column) => dateScale(getColumnDate(d)) || 0,
+  );
+  const getYPosition = (d: Column) => yScale(getY(d));
+
   const onMouseOver = useCallback(
     (pointInfo: HoverPointInfo) => {
+      if (getXPosition(pointInfo) < 0) {
+        return;
+      }
       showTooltip({ tooltipData: pointInfo });
     },
-    [showTooltip],
+    [getXPosition, showTooltip],
   );
 
-  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
-  const getYPosition = (d: Column) => yScale(getY(d));
   const seriesLabels = formatCurrentValueLabels(
     seriesList,
     (p: Column) => innerWidth + 5,
@@ -280,7 +278,6 @@ const MultipleLocationsChart: React.FC<{
             left={getXPosition(tooltipData) + marginLeft}
             top={getYPosition(tooltipData) + marginTop}
             yTooltipFormat={yTooltipFormat}
-            marginLeft={marginLeft}
           />
           <DateMarker
             left={getXPosition(tooltipData) + marginLeft}
