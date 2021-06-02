@@ -177,19 +177,20 @@ const MultipleLocationsChart: React.FC<{
     HoverPointInfo
   >();
 
-  const getXPosition = useCallback(
-    (d: Column) => dateScale(getColumnDate(d)) || 0,
-  );
+  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
+
+  const minTooltipDate = dateScale.invert(0);
 
   const onMouseOver = useCallback(
     (pointInfo: HoverPointInfo) => {
-      if (getXPosition(pointInfo) < 0) {
+      /* Makes sure we only render a tooltip for dates that fall within the selected time range: */
+      if (minTooltipDate > new Date(pointInfo.x)) {
         return;
       }
       showTooltip({ tooltipData: pointInfo });
     },
-    [getXPosition, showTooltip],
+    [showTooltip, minTooltipDate],
   );
 
   const seriesLabels = formatCurrentValueLabels(
