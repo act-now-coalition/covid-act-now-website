@@ -9,7 +9,7 @@ import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
 import ChartOverlay from './ChartOverlay';
-import { getMaxBy, findPointByDate } from './utils';
+import { findPointByDate, getMaxY } from './utils';
 import * as Styles from './Explore.style';
 import { ScreenshotReady } from 'components/Screenshot';
 import DateMarker from './DateMarker';
@@ -25,13 +25,53 @@ const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>
   getTimeDiff(dateTo, dateFrom, TimeUnit.DAYS);
 
+const SingleSeriesTooltip: React.FC<{
+  date: Date;
+  series: Series;
+  left: (d: Column) => number;
+  top: (d: Column) => number;
+  subtext: string;
+  yTooltipFormat: (val: number) => string;
+}> = ({ series, left, top, date, subtext, yTooltipFormat }) => {
+  const point = findPointByDate(series.data, date);
+
+  return point ? (
+    <Tooltip
+      width={'210px'}
+      top={top(point)}
+      left={left(point)}
+      title={formatTooltipColumnDate(point)}
+    >
+      <Styles.TooltipSubtitle>{series.tooltipLabel}</Styles.TooltipSubtitle>
+      <Styles.TooltipMetric>
+        {isNumber(point.y) ? yTooltipFormat(point.y) : '-'}
+      </Styles.TooltipMetric>
+      <Styles.TooltipLocation>{subtext}</Styles.TooltipLocation>
+    </Tooltip>
+  ) : null;
+};
+
 const SingleLocationTooltip: React.FC<{
   date: Date;
   seriesList: Series[];
   left: (d: Column) => number;
   top: (d: Column) => number;
   subtext: string;
-}> = ({ seriesList, left, top, date, subtext }) => {
+  yTooltipFormat: (val: number) => string;
+}> = ({ seriesList, left, top, date, subtext, yTooltipFormat }) => {
+  if (seriesList.length === 1) {
+    return (
+      <SingleSeriesTooltip
+        series={seriesList[0]}
+        date={date}
+        left={left}
+        top={top}
+        subtext={subtext}
+        yTooltipFormat={yTooltipFormat}
+      />
+    );
+  }
+
   const [seriesRaw, seriesSmooth] = seriesList;
   const pointSmooth = findPointByDate(seriesSmooth.data, date);
   const pointRaw = findPointByDate(seriesRaw.data, date);
@@ -101,6 +141,10 @@ const SingleLocationChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   barOpacityHover?: number;
+  dateRange: Date[];
+  yTickFormat: (val: number) => string;
+  yTooltipFormat: (val: number) => string;
+  xTickTimeUnit: TimeUnit;
 }> = ({
   width,
   height,
@@ -113,12 +157,16 @@ const SingleLocationChart: React.FC<{
   marginRight = 20,
   barOpacity,
   barOpacityHover,
+  dateRange,
+  yTickFormat,
+  yTooltipFormat,
+  xTickTimeUnit,
 }) => {
-  const dateFrom = new Date('2020-03-01');
-  const today = new Date();
-  const dateTo = today;
+  const [dateFrom, dateTo] = dateRange;
+
+  const maxY = getMaxY(seriesList, dateFrom, dateTo);
+
   const numDays = daysBetween(dateFrom, dateTo);
-  const maxY = getMaxBy<number>(seriesList, getY, 1);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
@@ -169,6 +217,8 @@ const SingleLocationChart: React.FC<{
             yScale={yScale}
             isMobile={isMobile}
             yNumTicks={5}
+            yTickFormat={yTickFormat}
+            xTickTimeUnit={xTickTimeUnit}
           />
           <RectClipGroup width={innerWidth} height={innerHeight}>
             {seriesList.map(({ label, data, type, params }) => (
@@ -213,6 +263,7 @@ const SingleLocationChart: React.FC<{
             date={tooltipData.date}
             seriesList={seriesList}
             subtext={tooltipSubtext}
+            yTooltipFormat={yTooltipFormat}
           />
           <DateMarker
             left={dateScale(tooltipData.date) + marginLeft}

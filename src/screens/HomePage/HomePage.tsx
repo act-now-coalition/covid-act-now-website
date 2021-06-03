@@ -151,7 +151,7 @@ export default function HomePage() {
             </Section>
             <Section ref={exploreSectionRef} id="explore-hospitalizations">
               <Explore
-                title="Cases, Deaths and Hospitalizations"
+                title="Trends"
                 initialFipsList={initialFipsListForExplore}
                 defaultMetric={initialMetricForExplore}
                 showNationalSummary={true}

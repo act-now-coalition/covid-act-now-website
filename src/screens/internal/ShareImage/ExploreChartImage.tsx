@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import { ThemeProvider, ThemeContext } from 'styled-components';
 import { ParentSize } from '@vx/responsive';
 import LogoDark from 'assets/images/logoDark';
@@ -18,9 +17,14 @@ import {
   getChartSeries,
   getLocationNames,
   getMetricName,
+  Period,
+  getMetricDataMeasure,
+  getDateRange,
+  getYFormat,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
+import { TimeUnit } from 'common/utils/time-utils';
 
 const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const theme = useContext(ThemeContext);
@@ -41,6 +45,12 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
       getChartSeries(currentMetric, selectedLocations, normalizeData);
     fetchSeries().then(setChartSeries);
   }, [selectedLocations, currentMetric, normalizeData]);
+
+  const dataMeasure = getMetricDataMeasure(currentMetric);
+  const yTickFormat = getYFormat(dataMeasure, 0);
+  const yTooltipFormat = getYFormat(dataMeasure, 1);
+
+  const dateRange = getDateRange(Period.ALL);
 
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
@@ -71,6 +81,10 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   barOpacity={0.4}
                   barOpacityHover={0.8}
                   hasMultipleLocations={selectedLocations.length > 1}
+                  dateRange={dateRange}
+                  yTickFormat={yTickFormat}
+                  yTooltipFormat={yTooltipFormat}
+                  xTickTimeUnit={TimeUnit.MONTHS}
                 />
               )}
             </ParentSize>
