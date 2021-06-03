@@ -89,9 +89,9 @@ export function getRecommendations(
     : [];
 
   const allRecommendations = [
-    ...exposureRecommendations,
-    ...gatheringsRecommendation,
     ...masksRecommendation,
+    ...gatheringsRecommendation,
+    ...exposureRecommendations,
     ...schoolRecommendation,
     ...travelRecommendation,
     ...otherRecommendations,
