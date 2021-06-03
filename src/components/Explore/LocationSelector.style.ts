@@ -17,7 +17,7 @@ export const ModalContainer = styled.div`
     width: 100%;
     max-width: 600px;
     border-radius: 4px;
-    margin: 10rem auto auto;
+    margin: auto;
   }
 `;
 
