@@ -167,6 +167,7 @@ interface ExploreMetricDescription {
   seriesList: SerieDescription[];
   dataMeasure: DataMeasure;
   yAxisDecimalPlaces: number;
+  maxY?: number;
 }
 
 export const exploreMetricData: {
@@ -236,7 +237,7 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
-    title: 'ICU Hospitalizations',
+    title: 'ICU hospitalizations',
     name: 'Current COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
     dataMeasure: DataMeasure.INTEGER,
@@ -257,11 +258,12 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_FIRST_DOSE]: {
-    title: 'Percent Vaccinated (1+ dose)',
-    name: 'Percent Vaccinated (1+ dose)',
+    title: 'Percent vaccinated (1+ dose)',
+    name: 'Percent vaccinated (1+ dose)',
     chartId: 'vaccinations_first_dose',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
+    maxY: 1,
     seriesList: [
       {
         label: 'Percent Vaccinated (1+ dose)',
@@ -272,11 +274,12 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_COMPLETED]: {
-    title: 'Percent Vaccinated (fully)',
-    name: 'Percent Vaccinated (fully)',
+    title: 'Percent vaccinated (fully)',
+    name: 'Percent vaccinated (fully)',
     chartId: 'vaccinations_completed',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
+    maxY: 1,
     seriesList: [
       {
         label: 'Percent Vaccinated (fully)',
@@ -398,6 +401,11 @@ export function getMetricDataMeasure(metric: ExploreMetric) {
 
 export function getYAxisDecimalPlaces(metric: ExploreMetric) {
   return exploreMetricData[metric].yAxisDecimalPlaces;
+}
+
+export function getMaxYFromDefinition(metric: ExploreMetric): number | null {
+  const maxY = exploreMetricData[metric].maxY;
+  return !maxY ? null : maxY;
 }
 
 export function getMetricName(metric: ExploreMetric) {

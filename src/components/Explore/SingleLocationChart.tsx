@@ -1,5 +1,6 @@
 import React, { useCallback, Fragment } from 'react';
 import isNumber from 'lodash/isNumber';
+import isFinite from 'lodash/isFinite';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -145,6 +146,7 @@ const SingleLocationChart: React.FC<{
   yTickFormat: (val: number) => string;
   yTooltipFormat: (val: number) => string;
   xTickTimeUnit: TimeUnit;
+  maxYFromDefinition: number | null;
 }> = ({
   width,
   height,
@@ -161,10 +163,13 @@ const SingleLocationChart: React.FC<{
   yTickFormat,
   yTooltipFormat,
   xTickTimeUnit,
+  maxYFromDefinition,
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
-  const maxY = getMaxY(seriesList, dateFrom, dateTo);
+  const maxY = isFinite(maxYFromDefinition)
+    ? maxYFromDefinition
+    : getMaxY(seriesList, dateFrom, dateTo);
 
   const numDays = daysBetween(dateFrom, dateTo);
 
