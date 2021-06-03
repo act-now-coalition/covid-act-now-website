@@ -110,7 +110,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
   const epidemiologyReasoning = levelText(
     level,
-    `Because each person is infecting less than one other person, the total number of current cases in ${locationName} is shrinking.`,
+    `Because each person is infecting fewer than one other person, the total number of current cases in ${locationName} is shrinking.`,
     `Because this number is around 1.0, it means that COVID continues to spread at about a constant rate.`,
     `As such, the total number of active cases in ${locationName} is growing.`,
     `As such, the total number of current cases in ${locationName} is quickly growing.`,
