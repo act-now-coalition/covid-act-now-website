@@ -7,5 +7,18 @@
       "cta": "Learn more",
       "url": "/covid-risk-levels-metrics#vulnerability"
     }
+  ],
+  "bodySections": [
+    {
+      "sectionBody": "Higher vulnerability areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.  \n\nAs of April 15, 2021, people in the most vulnerable third of U.S. counties are 47 percent more likely to have died from COVID than people in the least vulnerable third of U.S. counties. \n\n[Why this data is important for all communities](/covid-explained/covid-vulnerability-data)"
+    },
+    {
+      "sectionBody": "We use data from Surgo Ventures’ COVID-19 Community Vulnerability Index (CCVI). Surgo Ventures is a nonprofit with expertise in behavioral and data science.",
+      "sectionTitle": "Data source"
+    },
+    {
+      "sectionBody": "Known as the COVID-19 Community Vulnerability Index (CCVI), this index compares states, counties, and metros across the U.S. and ranks their vulnerability relative to each other, for example with the least vulnerable county assigned a score of 0 percent, and the most vulnerable county in the U.S. with a score of 100 percent, meaning it is more vulnerable than 100 of counties in the U.S.",
+      "sectionTitle": "How it’s calculated"
+    }
   ]
 }
