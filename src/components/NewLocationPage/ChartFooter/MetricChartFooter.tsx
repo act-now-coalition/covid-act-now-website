@@ -28,9 +28,10 @@ export interface ShareButtonProps {
 
 const MetricChartFooter: React.FC<{
   footerText: string | null;
+  disclaimer: string | null;
   shareButtonProps: ShareButtonProps;
   aboutModal: AboutModalProps;
-}> = ({ footerText, shareButtonProps, aboutModal }) => {
+}> = ({ footerText, disclaimer, shareButtonProps, aboutModal }) => {
   const [openModal, setOpenModal] = useState(false);
   const dialogProps = {
     open: openModal,
@@ -48,6 +49,13 @@ const MetricChartFooter: React.FC<{
             <ModalButton onClick={() => setOpenModal(true)}>
               <AboutText>About this data</AboutText>
             </ModalButton>
+            {disclaimer && (
+              <>
+                <br />
+                <br />
+                {disclaimer}
+              </>
+            )}
             <NewDialog {...dialogProps} />
           </FooterText>
           <ButtonContainer>
@@ -56,7 +64,16 @@ const MetricChartFooter: React.FC<{
         </Footer>
       </DesktopOnly>
       <MobileOnly>
-        <FooterText>{footerText}&nbsp;</FooterText>
+        <FooterText>
+          {footerText}
+          {disclaimer && (
+            <>
+              <br />
+              <br />
+              {disclaimer}
+            </>
+          )}
+        </FooterText>
         <Footer>
           <ModalButton onClick={() => setOpenModal(true)}>
             <AboutText>About this data</AboutText>
