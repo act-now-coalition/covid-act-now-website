@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import {
+  StyledLink as RegionItemWrappingLink,
+  SkeletonWrapper as RegionItemSkeletonWrapper,
+} from 'components/RegionItem/RegionItem.style';
 
 export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
   display: flex;
@@ -23,13 +27,18 @@ export const Section = styled.div`
 export const RegionItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.75rem;
   margin-top: 0.75rem;
   margin-bottom: 2.25rem;
   margin-left: 1rem;
   margin-right: 0;
   flex: 1;
   overflow-x: auto;
+
+  ${RegionItemWrappingLink},${RegionItemSkeletonWrapper} {
+    &:first-of-type{
+      margin-right: .75rem;
+    }
+  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
