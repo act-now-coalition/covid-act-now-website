@@ -15,7 +15,7 @@ export const ModalContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     height: unset;
     width: 100%;
-    max-width: 600px;
+    max-width: 580px;
     border-radius: 4px;
     margin: auto;
   }

@@ -302,7 +302,7 @@ const ExploreCopy: React.FunctionComponent<{
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
-            maxWidth={325}
+            maxWidth={400}
           />
         </Styles.ChartControlsContainer>
         {selectedLocations.length > 0 && hasData && (
