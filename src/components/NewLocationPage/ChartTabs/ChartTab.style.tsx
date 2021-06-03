@@ -1,25 +1,36 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import MuiTab from '@material-ui/core/Tab';
+import MuiTabs from '@material-ui/core/Tabs';
+
+export const Tabs = styled(MuiTabs)`
+  .MuiTabs-indicator {
+    background-color: ${COLOR_MAP.BLACK};
+  }
+`;
+
+export const Tab = styled(MuiTab)`
+  line-height: 1;
+  text-align: left;
+  padding: 6px 0;
+  margin-right: 1.5rem;
+  &.Mui-selected {
+    font-weight: 500;
+  }
+`;
 
 export const TabsContainer = styled.div`
   display: flex;
 `;
 
-export const Tab = styled.div`
-  display: flex;
+export const TabContainer = styled.div`
+  align-itmes: start;
+  display: inline-flex;
   flex-direction: column;
   min-width: 4rem;
   max-width: 10.5rem;
-  margin-right: 1.5rem;
   justify-content: space-between;
-
-  &:hover,
-  &:focus {
-    color: ${COLOR_MAP.BLACK};
-    font-weight: 500;
-    border-bottom: 3px solid ${COLOR_MAP.BLACK};
-  }
 `;
 
 export const TabTitle = styled.div`
@@ -32,7 +43,7 @@ export const TabTitle = styled.div`
 
 export const TabContent = styled.div`
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const MetricSubLabel = styled.div`

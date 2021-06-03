@@ -2,7 +2,12 @@ import React from 'react';
 import { formatValue, getLevelInfo } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
-import { Tab, TabTitle, TabContent, MetricSubLabel } from './ChartTab.style';
+import {
+  TabContainer,
+  TabTitle,
+  TabContent,
+  MetricSubLabel,
+} from './ChartTab.style';
 import { CircleIcon } from '../Shared/Shared.style';
 import { Value } from '../SummaryStat/SummaryStat.style';
 import { getMetricNameForStat, metricSubLabelText } from '../SummaryStat/utils';
@@ -18,7 +23,7 @@ const ChartTab: React.FC<{ metric: Metric; value: number | null }> = ({
   const formattedValue = formatValue(metric, value, /*nullValueCopy=*/ '-');
 
   return (
-    <Tab>
+    <TabContainer>
       <TabTitle>
         {metricName}
         {isMobile && hasSubLabel && (
@@ -36,7 +41,7 @@ const ChartTab: React.FC<{ metric: Metric; value: number | null }> = ({
           </MetricSubLabel>
         )}
       </TabContent>
-    </Tab>
+    </TabContainer>
   );
 };
 

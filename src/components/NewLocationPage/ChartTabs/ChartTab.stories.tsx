@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChartTab from './ChartTab';
+import ChartTabs from './ChartTabs';
 import { Metric } from 'common/metricEnum';
-import { TabsContainer } from './ChartTab.style';
 
 export default {
   title: 'Location page redesign/Chart Tabs',
@@ -28,11 +28,20 @@ export const VaccinationTab = () => {
 };
 
 export const MultipleTabs = () => {
+  const tabsContent = [
+    { metric: Metric.CASE_DENSITY, value: 25 },
+    { metric: Metric.CASE_GROWTH_RATE, value: 0.25 },
+    { metric: Metric.HOSPITAL_USAGE, value: 0.5 },
+  ];
+  const onChangeTab = (newMetric: number) => {
+    setCurrentTabIndex(newMetric);
+  };
+  const [currentTabIndex, setCurrentTabIndex] = useState(0);
   return (
-    <TabsContainer>
-      <ChartTab metric={Metric.CASE_DENSITY} value={25} />
-      <ChartTab metric={Metric.CASE_GROWTH_RATE} value={0.25} />
-      <ChartTab metric={Metric.HOSPITAL_USAGE} value={0.5} />
-    </TabsContainer>
+    <ChartTabs
+      activeTabIndex={currentTabIndex}
+      tabsContent={tabsContent}
+      onChangeTab={onChangeTab}
+    />
   );
 };
