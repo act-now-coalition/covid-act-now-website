@@ -2,6 +2,7 @@ import React from 'react';
 import { Series } from './interfaces';
 import SingleLocationChart from './SingleLocationChart';
 import MultipleLocationsChart from './MultipleLocationsChart';
+import { TimeUnit } from 'common/utils/time-utils';
 
 const ExploreChart: React.FC<{
   hasMultipleLocations: boolean;
@@ -17,6 +18,10 @@ const ExploreChart: React.FC<{
   barOpacity?: number;
   barOpacityHover?: number;
   isMobileXs?: boolean;
+  dateRange: Date[];
+  yTickFormat: (val: number) => string;
+  yTooltipFormat: (val: number) => string;
+  xTickTimeUnit: TimeUnit;
 }> = ({
   hasMultipleLocations,
   barOpacity,

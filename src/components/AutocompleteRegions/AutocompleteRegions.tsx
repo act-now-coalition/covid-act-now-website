@@ -23,6 +23,12 @@ function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
 
+export const getLocationLabel = (region: Region) => {
+  if (region instanceof MetroArea) {
+    return `${region.shortName}, ${region.stateCodes}`;
+  } else return region.shortName;
+};
+
 // TODO(Pablo): Use this component for the Newsletter
 const AutocompleteRegions: React.FC<{
   regions: Region[];
@@ -47,12 +53,6 @@ const AutocompleteRegions: React.FC<{
   const ariaLabelOptions = ariaLabelledBy
     ? { 'aria-labelledby': ariaLabelledBy }
     : { 'aria-label': 'Select locations' };
-
-  const getLocationLabel = (region: Region) => {
-    if (region instanceof MetroArea) {
-      return `${region.shortName}, ${region.stateCodes}`;
-    } else return region.shortName;
-  };
 
   const renderTagsOption = { renderTags };
 
