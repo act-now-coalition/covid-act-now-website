@@ -476,6 +476,14 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
       return `Hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_HOSPITALIZATIONS:
       return `ICU hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.VACCINATIONS_FIRST_DOSE:
+      return `Percent vaccinated (1+ dose) in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.VACCINATIONS_COMPLETED:
+      return `Percent vaccinated (fully) in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.ICU_USED:
+      return `ICU capacity used in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.POSITIVITY_RATE:
+      return `Positive test rate in ${locationName}, according to @CovidActNow. See the chart: `;
   }
   return '';
 }
