@@ -15,22 +15,22 @@ export const ModalContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     height: unset;
     width: 100%;
-    max-width: 600px;
+    max-width: 580px;
     border-radius: 4px;
-    margin: 10rem auto auto;
+    margin: auto;
   }
 `;
 
 export const ModalHeader = styled.div`
   display: flex;
   margin-bottom: 2rem;
-  gap: 1.75rem;
   justify-content: space-between;
 `;
 
 export const ModalTitle = styled.h1`
   ${props => props.theme.fonts.regularBookMidWeight};
   margin: 0;
+  margin-right: 1.75rem;
   font-size: 1.25rem;
 `;
 

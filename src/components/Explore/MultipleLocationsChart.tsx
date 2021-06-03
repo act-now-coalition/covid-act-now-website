@@ -3,6 +3,7 @@ import isNumber from 'lodash/isNumber';
 import last from 'lodash/last';
 import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
+import isFinite from 'lodash/isFinite';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
@@ -126,6 +127,7 @@ const MultipleLocationsChart: React.FC<{
   yTickFormat: (val: number) => string;
   yTooltipFormat: (val: number) => string;
   xTickTimeUnit: TimeUnit;
+  maxYFromDefinition: number | null;
 }> = ({
   width,
   height,
@@ -141,6 +143,7 @@ const MultipleLocationsChart: React.FC<{
   yTickFormat,
   yTooltipFormat,
   xTickTimeUnit,
+  maxYFromDefinition,
 }) => {
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
@@ -148,7 +151,9 @@ const MultipleLocationsChart: React.FC<{
 
   const [dateFrom, dateTo] = dateRange;
 
-  const maxY = getMaxY(seriesList, dateFrom, dateTo);
+  const maxY = isFinite(maxYFromDefinition)
+    ? maxYFromDefinition
+    : getMaxY(seriesList, dateFrom, dateTo);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;

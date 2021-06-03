@@ -39,7 +39,7 @@ const LocationSelector: React.FC<{
 
   const closeModal = () => setModalOpen(false);
 
-  const regionNames = selectedRegions.map(getLocationLabel).join(', ');
+  const regionNames = selectedRegions.map(getLocationLabel).join('; ');
 
   const id = uuidv4();
 

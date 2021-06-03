@@ -39,6 +39,7 @@ import {
   getYFormat,
   getYAxisDecimalPlaces,
   getXTickTimeUnitForPeriod,
+  getMaxYFromDefinition,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -255,6 +256,7 @@ const ExploreCopy: React.FunctionComponent<{
     const [timeRangeMenuLabel, setTimeRangeMenuLabel] = useState(
       allPeriodLabels[period],
     );
+    const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
     const sharedParams = useSharedComponentParams(SharedComponent.Explore);
     useEffect(() => {
@@ -302,7 +304,7 @@ const ExploreCopy: React.FunctionComponent<{
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
-            maxWidth={325}
+            maxWidth={400}
           />
         </Styles.ChartControlsContainer>
         {selectedLocations.length > 0 && hasData && (
@@ -327,6 +329,7 @@ const ExploreCopy: React.FunctionComponent<{
                     yTickFormat={yTickFormat}
                     yTooltipFormat={yTooltipFormat}
                     xTickTimeUnit={getXTickTimeUnitForPeriod(period)}
+                    maxYFromDefinition={maxYFromDefinition}
                   />
                 ) : (
                   <div style={{ height: 400 }} />

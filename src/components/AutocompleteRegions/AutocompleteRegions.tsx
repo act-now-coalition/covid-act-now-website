@@ -4,7 +4,7 @@ import Autocomplete, {
 } from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import { Region, MetroArea } from 'common/regions';
-import { StyledTextField } from './AutocompleteRegions.style';
+import { StyledTextField, StyledPaper } from './AutocompleteRegions.style';
 /**
  * `createFilterOptions` creates a configuration object that defines how the
  * user input will be matched against the options in the Autocomplete
@@ -59,6 +59,7 @@ const AutocompleteRegions: React.FC<{
   return (
     <Autocomplete
       multiple
+      disablePortal // so the menu always opens downward
       options={regions}
       getOptionLabel={getLocationLabel}
       onChange={onChangeRegions}
@@ -78,6 +79,7 @@ const AutocompleteRegions: React.FC<{
         />
       )}
       {...renderTagsOption}
+      PaperComponent={StyledPaper}
     />
   );
 };

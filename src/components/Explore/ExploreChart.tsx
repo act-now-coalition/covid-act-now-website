@@ -22,6 +22,7 @@ const ExploreChart: React.FC<{
   yTickFormat: (val: number) => string;
   yTooltipFormat: (val: number) => string;
   xTickTimeUnit: TimeUnit;
+  maxYFromDefinition: number | null;
 }> = ({
   hasMultipleLocations,
   barOpacity,

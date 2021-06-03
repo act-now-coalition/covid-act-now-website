@@ -21,6 +21,7 @@ import {
   getMetricDataMeasure,
   getDateRange,
   getYFormat,
+  getMaxYFromDefinition,
 } from 'components/Explore/utils';
 import { Series } from 'components/Explore/interfaces';
 import regions, { Region } from 'common/regions';
@@ -49,6 +50,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const dataMeasure = getMetricDataMeasure(currentMetric);
   const yTickFormat = getYFormat(dataMeasure, 0);
   const yTooltipFormat = getYFormat(dataMeasure, 1);
+  const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
   const dateRange = getDateRange(Period.ALL);
 
@@ -85,6 +87,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   yTickFormat={yTickFormat}
                   yTooltipFormat={yTooltipFormat}
                   xTickTimeUnit={TimeUnit.MONTHS}
+                  maxYFromDefinition={maxYFromDefinition}
                 />
               )}
             </ParentSize>
