@@ -20,8 +20,10 @@ import vulnerabilityData from '../articles/covid-vulnerability-data.json';
 import federalResources from '../articles/federal-resources-covid-relief.json';
 import vaccineTrials from '../articles/covid-vaccine-trials.json';
 import testingBasics from '../articles/covid-testing-basics.json';
+import vaccineHesitancy from '../articles/combatting-vaccine-hesitancy.json';
 
 const orderedArticles = [
+  vaccineHesitancy,
   vulnerabilityData,
   federalResources,
   schoolGuidance,
