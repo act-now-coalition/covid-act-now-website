@@ -5,8 +5,14 @@ import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 
 export const Tabs = styled(MuiTabs)`
+  .MuiTabs-flexContainer {
+    align-items: flex-end;
+  }
   .MuiTabs-indicator {
     background-color: ${COLOR_MAP.BLACK};
+  }
+  .MuiTab-root {
+    min-width: fit-content;
   }
 `;
 
@@ -15,6 +21,9 @@ export const Tab = styled(MuiTab)`
   text-align: left;
   padding: 6px 0;
   margin-right: 1.5rem;
+  .MuiTab-wrapper {
+    align-items: start;
+  }
   &.Mui-selected {
     font-weight: 500;
   }
@@ -27,8 +36,7 @@ export const TabsContainer = styled.div`
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 4rem;
-  max-width: 10.5rem;
+  width: fit-content;
   justify-content: space-between;
 `;
 
