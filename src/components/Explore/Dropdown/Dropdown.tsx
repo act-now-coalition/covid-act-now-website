@@ -9,11 +9,18 @@ const Dropdown: React.FC<{
   menuLabel: string;
   itemLabels: string[];
   onSelect: (itemIndex: number) => void;
-  defaultSelectionLabel: string;
+  buttonSelectionLabel: string;
   maxWidth: number;
-}> = ({ menuLabel, itemLabels, onSelect, defaultSelectionLabel, maxWidth }) => {
+  setLabel: any;
+}> = ({
+  menuLabel,
+  itemLabels,
+  onSelect,
+  buttonSelectionLabel,
+  maxWidth,
+  setLabel,
+}) => {
   const [open, setOpen] = useState(false);
-  const [buttonLabel, setButtonLabel] = useState(defaultSelectionLabel);
 
   const handleMenuButtonClick = () => {
     if (!open) {
@@ -39,7 +46,7 @@ const Dropdown: React.FC<{
           onClick={handleMenuButtonClick}
           open={open}
           menuLabel={menuLabel}
-          buttonLabel={buttonLabel}
+          buttonLabel={buttonSelectionLabel}
           ariaControlsId={menuId}
         />
         <ListContainer $open={open} $maxWidth={maxWidth}>
@@ -50,7 +57,7 @@ const Dropdown: React.FC<{
                 $maxWidth={maxWidth}
                 onClick={() => {
                   onSelect(i);
-                  setButtonLabel(label);
+                  setLabel(label);
                   trackEvent(
                     EventCategory.EXPLORE,
                     EventAction.CLICK,

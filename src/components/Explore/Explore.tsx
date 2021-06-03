@@ -249,6 +249,13 @@ const ExploreCopy: React.FunctionComponent<{
       });
     };
 
+    const [metricMenuLabel, setMetricMenuLabel] = useState(
+      metricLabels[currentMetric],
+    );
+    const [timeRangeMenuLabel, setTimeRangeMenuLabel] = useState(
+      allPeriodLabels[period],
+    );
+
     const sharedParams = useSharedComponentParams(SharedComponent.Explore);
     useEffect(() => {
       if (sharedParams) {
@@ -258,8 +265,9 @@ const ExploreCopy: React.FunctionComponent<{
           (fips: string) => regions.findByFipsCode(fips)!,
         );
         setSelectedLocations(locations);
+        setMetricMenuLabel(metricLabels[sharedParams.currentMetric]);
       }
-    }, [sharedParams]);
+    }, [sharedParams, metricLabels]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
@@ -276,17 +284,19 @@ const ExploreCopy: React.FunctionComponent<{
         <Styles.ChartControlsContainer>
           <Dropdown
             menuLabel="Metric"
-            defaultSelectionLabel={metricLabels[currentMetric]}
+            buttonSelectionLabel={metricMenuLabel}
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
             maxWidth={250}
+            setLabel={setMetricMenuLabel}
           />
           <Dropdown
             menuLabel="Past # of days"
-            defaultSelectionLabel={allPeriodLabels[period]}
+            buttonSelectionLabel={timeRangeMenuLabel}
             itemLabels={allPeriodLabels}
             onSelect={onSelectPeriod}
             maxWidth={150}
+            setLabel={setTimeRangeMenuLabel}
           />
           <LocationSelector
             regions={autocompleteLocations}
