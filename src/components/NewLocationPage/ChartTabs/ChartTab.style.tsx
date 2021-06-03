@@ -25,8 +25,7 @@ export const TabsContainer = styled.div`
 `;
 
 export const TabContainer = styled.div`
-  align-itmes: start;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   min-width: 4rem;
   max-width: 10.5rem;
