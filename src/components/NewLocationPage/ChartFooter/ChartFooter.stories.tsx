@@ -25,6 +25,10 @@ export default {
 
 const footerText =
   'Over the last week, Texas has averaged 3,173 new confirmed cases per day (10.9 for every 100,000 residents).';
+const header = 'This is the modal header.';
+const body = 'This is the modal body.';
+const links = [{ cta: 'Learn more', url: '/' }];
+const region = regions.findByFipsCodeStrict('48');
 
 const legendIcon = (
   <svg
@@ -131,12 +135,6 @@ export const ChartFooterWithTextAndAboutSection = () => {
 };
 
 export const MetricChartFooterWithDiscliamer = () => {
-  const footerText =
-    'Over the last week, Texas has averaged 3,173 new confirmed cases per day (10.9 for every 100,000 residents).';
-  const header = 'This is the modal header.';
-  const body = 'This is the modal body.';
-  const links = [{ cta: 'Learn more', url: '/' }];
-  const region = regions.findByFipsCodeStrict('48');
   const locationSummary = useSummaries()?.[48];
   if (!locationSummary) {
     return null;
@@ -160,12 +158,6 @@ export const MetricChartFooterWithDiscliamer = () => {
 };
 
 export const MetricChartFooterNoDiscliamer = () => {
-  const footerText =
-    'Over the last week, Texas has averaged 3,173 new confirmed cases per day (10.9 for every 100,000 residents).';
-  const header = 'This is the modal header.';
-  const body = 'This is the modal body.';
-  const links = [{ cta: 'Learn more', url: '/' }];
-  const region = regions.findByFipsCodeStrict('48');
   const locationSummary = useSummaries()?.[48];
   if (!locationSummary) {
     return null;
