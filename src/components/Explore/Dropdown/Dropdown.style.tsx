@@ -37,8 +37,10 @@ export const MainButton = styled(BaseButton)<{
   border-radius: ${({ $open }) => ($open ? '4px 4px 0 0' : '4px')};
   width: 100%;
   position: relative;
+  margin-bottom: 1rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    margin-bottom: 0;
     max-width: ${({ $maxWidth }) =>
       Number.isFinite($maxWidth) && `${$maxWidth}px`};
   }

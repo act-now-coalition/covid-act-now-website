@@ -44,7 +44,6 @@ export const Subtitle = styled.div`
 export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
   display: flex;
-  gap: 1rem;
   flex-direction: column;
 
   @media (min-width: ${materialSMBreakpoint}) {

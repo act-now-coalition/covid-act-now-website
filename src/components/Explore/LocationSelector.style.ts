@@ -24,13 +24,13 @@ export const ModalContainer = styled.div`
 export const ModalHeader = styled.div`
   display: flex;
   margin-bottom: 2rem;
-  gap: 1.75rem;
   justify-content: space-between;
 `;
 
 export const ModalTitle = styled.h1`
   ${props => props.theme.fonts.regularBookMidWeight};
   margin: 0;
+  margin-right: 1.75rem;
   font-size: 1.25rem;
 `;
 
