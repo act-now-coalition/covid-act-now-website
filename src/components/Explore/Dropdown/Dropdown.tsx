@@ -11,7 +11,7 @@ const Dropdown: React.FC<{
   onSelect: (itemIndex: number) => void;
   buttonSelectionLabel: string;
   maxWidth: number;
-  setLabel: any;
+  setLabel: React.Dispatch<React.SetStateAction<string>>;
 }> = ({
   menuLabel,
   itemLabels,
