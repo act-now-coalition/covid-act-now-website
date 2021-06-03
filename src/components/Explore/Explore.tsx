@@ -276,7 +276,7 @@ const ExploreCopy: React.FunctionComponent<{
         <Styles.ChartControlsContainer>
           <Dropdown
             menuLabel="Metric"
-            defaultSelectionLabel={metricLabels[defaultMetric]}
+            defaultSelectionLabel={metricLabels[currentMetric]}
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
             maxWidth={250}
