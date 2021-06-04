@@ -44,7 +44,6 @@ export const Subtitle = styled.div`
 export const ChartControlsContainer = styled.div`
   margin: ${theme.spacing(2)}px auto;
   display: flex;
-  gap: 1rem;
   flex-direction: column;
 
   @media (min-width: ${materialSMBreakpoint}) {
@@ -73,6 +72,7 @@ export const NormalizeCheckbox = styled(MuiCheckbox)`
 export const LegendContainer = styled(Box)`
   display: flex;
   flex-wrap: wrap;
+  margin-right: 2rem;
 `;
 
 export const LegendItem = styled(Box)`
@@ -350,7 +350,6 @@ export const DisclaimerBody = styled(Typography)`
 export const FooterContainer = styled.div`
   padding-top: 1rem;
   display: flex;
-  gap: 2rem;
   justify-content: space-between;
   padding-top: 1rem;
 `;

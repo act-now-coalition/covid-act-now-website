@@ -5,9 +5,12 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const DropdownWrapper = styled.div<{ $maxWidth: number }>`
   width: 100%;
+  margin-bottom: 1rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     max-width: ${({ $maxWidth }) => `${$maxWidth}px`};
+    margin-bottom: 0;
+    margin-right: 1rem;
   }
 `;
 
