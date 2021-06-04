@@ -40,6 +40,11 @@ export const USMapPreviewHeader = styled.div<{ sideLegend: Boolean }>`
   padding-top: ${props => (props.sideLegend ? '1.5rem' : '0')};
 `;
 
+export const LastUpdatedWrapper = styled.div`
+  font-size: 0.75rem;
+  text-align: center;
+`;
+
 export const MapWrapper = styled.div`
   width: 100%;
 `;

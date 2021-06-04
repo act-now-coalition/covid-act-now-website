@@ -8,12 +8,14 @@ import {
   MapHeaderHeader,
   PreviewFooter,
   FooterText,
+  LastUpdatedWrapper,
   MapWrapper,
 } from './SocialLocationPreview.style';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import Map from 'components/Map/Map';
 import { Legend, LegendItem } from 'components/Map/Legend';
+import { DateFormat, formatDateTime } from 'common/utils/time-utils';
 
 const SocialLocationPreview = (props: {
   border?: Boolean;
@@ -30,10 +32,16 @@ const SocialLocationPreview = (props: {
   };
   const Footer = props.Footer;
   const isEmbed = props.isEmbed;
+  const showUpdatedInHeader = true;
   const showCountyView = !isEmbed && !props.isEmbedPreview;
   return (
     <Wrapper border={props.border}>
       <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
+      {showUpdatedInHeader && (
+        <LastUpdatedWrapper>
+          Updated {formatDateTime(new Date(), DateFormat.MMMM_D_YYYY)}
+        </LastUpdatedWrapper>
+      )}
       <USMapPreviewHeader sideLegend={!isEmbed}>
         <MapWrapper>
           <Map
@@ -82,7 +90,9 @@ const SocialLocationPreview = (props: {
         <Footer />
       ) : (
         <PreviewFooter>
-          <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+          {!showUpdatedInHeader && (
+            <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+          )}
           <FooterText>covidactnow.org</FooterText>
         </PreviewFooter>
       )}
