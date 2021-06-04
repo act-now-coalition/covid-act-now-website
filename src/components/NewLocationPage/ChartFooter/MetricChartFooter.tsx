@@ -5,6 +5,7 @@ import {
   FooterText,
   AboutText,
   ModalButton,
+  DisclaimerWrapper,
 } from './ChartFooter.style';
 import NewDialog from 'components/NewDialog/NewDialog';
 import { Link } from 'cms-content/modals';
@@ -27,8 +28,8 @@ export interface ShareButtonProps {
 }
 
 const MetricChartFooter: React.FC<{
-  footerText: string | null;
-  disclaimer: string | null;
+  footerText: string;
+  disclaimer?: string;
   shareButtonProps: ShareButtonProps;
   aboutModal: AboutModalProps;
 }> = ({ footerText, disclaimer, shareButtonProps, aboutModal }) => {
@@ -49,13 +50,7 @@ const MetricChartFooter: React.FC<{
             <ModalButton onClick={() => setOpenModal(true)}>
               <AboutText>About this data</AboutText>
             </ModalButton>
-            {disclaimer && (
-              <>
-                <br />
-                <br />
-                {disclaimer}
-              </>
-            )}
+            {disclaimer && <DisclaimerWrapper>{disclaimer}</DisclaimerWrapper>}
             <NewDialog {...dialogProps} />
           </FooterText>
           <ButtonContainer>
@@ -66,13 +61,7 @@ const MetricChartFooter: React.FC<{
       <MobileOnly>
         <FooterText>
           {footerText}
-          {disclaimer && (
-            <>
-              <br />
-              <br />
-              {disclaimer}
-            </>
-          )}
+          {disclaimer && <DisclaimerWrapper>{disclaimer}</DisclaimerWrapper>}
         </FooterText>
         <Footer>
           <ModalButton onClick={() => setOpenModal(true)}>

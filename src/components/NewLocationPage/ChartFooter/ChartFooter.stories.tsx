@@ -134,7 +134,7 @@ export const ChartFooterWithTextAndAboutSection = () => {
   );
 };
 
-export const MetricChartFooterWithDiscliamer = () => {
+export const MetricChartFooterWithDisclaimer = () => {
   const locationSummary = useSummaries()?.[48];
   if (!locationSummary) {
     return null;
@@ -157,7 +157,7 @@ export const MetricChartFooterWithDiscliamer = () => {
   );
 };
 
-export const MetricChartFooterNoDiscliamer = () => {
+export const MetricChartFooterNoDisclaimer = () => {
   const locationSummary = useSummaries()?.[48];
   if (!locationSummary) {
     return null;
@@ -166,7 +166,6 @@ export const MetricChartFooterNoDiscliamer = () => {
   return (
     <MetricChartFooter
       footerText={footerText}
-      disclaimer={null}
       shareButtonProps={{
         region: region,
         stats: stats,

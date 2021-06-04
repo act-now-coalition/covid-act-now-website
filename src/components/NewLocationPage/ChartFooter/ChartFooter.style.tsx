@@ -65,3 +65,7 @@ export const ModalButton = styled(TooltipAnchorText).attrs(props => ({
   border: none;
   padding: 0;
 `;
+
+export const DisclaimerWrapper = styled.div`
+  margin-top: 1rem;
+`;
