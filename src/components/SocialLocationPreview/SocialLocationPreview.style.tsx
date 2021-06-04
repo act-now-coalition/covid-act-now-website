@@ -7,7 +7,9 @@ export const Wrapper = styled.div<{
   border?: Boolean;
 }>`
   box-shadow: ${props =>
-    props.border ? 'none' : '0px 12px 40px rgba(0, 0, 0, 0.2)'};
+    props.noShadow || props.border
+      ? 'none'
+      : '0px 12px 40px rgba(0, 0, 0, 0.2)'};
   border: ${props => (props.border ? `2px solid ${palette.divider}` : 'none')};
   border-radius: 4px;
   color: black;
@@ -29,8 +31,12 @@ export const PreviewHeader = styled.div`
   ${PreviewHeaderStyles}
 `;
 
-export const USMapPreviewHeader = styled.div<{ sideLegend: Boolean }>`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+export const USMapPreviewHeader = styled.div<{
+  border?: Boolean;
+  sideLegend: Boolean;
+}>`
+  border-bottom: ${props =>
+    props.border ? '1px solid rgba(0, 0, 0, 0.12)' : 'none'};
   padding: 1.5rem;
   display: flex;
   flex-direction: ${props => (props.sideLegend ? 'row' : 'column')};
@@ -38,6 +44,11 @@ export const USMapPreviewHeader = styled.div<{ sideLegend: Boolean }>`
   justify-content: center;
   padding-bottom: 0px;
   padding-top: ${props => (props.sideLegend ? '1.5rem' : '0')};
+`;
+
+export const LastUpdatedWrapper = styled.div`
+  font-size: 0.75rem;
+  text-align: center;
 `;
 
 export const MapWrapper = styled.div`
