@@ -74,7 +74,13 @@ const Button: React.FC<{ to?: string; href?: string; cta: string }> = ({
   cta,
 }) => {
   return (
-    <LargeOutlinedButton to={to} href={href} endIcon={<ArrowForwardIcon />}>
+    <LargeOutlinedButton
+      to={to}
+      href={href}
+      endIcon={<ArrowForwardIcon />}
+      trackingLabel={cta}
+      trackingCategory={EventCategory.ABOUT}
+    >
       {cta}
     </LargeOutlinedButton>
   );
@@ -138,7 +144,7 @@ const About = () => {
           <AboutHeading2>{aboutContent.partnersHeader}</AboutHeading2>
           <SectionContent>
             <ExpandableContainer
-              collapsedHeightMobile={275}
+              collapsedHeightMobile={350}
               collapsedHeightDesktop={565}
               tabTextCollapsed={<>More</>}
               tabTextExpanded={<>Less</>}

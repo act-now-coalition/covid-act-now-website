@@ -41,6 +41,10 @@ export const AlumniWrapper = styled.span`
       color: ${COLOR_MAP.BLUE};
     }
   }
+
+  &:not(:last-of-type):after {
+    content: ', ';
+  }
 `;
 
 export const AlumniName = styled.span`

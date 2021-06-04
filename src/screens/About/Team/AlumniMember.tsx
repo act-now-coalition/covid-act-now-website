@@ -5,11 +5,14 @@ import { UserProfile } from 'cms-content/team';
 
 const AlumniMember = (props: { teamMember: UserProfile }) => {
   const { teamMember } = props;
+  // ensure no trailing spaces from CMS
+  const fullName = teamMember.fullName?.trim();
+  const { profileUrl } = teamMember;
 
   return (
     <AlumniWrapper>
-      <ExternalLink href={teamMember.profileUrl}>
-        <AlumniName>{teamMember.fullName}</AlumniName>
+      <ExternalLink href={profileUrl}>
+        <AlumniName>{fullName}</AlumniName>
       </ExternalLink>
     </AlumniWrapper>
   );
