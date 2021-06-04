@@ -6,10 +6,9 @@
   "aboutContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020.  Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
   "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
   "introContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. \n\nWe help people make informed decisions by providing timely and accurate data about COVID in every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge\n\nPlease note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services.",
-  "missionContent": "We help people make informed decisions by providing **timely and accurate data** about COVID in the United States.\n\n We are committed to:",
+  "missionContent": "We help people make informed decisions by providing **timely and accurate data** about COVID in the United States. We are committed to:",
   "partnersContent": [
     {
-      "copy": "...",
       "logos": [
         {
           "image": "/images_cms/about-notable-users-gumc.png",
@@ -30,7 +29,6 @@
       "header": "Institutional partners"
     },
     {
-      "copy": "...",
       "logos": [
         {
           "url": "https://schmidtfutures.com",
@@ -46,7 +44,6 @@
       "header": "Funders"
     },
     {
-      "copy": "...",
       "logos": [
         {
           "altText": "IBM",
@@ -134,53 +131,6 @@
   "impactHeader": "Our impact",
   "joinUsHeader": "Join us",
   "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
-  "governmentLogos": [
-    {
-      "image": "/images_cms/anchorage-1-.png",
-      "altText": "Municipality of Anchorage Logo",
-      "url": "https://www.muni.org/pages/default.aspx"
-    },
-    {
-      "image": "/images_cms/cdph-1-.png",
-      "altText": "California Department of Public Health Logo",
-      "url": "https://www.cdph.ca.gov/"
-    },
-    {
-      "image": "/images_cms/new-orleans-mayor-s-office.png",
-      "altText": "New Orleans Mayor's Office Logo",
-      "url": "https://www.nola.gov/mayor/"
-    },
-    {
-      "image": "/images_cms/dc-health-logo-4c-rgb-300ppi.png",
-      "altText": "Washington, DC Department of Health Logo",
-      "url": "https://dchealth.dc.gov/"
-    },
-    {
-      "image": "/images_cms/hardy_county-1-.jpg",
-      "altText": "Hardy County Sheriff's Office Logo",
-      "url": "http://hardycounty.com/law-enforcement"
-    },
-    {
-      "image": "/images_cms/steuben_county-1-.jpg",
-      "altText": "Steuben County, New York Logo",
-      "url": "https://www.steubencony.org/"
-    },
-    {
-      "image": "/images_cms/civil-air-patrol-logo.jpg",
-      "altText": "Civil Air Patrol Logo",
-      "url": "https://www.gocivilairpatrol.com/"
-    },
-    {
-      "image": "/images_cms/naco-logo.png",
-      "altText": "National Association of Counties Logo",
-      "url": "https://www.naco.org/"
-    },
-    {
-      "altText": "Washington National Guard Logo",
-      "image": "/images_cms/washington-nationa-guard-logo-red.svg",
-      "url": "https://mil.wa.gov/national-guard"
-    }
-  ],
   "partnersHeader": "Our partners",
   "introHeader": "Our mission",
   "missionHeader": "Our mission",

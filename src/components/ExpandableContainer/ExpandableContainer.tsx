@@ -41,10 +41,10 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
   return (
     <Container>
       <InnerContent
-        collapsedHeight={
+        $collapsedHeight={
           isMobile ? collapsedHeightMobile : collapsedHeightDesktop
         }
-        collapsed={collapsed}
+        $collapsed={collapsed}
       >
         {children}
       </InnerContent>
@@ -53,7 +53,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
         trackingCategory={trackingCategory}
         trackingLabel={`${collapsed ? 'Expand' : 'Collapse'}: ${trackingLabel}`}
         endIcon={collapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-        collapsed={collapsed}
+        $collapsed={collapsed}
       >
         {collapsed ? tabTextCollapsed : tabTextExpanded}
       </ExpandButton>

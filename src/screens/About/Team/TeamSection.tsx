@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { teams, teamsWithTitles } from 'cms-content/team';
-import { AboutHeading3 } from '../About.style';
+import { AboutHeading3, TeamGroupContainer } from '../About.style';
 import sortBy from 'lodash/sortBy';
 import Grid from '@material-ui/core/Grid';
 import ActiveMember from './ActiveMember';
@@ -21,32 +21,32 @@ const TeamSection = () => {
         return !isAlumni ? (
           <Fragment key={team.teamName}>
             <AboutHeading3>{team.teamName}</AboutHeading3>
-            <Grid container spacing={3}>
-              {teamMembers.map((teamMember, i) => {
-                return (
-                  <ActiveMember
-                    teamMember={teamMember}
-                    includeTitle={includeTitle}
-                    key={teamMember.fullName}
-                  />
-                );
-              })}
-            </Grid>
+            <TeamGroupContainer>
+              <Grid container spacing={3}>
+                {teamMembers.map((teamMember, i) => {
+                  return (
+                    <ActiveMember
+                      teamMember={teamMember}
+                      includeTitle={includeTitle}
+                      key={teamMember.fullName}
+                    />
+                  );
+                })}
+              </Grid>
+            </TeamGroupContainer>
           </Fragment>
         ) : (
           <Fragment key={team.teamName}>
             <AboutHeading3>{team.teamName}</AboutHeading3>
             <div>
-              {teamMembers
-                .map<React.ReactNode>(teamMember => {
-                  return (
-                    <AlumniMember
-                      teamMember={teamMember}
-                      key={teamMember.fullName}
-                    />
-                  );
-                })
-                .reduce((prev, curr) => [prev, ', ', curr])}
+              {teamMembers.map<React.ReactNode>(teamMember => {
+                return (
+                  <AlumniMember
+                    teamMember={teamMember}
+                    key={teamMember.fullName}
+                  />
+                );
+              })}
             </div>
           </Fragment>
         );
