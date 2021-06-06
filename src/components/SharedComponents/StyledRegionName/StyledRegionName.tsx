@@ -32,7 +32,9 @@ const StyledRegionName: React.FC<{
       {regionNameMain}
       {regionSuffix && (
         <Suffix>
-          {regionSuffix !== 'metro' ? ` ${regionSuffix}` : ` ${regionSuffix},`}
+          {condensed && regionSuffix !== 'metro'
+            ? ` ${regionSuffix}`
+            : ` ${regionSuffix},`}
         </Suffix>
       )}
       {!regionSuffix && !(region instanceof State) && <Suffix>,</Suffix>}
