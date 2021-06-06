@@ -11,6 +11,7 @@ import {
   GridItemOverview,
   GridItemSparkLines,
   MapOutsideGrid,
+  ContentContainer,
 } from './AboveTheFold.style';
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
@@ -51,53 +52,55 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
 
     return (
       <MainWrapper>
-        <GridContainer showNote={showVulnerabilityNote}>
-          <GridItemHeader>
-            <HeaderContainer>
-              <LocationName region={region} />
-              <DesktopOnly>
-                <HeaderButtons region={region} onClickShare={onClickShare} />
-              </DesktopOnly>
-              <MobileOnly>
-                <VaccineButton />
-              </MobileOnly>
-            </HeaderContainer>
-          </GridItemHeader>
-          <GridItemOverview>
-            <LocationOverview
-              region={region}
-              locationSummary={locationSummary}
-              onClickMetric={onClickMetric}
-              onClickShare={onClickShare}
-            />
-          </GridItemOverview>
-          <GridItemSparkLines>
-            <SparkLineBlock
-              region={region}
-              onClickSparkLine={onClickSparkLine}
-            />
-          </GridItemSparkLines>
-          <GridItemAlerts>
-            <GetAlertsBlock
-              region={region}
-              onClickGetAlerts={onClickAlertSignup}
-            />
-          </GridItemAlerts>
-          <GridItemMap>
-            <CountyMap region={region} />
-          </GridItemMap>
-          {showVulnerabilityNote && (
-            <GridItemNote>
-              <VulnerabilityNote
-                ccviScore={locationSummary.ccvi}
+        <ContentContainer>
+          <GridContainer showNote={showVulnerabilityNote}>
+            <GridItemHeader>
+              <HeaderContainer>
+                <LocationName region={region} />
+                <DesktopOnly>
+                  <HeaderButtons region={region} onClickShare={onClickShare} />
+                </DesktopOnly>
+                <MobileOnly>
+                  <VaccineButton />
+                </MobileOnly>
+              </HeaderContainer>
+            </GridItemHeader>
+            <GridItemOverview>
+              <LocationOverview
                 region={region}
+                locationSummary={locationSummary}
+                onClickMetric={onClickMetric}
+                onClickShare={onClickShare}
               />
-            </GridItemNote>
-          )}
-        </GridContainer>
-        <MapOutsideGrid>
-          <CountyMap region={region} />
-        </MapOutsideGrid>
+            </GridItemOverview>
+            <GridItemSparkLines>
+              <SparkLineBlock
+                region={region}
+                onClickSparkLine={onClickSparkLine}
+              />
+            </GridItemSparkLines>
+            <GridItemAlerts>
+              <GetAlertsBlock
+                region={region}
+                onClickGetAlerts={onClickAlertSignup}
+              />
+            </GridItemAlerts>
+            <GridItemMap>
+              <CountyMap region={region} />
+            </GridItemMap>
+            {showVulnerabilityNote && (
+              <GridItemNote>
+                <VulnerabilityNote
+                  ccviScore={locationSummary.ccvi}
+                  region={region}
+                />
+              </GridItemNote>
+            )}
+          </GridContainer>
+          <MapOutsideGrid>
+            <CountyMap region={region} />
+          </MapOutsideGrid>
+        </ContentContainer>
       </MainWrapper>
     );
   },

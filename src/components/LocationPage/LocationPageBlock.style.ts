@@ -5,28 +5,31 @@ import {
 } from 'assets/theme/sizes';
 
 export const BlockContainer = styled.div`
-  margin: auto;
+  margin: 0 auto 4.5rem;
+  border: 1px dotted green;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    max-width: ${props =>
+      props.theme.spacingTheme.locationPage.maxWidthContent};
     margin-bottom: 5rem;
   }
 
-  @media (min-width: 932px) {
-    max-width: ${props => props.theme.spacingTheme.maxWidthLocationPageContent};
-    width: 100%;
-    margin: 0 auto 5rem;
-  }
-
   @media (min-width: ${countyMapToFixedBreakpoint}) {
-    margin: 0 350px 5rem auto;
-  }
-
-  @media (min-width: 1750px) {
-    margin: 0 auto 5rem;
+    margin-left: 0;
   }
 
   @media print {
     margin: 0 auto;
     padding: 0 1rem;
+  }
+`;
+
+export const WidthContainer = styled.div`
+  border: 1px solid red;
+  margin: auto;
+
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
+    width: ${props =>
+      props.theme.spacingTheme.locationPage.widthContentWithStickyMap};
   }
 `;

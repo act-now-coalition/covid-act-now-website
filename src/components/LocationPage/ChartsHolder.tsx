@@ -28,6 +28,7 @@ import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock'
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
+import { WidthContainer } from './LocationPageBlock.style';
 import { LocationPageContentWrapper, BelowTheFold } from './ChartsHolder.style';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
@@ -183,56 +184,58 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           onClickSparkLine={onClickSparkLine}
         />
         <BelowTheFold>
-          <LocationPageBlock>
-            <VaccinationEligibilityBlock region={region} />
-          </LocationPageBlock>
-          <LocationPageBlock>
-            <CompareMain
-              stateName={getStateName(region) || region.name} // rename prop
-              locationsViewable={6}
-              stateId={(region as State).stateCode || undefined}
-              region={region}
-            />
-          </LocationPageBlock>
-          {!projections ? (
-            <LoadingScreen />
-          ) : (
+          <WidthContainer>
             <LocationPageBlock>
-              <Recommendations
+              <VaccinationEligibilityBlock region={region} />
+            </LocationPageBlock>
+            <LocationPageBlock>
+              <CompareMain
+                stateName={getStateName(region) || region.name} // rename prop
+                locationsViewable={6}
+                stateId={(region as State).stateCode || undefined}
                 region={region}
-                projections={projections}
-                recommendationsRef={recommendationsRef}
               />
             </LocationPageBlock>
-          )}
-          {ALL_METRICS.map(metric => (
-            <ErrorBoundary key={metric}>
-              {!projections ? (
-                <LoadingScreen />
-              ) : (
-                <LocationPageBlock>
-                  <ChartBlock
-                    metric={metric}
-                    projections={projections}
-                    chartRef={metricRefs[metric]}
-                    isMobile={isMobile}
-                    region={region}
-                    stats={stats}
-                  />
-                </LocationPageBlock>
-              )}
-            </ErrorBoundary>
-          ))}
-          <LocationPageBlock id="vulnerabilities">
-            <VulnerabilitiesBlock scores={ccviScores} region={region} />
-          </LocationPageBlock>
-          <LocationPageBlock ref={exploreChartRef} id="explore-chart">
-            <Explore
-              initialFipsList={initialFipsList}
-              title="Trends"
-              defaultMetric={defaultExploreMetric}
-            />
-          </LocationPageBlock>
+            {!projections ? (
+              <LoadingScreen />
+            ) : (
+              <LocationPageBlock>
+                <Recommendations
+                  region={region}
+                  projections={projections}
+                  recommendationsRef={recommendationsRef}
+                />
+              </LocationPageBlock>
+            )}
+            {ALL_METRICS.map(metric => (
+              <ErrorBoundary key={metric}>
+                {!projections ? (
+                  <LoadingScreen />
+                ) : (
+                  <LocationPageBlock>
+                    <ChartBlock
+                      metric={metric}
+                      projections={projections}
+                      chartRef={metricRefs[metric]}
+                      isMobile={isMobile}
+                      region={region}
+                      stats={stats}
+                    />
+                  </LocationPageBlock>
+                )}
+              </ErrorBoundary>
+            ))}
+            <LocationPageBlock id="vulnerabilities">
+              <VulnerabilitiesBlock scores={ccviScores} region={region} />
+            </LocationPageBlock>
+            <LocationPageBlock ref={exploreChartRef} id="explore-chart">
+              <Explore
+                initialFipsList={initialFipsList}
+                title="Trends"
+                defaultMetric={defaultExploreMetric}
+              />
+            </LocationPageBlock>
+          </WidthContainer>
         </BelowTheFold>
       </LocationPageContentWrapper>
       <div ref={shareBlockRef}>
