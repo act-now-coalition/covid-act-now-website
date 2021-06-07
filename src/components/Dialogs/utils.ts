@@ -6,7 +6,7 @@ import { getDataSourceTooltipContent } from 'common/utils/provenance';
 
 export interface MetricModalContent {
   howItsCalculated: string;
-  dataSource?: any;
+  dataSource?: React.ReactElement;
   metricDefinition: string;
 }
 

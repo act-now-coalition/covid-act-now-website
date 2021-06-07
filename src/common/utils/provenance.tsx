@@ -132,7 +132,7 @@ export const getDataSourceTooltipContent = (
   metric: Metric,
   region: Region,
   provenanceInfo?: Sources,
-) => {
+): React.ReactElement => {
   const sourceFromMap = getSourceLinks(metric, region);
 
   const source =
