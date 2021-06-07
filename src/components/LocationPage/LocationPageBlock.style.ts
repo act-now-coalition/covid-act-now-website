@@ -6,7 +6,6 @@ import {
 
 export const BlockContainer = styled.div`
   margin: 0 auto 4.5rem;
-  border: 1px dotted green;
 
   @media (min-width: ${materialSMBreakpoint}) {
     max-width: ${props =>
@@ -25,7 +24,6 @@ export const BlockContainer = styled.div`
 `;
 
 export const WidthContainer = styled.div`
-  border: 1px solid red;
   margin: auto;
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {

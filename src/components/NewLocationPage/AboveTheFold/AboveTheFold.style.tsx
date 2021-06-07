@@ -18,7 +18,6 @@ export const MainWrapper = styled.div`
 export const ContentContainer = styled.div`
   margin: auto;
   display: flex;
-  border: 1px solid red;
   width: fit-content;
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
