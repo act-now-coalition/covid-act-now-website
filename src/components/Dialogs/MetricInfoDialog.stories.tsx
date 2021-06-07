@@ -13,8 +13,8 @@ export default {
   component: DialogMain,
 };
 
-export const VulnerabilitiesModal = () => {
-  const region = regions.findByFipsCodeStrict('22');
+export const Example = () => {
+  const region = regions.findByFipsCodeStrict('25');
 
   const [projection, setProjection] = useState<Projection>();
 
