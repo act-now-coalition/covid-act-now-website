@@ -160,12 +160,30 @@ const ExploreCopy: React.FunctionComponent<{
         ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
     );
 
+    const [period, setPeriod] = useState<Period>(Period.ALL);
+    const allPeriodLabels = getAllPeriodLabels();
+    const dateRange = getDateRange(period);
+
+    const onSelectPeriod = (newPeriod: Period) => {
+      const newPeriodLabel = periodMap[newPeriod].label;
+      setPeriod(newPeriod);
+      trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
+    };
+
     useEffect(() => {
       setNormalizeData(
         selectedLocations.length > 1 &&
           ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
       );
-    }, [currentMetric, selectedLocations]);
+      setMetricMenuLabel(metricLabels[currentMetric]);
+      setTimeRangeMenuLabel(allPeriodLabels[period]);
+    }, [
+      currentMetric,
+      selectedLocations,
+      metricLabels,
+      allPeriodLabels,
+      period,
+    ]);
 
     const onChangeSelectedLocations = (newLocations: Region[]) => {
       const changedLocations = uniq(newLocations);
@@ -197,14 +215,6 @@ const ExploreCopy: React.FunctionComponent<{
       }, 200);
     }, [exploreRef]);
 
-    const location = useLocation();
-    useEffect(() => {
-      if (location.pathname.includes('/explore')) {
-        const timeoutId = scrollToExplore();
-        return () => clearTimeout(timeoutId);
-      }
-    }, [location.pathname, scrollToExplore]);
-
     // We need to reset the selected locations and the default metric when
     // the user clicks a location on the Compare table or on the mini map so
     // they are not carried over to the new location page.
@@ -227,15 +237,20 @@ const ExploreCopy: React.FunctionComponent<{
     const hasData = some(chartSeries, ({ data }) => data.length > 0);
     const hasMultipleLocations = selectedLocations.length > 1;
 
-    const [period, setPeriod] = useState<Period>(Period.ALL);
-    const allPeriodLabels = getAllPeriodLabels();
-    const dateRange = getDateRange(period);
+    const { pathname } = useLocation();
 
-    const onSelectPeriod = (newPeriod: Period) => {
-      const newPeriodLabel = periodMap[newPeriod].label;
-      setPeriod(newPeriod);
-      trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
-    };
+    // Cliking a sparkline sets the default metric, so when we navigate to a different
+    // location page, we need to force reset the metric to cases in order to override that
+    // default metric setting
+    // (We also reset the time range to 'all time')
+    useEffect(() => {
+      if (pathname.includes('/explore')) {
+        const timeoutId = scrollToExplore();
+        return () => clearTimeout(timeoutId);
+      }
+      setCurrentMetric(ExploreMetric.CASES);
+      setPeriod(Period.ALL);
+    }, [pathname, scrollToExplore]);
 
     const marginRight = useMemo(
       () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
