@@ -124,6 +124,17 @@
           ],
           "showCaseStudy": true,
           "shortTitle": "RoadGoat"
+        },
+        {
+          "body": "Team Rubicon is a nonprofit organization that utilizes the skills of military veterans and first responders to provide immediate relief to those impacted by disasters and humanitarian crises. Over the past 11 years, it has responded to over 440 disasters in the U.S. and across the world.\n\n## What is the challenge?\n\nWhen the pandemic began, Team Rubicon looked for opportunities to provide medical, logistical, and administrative support to communities in need. It began deploying volunteers to provide staffing support to food banks, mobile testing locations, vaccination locations, and medical services in understaffed and under-resourced communities. As the pandemic continued, Team Rubicon needed to identify which communities were most impacted and how its team could best respond.\n\n## How is Team Rubicon responding to COVID? \n\nTeam Rubicon uses a combination of COVID metrics to assess a community’s relative risk in order to determine where to deploy volunteers. Initially, its volunteers were using complex mapping software to track the spread of COVID and decide where to allocate resources. Since discovering Covid Act Now’s API, Team Rubicon has been able to more easily track COVID data and identify areas of highest need. When multiple counties reach out for Team Rubicon’s support, it uses CAN’s API to compare case density, infection, and test positivity rates to help deploy staff to the highest risk communities.",
+          "logoUrl": "/images_cms/teamrubicon_primary_red.png",
+          "summary": "Team Rubicon uses CAN to help determine where to send volunteers as part of its COVID relief efforts.",
+          "author": "Amanda Fassler",
+          "logoAltText": "Team Rubicon logo",
+          "header": "Team Rubicon Uses CAN Data to Inform COVID Relief Response",
+          "caseStudyId": "team-rubicon",
+          "showCaseStudy": true,
+          "shortTitle": "Team Rubicon"
         }
       ]
     },
