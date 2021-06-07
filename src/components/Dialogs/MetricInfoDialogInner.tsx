@@ -1,3 +1,7 @@
+/**
+ * Content for info modals in metric chart footers
+ * Rendered as children of DialogMain
+ */
 import React from 'react';
 import { MetricDialogSectionHeader } from './Dialog.style';
 import { MarkdownBody } from 'components/Markdown';

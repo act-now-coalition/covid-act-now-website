@@ -12,20 +12,14 @@ export interface MetricModalContent {
 
 export function getMetricModalContent(
   region: Region,
-  metric: Metric, // plug into metric
+  metric: Metric,
   provenance?: Sources,
 ): MetricModalContent {
-  const howItsCalculated =
-    metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation.body;
+  const howItsCalculated = metricToTooltipMap[metric].metricCalculation.body;
 
-  const dataSource = getDataSourceTooltipContent(
-    Metric.CASE_DENSITY,
-    region,
-    provenance,
-  );
+  const dataSource = getDataSourceTooltipContent(metric, region, provenance);
 
-  const metricDefinition =
-    metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition.body;
+  const metricDefinition = metricToTooltipMap[metric].metricDefinition.body;
 
   const modalContent = {
     howItsCalculated,
