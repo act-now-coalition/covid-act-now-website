@@ -7,7 +7,7 @@ import AutocompleteRegions, {
   getLocationLabel,
 } from 'components/AutocompleteRegions';
 import MenuButton from './Dropdown/MenuButton';
-import { LockBodyScroll } from 'components/Dialog';
+import { LockBodyScroll } from 'components/Dialogs';
 import { FilledButton } from 'components/ButtonSystem';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 

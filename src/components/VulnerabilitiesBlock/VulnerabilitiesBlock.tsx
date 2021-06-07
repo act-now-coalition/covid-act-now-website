@@ -7,10 +7,11 @@ import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ShareButtons from '../SharedComponents/ShareButtons';
 import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
-import NewDialog from 'components/NewDialog/NewDialog';
+import { DialogMain } from 'components/Dialogs';
 import { vulnerabilitiesModal } from 'cms-content/modals';
 import { ModalOpenButton } from './VulnerabilitiesBlock.style';
 import { SectionHeader } from 'components/SharedComponents';
+import { MarkdownBody } from 'components/Markdown';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
@@ -66,13 +67,15 @@ const VulnerabilitiesBlock: React.FC<{
         <ModalOpenButton onClick={modalOpenOnClick}>
           About this data
         </ModalOpenButton>
-        <NewDialog
+        <DialogMain
           open={dialogOpen}
           closeDialog={closeDialog}
           header={header}
-          body={body}
+          // body={body}
           links={links}
-        />
+        >
+          <MarkdownBody source={body} />
+        </DialogMain>
         <ShareButtons
           eventCategory={EventCategory.VULNERABILITIES}
           shareUrl={shareUrl}

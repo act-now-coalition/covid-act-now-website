@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { COLOR_MAP } from 'common/colors';
 
 // Some extra styling on the Paper component to override MUI's default styles
 export const StyledPaper = styled(Paper)`
@@ -24,7 +25,7 @@ export const StyledPaper = styled(Paper)`
 
 export const HeaderWrapper = styled.div`
   margin: 0;
-  padding: 1.75rem 1.5rem;
+  padding: 1.5rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -39,6 +40,10 @@ export const Header = styled.h2`
 
 export const DialogContent = styled(MuiDialogContent)`
   padding: 0 1.5rem 1.5rem;
+
+  p {
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+  }
 
   ${LargeOutlinedButton} {
     width: 100%;
@@ -58,4 +63,15 @@ export const DialogContent = styled(MuiDialogContent)`
 export const StyledIconButton = styled(IconButton)`
   padding: 0;
   margin-left: 0.75rem;
+  display: flex;
+  align-self: flex-start;
+`;
+
+export const MetricDialogSectionHeader = styled.h3`
+  font-size: 1rem;
+  margin: 1.25rem 0 1rem;
+`;
+
+export const LinksContainer = styled.div`
+  padding-top: 1rem;
 `;

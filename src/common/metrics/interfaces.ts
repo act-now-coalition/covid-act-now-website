@@ -5,10 +5,11 @@ import { Region } from 'common/regions';
 
 export interface MetricDefinition {
   renderStatus: (projections: Projections) => React.ReactElement;
-  renderDisclaimer: (
-    region: Region,
-    provenance?: Sources,
-  ) => React.ReactElement;
+  // renderDisclaimer: (
+  //   region: Region,
+  //   provenance?: Sources,
+  // ) => React.ReactElement;
+  renderDisclaimer: (region: Region, provenance?: Sources) => any;
 
   metricName: string;
   extendedMetricName: string;

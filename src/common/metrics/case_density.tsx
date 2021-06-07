@@ -16,6 +16,7 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { Region } from 'common/regions';
 import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { DialogMain, MetricInfoDialogInner } from 'components/Dialogs';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -106,7 +107,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   );
 }
 
-function renderDisclaimer(
+function renderInfoModal(
   region: Region,
   provenance?: Sources,
 ): React.ReactElement {
@@ -195,5 +196,87 @@ function renderInfoTooltip(): React.ReactElement {
         trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
       }
     />
+  );
+}
+
+function renderDisclaimer(
+  region: Region,
+  provenance?: Sources,
+): React.ReactElement {
+  const howItsCalculated =
+    metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation.body;
+  const dataSource = getDataSourceTooltipContent(
+    Metric.CASE_DENSITY,
+    region,
+    provenance,
+  );
+  const metricDefinition =
+    metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition.body;
+
+  return (
+    <>
+      <DialogMain
+        open={true}
+        closeDialog={() => {}}
+        header="Daily new cases"
+        links={[
+          {
+            cta: 'Learn more',
+            url: '/covid-risk-levels-metrics#daily-new-cases',
+          },
+        ]}
+        // howItsCalculated={howItsCalculated}
+        // dataSource={dataSource}
+        // metricDefinition={metricDefinition}
+      >
+        <MetricInfoDialogInner
+          modalContent={{ metricDefinition, howItsCalculated, dataSource }}
+          // metricDefinition={metricDefinition}
+          // howItsCalculated={howItsCalculated}
+          // dataSource={dataSource}
+        />
+      </DialogMain>
+    </>
+  );
+}
+
+function getMetricModalContent(
+  region: Region,
+  provenance?: Sources,
+): React.ReactElement {
+  const howItsCalculated =
+    metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation.body;
+  const dataSource = getDataSourceTooltipContent(
+    Metric.CASE_DENSITY,
+    region,
+    provenance,
+  );
+  const metricDefinition =
+    metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition.body;
+
+  const modalContent = {
+    howItsCalculated,
+    dataSource,
+    metricDefinition,
+  };
+
+  console.log('modalContent', modalContent);
+
+  return (
+    <>
+      <DialogMain
+        open={true}
+        closeDialog={() => {}}
+        header="Daily new cases"
+        links={[
+          {
+            cta: 'Learn more',
+            url: '/covid-risk-levels-metrics#daily-new-cases',
+          },
+        ]}
+      >
+        <MetricInfoDialogInner modalContent={modalContent} />
+      </DialogMain>
+    </>
   );
 }

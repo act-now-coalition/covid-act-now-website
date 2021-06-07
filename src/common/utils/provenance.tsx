@@ -1,9 +1,9 @@
 import React from 'react';
 import { Region, MetroArea, County } from 'common/regions';
 import { Annotations, Sources } from 'api/schema/RegionSummaryWithTimeseries';
-import ExternalLink from 'components/ExternalLink';
 import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
+import { TextButton } from 'components/ButtonSystem';
 
 /**
  * Hardcoding sources as fallback (metricToSourceMap) for the time being
@@ -147,10 +147,10 @@ export const getDataSourceTooltipContent = (
         };
 
   return (
-    <>
+    <p>
       Our data for {getDisclaimerMetricName(metric)} in {region.name} comes from{' '}
-      <ExternalLink href={source.url}>{source.name}</ExternalLink>.
-    </>
+      <TextButton href={source.url}>{source.name}</TextButton>.
+    </p>
   );
 };
 
