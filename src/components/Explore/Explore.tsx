@@ -97,17 +97,19 @@ function getLabelLength(series: Series, shortLabel: boolean) {
   return label.length;
 }
 
-const ExploreCopy: React.FunctionComponent<{
+const Explore: React.FunctionComponent<{
   initialFipsList: string[];
   title?: string;
-  defaultMetric?: ExploreMetric;
   showNationalSummary?: boolean;
+  currentMetric: ExploreMetric;
+  setCurrentMetric: React.Dispatch<React.SetStateAction<ExploreMetric>>;
 }> = React.memo(
   ({
     initialFipsList,
-    defaultMetric = ExploreMetric.CASES,
     title = 'Trends',
     showNationalSummary = false,
+    currentMetric,
+    setCurrentMetric,
   }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -124,9 +126,9 @@ const ExploreCopy: React.FunctionComponent<{
     // Originally we had share URLs like /explore/cases instead of
     // /explore/<sharedComponentId> and so this code allows them to keep working.
     if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
-      defaultMetric = getMetricByChartId(sharedComponentId)!;
+      const sharedMetric = getMetricByChartId(sharedComponentId)!;
+      setCurrentMetric(sharedMetric);
     }
-    const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
     const onSelectCurrentMetric = (newMetric: number) => {
       const newMetricName = metricLabels[newMetric];
@@ -220,12 +222,11 @@ const ExploreCopy: React.FunctionComponent<{
     // they are not carried over to the new location page.
     useEffect(() => {
       setSelectedLocations(initialLocations);
-      setCurrentMetric(defaultMetric);
       setNormalizeData(
         initialLocations.length > 1 &&
-          ORIGINAL_EXPLORE_METRICS.includes(defaultMetric),
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
       );
-    }, [initialLocations, defaultMetric]);
+    }, [initialLocations, currentMetric]);
 
     const [chartSeries, setChartSeries] = useState<Series[]>([]);
     useEffect(() => {
@@ -250,7 +251,7 @@ const ExploreCopy: React.FunctionComponent<{
       }
       setCurrentMetric(ExploreMetric.CASES);
       setPeriod(Period.ALL);
-    }, [pathname, scrollToExplore]);
+    }, [pathname, scrollToExplore, setCurrentMetric]);
 
     const marginRight = useMemo(
       () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
@@ -284,7 +285,7 @@ const ExploreCopy: React.FunctionComponent<{
         setSelectedLocations(locations);
         setMetricMenuLabel(metricLabels[sharedParams.currentMetric]);
       }
-    }, [sharedParams, metricLabels]);
+    }, [sharedParams, metricLabels, setCurrentMetric]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
@@ -409,4 +410,4 @@ const ExploreCopy: React.FunctionComponent<{
   },
 );
 
-export default ExploreCopy;
+export default Explore;

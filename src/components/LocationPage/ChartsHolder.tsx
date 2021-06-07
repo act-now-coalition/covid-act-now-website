@@ -82,13 +82,13 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const { pathname, hash } = useLocation();
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
-  const [defaultExploreMetric, setDefaultExploreMetric] = useState<
+  const [currentExploreMetric, setCurrentExploreMetric] = useState<
     ExploreMetric
   >(ExploreMetric.CASES);
 
   useEffect(() => {
     if (hash === '#explore-chart') {
-      setDefaultExploreMetric(ExploreMetric.HOSPITALIZATIONS);
+      setCurrentExploreMetric(ExploreMetric.HOSPITALIZATIONS);
     }
   }, [hash]);
 
@@ -159,7 +159,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       EventAction.CLICK,
       `Spark line: ${SparkLineMetric[metric]}`,
     );
-    setDefaultExploreMetric(SparkLineToExploreMetric[metric]);
+    setCurrentExploreMetric(SparkLineToExploreMetric[metric]);
     scrollTo(exploreChartRef.current);
   }, []);
 
@@ -229,7 +229,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           <Explore
             initialFipsList={initialFipsList}
             title="Trends"
-            defaultMetric={defaultExploreMetric}
+            currentMetric={currentExploreMetric}
+            setCurrentMetric={setCurrentExploreMetric}
           />
         </LocationPageBlock>
       </ChartContentWrapper>
