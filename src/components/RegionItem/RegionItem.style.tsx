@@ -61,6 +61,7 @@ export const LevelDescription = styled.span`
 export const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
+  margin: 0.4rem;
 `;
 
 export const SharedWrapperStyles = css`
@@ -82,7 +83,7 @@ export const Wrapper = styled.div`
   transition: box-shadow 0.1s ease-in-out;
 
   :hover {
-    box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
   }
 `;
 
