@@ -11,6 +11,7 @@ import {
   navSearchbar,
   navSearchbarLocPage,
 } from './searchbar';
+import { spacingTheme, Spacing } from './sizes';
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
@@ -18,6 +19,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     buttons: ButtonMap;
     megaMenu: MenuTheme;
     searchbar: SearchbarTheme;
+    spacingTheme: Spacing;
   }
   interface ThemeOptions extends Theme {}
 }
@@ -34,6 +36,7 @@ const theme = createMuiTheme({
   buttons,
   megaMenu,
   searchbar,
+  spacingTheme,
 });
 
 export { megaMenuFooter, navSearchbar, navSearchbarLocPage };
