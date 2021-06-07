@@ -49,12 +49,16 @@ const blockquoteCss = css`
   display: inline-block;
   margin: ${theme.spacing(1)}px 0;
   width: 100%;
-  p {
+  p,
+  a {
     color: ${COLOR_MAP.GREEN.BASE};
     font-size: 18px;
     font-weight: 900;
     line-height: 1.6;
     margin: 0;
+    &:hover {
+      color: ${COLOR_MAP.GREEN.BASE};
+    }
   }
 `;
 
