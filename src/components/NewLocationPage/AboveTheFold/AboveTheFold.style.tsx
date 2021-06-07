@@ -21,7 +21,6 @@ export const ContentContainer = styled.div`
   width: fit-content;
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
-    width: 1220px; // plus 2 rem margin
     width: ${props =>
       props.theme.spacingTheme.locationPage.widthContentWithStickyMap};
   }
