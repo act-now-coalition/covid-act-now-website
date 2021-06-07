@@ -71,7 +71,6 @@ const VulnerabilitiesBlock: React.FC<{
           open={dialogOpen}
           closeDialog={closeDialog}
           header={header}
-          // body={body}
           links={links}
         >
           <MarkdownBody source={body} />

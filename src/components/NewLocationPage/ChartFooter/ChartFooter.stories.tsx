@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
 import {
   Footer,
@@ -8,11 +8,9 @@ import {
   FooterText,
   AboutText,
   IconWrapper,
-  ModalButton,
 } from './ChartFooter.style';
 import { useBreakpoint } from 'common/hooks';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
-import { DialogMain } from 'components/Dialogs';
 
 export default {
   title: 'Location page redesign/Chart Footer',
@@ -56,27 +54,6 @@ export const ChartFooterWithSourceText = () => {
     </Footer>
   );
 };
-
-// export const ChartFooterWithAboutText = () => {
-//   const [openModal, setOpenModal] = useState(false);
-//   return (
-//     <Footer>
-//       <ModalButton onClick={() => setOpenModal(true)}>
-//         <AboutText>About this data</AboutText>
-//       </ModalButton>
-//       <DialogMain
-//         open={openModal}
-//         closeDialog={() => setOpenModal(false)}
-//         header="Header text"
-//         body="Body text"
-//         links={[]}
-//       />
-//       <ButtonContainer>
-//         <ShareButton onClickShare={() => {}} />
-//       </ButtonContainer>
-//     </Footer>
-//   );
-// };
 
 export const ChartFooterWithLegend = () => {
   return (
