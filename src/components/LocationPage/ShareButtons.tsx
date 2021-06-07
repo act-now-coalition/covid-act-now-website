@@ -8,7 +8,7 @@ import makeChartShareQuote from 'common/utils/makeChartShareQuote';
 import * as urls from 'common/urls';
 import { Region } from 'common/regions';
 import type { MetricValues } from 'common/models/Projections';
-import { useEscToClose } from 'common/hooks';
+import { useEscToClose, useBreakpoint } from 'common/hooks';
 
 const ShareButtons: React.FC<{
   region: Region;
@@ -32,6 +32,10 @@ const ShareButtons: React.FC<{
 
   const hideSocialButtons = () => setShowSocialButtons(false);
 
+  const isMobile = useBreakpoint(600);
+
+  const iconSize = isMobile ? 40 : 50;
+
   useEscToClose(hideSocialButtons);
 
   return (
@@ -42,7 +46,7 @@ const ShareButtons: React.FC<{
         />
         {showSocialButtons && (
           <SocialButtons
-            iconSize={40}
+            iconSize={iconSize}
             shareURL={shareURL}
             shareQuote={shareQuote}
             region={region}
