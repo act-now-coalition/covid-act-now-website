@@ -9,6 +9,7 @@ export const smallPhoneBreakpoint = '321px';
 export const countyMapToFixedBreakpoint = '1320px';
 
 interface LocationPageSpacing {
+  mapWidthDesktop: string;
   maxWidthContent: string;
   widthContentWithStickyMap: string;
 }
@@ -24,6 +25,7 @@ export const spacingTheme: Spacing = {
   contentGutterMobile: '1rem',
   contentGutterDesktop: '2rem',
   locationPage: {
+    mapWidthDesktop: '320px',
     maxWidthContent: '900px',
     widthContentWithStickyMap: '1252px', // maxWidthContent + 320px-wide map + 2rem margin
   },

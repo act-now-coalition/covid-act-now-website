@@ -5,12 +5,8 @@ import {
 } from 'assets/theme/sizes';
 import { FixedAspectRatioContainer } from 'components/FixedAspectRatio/FixedAspectRatio.style';
 
-const desktopMapWidth = 320;
-
 export const PinnedContainer = css`
   position: fixed;
-  // top: 116px; // navBar height (84) + above the fold top padding (2rem)
-  // right: 40px;
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.08);
   z-index: 901;
 `;
@@ -25,7 +21,7 @@ export const MapContainer = styled.div`
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
-    width: ${desktopMapWidth}px;
+    width: ${props => props.theme.spacingTheme.locationPage.mapWidthDesktop};
   }
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
