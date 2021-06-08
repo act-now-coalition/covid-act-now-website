@@ -1,7 +1,11 @@
 import React from 'react';
 import { BetaTag } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
-import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
+import {
+  getMetricNameExtended,
+  getMetricStatusText,
+  getMetricName,
+} from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { County, Region } from 'common/regions';
@@ -62,8 +66,7 @@ function ChartBlock(props: {
             overrideDisclaimer={overrideDisclaimer}
             shareButtonProps={shareButtonProps}
             modalContent={modalContent}
-            modalHeader={getMetricNameExtended(metric)}
-            modalLinks={[]}
+            modalHeader={getMetricName(metric)}
           />
         </>
       )}

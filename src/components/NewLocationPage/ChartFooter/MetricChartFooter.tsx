@@ -30,7 +30,6 @@ interface DialogProps {
   openDialog: any;
   modalContent: MetricModalContent;
   modalHeader: string;
-  modalLinks: any;
 }
 
 const ShareButtonBlock: React.FC<ShareButtonProps> = ({
@@ -48,14 +47,18 @@ const MetricModal: React.FC<DialogProps> = ({
   closeDialog,
   openDialog,
   modalContent,
-  modalLinks,
   modalHeader,
 }) => {
   const dialogProps = {
     open,
     closeDialog,
     header: modalHeader,
-    links: modalLinks,
+    links: [
+      {
+        cta: 'Learn more',
+        url: modalContent.learnLink,
+      },
+    ],
   };
 
   return (
@@ -76,14 +79,12 @@ const MetricChartFooter: React.FC<{
   shareButtonProps: ShareButtonProps;
   modalContent: MetricModalContent;
   modalHeader: string;
-  modalLinks?: any;
 }> = ({
   footerText,
   overrideDisclaimer,
   shareButtonProps,
   modalContent,
   modalHeader,
-  modalLinks,
 }) => {
   const [isOpen, openDialog, closeDialog] = useDialog(false);
 
@@ -92,7 +93,6 @@ const MetricChartFooter: React.FC<{
     closeDialog,
     openDialog,
     modalContent,
-    modalLinks,
     modalHeader,
   };
 
