@@ -3,16 +3,14 @@ import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { TooltipAnchorText } from 'components/InfoTooltip/Tooltip.style';
 
-export const Footer = styled.div`
-  position: relative;
+export const Row = styled.div`
   display: flex;
-  flex-direction: row;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const FooterText = styled.div`
   margin: 0 0.5rem 0.75rem 0;
   max-width: 42.5rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
 export const ButtonContainer = styled.div`
@@ -65,4 +63,9 @@ export const ModalButton = styled(TooltipAnchorText).attrs(props => ({
   cursor: pointer;
   background-color: transparent;
   border: none;
+  padding: 0;
+`;
+
+export const DisclaimerWrapper = styled.div`
+  margin-top: 1rem;
 `;
