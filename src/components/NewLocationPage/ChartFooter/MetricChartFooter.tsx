@@ -101,7 +101,8 @@ const MetricChartFooter: React.FC<{
       <DesktopOnly>
         <Row>
           <FooterText>
-            {footerText}&nbsp;
+            {footerText}
+            {'   '}
             <MetricModal {...dialogProps} />
             {overrideDisclaimer && (
               <OverrideDisclaimer>{overrideDisclaimer}</OverrideDisclaimer>

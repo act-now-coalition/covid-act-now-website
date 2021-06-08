@@ -11,6 +11,10 @@ export const FooterText = styled.div`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin-bottom: 0.75rem;
 
+  a {
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+  }
+
   @media (min-width: ${materialSMBreakpoint}) {
     margin-right: 3rem;
     margin-bottom: 0;
