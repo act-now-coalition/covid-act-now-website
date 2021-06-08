@@ -18,33 +18,7 @@ export const FooterText = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  flex-grow: 0;
   margin-left: auto;
-`;
-
-export const LegendContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 0.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
-
-export const LegendContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 0.9rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-right: 1.5rem;
-  }
-`;
-
-export const IconWrapper = styled.div`
-  margin-right: 0.75rem;
 `;
 
 export const AboutText = styled.span`
