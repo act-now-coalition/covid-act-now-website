@@ -78,7 +78,7 @@ function ChartBlock(props: {
   );
 }
 
-function renderDisclaimer(
+export function renderDisclaimer(
   region: Region,
   metric: Metric,
   provenance: Sources | undefined,

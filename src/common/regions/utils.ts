@@ -153,7 +153,7 @@ function countyIncludesZip(
   return countyToZipMap[county.fipsCode]?.includes(zipCode);
 }
 
-function getCountyRegionFromZipCode(
+export function getCountyRegionFromZipCode(
   zipCode: string,
   countyToZipMap: CountyToZipMap,
 ): Region | undefined {

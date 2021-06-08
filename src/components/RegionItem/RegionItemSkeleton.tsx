@@ -4,7 +4,6 @@ import {
   Column,
   StyledSkeletonRect,
   CircleIcon,
-  ArrowIcon,
 } from './RegionItem.style';
 import { COLOR_MAP } from 'common/colors';
 
@@ -16,7 +15,6 @@ const RegionItemSkeleton = () => {
         <StyledSkeletonRect width={210} height={14} />
         <StyledSkeletonRect width={75} height={14} />
       </Column>
-      <ArrowIcon />
     </SkeletonWrapper>
   );
 };

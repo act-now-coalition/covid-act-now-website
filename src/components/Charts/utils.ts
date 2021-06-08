@@ -174,13 +174,20 @@ export const getUtcScale = (
   return dateScale;
 };
 
-export const getXTickFormat = (date: Date) => {
-  // Shows the year if the tick is in January (0) or December (11)
-  const dateFormat =
-    date.getMonth() === 0 || date.getMonth() === 11
-      ? DateFormat.MMM_YY
-      : DateFormat.MMM;
-  return formatDateTime(date, dateFormat).replace(' ', " '");
+export const getXTickFormat = (
+  date: Date,
+  timeUnit: TimeUnit = TimeUnit.MONTHS,
+) => {
+  if (timeUnit === TimeUnit.WEEKS) {
+    return formatDateTime(date, DateFormat.MMM_D);
+  } else {
+    // Shows the year if the tick is in January (0) or December (11)
+    const dateFormat =
+      date.getMonth() === 0 || date.getMonth() === 11
+        ? DateFormat.MMM_YY
+        : DateFormat.MMM;
+    return formatDateTime(date, dateFormat).replace(' ', " '");
+  }
 };
 
 /**
@@ -197,11 +204,15 @@ export function getFinalTicks(isMobile: boolean, ticks: Date[]): Date[] {
   return ticks;
 }
 
-export function getTimeAxisTicks(from: Date, to: Date) {
-  const dateFrom = getStartOf(from, TimeUnit.MONTHS);
-  const numMonths = getTimeDiff(to, dateFrom, TimeUnit.MONTHS);
-  return range(1, numMonths + 1).map((i: number) =>
-    addTime(dateFrom, i, TimeUnit.MONTHS),
+export function getTimeAxisTicks(
+  from: Date,
+  to: Date,
+  timeUnit: TimeUnit = TimeUnit.MONTHS,
+) {
+  const dateFrom = getStartOf(from, timeUnit);
+  const numTimeUnit = getTimeDiff(to, dateFrom, timeUnit);
+  return range(1, numTimeUnit + 1).map((i: number) =>
+    addTime(dateFrom, i, timeUnit),
   );
 }
 

@@ -3,7 +3,7 @@ import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { TooltipAnchorText } from 'components/InfoTooltip/Tooltip.style';
 
-export const Footer = styled.div`
+export const Row = styled.div`
   display: flex;
 `;
 

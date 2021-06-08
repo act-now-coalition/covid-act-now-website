@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import {
-  Footer,
+  Row,
   ButtonContainer,
   FooterText,
   AboutText,
   ModalButton,
   DisclaimerWrapper,
 } from './ChartFooter.style';
-import NewDialog from 'components/NewDialog/NewDialog';
+import { DialogMain } from 'components/Dialogs';
 import { Link } from 'cms-content/modals';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import { Region } from 'common/regions';
 import type { MetricValues } from 'common/models/Projections';
+import { MarkdownBody } from 'components/Markdown';
 
 export interface AboutModalProps {
   header: string;
@@ -38,40 +39,43 @@ const MetricChartFooter: React.FC<{
     open: openModal,
     closeDialog: () => setOpenModal(false),
     header: aboutModal.header,
-    body: aboutModal.body,
     links: aboutModal.links,
   };
   return (
     <>
       <DesktopOnly>
-        <Footer>
+        <Row>
           <FooterText>
             {footerText}&nbsp;
             <ModalButton onClick={() => setOpenModal(true)}>
               <AboutText>About this data</AboutText>
             </ModalButton>
             {disclaimer && <DisclaimerWrapper>{disclaimer}</DisclaimerWrapper>}
-            <NewDialog {...dialogProps} />
+            <DialogMain {...dialogProps}>
+              <MarkdownBody source={aboutModal.body} />
+            </DialogMain>
           </FooterText>
           <ButtonContainer>
             <ShareButtons {...shareButtonProps} />
           </ButtonContainer>
-        </Footer>
+        </Row>
       </DesktopOnly>
       <MobileOnly>
         <FooterText>
           {footerText}
           {disclaimer && <DisclaimerWrapper>{disclaimer}</DisclaimerWrapper>}
         </FooterText>
-        <Footer>
+        <Row>
           <ModalButton onClick={() => setOpenModal(true)}>
             <AboutText>About this data</AboutText>
           </ModalButton>
-          <NewDialog {...dialogProps} />
+          <DialogMain {...dialogProps}>
+            <MarkdownBody source={aboutModal.body} />
+          </DialogMain>
           <ButtonContainer>
             <ShareButtons {...shareButtonProps} />
           </ButtonContainer>
-        </Footer>
+        </Row>
       </MobileOnly>
     </>
   );

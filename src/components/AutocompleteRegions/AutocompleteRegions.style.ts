@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
 
 export const StyledTextField = styled(TextField)<{
   $placeholderMinWidth: string;
@@ -14,4 +15,8 @@ export const StyledTextField = styled(TextField)<{
     font-size: 13px;
     min-width: ${props => props.$placeholderMinWidth};
   }
+`;
+
+export const StyledPaper = styled(Paper)`
+  max-height: 200px;
 `;

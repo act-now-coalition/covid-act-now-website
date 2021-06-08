@@ -2,14 +2,14 @@ import urlJoin from 'url-join';
 import deburr from 'lodash/deburr';
 import flatten from 'lodash/flatten';
 import isNumber from 'lodash/isNumber';
-import max from 'lodash/max';
 import words from 'lodash/words';
+import max from 'lodash/max';
 import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { share_image_url } from 'assets/data/share_images_url.json';
-import { SeriesType, Series } from './interfaces';
+import { SeriesType, Series, ExploreMetric, DataMeasure } from './interfaces';
 import regions, {
   County,
   MetroArea,
@@ -20,32 +20,82 @@ import regions, {
   USA,
 } from 'common/regions';
 import { fail } from 'assert';
-import { pluralize } from 'common/utils';
+import { pluralize, formatPercent, formatDecimal } from 'common/utils';
 import {
   TimeUnit,
   DateFormat,
   formatDateTime,
   getTimeDiff,
 } from 'common/utils/time-utils';
-import { formatDecimal } from 'common/utils/index';
+import { subtractTime } from 'common/utils/time-utils';
 
-export function getMaxBy<T>(
-  seriesList: Series[],
-  getValue: (d: Column) => T,
-  defaultValue: T,
-): T {
-  const maxValue = max(seriesList.map(({ data }) => max(data.map(getValue))));
-  return maxValue || defaultValue;
+export enum Period {
+  DAYS_60,
+  DAYS_180,
+  ALL,
 }
 
-export enum ExploreMetric {
-  CASES,
-  DEATHS,
-  HOSPITALIZATIONS,
-  ICU_HOSPITALIZATIONS,
+const EXPLORE_PERIODS = [Period.DAYS_60, Period.DAYS_180, Period.ALL];
+
+interface PeriodDefinition {
+  increment: number;
+  label: string;
+  xTicktimeUnit: TimeUnit;
+}
+
+export const periodMap: {
+  [period in Period]: PeriodDefinition;
+} = {
+  [Period.DAYS_60]: {
+    increment: 60,
+    label: '60',
+    xTicktimeUnit: TimeUnit.WEEKS,
+  },
+  [Period.DAYS_180]: {
+    increment: 180,
+    label: '180',
+    xTicktimeUnit: TimeUnit.MONTHS,
+  },
+  [Period.ALL]: {
+    increment: -1,
+    label: 'All time',
+    xTicktimeUnit: TimeUnit.MONTHS,
+  },
+};
+
+export function getPeriodLabel(period: Period) {
+  return periodMap[period].label;
+}
+
+export function getXTickTimeUnitForPeriod(period: Period) {
+  return periodMap[period].xTicktimeUnit;
+}
+
+export function getAllPeriodLabels() {
+  return EXPLORE_PERIODS.map(getPeriodLabel);
+}
+
+export function getDateRange(period: Period): Date[] {
+  const dateTo = new Date();
+  const dateFrom =
+    period === Period.ALL
+      ? new Date('2020-03-01')
+      : subtractTime(dateTo, periodMap[period].increment, TimeUnit.DAYS);
+  return [dateFrom, dateTo];
 }
 
 export const EXPLORE_METRICS = [
+  ExploreMetric.CASES,
+  ExploreMetric.DEATHS,
+  ExploreMetric.HOSPITALIZATIONS,
+  ExploreMetric.ICU_HOSPITALIZATIONS,
+  ExploreMetric.VACCINATIONS_FIRST_DOSE,
+  ExploreMetric.VACCINATIONS_COMPLETED,
+  ExploreMetric.ICU_USED,
+  ExploreMetric.POSITIVITY_RATE,
+];
+
+export const ORIGINAL_EXPLORE_METRICS = [
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
@@ -62,6 +112,14 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.HOSPITALIZATIONS;
     case 'icu-hospitalizations':
       return ExploreMetric.ICU_HOSPITALIZATIONS;
+    case 'vaccinations':
+      return ExploreMetric.VACCINATIONS_FIRST_DOSE;
+    case 'vaccinationsCompleted':
+      return ExploreMetric.VACCINATIONS_COMPLETED;
+    case 'icuUtilization':
+      return ExploreMetric.ICU_USED;
+    case 'testPositiveRate':
+      return ExploreMetric.POSITIVITY_RATE;
   }
 }
 
@@ -75,8 +133,25 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'smoothedHospitalizations';
     case ExploreMetric.ICU_HOSPITALIZATIONS:
       return 'smoothedICUHospitalizations';
+    case ExploreMetric.VACCINATIONS_FIRST_DOSE:
+      return 'vaccinations';
+    case ExploreMetric.VACCINATIONS_COMPLETED:
+      return 'vaccinationsCompleted';
+    case ExploreMetric.ICU_USED:
+      return 'icuUtilization';
+    case ExploreMetric.POSITIVITY_RATE:
+      return 'testPositiveRate';
   }
 }
+
+export const getYFormat = (dataMeasure: DataMeasure, places: number) => {
+  const yFormat = (value: number) =>
+    dataMeasure === DataMeasure.PERCENT
+      ? formatPercent(value, places)
+      : formatDecimal(value, places);
+
+  return yFormat;
+};
 
 interface SerieDescription {
   label: string;
@@ -90,6 +165,9 @@ interface ExploreMetricDescription {
   name: string;
   chartId: string;
   seriesList: SerieDescription[];
+  dataMeasure: DataMeasure;
+  yAxisDecimalPlaces: number;
+  maxY?: number;
 }
 
 export const exploreMetricData: {
@@ -99,6 +177,8 @@ export const exploreMetricData: {
     title: 'Cases',
     name: 'Cases',
     chartId: 'cases',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Cases',
@@ -118,6 +198,8 @@ export const exploreMetricData: {
     title: 'Deaths',
     name: 'Deaths',
     chartId: 'deaths',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Deaths',
@@ -137,6 +219,8 @@ export const exploreMetricData: {
     title: 'Hospitalizations',
     name: 'Current COVID Hospitalizations',
     chartId: 'hospitalizations',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Current COVID Hospitalizations',
@@ -153,9 +237,11 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
-    title: 'ICU Hospitalizations',
+    title: 'ICU hospitalizations',
     name: 'Current COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Current COVID ICU Hospitalizations',
@@ -167,6 +253,68 @@ export const exploreMetricData: {
         label: '7 Day Average',
         tooltipLabel: 'COVID ICU Hospitalizations',
         datasetId: 'smoothedICUHospitalizations',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.VACCINATIONS_FIRST_DOSE]: {
+    title: 'Percent vaccinated (1+ dose)',
+    name: 'Percent vaccinated (1+ dose)',
+    chartId: 'vaccinations_first_dose',
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
+    maxY: 1,
+    seriesList: [
+      {
+        label: 'Percent Vaccinated (1+ dose)',
+        tooltipLabel: 'Percent Vaccinated (1+ dose)',
+        datasetId: 'vaccinations',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.VACCINATIONS_COMPLETED]: {
+    title: 'Percent vaccinated (fully)',
+    name: 'Percent vaccinated (fully)',
+    chartId: 'vaccinations_completed',
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
+    maxY: 1,
+    seriesList: [
+      {
+        label: 'Percent Vaccinated (fully)',
+        tooltipLabel: 'Percent Vaccinated (fully)',
+        datasetId: 'vaccinationsCompleted',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.ICU_USED]: {
+    title: 'ICU capacity used',
+    name: 'ICU capacity used',
+    chartId: 'icu_capacity_used',
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'ICU capacity used',
+        tooltipLabel: 'ICU capacity used',
+        datasetId: 'icuUtilization',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.POSITIVITY_RATE]: {
+    title: 'Positive test rate',
+    name: 'Positive test rate',
+    chartId: 'positivity_rate',
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'Positive test rate',
+        tooltipLabel: 'Positive test rate',
+        datasetId: 'testPositiveRate',
         type: SeriesType.LINE,
       },
     ],
@@ -247,6 +395,19 @@ export function getTitle(metric: ExploreMetric) {
   return exploreMetricData[metric].title;
 }
 
+export function getMetricDataMeasure(metric: ExploreMetric) {
+  return exploreMetricData[metric].dataMeasure;
+}
+
+export function getYAxisDecimalPlaces(metric: ExploreMetric) {
+  return exploreMetricData[metric].yAxisDecimalPlaces;
+}
+
+export function getMaxYFromDefinition(metric: ExploreMetric): number | null {
+  const maxY = exploreMetricData[metric].maxY;
+  return !maxY ? null : maxY;
+}
+
 export function getMetricName(metric: ExploreMetric) {
   return exploreMetricData[metric].name;
 }
@@ -323,6 +484,14 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
       return `Hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_HOSPITALIZATIONS:
       return `ICU hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.VACCINATIONS_FIRST_DOSE:
+      return `Percent vaccinated (1+ dose) in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.VACCINATIONS_COMPLETED:
+      return `Percent vaccinated (fully) in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.ICU_USED:
+      return `ICU capacity used in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.POSITIVITY_RATE:
+      return `Positive test rate in ${locationName}, according to @CovidActNow. See the chart: `;
   }
   return '';
 }
@@ -399,17 +568,6 @@ export function getLocationNames(
   return `${firstLabels.join(', ')} and ${lastLabel}`;
 }
 
-export function getSubtitle(
-  metricName: string,
-  normalizeData: boolean,
-  regions: Region[],
-) {
-  const textPer100k = normalizeData ? 'per 100k population' : '';
-  return regions.length === 0
-    ? 'Select states, counties, or metro areas to explore trends'
-    : `${metricName} ${textPer100k} in ${getLocationNames(regions)}`;
-}
-
 export function getExploreAutocompleteLocations(locationFips: string) {
   const currentLocation = regions.findByFipsCode(locationFips)!;
   const locations = getAutocompleteRegions(currentLocation);
@@ -463,4 +621,25 @@ export function getSeriesLabel(series: Series, isMobile: boolean) {
 export function brightenColor(colorCode: string, amount = 1): string {
   const colorObject = color(colorCode);
   return colorObject ? colorObject.brighter(amount).hex() : colorCode;
+}
+
+const getY = (d: Column) => d.y;
+
+function isInDateRange(date: Date, dateFrom: Date, dateTo: Date) {
+  return dateFrom <= date && date <= dateTo;
+}
+
+/* Gets overall maxY value to adjust y-axis when a new date range is selected from dropdown menu */
+export function getMaxY(seriesList: Series[], dateFrom: Date, dateTo: Date) {
+  const maxPerSeries = seriesList.map(series => {
+    const dataInRange = series.data.filter(d =>
+      isInDateRange(new Date(d.x), dateFrom, dateTo),
+    );
+    const seriesMax = max(dataInRange.map(getY)) || 1;
+    return seriesMax;
+  });
+
+  const overallMaxY = max(maxPerSeries);
+
+  return overallMaxY;
 }

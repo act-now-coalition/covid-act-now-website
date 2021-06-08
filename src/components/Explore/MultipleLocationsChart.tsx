@@ -3,15 +3,15 @@ import isNumber from 'lodash/isNumber';
 import last from 'lodash/last';
 import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
+import isFinite from 'lodash/isFinite';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatDecimal } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
 import ChartSeries, { SeriesMarker } from './SeriesChart';
-import { getMaxBy, getSeriesLabel } from './utils';
+import { getSeriesLabel, getMaxY } from './utils';
 import * as Styles from './Explore.style';
 import { ScreenshotReady } from 'components/Screenshot';
 import SeriesTooltipOverlay, { HoverPointInfo } from './SeriesTooltipOverlay';
@@ -23,6 +23,7 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from 'components/Charts/utils';
+import { TimeUnit } from 'common/utils/time-utils';
 
 interface LabelInfo {
   x: number;
@@ -45,12 +46,13 @@ function getSeriesOpacity(
     : 1;
 }
 
-const MultipleLocationsTooltip: React.FC<{
+export const MultipleLocationsTooltip: React.FC<{
   top: number;
   left: number;
   seriesList: Series[];
   pointInfo: HoverPointInfo;
-}> = ({ top, left, seriesList: series, pointInfo }) => {
+  yTooltipFormat: (val: number) => string;
+}> = ({ top, left, seriesList: series, pointInfo, yTooltipFormat }) => {
   const { seriesIndex } = pointInfo;
   const currentSeries = isNumber(seriesIndex) ? series[seriesIndex] : null;
   return (
@@ -64,7 +66,7 @@ const MultipleLocationsTooltip: React.FC<{
         {currentSeries && currentSeries.tooltipLabel}
       </Styles.TooltipSubtitle>
       <Styles.TooltipMetric>
-        {isNumber(pointInfo.y) ? formatDecimal(pointInfo.y, 1) : '-'}
+        {isNumber(pointInfo.y) ? yTooltipFormat(pointInfo.y) : '-'}
       </Styles.TooltipMetric>
       <Styles.TooltipLocation>
         {currentSeries && `in ${currentSeries.label}`}
@@ -121,6 +123,11 @@ const MultipleLocationsChart: React.FC<{
   marginRight?: number;
   barOpacity?: number;
   isMobileXs?: boolean;
+  dateRange: Date[];
+  yTickFormat: (val: number) => string;
+  yTooltipFormat: (val: number) => string;
+  xTickTimeUnit: TimeUnit;
+  maxYFromDefinition: number | null;
 }> = ({
   width,
   height,
@@ -132,13 +139,21 @@ const MultipleLocationsChart: React.FC<{
   marginRight = 100,
   barOpacity,
   isMobileXs = false,
+  dateRange,
+  yTickFormat,
+  yTooltipFormat,
+  xTickTimeUnit,
+  maxYFromDefinition,
 }) => {
   const seriesList = sortSeriesByLast(unsortedSeriesList).filter(
     series => series.data.length > 0,
   );
-  const dateFrom = new Date('2020-03-01');
-  const dateTo = new Date();
-  const maxY = getMaxBy<number>(seriesList, getY, 1);
+
+  const [dateFrom, dateTo] = dateRange;
+
+  const maxY = isFinite(maxYFromDefinition)
+    ? maxYFromDefinition
+    : getMaxY(seriesList, dateFrom, dateTo);
 
   const innerWidth = width - marginLeft - marginRight;
   const innerHeight = height - marginTop - marginBottom;
@@ -157,15 +172,22 @@ const MultipleLocationsChart: React.FC<{
     HoverPointInfo
   >();
 
-  const onMouseOver = useCallback(
-    (pointInfo: HoverPointInfo) => {
-      showTooltip({ tooltipData: pointInfo });
-    },
-    [showTooltip],
-  );
-
   const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
   const getYPosition = (d: Column) => yScale(getY(d));
+
+  const minTooltipDate = dateScale.invert(0);
+
+  const onMouseOver = useCallback(
+    (pointInfo: HoverPointInfo) => {
+      /* Makes sure we only render a tooltip for dates that fall within the selected time range: */
+      if (minTooltipDate > new Date(pointInfo.x)) {
+        return;
+      }
+      showTooltip({ tooltipData: pointInfo });
+    },
+    [showTooltip, minTooltipDate],
+  );
+
   const seriesLabels = formatCurrentValueLabels(
     seriesList,
     (p: Column) => innerWidth + 5,
@@ -190,6 +212,8 @@ const MultipleLocationsChart: React.FC<{
             yScale={yScale}
             isMobile={isMobile}
             yNumTicks={5}
+            yTickFormat={yTickFormat}
+            xTickTimeUnit={xTickTimeUnit}
           />
           {seriesLabels.map((label, i) => (
             <Styles.LineLabel
@@ -249,6 +273,7 @@ const MultipleLocationsChart: React.FC<{
             pointInfo={tooltipData}
             left={getXPosition(tooltipData) + marginLeft}
             top={getYPosition(tooltipData) + marginTop}
+            yTooltipFormat={yTooltipFormat}
           />
           <DateMarker
             left={getXPosition(tooltipData) + marginLeft}

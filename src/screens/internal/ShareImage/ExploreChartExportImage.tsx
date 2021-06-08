@@ -20,8 +20,14 @@ import {
   getChartSeries,
   getLocationNames,
   getMetricName,
+  Period,
+  getMetricDataMeasure,
+  getDateRange,
+  getYFormat,
+  getMaxYFromDefinition,
 } from 'components/Explore/utils';
 import regions, { Region } from 'common/regions';
+import { TimeUnit } from 'common/utils/time-utils';
 
 const ExploreChartExportImage = ({
   componentParams,
@@ -55,6 +61,13 @@ const ExploreChartExportImage = ({
 
   const url = `https://covidactnow.org/`;
 
+  const dataMeasure = getMetricDataMeasure(currentMetric);
+  const yTickFormat = getYFormat(dataMeasure, 0);
+  const yTooltipFormat = getYFormat(dataMeasure, 1);
+  const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
+
+  const dateRange = getDateRange(Period.ALL);
+
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <Content>
@@ -79,6 +92,11 @@ const ExploreChartExportImage = ({
                 height={chartHeight}
                 isMobile={false}
                 hasMultipleLocations={selectedLocations.length > 1}
+                dateRange={dateRange}
+                yTickFormat={yTickFormat}
+                yTooltipFormat={yTooltipFormat}
+                xTickTimeUnit={TimeUnit.MONTHS}
+                maxYFromDefinition={maxYFromDefinition}
               />
             )}
           </ParentSize>

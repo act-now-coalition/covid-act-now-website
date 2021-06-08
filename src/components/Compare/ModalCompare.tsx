@@ -8,7 +8,7 @@ import {
   HomepageLocationScope,
 } from 'common/utils/compare';
 import Filters from 'components/Compare/Filters';
-import { LockBodyScroll } from 'components/Dialog';
+import { LockBodyScroll } from 'components/Dialogs';
 import { Region, MetroArea } from 'common/regions';
 
 interface ModalCompareProps {
