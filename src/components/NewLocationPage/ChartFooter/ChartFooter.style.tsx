@@ -13,12 +13,15 @@ export const FooterText = styled.div`
 
   a {
     color: ${COLOR_MAP.GRAY_BODY_COPY};
-    text-underline-offset: 3px; // to match the dotted line under 'about this data'
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-right: 3rem;
     margin-bottom: 0;
+
+    a {
+      text-underline-offset: 3px; // to match the dotted line under 'about this data'
+    }
   }
 `;
 
