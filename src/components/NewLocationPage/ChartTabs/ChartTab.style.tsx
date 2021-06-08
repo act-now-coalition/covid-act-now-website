@@ -21,6 +21,7 @@ export const Tab = styled(MuiTab)`
   text-align: left;
   padding: 6px 0;
   margin-right: 1.5rem;
+  opacity: 1;
   .MuiTab-wrapper {
     align-items: start;
   }
