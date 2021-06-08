@@ -3,7 +3,7 @@ import { Region, MetroArea, County } from 'common/regions';
 import { Annotations, Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { TextButton } from 'components/ButtonSystem';
+import ExternalLink from 'components/ExternalLink';
 
 /**
  * Hardcoding sources as fallback (metricToSourceMap) for the time being
@@ -128,6 +128,7 @@ function getDisclaimerMetricName(metric: Metric): string {
   }
 }
 
+// When implementing new footers/modals, change fragment to <p> and ExternalLink to TextButton
 export const getDataSourceTooltipContent = (
   metric: Metric,
   region: Region,
@@ -147,10 +148,10 @@ export const getDataSourceTooltipContent = (
         };
 
   return (
-    <p>
+    <>
       Our data for {getDisclaimerMetricName(metric)} in {region.name} comes from{' '}
-      <TextButton href={source.url}>{source.name}</TextButton>.
-    </p>
+      <ExternalLink href={source.url}>{source.name}</ExternalLink>.
+    </>
   );
 };
 
