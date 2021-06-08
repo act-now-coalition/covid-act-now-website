@@ -20,7 +20,7 @@ import {
 } from 'assets/theme/customMuiStyleBlocks';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { LockBodyScroll } from 'components/Dialog';
+import { LockBodyScroll } from 'components/Dialogs';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;

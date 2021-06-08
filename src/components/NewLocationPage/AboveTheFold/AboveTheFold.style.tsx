@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { maxContentWidth } from 'components/NewLocationPage/Shared/Shared.style';
 import {
   materialSMBreakpoint,
   mobileBreakpoint,
@@ -8,12 +7,22 @@ import {
 } from 'assets/theme/sizes';
 
 export const MainWrapper = styled.div`
+  padding: ${props => props.theme.spacingTheme.contentGutterMobile};
   background-color: ${COLOR_MAP.GREY_0};
-  padding: 2rem 1rem;
-  margin-bottom: 3rem;
 
   @media (min-width: ${mobileBreakpoint}) {
-    padding: 2rem;
+    padding: ${props => props.theme.spacingTheme.contentGutterDesktop};
+  }
+`;
+
+export const ContentContainer = styled.div`
+  margin: auto;
+  display: flex;
+  width: fit-content;
+
+  @media (min-width: ${countyMapToFixedBreakpoint}) {
+    width: ${props =>
+      props.theme.spacingTheme.locationPage.widthContentWithStickyMap};
   }
 `;
 
@@ -34,8 +43,7 @@ export const HeaderContainer = styled.div`
 
 export const GridContainer = styled.div<{ showNote: boolean }>`
   display: grid;
-  max-width: ${maxContentWidth};
-  margin: auto;
+  max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
   row-gap: 1.25rem;
   grid-template-areas: ${({ showNote }) =>
     showNote
@@ -73,7 +81,6 @@ export const GridContainer = styled.div<{ showNote: boolean }>`
   }
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
-    margin: 0 350px 0 auto;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: ${({ showNote }) =>
       showNote
@@ -84,10 +91,7 @@ export const GridContainer = styled.div<{ showNote: boolean }>`
         : `'header header'
       'overview overview'
       'spark alerts'`};
-  }
-
-  @media (min-width: 1750px) {
-    margin: auto;
+    margin-right: 2rem;
   }
 `;
 
