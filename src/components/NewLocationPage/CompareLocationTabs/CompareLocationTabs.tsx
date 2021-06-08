@@ -10,7 +10,6 @@ function getGeoScopeCopy(
   geoScope: GeoScopeFilter | HomepageLocationScope,
   stateId?: string,
 ) {
-  console.log(typeof geoScope);
   switch (geoScope) {
     case GeoScopeFilter.NEARBY:
       return 'Nearby';
