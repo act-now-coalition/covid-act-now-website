@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import NewDialog from './NewDialog';
+import DialogMain from './DialogMain';
 import { vulnerabilitiesModal } from 'cms-content/modals';
+import { MarkdownBody } from 'components/Markdown';
 
 export default {
   title: 'Below the fold/Vulnerabilities Modal',
-  component: NewDialog,
+  component: DialogMain,
 };
 
 export const VulnerabilitiesModal = () => {
@@ -16,13 +17,14 @@ export const VulnerabilitiesModal = () => {
   return (
     <>
       <div onClick={() => setDialogOpen(true)}>Open dialog</div>
-      <NewDialog
+      <DialogMain
         open={dialogOpen}
         closeDialog={closeDialog}
         header={header}
-        body={body}
         links={links}
-      />
+      >
+        <MarkdownBody source={body} />
+      </DialogMain>
     </>
   );
 };

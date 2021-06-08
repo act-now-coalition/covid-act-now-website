@@ -8,18 +8,17 @@ import {
   DialogContent,
   StyledIconButton,
   StyledPaper,
+  LinksContainer,
 } from './Dialog.style';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
-import { MarkdownBody } from 'components/Markdown';
-import { LockBodyScroll } from 'components/Dialog';
+import { LockBodyScroll } from 'components/Dialogs';
 
-const NewDialog: React.FC<{
+const DialogMain: React.FC<{
   open: boolean;
   closeDialog: () => void;
   header: string;
-  body: string;
   links: Link[];
-}> = ({ open, closeDialog, header, body, links }) => {
+}> = ({ open, closeDialog, header, links, children }) => {
   return (
     <Dialog
       open={open}
@@ -35,19 +34,21 @@ const NewDialog: React.FC<{
         </StyledIconButton>
       </HeaderWrapper>
       <DialogContent>
-        <MarkdownBody source={body} />
-        {links.length && (
-          <>
-            {links.map((link: Link) => (
-              <LargeOutlinedButton to={link.url} key={link.cta}>
-                {link.cta}
-              </LargeOutlinedButton>
-            ))}
-          </>
-        )}
+        {children}
+        <LinksContainer>
+          {links.length && (
+            <>
+              {links.map((link: Link) => (
+                <LargeOutlinedButton to={link.url} key={link.cta}>
+                  {link.cta}
+                </LargeOutlinedButton>
+              ))}
+            </>
+          )}
+        </LinksContainer>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default NewDialog;
+export default DialogMain;
