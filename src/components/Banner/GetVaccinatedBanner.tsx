@@ -26,7 +26,7 @@ const GetVaccinatedBanner: React.FC = () => {
         </Body>
         <ButtonsContainer>
           <LargeButton
-            href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/talk-about-vaccines.html"
+            to="/covid-explained/combating-vaccine-hesitancy"
             trackingCategory={EventCategory.HOMEPAGE_BANNER}
             trackingLabel="Homepage Banner: CDC Talk About Vaccines"
           >
