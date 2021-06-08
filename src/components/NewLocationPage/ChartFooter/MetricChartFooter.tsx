@@ -26,8 +26,8 @@ export interface ShareButtonProps {
 
 interface DialogProps {
   open: boolean;
-  closeDialog: any;
-  openDialog: any;
+  closeDialog: () => void;
+  openDialog: () => void;
   modalContent: MetricModalContent;
   modalHeader: string;
 }
