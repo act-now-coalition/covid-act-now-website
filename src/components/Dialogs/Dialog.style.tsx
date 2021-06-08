@@ -60,7 +60,10 @@ export const DialogContent = styled(MuiDialogContent)`
   }
 `;
 
-export const StyledIconButton = styled(IconButton)`
+export const StyledIconButton = styled(IconButton).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
   padding: 0;
   margin-left: 0.75rem;
   display: flex;
