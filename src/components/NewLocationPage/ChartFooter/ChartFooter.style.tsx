@@ -13,6 +13,7 @@ export const FooterText = styled.div`
 
   a {
     color: ${COLOR_MAP.GRAY_BODY_COPY};
+    text-underline-offset: 3px; // to match the dotted line under 'about this data'
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
