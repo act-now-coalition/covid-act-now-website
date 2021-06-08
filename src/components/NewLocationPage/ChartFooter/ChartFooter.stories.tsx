@@ -9,8 +9,12 @@ export default {
   title: 'Location page redesign/Chart Footer',
 };
 
-const footerText =
-  'Over the last week, Texas has averaged 3,173 new confirmed cases per day (10.9 for every 100,000 residents).';
+const footerText = (
+  <>
+    Over the last week, Texas has averaged 3,173 new confirmed cases per day
+    (10.9 for every 100,000 residents).
+  </>
+);
 const header = 'This is the modal header.';
 const body = 'This is the modal body.';
 const links = [{ cta: 'Learn more', url: '/' }];
@@ -22,20 +26,20 @@ export const MetricChartFooterWithDisclaimer = () => {
     return null;
   }
   const stats = summaryToStats(locationSummary);
-  const disclaimer =
+  const overrideDisclaimer =
     'Note that our daily new cases per 100k metric is different than the "adjusted case rate" metric used by Texas for determining reopening tier assignments. Their adjusted case rate is adjusted to account for testing levels.';
   return (
-    <MetricChartFooter
-      footerText={footerText}
-      disclaimer={disclaimer}
-      shareButtonProps={{
-        region: region,
-        stats: stats,
-        chartIdentifier: Metric.CASE_DENSITY,
-        showEmbedButton: false,
-      }}
-      aboutModal={{ header: header, body: body, links: links }}
-    />
+    <div>hello</div>
+    // <MetricChartFooter
+    //   footerText={footerText}
+    //   overrideDisclaimer={overrideDisclaimer}
+    //   shareButtonProps={{
+    //     region: region,
+    //     stats: stats,
+    //     chartIdentifier: Metric.CASE_DENSITY,
+    //     showEmbedButton: false,
+    //   }}
+    // />
   );
 };
 
@@ -46,15 +50,15 @@ export const MetricChartFooterNoDisclaimer = () => {
   }
   const stats = summaryToStats(locationSummary);
   return (
-    <MetricChartFooter
-      footerText={footerText}
-      shareButtonProps={{
-        region: region,
-        stats: stats,
-        chartIdentifier: Metric.CASE_DENSITY,
-        showEmbedButton: false,
-      }}
-      aboutModal={{ header: header, body: body, links: links }}
-    />
+    <div>hello</div>
+    // <MetricChartFooter
+    //   footerText={footerText}
+    //   shareButtonProps={{
+    //     region: region,
+    //     stats: stats,
+    //     chartIdentifier: Metric.CASE_DENSITY,
+    //     showEmbedButton: false,
+    //   }}
+    // />
   );
 };

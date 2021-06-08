@@ -8,9 +8,13 @@ export const Row = styled.div`
 `;
 
 export const FooterText = styled.div`
-  margin: 0 0.5rem 0.75rem 0;
-  max-width: 42.5rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-bottom: 0.75rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-right: 3rem;
+    margin-bottom: 0;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -44,15 +48,11 @@ export const IconWrapper = styled.div`
 `;
 
 export const AboutText = styled.span`
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  line-height: 2.25rem;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 0.2rem;
+  ${props => props.theme.fonts.regularBook};
   font-size: 0.9rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    line-height: 1.5rem;
+    line-height: 1.4rem;
     font-size: 1rem;
   }
 `;
@@ -66,6 +66,10 @@ export const ModalButton = styled(TooltipAnchorText).attrs(props => ({
   padding: 0;
 `;
 
-export const DisclaimerWrapper = styled.div`
+export const Wrapper = styled.div`
   margin-top: 1rem;
+`;
+
+export const OverrideDisclaimer = styled.p`
+  margin: 1rem 0 0;
 `;

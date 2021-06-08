@@ -1,25 +1,16 @@
 import React from 'react';
-import {
-  ChartDescription,
-  BetaTag,
-  DisclaimerWrapper,
-} from './ChartsHolder.style';
+import { BetaTag } from './ChartsHolder.style';
 import { Projections } from 'common/models/Projections';
-import ShareButtons from 'components/LocationPage/ShareButtons';
-import {
-  getMetricNameExtended,
-  getMetricStatusText,
-  getMetricDefinition,
-} from 'common/metric';
+import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import MetricChart from 'components/Charts/MetricChart';
 import { County, Region } from 'common/regions';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
-import { MarkdownContent } from 'components/Markdown';
-import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
 import { SectionHeader } from 'components/SharedComponents';
+import MetricChartFooter from 'components/NewLocationPage/ChartFooter/MetricChartFooter';
+import { getMetricModalContent } from 'components/Dialogs/utils';
 
 function ChartBlock(props: {
   chartRef: React.RefObject<HTMLDivElement>;
@@ -40,22 +31,25 @@ function ChartBlock(props: {
 
   const hasMetric = projections.hasMetric(metric);
 
-  const metricDefinition = getMetricDefinition(metric);
-  const chartHeaderTooltip = metricDefinition.renderInfoTooltip();
-  const disclaimerContent = renderDisclaimer(region, metric, provenance);
+  const overrideDisclaimer = getOverrideDisclaimer(region, metric, provenance);
 
   const chartHeight = isMobile ? 280 : 400;
+
+  const shareButtonProps = {
+    chartIdentifier: metric,
+    region,
+    stats,
+    showEmbedButton: false,
+  };
+
+  const modalContent = getMetricModalContent(region, metric, provenance);
 
   return (
     <>
       <SectionHeader ref={props.chartRef}>
         {getMetricNameExtended(metric)}
-        <>{chartHeaderTooltip}</>
         {showBetaTag && <BetaTag>New</BetaTag>}
       </SectionHeader>
-      <ChartDescription>
-        {getMetricStatusText(metric, projections)}
-      </ChartDescription>
       {hasMetric && (
         <>
           <MetricChart
@@ -63,32 +57,25 @@ function ChartBlock(props: {
             projections={projections}
             height={chartHeight}
           />
-          <LocationPageSectionFooter>
-            <DisclaimerWrapper>{disclaimerContent}</DisclaimerWrapper>
-            <ShareButtons
-              chartIdentifier={metric}
-              region={region}
-              stats={stats}
-              showEmbedButton={false}
-            />
-          </LocationPageSectionFooter>
+          <MetricChartFooter
+            footerText={getMetricStatusText(metric, projections)}
+            overrideDisclaimer={overrideDisclaimer}
+            shareButtonProps={shareButtonProps}
+            modalContent={modalContent}
+            modalHeader={getMetricNameExtended(metric)}
+            modalLinks={[]}
+          />
         </>
       )}
     </>
   );
 }
 
-export function renderDisclaimer(
+export function getOverrideDisclaimer(
   region: Region,
   metric: Metric,
   provenance: Sources | undefined,
-) {
-  const metricDefinition = getMetricDefinition(metric);
-  const standardDisclaimer = metricDefinition.renderDisclaimer(
-    region,
-    provenance,
-  );
-
+): string | undefined {
   // Preface with any region override disclaimer text.
   let overrideDisclaimer = getRegionMetricOverride(region, metric)?.disclaimer;
 
@@ -105,12 +92,7 @@ export function renderDisclaimer(
     state-wide average ratio.`;
   }
 
-  return (
-    <>
-      {overrideDisclaimer && <MarkdownContent source={overrideDisclaimer} />}
-      {standardDisclaimer}
-    </>
-  );
+  return overrideDisclaimer;
 }
 
 export default ChartBlock;

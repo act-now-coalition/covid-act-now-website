@@ -38,11 +38,11 @@ export const ChartLocationName = styled(Typography)`
   ${ChartLocationNameStyles}
 `;
 
-export const ChartDescription = styled(Typography)`
-  max-width: 600px;
-  color: rgba(0, 0, 0, 0.7);
-  margin-bottom: 1rem;
-`;
+// export const ChartDescription = styled(Typography)`
+//   max-width: 600px;
+//   color: rgba(0, 0, 0, 0.7);
+//   margin-bottom: 1rem;
+// `;
 
 export const BetaTag = styled.div`
   font-size: 0.675rem;
