@@ -10,8 +10,8 @@ export const ButtonGroup = styled(ToggleButtonGroup)`
 `;
 
 export const Button = styled(ToggleButton)`
-  padding: 10px;
-  border: 0;
+  padding: 0.63rem;
+  border: none;
   .MuiToggleButton-label {
     color: ${COLOR_MAP.GREY_3};
     text-transform: none;
