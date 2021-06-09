@@ -1,3 +1,5 @@
+import some from 'lodash/some';
+
 import RegionOverrides from './region-overrides.json';
 import { Markdown } from 'cms-content/utils';
 import { Metric } from 'common/metricEnum';
@@ -21,9 +23,11 @@ const metricIdToMetric: { [metricId: string]: Metric } = {
 interface RegionOverride {
   include: Include;
   metric: string;
-  region: string;
+  region: string; // comma-separated list of state codes and FIPS
   context: string;
   blocked: boolean;
+  start_date?: string;
+  end_date?: string;
   disclaimer?: Markdown;
 }
 
@@ -43,7 +47,7 @@ export function getRegionMetricOverride(
 /** Can be called from a test to validate properties for each override. */
 export function validateOverrides() {
   for (const override of getOverrides()) {
-    getRegionFromOverride(override);
+    getRegionsFromOverride(override);
     getMetricForOverride(override);
   }
 }
@@ -65,28 +69,36 @@ function getOverrides(): RegionOverride[] {
 
 /** Checks if the specified override applies to the specified region. */
 function overrideAppliesToRegion(override: RegionOverride, region: Region) {
-  const overrideRegion = getRegionFromOverride(override);
+  const overrideRegions = getRegionsFromOverride(override);
   const includeSelf =
     override.include === Include.Region ||
     override.include === Include.RegionAndSubregions;
   const includeSubregions =
     override.include === Include.Subregions ||
     override.include === Include.RegionAndSubregions;
-  if (includeSelf && region === overrideRegion) {
+  if (includeSelf && overrideRegions.includes(region)) {
     return true;
   } else if (includeSubregions) {
-    return overrideRegion.contains(region);
+    return some(
+      overrideRegions.map((overrideRegion: Region) =>
+        overrideRegion.contains(region),
+      ),
+    );
   }
   return false;
 }
 
 /** Parses the string "region" out of the specified override and returns it as a Region class. */
-function getRegionFromOverride(override: RegionOverride): Region {
-  if (/^[A-Z][A-Z]$/.test(override.region)) {
-    return regions.findByStateCodeStrict(override.region);
-  } else {
-    return regions.findByFipsCodeStrict(override.region);
-  }
+function getRegionsFromOverride(override: RegionOverride): Region[] {
+  const regionStrings = override.region.split(',');
+  const overrideRegions = regionStrings.map((r: string) => {
+    if (/^[A-Z][A-Z]$/.test(r)) {
+      return regions.findByStateCodeStrict(r);
+    } else {
+      return regions.findByFipsCodeStrict(r);
+    }
+  });
+  return overrideRegions;
 }
 
 function getMetricForOverride(override: RegionOverride): Metric {

@@ -9,13 +9,10 @@ import { useLocation, useParams } from 'react-router-dom';
 import some from 'lodash/some';
 import uniq from 'lodash/uniq';
 import max from 'lodash/max';
-import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ParentSize } from '@vx/responsive';
-import ShareImageButtonGroup from 'components/ShareButtons';
-import ExploreTabs from './ExploreTabs';
+import ShareButtonGroup from 'components/ShareButtons';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
@@ -33,7 +30,16 @@ import {
   getMetricName,
   getSeriesLabel,
   EXPLORE_CHART_IDS,
-  getSubtitle,
+  Period,
+  periodMap,
+  getAllPeriodLabels,
+  ORIGINAL_EXPLORE_METRICS,
+  getMetricDataMeasure,
+  getDateRange,
+  getYFormat,
+  getYAxisDecimalPlaces,
+  getXTickTimeUnitForPeriod,
+  getMaxYFromDefinition,
 } from './utils';
 import * as Styles from './Explore.style';
 import {
@@ -44,8 +50,9 @@ import {
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
-import NationalText from 'components/NationalText';
 import { SectionHeader } from 'components/SharedComponents';
+import NationalText from 'components/NationalText';
+import Dropdown from 'components/Explore/Dropdown/Dropdown';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -90,7 +97,7 @@ function getLabelLength(series: Series, shortLabel: boolean) {
   return label.length;
 }
 
-const Explore: React.FunctionComponent<{
+const ExploreCopy: React.FunctionComponent<{
   initialFipsList: string[];
   title?: string;
   defaultMetric?: ExploreMetric;
@@ -121,27 +128,18 @@ const Explore: React.FunctionComponent<{
     }
     const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
-    const [normalizeData, setNormalizeData] = useState(
-      initialFipsList.length > 1,
-    );
-
-    const onChangeTab = (newMetric: number) => {
+    const onSelectCurrentMetric = (newMetric: number) => {
       const newMetricName = metricLabels[newMetric];
       setCurrentMetric(newMetric);
       trackExploreEvent(EventAction.SELECT, `Metric: ${newMetricName}`);
     };
 
-    const onClickNormalize = () => {
-      const newNormalizeData = !normalizeData;
-      setNormalizeData(newNormalizeData);
-      trackExploreEvent(
-        EventAction.SELECT,
-        'Normalize Data',
-        newNormalizeData ? 1 : 0,
-      );
-    };
-
     const currentMetricName = getMetricName(currentMetric);
+
+    const dataMeasure = getMetricDataMeasure(currentMetric);
+    const yAxisDecimalPlaces = getYAxisDecimalPlaces(currentMetric);
+    const yTickFormat = getYFormat(dataMeasure, yAxisDecimalPlaces);
+    const yTooltipFormat = getYFormat(dataMeasure, 1);
 
     const initialLocations = useMemo(
       () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
@@ -157,19 +155,20 @@ const Explore: React.FunctionComponent<{
       initialLocations,
     );
 
+    const [normalizeData, setNormalizeData] = useState(
+      selectedLocations.length > 1 &&
+        ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+    );
+
+    useEffect(() => {
+      setNormalizeData(
+        selectedLocations.length > 1 &&
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+      );
+    }, [currentMetric, selectedLocations]);
+
     const onChangeSelectedLocations = (newLocations: Region[]) => {
       const changedLocations = uniq(newLocations);
-      if (selectedLocations.length > 1 && changedLocations.length === 1) {
-        // if switching from multiple to a single location, disable normalization
-        setNormalizeData(false);
-      } else if (
-        selectedLocations.length === 1 &&
-        changedLocations.length > 1
-      ) {
-        // if switching from single to multiple locations, enable normalization
-        setNormalizeData(true);
-      }
-
       const eventLabel =
         selectedLocations.length < changedLocations.length
           ? 'Adding Location'
@@ -211,8 +210,11 @@ const Explore: React.FunctionComponent<{
     // they are not carried over to the new location page.
     useEffect(() => {
       setSelectedLocations(initialLocations);
-      setNormalizeData(initialLocations.length > 1);
       setCurrentMetric(defaultMetric);
+      setNormalizeData(
+        initialLocations.length > 1 &&
+          ORIGINAL_EXPLORE_METRICS.includes(defaultMetric),
+      );
     }, [initialLocations, defaultMetric]);
 
     const [chartSeries, setChartSeries] = useState<Series[]>([]);
@@ -225,10 +227,14 @@ const Explore: React.FunctionComponent<{
     const hasData = some(chartSeries, ({ data }) => data.length > 0);
     const hasMultipleLocations = selectedLocations.length > 1;
 
-    const modalNormalizeCheckboxProps = {
-      hasMultipleLocations,
-      normalizeData,
-      setNormalizeData,
+    const [period, setPeriod] = useState<Period>(Period.ALL);
+    const allPeriodLabels = getAllPeriodLabels();
+    const dateRange = getDateRange(period);
+
+    const onSelectPeriod = (newPeriod: Period) => {
+      const newPeriodLabel = periodMap[newPeriod].label;
+      setPeriod(newPeriod);
+      trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
     };
 
     const marginRight = useMemo(
@@ -244,6 +250,14 @@ const Explore: React.FunctionComponent<{
       });
     };
 
+    const [metricMenuLabel, setMetricMenuLabel] = useState(
+      metricLabels[currentMetric],
+    );
+    const [timeRangeMenuLabel, setTimeRangeMenuLabel] = useState(
+      allPeriodLabels[period],
+    );
+    const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
+
     const sharedParams = useSharedComponentParams(SharedComponent.Explore);
     useEffect(() => {
       if (sharedParams) {
@@ -253,67 +267,46 @@ const Explore: React.FunctionComponent<{
           (fips: string) => regions.findByFipsCode(fips)!,
         );
         setSelectedLocations(locations);
+        setMetricMenuLabel(metricLabels[sharedParams.currentMetric]);
       }
-    }, [sharedParams]);
+    }, [sharedParams, metricLabels]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
       : 'Single Location';
     const numLocations = selectedLocations.length;
 
+    const showLegend =
+      ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
+
     return (
       <div ref={exploreRef}>
         <SectionHeader>{title}</SectionHeader>
         {showNationalSummary && <NationalText />}
-        <ExploreTabs
-          activeTabIndex={currentMetric}
-          labels={metricLabels}
-          onChangeTab={onChangeTab}
-        />
         <Styles.ChartControlsContainer>
-          <Styles.TableAutocompleteHeader>
-            Compare states, counties, or metro areas
-          </Styles.TableAutocompleteHeader>
-          <Grid container spacing={1}>
-            <Grid key="location-selector" item sm={9} xs={12}>
-              <LocationSelector
-                regions={autocompleteLocations}
-                selectedRegions={selectedLocations}
-                onChangeSelectedRegions={onChangeSelectedLocations}
-                {...modalNormalizeCheckboxProps}
-              />
-            </Grid>
-            {!hasMultipleLocations && (
-              <Grid key="legend" item sm={3} xs={12}>
-                <Legend seriesList={chartSeries} />
-              </Grid>
-            )}
-            {hasMultipleLocations && !isMobileXs && (
-              <Grid key="legend" item sm={3} xs={12}>
-                <Styles.NormalizeDataContainer>
-                  <FormControlLabel
-                    control={
-                      <Styles.NormalizeCheckbox
-                        checked={normalizeData}
-                        onChange={onClickNormalize}
-                        name="normalize data"
-                        disableRipple
-                        id="normalize-data-control"
-                      />
-                    }
-                    label="Normalize Data"
-                  />
-                  <Styles.NormalizeSubLabel>
-                    Per 100k population
-                  </Styles.NormalizeSubLabel>
-                </Styles.NormalizeDataContainer>
-              </Grid>
-            )}
-          </Grid>
+          <Dropdown
+            menuLabel="Metric"
+            buttonSelectionLabel={metricMenuLabel}
+            itemLabels={metricLabels}
+            onSelect={onSelectCurrentMetric}
+            maxWidth={250}
+            setLabel={setMetricMenuLabel}
+          />
+          <Dropdown
+            menuLabel="Past # of days"
+            buttonSelectionLabel={timeRangeMenuLabel}
+            itemLabels={allPeriodLabels}
+            onSelect={onSelectPeriod}
+            maxWidth={150}
+            setLabel={setTimeRangeMenuLabel}
+          />
+          <LocationSelector
+            regions={autocompleteLocations}
+            selectedRegions={selectedLocations}
+            onChangeSelectedRegions={onChangeSelectedLocations}
+            maxWidth={400}
+          />
         </Styles.ChartControlsContainer>
-        <Styles.Subtitle>
-          {getSubtitle(currentMetricName, normalizeData, selectedLocations)}
-        </Styles.Subtitle>
         {selectedLocations.length > 0 && hasData && (
           <Styles.ChartContainer>
             {/**
@@ -332,6 +325,11 @@ const Explore: React.FunctionComponent<{
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
                     marginRight={marginRight}
+                    dateRange={dateRange}
+                    yTickFormat={yTickFormat}
+                    yTooltipFormat={yTooltipFormat}
+                    xTickTimeUnit={getXTickTimeUnitForPeriod(period)}
+                    maxYFromDefinition={maxYFromDefinition}
                   />
                 ) : (
                   <div style={{ height: 400 }} />
@@ -354,9 +352,10 @@ const Explore: React.FunctionComponent<{
             <ScreenshotReady />
           </Styles.EmptyPanel>
         )}
-        <div style={{ paddingTop: '1rem' }}>
+        <Styles.FooterContainer>
+          {showLegend && <Legend seriesList={chartSeries} />}
           <Styles.ShareBlock>
-            <ShareImageButtonGroup
+            <ShareButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
               imageFilename={getImageFilename(selectedLocations, currentMetric)}
@@ -366,6 +365,7 @@ const Explore: React.FunctionComponent<{
                 )
               }
               quote={getSocialQuote(selectedLocations, currentMetric)}
+              region={region ? region : undefined}
               onSaveImage={() => {
                 trackExploreEvent(
                   EventAction.SAVE_IMAGE,
@@ -386,15 +386,12 @@ const Explore: React.FunctionComponent<{
               onShareOnTwitter={() =>
                 trackShare(`Twitter: ${trackingLabel}`, numLocations)
               }
-              onShareOnLinkedin={() =>
-                trackShare(`Linkedin: ${trackingLabel}`, numLocations)
-              }
             />
           </Styles.ShareBlock>
-        </div>
+        </Styles.FooterContainer>
       </div>
     );
   },
 );
 
-export default Explore;
+export default ExploreCopy;

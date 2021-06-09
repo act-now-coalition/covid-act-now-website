@@ -101,7 +101,6 @@ const NavLocationPage: React.FC<{
             <NavBarSearch
               menuOpen={menuOpen}
               WrappingDiv={Fragment}
-              region={region}
               placeholder={
                 hasScrolled ? region.shortName : 'City, county, state, or zip'
               }

@@ -69,6 +69,7 @@ function ChartBlock(props: {
               chartIdentifier={metric}
               region={region}
               stats={stats}
+              showEmbedButton={false}
             />
           </LocationPageSectionFooter>
         </>
@@ -77,7 +78,7 @@ function ChartBlock(props: {
   );
 }
 
-function renderDisclaimer(
+export function renderDisclaimer(
   region: Region,
   metric: Metric,
   provenance: Sources | undefined,

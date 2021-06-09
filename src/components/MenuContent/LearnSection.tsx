@@ -34,11 +34,8 @@ const LearnSection: React.FC<{
           );
         })}
       </Column>
-      <OutlinedButton
-        to="/learn"
-        onClick={() => onClick('Learn: View all topics')}
-      >
-        View all topics
+      <OutlinedButton to="/faq" onClick={() => onClick('Learn: Vaccine FAQs')}>
+        Vaccine FAQs
       </OutlinedButton>
     </Section>
   );

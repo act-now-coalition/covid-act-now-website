@@ -7,3 +7,26 @@ export const smallPhoneBreakpoint = '321px';
 
 // Breakpoint at which the county map changes to position:fixed on the location page:
 export const countyMapToFixedBreakpoint = '1320px';
+
+interface LocationPageSpacing {
+  mapWidthDesktop: string;
+  maxWidthContent: string;
+  widthContentWithStickyMap: string;
+}
+
+export interface Spacing {
+  contentGutterMobile: string;
+  contentGutterDesktop: string;
+  locationPage: LocationPageSpacing;
+}
+
+// TODO (chelsi) - use these content gutters throughout site
+export const spacingTheme: Spacing = {
+  contentGutterMobile: '1rem',
+  contentGutterDesktop: '2rem',
+  locationPage: {
+    mapWidthDesktop: '320px',
+    maxWidthContent: '900px',
+    widthContentWithStickyMap: '1252px', // maxWidthContent + 320px-wide map + 2rem margin
+  },
+};

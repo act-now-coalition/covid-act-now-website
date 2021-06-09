@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
-import palette from 'assets/theme/palette';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import {
+  StyledLink as RegionItemWrappingLink,
+  SkeletonWrapper as RegionItemSkeletonWrapper,
+} from 'components/RegionItem/RegionItem.style';
 
 export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
   display: flex;
@@ -16,28 +19,26 @@ export const Content = styled.div`
   margin: auto auto 3rem;
 `;
 
-export const SectionWrapper = styled.div`
-  margin-bottom: 2.5rem;
-`;
-
 export const Section = styled.div`
   margin: 3.5rem 1rem;
-  @media (min-width: ${mobileBreakpoint}) {
-    margin: 3.5rem 0;
-  }
 `;
 
 // zero right margin so that it's full bleed on mobile when overflowing
 export const RegionItemsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.75rem;
   margin-top: 0.75rem;
   margin-bottom: 2.25rem;
   margin-left: 1rem;
   margin-right: 0;
   flex: 1;
   overflow-x: auto;
+
+  ${RegionItemWrappingLink},${RegionItemSkeletonWrapper} {
+    &:first-of-type{
+      margin-right: .75rem;
+    }
+  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
@@ -55,24 +56,6 @@ export const SearchBarThermometerWrapper = styled(Box)`
   }
 `;
 
-export const PartnerSection = styled.div`
-  padding: 0 1rem 1rem;
-`;
-
-export const PartnerHeader = styled(Subtitle1)`
-  padding-top: 2.5rem;
-  margin-top: 2.5rem;
-  border-top: 1px solid ${palette.lightGray};
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
-export const FeaturedHeader = styled(Subtitle1)`
-  margin-top: 4rem;
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
 export const BannerContainer = styled.div`
   margin: 0 auto;
 
@@ -88,4 +71,16 @@ export const ElectionCountdownContainer = styled.div`
   @media (min-width: ${mobileBreakpoint}) {
     margin-top: 2rem;
   }
+`;
+
+export const SectionWrapper = styled.div`
+  max-width: 1000px;
+  margin: auto 1rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid ${props => props.theme.palette.lightGray};
+`;
+
+export const SectionHeader = styled(Subtitle1)`
+  text-align: center;
+  margin-bottom: 1.25rem;
 `;

@@ -3,27 +3,32 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   FacebookShareButton,
   TwitterShareButton,
-  LinkedinShareButton,
   FacebookIcon,
   TwitterIcon,
-  LinkedinIcon,
 } from 'react-share';
 import {
   CopyLinkButton,
   SocialButtonsContainer,
   SocialShareButton,
 } from './ShareButtons.style';
+import { SocialButton } from 'components/ShareButtons/ShareButtons.style';
+import EmbedPreview from 'components/ShareBlock/EmbedPreview';
+import { Region } from 'common/regions';
 
 const SocialButtons = ({
   iconSize,
   shareURL,
   shareQuote,
-  closeOnClick,
+  region,
+  hideSocialButtons,
+  showEmbedButton,
 }: {
   iconSize: number;
   shareURL: string;
   shareQuote: string;
-  closeOnClick: () => void;
+  region: Region;
+  hideSocialButtons: () => void;
+  showEmbedButton?: boolean;
 }) => {
   const url = shareURL || 'https://covidactnow.org/';
   const quote =
@@ -45,23 +50,29 @@ const SocialButtons = ({
     variant: 'contained',
   };
 
+  const [showEmbedPreviewModal, setShowEmbedPreviewModal] = useState(false);
+
+  function closeShareButtonGroup() {
+    setTimeout(() => hideSocialButtons(), 1000);
+  }
+
   return (
-    <SocialButtonsContainer onClick={closeOnClick}>
-      <SocialShareButton {...buttonProps} color="#3b5998">
-        <FacebookShareButton url={url} quote={quote}>
-          <FacebookIcon {...iconProps} />
-        </FacebookShareButton>
-      </SocialShareButton>
-      <SocialShareButton {...buttonProps} color="#00acee">
-        <TwitterShareButton url={url} hashtags={[hashtag]} title={quote}>
-          <TwitterIcon {...iconProps} />
-        </TwitterShareButton>
-      </SocialShareButton>
-      <SocialShareButton {...buttonProps} color="#007fb1">
-        <LinkedinShareButton url={url} title={quote}>
-          <LinkedinIcon {...iconProps} />
-        </LinkedinShareButton>
-      </SocialShareButton>
+    <SocialButtonsContainer>
+      {showEmbedButton && (
+        <SocialShareButton variant="contained" color="#007fb1">
+          <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
+            Embed
+          </SocialButton>
+          <EmbedPreview
+            open={showEmbedPreviewModal}
+            onClose={() => {
+              setShowEmbedPreviewModal(false);
+              closeShareButtonGroup();
+            }}
+            region={region}
+          />
+        </SocialShareButton>
+      )}
       <CopyToClipboard
         text={url}
         onCopy={() => {
@@ -69,7 +80,11 @@ const SocialButtons = ({
           setCopyLinkButtonTextB('');
         }}
       >
-        <SocialShareButton {...buttonProps} color="#007fb1">
+        <SocialShareButton
+          {...buttonProps}
+          color="#007fb1"
+          onClick={closeShareButtonGroup}
+        >
           <CopyLinkButton>
             {copyLinkButtonTextA}
             <br />
@@ -77,6 +92,24 @@ const SocialButtons = ({
           </CopyLinkButton>
         </SocialShareButton>
       </CopyToClipboard>
+      <SocialShareButton
+        {...buttonProps}
+        color="#00acee"
+        onClick={closeShareButtonGroup}
+      >
+        <TwitterShareButton url={url} hashtags={[hashtag]} title={quote}>
+          <TwitterIcon {...iconProps} />
+        </TwitterShareButton>
+      </SocialShareButton>
+      <SocialShareButton
+        {...buttonProps}
+        color="#3b5998"
+        onClick={closeShareButtonGroup}
+      >
+        <FacebookShareButton url={url} quote={quote}>
+          <FacebookIcon {...iconProps} />
+        </FacebookShareButton>
+      </SocialShareButton>
     </SocialButtonsContainer>
   );
 };

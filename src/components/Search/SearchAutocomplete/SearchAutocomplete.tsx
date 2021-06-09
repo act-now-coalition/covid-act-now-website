@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import flatten from 'lodash/flatten';
+import uniq from 'lodash/uniq';
 import { Autocomplete } from '@material-ui/lab';
 import Hidden from '@material-ui/core/Hidden';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
-import { Region, MetroArea } from 'common/regions';
+import { State, County, Region, MetroArea, FipsCode } from 'common/regions';
 import {
   Wrapper,
   StyledTextField,
@@ -18,7 +20,7 @@ import {
 } from 'assets/theme/customMuiStyleBlocks';
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import { LockBodyScroll } from 'components/Dialog';
+import { LockBodyScroll } from 'components/Dialogs';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -29,7 +31,6 @@ const SearchAutocomplete: React.FC<{
   filterLimit: number;
   setHideMapToggle?: any;
   menuOpen: boolean;
-  region?: Region;
   placeholder: string;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({
@@ -37,7 +38,6 @@ const SearchAutocomplete: React.FC<{
   filterLimit,
   setHideMapToggle,
   menuOpen,
-  region,
   placeholder,
   setMenuOpen,
 }) => {
@@ -74,15 +74,32 @@ const SearchAutocomplete: React.FC<{
   };
 
   const stringifyOption = (option: Region) => {
-    const zipCodes = countyToZipMap?.[option.fipsCode];
-    if (checkForZipcodeMatch && zipCodes) {
-      return `${zipCodes.join(' ')}`;
-    } else {
+    // given a county fips code, return zip codes
+    const zipsForFips = (fips: FipsCode): string[] => {
+      return countyToZipMap?.[fips] ?? [];
+    };
+
+    if (checkForZipcodeMatch) {
+      // get zipcodes for county, metro, and state objects
+      let zipCodes = null;
       if (option instanceof MetroArea) {
-        return `${option.shortName}, ${(option as MetroArea).stateCodes}`;
-      } else {
-        return option.shortName;
+        zipCodes = uniq(flatten(option.countiesFips.map(zipsForFips)));
+      } else if (option instanceof County) {
+        zipCodes = zipsForFips(option.fipsCode);
+      } else if (option instanceof State) {
+        // going from state -> zips requires mapping all counties for the state
+        // which we don't have and won't be cheap (a list of all zip-codes per state? oof)
+        // so maybe defer this one for now
       }
+      if (zipCodes) {
+        return `${zipCodes.join(' ')}`;
+      }
+    }
+
+    if (option instanceof MetroArea) {
+      return `${option.shortName}, ${(option as MetroArea).stateCodes}`;
+    } else {
+      return option.shortName;
     }
   };
 

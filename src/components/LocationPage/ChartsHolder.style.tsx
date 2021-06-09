@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
-export const ChartContentWrapper = styled.div`
+export const LocationPageContentWrapper = styled.div`
   @media print {
     margin-top: 0;
   }
@@ -11,6 +12,14 @@ export const ChartContentWrapper = styled.div`
   @media print {
     max-width: 7.5in;
     margin: 0 auto;
+  }
+`;
+
+export const BelowTheFold = styled.div`
+  padding: ${props => props.theme.spacingTheme.contentGutterMobile};
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: ${props => props.theme.spacingTheme.contentGutterDesktop};
   }
 `;
 

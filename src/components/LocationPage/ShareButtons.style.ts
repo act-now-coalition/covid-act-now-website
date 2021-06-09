@@ -22,7 +22,7 @@ export const SocialButtonsContainer = styled.div`
   ${ButtonContainerStyles};
   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  margin: 10px 0 0 auto;
+  margin: 0.5rem 0 0 auto;
   position: absolute;
   right: 0;
 `;

@@ -63,7 +63,7 @@ export const LearnHeading1 = styled(Heading1)`
 `;
 
 export const SmallSubtext = styled(MarkdownContent)`
-  margin: 0;
+  margin: 0 0 1rem;
 
   p {
     font-style: italic;

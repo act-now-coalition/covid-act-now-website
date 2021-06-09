@@ -19,6 +19,7 @@ export const StyledShareButton = styled(LargeOutlinedButton)`
   border: 1px solid transparent;
   background-color: inherit;
   border-radius: 0 0 4px 4px;
+  width: 100%;
 
   &:hover {
     background-color: ${props =>
@@ -29,6 +30,7 @@ export const StyledShareButton = styled(LargeOutlinedButton)`
   @media (min-width: ${materialSMBreakpoint}) {
     margin: 0 0.5rem 0 0.5rem;
     border-radius: 4px;
+    width: initial;
 
     &:hover {
       border: ${props =>

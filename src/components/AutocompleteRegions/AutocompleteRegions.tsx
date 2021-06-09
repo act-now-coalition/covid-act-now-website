@@ -4,7 +4,7 @@ import Autocomplete, {
 } from '@material-ui/lab/Autocomplete';
 import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import { Region, MetroArea } from 'common/regions';
-import { StyledTextField } from './AutocompleteRegions.style';
+import { StyledTextField, StyledPaper } from './AutocompleteRegions.style';
 /**
  * `createFilterOptions` creates a configuration object that defines how the
  * user input will be matched against the options in the Autocomplete
@@ -22,6 +22,12 @@ import { StyledTextField } from './AutocompleteRegions.style';
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
 }
+
+export const getLocationLabel = (region: Region) => {
+  if (region instanceof MetroArea) {
+    return `${region.shortName}, ${region.stateCodes}`;
+  } else return region.shortName;
+};
 
 // TODO(Pablo): Use this component for the Newsletter
 const AutocompleteRegions: React.FC<{
@@ -48,17 +54,12 @@ const AutocompleteRegions: React.FC<{
     ? { 'aria-labelledby': ariaLabelledBy }
     : { 'aria-label': 'Select locations' };
 
-  const getLocationLabel = (region: Region) => {
-    if (region instanceof MetroArea) {
-      return `${region.shortName}, ${region.stateCodes}`;
-    } else return region.shortName;
-  };
-
   const renderTagsOption = { renderTags };
 
   return (
     <Autocomplete
       multiple
+      disablePortal // so the menu always opens downward
       options={regions}
       getOptionLabel={getLocationLabel}
       onChange={onChangeRegions}
@@ -78,6 +79,7 @@ const AutocompleteRegions: React.FC<{
         />
       )}
       {...renderTagsOption}
+      PaperComponent={StyledPaper}
     />
   );
 };

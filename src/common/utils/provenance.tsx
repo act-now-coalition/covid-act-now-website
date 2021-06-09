@@ -1,9 +1,9 @@
 import React from 'react';
 import { Region, MetroArea, County } from 'common/regions';
 import { Annotations, Sources } from 'api/schema/RegionSummaryWithTimeseries';
-import ExternalLink from 'components/ExternalLink';
 import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
+import ExternalLink from 'components/ExternalLink';
 
 /**
  * Hardcoding sources as fallback (metricToSourceMap) for the time being
@@ -128,11 +128,12 @@ function getDisclaimerMetricName(metric: Metric): string {
   }
 }
 
+// When implementing new footers/modals, change fragment to <p> and ExternalLink to TextButton
 export const getDataSourceTooltipContent = (
   metric: Metric,
   region: Region,
   provenanceInfo?: Sources,
-) => {
+): React.ReactElement => {
   const sourceFromMap = getSourceLinks(metric, region);
 
   const source =

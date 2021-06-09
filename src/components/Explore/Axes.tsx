@@ -7,8 +7,7 @@ import {
   getXTickFormat,
   getTimeAxisTicks,
 } from 'components/Charts/utils';
-
-const yTickFormatDefault = (value: number) => value.toString();
+import { TimeUnit } from 'common/utils/time-utils';
 
 const Axes: React.FC<{
   height: number;
@@ -16,20 +15,22 @@ const Axes: React.FC<{
   yScale: ScaleLinear<number, number>;
   isMobile: boolean;
   yNumTicks?: number;
-  yTickFormat?: (value: number) => string;
+  yTickFormat: (val: number) => string;
+  xTickTimeUnit: TimeUnit;
 }> = ({
   height,
   dateScale,
   yScale,
   isMobile,
   yNumTicks = 10,
-  yTickFormat = yTickFormatDefault,
+  yTickFormat,
+  xTickTimeUnit,
 }) => {
   const [dateFrom, dateTo] = dateScale.domain();
-  const timeTicks = getTimeAxisTicks(dateFrom, dateTo);
+  const timeTicks = getTimeAxisTicks(dateFrom, dateTo, xTickTimeUnit);
 
   const finalTickValues = getFinalTicks(isMobile, timeTicks).filter(
-    date => date < dateTo,
+    (date: Date) => date < dateTo,
   );
 
   return (
@@ -39,7 +40,7 @@ const Axes: React.FC<{
         top={height}
         scale={dateScale}
         tickValues={finalTickValues}
-        tickFormat={(date: Date) => getXTickFormat(date)}
+        tickFormat={(date: Date) => getXTickFormat(date, xTickTimeUnit)}
       />
     </AxisStyle>
   );

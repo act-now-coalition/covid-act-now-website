@@ -6,6 +6,7 @@ import {
   fetchAllStateProjections,
   fetchAllMetroProjections,
   fetchAllCountyProjections,
+  fetchProjectionsRegion,
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
@@ -18,44 +19,12 @@ import {
   SummariesMap,
 } from '../src/common/location_summaries';
 import { Projections } from '../src/common/models/Projections';
-import { DatasetId } from '../src/common/models/Projection';
-import { assert } from '../src/common/utils';
 import { Level } from '../src/common/level';
 import regions from '../src/common/regions';
 import { importFipsToCcviMap } from '../src/common/data';
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
 const SUMMARIES_FOLDER = path.join(__dirname, 'alert_emails/summaries');
-
-// Via https://en.wikipedia.org/wiki/List_of_U.S._counties_with_Native_American_majority_populations
-const INDIGENOUS_FIPS = [
-  '02050',
-  '02070',
-  '02164',
-  '02180',
-  '02185',
-  '02188',
-  '02158',
-  '02290',
-  '04001',
-  '30003',
-  '30035',
-  '30085',
-  '31173',
-  '35031',
-  '38079',
-  '38085',
-  '46007',
-  '46017',
-  '46031',
-  '46041',
-  '46095',
-  '46102',
-  '46121',
-  '46137',
-  '49037',
-  '55078',
-];
 
 async function main() {
   const allStatesProjections = await fetchAllStateProjections();
@@ -66,7 +35,9 @@ async function main() {
     ...allCountiesProjections,
     ...allMetroProjections,
   ]);
-  await buildAggregations(allStatesProjections, allCountiesProjections);
+
+  await buildSiteSummaryData();
+
   try {
     await buildSlackSummary();
   } catch (e) {
@@ -96,101 +67,31 @@ async function buildSummaries(allProjections: Projections[]) {
   await fs.writeJSON(snapshotSummaryFile, summaries);
 }
 
-// Aggregates of county level data should not include hospitalizations
-// because we may know hopsitalizations for some counties but not others, leading
-// to misleading aggregates.
-const COUNTY_AGGREGATED_DATASETS: DatasetId[] = [
-  'rawDailyCases',
-  'smoothedDailyCases',
-  'rawDailyDeaths',
-  'smoothedDailyDeaths',
-  /*
-  'rawHospitalizations',
-  'smoothedHospitalizations',
-  'rawICUHospitalizations',
-  'smoothedICUHospitalizations',
-  */
-];
+/**
+ * Precomputes any data we want available in the main bundle (e.g. for use on
+ * the homepage).
+ */
+async function buildSiteSummaryData() {
+  const usaProjection = (await fetchProjectionsRegion(regions.usa)).primary;
+  const usaSummaryData = {
+    lastDate: usaProjection.finalDate.getTime(),
 
-const STATE_AGGREGATED_DATASETS: DatasetId[] = [
-  'rawDailyCases',
-  'smoothedDailyCases',
-  'rawDailyDeaths',
-  'smoothedDailyDeaths',
-  'rawHospitalizations',
-  'smoothedHospitalizations',
-  'rawICUHospitalizations',
-  'smoothedICUHospitalizations',
-];
+    totalCases: usaProjection.currentCumulativeCases,
+    totalDeaths: usaProjection.currentCumulativeDeaths,
 
-function aggregate(
-  allProjections: Projections[],
-  datasetsToAggregate: DatasetId[],
-) {
-  const totalPopulation = _.sumBy(allProjections, p => p.population);
-  const totalCases = _.sumBy(
-    allProjections,
-    p => p.primary.currentCumulativeCases || 0,
-  );
-  const totalDeaths = _.sumBy(
-    allProjections,
-    p => p.primary.currentCumulativeDeaths || 0,
-  );
-  const totalVaccinationsInitiated = _.sumBy(
-    allProjections,
-    p => p.primary.vaccinationsInfo?.peopleInitiated || 0,
-  );
-  const dates: number[] = [];
-  let aggregatedDatasets: { [key: string]: Array<number | null> } = {};
-  for (const datasetId of datasetsToAggregate) {
-    const aggregatedSeries = [];
-    for (const projections of allProjections) {
-      const projection = projections.primary;
-      const data = projection.getDataset(datasetId);
-      assert(
-        data[0].x == new Date('2020-03-01').getTime(),
-        'We rely on datasets starting on the same date (2020-03-01).',
-      );
-      for (let i = 0; i < data.length; i++) {
-        const y = data[i].y;
-        // TODO(michael): Is keeping aggregate data where some components have gaps okay?
-        if (y !== null && y > 0) {
-          dates[i] = data[i].x;
-          if (aggregatedSeries[i] === undefined) {
-            aggregatedSeries[i] = 0;
-          }
-          aggregatedSeries[i] += y;
-        }
-      }
-    }
-    aggregatedDatasets[datasetId] = aggregatedSeries;
-  }
+    twoWeekPercentChangeInCases: usaProjection.twoWeekPercentChangeInCases,
+    twoWeekPercentChangeInDeaths: usaProjection.twoWeekPercentChangeInDeaths,
 
-  return {
-    totalPopulation,
-    totalCases,
-    totalDeaths,
-    totalVaccinationsInitiated,
-    dates,
-    ...aggregatedDatasets,
-  };
-}
-
-async function buildAggregations(
-  allStatesProjections: Projections[],
-  allCountiesProjections: Projections[],
-) {
-  const aggregations = {
-    // US
-    '00001': aggregate(allStatesProjections, STATE_AGGREGATED_DATASETS),
-    // Native American Majority Counties
-    '00002': aggregate(
-      allCountiesProjections.filter(p => INDIGENOUS_FIPS.includes(p.fips)),
-      COUNTY_AGGREGATED_DATASETS,
-    ),
+    totalVaccinationsInitiated:
+      usaProjection.vaccinationsInfo?.peopleInitiated ?? null,
+    totalPopulation: usaProjection.totalPopulation,
   };
 
-  await fs.writeJson(`${OUTPUT_FOLDER}/aggregations.json`, aggregations);
+  const summaryData = {
+    usa: usaSummaryData,
+  };
+
+  await fs.writeJson(`${OUTPUT_FOLDER}/site-summary.json`, summaryData);
 }
 
 async function buildSlackSummary() {
