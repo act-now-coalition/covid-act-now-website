@@ -22,7 +22,7 @@ import type { MetricValues, Projections } from 'common/models/Projections';
 import { useDialog } from 'common/hooks';
 import { Metric } from 'common/metricEnum';
 import { getSourcesForMetric } from 'common/utils/provenance';
-import { getMetricName, getMetricStatusText } from 'common/metric';
+import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
 
 export interface ShareButtonProps {
   region: Region;
@@ -91,7 +91,7 @@ const MetricChartFooter: React.FC<{
   );
   const overrideDisclaimer = getOverrideDisclaimer(region, metric, provenance);
   const modalContent = getMetricModalContent(region, metric, provenance);
-  const modalHeader = getMetricName(metric);
+  const modalHeader = getMetricNameExtended(metric);
 
   const shareButtonProps = {
     chartIdentifier: metric,
