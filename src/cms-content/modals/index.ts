@@ -4,6 +4,7 @@ import { Markdown, sanitizeID } from '../utils';
 export interface Link {
   cta: string;
   url: string;
+  ariaLabel: string;
 }
 
 export interface Modal {

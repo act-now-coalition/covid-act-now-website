@@ -9,7 +9,6 @@ import {
   OverrideDisclaimer,
 } from './ChartFooter.style';
 import { DialogMain, MetricInfoDialogInner } from 'components/Dialogs';
-// import { Link } from 'cms-content/modals';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import { Region } from 'common/regions';
@@ -32,9 +31,7 @@ interface DialogProps {
   modalHeader: string;
 }
 
-const ShareButtonBlock: React.FC<ShareButtonProps> = ({
-  ...shareButtonProps
-}) => {
+const ShareButtonBlock: React.FC<ShareButtonProps> = shareButtonProps => {
   return (
     <ButtonContainer>
       <ShareButtons {...shareButtonProps} />
@@ -57,6 +54,7 @@ const MetricModal: React.FC<DialogProps> = ({
       {
         cta: 'Learn more',
         url: modalContent.learnLink,
+        ariaLabel: `Learn more about ${modalHeader}`,
       },
     ],
   };

@@ -46,6 +46,7 @@ export const Example = () => {
           {
             cta: 'Learn more',
             url: '/covid-risk-levels-metrics#daily-new-cases',
+            ariaLabel: 'Learn more about daily new cases',
           },
         ]}
       >
