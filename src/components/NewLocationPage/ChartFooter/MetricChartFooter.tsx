@@ -8,21 +8,21 @@ import {
   Wrapper,
   OverrideDisclaimer,
 } from './ChartFooter.style';
-import { DialogMain, MetricInfoDialogInner } from 'components/Dialogs';
-import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
-import ShareButtons from 'components/LocationPage/ShareButtons';
 import {
+  DialogMain,
+  MetricInfoDialogInner,
   MetricModalContent,
   getMetricModalContent,
-} from 'components/Dialogs/utils';
+} from 'components/Dialogs';
+import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
+import ShareButtons from 'components/LocationPage/ShareButtons';
 import { getOverrideDisclaimer } from './utils';
 import { Region } from 'common/regions';
-import type { MetricValues } from 'common/models/Projections';
+import type { MetricValues, Projections } from 'common/models/Projections';
 import { useDialog } from 'common/hooks';
 import { Metric } from 'common/metricEnum';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { getMetricName, getMetricStatusText } from 'common/metric';
-import { Projections } from 'common/models/Projections';
 
 export interface ShareButtonProps {
   region: Region;
