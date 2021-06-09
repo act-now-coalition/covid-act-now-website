@@ -83,7 +83,7 @@ const MetricChartFooter: React.FC<{
   metric: Metric;
   projections: Projections;
   region: Region;
-  stats: any;
+  stats: MetricValues;
 }> = ({ metric, projections, region, stats }) => {
   const provenance = getSourcesForMetric(
     projections.primary.annotations,
