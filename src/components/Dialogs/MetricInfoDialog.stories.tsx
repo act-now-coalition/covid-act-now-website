@@ -7,6 +7,7 @@ import { getProjectionForRegion } from 'components/NewLocationPage/SparkLineBloc
 import { Metric } from 'common/metricEnum';
 import { getMetricModalContent } from './utils';
 import { useDialog } from 'common/hooks';
+import { EventCategory } from 'components/Analytics';
 
 export default {
   title: 'Below the fold/Metric info modal',
@@ -23,7 +24,11 @@ export const Example = () => {
     fetchProjection().then(setProjection);
   }, [region]);
 
-  const [isOpen, openDialog, closeDialog] = useDialog(false);
+  const [isOpen, openDialog, closeDialog] = useDialog(
+    false,
+    EventCategory.METRICS,
+    'Footer modal: daily new cases',
+  );
 
   if (!projection) {
     return null;
@@ -46,6 +51,7 @@ export const Example = () => {
           {
             cta: 'Learn more',
             url: '/covid-risk-levels-metrics#daily-new-cases',
+            ariaLabel: 'Learn more about daily new cases',
           },
         ]}
       >

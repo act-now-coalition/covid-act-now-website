@@ -8,51 +8,33 @@ export const Row = styled.div`
 `;
 
 export const FooterText = styled.div`
-  margin: 0 0.5rem 0.75rem 0;
-  max-width: 42.5rem;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-bottom: 0.75rem;
+
+  a {
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-right: 3rem;
+    margin-bottom: 0;
+
+    a {
+      text-underline-offset: 3px; // to match the dotted line under 'about this data'
+    }
+  }
 `;
 
 export const ButtonContainer = styled.div`
-  flex-grow: 0;
   margin-left: auto;
 `;
 
-export const LegendContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 0.5rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
-
-export const LegendContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 0.9rem;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    margin-right: 1.5rem;
-  }
-`;
-
-export const IconWrapper = styled.div`
-  margin-right: 0.75rem;
-`;
-
 export const AboutText = styled.span`
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  line-height: 2.25rem;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 0.2rem;
+  ${props => props.theme.fonts.regularBook};
   font-size: 0.9rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    line-height: 1.5rem;
+    line-height: 1.4rem;
     font-size: 1rem;
   }
 `;
@@ -66,6 +48,10 @@ export const ModalButton = styled(TooltipAnchorText).attrs(props => ({
   padding: 0;
 `;
 
-export const DisclaimerWrapper = styled.div`
+export const Wrapper = styled.div`
   margin-top: 1rem;
+`;
+
+export const OverrideDisclaimer = styled.p`
+  margin: 1rem 0 0;
 `;
