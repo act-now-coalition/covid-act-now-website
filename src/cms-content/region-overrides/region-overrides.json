@@ -171,19 +171,65 @@
       "include": "subregions",
       "metric": "metrics.caseDensity",
       "blocked": true,
-      "start_date": "2021-05-31",
-      "end_date": "",
-      "region": "RI",
-      "context": "RI county cases not updating"
-    },
-    {
-      "include": "subregions",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
       "start_date": "2021-05-26",
       "end_date": "",
       "region": "NE",
       "context": "Counties not updating - NYTimes is working on a fix"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "48135",
+      "context": "https://trello.com/c/5MMJrIJT/1412-odessa-metro-tx-ector-county-spiked-causing-grade-to-go-up-two-levels"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-06-05",
+      "end_date": "2021-06-07",
+      "context": "https://trello.com/c/haTHfinN/1413-blocked-06-05-06-06-vermont-and-montana-no-longer-reporting-on-weekends",
+      "region": "MT"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-06-05",
+      "end_date": "2021-06-07",
+      "context": "https://trello.com/c/haTHfinN/1413-blocked-06-05-06-06-vermont-and-montana-no-longer-reporting-on-weekends",
+      "region": "VT"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-05-28",
+      "end_date": "",
+      "region": "48085",
+      "context": "https://trello.com/c/WCCU7ey1/1417-blocked-data-after-5-27-cases-in-collin-county-tx-stalled"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-06-04",
+      "end_date": "",
+      "region": "FL",
+      "context": "https://trello.com/c/3uunA3oU/1419-data-paused-for-now-florida-counties-switching-to-weekly-reporting"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": false,
+      "start_date": "",
+      "end_date": "",
+      "region": "FL",
+      "context": "https://trello.com/c/3uunA3oU/1419-data-paused-for-now-florida-counties-switching-to-weekly-reporting",
+      "disclaimer": "As of June 2021, Florida only reports data once a week and therefore the above data may be up to a week old."
     }
   ]
 }

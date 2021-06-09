@@ -21,12 +21,7 @@ function palette(props: any) {
   return props.theme.palette.chart;
 }
 
-export const ChartContainer = styled.div`
-  /* TODO(@pnavarrc): This negative margin breaks the auto-size of the chart */
-  @media (min-width: 996px) {
-    margin-left: -3rem;
-  }
-`;
+export const ChartContainer = styled.div``;
 
 export const PositionRelative = styled.div`
   position: relative;

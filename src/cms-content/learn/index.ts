@@ -79,7 +79,7 @@ export interface CaseStudy {
   logoAltText: string;
   summary: Markdown;
   body: Markdown;
-  tags: string[];
+  tags?: string[];
   showCaseStudy: boolean;
 }
 

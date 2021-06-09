@@ -41,6 +41,11 @@ const ExplainedRouter: React.FC = () => {
           </Route>
         );
       })}
+      {/* This URL contained a typo that was corrected after launching/sharing the article a bit. Adding a redirect so the old URL doesn't break: */}
+      <Redirect
+        from="/covid-explained/combatting-vaccine-hesitancy"
+        to="/covid-explained/combating-vaccine-hesitancy"
+      />
       {/* Redirect bad URLs to the explained landing page */}
       <Route path="/*" key="bad-url">
         <Redirect to="/covid-explained" />
