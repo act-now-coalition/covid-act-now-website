@@ -3,11 +3,6 @@
   "teamID": "user-experience",
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/samvogt.jpeg",
-      "fullName": "Sam Vogt",
-      "profileUrl": "https://www.linkedin.com/in/sam-vogt/"
-    },
-    {
       "profileImgUrl": "/images_cms/grace.jpeg",
       "fullName": "Grace Zec",
       "description": "UX researcher",
