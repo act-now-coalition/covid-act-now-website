@@ -23,6 +23,7 @@ import { useDialog } from 'common/hooks';
 import { Metric } from 'common/metricEnum';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
+import { EventCategory } from 'components/Analytics';
 
 export interface ShareButtonProps {
   region: Region;
@@ -91,7 +92,7 @@ const MetricChartFooter: React.FC<{
   );
   const overrideDisclaimer = getOverrideDisclaimer(region, metric, provenance);
   const modalContent = getMetricModalContent(region, metric, provenance);
-  const modalHeader = getMetricNameExtended(metric);
+  const metricName = getMetricNameExtended(metric);
 
   const shareButtonProps = {
     chartIdentifier: metric,
@@ -102,14 +103,18 @@ const MetricChartFooter: React.FC<{
 
   const footerText = getMetricStatusText(metric, projections);
 
-  const [isOpen, openDialog, closeDialog] = useDialog(false);
+  const [isOpen, openDialog, closeDialog] = useDialog(
+    false,
+    EventCategory.METRICS,
+    `Footer modal: ${metricName}`,
+  );
 
   const dialogProps = {
     open: isOpen,
     closeDialog,
     openDialog,
     modalContent,
-    modalHeader,
+    modalHeader: metricName,
   };
 
   return (
