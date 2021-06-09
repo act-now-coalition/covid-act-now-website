@@ -27,6 +27,7 @@ import {
   CompareOptions,
 } from './utils';
 import { SelectProps } from '@material-ui/core/Select';
+import regions from 'common/regions';
 
 interface OptionsSelectorProps {
   onNewOptions: (options: CompareOptions) => void;
@@ -77,10 +78,10 @@ function OptionsSelectorInner({
   const params = QueryString.parse(history.location.search);
 
   const [leftSnapshot, setLeftSnapshot] = useState(
-    getParamValue(params, 'left', mainSnapshot),
+    getNumericParamValue(params, 'left', mainSnapshot),
   );
   const [rightSnapshot, setRightSnapshot] = useState(
-    getParamValue(params, 'right', snapshotFromUrl(SNAPSHOT_URL)),
+    getNumericParamValue(params, 'right', snapshotFromUrl(SNAPSHOT_URL)),
   );
 
   // We have separate state for the input field text because we don't want to
@@ -94,26 +95,27 @@ function OptionsSelectorInner({
   );
 
   const [sortType, setSortType] = useState<SortType>(
-    getParamValue(params, 'sort', SortType.METRIC_DIFF),
+    getNumericParamValue(params, 'sort', SortType.METRIC_DIFF),
   );
   const [metric, setMetric] = useState(
-    getParamValue(params, 'metric', Metric.CASE_DENSITY),
+    getNumericParamValue(params, 'metric', Metric.CASE_DENSITY),
   );
-  const [locations, setLocations] = useState(
-    getParamValue(
-      params,
-      'locations',
-      CompareLocations.STATES_AND_INTERESTING_REGIONS,
-    ),
+
+  const [locations, setLocations] = useState<string | number>(
+    getLocationsParamValue(params),
   );
 
   useEffect(() => {
+    const parsedLocations =
+      typeof locations === 'string'
+        ? regions.findByStateCodeStrict(locations)
+        : (locations as CompareLocations);
     onNewOptions({
       leftSnapshot,
       rightSnapshot,
       sortType,
       metric,
-      locations,
+      locations: parsedLocations,
     });
   }, [leftSnapshot, rightSnapshot, sortType, metric, locations, onNewOptions]);
 
@@ -122,7 +124,7 @@ function OptionsSelectorInner({
     right?: number;
     sort?: number;
     metric?: number;
-    locations?: number;
+    locations?: number | string;
   }) {
     const params = {
       left: leftSnapshot,
@@ -171,7 +173,14 @@ function OptionsSelectorInner({
 
   // TODO: Figure out correct type for event.
   const changeLocations = (event: any) => {
-    const locations = parseInt(event.target.value);
+    const value = event.target.value;
+    // See if it's a state code.
+    let locations: string | number;
+    if (typeof value === 'string' && regions.findByStateCode(value)) {
+      locations = value;
+    } else {
+      locations = parseInt(value);
+    }
     setLocations(locations);
     setQueryParams({ locations });
   };
@@ -234,9 +243,11 @@ function OptionsSelectorInner({
           <MenuItem value={CompareLocations.TOP_METROS_BY_POPULATION}>
             Top {METROS_LIMIT} Metros (by Population)
           </MenuItem>
-          <MenuItem value={CompareLocations.DISABLED}>
-            Blocked Locations
-          </MenuItem>
+          {regions.states.map(state => (
+            <MenuItem key={state.stateCode} value={state.stateCode}>
+              {state.name} Counties
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
@@ -252,7 +263,7 @@ function OptionsSelectorInner({
   );
 }
 
-function getParamValue(
+function getNumericParamValue(
   params: QueryString.ParsedQuery,
   param: string,
   defaultValue: number,
@@ -265,6 +276,31 @@ function getParamValue(
     typeof value === 'number' && !Number.isNaN(value),
     `Parameter ${param} has non-numeric value: ${value}`,
   );
+  return value;
+}
+
+function getLocationsParamValue(
+  params: QueryString.ParsedQuery,
+): number | string {
+  let value = get(
+    params,
+    'locations',
+    CompareLocations.STATES_AND_INTERESTING_REGIONS,
+  );
+  if (typeof value === 'string') {
+    if (!regions.findByStateCode(value)) {
+      value = parseInt(value);
+      assert(
+        typeof value === 'number' && !Number.isNaN(value),
+        `Parameter 'locations' has non-numeric value: ${value}`,
+      );
+    }
+  } else {
+    assert(
+      typeof value === 'number',
+      `Invalid parameter 'locations': ${value}`,
+    );
+  }
   return value;
 }
 
