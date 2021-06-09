@@ -90,7 +90,7 @@ function overrideAppliesToRegion(override: RegionOverride, region: Region) {
 
 /** Parses the string "region" out of the specified override and returns it as a Region class. */
 function getRegionsFromOverride(override: RegionOverride): Region[] {
-  const regionStrings = override.region.split(',');
+  const regionStrings = override.region.split(',').map(region => region.trim());
   const overrideRegions = regionStrings.map((r: string) => {
     if (/^[A-Z][A-Z]$/.test(r)) {
       return regions.findByStateCodeStrict(r);

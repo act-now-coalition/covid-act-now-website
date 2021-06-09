@@ -6,13 +6,14 @@ import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import {
   fetchAllCountyProjections,
   fetchAllStateProjections,
+  fetchCountyProjectionsForState,
   fetchProjectionsRegion,
 } from 'common/utils/model';
 import { snapshotUrl } from 'common/utils/snapshots';
-import regions, { County, MetroArea, Region } from 'common/regions';
+import regions, { County, MetroArea, Region, State } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { fetchSummaries } from 'common/location_summaries';
-import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { fail } from 'common/utils';
 
 export const COUNTIES_LIMIT = 100;
 export const METROS_LIMIT = 100;
@@ -29,7 +30,6 @@ export enum CompareLocations {
   TOP_COUNTIES_BY_POPULATION,
   TOP_COUNTIES_BY_DIFF,
   TOP_METROS_BY_POPULATION,
-  DISABLED,
 }
 
 export interface CompareOptions {
@@ -37,7 +37,7 @@ export interface CompareOptions {
   rightSnapshot: number;
   sortType: SortType;
   metric: Metric;
-  locations: CompareLocations;
+  locations: CompareLocations | State;
 }
 
 /**
@@ -47,7 +47,7 @@ export interface CompareOptions {
 export function useProjectionsSet(
   leftSnapshot: number,
   rightSnapshot: number,
-  locations: CompareLocations,
+  locations: CompareLocations | State,
   metric: Metric,
 ): ProjectionsSet {
   const [projectionsSet, setProjectionsSet] = useState<ProjectionsSet>(
@@ -55,7 +55,21 @@ export function useProjectionsSet(
   );
   useEffect(() => {
     async function fetchData() {
-      if (locations === CompareLocations.STATES) {
+      if (locations instanceof State) {
+        // show counties within state.
+        setProjectionsSet(
+          ProjectionsSet.fromProjections(
+            await fetchCountyProjectionsForState(
+              locations,
+              snapshotUrl(leftSnapshot),
+            ),
+            await fetchCountyProjectionsForState(
+              locations,
+              snapshotUrl(rightSnapshot),
+            ),
+          ),
+        );
+      } else if (locations === CompareLocations.STATES) {
         setProjectionsSet(
           ProjectionsSet.fromProjections(
             await fetchAllStateProjections(snapshotUrl(leftSnapshot)),
@@ -141,16 +155,6 @@ export function useProjectionsSet(
             ProjectionsSet.fromProjections(leftProjections, rightProjections),
           );
         }
-      } else if (locations === CompareLocations.DISABLED) {
-        const disabledRegions = regions
-          .all()
-          .filter(r => getRegionMetricOverride(r, metric)?.blocked);
-        setProjectionsSet(
-          ProjectionsSet.fromProjections(
-            await fetchRegionProjections(leftSnapshot, disabledRegions),
-            await fetchRegionProjections(rightSnapshot, disabledRegions),
-          ),
-        );
       } else {
         fail('Unknown locations selection.');
       }

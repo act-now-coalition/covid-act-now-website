@@ -191,7 +191,7 @@ export const LegendLabel = styled.span`
 // Vaccination Label
 export const VaccinationLabel = styled.g`
   rect {
-    fill: white;
+    fill: ${props => palette(props).background};
   }
   text {
     ${props => props.theme.fonts.regularBook};
