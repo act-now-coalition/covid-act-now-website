@@ -53,6 +53,7 @@ import regions, { Region, useRegionFromParams } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
 import NationalText from 'components/NationalText';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
+import { getLocationLabel } from 'components/AutocompleteRegions';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -187,6 +188,10 @@ const Explore: React.FunctionComponent<{
       period,
     ]);
 
+    const [regionNamesMenuLabel, setRegionNamesMenuLabel] = useState<string>(
+      selectedLocations.map(getLocationLabel).join('; '),
+    );
+
     const onChangeSelectedLocations = (newLocations: Region[]) => {
       const changedLocations = uniq(newLocations);
       const eventLabel =
@@ -201,6 +206,9 @@ const Explore: React.FunctionComponent<{
 
       // make sure that the current location is always selected
       setSelectedLocations(changedLocations);
+      setRegionNamesMenuLabel(
+        changedLocations.map(getLocationLabel).join('; '),
+      );
     };
 
     const exploreRef = useRef<HTMLDivElement>(null);
@@ -283,9 +291,13 @@ const Explore: React.FunctionComponent<{
           (fips: string) => regions.findByFipsCode(fips)!,
         );
         setSelectedLocations(locations);
-        setMetricMenuLabel(metricLabels[sharedParams.currentMetric]);
+        setRegionNamesMenuLabel(locations.map(getLocationLabel).join('; '));
       }
-    }, [sharedParams, metricLabels, setCurrentMetric]);
+    }, [setCurrentMetric, sharedParams]);
+
+    useEffect(() => {
+      setMetricMenuLabel(metricLabels[currentMetric]);
+    }, [currentMetric, metricLabels]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
@@ -321,6 +333,7 @@ const Explore: React.FunctionComponent<{
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
             maxWidth={400}
+            regionNamesMenuLabel={regionNamesMenuLabel}
           />
         </Styles.ChartControlsContainer>
         {selectedLocations.length > 0 && hasData && (
