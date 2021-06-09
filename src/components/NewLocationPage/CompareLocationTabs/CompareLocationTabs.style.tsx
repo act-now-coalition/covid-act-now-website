@@ -10,19 +10,20 @@ export const ButtonGroup = styled(ToggleButtonGroup)`
 `;
 
 export const Button = styled(ToggleButton)`
-  padding: 0.63rem;
+  ${props => props.theme.fonts.regularBook};
+  padding: 0.75rem;
   border: none;
   .MuiToggleButton-label {
-    color: ${COLOR_MAP.GREY_3};
+    color: ${COLOR_MAP.GRAY_BODY_COPY};
     text-transform: none;
-    line-height: 1rem;
+    line-height: 1.4;
   }
   &.Mui-selected {
+    ${props => props.theme.fonts.regularBookMidWeight};
     background-color: white;
     .MuiToggleButton-label {
       color: ${COLOR_MAP.BLACK};
     }
-    font-weight: 500;
     border: 1px solid ${COLOR_MAP.GREY_3};
     border-radius: 3px;
   }

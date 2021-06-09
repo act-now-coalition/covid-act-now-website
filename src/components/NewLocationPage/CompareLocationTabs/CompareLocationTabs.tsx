@@ -1,34 +1,8 @@
 import React, { useState } from 'react';
 import { ButtonGroup, Button } from './CompareLocationTabs.style';
-import {
-  HomepageLocationScope,
-  homepageLabelMap,
-  GeoScopeFilter,
-} from 'common/utils/compare';
 
-function getGeoScopeCopy(
-  geoScope: GeoScopeFilter | HomepageLocationScope,
-  stateId?: string,
-) {
-  switch (geoScope) {
-    case GeoScopeFilter.NEARBY:
-      return 'Nearby';
-    case GeoScopeFilter.STATE:
-      return stateId;
-    case GeoScopeFilter.COUNTRY:
-      return 'USA';
-    default:
-      return null;
-  }
-}
-
-const CompareLocationTabs: React.FC<{
-  options: Array<HomepageLocationScope | GeoScopeFilter>;
-  value: string;
-  isCounty: boolean;
-  stateId?: string;
-}> = ({ options, value, isCounty, stateId }) => {
-  const [selectedOption, setSelectedOption] = useState(value);
+const CompareLocationTabs: React.FC = () => {
+  const [selectedOption, setSelectedOption] = useState('VT');
   const handleSelectedOption = (
     event: React.MouseEvent<HTMLElement>,
     newSelection: string,
@@ -41,17 +15,9 @@ const CompareLocationTabs: React.FC<{
       exclusive
       onChange={handleSelectedOption}
     >
-      {options.map(option =>
-        isCounty ? (
-          <Button value={getGeoScopeCopy(option, stateId)}>
-            {getGeoScopeCopy(option, stateId)}
-          </Button>
-        ) : (
-          <Button value={homepageLabelMap[option].plural}>
-            {homepageLabelMap[option].plural}
-          </Button>
-        ),
-      )}
+      <Button value={'Nearby'}>Nearby</Button>
+      <Button value={'VT'}>VT</Button>
+      <Button value={'USA'}>USA</Button>
     </ButtonGroup>
   );
 };
