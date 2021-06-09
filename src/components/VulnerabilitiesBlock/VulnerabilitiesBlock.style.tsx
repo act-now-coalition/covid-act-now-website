@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
-import { TooltipAnchorText } from 'components/InfoTooltip/Tooltip.style';
 
 export const Content = styled.div`
   display: flex;
@@ -109,12 +108,4 @@ export const LevelName = styled.span`
     margin-bottom: 0.5rem;
     text-align: left;
   }
-`;
-
-export const ModalOpenButton = styled(TooltipAnchorText).attrs(props => ({
-  as: 'button',
-}))`
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
 `;

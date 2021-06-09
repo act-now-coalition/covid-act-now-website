@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Region } from 'common/regions';
 import ExpandableContainer from 'components/ExpandableContainer';
 import VulnerabilitiesBlockInner from './VulnerabilitiesBlockInner';
 import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
-import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { EventCategory } from 'components/Analytics';
 import ShareButtons from '../SharedComponents/ShareButtons';
 import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
 import { DialogMain } from 'components/Dialogs';
 import { vulnerabilitiesModal } from 'cms-content/modals';
-import { ModalOpenButton } from './VulnerabilitiesBlock.style';
 import { SectionHeader } from 'components/SharedComponents';
 import { MarkdownBody } from 'components/Markdown';
+import { useDialog } from 'common/hooks';
+import {
+  ModalButton,
+  AboutText,
+} from 'components/NewLocationPage/ChartFooter/ChartFooter.style';
 
 const VulnerabilitiesBlock: React.FC<{
   scores: RegionCcviItem | null;
   region: Region;
 }> = ({ scores, region }) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const closeDialog = () => setDialogOpen(false);
+  const [isOpen, openDialog, closeDialog] = useDialog(
+    false,
+    EventCategory.VULNERABILITIES,
+    'About this data modal',
+  );
+
   const { header, body, links } = vulnerabilitiesModal;
 
   if (!scores) {
@@ -44,15 +52,6 @@ const VulnerabilitiesBlock: React.FC<{
     percentPopulationVulnerable,
   );
 
-  const modalOpenOnClick = () => {
-    setDialogOpen(true);
-    trackEvent(
-      EventCategory.VULNERABILITIES,
-      EventAction.OPEN_MODAL,
-      'About this data modal',
-    );
-  };
-
   return (
     <>
       <SectionHeader>Vulnerabilities</SectionHeader>
@@ -64,11 +63,11 @@ const VulnerabilitiesBlock: React.FC<{
         />
       </ExpandableContainer>
       <LocationPageSectionFooter>
-        <ModalOpenButton onClick={modalOpenOnClick}>
-          About this data
-        </ModalOpenButton>
+        <ModalButton onClick={openDialog}>
+          <AboutText>About this data</AboutText>
+        </ModalButton>
         <DialogMain
-          open={dialogOpen}
+          open={isOpen}
           closeDialog={closeDialog}
           header={header}
           links={links}

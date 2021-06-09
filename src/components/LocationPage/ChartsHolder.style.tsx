@@ -53,7 +53,7 @@ export const BetaTag = styled.div`
 export const DisclaimerWrapper = styled.div`
   max-width: 600px;
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.875rem;
+  font-size: 1rem;
   padding-right: 2rem;
 
   p {
