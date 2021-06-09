@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Row,
   ButtonContainer,
   FooterText,
   AboutText,
   ModalButton,
-  DisclaimerWrapper,
+  Wrapper,
+  OverrideDisclaimer,
 } from './ChartFooter.style';
-import { DialogMain } from 'components/Dialogs';
-import { Link } from 'cms-content/modals';
+import {
+  DialogMain,
+  MetricInfoDialogInner,
+  MetricModalContent,
+  getMetricModalContent,
+} from 'components/Dialogs';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
+import { getOverrideDisclaimer } from './utils';
 import { Region } from 'common/regions';
-import type { MetricValues } from 'common/models/Projections';
-import { MarkdownBody } from 'components/Markdown';
-
-export interface AboutModalProps {
-  header: string;
-  body: string;
-  links: Link[];
-}
+import type { MetricValues, Projections } from 'common/models/Projections';
+import { useDialog } from 'common/hooks';
+import { Metric } from 'common/metricEnum';
+import { getSourcesForMetric } from 'common/utils/provenance';
+import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
+import { EventCategory } from 'components/Analytics';
 
 export interface ShareButtonProps {
   region: Region;
@@ -28,56 +32,119 @@ export interface ShareButtonProps {
   showEmbedButton?: boolean;
 }
 
-const MetricChartFooter: React.FC<{
-  footerText: string;
-  disclaimer?: string;
-  shareButtonProps: ShareButtonProps;
-  aboutModal: AboutModalProps;
-}> = ({ footerText, disclaimer, shareButtonProps, aboutModal }) => {
-  const [openModal, setOpenModal] = useState(false);
+interface DialogProps {
+  open: boolean;
+  closeDialog: () => void;
+  openDialog: () => void;
+  modalContent: MetricModalContent;
+  modalHeader: string;
+}
+
+const ShareButtonBlock: React.FC<ShareButtonProps> = shareButtonProps => {
+  return (
+    <ButtonContainer>
+      <ShareButtons {...shareButtonProps} />
+    </ButtonContainer>
+  );
+};
+
+const MetricModal: React.FC<DialogProps> = ({
+  open,
+  closeDialog,
+  openDialog,
+  modalContent,
+  modalHeader,
+}) => {
   const dialogProps = {
-    open: openModal,
-    closeDialog: () => setOpenModal(false),
-    header: aboutModal.header,
-    links: aboutModal.links,
+    open,
+    closeDialog,
+    header: modalHeader,
+    links: [
+      {
+        cta: 'Learn more',
+        url: modalContent.learnLink,
+        ariaLabel: `Learn more about ${modalHeader}`,
+      },
+    ],
   };
+
   return (
     <>
+      <ModalButton onClick={openDialog}>
+        <AboutText>About this data</AboutText>
+      </ModalButton>
+      <DialogMain {...dialogProps}>
+        <MetricInfoDialogInner modalContent={modalContent} />
+      </DialogMain>
+    </>
+  );
+};
+
+const MetricChartFooter: React.FC<{
+  metric: Metric;
+  projections: Projections;
+  region: Region;
+  stats: MetricValues;
+}> = ({ metric, projections, region, stats }) => {
+  const provenance = getSourcesForMetric(
+    projections.primary.annotations,
+    metric,
+  );
+  const overrideDisclaimer = getOverrideDisclaimer(region, metric, provenance);
+  const modalContent = getMetricModalContent(region, metric, provenance);
+  const metricName = getMetricNameExtended(metric);
+
+  const shareButtonProps = {
+    chartIdentifier: metric,
+    region,
+    stats,
+    showEmbedButton: false,
+  };
+
+  const footerText = getMetricStatusText(metric, projections);
+
+  const [isOpen, openDialog, closeDialog] = useDialog(
+    false,
+    EventCategory.METRICS,
+    `Footer modal: ${metricName}`,
+  );
+
+  const dialogProps = {
+    open: isOpen,
+    closeDialog,
+    openDialog,
+    modalContent,
+    modalHeader: metricName,
+  };
+
+  return (
+    <Wrapper>
       <DesktopOnly>
         <Row>
           <FooterText>
-            {footerText}&nbsp;
-            <ModalButton onClick={() => setOpenModal(true)}>
-              <AboutText>About this data</AboutText>
-            </ModalButton>
-            {disclaimer && <DisclaimerWrapper>{disclaimer}</DisclaimerWrapper>}
-            <DialogMain {...dialogProps}>
-              <MarkdownBody source={aboutModal.body} />
-            </DialogMain>
+            {footerText}
+            {'   '}
+            <MetricModal {...dialogProps} />
+            {overrideDisclaimer && (
+              <OverrideDisclaimer>{overrideDisclaimer}</OverrideDisclaimer>
+            )}
           </FooterText>
-          <ButtonContainer>
-            <ShareButtons {...shareButtonProps} />
-          </ButtonContainer>
+          <ShareButtonBlock {...shareButtonProps} />
         </Row>
       </DesktopOnly>
       <MobileOnly>
         <FooterText>
           {footerText}
-          {disclaimer && <DisclaimerWrapper>{disclaimer}</DisclaimerWrapper>}
+          {overrideDisclaimer && (
+            <OverrideDisclaimer>{overrideDisclaimer}</OverrideDisclaimer>
+          )}
         </FooterText>
         <Row>
-          <ModalButton onClick={() => setOpenModal(true)}>
-            <AboutText>About this data</AboutText>
-          </ModalButton>
-          <DialogMain {...dialogProps}>
-            <MarkdownBody source={aboutModal.body} />
-          </DialogMain>
-          <ButtonContainer>
-            <ShareButtons {...shareButtonProps} />
-          </ButtonContainer>
+          <MetricModal {...dialogProps} />
+          <ShareButtonBlock {...shareButtonProps} />
         </Row>
       </MobileOnly>
-    </>
+    </Wrapper>
   );
 };
 

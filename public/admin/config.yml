@@ -899,3 +899,7 @@ collections:
             label: URL
             widget: string
             hint: 'Ex: /covid-risk-levels-metrics#vulnerability'
+          - name: ariaLabel
+            label: Label for accessibility
+            widget: string
+            hint: 'Ex: Learn more about daily new cases'
