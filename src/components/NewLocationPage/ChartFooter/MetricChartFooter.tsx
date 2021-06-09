@@ -11,10 +11,18 @@ import {
 import { DialogMain, MetricInfoDialogInner } from 'components/Dialogs';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
+import {
+  MetricModalContent,
+  getMetricModalContent,
+} from 'components/Dialogs/utils';
+import { getOverrideDisclaimer } from './utils';
 import { Region } from 'common/regions';
 import type { MetricValues } from 'common/models/Projections';
 import { useDialog } from 'common/hooks';
-import { MetricModalContent } from 'components/Dialogs/utils';
+import { Metric } from 'common/metricEnum';
+import { getSourcesForMetric } from 'common/utils/provenance';
+import { getMetricName, getMetricStatusText } from 'common/metric';
+import { Projections } from 'common/models/Projections';
 
 export interface ShareButtonProps {
   region: Region;
@@ -72,18 +80,28 @@ const MetricModal: React.FC<DialogProps> = ({
 };
 
 const MetricChartFooter: React.FC<{
-  footerText: React.ReactElement;
-  overrideDisclaimer?: string;
-  shareButtonProps: ShareButtonProps;
-  modalContent: MetricModalContent;
-  modalHeader: string;
-}> = ({
-  footerText,
-  overrideDisclaimer,
-  shareButtonProps,
-  modalContent,
-  modalHeader,
-}) => {
+  metric: Metric;
+  projections: Projections;
+  region: Region;
+  stats: any;
+}> = ({ metric, projections, region, stats }) => {
+  const provenance = getSourcesForMetric(
+    projections.primary.annotations,
+    metric,
+  );
+  const overrideDisclaimer = getOverrideDisclaimer(region, metric, provenance);
+  const modalContent = getMetricModalContent(region, metric, provenance);
+  const modalHeader = getMetricName(metric);
+
+  const shareButtonProps = {
+    chartIdentifier: metric,
+    region,
+    stats,
+    showEmbedButton: false,
+  };
+
+  const footerText = getMetricStatusText(metric, projections);
+
   const [isOpen, openDialog, closeDialog] = useDialog(false);
 
   const dialogProps = {
