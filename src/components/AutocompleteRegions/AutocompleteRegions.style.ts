@@ -12,7 +12,7 @@ export const StyledTextField = styled(TextField)<{
   .MuiAutocomplete-inputRoot[class*='MuiOutlinedInput-root']
     .MuiAutocomplete-input {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
     min-width: ${props => props.$placeholderMinWidth};
   }
 `;
