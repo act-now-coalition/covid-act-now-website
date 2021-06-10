@@ -154,22 +154,24 @@ const Explore: React.FunctionComponent<{
       () => getExploreAutocompleteLocations(initialFipsList[0]),
       [initialFipsList],
     );
+
+    const [chartSeries, setChartSeries] = useState<Series[]>([]);
+
     const [selectedLocations, setSelectedLocations] = useState<Region[]>(
       initialLocations,
     );
 
+    const [period, setPeriod] = useState<Period>(Period.ALL);
+
+    // TODO (chelsi) - does this need to be state?
     const [normalizeData, setNormalizeData] = useState(
       selectedLocations.length > 1 &&
         ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
     );
 
-    const [period, setPeriod] = useState<Period>(Period.ALL);
-
-    const [chartSeries, setChartSeries] = useState<Series[]>([]);
-
     const dateRange = getDateRange(period);
 
-    const onSelectPeriod = (newPeriod: Period) => {
+    const onSelectTimePeriod = (newPeriod: Period) => {
       setPeriod(newPeriod);
       const newPeriodLabel = periodMap[newPeriod].label;
       trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
@@ -234,11 +236,7 @@ const Explore: React.FunctionComponent<{
       fetchSeries().then(setChartSeries);
     }, [selectedLocations, currentMetric, normalizeData]);
 
-    // Cliking a sparkline sets the default metric, so when we navigate to a different
-    // location page, we need to force reset the metric to cases in order to override that
-    // default metric setting
-    // (We also reset the time range to 'all time')
-    // COMBINED WITH: if pathname changes, reset
+    // Scrolls to explore if the url contains /explore (ie. if it's a share link)
     useEffect(() => {
       if (pathname.includes('/explore')) {
         const timeoutId = scrollToExplore();
@@ -251,12 +249,17 @@ const Explore: React.FunctionComponent<{
       );
     }, [currentMetric, initialLocations, pathname, scrollToExplore]);
 
+    // if the pathname changes (ie. if navigating between location pages via compare or minimap)-
+    // resets metric, time period, and locations
+    // (need to force the reset since the route doesnt change)
     useEffect(() => {
       setSelectedLocations(initialLocations);
       setCurrentMetric(ExploreMetric.CASES);
       setPeriod(Period.ALL);
     }, [pathname, region, initialLocations, setCurrentMetric]);
 
+    // checks for shared parameters (ie. if arriving from a share link)
+    // and sets state according to the shared params
     useEffect(() => {
       if (sharedParams) {
         setCurrentMetric(sharedParams.currentMetric);
@@ -268,6 +271,7 @@ const Explore: React.FunctionComponent<{
       }
     }, [setCurrentMetric, sharedParams]);
 
+    // keeps normalizeData current with location and metric selection
     useEffect(() => {
       setNormalizeData(
         selectedLocations.length > 1 &&
@@ -308,7 +312,7 @@ const Explore: React.FunctionComponent<{
             menuLabel="Past # of days"
             buttonSelectionLabel={periodMenuLabel}
             itemLabels={allPeriodLabels}
-            onSelect={onSelectPeriod}
+            onSelect={onSelectTimePeriod}
             maxWidth={150}
           />
           <LocationSelector
