@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import isNumber from 'lodash/isNumber';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
@@ -43,8 +42,6 @@ const CompareTableRow = (props: {
     showStateCode,
   } = props;
 
-  const history = useHistory();
-
   const fipsCode = location.region.fipsCode;
 
   const region = regions.findByFipsCode(fipsCode);
@@ -57,7 +54,7 @@ const CompareTableRow = (props: {
   const populationRoundTo = isHomepage ? 3 : 2;
 
   const navigate = () => {
-    history.push(locationLink);
+    window.location.href = locationLink;
   };
 
   return (
