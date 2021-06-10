@@ -13,6 +13,7 @@ export const Headshot = styled.img`
 
 export const TeamMemberWrapper = styled(Grid)`
   display: flex;
+  align-items: center;
 
   a {
     color: black;
