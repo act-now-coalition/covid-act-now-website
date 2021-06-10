@@ -156,13 +156,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2873,
+      "regionsAvailable": 2874,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 385,
+      "regionsAvailable": 386,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -240,7 +240,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2971,
+      "regionsAvailable": 2972,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -261,7 +261,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2971,
+      "regionsAvailable": 2972,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -282,7 +282,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 1134,
+      "regionsAvailable": 1142,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -303,7 +303,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 1854,
+      "regionsAvailable": 1871,
       "totalStates": 53,
       "statesAvailable": 52
     },
