@@ -40,6 +40,8 @@ export default function HomePage() {
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
+  const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
+
   const largestMetroFips = largestMetroFipsForExplore;
   const exploreGeoLocations = useMemo(
     () =>
@@ -48,9 +50,7 @@ export default function HomePage() {
         : largestMetroFips,
     [largestMetroFips, userRegions],
   );
-
   const initialFipsListForExplore = exploreGeoLocations;
-  const initialMetricForExplore = ExploreMetric.CASES;
 
   // Location hash is uniquely set from vaccination banner button click
   const compareShowVaccinationsFirst = location.hash === '#compare';
@@ -153,8 +153,9 @@ export default function HomePage() {
               <Explore
                 title="Trends"
                 initialFipsList={initialFipsListForExplore}
-                defaultMetric={initialMetricForExplore}
                 showNationalSummary={true}
+                currentMetric={currentMetric}
+                setCurrentMetric={setCurrentMetric}
               />
             </Section>
             <Announcements />
