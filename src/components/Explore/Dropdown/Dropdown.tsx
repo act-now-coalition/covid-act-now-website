@@ -11,15 +11,7 @@ const Dropdown: React.FC<{
   onSelect: (itemIndex: number) => void;
   buttonSelectionLabel: string;
   maxWidth: number;
-  setLabel: React.Dispatch<React.SetStateAction<string>>;
-}> = ({
-  menuLabel,
-  itemLabels,
-  onSelect,
-  buttonSelectionLabel,
-  maxWidth,
-  setLabel,
-}) => {
+}> = ({ menuLabel, itemLabels, onSelect, buttonSelectionLabel, maxWidth }) => {
   const [open, setOpen] = useState(false);
 
   const handleMenuButtonClick = () => {
@@ -57,7 +49,6 @@ const Dropdown: React.FC<{
                 $maxWidth={maxWidth}
                 onClick={() => {
                   onSelect(i);
-                  setLabel(label);
                   trackEvent(
                     EventCategory.EXPLORE,
                     EventAction.CLICK,

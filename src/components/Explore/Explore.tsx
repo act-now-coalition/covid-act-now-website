@@ -143,6 +143,7 @@ const Explore: React.FunctionComponent<{
     const yAxisDecimalPlaces = getYAxisDecimalPlaces(currentMetric);
     const yTickFormat = getYFormat(dataMeasure, yAxisDecimalPlaces);
     const yTooltipFormat = getYFormat(dataMeasure, 1);
+    const allPeriodLabels = getAllPeriodLabels();
 
     const initialLocations = useMemo(
       () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
@@ -153,7 +154,6 @@ const Explore: React.FunctionComponent<{
       () => getExploreAutocompleteLocations(initialFipsList[0]),
       [initialFipsList],
     );
-
     const [selectedLocations, setSelectedLocations] = useState<Region[]>(
       initialLocations,
     );
@@ -164,33 +164,16 @@ const Explore: React.FunctionComponent<{
     );
 
     const [period, setPeriod] = useState<Period>(Period.ALL);
-    const allPeriodLabels = getAllPeriodLabels();
+
+    const [chartSeries, setChartSeries] = useState<Series[]>([]);
+
     const dateRange = getDateRange(period);
 
     const onSelectPeriod = (newPeriod: Period) => {
-      const newPeriodLabel = periodMap[newPeriod].label;
       setPeriod(newPeriod);
+      const newPeriodLabel = periodMap[newPeriod].label;
       trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
     };
-
-    useEffect(() => {
-      setNormalizeData(
-        selectedLocations.length > 1 &&
-          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
-      );
-      setMetricMenuLabel(metricLabels[currentMetric]);
-      setTimeRangeMenuLabel(allPeriodLabels[period]);
-    }, [
-      currentMetric,
-      selectedLocations,
-      metricLabels,
-      allPeriodLabels,
-      period,
-    ]);
-
-    const [regionNamesMenuLabel, setRegionNamesMenuLabel] = useState<string>(
-      selectedLocations.map(getLocationLabel).join('; '),
-    );
 
     const onChangeSelectedLocations = (newLocations: Region[]) => {
       const changedLocations = uniq(newLocations);
@@ -203,12 +186,8 @@ const Explore: React.FunctionComponent<{
         eventLabel,
         changedLocations.length,
       );
-
       // make sure that the current location is always selected
       setSelectedLocations(changedLocations);
-      setRegionNamesMenuLabel(
-        changedLocations.map(getLocationLabel).join('; '),
-      );
     };
 
     const exploreRef = useRef<HTMLDivElement>(null);
@@ -225,41 +204,10 @@ const Explore: React.FunctionComponent<{
       }, 200);
     }, [exploreRef]);
 
-    // We need to reset the selected locations and the default metric when
-    // the user clicks a location on the Compare table or on the mini map so
-    // they are not carried over to the new location page.
-    useEffect(() => {
-      setSelectedLocations(initialLocations);
-      setNormalizeData(
-        initialLocations.length > 1 &&
-          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
-      );
-    }, [initialLocations, currentMetric]);
-
-    const [chartSeries, setChartSeries] = useState<Series[]>([]);
-    useEffect(() => {
-      const fetchSeries = () =>
-        getChartSeries(currentMetric, selectedLocations, normalizeData);
-      fetchSeries().then(setChartSeries);
-    }, [selectedLocations, currentMetric, normalizeData]);
-
     const hasData = some(chartSeries, ({ data }) => data.length > 0);
     const hasMultipleLocations = selectedLocations.length > 1;
 
     const { pathname } = useLocation();
-
-    // Cliking a sparkline sets the default metric, so when we navigate to a different
-    // location page, we need to force reset the metric to cases in order to override that
-    // default metric setting
-    // (We also reset the time range to 'all time')
-    useEffect(() => {
-      if (pathname.includes('/explore')) {
-        const timeoutId = scrollToExplore();
-        return () => clearTimeout(timeoutId);
-      }
-      setCurrentMetric(ExploreMetric.CASES);
-      setPeriod(Period.ALL);
-    }, [pathname, scrollToExplore, setCurrentMetric]);
 
     const marginRight = useMemo(
       () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
@@ -274,15 +222,41 @@ const Explore: React.FunctionComponent<{
       });
     };
 
-    const [metricMenuLabel, setMetricMenuLabel] = useState(
-      metricLabels[currentMetric],
-    );
-    const [timeRangeMenuLabel, setTimeRangeMenuLabel] = useState(
-      allPeriodLabels[period],
-    );
     const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
     const sharedParams = useSharedComponentParams(SharedComponent.Explore);
+
+    const metricMenuLabel = metricLabels[currentMetric];
+
+    useEffect(() => {
+      const fetchSeries = () =>
+        getChartSeries(currentMetric, selectedLocations, normalizeData);
+      fetchSeries().then(setChartSeries);
+    }, [selectedLocations, currentMetric, normalizeData]);
+
+    // Cliking a sparkline sets the default metric, so when we navigate to a different
+    // location page, we need to force reset the metric to cases in order to override that
+    // default metric setting
+    // (We also reset the time range to 'all time')
+    // COMBINED WITH: if pathname changes, reset
+    useEffect(() => {
+      if (pathname.includes('/explore')) {
+        const timeoutId = scrollToExplore();
+        return () => clearTimeout(timeoutId);
+      }
+      setSelectedLocations(initialLocations);
+      setNormalizeData(
+        initialLocations.length > 1 &&
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+      );
+    }, [currentMetric, initialLocations, pathname, scrollToExplore]);
+
+    useEffect(() => {
+      setSelectedLocations(initialLocations);
+      setCurrentMetric(ExploreMetric.CASES);
+      setPeriod(Period.ALL);
+    }, [pathname, region, initialLocations, setCurrentMetric]);
+
     useEffect(() => {
       if (sharedParams) {
         setCurrentMetric(sharedParams.currentMetric);
@@ -291,13 +265,21 @@ const Explore: React.FunctionComponent<{
           (fips: string) => regions.findByFipsCode(fips)!,
         );
         setSelectedLocations(locations);
-        setRegionNamesMenuLabel(locations.map(getLocationLabel).join('; '));
       }
     }, [setCurrentMetric, sharedParams]);
 
     useEffect(() => {
-      setMetricMenuLabel(metricLabels[currentMetric]);
-    }, [currentMetric, metricLabels]);
+      setNormalizeData(
+        selectedLocations.length > 1 &&
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+      );
+    }, [
+      currentMetric,
+      selectedLocations,
+      metricLabels,
+      allPeriodLabels,
+      period,
+    ]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
@@ -306,6 +288,9 @@ const Explore: React.FunctionComponent<{
 
     const showLegend =
       ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
+
+    const regionsMenuLabel = selectedLocations.map(getLocationLabel).join('; ');
+    const periodMenuLabel = allPeriodLabels[period];
 
     return (
       <div ref={exploreRef}>
@@ -318,22 +303,20 @@ const Explore: React.FunctionComponent<{
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
             maxWidth={250}
-            setLabel={setMetricMenuLabel}
           />
           <Dropdown
             menuLabel="Past # of days"
-            buttonSelectionLabel={timeRangeMenuLabel}
+            buttonSelectionLabel={periodMenuLabel}
             itemLabels={allPeriodLabels}
             onSelect={onSelectPeriod}
             maxWidth={150}
-            setLabel={setTimeRangeMenuLabel}
           />
           <LocationSelector
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
             maxWidth={400}
-            regionNamesMenuLabel={regionNamesMenuLabel}
+            regionNamesMenuLabel={regionsMenuLabel}
           />
         </Styles.ChartControlsContainer>
         {selectedLocations.length > 0 && hasData && (
