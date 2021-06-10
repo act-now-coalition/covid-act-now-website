@@ -33,13 +33,11 @@ export const PartnersSectionWrapper = styled.div`
   flex-direction: column;
 
   ${AboutHeading3} {
-    margin: 2rem auto 0;
+    margin: 2rem auto;
   }
 
-  @media (max-width: ${materialSMBreakpoint}) {
-    ${AboutHeading3}:first-of-type {
-      margin-top: 1rem;
-    }
+  ${AboutHeading3}:first-of-type {
+    margin-top: 1rem;
   }
 `;
 

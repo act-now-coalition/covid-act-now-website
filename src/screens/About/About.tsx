@@ -144,7 +144,7 @@ const About = () => {
           <AboutHeading2>{aboutContent.partnersHeader}</AboutHeading2>
           <SectionContent>
             <ExpandableContainer
-              collapsedHeightMobile={350}
+              collapsedHeightMobile={400}
               collapsedHeightDesktop={565}
               tabTextCollapsed={<>More</>}
               tabTextExpanded={<>Less</>}
