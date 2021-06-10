@@ -53,6 +53,7 @@ import regions, { Region, useRegionFromParams } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
 import NationalText from 'components/NationalText';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
+import { getLocationLabel } from 'components/AutocompleteRegions';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -97,17 +98,19 @@ function getLabelLength(series: Series, shortLabel: boolean) {
   return label.length;
 }
 
-const ExploreCopy: React.FunctionComponent<{
+const Explore: React.FunctionComponent<{
   initialFipsList: string[];
   title?: string;
-  defaultMetric?: ExploreMetric;
   showNationalSummary?: boolean;
+  currentMetric: ExploreMetric;
+  setCurrentMetric: React.Dispatch<React.SetStateAction<ExploreMetric>>;
 }> = React.memo(
   ({
     initialFipsList,
-    defaultMetric = ExploreMetric.CASES,
     title = 'Trends',
     showNationalSummary = false,
+    currentMetric,
+    setCurrentMetric,
   }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -124,9 +127,9 @@ const ExploreCopy: React.FunctionComponent<{
     // Originally we had share URLs like /explore/cases instead of
     // /explore/<sharedComponentId> and so this code allows them to keep working.
     if (sharedComponentId && EXPLORE_CHART_IDS.includes(sharedComponentId)) {
-      defaultMetric = getMetricByChartId(sharedComponentId)!;
+      const sharedMetric = getMetricByChartId(sharedComponentId)!;
+      setCurrentMetric(sharedMetric);
     }
-    const [currentMetric, setCurrentMetric] = useState(defaultMetric);
 
     const onSelectCurrentMetric = (newMetric: number) => {
       const newMetricName = metricLabels[newMetric];
@@ -140,6 +143,7 @@ const ExploreCopy: React.FunctionComponent<{
     const yAxisDecimalPlaces = getYAxisDecimalPlaces(currentMetric);
     const yTickFormat = getYFormat(dataMeasure, yAxisDecimalPlaces);
     const yTooltipFormat = getYFormat(dataMeasure, 1);
+    const allPeriodLabels = getAllPeriodLabels();
 
     const initialLocations = useMemo(
       () => initialFipsList.map(fipsCode => regions.findByFipsCode(fipsCode)!),
@@ -151,21 +155,27 @@ const ExploreCopy: React.FunctionComponent<{
       [initialFipsList],
     );
 
+    const [chartSeries, setChartSeries] = useState<Series[]>([]);
+
     const [selectedLocations, setSelectedLocations] = useState<Region[]>(
       initialLocations,
     );
 
+    const [period, setPeriod] = useState<Period>(Period.ALL);
+
+    // TODO (chelsi) - does this need to be state?
     const [normalizeData, setNormalizeData] = useState(
       selectedLocations.length > 1 &&
         ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
     );
 
-    useEffect(() => {
-      setNormalizeData(
-        selectedLocations.length > 1 &&
-          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
-      );
-    }, [currentMetric, selectedLocations]);
+    const dateRange = getDateRange(period);
+
+    const onSelectTimePeriod = (newPeriod: Period) => {
+      setPeriod(newPeriod);
+      const newPeriodLabel = periodMap[newPeriod].label;
+      trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
+    };
 
     const onChangeSelectedLocations = (newLocations: Region[]) => {
       const changedLocations = uniq(newLocations);
@@ -178,7 +188,6 @@ const ExploreCopy: React.FunctionComponent<{
         eventLabel,
         changedLocations.length,
       );
-
       // make sure that the current location is always selected
       setSelectedLocations(changedLocations);
     };
@@ -197,45 +206,10 @@ const ExploreCopy: React.FunctionComponent<{
       }, 200);
     }, [exploreRef]);
 
-    const location = useLocation();
-    useEffect(() => {
-      if (location.pathname.includes('/explore')) {
-        const timeoutId = scrollToExplore();
-        return () => clearTimeout(timeoutId);
-      }
-    }, [location.pathname, scrollToExplore]);
-
-    // We need to reset the selected locations and the default metric when
-    // the user clicks a location on the Compare table or on the mini map so
-    // they are not carried over to the new location page.
-    useEffect(() => {
-      setSelectedLocations(initialLocations);
-      setCurrentMetric(defaultMetric);
-      setNormalizeData(
-        initialLocations.length > 1 &&
-          ORIGINAL_EXPLORE_METRICS.includes(defaultMetric),
-      );
-    }, [initialLocations, defaultMetric]);
-
-    const [chartSeries, setChartSeries] = useState<Series[]>([]);
-    useEffect(() => {
-      const fetchSeries = () =>
-        getChartSeries(currentMetric, selectedLocations, normalizeData);
-      fetchSeries().then(setChartSeries);
-    }, [selectedLocations, currentMetric, normalizeData]);
-
     const hasData = some(chartSeries, ({ data }) => data.length > 0);
     const hasMultipleLocations = selectedLocations.length > 1;
 
-    const [period, setPeriod] = useState<Period>(Period.ALL);
-    const allPeriodLabels = getAllPeriodLabels();
-    const dateRange = getDateRange(period);
-
-    const onSelectPeriod = (newPeriod: Period) => {
-      const newPeriodLabel = periodMap[newPeriod].label;
-      setPeriod(newPeriod);
-      trackExploreEvent(EventAction.SELECT, `Period: ${newPeriodLabel}`);
-    };
+    const { pathname } = useLocation();
 
     const marginRight = useMemo(
       () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
@@ -250,15 +224,40 @@ const ExploreCopy: React.FunctionComponent<{
       });
     };
 
-    const [metricMenuLabel, setMetricMenuLabel] = useState(
-      metricLabels[currentMetric],
-    );
-    const [timeRangeMenuLabel, setTimeRangeMenuLabel] = useState(
-      allPeriodLabels[period],
-    );
     const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
     const sharedParams = useSharedComponentParams(SharedComponent.Explore);
+
+    useEffect(() => {
+      const fetchSeries = () =>
+        getChartSeries(currentMetric, selectedLocations, normalizeData);
+      fetchSeries().then(setChartSeries);
+    }, [selectedLocations, currentMetric, normalizeData]);
+
+    // Scrolls to explore if the url contains /explore (ie. if it's a share link)
+    useEffect(() => {
+      if (pathname.includes('/explore')) {
+        const timeoutId = scrollToExplore();
+        return () => clearTimeout(timeoutId);
+      }
+      setSelectedLocations(initialLocations);
+      setNormalizeData(
+        initialLocations.length > 1 &&
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+      );
+    }, [currentMetric, initialLocations, pathname, scrollToExplore]);
+
+    // if the pathname changes (ie. if navigating between location pages via compare or minimap)-
+    // resets metric, time period, and locations
+    // (need to force the reset since the route doesnt change)
+    useEffect(() => {
+      setSelectedLocations(initialLocations);
+      setCurrentMetric(ExploreMetric.CASES);
+      setPeriod(Period.ALL);
+    }, [pathname, region, initialLocations, setCurrentMetric]);
+
+    // checks for shared parameters (ie. if arriving from a share link)
+    // and sets state according to the shared params
     useEffect(() => {
       if (sharedParams) {
         setCurrentMetric(sharedParams.currentMetric);
@@ -267,9 +266,22 @@ const ExploreCopy: React.FunctionComponent<{
           (fips: string) => regions.findByFipsCode(fips)!,
         );
         setSelectedLocations(locations);
-        setMetricMenuLabel(metricLabels[sharedParams.currentMetric]);
       }
-    }, [sharedParams, metricLabels]);
+    }, [setCurrentMetric, sharedParams]);
+
+    // keeps normalizeData current with location and metric selection
+    useEffect(() => {
+      setNormalizeData(
+        selectedLocations.length > 1 &&
+          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+      );
+    }, [
+      currentMetric,
+      selectedLocations,
+      metricLabels,
+      allPeriodLabels,
+      period,
+    ]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
@@ -278,6 +290,11 @@ const ExploreCopy: React.FunctionComponent<{
 
     const showLegend =
       ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
+
+    // menu labels for metric, time period, and selected locations:
+    const metricMenuLabel = metricLabels[currentMetric];
+    const regionsMenuLabel = selectedLocations.map(getLocationLabel).join('; ');
+    const periodMenuLabel = allPeriodLabels[period];
 
     return (
       <div ref={exploreRef}>
@@ -290,21 +307,20 @@ const ExploreCopy: React.FunctionComponent<{
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
             maxWidth={250}
-            setLabel={setMetricMenuLabel}
           />
           <Dropdown
             menuLabel="Past # of days"
-            buttonSelectionLabel={timeRangeMenuLabel}
+            buttonSelectionLabel={periodMenuLabel}
             itemLabels={allPeriodLabels}
-            onSelect={onSelectPeriod}
+            onSelect={onSelectTimePeriod}
             maxWidth={150}
-            setLabel={setTimeRangeMenuLabel}
           />
           <LocationSelector
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
             maxWidth={400}
+            regionNamesMenuLabel={regionsMenuLabel}
           />
         </Styles.ChartControlsContainer>
         {selectedLocations.length > 0 && hasData && (
@@ -394,4 +410,4 @@ const ExploreCopy: React.FunctionComponent<{
   },
 );
 
-export default ExploreCopy;
+export default Explore;

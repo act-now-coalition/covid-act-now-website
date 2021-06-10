@@ -3,9 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Modal } from '@material-ui/core';
 import { Region } from 'common/regions';
 import * as Styles from './LocationSelector.style';
-import AutocompleteRegions, {
-  getLocationLabel,
-} from 'components/AutocompleteRegions';
+import AutocompleteRegions from 'components/AutocompleteRegions';
 import MenuButton from './Dropdown/MenuButton';
 import { LockBodyScroll } from 'components/Dialogs';
 import { FilledButton } from 'components/ButtonSystem';
@@ -16,7 +14,14 @@ const LocationSelector: React.FC<{
   selectedRegions: Region[];
   onChangeSelectedRegions: (newLocations: Region[]) => void;
   maxWidth: number;
-}> = ({ regions, selectedRegions, onChangeSelectedRegions, maxWidth }) => {
+  regionNamesMenuLabel: string;
+}> = ({
+  regions,
+  selectedRegions,
+  onChangeSelectedRegions,
+  maxWidth,
+  regionNamesMenuLabel,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onChangeRegions = (
@@ -39,8 +44,6 @@ const LocationSelector: React.FC<{
 
   const closeModal = () => setModalOpen(false);
 
-  const regionNames = selectedRegions.map(getLocationLabel).join('; ');
-
   const id = uuidv4();
 
   return (
@@ -48,7 +51,7 @@ const LocationSelector: React.FC<{
       <MenuButton
         onClick={onClickButton}
         menuLabel="Locations"
-        buttonLabel={regionNames}
+        buttonLabel={regionNamesMenuLabel}
         maxWidth={maxWidth}
         ariaControlsId={id}
       />
