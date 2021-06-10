@@ -228,8 +228,6 @@ const Explore: React.FunctionComponent<{
 
     const sharedParams = useSharedComponentParams(SharedComponent.Explore);
 
-    const metricMenuLabel = metricLabels[currentMetric];
-
     useEffect(() => {
       const fetchSeries = () =>
         getChartSeries(currentMetric, selectedLocations, normalizeData);
@@ -293,6 +291,8 @@ const Explore: React.FunctionComponent<{
     const showLegend =
       ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
 
+    // menu labels for metric, time period, and selected locations:
+    const metricMenuLabel = metricLabels[currentMetric];
     const regionsMenuLabel = selectedLocations.map(getLocationLabel).join('; ');
     const periodMenuLabel = allPeriodLabels[period];
 
