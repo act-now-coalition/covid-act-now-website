@@ -8,6 +8,18 @@ import cercLogo from 'assets/images/cerc.png';
 import { StyledGridContainer } from 'screens/About/About.style';
 import { LogoItem } from 'cms-content/about';
 
+export const LogoElement = (props: {
+  image: string;
+  url: string;
+  altText: string;
+}) => {
+  return (
+    <ExternalLink href={props.url}>
+      <Logo src={props.image} alt={props.altText} />
+    </ExternalLink>
+  );
+};
+
 export const LogoGridItem = (props: {
   image: string;
   url: string;
@@ -16,9 +28,7 @@ export const LogoGridItem = (props: {
   return (
     <Grid container item xs={12} sm={4} justify="center">
       <Grid item>
-        <ExternalLink href={props.url}>
-          <Logo src={props.image} alt={props.altText} />
-        </ExternalLink>
+        <LogoElement {...props} />
       </Grid>
     </Grid>
   );
