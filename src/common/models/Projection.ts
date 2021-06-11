@@ -144,7 +144,6 @@ export class Projection {
   private readonly isCounty: boolean;
 
   // NOTE: These are used dynamically by getColumn()
-  private readonly actualTimeseries: Array<ActualsTimeseriesRow | null>;
   private readonly smoothedDailyCases: Array<number | null>;
   private readonly rtRange: Array<RtRange | null>;
   // ICU Utilization series as values between 0-1 (or > 1 if over capacity).
@@ -179,7 +178,6 @@ export class Projection {
     const metrics = summaryWithTimeseries.metrics;
 
     this.metrics = metrics || null;
-    this.actualTimeseries = actualTimeseries;
     this.dates = dates;
 
     this.isCounty = parameters.isCounty;
@@ -188,12 +186,10 @@ export class Projection {
     this.region = region;
 
     // Set up our series data exposed via getDataset().
-    this.rawDailyCases = this.actualTimeseries.map(row => row && row.newCases);
+    this.rawDailyCases = actualTimeseries.map(row => row && row.newCases);
     this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
 
-    this.rawDailyDeaths = this.actualTimeseries.map(
-      row => row && row.newDeaths,
-    );
+    this.rawDailyDeaths = actualTimeseries.map(row => row && row.newDeaths);
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.rawDailyDeaths,
     );

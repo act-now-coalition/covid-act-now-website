@@ -5,8 +5,8 @@ import _ from 'lodash';
 import {
   fetchAllStateProjections,
   fetchAllMetroProjections,
-  fetchAllCountyProjections,
   fetchProjectionsRegion,
+  fetchCountyProjectionsForState,
 } from '../src/common/utils/model';
 import {
   currentSnapshot,
@@ -27,15 +27,7 @@ const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'assets', 'data');
 const SUMMARIES_FOLDER = path.join(__dirname, 'alert_emails/summaries');
 
 async function main() {
-  const allStatesProjections = await fetchAllStateProjections();
-  const allCountiesProjections = await fetchAllCountyProjections();
-  const allMetroProjections = await fetchAllMetroProjections();
-  await buildSummaries([
-    ...allStatesProjections,
-    ...allCountiesProjections,
-    ...allMetroProjections,
-  ]);
-
+  await buildSummaries();
   await buildSiteSummaryData();
 
   try {
@@ -46,13 +38,25 @@ async function main() {
   console.log('done');
 }
 
-async function buildSummaries(allProjections: Projections[]) {
-  const fipsToCcviMap = await importFipsToCcviMap();
+async function buildSummaries() {
   const summaries = {} as { [fips: string]: LocationSummary };
 
-  for (const projections of allProjections) {
-    const fips = projections.fips;
-    summaries[fips] = projections.summary(fipsToCcviMap[fips]?.overall ?? null);
+  // We intentionally don't fetch or process these in parallel in order to keep memory usage down
+  // (and avoid out-of-memory crashes).
+  const fetchers: Array<() => Promise<Projections[]>> = [
+    () => fetchAllStateProjections(/*snapshotUrl=*/ null, /*cache=*/ false),
+    () => fetchAllMetroProjections(/*snapshotUrl=*/ null, /*cache=*/ false),
+    ...regions.states.map(state => () =>
+      fetchCountyProjectionsForState(
+        state,
+        /*snapshotUrl=*/ null,
+        /*cache=*/ false,
+      ),
+    ),
+  ];
+
+  for (const fetcher of fetchers) {
+    await addSummariesForProjections(summaries, await fetcher());
   }
 
   await fs.writeJson(`${OUTPUT_FOLDER}/summaries.json`, summaries);
@@ -65,6 +69,18 @@ async function buildSummaries(allProjections: Projections[]) {
     `${currentSnapshot()}.json`,
   );
   await fs.writeJSON(snapshotSummaryFile, summaries);
+}
+
+async function addSummariesForProjections(
+  summaries: { [fips: string]: LocationSummary },
+  allProjections: Projections[],
+) {
+  const fipsToCcviMap = await importFipsToCcviMap();
+
+  for (const projections of allProjections) {
+    const fips = projections.fips;
+    summaries[fips] = projections.summary(fipsToCcviMap[fips]?.overall ?? null);
+  }
 }
 
 /**
