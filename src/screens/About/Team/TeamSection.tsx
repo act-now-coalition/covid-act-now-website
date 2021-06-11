@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { teams, teamsWithTitles } from 'cms-content/team';
-import { AboutHeading3 } from '../About.style';
+import { AboutHeading3, TeamGroupContainer } from '../About.style';
 import sortBy from 'lodash/sortBy';
 import Grid from '@material-ui/core/Grid';
 import ActiveMember from './ActiveMember';
@@ -18,25 +18,36 @@ const TeamSection = () => {
           team.teamName === 'Leadership' ? team.teamMembers : alphabetizedTeam;
         const isAlumni = team.teamName === 'Alumni';
         const includeTitle = teamsWithTitles.includes(team.teamName);
-        return (
+        return !isAlumni ? (
           <Fragment key={team.teamName}>
             <AboutHeading3>{team.teamName}</AboutHeading3>
-            <Grid container spacing={3}>
-              {teamMembers.map((teamMember, i) => {
-                return isAlumni ? (
+            <TeamGroupContainer>
+              <Grid container spacing={3}>
+                {teamMembers.map((teamMember, i) => {
+                  return (
+                    <ActiveMember
+                      teamMember={teamMember}
+                      includeTitle={includeTitle}
+                      key={teamMember.fullName}
+                    />
+                  );
+                })}
+              </Grid>
+            </TeamGroupContainer>
+          </Fragment>
+        ) : (
+          <Fragment key={team.teamName}>
+            <AboutHeading3>{team.teamName}</AboutHeading3>
+            <div>
+              {teamMembers.map<React.ReactNode>(teamMember => {
+                return (
                   <AlumniMember
                     teamMember={teamMember}
                     key={teamMember.fullName}
                   />
-                ) : (
-                  <ActiveMember
-                    teamMember={teamMember}
-                    includeTitle={includeTitle}
-                    key={teamMember.fullName}
-                  />
                 );
               })}
-            </Grid>
+            </div>
           </Fragment>
         );
       })}

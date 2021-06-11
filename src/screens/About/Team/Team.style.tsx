@@ -13,6 +13,7 @@ export const Headshot = styled.img`
 
 export const TeamMemberWrapper = styled(Grid)`
   display: flex;
+  align-items: center;
 
   a {
     color: black;
@@ -31,7 +32,23 @@ export const DescriptionWrapper = styled.div`
   }
 `;
 
-export const AlumniName = styled.p`
+export const AlumniWrapper = styled.span`
+  a {
+    color: black;
+    text-decoration: none;
+    height: fit-content;
+    margin: 0;
+    &:hover {
+      color: ${COLOR_MAP.BLUE};
+    }
+  }
+
+  &:not(:last-of-type):after {
+    content: ', ';
+  }
+`;
+
+export const AlumniName = styled.span`
   margin: 0;
   line-height: 1.3;
 `;

@@ -7,29 +7,33 @@ export interface LogoItem {
   url: string;
 }
 
-interface PartnersContent {
+export interface CommitmentsContent {
+  icon: string;
+  altText: string;
   copy: Markdown;
+}
+
+export interface PartnersContent {
+  header: string;
   logos: LogoItem[];
 }
 
 interface AboutContent {
-  pageHeader: string;
-  introHeader: string;
-  introContent: Markdown;
-  contactUsHeader: string;
-  contactUsContent: Markdown;
+  aboutHeader: string;
+  aboutContent: Markdown;
+  missionHeader: string;
+  missionContent: Markdown;
+  commitmentsContent: CommitmentsContent[];
+  impactHeader: string;
+  impactContent: Markdown;
   partnersHeader: string;
   partnersContent: PartnersContent[];
-  whoWeServeHeader: string;
-  whoWeServeContentA: Markdown;
-  whoWeServeContentB: Markdown;
-  governmentLogos: LogoItem[];
   teamHeader: string;
   teamIntro: Markdown;
   futureProjectsHeader: string;
   futureProjectsContent: Markdown;
-  joinUsHeader: string;
-  joinUsContent: Markdown;
+  contactUsHeader: string;
+  contactUsContent: Markdown;
 }
 
 const aboutContent = aboutPage as AboutContent;
