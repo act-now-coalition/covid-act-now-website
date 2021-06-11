@@ -68,6 +68,10 @@ export const sidebarItems: TocItem[] = [
 ];
 
 // TODO(Chelsi): put these ids into the CMS
+/**
+ * Wrapper for a button.
+ * Pass to (for internal links) or `href` (for external links) but not both.
+ */
 const Button: React.FC<{ to?: string; href?: string; cta: string }> = ({
   to,
   href,

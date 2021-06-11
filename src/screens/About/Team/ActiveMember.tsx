@@ -8,10 +8,7 @@ const ActiveMember: React.FC<{
   teamMember: UserProfile;
   includeTitle: boolean;
 }> = ({ teamMember, includeTitle }) => {
-  // ensure no trailing spaces from CMS
-  const fullName = teamMember.fullName?.trim();
-  const description = teamMember.description?.trim();
-  const { profileImgUrl, profileUrl } = teamMember;
+  const { description, fullName, profileImgUrl, profileUrl } = teamMember;
   return (
     <TeamMemberWrapper item sm={6} xs={12}>
       <Headshot src={profileImgUrl} alt={`headshot of ${fullName}`} />

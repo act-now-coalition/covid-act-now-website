@@ -36,7 +36,14 @@ function sanitizeTeam(team: Team): Team {
   return {
     ...team,
     teamID: sanitizeID(team.teamID),
-    teamMembers: team.teamMembers || [],
+    teamMembers:
+      team.teamMembers.map((m: UserProfile) => {
+        return {
+          ...m,
+          fullName: m.fullName.trim(),
+          description: m.description?.trim() ?? '',
+        };
+      }) || [],
   };
 }
 

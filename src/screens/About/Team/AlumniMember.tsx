@@ -5,9 +5,7 @@ import { UserProfile } from 'cms-content/team';
 
 const AlumniMember = (props: { teamMember: UserProfile }) => {
   const { teamMember } = props;
-  // ensure no trailing spaces from CMS
-  const fullName = teamMember.fullName?.trim();
-  const { profileUrl } = teamMember;
+  const { fullName, profileUrl } = teamMember;
 
   return (
     <AlumniWrapper>
