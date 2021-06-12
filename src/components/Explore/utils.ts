@@ -421,10 +421,10 @@ export function getChartIdByMetric(metric: ExploreMetric) {
   return exploreMetricData[metric].chartId;
 }
 
-export function getMetricLabels(normalizeData: boolean): string[] {
+export function getMetricLabels(multiLocation: boolean): string[] {
   return EXPLORE_METRICS.map((metric: ExploreMetric) => {
     const title = getTitle(metric);
-    if (normalizeData && ORIGINAL_EXPLORE_METRICS.includes(metric)) {
+    if (multiLocation && ORIGINAL_EXPLORE_METRICS.includes(metric)) {
       return title + ' per 100K';
     } else {
       return title;
