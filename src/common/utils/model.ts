@@ -75,7 +75,10 @@ export function fetchSummariesForRegionType(
 
 /** Returns an array of `Projections` instances for all states. */
 const cachedStatesProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllStateProjections(snapshotUrl: string | null = null) {
+export function fetchAllStateProjections(
+  snapshotUrl: string | null = null,
+  cache: boolean = true,
+) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
@@ -94,8 +97,11 @@ export function fetchAllStateProjections(snapshotUrl: string | null = null) {
       });
   }
   const key = snapshotUrl || 'null';
-  cachedStatesProjections[key] = cachedStatesProjections[key] || fetch();
-  return cachedStatesProjections[key];
+  const result = cachedStatesProjections[key] || fetch();
+  if (cache) {
+    cachedStatesProjections[key] = result;
+  }
+  return result;
 }
 
 /** Returns an array of `Projections` instances for all counties. */
@@ -103,9 +109,10 @@ const cachedCountiesProjections: { [key: string]: Promise<Projections[]> } = {};
 export function fetchAllCountyProjections(
   snapshotUrl: string | null = null,
   queryByState: boolean = true,
+  cache: boolean = true,
 ) {
   if (queryByState) {
-    return fetchAllCountyProjectionsByState();
+    return fetchAllCountyProjectionsByState(cache);
   }
 
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
@@ -126,16 +133,20 @@ export function fetchAllCountyProjections(
       });
   }
   const key = snapshotUrl || 'null';
-  cachedCountiesProjections[key] = cachedCountiesProjections[key] || fetch();
-  return cachedCountiesProjections[key];
+  const result = cachedCountiesProjections[key] || fetch();
+  if (cache) {
+    cachedCountiesProjections[key] = result;
+  }
+  return result;
 }
 
-export async function fetchAllCountyProjectionsByState() {
+export async function fetchAllCountyProjectionsByState(cache: boolean = true) {
   // Query counties for states individually as the entire counties.timeseries.json is too large
   // to be parsed by node.
   const allProjections = await Promise.all(
     regions.states.map(
-      async (state: State) => await fetchCountyProjectionsForState(state),
+      async (state: State) =>
+        await fetchCountyProjectionsForState(state, null, cache),
     ),
   );
   return allProjections.flatMap(obj => obj);
@@ -148,6 +159,7 @@ const cachedCountiesProjectionsForState: {
 export function fetchCountyProjectionsForState(
   state: State,
   snapshotUrl: string | null = null,
+  cache: boolean = true,
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
@@ -167,14 +179,19 @@ export function fetchCountyProjectionsForState(
       });
   }
   const key = `${state.stateCode}-${snapshotUrl}` || 'null';
-  cachedCountiesProjectionsForState[key] =
-    cachedCountiesProjectionsForState[key] || fetch();
-  return cachedCountiesProjectionsForState[key];
+  const result = cachedCountiesProjectionsForState[key] || fetch();
+  if (cache) {
+    cachedCountiesProjectionsForState[key] = result;
+  }
+  return result;
 }
 
 /** Returns an array of `Projections` instances for all counties. */
 const cachedMetroProjections: { [key: string]: Promise<Projections[]> } = {};
-export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
+export function fetchAllMetroProjections(
+  snapshotUrl: string | null = null,
+  cache: boolean = true,
+) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
     const all = await new Api(snapshotUrl).fetchAggregatedSummaryWithTimeseries(
@@ -194,8 +211,11 @@ export function fetchAllMetroProjections(snapshotUrl: string | null = null) {
       });
   }
   const key = snapshotUrl || 'null';
-  cachedMetroProjections[key] = cachedMetroProjections[key] || fetch();
-  return cachedMetroProjections[key];
+  const result = cachedMetroProjections[key] || fetch();
+  if (cache) {
+    cachedMetroProjections[key] = result;
+  }
+  return result;
 }
 
 export function useProjectionsFromRegion(region: Region | null) {
