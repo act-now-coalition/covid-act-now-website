@@ -115,7 +115,6 @@ const Explore: React.FunctionComponent<{
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
-    const metricLabels = getMetricLabels();
 
     const { sharedComponentId } = useParams<{
       sharedComponentId?: string;
@@ -163,11 +162,14 @@ const Explore: React.FunctionComponent<{
 
     const [period, setPeriod] = useState<Period>(Period.ALL);
 
+    const multiLocation = selectedLocations.length > 1;
+
     // TODO (chelsi) - does this need to be state?
     const [normalizeData, setNormalizeData] = useState(
-      selectedLocations.length > 1 &&
-        ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
+      multiLocation && ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
     );
+
+    const metricLabels = getMetricLabels(multiLocation);
 
     const dateRange = getDateRange(period);
 

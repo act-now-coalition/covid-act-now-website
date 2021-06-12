@@ -95,6 +95,11 @@ export const EXPLORE_METRICS = [
   ExploreMetric.POSITIVITY_RATE,
 ];
 
+// Note that these specifically are counts, not percentages, and can normalized
+// to per 100K when multiple locations are displayed, in which case we manipulate
+// the labels to indicate the 'per 100K'.
+// Therefore, don't add a 'percentage' type metric to this without updating
+// that code accordingly.
 export const ORIGINAL_EXPLORE_METRICS = [
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
@@ -416,8 +421,15 @@ export function getChartIdByMetric(metric: ExploreMetric) {
   return exploreMetricData[metric].chartId;
 }
 
-export function getMetricLabels() {
-  return EXPLORE_METRICS.map(getTitle);
+export function getMetricLabels(multiLocation: boolean): string[] {
+  return EXPLORE_METRICS.map((metric: ExploreMetric) => {
+    const title = getTitle(metric);
+    if (multiLocation && ORIGINAL_EXPLORE_METRICS.includes(metric)) {
+      return title + ' per 100K';
+    } else {
+      return title;
+    }
+  });
 }
 
 export function findPointByDate(data: Column[], date: Date): Column | null {
