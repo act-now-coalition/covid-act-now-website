@@ -115,7 +115,6 @@ const Explore: React.FunctionComponent<{
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
-    const metricLabels = getMetricLabels();
 
     const { sharedComponentId } = useParams<{
       sharedComponentId?: string;
@@ -168,6 +167,8 @@ const Explore: React.FunctionComponent<{
       selectedLocations.length > 1 &&
         ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
     );
+
+    const metricLabels = getMetricLabels(normalizeData);
 
     const dateRange = getDateRange(period);
 

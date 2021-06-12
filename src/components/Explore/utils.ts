@@ -416,8 +416,10 @@ export function getChartIdByMetric(metric: ExploreMetric) {
   return exploreMetricData[metric].chartId;
 }
 
-export function getMetricLabels() {
-  return EXPLORE_METRICS.map(getTitle);
+export function getMetricLabels(normalizeData: boolean): string[] {
+  const getTitleNormalized = (metric: ExploreMetric) =>
+    getTitle(metric) + ' per 100K';
+  return EXPLORE_METRICS.map(normalizeData ? getTitleNormalized : getTitle);
 }
 
 export function findPointByDate(data: Column[], date: Date): Column | null {
