@@ -48,7 +48,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
             <IconContainer>
               <CircleIcon $iconColor={iconColor} />
             </IconContainer>
-            <LevelDescription>{levelDescriptionCopy}</LevelDescription>
+            <LevelDescription>{levelDescriptionCopy} hi hi</LevelDescription>
           </LevelContainer>
         </CopyContainer>
         <IconContainer>
