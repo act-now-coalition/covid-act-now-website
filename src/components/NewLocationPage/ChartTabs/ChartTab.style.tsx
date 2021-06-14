@@ -66,3 +66,9 @@ export const TabsWrapper = styled.div`
   border-bottom: 1px solid ${COLOR_MAP.GREY_3};
   margin-bottom: 2rem;
 `;
+
+export const InactiveTabWrapper = styled.div<{ activeTabIndex: number }>`
+  ${Tab} {
+    cursor: default;
+  }
+`;

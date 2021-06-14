@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Tabs, TabsWrapper } from './ChartTab.style';
-// import ChartTab from './ChartTab';
-// import { Metric } from 'common/metricEnum';
-// import { formatValue, getLevelInfo } from 'common/metric';
 
 const ChartTabs: FunctionComponent<{
   activeTabIndex: number;

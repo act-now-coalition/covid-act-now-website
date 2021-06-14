@@ -13,7 +13,6 @@ import {
   useLocationSummariesForFips,
   useShowPastPosition,
 } from 'common/hooks';
-// import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
 import { useProjectionsFromRegion } from 'common/utils/model';
@@ -37,7 +36,7 @@ import {
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
-import TestChartBlock from 'components/Charts/Redesign/Test-ChartBlock';
+import NewChartBlock from 'components/Charts/Redesign/NewChartBlock';
 import { CHART_GROUPS } from 'components/Charts/Redesign/Groupings';
 
 // TODO: 100 is rough accounting for the navbar;
@@ -209,7 +208,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 />
               </LocationPageBlock>
             )}
-            {/* {ALL_METRICS.map(metric => ( */}
             {CHART_GROUPS.map(group => (
               <ErrorBoundary key={group.groupHeader}>
                 {!projections ? (
@@ -224,13 +222,14 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                       region={region}
                       stats={stats}
                     /> */}
-                    <TestChartBlock
+                    <NewChartBlock
                       // metric={metric}
                       projections={projections}
                       // chartRef={metricRefs[metric]}
                       isMobile={isMobile}
                       region={region}
                       stats={stats}
+                      group={group}
                     />
                   </LocationPageBlock>
                 )}
