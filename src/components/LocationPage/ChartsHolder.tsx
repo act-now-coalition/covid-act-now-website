@@ -37,6 +37,8 @@ import {
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
+import TestChartBlock from './Test-ChartBlock';
+import { CHART_GROUPS } from 'components/Charts/Redesign/Groupings';
 
 // TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
@@ -207,16 +209,25 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 />
               </LocationPageBlock>
             )}
-            {ALL_METRICS.map(metric => (
-              <ErrorBoundary key={metric}>
+            {/* {ALL_METRICS.map(metric => ( */}
+            {CHART_GROUPS.map(group => (
+              <ErrorBoundary key={group.groupHeader}>
                 {!projections ? (
                   <LoadingScreen />
                 ) : (
                   <LocationPageBlock>
-                    <ChartBlock
+                    {/* <ChartBlock
                       metric={metric}
                       projections={projections}
                       chartRef={metricRefs[metric]}
+                      isMobile={isMobile}
+                      region={region}
+                      stats={stats}
+                    /> */}
+                    <TestChartBlock
+                      // metric={metric}
+                      projections={projections}
+                      // chartRef={metricRefs[metric]}
                       isMobile={isMobile}
                       region={region}
                       stats={stats}

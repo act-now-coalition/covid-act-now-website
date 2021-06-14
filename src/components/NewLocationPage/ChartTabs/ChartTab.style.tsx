@@ -30,10 +30,6 @@ export const Tab = styled(MuiTab)`
   }
 `;
 
-export const TabsContainer = styled.div`
-  display: flex;
-`;
-
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -64,4 +60,9 @@ export const MetricSubLabel = styled.div`
     color: ${COLOR_MAP.GREY_3};
     padding: 0.5rem 0 0 0.5rem;
   }
+`;
+
+export const TabsWrapper = styled.div`
+  border-bottom: 1px solid ${COLOR_MAP.GREY_3};
+  margin-bottom: 2rem;
 `;
