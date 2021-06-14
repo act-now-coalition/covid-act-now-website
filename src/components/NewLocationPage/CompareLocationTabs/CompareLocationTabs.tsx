@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonGroup, Button } from './CompareLocationTabs.style';
 
 const CompareLocationTabs: React.FC<{
