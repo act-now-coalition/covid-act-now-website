@@ -479,6 +479,16 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Sam Vogt",
       "profileUrl": "https://www.linkedin.com/in/sam-vogt/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Spencer Lyon",
+      "profileUrl": "https://www.linkedin.com/in/spencer-lyon-27991541"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Derek Stevenson",
+      "profileUrl": "https://www.linkedin.com/in/derekstevenson"
     }
   ]
 }
