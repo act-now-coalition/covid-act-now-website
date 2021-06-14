@@ -2,11 +2,12 @@ import React from 'react';
 import { Metric } from 'common/metricEnum';
 import { ExploreMetric } from 'components/Explore';
 import MetricChart from 'components/Charts/MetricChart';
+import SingleLocationParent from './SingleLocationParent';
 import { Projections } from 'common/models/Projections';
-import { getMetricNameExtended } from 'common/metric';
+// import { getMetricNameExtended } from 'common/metric';
 import {
   getMetricNameForStat,
-  metricSubLabelText,
+  // metricSubLabelText,
 } from 'components/NewLocationPage/SummaryStat/utils';
 import ChartTab from 'components/NewLocationPage/ChartTabs/ChartTab';
 import { getMetricName } from 'components/Explore/utils';
@@ -24,49 +25,49 @@ export interface ChartGroup {
 }
 
 export const CHART_GROUPS: ChartGroup[] = [
-  {
-    groupHeader: 'Cases',
-    metricList: [
-      {
-        metric: Metric.CASE_DENSITY,
-        renderTabLabel: () => (
-          <ChartTab
-            metricName={getMetricNameForStat(Metric.CASE_DENSITY)}
-            subLabel={metricSubLabelText[Metric.CASE_DENSITY]}
-          />
-        ),
-        renderChart: projections => (
-          <MetricChart metric={Metric.CASE_DENSITY} projections={projections} />
-        ),
-      },
-      {
-        metric: Metric.CASE_GROWTH_RATE,
-        renderTabLabel: () => (
-          <ChartTab
-            metricName={getMetricNameForStat(Metric.CASE_GROWTH_RATE)}
-          />
-        ),
-        renderChart: projections => (
-          <MetricChart
-            metric={Metric.CASE_GROWTH_RATE}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: Metric.POSITIVE_TESTS,
-        renderTabLabel: () => (
-          <ChartTab metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)} />
-        ),
-        renderChart: projections => (
-          <MetricChart
-            metric={Metric.POSITIVE_TESTS}
-            projections={projections}
-          />
-        ),
-      },
-    ],
-  },
+  // {
+  //   groupHeader: 'Cases',
+  //   metricList: [
+  //     {
+  //       metric: Metric.CASE_DENSITY,
+  //       renderTabLabel: () => (
+  //         <ChartTab
+  //           metricName={getMetricNameForStat(Metric.CASE_DENSITY)}
+  //           subLabel={metricSubLabelText[Metric.CASE_DENSITY]}
+  //         />
+  //       ),
+  //       renderChart: projections => (
+  //         <MetricChart metric={Metric.CASE_DENSITY} projections={projections} />
+  //       ),
+  //     },
+  //     {
+  //       metric: Metric.CASE_GROWTH_RATE,
+  //       renderTabLabel: () => (
+  //         <ChartTab
+  //           metricName={getMetricNameForStat(Metric.CASE_GROWTH_RATE)}
+  //         />
+  //       ),
+  //       renderChart: projections => (
+  //         <MetricChart
+  //           metric={Metric.CASE_GROWTH_RATE}
+  //           projections={projections}
+  //         />
+  //       ),
+  //     },
+  //     {
+  //       metric: Metric.POSITIVE_TESTS,
+  //       renderTabLabel: () => (
+  //         <ChartTab metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)} />
+  //       ),
+  //       renderChart: projections => (
+  //         <MetricChart
+  //           metric={Metric.POSITIVE_TESTS}
+  //           projections={projections}
+  //         />
+  //       ),
+  //     },
+  //   ],
+  // },
   {
     groupHeader: 'Hospitalizations',
     metricList: [
@@ -82,21 +83,34 @@ export const CHART_GROUPS: ChartGroup[] = [
           />
         ),
       },
-      // {
-      //   metric: ExploreMetric.ICU_HOSPITALIZATIONS,
-      //   renderTabLabel: () => (
-      //     <ChartTab
-      //       metricName={getMetricName(ExploreMetric.ICU_HOSPITALIZATIONS)}
-      //     />
-      //   ),
-      //   // renderChart: projections => (
-      //   //   <MetricChart
-      //   //     metric={Metric.HOSPITAL_USAGE}
-      //   //     projections={projections}
-      //   //   />
-      //   // ),
-      //   renderChart: (projections) => (<div>Hello</div>),
-      // },
+      {
+        metric: ExploreMetric.ICU_HOSPITALIZATIONS,
+        renderTabLabel: () => (
+          <ChartTab
+            metricName={getMetricName(ExploreMetric.ICU_HOSPITALIZATIONS)}
+          />
+        ),
+        renderChart: projections => (
+          <SingleLocationParent
+            metric={ExploreMetric.ICU_HOSPITALIZATIONS}
+            projections={projections}
+          />
+        ),
+      },
+      {
+        metric: ExploreMetric.HOSPITALIZATIONS,
+        renderTabLabel: () => (
+          <ChartTab
+            metricName={getMetricName(ExploreMetric.HOSPITALIZATIONS)}
+          />
+        ),
+        renderChart: projections => (
+          <SingleLocationParent
+            metric={ExploreMetric.HOSPITALIZATIONS}
+            projections={projections}
+          />
+        ),
+      },
     ],
   },
 ];

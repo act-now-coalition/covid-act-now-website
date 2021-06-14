@@ -13,7 +13,7 @@ import {
   useLocationSummariesForFips,
   useShowPastPosition,
 } from 'common/hooks';
-import { ALL_METRICS } from 'common/metric';
+// import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
 import { useProjectionsFromRegion } from 'common/utils/model';
@@ -26,7 +26,7 @@ import Recommendations from './Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-import ChartBlock from './ChartBlock';
+// import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { WidthContainer } from './LocationPageBlock.style';
 import { LocationPageContentWrapper, BelowTheFold } from './ChartsHolder.style';
@@ -37,7 +37,7 @@ import {
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
-import TestChartBlock from './Test-ChartBlock';
+import TestChartBlock from 'components/Charts/Redesign/Test-ChartBlock';
 import { CHART_GROUPS } from 'components/Charts/Redesign/Groupings';
 
 // TODO: 100 is rough accounting for the navbar;

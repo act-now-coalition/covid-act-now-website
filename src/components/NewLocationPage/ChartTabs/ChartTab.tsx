@@ -1,6 +1,6 @@
 import React from 'react';
-import { formatValue, getLevelInfo } from 'common/metric';
-import { Metric } from 'common/metricEnum';
+// import { formatValue, getLevelInfo } from 'common/metric';
+// import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
 import {
   TabContainer,
@@ -10,7 +10,7 @@ import {
 } from './ChartTab.style';
 import { CircleIcon } from '../Shared/Shared.style';
 import { Value } from '../SummaryStat/SummaryStat.style';
-import { getMetricNameForStat, metricSubLabelText } from '../SummaryStat/utils';
+// import { getMetricNameForStat, metricSubLabelText } from '../SummaryStat/utils';
 
 const ChartTab: React.FC<{ metricName: string; subLabel?: string[] }> = ({
   metricName,

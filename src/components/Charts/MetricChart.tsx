@@ -25,7 +25,7 @@ const MetricChart = React.memo(
     height?: number;
   }) => {
     if (!projections.hasMetric(metric)) {
-      return null;
+      return <div>Placeholder text here</div>; // Chelsi: update this, use same component as backup for SingleLocationChart
     }
     const projection = projections.primary;
     return (
