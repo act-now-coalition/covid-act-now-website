@@ -19,6 +19,7 @@ export const LegendContainer = styled.div<{
 `;
 
 export const LegendItemHeader = styled.div`
+  white-space: nowrap;
   display: flex;
   flex-direction: row;
   align-items: center;
