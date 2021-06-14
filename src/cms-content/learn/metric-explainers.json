@@ -68,7 +68,7 @@
         {
           "question": "More information on infection rate",
           "questionId": "more-info-infection-rate",
-          "answer": "[Why is infection rate important?](https://covidactnow.org/faq#infection-rate-important)\n\n[Video explainer](https://www.youtube.com/watch?v=dmp5iAXrkaY&t=0s)"
+          "answer": "[Why is infection rate important?](https://covidactnow.org/faq#infection-rate-important)\n\n[Video explainer](https://www.youtube.com/embed/dmp5iAXrkaY)"
         }
       ]
     },
@@ -96,7 +96,7 @@
         {
           "question": "More information on positive test rate",
           "questionId": "more-info-positive-test-rate\n",
-          "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/watch?v=RpqI-ZVGGoY)"
+          "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/embed/RpqI-ZVGGoY)"
         },
         {
           "question": "More information on COVID testing",
