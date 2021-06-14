@@ -242,7 +242,7 @@ const Explore: React.FunctionComponent<{
         const timeoutId = scrollToExplore();
         return () => clearTimeout(timeoutId);
       }
-    }, [currentMetric, initialLocations, pathname, scrollToExplore]);
+    }, [pathname, scrollToExplore]);
 
     // if the pathname changes (ie. if navigating between location pages via compare or minimap)-
     // resets metric, time period, and locations
@@ -272,13 +272,7 @@ const Explore: React.FunctionComponent<{
         selectedLocations.length > 1 &&
           ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
       );
-    }, [
-      currentMetric,
-      selectedLocations,
-      metricLabels,
-      allPeriodLabels,
-      period,
-    ]);
+    }, [currentMetric, selectedLocations]);
 
     const trackingLabel = hasMultipleLocations
       ? `Multiple Locations`
