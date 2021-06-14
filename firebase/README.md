@@ -52,7 +52,8 @@ npm install
 firebase serve
 ```
 
-Then visit http://localhost:5000/ to test your hosting + functions code, e.g.
+Then visit http://localhost:5000/ to test your hosting + functions code, e.g. 
+http://localhost:5000/share/0-123/home.png or
 http://localhost:5000/share/0-123/states/ca/chart/0.png
 
 ## Learn More
