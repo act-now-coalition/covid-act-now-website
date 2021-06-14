@@ -27,18 +27,6 @@
       "profileUrl": "https://www.linkedin.com/in/ckelly90/"
     },
     {
-      "profileImgUrl": "/images_cms/benlewis.jpeg",
-      "fullName": "Ben Lewis",
-      "description": "Data engineering",
-      "profileUrl": "https://www.linkedin.com/in/benjamintlewis/"
-    },
-    {
-      "profileImgUrl": "/images_cms/spencerlyon.jpeg",
-      "fullName": "Spencer Lyon",
-      "description": "Data engineering",
-      "profileUrl": "https://www.linkedin.com/in/spencer-lyon-27991541/"
-    },
-    {
       "profileImgUrl": "/images_cms/seanmcclure.jpeg",
       "fullName": "Sean McClure",
       "description": "Data engineering",
@@ -57,21 +45,14 @@
       "profileUrl": "https://www.linkedin.com/in/andrew-schamp/"
     },
     {
-      "profileImgUrl": "/images_cms/mattsidor.jpeg",
-      "fullName": "Matt Sidor",
-      "description": "Data engineering",
-      "profileUrl": "https://www.linkedin.com/in/mattsidor/"
-    },
-    {
-      "profileImgUrl": "/images_cms/derekstevenson.jpeg",
-      "fullName": "Derek Stevenson",
-      "description": "Engineering",
-      "profileUrl": "https://www.linkedin.com/in/derekstevenson/"
-    },
-    {
       "profileImgUrl": "/images_cms/mime-cuvalo.jpg",
       "fullName": "Mime Čuvalo",
       "profileUrl": "https://nightlight.rocks/mime/about/resume"
+    },
+    {
+      "profileImgUrl": "/images_cms/michaellehenbauer.jpeg",
+      "fullName": "Michael Lehenbauer",
+      "profileUrl": "https://www.linkedin.com/in/mikelehen/"
     }
   ]
 }
