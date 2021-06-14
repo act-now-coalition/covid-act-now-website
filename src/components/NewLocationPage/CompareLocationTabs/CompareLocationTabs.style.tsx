@@ -9,7 +9,9 @@ export const ButtonGroup = styled(ToggleButtonGroup)`
   border-radius: 4px;
 `;
 
-export const Button = styled(ToggleButton)`
+export const Button = styled(ToggleButton).attrs(props => ({
+  disableRipple: true,
+}))`
   ${props => props.theme.fonts.regularBook};
   padding: 0.75rem;
   border: none;
@@ -23,6 +25,9 @@ export const Button = styled(ToggleButton)`
     background-color: white;
     .MuiToggleButton-label {
       color: ${COLOR_MAP.BLACK};
+    }
+    &:hover {
+      background-color: white;
     }
     border: 1px solid ${COLOR_MAP.GREY_3};
     border-radius: 3px;
