@@ -3,16 +3,15 @@ import {
   GeoScopeFilter,
   trackCompareEvent,
   HomepageLocationScope,
-  sliderNumberToFilterMap,
-  homepageSliderNumberToFilterMap,
+  labelToFilterMap,
+  homepageLabelToFilterMap,
+  homepageLabelMap,
+  homepageScopeToValueMap,
+  scopeToValueMap,
 } from 'common/utils/compare';
-import {
-  Container,
-  SliderContainer,
-  GeoSlider,
-} from 'components/Compare/Filters.style';
+import { Container } from 'components/Compare/Filters.style';
 import { EventAction } from 'components/Analytics';
-import HomepageSlider from './HomepageSlider';
+import CompareLocationTabs from 'components/NewLocationPage/CompareLocationTabs/CompareLocationTabs';
 
 const Filters = (props: {
   isHomepage?: boolean;
@@ -26,57 +25,38 @@ const Filters = (props: {
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
 }) => {
-  const {
-    sliderValue,
-    homepageScope,
-    setHomepageScope,
-    homepageSliderValue,
-  } = props;
+  const { setHomepageScope } = props;
 
-  const GeoFilterLabels = {
-    [GeoScopeFilter.NEARBY]: 'Nearby',
-    [GeoScopeFilter.STATE]: `${props.stateId}`,
-    [GeoScopeFilter.COUNTRY]: 'USA',
-  };
-
-  // Last value is set to 99 for styling
-  // so that the final mark falls on the slider and not to the right of it
-  const marks = [
-    {
-      value: 0,
-      label: GeoFilterLabels[GeoScopeFilter.NEARBY],
-    },
-    {
-      value: 50,
-      label: GeoFilterLabels[GeoScopeFilter.STATE],
-    },
-    {
-      value: 99,
-      label: GeoFilterLabels[GeoScopeFilter.COUNTRY],
-    },
+  const homepageFilterLabels = [
+    homepageLabelMap[HomepageLocationScope.COUNTY].plural,
+    homepageLabelMap[HomepageLocationScope.MSA].plural,
+    homepageLabelMap[HomepageLocationScope.STATE].plural,
   ];
 
-  const sliderHandleChange = (event: any, value: any) => {
-    if (props.setGeoScope) {
-      props.setGeoScope(sliderNumberToFilterMap[value]);
+  const locationPageFilterLabels = ['Nearby', `${props.stateId}`, 'USA'];
+
+  const handleLocationPageSelectedOption = (
+    event: React.MouseEvent<HTMLElement>,
+    value: string,
+  ) => {
+    if (props.setGeoScope && value != null) {
+      props.setGeoScope(labelToFilterMap(value));
       trackCompareEvent(
         EventAction.SELECT,
-        `GeoScope: ${GeoScopeFilter[sliderNumberToFilterMap[value]]}`,
+        `GeoScope: ${GeoScopeFilter[labelToFilterMap(value)]}`,
       );
     }
   };
 
-  const homepageSliderHandleChange = (
-    event: React.ChangeEvent<{}>,
-    value: any,
+  const handleHomePageSelectedOption = (
+    event: React.MouseEvent<HTMLElement>,
+    value: string,
   ) => {
-    if (setHomepageScope) {
-      setHomepageScope(homepageSliderNumberToFilterMap[value]);
+    if (setHomepageScope && value != null) {
+      setHomepageScope(homepageLabelToFilterMap[value]);
       trackCompareEvent(
         EventAction.SELECT,
-        `GeoScope: ${
-          HomepageLocationScope[homepageSliderNumberToFilterMap[value]]
-        }`,
+        `GeoScope: ${HomepageLocationScope[homepageLabelToFilterMap[value]]}`,
       );
     }
   };
@@ -85,25 +65,18 @@ const Filters = (props: {
     <Fragment>
       <Container $isModal={props.isModal} $isHomepage={props.isHomepage}>
         {props.isHomepage && (
-          <HomepageSlider
-            homepageScope={homepageScope}
-            onChange={homepageSliderHandleChange}
-            homepageSliderValue={homepageSliderValue}
-            $isModal={props.isModal}
+          <CompareLocationTabs
+            locationLevels={homepageFilterLabels}
+            onChange={handleHomePageSelectedOption}
+            selectedOption={homepageScopeToValueMap[props.homepageScope]}
           />
         )}
         {props.isCounty && (
-          <SliderContainer $isModal={props.isModal}>
-            <GeoSlider
-              onChange={sliderHandleChange}
-              value={sliderValue}
-              step={null}
-              marks={marks}
-              track={false}
-              $isModal={props.isModal}
-              geoScope={props.geoScope}
-            />
-          </SliderContainer>
+          <CompareLocationTabs
+            locationLevels={locationPageFilterLabels}
+            onChange={handleLocationPageSelectedOption}
+            selectedOption={scopeToValueMap(props.geoScope, props.stateId)}
+          />
         )}
       </Container>
     </Fragment>

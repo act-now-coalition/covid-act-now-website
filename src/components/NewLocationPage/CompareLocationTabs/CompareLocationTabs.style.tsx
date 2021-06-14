@@ -4,6 +4,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 export const ButtonGroup = styled(ToggleButtonGroup)`
+  width: fit-content;
   background-color: ${COLOR_MAP.GREY_1};
   border: 1px solid ${COLOR_MAP.GREY_2};
   border-radius: 4px;
