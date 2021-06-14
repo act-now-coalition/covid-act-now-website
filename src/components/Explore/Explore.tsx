@@ -242,11 +242,6 @@ const Explore: React.FunctionComponent<{
         const timeoutId = scrollToExplore();
         return () => clearTimeout(timeoutId);
       }
-      setSelectedLocations(initialLocations);
-      setNormalizeData(
-        initialLocations.length > 1 &&
-          ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
-      );
     }, [currentMetric, initialLocations, pathname, scrollToExplore]);
 
     // if the pathname changes (ie. if navigating between location pages via compare or minimap)-
