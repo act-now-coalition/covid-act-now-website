@@ -7,7 +7,9 @@ const CompareLocationTabs: React.FC = () => {
     event: React.MouseEvent<HTMLElement>,
     newSelection: string,
   ) => {
-    setSelectedOption(newSelection);
+    if (newSelection !== null) {
+      setSelectedOption(newSelection);
+    }
   };
   return (
     <ButtonGroup
