@@ -48,6 +48,11 @@
       "profileImgUrl": "/images_cms/mime-cuvalo.jpg",
       "fullName": "Mime Čuvalo",
       "profileUrl": "https://nightlight.rocks/mime/about/resume"
+    },
+    {
+      "profileImgUrl": "/images_cms/michaellehenbauer.jpeg",
+      "fullName": "Michael Lehenbauer",
+      "profileUrl": "https://www.linkedin.com/in/mikelehen/"
     }
   ]
 }
