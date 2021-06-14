@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import ChartTab from './ChartTab';
-import ChartTabs from './ChartTabs';
-import { Metric } from 'common/metricEnum';
+import React from 'react';
+// import React, { useState } from 'react';
+// import ChartTab from './ChartTab';
+// import ChartTabs from './ChartTabs';
+// import { Metric } from 'common/metricEnum';
 
 export default {
   title: 'Location page redesign/Chart Tabs',

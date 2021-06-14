@@ -69,6 +69,6 @@ export const TabsWrapper = styled.div`
 
 export const InactiveTabWrapper = styled.div<{ activeTabIndex: number }>`
   ${Tab} {
-    cursor: default;
+    cursor: default; // (Chelsi)-this isn't accessible
   }
 `;

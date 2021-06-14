@@ -25,6 +25,23 @@ export interface ChartGroup {
 
 export const CHART_GROUPS: ChartGroup[] = [
   {
+    groupHeader: '% Vaccinated',
+    metricList: [
+      {
+        metric: Metric.VACCINATIONS,
+        renderTabLabel: () => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.VACCINATIONS)}
+            subLabel={metricSubLabelText[Metric.VACCINATIONS]}
+          />
+        ),
+        renderChart: projections => (
+          <MetricChart metric={Metric.VACCINATIONS} projections={projections} />
+        ),
+      },
+    ],
+  },
+  {
     groupHeader: 'Cases',
     metricList: [
       {

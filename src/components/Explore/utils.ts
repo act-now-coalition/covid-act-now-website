@@ -621,30 +621,6 @@ export function getChartSeries(
   }
 }
 
-export function getSeriesFromProjections(
-  metric: ExploreMetric,
-  regions: Region[],
-  normalizeData: boolean,
-): Promise<Series[]> {
-  if (regions.length === 1) {
-    return getProjectionForRegion(regions[0]).then(projection =>
-      getAllSeriesForMetric(metric, projection),
-    );
-  } else {
-    return Promise.all(
-      regions.map(async (region, i) => {
-        const projection = await getProjectionForRegion(region);
-        return getAveragedSeriesForMetric(
-          metric,
-          projection,
-          SERIES_COLORS[i % SERIES_COLORS.length],
-          normalizeData,
-        );
-      }),
-    ).then(flatten);
-  }
-}
-
 export function getSeriesLabel(series: Series, isMobile: boolean) {
   return isMobile ? series.shortLabel : series.label;
 }
