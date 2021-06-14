@@ -45,13 +45,15 @@ To test hosting / functions locally:
 
 ```sh
 # Run this from the 'firebase/functions' directory to watch / recompile TypeScript files.
+npm install
 `npm bin`/tsc -w
 
 # Run this to run the hosting / functions local servers.
 firebase serve
 ```
 
-Then visit http://localhost:5000/ to test your hosting + functions code, e.g.
+Then visit http://localhost:5000/ to test your hosting + functions code, e.g. 
+http://localhost:5000/share/0-123/home.png or
 http://localhost:5000/share/0-123/states/ca/chart/0.png
 
 ## Learn More
