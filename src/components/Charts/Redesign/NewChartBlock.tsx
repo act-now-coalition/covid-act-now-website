@@ -37,14 +37,13 @@ const NewChartBlock: React.FC<{
       <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
         {metricList.map((metricItem: MetricChartInfo, i: number) => {
           const metricValueInfo = getValueInfo(stats, metricItem, projections);
-          // const { unformattedValue } = metricValueInfo;
 
           return (
             <Tab
               key={`tab-${i}`}
               disableRipple
               disableFocusRipple
-              label={metricItem.renderTabLabel(metricValueInfo)}
+              label={metricItem.renderTabLabel(metricValueInfo, projections)}
               id={`tab-id-${i}`}
               aria-controls={`tab-id-${i}`}
             />
