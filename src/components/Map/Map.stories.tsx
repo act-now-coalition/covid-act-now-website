@@ -9,7 +9,6 @@ export default {
     hideInstructions: false,
     hideLegendTitle: false,
     onClick: () => {},
-    isMiniMap: false,
     showCounties: false,
   },
 };
