@@ -3,11 +3,11 @@ import {
   GeoScopeFilter,
   trackCompareEvent,
   HomepageLocationScope,
-  labelToFilterMap,
+  locationPageLabelToFilterMap,
   homepageLabelToFilterMap,
   homepageLabelMap,
   homepageScopeToValueMap,
-  scopeToValueMap,
+  locationPageScopeToValueMap,
 } from 'common/utils/compare';
 import { Container } from 'components/Compare/Filters.style';
 import { EventAction } from 'components/Analytics';
@@ -39,11 +39,11 @@ const Filters = (props: {
     event: React.MouseEvent<HTMLElement>,
     value: string,
   ) => {
-    if (props.setGeoScope && value != null) {
-      props.setGeoScope(labelToFilterMap(value));
+    if (value != null) {
+      props.setGeoScope(locationPageLabelToFilterMap(value));
       trackCompareEvent(
         EventAction.SELECT,
-        `GeoScope: ${GeoScopeFilter[labelToFilterMap(value)]}`,
+        `GeoScope: ${GeoScopeFilter[locationPageLabelToFilterMap(value)]}`,
       );
     }
   };
@@ -52,7 +52,7 @@ const Filters = (props: {
     event: React.MouseEvent<HTMLElement>,
     value: string,
   ) => {
-    if (setHomepageScope && value != null) {
+    if (value != null) {
       setHomepageScope(homepageLabelToFilterMap[value]);
       trackCompareEvent(
         EventAction.SELECT,
@@ -75,7 +75,10 @@ const Filters = (props: {
           <CompareLocationTabs
             locationLevels={locationPageFilterLabels}
             onChange={handleLocationPageSelectedOption}
-            selectedOption={scopeToValueMap(props.geoScope, props.stateId)}
+            selectedOption={locationPageScopeToValueMap(
+              props.geoScope,
+              props.stateId,
+            )}
           />
         )}
       </Container>

@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonGroup, Button } from './CompareLocationTabs.style';
 
 const CompareLocationTabs: React.FC<{
-  locationLevels: Array<string>;
+  locationLevels: string[];
   onChange: (
     event: React.MouseEvent<HTMLElement>,
     newSelection: string,

@@ -254,7 +254,7 @@ export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
   99: GeoScopeFilter.COUNTRY,
 };
 
-export function labelToFilterMap(val: string): GeoScopeFilter {
+export function locationPageLabelToFilterMap(val: string): GeoScopeFilter {
   switch (val) {
     case 'Nearby':
       return GeoScopeFilter.NEARBY;
@@ -265,7 +265,7 @@ export function labelToFilterMap(val: string): GeoScopeFilter {
   }
 }
 
-export function scopeToValueMap(
+export function locationPageScopeToValueMap(
   locationLevel: GeoScopeFilter,
   stateId: string | undefined,
 ): string {
