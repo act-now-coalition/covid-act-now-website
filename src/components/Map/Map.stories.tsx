@@ -6,7 +6,6 @@ export default {
   component: Map,
   argTypes: {
     hideLegend: false,
-    hideInstructions: false,
     hideLegendTitle: false,
     onClick: () => {},
     showCounties: false,

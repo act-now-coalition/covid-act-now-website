@@ -40,7 +40,6 @@ const SocialLocationPreview = (props: {
             onClick={isEmbed ? navigateToCAN : undefined}
             hideLegend={!isEmbed}
             hideLegendTitle={true}
-            hideInstructions={true}
             showCounties={showCountyView}
           />
         </MapWrapper>

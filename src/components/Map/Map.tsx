@@ -4,12 +4,10 @@ import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Legend, LegendItem } from './Legend';
 import USACountyMap from './USACountyMap';
-import { MapInstructions, MobileLineBreak } from './Map.style';
 import noop from 'lodash/noop';
 
 interface MapProps {
   hideLegend?: boolean;
-  hideInstructions?: boolean;
   hideLegendTitle?: boolean;
   onClick?: () => void;
   showCounties?: boolean;
@@ -17,7 +15,6 @@ interface MapProps {
 
 function Map({
   hideLegend = false,
-  hideInstructions = false,
   hideLegendTitle = false,
   onClick = noop,
   showCounties = false,
@@ -73,12 +70,6 @@ function Map({
           showCounties={showCounties}
         />
       </div>
-      {!hideInstructions && (
-        <MapInstructions>
-          <strong>Click a state</strong> to view risk details{' '}
-          <MobileLineBreak /> and county info.
-        </MapInstructions>
-      )}
     </div>
   );
 }
