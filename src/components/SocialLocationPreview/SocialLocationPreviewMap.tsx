@@ -13,7 +13,7 @@ import {
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import Map from 'components/Map/Map';
-import { Legend, LegendItem } from 'components/Map/Legend';
+import { Legend, LegendItem } from './Legend';
 
 const SocialLocationPreview = (props: {
   border?: Boolean;
@@ -36,43 +36,15 @@ const SocialLocationPreview = (props: {
       <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
       <USMapPreviewHeader sideLegend={!isEmbed}>
         <MapWrapper>
+          {isEmbed && <MapLegend isEmbed />}
           <Map
             onClick={isEmbed ? navigateToCAN : undefined}
-            hideLegend={!isEmbed}
             showCounties={showCountyView}
           />
         </MapWrapper>
-        {isEmbed ? (
-          ''
-        ) : (
+        {!isEmbed && (
           <USMapHeaderText>
-            <Legend condensed={true}>
-              <LegendItem
-                key={'legend-5'}
-                title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].color}
-              />
-              <LegendItem
-                key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
-              />
-              <LegendItem
-                key={'legend-3'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-              />
-              <LegendItem
-                key={'legend-2'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-              />
-              <LegendItem
-                key={'legend-1'}
-                title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-              />
-            </Legend>
+            <MapLegend />
           </USMapHeaderText>
         )}
       </USMapPreviewHeader>
@@ -87,5 +59,27 @@ const SocialLocationPreview = (props: {
     </Wrapper>
   );
 };
+
+const MapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
+  <Legend condensed={!isEmbed}>
+    {[
+      Level.SUPER_CRITICAL,
+      Level.CRITICAL,
+      Level.HIGH,
+      Level.MEDIUM,
+      Level.LOW,
+    ].map(level => (
+      <LegendItem
+        key={'legend-{level}'}
+        title={
+          isEmbed
+            ? LOCATION_SUMMARY_LEVELS[level].summary || ''
+            : LOCATION_SUMMARY_LEVELS[level].name
+        }
+        color={LOCATION_SUMMARY_LEVELS[level].color}
+      />
+    ))}
+  </Legend>
+);
 
 export default SocialLocationPreview;

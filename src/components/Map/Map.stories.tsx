@@ -5,7 +5,6 @@ export default {
   title: 'Shared Components/Map',
   component: Map,
   argTypes: {
-    hideLegend: false,
     onClick: () => {},
     showCounties: false,
   },

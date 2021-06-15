@@ -137,7 +137,7 @@ export default function HomePage() {
               />
             </ColumnCentered>
 
-            <Map hideLegend showCounties={showCounties} />
+            <Map showCounties={showCounties} />
 
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />
