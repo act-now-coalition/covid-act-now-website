@@ -20,8 +20,7 @@ export const Container = styled.div<{
   $isHomepage?: boolean;
 }>`
   display: flex;
-  margin: ${({ $isModal }) => $isModal && '1rem auto 0'};
-  padding: ${({ $isModal }) => ($isModal ? '0 0 0 1.75rem' : '0 0 0.75rem')};
+  margin: ${({ $isModal }) => $isModal && '0 auto'};
   justify-content: ${({ $isHomepage, $isModal }) =>
     $isHomepage && $isModal && 'center'};
   flex-direction: column;

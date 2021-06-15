@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CompareLocationTabs from './CompareLocationTabs';
 
 export default {
@@ -7,5 +7,20 @@ export default {
 };
 
 export const CompareLocationTabsExample = () => {
-  return <CompareLocationTabs />;
+  const [selectedOption, setSelectedOption] = useState('VT');
+  const handleSelectedOption = (
+    event: React.MouseEvent<HTMLElement>,
+    newSelection: string,
+  ) => {
+    if (newSelection !== null) {
+      setSelectedOption(newSelection);
+    }
+  };
+  return (
+    <CompareLocationTabs
+      locationLevels={['Nearby', 'VT', 'USA']}
+      onChange={handleSelectedOption}
+      selectedOption={selectedOption}
+    />
+  );
 };

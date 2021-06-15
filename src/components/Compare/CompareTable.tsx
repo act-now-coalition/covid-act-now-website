@@ -4,7 +4,13 @@ import findIndex from 'lodash/findIndex';
 import partition from 'lodash/partition';
 import reverse from 'lodash/reverse';
 import isNumber from 'lodash/isNumber';
-import { Wrapper, Footer, FooterText } from 'components/Compare/Compare.style';
+import {
+  Wrapper,
+  Footer,
+  FooterText,
+  HeaderContainer,
+  CompareHeader,
+} from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
 import Filters from 'components/Compare/Filters';
 import {
@@ -29,7 +35,6 @@ import {
 } from './columns';
 import { TextButton } from 'components/ButtonSystem/MainButtons.style';
 import { EventCategory } from 'components/Analytics/utils';
-import { SectionHeader } from 'components/SharedComponents';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -209,8 +214,8 @@ const CompareTable = (props: {
   return (
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
-        <>
-          <SectionHeader>Compare</SectionHeader>
+        <HeaderContainer>
+          <CompareHeader>Compare</CompareHeader>
           {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}
@@ -225,7 +230,7 @@ const CompareTable = (props: {
               homepageSliderValue={homepageSliderValue}
             />
           )}
-        </>
+        </HeaderContainer>
       )}
       <LocationTable
         firstColumnHeader={firstColumnHeader}

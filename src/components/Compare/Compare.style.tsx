@@ -7,6 +7,8 @@ import { Wrapper as LocationName } from 'components/SharedComponents/StyledRegio
 import { COLORS } from 'common';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { Level } from 'common/level';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { SectionHeader } from 'components/SharedComponents/SharedComponents.style';
 
 // TODO (Chelsi): consolidate into a theme:
 
@@ -487,4 +489,33 @@ export const DivForRef = styled.div``;
 export const StateName = styled.div`
   font-size: 0.9rem;
   line-height: 1.2;
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  .MuiToggleButtonGroup-root {
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    justify-content: flex-start;
+  }
+
+  @media (min-width: 375px) {
+    .MuiToggleButtonGroup-root {
+      margin: 0;
+    }
+  }
+`;
+
+export const CompareHeader = styled(SectionHeader)`
+  line-height: 1.5;
+  margin: 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 0 2.5rem 0 0;
+  }
 `;
