@@ -8,6 +8,7 @@ import { COLORS } from 'common';
 import { COLOR_MAP, LEVEL_COLOR } from 'common/colors';
 import { Level } from 'common/level';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { SectionHeader } from 'components/SharedComponents/SharedComponents.style';
 
 // TODO (Chelsi): consolidate into a theme:
 
@@ -494,7 +495,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 0 1.5rem 0;
+  margin-bottom: 1.5rem;
   .MuiToggleButtonGroup-root {
     margin-top: 0.5rem;
   }
@@ -510,10 +511,7 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const CompareHeader = styled.h2`
-  ${props => props.theme.fonts.regularBookBold};
-  font-size: 1.5rem;
-  letter-spacing: 0;
+export const CompareHeader = styled(SectionHeader)`
   line-height: 1.5;
   margin: 0;
 
