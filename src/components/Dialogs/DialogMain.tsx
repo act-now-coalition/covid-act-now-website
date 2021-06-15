@@ -1,4 +1,5 @@
 import React from 'react';
+import upperFirst from 'lodash/upperFirst';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
 import { Link } from 'cms-content/modals';
@@ -28,7 +29,7 @@ const DialogMain: React.FC<{
     >
       <LockBodyScroll />
       <HeaderWrapper>
-        <Header>{header}</Header>
+        <Header>{upperFirst(header)}</Header>
         <StyledIconButton aria-label="close" onClick={closeDialog}>
           <CloseIcon />
         </StyledIconButton>

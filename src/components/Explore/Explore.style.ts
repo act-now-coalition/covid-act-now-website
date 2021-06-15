@@ -73,6 +73,7 @@ export const LegendContainer = styled(Box)`
   display: flex;
   flex-wrap: wrap;
   margin-right: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const LegendItem = styled(Box)`

@@ -23,6 +23,7 @@ export enum MetricType {
 }
 
 export interface ValueInfo {
+  unformattedValue: number | null;
   formattedValue: string;
   levelColor?: string;
 }
@@ -196,6 +197,7 @@ export function getValueInfo(
       nullValueString,
     );
     return {
+      unformattedValue: statValue,
       formattedValue,
       levelColor: levelInfo.color,
     };
@@ -208,11 +210,12 @@ export function getValueInfo(
     );
     const hasData = some([smoothedSeries], ({ data }) => data.length > 0);
     if (!hasData) {
-      return { formattedValue: nullValueString };
+      return { unformattedValue: null, formattedValue: nullValueString };
     } else {
       const data = smoothedSeries.data.filter(data => Number.isFinite(data.y));
       const lastPoint = last(data);
       return {
+        unformattedValue: lastPoint.y,
         formattedValue: formatDecimal(lastPoint.y, 1),
       };
     }
