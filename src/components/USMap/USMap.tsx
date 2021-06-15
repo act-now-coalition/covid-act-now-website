@@ -1,11 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import ReactTooltip from 'react-tooltip';
-import { colorFromLocationSummary } from 'common/colors';
-import { useSummaries } from 'common/location_summaries';
-import { ScreenshotReady } from 'components/Screenshot';
 import {
   findStateByFipsCodeStrict,
   statesByFips,
@@ -38,21 +35,13 @@ const MarianaIslands = ({ fill }: { fill: string }) => (
 
 interface USMapProps {
   showCounties: boolean;
+  getFillColor: (fipsCode: string) => string;
 }
 
 const projection = geoAlbersUsaTerritories().scale(1070).translate([400, 300]);
 
-const USMap = React.memo(({ showCounties }: USMapProps) => {
+const USMap = React.memo(({ showCounties, getFillColor }: USMapProps) => {
   const [tooltipContent, setTooltipContent] = useState('');
-  const locationSummaries = useSummaries();
-
-  const getFillColor = useCallback(
-    (fips: string) => {
-      const summary = (locationSummaries && locationSummaries[fips]) || null;
-      return colorFromLocationSummary(summary);
-    },
-    [locationSummaries],
-  );
 
   const onMouseLeave = () => setTooltipContent('');
 
@@ -125,7 +114,6 @@ const USMap = React.memo(({ showCounties }: USMapProps) => {
     <USMapWrapper>
       {/** Map with shaded background colors for states. */}
       {mapContent}
-      {locationSummaries && <ScreenshotReady />}
       <ReactTooltip>{tooltipContent}</ReactTooltip>
     </USMapWrapper>
   );
