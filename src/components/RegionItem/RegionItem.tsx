@@ -15,6 +15,7 @@ import { StyledRegionName } from 'components/SharedComponents';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 
 const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = getLocationIconFillColor(region);
@@ -23,6 +24,8 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const levelDescriptionCopy = regionSummary?.level
     ? LOCATION_SUMMARY_LEVELS[regionSummary.level].summary
     : '';
+  const stats = regionSummary ? summaryToStats(regionSummary) : null;
+  console.log(stats);
 
   const showStateCode = !(region instanceof State);
 
