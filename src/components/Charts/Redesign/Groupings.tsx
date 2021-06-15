@@ -1,26 +1,42 @@
 import React from 'react';
+import some from 'lodash/some';
 import { Metric } from 'common/metricEnum';
 import { ExploreMetric } from 'components/Explore';
 import MetricChart from 'components/Charts/MetricChart';
 import SingleLocationParent from './SingleLocationParent';
 import { Projections } from 'common/models/Projections';
-// import { getMetricNameExtended } from 'common/metric';
 import {
   getMetricNameForStat,
   metricSubLabelText,
 } from 'components/NewLocationPage/SummaryStat/utils';
 import ChartTab from 'components/NewLocationPage/ChartTabs/ChartTab';
-// import { getMetricName } from 'components/Explore/utils';
+import { MetricValues } from 'common/models/Projections';
+import { getAveragedSeriesForMetric } from 'components/Explore/utils';
+import { formatValue, getLevelInfo } from 'common/metric';
+import { last } from 'components/Charts/utils';
+import { formatDecimal } from 'common/utils';
 
-export interface metricChartInfo {
+export enum MetricType {
+  KEY_METRIC,
+  EXPLORE_METRIC,
+}
+
+export interface ValueInfo {
+  unformattedValue: number | null;
+  formattedValue: string;
+  levelColor?: string;
+}
+
+export interface MetricChartInfo {
   metric: Metric | ExploreMetric;
+  metricType: MetricType;
   renderChart: (projections: Projections) => React.ReactElement;
-  renderTabLabel: () => React.ReactElement;
+  renderTabLabel: (metricValueInfo: ValueInfo) => React.ReactElement;
 }
 
 export interface ChartGroup {
   groupHeader: string;
-  metricList: metricChartInfo[];
+  metricList: MetricChartInfo[];
 }
 
 export const CHART_GROUPS: ChartGroup[] = [
@@ -29,10 +45,12 @@ export const CHART_GROUPS: ChartGroup[] = [
     metricList: [
       {
         metric: Metric.VACCINATIONS,
-        renderTabLabel: () => (
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: metricValue => (
           <ChartTab
             metricName={getMetricNameForStat(Metric.VACCINATIONS)}
             subLabel={metricSubLabelText[Metric.VACCINATIONS]}
+            metricValueInfo={metricValue}
           />
         ),
         renderChart: projections => (
@@ -46,10 +64,12 @@ export const CHART_GROUPS: ChartGroup[] = [
     metricList: [
       {
         metric: Metric.CASE_DENSITY,
-        renderTabLabel: () => (
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: metricValue => (
           <ChartTab
             metricName={getMetricNameForStat(Metric.CASE_DENSITY)}
             subLabel={metricSubLabelText[Metric.CASE_DENSITY]}
+            metricValueInfo={metricValue}
           />
         ),
         renderChart: projections => (
@@ -58,9 +78,11 @@ export const CHART_GROUPS: ChartGroup[] = [
       },
       {
         metric: Metric.CASE_GROWTH_RATE,
-        renderTabLabel: () => (
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: metricValue => (
           <ChartTab
             metricName={getMetricNameForStat(Metric.CASE_GROWTH_RATE)}
+            metricValueInfo={metricValue}
           />
         ),
         renderChart: projections => (
@@ -72,8 +94,12 @@ export const CHART_GROUPS: ChartGroup[] = [
       },
       {
         metric: Metric.POSITIVE_TESTS,
-        renderTabLabel: () => (
-          <ChartTab metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)} />
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: metricValue => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)}
+            metricValueInfo={metricValue}
+          />
         ),
         renderChart: projections => (
           <MetricChart
@@ -89,8 +115,9 @@ export const CHART_GROUPS: ChartGroup[] = [
     metricList: [
       {
         metric: Metric.HOSPITAL_USAGE,
-        renderTabLabel: () => (
-          <ChartTab metricName="ICU used" /> // (chelsi) make a map of these chart-specific metric names
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: metricValue => (
+          <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // (chelsi) make a map of these chart-specific metric names
         ),
         renderChart: projections => (
           <MetricChart
@@ -101,7 +128,10 @@ export const CHART_GROUPS: ChartGroup[] = [
       },
       {
         metric: ExploreMetric.ICU_HOSPITALIZATIONS,
-        renderTabLabel: () => <ChartTab metricName="ICU patients" />,
+        metricType: MetricType.EXPLORE_METRIC,
+        renderTabLabel: metricValue => (
+          <ChartTab metricName="ICU patients" metricValueInfo={metricValue} />
+        ),
         renderChart: projections => (
           <SingleLocationParent
             metric={ExploreMetric.ICU_HOSPITALIZATIONS}
@@ -111,7 +141,13 @@ export const CHART_GROUPS: ChartGroup[] = [
       },
       {
         metric: ExploreMetric.HOSPITALIZATIONS,
-        renderTabLabel: () => <ChartTab metricName="Hospitalized patients" />,
+        metricType: MetricType.EXPLORE_METRIC,
+        renderTabLabel: metricValue => (
+          <ChartTab
+            metricName="Hospitalized patients"
+            metricValueInfo={metricValue}
+          />
+        ),
         renderChart: projections => (
           <SingleLocationParent
             metric={ExploreMetric.HOSPITALIZATIONS}
@@ -126,7 +162,13 @@ export const CHART_GROUPS: ChartGroup[] = [
     metricList: [
       {
         metric: ExploreMetric.DEATHS,
-        renderTabLabel: () => <ChartTab metricName="Daily new deaths" />,
+        metricType: MetricType.EXPLORE_METRIC,
+        renderTabLabel: metricValue => (
+          <ChartTab
+            metricName="Daily new deaths"
+            metricValueInfo={metricValue}
+          />
+        ),
         renderChart: projections => (
           <SingleLocationParent
             metric={ExploreMetric.DEATHS}
@@ -137,3 +179,44 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
 ];
+
+export function getValueInfo(
+  stats: MetricValues,
+  metricItem: MetricChartInfo,
+  projections: Projections,
+): ValueInfo {
+  const nullValueString = '--';
+  const { metric, metricType } = metricItem;
+  if (metricType === MetricType.KEY_METRIC) {
+    const statValue = stats[metric as Metric];
+    const levelInfo = getLevelInfo(metric as Metric, statValue);
+    const formattedValue = formatValue(
+      metric as Metric,
+      statValue,
+      nullValueString,
+    );
+    return {
+      unformattedValue: statValue,
+      formattedValue,
+      levelColor: levelInfo.color,
+    };
+  } else {
+    const smoothedSeries = getAveragedSeriesForMetric(
+      metric as ExploreMetric,
+      projections.primary,
+      '',
+      false,
+    );
+    const hasData = some([smoothedSeries], ({ data }) => data.length > 0);
+    if (!hasData) {
+      return { unformattedValue: null, formattedValue: nullValueString };
+    } else {
+      const data = smoothedSeries.data.filter(data => Number.isFinite(data.y));
+      const lastPoint = last(data);
+      return {
+        unformattedValue: lastPoint.y,
+        formattedValue: formatDecimal(lastPoint.y, 1),
+      };
+    }
+  }
+}

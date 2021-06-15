@@ -1,5 +1,4 @@
 import React from 'react';
-// import { formatValue, getLevelInfo } from 'common/metric';
 import { useBreakpoint } from 'common/hooks';
 import {
   TabContainer,
@@ -9,11 +8,13 @@ import {
 } from './ChartTab.style';
 import { CircleIcon } from '../Shared/Shared.style';
 import { Value } from '../SummaryStat/SummaryStat.style';
+import { ValueInfo } from 'components/Charts/Redesign/Groupings';
 
-const ChartTab: React.FC<{ metricName: string; subLabel?: string[] }> = ({
-  metricName,
-  subLabel,
-}) => {
+const ChartTab: React.FC<{
+  metricName: string;
+  subLabel?: string[];
+  metricValueInfo: ValueInfo;
+}> = ({ metricName, subLabel, metricValueInfo }) => {
   const isMobile = useBreakpoint(600);
 
   return (
@@ -25,10 +26,10 @@ const ChartTab: React.FC<{ metricName: string; subLabel?: string[] }> = ({
         )}
       </TabTitle>
       <TabContent>
-        {/* <CircleIcon $iconColor={levelInfo.color} /> */}
-        <CircleIcon $iconColor="red" />
-        {/* <Value>{formattedValue}</Value> */}
-        <Value>95%</Value>
+        {metricValueInfo.levelColor && (
+          <CircleIcon $iconColor={metricValueInfo.levelColor} />
+        )}
+        <Value>{metricValueInfo.formattedValue}</Value>
         {!isMobile && subLabel && (
           <MetricSubLabel>{subLabel.join(' ')}</MetricSubLabel>
         )}

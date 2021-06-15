@@ -81,6 +81,7 @@ const SingleLocationParent: React.FunctionComponent<{
                   yTooltipFormat={yTooltipFormat}
                   xTickTimeUnit={getXTickTimeUnitForPeriod(Period.ALL)}
                   maxYFromDefinition={maxYFromDefinition}
+                  hideGridColumns={true}
                 />
               ) : (
                 <div style={{ height: 400 }} />

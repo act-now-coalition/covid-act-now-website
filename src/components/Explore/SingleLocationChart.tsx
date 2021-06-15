@@ -147,6 +147,7 @@ const SingleLocationChart: React.FC<{
   yTooltipFormat: (val: number) => string;
   xTickTimeUnit: TimeUnit;
   maxYFromDefinition: number | null;
+  hideGridColumns?: boolean;
 }> = ({
   width,
   height,
@@ -164,6 +165,7 @@ const SingleLocationChart: React.FC<{
   yTooltipFormat,
   xTickTimeUnit,
   maxYFromDefinition,
+  hideGridColumns,
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
@@ -215,6 +217,7 @@ const SingleLocationChart: React.FC<{
             dateScale={dateScale}
             yScale={yScale}
             numTicksRows={5}
+            hideGridColumns={hideGridColumns}
           />
           <Axes
             height={innerHeight}

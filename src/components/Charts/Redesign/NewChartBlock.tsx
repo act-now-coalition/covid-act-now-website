@@ -7,7 +7,11 @@ import {
   Tab,
   InactiveTabWrapper,
 } from 'components/NewLocationPage/ChartTabs/ChartTab.style';
-import { ChartGroup } from 'components/Charts/Redesign/Groupings';
+import {
+  ChartGroup,
+  MetricChartInfo,
+  getValueInfo,
+} from 'components/Charts/Redesign/Groupings';
 import { MetricValues } from 'common/models/Projections';
 
 const NewChartBlock: React.FC<{
@@ -31,13 +35,16 @@ const NewChartBlock: React.FC<{
     <>
       <SectionHeader>{groupHeader}</SectionHeader>
       <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
-        {metricList.map((metric: any, i: number) => {
+        {metricList.map((metricItem: MetricChartInfo, i: number) => {
+          const metricValueInfo = getValueInfo(stats, metricItem, projections);
+          // const { unformattedValue } = metricValueInfo;
+
           return (
             <Tab
               key={`tab-${i}`}
               disableRipple
               disableFocusRipple
-              label={metric.renderTabLabel()}
+              label={metricItem.renderTabLabel(metricValueInfo)}
               id={`tab-id-${i}`}
               aria-controls={`tab-id-${i}`}
             />

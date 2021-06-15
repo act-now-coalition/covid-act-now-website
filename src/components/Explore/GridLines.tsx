@@ -10,7 +10,16 @@ const GridLines: React.FC<{
   yScale: ScaleLinear<number, number>;
   numTicksRows?: number;
   xTickValues?: number[];
-}> = ({ width, height, dateScale, yScale, numTicksRows = 10, xTickValues }) => {
+  hideGridColumns?: boolean;
+}> = ({
+  width,
+  height,
+  dateScale,
+  yScale,
+  numTicksRows = 10,
+  xTickValues,
+  hideGridColumns,
+}) => {
   const gridColumnProps = xTickValues
     ? {
         tickValues: xTickValues,
@@ -18,11 +27,13 @@ const GridLines: React.FC<{
     : {};
   return (
     <GridStyle>
-      <GridColumns<Date>
-        scale={dateScale}
-        height={height}
-        {...gridColumnProps}
-      />
+      {!hideGridColumns && (
+        <GridColumns<Date>
+          scale={dateScale}
+          height={height}
+          {...gridColumnProps}
+        />
+      )}
       <GridRows<number> scale={yScale} width={width} numTicks={numTicksRows} />
     </GridStyle>
   );
