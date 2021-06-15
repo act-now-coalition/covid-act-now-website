@@ -255,25 +255,28 @@ export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
 };
 
 export function labelToFilterMap(val: string): GeoScopeFilter {
-  if (val === 'Nearby') {
-    return GeoScopeFilter.NEARBY;
-  } else if (val === 'USA') {
-    return GeoScopeFilter.COUNTRY;
-  } else return GeoScopeFilter.STATE;
+  switch (val) {
+    case 'Nearby':
+      return GeoScopeFilter.NEARBY;
+    case 'USA':
+      return GeoScopeFilter.COUNTRY;
+    default:
+      return GeoScopeFilter.STATE;
+  }
 }
 
 export function scopeToValueMap(
   locationLevel: GeoScopeFilter,
   stateId: string | undefined,
 ): string {
-  if (locationLevel === GeoScopeFilter.NEARBY) {
-    return 'Nearby';
-  } else if (locationLevel === GeoScopeFilter.COUNTRY) {
-    return 'USA';
-  } else if (stateId) {
-    return stateId;
+  switch (locationLevel) {
+    case GeoScopeFilter.NEARBY:
+      return 'Nearby';
+    case GeoScopeFilter.COUNTRY:
+      return 'USA';
+    default:
+      return stateId ? stateId : '';
   }
-  return '';
 }
 
 export const scopeValueMap = {
