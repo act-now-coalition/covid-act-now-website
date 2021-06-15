@@ -492,11 +492,21 @@ export const StateName = styled.div`
 
 export const HeaderContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 0 1.5rem 0;
+  .MuiToggleButtonGroup-root {
+    margin-top: 0.5rem;
+  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     justify-content: flex-start;
+  }
+
+  @media (min-width: 375px) {
+    .MuiToggleButtonGroup-root {
+      margin: 0;
+    }
   }
 `;
 

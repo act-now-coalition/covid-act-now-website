@@ -20,6 +20,7 @@ export const Button = styled(ToggleButton).attrs(props => ({
     color: ${COLOR_MAP.GRAY_BODY_COPY};
     text-transform: none;
     line-height: 1.4;
+    white-space: no-wrap;
   }
   &.Mui-selected {
     ${props => props.theme.fonts.regularBookMidWeight};
