@@ -12,19 +12,21 @@ import {
 import { Region, State } from 'common/regions';
 import { getLocationIconFillColor } from 'components/Search';
 import { StyledRegionName } from 'components/SharedComponents';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
+import { Metric } from 'common/metricEnum';
+import { formatPercent } from 'common/utils';
 
 const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = getLocationIconFillColor(region);
 
   const regionSummary = getSummaryFromFips(region.fipsCode);
-  const levelDescriptionCopy = regionSummary?.level
-    ? LOCATION_SUMMARY_LEVELS[regionSummary.level].summary
-    : '';
   const stats = regionSummary ? summaryToStats(regionSummary) : null;
+  const vaccinatedStat = stats ? stats[Metric.VACCINATIONS] : '';
+  const levelDescriptionCopy = vaccinatedStat
+    ? `${formatPercent(vaccinatedStat, 0)} with 1+ dose`
+    : '';
 
   const showStateCode = !(region instanceof State);
 
@@ -50,7 +52,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
             <IconContainer>
               <CircleIcon $iconColor={iconColor} />
             </IconContainer>
-            <LevelDescription>{levelDescriptionCopy} hi hi</LevelDescription>
+            <LevelDescription>{levelDescriptionCopy}</LevelDescription>
           </LevelContainer>
         </CopyContainer>
         <IconContainer>
