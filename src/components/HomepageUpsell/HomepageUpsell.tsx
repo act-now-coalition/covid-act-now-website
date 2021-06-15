@@ -38,7 +38,6 @@ const HomepageUpsell: React.FC<{ showHomepageUpsell: boolean }> = ({
                   <Map
                     onClick={undefined}
                     hideLegend={true}
-                    hideLegendTitle={true}
                     showCounties={false}
                   />
                 </MapWrapper>

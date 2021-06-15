@@ -39,7 +39,6 @@ const SocialLocationPreview = (props: {
           <Map
             onClick={isEmbed ? navigateToCAN : undefined}
             hideLegend={!isEmbed}
-            hideLegendTitle={true}
             showCounties={showCountyView}
           />
         </MapWrapper>

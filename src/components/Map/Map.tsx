@@ -8,14 +8,12 @@ import noop from 'lodash/noop';
 
 interface MapProps {
   hideLegend?: boolean;
-  hideLegendTitle?: boolean;
   onClick?: () => void;
   showCounties?: boolean;
 }
 
 function Map({
   hideLegend = false,
-  hideLegendTitle = false,
   onClick = noop,
   showCounties = false,
 }: MapProps) {
@@ -36,7 +34,7 @@ function Map({
   return (
     <div className="Map">
       {!hideLegend && (
-        <Legend hideLegendTitle={hideLegendTitle}>
+        <Legend>
           <LegendItem
             key={'legend-5'}
             title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].summary || ''}
