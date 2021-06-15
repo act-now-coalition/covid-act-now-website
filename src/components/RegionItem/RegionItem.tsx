@@ -25,7 +25,6 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
     ? LOCATION_SUMMARY_LEVELS[regionSummary.level].summary
     : '';
   const stats = regionSummary ? summaryToStats(regionSummary) : null;
-  console.log(stats);
 
   const showStateCode = !(region instanceof State);
 
