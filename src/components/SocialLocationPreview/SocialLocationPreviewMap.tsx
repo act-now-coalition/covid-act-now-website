@@ -24,10 +24,6 @@ const SocialLocationPreview = (props: {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-  const navigateToCAN = () => {
-    window.top.location.href = 'https://covidactnow.org/';
-    return false;
-  };
   const Footer = props.Footer;
   const isEmbed = props.isEmbed;
   const showCountyView = !isEmbed && !props.isEmbedPreview;
@@ -37,10 +33,7 @@ const SocialLocationPreview = (props: {
       <USMapPreviewHeader sideLegend={!isEmbed}>
         <MapWrapper>
           {isEmbed && <MapLegend isEmbed />}
-          <Map
-            onClick={isEmbed ? navigateToCAN : undefined}
-            showCounties={showCountyView}
-          />
+          <Map showCounties={showCountyView} />
         </MapWrapper>
         {!isEmbed && (
           <USMapHeaderText>

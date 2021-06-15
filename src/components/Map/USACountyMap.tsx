@@ -37,102 +37,98 @@ const MarianaIslands = ({ fill }: { fill: string }) => (
 );
 
 interface USACountyMapProps {
-  stateClickHandler: (stateName: string) => void;
   showCounties: boolean;
 }
 
 const projection = geoAlbersUsaTerritories().scale(1070).translate([400, 300]);
 
-const USACountyMap = React.memo(
-  ({ stateClickHandler, showCounties }: USACountyMapProps) => {
-    const [tooltipContent, setTooltipContent] = useState('');
-    const locationSummaries = useSummaries();
+const USACountyMap = React.memo(({ showCounties }: USACountyMapProps) => {
+  const [tooltipContent, setTooltipContent] = useState('');
+  const locationSummaries = useSummaries();
 
-    const getFillColor = useCallback(
-      (fips: string) => {
-        const summary = (locationSummaries && locationSummaries[fips]) || null;
-        return colorFromLocationSummary(summary);
-      },
-      [locationSummaries],
-    );
+  const getFillColor = useCallback(
+    (fips: string) => {
+      const summary = (locationSummaries && locationSummaries[fips]) || null;
+      return colorFromLocationSummary(summary);
+    },
+    [locationSummaries],
+  );
 
-    const onMouseLeave = () => setTooltipContent('');
+  const onMouseLeave = () => setTooltipContent('');
 
-    const mapContent = useMemo(
-      () => (
-        <USStateMapWrapper $showCounties={showCounties}>
-          <ComposableMap data-tip="" projection={projection} height={500}>
-            <g transform="translate(0, -50)">
-              {showCounties && <MapCounties getFillColor={getFillColor} />}
-              <Geographies geography={stateGeographies}>
-                {({ geographies }) =>
-                  geographies
-                    .filter(geo => stateFipsCodes.includes(geo.id))
-                    .map(geo => {
-                      const fipsCode = geo.id;
-                      // we can coerce this to a state safely because we're only
-                      // dealing with FIPS codes that are from states, because of that filter.
-                      const state = findStateByFipsCodeStrict(
-                        fipsCode,
-                      ) as StateType;
+  const mapContent = useMemo(
+    () => (
+      <USStateMapWrapper $showCounties={showCounties}>
+        <ComposableMap data-tip="" projection={projection} height={500}>
+          <g transform="translate(0, -50)">
+            {showCounties && <MapCounties getFillColor={getFillColor} />}
+            <Geographies geography={stateGeographies}>
+              {({ geographies }) =>
+                geographies
+                  .filter(geo => stateFipsCodes.includes(geo.id))
+                  .map(geo => {
+                    const fipsCode = geo.id;
+                    // we can coerce this to a state safely because we're only
+                    // dealing with FIPS codes that are from states, because of that filter.
+                    const state = findStateByFipsCodeStrict(
+                      fipsCode,
+                    ) as StateType;
 
-                      const { stateCode, fullName } = state;
-                      const fillColor = getFillColor(fipsCode);
+                    const { stateCode, fullName } = state;
+                    const fillColor = getFillColor(fipsCode);
 
-                      // This flag is used to increase an invisible border around Hawaii and Puerto Rico
-                      // to increase their effective target size
-                      const expandTapArea = ['HI', 'PR'].includes(stateCode);
+                    // This flag is used to increase an invisible border around Hawaii and Puerto Rico
+                    // to increase their effective target size
+                    const expandTapArea = ['HI', 'PR'].includes(stateCode);
 
-                      return (
-                        <Link
-                          key={stateCode}
-                          to={state.relativeUrl}
-                          aria-label={fullName}
-                          onClick={() => {
-                            trackMapClick(fullName);
-                            stateClickHandler(fullName);
-                          }}
-                          tabIndex={-1}
-                          onMouseEnter={() => setTooltipContent(fullName)}
-                          onMouseLeave={onMouseLeave}
-                        >
-                          {stateCode === 'MP' ? (
-                            <MarianaIslands key={fipsCode} fill={fillColor} />
-                          ) : (
-                            <Geography
-                              key={fipsCode}
-                              geography={geo}
-                              fill={fillColor}
-                              fillOpacity={showCounties ? 0 : 1}
-                              stroke="white"
-                              strokeWidth={expandTapArea ? 35 : 1}
-                              strokeOpacity={expandTapArea ? 0 : 1}
-                              role="img"
-                              tabIndex={-1}
-                              aria-label={fullName}
-                            />
-                          )}
-                        </Link>
-                      );
-                    })
-                }
-              </Geographies>
-            </g>
-          </ComposableMap>
-        </USStateMapWrapper>
-      ),
-      [showCounties, getFillColor, stateClickHandler],
-    );
+                    return (
+                      <Link
+                        key={stateCode}
+                        to={state.relativeUrl}
+                        aria-label={fullName}
+                        onClick={() => {
+                          trackMapClick(fullName);
+                        }}
+                        tabIndex={-1}
+                        onMouseEnter={() => setTooltipContent(fullName)}
+                        onMouseLeave={onMouseLeave}
+                      >
+                        {stateCode === 'MP' ? (
+                          <MarianaIslands key={fipsCode} fill={fillColor} />
+                        ) : (
+                          <Geography
+                            key={fipsCode}
+                            geography={geo}
+                            fill={fillColor}
+                            fillOpacity={showCounties ? 0 : 1}
+                            stroke="white"
+                            strokeWidth={expandTapArea ? 35 : 1}
+                            strokeOpacity={expandTapArea ? 0 : 1}
+                            role="img"
+                            tabIndex={-1}
+                            aria-label={fullName}
+                          />
+                        )}
+                      </Link>
+                    );
+                  })
+              }
+            </Geographies>
+          </g>
+        </ComposableMap>
+      </USStateMapWrapper>
+    ),
+    [showCounties, getFillColor],
+  );
 
-    return (
-      <USMapWrapper>
-        {/** Map with shaded background colors for states. */}
-        {mapContent}
-        {locationSummaries && <ScreenshotReady />}
-        <ReactTooltip>{tooltipContent}</ReactTooltip>
-      </USMapWrapper>
-    );
-  },
-);
+  return (
+    <USMapWrapper>
+      {/** Map with shaded background colors for states. */}
+      {mapContent}
+      {locationSummaries && <ScreenshotReady />}
+      <ReactTooltip>{tooltipContent}</ReactTooltip>
+    </USMapWrapper>
+  );
+});
 
 export default USACountyMap;

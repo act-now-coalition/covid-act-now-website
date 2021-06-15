@@ -35,7 +35,7 @@ const HomepageUpsell: React.FC<{ showHomepageUpsell: boolean }> = ({
                 to="/"
               >
                 <MapWrapper>
-                  <Map onClick={undefined} showCounties={false} />
+                  <Map showCounties={false} />
                 </MapWrapper>
                 <div>
                   <LabelWithChevron text="Risk &amp; vaccine tracker" />
