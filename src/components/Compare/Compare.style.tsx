@@ -519,3 +519,8 @@ export const CompareHeader = styled(SectionHeader)`
     margin: 0 2.5rem 0 0;
   }
 `;
+
+export const NumberOfLocationsText = styled.span`
+  color: ${COLOR_MAP.GREY_4};
+  font-weight: normal;
+`;

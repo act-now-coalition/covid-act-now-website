@@ -7,9 +7,9 @@ import isNumber from 'lodash/isNumber';
 import {
   Wrapper,
   Footer,
-  FooterText,
   HeaderContainer,
   CompareHeader,
+  NumberOfLocationsText,
 } from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
 import Filters from 'components/Compare/Filters';
@@ -33,8 +33,8 @@ import {
   orderedColumnsVaccineFirst,
   orderedColumnsVulnerabilityFirst,
 } from './columns';
-import { TextButton } from 'components/ButtonSystem/MainButtons.style';
 import { EventCategory } from 'components/Analytics/utils';
+import ExpandableContainer from 'components/ExpandableContainer';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -211,6 +211,44 @@ const CompareTable = (props: {
     trackCompareEvent(EventAction.OPEN_MODAL, 'Show All Locations');
   };
 
+  const seeAllText = (
+    <>
+      See all &nbsp;
+      <NumberOfLocationsText>
+        ({sortedLocationsArr.length})
+      </NumberOfLocationsText>
+    </>
+  );
+
+  const containerProps = {
+    collapsedHeightMobile: 'fit-content',
+    collapsedHeightDesktop: 'fit-content',
+    tabTextCollapsed: seeAllText,
+    tabTextExpanded: seeAllText,
+    trackingLabel: 'Compare module',
+    trackingCategory: EventCategory.COMPARE,
+    onClickShowAll: onClickShowAll,
+  };
+
+  const locationTableProps = {
+    firstColumnHeader: firstColumnHeader,
+    setSorter: setSorter,
+    setSortDescending: setSortDescending,
+    columns: columns,
+    isModal: props.isModal,
+    ...arrowContainerProps,
+    pinnedLocation: currentLocation,
+    sortedLocations: sortedLocations,
+    numLocations: locationsViewable,
+    stateName: props.stateName,
+    setSortByPopulation: setSortByPopulation,
+    sortByPopulation: sortByPopulation,
+    isHomepage: props.isHomepage,
+    geoScope: props.geoScope,
+    homepageScope: homepageScope,
+    region: region,
+  };
+
   return (
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -232,41 +270,16 @@ const CompareTable = (props: {
           )}
         </HeaderContainer>
       )}
-      <LocationTable
-        firstColumnHeader={firstColumnHeader}
-        setSorter={setSorter}
-        setSortDescending={setSortDescending}
-        columns={columns}
-        isModal={props.isModal}
-        {...arrowContainerProps}
-        pinnedLocation={currentLocation}
-        sortedLocations={sortedLocations}
-        numLocations={locationsViewable}
-        stateName={props.stateName}
-        setSortByPopulation={setSortByPopulation}
-        sortByPopulation={sortByPopulation}
-        isHomepage={props.isHomepage}
-        geoScope={props.geoScope}
-        homepageScope={homepageScope}
-        region={region}
-      />
+      {!props.isModal && showViewMore ? (
+        <ExpandableContainer {...containerProps}>
+          <LocationTable {...locationTableProps} />
+        </ExpandableContainer>
+      ) : (
+        <LocationTable {...locationTableProps} />
+      )}
       {!props.isModal && (
         <Footer>
-          <div>
-            <FooterText>
-              Displaying <strong>{amountDisplayed}</strong> of{' '}
-              <strong>{sortedLocationsArr.length}</strong>{' '}
-            </FooterText>
-            {showViewMore && (
-              <TextButton
-                onClick={onClickShowAll}
-                trackingCategory={EventCategory.COMPARE}
-                trackingLabel="view all regions button"
-              >
-                {props.viewMoreCopy}
-              </TextButton>
-            )}
-          </div>
+          <div /> {/* Need empty div to right align share button. */}
           <ShareButtonGroup
             imageUrl={getDownloadImageUrl}
             imageFilename="CovidActNow-compare.png"

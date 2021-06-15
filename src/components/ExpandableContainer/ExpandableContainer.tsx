@@ -11,12 +11,13 @@ import { EventCategory } from 'components/Analytics';
 import { useBreakpoint } from 'common/hooks';
 
 export interface ExpandableContainerProps {
-  collapsedHeightDesktop: number;
-  collapsedHeightMobile: number;
+  collapsedHeightDesktop: string;
+  collapsedHeightMobile: string;
   tabTextCollapsed: React.ReactElement;
   tabTextExpanded: React.ReactElement;
   trackingLabel: string;
   trackingCategory: EventCategory;
+  onClickShowAll?: () => void;
 }
 
 const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
@@ -26,6 +27,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
   tabTextExpanded,
   trackingLabel,
   trackingCategory,
+  onClickShowAll,
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -49,7 +51,12 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
         {children}
       </InnerContent>
       <ExpandButton
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => {
+          setCollapsed(!collapsed);
+          if (onClickShowAll) {
+            onClickShowAll();
+          }
+        }}
         trackingCategory={trackingCategory}
         trackingLabel={`${collapsed ? 'Expand' : 'Collapse'}: ${trackingLabel}`}
         endIcon={collapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
