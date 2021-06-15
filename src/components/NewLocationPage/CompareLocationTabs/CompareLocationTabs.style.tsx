@@ -14,7 +14,7 @@ export const Button = styled(ToggleButton).attrs(props => ({
   disableRipple: true,
 }))`
   ${props => props.theme.fonts.regularBook};
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: none;
   .MuiToggleButton-label {
     color: ${COLOR_MAP.GRAY_BODY_COPY};
