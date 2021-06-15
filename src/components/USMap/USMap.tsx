@@ -12,7 +12,7 @@ import {
   State as StateType,
 } from 'common/regions';
 import stateGeographies from 'common/data/states-10m.json';
-import { USMapWrapper, USStateMapWrapper } from './Map.style';
+import { USMapWrapper, USStateMapWrapper } from './USMap.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import MapCounties from './MapCounties';
 
@@ -36,13 +36,13 @@ const MarianaIslands = ({ fill }: { fill: string }) => (
   </g>
 );
 
-interface USACountyMapProps {
+interface USMapProps {
   showCounties: boolean;
 }
 
 const projection = geoAlbersUsaTerritories().scale(1070).translate([400, 300]);
 
-const USACountyMap = React.memo(({ showCounties }: USACountyMapProps) => {
+const USMap = React.memo(({ showCounties }: USMapProps) => {
   const [tooltipContent, setTooltipContent] = useState('');
   const locationSummaries = useSummaries();
 
@@ -131,4 +131,4 @@ const USACountyMap = React.memo(({ showCounties }: USACountyMapProps) => {
   );
 });
 
-export default USACountyMap;
+export default USMap;

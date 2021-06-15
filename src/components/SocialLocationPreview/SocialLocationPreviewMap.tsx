@@ -12,7 +12,7 @@ import {
 } from './SocialLocationPreview.style';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import Map from 'components/Map/Map';
+import USRiskMap from 'components/USMap/USRiskMap';
 import { Legend, LegendItem } from './Legend';
 
 const SocialLocationPreview = (props: {
@@ -33,7 +33,7 @@ const SocialLocationPreview = (props: {
       <USMapPreviewHeader sideLegend={!isEmbed}>
         <MapWrapper>
           {isEmbed && <MapLegend isEmbed />}
-          <Map showCounties={showCountyView} />
+          <USRiskMap showCounties={showCountyView} />
         </MapWrapper>
         {!isEmbed && (
           <USMapHeaderText>

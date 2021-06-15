@@ -1,9 +1,9 @@
 import React from 'react';
-import Map from './Map';
+import USRiskMap from './USRiskMap';
 
 export default {
-  title: 'Shared Components/Map',
-  component: Map,
+  title: 'Shared Components/USRiskMap',
+  component: USRiskMap,
   argTypes: {
     onClick: () => {},
     showCounties: false,
@@ -12,12 +12,12 @@ export default {
 
 export const States = (args: any) => (
   <div style={{ width: 600 }}>
-    <Map {...args} />
+    <USRiskMap {...args} />
   </div>
 );
 
 export const Counties = (args: any) => (
   <div style={{ width: 600 }}>
-    <Map {...args} showCounties />
+    <USRiskMap {...args} showCounties />
   </div>
 );
