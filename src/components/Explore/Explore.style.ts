@@ -4,7 +4,6 @@ import MuiCheckbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import theme from 'assets/theme';
 import colorPalette from 'assets/theme/palette';
-import { charts } from 'components/Charts/Charts.style';
 import { COLOR_MAP } from 'common/colors';
 import { brightenColor } from './utils';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
@@ -167,7 +166,7 @@ export const GridLines = styled.g`
 
 export const Axis = styled.g`
   text {
-    font-family: ${charts.fontFamily};
+    ${props => props.theme.fonts.monospace};
     font-weight: 'medium';
     font-size: 12px;
     fill: ${props => palette(props).axis};
@@ -196,7 +195,7 @@ export const EmptyPanel = styled(ChartContainer)`
 
 export const TodayLabel = styled.g`
   text {
-    font-family: ${charts.fontFamily};
+    ${props => props.theme.fonts.monospace};
     font-weight: 500;
     font-size: 12px;
     fill: #4f4f4f;

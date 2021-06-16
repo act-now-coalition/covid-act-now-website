@@ -147,7 +147,6 @@ const SingleLocationChart: React.FC<{
   yTooltipFormat: (val: number) => string;
   xTickTimeUnit: TimeUnit;
   maxYFromDefinition: number | null;
-  hideGridColumns?: boolean;
 }> = ({
   width,
   height,
@@ -165,7 +164,6 @@ const SingleLocationChart: React.FC<{
   yTooltipFormat,
   xTickTimeUnit,
   maxYFromDefinition,
-  hideGridColumns,
 }) => {
   const [dateFrom, dateTo] = dateRange;
 
@@ -211,14 +209,7 @@ const SingleLocationChart: React.FC<{
     <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
-          <GridLines
-            width={innerWidth}
-            height={innerHeight}
-            dateScale={dateScale}
-            yScale={yScale}
-            numTicksRows={5}
-            hideGridColumns={hideGridColumns}
-          />
+          <GridLines width={innerWidth} yScale={yScale} numTicksRows={5} />
           <Axes
             height={innerHeight}
             dateScale={dateScale}

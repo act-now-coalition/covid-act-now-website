@@ -16,6 +16,24 @@ export const Tabs = styled(MuiTabs)`
   }
 `;
 
+export const TabTitle = styled.div`
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: ${COLOR_MAP.GREY_4};
+  margin-bottom: 0.5rem;
+`;
+
+export const MetricSubLabel = styled.div`
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: ${COLOR_MAP.GREY_4};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0.5rem 0 0 0.5rem;
+  }
+`;
+
 export const Tab = styled(MuiTab)`
   line-height: 1;
   text-align: left;
@@ -26,7 +44,9 @@ export const Tab = styled(MuiTab)`
     align-items: start;
   }
   &.Mui-selected {
-    font-weight: 500;
+    ${TabTitle},${MetricSubLabel}{
+      color: black;
+    }
   }
 `;
 
@@ -37,29 +57,9 @@ export const TabContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TabTitle = styled.div`
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  line-height: 1;
-  color: ${COLOR_MAP.GREY_4};
-  margin-bottom: 0.5rem;
-`;
-
 export const TabContent = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
-`;
-
-export const MetricSubLabel = styled.div`
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: ${COLOR_MAP.GREY_4};
-  line-height: 1;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    color: ${COLOR_MAP.GREY_3};
-    padding: 0.5rem 0 0 0.5rem;
-  }
 `;
 
 export const TabsWrapper = styled.div`
@@ -67,13 +67,17 @@ export const TabsWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const InactiveTabWrapper = styled.div<{ activeTabIndex: number }>`
+export const InactiveTabWrapper = styled.div`
   ${Tab} {
     cursor: default; // (Chelsi)-this isn't accessible
   }
+
+  ${TabTitle} {
+    color: ${COLOR_MAP.GREY_4};
+  }
 `;
 
-export const VaccinationsTabsWrapper = styled.div`
+export const VaccinationsTabsWrapper = styled(InactiveTabWrapper)`
   display: flex;
 
   ${TabContainer} {
