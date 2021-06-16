@@ -15,7 +15,7 @@ import { getAveragedSeriesForMetric } from 'components/Explore/utils';
 import { formatValue, getLevelInfo } from 'common/metric';
 import { last } from 'components/Charts/utils';
 import { formatDecimal } from 'common/utils';
-import VaccinationChartTabs from './VaccinationChartTabs';
+import VaccinationChartTabs from 'components/NewLocationPage/ChartTabs/VaccinationChartTabs';
 
 export enum MetricType {
   KEY_METRIC,

@@ -72,3 +72,13 @@ export const InactiveTabWrapper = styled.div<{ activeTabIndex: number }>`
     cursor: default; // (Chelsi)-this isn't accessible
   }
 `;
+
+export const VaccinationsTabsWrapper = styled.div`
+  display: flex;
+
+  ${TabContainer} {
+    &:first-of-type {
+      margin-right: 1.5rem;
+    }
+  }
+`;

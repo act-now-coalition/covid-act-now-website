@@ -1,26 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   TabContainer,
   TabTitle,
   TabContent,
+  VaccinationsTabsWrapper,
 } from 'components/NewLocationPage/ChartTabs/ChartTab.style';
 import { CircleIcon } from 'components/NewLocationPage/Shared/Shared.style';
 import { Value } from 'components/NewLocationPage/SummaryStat/SummaryStat.style';
 import { Projections } from 'common/models/Projections';
 import { VACCINATIONS_COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
-import { nullValueString } from './Groupings';
+import { nullValueString } from 'components/Charts/Redesign/Groupings';
 
-const Wrapper = styled.div`
-  display: flex;
-
-  ${TabContainer} {
-    &:first-of-type {
-      margin-right: 1.5rem;
-    }
-  }
-`;
+interface TabContent {
+  metricName: string;
+  value: string;
+  iconColor: string;
+}
 
 const VaccinationChartTabs: React.FC<{
   projections: Projections;
@@ -33,28 +29,32 @@ const VaccinationChartTabs: React.FC<{
   const tabsContent = [
     {
       metricName: '1+ Dose',
-      value: percentInitiated || nullValueString,
+      value: percentInitiated
+        ? formatPercent(percentInitiated)
+        : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.INITIATED,
     },
     {
       metricName: 'Fully Vaccinated',
-      value: percentCompleted || nullValueString,
+      value: percentCompleted
+        ? formatPercent(percentCompleted)
+        : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.COMPLETED,
     },
   ];
 
   return (
-    <Wrapper>
-      {tabsContent.map((tab: any) => (
+    <VaccinationsTabsWrapper>
+      {tabsContent.map((tab: TabContent) => (
         <TabContainer>
           <TabTitle>{tab.metricName}</TabTitle>
           <TabContent>
             <CircleIcon $iconColor={tab.iconColor} />
-            <Value>{formatPercent(tab.value)}</Value>
+            <Value>{tab.value}</Value>
           </TabContent>
         </TabContainer>
       ))}
-    </Wrapper>
+    </VaccinationsTabsWrapper>
   );
 };
 

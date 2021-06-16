@@ -223,9 +223,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                       stats={stats}
                     /> */}
                     <NewChartBlock
-                      // metric={metric}
                       projections={projections}
-                      // chartRef={metricRefs[metric]}
                       isMobile={isMobile}
                       region={region}
                       stats={stats}
