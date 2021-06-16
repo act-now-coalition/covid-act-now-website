@@ -254,6 +254,31 @@ export const sliderNumberToFilterMap: { [val: number]: GeoScopeFilter } = {
   99: GeoScopeFilter.COUNTRY,
 };
 
+export function locationPageLabelToFilterMap(val: string): GeoScopeFilter {
+  switch (val) {
+    case 'Nearby':
+      return GeoScopeFilter.NEARBY;
+    case 'USA':
+      return GeoScopeFilter.COUNTRY;
+    default:
+      return GeoScopeFilter.STATE;
+  }
+}
+
+export function locationPageScopeToValueMap(
+  locationLevel: GeoScopeFilter,
+  stateId: string | undefined,
+): string {
+  switch (locationLevel) {
+    case GeoScopeFilter.NEARBY:
+      return 'Nearby';
+    case GeoScopeFilter.COUNTRY:
+      return 'USA';
+    default:
+      return stateId ? stateId : '';
+  }
+}
+
 export const scopeValueMap = {
   [GeoScopeFilter.NEARBY]: 0,
   [GeoScopeFilter.STATE]: 50,
@@ -267,6 +292,20 @@ export const homepageSliderNumberToFilterMap: {
   0: HomepageLocationScope.COUNTY,
   50: HomepageLocationScope.MSA,
   99: HomepageLocationScope.STATE,
+};
+
+export const homepageLabelToFilterMap: {
+  [val: string]: HomepageLocationScope;
+} = {
+  Counties: HomepageLocationScope.COUNTY,
+  'Metro areas': HomepageLocationScope.MSA,
+  States: HomepageLocationScope.STATE,
+};
+
+export const homepageScopeToValueMap = {
+  [HomepageLocationScope.COUNTY]: 'Counties',
+  [HomepageLocationScope.MSA]: 'Metro areas',
+  [HomepageLocationScope.STATE]: 'States',
 };
 
 export const homepageScopeValueMap = {

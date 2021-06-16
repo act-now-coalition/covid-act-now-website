@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonGroup, Button } from './CompareLocationTabs.style';
 
-const CompareLocationTabs: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState('VT');
-  const handleSelectedOption = (
+const CompareLocationTabs: React.FC<{
+  locationLevels: string[];
+  onChange: (
     event: React.MouseEvent<HTMLElement>,
     newSelection: string,
-  ) => {
-    if (newSelection !== null) {
-      setSelectedOption(newSelection);
-    }
-  };
+  ) => void;
+  selectedOption: string;
+}> = ({ locationLevels, onChange, selectedOption }) => {
   return (
-    <ButtonGroup
-      value={selectedOption}
-      exclusive
-      onChange={handleSelectedOption}
-    >
-      <Button value={'Nearby'}>Nearby</Button>
-      <Button value={'VT'}>VT</Button>
-      <Button value={'USA'}>USA</Button>
+    <ButtonGroup value={selectedOption} exclusive onChange={onChange}>
+      {locationLevels.map(locationLevel => (
+        <Button value={locationLevel}>{locationLevel}</Button>
+      ))}
     </ButtonGroup>
   );
 };
