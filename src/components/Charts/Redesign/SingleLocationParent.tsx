@@ -15,6 +15,7 @@ import {
   getMaxYFromDefinition,
   getAllSeriesForMetric,
 } from 'components/Explore/utils';
+import { NewChartContainer } from 'components/Charts/Charts.style';
 import * as Styles from 'components/Explore/Explore.style';
 import SingleLocationChart from 'components/Explore/SingleLocationChart';
 import { Projections } from 'common/models/Projections';
@@ -47,8 +48,6 @@ const SingleLocationParent: React.FunctionComponent<{
 
   const hasData = some(chartSeries, ({ data }) => data.length > 0);
 
-  const marginRight = 0;
-
   const maxYFromDefinition = getMaxYFromDefinition(metric);
 
   useEffect(() => {
@@ -61,7 +60,7 @@ const SingleLocationParent: React.FunctionComponent<{
   return (
     <div>
       {hasData && (
-        <Styles.ChartContainer>
+        <NewChartContainer>
           {/**
            * The width is set to zero while the parent div is rendering, the
            * placeholder div below prevents the page from jumping.
@@ -75,7 +74,7 @@ const SingleLocationParent: React.FunctionComponent<{
                   width={width}
                   height={400}
                   tooltipSubtext={`in ${projections.region.shortName}`}
-                  marginRight={marginRight}
+                  marginRight={0}
                   dateRange={dateRange}
                   yTickFormat={yTickFormat}
                   yTooltipFormat={yTooltipFormat}
@@ -88,7 +87,7 @@ const SingleLocationParent: React.FunctionComponent<{
               )
             }
           </ParentSize>
-        </Styles.ChartContainer>
+        </NewChartContainer>
       )}
       {!hasData && (
         <Styles.EmptyPanel style={{ height: 400 }}>

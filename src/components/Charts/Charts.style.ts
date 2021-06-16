@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { ChartContainer as ExploreChartContainer } from 'components/Explore/Explore.style';
 
 export const charts = {
   fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
@@ -207,4 +208,9 @@ export const VaccinationLabelBold = styled(VaccinationLabel)`
     ${props => props.theme.fonts.regularBookBold};
     text-anchor: start;
   }
+`;
+
+export const NewChartContainer = styled(ExploreChartContainer)`
+  margin-right: 0;
+  margin-left: 0;
 `;
