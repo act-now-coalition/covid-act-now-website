@@ -35,6 +35,7 @@ import {
 } from './columns';
 import { EventCategory } from 'components/Analytics/utils';
 import ExpandableContainer from 'components/ExpandableContainer';
+import { ShareBlock } from 'components/Footer/Footer.style';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -211,12 +212,26 @@ const CompareTable = (props: {
     trackCompareEvent(EventAction.OPEN_MODAL, 'Show All Locations');
   };
 
+  function getLocationLimit() {
+    /**
+     * Only return 100 in the following scenarios:
+     * - "Counties" tab selected on homepage.
+     * - "Metro areas" tab selected on homepage.
+     * - "USA" tab selected on location page.
+     */
+    if (
+      (props.isHomepage &&
+        props.homepageScope !== HomepageLocationScope.STATE) ||
+      (!props.isHomepage && props.geoScope === GeoScopeFilter.COUNTRY)
+    )
+      return 100;
+    return sortedLocationsArr.length;
+  }
+
   const seeAllText = (
     <>
       See all &nbsp;
-      <NumberOfLocationsText>
-        ({sortedLocationsArr.length})
-      </NumberOfLocationsText>
+      <NumberOfLocationsText>({getLocationLimit()})</NumberOfLocationsText>
     </>
   );
 
@@ -225,9 +240,9 @@ const CompareTable = (props: {
     collapsedHeightDesktop: 'fit-content',
     tabTextCollapsed: seeAllText,
     tabTextExpanded: seeAllText,
-    trackingLabel: 'Compare module',
+    trackingLabel: 'Open compare modal',
     trackingCategory: EventCategory.COMPARE,
-    onClickShowAll: onClickShowAll,
+    secondaryOnClick: onClickShowAll,
   };
 
   const locationTableProps = {
@@ -279,22 +294,23 @@ const CompareTable = (props: {
       )}
       {!props.isModal && (
         <Footer>
-          <div /> {/* Need empty div to right align share button. */}
-          <ShareButtonGroup
-            imageUrl={getDownloadImageUrl}
-            imageFilename="CovidActNow-compare.png"
-            url={getShareUrl}
-            quote={shareQuote}
-            region={region}
-            onCopyLink={() =>
-              trackCompareEvent(EventAction.COPY_LINK, trackLabel)
-            }
-            onSaveImage={() =>
-              trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
-            }
-            onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
-            onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
-          />
+          <ShareBlock>
+            <ShareButtonGroup
+              imageUrl={getDownloadImageUrl}
+              imageFilename="CovidActNow-compare.png"
+              url={getShareUrl}
+              quote={shareQuote}
+              region={region}
+              onCopyLink={() =>
+                trackCompareEvent(EventAction.COPY_LINK, trackLabel)
+              }
+              onSaveImage={() =>
+                trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
+              }
+              onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
+              onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
+            />
+          </ShareBlock>
         </Footer>
       )}
     </Wrapper>

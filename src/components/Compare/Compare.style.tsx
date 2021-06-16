@@ -521,6 +521,6 @@ export const CompareHeader = styled(SectionHeader)`
 `;
 
 export const NumberOfLocationsText = styled.span`
+  ${props => props.theme.fonts.regularBook};
   color: ${COLOR_MAP.GREY_4};
-  font-weight: normal;
 `;

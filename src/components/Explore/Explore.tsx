@@ -54,6 +54,7 @@ import { SectionHeader } from 'components/SharedComponents';
 import NationalText from 'components/NationalText';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
+import { ShareBlock } from 'components/Footer/Footer.style';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -361,7 +362,7 @@ const Explore: React.FunctionComponent<{
         )}
         <Styles.FooterContainer>
           {showLegend && <Legend seriesList={chartSeries} />}
-          <Styles.ShareBlock>
+          <ShareBlock>
             <ShareButtonGroup
               disabled={selectedLocations.length === 0 || !hasData}
               imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
@@ -394,7 +395,7 @@ const Explore: React.FunctionComponent<{
                 trackShare(`Twitter: ${trackingLabel}`, numLocations)
               }
             />
-          </Styles.ShareBlock>
+          </ShareBlock>
         </Styles.FooterContainer>
       </div>
     );

@@ -17,7 +17,7 @@ export interface ExpandableContainerProps {
   tabTextExpanded: React.ReactElement;
   trackingLabel: string;
   trackingCategory: EventCategory;
-  onClickShowAll?: () => void;
+  secondaryOnClick?: () => void;
 }
 
 const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
@@ -27,7 +27,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
   tabTextExpanded,
   trackingLabel,
   trackingCategory,
-  onClickShowAll,
+  secondaryOnClick,
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -53,8 +53,8 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
       <ExpandButton
         onClick={() => {
           setCollapsed(!collapsed);
-          if (onClickShowAll) {
-            onClickShowAll();
+          if (secondaryOnClick) {
+            secondaryOnClick();
           }
         }}
         trackingCategory={trackingCategory}
