@@ -184,11 +184,12 @@ export const HoverTrackerLine = styled.g`
   }
 `;
 
+// (Chelsi) - delete this?
 export const EmptyPanel = styled(ChartContainer)`
   /* Super centered: https://web.dev/one-line-layouts */
   display: grid;
   place-items: center;
-  background-color: ${colorPalette.lightGray};
+  background-color: ${COLOR_MAP.GREY_0};
   padding: ${theme.spacing(3)}px;
   text-align: center;
 `;

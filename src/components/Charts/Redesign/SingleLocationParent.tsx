@@ -19,9 +19,9 @@ import {
   NewChartContainer,
   chartsHeight,
 } from 'components/Charts/Charts.style';
-import * as Styles from 'components/Explore/Explore.style';
 import SingleLocationChart from 'components/Explore/SingleLocationChart';
 import { Projections } from 'common/models/Projections';
+import EmptyPanel from 'components/Charts/EmptyPanel';
 
 function getNoDataCopy(metricName: string, locationNames: string) {
   return (
@@ -92,9 +92,12 @@ const SingleLocationParent: React.FunctionComponent<{
         </NewChartContainer>
       )}
       {!hasData && (
-        <Styles.EmptyPanel style={{ height: chartsHeight }}>
-          {getNoDataCopy(currentMetricName, projections.region.shortName)}
-        </Styles.EmptyPanel>
+        <EmptyPanel
+          bodyText={getNoDataCopy(
+            currentMetricName,
+            projections.region.shortName,
+          )}
+        />
       )}
     </div>
   );
