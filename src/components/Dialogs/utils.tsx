@@ -11,7 +11,7 @@ export interface MetricModalContent {
   howItsCalculated: string;
   dataSource?: React.ReactElement;
   metricDefinition: string;
-  learnLink: string;
+  learnLink?: string;
   metricName: string;
 }
 
@@ -101,14 +101,11 @@ export function getExploreMetricModalContent(
     </p>
   );
 
-  const learnLink = ''; // (Chelsi) - make optional
-
   const modalContent = {
     metricName,
     howItsCalculated,
     dataSource,
     metricDefinition,
-    learnLink,
   };
 
   return modalContent;

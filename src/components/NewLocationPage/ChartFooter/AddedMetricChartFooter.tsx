@@ -58,13 +58,6 @@ const MetricModal: React.FC<DialogProps> = ({
     open,
     closeDialog,
     header: modalHeader,
-    links: [
-      {
-        cta: 'Learn more',
-        url: modalContent.learnLink,
-        ariaLabel: `Learn more about ${modalHeader}`,
-      },
-    ],
   };
 
   return (
