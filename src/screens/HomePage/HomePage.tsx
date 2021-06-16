@@ -18,15 +18,23 @@ import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import { Content, Section, ColumnCentered } from './HomePage.style';
+import {
+  Content,
+  Section,
+  ColumnCentered,
+  ToggleWrapper,
+} from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
-import Toggle from './Toggle/Toggle';
 import HorizontalThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
+import {
+  ButtonGroup,
+  Button,
+} from 'components/SharedComponents/SharedComponents.style';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -36,7 +44,7 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
-  const [showCounties, setShowCounties] = useState(false);
+  const [locationScope, setLocationScope] = useState('States');
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -65,12 +73,15 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = (newShowCounties: boolean) => {
-    setShowCounties(newShowCounties);
+  const onClickSwitch = (
+    event: React.MouseEvent<HTMLElement>,
+    newSelection: string,
+  ) => {
+    setLocationScope(newSelection);
     trackEvent(
       EventCategory.MAP,
       EventAction.SELECT,
-      `Select: ${newShowCounties ? 'Counties' : 'States'}`,
+      `Select: ${locationScope}`,
     );
   };
 
@@ -131,13 +142,23 @@ export default function HomePage() {
                 setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-              <Toggle
-                showCounties={showCounties}
-                onClickSwitch={onClickSwitch}
-              />
+              <ToggleWrapper>
+                <ButtonGroup
+                  value={locationScope}
+                  exclusive
+                  onChange={onClickSwitch}
+                >
+                  <Button value={'States'}>States</Button>
+                  <Button value={'Counties'}>Counties</Button>
+                </ButtonGroup>
+              </ToggleWrapper>
             </ColumnCentered>
 
-            <Map hideLegend hideInstructions showCounties={showCounties} />
+            <Map
+              hideLegend
+              hideInstructions
+              showCounties={locationScope === 'Counties' ? true : false}
+            />
 
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />

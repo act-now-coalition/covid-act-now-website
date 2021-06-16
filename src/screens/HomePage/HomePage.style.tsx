@@ -84,3 +84,11 @@ export const SectionHeader = styled(Subtitle1)`
   text-align: center;
   margin-bottom: 1.25rem;
 `;
+
+export const ToggleWrapper = styled.div`
+  margin: auto;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 2rem auto 0;
+  }
+`;
