@@ -15,7 +15,10 @@ import {
   getMaxYFromDefinition,
   getAllSeriesForMetric,
 } from 'components/Explore/utils';
-import { NewChartContainer } from 'components/Charts/Charts.style';
+import {
+  NewChartContainer,
+  chartsHeight,
+} from 'components/Charts/Charts.style';
 import * as Styles from 'components/Explore/Explore.style';
 import SingleLocationChart from 'components/Explore/SingleLocationChart';
 import { Projections } from 'common/models/Projections';
@@ -72,7 +75,7 @@ const SingleLocationParent: React.FunctionComponent<{
                   seriesList={chartSeries}
                   isMobile={isMobile}
                   width={width}
-                  height={400}
+                  height={chartsHeight}
                   tooltipSubtext={`in ${projections.region.shortName}`}
                   marginRight={0}
                   dateRange={dateRange}
@@ -82,14 +85,14 @@ const SingleLocationParent: React.FunctionComponent<{
                   maxYFromDefinition={maxYFromDefinition}
                 />
               ) : (
-                <div style={{ height: 400 }} />
+                <div style={{ height: chartsHeight }} />
               )
             }
           </ParentSize>
         </NewChartContainer>
       )}
       {!hasData && (
-        <Styles.EmptyPanel style={{ height: 400 }}>
+        <Styles.EmptyPanel style={{ height: chartsHeight }}>
           {getNoDataCopy(currentMetricName, projections.region.shortName)}
         </Styles.EmptyPanel>
       )}

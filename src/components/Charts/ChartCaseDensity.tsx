@@ -182,7 +182,7 @@ const ChartCaseDensity: FunctionComponent<{
 const ChartCaseDensityAutosize: FunctionComponent<{
   columnData: Column[];
   height?: number;
-}> = ({ columnData, height = 400 }) => (
+}> = ({ columnData, height = Style.chartsHeight }) => (
   <Style.ChartContainer>
     <ParentSize>
       {({ width }) => (

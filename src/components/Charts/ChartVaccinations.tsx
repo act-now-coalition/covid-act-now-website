@@ -280,7 +280,7 @@ const VaccinationLines: React.FC<{
 const ChartVaccinationsAutosize: React.FC<{
   seriesList?: Series[];
   height?: number;
-}> = ({ seriesList, height = 400 }) => (
+}> = ({ seriesList, height = ChartStyle.chartsHeight }) => (
   <ChartStyle.ChartContainer>
     <ParentSize>
       {({ width }) => (
