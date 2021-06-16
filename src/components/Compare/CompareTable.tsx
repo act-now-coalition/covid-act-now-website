@@ -212,26 +212,24 @@ const CompareTable = (props: {
     trackCompareEvent(EventAction.OPEN_MODAL, 'Show All Locations');
   };
 
-  function getLocationLimit() {
-    /**
-     * Only return 100 in the following scenarios:
-     * - "Counties" tab selected on homepage.
-     * - "Metro areas" tab selected on homepage.
-     * - "USA" tab selected on location page.
-     */
-    if (
-      (props.isHomepage &&
-        props.homepageScope !== HomepageLocationScope.STATE) ||
-      (!props.isHomepage && props.geoScope === GeoScopeFilter.COUNTRY)
-    )
-      return 100;
-    return sortedLocationsArr.length;
-  }
+  /**
+   * Show limited locations (100 max) in the following scenarios:
+   * - "Counties" tab selected on homepage.
+   * - "Metro areas" tab selected on homepage.
+   * - "USA" tab selected on location page.
+   */
+  const showLimitedLocations =
+    (props.isHomepage && props.homepageScope === HomepageLocationScope.STATE) ||
+    (!props.isHomepage && props.geoScope !== GeoScopeFilter.COUNTRY)
+      ? true
+      : false;
 
   const seeAllText = (
     <>
-      See all &nbsp;
-      <NumberOfLocationsText>({getLocationLimit()})</NumberOfLocationsText>
+      See {showLimitedLocations ? 'all' : 'more'} &nbsp;
+      <NumberOfLocationsText>
+        ({showLimitedLocations ? sortedLocationsArr.length : 100})
+      </NumberOfLocationsText>
     </>
   );
 
