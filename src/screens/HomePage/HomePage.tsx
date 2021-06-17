@@ -36,6 +36,11 @@ import {
   Button,
 } from 'components/SharedComponents/SharedComponents.style';
 
+enum MapView {
+  STATES = 'States',
+  COUNTIES = 'Counties',
+}
+
 function getPageDescription() {
   const date = formatMetatagDate();
   return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Deaths, Positivity rate, and ICU capacity for your State, City, or County.`;
@@ -44,7 +49,7 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
-  const [locationScope, setLocationScope] = useState('States');
+  const [locationScope, setLocationScope] = useState(MapView.STATES);
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -75,7 +80,7 @@ export default function HomePage() {
 
   const onClickSwitch = (
     event: React.MouseEvent<HTMLElement>,
-    newSelection: string,
+    newSelection: MapView,
   ) => {
     setLocationScope(newSelection);
     trackEvent(
@@ -148,8 +153,8 @@ export default function HomePage() {
                   exclusive
                   onChange={onClickSwitch}
                 >
-                  <Button value={'States'}>States</Button>
-                  <Button value={'Counties'}>Counties</Button>
+                  <Button value={MapView.STATES}>States</Button>
+                  <Button value={MapView.COUNTIES}>Counties</Button>
                 </ButtonGroup>
               </ToggleWrapper>
             </ColumnCentered>
@@ -157,7 +162,7 @@ export default function HomePage() {
             <Map
               hideLegend
               hideInstructions
-              showCounties={locationScope === 'Counties' ? true : false}
+              showCounties={locationScope === MapView.COUNTIES}
             />
 
             <ColumnCentered $topBottomSpacing={true}>
