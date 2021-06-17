@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   ColorBox,
-  LegendTitle,
   LegendContainer,
   LegendItemHeader,
   LegendItemContainer,
@@ -12,7 +11,6 @@ import {
 interface LegendProps {
   children: React.ReactElement[];
   condensed?: boolean;
-  hideLegendTitle?: boolean;
 }
 
 interface LegendItemProps {
@@ -21,14 +19,9 @@ interface LegendItemProps {
   condensed?: boolean;
 }
 
-export function Legend({
-  children,
-  condensed = false,
-  hideLegendTitle = false,
-}: LegendProps) {
+export function Legend({ children, condensed = false }: LegendProps) {
   return (
     <LegendWrapper $condensed={condensed}>
-      {!condensed && !hideLegendTitle && <LegendTitle>COVID Risk:</LegendTitle>}
       <LegendContainer $condensed={condensed}>
         {React.Children.map(children, child =>
           React.cloneElement(child, { condensed: condensed }),

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
-import Map from 'components/Map/Map';
+import USRiskMap from 'components/USMap/USRiskMap';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -159,11 +159,7 @@ export default function HomePage() {
               </ToggleWrapper>
             </ColumnCentered>
 
-            <Map
-              hideLegend
-              hideInstructions
-              showCounties={locationScope === MapView.COUNTIES}
-            />
+            <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
 
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />

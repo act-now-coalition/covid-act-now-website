@@ -1,27 +1,23 @@
 import React from 'react';
-import Map from './Map';
+import USVaccineMap from './USVaccineMap';
 
 export default {
-  title: 'Shared Components/Map',
-  component: Map,
+  title: 'Shared Components/USVaccineMap',
+  component: USVaccineMap,
   argTypes: {
-    hideLegend: false,
-    hideInstructions: false,
-    hideLegendTitle: false,
     onClick: () => {},
-    isMiniMap: false,
     showCounties: false,
   },
 };
 
 export const States = (args: any) => (
   <div style={{ width: 600 }}>
-    <Map {...args} />
+    <USVaccineMap {...args} />
   </div>
 );
 
 export const Counties = (args: any) => (
   <div style={{ width: 600 }}>
-    <Map {...args} showCounties />
+    <USVaccineMap {...args} showCounties />
   </div>
 );

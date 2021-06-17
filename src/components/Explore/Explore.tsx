@@ -244,7 +244,7 @@ const Explore: React.FunctionComponent<{
       }
     }, [pathname, scrollToExplore]);
 
-    // if the pathname changes (ie. if navigating between location pages via compare or minimap)-
+    // if the pathname changes (ie. if navigating between location pages via compare or regionmap)-
     // resets metric, time period, and locations
     // (need to force the reset since the route doesnt change)
     useEffect(() => {

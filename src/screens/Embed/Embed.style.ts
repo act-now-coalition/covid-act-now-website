@@ -30,6 +30,9 @@ export const EmbedContainer = styled(Paper)<{
   height: ${props => props.height || `${EMBED_HEIGHT}px`};
   width: ${props => props.width || `${EMBED_WIDTH}px`};
   box-shadow: none;
+
+  // We have a click handler for the entire embed that goes to covidactnow.org.
+  cursor: pointer;
 `;
 
 export const EmbedContentContainer = styled(Box)`
