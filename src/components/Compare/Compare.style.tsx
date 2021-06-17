@@ -258,6 +258,12 @@ export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
     border-bottom: ${({ $isModal }) =>
       !$isModal && `2px solid ${COLORS.LIGHTGRAY}`};
   }
+
+  th {
+    &:last-child {
+      padding-right: 0.5rem;
+    }
+  }
 `;
 
 export const StyledLink = styled(Link)`
