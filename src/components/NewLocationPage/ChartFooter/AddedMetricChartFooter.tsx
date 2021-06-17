@@ -28,9 +28,18 @@ import { ExploreMetric } from 'components/Explore';
 import { getAddedMetricStatusText, DialogProps } from './utils';
 import Legend from 'components/Explore/Legend';
 
-const ShareButtonBlock: React.FC<{ region: Region }> = ({ region }) => {
+const ShareButtonBlock: React.FC<{ region: Region; metric: ExploreMetric }> = ({
+  region,
+  metric,
+}) => {
+  const metricToShareQuoteName: { [key: number]: string } = {
+    [ExploreMetric.DEATHS]: 'Daily COVID deaths',
+    [ExploreMetric.ICU_HOSPITALIZATIONS]: 'Current COVID ICU hospitalizations',
+    [ExploreMetric.HOSPITALIZATIONS]: 'Current COVID hospitalizations',
+  };
+
   const shareUrl = region.canonicalUrl;
-  const shareQuote = `Check out Daily COVID deaths, vaccination progress, and other key metrics for ${region.fullName} at @CovidActNow: `;
+  const shareQuote = `${metricToShareQuoteName[metric]}, vaccination progress, and other key metrics for ${region.fullName} at @CovidActNow: `;
 
   const props = {
     shareUrl,
@@ -96,6 +105,7 @@ const AddedMetricChartFooter: React.FC<{
 
   const series = getAllSeriesForMetric(metric, projections.primary);
 
+  const shareProps = { region, metric };
   return (
     <Wrapper>
       <DesktopOnly>
@@ -106,7 +116,7 @@ const AddedMetricChartFooter: React.FC<{
             {'   '}
             <MetricModal {...dialogProps} />
           </FooterText>
-          <ShareButtonBlock region={region} />
+          <ShareButtonBlock {...shareProps} />
         </Row>
       </DesktopOnly>
       <MobileOnly>
@@ -114,7 +124,7 @@ const AddedMetricChartFooter: React.FC<{
         <FooterText>{statusText}</FooterText>
         <Row>
           <MetricModal {...dialogProps} />
-          <ShareButtonBlock region={region} />
+          <ShareButtonBlock {...shareProps} />
         </Row>
       </MobileOnly>
     </Wrapper>
