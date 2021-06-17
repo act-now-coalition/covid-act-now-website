@@ -67,7 +67,7 @@ export const exploreMetricToFooterContentMap: {
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     metricName: 'ICU hospitalizations',
-    howItsCalculated: 'Our ICU patients number is a seven-day average.',
+    howItsCalculated: 'Our ICU hospitalizations number is a seven-day average.',
     metricDefinition:
       'This is the number of patients currently hospitalized in the ICU with COVID.',
     source: 'Department of Health and Human Services',
@@ -75,8 +75,7 @@ export const exploreMetricToFooterContentMap: {
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     metricName: 'hospitalizations',
-    howItsCalculated:
-      'Our hospitalized patients number is a seven-day average.',
+    howItsCalculated: 'Our hospitalizations number is a seven-day average.',
     metricDefinition:
       'This is the number of patients currently hospitalized with COVID.',
     source: 'Department of Health and Human Services',
