@@ -37,7 +37,12 @@ import {
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
 import NewChartBlock from 'components/Charts/Redesign/NewChartBlock';
-import { CHART_GROUPS } from 'components/Charts/Redesign/Groupings';
+import {
+  CHART_GROUPS,
+  ChartGroup,
+  GroupHeader,
+  getChartGroupFromMetric,
+} from 'components/Charts/Redesign/Groupings';
 
 // TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
@@ -96,6 +101,21 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const [scrolledWithRef, setScrolledWithRef] = useState(false);
 
+  const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
+  const casesBlockRef = useRef<HTMLDivElement>(null);
+  const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
+  const deathsBlockRed = useRef<HTMLDivElement>(null);
+  const chartBlockRefs: any = useMemo(
+    // Fix the any
+    () => ({
+      [GroupHeader.VACCINATED]: vaccinationsBlockRef,
+      [GroupHeader.CASES]: casesBlockRef,
+      [GroupHeader.HOSPITALIZATIONS]: hospitalizationsBlockRef,
+      [GroupHeader.DEATHS]: deathsBlockRed,
+    }),
+    [],
+  );
+
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
@@ -124,7 +144,13 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
     scrollToChart();
     scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithRef]);
+  }, [
+    chartId,
+    metricRefs,
+    isRecommendationsShareUrl,
+    scrolledWithRef,
+    chartBlockRefs,
+  ]);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
@@ -143,6 +169,10 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(shareBlockRef.current, -352);
   }, []);
 
+  const [clickedStatMetric, setClickedStatMetric] = useState<Metric | null>(
+    null,
+  );
+
   const onClickMetric = useCallback(
     (metric: Metric) => {
       trackEvent(
@@ -150,9 +180,17 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         EventAction.CLICK,
         `Location Header Stats: ${Metric[metric]}`,
       );
-      scrollTo(metricRefs[metric].current);
+      setClickedStatMetric(metric);
+      const groupWithMetric = getChartGroupFromMetric(metric);
+      const chartBlockRef = groupWithMetric
+        ? chartBlockRefs[groupWithMetric.groupHeader]
+        : null;
+      if (chartBlockRef.current) {
+        setScrolledWithRef(true);
+        scrollTo(chartBlockRef.current);
+      }
     },
-    [metricRefs],
+    [chartBlockRefs],
   );
 
   const onClickSparkLine = useCallback((metric: SparkLineMetric) => {
@@ -208,13 +246,16 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 />
               </LocationPageBlock>
             )}
-            {CHART_GROUPS.map(group => (
-              <ErrorBoundary key={group.groupHeader}>
-                {!projections ? (
-                  <LoadingScreen />
-                ) : (
-                  <LocationPageBlock>
-                    {/* <ChartBlock
+            {CHART_GROUPS.map((group: ChartGroup) => {
+              const { groupHeader } = group;
+              const groupRef = chartBlockRefs[groupHeader];
+              return (
+                <ErrorBoundary key={group.groupHeader}>
+                  {!projections ? (
+                    <LoadingScreen />
+                  ) : (
+                    <LocationPageBlock>
+                      {/* <ChartBlock
                       metric={metric}
                       projections={projections}
                       chartRef={metricRefs[metric]}
@@ -222,17 +263,20 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                       region={region}
                       stats={stats}
                     /> */}
-                    <NewChartBlock
-                      projections={projections}
-                      isMobile={isMobile}
-                      region={region}
-                      stats={stats}
-                      group={group}
-                    />
-                  </LocationPageBlock>
-                )}
-              </ErrorBoundary>
-            ))}
+                      <NewChartBlock
+                        groupRef={groupRef}
+                        projections={projections}
+                        isMobile={isMobile}
+                        region={region}
+                        stats={stats}
+                        group={group}
+                        clickedStatMetric={clickedStatMetric}
+                      />
+                    </LocationPageBlock>
+                  )}
+                </ErrorBoundary>
+              );
+            })}
             <LocationPageBlock id="vulnerabilities">
               <VulnerabilitiesBlock scores={ccviScores} region={region} />
             </LocationPageBlock>

@@ -1,5 +1,6 @@
 import React from 'react';
 import some from 'lodash/some';
+import find from 'lodash/find';
 import { Metric } from 'common/metricEnum';
 import { ExploreMetric } from 'components/Explore';
 import MetricChart from 'components/Charts/MetricChart';
@@ -38,14 +39,21 @@ export interface MetricChartInfo {
   ) => React.ReactElement;
 }
 
+export enum GroupHeader {
+  VACCINATED = '% Vaccinated',
+  CASES = 'Cases',
+  HOSPITALIZATIONS = 'Hospitalizations',
+  DEATHS = 'Deaths',
+}
+
 export interface ChartGroup {
-  groupHeader: string;
+  groupHeader: GroupHeader;
   metricList: MetricChartInfo[];
 }
 
 export const CHART_GROUPS: ChartGroup[] = [
   {
-    groupHeader: '% Vaccinated',
+    groupHeader: GroupHeader.VACCINATED,
     metricList: [
       {
         metric: Metric.VACCINATIONS,
@@ -60,7 +68,7 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
   {
-    groupHeader: 'Cases',
+    groupHeader: GroupHeader.CASES,
     metricList: [
       {
         metric: Metric.CASE_DENSITY,
@@ -111,7 +119,7 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
   {
-    groupHeader: 'Hospitalizations',
+    groupHeader: GroupHeader.HOSPITALIZATIONS,
     metricList: [
       {
         metric: Metric.HOSPITAL_USAGE,
@@ -158,16 +166,13 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
   {
-    groupHeader: 'Deaths',
+    groupHeader: GroupHeader.DEATHS,
     metricList: [
       {
         metric: ExploreMetric.DEATHS,
         metricType: MetricType.EXPLORE_METRIC,
         renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName="Daily new deaths"
-            metricValueInfo={metricValue}
-          />
+          <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
         ),
         renderChart: projections => (
           <SingleLocationParent
@@ -221,3 +226,13 @@ export function getValueInfo(
     }
   }
 }
+
+// Used for scrolling to correct chart group when clicking summary stat
+export const getChartGroupFromMetric = (metricToScrollTo: Metric): any => {
+  // Fix the any
+  const groupWithMetric = find(CHART_GROUPS, group =>
+    find(group.metricList, metric => metric.metric === metricToScrollTo),
+  );
+  if (!groupWithMetric) return null;
+  return groupWithMetric;
+};
