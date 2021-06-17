@@ -30,7 +30,6 @@ const ChartFooter: React.FC<{
           metric={metric as ExploreMetric}
           projections={projections}
           region={region}
-          stats={stats}
           formattedValue={formattedValue}
         />
       )}

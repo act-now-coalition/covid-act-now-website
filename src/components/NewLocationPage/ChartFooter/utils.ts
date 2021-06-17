@@ -3,7 +3,10 @@ import { County, Region } from 'common/regions';
 import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { ExploreMetric } from 'components/Explore';
-import { exploreMetricToFooterContentMap } from 'components/Dialogs';
+import {
+  exploreMetricToFooterContentMap,
+  MetricModalContent,
+} from 'components/Dialogs';
 
 export function getOverrideDisclaimer(
   region: Region,
@@ -35,4 +38,12 @@ export function getAddedMetricStatusText(
   region: Region,
 ) {
   return `Over the last week, ${region.shortName} has averaged ${value} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
+}
+
+export interface DialogProps {
+  open: boolean;
+  closeDialog: () => void;
+  openDialog: () => void;
+  modalContent: MetricModalContent;
+  modalHeader: string;
 }
