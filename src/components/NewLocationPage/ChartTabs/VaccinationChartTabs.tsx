@@ -10,7 +10,7 @@ import { Value } from 'components/NewLocationPage/SummaryStat/SummaryStat.style'
 import { Projections } from 'common/models/Projections';
 import { VACCINATIONS_COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
-import { nullValueString } from 'components/Charts/Redesign/Groupings';
+import { nullValueString } from 'components/Charts/Groupings';
 
 interface TabContent {
   metricName: string;
@@ -30,14 +30,14 @@ const VaccinationChartTabs: React.FC<{
     {
       metricName: '1+ Dose',
       value: percentInitiated
-        ? formatPercent(percentInitiated)
+        ? formatPercent(percentInitiated, 1)
         : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.INITIATED,
     },
     {
       metricName: 'Fully Vaccinated',
       value: percentCompleted
-        ? formatPercent(percentCompleted)
+        ? formatPercent(percentCompleted, 1)
         : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.COMPLETED,
     },

@@ -25,7 +25,6 @@ import Recommendations from './Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-// import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { WidthContainer } from './LocationPageBlock.style';
 import { LocationPageContentWrapper, BelowTheFold } from './ChartsHolder.style';
@@ -36,13 +35,13 @@ import {
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
-import NewChartBlock from 'components/Charts/Redesign/NewChartBlock';
+import ChartBlock from 'components/Charts/ChartBlock';
 import {
   CHART_GROUPS,
   ChartGroup,
   GroupHeader,
   getChartGroupFromMetric,
-} from 'components/Charts/Redesign/Groupings';
+} from 'components/Charts/Groupings';
 
 // TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
@@ -247,15 +246,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                     <LoadingScreen />
                   ) : (
                     <LocationPageBlock>
-                      {/* <ChartBlock
-                      metric={metric}
-                      projections={projections}
-                      chartRef={metricRefs[metric]}
-                      isMobile={isMobile}
-                      region={region}
-                      stats={stats}
-                    /> */}
-                      <NewChartBlock
+                      <ChartBlock
                         groupRef={groupRef}
                         projections={projections}
                         isMobile={isMobile}

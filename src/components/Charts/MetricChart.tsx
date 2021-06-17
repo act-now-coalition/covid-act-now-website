@@ -28,9 +28,9 @@ const MetricChart = React.memo(
   }) => {
     if (!projections.hasMetric(metric)) {
       return (
-        <EmptyPanel
-          bodyText={<p>{getMetricStatusText(metric, projections)}</p>}
-        />
+        <EmptyPanel>
+          <p>{getMetricStatusText(metric, projections)}</p>
+        </EmptyPanel>
       );
     }
     const projection = projections.primary;

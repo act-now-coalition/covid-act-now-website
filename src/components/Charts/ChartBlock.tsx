@@ -13,12 +13,12 @@ import {
   ChartGroup,
   MetricChartInfo,
   getValueInfo,
-} from 'components/Charts/Redesign/Groupings';
+} from 'components/Charts/Groupings';
 import { MetricValues } from 'common/models/Projections';
 import ChartFooter from 'components/NewLocationPage/ChartFooter/ChartFooter';
 import { Metric } from 'common/metricEnum';
 
-const NewChartBlock: React.FC<{
+const ChartBlock: React.FC<{
   isMobile: boolean;
   region: Region;
   stats: MetricValues;
@@ -90,4 +90,4 @@ const NewChartBlock: React.FC<{
   );
 };
 
-export default NewChartBlock;
+export default ChartBlock;

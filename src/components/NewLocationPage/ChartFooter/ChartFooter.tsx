@@ -6,7 +6,7 @@ import { MetricValues } from 'common/models/Projections';
 import { Region } from 'common/regions';
 import MetricChartFooter from 'components/NewLocationPage/ChartFooter/MetricChartFooter';
 import AddedMetricChartFooter from 'components/NewLocationPage/ChartFooter/AddedMetricChartFooter';
-import { MetricType } from 'components/Charts/Redesign/Groupings';
+import { MetricType } from 'components/Charts/Groupings';
 
 const ChartFooter: React.FC<{
   metric: Metric | ExploreMetric;

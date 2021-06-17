@@ -8,7 +8,7 @@ import {
 } from './ChartTab.style';
 import { CircleIcon } from '../Shared/Shared.style';
 import { Value } from '../SummaryStat/SummaryStat.style';
-import { ValueInfo } from 'components/Charts/Redesign/Groupings';
+import { ValueInfo } from 'components/Charts/Groupings';
 
 const ChartTab: React.FC<{
   metricName: string;

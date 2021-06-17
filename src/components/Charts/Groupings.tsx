@@ -4,7 +4,7 @@ import find from 'lodash/find';
 import { Metric } from 'common/metricEnum';
 import { ExploreMetric } from 'components/Explore';
 import MetricChart from 'components/Charts/MetricChart';
-import SingleLocationParent from './SingleLocationParent';
+import SingleLocationChartContainer from './SingleLocationChartContainer';
 import { Projections } from 'common/models/Projections';
 import {
   getMetricNameForStat,
@@ -125,7 +125,7 @@ export const CHART_GROUPS: ChartGroup[] = [
         metric: Metric.HOSPITAL_USAGE,
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // (chelsi) make a map of these chart-specific metric names
+          <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // TODO (chelsi): make a map of these chart-specific metric names
         ),
         renderChart: projections => (
           <MetricChart
@@ -141,7 +141,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           <ChartTab metricName="ICU patients" metricValueInfo={metricValue} />
         ),
         renderChart: projections => (
-          <SingleLocationParent
+          <SingleLocationChartContainer
             metric={ExploreMetric.ICU_HOSPITALIZATIONS}
             projections={projections}
           />
@@ -157,7 +157,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           />
         ),
         renderChart: projections => (
-          <SingleLocationParent
+          <SingleLocationChartContainer
             metric={ExploreMetric.HOSPITALIZATIONS}
             projections={projections}
           />
@@ -175,7 +175,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
         ),
         renderChart: projections => (
-          <SingleLocationParent
+          <SingleLocationChartContainer
             metric={ExploreMetric.DEATHS}
             projections={projections}
           />

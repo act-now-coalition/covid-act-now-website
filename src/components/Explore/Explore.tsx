@@ -348,19 +348,16 @@ const Explore: React.FunctionComponent<{
           </Styles.ChartContainer>
         )}
         {selectedLocations.length > 0 && !hasData && (
-          <EmptyPanel
-            bodyText={getNoDataCopy(
+          <EmptyPanel>
+            {getNoDataCopy(
               currentMetricName,
               getLocationNames(selectedLocations),
             )}
-          />
+          </EmptyPanel>
         )}
         {selectedLocations.length === 0 && (
-          <EmptyPanel
-            bodyText={
-              <p>Please select states or counties to explore trends.</p>
-            }
-          >
+          <EmptyPanel>
+            <p>Please select states or counties to explore trends.</p>
             <ScreenshotReady />
           </EmptyPanel>
         )}

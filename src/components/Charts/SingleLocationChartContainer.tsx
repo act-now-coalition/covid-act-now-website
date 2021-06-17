@@ -23,7 +23,7 @@ import SingleLocationChart from 'components/Explore/SingleLocationChart';
 import { Projections } from 'common/models/Projections';
 import EmptyPanel from 'components/Charts/EmptyPanel';
 
-function getNoDataCopy(metricName: string, locationNames: string) {
+export function getNoDataCopy(metricName: string, locationNames: string) {
   return (
     <p>
       We don't have {metricName} data for {locationNames}.
@@ -31,7 +31,7 @@ function getNoDataCopy(metricName: string, locationNames: string) {
   );
 }
 
-const SingleLocationParent: React.FunctionComponent<{
+const SingleLocationChartContainer: React.FunctionComponent<{
   projections: Projections;
   metric: ExploreMetric;
 }> = React.memo(({ projections, metric }) => {
@@ -92,15 +92,12 @@ const SingleLocationParent: React.FunctionComponent<{
         </NewChartContainer>
       )}
       {!hasData && (
-        <EmptyPanel
-          bodyText={getNoDataCopy(
-            currentMetricName,
-            projections.region.shortName,
-          )}
-        />
+        <EmptyPanel>
+          {getNoDataCopy(currentMetricName, projections.region.shortName)}
+        </EmptyPanel>
       )}
     </div>
   );
 });
 
-export default SingleLocationParent;
+export default SingleLocationChartContainer;

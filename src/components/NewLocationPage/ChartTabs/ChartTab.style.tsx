@@ -69,7 +69,7 @@ export const TabsWrapper = styled.div`
 
 export const InactiveTabWrapper = styled.div`
   ${Tab} {
-    cursor: default; // (Chelsi)-this isn't accessible
+    cursor: default; // (Chelsi)-this isn't the *most* accessible
   }
 
   ${TabTitle} {
