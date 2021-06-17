@@ -1,3 +1,8 @@
+/**
+ * Chart footer for newly added chart metrics (deaths, hospitalizations, ICU hospitalizations)
+ * TODO (chelsi) - implement a better naming convention for the files/components/utils that currently use 'Added'
+ */
+
 import React from 'react';
 import {
   Row,
@@ -10,39 +15,41 @@ import {
 import {
   DialogMain,
   MetricInfoDialogInner,
-  MetricModalContent,
   getExploreMetricModalContent,
 } from 'components/Dialogs';
 import { getAllSeriesForMetric } from 'components/Explore/utils';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
 import { Region } from 'common/regions';
-import type { MetricValues, Projections } from 'common/models/Projections';
+import type { Projections } from 'common/models/Projections';
 import { useDialog } from 'common/hooks';
 import { EventCategory } from 'components/Analytics';
 import { ExploreMetric } from 'components/Explore';
-import { getAddedMetricStatusText } from './utils';
+import { getAddedMetricStatusText, DialogProps } from './utils';
 import Legend from 'components/Explore/Legend';
 
-export interface ShareButtonProps {
-  region: Region;
-  stats: MetricValues;
-  chartIdentifier: number;
-  showEmbedButton?: boolean;
-}
+const ShareButtonBlock: React.FC<{ region: Region; metric: ExploreMetric }> = ({
+  region,
+  metric,
+}) => {
+  const metricToShareQuoteName: { [key: number]: string } = {
+    [ExploreMetric.DEATHS]: 'Daily COVID deaths',
+    [ExploreMetric.ICU_HOSPITALIZATIONS]: 'Current COVID ICU hospitalizations',
+    [ExploreMetric.HOSPITALIZATIONS]: 'Current COVID hospitalizations',
+  };
 
-interface DialogProps {
-  open: boolean;
-  closeDialog: () => void;
-  openDialog: () => void;
-  modalContent: MetricModalContent;
-  modalHeader: string;
-}
+  const shareUrl = region.canonicalUrl;
+  const shareQuote = `${metricToShareQuoteName[metric]}, vaccination progress, and other key metrics for ${region.fullName} at @CovidActNow: `;
 
-const ShareButtonBlock: React.FC<ShareButtonProps> = shareButtonProps => {
+  const props = {
+    shareUrl,
+    shareQuote,
+    region,
+  };
+
   return (
     <ButtonContainer>
-      <ShareButtons {...shareButtonProps} />
+      <ShareButtons {...props} />
     </ButtonContainer>
   );
 };
@@ -76,17 +83,9 @@ const AddedMetricChartFooter: React.FC<{
   metric: ExploreMetric;
   projections: Projections;
   region: Region;
-  stats: MetricValues;
   formattedValue: string;
-}> = ({ metric, region, stats, formattedValue, projections }) => {
+}> = ({ metric, region, formattedValue, projections }) => {
   const modalContent = getExploreMetricModalContent(region, metric);
-
-  const shareButtonProps = {
-    chartIdentifier: metric,
-    region,
-    stats,
-    showEmbedButton: false,
-  };
 
   const statusText = getAddedMetricStatusText(metric, formattedValue, region);
 
@@ -106,6 +105,7 @@ const AddedMetricChartFooter: React.FC<{
 
   const series = getAllSeriesForMetric(metric, projections.primary);
 
+  const shareProps = { region, metric };
   return (
     <Wrapper>
       <DesktopOnly>
@@ -116,7 +116,7 @@ const AddedMetricChartFooter: React.FC<{
             {'   '}
             <MetricModal {...dialogProps} />
           </FooterText>
-          <ShareButtonBlock {...shareButtonProps} />
+          <ShareButtonBlock {...shareProps} />
         </Row>
       </DesktopOnly>
       <MobileOnly>
@@ -124,7 +124,7 @@ const AddedMetricChartFooter: React.FC<{
         <FooterText>{statusText}</FooterText>
         <Row>
           <MetricModal {...dialogProps} />
-          <ShareButtonBlock {...shareButtonProps} />
+          <ShareButtonBlock {...shareProps} />
         </Row>
       </MobileOnly>
     </Wrapper>

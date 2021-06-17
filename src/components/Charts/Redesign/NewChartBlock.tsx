@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import findIndex from 'lodash/findIndex';
+import isNull from 'lodash/isNull';
 import { Projections } from 'common/models/Projections';
 import { Region } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
@@ -14,6 +16,7 @@ import {
 } from 'components/Charts/Redesign/Groupings';
 import { MetricValues } from 'common/models/Projections';
 import ChartFooter from 'components/NewLocationPage/ChartFooter/ChartFooter';
+import { Metric } from 'common/metricEnum';
 
 const NewChartBlock: React.FC<{
   isMobile: boolean;
@@ -21,16 +24,31 @@ const NewChartBlock: React.FC<{
   stats: MetricValues;
   projections: Projections;
   group: ChartGroup;
-}> = ({ projections, stats, group, region }) => {
+  clickedStatMetric: Metric | null;
+  groupRef: React.RefObject<HTMLDivElement>;
+}> = ({ projections, stats, group, region, groupRef, clickedStatMetric }) => {
   const { metricList, groupHeader } = group;
 
+  // TODO (chelsi) - revisit placement of these state/setState variables
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const onChangeTab = (newTabIndex: number) => {
     setActiveTabIndex(newTabIndex);
   };
 
-  const inactiveTabs = metricList.length === 1;
-  const TabsWrapper = inactiveTabs ? InactiveTabWrapper : ChartTabs;
+  // Selects correct tab after clicking summary stat + scrolling to chart block
+  useEffect(() => {
+    if (!isNull(clickedStatMetric)) {
+      const clickedStatMetricIndex = findIndex(
+        metricList,
+        item => item.metric === clickedStatMetric,
+      );
+      if (clickedStatMetricIndex >= 0) {
+        setActiveTabIndex(clickedStatMetricIndex);
+      }
+    }
+  }, [metricList, clickedStatMetric]);
+
+  const TabsWrapper = metricList.length === 1 ? InactiveTabWrapper : ChartTabs;
 
   const { unformattedValue, formattedValue } = getValueInfo(
     stats,
@@ -41,7 +59,7 @@ const NewChartBlock: React.FC<{
 
   return (
     <>
-      <SectionHeader>{groupHeader}</SectionHeader>
+      <SectionHeader ref={groupRef}>{groupHeader}</SectionHeader>
       <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
         {metricList.map((metricItem: MetricChartInfo, i: number) => {
           const metricValueInfo = getValueInfo(stats, metricItem, projections);

@@ -59,11 +59,11 @@ export const exploreMetricToFooterContentMap: {
   [key: number]: ExploreMetricModalMapContent;
 } = {
   [ExploreMetric.DEATHS]: {
-    metricName: 'daily new deaths',
+    metricName: 'daily deaths',
     howItsCalculated: 'Our daily deaths number is a seven-day average.',
     metricDefinition: 'This is the number of COVID deaths per day.',
     source: 'The New York Times',
-    statusTextMeasure: 'daily new deaths',
+    statusTextMeasure: 'daily deaths',
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     metricName: 'ICU hospitalizations',
