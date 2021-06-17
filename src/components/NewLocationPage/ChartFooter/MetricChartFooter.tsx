@@ -1,4 +1,5 @@
 import React from 'react';
+import urlJoin from 'url-join';
 import {
   Row,
   ButtonContainer,
@@ -11,12 +12,11 @@ import {
 import {
   DialogMain,
   MetricInfoDialogInner,
-  MetricModalContent,
   getMetricModalContent,
 } from 'components/Dialogs';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
-import { getOverrideDisclaimer } from './utils';
+import { getOverrideDisclaimer, DialogProps } from './utils';
 import { Region } from 'common/regions';
 import type { MetricValues, Projections } from 'common/models/Projections';
 import { useDialog } from 'common/hooks';
@@ -24,26 +24,33 @@ import { Metric } from 'common/metricEnum';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
 import { EventCategory } from 'components/Analytics';
+import { makeChartShareQuote } from 'common/utils/makeChartShareQuote';
+import * as urls from 'common/urls';
 
-export interface ShareButtonProps {
+const ShareButtonBlock: React.FC<{
   region: Region;
   stats: MetricValues;
   chartIdentifier: number;
-  showEmbedButton?: boolean;
-}
+}> = ({ region, chartIdentifier, stats }) => {
+  const shareBaseURL = region.canonicalUrl;
+  const shareUrl = urls.addSharingId(
+    urlJoin(shareBaseURL, `chart/${chartIdentifier}`),
+  );
+  const shareQuote = makeChartShareQuote(
+    region.fullName,
+    stats,
+    chartIdentifier,
+  );
 
-interface DialogProps {
-  open: boolean;
-  closeDialog: () => void;
-  openDialog: () => void;
-  modalContent: MetricModalContent;
-  modalHeader: string;
-}
+  const props = {
+    shareUrl,
+    shareQuote,
+    region,
+  };
 
-const ShareButtonBlock: React.FC<ShareButtonProps> = shareButtonProps => {
   return (
     <ButtonContainer>
-      <ShareButtons {...shareButtonProps} />
+      <ShareButtons {...props} />
     </ButtonContainer>
   );
 };
@@ -62,7 +69,7 @@ const MetricModal: React.FC<DialogProps> = ({
     links: [
       {
         cta: 'Learn more',
-        url: modalContent.learnLink,
+        url: modalContent.learnLink || '/covid-risk-levels-metrics',
         ariaLabel: `Learn more about ${modalHeader}`,
       },
     ],
@@ -98,7 +105,6 @@ const MetricChartFooter: React.FC<{
     chartIdentifier: metric,
     region,
     stats,
-    showEmbedButton: false,
   };
 
   const footerText = getMetricStatusText(metric, projections);

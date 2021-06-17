@@ -49,7 +49,7 @@ const hasData = (d: any) =>
 const ChartRt = ({
   columnData,
   width,
-  height = 400,
+  height = Style.chartsHeight,
   marginTop = 6,
   marginBottom = 40,
   marginLeft = 40,
@@ -218,7 +218,7 @@ const ChartRt = ({
 
 const ChartRtAutosize = ({
   columnData,
-  height = 400,
+  height = Style.chartsHeight,
 }: {
   columnData: Column[];
   height?: number;

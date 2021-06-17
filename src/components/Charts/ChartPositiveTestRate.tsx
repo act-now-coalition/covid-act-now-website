@@ -3,6 +3,7 @@ import ChartZones from './ChartZones';
 import { POSITIVE_TESTS_LEVEL_INFO_MAP } from 'common/metrics/positive_rate';
 import { formatPercent } from 'common/utils';
 import { Column } from 'common/models/Projection';
+import { chartsHeight } from 'components/Charts/Charts.style';
 
 const CAP_Y = 0.4;
 
@@ -25,7 +26,7 @@ const getTooltipContent = (valueY: number) =>
 
 const ChartPositiveTests = ({
   columnData,
-  height = 400,
+  height = chartsHeight,
 }: {
   columnData: Column[];
   height?: number;

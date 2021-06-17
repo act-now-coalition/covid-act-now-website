@@ -10,7 +10,6 @@ export const BlockContainer = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     max-width: ${props =>
       props.theme.spacingTheme.locationPage.maxWidthContent};
-    margin-bottom: 5rem;
   }
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
