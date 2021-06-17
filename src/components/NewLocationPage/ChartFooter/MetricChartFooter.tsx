@@ -24,7 +24,7 @@ import { Metric } from 'common/metricEnum';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
 import { EventCategory } from 'components/Analytics';
-import makeChartShareQuote from 'common/utils/makeChartShareQuote';
+import { makeChartShareQuote } from 'common/utils/makeChartShareQuote';
 import * as urls from 'common/urls';
 
 const ShareButtonBlock: React.FC<{
