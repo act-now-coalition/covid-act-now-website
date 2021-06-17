@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
 
 export const LegendContainer = styled.div<{
   $condensed: boolean;
@@ -82,15 +81,4 @@ export const LegendWrapper = styled.div<{
         padding: ${props => (props.$condensed ? '0.75rem 0 0' : '0 1rem')};
       }
     `};
-`;
-
-export const LegendTitle = styled(Typography)`
-  font-size: 0.75rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-
-  @media (min-width: 600px) {
-    margin-right: 1.5rem;
-    margin-bottom: 0;
-  }
 `;
