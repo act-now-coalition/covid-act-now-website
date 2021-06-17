@@ -228,10 +228,14 @@ export function getValueInfo(
 }
 
 // Used for scrolling to correct chart group when clicking summary stat
-export const getChartGroupFromMetric = (metricToScrollTo: Metric): any => {
-  // Fix the any
-  const groupWithMetric = find(CHART_GROUPS, group =>
-    find(group.metricList, metric => metric.metric === metricToScrollTo),
+export const getChartGroupFromMetric = (
+  metricToScrollTo: Metric,
+): ChartGroup | null => {
+  const groupWithMetric = find(
+    CHART_GROUPS,
+    group =>
+      find(group.metricList, metric => metric.metric === metricToScrollTo) !==
+      undefined,
   );
   if (!groupWithMetric) return null;
   return groupWithMetric;

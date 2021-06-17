@@ -105,7 +105,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const casesBlockRef = useRef<HTMLDivElement>(null);
   const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
   const deathsBlockRed = useRef<HTMLDivElement>(null);
-  const chartBlockRefs: any = useMemo(
+  const chartBlockRefs = useMemo(
     // Fix the any
     () => ({
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
@@ -185,7 +185,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       const chartBlockRef = groupWithMetric
         ? chartBlockRefs[groupWithMetric.groupHeader]
         : null;
-      if (chartBlockRef.current) {
+      if (chartBlockRef?.current) {
         setScrolledWithRef(true);
         scrollTo(chartBlockRef.current);
       }
