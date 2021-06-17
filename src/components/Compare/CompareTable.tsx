@@ -220,9 +220,7 @@ const CompareTable = (props: {
    */
   const showLimitedLocations =
     (props.isHomepage && props.homepageScope === HomepageLocationScope.STATE) ||
-    (!props.isHomepage && props.geoScope !== GeoScopeFilter.COUNTRY)
-      ? true
-      : false;
+    (!props.isHomepage && props.geoScope !== GeoScopeFilter.COUNTRY);
 
   const seeAllText = (
     <>
