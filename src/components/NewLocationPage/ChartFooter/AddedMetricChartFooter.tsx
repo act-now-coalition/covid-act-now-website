@@ -1,4 +1,7 @@
-/** Chart footer for newly added chart metrics (deaths, hospitalizations, ICU hospitalizations) */
+/**
+ * Chart footer for newly added chart metrics (deaths, hospitalizations, ICU hospitalizations)
+ * TODO (chelsi) - implement a better naming convention for the files/components/utils that currently use 'Added'
+ */
 
 import React from 'react';
 import {
@@ -24,14 +27,10 @@ import { EventCategory } from 'components/Analytics';
 import { ExploreMetric } from 'components/Explore';
 import { getAddedMetricStatusText, DialogProps } from './utils';
 import Legend from 'components/Explore/Legend';
-import { makeAddedChartShareQuote } from 'common/utils/makeChartShareQuote';
 
-const ShareButtonBlock: React.FC<{ region: Region; metric: ExploreMetric }> = ({
-  region,
-  metric,
-}) => {
+const ShareButtonBlock: React.FC<{ region: Region }> = ({ region }) => {
   const shareUrl = region.canonicalUrl;
-  const shareQuote = makeAddedChartShareQuote(region.fullName, metric);
+  const shareQuote = `Check out Daily COVID deaths, vaccination progress, and other key metrics for ${region.fullName} at @CovidActNow: `;
 
   const props = {
     shareUrl,
@@ -97,11 +96,6 @@ const AddedMetricChartFooter: React.FC<{
 
   const series = getAllSeriesForMetric(metric, projections.primary);
 
-  const shareProps = {
-    region,
-    metric,
-  };
-
   return (
     <Wrapper>
       <DesktopOnly>
@@ -112,7 +106,7 @@ const AddedMetricChartFooter: React.FC<{
             {'   '}
             <MetricModal {...dialogProps} />
           </FooterText>
-          <ShareButtonBlock {...shareProps} />
+          <ShareButtonBlock region={region} />
         </Row>
       </DesktopOnly>
       <MobileOnly>
@@ -120,7 +114,7 @@ const AddedMetricChartFooter: React.FC<{
         <FooterText>{statusText}</FooterText>
         <Row>
           <MetricModal {...dialogProps} />
-          <ShareButtonBlock {...shareProps} />
+          <ShareButtonBlock region={region} />
         </Row>
       </MobileOnly>
     </Wrapper>

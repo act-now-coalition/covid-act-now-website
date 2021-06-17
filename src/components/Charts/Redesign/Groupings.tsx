@@ -237,6 +237,5 @@ export const getChartGroupFromMetric = (
       find(group.metricList, metric => metric.metric === metricToScrollTo) !==
       undefined,
   );
-  if (!groupWithMetric) return null;
-  return groupWithMetric;
+  return groupWithMetric ?? null;
 };

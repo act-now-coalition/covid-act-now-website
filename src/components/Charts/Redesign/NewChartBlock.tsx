@@ -29,6 +29,7 @@ const NewChartBlock: React.FC<{
 }> = ({ projections, stats, group, region, groupRef, clickedStatMetric }) => {
   const { metricList, groupHeader } = group;
 
+  // TODO (chelsi) - revisit placement of these state/setState variables
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const onChangeTab = (newTabIndex: number) => {
     setActiveTabIndex(newTabIndex);

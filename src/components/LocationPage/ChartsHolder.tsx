@@ -99,14 +99,13 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     }
   }, [hash]);
 
-  const [scrolledWithRef, setScrolledWithRef] = useState(false);
+  const [scrolledWithUrl, setScrolledWithUrl] = useState(false);
 
   const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
   const casesBlockRef = useRef<HTMLDivElement>(null);
   const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
   const deathsBlockRed = useRef<HTMLDivElement>(null);
   const chartBlockRefs = useMemo(
-    // Fix the any
     () => ({
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
       [GroupHeader.CASES]: casesBlockRef,
@@ -121,8 +120,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
           const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current && !scrolledWithRef) {
-            setScrolledWithRef(true);
+          if (metricRef.current && !scrolledWithUrl) {
+            setScrolledWithUrl(true);
             scrollTo(metricRef.current);
           }
         }
@@ -133,8 +132,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     const scrollToRecommendations = () => {
       const timeoutId = setTimeout(() => {
         if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current && !scrolledWithRef) {
-            setScrolledWithRef(true);
+          if (recommendationsRef.current && !scrolledWithUrl) {
+            setScrolledWithUrl(true);
             scrollTo(recommendationsRef.current);
           }
         }
@@ -144,13 +143,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
     scrollToChart();
     scrollToRecommendations();
-  }, [
-    chartId,
-    metricRefs,
-    isRecommendationsShareUrl,
-    scrolledWithRef,
-    chartBlockRefs,
-  ]);
+  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithUrl]);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
@@ -186,7 +179,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         ? chartBlockRefs[groupWithMetric.groupHeader]
         : null;
       if (chartBlockRef?.current) {
-        setScrolledWithRef(true);
         scrollTo(chartBlockRef.current);
       }
     },

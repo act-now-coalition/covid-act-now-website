@@ -1,6 +1,5 @@
 import { Metric } from 'common/metricEnum';
 import { fail, formatDecimal, formatPercent } from 'common/utils';
-import { ExploreMetric } from 'components/Explore';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
 export function makeChartShareQuote(
@@ -35,19 +34,4 @@ export function makeChartShareQuote(
     )} daily new cases per 100k population, according to @CovidActNow. See the chart: `;
   }
   return `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
-}
-
-export function makeAddedChartShareQuote(
-  displayName: string,
-  metric: ExploreMetric,
-) {
-  if (metric === ExploreMetric.DEATHS) {
-    return `Daily COVID deaths in ${displayName}, according to @CovidActNow. See the chart: `;
-  } else if (metric === ExploreMetric.ICU_HOSPITALIZATIONS) {
-    return `COVID ICU hospitalizations in ${displayName}, according to @CovidActNow. See the chart: `;
-  } else if (metric === ExploreMetric.HOSPITALIZATIONS) {
-    return `COVID hospitalizations in ${displayName}, according to @CovidActNow. See the chart: `;
-  } else {
-    return `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
-  }
 }
