@@ -193,14 +193,7 @@ const VaccinationLines: React.FC<{
     <Styles.PositionRelative style={{ height }}>
       <svg width={width} height={height}>
         <Group key="chart-container" top={marginTop} left={marginLeft}>
-          <GridLines
-            width={innerWidth}
-            height={innerHeight}
-            dateScale={dateScale}
-            yScale={yScale}
-            numTicksRows={5}
-            xTickValues={dateTicks.map(date => date.valueOf())}
-          />
+          <GridLines width={innerWidth} yScale={yScale} numTicksRows={5} />
           {/* Axes */}
           <Styles.Axis>
             <AxisLeft
@@ -236,17 +229,10 @@ const VaccinationLines: React.FC<{
                 <ChartStyle.VaccinationLabel>
                   <BoxedAnnotation
                     y={labelInfo.y}
-                    x={labelInfo.x - 10}
-                    text={labelInfo.label}
-                  />
-                </ChartStyle.VaccinationLabel>
-                <ChartStyle.VaccinationLabelBold>
-                  <BoxedAnnotation
-                    y={labelInfo.y}
                     x={labelInfo.x + 5}
                     text={labelInfo.formattedValue}
                   />
-                </ChartStyle.VaccinationLabelBold>
+                </ChartStyle.VaccinationLabel>
               </Group>
             );
           })}
@@ -287,7 +273,7 @@ const VaccinationLines: React.FC<{
 const ChartVaccinationsAutosize: React.FC<{
   seriesList?: Series[];
   height?: number;
-}> = ({ seriesList, height = 400 }) => (
+}> = ({ seriesList, height = ChartStyle.chartsHeight }) => (
   <ChartStyle.ChartContainer>
     <ParentSize>
       {({ width }) => (

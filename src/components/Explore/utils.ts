@@ -370,7 +370,7 @@ function scalePer100k(data: Column[], population: number) {
  * used for the multiple-locations Explore chart. It receives a color
  * so we can differentiate the lines in the chart
  */
-function getAveragedSeriesForMetric(
+export function getAveragedSeriesForMetric(
   metric: ExploreMetric,
   projection: Projection,
   color: string,
