@@ -13,6 +13,7 @@ import {
   ChartGroup,
   MetricChartInfo,
   getValueInfo,
+  trackTabClick,
 } from 'components/Charts/Groupings';
 import { MetricValues } from 'common/models/Projections';
 import ChartFooter from 'components/NewLocationPage/ChartFooter/ChartFooter';
@@ -25,13 +26,13 @@ const ChartBlock: React.FC<{
   projections: Projections;
   group: ChartGroup;
   clickedStatMetric: Metric | null;
-  groupRef: React.RefObject<HTMLDivElement>;
-}> = ({ projections, stats, group, region, groupRef, clickedStatMetric }) => {
+}> = ({ projections, stats, group, region, clickedStatMetric }) => {
   const { metricList, groupHeader } = group;
 
   // TODO (chelsi) - revisit placement of these state/setState variables
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const onChangeTab = (newTabIndex: number) => {
+    trackTabClick(metricList[newTabIndex]);
     setActiveTabIndex(newTabIndex);
   };
 
@@ -59,15 +60,13 @@ const ChartBlock: React.FC<{
 
   return (
     <>
-      <SectionHeader ref={groupRef}>{groupHeader}</SectionHeader>
+      <SectionHeader>{groupHeader}</SectionHeader>
       <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
         {metricList.map((metricItem: MetricChartInfo, i: number) => {
           const metricValueInfo = getValueInfo(stats, metricItem, projections);
           return (
             <Tab
               key={`tab-${i}`}
-              disableRipple
-              disableFocusRipple
               label={metricItem.renderTabLabel(metricValueInfo, projections)}
               id={`tab-id-${i}`}
               aria-controls={`tab-id-${i}`}

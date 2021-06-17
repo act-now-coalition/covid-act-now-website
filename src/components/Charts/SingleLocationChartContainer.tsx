@@ -21,7 +21,8 @@ import {
 } from 'components/Charts/Charts.style';
 import SingleLocationChart from 'components/Explore/SingleLocationChart';
 import { Projections } from 'common/models/Projections';
-import EmptyPanel from 'components/Charts/EmptyPanel';
+import { EmptyPanel } from 'components/Charts/Charts.style';
+import { ScreenshotReady } from 'components/Screenshot';
 
 export function getNoDataCopy(metricName: string, locationNames: string) {
   return (
@@ -94,6 +95,7 @@ const SingleLocationChartContainer: React.FunctionComponent<{
       {!hasData && (
         <EmptyPanel>
           {getNoDataCopy(currentMetricName, projections.region.shortName)}
+          <ScreenshotReady />
         </EmptyPanel>
       )}
     </div>

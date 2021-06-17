@@ -55,7 +55,7 @@ import NationalText from 'components/NationalText';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
 import { chartsHeight } from 'components/Charts/Charts.style';
-import EmptyPanel from 'components/Charts/EmptyPanel';
+import { EmptyPanel } from 'components/Charts/Charts.style';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -353,6 +353,7 @@ const Explore: React.FunctionComponent<{
               currentMetricName,
               getLocationNames(selectedLocations),
             )}
+            <ScreenshotReady />
           </EmptyPanel>
         )}
         {selectedLocations.length === 0 && (

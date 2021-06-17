@@ -46,7 +46,7 @@ const VaccinationChartTabs: React.FC<{
   return (
     <VaccinationsTabsWrapper>
       {tabsContent.map((tab: TabContent) => (
-        <TabContainer>
+        <TabContainer key={tab.metricName}>
           <TabTitle>{tab.metricName}</TabTitle>
           <TabContent>
             <CircleIcon $iconColor={tab.iconColor} />

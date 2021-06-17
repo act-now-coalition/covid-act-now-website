@@ -11,8 +11,9 @@ import {
 import { Metric } from 'common/metricEnum';
 import { SeriesType, Series } from 'components/Explore/interfaces';
 import { VACCINATIONS_COLOR_MAP } from 'common/colors';
-import EmptyPanel from './EmptyPanel';
+import { EmptyPanel } from 'components/Charts/Charts.style';
 import { getMetricStatusText } from 'common/metric';
+import { ScreenshotReady } from 'components/Screenshot';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -30,6 +31,7 @@ const MetricChart = React.memo(
       return (
         <EmptyPanel>
           <p>{getMetricStatusText(metric, projections)}</p>
+          <ScreenshotReady />
         </EmptyPanel>
       );
     }

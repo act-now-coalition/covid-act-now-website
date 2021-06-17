@@ -34,7 +34,10 @@ export const MetricSubLabel = styled.div`
   }
 `;
 
-export const Tab = styled(MuiTab)`
+export const Tab = styled(MuiTab).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
   line-height: 1;
   text-align: left;
   padding: 6px 0;

@@ -2,7 +2,7 @@ import React from 'react';
 import some from 'lodash/some';
 import find from 'lodash/find';
 import { Metric } from 'common/metricEnum';
-import { ExploreMetric } from 'components/Explore';
+import { ExploreMetric, getTitle } from 'components/Explore';
 import MetricChart from 'components/Charts/MetricChart';
 import SingleLocationChartContainer from './SingleLocationChartContainer';
 import { Projections } from 'common/models/Projections';
@@ -13,10 +13,11 @@ import {
 import ChartTab from 'components/NewLocationPage/ChartTabs/ChartTab';
 import { MetricValues } from 'common/models/Projections';
 import { getAveragedSeriesForMetric } from 'components/Explore/utils';
-import { formatValue, getLevelInfo } from 'common/metric';
+import { formatValue, getLevelInfo, getMetricName } from 'common/metric';
 import { last } from 'components/Charts/utils';
 import { formatDecimal } from 'common/utils';
 import VaccinationChartTabs from 'components/NewLocationPage/ChartTabs/VaccinationChartTabs';
+import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
 export enum MetricType {
   KEY_METRIC,
@@ -239,3 +240,21 @@ export const getChartGroupFromMetric = (
   );
   return groupWithMetric ?? null;
 };
+
+function getMetricNameForTracking(metricItem: MetricChartInfo): string {
+  const { metric } = metricItem;
+  if (metricItem.metricType === MetricType.EXPLORE_METRIC) {
+    return getTitle(metric as ExploreMetric);
+  } else if (metricItem.metricType === MetricType.KEY_METRIC) {
+    return getMetricName(metric as Metric);
+  } else return '';
+}
+
+export function trackTabClick(metricItem: MetricChartInfo) {
+  console.log('tracking label', getMetricNameForTracking(metricItem));
+  trackEvent(
+    EventCategory.METRICS,
+    EventAction.CLICK,
+    `Chart tab: ${getMetricNameForTracking(metricItem)}`,
+  );
+}

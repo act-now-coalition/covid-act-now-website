@@ -217,7 +217,7 @@ export const NewChartContainer = styled(ExploreChartContainer)`
   margin: 0 0 ${props => props.theme.spacing(3)}px 0;
 `;
 
-export const EmptyPanelContainer = styled(ExploreChartContainer)`
+export const EmptyPanel = styled(ExploreChartContainer)`
   display: grid;
   place-items: center;
   background-color: ${COLOR_MAP.GREY_0};

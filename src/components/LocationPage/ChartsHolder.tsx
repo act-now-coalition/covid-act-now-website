@@ -241,13 +241,12 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
               const { groupHeader } = group;
               const groupRef = chartBlockRefs[groupHeader];
               return (
-                <ErrorBoundary key={group.groupHeader}>
+                <ErrorBoundary key={groupHeader}>
                   {!projections ? (
                     <LoadingScreen />
                   ) : (
-                    <LocationPageBlock>
+                    <LocationPageBlock ref={groupRef}>
                       <ChartBlock
-                        groupRef={groupRef}
                         projections={projections}
                         isMobile={isMobile}
                         region={region}
