@@ -229,17 +229,10 @@ const VaccinationLines: React.FC<{
                 <ChartStyle.VaccinationLabel>
                   <BoxedAnnotation
                     y={labelInfo.y}
-                    x={labelInfo.x - 10}
-                    text={labelInfo.label}
-                  />
-                </ChartStyle.VaccinationLabel>
-                <ChartStyle.VaccinationLabelBold>
-                  <BoxedAnnotation
-                    y={labelInfo.y}
                     x={labelInfo.x + 5}
                     text={labelInfo.formattedValue}
                   />
-                </ChartStyle.VaccinationLabelBold>
+                </ChartStyle.VaccinationLabel>
               </Group>
             );
           })}

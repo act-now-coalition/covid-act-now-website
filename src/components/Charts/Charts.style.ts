@@ -198,18 +198,11 @@ export const VaccinationLabel = styled.g`
     fill: ${props => palette(props).background};
   }
   text {
-    ${props => props.theme.fonts.regularBook};
-    font-size: 0.85rem;
-    text-anchor: end;
-    fill: ${props => palette(props).annotation || '#4f4f4f'};
-    dominant-baseline: middle;
-  }
-`;
-
-export const VaccinationLabelBold = styled(VaccinationLabel)`
-  text {
     ${props => props.theme.fonts.regularBookBold};
     text-anchor: start;
+    font-size: 0.85rem;
+    fill: ${props => palette(props).annotation || '#4f4f4f'};
+    dominant-baseline: middle;
   }
 `;
 
