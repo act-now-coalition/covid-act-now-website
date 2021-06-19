@@ -6,6 +6,7 @@ import {
   USMapPreviewHeader,
   USMapHeaderText,
   MapHeaderHeader,
+  LastUpdatedWrapper,
   PreviewFooter,
   FooterText,
   MapWrapper,
@@ -24,13 +25,15 @@ const SocialLocationPreview = (props: {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-  const Footer = props.Footer;
-  const isEmbed = props.isEmbed;
-  const showCountyView = !isEmbed && !props.isEmbedPreview;
+  const { border, Footer, isEmbed, isEmbedPreview } = props;
+  const showCountyView = !isEmbed && !isEmbedPreview;
   return (
-    <Wrapper border={props.border}>
+    <Wrapper noShadow={!isEmbedPreview} border={border}>
       <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
-      <USMapPreviewHeader sideLegend={!isEmbed}>
+      {!isEmbedPreview && (
+        <LastUpdatedWrapper>Updated {lastUpdatedDateString}</LastUpdatedWrapper>
+      )}
+      <USMapPreviewHeader border={isEmbedPreview} sideLegend={!isEmbed}>
         <MapWrapper>
           {isEmbed && <MapLegend isEmbed />}
           <USRiskMap showCounties={showCountyView} />
@@ -44,10 +47,12 @@ const SocialLocationPreview = (props: {
       {Footer ? (
         <Footer />
       ) : (
-        <PreviewFooter>
-          <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
-          <FooterText>covidactnow.org</FooterText>
-        </PreviewFooter>
+        isEmbedPreview && (
+          <PreviewFooter>
+            <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+            <FooterText>covidactnow.org</FooterText>
+          </PreviewFooter>
+        )
       )}
     </Wrapper>
   );
