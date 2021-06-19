@@ -14,8 +14,16 @@ const getTotalCasesCopy = (summedRawCases: number): string => {
   return `${formatDecimal(divided, 1)} million`;
 };
 
+interface SiteSummary {
+  totalCases: number;
+  totalDeaths: number;
+  lastDate: number;
+  twoWeekPercentChangeInCases: number | null;
+  twoWeekPercentChangeInDeaths: number | null;
+}
+
 export function getNationalText(): React.ReactElement {
-  const usa = SiteSummaryJSON.usa;
+  const usa = SiteSummaryJSON.usa as SiteSummary;
   const {
     totalCases,
     totalDeaths,
