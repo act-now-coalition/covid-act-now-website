@@ -14,6 +14,7 @@ export const ProgressBarContainer = styled.div`
 `;
 
 export const StyledSvg = styled.svg`
+  width: 100%;
   border: 1px solid ${COLOR_MAP.GREY_2};
   border-radius: 3px;
 `;

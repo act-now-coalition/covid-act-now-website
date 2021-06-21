@@ -24,7 +24,7 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
   locationName,
   width,
 }) => {
-  const height = 16;
+  const height = 18;
   const color = oldVersion
     ? VACCINATIONS_COLOR_MAP.COMPLETED
     : vaccineColor(vaccinationsInitiated);
