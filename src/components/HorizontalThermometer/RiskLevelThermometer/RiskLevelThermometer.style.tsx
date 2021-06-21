@@ -4,6 +4,8 @@ import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
+export const thermometerBarHeight = 8;
+
 export const Wrapper = styled.div`
   margin: auto;
   display: flex;
@@ -16,6 +18,7 @@ export const Wrapper = styled.div`
 
 export const ThermometerContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const Label = styled.span`
@@ -47,7 +50,7 @@ export const InfoLink = styled(Link)`
 `;
 
 export const ColorBlock = styled.div<{ color: string }>`
-  height: 20px;
+  height: ${thermometerBarHeight}px;
   width: 24px;
   background-color: ${({ color }) => color};
 
