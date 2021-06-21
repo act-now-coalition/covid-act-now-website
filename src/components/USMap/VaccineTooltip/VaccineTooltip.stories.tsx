@@ -19,12 +19,12 @@ export const Example = () => {
   return <VaccineTooltip {...props} />;
 };
 
-export const Mobile = () => {
+export const MoreDataLink = () => {
   const props = {
     state: idaho,
     vaccinationsCompleted: 0.29,
     vaccinationsInitiated: 0.35,
-    isMobileVersion: true,
+    addMoreDataLink: true,
   };
 
   return <VaccineTooltip {...props} />;

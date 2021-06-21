@@ -24,21 +24,27 @@ export interface VaccineTooltipProps {
   state: State;
   vaccinationsInitiated: number;
   vaccinationsCompleted: number;
-  isMobileVersion?: boolean;
+  /**
+   * Whether to include "More data" link at the bottom of tooltip.  This is
+   * typically used when the USMap is using `TooltipMode.ACTIVATE_ON_CLICK`
+   * since we then need a link within the Tooltip to actually navigate to
+   * the location page.
+   */
+  addMoreDataLink?: boolean;
 }
 
 const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
   state,
   vaccinationsInitiated,
   vaccinationsCompleted,
-  isMobileVersion = false,
+  addMoreDataLink = false,
 }) => {
   const locationName = state.fullName;
   return (
     <Container>
       <Inner>
-        <LocationName $isMobileVersion={isMobileVersion}>
-          {isMobileVersion ? (
+        <LocationName $center={addMoreDataLink}>
+          {addMoreDataLink ? (
             locationName
           ) : (
             <TextAndIconWithSpecialWrapping
@@ -75,7 +81,7 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
           />
         </ProgressBarWrapper>
       </Inner>
-      {isMobileVersion && (
+      {addMoreDataLink && (
         <MoreDataLinkContainer>
           <MoreDataLinkButton
             href={state.relativeUrl}
@@ -83,7 +89,6 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
             onClick={() => {
               trackMapClick(locationName);
             }}
-            tabIndex={-1}
           >
             More data
             <MoreDataArrowIcon />

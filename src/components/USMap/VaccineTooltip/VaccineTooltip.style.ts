@@ -15,9 +15,9 @@ export const Inner = styled.div`
   padding: 16px;
 `;
 
-export const LocationName = styled.div<{ $isMobileVersion: boolean }>`
+export const LocationName = styled.div<{ $center: boolean }>`
   ${props => props.theme.fonts.regularBookBold};
-  text-align: ${props => (props.$isMobileVersion ? 'center' : undefined)};
+  text-align: ${props => (props.$center ? 'center' : undefined)};
   color: black;
   font-size: 16px;
   line-height: 16px;
@@ -55,8 +55,8 @@ export const StyledVaccineDot = styled(VaccineDot)`
 `;
 
 export const ProgressBarWrapper = styled.div`
-  margin-top: 12px;
-  margin-bottom: 2px;
+  margin-top: 11px;
+  margin-bottom: 1px;
 `;
 
 export const MoreDataLinkContainer = styled.div`
