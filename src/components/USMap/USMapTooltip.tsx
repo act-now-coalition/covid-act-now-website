@@ -62,21 +62,19 @@ export const ActivateOnClickTooltip: React.FC<TooltipProps> = ({
   };
 
   return (
-    <ClickAwayListener onClickAway={handleTooltipClose}>
-      <g onClickCapture={handleTooltipOpen}>
-        <Tooltip
-          interactive
-          enterDelay={0}
-          onClose={handleTooltipClose}
-          open={open}
-          disableFocusListener
-          disableHoverListener
-          disableTouchListener
-          {...otherProps}
-        >
-          {children}
-        </Tooltip>
-      </g>
-    </ClickAwayListener>
+    <g onClickCapture={handleTooltipOpen}>
+      <Tooltip
+        interactive
+        enterDelay={0}
+        onClose={handleTooltipClose}
+        open={open}
+        disableFocusListener
+        disableHoverListener
+        disableTouchListener
+        {...otherProps}
+      >
+        {children}
+      </Tooltip>
+    </g>
   );
 };
