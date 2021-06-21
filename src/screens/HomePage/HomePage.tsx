@@ -25,7 +25,7 @@ import {
   ToggleWrapper,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
-import HorizontalThermometer from 'components/HorizontalThermometer';
+import RiskLevelThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
@@ -162,7 +162,7 @@ export default function HomePage() {
             <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
 
             <ColumnCentered $topBottomSpacing={true}>
-              <HorizontalThermometer />
+              <RiskLevelThermometer />
             </ColumnCentered>
             <Section>
               <CompareMain

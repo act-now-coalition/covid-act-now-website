@@ -1,0 +1,11 @@
+import React from 'react';
+import VaccinationsThermometerAutosize from './VaccinationsThermometer';
+
+export default {
+  title: 'Shared Components/Vaccinations Thermometer',
+  component: VaccinationsThermometerAutosize,
+};
+
+export const Thermometer = () => {
+  return <VaccinationsThermometerAutosize />;
+};

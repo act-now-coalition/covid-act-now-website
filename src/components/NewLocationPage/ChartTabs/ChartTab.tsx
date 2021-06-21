@@ -1,6 +1,4 @@
 import React from 'react';
-import { formatValue, getLevelInfo } from 'common/metric';
-import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
 import {
   TabContainer,
@@ -10,35 +8,30 @@ import {
 } from './ChartTab.style';
 import { CircleIcon } from '../Shared/Shared.style';
 import { Value } from '../SummaryStat/SummaryStat.style';
-import { getMetricNameForStat, metricSubLabelText } from '../SummaryStat/utils';
+import { ValueInfo } from 'components/Charts/Groupings';
 
-const ChartTab: React.FC<{ metric: Metric; value: number | null }> = ({
-  metric,
-  value,
-}) => {
+const ChartTab: React.FC<{
+  metricName: string;
+  subLabel?: string[];
+  metricValueInfo: ValueInfo;
+}> = ({ metricName, subLabel, metricValueInfo }) => {
   const isMobile = useBreakpoint(600);
-  const metricName = getMetricNameForStat(metric);
-  const hasSubLabel = metric in metricSubLabelText;
-  const levelInfo = getLevelInfo(metric, value);
-  const formattedValue = formatValue(metric, value, /*nullValueCopy=*/ '-');
 
   return (
     <TabContainer>
       <TabTitle>
         {metricName}
-        {isMobile && hasSubLabel && (
-          <MetricSubLabel>
-            {metricSubLabelText[metric].join(' ')}
-          </MetricSubLabel>
+        {isMobile && subLabel && (
+          <MetricSubLabel>{subLabel.join(' ')}</MetricSubLabel>
         )}
       </TabTitle>
       <TabContent>
-        <CircleIcon $iconColor={levelInfo.color} />
-        <Value>{formattedValue}</Value>
-        {!isMobile && hasSubLabel && (
-          <MetricSubLabel>
-            {metricSubLabelText[metric].join(' ')}
-          </MetricSubLabel>
+        {metricValueInfo.levelColor && (
+          <CircleIcon $iconColor={metricValueInfo.levelColor} />
+        )}
+        <Value>{metricValueInfo.formattedValue}</Value>
+        {!isMobile && subLabel && (
+          <MetricSubLabel>{subLabel.join(' ')}</MetricSubLabel>
         )}
       </TabContent>
     </TabContainer>

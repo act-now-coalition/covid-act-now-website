@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
-import urlJoin from 'url-join';
 import { ClickAwayListener } from '@material-ui/core';
 import SocialButtons from './SocialButtons';
 import { Wrapper } from './ShareButtons.style';
 import ShareButton from 'components/NewLocationPage/ShareButton/ShareButton';
-import makeChartShareQuote from 'common/utils/makeChartShareQuote';
-import * as urls from 'common/urls';
 import { Region } from 'common/regions';
-import type { MetricValues } from 'common/models/Projections';
 import { useEscToClose, useBreakpoint } from 'common/hooks';
 
 const ShareButtons: React.FC<{
+  shareQuote: string;
+  shareUrl: string;
   region: Region;
-  stats: MetricValues;
-  chartIdentifier: number;
   showEmbedButton?: boolean;
-}> = ({ region, stats, chartIdentifier, showEmbedButton }) => {
-  const shareQuote = makeChartShareQuote(
-    region.fullName,
-    stats,
-    chartIdentifier,
-  );
-
-  const shareBaseURL = region.canonicalUrl;
-
-  const shareURL = urls.addSharingId(
-    urlJoin(shareBaseURL, `chart/${chartIdentifier}`),
-  );
-
+}> = ({ shareQuote, shareUrl, region, showEmbedButton }) => {
   const [showSocialButtons, setShowSocialButtons] = useState(false);
 
   const hideSocialButtons = () => setShowSocialButtons(false);
@@ -47,7 +31,7 @@ const ShareButtons: React.FC<{
         {showSocialButtons && (
           <SocialButtons
             iconSize={iconSize}
-            shareURL={shareURL}
+            shareURL={shareUrl}
             shareQuote={shareQuote}
             region={region}
             hideSocialButtons={() => hideSocialButtons()}

@@ -54,6 +54,8 @@ import { SectionHeader } from 'components/SharedComponents';
 import NationalText from 'components/NationalText';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
+import { chartsHeight } from 'components/Charts/Charts.style';
+import { EmptyPanel } from 'components/Charts/Charts.style';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -327,7 +329,7 @@ const Explore: React.FunctionComponent<{
                     seriesList={chartSeries}
                     isMobile={isMobile}
                     width={width}
-                    height={400}
+                    height={chartsHeight}
                     tooltipSubtext={`in ${getLocationNames(selectedLocations)}`}
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
@@ -339,25 +341,26 @@ const Explore: React.FunctionComponent<{
                     maxYFromDefinition={maxYFromDefinition}
                   />
                 ) : (
-                  <div style={{ height: 400 }} />
+                  <div style={{ height: chartsHeight }} />
                 )
               }
             </ParentSize>
           </Styles.ChartContainer>
         )}
         {selectedLocations.length > 0 && !hasData && (
-          <Styles.EmptyPanel style={{ height: 400 }}>
+          <EmptyPanel>
             {getNoDataCopy(
               currentMetricName,
               getLocationNames(selectedLocations),
             )}
-          </Styles.EmptyPanel>
+            <ScreenshotReady />
+          </EmptyPanel>
         )}
         {selectedLocations.length === 0 && (
-          <Styles.EmptyPanel style={{ height: 400 }}>
+          <EmptyPanel>
             <p>Please select states or counties to explore trends.</p>
             <ScreenshotReady />
-          </Styles.EmptyPanel>
+          </EmptyPanel>
         )}
         <Styles.FooterContainer>
           {showLegend && <Legend seriesList={chartSeries} />}
