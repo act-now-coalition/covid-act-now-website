@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
-import USRiskMap from 'components/USMap/USRiskMap';
+import USVaccineMap from 'components/USMap/USVaccineMap';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -27,6 +27,7 @@ import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
+import { TooltipMode } from 'components/USMap/USMapTooltip';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -79,6 +80,7 @@ export default function HomePage() {
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
+  const isMobileMap = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
@@ -137,7 +139,14 @@ export default function HomePage() {
               />
             </ColumnCentered>
 
-            <USRiskMap showCounties={showCounties} />
+            <USVaccineMap
+              showCounties={showCounties}
+              tooltipMode={
+                isMobileMap
+                  ? TooltipMode.ACTIVATE_ON_CLICK
+                  : TooltipMode.ACTIVATE_ON_HOVER
+              }
+            />
 
             <ColumnCentered $topBottomSpacing={true}>
               <HorizontalThermometer />
