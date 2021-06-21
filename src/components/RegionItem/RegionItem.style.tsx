@@ -10,7 +10,8 @@ const regionItemWidth = '296px';
 
 export const CircleIcon = styled(FiberManualRecordIcon)<{ $iconColor: string }>`
   color: ${({ $iconColor }) => $iconColor};
-  font-size: 1rem;
+  font-size: 0.8rem;
+  display: flex;
 `;
 
 export const CopyContainer = styled.div`
