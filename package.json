@@ -132,7 +132,8 @@
     "build-storybook": "build-storybook -s public --no-dll",
     "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js",
     "generate-ccvi": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_ccvi.ts",
-    "generate-surgo-percent-population-vulnerable": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_surgo_percent_population_vulnerable.ts"
+    "generate-surgo-percent-population-vulnerable": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_surgo_percent_population_vulnerable.ts",
+    "chromatic": "npx chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [
@@ -190,6 +191,7 @@
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-loader": "8.0.6",
+    "chromatic": "^5.9.2",
     "cross-env": "^7.0.2",
     "cypress": "^4.2.0",
     "delay": "^4.3.0",
