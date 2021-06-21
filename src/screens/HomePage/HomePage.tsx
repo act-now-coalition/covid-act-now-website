@@ -18,12 +18,7 @@ import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import {
-  Content,
-  Section,
-  ColumnCentered,
-  ToggleWrapper,
-} from './HomePage.style';
+import { Content, Section, ColumnCentered } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import RiskLevelThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -31,12 +26,9 @@ import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
-import {
-  ButtonGroup,
-  Button,
-} from 'components/SharedComponents/SharedComponents.style';
+import LocationToggle from './LocationToggle';
 
-enum MapView {
+export enum MapView {
   STATES = 'States',
   COUNTIES = 'Counties',
 }
@@ -118,17 +110,6 @@ export default function HomePage() {
     </>
   );
 
-  const LocationToggle: React.FC = () => {
-    return (
-      <ToggleWrapper>
-        <ButtonGroup value={locationScope} exclusive onChange={onClickSwitch}>
-          <Button value={MapView.STATES}>States</Button>
-          <Button value={MapView.COUNTIES}>Counties</Button>
-        </ButtonGroup>
-      </ToggleWrapper>
-    );
-  };
-
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -158,7 +139,10 @@ export default function HomePage() {
                 setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-              <LocationToggle />
+              <LocationToggle
+                locationScope={locationScope}
+                onChange={onClickSwitch}
+              />
             </ColumnCentered>
 
             <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
