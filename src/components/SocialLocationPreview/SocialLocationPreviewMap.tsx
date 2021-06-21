@@ -6,14 +6,15 @@ import {
   USMapPreviewHeader,
   USMapHeaderText,
   MapHeaderHeader,
+  LastUpdatedWrapper,
   PreviewFooter,
   FooterText,
   MapWrapper,
 } from './SocialLocationPreview.style';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import Map from 'components/Map/Map';
-import { Legend, LegendItem } from 'components/Map/Legend';
+import USRiskMap from 'components/USMap/USRiskMap';
+import { Legend, LegendItem } from './Legend';
 
 const SocialLocationPreview = (props: {
   border?: Boolean;
@@ -24,70 +25,59 @@ const SocialLocationPreview = (props: {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-  const navigateToCAN = () => {
-    window.top.location.href = 'https://covidactnow.org/';
-    return false;
-  };
-  const Footer = props.Footer;
-  const isEmbed = props.isEmbed;
-  const showCountyView = !isEmbed && !props.isEmbedPreview;
+  const { border, Footer, isEmbed, isEmbedPreview } = props;
+  const showCountyView = !isEmbed && !isEmbedPreview;
   return (
-    <Wrapper border={props.border}>
+    <Wrapper noShadow={!isEmbedPreview} border={border}>
       <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
-      <USMapPreviewHeader sideLegend={!isEmbed}>
+      {!isEmbedPreview && (
+        <LastUpdatedWrapper>Updated {lastUpdatedDateString}</LastUpdatedWrapper>
+      )}
+      <USMapPreviewHeader border={isEmbedPreview} sideLegend={!isEmbed}>
         <MapWrapper>
-          <Map
-            onClick={isEmbed ? navigateToCAN : undefined}
-            hideLegend={!isEmbed}
-            hideLegendTitle={true}
-            hideInstructions={true}
-            showCounties={showCountyView}
-          />
+          {isEmbed && <MapLegend isEmbed />}
+          <USRiskMap showCounties={showCountyView} />
         </MapWrapper>
-        {isEmbed ? (
-          ''
-        ) : (
+        {!isEmbed && (
           <USMapHeaderText>
-            <Legend condensed={true}>
-              <LegendItem
-                key={'legend-5'}
-                title={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.SUPER_CRITICAL].color}
-              />
-              <LegendItem
-                key={'legend-4'}
-                title={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.CRITICAL].color}
-              />
-              <LegendItem
-                key={'legend-3'}
-                title={LOCATION_SUMMARY_LEVELS[Level.HIGH].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.HIGH].color}
-              />
-              <LegendItem
-                key={'legend-2'}
-                title={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.MEDIUM].color}
-              />
-              <LegendItem
-                key={'legend-1'}
-                title={LOCATION_SUMMARY_LEVELS[Level.LOW].name}
-                color={LOCATION_SUMMARY_LEVELS[Level.LOW].color}
-              />
-            </Legend>
+            <MapLegend />
           </USMapHeaderText>
         )}
       </USMapPreviewHeader>
       {Footer ? (
         <Footer />
       ) : (
-        <PreviewFooter>
-          <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
-          <FooterText>covidactnow.org</FooterText>
-        </PreviewFooter>
+        isEmbedPreview && (
+          <PreviewFooter>
+            <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
+            <FooterText>covidactnow.org</FooterText>
+          </PreviewFooter>
+        )
       )}
     </Wrapper>
   );
 };
+
+const MapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
+  <Legend condensed={!isEmbed}>
+    {[
+      Level.SUPER_CRITICAL,
+      Level.CRITICAL,
+      Level.HIGH,
+      Level.MEDIUM,
+      Level.LOW,
+    ].map(level => (
+      <LegendItem
+        key={`legend-${level}`}
+        title={
+          isEmbed
+            ? LOCATION_SUMMARY_LEVELS[level].summary || ''
+            : LOCATION_SUMMARY_LEVELS[level].name
+        }
+        color={LOCATION_SUMMARY_LEVELS[level].color}
+      />
+    ))}
+  </Legend>
+);
 
 export default SocialLocationPreview;

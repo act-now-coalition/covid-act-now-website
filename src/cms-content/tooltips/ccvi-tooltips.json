@@ -1,5 +1,5 @@
 {
-  "headerTooltipContent": "Our vulnerability metric is calculated using government and health data sources. It is a static metric.  \n\nAs of May 4, 2021, people in the *most* vulnerable third of U.S. counties are 47 percent more likely to have died from COVID than people in the *least* vulnerable third of U.S. counties. \n\nRead more about Surgo Ventures’ [COVID-19 Community Vulnerability Index](https://precisionforcovid.org/ccvi)[ (CCVI)](https://precisionforcovid.org/ccvi).",
+  "headerTooltipContent": "Our vulnerability metric is calculated using government and health data sources. It is a static metric.  \n\nAs of June 15, 2021, people in the *most* vulnerable third of U.S. counties are 47 percent more likely to have died from COVID than people in the *least* vulnerable third of U.S. counties. \n\nRead more about Surgo Ventures’ [COVID-19 Community Vulnerability Index](https://precisionforcovid.org/ccvi)[ (CCVI)](https://precisionforcovid.org/ccvi).",
   "subscoreTooltips": [
     {
       "subscoreName": "Unemployment & low income",

@@ -13,7 +13,6 @@ import {
   useLocationSummariesForFips,
   useShowPastPosition,
 } from 'common/hooks';
-import { ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
 import { useProjectionsFromRegion } from 'common/utils/model';
@@ -26,7 +25,6 @@ import Recommendations from './Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
-import ChartBlock from './ChartBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { WidthContainer } from './LocationPageBlock.style';
 import { LocationPageContentWrapper, BelowTheFold } from './ChartsHolder.style';
@@ -37,6 +35,13 @@ import {
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
+import ChartBlock from 'components/Charts/ChartBlock';
+import {
+  CHART_GROUPS,
+  ChartGroup,
+  GroupHeader,
+  getChartGroupFromMetric,
+} from 'components/Charts/Groupings';
 
 // TODO: 100 is rough accounting for the navbar;
 // could make these constants so we don't have to manually update
@@ -93,15 +98,29 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     }
   }, [hash]);
 
-  const [scrolledWithRef, setScrolledWithRef] = useState(false);
+  const [scrolledWithUrl, setScrolledWithUrl] = useState(false);
+
+  const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
+  const casesBlockRef = useRef<HTMLDivElement>(null);
+  const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
+  const deathsBlockRed = useRef<HTMLDivElement>(null);
+  const chartBlockRefs = useMemo(
+    () => ({
+      [GroupHeader.VACCINATED]: vaccinationsBlockRef,
+      [GroupHeader.CASES]: casesBlockRef,
+      [GroupHeader.HOSPITALIZATIONS]: hospitalizationsBlockRef,
+      [GroupHeader.DEATHS]: deathsBlockRed,
+    }),
+    [],
+  );
 
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
           const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current && !scrolledWithRef) {
-            setScrolledWithRef(true);
+          if (metricRef.current && !scrolledWithUrl) {
+            setScrolledWithUrl(true);
             scrollTo(metricRef.current);
           }
         }
@@ -112,8 +131,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     const scrollToRecommendations = () => {
       const timeoutId = setTimeout(() => {
         if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current && !scrolledWithRef) {
-            setScrolledWithRef(true);
+          if (recommendationsRef.current && !scrolledWithUrl) {
+            setScrolledWithUrl(true);
             scrollTo(recommendationsRef.current);
           }
         }
@@ -123,7 +142,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
     scrollToChart();
     scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithRef]);
+  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithUrl]);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
@@ -142,6 +161,10 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(shareBlockRef.current, -352);
   }, []);
 
+  const [clickedStatMetric, setClickedStatMetric] = useState<Metric | null>(
+    null,
+  );
+
   const onClickMetric = useCallback(
     (metric: Metric) => {
       trackEvent(
@@ -149,9 +172,16 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         EventAction.CLICK,
         `Location Header Stats: ${Metric[metric]}`,
       );
-      scrollTo(metricRefs[metric].current);
+      setClickedStatMetric(metric);
+      const groupWithMetric = getChartGroupFromMetric(metric);
+      const chartBlockRef = groupWithMetric
+        ? chartBlockRefs[groupWithMetric.groupHeader]
+        : null;
+      if (chartBlockRef?.current) {
+        scrollTo(chartBlockRef.current);
+      }
     },
-    [metricRefs],
+    [chartBlockRefs],
   );
 
   const onClickSparkLine = useCallback((metric: SparkLineMetric) => {
@@ -207,24 +237,28 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 />
               </LocationPageBlock>
             )}
-            {ALL_METRICS.map(metric => (
-              <ErrorBoundary key={metric}>
-                {!projections ? (
-                  <LoadingScreen />
-                ) : (
-                  <LocationPageBlock>
-                    <ChartBlock
-                      metric={metric}
-                      projections={projections}
-                      chartRef={metricRefs[metric]}
-                      isMobile={isMobile}
-                      region={region}
-                      stats={stats}
-                    />
-                  </LocationPageBlock>
-                )}
-              </ErrorBoundary>
-            ))}
+            {CHART_GROUPS.map((group: ChartGroup) => {
+              const { groupHeader } = group;
+              const groupRef = chartBlockRefs[groupHeader];
+              return (
+                <ErrorBoundary key={groupHeader}>
+                  {!projections ? (
+                    <LoadingScreen />
+                  ) : (
+                    <LocationPageBlock ref={groupRef}>
+                      <ChartBlock
+                        projections={projections}
+                        isMobile={isMobile}
+                        region={region}
+                        stats={stats}
+                        group={group}
+                        clickedStatMetric={clickedStatMetric}
+                      />
+                    </LocationPageBlock>
+                  )}
+                </ErrorBoundary>
+              );
+            })}
             <LocationPageBlock id="vulnerabilities">
               <VulnerabilitiesBlock scores={ccviScores} region={region} />
             </LocationPageBlock>

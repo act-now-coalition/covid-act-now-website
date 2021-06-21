@@ -10,25 +10,25 @@ import {
   IconContainer,
 } from './RegionItem.style';
 import { Region, State } from 'common/regions';
-import { getLocationIconFillColor } from 'components/Search';
 import { StyledRegionName } from 'components/SharedComponents';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { vaccineColorFromLocationSummary } from 'common/colors';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 import { Metric } from 'common/metricEnum';
 import { formatPercent } from 'common/utils';
 
 const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
-  const iconColor = getLocationIconFillColor(region);
-
   const regionSummary = getSummaryFromFips(region.fipsCode);
-  const stats = regionSummary ? summaryToStats(regionSummary) : null;
-  const vaccinatedStat = stats ? stats[Metric.VACCINATIONS] : '';
+  const showStateCode = !(region instanceof State);
+  const iconColor = vaccineColorFromLocationSummary(regionSummary);
+
+  const vaccinatedStat = regionSummary
+    ? summaryToStats(regionSummary)[Metric.VACCINATIONS]
+    : null;
   const levelDescriptionCopy = vaccinatedStat
     ? `${formatPercent(vaccinatedStat, 0)} with 1+ dose`
     : '';
-
-  const showStateCode = !(region instanceof State);
 
   return (
     <StyledLink

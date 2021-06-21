@@ -194,7 +194,7 @@ const ChartZoneAutosize = ({
   capY,
   getTooltipContent,
   getPointText,
-  height = 400,
+  height = Style.chartsHeight,
   marginTop,
   marginLeft,
 }: {

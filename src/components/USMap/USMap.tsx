@@ -1,18 +1,15 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { geoAlbersUsaTerritories } from 'geo-albers-usa-territories';
 import ReactTooltip from 'react-tooltip';
-import { colorFromLocationSummary } from 'common/colors';
-import { useSummaries } from 'common/location_summaries';
-import { ScreenshotReady } from 'components/Screenshot';
 import {
   findStateByFipsCodeStrict,
   statesByFips,
   State as StateType,
 } from 'common/regions';
 import stateGeographies from 'common/data/states-10m.json';
-import { USMapWrapper, USStateMapWrapper } from './Map.style';
+import { USMapWrapper, USStateMapWrapper } from './USMap.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import MapCounties from './MapCounties';
 
@@ -36,25 +33,17 @@ const MarianaIslands = ({ fill }: { fill: string }) => (
   </g>
 );
 
-interface USACountyMapProps {
-  stateClickHandler: (stateName: string) => void;
+interface USMapProps {
   showCounties: boolean;
+  getFillColor: (fipsCode: string) => string;
+  renderTooltip: (stateFipsCode: string) => ReactNode;
 }
 
 const projection = geoAlbersUsaTerritories().scale(1070).translate([400, 300]);
 
-const USACountyMap = React.memo(
-  ({ stateClickHandler, showCounties }: USACountyMapProps) => {
-    const [tooltipContent, setTooltipContent] = useState('');
-    const locationSummaries = useSummaries();
-
-    const getFillColor = useCallback(
-      (fips: string) => {
-        const summary = (locationSummaries && locationSummaries[fips]) || null;
-        return colorFromLocationSummary(summary);
-      },
-      [locationSummaries],
-    );
+const USMap = React.memo(
+  ({ showCounties, getFillColor, renderTooltip }: USMapProps) => {
+    const [tooltipContent, setTooltipContent] = useState<ReactNode>(null);
 
     const onMouseLeave = () => setTooltipContent('');
 
@@ -90,10 +79,11 @@ const USACountyMap = React.memo(
                           aria-label={fullName}
                           onClick={() => {
                             trackMapClick(fullName);
-                            stateClickHandler(fullName);
                           }}
                           tabIndex={-1}
-                          onMouseEnter={() => setTooltipContent(fullName)}
+                          onMouseEnter={() =>
+                            setTooltipContent(renderTooltip(fipsCode))
+                          }
                           onMouseLeave={onMouseLeave}
                         >
                           {stateCode === 'MP' ? (
@@ -121,18 +111,17 @@ const USACountyMap = React.memo(
           </ComposableMap>
         </USStateMapWrapper>
       ),
-      [showCounties, getFillColor, stateClickHandler],
+      [showCounties, getFillColor, renderTooltip],
     );
 
     return (
       <USMapWrapper>
         {/** Map with shaded background colors for states. */}
         {mapContent}
-        {locationSummaries && <ScreenshotReady />}
         <ReactTooltip>{tooltipContent}</ReactTooltip>
       </USMapWrapper>
     );
   },
 );
 
-export default USACountyMap;
+export default USMap;

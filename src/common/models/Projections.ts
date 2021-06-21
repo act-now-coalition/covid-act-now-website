@@ -74,10 +74,13 @@ export class Projections {
       };
     }
 
+    const vaccinationsCompleted =
+      this.primary.vaccinationsInfo?.ratioVaccinated ?? null;
     return {
       level: this.getAlarmLevel(),
       metrics,
       ccvi,
+      vc: vaccinationsCompleted,
     };
   }
 
