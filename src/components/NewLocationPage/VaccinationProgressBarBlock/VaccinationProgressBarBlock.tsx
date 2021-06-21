@@ -1,13 +1,7 @@
 import React from 'react';
-import { ProgressBar } from './ProgressBar';
 import { Title } from './VaccinationProgressBarBlock.style';
 import { Projection } from 'common/models/Projection';
-
-export interface ProgressBarProps {
-  locationName: string;
-  vaccinationsInitiated: number;
-  vaccinationsCompleted: number;
-}
+import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 
 const VaccinationProgressBarBlock: React.FC<{
   locationName: string;
@@ -23,7 +17,8 @@ const VaccinationProgressBarBlock: React.FC<{
   return (
     <>
       <Title>Vaccination Progress</Title>
-      <ProgressBar
+      <VaccineProgressBar
+        oldVersion
         vaccinationsInitiated={percentInitiated}
         vaccinationsCompleted={percentCompleted}
         locationName={locationName}
