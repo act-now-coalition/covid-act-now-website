@@ -238,6 +238,7 @@ const CompareTable = (props: {
     tabTextExpanded: seeAllText,
     trackingLabel: 'Open compare modal',
     trackingCategory: EventCategory.COMPARE,
+    disableArrowChange: true,
     secondaryOnClick: onClickShowAll,
   };
 
