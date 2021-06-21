@@ -213,20 +213,20 @@ const CompareTable = (props: {
   };
 
   /**
-   * Show limited locations (100 max) in the following scenarios:
+   * Only show limited locations (100 max) in the following scenarios:
    * - "Counties" tab selected on homepage.
    * - "Metro areas" tab selected on homepage.
    * - "USA" tab selected on location page.
    */
-  const showLimitedLocations =
+  const showAllLocations =
     (props.isHomepage && props.homepageScope === HomepageLocationScope.STATE) ||
     (!props.isHomepage && props.geoScope !== GeoScopeFilter.COUNTRY);
 
   const seeAllText = (
     <>
-      See {showLimitedLocations ? 'all' : 'more'} &nbsp;
+      See {showAllLocations ? 'all' : 'more'} &nbsp;
       <NumberOfLocationsText>
-        ({showLimitedLocations ? sortedLocationsArr.length : 100})
+        ({showAllLocations ? sortedLocationsArr.length : 100})
       </NumberOfLocationsText>
     </>
   );
