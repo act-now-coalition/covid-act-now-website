@@ -68,7 +68,7 @@ const MapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
       Level.LOW,
     ].map(level => (
       <LegendItem
-        key={'legend-{level}'}
+        key={`legend-${level}`}
         title={
           isEmbed
             ? LOCATION_SUMMARY_LEVELS[level].summary || ''

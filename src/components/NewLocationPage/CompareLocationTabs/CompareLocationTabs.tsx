@@ -12,7 +12,9 @@ const CompareLocationTabs: React.FC<{
   return (
     <ButtonGroup value={selectedOption} exclusive onChange={onChange}>
       {locationLevels.map(locationLevel => (
-        <Button value={locationLevel}>{locationLevel}</Button>
+        <Button key={`level-${locationLevel}`} value={locationLevel}>
+          {locationLevel}
+        </Button>
       ))}
     </ButtonGroup>
   );
