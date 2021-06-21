@@ -6,10 +6,10 @@ import styled from 'styled-components';
  */
 
 export const ShareCardWrapper = styled.div<{ isHomePage?: boolean }>`
-  margin: ${props => (props.isHomePage ? '50px auto' : '35px auto')};
+  margin: ${props => (props.isHomePage ? '15px auto' : '35px auto')};
   width: 400px;
   height: 262px;
-  transform: scale(1.75);
+  transform: scale(2.25);
   transform-origin: top center;
 `;
 

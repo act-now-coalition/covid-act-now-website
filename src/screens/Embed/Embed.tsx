@@ -88,9 +88,18 @@ export function EmbedFooter() {
 }
 
 export default function Embed({ isNational }: { isNational: boolean }) {
+  const navigateToCAN = () => {
+    window.top.location.href = 'https://covidactnow.org/';
+    return false;
+  };
+
   if (isNational) {
     return (
-      <EmbedContainer height={US_MAP_EMBED_HEIGHT} width={US_MAP_EMBED_WIDTH}>
+      <EmbedContainer
+        height={US_MAP_EMBED_HEIGHT}
+        width={US_MAP_EMBED_WIDTH}
+        onClick={navigateToCAN}
+      >
         <SocialLocationPreviewMap border isEmbed Footer={EmbedFooter} />
       </EmbedContainer>
     );

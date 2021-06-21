@@ -36,6 +36,8 @@ Before running the functions locally for the first time, you will need to login 
 ```sh
 # This will open the browser to authorize and authenticate the Firebase CLI
 firebase login
+# if you're running on windows and get errors about `cannot login in non-interactive mode`, use:
+firebase login --interactive
 
 # This will use the development configuration by default
 firebase use dev

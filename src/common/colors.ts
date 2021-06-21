@@ -2,6 +2,7 @@ import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 
 import { LocationSummary } from './location_summaries';
+import { Metric } from './metricEnum';
 
 export default {
   LIGHTGRAY: '#f2f2f2',
@@ -80,6 +81,13 @@ export const COLOR_MAP = {
     LIGHT: 'rgba(53, 103, 253, .15)',
     PURPLE: '#5361FD',
   },
+  VACCINATIONS_BLUE: {
+    0: '#B7C8FF',
+    1: '#6F93FF',
+    2: '#3567FD',
+    3: '#002CB4',
+    4: '#00175D',
+  },
 };
 
 export const LEVEL_COLOR = {
@@ -96,6 +104,33 @@ export function colorFromLocationSummary(
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ) {
   return summary ? LEVEL_COLOR[summary.level] : defaultColor;
+}
+
+export function vaccineColorFromLocationSummary(
+  summary: LocationSummary | null | undefined,
+  defaultColor = COLOR_MAP.GRAY.LIGHT,
+): string {
+  const val = summary?.metrics?.[Metric.VACCINATIONS]?.value ?? null;
+  if (val === null) {
+    return defaultColor;
+  } else {
+    return vaccineColor(val);
+  }
+}
+
+export function vaccineColor(val: number): string {
+  const colors = COLOR_MAP.VACCINATIONS_BLUE;
+  if (val < 0.4) {
+    return colors[0];
+  } else if (val < 0.5) {
+    return colors[1];
+  } else if (val < 0.6) {
+    return colors[2];
+  } else if (val < 0.7) {
+    return colors[3];
+  } else {
+    return colors[4];
+  }
 }
 
 export const VACCINATIONS_COLOR_MAP = {

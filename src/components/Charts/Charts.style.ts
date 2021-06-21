@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { ChartContainer as ExploreChartContainer } from 'components/Explore/Explore.style';
+import { COLOR_MAP } from 'common/colors';
+
+export const chartsHeight = 250;
 
 export const charts = {
   fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
@@ -194,17 +198,23 @@ export const VaccinationLabel = styled.g`
     fill: ${props => palette(props).background};
   }
   text {
-    ${props => props.theme.fonts.regularBook};
+    ${props => props.theme.fonts.regularBookBold};
+    text-anchor: start;
     font-size: 0.85rem;
-    text-anchor: end;
     fill: ${props => palette(props).annotation || '#4f4f4f'};
     dominant-baseline: middle;
   }
 `;
 
-export const VaccinationLabelBold = styled(VaccinationLabel)`
-  text {
-    ${props => props.theme.fonts.regularBookBold};
-    text-anchor: start;
-  }
+export const NewChartContainer = styled(ExploreChartContainer)`
+  margin: 0 0 ${props => props.theme.spacing(3)}px 0;
+`;
+
+export const EmptyPanel = styled(ExploreChartContainer)`
+  display: grid;
+  place-items: center;
+  background-color: ${COLOR_MAP.GREY_0};
+  padding: ${props => props.theme.spacing(3)}px;
+  text-align: center;
+  height: ${chartsHeight}px;
 `;

@@ -6,7 +6,7 @@ import {
   Wrapper,
 } from './HomepageUpsell.style';
 import { EventAction, EventCategory } from 'components/Analytics';
-import Map from 'components/Map/Map';
+import USRiskMap from 'components/USMap/USRiskMap';
 import LabelWithChevron from 'components/NewLocationPage/Shared/LabelWithChevron';
 import {
   Experiment,
@@ -35,13 +35,7 @@ const HomepageUpsell: React.FC<{ showHomepageUpsell: boolean }> = ({
                 to="/"
               >
                 <MapWrapper>
-                  <Map
-                    onClick={undefined}
-                    hideLegend={true}
-                    hideLegendTitle={true}
-                    hideInstructions={true}
-                    showCounties={false}
-                  />
+                  <USRiskMap showCounties={false} />
                 </MapWrapper>
                 <div>
                   <LabelWithChevron text="Risk &amp; vaccine tracker" />

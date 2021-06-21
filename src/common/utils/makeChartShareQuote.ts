@@ -2,7 +2,7 @@ import { Metric } from 'common/metricEnum';
 import { fail, formatDecimal, formatPercent } from 'common/utils';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
-export default function makeChartShareQuote(
+export function makeChartShareQuote(
   displayName: string,
   stats: any = {},
   chartIdentifier: number,
@@ -33,5 +33,5 @@ export default function makeChartShareQuote(
       1,
     )} daily new cases per 100k population, according to @CovidActNow. See the chart: `;
   }
-  return `I'm keeping track of ${displayName}'s COVID data and risk level with @CovidActNow. What does your community look like?`;
+  return `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
 }

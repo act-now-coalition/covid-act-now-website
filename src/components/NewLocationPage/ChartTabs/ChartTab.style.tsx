@@ -16,7 +16,28 @@ export const Tabs = styled(MuiTabs)`
   }
 `;
 
-export const Tab = styled(MuiTab)`
+export const TabTitle = styled.div`
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: ${COLOR_MAP.GREY_4};
+  margin-bottom: 0.5rem;
+`;
+
+export const MetricSubLabel = styled.div`
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: ${COLOR_MAP.GREY_4};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0.5rem 0 0 0.5rem;
+  }
+`;
+
+export const Tab = styled(MuiTab).attrs(props => ({
+  disableRipple: true,
+  disableFocusRipple: true,
+}))`
   line-height: 1;
   text-align: left;
   padding: 6px 0;
@@ -26,12 +47,10 @@ export const Tab = styled(MuiTab)`
     align-items: start;
   }
   &.Mui-selected {
-    font-weight: 500;
+    ${TabTitle},${MetricSubLabel}{
+      color: black;
+    }
   }
-`;
-
-export const TabsContainer = styled.div`
-  display: flex;
 `;
 
 export const TabContainer = styled.div`
@@ -41,27 +60,32 @@ export const TabContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TabTitle = styled.div`
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  line-height: 1;
-  color: ${COLOR_MAP.GREY_4};
-  margin-bottom: 0.5rem;
-`;
-
 export const TabContent = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
 `;
 
-export const MetricSubLabel = styled.div`
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: ${COLOR_MAP.GREY_4};
-  line-height: 1;
+export const TabsWrapper = styled.div`
+  border-bottom: 1px solid ${COLOR_MAP.GREY_3};
+  margin-bottom: 2rem;
+`;
 
-  @media (min-width: ${materialSMBreakpoint}) {
-    color: ${COLOR_MAP.GREY_3};
-    padding: 0.5rem 0 0 0.5rem;
+export const InactiveTabWrapper = styled.div`
+  ${Tab} {
+    cursor: default; // (Chelsi)-this isn't the *most* accessible
+  }
+
+  ${TabTitle} {
+    color: ${COLOR_MAP.GREY_4};
+  }
+`;
+
+export const VaccinationsTabsWrapper = styled(InactiveTabWrapper)`
+  display: flex;
+
+  ${TabContainer} {
+    &:first-of-type {
+      margin-right: 1.5rem;
+    }
   }
 `;

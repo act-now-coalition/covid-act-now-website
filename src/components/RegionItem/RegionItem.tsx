@@ -20,7 +20,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = getLocationIconFillColor(region);
 
   const regionSummary = getSummaryFromFips(region.fipsCode);
-  const levelDescriptionCopy = regionSummary?.level
+  const levelDescriptionCopy = regionSummary
     ? LOCATION_SUMMARY_LEVELS[regionSummary.level].summary
     : '';
 
