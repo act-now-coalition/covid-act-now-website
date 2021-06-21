@@ -5,31 +5,32 @@ import { ParentSize } from '@vx/responsive';
 import { Label } from './VaccinationsThermometer.style';
 import { thermometerBarHeight } from '../RiskLevelThermometer/RiskLevelThermometer.style';
 import { COLOR_MAP } from 'common/colors';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Section {
-  labelValue: string;
+  labelTo: string;
   color: string;
 }
 
 const thermometerSections: Section[] = [
   {
-    labelValue: '40%',
+    labelTo: '40%',
     color: COLOR_MAP.VACCINATIONS_BLUE[0],
   },
   {
-    labelValue: '50%',
+    labelTo: '50%',
     color: COLOR_MAP.VACCINATIONS_BLUE[1],
   },
   {
-    labelValue: '60%',
+    labelTo: '60%',
     color: COLOR_MAP.VACCINATIONS_BLUE[2],
   },
   {
-    labelValue: '70%',
+    labelTo: '70%',
     color: COLOR_MAP.VACCINATIONS_BLUE[3],
   },
   {
-    labelValue: '',
+    labelTo: '100%', // Does not render
     color: COLOR_MAP.VACCINATIONS_BLUE[4],
   },
 ];
@@ -42,10 +43,12 @@ const VaccinationsThermometer: React.FC<{ height: number; width: number }> = ({
   const scaleRect = scaleBand<number>().domain(indexList).range([0, width]);
   const bandWidth = scaleRect.bandwidth();
 
+  const clipPathId = uuidv4();
+
   return (
     <svg width={width} height={height}>
       <defs>
-        <clipPath id="rounded-corners">
+        <clipPath id={clipPathId}>
           <rect
             width={width}
             height={thermometerBarHeight}
@@ -54,26 +57,28 @@ const VaccinationsThermometer: React.FC<{ height: number; width: number }> = ({
           />
         </clipPath>
       </defs>
-      {indexList.map((index: number) => (
+      {thermometerSections.map((section: Section, index: number) => (
         <g key={`group-${index}`} transform="translate(0, 2)">
           <rect
             x={scaleRect(index)}
             width={bandWidth}
             height={thermometerBarHeight}
-            fill={thermometerSections[index].color}
-            clipPath="url(#rounded-corners)"
+            fill={section.color}
+            clipPath={`url(#${clipPathId})`}
           />
+          {/* We do not render the last label (ie. the "100%" label) */}
           {index < thermometerSections.length - 1 && (
             <Label
               x={scaleRect(index)! + bandWidth}
               y={thermometerBarHeight + 12}
               dx={5}
             >
-              {thermometerSections[index].labelValue}
+              {section.labelTo}
             </Label>
           )}
         </g>
       ))}
+      {/* Lines go in a separate group so they sit on top of the rectangles */}
       {indexList.map((index: number) => (
         <g key={`group-${index}`}>
           {index < thermometerSections.length - 1 && (
