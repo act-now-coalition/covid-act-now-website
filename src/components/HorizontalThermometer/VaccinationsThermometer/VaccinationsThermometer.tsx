@@ -3,8 +3,8 @@ import { range } from 'd3-array';
 import { scaleBand } from 'd3-scale';
 import { ParentSize } from '@vx/responsive';
 import { Label } from './VaccinationsThermometer.style';
-import { COLOR_MAP } from 'common/colors';
 import { thermometerBarHeight } from '../RiskLevelThermometer/RiskLevelThermometer.style';
+import { COLOR_MAP } from 'common/colors';
 
 interface Section {
   labelValue: string;
