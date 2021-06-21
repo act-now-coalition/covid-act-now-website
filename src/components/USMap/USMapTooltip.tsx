@@ -16,8 +16,6 @@ interface USMapTooltipProps extends TooltipProps {
  * This tooltip implementation wraps material-ui Tooltip with a couple additions:
  *  * Supports a `TooltipMode.ACTIVATE_ON_CLICK` mode for use on mobile devices
  *    where hover isn't possible.
- *  * Makes the tooltip follow the mouse cursor since map states can be big /
- *    weird-shaped.
  *  * Minor builtin styling (light background, etc.)
  */
 export const USMapTooltip: React.FC<USMapTooltipProps> = ({
@@ -25,35 +23,8 @@ export const USMapTooltip: React.FC<USMapTooltipProps> = ({
   children,
   ...otherProps
 }) => {
-  // Code to follow mouse position borrowed from
-  // https://github.com/mui-org/material-ui/issues/14270#issuecomment-691958577
-  // This can be removed once material-ui v5 ships and we can use
-  // https://next.material-ui.com/components/tooltips/#follow-cursor
-  const [position, setPosition] = React.useState({ x: 0, y: 0 });
-
   if (tooltipMode === TooltipMode.ACTIVATE_ON_HOVER) {
-    return (
-      <Tooltip
-        onMouseMove={e => setPosition({ x: e.pageX, y: e.pageY })}
-        PopperProps={{
-          anchorEl: {
-            clientHeight: 0,
-            clientWidth: 0,
-            getBoundingClientRect: () => ({
-              top: position.y + 15,
-              left: position.x,
-              right: position.x,
-              bottom: position.y + 15,
-              width: 0,
-              height: 0,
-            }),
-          },
-        }}
-        {...otherProps}
-      >
-        {children}
-      </Tooltip>
-    );
+    return <Tooltip {...otherProps}>{children}</Tooltip>;
   } else {
     return (
       <ActivateOnClickTooltip {...otherProps}>
