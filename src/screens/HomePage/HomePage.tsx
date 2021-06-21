@@ -118,6 +118,17 @@ export default function HomePage() {
     </>
   );
 
+  const LocationToggle: React.FC = () => {
+    return (
+      <ToggleWrapper>
+        <ButtonGroup value={locationScope} exclusive onChange={onClickSwitch}>
+          <Button value={MapView.STATES}>States</Button>
+          <Button value={MapView.COUNTIES}>Counties</Button>
+        </ButtonGroup>
+      </ToggleWrapper>
+    );
+  };
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -147,16 +158,7 @@ export default function HomePage() {
                 setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-              <ToggleWrapper>
-                <ButtonGroup
-                  value={locationScope}
-                  exclusive
-                  onChange={onClickSwitch}
-                >
-                  <Button value={MapView.STATES}>States</Button>
-                  <Button value={MapView.COUNTIES}>Counties</Button>
-                </ButtonGroup>
-              </ToggleWrapper>
+              <LocationToggle />
             </ColumnCentered>
 
             <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
