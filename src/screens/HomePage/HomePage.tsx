@@ -21,7 +21,7 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import { Content, Section, ColumnCentered } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
-import HorizontalThermometer from 'components/HorizontalThermometer';
+import RiskLevelThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
@@ -140,7 +140,7 @@ export default function HomePage() {
             <USRiskMap showCounties={showCounties} />
 
             <ColumnCentered $topBottomSpacing={true}>
-              <HorizontalThermometer />
+              <RiskLevelThermometer />
             </ColumnCentered>
             <Section>
               <CompareMain
