@@ -6,6 +6,8 @@ import { ScreenshotReady } from 'components/Screenshot';
 import { findStateByFipsCodeStrict } from 'common/regions';
 import { TooltipMode } from './USMapTooltip';
 import { ActiveRegionStyle } from './utils';
+import { Metric } from 'common/metricEnum';
+import VaccineTooltip from './VaccineTooltip/VaccineTooltip';
 
 interface MapProps {
   showCounties?: boolean;
@@ -27,16 +29,22 @@ function USVaccineMap({
 
   const renderTooltip = useCallback(
     (stateFipsCode: string, tooltipMode: TooltipMode) => {
-      // TODO(michael): Implement real tooltip.
       const state = findStateByFipsCodeStrict(stateFipsCode);
+      const summary = locationSummaries?.[stateFipsCode];
+      const vaccinationsInitiated =
+        summary?.metrics?.[Metric.VACCINATIONS]?.value || 0;
+      const vaccinationsCompleted = summary?.vc || 0;
+      const isMobileVersion = tooltipMode === TooltipMode.ACTIVATE_ON_CLICK;
       return (
-        state.fullName +
-        (tooltipMode === TooltipMode.ACTIVATE_ON_HOVER
-          ? ' (hover tooltip)'
-          : ' (click tooltip)')
+        <VaccineTooltip
+          state={state}
+          vaccinationsInitiated={vaccinationsInitiated}
+          vaccinationsCompleted={vaccinationsCompleted}
+          isMobileVersion={isMobileVersion}
+        />
       );
     },
-    [],
+    [locationSummaries],
   );
 
   return (
