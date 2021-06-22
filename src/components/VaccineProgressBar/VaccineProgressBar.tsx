@@ -96,7 +96,8 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
 const VaccineProgressBarAutosize: React.FC<ProgressBarProps> = props => {
   return (
     <ProgressBarContainer>
-      <ParentSize>
+      {/* Not sure if this display flex feels right-- */}
+      <ParentSize style={{ display: 'flex' }}>
         {({ width }) => <VaccineProgressBar {...props} width={width} />}
       </ParentSize>
     </ProgressBarContainer>
