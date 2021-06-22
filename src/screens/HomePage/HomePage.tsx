@@ -74,12 +74,14 @@ export default function HomePage() {
     event: React.MouseEvent<HTMLElement>,
     newSelection: MapView,
   ) => {
-    setLocationScope(newSelection);
-    trackEvent(
-      EventCategory.MAP,
-      EventAction.SELECT,
-      `Select: ${locationScope}`,
-    );
+    if (newSelection) {
+      setLocationScope(newSelection);
+      trackEvent(
+        EventCategory.MAP,
+        EventAction.SELECT,
+        `Select: ${locationScope}`,
+      );
+    }
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
