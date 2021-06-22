@@ -108,6 +108,7 @@ const USMap = React.memo(
                       key={stateCode}
                       tooltipMode={tooltipMode}
                       title={renderTooltip(fipsCode, tooltipMode)}
+                      placement="top"
                       onOpen={() => {
                         setActiveState(state);
                       }}
