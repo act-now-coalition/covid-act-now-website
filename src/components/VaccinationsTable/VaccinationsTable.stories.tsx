@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapView } from 'screens/HomePage/HomePage';
+import { MapView } from 'screens/HomePage/utils';
 import VaccinationsTable from './VaccinationsTable';
 
 export default {

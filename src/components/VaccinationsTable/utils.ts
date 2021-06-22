@@ -2,9 +2,9 @@ import regions, { Region, County } from 'common/regions';
 import orderBy from 'lodash/orderBy';
 import take from 'lodash/take';
 import takeRight from 'lodash/takeRight';
-import { MapView } from 'screens/HomePage/HomePage';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { Metric } from 'common/metricEnum';
+import { MapView } from 'screens/HomePage/utils';
 
 export interface RegionVaccinationInfo {
   regionName: string;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { MapView } from 'screens/HomePage/HomePage';
 import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 import {
   List,
@@ -20,6 +19,7 @@ import {
   RegionVaccinationInfo,
 } from './utils';
 import { formatPercent } from 'common/utils';
+import { MapView } from 'screens/HomePage/utils';
 
 const Column: React.FC<{
   listHeader: string;
