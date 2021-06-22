@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-import { MarkdownContent } from 'components/Markdown';
+import { MarkdownContent, anchorStyles } from 'components/Markdown';
 
 export const Column = styled.div`
   display: flex;
@@ -65,13 +65,7 @@ export const RecommendationBody = styled(MarkdownContent)`
     color: black;
   }
 
-  a {
-    color: ${COLOR_MAP.NEW_BLUE.BASE};
-    &:hover {
-      color: ${COLOR_MAP.NEW_BLUE.DARK};
-      text-decoration: underline;
-    }
-  }
+  ${anchorStyles};
 `;
 
 export const Icon = styled.img`
