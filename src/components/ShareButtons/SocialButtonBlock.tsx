@@ -20,7 +20,6 @@ const SocialButtonBlock: React.FC<{
   onShareOnTwitter: () => void;
   onCopyLink: () => void;
   hideSocialButton: () => void;
-  showEmbedOption?: boolean;
 }> = ({
   url,
   quote,
@@ -31,7 +30,6 @@ const SocialButtonBlock: React.FC<{
   hideSocialButton,
   region,
   isHeader,
-  showEmbedOption,
 }) => {
   const socialSharingProps = {
     url,
@@ -44,7 +42,7 @@ const SocialButtonBlock: React.FC<{
   }
   return (
     <SocialButtonsContainer isHeader={isHeader}>
-      {showEmbedOption && (
+      {isHeader && (
         <SocialShareButton variant="contained" color="#007fb1">
           <SocialButton onClick={() => setShowEmbedPreviewModal(true)}>
             Embed

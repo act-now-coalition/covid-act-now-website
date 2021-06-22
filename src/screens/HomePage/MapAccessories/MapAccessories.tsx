@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Wrapper, AboutText } from './MapAccessories.style';
+import { Row, Wrapper, AboutLink } from './MapAccessories.style';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
 import { EventCategory } from 'components/Analytics';
 import { getUrlAndShareQuote } from 'components/ShareBlock/ShareModelBlock';
@@ -20,7 +20,7 @@ const MapAccessories: React.FC<MapAccessoriesProps> = ({
     <Wrapper>
       {renderThermometer()}
       <Row>
-        <AboutText to={infoLink}>About this data</AboutText>
+        <AboutLink to={infoLink}>About this data</AboutLink>
         <ShareButtons
           eventCategory={EventCategory.MAP}
           shareUrl={shareURL}

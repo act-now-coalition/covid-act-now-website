@@ -25,7 +25,7 @@ export const Row = styled.div`
   }
 `;
 
-export const AboutText = styled(Link)`
+export const AboutLink = styled(Link)`
   ${props => props.theme.fonts.regularBook};
   font-size: 0.875rem;
   text-decoration: underline;
