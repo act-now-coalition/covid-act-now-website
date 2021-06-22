@@ -3,6 +3,11 @@ import reverse from 'lodash/reverse';
 import take from 'lodash/take';
 import { RegionDB } from 'common/regions';
 
+export enum MapView {
+  STATES = 'States',
+  COUNTIES = 'Counties',
+}
+
 /**
  * Gets fips of 5 largest metro areas to set as homepage explore presets.
  * These are precomputed by hand using the function below.

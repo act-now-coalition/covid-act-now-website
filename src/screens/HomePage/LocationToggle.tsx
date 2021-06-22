@@ -4,7 +4,7 @@ import {
   ButtonGroup,
   Button,
 } from 'components/SharedComponents/SharedComponents.style';
-import { MapView } from './HomePage';
+import { MapView } from './utils';
 
 const LocationToggle: React.FC<{
   locationScope: MapView;

@@ -8,10 +8,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 2rem;
-  margin: 1rem auto;
+  margin: 1rem auto 0;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin: 2rem auto;
+    margin: 1.5rem auto 0;
   }
 `;
 
