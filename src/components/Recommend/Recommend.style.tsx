@@ -66,10 +66,10 @@ export const RecommendationBody = styled(MarkdownContent)`
   }
 
   a {
+    color: ${COLOR_MAP.NEW_BLUE.BASE};
     text-decoration: underline;
-    color: ${COLOR_MAP.BLUE};
     &:hover {
-      color: ${COLOR_MAP.BLUE};
+      color: ${COLOR_MAP.NEW_BLUE.DARK};
     }
   }
 `;

@@ -136,7 +136,7 @@ export const LocationHeaderCell = styled(TableCell)<{
       : $isModal
       ? `${COLOR_MAP.GRAY_BODY_COPY}`
       : $sortByPopulation
-      ? `${COLOR_MAP.BLUE}`
+      ? `${COLOR_MAP.NEW_BLUE.BASE}`
       : 'white'};
 
   border-radius: ${({ $sortByPopulation }) =>
@@ -411,15 +411,15 @@ export const Row = styled(TableRow)<{
 
   &:hover {
     color: ${({ $headerRowBackground }) =>
-      !$headerRowBackground && `${COLOR_MAP.BLUE}`};
+      !$headerRowBackground && `${COLOR_MAP.NEW_BLUE.BASE}`};
     ${DataCell} {
       span,
       ${Tag} {
-        color: ${COLOR_MAP.BLUE};
+        color: ${COLOR_MAP.NEW_BLUE.BASE};
       }
     }
     ${LocationName} {
-      color: ${COLOR_MAP.BLUE};
+      color: ${COLOR_MAP.NEW_BLUE.BASE};
     }
   }
 `;

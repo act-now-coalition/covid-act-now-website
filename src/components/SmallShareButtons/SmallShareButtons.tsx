@@ -41,16 +41,19 @@ const SmallShareButtons: React.FC<{
     <Fragment>
       <ButtonsWrapper>
         <ShareButtonContainer
-          color={COLOR_MAP.BLUE}
+          color={COLOR_MAP.GRAY_BODY_COPY}
           onClick={onShareOnFacebook}
         >
           <FacebookShareButtonInner {...socialProps} />
         </ShareButtonContainer>
-        <ShareButtonContainer color={COLOR_MAP.BLUE} onClick={onShareOnTwitter}>
+        <ShareButtonContainer
+          color={COLOR_MAP.GRAY_BODY_COPY}
+          onClick={onShareOnTwitter}
+        >
           <TwitterShareButtonInner {...socialProps} />
         </ShareButtonContainer>
         <CopyToClipboard text={shareUrl} onCopy={handleCopyLink}>
-          <ShareButtonContainer color={COLOR_MAP.BLUE}>
+          <ShareButtonContainer color={COLOR_MAP.GRAY_BODY_COPY}>
             <LinkIcon />
           </ShareButtonContainer>
         </CopyToClipboard>
