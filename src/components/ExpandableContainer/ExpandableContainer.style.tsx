@@ -23,7 +23,7 @@ export const InnerContent = styled.div<{
   $collapsed: boolean;
 }>`
   height: ${({ $collapsed, $collapsedHeight }) =>
-    $collapsed ? `${$collapsedHeight}` : 'fit-content'};
+    $collapsed ? $collapsedHeight : 'fit-content'};
   overflow: hidden;
   border: 1px solid ${COLOR_MAP.GREY_2};
   border-bottom: none;
