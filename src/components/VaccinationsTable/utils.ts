@@ -4,8 +4,8 @@ import dropWhile from 'lodash/dropWhile';
 import isNull from 'lodash/isNull';
 import take from 'lodash/take';
 import takeRight from 'lodash/takeRight';
-import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { MapView } from 'screens/HomePage/HomePage';
+import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { Metric } from 'common/metricEnum';
 
 function getRegionsSortedByVaccinationsInitiated(regionScope: MapView): any[] {
@@ -48,7 +48,6 @@ export function getHighestRankingRegions(
   mapView: MapView,
 ): any[] {
   const sortedRegions = getRegionsSortedByVaccinationsInitiated(mapView);
-  console.log('take(sortedRegions, amount)', take(sortedRegions, amount));
   return take(sortedRegions, amount);
 }
 

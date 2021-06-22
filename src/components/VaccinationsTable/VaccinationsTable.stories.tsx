@@ -1,6 +1,6 @@
 import React from 'react';
-import VaccinationsTable from './VaccinationsTable';
 import { MapView } from 'screens/HomePage/HomePage';
+import VaccinationsTable from './VaccinationsTable';
 
 export default {
   title: 'Shared Components/Vaccinations Table',
