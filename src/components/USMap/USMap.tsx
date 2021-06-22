@@ -149,7 +149,7 @@ const USMap = React.memo(
           $showCounties={showCounties}
           $highlightOnHover={activeRegionStyle === ActiveRegionStyle.HIGHLIGHT}
         >
-          <ComposableMap data-tip="" projection={projection} height={500}>
+          <ComposableMap projection={projection} height={500}>
             <g transform="translate(0, -50)">
               {regionGeographies}
 
