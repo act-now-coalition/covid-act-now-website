@@ -11,6 +11,7 @@ export interface ProgressBarProps {
   locationName: string;
   vaccinationsInitiated: number;
   vaccinationsCompleted: number;
+  width?: number;
 }
 
 function getOffsetPercentage(decimal: number) {
@@ -96,8 +97,15 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
 const VaccineProgressBarAutosize: React.FC<ProgressBarProps> = props => {
   return (
     <ProgressBarContainer>
-      <ParentSize>
-        {({ width }) => <VaccineProgressBar {...props} width={width} />}
+      {/* Adding display:flex makes sure the ParentSize container is tight to its contents */}
+      <ParentSize style={{ display: 'flex' }}>
+        {({ width }) => (
+          <VaccineProgressBar
+            {...props}
+            // If no width prop is passed, the progress bar is responsive and uses ParentSize width
+            width={props.width ? props.width : width}
+          />
+        )}
       </ParentSize>
     </ProgressBarContainer>
   );

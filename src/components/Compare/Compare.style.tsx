@@ -24,7 +24,8 @@ const getMetricHeaderBackground = (
     if ($isSelectedMetric && !$sortByPopulation) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
-    if ($isSelectedMetric && !$sortByPopulation) return `${COLOR_MAP.BLUE}`;
+    if ($isSelectedMetric && !$sortByPopulation)
+      return `${COLOR_MAP.NEW_BLUE.BASE}`;
     return 'white';
   }
 };
@@ -136,11 +137,9 @@ export const LocationHeaderCell = styled(TableCell)<{
       : $isModal
       ? `${COLOR_MAP.GRAY_BODY_COPY}`
       : $sortByPopulation
-      ? `${COLOR_MAP.BLUE}`
+      ? `${COLOR_MAP.NEW_BLUE.BASE}`
       : 'white'};
 
-  border-radius: ${({ $sortByPopulation }) =>
-    $sortByPopulation && '4px 4px 0 0'};
   color: ${({ $isModal, $sortByPopulation }) =>
     !$isModal && $sortByPopulation && 'white'};
 
@@ -185,8 +184,6 @@ export const MetricHeaderCell = styled(TableCell)<{
 }>`
   ${CellStyles}
 
-  border-radius: ${({ $sortByPopulation, $isSelectedMetric }) =>
-    !$sortByPopulation && $isSelectedMetric && '4px 4px 0 0'};
   background-color: ${props =>
     getMetricHeaderBackground(
       props.$sortByPopulation,
@@ -411,15 +408,15 @@ export const Row = styled(TableRow)<{
 
   &:hover {
     color: ${({ $headerRowBackground }) =>
-      !$headerRowBackground && `${COLOR_MAP.BLUE}`};
+      !$headerRowBackground && `${COLOR_MAP.NEW_BLUE.BASE}`};
     ${DataCell} {
       span,
       ${Tag} {
-        color: ${COLOR_MAP.BLUE};
+        color: ${COLOR_MAP.NEW_BLUE.BASE};
       }
     }
     ${LocationName} {
-      color: ${COLOR_MAP.BLUE};
+      color: ${COLOR_MAP.NEW_BLUE.BASE};
     }
   }
 `;
