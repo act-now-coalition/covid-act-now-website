@@ -26,7 +26,7 @@ const Column: React.FC<{ listHeader: string; locations: any[] }> = ({
         <ListItem>
           <ListItemHalf>
             <MonospaceItem>{state.rank}.</MonospaceItem>
-            <LocationName>{state.stateInfo.locationName}</LocationName>
+            <LocationName>{state.stateInfo.stateName}</LocationName>
           </ListItemHalf>
           <ListItemHalf>
             <MonospaceItem>
