@@ -102,6 +102,7 @@ const VaccineProgressBarAutosize: React.FC<ProgressBarProps> = props => {
         {({ width }) => (
           <VaccineProgressBar
             {...props}
+            // If no width prop is passed, the progress bar is responsive and uses ParentSize width
             width={props.width ? props.width : width}
           />
         )}
