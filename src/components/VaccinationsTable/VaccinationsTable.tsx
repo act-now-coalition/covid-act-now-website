@@ -1,5 +1,5 @@
 import React from 'react';
-import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
+import { VaccineProgressBarInner } from 'components/VaccineProgressBar/VaccineProgressBar';
 import {
   List,
   ListItem,
@@ -33,10 +33,11 @@ const Column: React.FC<{ listHeader: string; locations: any[] }> = ({
               {formatPercent(state.stateInfo.vaccinationsInitiated)}
             </MonospaceItem>
             <ProgressBarWrapper>
-              <VaccineProgressBar
+              <VaccineProgressBarInner
                 locationName={state.stateInfo.locationName}
                 vaccinationsInitiated={state.stateInfo.vaccinationsInitiated}
                 vaccinationsCompleted={state.stateInfo.vaccinationsCompleted}
+                width={100}
               />
             </ProgressBarWrapper>
           </ListItemHalf>

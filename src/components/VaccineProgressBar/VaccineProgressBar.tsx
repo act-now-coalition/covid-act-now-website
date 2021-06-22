@@ -17,7 +17,9 @@ function getOffsetPercentage(decimal: number) {
   return formatPercent(decimal, 1);
 }
 
-const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
+export const VaccineProgressBarInner: React.FC<
+  ProgressBarProps & { width: number }
+> = ({
   oldVersion = false,
   vaccinationsInitiated,
   vaccinationsCompleted,
@@ -96,9 +98,9 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
 const VaccineProgressBarAutosize: React.FC<ProgressBarProps> = props => {
   return (
     <ProgressBarContainer>
-      {/* Not sure if this display flex feels right-- */}
+      {/* Adding display:flex makes sure the ParentSize container is tight to its contents */}
       <ParentSize style={{ display: 'flex' }}>
-        {({ width }) => <VaccineProgressBar {...props} width={width} />}
+        {({ width }) => <VaccineProgressBarInner {...props} width={width} />}
       </ParentSize>
     </ProgressBarContainer>
   );
