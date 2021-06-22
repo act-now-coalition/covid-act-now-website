@@ -6,18 +6,18 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 1rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
-    padding: 2rem;
+    padding: 1.5rem 2rem 2rem;
   }
 `;
 
 export const ProgressBarWrapper = styled.div`
-  max-width: 100px;
-  width: 100%;
+  width: 100px;
   margin-left: 0.5rem;
 `;
 

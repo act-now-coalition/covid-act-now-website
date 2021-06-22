@@ -1,6 +1,5 @@
 import React from 'react';
 import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
-import { getHighestRankingStates, getLowestRankingStates } from './utils';
 import {
   List,
   ListItem,
@@ -11,6 +10,9 @@ import {
   Wrapper,
   ColumnHeader,
 } from './VaccinationsTable.style';
+import ExpandableContainer from 'components/ExpandableContainer';
+import { EventCategory } from 'components/Analytics';
+import { getHighestRankingStates, getLowestRankingStates } from './utils';
 import { formatPercent } from 'common/utils';
 
 const Column: React.FC<{ listHeader: string; locations: any[] }> = ({
@@ -47,11 +49,25 @@ const Column: React.FC<{ listHeader: string; locations: any[] }> = ({
 const VaccinationsTable: React.FC<{}> = () => {
   const highestRanking = getHighestRankingStates(5);
   const lowestRanking = getLowestRankingStates(5);
+
+  const containerProps = {
+    collapsedHeightMobile: 'fit-content',
+    collapsedHeightDesktop: 'fit-content',
+    tabTextCollapsed: <>See all states</>,
+    tabTextExpanded: <>See all states</>,
+    trackingLabel: 'Vaccinations table: open modal',
+    trackingCategory: EventCategory.VACCINATION,
+    disableArrowChange: true,
+    secondaryOnClick: () => {}, // plug into opening compare modal
+  };
+
   return (
-    <Wrapper>
-      <Column listHeader="Highest Percent" locations={highestRanking} />
-      <Column listHeader="Lowest percent" locations={lowestRanking} />
-    </Wrapper>
+    <ExpandableContainer {...containerProps}>
+      <Wrapper>
+        <Column listHeader="Highest Percent" locations={highestRanking} />
+        <Column listHeader="Lowest percent" locations={lowestRanking} />
+      </Wrapper>
+    </ExpandableContainer>
   );
 };
 
