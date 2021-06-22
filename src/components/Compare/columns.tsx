@@ -1,9 +1,19 @@
 import { Metric } from 'common/metricEnum';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { SummaryForCompare } from 'common/utils/compare';
 import { formatValue, getMetricNameForCompare } from 'common/metric';
 import { LEVEL_COLOR } from 'common/colors';
 import { Level } from 'common/level';
 import { getCcviLevel, getCcviLevelColor, getCcviLevelName } from 'common/ccvi';
+import React from 'react';
+import {
+  DataCellValue,
+  VaccinationsCell,
+  VaccinationsCellProgressBar,
+  VaccinationsCellValue,
+} from './Compare.style';
+import { formatPercent } from 'common/utils';
+import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 
 const UNKNOWN_VALUE_TEXT = '---';
 
@@ -12,11 +22,7 @@ const CCVI_COLUMN_ID = 100;
 
 /**
  * Represents a column in the compare table (e.g. for the case density metric or CCVI).
- * Implementations must define the name, getValue() function, etc. as appropriate.
- *
- * TODO(michael): Refactor this to have a `cellContent(row: SummaryForCompare)` method that
- * returns the rendered React component and then we can probably drop textAlign, fontSize,
- * getFormattedValue(), getIconColor().
+ * Implementations must define the name, getValue(), render() functions, etc. as appropriate.
  */
 export interface ColumnDefinition {
   /** A unique ID used to identify the column, e.g. to identify which column is sorted. */
@@ -25,19 +31,17 @@ export interface ColumnDefinition {
   /** The column name. */
   name: string;
 
-  /** The CSS text-align value to use for the column. */
-  textAlign: string;
+  /** The % width this column should be in relation to other columns. */
+  desiredWidthPercent: number;
 
-  fontSize: string;
+  /** min-width of this column (e.g. to ensure enough space for the column header). */
+  minWidthPx: number;
 
   /** Get the numeric value for the specified `row`. (used for sorting) */
   getValue(row: SummaryForCompare): number | null;
 
-  /** Get the formatted value for the specified `row`. (used for display). */
-  getFormattedValue(row: SummaryForCompare): string;
-
-  /** Get the color of the dot to display next to the formatted value for the specified `row`. */
-  getIconColor(row: SummaryForCompare): string;
+  /** Renders the contents of this column's cell for the provided `row`. */
+  render(row: SummaryForCompare, locationName: string): React.ReactNode;
 }
 
 /** Represents a compare table column backed by a Metric (e.g. case density). */
@@ -48,21 +52,30 @@ class MetricColumn implements ColumnDefinition {
 
   name = getMetricNameForCompare(this.metric);
 
-  textAlign = 'right';
-
-  fontSize = '16px;';
+  desiredWidthPercent = 14;
+  minWidthPx = 110;
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.metrics[this.metric]?.value ?? null;
   }
 
-  getFormattedValue(row: SummaryForCompare): string {
-    return formatValue(this.metric, this.getValue(row), UNKNOWN_VALUE_TEXT);
-  }
-
-  getIconColor(row: SummaryForCompare): string {
-    const level = row.metricsInfo.metrics[this.metric]?.level ?? Level.UNKNOWN;
-    return LEVEL_COLOR[level];
+  render(row: SummaryForCompare, locationName: string): React.ReactNode {
+    const metricInfo = row.metricsInfo.metrics[this.metric];
+    const value = metricInfo?.value ?? null;
+    const formattedValue = formatValue(this.metric, value, UNKNOWN_VALUE_TEXT);
+    const color = LEVEL_COLOR[metricInfo?.level ?? Level.UNKNOWN];
+    return (
+      <>
+        <FiberManualRecordIcon style={{ color }} />
+        <DataCellValue
+          $valueUnknown={!Number.isFinite(value)}
+          $textAlign="right"
+          $fontSize="16px"
+        >
+          {formattedValue}
+        </DataCellValue>
+      </>
+    );
   }
 }
 
@@ -72,30 +85,77 @@ class CcviColumn implements ColumnDefinition {
 
   name = 'Vulnerability Level';
 
-  textAlign = 'left';
-
-  fontSize = '14px;';
+  desiredWidthPercent = 14;
+  // Need 130px to fit "Vulnerability" in the header.
+  minWidthPx = 130;
 
   getValue(row: SummaryForCompare): number | null {
     return row.metricsInfo.ccvi;
   }
 
-  getFormattedValue(row: SummaryForCompare): string {
+  render(row: SummaryForCompare): React.ReactNode {
+    let color = LEVEL_COLOR[Level.UNKNOWN];
+    let formattedValue = UNKNOWN_VALUE_TEXT;
     const ccvi = row.metricsInfo.ccvi;
-    if (ccvi === null) {
-      return UNKNOWN_VALUE_TEXT;
+    if (ccvi !== null) {
+      const level = getCcviLevel(ccvi);
+      color = getCcviLevelColor(level);
+      formattedValue = getCcviLevelName(level);
     }
-    const level = getCcviLevel(ccvi);
-    return getCcviLevelName(level);
+
+    return (
+      <>
+        <FiberManualRecordIcon style={{ color }} />
+        <DataCellValue
+          $valueUnknown={ccvi === null}
+          $textAlign="left"
+          $fontSize="14px"
+        >
+          {formattedValue}
+        </DataCellValue>
+      </>
+    );
+  }
+}
+
+class VaccinationsColumn extends MetricColumn {
+  constructor() {
+    super(Metric.VACCINATIONS);
   }
 
-  getIconColor(row: SummaryForCompare): string {
-    const ccvi = row.metricsInfo.ccvi;
-    if (ccvi === null) {
-      return LEVEL_COLOR[Level.UNKNOWN];
+  desiredWidthPercent = 22;
+  // Need ~130 to fit vaccine progress bar.
+  minWidthPx = 130;
+
+  render(row: SummaryForCompare, locationName: string): React.ReactNode {
+    const vaccinationsInitiated =
+      row.metricsInfo.metrics[Metric.VACCINATIONS]?.value;
+    const vaccinationsCompleted = row.metricsInfo.vc;
+
+    if (!vaccinationsInitiated || !vaccinationsCompleted) {
+      return (
+        <DataCellValue $valueUnknown={true} $textAlign="right" $fontSize="16px">
+          {UNKNOWN_VALUE_TEXT}
+        </DataCellValue>
+      );
     }
-    const level = getCcviLevel(ccvi);
-    return getCcviLevelColor(level);
+
+    return (
+      <>
+        <VaccinationsCell>
+          <VaccinationsCellValue>
+            {formatPercent(vaccinationsInitiated)}
+          </VaccinationsCellValue>
+          <VaccinationsCellProgressBar>
+            <VaccineProgressBar
+              vaccinationsCompleted={vaccinationsCompleted}
+              vaccinationsInitiated={vaccinationsInitiated}
+              locationName={locationName}
+            />
+          </VaccinationsCellProgressBar>
+        </VaccinationsCell>
+      </>
+    );
   }
 }
 
@@ -103,8 +163,7 @@ class CcviColumn implements ColumnDefinition {
 const caseDensityColumn = new MetricColumn(Metric.CASE_DENSITY);
 const caseGrowthRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
 const positiveTestsColumn = new MetricColumn(Metric.POSITIVE_TESTS);
-const hospitalUsageColumn = new MetricColumn(Metric.HOSPITAL_USAGE);
-const vaccinationsColumn = new MetricColumn(Metric.VACCINATIONS);
+const vaccinationsColumn = new VaccinationsColumn();
 const ccviColumn = new CcviColumn();
 
 /** Ordered array of columns. */
@@ -112,7 +171,6 @@ export const orderedColumns = [
   caseDensityColumn,
   caseGrowthRateColumn,
   positiveTestsColumn,
-  hospitalUsageColumn,
   vaccinationsColumn,
   ccviColumn,
 ];

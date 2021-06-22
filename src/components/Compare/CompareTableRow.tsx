@@ -1,10 +1,8 @@
 import React from 'react';
-import isNumber from 'lodash/isNumber';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import {
   DataCell,
   Row,
-  DataCellValue,
   Population,
   LocationCellWrapper,
   LocationInfoWrapper,
@@ -94,26 +92,17 @@ const CompareTableRow = (props: {
         </StyledLink>
       </LocationNameCell>
       {columns.map((column, i) => {
-        const metricValue = column.getValue(location);
-        const valueUnknown =
-          !isNumber(metricValue) || !Number.isFinite(metricValue);
         const isSelected = !sortByPopulation && sorter === column.columnId;
 
         return (
           <DataCell
             key={`data-cell-${i}`}
             $isSelected={isSelected}
-            $iconColor={column.getIconColor(location)}
+            $desiredWidthPercent={column.desiredWidthPercent}
+            $minWidthPx={column.minWidthPx}
           >
             <StyledLink to={locationLink}>
-              <FiberManualRecordIcon />
-              <DataCellValue
-                $valueUnknown={valueUnknown}
-                $textAlign={column.textAlign}
-                $fontSize={column.fontSize}
-              >
-                {column.getFormattedValue(location)}
-              </DataCellValue>
+              {column.render(location, location.region.fullName)}
             </StyledLink>
           </DataCell>
         );
