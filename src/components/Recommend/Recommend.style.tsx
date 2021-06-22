@@ -67,9 +67,9 @@ export const RecommendationBody = styled(MarkdownContent)`
 
   a {
     color: ${COLOR_MAP.NEW_BLUE.BASE};
-    text-decoration: underline;
     &:hover {
       color: ${COLOR_MAP.NEW_BLUE.DARK};
+      text-decoration: underline;
     }
   }
 `;
