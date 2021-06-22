@@ -85,6 +85,24 @@ const USMap = React.memo(
                   // to increase their effective target size
                   const expandTapArea = ['HI', 'PR'].includes(stateCode);
 
+                  const geography =
+                    stateCode === 'MP' ? (
+                      <MarianaIslands key={fipsCode} fill={fillColor} />
+                    ) : (
+                      <GeoPath
+                        key={fipsCode}
+                        geography={geo}
+                        fill={fillColor}
+                        fillOpacity={showCounties ? 0 : 1}
+                        stroke="white"
+                        strokeWidth={expandTapArea ? 35 : 1}
+                        strokeOpacity={expandTapArea ? 0 : 1}
+                        role="img"
+                        tabIndex={-1}
+                        aria-label={fullName}
+                      />
+                    );
+
                   return (
                     <USMapTooltip
                       key={stateCode}
@@ -101,31 +119,20 @@ const USMap = React.memo(
                       arrow
                     >
                       <g>
-                        <Link
-                          to={state.relativeUrl}
-                          aria-label={fullName}
-                          onClick={() => {
-                            trackMapClick(fullName);
-                          }}
-                          tabIndex={-1}
-                        >
-                          {stateCode === 'MP' ? (
-                            <MarianaIslands key={fipsCode} fill={fillColor} />
-                          ) : (
-                            <GeoPath
-                              key={fipsCode}
-                              geography={geo}
-                              fill={fillColor}
-                              fillOpacity={showCounties ? 0 : 1}
-                              stroke="white"
-                              strokeWidth={expandTapArea ? 35 : 1}
-                              strokeOpacity={expandTapArea ? 0 : 1}
-                              role="img"
-                              tabIndex={-1}
-                              aria-label={fullName}
-                            />
-                          )}
-                        </Link>
+                        {tooltipMode === TooltipMode.ACTIVATE_ON_CLICK ? (
+                          geography
+                        ) : (
+                          <Link
+                            to={state.relativeUrl}
+                            aria-label={fullName}
+                            onClick={() => {
+                              trackMapClick(fullName);
+                            }}
+                            tabIndex={-1}
+                          >
+                            {geography}
+                          </Link>
+                        )}
                       </g>
                     </USMapTooltip>
                   );

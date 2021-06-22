@@ -58,12 +58,11 @@ export const ActivateOnClickTooltip: React.FC<TooltipProps> = ({
       setOpen(true);
       onOpen && onOpen(e);
     }
-    e.preventDefault();
   };
 
   return (
     <ClickAwayListener onClickAway={handleTooltipClose}>
-      <g onClickCapture={handleTooltipOpen}>
+      <g onClick={handleTooltipOpen}>
         <Tooltip
           interactive
           enterDelay={0}
