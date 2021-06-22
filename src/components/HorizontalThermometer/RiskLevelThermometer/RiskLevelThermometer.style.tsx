@@ -1,20 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 export const thermometerBarHeight = 8;
-
-export const Wrapper = styled.div`
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: fit-content;
-  padding: 1.5rem 2rem 1rem;
-  border-radius: 4px;
-`;
 
 export const ThermometerContainer = styled.div`
   display: flex;
@@ -27,25 +15,6 @@ export const Label = styled.span`
 
   strong {
     color: black;
-  }
-`;
-
-export const InfoIcon = styled(InfoOutlinedIcon)`
-  color: ${COLOR_MAP.GRAY.BASE};
-  transform: translateY(6px); // because of padding around MUI icon
-  margin-right: 0.25rem;
-  font-size: 1.35rem;
-`;
-
-export const InfoLink = styled(Link)`
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.875rem;
-  transform: translateX(-14px); // because of padding around MUI icon
-  margin-top: 0.5rem;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
   }
 `;
 

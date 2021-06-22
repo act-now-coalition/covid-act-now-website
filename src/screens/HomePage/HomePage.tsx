@@ -27,6 +27,7 @@ import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
+import MapAccessories from './MapAccessories/MapAccessories';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -139,8 +140,11 @@ export default function HomePage() {
 
             <USRiskMap showCounties={showCounties} />
 
-            <ColumnCentered $topBottomSpacing={true}>
-              <RiskLevelThermometer />
+            <ColumnCentered>
+              <MapAccessories
+                renderThermometer={() => <RiskLevelThermometer />}
+                infoLink="/covid-risk-levels-metrics"
+              />
             </ColumnCentered>
             <Section>
               <CompareMain
