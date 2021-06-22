@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapView } from 'screens/HomePage/HomePage';
-import { VaccineProgressBarInner } from 'components/VaccineProgressBar/VaccineProgressBar';
+import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 import {
   List,
   ListItem,
@@ -34,7 +34,7 @@ const Column: React.FC<{ listHeader: string; regions: any[] }> = ({
               {formatPercent(region.vaccinationsInitiated)}
             </MonospaceItem>
             <ProgressBarWrapper>
-              <VaccineProgressBarInner
+              <VaccineProgressBar
                 locationName={region.regionName}
                 vaccinationsInitiated={region.vaccinationsInitiated}
                 vaccinationsCompleted={region.vaccinationsCompleted}
