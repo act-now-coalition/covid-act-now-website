@@ -19,7 +19,6 @@ export const SectionHeader = styled.h2`
 export const ButtonGroup = styled(ToggleButtonGroup)`
   width: fit-content;
   background-color: ${COLOR_MAP.GREY_1};
-  border: 1px solid ${COLOR_MAP.GREY_2};
   border-radius: 4px;
 `;
 
