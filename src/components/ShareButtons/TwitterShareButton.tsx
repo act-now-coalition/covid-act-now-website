@@ -2,7 +2,7 @@ import React from 'react';
 import * as ReactShare from 'react-share';
 import { SocialShareButton } from './ShareButtons.style';
 
-const COLOR_TWITTER = '#00acee';
+export const COLOR_TWITTER = '#00acee';
 
 export const TwitterShareButtonInner: React.FC<{
   url: string;

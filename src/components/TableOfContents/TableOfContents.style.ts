@@ -20,7 +20,7 @@ export const Container = styled.nav`
   }
 
   a {
-    color: ${COLOR_MAP.BLUE};
+    color: ${COLOR_MAP.NEW_BLUE.BASE};
     text-decoration: none;
   }
 `;
