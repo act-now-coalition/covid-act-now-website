@@ -21,12 +21,13 @@ import HomePageHeader from 'components/Header/HomePageHeader';
 import { Content, Section, ColumnCentered } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import Toggle from './Toggle/Toggle';
-import HorizontalThermometer from 'components/HorizontalThermometer';
+import RiskLevelThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
+import MapAccessories from './MapAccessories/MapAccessories';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -139,8 +140,11 @@ export default function HomePage() {
 
             <USRiskMap showCounties={showCounties} />
 
-            <ColumnCentered $topBottomSpacing={true}>
-              <HorizontalThermometer />
+            <ColumnCentered>
+              <MapAccessories
+                renderThermometer={() => <RiskLevelThermometer />}
+                infoLink="/covid-risk-levels-metrics"
+              />
             </ColumnCentered>
             <Section>
               <CompareMain
