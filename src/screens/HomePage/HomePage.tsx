@@ -27,6 +27,7 @@ import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 import LocationToggle from './LocationToggle';
+import MapAccessories from './MapAccessories/MapAccessories';
 
 export enum MapView {
   STATES = 'States',
@@ -149,8 +150,11 @@ export default function HomePage() {
 
             <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
 
-            <ColumnCentered $topBottomSpacing={true}>
-              <RiskLevelThermometer />
+            <ColumnCentered>
+              <MapAccessories
+                renderThermometer={() => <RiskLevelThermometer />}
+                infoLink="/covid-risk-levels-metrics"
+              />
             </ColumnCentered>
             <Section>
               <CompareMain

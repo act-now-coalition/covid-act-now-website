@@ -41,7 +41,7 @@ const ShareModelBlock = ({
   );
 };
 
-function getUrlAndShareQuote(region?: Region) {
+export function getUrlAndShareQuote(region?: Region) {
   return region
     ? {
         shareURL: region.canonicalUrl,

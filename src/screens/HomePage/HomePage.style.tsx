@@ -7,10 +7,9 @@ import {
   SkeletonWrapper as RegionItemSkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
 
-export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
+export const ColumnCentered = styled.div`
   display: flex;
-  margin: ${({ $topBottomSpacing }) =>
-    $topBottomSpacing ? '1rem auto' : 'auto'};
+  margin: auto;
   flex-direction: column;
 `;
 
