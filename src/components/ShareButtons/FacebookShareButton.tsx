@@ -2,7 +2,7 @@ import React from 'react';
 import * as ReactShare from 'react-share';
 import { SocialShareButton } from './ShareButtons.style';
 
-const COLOR_FACEBOOK = '#3b5998';
+export const COLOR_FACEBOOK = '#3b5998';
 
 export const FacebookShareButtonInner: React.FC<{
   url: string;

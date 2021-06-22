@@ -24,7 +24,8 @@ const getMetricHeaderBackground = (
     if ($isSelectedMetric && !$sortByPopulation) return 'black';
     return `${COLOR_MAP.GRAY_BODY_COPY}`;
   } else {
-    if ($isSelectedMetric && !$sortByPopulation) return `${COLOR_MAP.BLUE}`;
+    if ($isSelectedMetric && !$sortByPopulation)
+      return `${COLOR_MAP.NEW_BLUE.BASE}`;
     return 'white';
   }
 };

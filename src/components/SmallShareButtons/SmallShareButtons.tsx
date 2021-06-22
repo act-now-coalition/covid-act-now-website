@@ -11,6 +11,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { COLOR_MAP } from 'common/colors';
 import LinkIcon from '@material-ui/icons/Link';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { COLOR_FACEBOOK } from 'components/ShareButtons/FacebookShareButton';
+import { COLOR_TWITTER } from 'components/ShareButtons/TwitterShareButton';
 
 const SmallShareButtons: React.FC<{
   shareUrl: string;
@@ -41,15 +43,12 @@ const SmallShareButtons: React.FC<{
     <Fragment>
       <ButtonsWrapper>
         <ShareButtonContainer
-          color={COLOR_MAP.GRAY_BODY_COPY}
+          color={COLOR_FACEBOOK}
           onClick={onShareOnFacebook}
         >
           <FacebookShareButtonInner {...socialProps} />
         </ShareButtonContainer>
-        <ShareButtonContainer
-          color={COLOR_MAP.GRAY_BODY_COPY}
-          onClick={onShareOnTwitter}
-        >
+        <ShareButtonContainer color={COLOR_TWITTER} onClick={onShareOnTwitter}>
           <TwitterShareButtonInner {...socialProps} />
         </ShareButtonContainer>
         <CopyToClipboard text={shareUrl} onCopy={handleCopyLink}>
