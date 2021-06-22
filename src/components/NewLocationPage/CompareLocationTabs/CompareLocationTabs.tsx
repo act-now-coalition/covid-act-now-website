@@ -1,5 +1,8 @@
 import React from 'react';
-import { ButtonGroup, Button } from './CompareLocationTabs.style';
+import {
+  ButtonGroup,
+  Button,
+} from 'components/SharedComponents/SharedComponents.style';
 
 const CompareLocationTabs: React.FC<{
   locationLevels: string[];

@@ -39,8 +39,8 @@ const Recommendations = ({
   );
 
   const containerProps = {
-    collapsedHeightMobile: 275,
-    collapsedHeightDesktop: 165,
+    collapsedHeightMobile: '275px',
+    collapsedHeightDesktop: '165px',
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Recommendations module',
