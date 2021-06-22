@@ -11,6 +11,7 @@ export interface RegionVaccinationInfo {
   vaccinationsInitiated: number;
   vaccinationsCompleted: number;
   rank: number;
+  url: string;
 }
 
 function getRegionsSortedByVaccinationsInitiated(
@@ -26,6 +27,7 @@ function getRegionsSortedByVaccinationsInitiated(
       vaccinationsInitiated:
         summaryForFips?.metrics[Metric.VACCINATIONS]?.value ?? null,
       vaccinationsCompleted: summaryForFips?.vc ?? null,
+      url: region.canonicalUrl,
     };
   });
 
@@ -46,6 +48,7 @@ function getRegionsSortedByVaccinationsInitiated(
     regionName: regionInfo.regionName,
     vaccinationsInitiated: regionInfo.vaccinationsInitiated as number,
     vaccinationsCompleted: regionInfo.vaccinationsCompleted as number,
+    url: regionInfo.url,
   }));
 
   return sortedWithRank;

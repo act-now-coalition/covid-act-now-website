@@ -10,6 +10,7 @@ import {
   ListItemHalf,
   Wrapper,
   ColumnHeader,
+  StyledLink,
 } from './VaccinationsTable.style';
 import ExpandableContainer from 'components/ExpandableContainer';
 import { EventCategory } from 'components/Analytics';
@@ -29,23 +30,25 @@ const Column: React.FC<{
       <ColumnHeader>{listHeader}</ColumnHeader>
       {regions.map((region: RegionVaccinationInfo) => (
         <ListItem>
-          <ListItemHalf>
-            <MonospaceItem>{region.rank}.</MonospaceItem>
-            <LocationName>{region.regionName}</LocationName>
-          </ListItemHalf>
-          <ListItemHalf>
-            <MonospaceItem>
-              {formatPercent(region.vaccinationsInitiated)}
-            </MonospaceItem>
-            <ProgressBarWrapper>
-              <VaccineProgressBar
-                locationName={region.regionName}
-                vaccinationsInitiated={region.vaccinationsInitiated}
-                vaccinationsCompleted={region.vaccinationsCompleted}
-                width={100}
-              />
-            </ProgressBarWrapper>
-          </ListItemHalf>
+          <StyledLink to={region.url}>
+            <ListItemHalf>
+              <MonospaceItem>{region.rank}.</MonospaceItem>
+              <LocationName>{region.regionName}</LocationName>
+            </ListItemHalf>
+            <ListItemHalf>
+              <MonospaceItem>
+                {formatPercent(region.vaccinationsInitiated)}
+              </MonospaceItem>
+              <ProgressBarWrapper>
+                <VaccineProgressBar
+                  locationName={region.regionName}
+                  vaccinationsInitiated={region.vaccinationsInitiated}
+                  vaccinationsCompleted={region.vaccinationsCompleted}
+                  width={100}
+                />
+              </ProgressBarWrapper>
+            </ListItemHalf>
+          </StyledLink>
         </ListItem>
       ))}
     </List>

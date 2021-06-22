@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { COLOR_MAP } from 'common/colors';
 
 import { materialSMBreakpoint } from 'assets/theme/sizes';
@@ -80,4 +81,18 @@ export const ColumnHeader = styled.p`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin: 0 0 1rem;
   text-align: center;
+`;
+
+export const StyledLink = styled(Link)`
+  display: flex;
+  font-size: inherit;
+  text-decoration: inherit;
+  color: inherit;
+  width: 100%;
+
+  &:hover {
+    ${LocationName} {
+      color: ${COLOR_MAP.NEW_BLUE.BASE};
+    }
+  }
 `;
