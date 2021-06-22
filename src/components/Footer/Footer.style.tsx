@@ -24,3 +24,8 @@ export const StyledFooter = styled.footer<{ extraPaddingBottom?: boolean }>`
     padding-bottom: ${({ extraPaddingBottom }) => extraPaddingBottom && '8rem'};
   }
 `;
+
+export const ShareBlock = styled.div`
+  display: flex;
+  margin-left: auto;
+`;

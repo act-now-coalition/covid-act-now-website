@@ -7,9 +7,9 @@ import isNumber from 'lodash/isNumber';
 import {
   Wrapper,
   Footer,
-  FooterText,
   HeaderContainer,
   CompareHeader,
+  NumberOfLocationsText,
 } from 'components/Compare/Compare.style';
 import LocationTable from './LocationTable';
 import Filters from 'components/Compare/Filters';
@@ -33,8 +33,9 @@ import {
   orderedColumnsVaccineFirst,
   orderedColumnsVulnerabilityFirst,
 } from './columns';
-import { TextButton } from 'components/ButtonSystem/MainButtons.style';
 import { EventCategory } from 'components/Analytics/utils';
+import ExpandableContainer from 'components/ExpandableContainer';
+import { ShareBlock } from 'components/Footer/Footer.style';
 
 function trackShare(label: string) {
   trackCompareEvent(EventAction.SHARE, label);
@@ -211,6 +212,55 @@ const CompareTable = (props: {
     trackCompareEvent(EventAction.OPEN_MODAL, 'Show All Locations');
   };
 
+  /**
+   * Only show limited locations (100 max) in the following scenarios:
+   * - "Counties" tab selected on homepage.
+   * - "Metro areas" tab selected on homepage.
+   * - "USA" tab selected on location page.
+   */
+  const showAllLocations =
+    (props.isHomepage && props.homepageScope === HomepageLocationScope.STATE) ||
+    (!props.isHomepage && props.geoScope !== GeoScopeFilter.COUNTRY);
+
+  const seeAllText = (
+    <>
+      See {showAllLocations ? 'all' : 'more'} &nbsp;
+      <NumberOfLocationsText>
+        ({showAllLocations ? sortedLocationsArr.length : 100})
+      </NumberOfLocationsText>
+    </>
+  );
+
+  const containerProps = {
+    collapsedHeightMobile: 'fit-content',
+    collapsedHeightDesktop: 'fit-content',
+    tabTextCollapsed: seeAllText,
+    tabTextExpanded: seeAllText,
+    trackingLabel: 'Open compare modal',
+    trackingCategory: EventCategory.COMPARE,
+    disableArrowChange: true,
+    secondaryOnClick: onClickShowAll,
+  };
+
+  const locationTableProps = {
+    firstColumnHeader: firstColumnHeader,
+    setSorter: setSorter,
+    setSortDescending: setSortDescending,
+    columns: columns,
+    isModal: props.isModal,
+    ...arrowContainerProps,
+    pinnedLocation: currentLocation,
+    sortedLocations: sortedLocations,
+    numLocations: locationsViewable,
+    stateName: props.stateName,
+    setSortByPopulation: setSortByPopulation,
+    sortByPopulation: sortByPopulation,
+    isHomepage: props.isHomepage,
+    geoScope: props.geoScope,
+    homepageScope: homepageScope,
+    region: region,
+  };
+
   return (
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
@@ -232,56 +282,32 @@ const CompareTable = (props: {
           )}
         </HeaderContainer>
       )}
-      <LocationTable
-        firstColumnHeader={firstColumnHeader}
-        setSorter={setSorter}
-        setSortDescending={setSortDescending}
-        columns={columns}
-        isModal={props.isModal}
-        {...arrowContainerProps}
-        pinnedLocation={currentLocation}
-        sortedLocations={sortedLocations}
-        numLocations={locationsViewable}
-        stateName={props.stateName}
-        setSortByPopulation={setSortByPopulation}
-        sortByPopulation={sortByPopulation}
-        isHomepage={props.isHomepage}
-        geoScope={props.geoScope}
-        homepageScope={homepageScope}
-        region={region}
-      />
+      {!props.isModal && showViewMore ? (
+        <ExpandableContainer {...containerProps}>
+          <LocationTable {...locationTableProps} />
+        </ExpandableContainer>
+      ) : (
+        <LocationTable {...locationTableProps} />
+      )}
       {!props.isModal && (
         <Footer>
-          <div>
-            <FooterText>
-              Displaying <strong>{amountDisplayed}</strong> of{' '}
-              <strong>{sortedLocationsArr.length}</strong>{' '}
-            </FooterText>
-            {showViewMore && (
-              <TextButton
-                onClick={onClickShowAll}
-                trackingCategory={EventCategory.COMPARE}
-                trackingLabel="view all regions button"
-              >
-                {props.viewMoreCopy}
-              </TextButton>
-            )}
-          </div>
-          <ShareButtonGroup
-            imageUrl={getDownloadImageUrl}
-            imageFilename="CovidActNow-compare.png"
-            url={getShareUrl}
-            quote={shareQuote}
-            region={region}
-            onCopyLink={() =>
-              trackCompareEvent(EventAction.COPY_LINK, trackLabel)
-            }
-            onSaveImage={() =>
-              trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
-            }
-            onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
-            onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
-          />
+          <ShareBlock>
+            <ShareButtonGroup
+              imageUrl={getDownloadImageUrl}
+              imageFilename="CovidActNow-compare.png"
+              url={getShareUrl}
+              quote={shareQuote}
+              region={region}
+              onCopyLink={() =>
+                trackCompareEvent(EventAction.COPY_LINK, trackLabel)
+              }
+              onSaveImage={() =>
+                trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
+              }
+              onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
+              onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
+            />
+          </ShareBlock>
         </Footer>
       )}
     </Wrapper>

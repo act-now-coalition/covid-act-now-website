@@ -258,6 +258,12 @@ export const TableHeadContainer = styled(TableHead)<{ $isModal?: boolean }>`
     border-bottom: ${({ $isModal }) =>
       !$isModal && `2px solid ${COLORS.LIGHTGRAY}`};
   }
+
+  th {
+    &:last-child {
+      padding-right: 0.5rem;
+    }
+  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -518,4 +524,9 @@ export const CompareHeader = styled(SectionHeader)`
   @media (min-width: ${materialSMBreakpoint}) {
     margin: 0 2.5rem 0 0;
   }
+`;
+
+export const NumberOfLocationsText = styled.span`
+  ${props => props.theme.fonts.regularBook};
+  color: ${COLOR_MAP.GREY_4};
 `;
