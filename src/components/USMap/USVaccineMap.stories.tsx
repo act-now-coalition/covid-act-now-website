@@ -1,4 +1,5 @@
 import React from 'react';
+import { TooltipMode } from './USMapTooltip';
 import USVaccineMap from './USVaccineMap';
 
 export default {
@@ -12,12 +13,22 @@ export default {
 
 export const States = (args: any) => (
   <div style={{ width: 600 }}>
-    <USVaccineMap {...args} />
+    <USVaccineMap {...args} tooltipMode={TooltipMode.ACTIVATE_ON_HOVER} />
+  </div>
+);
+
+export const StatesMobile = (args: any) => (
+  <div style={{ width: 600 }}>
+    <USVaccineMap {...args} tooltipMode={TooltipMode.ACTIVATE_ON_CLICK} />
   </div>
 );
 
 export const Counties = (args: any) => (
   <div style={{ width: 600 }}>
-    <USVaccineMap {...args} showCounties />
+    <USVaccineMap
+      {...args}
+      showCounties
+      tooltipMode={TooltipMode.ACTIVATE_ON_HOVER}
+    />
   </div>
 );
