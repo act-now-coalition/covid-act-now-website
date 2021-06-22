@@ -59,7 +59,7 @@ const VaccinationsTable: React.FC<{ mapView: MapView }> = ({ mapView }) => {
   const highestRanking = getHighestRankingRegions(5, mapView);
   const lowestRanking = getLowestRankingRegions(5, mapView);
 
-  const buttonLabel = <>See all {mapView.toLowerCase()}</>;
+  const buttonLabel = `See all ${mapView.toLowerCase()}`;
 
   const containerProps = {
     collapsedHeightMobile: 'fit-content',

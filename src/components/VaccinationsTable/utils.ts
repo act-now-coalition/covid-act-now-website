@@ -1,4 +1,4 @@
-import regions, { Region } from 'common/regions';
+import regions, { Region, County } from 'common/regions';
 import orderBy from 'lodash/orderBy';
 import take from 'lodash/take';
 import takeRight from 'lodash/takeRight';
@@ -23,11 +23,14 @@ function getRegionsSortedByVaccinationsInitiated(
   const regionsWithVaccinationMetrics = regionsToSort.map((region: Region) => {
     const summaryForFips = LocationSummariesByFIPS[region.fipsCode];
     return {
-      regionName: region.name,
+      regionName:
+        region instanceof County
+          ? `${region.name}, ${region.stateCode}`
+          : region.name,
       vaccinationsInitiated:
         summaryForFips?.metrics[Metric.VACCINATIONS]?.value ?? null,
       vaccinationsCompleted: summaryForFips?.vc ?? null,
-      url: region.canonicalUrl,
+      url: region.relativeUrl,
     };
   });
 
@@ -41,13 +44,13 @@ function getRegionsSortedByVaccinationsInitiated(
     region =>
       Number.isFinite(region.vaccinationsInitiated) &&
       Number.isFinite(region.vaccinationsCompleted),
-  );
+  ) as RegionVaccinationInfo[];
 
   const sortedWithRank = sortedNoNulls.map((regionInfo, i: number) => ({
     rank: i + 1,
     regionName: regionInfo.regionName,
-    vaccinationsInitiated: regionInfo.vaccinationsInitiated as number,
-    vaccinationsCompleted: regionInfo.vaccinationsCompleted as number,
+    vaccinationsInitiated: regionInfo.vaccinationsInitiated,
+    vaccinationsCompleted: regionInfo.vaccinationsCompleted,
     url: regionInfo.url,
   }));
 
