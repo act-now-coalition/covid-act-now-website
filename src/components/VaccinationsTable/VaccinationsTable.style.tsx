@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1.25rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
@@ -57,6 +57,7 @@ export const MonospaceItem = styled.span`
 export const LocationName = styled.span`
   ${props => props.theme.fonts.regularBookMidWeight};
   margin-left: 0.25rem;
+  margin-right: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

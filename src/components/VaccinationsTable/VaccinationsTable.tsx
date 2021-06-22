@@ -13,17 +13,21 @@ import {
 } from './VaccinationsTable.style';
 import ExpandableContainer from 'components/ExpandableContainer';
 import { EventCategory } from 'components/Analytics';
-import { getHighestRankingRegions, getLowestRankingRegions } from './utils';
+import {
+  getHighestRankingRegions,
+  getLowestRankingRegions,
+  RegionVaccinationInfo,
+} from './utils';
 import { formatPercent } from 'common/utils';
 
-const Column: React.FC<{ listHeader: string; regions: any[] }> = ({
-  listHeader,
-  regions,
-}) => {
+const Column: React.FC<{
+  listHeader: string;
+  regions: RegionVaccinationInfo[];
+}> = ({ listHeader, regions }) => {
   return (
     <List>
       <ColumnHeader>{listHeader}</ColumnHeader>
-      {regions.map((region: any, i: number) => (
+      {regions.map((region: RegionVaccinationInfo) => (
         <ListItem>
           <ListItemHalf>
             <MonospaceItem>{region.rank}.</MonospaceItem>

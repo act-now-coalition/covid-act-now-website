@@ -1,14 +1,21 @@
 import regions, { Region } from 'common/regions';
 import orderBy from 'lodash/orderBy';
-import dropWhile from 'lodash/dropWhile';
-import isNull from 'lodash/isNull';
 import take from 'lodash/take';
 import takeRight from 'lodash/takeRight';
 import { MapView } from 'screens/HomePage/HomePage';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
 import { Metric } from 'common/metricEnum';
 
-function getRegionsSortedByVaccinationsInitiated(regionScope: MapView): any[] {
+export interface RegionVaccinationInfo {
+  regionName: string;
+  vaccinationsInitiated: number;
+  vaccinationsCompleted: number;
+  rank: number;
+}
+
+function getRegionsSortedByVaccinationsInitiated(
+  regionScope: MapView,
+): RegionVaccinationInfo[] {
   const regionsToSort =
     regionScope === MapView.COUNTIES ? regions.counties : regions.states;
 
@@ -28,16 +35,17 @@ function getRegionsSortedByVaccinationsInitiated(regionScope: MapView): any[] {
     'desc',
   );
 
-  const sortedNoNulls = dropWhile(
-    sortedByVaccinationsInitiated,
+  const sortedNoNulls = sortedByVaccinationsInitiated.filter(
     region =>
-      isNull(region.vaccinationsInitiated) ||
-      isNull(region.vaccinationsCompleted),
+      Number.isFinite(region.vaccinationsInitiated) &&
+      Number.isFinite(region.vaccinationsCompleted),
   );
 
   const sortedWithRank = sortedNoNulls.map((regionInfo, i: number) => ({
     rank: i + 1,
-    ...regionInfo,
+    regionName: regionInfo.regionName,
+    vaccinationsInitiated: regionInfo.vaccinationsInitiated as number,
+    vaccinationsCompleted: regionInfo.vaccinationsCompleted as number,
   }));
 
   return sortedWithRank;
@@ -46,7 +54,7 @@ function getRegionsSortedByVaccinationsInitiated(regionScope: MapView): any[] {
 export function getHighestRankingRegions(
   amount: number,
   mapView: MapView,
-): any[] {
+): RegionVaccinationInfo[] {
   const sortedRegions = getRegionsSortedByVaccinationsInitiated(mapView);
   return take(sortedRegions, amount);
 }
@@ -54,7 +62,7 @@ export function getHighestRankingRegions(
 export function getLowestRankingRegions(
   amount: number,
   mapView: MapView,
-): any[] {
+): RegionVaccinationInfo[] {
   const sortedRegions = getRegionsSortedByVaccinationsInitiated(mapView);
   return takeRight(sortedRegions, amount);
 }
