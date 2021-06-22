@@ -1,53 +1,61 @@
-import regions, { State } from 'common/regions';
-import sortBy from 'lodash/sortBy';
+import regions, { Region } from 'common/regions';
+import orderBy from 'lodash/orderBy';
+import dropWhile from 'lodash/dropWhile';
+import isNull from 'lodash/isNull';
 import take from 'lodash/take';
 import takeRight from 'lodash/takeRight';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
+import { MapView } from 'screens/HomePage/HomePage';
+import { Metric } from 'common/metricEnum';
 
-export interface StateWithVaccinationMetrics {
-  stateName: string;
-  vaccinationsInitiated: number | null;
-  vaccinationsCompleted: number | null;
-}
+function getRegionsSortedByVaccinationsInitiated(regionScope: MapView): any[] {
+  const regionsToSort =
+    regionScope === MapView.COUNTIES ? regions.counties : regions.states;
 
-export interface StateWithVaccinationMetricsAndRank {
-  rank: number;
-}
+  const regionsWithVaccinationMetrics = regionsToSort.map((region: Region) => {
+    const summaryForFips = LocationSummariesByFIPS[region.fipsCode];
+    return {
+      regionName: region.name,
+      vaccinationsInitiated:
+        summaryForFips?.metrics[Metric.VACCINATIONS]?.value ?? null,
+      vaccinationsCompleted: summaryForFips?.vc ?? null,
+    };
+  });
 
-function getStatesSortedByVaccinationsCompleted(): StateWithVaccinationMetricsAndRank[] {
-  const statesWithVaccinationMetrics = regions.states.map(
-    (state: State, i: number) => {
-      const summaryForFips = LocationSummariesByFIPS[state.fipsCode];
-      return {
-        stateName: state.name,
-        vaccinationsInitiated: summaryForFips.metrics[6]?.value ?? null,
-        vaccinationsCompleted: summaryForFips.vc ?? null,
-      };
-    },
+  const sortedByVaccinationsInitiated = orderBy(
+    regionsWithVaccinationMetrics,
+    region => region.vaccinationsInitiated,
+    'desc',
   );
-  const sorted = sortBy(
-    statesWithVaccinationMetrics,
-    (state: StateWithVaccinationMetrics) => state.vaccinationsInitiated,
-  ).reverse(); // reversing because sortBy sorts in ascending order, placing lowest-ranked first
-  const sortedWithRank = sorted.map(
-    (stateInfo: StateWithVaccinationMetrics, i: number) => ({
-      stateInfo,
-      rank: i + 1,
-    }),
+
+  const sortedNoNulls = dropWhile(
+    sortedByVaccinationsInitiated,
+    region =>
+      isNull(region.vaccinationsInitiated) ||
+      isNull(region.vaccinationsCompleted),
   );
+
+  const sortedWithRank = sortedNoNulls.map((regionInfo, i: number) => ({
+    rank: i + 1,
+    ...regionInfo,
+  }));
+
   return sortedWithRank;
 }
 
-export function getHighestRankingStates(
+export function getHighestRankingRegions(
   amount: number,
-): StateWithVaccinationMetricsAndRank[] {
-  const sortedStates = getStatesSortedByVaccinationsCompleted();
-  return take(sortedStates, amount);
+  mapView: MapView,
+): any[] {
+  const sortedRegions = getRegionsSortedByVaccinationsInitiated(mapView);
+  console.log('take(sortedRegions, amount)', take(sortedRegions, amount));
+  return take(sortedRegions, amount);
 }
 
-export function getLowestRankingStates(
+export function getLowestRankingRegions(
   amount: number,
-): StateWithVaccinationMetricsAndRank[] {
-  const sortedStates = getStatesSortedByVaccinationsCompleted();
-  return takeRight(sortedStates, amount);
+  mapView: MapView,
+): any[] {
+  const sortedRegions = getRegionsSortedByVaccinationsInitiated(mapView);
+  return takeRight(sortedRegions, amount);
 }

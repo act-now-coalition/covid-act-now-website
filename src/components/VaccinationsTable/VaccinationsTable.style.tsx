@@ -57,13 +57,17 @@ export const MonospaceItem = styled.span`
 export const LocationName = styled.span`
   ${props => props.theme.fonts.regularBookMidWeight};
   margin-left: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ListItemHalf = styled.div`
-  flex: 1;
   display: flex;
-  flex-wrap: nowrap;
+  flex: 1;
   align-items: center;
+  flex-wrap: nowrap;
+  max-width: 50%;
 
   &:last-child {
     justify-content: flex-end;
