@@ -15,15 +15,16 @@ export interface StateWithVaccinationMetricsAndRank {
 }
 
 function getStatesSortedByVaccinationsCompleted(): StateWithVaccinationMetricsAndRank[] {
-  const states = regions.states;
-  const statesWithVaccinationMetrics = states.map((state: State, i: number) => {
-    const summaryForFips = LocationSummariesByFIPS[state.fipsCode];
-    return {
-      stateName: state.name,
-      vaccinationsInitiated: summaryForFips.metrics[6]?.value ?? null,
-      vaccinationsCompleted: summaryForFips.vc ?? null,
-    };
-  });
+  const statesWithVaccinationMetrics = regions.states.map(
+    (state: State, i: number) => {
+      const summaryForFips = LocationSummariesByFIPS[state.fipsCode];
+      return {
+        stateName: state.name,
+        vaccinationsInitiated: summaryForFips.metrics[6]?.value ?? null,
+        vaccinationsCompleted: summaryForFips.vc ?? null,
+      };
+    },
+  );
   const sorted = sortBy(
     statesWithVaccinationMetrics,
     (state: StateWithVaccinationMetrics) => state.vaccinationsInitiated,
