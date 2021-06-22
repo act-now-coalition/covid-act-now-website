@@ -9,7 +9,6 @@ import {
   Container,
   Inner,
   LocationName,
-  MoreDataLinkButton,
   ProgressBarWrapper,
   Row,
   StyledVaccineDot,
@@ -19,6 +18,7 @@ import {
 } from './VaccineTooltip.style';
 import { State } from 'common/regions';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { TextButton } from 'components/ButtonSystem';
 
 export interface VaccineTooltipProps {
   state: State;
@@ -83,7 +83,7 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
       </Inner>
       {addMoreDataLink && (
         <MoreDataLinkContainer>
-          <MoreDataLinkButton
+          <TextButton
             href={state.relativeUrl}
             aria-label={locationName}
             onClick={() => {
@@ -92,7 +92,7 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
           >
             More data
             <MoreDataArrowIcon />
-          </MoreDataLinkButton>
+          </TextButton>
         </MoreDataLinkContainer>
       )}
     </Container>
