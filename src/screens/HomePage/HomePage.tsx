@@ -34,6 +34,7 @@ import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
+import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -72,6 +73,12 @@ export default function HomePage() {
   const exploreSectionRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
+  const vaccinationsTableButtonOnClick = () => {
+    window.location.href = '#compare';
+    setShowCompareModal(true);
+  };
 
   const searchLocations = useFinalAutocompleteLocations();
 
@@ -147,6 +154,12 @@ export default function HomePage() {
                 </>
               )}
               infoLink="/covid-risk-levels-metrics#percent-vaccinated"
+              renderTable={locationScope => (
+                <VaccinationsTable
+                  mapView={locationScope}
+                  seeAllOnClick={vaccinationsTableButtonOnClick}
+                />
+              )}
             />
 
             <MapBlock
@@ -164,6 +177,8 @@ export default function HomePage() {
                 locationsViewable={8}
                 vaccinesFirst={compareShowVaccinationsFirst}
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
               />
             </HomePageBlock>
             <HomePageBlock

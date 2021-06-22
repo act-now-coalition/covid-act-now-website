@@ -49,10 +49,11 @@ export const MapBlock: React.FC<MapBlockProps> = ({
         <HomePageBlockSubtitle>{subtitle}</HomePageBlockSubtitle>
         <LocationToggle locationScope={locationScope} onChange={onToggle} />
         {renderMap(locationScope)}
-        {renderTable && renderTable(locationScope)}
         <MapAccessories
           renderThermometer={renderThermometer}
           infoLink={infoLink}
+          renderTable={renderTable && renderTable}
+          locationScope={locationScope}
         />
       </ColumnCentered>
     </HomePageBlock>

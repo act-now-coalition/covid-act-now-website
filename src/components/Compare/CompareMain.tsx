@@ -46,13 +46,15 @@ import {
 const CompareMain = React.memo(
   (props: {
     stateName?: string;
-    isModal?: boolean;
     locationsViewable: number;
     stateId?: string;
     region?: Region;
     vaccinesFirst?: boolean;
     vulnerabilityFirst?: boolean;
+    showModal: boolean;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
+    const { showModal, setShowModal } = props;
     const tableRef = useRef<HTMLDivElement>(null);
 
     const [region, setRegion] = useState(props.region);
@@ -156,7 +158,6 @@ const CompareMain = React.memo(
       ? getLocationPageViewMoreCopy(geoScope, region)
       : homepageViewMoreCopy;
 
-    const [showModal, setShowModal] = useState(false);
     const handleCloseModal = () => {
       setShowModal(false);
       scrollToCompare();
@@ -169,7 +170,7 @@ const CompareMain = React.memo(
       setSortDescending(true);
       setSortByPopulation(true);
       setGeoScope(GeoScopeFilter.STATE);
-    }, [location.pathname]);
+    }, [location.pathname, setShowModal]);
 
     // State needed to reconstruct the current sort / filters. Needs to be persisted
     // when we generate sharing URLs, etc.

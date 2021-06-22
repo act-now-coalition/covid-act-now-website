@@ -8,9 +8,13 @@ export default {
 };
 
 export const Counties = () => {
-  return <VaccinationsTable mapView={MapView.COUNTIES} />;
+  return (
+    <VaccinationsTable mapView={MapView.COUNTIES} seeAllOnClick={() => {}} />
+  );
 };
 
 export const States = () => {
-  return <VaccinationsTable mapView={MapView.STATES} />;
+  return (
+    <VaccinationsTable mapView={MapView.STATES} seeAllOnClick={() => {}} />
+  );
 };

@@ -42,3 +42,7 @@ export const AboutLink = styled(Link)`
     outline: rgb(0, 95, 204) 1px auto;
   }
 `;
+
+export const TableWrapper = styled.div`
+  margin-top: 1.5rem;
+`;
