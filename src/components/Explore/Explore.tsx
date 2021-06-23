@@ -50,7 +50,6 @@ import {
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
-// import { SectionHeader } from 'components/SharedComponents';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
