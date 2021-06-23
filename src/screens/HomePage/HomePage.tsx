@@ -35,6 +35,7 @@ import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
+import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -59,8 +60,8 @@ export default function HomePage() {
   );
   const initialFipsListForExplore = exploreGeoLocations;
 
+  // TODO(Chelsi) - i think we can delete this:
   // Location hash is uniquely set from vaccination banner button click
-  const compareShowVaccinationsFirst = location.hash === '#compare';
   const compareShowVulnerabilityFirst =
     location.hash === '#compare-vulnerabilities';
 
@@ -73,6 +74,17 @@ export default function HomePage() {
   const exploreSectionRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [showCompareModal, setShowCompareModal] = useState(false);
+  const [
+    compareShowVaccinationsFirst,
+    setCompareShowVaccinationsFirst,
+  ] = useState<boolean>(false);
+
+  const vaccinationsTableButtonOnClick = () => {
+    setCompareShowVaccinationsFirst(true);
+    setShowCompareModal(true);
+  };
 
   const searchLocations = useFinalAutocompleteLocations();
 
@@ -154,6 +166,12 @@ export default function HomePage() {
                 </>
               )}
               infoLink="/covid-risk-levels-metrics#percent-vaccinated"
+              renderTable={locationScope => (
+                <VaccinationsTable
+                  mapView={locationScope}
+                  seeAllOnClick={vaccinationsTableButtonOnClick}
+                />
+              )}
             />
 
             <MapBlock
@@ -171,6 +189,8 @@ export default function HomePage() {
                 locationsViewable={8}
                 vaccinesFirst={compareShowVaccinationsFirst}
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
               />
             </HomePageBlock>
             <HomePageBlock

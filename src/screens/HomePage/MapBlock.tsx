@@ -5,10 +5,15 @@ import {
   HomePageBlock,
   HomePageBlockHeader,
   HomePageBlockSubtitle,
+  Row,
+  MapSubitemsWrapper,
+  AboutLink,
+  TableWrapper,
 } from './HomePage.style';
-import MapAccessories from './MapAccessories/MapAccessories';
 import LocationToggle from './LocationToggle';
 import { MapView } from './utils';
+import { getUrlAndShareQuote } from 'components/ShareBlock/ShareModelBlock';
+import ShareButtons from 'components/SharedComponents/ShareButtons';
 
 interface MapBlockProps {
   title: React.ReactNode;
@@ -42,6 +47,9 @@ export const MapBlock: React.FC<MapBlockProps> = ({
     }
   };
 
+  const { displayName, shareURL } = getUrlAndShareQuote();
+  const shareQuote = `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
+
   return (
     <HomePageBlock>
       <ColumnCentered>
@@ -49,11 +57,20 @@ export const MapBlock: React.FC<MapBlockProps> = ({
         <HomePageBlockSubtitle>{subtitle}</HomePageBlockSubtitle>
         <LocationToggle locationScope={locationScope} onChange={onToggle} />
         {renderMap(locationScope)}
-        {renderTable && renderTable(locationScope)}
-        <MapAccessories
-          renderThermometer={renderThermometer}
-          infoLink={infoLink}
-        />
+        <MapSubitemsWrapper>
+          {renderThermometer()}
+          {renderTable && (
+            <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
+          )}
+          <Row>
+            <AboutLink to={infoLink}>About this data</AboutLink>
+            <ShareButtons
+              eventCategory={EventCategory.MAP}
+              shareUrl={shareURL}
+              shareQuote={shareQuote}
+            />
+          </Row>
+        </MapSubitemsWrapper>
       </ColumnCentered>
     </HomePageBlock>
   );

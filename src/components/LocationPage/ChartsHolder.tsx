@@ -201,6 +201,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   }
   const stats = summaryToStats(locationSummary);
 
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
@@ -224,6 +226,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 locationsViewable={6}
                 stateId={(region as State).stateCode || undefined}
                 region={region}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
               />
             </LocationPageBlock>
             {!projections ? (
