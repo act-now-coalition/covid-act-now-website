@@ -11,7 +11,6 @@ import {
   useScrollToElement,
   useBreakpoint,
   useLocationSummariesForFips,
-  useShowPastPosition,
 } from 'common/hooks';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
@@ -34,7 +33,6 @@ import {
   SparkLineMetric,
   SparkLineToExploreMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
-import HomepageUpsell from 'components/HomepageUpsell/HomepageUpsell';
 import ChartBlock from 'components/Charts/ChartBlock';
 import {
   CHART_GROUPS,
@@ -194,8 +192,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(exploreChartRef.current);
   }, []);
 
-  const showHomepageUpsell = useShowPastPosition(3000);
-
   if (!locationSummary) {
     return null;
   }
@@ -280,7 +276,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           stats={stats}
         />
       </div>
-      <HomepageUpsell showHomepageUpsell={showHomepageUpsell} />
     </>
   );
 });
