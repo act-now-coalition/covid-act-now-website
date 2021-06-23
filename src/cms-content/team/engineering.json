@@ -58,6 +58,12 @@
       "profileImgUrl": "/images_cms/erika-reinhardt.jpeg",
       "fullName": "Erika Reinhardt",
       "description": "Product Management "
+    },
+    {
+      "profileImgUrl": "/images_cms/aaron-hoffer.jpg",
+      "fullName": "Aaron Hoffer",
+      "description": "Data Engineering",
+      "profileUrl": "https://www.linkedin.com/in/hofferaaron/"
     }
   ]
 }
