@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
@@ -6,6 +7,7 @@ import {
   StyledLink as RegionItemWrappingLink,
   SkeletonWrapper as RegionItemSkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
+import { COLOR_MAP } from 'common/colors';
 
 export const ColumnCentered = styled.div`
   display: flex;
@@ -121,4 +123,50 @@ export const VaccinationsThermometerHeading = styled.div`
   ${props => props.theme.fonts.regularBook};
   font-size: 14px;
   margin-bottom: 8px;
+`;
+
+// Items below maps:
+
+export const MapSubitemsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+  margin: 1rem auto 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 1.5rem auto 0;
+  }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-top: 1.25rem;
+  }
+`;
+
+export const AboutLink = styled(Link)`
+  ${props => props.theme.fonts.regularBook};
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  color: ${COLOR_MAP.GREY_4};
+  margin-right: 1.5rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
+`;
+
+export const TableWrapper = styled.div`
+  margin-top: 1.5rem;
 `;
