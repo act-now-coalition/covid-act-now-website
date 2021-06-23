@@ -34,6 +34,7 @@ import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
+import { TooltipMode } from 'components/USMap/USMapTooltip';
 import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 
 function getPageDescription() {
@@ -88,6 +89,7 @@ export default function HomePage() {
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
+  const isMobileMap = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
@@ -148,6 +150,11 @@ export default function HomePage() {
               renderMap={locationScope => (
                 <USVaccineMap
                   showCounties={locationScope === MapView.COUNTIES}
+                  tooltipMode={
+                    isMobileMap
+                      ? TooltipMode.ACTIVATE_ON_CLICK
+                      : TooltipMode.ACTIVATE_ON_HOVER
+                  }
                 />
               )}
               renderThermometer={() => (
