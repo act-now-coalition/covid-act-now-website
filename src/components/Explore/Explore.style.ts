@@ -7,6 +7,7 @@ import colorPalette from 'assets/theme/palette';
 import { COLOR_MAP } from 'common/colors';
 import { brightenColor } from './utils';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { SectionHeader } from 'components/SharedComponents';
 
 /** Gets the chart palette based on the current theme. */
 function palette(props: any) {
@@ -40,13 +41,15 @@ export const Subtitle = styled.div`
 `;
 
 // CHART CONTROLS
-export const ChartControlsContainer = styled.div`
+export const ChartControlsContainer = styled.div<{ $isHomepage: boolean }>`
   margin: ${theme.spacing(2)}px auto;
   display: flex;
   flex-direction: column;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: row;
+    justify-content: ${({ $isHomepage }) =>
+      $isHomepage ? 'center' : 'flex-start'};
   }
 `;
 
@@ -343,4 +346,16 @@ export const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 1rem;
+`;
+
+export const ExploreSectionHeader = styled(SectionHeader)<{
+  $isHomepage: boolean;
+}>`
+  text-align: ${({ $isHomepage }) => ($isHomepage ? 'center' : 'left')};
+  font-size: ${({ $isHomepage }) => ($isHomepage ? '1.625rem' : '1.5rem')};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: ${({ $isHomepage }) => ($isHomepage ? '0 0 1rem' : '0 0 1.25rem')};
+    font-size: ${({ $isHomepage }) => ($isHomepage ? '2.25rem' : '1.5rem')};
+  }
 `;

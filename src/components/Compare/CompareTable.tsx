@@ -46,7 +46,7 @@ const CompareTable = (props: {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isModal: boolean;
   locationsViewable?: number;
-  isHomepage?: boolean;
+  isHomepage?: boolean; // TODO (Chelsi) delete this prop, absence/presence of region does the same thing
   locations: SummaryForCompare[];
   currentCounty: any | null;
   viewMoreCopy?: string;
@@ -264,8 +264,8 @@ const CompareTable = (props: {
   return (
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
-        <HeaderContainer>
-          <CompareHeader>Compare</CompareHeader>
+        <HeaderContainer $isHomepage={props.isHomepage}>
+          <CompareHeader $isHomepage={props.isHomepage}>Compare</CompareHeader>
           {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}

@@ -81,6 +81,7 @@ export const ColumnHeader = styled.p`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
   margin: 0 0 1rem;
   text-align: center;
+  font-size: 0.875rem;
 `;
 
 export const StyledLink = styled(Link)`
