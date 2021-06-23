@@ -28,3 +28,7 @@ export const MapContainer = styled.div`
     ${PinnedContainer};
   }
 `;
+
+export const ThermometerContainer = styled.div`
+  padding: 1rem;
+`;

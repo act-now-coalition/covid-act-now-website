@@ -37,9 +37,9 @@ export const CountyBorder = styled(GeoPath)`
 `;
 
 export const CountyWithLevel = styled(GeoPath)<{
-  $locationSummary?: LocationSummary;
+  $fillColor: string;
 }>`
-  fill: ${({ $locationSummary }) => getAlertColor($locationSummary)};
+  fill: ${({ $fillColor }) => $fillColor};
   stroke: #fff;
   stroke-width: 1;
 
@@ -48,7 +48,7 @@ export const CountyWithLevel = styled(GeoPath)<{
   }
 `;
 
-function getAlertColor(locationSummary?: LocationSummary) {
+export function getAlertColor(locationSummary?: LocationSummary) {
   return locationSummary
     ? LOCATION_SUMMARY_LEVELS[locationSummary.level].color
     : COLOR_MAP.GRAY.LIGHT;

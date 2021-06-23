@@ -1,6 +1,5 @@
 import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
-
 import { LocationSummary } from './location_summaries';
 import { Metric } from './metricEnum';
 
