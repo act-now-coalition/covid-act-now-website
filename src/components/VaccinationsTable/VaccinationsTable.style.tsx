@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ProgressBarWrapper = styled.div`
+  width: 100px;
   margin-left: 0.5rem;
   display: flex;
 `;

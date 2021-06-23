@@ -44,7 +44,6 @@ const Column: React.FC<{
                   locationName={region.regionName}
                   vaccinationsInitiated={region.vaccinationsInitiated}
                   vaccinationsCompleted={region.vaccinationsCompleted}
-                  width={100}
                 />
               </ProgressBarWrapper>
             </ListItemHalf>
