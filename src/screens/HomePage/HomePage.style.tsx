@@ -106,7 +106,7 @@ export const SectionWrapper = styled.div`
   border-top: 1px solid ${props => props.theme.palette.lightGray};
 `;
 
-export const SectionHeader = styled(Subtitle1)`
+export const SmallSectionHeader = styled(Subtitle1)`
   text-align: center;
   margin-bottom: 1.25rem;
 `;

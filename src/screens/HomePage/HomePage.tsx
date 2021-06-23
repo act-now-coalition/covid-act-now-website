@@ -36,6 +36,7 @@ import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
 import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
+import NationalText from 'components/NationalText';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -200,9 +201,9 @@ export default function HomePage() {
               <Explore
                 title="Trends"
                 initialFipsList={initialFipsListForExplore}
-                showNationalSummary={true}
                 currentMetric={currentMetric}
                 setCurrentMetric={setCurrentMetric}
+                nationalSummary={<NationalText />}
               />
             </HomePageBlock>
             <Announcements />

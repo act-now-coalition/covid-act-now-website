@@ -1,11 +1,14 @@
 import React from 'react';
 import { PartnerLogoGrid } from 'components/LogoGrid/LogoGrid';
-import { SectionHeader, SectionWrapper } from 'screens/HomePage/HomePage.style';
+import {
+  SmallSectionHeader,
+  SectionWrapper,
+} from 'screens/HomePage/HomePage.style';
 
 function PartnersSection() {
   return (
     <SectionWrapper>
-      <SectionHeader>Our Partners</SectionHeader>
+      <SmallSectionHeader>Our Partners</SmallSectionHeader>
       <PartnerLogoGrid />
     </SectionWrapper>
   );
