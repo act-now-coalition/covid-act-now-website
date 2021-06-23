@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const Wrapper = styled.div`
   max-width: 600px;
@@ -6,5 +7,9 @@ export const Wrapper = styled.div`
 
   p {
     margin: 0;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    text-align: center;
   }
 `;
