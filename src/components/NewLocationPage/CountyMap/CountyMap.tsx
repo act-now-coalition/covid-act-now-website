@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import RegionMap from 'components/RegionMap';
 import FixedAspectRatio from 'components/FixedAspectRatio/FixedAspectRatio';
-import { MapContainer, ThermometerContainer } from './CountyMap.style';
+import {
+  MapContainer,
+  ThermometerContainer,
+  ToggleWrapper,
+  Row,
+  VaccinationsThermLabel,
+} from './CountyMap.style';
 import { Region } from 'common/regions';
 import {
   ButtonGroup,
@@ -26,7 +32,17 @@ interface MapTypeInfo {
 
 const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
   [MapType.VACCINATIONS]: {
-    thermometer: <VaccinationsThermometer />,
+    thermometer: (
+      <Row>
+        <VaccinationsThermLabel>
+          Pop. with
+          <br />
+          <strong>1+ dose</strong>
+        </VaccinationsThermLabel>
+        <VaccinationsThermometer />
+      </Row>
+    ),
+
     colorMap: (locationSummary: LocationSummary) =>
       vaccineColorFromLocationSummary(locationSummary),
   },
@@ -63,10 +79,12 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
         <RegionMap region={region} colorMap={MAP_TYPE_INFO[mapType].colorMap} />
       </FixedAspectRatio>
       <ThermometerContainer>
-        <ButtonGroup value={mapType} exclusive onChange={onClickToggle}>
-          <Button value={MapType.VACCINATIONS}>{MapType.VACCINATIONS}</Button>
-          <Button value={MapType.RISK_LEVEL}>{MapType.RISK_LEVEL}</Button>
-        </ButtonGroup>
+        <ToggleWrapper>
+          <ButtonGroup value={mapType} exclusive onChange={onClickToggle}>
+            <Button value={MapType.VACCINATIONS}>{MapType.VACCINATIONS}</Button>
+            <Button value={MapType.RISK_LEVEL}>{MapType.RISK_LEVEL}</Button>
+          </ButtonGroup>
+        </ToggleWrapper>
         {MAP_TYPE_INFO[mapType].thermometer}
       </ThermometerContainer>
     </MapContainer>

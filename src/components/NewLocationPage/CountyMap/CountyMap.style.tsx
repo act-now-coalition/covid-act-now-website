@@ -4,6 +4,7 @@ import {
   countyMapToFixedBreakpoint,
 } from 'assets/theme/sizes';
 import { FixedAspectRatioContainer } from 'components/FixedAspectRatio/FixedAspectRatio.style';
+import { Label } from 'components/HorizontalThermometer/RiskLevelThermometer/RiskLevelThermometer.style';
 
 export const PinnedContainer = css`
   position: fixed;
@@ -31,4 +32,23 @@ export const MapContainer = styled.div`
 
 export const ThermometerContainer = styled.div`
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ToggleWrapper = styled.div`
+  margin-bottom: 0.75rem;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const VaccinationsThermLabel = styled(Label)`
+  margin-right: 0.5rem;
+  line-height: 1.1rem;
 `;
