@@ -48,12 +48,14 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
             showStateCode={showStateCode}
             truncateText
           />
-          <LevelContainer>
-            <IconContainer>
-              <CircleIcon $iconColor={iconColor} />
-            </IconContainer>
-            <LevelDescription>{levelDescriptionCopy}</LevelDescription>
-          </LevelContainer>
+          {vaccinatedStat && (
+            <LevelContainer>
+              <IconContainer>
+                <CircleIcon $iconColor={iconColor} />
+              </IconContainer>
+              <LevelDescription>{levelDescriptionCopy}</LevelDescription>
+            </LevelContainer>
+          )}
         </CopyContainer>
         <IconContainer>
           <ArrowIcon />
