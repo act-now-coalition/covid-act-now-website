@@ -60,7 +60,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
         <MapSubitemsWrapper>
           {renderThermometer()}
           {renderTable && (
-            <TableWrapper>{renderTable(locationScope)}</TableWrapper>
+            <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
           <Row>
             <AboutLink to={infoLink}>About this data</AboutLink>
