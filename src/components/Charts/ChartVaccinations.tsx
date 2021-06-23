@@ -71,7 +71,7 @@ const VaccinesTooltip: React.FC<{
 
   return pointInitiated ? (
     <Tooltip
-      width={'160px'}
+      width={'170px'}
       top={top(pointInitiated)}
       left={left(pointCompleted ? pointCompleted : pointInitiated)}
       title={formatTooltipColumnDate(pointInitiated)}
