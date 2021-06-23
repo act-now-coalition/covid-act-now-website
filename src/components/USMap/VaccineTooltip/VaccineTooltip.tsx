@@ -1,6 +1,5 @@
 import { formatPercent } from 'common/utils';
 import TextAndIconWithSpecialWrapping from 'components/TextAndIconWithSpecialWrapping/TextAndIconWithSpecialWrapping';
-import { DotStyle } from 'components/VaccineDot/VaccineDot';
 import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 import React from 'react';
 import {
@@ -11,7 +10,6 @@ import {
   LocationName,
   ProgressBarWrapper,
   Row,
-  StyledVaccineDot,
   Title,
   Value,
   MoreDataArrowIcon,
@@ -54,24 +52,12 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
           )}
         </LocationName>
         <Row>
-          <Title>Fully vaccinated</Title>
-          <Value>
-            {formatPercent(vaccinationsCompleted)}
-            <StyledVaccineDot
-              vaccinationsInitiated={vaccinationsInitiated}
-              dotStyle={DotStyle.SOLID}
-            />
-          </Value>
+          <Title>1+ dose</Title>
+          <Value>{formatPercent(vaccinationsInitiated)}</Value>
         </Row>
         <Row>
-          <Title>1+ dose</Title>
-          <Value>
-            {formatPercent(vaccinationsInitiated)}
-            <StyledVaccineDot
-              vaccinationsInitiated={vaccinationsInitiated}
-              dotStyle={DotStyle.HATCHED}
-            />
-          </Value>
+          <Title>Fully vaccinated</Title>
+          <Value>{formatPercent(vaccinationsCompleted)}</Value>
         </Row>
         <ProgressBarWrapper>
           <VaccineProgressBar

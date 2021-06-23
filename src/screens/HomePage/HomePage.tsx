@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
+import USVaccineMap from 'components/USMap/USVaccineMap';
+import VaccinationsThermometer from 'components/HorizontalThermometer/VaccinationsThermometer/VaccinationsThermometer';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -11,28 +13,29 @@ import Announcements from './Announcements';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
-import { formatMetatagDate } from 'common/utils';
-import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
+import { formatMetatagDate, formatPercent } from 'common/utils';
 import { getFilterLimit } from 'components/Search';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import { Content, Section, ColumnCentered } from './HomePage.style';
+import {
+  Content,
+  HomePageBlock,
+  ColumnCentered,
+  VaccinationsThermometerHeading,
+} from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import RiskLevelThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
-import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
+import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
-import LocationToggle from './LocationToggle';
-import MapAccessories from './MapAccessories/MapAccessories';
-
-export enum MapView {
-  STATES = 'States',
-  COUNTIES = 'Counties',
-}
+import SiteSummaryJSON from 'assets/data/site-summary.json';
+import { MapBlock } from './MapBlock';
+import { TooltipMode } from 'components/USMap/USMapTooltip';
+import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -42,7 +45,6 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
-  const [locationScope, setLocationScope] = useState(MapView.STATES);
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -58,8 +60,8 @@ export default function HomePage() {
   );
   const initialFipsListForExplore = exploreGeoLocations;
 
+  // TODO(Chelsi) - i think we can delete this:
   // Location hash is uniquely set from vaccination banner button click
-  const compareShowVaccinationsFirst = location.hash === '#compare';
   const compareShowVulnerabilityFirst =
     location.hash === '#compare-vulnerabilities';
 
@@ -71,25 +73,23 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = (
-    event: React.MouseEvent<HTMLElement>,
-    newSelection: MapView,
-  ) => {
-    if (newSelection) {
-      setLocationScope(newSelection);
-      trackEvent(
-        EventCategory.MAP,
-        EventAction.SELECT,
-        `Select: ${locationScope}`,
-      );
-    }
-  };
-
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [showCompareModal, setShowCompareModal] = useState(false);
+  const [
+    compareShowVaccinationsFirst,
+    setCompareShowVaccinationsFirst,
+  ] = useState<boolean>(false);
+
+  const vaccinationsTableButtonOnClick = () => {
+    setCompareShowVaccinationsFirst(true);
+    setShowCompareModal(true);
+  };
 
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
+  const isMobileMap = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
@@ -142,28 +142,61 @@ export default function HomePage() {
                 setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-              <LocationToggle
-                locationScope={locationScope}
-                onChange={onClickSwitch}
-              />
             </ColumnCentered>
 
-            <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
+            <MapBlock
+              title="Vaccination progress"
+              subtitle={getVaccinationProgressSubtitle()}
+              renderMap={locationScope => (
+                <USVaccineMap
+                  showCounties={locationScope === MapView.COUNTIES}
+                  tooltipMode={
+                    isMobileMap
+                      ? TooltipMode.ACTIVATE_ON_CLICK
+                      : TooltipMode.ACTIVATE_ON_HOVER
+                  }
+                />
+              )}
+              renderThermometer={() => (
+                <>
+                  <VaccinationsThermometerHeading>
+                    Population with <b>1+ dose</b>
+                  </VaccinationsThermometerHeading>
+                  <VaccinationsThermometer />
+                </>
+              )}
+              infoLink="/covid-risk-levels-metrics#percent-vaccinated"
+              renderTable={locationScope => (
+                <VaccinationsTable
+                  mapView={locationScope}
+                  seeAllOnClick={vaccinationsTableButtonOnClick}
+                />
+              )}
+            />
 
-            <ColumnCentered>
-              <MapAccessories
-                renderThermometer={() => <RiskLevelThermometer />}
-                infoLink="/covid-risk-levels-metrics"
-              />
-            </ColumnCentered>
-            <Section>
+            <MapBlock
+              title="Risk levels"
+              subtitle="Risk is reduced for those who are vaccinated"
+              renderMap={locationScope => (
+                <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
+              )}
+              renderThermometer={() => <RiskLevelThermometer />}
+              infoLink="/covid-risk-levels-metrics"
+            />
+
+            <HomePageBlock>
               <CompareMain
                 locationsViewable={8}
                 vaccinesFirst={compareShowVaccinationsFirst}
                 vulnerabilityFirst={compareShowVulnerabilityFirst}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
               />
-            </Section>
-            <Section ref={exploreSectionRef} id="explore-hospitalizations">
+            </HomePageBlock>
+            <HomePageBlock
+              ref={exploreSectionRef}
+              id="explore-hospitalizations"
+            >
               <Explore
                 title="Trends"
                 initialFipsList={initialFipsListForExplore}
@@ -171,7 +204,7 @@ export default function HomePage() {
                 currentMetric={currentMetric}
                 setCurrentMetric={setCurrentMetric}
               />
-            </Section>
+            </HomePageBlock>
             <Announcements />
             <PartnersSection />
           </Content>
@@ -180,6 +213,19 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+    </>
+  );
+}
+
+function getVaccinationProgressSubtitle() {
+  const { totalVaccinationsInitiated, totalPopulation } = SiteSummaryJSON.usa;
+  const percentVaccinated = formatPercent(
+    totalVaccinationsInitiated / totalPopulation,
+  );
+  return (
+    <>
+      <b>{percentVaccinated}</b> of the entire U.S. population has received{' '}
+      <b>1+ dose</b>.
     </>
   );
 }
