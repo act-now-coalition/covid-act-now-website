@@ -59,8 +59,8 @@ export default function HomePage() {
   );
   const initialFipsListForExplore = exploreGeoLocations;
 
+  // TODO(Chelsi) - i think we can delete this:
   // Location hash is uniquely set from vaccination banner button click
-  const compareShowVaccinationsFirst = location.hash === '#compare';
   const compareShowVulnerabilityFirst =
     location.hash === '#compare-vulnerabilities';
 
@@ -73,10 +73,15 @@ export default function HomePage() {
   const exploreSectionRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
+
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const [
+    compareShowVaccinationsFirst,
+    setCompareShowVaccinationsFirst,
+  ] = useState<boolean>(false);
 
   const vaccinationsTableButtonOnClick = () => {
-    window.location.href = '#compare';
+    setCompareShowVaccinationsFirst(true);
     setShowCompareModal(true);
   };
 

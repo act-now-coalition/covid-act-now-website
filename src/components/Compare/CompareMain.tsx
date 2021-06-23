@@ -108,7 +108,7 @@ const CompareMain = React.memo(
 
     // For homepage:
     const [homepageScope, setHomepageScope] = useState(
-      HomepageLocationScope.MSA,
+      HomepageLocationScope.STATE,
     );
 
     const homepageViewMoreCopy = getHomePageViewMoreCopy(homepageScope);
