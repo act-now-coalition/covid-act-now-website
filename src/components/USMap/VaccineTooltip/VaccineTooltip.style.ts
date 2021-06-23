@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { COLOR_MAP } from 'common/colors';
 import VaccineDot from 'components/VaccineDot/VaccineDot';
-import { LinkButton } from 'components/Button';
 
 export const Container = styled.div`
   background-color: white;
@@ -64,10 +63,6 @@ export const MoreDataLinkContainer = styled.div`
   margin-top: -2px;
   border-top: 1px solid ${COLOR_MAP.GREY_2};
   text-align: center;
-`;
-
-export const MoreDataLinkButton = styled(LinkButton)`
-  color: ${COLOR_MAP.NEW_BLUE.BASE};
 `;
 
 export const MoreDataArrowIcon = styled(ArrowForwardIcon)`

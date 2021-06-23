@@ -13,8 +13,8 @@ import { useBreakpoint } from 'common/hooks';
 export interface ExpandableContainerProps {
   collapsedHeightDesktop: string;
   collapsedHeightMobile: string;
-  tabTextCollapsed: React.ReactElement;
-  tabTextExpanded: React.ReactElement;
+  tabTextCollapsed: React.ReactNode;
+  tabTextExpanded: React.ReactNode;
   trackingLabel: string;
   trackingCategory: EventCategory;
   disableArrowChange?: boolean;
