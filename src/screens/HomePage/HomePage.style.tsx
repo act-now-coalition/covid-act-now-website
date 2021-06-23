@@ -131,11 +131,12 @@ export const MapSubitemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 2rem;
   margin: 1rem auto 0;
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin: 1.5rem auto 0;
+    max-width: 800px;
+    width: 100%;
   }
 `;
 
@@ -169,4 +170,5 @@ export const AboutLink = styled(Link)`
 
 export const TableWrapper = styled.div`
   margin-top: 1.5rem;
+  width: 100%;
 `;
