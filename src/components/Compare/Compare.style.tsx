@@ -494,17 +494,21 @@ export const StateName = styled.div`
   line-height: 1.2;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div<{ $isHomepage?: boolean }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  flex-direction: ${({ $isHomepage }) => ($isHomepage ? 'column' : 'row')};
+  align-items: ${({ $isHomepage }) => ($isHomepage ? 'center' : 'unset')};
+
   .MuiToggleButtonGroup-root {
     margin-top: 0.5rem;
   }
 
   @media (min-width: ${materialSMBreakpoint}) {
     justify-content: flex-start;
+    margin-bottom: 1.25rem;
   }
 
   @media (min-width: 375px) {
@@ -514,12 +518,15 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const CompareHeader = styled(SectionHeader)`
+export const CompareHeader = styled(SectionHeader)<{ $isHomepage?: boolean }>`
   line-height: 1.5;
-  margin: 0;
+  margin: ${({ $isHomepage }) => ($isHomepage ? '0 0 .75rem' : '0')};
+  font-size: ${({ $isHomepage }) => ($isHomepage ? '1.625rem' : '1.5rem')};
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin: 0 2.5rem 0 0;
+    margin: ${({ $isHomepage }) =>
+      $isHomepage ? '0 0 .75rem' : '0 2.5rem 0 0'};
+    font-size: ${({ $isHomepage }) => ($isHomepage ? '2.25rem' : '1.5rem')};
   }
 `;
 

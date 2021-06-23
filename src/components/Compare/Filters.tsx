@@ -28,9 +28,9 @@ const Filters = (props: {
   const { setHomepageScope } = props;
 
   const homepageFilterLabels = [
+    homepageLabelMap[HomepageLocationScope.STATE].plural,
     homepageLabelMap[HomepageLocationScope.COUNTY].plural,
     homepageLabelMap[HomepageLocationScope.MSA].plural,
-    homepageLabelMap[HomepageLocationScope.STATE].plural,
   ];
 
   const locationPageFilterLabels = ['Nearby', `${props.stateId}`, 'USA'];
