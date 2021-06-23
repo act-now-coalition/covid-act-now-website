@@ -7,10 +7,9 @@ import {
   SkeletonWrapper as RegionItemSkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
 
-export const ColumnCentered = styled.div<{ $topBottomSpacing?: boolean }>`
+export const ColumnCentered = styled.div`
   display: flex;
-  margin: ${({ $topBottomSpacing }) =>
-    $topBottomSpacing ? '1rem auto' : 'auto'};
+  margin: auto;
   flex-direction: column;
 `;
 
@@ -83,4 +82,12 @@ export const SectionWrapper = styled.div`
 export const SectionHeader = styled(Subtitle1)`
   text-align: center;
   margin-bottom: 1.25rem;
+`;
+
+export const ToggleWrapper = styled.div`
+  margin: auto;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin: 2rem auto 0;
+  }
 `;

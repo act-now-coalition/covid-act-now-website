@@ -20,13 +20,19 @@ import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import { Content, Section, ColumnCentered } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
-import Toggle from './Toggle/Toggle';
-import HorizontalThermometer from 'components/HorizontalThermometer';
+import RiskLevelThermometer from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
+import LocationToggle from './LocationToggle';
+import MapAccessories from './MapAccessories/MapAccessories';
+
+export enum MapView {
+  STATES = 'States',
+  COUNTIES = 'Counties',
+}
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -36,7 +42,7 @@ function getPageDescription() {
 export default function HomePage() {
   const shareBlockRef = useRef(null);
   const location = useLocation();
-  const [showCounties, setShowCounties] = useState(false);
+  const [locationScope, setLocationScope] = useState(MapView.STATES);
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -65,13 +71,18 @@ export default function HomePage() {
 
   const exploreSectionRef = useRef(null);
 
-  const onClickSwitch = (newShowCounties: boolean) => {
-    setShowCounties(newShowCounties);
-    trackEvent(
-      EventCategory.MAP,
-      EventAction.SELECT,
-      `Select: ${newShowCounties ? 'Counties' : 'States'}`,
-    );
+  const onClickSwitch = (
+    event: React.MouseEvent<HTMLElement>,
+    newSelection: MapView,
+  ) => {
+    if (newSelection) {
+      setLocationScope(newSelection);
+      trackEvent(
+        EventCategory.MAP,
+        EventAction.SELECT,
+        `Select: ${locationScope}`,
+      );
+    }
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -131,16 +142,19 @@ export default function HomePage() {
                 setMenuOpen={setMenuOpen}
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-              <Toggle
-                showCounties={showCounties}
-                onClickSwitch={onClickSwitch}
+              <LocationToggle
+                locationScope={locationScope}
+                onChange={onClickSwitch}
               />
             </ColumnCentered>
 
-            <USRiskMap showCounties={showCounties} />
+            <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
 
-            <ColumnCentered $topBottomSpacing={true}>
-              <HorizontalThermometer />
+            <ColumnCentered>
+              <MapAccessories
+                renderThermometer={() => <RiskLevelThermometer />}
+                infoLink="/covid-risk-levels-metrics"
+              />
             </ColumnCentered>
             <Section>
               <CompareMain

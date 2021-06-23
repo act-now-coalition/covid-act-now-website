@@ -1,3 +1,3 @@
-import HorizontalThermometer from './HorizontalThermometer';
+import RiskLevelThermometer from './RiskLevelThermometer/RiskLevelThermometer';
 
-export default HorizontalThermometer;
+export default RiskLevelThermometer;

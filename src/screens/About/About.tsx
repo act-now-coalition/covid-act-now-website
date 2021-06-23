@@ -148,8 +148,8 @@ const About = () => {
           <AboutHeading2>{aboutContent.partnersHeader}</AboutHeading2>
           <SectionContent>
             <ExpandableContainer
-              collapsedHeightMobile={400}
-              collapsedHeightDesktop={565}
+              collapsedHeightMobile={'400px'}
+              collapsedHeightDesktop={'565px'}
               tabTextCollapsed={<>More</>}
               tabTextExpanded={<>Less</>}
               trackingLabel="Partners logos"

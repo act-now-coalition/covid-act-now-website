@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-  Wrapper,
   ColorBlock,
   ThermometerContainer,
   Label,
-  InfoIcon,
-  InfoLink,
-} from './HorizontalThermometer.style';
+} from './RiskLevelThermometer.style';
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 
@@ -39,30 +36,16 @@ const ThermometerLabel: React.FC<{ label: string }> = ({ label }) => {
   );
 };
 
-const AboutLink: React.FC = () => {
+const RiskLevelThermometer: React.FC = () => {
   return (
-    <InfoLink to="/covid-risk-levels-metrics">
-      <span>
-        <InfoIcon />
-        About risk levels
-      </span>
-    </InfoLink>
+    <ThermometerContainer>
+      <ThermometerLabel label="Low" />
+      {items.map((item: ThermometerItem) => {
+        return <ColorBlock color={item.color} key={item.label} />;
+      })}
+      <ThermometerLabel label="Severe" />
+    </ThermometerContainer>
   );
 };
 
-const HorizontalThermometer: React.FC = () => {
-  return (
-    <Wrapper>
-      <ThermometerContainer>
-        <ThermometerLabel label="Low" />
-        {items.map((item: ThermometerItem) => {
-          return <ColorBlock color={item.color} key={item.label} />;
-        })}
-        <ThermometerLabel label="Severe" />
-      </ThermometerContainer>
-      <AboutLink />
-    </Wrapper>
-  );
-};
-
-export default HorizontalThermometer;
+export default RiskLevelThermometer;

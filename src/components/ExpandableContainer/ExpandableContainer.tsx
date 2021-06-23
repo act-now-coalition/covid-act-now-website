@@ -11,12 +11,14 @@ import { EventCategory } from 'components/Analytics';
 import { useBreakpoint } from 'common/hooks';
 
 export interface ExpandableContainerProps {
-  collapsedHeightDesktop: number;
-  collapsedHeightMobile: number;
-  tabTextCollapsed: React.ReactElement;
-  tabTextExpanded: React.ReactElement;
+  collapsedHeightDesktop: string;
+  collapsedHeightMobile: string;
+  tabTextCollapsed: React.ReactNode;
+  tabTextExpanded: React.ReactNode;
   trackingLabel: string;
   trackingCategory: EventCategory;
+  disableArrowChange?: boolean;
+  secondaryOnClick?: () => void;
 }
 
 const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
@@ -26,6 +28,8 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
   tabTextExpanded,
   trackingLabel,
   trackingCategory,
+  disableArrowChange,
+  secondaryOnClick,
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -49,10 +53,23 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
         {children}
       </InnerContent>
       <ExpandButton
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => {
+          setCollapsed(!collapsed);
+          if (secondaryOnClick) {
+            secondaryOnClick();
+          }
+        }}
         trackingCategory={trackingCategory}
         trackingLabel={`${collapsed ? 'Expand' : 'Collapse'}: ${trackingLabel}`}
-        endIcon={collapsed ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+        endIcon={
+          disableArrowChange ? (
+            <ExpandMoreIcon />
+          ) : collapsed ? (
+            <ExpandMoreIcon />
+          ) : (
+            <ExpandLessIcon />
+          )
+        }
         $collapsed={collapsed}
       >
         {collapsed ? tabTextCollapsed : tabTextExpanded}
