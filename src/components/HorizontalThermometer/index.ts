@@ -1,3 +1,2 @@
-import RiskLevelThermometer from './RiskLevelThermometer/RiskLevelThermometer';
-
-export default RiskLevelThermometer;
+export { default as RiskLevelThermometer } from './RiskLevelThermometer/RiskLevelThermometer';
+export { default as VaccinationsThermometer } from './VaccinationsThermometer/VaccinationsThermometer';
