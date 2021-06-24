@@ -14,11 +14,13 @@ import {
   Button,
 } from 'components/SharedComponents/SharedComponents.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
-import RiskLevelThermometer from 'components/HorizontalThermometer';
-import VaccinationsThermometer from 'components/HorizontalThermometer/VaccinationsThermometer/VaccinationsThermometer';
+import {
+  RiskLevelThermometer,
+  VaccinationsThermometer,
+} from 'components/HorizontalThermometer';
+import { getAlertColor } from 'components/RegionMap/RegionMap.style';
 import { LocationSummary } from 'common/location_summaries';
 import { vaccineColorFromLocationSummary } from 'common/colors';
-import { getAlertColor } from 'components/RegionMap/RegionMap.style';
 
 enum MapType {
   VACCINATIONS = '% Vaccinated',
@@ -42,11 +44,9 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
         <VaccinationsThermometer />
       </Row>
     ),
-
     colorMap: (locationSummary: LocationSummary) =>
       vaccineColorFromLocationSummary(locationSummary),
   },
-
   [MapType.RISK_LEVEL]: {
     thermometer: <RiskLevelThermometer />,
     colorMap: (locationSummary: LocationSummary) =>

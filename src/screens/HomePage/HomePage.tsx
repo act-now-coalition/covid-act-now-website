@@ -3,7 +3,6 @@ import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
 import USVaccineMap from 'components/USMap/USVaccineMap';
-import VaccinationsThermometer from 'components/HorizontalThermometer/VaccinationsThermometer/VaccinationsThermometer';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -26,7 +25,10 @@ import {
   VaccinationsThermometerHeading,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
-import RiskLevelThermometer from 'components/HorizontalThermometer';
+import {
+  RiskLevelThermometer,
+  VaccinationsThermometer,
+} from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
