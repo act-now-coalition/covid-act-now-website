@@ -23,6 +23,7 @@ const MapCounties: React.FC<{
             strokeWidth={0}
             role="img"
             aria-label={geo.properties.name}
+            tabIndex={-1}
           />
         ))
       }
