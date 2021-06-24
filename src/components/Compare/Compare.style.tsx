@@ -12,8 +12,8 @@ import { SectionHeader } from 'components/SharedComponents/SharedComponents.styl
 
 // TODO (Chelsi): consolidate into a theme:
 
+export const locationNameCellWidthPercent = 22;
 export const locationNameCellWidth = 195;
-export const metricCellWidth = 110;
 
 const getMetricHeaderBackground = (
   $sortByPopulation: boolean,
@@ -67,19 +67,6 @@ export const Wrapper = styled.div<{
   table {
     border-spacing: 0;
 
-    th,
-    td {
-      &:first-child {
-        width: 22%;
-        min-width: ${locationNameCellWidth}px;
-      }
-
-      &:not(:first-child) {
-        width: 13%;
-        min-width: ${metricCellWidth}px;
-      }
-    }
-
     a {
       display: table;
       color: black;
@@ -130,6 +117,8 @@ export const LocationHeaderCell = styled(TableCell)<{
   $sortDescending: boolean;
 }>`
   ${CellStyles}
+  width: ${locationNameCellWidthPercent}%;
+  min-width: ${locationNameCellWidth}px;
 
   background-color: ${({ $isModal, $sortByPopulation }) =>
     $isModal && $sortByPopulation
@@ -181,8 +170,13 @@ export const MetricHeaderCell = styled(TableCell)<{
   $arrowColorSelected: string;
   $sortDescending: boolean;
   $isSelectedMetric: boolean;
+  $desiredWidthPercent: number;
+  $minWidthPx: number;
 }>`
   ${CellStyles}
+
+  width: ${props => props.$desiredWidthPercent}%;
+  min-width: ${props => props.$minWidthPx}px;
 
   background-color: ${props =>
     getMetricHeaderBackground(
@@ -319,6 +313,7 @@ export const LocationNameCell = styled.td<{
   sortByPopulation: boolean;
 }>`
   ${SharedCellStyles}
+  width: ${locationNameCellWidthPercent}%;
   min-width: ${locationNameCellWidth}px;
   background-color: ${({ sortByPopulation }) =>
     sortByPopulation && 'rgba(0,0,0,0.02)'};
@@ -359,21 +354,39 @@ export const DataCellValue = styled.span<{
   text-transform: capitalize;
 `;
 
+export const VaccinationsCell = styled.div`
+  display: flex;
+  min-width: 110px;
+`;
+
+export const VaccinationsCellValue = styled.div`
+  font-size: 16px;
+  font-family: Source Code Pro;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  margin-right: 0.5rem;
+  text-transform: capitalize;
+`;
+
+export const VaccinationsCellProgressBar = styled.div`
+  display: flex;
+  width: 100%;
+  margin: auto 0.25rem;
+  padding-right: 20px;
+`;
+
 export const DataCell = styled.td<{
-  $iconColor: string;
   $isSelected: boolean;
+  $desiredWidthPercent: number;
+  $minWidthPx: number;
 }>`
   ${SharedCellStyles}
-  min-width: ${metricCellWidth}px;
+  width: ${props => props.$desiredWidthPercent}%;
+  min-width: ${props => props.$minWidthPx}px;
   padding-right: 0;
   color: ${({ $isSelected }) =>
     $isSelected ? 'black' : `${COLOR_MAP.GRAY_BODY_COPY}`};
   font-weight: ${({ $isSelected }) => $isSelected && '600'};
   background-color: ${({ $isSelected }) => $isSelected && 'rgba(0,0,0,0.02)'};
-
-  svg {
-    color: ${({ $iconColor }) => $iconColor};
-  }
 `;
 
 export const Tag = styled.div`

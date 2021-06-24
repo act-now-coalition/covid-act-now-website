@@ -76,6 +76,8 @@ const HeaderCell = (props: {
       $arrowColorSelected={arrowColorSelected}
       $sortDescending={sortDescending}
       $isSelectedMetric={isSelectedMetric}
+      $desiredWidthPercent={column.desiredWidthPercent}
+      $minWidthPx={column.minWidthPx}
     >
       <span>{columnName}</span>
       <ArrowContainer

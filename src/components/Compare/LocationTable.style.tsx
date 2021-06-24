@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { locationNameCellWidth, metricCellWidth } from './Compare.style';
+import { locationNameCellWidth } from './Compare.style';
 import { orderedColumns } from './columns';
 import { RankedLocationSummary } from 'common/utils/compare';
+import sum from 'lodash/sum';
 
 const minTableWidth =
-  locationNameCellWidth + orderedColumns.length * metricCellWidth;
+  locationNameCellWidth + sum(orderedColumns.map(c => c.minWidthPx));
 const pinnedBorderColor = '#CEBFAC';
 
 //159px is the header-height
