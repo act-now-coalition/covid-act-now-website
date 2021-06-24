@@ -29,7 +29,7 @@ const MetricChart = React.memo(
     projections: Projections;
     height?: number;
   }) => {
-    const chartHeight = useChartHeightForBreakpoint();
+    const chartHeight = height ? height : useChartHeightForBreakpoint();
     if (!projections.hasMetric(metric)) {
       return (
         <EmptyPanel $height={chartHeight}>
