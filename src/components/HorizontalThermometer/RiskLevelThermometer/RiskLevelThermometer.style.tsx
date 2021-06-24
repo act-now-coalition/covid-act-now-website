@@ -11,7 +11,7 @@ export const ThermometerContainer = styled.div`
 
 export const Label = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 1rem;
+  font-size: 0.875rem;
 
   strong {
     color: black;

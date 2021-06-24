@@ -10,12 +10,14 @@ import { useCountyGeographies, useStateGeographies } from 'common/hooks';
 import * as Styles from './RegionMap.style';
 import { CountiesTopology } from 'common/data';
 import { trackEvent, EventCategory, EventAction } from 'components/Analytics';
+import { LocationSummary } from 'common/location_summaries';
 
 const RegionMap: React.FC<{
   height?: number;
   width?: number;
   region: Region;
-}> = ({ height = 600, width = 800, region }) => {
+  colorMap: (locationSummary: LocationSummary) => string;
+}> = ({ height = 600, width = 800, region, colorMap }) => {
   const [tooltipContent, setTooltipContent] = useState('');
 
   const countyFipsList = useMemo(() => getCountyFipsList(region), [region]);
@@ -106,7 +108,7 @@ const RegionMap: React.FC<{
                   >
                     <Styles.CountyWithLevel
                       geography={geo}
-                      $locationSummary={LocationSummariesByFIPS[geo.id] || null}
+                      $fillColor={colorMap(LocationSummariesByFIPS[geo.id])}
                       aria-label={region?.shortName}
                     />
                   </Link>
