@@ -1,5 +1,4 @@
 import React from 'react';
-import { MapView } from 'screens/HomePage/HomePage';
 import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 import {
   List,
@@ -20,6 +19,7 @@ import {
   RegionVaccinationInfo,
 } from './utils';
 import { formatPercent } from 'common/utils';
+import { MapView } from 'screens/HomePage/utils';
 
 const Column: React.FC<{
   listHeader: string;
@@ -55,7 +55,10 @@ const Column: React.FC<{
   );
 };
 
-const VaccinationsTable: React.FC<{ mapView: MapView }> = ({ mapView }) => {
+const VaccinationsTable: React.FC<{
+  mapView: MapView;
+  seeAllOnClick: () => void;
+}> = ({ mapView, seeAllOnClick }) => {
   const highestRanking = getHighestRankingRegions(5, mapView);
   const lowestRanking = getLowestRankingRegions(5, mapView);
 
@@ -69,7 +72,7 @@ const VaccinationsTable: React.FC<{ mapView: MapView }> = ({ mapView }) => {
     trackingLabel: 'Vaccinations table: open modal',
     trackingCategory: EventCategory.VACCINATION,
     disableArrowChange: true,
-    secondaryOnClick: () => {}, // TODO(Chelsi): plug into opening compare modal
+    secondaryOnClick: seeAllOnClick,
   };
 
   return (

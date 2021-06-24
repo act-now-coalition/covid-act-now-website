@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapView } from 'screens/HomePage/HomePage';
+import { MapView } from 'screens/HomePage/utils';
 import VaccinationsTable from './VaccinationsTable';
 
 export default {
@@ -8,9 +8,13 @@ export default {
 };
 
 export const Counties = () => {
-  return <VaccinationsTable mapView={MapView.COUNTIES} />;
+  return (
+    <VaccinationsTable mapView={MapView.COUNTIES} seeAllOnClick={() => {}} />
+  );
 };
 
 export const States = () => {
-  return <VaccinationsTable mapView={MapView.STATES} />;
+  return (
+    <VaccinationsTable mapView={MapView.STATES} seeAllOnClick={() => {}} />
+  );
 };

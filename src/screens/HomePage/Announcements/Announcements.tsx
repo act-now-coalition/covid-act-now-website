@@ -6,13 +6,16 @@ import {
   Content,
 } from './Announcements.style';
 import ExternalLink from 'components/ExternalLink';
-import { SectionWrapper, SectionHeader } from 'screens/HomePage/HomePage.style';
+import {
+  SectionWrapper,
+  SmallSectionHeader,
+} from 'screens/HomePage/HomePage.style';
 
 const Announcements: React.FC = () => {
   return (
     <SectionWrapper>
       <Content>
-        <SectionHeader>Announcements</SectionHeader>
+        <SmallSectionHeader>Announcements</SmallSectionHeader>
         <AnnouncementIntro>
           Act Now Coalition and Rewiring America
         </AnnouncementIntro>

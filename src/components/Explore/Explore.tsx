@@ -50,8 +50,6 @@ import {
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
-import { SectionHeader } from 'components/SharedComponents';
-import NationalText from 'components/NationalText';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
@@ -104,16 +102,16 @@ function getLabelLength(series: Series, shortLabel: boolean) {
 const Explore: React.FunctionComponent<{
   initialFipsList: string[];
   title?: string;
-  showNationalSummary?: boolean;
+  nationalSummary?: React.ReactNode;
   currentMetric: ExploreMetric;
   setCurrentMetric: React.Dispatch<React.SetStateAction<ExploreMetric>>;
 }> = React.memo(
   ({
     initialFipsList,
     title = 'Trends',
-    showNationalSummary = false,
     currentMetric,
     setCurrentMetric,
+    nationalSummary,
   }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -290,11 +288,15 @@ const Explore: React.FunctionComponent<{
     const regionsMenuLabel = selectedLocations.map(getLocationLabel).join('; ');
     const periodMenuLabel = allPeriodLabels[period];
 
+    const isHomepage = nationalSummary !== undefined;
+
     return (
       <div ref={exploreRef}>
-        <SectionHeader>{title}</SectionHeader>
-        {showNationalSummary && <NationalText />}
-        <Styles.ChartControlsContainer>
+        <Styles.ExploreSectionHeader $isHomepage={isHomepage}>
+          {title}
+        </Styles.ExploreSectionHeader>
+        {nationalSummary && nationalSummary}
+        <Styles.ChartControlsContainer $isHomepage={isHomepage}>
           <Dropdown
             menuLabel="Metric"
             buttonSelectionLabel={metricMenuLabel}
