@@ -265,7 +265,9 @@ const CompareTable = (props: {
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
         <HeaderContainer $isHomepage={props.isHomepage}>
-          <CompareHeader $isHomepage={props.isHomepage}>Compare</CompareHeader>
+          <CompareHeader $isHomepage={props.isHomepage}>
+            {props.isHomepage ? 'Compare' : 'Counties'}
+          </CompareHeader>
           {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}
