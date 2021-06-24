@@ -3,8 +3,6 @@ import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { ChartContainer as ExploreChartContainer } from 'components/Explore/Explore.style';
 import { COLOR_MAP } from 'common/colors';
 
-export const chartsHeight = 250;
-
 export const charts = {
   fontFamily: "'Source Code Pro', 'Roboto Mono', monospace",
   fontWeight: 'bold',
@@ -210,11 +208,11 @@ export const NewChartContainer = styled(ExploreChartContainer)`
   margin: 0 0 ${props => props.theme.spacing(3)}px 0;
 `;
 
-export const EmptyPanel = styled(ExploreChartContainer)`
+export const EmptyPanel = styled(ExploreChartContainer)<{ $height: number }>`
   display: grid;
   place-items: center;
   background-color: ${COLOR_MAP.GREY_0};
   padding: ${props => props.theme.spacing(3)}px;
   text-align: center;
-  height: ${chartsHeight}px;
+  height: ${({ $height }) => `${$height}px`};
 `;

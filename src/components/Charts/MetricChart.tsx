@@ -14,9 +14,11 @@ import { VACCINATIONS_COLOR_MAP } from 'common/colors';
 import { EmptyPanel } from 'components/Charts/Charts.style';
 import { getMetricStatusText } from 'common/metric';
 import { ScreenshotReady } from 'components/Screenshot';
+import { useChartHeightForBreakpoint } from 'common/hooks';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
+
 const MetricChart = React.memo(
   ({
     metric,
@@ -27,9 +29,10 @@ const MetricChart = React.memo(
     projections: Projections;
     height?: number;
   }) => {
+    const chartHeight = useChartHeightForBreakpoint();
     if (!projections.hasMetric(metric)) {
       return (
-        <EmptyPanel>
+        <EmptyPanel $height={chartHeight}>
           <p>{getMetricStatusText(metric, projections)}</p>
           <ScreenshotReady />
         </EmptyPanel>
@@ -40,31 +43,31 @@ const MetricChart = React.memo(
       <>
         {metric === Metric.CASE_GROWTH_RATE && (
           <ChartRt
-            height={height}
+            height={chartHeight}
             columnData={projection.getDataset('rtRange')}
           />
         )}
         {metric === Metric.CASE_DENSITY && (
           <ChartCaseDensity
-            height={height}
+            height={chartHeight}
             columnData={projection.getDataset('caseDensityRange')}
           />
         )}
         {metric === Metric.POSITIVE_TESTS && (
           <ChartPositiveTestRate
-            height={height}
+            height={chartHeight}
             columnData={projection.getDataset('testPositiveRate')}
           />
         )}
         {metric === Metric.HOSPITAL_USAGE && (
           <ChartICUCapacityUsed
-            height={height}
+            height={chartHeight}
             columnData={projection.getDataset('icuUtilization')}
           />
         )}
         {metric === Metric.VACCINATIONS && (
           <ChartVaccinations
-            height={height}
+            height={chartHeight}
             seriesList={getVaccinationSeries(projection)}
           />
         )}

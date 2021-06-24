@@ -19,3 +19,4 @@ export { default as useDynamicVaccineButton } from './useDynamicVaccineButton';
 export { default as useLogChanges } from './useLogChanges';
 export * from './useGeolocatedRegions';
 export { default as useDialog } from './useDialog';
+export { default as useChartHeightForBreakpoint } from './useChartHeightForBreakpoint';
