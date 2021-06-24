@@ -356,7 +356,6 @@ export const DataCellValue = styled.span<{
 
 export const VaccinationsCell = styled.div`
   display: flex;
-  flex-direction: row;
   min-width: 110px;
 `;
 
