@@ -8,7 +8,7 @@
 
 import { singletonHook } from 'react-singleton-hook';
 import { useEffect, useState } from 'react';
-// import { IP_API_KEY } from 'common/ip-api';
+import { IP_API_KEY } from 'common/ip-api';
 
 // move this elsewhere
 export interface GeolocationInfo {
@@ -31,12 +31,12 @@ const useGeolocation = singletonHook(
     useEffect(() => {
       const fetchIpData = () => {
         setIsLoading(true);
-        mockGeolocationData()
+        fetchGeolocationData()
           .then(data => {
             setIpData({
-              zipCode: '20149',
-              stateCode: 'VA',
-              country: 'United States',
+              zipCode: data.zip,
+              stateCode: data.region,
+              country: data.country,
             });
             setIsLoading(false);
           })
@@ -57,18 +57,18 @@ const useGeolocation = singletonHook(
   },
 );
 
-// function fetchGeolocationData() {
-//   return fetch(
-//     `https://pro.ip-api.com/json/?key=${IP_API_KEY}`,
-//   ).then(response => response.json());
-// }
+function fetchGeolocationData() {
+  return fetch(
+    `https://pro.ip-api.com/json/?key=${IP_API_KEY}`,
+  ).then(response => response.json());
+}
 
 // Use this mock to simulate fetchGeolocationData, other data can be obtained from
 // https://ip-api.com/#<IP_ADDRESS> (https://ip-api.com/#8.8.8.8)
-
+/*
 function mockGeolocationData() {
   // how many seconds to wait before returning fake geolocation data
-  const GEO_WAIT_SECONDS = 1;
+  const GEO_WAIT_SECONDS = 30;
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
@@ -95,9 +95,9 @@ function mockGeolocationData() {
         mobile: false,
         proxy: false,
         hosting: true,
-      });
+     });
     }, GEO_WAIT_SECONDS * 1000);
   });
 }
-
+*/
 export default useGeolocation;
