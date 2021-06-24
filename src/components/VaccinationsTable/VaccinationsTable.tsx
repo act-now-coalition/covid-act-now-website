@@ -29,7 +29,7 @@ const Column: React.FC<{
     <List>
       <ColumnHeader>{listHeader}</ColumnHeader>
       {regions.map((region: RegionVaccinationInfo) => (
-        <ListItem>
+        <ListItem key={region.regionName}>
           <StyledLink to={region.url}>
             <ListItemHalf>
               <MonospaceItem>{region.rank}.</MonospaceItem>
