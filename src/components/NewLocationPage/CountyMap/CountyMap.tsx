@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import RegionMap from 'components/RegionMap';
 import FixedAspectRatio from 'components/FixedAspectRatio/FixedAspectRatio';
 import {
@@ -72,6 +73,12 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
       );
     }
   };
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setMapType(MapType.VACCINATIONS);
+  }, [pathname]);
 
   return (
     <MapContainer>
