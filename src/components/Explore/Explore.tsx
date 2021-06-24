@@ -53,8 +53,8 @@ import regions, { Region, useRegionFromParams } from 'common/regions';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
-import { chartsHeight } from 'components/Charts/Charts.style';
 import { EmptyPanel } from 'components/Charts/Charts.style';
+import { useChartHeightForBreakpoint } from 'common/hooks';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -116,6 +116,8 @@ const Explore: React.FunctionComponent<{
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const isMobileXs = useMediaQuery(theme.breakpoints.down('xs'));
+
+    const chartHeight = useChartHeightForBreakpoint();
 
     const { sharedComponentId } = useParams<{
       sharedComponentId?: string;
@@ -332,7 +334,7 @@ const Explore: React.FunctionComponent<{
                     seriesList={chartSeries}
                     isMobile={isMobile}
                     width={width}
-                    height={chartsHeight}
+                    height={chartHeight}
                     tooltipSubtext={`in ${getLocationNames(selectedLocations)}`}
                     hasMultipleLocations={hasMultipleLocations}
                     isMobileXs={isMobileXs}
@@ -344,14 +346,14 @@ const Explore: React.FunctionComponent<{
                     maxYFromDefinition={maxYFromDefinition}
                   />
                 ) : (
-                  <div style={{ height: chartsHeight }} />
+                  <div style={{ height: chartHeight }} />
                 )
               }
             </ParentSize>
           </Styles.ChartContainer>
         )}
         {selectedLocations.length > 0 && !hasData && (
-          <EmptyPanel>
+          <EmptyPanel $height={chartHeight}>
             {getNoDataCopy(
               currentMetricName,
               getLocationNames(selectedLocations),
@@ -360,7 +362,7 @@ const Explore: React.FunctionComponent<{
           </EmptyPanel>
         )}
         {selectedLocations.length === 0 && (
-          <EmptyPanel>
+          <EmptyPanel $height={chartHeight}>
             <p>Please select states or counties to explore trends.</p>
             <ScreenshotReady />
           </EmptyPanel>
