@@ -76,6 +76,8 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
 
   const { pathname } = useLocation();
 
+  // Resets MapType to vacciations when navigating between location pages via minimap
+  // (need to force reset since the route doesnt change)
   useEffect(() => {
     setMapType(MapType.VACCINATIONS);
   }, [pathname]);
