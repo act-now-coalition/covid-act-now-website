@@ -9,6 +9,8 @@ export const LegendContainer = styled.div<{
   flex-wrap: wrap;
   height: ${props => (props.$condensed ? 'unset' : '3.5rem')};
   width: 100%;
+  margin-top: 8px;
+  align-items: center;
 
   @media (min-width: 960px) {
     height: unset;
@@ -27,6 +29,7 @@ export const LegendItemHeader = styled.div`
   font-size: 0.75rem;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.7);
+  min-width: 70px;
 `;
 
 export const LegendItemContainer = styled.div<{
@@ -41,12 +44,6 @@ export const LegendItemContainer = styled.div<{
     padding: 0;
   `
       : `
-    margin-right: 1rem;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
     @media (min-width: 960px) {
       margin: 0.5rem;
     }
@@ -67,9 +64,12 @@ export const LegendWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 1rem;
   align-items: ${props => (props.$condensed ? 'flex-start' : 'center')};
   padding: ${props => (props.$condensed ? '0.75rem 0 0' : '0 0.5rem')};
+  margin-top: ${props => (!props.$condensed ? '0.5rem' : 0)};
+  font-weight: bold;
+  font-size: 0.8rem;
+  line-height: 1.1rem;
   ${props =>
     !props.$condensed &&
     css<{

@@ -8,29 +8,37 @@ import { COLOR_MAP } from 'common/colors';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Section {
+  // Used in thermometer
   labelTo: string;
+  // Used in SocialLocationPreviewMap legend.
+  labelRange: string;
   color: string;
 }
 
-const thermometerSections: Section[] = [
+export const thermometerSections: Section[] = [
   {
     labelTo: '40%',
+    labelRange: '< 40%',
     color: COLOR_MAP.VACCINATIONS_BLUE[0],
   },
   {
     labelTo: '50%',
+    labelRange: '40 - 50%',
     color: COLOR_MAP.VACCINATIONS_BLUE[1],
   },
   {
     labelTo: '60%',
+    labelRange: '50 - 60%',
     color: COLOR_MAP.VACCINATIONS_BLUE[2],
   },
   {
     labelTo: '70%',
+    labelRange: '60 - 70%',
     color: COLOR_MAP.VACCINATIONS_BLUE[3],
   },
   {
     labelTo: '100%', // Does not render
+    labelRange: '> 70%',
     color: COLOR_MAP.VACCINATIONS_BLUE[4],
   },
 ];
