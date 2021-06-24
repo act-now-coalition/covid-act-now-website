@@ -38,7 +38,7 @@ export const ThermometerContainer = styled.div`
 `;
 
 export const ToggleWrapper = styled.div`
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 `;
 
 export const Row = styled.div`
@@ -49,6 +49,6 @@ export const Row = styled.div`
 `;
 
 export const VaccinationsThermLabel = styled(Label)`
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   line-height: 1.1rem;
 `;
