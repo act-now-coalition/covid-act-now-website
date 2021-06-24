@@ -6,8 +6,7 @@ import regions, {
   MetroArea,
 } from 'common/regions';
 import { LocationSummariesByFIPS } from 'common/location_summaries';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import { COLOR_MAP } from 'common/colors';
+import { COLOR_MAP, vaccineColorFromLocationSummary } from 'common/colors';
 
 // Move somewhere more central:
 function belongsToState(county: County, stateFips: string | null) {
@@ -18,7 +17,7 @@ function belongsToState(county: County, stateFips: string | null) {
 export function getLocationIconFillColor(region: Region) {
   const locationSummary = LocationSummariesByFIPS[region.fipsCode];
   if (locationSummary) {
-    return LOCATION_SUMMARY_LEVELS[locationSummary.level].color;
+    return vaccineColorFromLocationSummary(locationSummary);
   } else return `${COLOR_MAP.GRAY.LIGHT}`;
 }
 
