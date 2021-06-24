@@ -28,6 +28,9 @@ export const Button = styled(ToggleButton).attrs(props => ({
   ${props => props.theme.fonts.regularBook};
   padding: 0.5rem;
   border: none;
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 1px auto;
+  }
   .MuiToggleButton-label {
     color: ${COLOR_MAP.GRAY_BODY_COPY};
     text-transform: none;
