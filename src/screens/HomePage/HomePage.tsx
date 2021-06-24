@@ -152,7 +152,9 @@ export default function HomePage() {
                 <USVaccineMap
                   showCounties={locationScope === MapView.COUNTIES}
                   tooltipMode={
-                    isMobileMap
+                    // TODO(michael): There's some sort of bug / performance issue on iOS that makes
+                    // the mobile tooltip on the county view unusable.
+                    isMobileMap && locationScope === MapView.STATES
                       ? TooltipMode.ACTIVATE_ON_CLICK
                       : TooltipMode.ACTIVATE_ON_HOVER
                   }
