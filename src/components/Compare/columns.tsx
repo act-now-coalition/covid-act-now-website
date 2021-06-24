@@ -34,7 +34,11 @@ export interface ColumnDefinition {
   /** The % width this column should be in relation to other columns. */
   desiredWidthPercent: number;
 
-  /** min-width of this column (e.g. to ensure enough space for the column header). */
+  /**
+   * min-width of this column (e.g. to ensure enough space for the column header).
+   * This is probably the width that will be used on mobile so try to make it
+   * look nice. :-)
+   */
   minWidthPx: number;
 
   /** Get the numeric value for the specified `row`. (used for sorting) */
@@ -124,8 +128,8 @@ class VaccinationsColumn extends MetricColumn {
   }
 
   desiredWidthPercent = 22;
-  // Need ~130 to fit vaccine progress bar.
-  minWidthPx = 130;
+  // Make it wide enough so progress bar doesn't look squashed on mobile.
+  minWidthPx = 180;
 
   render(row: SummaryForCompare, locationName: string): React.ReactNode {
     const vaccinationsInitiated =
