@@ -181,7 +181,7 @@ export default function HomePage() {
 
             <MapBlock
               title="Risk levels"
-              subtitle="Risk is reduced for those who are vaccinated"
+              subtitle="Risk is reduced for those who are vaccinated."
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}
