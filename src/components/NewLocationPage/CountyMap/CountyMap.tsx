@@ -57,11 +57,11 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
 /* The default aspect-ratio for the state and US maps is 800x600 */
 
 const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
-  const [mapType, setMapType] = useState<MapType>(MapType.RISK_LEVEL);
+  const [mapType, setMapType] = useState<MapType>(MapType.VACCINATIONS);
 
   const onClickToggle = (
     event: React.MouseEvent<HTMLElement>,
-    newView: MapType,
+    newView: MapType | null,
   ) => {
     if (newView) {
       setMapType(newView);
