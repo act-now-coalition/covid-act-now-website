@@ -11,6 +11,7 @@ import {
 interface LegendProps {
   children: React.ReactElement[];
   condensed?: boolean;
+  header?: string;
 }
 
 interface LegendItemProps {
@@ -19,9 +20,10 @@ interface LegendItemProps {
   condensed?: boolean;
 }
 
-export function Legend({ children, condensed = false }: LegendProps) {
+export function Legend({ children, condensed = false, header }: LegendProps) {
   return (
     <LegendWrapper $condensed={condensed}>
+      {header}
       <LegendContainer $condensed={condensed}>
         {React.Children.map(children, child =>
           React.cloneElement(child, { condensed: condensed }),

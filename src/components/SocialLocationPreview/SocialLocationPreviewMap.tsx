@@ -14,7 +14,9 @@ import {
 import { Level } from 'common/level';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import USRiskMap from 'components/USMap/USRiskMap';
+import USVaccineMap from 'components/USMap/USVaccineMap';
 import { Legend, LegendItem } from './Legend';
+import { thermometerSections } from 'components/HorizontalThermometer/VaccinationsThermometer/VaccinationsThermometer';
 
 const SocialLocationPreview = (props: {
   border?: Boolean;
@@ -27,6 +29,13 @@ const SocialLocationPreview = (props: {
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
   const { border, Footer, isEmbed, isEmbedPreview } = props;
   const showCountyView = !isEmbed && !isEmbedPreview;
+  // TODO(michael): 2021-06-24: I'm going out on a limb and switching our embeds
+  // over to the vaccine map too, but if anybody complains we could change this
+  // to only show when `!isEmbed` so we don't affect embeds on people's sites.
+  const showVaccineMap = true;
+  const Map = showVaccineMap ? USVaccineMap : USRiskMap;
+  const MapLegend = showVaccineMap ? VaccineMapLegend : RiskMapLegend;
+
   return (
     <Wrapper noShadow={!isEmbedPreview} border={border}>
       <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
@@ -36,7 +45,7 @@ const SocialLocationPreview = (props: {
       <USMapPreviewHeader border={isEmbedPreview} sideLegend={!isEmbed}>
         <MapWrapper>
           {isEmbed && <MapLegend isEmbed />}
-          <USRiskMap showCounties={showCountyView} />
+          <Map showCounties={showCountyView} />
         </MapWrapper>
         {!isEmbed && (
           <USMapHeaderText>
@@ -58,7 +67,7 @@ const SocialLocationPreview = (props: {
   );
 };
 
-const MapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
+const RiskMapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
   <Legend condensed={!isEmbed}>
     {[
       Level.SUPER_CRITICAL,
@@ -75,6 +84,18 @@ const MapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
             : LOCATION_SUMMARY_LEVELS[level].name
         }
         color={LOCATION_SUMMARY_LEVELS[level].color}
+      />
+    ))}
+  </Legend>
+);
+
+const VaccineMapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
+  <Legend condensed={!isEmbed} header="Pop. with 1+ dose">
+    {thermometerSections.map((section, i) => (
+      <LegendItem
+        key={`legend-${i}`}
+        title={section.labelRange}
+        color={section.color}
       />
     ))}
   </Legend>

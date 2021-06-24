@@ -77,6 +77,8 @@ const ShareBlock = ({
     projections && stats ? (
       <SocialLocationPreview projections={projections} stats={stats} />
     ) : (
+      // HACK: We always set isEmbedPreview to true so that we render the states
+      // map (instead of counties) on the homepage, which renders much faster.
       <SocialLocationPreviewMap isEmbedPreview />
     );
 
