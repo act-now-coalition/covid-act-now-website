@@ -15,14 +15,12 @@ import {
   getMaxYFromDefinition,
   getAllSeriesForMetric,
 } from 'components/Explore/utils';
-import {
-  NewChartContainer,
-  chartsHeight,
-} from 'components/Charts/Charts.style';
+import { NewChartContainer } from 'components/Charts/Charts.style';
 import SingleLocationChart from 'components/Explore/SingleLocationChart';
 import { Projections } from 'common/models/Projections';
 import { EmptyPanel } from 'components/Charts/Charts.style';
 import { ScreenshotReady } from 'components/Screenshot';
+import { useChartHeightForBreakpoint } from 'common/hooks';
 
 export function getNoDataCopy(metricName: string, locationNames: string) {
   return (
@@ -54,6 +52,8 @@ const SingleLocationChartContainer: React.FunctionComponent<{
 
   const maxYFromDefinition = getMaxYFromDefinition(metric);
 
+  const chartHeight = useChartHeightForBreakpoint();
+
   useEffect(() => {
     if (projections) {
       const series = getAllSeriesForMetric(metric, projections.primary);
@@ -76,7 +76,7 @@ const SingleLocationChartContainer: React.FunctionComponent<{
                   seriesList={chartSeries}
                   isMobile={isMobile}
                   width={width}
-                  height={chartsHeight}
+                  height={chartHeight}
                   tooltipSubtext={`in ${projections.region.shortName}`}
                   marginRight={0}
                   dateRange={dateRange}
@@ -86,14 +86,14 @@ const SingleLocationChartContainer: React.FunctionComponent<{
                   maxYFromDefinition={maxYFromDefinition}
                 />
               ) : (
-                <div style={{ height: chartsHeight }} />
+                <div style={{ height: chartHeight }} />
               )
             }
           </ParentSize>
         </NewChartContainer>
       )}
       {!hasData && (
-        <EmptyPanel>
+        <EmptyPanel $height={chartHeight}>
           {getNoDataCopy(currentMetricName, projections.region.shortName)}
           <ScreenshotReady />
         </EmptyPanel>

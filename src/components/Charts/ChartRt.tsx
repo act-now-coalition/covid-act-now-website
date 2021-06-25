@@ -49,7 +49,7 @@ const hasData = (d: any) =>
 const ChartRt = ({
   columnData,
   width,
-  height = Style.chartsHeight,
+  height,
   marginTop = 6,
   marginBottom = 40,
   marginLeft = 40,
@@ -57,7 +57,7 @@ const ChartRt = ({
 }: {
   columnData: Column[];
   width: number;
-  height?: number;
+  height: number;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
@@ -218,10 +218,10 @@ const ChartRt = ({
 
 const ChartRtAutosize = ({
   columnData,
-  height = Style.chartsHeight,
+  height,
 }: {
   columnData: Column[];
-  height?: number;
+  height: number;
 }) => (
   <Style.ChartContainer>
     <ParentSize>

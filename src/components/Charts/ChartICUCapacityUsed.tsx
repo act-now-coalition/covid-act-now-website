@@ -3,7 +3,6 @@ import { HOSPITAL_USAGE_LEVEL_INFO_MAP } from 'common/metrics/hospitalizations';
 import { Column } from 'common/models/Projection';
 import ChartZones from './ChartZones';
 import { formatPercent } from 'common/utils';
-import { chartsHeight } from 'components/Charts/Charts.style';
 
 const CAP_Y = 1;
 
@@ -24,10 +23,10 @@ const getTooltipContent = (valueY: number) =>
 
 const ChartICUCapacityUsed = ({
   columnData,
-  height = chartsHeight,
+  height,
 }: {
   columnData: Column[];
-  height?: number;
+  height: number;
 }) => (
   <ChartZones
     height={height}
