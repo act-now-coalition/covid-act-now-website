@@ -97,7 +97,7 @@
         {
           "question": "Can you transmit COVID after vaccination?",
           "questionId": "can-you-transmit-covid-after-vaccination",
-          "answer": "A person is considered to be fully vaccinated two weeks after the second dose of the Pfizer or Moderna vaccines, or two weeks after receiving the single dose of the Johnson & Johnson vaccine. Anyone who is fully vaccinated with an mRNA vaccine is protected against asymptomatic infection and is unlikely to acquire or transmit COVID to others, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/science/science-briefs/fully-vaccinated-people.html). Mask wearing and social distancing for fully vaccinated individuals is not necessary unless it is required by law. See the agency’s full [guidance](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html) for further information."
+          "answer": "A person is considered to be fully vaccinated two weeks after the second dose of the Pfizer or Moderna vaccines, or two weeks after receiving the single dose of the Johnson & Johnson vaccine. Anyone who is fully vaccinated is protected against asymptomatic infection and is unlikely to acquire or transmit COVID to others, according to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/science/science-briefs/fully-vaccinated-people.html). Mask wearing and social distancing for fully vaccinated individuals is not necessary unless it is required by law. See the agency’s full [guidance](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html) for further information."
         },
         {
           "question": "Which locations does Covid Act Now have vaccine eligibility information for? ",
