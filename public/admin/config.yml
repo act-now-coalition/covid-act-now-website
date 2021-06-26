@@ -140,8 +140,6 @@ collections:
           - label: Profile URL
             name: profileUrl
             widget: string
-            required: false
-
   - name: articles
     label: Articles
     folder: 'src/cms-content/articles'
