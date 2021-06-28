@@ -22,7 +22,6 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
 import Recommendations from './Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import VaccinationEligibilityBlock from 'components/VaccinationEligibilityBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { WidthContainer } from './LocationPageBlock.style';
@@ -213,9 +212,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         />
         <BelowTheFold>
           <WidthContainer>
-            <LocationPageBlock>
-              <VaccinationEligibilityBlock region={region} />
-            </LocationPageBlock>
             <LocationPageBlock>
               <CompareMain
                 stateName={getStateName(region) || region.name} // rename prop

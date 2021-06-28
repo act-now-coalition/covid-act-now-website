@@ -33,7 +33,6 @@ import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
-import GetVaccinatedBanner from 'components/Banner/GetVaccinatedBanner';
 import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
@@ -131,7 +130,6 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
-      <GetVaccinatedBanner />
       <HomePageHeader />
       <main>
         <div className="App">
