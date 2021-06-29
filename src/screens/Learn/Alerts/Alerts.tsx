@@ -27,7 +27,7 @@ const Alerts: React.FC = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/subscribe"
+        canonicalUrl="/research-rundown-archive"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />

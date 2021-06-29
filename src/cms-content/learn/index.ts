@@ -228,9 +228,9 @@ export const learnPages: TocItem[] = [
   },
   {
     label: aboutAlerts.pageHeader,
-    to: '/subscribe',
+    to: '/research-rundown-archive',
     items: aboutAlerts.sections.map(section => ({
-      to: `/subscribe#${section.sectionId}`,
+      to: `/research-rundown-archive#${section.sectionId}`,
       label: section.sectionHeader,
     })),
   },
