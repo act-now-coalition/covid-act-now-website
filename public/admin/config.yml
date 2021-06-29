@@ -687,34 +687,18 @@ collections:
           - label: Page Header
             name: pageHeader
             widget: string
-          - label: Page Intro
-            name: pageIntro
+          - label: Body Text
+            name: bodyText
             widget: markdown
-          - label: Sections
-            name: sections
-            widget: list
-            fields:
-              - { label: Section header, name: sectionHeader, widget: string }
-              - {
-                  label: Section subheader,
-                  name: sectionSubheader,
-                  widget: string,
-                  required: false,
-                }
-              - {
-                  label: Section ID,
-                  name: sectionId,
-                  widget: string,
-                  hint: 'Section header, all lowercase, separated by dashes if multi-word',
-                }
-              - { label: Section body, name: sectionBody, widget: markdown }
+          - label: Body Image(s)
+            name: bodyImages
+            widget: markdown
           - label: Metadata title
             name: metadataTitle
             widget: text
           - label: Metadata description
             name: metadataDescription
             widget: text
-
   - label: Tooltips
     name: tooltips
     description: Content for location page tooltips (short metric explainers, location page header info, chart disclaimers)

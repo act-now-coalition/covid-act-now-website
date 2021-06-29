@@ -199,17 +199,10 @@ export const footerContent = footer as Footer;
   About our alerts:
 */
 
-export interface AlertsSection {
-  sectionHeader: string;
-  sectionSubheader: string;
-  sectionId: string;
-  sectionBody: Markdown;
-}
-
 export interface AboutAlertsContent {
   pageHeader: string;
-  pageIntro: Markdown;
-  sections: AlertsSection[];
+  bodyText: Markdown;
+  bodyImages: Markdown;
   metadataTitle: string;
   metadataDescription: string;
 }
@@ -229,10 +222,6 @@ export const learnPages: TocItem[] = [
   {
     label: aboutAlerts.pageHeader,
     to: '/research-rundown-archive',
-    items: aboutAlerts.sections.map(section => ({
-      to: `/research-rundown-archive#${section.sectionId}`,
-      label: section.sectionHeader,
-    })),
   },
   {
     label: metricExplainersContent.pageHeader,

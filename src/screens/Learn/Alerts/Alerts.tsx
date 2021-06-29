@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
-import {
-  BreadcrumbsContainer,
-  SectionName,
-  LearnHeading1,
-} from '../Learn.style';
+import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
+import { ButtonWrapper } from './Alerts.style';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
@@ -12,12 +9,15 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import { formatMetatagDate } from 'common/utils';
 import Footer from 'screens/Learn/Footer/Footer';
 import { aboutOurAlertsContent } from 'cms-content/learn';
+import { LargeOutlinedButton } from 'components/ButtonSystem';
+import { EventCategory } from 'components/Analytics';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const Alerts: React.FC = () => {
   const {
     pageHeader,
-    pageIntro,
-    sections,
+    bodyText,
+    bodyImages,
     metadataTitle,
     metadataDescription,
   } = aboutOurAlertsContent;
@@ -36,15 +36,18 @@ const Alerts: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
-        <MarkdownContent source={pageIntro} />
-        {sections.map((section: any, i: number) => (
-          <Fragment key={i}>
-            <SectionName id={section.sectionId}>
-              {section.sectionHeader}
-            </SectionName>
-            <MarkdownContent source={section.sectionBody} />
-          </Fragment>
-        ))}
+        <MarkdownContent source={bodyText} />
+        <ButtonWrapper>
+          <LargeOutlinedButton
+            href="https://docs.google.com/spreadsheets/d/1JYl0YtoyDbvaCvuY2oF1oAPpIWRLKJJw4aaAS93YgP4"
+            endIcon={<ArrowForwardIcon />}
+            trackingCategory={EventCategory.LEARN}
+            trackingLabel="Read the archive"
+          >
+            Read the archive
+          </LargeOutlinedButton>
+        </ButtonWrapper>
+        <MarkdownContent source={bodyImages} />
         <Footer />
       </PageContent>
     </Fragment>
