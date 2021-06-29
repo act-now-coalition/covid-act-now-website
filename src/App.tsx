@@ -221,6 +221,11 @@ export default function App() {
                     path="/embed/us"
                     render={() => <Embed isNational />}
                   />
+                  <Route
+                    exact
+                    path="/embed/risk/us"
+                    render={() => <Embed isNational isRiskMap />}
+                  />
                   <Route exact path="/embed/us/:stateId" component={Embed} />
                   <Route
                     exact
