@@ -188,7 +188,8 @@ export default function App() {
                     component={MetricExplainer}
                   />
                   <Route path="/about" component={About} />
-                  <Route path="/subscribe" component={Alerts} />
+                  <Route path="/research-rundown-archive" component={Alerts} />
+                  <Redirect path="/subscribe" to="/research-rundown-archive" />
 
                   {/* /state/ routes are deprecated but still supported. */}
                   <Redirect exact from="/state/:stateId" to="/us/:stateId" />
