@@ -87,7 +87,13 @@ export function EmbedFooter() {
   );
 }
 
-export default function Embed({ isNational }: { isNational: boolean }) {
+export default function Embed({
+  isNational,
+  isRiskMap,
+}: {
+  isNational: boolean;
+  isRiskMap?: boolean;
+}) {
   const navigateToCAN = () => {
     window.top.location.href = 'https://covidactnow.org/';
     return false;
@@ -100,7 +106,12 @@ export default function Embed({ isNational }: { isNational: boolean }) {
         width={US_MAP_EMBED_WIDTH}
         onClick={navigateToCAN}
       >
-        <SocialLocationPreviewMap border isEmbed Footer={EmbedFooter} />
+        <SocialLocationPreviewMap
+          border
+          isEmbed
+          isRiskMap={isRiskMap}
+          Footer={EmbedFooter}
+        />
       </EmbedContainer>
     );
   }
