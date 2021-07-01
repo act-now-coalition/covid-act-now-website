@@ -3,10 +3,10 @@
   "teamHeader": "Our team",
   "contactUsHeader": "Contact us",
   "whoWeServeContentA": "We've worked with more than 100 federal, state, and county officials to develop data-driven COVID responses.",
-  "aboutContent": "The Act Now Coalition is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. Our multidisciplinary, volunteer-driven team draws on expertise in technology, design, data science, epidemiology, public health, and policy.",
+  "aboutContent": "Act Now Coalition is an independent 501(c)(3) nonprofit founded in March 2020. We build data and storytelling products that are accurate and actionable, so that everyone can make informed decisions during crises, whether COVID or climate change.",
   "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
   "introContent": "Covid Act Now is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. \n\nWe help people make informed decisions by providing timely and accurate data about COVID in every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories. We are committed to:\n\n* **Data**: We support data- and science-backed policies and decision-making\n* **Transparency**: Our data and methodologies are fully open-source so that the public can vet, freely use, and build upon our work\n* **Accessibility**: We make data universally accessible so that anyone can easily understand and use it, regardless of ability or prior knowledge\n\nPlease note that we are not a government or healthcare organization. We do not provide testing, vaccination, or other on-the-ground COVID services.",
-  "missionContent": "We leverage the power of **accurate, accessible, and actionable data** to help people make informed decisions. We are committed to:",
+  "missionContent": "We are committed to:",
   "partnersContent": [
     {
       "logos": [
@@ -133,7 +133,7 @@
   "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
   "partnersHeader": "Our partners",
   "introHeader": "Our mission",
-  "missionHeader": "Our mission",
+  "missionHeader": "Our guiding principles",
   "aboutHeader": "About us",
   "commitmentsContent": [
     {
@@ -154,5 +154,5 @@
   ],
   "contactUsContent": "For general questions, email [info@covidactnow.org](mailto:info@covidactnow.org).",
   "pageHeader": "About Covid Act Now",
-  "futureProjectsContent": "### Act Now Coalition and Rewiring America\n\nAct Now Coalition is proud to announce our next project: a partnership with the non-profit [Rewiring America](https://www.rewiringamerica.org/) to build best-in-class data models that support the electrification of U.S. households at all income levels, and modernize America’s energy infrastructure. \n\nWe believe that it is possible to solve the climate crisis in our lifetime and that America has a responsibility in this endeavor to both lead and inspire. America pioneered the collection of energy generation and consumption data. Fresh analysis indicates that electrification and the subsequent decarbonization of our energy grid will slow climate change while saving millions of American households thousands of dollars a year. It will create millions of new, local jobs and restore American economic leadership. 2020 is the decade to decarbonize.\n\nWe are very excited about this next venture and the opportunity it provides to apply data- and science-backed decision-making, as well as open-source, accessible tools to the critical initiative of electrification.\n\nAs ever, we remain committed to our work on COVID, to maintaining our data, and to helping people navigate the pandemic as it continues to evolve."
+  "futureProjectsContent": "### Act Now Coalition and Rewiring America\n\n> Act Now Coalition is proud to announce our next project: a partnership with the non-profit [Rewiring America](rewiringamerica.org) to support the electrification of U.S. households at all income levels, modernize our country's energy infrastructure, and hit international goals of keeping global warming within 1.5 °C.\n>\n> We believe that the American household is the keystone of our country's energy infrastructure: 42 percent of our energy-related carbon emissions are the result of decisions we make around our kitchen table: what cars we drive, how we power and heat our homes, how we warm our water, cook our food, and dry our laundry. There are 121 million households in the U.S., which each have a handful of machines that run on oil, gas, or antiquated “electric resistance” technology that will need to be replaced at the end of their useful life. \n>\n> To power their modern, new, electric replacements — induction cooktop stoves, heat pump space heaters, and heat pump water heaters — we will need upgraded breaker boxes that increase the energy capacity of our homes. This would prepare households for the next step: electric vehicles (EVs), EV chargers, solar roofs and battery storage to power it all.  Every time we miss an opportunity to replace an appliance with a clean, electric alternative, we extend the life of our fossil fuel infrastructure by the useful life of that machine — for at least a decade, and maybe two. Altogether, these electrified and solar households will become an extension of the grid, capable of generating a third of our national energy needs.\n>\n> How do we get there? We have all the technology we need now — no moonshots required. Sign up for updates [here](https://www.rewiringamerica.org/mailing)."
 }
