@@ -12,7 +12,7 @@ export interface MenuTheme {
   buttonContentHover: string;
   buttonBorder: string;
   aboutUsContentAlignment: string;
-  aboutUsTextAlignment: string;
+  paragraphAlignment: string;
 }
 
 export const megaMenu: MenuTheme = {
@@ -23,7 +23,7 @@ export const megaMenu: MenuTheme = {
   buttonContentHover: 'white',
   buttonBorder: COLOR_MAP.GREY_2,
   aboutUsContentAlignment: 'flex-start',
-  aboutUsTextAlignment: 'left',
+  paragraphAlignment: 'left',
 };
 
 export const megaMenuFooter: MenuTheme = {
@@ -34,5 +34,5 @@ export const megaMenuFooter: MenuTheme = {
   buttonContentHover: COLOR_MAP.NEW_BLUE.PURPLE,
   buttonBorder: COLOR_MAP.GREY_3,
   aboutUsContentAlignment: 'center',
-  aboutUsTextAlignment: 'center',
+  paragraphAlignment: 'center',
 };

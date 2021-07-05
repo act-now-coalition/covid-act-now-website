@@ -1,41 +1,21 @@
 import React from 'react';
-import { LinkItem } from 'cms-content/footer';
-import TextAndIconWithSpecialWrapping from 'components/TextAndIconWithSpecialWrapping/TextAndIconWithSpecialWrapping';
 import {
   Section,
-  Column,
   SectionHeader,
-  ArrowIcon,
   OutlinedButton,
-  LearnLink,
+  ParagraphCopy,
 } from './Menu.style';
 
 const LearnSection: React.FC<{
-  learnLinks: LinkItem[];
+  learnCopy: string;
   onClick: (label: string) => void;
-}> = ({ learnLinks, onClick }) => {
+}> = ({ learnCopy, onClick }) => {
   return (
     <Section>
       <SectionHeader>FAQ</SectionHeader>
-      <Column>
-        {learnLinks.map((link: LinkItem) => {
-          const { url, cta } = link;
-          return (
-            <LearnLink
-              key={cta}
-              to={url}
-              onClick={() => onClick(`Learn: ${cta}`)}
-            >
-              <TextAndIconWithSpecialWrapping
-                text={link.cta}
-                icon={<ArrowIcon />}
-              />
-            </LearnLink>
-          );
-        })}
-      </Column>
-      <OutlinedButton to="/faq" onClick={() => onClick('Learn: Vaccine FAQs')}>
-        Vaccine FAQs
+      <ParagraphCopy>{learnCopy}</ParagraphCopy>
+      <OutlinedButton to="/learn" onClick={() => onClick('Learn')}>
+        Learn more
       </OutlinedButton>
     </Section>
   );
