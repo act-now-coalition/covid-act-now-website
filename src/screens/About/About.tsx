@@ -48,16 +48,16 @@ export const sidebarItems: TocItem[] = [
         label: aboutContent.impactHeader,
       },
       {
+        to: '/about#future-projects',
+        label: aboutContent.futureProjectsHeader,
+      },
+      {
         to: '/about#partners',
         label: aboutContent.partnersHeader,
       },
       {
         to: '/about#team',
         label: aboutContent.teamHeader,
-      },
-      {
-        to: '/about#future-projects',
-        label: aboutContent.futureProjectsHeader,
       },
       {
         to: '/about#contact-us',
