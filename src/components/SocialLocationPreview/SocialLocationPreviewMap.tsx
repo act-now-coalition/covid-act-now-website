@@ -19,20 +19,21 @@ import { Legend, LegendItem } from './Legend';
 import { thermometerSections } from 'components/HorizontalThermometer/VaccinationsThermometer/VaccinationsThermometer';
 
 const SocialLocationPreview = (props: {
-  border?: Boolean;
-  isEmbed?: Boolean;
+  border?: boolean;
+  isEmbed?: boolean;
+  isRiskMap?: boolean;
   Footer?: ComponentType;
   isEmbedPreview?: boolean;
 }) => {
   const lastUpdatedDate: Date | null = useModelLastUpdatedDate() || new Date();
   const lastUpdatedDateString =
     lastUpdatedDate !== null ? lastUpdatedDate.toLocaleDateString() : '';
-  const { border, Footer, isEmbed, isEmbedPreview } = props;
+  const { border, Footer, isEmbed, isEmbedPreview, isRiskMap } = props;
   const showCountyView = !isEmbed && !isEmbedPreview;
   // TODO(michael): 2021-06-24: I'm going out on a limb and switching our embeds
   // over to the vaccine map too, but if anybody complains we could change this
   // to only show when `!isEmbed` so we don't affect embeds on people's sites.
-  const showVaccineMap = true;
+  const showVaccineMap = !isRiskMap;
   const Map = showVaccineMap ? USVaccineMap : USRiskMap;
   const MapLegend = showVaccineMap ? VaccineMapLegend : RiskMapLegend;
 

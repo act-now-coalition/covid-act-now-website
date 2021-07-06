@@ -1,11 +1,5 @@
 import { Markdown } from '../utils';
-import shuffle from 'lodash/shuffle';
 import footer from './footer.json';
-
-export interface LinkItem {
-  url: string;
-  cta: string;
-}
 
 export enum SectionId {
   API = 'API',
@@ -21,17 +15,11 @@ export interface FeaturedItem {
 }
 
 interface MenuContent {
-  learnLinks: LinkItem[];
+  learn: Markdown;
   aboutUs: Markdown;
   featuredSections: FeaturedItem[];
 }
 
-const { learnLinks, aboutUs, featuredSections } = footer;
+const { learn, aboutUs, featuredSections } = footer;
 
-const menuContentWithShuffleLearnLinks = {
-  learnLinks: shuffle(learnLinks),
-  aboutUs,
-  featuredSections,
-};
-
-export const menuContent = menuContentWithShuffleLearnLinks as MenuContent;
+export const menuContent = { learn, aboutUs, featuredSections } as MenuContent;
