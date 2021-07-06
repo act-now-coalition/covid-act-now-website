@@ -12,7 +12,7 @@ const LearnSection: React.FC<{
 }> = ({ learnCopy, onClick }) => {
   return (
     <Section>
-      <SectionHeader>FAQ</SectionHeader>
+      <SectionHeader>Learn</SectionHeader>
       <ParagraphCopy>{learnCopy}</ParagraphCopy>
       <OutlinedButton to="/learn" onClick={() => onClick('Learn')}>
         Learn more
