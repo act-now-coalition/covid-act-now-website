@@ -10,7 +10,7 @@ const MenuContent: React.FC<{
   onClick: (label: string) => void;
   Logo?: ComponentType;
 }> = ({ onClick, Logo }) => {
-  const { learnLinks, aboutUs, featuredSections } = menuContent;
+  const { learn, aboutUs, featuredSections } = menuContent;
 
   const isMobile = useBreakpoint(800);
 
@@ -22,12 +22,12 @@ const MenuContent: React.FC<{
             featuredSections={featuredSections}
             onClick={onClick}
           />
-          <LearnSection learnLinks={learnLinks} onClick={onClick} />
+          <LearnSection learnCopy={learn} onClick={onClick} />
           <AboutUsSection aboutUsCopy={aboutUs} onClick={onClick} Logo={Logo} />
         </>
       ) : (
         <>
-          <LearnSection learnLinks={learnLinks} onClick={onClick} />
+          <LearnSection learnCopy={learn} onClick={onClick} />
           <FeaturedSection
             featuredSections={featuredSections}
             onClick={onClick}

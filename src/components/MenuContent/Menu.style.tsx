@@ -102,11 +102,11 @@ export const FeaturedDescription = styled.p`
   color: ${props => props.theme.megaMenu.secondaryText};
 `;
 
-export const AboutCopy = styled.p`
+export const ParagraphCopy = styled.p`
   ${BodyCopy};
   color: ${props => props.theme.megaMenu.secondaryText};
   margin-bottom: 2rem;
-  text-align: ${props => props.theme.megaMenu.aboutUsTextAlignment};
+  text-align: ${props => props.theme.megaMenu.paragraphAlignment};
 
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
@@ -133,22 +133,6 @@ export const TextLink = styled(Link)`
     ${ArrowIcon} {
       transform: translateX(6px);
       transition: transform 0.06s ease-in-out;
-    }
-  }
-`;
-
-export const LearnLink = styled(TextLink)`
-  &:not(:last-of-type) {
-    margin-bottom: 0.5rem;
-  }
-
-  ${ArrowIcon} {
-    margin-bottom: -4px;
-  }
-
-  @media (min-width: ${mobileBreakpoint}) {
-    &:last-of-type {
-      margin-bottom: 1.75rem;
     }
   }
 `;
