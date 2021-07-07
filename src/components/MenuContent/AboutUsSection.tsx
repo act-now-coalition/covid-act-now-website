@@ -5,7 +5,7 @@ import {
   Section,
   SectionHeader,
   OutlinedButton,
-  AboutCopy,
+  ParagraphCopy,
   LogoWrapper,
   RowWithSpacing,
 } from './Menu.style';
@@ -30,7 +30,7 @@ const AboutUsSection: React.FC<{
       ) : (
         <SectionHeader>About Us</SectionHeader>
       )}
-      <AboutCopy>{aboutUsCopy}</AboutCopy>
+      <ParagraphCopy>{aboutUsCopy}</ParagraphCopy>
       <RowWithSpacing>
         <OutlinedButton to="/about" onClick={() => onClick('About us')}>
           Learn more about us
