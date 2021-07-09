@@ -150,19 +150,19 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 53,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 53
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2815,
+      "regionsAvailable": 2820,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 385,
+      "regionsAvailable": 384,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -240,7 +240,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2906,
+      "regionsAvailable": 2905,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -261,7 +261,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2906,
+      "regionsAvailable": 2905,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -282,7 +282,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 995,
+      "regionsAvailable": 909,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -324,13 +324,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 1426,
+      "regionsAvailable": 1410,
       "totalStates": 53,
       "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 238,
+      "regionsAvailable": 235,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -366,13 +366,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3209,
+      "regionsAvailable": 3137,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 389,
+      "regionsAvailable": 376,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -576,7 +576,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 33,
+      "regionsAvailable": 34,
       "totalStates": 53,
       "statesAvailable": 2
     },
