@@ -236,13 +236,13 @@
       "context": "https://trello.com/c/hvLgPSCV/1449-blocked-6-26-three-texas-counties-with-data-anomalies Upshur county note"
     },
     {
-      "include": "region-and-subregions",
-      "metric": "metrics.caseDensity",
+      "include": "subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
       "blocked": true,
-      "start_date": "2021-07-07",
-      "end_date": "2021-07-08",
-      "region": "MI",
-      "context": "https://trello.com/c/Xb9i71Y6/1461-michigan-delayed-updating"
+      "start_date": "2021-07-09",
+      "end_date": "",
+      "region": "PA",
+      "context": "https://trello.com/c/joAFlemh/1462-pa-1st-dose-decreased-across-the-board"
     }
   ]
 }
