@@ -38,8 +38,9 @@ export const Section = styled.div`
     margin-bottom: 2.5rem;
   }
 
-  &:last-child {
-    align-items: ${props => props.theme.megaMenu.aboutUsContentAlignment};
+  &:nth-last-child(-n + 2) {
+    align-items: ${props =>
+      props.theme.megaMenu.aboutUsAndLearnContentAlignment};
   }
 
   @media (min-width: ${mobileBreakpoint}) {
