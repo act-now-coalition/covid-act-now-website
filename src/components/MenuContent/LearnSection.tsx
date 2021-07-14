@@ -4,6 +4,7 @@ import {
   SectionHeader,
   OutlinedButton,
   ParagraphCopy,
+  RowWithSpacing,
 } from './Menu.style';
 
 const LearnSection: React.FC<{
@@ -14,9 +15,11 @@ const LearnSection: React.FC<{
     <Section>
       <SectionHeader>Educational Resources</SectionHeader>
       <ParagraphCopy>{learnCopy}</ParagraphCopy>
-      <OutlinedButton to="/learn" onClick={() => onClick('Learn')}>
-        Learn more
-      </OutlinedButton>
+      <RowWithSpacing>
+        <OutlinedButton to="/learn" onClick={() => onClick('Learn')}>
+          Learn more
+        </OutlinedButton>
+      </RowWithSpacing>
     </Section>
   );
 };

@@ -33,23 +33,17 @@ export const Section = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: ${props => props.theme.megaMenu.sectionAlignment};
 
   &:not(:last-child) {
     margin-bottom: 2.5rem;
   }
 
-  &:last-child {
-    align-items: ${props => props.theme.megaMenu.aboutUsContentAlignment};
-  }
-
   @media (min-width: ${mobileBreakpoint}) {
+    align-items: flex-start;
     &:not(:last-child) {
       margin-bottom: 0;
       margin-right: 3.5rem;
-    }
-
-    &:last-child {
-      align-items: flex-start;
     }
   }
 
