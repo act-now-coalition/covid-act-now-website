@@ -28,8 +28,8 @@ const Announcements: React.FC = () => {
           </ExternalLink>{' '}
           to support the electrification of American homes, which will save
           people money, reduce negative health impacts from air pollution,
-          create new American jobs, and help us keep global warming below 1.5°C.
-          Read more{' '}
+          create new American jobs, and help us keep global warming below{' '}
+          <strong>1.5</strong>°C. Read more{' '}
           <ExternalLink href="https://www.rewiringamerica.org/newsletter/we-had-a-very-big-week-here-at-rewiring-america">
             here
           </ExternalLink>
