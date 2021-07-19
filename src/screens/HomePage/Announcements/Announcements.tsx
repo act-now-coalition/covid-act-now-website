@@ -19,7 +19,7 @@ const Announcements: React.FC = () => {
         <AnnouncementIntro>
           Act Now Coalition and Rewiring America
         </AnnouncementIntro>
-        <Date>FRIDAY, May 21, 2021</Date>
+        <Date>MONDAY, July 19, 2021</Date>
         <AnnouncementBodyCopy>
           We’re excited to announce a new project! Act Now Coalition, the
           non-profit behind Covid Act Now, is partnering with{' '}
