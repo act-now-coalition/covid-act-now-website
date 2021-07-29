@@ -314,7 +314,7 @@ export const exploreMetricData: {
     name: 'Positive test rate',
     chartId: 'positivity_rate',
     dataMeasure: DataMeasure.PERCENT,
-    yAxisDecimalPlaces: 0,
+    yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Positive test rate',
