@@ -156,7 +156,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2939,
+      "regionsAvailable": 2938,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -276,9 +276,9 @@
     "name": "metrics.icuHeadroomRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3222,
@@ -297,9 +297,9 @@
     "name": "metrics.icuHeadroomDetails",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3222,
@@ -324,13 +324,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 1414,
+      "regionsAvailable": 1399,
       "totalStates": 53,
       "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 234,
+      "regionsAvailable": 233,
       "totalStates": 0,
       "statesAvailable": 0
     }
