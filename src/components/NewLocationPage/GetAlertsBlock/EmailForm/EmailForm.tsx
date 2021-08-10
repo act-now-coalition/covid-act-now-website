@@ -7,11 +7,9 @@ import React, {
 } from 'react';
 import { useLocation } from 'react-router-dom';
 import AlertsIcon from 'assets/images/AlertsIcon';
-import DailyDownloadCheckbox from './DailyDownloadCheckbox';
 import SuccessNote from './SuccessNote';
 import {
   subscribeToLocations,
-  subscribeToDailyDownload,
   CREATESEND_DATA_ID,
 } from 'components/EmailAlertsForm/utils';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
@@ -41,10 +39,8 @@ const EmailForm: React.FC<{
 }> = ({ region }) => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
-  const [checkDailyDownload, setCheckDailyDownload] = useState(true);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const formRef = createRef<HTMLFormElement>();
-  const [isFocused, setIsFocused] = useState(false);
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -57,7 +53,6 @@ const EmailForm: React.FC<{
   useEffect(() => {
     setShowConfirmation(false);
     setEmail('');
-    setCheckDailyDownload(true);
   }, [pathname]);
 
   async function subscribeToAlerts() {
@@ -65,30 +60,14 @@ const EmailForm: React.FC<{
       return;
     }
     await subscribeToLocations(email, [region.fipsCode]);
-    if (checkDailyDownload) {
-      trackSubscription('Email Alerts & Daily Downloads', 1);
-    } else {
-      trackSubscription('Email Alerts Only', 1);
-    }
+    trackSubscription('Email Alerts Only', 1);
 
-    if (checkDailyDownload) {
-      const secureUrl = await subscribeToDailyDownload(email);
-      if (formRef?.current?.action) {
-        formRef.current.action = secureUrl;
-        formRef.current.submit();
-      }
-    } else {
-      setShowConfirmation(true);
-    }
+    setShowConfirmation(true);
   }
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     subscribeToAlerts();
     event.preventDefault();
-  };
-
-  const onChangeDailyDownload = (event: ChangeEvent<HTMLInputElement>) => {
-    setCheckDailyDownload(event.target.checked);
   };
 
   const emailInputLabel = emailError ? 'Invalid email' : 'Email address';
@@ -125,11 +104,6 @@ const EmailForm: React.FC<{
                   name="cm-wurhhh-wurhhh"
                   autoComplete="email"
                   aria-invalid={!isValidEmail(email)}
-                  inputProps={{
-                    onFocus: () => {
-                      setIsFocused(true);
-                    },
-                  }}
                 />
                 <StyledButton
                   onClick={() => subscribeToAlerts()}
@@ -139,12 +113,6 @@ const EmailForm: React.FC<{
                 </StyledButton>
               </EmailFieldGroup>
             </StyledFormGroup>
-            {isFocused && (
-              <DailyDownloadCheckbox
-                checkDailyDownload={checkDailyDownload}
-                onChangeDailyDownload={onChangeDailyDownload}
-              />
-            )}
           </StyledForm>
         </>
       )}
