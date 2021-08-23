@@ -266,7 +266,7 @@
       "context": "context: https://trello.com/c/Q2VorVkg/1484-cms-disclaimers-for-counties-with-1-dose-estimation"
     },
     {
-      "include": "subregions",
+      "include": "region-and-subregions",
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2021-07-08",
@@ -275,12 +275,21 @@
       "context": "https://trello.com/c/9yFJDbZo/1486-7-29-21-backlogged-antigen-probable-cases-added-to-ca-cases-on-july-8th"
     },
     {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-07-01",
+      "end_date": "2021-07-01",
+      "region": "CA",
+      "context": "https://trello.com/c/9yFJDbZo/1486-7-29-21-backlogged-antigen-probable-cases-added-to-ca-cases-on-july-8th"
+    },
+    {
       "include": "region",
       "metric": "metrics.testPositivityRatio",
       "blocked": true,
       "start_date": "2021-08-15",
-      "end_date": "2021-08-18",
-      "region": "48113, 30013, 10001, 13153",
+      "end_date": "2021-08-21",
+      "region": "48113, 30013, 10001, 13153, 48215, 26145, 12021",
       "context": "wagging data in recent dates from new test positivity endpoint caused spikes in test rate"
     },
     {
@@ -294,12 +303,31 @@
     },
     {
       "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "2021-08-18",
+      "end_date": "2021-08-21",
+      "region": "12021",
+      "context": "positive test data mismatch from cdc"
+    },
+    {
+      "include": "region",
       "metric": "metrics.vaccinationsInitiatedRatio",
       "blocked": true,
       "start_date": "2021-08-21",
       "end_date": "",
       "region": "38015",
       "context": "data correction dropped 1+ dose rate below fully vaccinated rate"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-08-23",
+      "end_date": "2021-08-23",
+      "region": "NE",
+      "disclaimer": "",
+      "context": "NE cases endpoint did not update, causing cases to drop"
     }
   ]
 }
