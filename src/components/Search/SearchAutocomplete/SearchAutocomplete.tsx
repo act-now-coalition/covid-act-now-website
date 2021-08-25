@@ -44,6 +44,7 @@ const SearchAutocomplete: React.FC<{
   const [input, setInput] = useState('');
   /* We only check for a zipcode match when the input is all numbers and has a length of 5: */
   const [checkForZipcodeMatch, setCheckForZipcodeMatch] = useState(false);
+  const [checkForFipsMatch, setCheckForFipsMatch] = useState(false);
   const [noOptionsCopy, setNoOptionsCopy] = useState('No location found');
   const [isOpen, setIsOpen] = useState(false);
   const { result: countyToZipMap } = useCountyToZipMap();
@@ -63,8 +64,13 @@ const SearchAutocomplete: React.FC<{
     if (isStringOfDigits) {
       setNoOptionsCopy('Enter a valid 5-digit zip code');
       setCheckForZipcodeMatch(value.length === 5);
+      setCheckForFipsMatch(false);
+    } else if (value.startsWith('fips:')) {
+      setCheckForZipcodeMatch(false);
+      setCheckForFipsMatch(true);
     } else {
       setCheckForZipcodeMatch(false);
+      setCheckForFipsMatch(false);
       if (value.length) {
         setNoOptionsCopy(
           `No locations named ${value} found. You can also try searching by zip code.`,
@@ -79,6 +85,10 @@ const SearchAutocomplete: React.FC<{
       return countyToZipMap?.[fips] ?? [];
     };
 
+    // Search by fips matches patterns of "fips:<fips code>"
+    if (checkForFipsMatch) {
+      return `fips:${option.fipsCode}`;
+    }
     if (checkForZipcodeMatch) {
       // get zipcodes for county, metro, and state objects
       let zipCodes = null;
