@@ -111,12 +111,15 @@ export const MenuLabel = styled.span`
 // Location page:
 export const GridContainer = styled.div`
   display: grid;
+  // On mobile, we have 4 columns: back, logo, search, menu
+  // But note that after you scroll, the search bar expands to use the logo column as well.
   grid-auto-columns: min-content auto auto min-content;
   align-items: center;
   width: 100%;
 
   @media (min-width: ${mobileBreakpoint}) {
-    grid-auto-columns: min-content min-content 1fr min-content min-content;
+    // On desktop, we have 5 columns: back, logo, search, donate, menu
+    grid-auto-columns: min-content min-content 1fr auto min-content;
     grid-gap: 1rem;
   }
 `;
@@ -128,6 +131,7 @@ const row = css`
 export const GridItemBackLink = styled.div`
   ${row};
   grid-column: 1/2;
+  // Back link is hidden on small mobile
   display: none;
 
   @media (min-width: ${smallPhoneBreakpoint}) {
@@ -138,6 +142,7 @@ export const GridItemBackLink = styled.div`
 export const GridItemLogo = styled.div<{ hasScrolled: boolean }>`
   ${row};
   grid-column: 2/3;
+  // Logo is hidden on mobile after scrolling, to make the search bigger.
   display: ${({ hasScrolled }) => hasScrolled && 'none'};
 
   @media (min-width: ${mobileBreakpoint}) {
@@ -147,16 +152,18 @@ export const GridItemLogo = styled.div<{ hasScrolled: boolean }>`
 
 export const GridItemSearch = styled.div<{ hasScrolled: boolean }>`
   ${row};
+  // On mobile, search expands to also use the logo column after scrolling.
   grid-column: ${({ hasScrolled }) => (hasScrolled ? '2/4' : '3/4')};
 
   @media (min-width: ${mobileBreakpoint}) {
-    grid-column: 1/6;
+    grid-column: 3/4;
   }
 `;
 
 export const GridItemSecondaryEl = styled.div`
   ${row};
   grid-column: 4/5;
+  // Donate is hidden on mobile
   display: none;
 
   @media (min-width: ${mobileBreakpoint}) {
