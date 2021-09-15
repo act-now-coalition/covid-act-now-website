@@ -208,7 +208,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           Under a non-commercial license, you may use our data without
           requesting permission, provided that you give proper attribution.
-          However, if your use case falls within the list of "Prohibited Uses,”
+          However, if your use case falls within the list of "Prohibited Uses”,
           please cease all use of our product and trademarks.
         </Typography>
 
