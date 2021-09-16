@@ -206,12 +206,10 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Trademarks
         </Typography>
         <Typography variant="body1" component="p">
-          The Company name and all related names, logos, product and service
-          names, designs and slogans are trademarks of the Company or its
-          affiliates or licensors. You must not use such marks without the prior
-          written permission of the Company. All other names, logos, product and
-          service names, designs and slogans on this Website are the trademarks
-          of their respective owners.
+          Under a non-commercial license, you may use our data without
+          requesting permission, provided that you give proper attribution.
+          However, if your use case falls within the list of "Prohibited Uses”,
+          please cease all use of our product and trademarks.
         </Typography>
 
         <Typography variant="h5" component="h1">
