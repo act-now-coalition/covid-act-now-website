@@ -87,6 +87,12 @@
       "productId": "license",
       "productSubtitle": "API License",
       "productDescription": "Note that our data is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). All commercial entities wishing to access our API should contact [api@covidactnow.org](mailto:api@covidactnow.org) to acquire a commercial license. \n\nWe define commercial users as any individual or entity engaged in commercial activities, such as selling goods or services. Our non-commercial users can freely download, use, share, modify, or build upon our source code.\n\n"
+    },
+    {
+      "productName": "Required attribution",
+      "productId": "required-attribution",
+      "productSubtitle": "Required attribution",
+      "productDescription": "All uses of the Covid Act Now API **must** provide attribution to Covid Act Now.\n\n[Download our logos](https://drive.google.com/drive/folders/1p9SeJ6I28zzSrWEbmef5xi1vZr-GwhZB)\n\n\\* The above logo designs you are about to download are the intellectual property of Covid Act Now and are offered to you as a convenience for lawful use. You hereby agree that you agree to the full [Website Terms of Use](https://covidactnow.org/terms) and that the logos you download will be used for non-commercial use without infringing on the rights of the copyright and/or trademark holder."
     }
   ],
   "metadataTitle": "Data API",
