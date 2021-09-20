@@ -105,27 +105,6 @@
     }
   },
   {
-    "name": "riskLevels.icuHeadroomRatio",
-    "state": {
-      "totalRegions": 53,
-      "regionsAvailable": 53,
-      "totalStates": 53,
-      "statesAvailable": 53
-    },
-    "county": {
-      "totalRegions": 3222,
-      "regionsAvailable": 3222,
-      "totalStates": 53,
-      "statesAvailable": 53
-    },
-    "metro": {
-      "totalRegions": 392,
-      "regionsAvailable": 392,
-      "totalStates": 0,
-      "statesAvailable": 0
-    }
-  },
-  {
     "name": "riskLevels.icuCapacityRatio",
     "state": {
       "totalRegions": 53,
@@ -240,7 +219,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2952,
+      "regionsAvailable": 2950,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -261,55 +240,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2952,
+      "regionsAvailable": 2950,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
       "regionsAvailable": 390,
-      "totalStates": 0,
-      "statesAvailable": 0
-    }
-  },
-  {
-    "name": "metrics.icuHeadroomRatio",
-    "state": {
-      "totalRegions": 53,
-      "regionsAvailable": 52,
-      "totalStates": 53,
-      "statesAvailable": 52
-    },
-    "county": {
-      "totalRegions": 3222,
-      "regionsAvailable": 1,
-      "totalStates": 53,
-      "statesAvailable": 1
-    },
-    "metro": {
-      "totalRegions": 392,
-      "regionsAvailable": 0,
-      "totalStates": 0,
-      "statesAvailable": 0
-    }
-  },
-  {
-    "name": "metrics.icuHeadroomDetails",
-    "state": {
-      "totalRegions": 53,
-      "regionsAvailable": 52,
-      "totalStates": 53,
-      "statesAvailable": 52
-    },
-    "county": {
-      "totalRegions": 3222,
-      "regionsAvailable": 1,
-      "totalStates": 53,
-      "statesAvailable": 1
-    },
-    "metro": {
-      "totalRegions": 392,
-      "regionsAvailable": 0,
       "totalStates": 0,
       "statesAvailable": 0
     }
