@@ -7,10 +7,12 @@
  * and set the flag to true if the number is below the sampling percentage.
  */
 
+import { StorageKeys, storageAvailable } from 'common/utils/storage';
+
 // Percentage of overall users that we want to record
 const FULLSTORY_RECORD_PERCENT = 2.5 / 100;
 
-const FULLSTORY_RECORD_KEY = 'FULLSTORY_RECORD';
+const FULLSTORY_RECORD_KEY = StorageKeys.FULLSTORY_RECORD;
 
 enum RecordSession {
   TRUE = 'true',
@@ -64,20 +66,5 @@ function initStorage(recordKey: string, recordPercent: number) {
     // It doesn't matter if we can't write to localStorage, we only need this
     // for 1% of the users.
     console.warn(`Error writing to localStorage`, err);
-  }
-}
-
-// From https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability
-function storageAvailable(storageType: string) {
-  let storage;
-  const testKey = '__storage_test__';
-  try {
-    // @ts-ignore
-    storage = window[storageType];
-    storage.setItem(testKey, testKey);
-    storage.removeItem(testKey);
-    return true;
-  } catch (e) {
-    return false;
   }
 }
