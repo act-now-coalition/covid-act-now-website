@@ -32,7 +32,10 @@ export function useLocalStorage<T>(
   const [storedValue, setStoredValue] = useState(() => {
     try {
       // Get from local storage by key
-      const item = window.localStorage.getItem(key);
+      let item;
+      if (storageAvailable('localStorage')) {
+        item = window.localStorage.getItem(key);
+      }
       // Parse stored json or if none return initialValue
       return item ? JSON.parse(item) : (initialValue as T);
     } catch (error) {
@@ -57,23 +60,9 @@ export function useLocalStorage<T>(
       console.log(error);
     }
   };
-  return [storedValue as T, setValue];
-}
-
-// this is probably unnecessary, but it would be nice to have it work if for some reason localstorage isn't available
-export function useLocalStorageWithFallback<T>(
-  key: StorageKeys,
-  initialValue: T,
-): [T, (value: T) => void] {
-  const [localStorageValue, setLocalStorageValue] = useLocalStorage(
-    key,
-    initialValue,
-  );
-  const [fallbackValue, setFallbackValue] = useState<T>(initialValue);
-
   if (storageAvailable('localStorage')) {
-    return [localStorageValue, setLocalStorageValue];
+    return [storedValue as T, setValue];
   } else {
-    return [fallbackValue, setFallbackValue];
+    return [storedValue as T, setStoredValue];
   }
 }

@@ -21,7 +21,7 @@ import {
 import { getAlertColor } from 'components/RegionMap/RegionMap.style';
 import { LocationSummary } from 'common/location_summaries';
 import { vaccineColorFromLocationSummary } from 'common/colors';
-import { StorageKeys, useLocalStorageWithFallback } from 'common/utils/storage';
+import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 
 enum MapType {
   VACCINATIONS = '% Vaccinated',
@@ -58,7 +58,7 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
 /* The default aspect-ratio for the state and US maps is 800x600 */
 
 const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
-  const [mapType, setMapType] = useLocalStorageWithFallback<MapType>(
+  const [mapType, setMapType] = useLocalStorage<MapType>(
     StorageKeys.COUNTY_MAP_TYPE,
     MapType.VACCINATIONS,
   );
