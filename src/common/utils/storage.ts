@@ -6,63 +6,63 @@ export enum StorageKeys {
   FULLSTORY_RECORD = 'FULLSTORY_RECORD',
 }
 
+const storageMemo: { [index: string]: boolean } = {};
+
 // From https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability
 export function storageAvailable(storageType: string) {
-  let storage;
-  const testKey = '__storage_test__';
-  try {
-    // @ts-ignore
-    storage = window[storageType];
-    storage.setItem(testKey, testKey);
-    storage.removeItem(testKey);
-    return true;
-  } catch (e) {
-    return false;
+  if (!(storageType in storageMemo)) {
+    let storage;
+    const testKey = '__storage_test__';
+    try {
+      // @ts-ignore
+      storage = window[storageType];
+      storage.setItem(testKey, testKey);
+      storage.removeItem(testKey);
+      storageMemo[storageType] = true;
+    } catch (e) {
+      storageMemo[storageType] = false;
+    }
   }
+  return storageMemo[storageType];
 }
 
-// Hook from https://usehooks.com/useLocalStorage/
-// but updated to fallback to setState if localstorage is not available.
+/*!
+   License: https://github.com/uidotdev/usehooks/blob/master/LICENSE
+   Hook from https://usehooks.com/useLocalStorage/
+   but updated to fallback to setState if localstorage is not available.
+  */
 export function useLocalStorage<T>(
   key: StorageKeys,
-  initialValue: T,
+  initialValue?: T,
 ): [T, (value: T) => void] {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    let item;
     try {
-      // Get from local storage by key
-      let item;
       if (storageAvailable('localStorage')) {
         item = window.localStorage.getItem(key);
+        item = item ? JSON.parse(item) : initialValue;
       }
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : (initialValue as T);
     } catch (error) {
-      // If error also return initialValue
-      console.log(error);
-      return initialValue as T;
+      item = initialValue;
     }
+    return item;
   });
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
+  // Return a wrapped version of useState's setter function that persists the new value to localStorage.
   const setValue = (value: T) => {
+    // Allow value to be a function so we have same API as useState
+    const valueToStore = value instanceof Function ? value(storedValue) : value;
     try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
       window.localStorage.setItem(key as string, JSON.stringify(valueToStore));
-    } catch (error) {
+    } finally {
       // A more advanced implementation would handle the error case
-      console.log(error);
+      setStoredValue(valueToStore);
     }
   };
   if (storageAvailable('localStorage')) {
-    return [storedValue as T, setValue];
+    return [storedValue, setValue];
   } else {
-    return [storedValue as T, setStoredValue];
+    return [storedValue, setStoredValue];
   }
 }
