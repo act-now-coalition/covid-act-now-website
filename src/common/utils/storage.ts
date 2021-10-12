@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+export enum StorageType {
+  LOCAL_STORAGE = 'localStorage',
+  SESSION_STORAGE = 'sessionStorage',
+}
+
 // a single place to define all used localStorage keys, to avoid collisions or hardcoded strings
 export enum StorageKeys {
   COUNTY_MAP_TYPE = 'COUNTY_MAP_TYPE',
@@ -9,7 +14,7 @@ export enum StorageKeys {
 const storageMemo: { [index: string]: boolean } = {};
 
 // From https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability
-export function storageAvailable(storageType: string) {
+export function storageAvailable(storageType: StorageType) {
   if (!(storageType in storageMemo)) {
     let storage;
     const testKey = '__storage_test__';
@@ -40,7 +45,7 @@ export function useLocalStorage<T>(
   const [storedValue, setStoredValue] = useState<T>(() => {
     let item;
     try {
-      if (storageAvailable('localStorage')) {
+      if (storageAvailable(StorageType.LOCAL_STORAGE)) {
         item = window.localStorage.getItem(key);
         item = item ? JSON.parse(item) : initialValue;
       }
@@ -60,7 +65,7 @@ export function useLocalStorage<T>(
       setStoredValue(valueToStore);
     }
   };
-  if (storageAvailable('localStorage')) {
+  if (storageAvailable(StorageType.LOCAL_STORAGE)) {
     return [storedValue, setValue];
   } else {
     return [storedValue, setStoredValue];

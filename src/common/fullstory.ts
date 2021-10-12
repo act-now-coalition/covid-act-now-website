@@ -7,7 +7,11 @@
  * and set the flag to true if the number is below the sampling percentage.
  */
 
-import { StorageKeys, storageAvailable } from 'common/utils/storage';
+import {
+  StorageKeys,
+  StorageType,
+  storageAvailable,
+} from 'common/utils/storage';
 
 // Percentage of overall users that we want to record
 const FULLSTORY_RECORD_PERCENT = 2.5 / 100;
@@ -20,7 +24,7 @@ enum RecordSession {
 }
 
 export function isRecordingEnabled(recordKey: string, recordPercent: number) {
-  if (!storageAvailable('localStorage')) {
+  if (!storageAvailable(StorageType.LOCAL_STORAGE)) {
     return false;
   }
   initStorage(recordKey, recordPercent);
