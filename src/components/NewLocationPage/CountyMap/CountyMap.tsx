@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import RegionMap from 'components/RegionMap';
 import FixedAspectRatio from 'components/FixedAspectRatio/FixedAspectRatio';
 import {
@@ -22,6 +21,7 @@ import {
 import { getAlertColor } from 'components/RegionMap/RegionMap.style';
 import { LocationSummary } from 'common/location_summaries';
 import { vaccineColorFromLocationSummary } from 'common/colors';
+import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 
 enum MapType {
   VACCINATIONS = '% Vaccinated',
@@ -58,7 +58,10 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
 /* The default aspect-ratio for the state and US maps is 800x600 */
 
 const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
-  const [mapType, setMapType] = useState<MapType>(MapType.VACCINATIONS);
+  const [mapType, setMapType] = useLocalStorage<MapType>(
+    StorageKeys.COUNTY_MAP_TYPE,
+    MapType.VACCINATIONS,
+  );
 
   const onClickToggle = (
     event: React.MouseEvent<HTMLElement>,
@@ -73,14 +76,6 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
       );
     }
   };
-
-  const { pathname } = useLocation();
-
-  // Resets MapType to vacciations when navigating between location pages via minimap
-  // (need to force reset since the route doesnt change)
-  useEffect(() => {
-    setMapType(MapType.VACCINATIONS);
-  }, [pathname]);
 
   return (
     <MapContainer>
