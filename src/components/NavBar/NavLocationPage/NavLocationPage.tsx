@@ -75,7 +75,12 @@ const NavLocationPage: React.FC<{
   }
 
   return (
-    <Style.AppBar position="sticky" color="transparent" elevation={0}>
+    <Style.AppBar
+      position="sticky"
+      color="transparent"
+      elevation={0}
+      style={{ backgroundColor: '#f9d65b' }}
+    >
       <Style.Toolbar>
         <Style.GridContainer>
           <Style.GridItemBackLink>

@@ -41,10 +41,11 @@ export interface MetricChartInfo {
 }
 
 export enum GroupHeader {
-  VACCINATED = '% Vaccinated',
-  CASES = 'Cases',
-  HOSPITALIZATIONS = 'Hospitalizations',
-  DEATHS = 'Deaths',
+  VACCINATED = 'Appliances Installed',
+  CASES = 'Carbon Emissions Avoided',
+  HOSPITALIZATIONS = 'Electrification Jobs Created',
+  DEATHS = 'Deaths Avoided',
+  NATURAL_GAS = 'Natural Gas Customers',
 }
 
 export interface ChartGroup {
@@ -63,11 +64,70 @@ export const CHART_GROUPS: ChartGroup[] = [
           <VaccinationChartTabs projections={projections} />
         ),
         renderChart: projections => (
-          <MetricChart metric={Metric.VACCINATIONS} projections={projections} />
+          <SingleLocationChartContainer
+            metric={ExploreMetric.DEATHS}
+            projections={projections}
+          />
         ),
       },
     ],
   },
+  {
+    groupHeader: GroupHeader.HOSPITALIZATIONS,
+    metricList: [
+      {
+        metric: Metric.HOSPITAL_USAGE,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // TODO (chelsi): make a map of these chart-specific metric names
+        ),
+        renderChart: projections => (
+          <SingleLocationChartContainer
+            metric={ExploreMetric.HOSPITALIZATIONS}
+            projections={projections}
+          />
+        ),
+      },
+    ],
+  },
+  {
+    groupHeader: GroupHeader.DEATHS,
+    metricList: [
+      {
+        metric: ExploreMetric.DEATHS,
+        metricType: MetricType.EXPLORE_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
+        ),
+        renderChart: projections => (
+          <SingleLocationChartContainer
+            metric={ExploreMetric.DEATHS}
+            projections={projections}
+          />
+        ),
+      },
+    ],
+  },
+
+  {
+    groupHeader: GroupHeader.NATURAL_GAS,
+    metricList: [
+      {
+        metric: ExploreMetric.HOSPITALIZATIONS,
+        metricType: MetricType.EXPLORE_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
+        ),
+        renderChart: projections => (
+          <SingleLocationChartContainer
+            metric={ExploreMetric.POSITIVITY_RATE}
+            projections={projections}
+          />
+        ),
+      },
+    ],
+  },
+
   {
     groupHeader: GroupHeader.CASES,
     metricList: [
@@ -82,7 +142,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           />
         ),
         renderChart: projections => (
-          <MetricChart metric={Metric.CASE_DENSITY} projections={projections} />
+          <MetricChart metric={Metric.VACCINATIONS} projections={projections} />
         ),
       },
       {
@@ -113,71 +173,6 @@ export const CHART_GROUPS: ChartGroup[] = [
         renderChart: projections => (
           <MetricChart
             metric={Metric.POSITIVE_TESTS}
-            projections={projections}
-          />
-        ),
-      },
-    ],
-  },
-  {
-    groupHeader: GroupHeader.HOSPITALIZATIONS,
-    metricList: [
-      {
-        metric: Metric.HOSPITAL_USAGE,
-        metricType: MetricType.KEY_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // TODO (chelsi): make a map of these chart-specific metric names
-        ),
-        renderChart: projections => (
-          <MetricChart
-            metric={Metric.HOSPITAL_USAGE}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: ExploreMetric.ICU_HOSPITALIZATIONS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="ICU patients" metricValueInfo={metricValue} />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.ICU_HOSPITALIZATIONS}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: ExploreMetric.HOSPITALIZATIONS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName="Hospitalized patients"
-            metricValueInfo={metricValue}
-          />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.HOSPITALIZATIONS}
-            projections={projections}
-          />
-        ),
-      },
-    ],
-  },
-  {
-    groupHeader: GroupHeader.DEATHS,
-    metricList: [
-      {
-        metric: ExploreMetric.DEATHS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.DEATHS}
             projections={projections}
           />
         ),

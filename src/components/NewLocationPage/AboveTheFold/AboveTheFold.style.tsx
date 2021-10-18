@@ -7,11 +7,11 @@ import {
 } from 'assets/theme/sizes';
 
 export const MainWrapper = styled.div`
-  padding: ${props => props.theme.spacingTheme.contentGutterMobile};
+  padding: 0.5rem;
   background-color: ${COLOR_MAP.GREY_0};
 
   @media (min-width: ${mobileBreakpoint}) {
-    padding: ${props => props.theme.spacingTheme.contentGutterDesktop};
+    padding: 0.5rem;
   }
 `;
 
@@ -42,7 +42,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const GridContainer = styled.div<{ showNote: boolean }>`
-  display: grid;
+  // display: grid;
   max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
   row-gap: 1.25rem;
   grid-template-areas: ${({ showNote }) =>

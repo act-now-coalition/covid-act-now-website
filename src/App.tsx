@@ -358,7 +358,7 @@ export default function App() {
              */}
             <HandleRedirectTo />
 
-            <Footer />
+            {/* <Footer /> */}
           </BrowserRouter>
         </StylesProvider>
       </ScThemeProvider>

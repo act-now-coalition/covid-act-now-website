@@ -84,7 +84,7 @@ const ShareBlock = ({
 
   return (
     <ShareContainer id="share">
-      <EmailAlertsFooter defaultRegions={defaultSignupRegions} />
+      {/* <EmailAlertsFooter defaultRegions={defaultSignupRegions} /> */}
       {!region && (
         <ShareRow newsletter={false}>
           <ShareRowContentArea

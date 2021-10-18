@@ -57,15 +57,15 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
             <GridItemHeader>
               <HeaderContainer>
                 <LocationName region={region} />
-                <DesktopOnly>
+                {/* <DesktopOnly>
                   <HeaderButtons region={region} onClickShare={onClickShare} />
                 </DesktopOnly>
                 <MobileOnly>
                   <VaccineButton />
-                </MobileOnly>
+                </MobileOnly> */}
               </HeaderContainer>
             </GridItemHeader>
-            <GridItemOverview>
+            {/* <GridItemOverview>
               <LocationOverview
                 region={region}
                 locationSummary={locationSummary}
@@ -95,11 +95,11 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                   region={region}
                 />
               </GridItemNote>
-            )}
+            )} */}
           </GridContainer>
-          <MapOutsideGrid>
+          {/* <MapOutsideGrid>
             <CountyMap region={region} />
-          </MapOutsideGrid>
+          </MapOutsideGrid> */}
         </ContentContainer>
       </MainWrapper>
     );

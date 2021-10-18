@@ -58,7 +58,9 @@ function renderStyledRegionName(region: Region) {
       </>
     );
   } else {
-    return <strong>{getSplitRegionName(region)}</strong>;
+    return (
+      <strong>{getSplitRegionName(region)}: Electrification Dashboard</strong>
+    );
   }
 }
 

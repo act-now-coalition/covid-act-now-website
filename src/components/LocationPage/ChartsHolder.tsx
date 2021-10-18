@@ -101,12 +101,14 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const casesBlockRef = useRef<HTMLDivElement>(null);
   const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
   const deathsBlockRed = useRef<HTMLDivElement>(null);
+  const ngBlockRed = useRef<HTMLDivElement>(null);
   const chartBlockRefs = useMemo(
     () => ({
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
       [GroupHeader.CASES]: casesBlockRef,
       [GroupHeader.HOSPITALIZATIONS]: hospitalizationsBlockRef,
       [GroupHeader.DEATHS]: deathsBlockRed,
+      [GroupHeader.NATURAL_GAS]: ngBlockRed,
     }),
     [],
   );
@@ -212,27 +214,29 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         />
         <BelowTheFold>
           <WidthContainer>
-            <LocationPageBlock>
-              <CompareMain
-                stateName={getStateName(region) || region.name} // rename prop
-                locationsViewable={6}
-                stateId={(region as State).stateCode || undefined}
-                region={region}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
-              />
-            </LocationPageBlock>
-            {!projections ? (
-              <LoadingScreen />
-            ) : (
+            <div style={{ display: 'none' }}>
               <LocationPageBlock>
-                <Recommendations
+                <CompareMain
+                  stateName={getStateName(region) || region.name} // rename prop
+                  locationsViewable={6}
+                  stateId={(region as State).stateCode || undefined}
                   region={region}
-                  projections={projections}
-                  recommendationsRef={recommendationsRef}
+                  showModal={showCompareModal}
+                  setShowModal={setShowCompareModal}
                 />
               </LocationPageBlock>
-            )}
+              {!projections ? (
+                <LoadingScreen />
+              ) : (
+                <LocationPageBlock>
+                  <Recommendations
+                    region={region}
+                    projections={projections}
+                    recommendationsRef={recommendationsRef}
+                  />
+                </LocationPageBlock>
+              )}
+            </div>
             {CHART_GROUPS.map((group: ChartGroup) => {
               const { groupHeader } = group;
               const groupRef = chartBlockRefs[groupHeader];
@@ -255,17 +259,17 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 </ErrorBoundary>
               );
             })}
-            <LocationPageBlock id="vulnerabilities">
-              <VulnerabilitiesBlock scores={ccviScores} region={region} />
-            </LocationPageBlock>
-            <LocationPageBlock ref={exploreChartRef} id="explore-chart">
-              <Explore
-                initialFipsList={initialFipsList}
-                title="Trends"
-                currentMetric={currentExploreMetric}
-                setCurrentMetric={setCurrentExploreMetric}
-              />
-            </LocationPageBlock>
+            {!projections ? (
+              <LoadingScreen />
+            ) : (
+              <LocationPageBlock>
+                <Recommendations
+                  region={region}
+                  projections={projections}
+                  recommendationsRef={recommendationsRef}
+                />
+              </LocationPageBlock>
+            )}
           </WidthContainer>
         </BelowTheFold>
       </LocationPageContentWrapper>

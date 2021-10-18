@@ -7,6 +7,7 @@ import {
   exploreMetricToFooterContentMap,
   MetricModalContent,
 } from 'components/Dialogs';
+import React from 'react';
 
 export function getOverrideDisclaimer(
   region: Region,
@@ -21,7 +22,18 @@ export function getAddedMetricStatusText(
   value: string,
   region: Region,
 ) {
-  return `Over the last week, ${region.shortName} has averaged ${value} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
+  if (metric === ExploreMetric.DEATHS) {
+    return (
+      <>
+        Over the last week, {region.shortName} has avoided{' '}
+        <strong>
+          {value} {exploreMetricToFooterContentMap[metric].statusTextMeasure}
+        </strong>
+        .
+      </>
+    );
+  }
+  return `Over the last week, ${region.shortName} retired ${value} natural gas customers.`;
 }
 
 export interface DialogProps {

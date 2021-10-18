@@ -56,10 +56,6 @@ export const Wrapper = styled.div<{
     margin: 0 auto;
   }
 
-  @media (min-width: 1350px) {
-    margin: ${({ $isModal }) => ($isModal ? '0 auto' : '0 445px 0 auto')};
-  }
-
   @media (min-width: 1750px) {
     margin: 0 auto;
   }

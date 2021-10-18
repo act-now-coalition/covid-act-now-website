@@ -61,7 +61,7 @@ const ChartBlock: React.FC<{
   return (
     <>
       <SectionHeader>{groupHeader}</SectionHeader>
-      <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
+      {/* <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
         {metricList.map((metricItem: MetricChartInfo, i: number) => {
           const metricValueInfo = getValueInfo(stats, metricItem, projections);
           return (
@@ -73,7 +73,7 @@ const ChartBlock: React.FC<{
             />
           );
         })}
-      </TabsWrapper>
+      </TabsWrapper> */}
       {metricList[activeTabIndex].renderChart(projections)}
       {hasValue && (
         <ChartFooter

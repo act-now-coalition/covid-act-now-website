@@ -10,6 +10,7 @@ import { fail } from 'common/utils';
 import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
+import React from 'react';
 
 export const ALL_METRICS = [
   Metric.CASE_DENSITY,
@@ -65,7 +66,40 @@ export function getMetricDefinition(metric: Metric) {
 
 export function getMetricStatusText(metric: Metric, projections: Projections) {
   const metricDefinition = getMetricDefinition(metric);
-  return metricDefinition.renderStatus(projections);
+  if (metric === Metric.VACCINATIONS) {
+    return (
+      <div>
+        We need to convert 100% of our{' '}
+        <strong>water heaters, furnaces, stoves, and cars</strong> to electric
+        by 2050. This chart shows how we're doing against our 2025, 2030, 2040,
+        and 2050 goals.
+      </div>
+    );
+  } else if (metric === Metric.CASE_DENSITY) {
+    return (
+      <div>
+        This shows our <strong>CO2e emissions</strong> saved as we electrify our
+        nation.
+      </div>
+    );
+  } else if (metric === Metric.HOSPITAL_USAGE) {
+    return (
+      <div>
+        We show here the number of{' '}
+        <strong>direct, indirect, and induced jobs</strong> over time as we
+        electrify our nation.
+      </div>
+    );
+  } else if (metric === Metric.POSITIVE_TESTS) {
+    return (
+      <div>
+        We need to convert 100% of our{' '}
+        <strong>water heaters, furnaces, stoves, and cars</strong> to electric
+        by 2050. This chart shows how we're doing against our 2025, 2030, 2040,
+        and 2050 goals.
+      </div>
+    );
+  }
 }
 
 export function getMetricName(metric: Metric) {

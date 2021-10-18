@@ -1,6 +1,10 @@
 export default {
   root: {
-    backgroundColor: 'white',
+    backgroundColor: '#f9d65b',
     'border-radius': '4px',
+
+    '& .MuiFormControl-root, & .MuiFormControl-root:hover': {
+      backgroundColor: 'white',
+    },
   },
 };

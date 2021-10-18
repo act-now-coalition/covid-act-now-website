@@ -91,7 +91,7 @@ export function getRecommendations(
   const allRecommendations = [
     ...masksRecommendation,
     ...gatheringsRecommendation,
-    ...exposureRecommendations,
+    //...exposureRecommendations,
     ...schoolRecommendation,
     ...travelRecommendation,
     ...otherRecommendations,

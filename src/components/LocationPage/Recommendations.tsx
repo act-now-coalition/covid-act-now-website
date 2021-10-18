@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from 'react';
 import { mainContent } from 'cms-content/recommendations';
 import Recommend from 'components/Recommend';
@@ -26,6 +28,40 @@ const Recommendations = ({
 }: RecommendationsProps) => {
   const alarmLevel = projections.getAlarmLevel();
 
+  mainContent.recommendations = [
+    {
+      body:
+        '**Incentives** Create tax and rebate incentives for people to purchase electric appliances.',
+      source: 'FED',
+      category: 'GATHERINGS',
+      level: 'ALL',
+      id: 'GATHERINGS_ALL',
+    },
+    {
+      body:
+        '**Travel** Contact these 3 mayors who are leading the country in electrification.',
+      source: 'FED',
+      category: 'TRAVEL',
+      level: 'ALL',
+      id: 'TRAVEL_ALL',
+    },
+    {
+      body:
+        '**Job training** Invest in training contractors and electricians in our county.',
+      category: 'SCHOOLS',
+      source: 'HGHI',
+      level: 'ALL',
+      id: 'SCHOOLS_ALL',
+    },
+    {
+      body:
+        '**Advocate** Call [this number](tel:555-5555) to talk to your local representative and demand climate action now!',
+      source: 'FED',
+      category: 'RESTAURANTS',
+      level: 'ALL',
+      id: 'GATHERINGS_ALL',
+    },
+  ];
   const recommendationsMainContent = getRecommendations(
     region,
     mainContent.recommendations,
@@ -54,12 +90,10 @@ const Recommendations = ({
   return (
     <>
       <SectionHeader id="recommendations">Recommendations</SectionHeader>
-      <ExpandableContainer {...containerProps}>
-        <Recommend
-          recommendations={recommendationsMainContent}
-          recommendationsRef={recommendationsRef}
-        />
-      </ExpandableContainer>
+      <Recommend
+        recommendations={recommendationsMainContent}
+        recommendationsRef={recommendationsRef}
+      />
       <LocationPageSectionFooter>
         <DisclaimerWrapper>
           Source:{' '}
@@ -68,7 +102,7 @@ const Recommendations = ({
             href="https://www.cdc.gov/"
             onClick={trackSourceClick}
           >
-            CDC
+            Rewiring America
           </ExternalLink>
         </DisclaimerWrapper>
         <ShareButtons

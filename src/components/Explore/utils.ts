@@ -228,7 +228,7 @@ export const exploreMetricData: {
     yAxisDecimalPlaces: 0,
     seriesList: [
       {
-        label: 'Current COVID Hospitalizations',
+        label: 'Current Customers',
         tooltipLabel: 'COVID Hospitalizations',
         datasetId: 'rawHospitalizations',
         type: SeriesType.BAR,
