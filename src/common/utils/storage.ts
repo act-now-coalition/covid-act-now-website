@@ -48,6 +48,8 @@ export function useLocalStorage<T>(
       if (storageAvailable(StorageType.LOCAL_STORAGE)) {
         item = window.localStorage.getItem(key);
         item = item ? JSON.parse(item) : initialValue;
+      } else {
+        item = initialValue;
       }
     } catch (error) {
       item = initialValue;
