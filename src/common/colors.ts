@@ -1,6 +1,7 @@
 import grey from '@material-ui/core/colors/grey';
 import { Level } from 'common/level';
 import { LocationSummary } from './location_summaries';
+import { roundMetricValue } from './metric';
 import { Metric } from './metricEnum';
 
 export default {
@@ -118,6 +119,12 @@ export function vaccineColorFromLocationSummary(
 }
 
 export function vaccineColor(val: number): string {
+  // Round to the nearest .01 before calculating color to make it match the
+  // rounding we do in the map / compare table.
+  // TODO(michael): Ideally we'd use roundMetricValue() from metric.tsx but that
+  // causes a circular dependency. :-(
+  val = Number(val.toFixed(2));
+
   const colors = COLOR_MAP.VACCINATIONS_BLUE;
   if (val < 0.5) {
     return colors[0];
