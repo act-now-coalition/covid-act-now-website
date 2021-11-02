@@ -119,13 +119,13 @@ export function vaccineColorFromLocationSummary(
 
 export function vaccineColor(val: number): string {
   const colors = COLOR_MAP.VACCINATIONS_BLUE;
-  if (val < 0.4) {
+  if (val < 0.5) {
     return colors[0];
-  } else if (val < 0.5) {
-    return colors[1];
   } else if (val < 0.6) {
-    return colors[2];
+    return colors[1];
   } else if (val < 0.7) {
+    return colors[2];
+  } else if (val < 0.8) {
     return colors[3];
   } else {
     return colors[4];

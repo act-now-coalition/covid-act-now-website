@@ -17,28 +17,28 @@ interface Section {
 
 export const thermometerSections: Section[] = [
   {
-    labelTo: '40%',
-    labelRange: '< 40%',
-    color: COLOR_MAP.VACCINATIONS_BLUE[0],
-  },
-  {
     labelTo: '50%',
-    labelRange: '40 - 50%',
-    color: COLOR_MAP.VACCINATIONS_BLUE[1],
+    labelRange: '< 50%',
+    color: COLOR_MAP.VACCINATIONS_BLUE[0],
   },
   {
     labelTo: '60%',
     labelRange: '50 - 60%',
-    color: COLOR_MAP.VACCINATIONS_BLUE[2],
+    color: COLOR_MAP.VACCINATIONS_BLUE[1],
   },
   {
     labelTo: '70%',
     labelRange: '60 - 70%',
+    color: COLOR_MAP.VACCINATIONS_BLUE[2],
+  },
+  {
+    labelTo: '80%',
+    labelRange: '70 - 80%',
     color: COLOR_MAP.VACCINATIONS_BLUE[3],
   },
   {
     labelTo: '100%', // Does not render
-    labelRange: '> 70%',
+    labelRange: '> 80%',
     color: COLOR_MAP.VACCINATIONS_BLUE[4],
   },
 ];
