@@ -135,7 +135,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2975,
+      "regionsAvailable": 2970,
       "totalStates": 53,
       "statesAvailable": 50
     },
@@ -213,13 +213,13 @@
     "name": "metrics.infectionRate",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2957,
+      "regionsAvailable": 2962,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -234,13 +234,13 @@
     "name": "metrics.infectionRateCI90",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2957,
+      "regionsAvailable": 2962,
       "totalStates": 53,
       "statesAvailable": 52
     },
