@@ -79,6 +79,11 @@ export function importCountyGeographies(): Promise<CountiesTopology> {
   return importJson('counties-10m', import('./counties-10m.json'));
 }
 
+export type NationsTopology = typeof import('./countries-110m.json');
+export function importNationsGeographies(): Promise<NationsTopology> {
+  return importJson('nations-110m', import('./countries-110m.json'));
+}
+
 /** Represent entries in county_adjacency_msa.json. */
 export interface CountyAdjacencyMap {
   counties: {

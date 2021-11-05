@@ -20,3 +20,4 @@ export { default as useLogChanges } from './useLogChanges';
 export * from './useGeolocatedRegions';
 export { default as useDialog } from './useDialog';
 export { default as useChartHeightForBreakpoint } from './useChartHeightForBreakpoint';
+export { default as useNationsGeographies } from './useNationsGeographies';
