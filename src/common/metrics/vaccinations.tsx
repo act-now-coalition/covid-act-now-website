@@ -80,7 +80,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose and {peopleVaccinated} ({percentVaccinated})
-      are fully vaccinated. Anybody who is at least 12 years old is eligible to
+      are fully vaccinated. Anybody who is at least 5 years old is eligible to
       be vaccinated. Fewer than 0.001% of people who have received a dose
       experienced a severe adverse reaction.{' '}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
