@@ -400,9 +400,9 @@
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2021-11-10",
-      "end_date": "2021-11-10",
+      "end_date": "",
       "region": "NE",
-      "context": "no cases on 11/10/21 which is decreasing DNC artificially"
+      "context": "No cases reported since 11/10 from cases scraper source"
     }
   ]
 }
