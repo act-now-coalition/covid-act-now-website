@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
@@ -9,21 +8,14 @@ import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import Thermometer from 'components/Thermometer';
-import {
-  InfoTooltip,
-  TextTooltip,
-  renderTooltipContent,
-} from 'components/InfoTooltip';
+import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
-import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'Positive test rate';
 
 export const PositiveTestRateMetric: MetricDefinition = {
   renderStatus,
-  renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
@@ -141,39 +133,6 @@ function renderStatus(projections: Projections) {
     <Fragment>
       A {lowSizableLarge} percentage ({percentage}) of COVID tests were
       positive, {testingBroadlyText}.
-    </Fragment>
-  );
-}
-
-function renderDisclaimer(
-  region: Region,
-  provenance?: Sources,
-): React.ReactElement {
-  const { body } = metricToTooltipMap[Metric.POSITIVE_TESTS].metricCalculation;
-
-  return (
-    <Fragment>
-      {'Learn more about '}
-      <TextTooltip
-        title={getDataSourceTooltipContent(
-          Metric.POSITIVE_TESTS,
-          region,
-          provenance,
-        )}
-        mainCopy={'where our data comes from'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`Learn more: ${Metric.POSITIVE_TESTS}`)
-        }
-      />
-      {' and '}
-      <TextTooltip
-        title={renderTooltipContent(body)}
-        mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`How we calculate: ${Metric.POSITIVE_TESTS}`)
-        }
-      />
-      .
     </Fragment>
   );
 }
