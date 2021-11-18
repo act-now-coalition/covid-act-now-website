@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { levelText } from 'common/utils/chart';
@@ -9,21 +8,14 @@ import { formatPercent, formatInteger, assert } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import Thermometer from 'components/Thermometer';
-import {
-  InfoTooltip,
-  TextTooltip,
-  renderTooltipContent,
-} from 'components/InfoTooltip';
+import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
-import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 const METRIC_NAME = 'ICU capacity used';
 
 export const ICUCapacityUsed: MetricDefinition = {
   renderStatus,
-  renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
@@ -150,39 +142,6 @@ function renderStatus(projections: Projections): React.ReactElement {
       {locationName} has reported having {totalICUBeds} staffed adult ICU beds.{' '}
       {patientBreakdown} Overall, {totalICUPatients} out of {totalICUBeds} (
       {icuCapacityUsed}) are filled. {textLevel}.
-    </Fragment>
-  );
-}
-
-function renderDisclaimer(
-  region: Region,
-  provenance?: Sources,
-): React.ReactElement {
-  const { body } = metricToTooltipMap[Metric.HOSPITAL_USAGE].metricCalculation;
-
-  return (
-    <Fragment>
-      {'Learn more about '}
-      <TextTooltip
-        title={getDataSourceTooltipContent(
-          Metric.HOSPITAL_USAGE,
-          region,
-          provenance,
-        )}
-        mainCopy={'where our data comes from'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`Learn more: ${Metric.HOSPITAL_USAGE}`)
-        }
-      />
-      {' and '}
-      <TextTooltip
-        title={renderTooltipContent(body)}
-        mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`How we calculate: ${Metric.HOSPITAL_USAGE}`)
-        }
-      />
-      .
     </Fragment>
   );
 }
