@@ -464,9 +464,9 @@
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2021-11-24",
-      "end_date": "2021-11-24",
-      "region": "OH, WY, CA, UT, KS, TX, MN, IL, GA, MD",
-      "context": "states with little or no reporting on Thanksgiving (11/25)"
+      "end_date": "2021-11-27",
+      "region": "WY, KS, TX, IL, GA, MD, MI, FL, ID, CA",
+      "context": "Lack of case reporting over Thanksgiving"
     }
   ]
 }
