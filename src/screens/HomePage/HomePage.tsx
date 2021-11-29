@@ -38,6 +38,8 @@ import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
 import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 import NationalText from 'components/NationalText';
+import DonationBanner from 'components/Banner/DonationBanner';
+import Box from '@material-ui/core/Box';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -91,7 +93,7 @@ export default function HomePage() {
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
-  const isMobileMap = useBreakpoint(600);
+  const isMobile = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
@@ -129,6 +131,9 @@ export default function HomePage() {
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
+      <Box margin={'auto'} marginTop={isMobile ? 0 : 2} maxWidth={'1000px'}>
+        <DonationBanner />
+      </Box>
       <HomepageStructuredData />
       <HomePageHeader />
       <main>
@@ -154,7 +159,7 @@ export default function HomePage() {
                   tooltipMode={
                     // TODO(michael): There's some sort of bug / performance issue on iOS that makes
                     // the mobile tooltip on the county view unusable.
-                    isMobileMap && locationScope === MapView.STATES
+                    isMobile && locationScope === MapView.STATES
                       ? TooltipMode.ACTIVATE_ON_CLICK
                       : TooltipMode.ACTIVATE_ON_HOVER
                   }
