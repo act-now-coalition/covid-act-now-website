@@ -19,7 +19,7 @@ const renderDonationButton = () => (
 );
 
 const DONATION_MESSAGE =
-  'We are a tiny non-profit working relentlessly since March to bring you trustworthy COVID information. Help make our work sustainable by donating today.';
+  'We are a small non-profit working relentlessly since March 2020 to bring you trustworthy COVID information. Make sure we can continue our work by donating today.';
 
 export const DonationBanner: React.FC = () => (
   <Banner message={DONATION_MESSAGE} renderButton={renderDonationButton} />

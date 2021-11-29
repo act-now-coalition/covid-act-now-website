@@ -5,8 +5,8 @@ import MuiButton from '@material-ui/core/Button';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
 
-const colorButton = `${COLOR_MAP.RED.DARK}`;
-const bannerBackgroundColor = `${COLOR_MAP.RED.DARK}`;
+const colorButton = `${COLOR_MAP.PURPLE}`;
+const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
 
 export const MainContainerStyles = css`
   background-color: ${bannerBackgroundColor};
@@ -45,6 +45,7 @@ export const ButtonContainer = styled(Grid)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 1rem;
 
   a {
     text-decoration: none;
