@@ -30,6 +30,10 @@ const HomePageHeader: React.FC = () => {
           Updated on {formatDateTime(lastUpdatedDate, DateFormat.MMMM_D)}{' '}
           {renderInfoTooltip(lastUpdatedDate)}
         </Subcopy>
+        <Subcopy style={{ paddingTop: '0.2rem' }}>
+          December 10 - Due to technical difficulties, today's update may be
+          delayed.
+        </Subcopy>
       </Content>
     </Wrapper>
   );
