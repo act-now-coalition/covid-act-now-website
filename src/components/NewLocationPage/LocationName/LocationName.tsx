@@ -25,6 +25,8 @@ const UpdatedDate: React.FC = () => {
         aria-label="Description of when data is updated"
         trackOpenTooltip={() => trackOpenTooltip(`Updated date`)}
       />
+      . <strong>NOTE:</strong> Data over the holidays might be delayed or
+      unreliable. Please interpret with caution.
     </UpdatedOnText>
   );
 };
