@@ -129,13 +129,13 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3066,
+      "regionsAvailable": 3065,
       "totalStates": 53,
       "statesAvailable": 52
     },
@@ -219,7 +219,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2998,
+      "regionsAvailable": 2999,
       "totalStates": 53,
       "statesAvailable": 53
     },
@@ -240,7 +240,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2998,
+      "regionsAvailable": 2999,
       "totalStates": 53,
       "statesAvailable": 53
     },
@@ -507,9 +507,9 @@
     "name": "actuals.vaccinesDistributed",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 51,
+      "regionsAvailable": 50,
       "totalStates": 53,
-      "statesAvailable": 51
+      "statesAvailable": 50
     },
     "county": {
       "totalRegions": 3222,
@@ -528,9 +528,9 @@
     "name": "actuals.vaccinationsInitiated",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 51,
+      "regionsAvailable": 50,
       "totalStates": 53,
-      "statesAvailable": 51
+      "statesAvailable": 50
     },
     "county": {
       "totalRegions": 3222,
@@ -549,9 +549,9 @@
     "name": "actuals.vaccinationsCompleted",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 51,
+      "regionsAvailable": 50,
       "totalStates": 53,
-      "statesAvailable": 51
+      "statesAvailable": 50
     },
     "county": {
       "totalRegions": 3222,
@@ -570,9 +570,9 @@
     "name": "actuals.vaccinesAdministered",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 51,
+      "regionsAvailable": 50,
       "totalStates": 53,
-      "statesAvailable": 51
+      "statesAvailable": 50
     },
     "county": {
       "totalRegions": 3222,
