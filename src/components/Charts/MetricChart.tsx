@@ -43,9 +43,11 @@ const MetricChart = React.memo(
       return (
         <EmptyPanel $height={chartHeight}>
           <p>
-            <MarkdownContent>
-              {blockedDisclaimer || getMetricStatusText(metric, projections)}
-            </MarkdownContent>
+            {blockedDisclaimer ? (
+              <MarkdownContent>{blockedDisclaimer}</MarkdownContent>
+            ) : (
+              getMetricStatusText(metric, projections)
+            )}
           </p>
           <ScreenshotReady />
         </EmptyPanel>
