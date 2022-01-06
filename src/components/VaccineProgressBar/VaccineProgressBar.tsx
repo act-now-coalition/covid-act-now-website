@@ -81,6 +81,14 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
           )}
           height={height}
         />
+        {(vaccinationsCompleted === 0 || vaccinationsInitiated === 0) && (
+          <rect
+            fill={COLOR_MAP.GRAY.LIGHT}
+            x={0}
+            width={width}
+            height={height}
+          />
+        )}
         {oldVersion && (
           <rect
             fill={COLOR_MAP.GREY_2}

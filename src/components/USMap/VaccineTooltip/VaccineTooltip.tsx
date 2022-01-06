@@ -53,11 +53,19 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
         </LocationName>
         <Row>
           <Title>1+ dose</Title>
-          <Value>{formatPercent(vaccinationsInitiated)}</Value>
+          <Value>
+            {vaccinationsInitiated === 0
+              ? '--'
+              : formatPercent(vaccinationsInitiated)}
+          </Value>
         </Row>
         <Row>
           <Title>Fully vaccinated</Title>
-          <Value>{formatPercent(vaccinationsCompleted)}</Value>
+          <Value>
+            {vaccinationsCompleted === 0
+              ? '--'
+              : formatPercent(vaccinationsCompleted)}
+          </Value>
         </Row>
         <ProgressBarWrapper>
           <VaccineProgressBar
