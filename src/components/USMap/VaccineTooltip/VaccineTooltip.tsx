@@ -17,6 +17,8 @@ import {
 import { State } from 'common/regions';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { TextButton } from 'components/ButtonSystem';
+import Box from '@material-ui/core/Box';
+import { COLOR_MAP } from 'common/colors';
 
 export interface VaccineTooltipProps {
   state: State;
@@ -67,13 +69,24 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
               : formatPercent(vaccinationsCompleted)}
           </Value>
         </Row>
-        <ProgressBarWrapper>
-          <VaccineProgressBar
-            locationName={locationName}
-            vaccinationsInitiated={vaccinationsInitiated}
-            vaccinationsCompleted={vaccinationsCompleted}
-          />
-        </ProgressBarWrapper>
+        {vaccinationsInitiated !== 0 && vaccinationsCompleted !== 0 ? (
+          <ProgressBarWrapper>
+            <VaccineProgressBar
+              locationName={locationName}
+              vaccinationsInitiated={vaccinationsInitiated}
+              vaccinationsCompleted={vaccinationsCompleted}
+            />
+          </ProgressBarWrapper>
+        ) : (
+          <Box
+            display="flex"
+            justifyContent="center"
+            mt={2}
+            color={COLOR_MAP.GRAY.DARK}
+          >
+            No vaccination data available
+          </Box>
+        )}
       </Inner>
       {addMoreDataLink && (
         <MoreDataLinkContainer>
