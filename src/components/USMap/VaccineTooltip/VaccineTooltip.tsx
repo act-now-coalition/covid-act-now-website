@@ -33,6 +33,10 @@ export interface VaccineTooltipProps {
   addMoreDataLink?: boolean;
 }
 
+function hasVaccineData(vaccineData: number): boolean {
+  return vaccineData > 0;
+}
+
 const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
   state,
   vaccinationsInitiated,
@@ -56,20 +60,21 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
         <Row>
           <Title>1+ dose</Title>
           <Value>
-            {vaccinationsInitiated === 0
-              ? '--'
-              : formatPercent(vaccinationsInitiated)}
+            {hasVaccineData(vaccinationsInitiated)
+              ? formatPercent(vaccinationsInitiated)
+              : '--'}
           </Value>
         </Row>
         <Row>
           <Title>Fully vaccinated</Title>
           <Value>
-            {vaccinationsCompleted === 0
-              ? '--'
-              : formatPercent(vaccinationsCompleted)}
+            {hasVaccineData(vaccinationsCompleted)
+              ? formatPercent(vaccinationsCompleted)
+              : '--'}
           </Value>
         </Row>
-        {vaccinationsInitiated !== 0 && vaccinationsCompleted !== 0 ? (
+        {hasVaccineData(vaccinationsInitiated) &&
+        hasVaccineData(vaccinationsCompleted) ? (
           <ProgressBarWrapper>
             <VaccineProgressBar
               locationName={locationName}
@@ -78,12 +83,7 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
             />
           </ProgressBarWrapper>
         ) : (
-          <Box
-            display="flex"
-            justifyContent="center"
-            mt={2}
-            color={COLOR_MAP.GRAY.DARK}
-          >
+          <Box display="flex" mt={2} color={COLOR_MAP.GRAY.DARK}>
             No vaccination data available
           </Box>
         )}
