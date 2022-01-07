@@ -190,18 +190,8 @@ export const getXTickFormat = (
   }
 };
 
-/**
- * For mobile, we only show every other month
- */
-function getMobileDateTicks(tickValues: Date[]): Date[] {
-  return tickValues.filter((value: Date, i: number) => i % 2 === 0);
-}
-
 export function getFinalTicks(isMobile: boolean, ticks: Date[]): Date[] {
-  if (isMobile) {
-    return getMobileDateTicks(ticks);
-  }
-  return ticks;
+  return ticks.filter((value: Date, i: number) => i % (isMobile ? 3 : 2) === 0);
 }
 
 export function getTimeAxisTicks(

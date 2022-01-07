@@ -17,6 +17,8 @@ import {
 import { State } from 'common/regions';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { TextButton } from 'components/ButtonSystem';
+import Box from '@material-ui/core/Box';
+import { COLOR_MAP } from 'common/colors';
 
 export interface VaccineTooltipProps {
   state: State;
@@ -29,6 +31,14 @@ export interface VaccineTooltipProps {
    * the location page.
    */
   addMoreDataLink?: boolean;
+}
+
+function hasVaccineData(vaccineData: number): boolean {
+  return vaccineData > 0;
+}
+
+function getRenderedValue(vaccineData: number): string {
+  return hasVaccineData(vaccineData) ? formatPercent(vaccineData) : '--';
 }
 
 const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
@@ -53,19 +63,26 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
         </LocationName>
         <Row>
           <Title>1+ dose</Title>
-          <Value>{formatPercent(vaccinationsInitiated)}</Value>
+          <Value>{getRenderedValue(vaccinationsInitiated)}</Value>
         </Row>
         <Row>
           <Title>Fully vaccinated</Title>
-          <Value>{formatPercent(vaccinationsCompleted)}</Value>
+          <Value>{getRenderedValue(vaccinationsCompleted)}</Value>
         </Row>
-        <ProgressBarWrapper>
-          <VaccineProgressBar
-            locationName={locationName}
-            vaccinationsInitiated={vaccinationsInitiated}
-            vaccinationsCompleted={vaccinationsCompleted}
-          />
-        </ProgressBarWrapper>
+        {hasVaccineData(vaccinationsInitiated) &&
+        hasVaccineData(vaccinationsCompleted) ? (
+          <ProgressBarWrapper>
+            <VaccineProgressBar
+              locationName={locationName}
+              vaccinationsInitiated={vaccinationsInitiated}
+              vaccinationsCompleted={vaccinationsCompleted}
+            />
+          </ProgressBarWrapper>
+        ) : (
+          <Box display="flex" mt={2} color={COLOR_MAP.GRAY.DARK}>
+            No vaccination data available
+          </Box>
+        )}
       </Inner>
       {addMoreDataLink && (
         <MoreDataLinkContainer>
