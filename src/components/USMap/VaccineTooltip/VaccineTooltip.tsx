@@ -37,6 +37,10 @@ function hasVaccineData(vaccineData: number): boolean {
   return vaccineData > 0;
 }
 
+function getRenderedValue(vaccineData: number): string {
+  return hasVaccineData(vaccineData) ? formatPercent(vaccineData) : '--';
+}
+
 const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
   state,
   vaccinationsInitiated,
@@ -59,19 +63,11 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
         </LocationName>
         <Row>
           <Title>1+ dose</Title>
-          <Value>
-            {hasVaccineData(vaccinationsInitiated)
-              ? formatPercent(vaccinationsInitiated)
-              : '--'}
-          </Value>
+          <Value>{getRenderedValue(vaccinationsInitiated)}</Value>
         </Row>
         <Row>
           <Title>Fully vaccinated</Title>
-          <Value>
-            {hasVaccineData(vaccinationsCompleted)
-              ? formatPercent(vaccinationsCompleted)
-              : '--'}
-          </Value>
+          <Value>{getRenderedValue(vaccinationsCompleted)}</Value>
         </Row>
         {hasVaccineData(vaccinationsInitiated) &&
         hasVaccineData(vaccinationsCompleted) ? (
