@@ -155,7 +155,7 @@ const SingleLocationChart: React.FC<{
   tooltipSubtext = '',
   marginTop = 10,
   marginBottom = 30,
-  marginLeft = 60,
+  marginLeft = 70,
   marginRight = 20,
   barOpacity,
   barOpacityHover,

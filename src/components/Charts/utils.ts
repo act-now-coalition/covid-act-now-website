@@ -186,7 +186,7 @@ export const getXTickFormat = (
       date.getMonth() === 0 || date.getMonth() === 11
         ? DateFormat.MMM_YY
         : DateFormat.MMM;
-    return formatDateTime(date, dateFormat).replace(' ', " '");
+    return formatDateTime(date, dateFormat).replace(' ', "'");
   }
 };
 
