@@ -68,16 +68,17 @@ function renderStatus(projections: Projections): React.ReactElement {
   const peopleVaccinated = formatInteger(info.peopleVaccinated);
   const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
 
-  const cappedVacc =
-    info.ratioInitiated <= 0.95 ? undefined : (
-      <span>
-        {' '}
+  const cappedVaccinatedCopy =
+    info.ratioInitiated >= 0.95 ? (
+      <Fragment>
+        <br />
+        <br />
         We have capped the vaccination metrics at 95%. This cap helps address
         potential overestimates of vaccination coverage due to incorrect
         reporting of doses, census denominator data not including part-time
         residents, or other potential data reporting errors.
-      </span>
-    );
+      </Fragment>
+    ) : undefined;
 
   return (
     <Fragment>
@@ -87,7 +88,7 @@ function renderStatus(projections: Projections): React.ReactElement {
       be vaccinated. Fewer than 0.001% of people who have received a dose
       experienced a severe adverse reaction.{' '}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
-      {cappedVacc}
+      {cappedVaccinatedCopy}
     </Fragment>
   );
 }
