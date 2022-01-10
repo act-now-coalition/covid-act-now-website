@@ -29,6 +29,7 @@ import BoxedAnnotation from './BoxedAnnotation';
 import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
+const dashedLineParam = { strokeDashArray: '1, 6' };
 
 interface LabelInfo {
   x: number;
@@ -68,12 +69,14 @@ const VaccinesTooltip: React.FC<{
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
+  const isCapped = pointInitiated!.y >= 0.95;
 
   return pointInitiated ? (
     <Tooltip
       width={'170px'}
       top={top(pointInitiated)}
       left={left(pointCompleted ? pointCompleted : pointInitiated)}
+      subtext={isCapped ? 'Vaccination capped at 95%' : undefined}
       title={formatTooltipColumnDate(pointInitiated)}
     >
       <Styles.TooltipLine>
@@ -209,17 +212,30 @@ const VaccinationLines: React.FC<{
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
-              <ChartSeries
-                key={`series-chart-${label}`}
-                data={data}
-                x={getXPosition}
-                y={getYPosition}
-                type={type}
-                yMax={innerHeight}
-                barWidth={0}
-                barOpacity={1}
-                params={params}
-              />
+              <Group>
+                <ChartSeries
+                  key={`series-chart-${label}`}
+                  data={data.filter(d => d.y < 0.95)}
+                  x={getXPosition}
+                  y={getYPosition}
+                  type={type}
+                  yMax={innerHeight}
+                  barWidth={0}
+                  barOpacity={1}
+                  params={params}
+                />
+                <ChartSeries
+                  key={`series-chart-${label}`}
+                  data={data.filter(d => d.y > 0.95)}
+                  x={getXPosition}
+                  y={getYPosition}
+                  type={type}
+                  yMax={innerHeight}
+                  barWidth={0}
+                  barOpacity={1}
+                  params={{ ...params, ...dashedLineParam }}
+                />
+              </Group>
             ))}
           </RectClipGroup>
           {/* Current Value Labels */}

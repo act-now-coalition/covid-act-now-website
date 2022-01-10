@@ -9,6 +9,7 @@ export interface SeriesParams {
   stroke?: string;
   fill?: string;
   strokeOpacity?: number;
+  strokeDashArray?: string;
 }
 
 export interface Series {
