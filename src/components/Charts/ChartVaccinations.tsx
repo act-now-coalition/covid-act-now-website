@@ -30,10 +30,8 @@ import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
 
-{
-  /* Vaccination data from the backend is capped at 95%. For data quality reasons.  
+/* Vaccination data from the backend is capped at 95% for data quality reasons.  
 We update the tooltip and use a dashed line for all capped data. */
-}
 const VACCINATION_PERCENTAGE_CAP = 0.95;
 
 interface LabelInfo {
