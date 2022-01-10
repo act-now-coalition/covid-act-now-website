@@ -267,7 +267,7 @@ export const exploreMetricData: {
     name: 'Current COVID ICU Hospitalizations',
     chartId: 'icu-hospitalizations',
     dataMeasure: DataMeasure.INTEGER,
-    yAxisDecimalPlaces: 0,
+    yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Current COVID ICU Hospitalizations',
