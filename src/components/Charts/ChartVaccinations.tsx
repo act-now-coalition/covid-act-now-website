@@ -78,7 +78,7 @@ const VaccinesTooltip: React.FC<{
       width={'170px'}
       top={top(pointInitiated)}
       left={left(pointCompleted ? pointCompleted : pointInitiated)}
-      subtext={isCapped ? 'Vaccination capped at 95%' : undefined}
+      subtext={isCapped ? 'Data capped at 95%' : undefined}
       title={formatTooltipColumnDate(pointInitiated)}
     >
       <Styles.TooltipLine>

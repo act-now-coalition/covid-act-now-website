@@ -14,12 +14,10 @@ function palette(props: any) {
   return props.theme.palette.chart;
 }
 
-/** By default make line solid */
-function is_dashed(props: any) {
-  if (typeof props.strokeDashArray === 'undefined') {
-    return 'none';
-  }
-  return props.strokeDashArray;
+/** By default make line charts solid,
+ * If a value is provided, use that instead.*/
+function getStrokeDashType(props: any) {
+  return props.strokeDashArray || 'none';
 }
 
 export const Header = styled.div`
@@ -143,7 +141,7 @@ export const MainSeriesLine = styled.g`
   line,
   path {
     fill: none;
-    stroke-dasharray: ${props => is_dashed(props)};
+    stroke-dasharray: ${props => getStrokeDashType(props)};
     stroke: ${props =>
       palette(props).isDarkMode
         ? brightenStroke(props.stroke || '#fff')
