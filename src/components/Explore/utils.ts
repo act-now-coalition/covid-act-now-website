@@ -453,13 +453,6 @@ export function getMetricLabels(multiLocation: boolean): string[] {
   });
 }
 
-export function checkIfVaccinationCapped(data: Column | null) {
-  if (data) {
-    return data.y >= 0.95;
-  }
-  return false;
-}
-
 export function findPointByDate(data: Column[], date: Date): Column | null {
   const idx = data.findIndex(
     p => new Date(p.x).toDateString() === date.toDateString(),

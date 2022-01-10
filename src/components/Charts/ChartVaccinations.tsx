@@ -16,10 +16,7 @@ import * as Styles from 'components/Explore/Explore.style';
 import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
-import {
-  findPointByDate,
-  checkIfVaccinationCapped,
-} from 'components/Explore/utils';
+import { findPointByDate } from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
 import { AxisBottom } from 'components/Charts/Axis';
 import {
@@ -71,7 +68,7 @@ const VaccinesTooltip: React.FC<{
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
-  const isCapped = checkIfVaccinationCapped(pointInitiated);
+  const isCapped = pointInitiated?.y >= 0.95 ?? false;
 
   return pointInitiated ? (
     <Tooltip
