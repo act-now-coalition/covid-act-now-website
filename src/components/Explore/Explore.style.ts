@@ -141,7 +141,6 @@ export const MainSeriesLine = styled.g`
   line,
   path {
     fill: none;
-    stroke-dasharray: ${props => getStrokeDashType(props)};
     stroke: ${props =>
       palette(props).isDarkMode
         ? brightenStroke(props.stroke || '#fff')

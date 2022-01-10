@@ -11,6 +11,7 @@ import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Link } from 'react-router-dom';
 
 const METRIC_NAME = 'Vaccinated';
+const VACCINATION_PERCENTAGE_CAP = 0.95;
 
 export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
@@ -69,15 +70,13 @@ function renderStatus(projections: Projections): React.ReactElement {
   const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
 
   const cappedVaccinatedCopy =
-    info.ratioInitiated >= 0.95 ? (
-      <Fragment>
-        <br />
-        <br />
+    info.ratioInitiated >= VACCINATION_PERCENTAGE_CAP ? (
+      <p>
         We have capped the vaccination metrics at 95%. This cap helps address
         potential overestimates of vaccination coverage due to incorrect
         reporting of doses, census denominator data not including part-time
         residents, or other potential data reporting errors.{' '}
-      </Fragment>
+      </p>
     ) : undefined;
 
   return (

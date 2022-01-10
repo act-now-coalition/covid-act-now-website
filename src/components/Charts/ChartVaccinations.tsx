@@ -30,6 +30,12 @@ import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
 
+{
+  /* Vaccination data from the backend is capped at 95%. For data quality reasons.  
+We update the tooltip and use a dashed line for all capped data. */
+}
+const VACCINATION_PERCENTAGE_CAP = 0.95;
+
 interface LabelInfo {
   x: number;
   y: number;
@@ -68,7 +74,7 @@ const VaccinesTooltip: React.FC<{
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
-  const isCapped = pointInitiated?.y >= 0.95 ?? false;
+  const isCapped = pointInitiated?.y >= VACCINATION_PERCENTAGE_CAP ?? false;
 
   return pointInitiated ? (
     <Tooltip
@@ -190,7 +196,6 @@ const VaccinationLines: React.FC<{
     getXPosition,
     getYPosition,
   );
-  const dashedLineParam = { strokeDashArray: '1, 6' };
 
   return (
     <Styles.PositionRelative style={{ height }}>
@@ -212,10 +217,12 @@ const VaccinationLines: React.FC<{
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
+              // Create separate lines for capped and un-capped data points.
+              // Capped data will have a dashed line
               <Group>
                 <ChartSeries
                   key={`series-chart-${label}`}
-                  data={data.filter(d => d.y < 0.95)}
+                  data={data.filter(d => d.y < VACCINATION_PERCENTAGE_CAP)}
                   x={getXPosition}
                   y={getYPosition}
                   type={type}
@@ -224,18 +231,16 @@ const VaccinationLines: React.FC<{
                   barOpacity={1}
                   params={params}
                 />
-                {/* Vaccination data from the backend is capped at 95%. 
-                Use a dashed line for all capped data. */}
                 <ChartSeries
                   key={`series-chart-${label}`}
-                  data={data.filter(d => d.y >= 0.95)}
+                  data={data.filter(d => d.y >= VACCINATION_PERCENTAGE_CAP)}
                   x={getXPosition}
                   y={getYPosition}
                   type={type}
                   yMax={innerHeight}
                   barWidth={0}
                   barOpacity={1}
-                  params={{ ...params, ...dashedLineParam }}
+                  params={{ ...params, ...{ strokeDasharray: '1, 6' } }}
                 />
               </Group>
             ))}
