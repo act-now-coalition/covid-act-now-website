@@ -16,7 +16,10 @@ import * as Styles from 'components/Explore/Explore.style';
 import { Series } from 'components/Explore/interfaces';
 import ChartSeries, { SeriesMarker } from 'components/Explore/SeriesChart';
 import ChartOverlay from 'components/Explore/ChartOverlay';
-import { findPointByDate } from 'components/Explore/utils';
+import {
+  findPointByDate,
+  checkIfVaccinationCapped,
+} from 'components/Explore/utils';
 import * as ChartStyle from './Charts.style';
 import { AxisBottom } from 'components/Charts/Axis';
 import {
@@ -29,7 +32,6 @@ import BoxedAnnotation from './BoxedAnnotation';
 import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
-const dashedLineParam = { strokeDashArray: '1, 6' };
 
 interface LabelInfo {
   x: number;
@@ -69,7 +71,7 @@ const VaccinesTooltip: React.FC<{
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
-  const isCapped = pointInitiated!.y >= 0.95;
+  const isCapped = checkIfVaccinationCapped(pointInitiated);
 
   return pointInitiated ? (
     <Tooltip
@@ -191,6 +193,7 @@ const VaccinationLines: React.FC<{
     getXPosition,
     getYPosition,
   );
+  const dashedLineParam = { strokeDashArray: '1, 6' };
 
   return (
     <Styles.PositionRelative style={{ height }}>
@@ -224,9 +227,11 @@ const VaccinationLines: React.FC<{
                   barOpacity={1}
                   params={params}
                 />
+                {/* Vaccination data from the backend is capped at 95%. 
+                Use a dashed line for all capped data. */}
                 <ChartSeries
                   key={`series-chart-${label}`}
-                  data={data.filter(d => d.y > 0.95)}
+                  data={data.filter(d => d.y >= 0.95)}
                   x={getXPosition}
                   y={getYPosition}
                   type={type}
