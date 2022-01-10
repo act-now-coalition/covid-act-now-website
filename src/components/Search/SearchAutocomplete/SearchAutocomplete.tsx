@@ -3,7 +3,6 @@ import flatten from 'lodash/flatten';
 import uniq from 'lodash/uniq';
 import { Autocomplete } from '@material-ui/lab';
 import Hidden from '@material-ui/core/Hidden';
-import { createFilterOptions } from '@material-ui/lab/useAutocomplete';
 import { State, County, Region, MetroArea, FipsCode } from 'common/regions';
 import {
   Wrapper,
@@ -21,6 +20,7 @@ import {
 import { useBreakpoint, useCountyToZipMap } from 'common/hooks';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import { LockBodyScroll } from 'components/Dialogs';
+import { matchSorter } from 'match-sorter';
 
 function getOptionSelected(option: Region, selectedOption: Region) {
   return option.fipsCode === selectedOption.fipsCode;
@@ -144,11 +144,13 @@ const SearchAutocomplete: React.FC<{
           onChange={onSelect}
           getOptionSelected={getOptionSelected}
           getOptionLabel={() => ''} // we don't want the location name to populate the searchbar after selecting
-          filterOptions={createFilterOptions({
-            matchFrom: checkForZipcodeMatch ? 'any' : 'start',
-            limit: filterLimit,
-            stringify: stringifyOption,
-          })}
+          filterOptions={(options, { inputValue }) =>
+            (matchSorter(options, inputValue, {
+              keys: [stringifyOption],
+              // Override baseSort to not include diacritics (not do localeCompare)
+              baseSort: (a, b) => (a < b ? -1 : a > b ? 1 : 0),
+            }).slice(0, filterLimit) as unknown) as Region[]
+          }
           popupIcon={<span />} // adding an empty span removes default MUI arrow icon
           renderInput={params => (
             <div style={{ display: 'flex', alignItems: 'center' }}>
