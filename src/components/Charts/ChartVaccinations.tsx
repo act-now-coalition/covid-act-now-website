@@ -217,9 +217,9 @@ const VaccinationLines: React.FC<{
             {seriesList.map(({ label, data, type, params }) => (
               /* Create separate lines for capped and un-capped data points.
               Capped data will have a dashed line */
-              <Group>
+              <Group key={`series-chart-${label}`}>
                 <ChartSeries
-                  key={`series-chart-${label}`}
+                  key={`series-chart-${label}-uncapped`}
                   data={data.filter(d => d.y < VACCINATION_PERCENTAGE_CAP)}
                   x={getXPosition}
                   y={getYPosition}
@@ -230,7 +230,7 @@ const VaccinationLines: React.FC<{
                   params={params}
                 />
                 <ChartSeries
-                  key={`series-chart-${label}`}
+                  key={`series-chart-${label}-capped`}
                   data={data.filter(d => d.y >= VACCINATION_PERCENTAGE_CAP)}
                   x={getXPosition}
                   y={getYPosition}
