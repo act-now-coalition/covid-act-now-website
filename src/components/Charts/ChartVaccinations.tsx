@@ -215,8 +215,8 @@ const VaccinationLines: React.FC<{
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
-              // Create separate lines for capped and un-capped data points.
-              // Capped data will have a dashed line
+              /* Create separate lines for capped and un-capped data points.
+              Capped data will have a dashed line */
               <Group>
                 <ChartSeries
                   key={`series-chart-${label}`}
