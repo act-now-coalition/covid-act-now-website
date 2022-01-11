@@ -238,7 +238,7 @@ const VaccinationLines: React.FC<{
                   yMax={innerHeight}
                   barWidth={0}
                   barOpacity={1}
-                  params={{ ...params, ...{ strokeDasharray: '1, 6' } }}
+                  params={{ ...params, strokeDasharray: '1, 6' }}
                 />
               </Group>
             ))}
