@@ -30,6 +30,10 @@ import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
 
 const getY = (d: Column) => d.y;
 
+/* Vaccination data from the backend is capped at 95% for data quality reasons.  
+We update the tooltip and use a dashed line for all capped data. */
+const VACCINATION_PERCENTAGE_CAP = 0.95;
+
 interface LabelInfo {
   x: number;
   y: number;
@@ -68,12 +72,14 @@ const VaccinesTooltip: React.FC<{
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
+  const isCapped = (pointInitiated?.y ?? 0) >= VACCINATION_PERCENTAGE_CAP;
 
   return pointInitiated ? (
     <Tooltip
       width={'170px'}
       top={top(pointInitiated)}
       left={left(pointCompleted ? pointCompleted : pointInitiated)}
+      subtext={isCapped ? 'Data capped at 95%' : undefined}
       title={formatTooltipColumnDate(pointInitiated)}
     >
       <Styles.TooltipLine>
@@ -209,17 +215,32 @@ const VaccinationLines: React.FC<{
           </Styles.Axis>
           <RectClipGroup width={innerWidth} height={innerHeight + 2}>
             {seriesList.map(({ label, data, type, params }) => (
-              <ChartSeries
-                key={`series-chart-${label}`}
-                data={data}
-                x={getXPosition}
-                y={getYPosition}
-                type={type}
-                yMax={innerHeight}
-                barWidth={0}
-                barOpacity={1}
-                params={params}
-              />
+              /* Create separate lines for capped and un-capped data points.
+              Capped data will have a dashed line */
+              <Group key={`series-chart-${label}`}>
+                <ChartSeries
+                  key={`series-chart-${label}-uncapped`}
+                  data={data.filter(d => d.y < VACCINATION_PERCENTAGE_CAP)}
+                  x={getXPosition}
+                  y={getYPosition}
+                  type={type}
+                  yMax={innerHeight}
+                  barWidth={0}
+                  barOpacity={1}
+                  params={params}
+                />
+                <ChartSeries
+                  key={`series-chart-${label}-capped`}
+                  data={data.filter(d => d.y >= VACCINATION_PERCENTAGE_CAP)}
+                  x={getXPosition}
+                  y={getYPosition}
+                  type={type}
+                  yMax={innerHeight}
+                  barWidth={0}
+                  barOpacity={1}
+                  params={{ ...params, strokeDasharray: '1, 6' }}
+                />
+              </Group>
             ))}
           </RectClipGroup>
           {/* Current Value Labels */}
