@@ -14,12 +14,6 @@ function palette(props: any) {
   return props.theme.palette.chart;
 }
 
-/** By default make line charts solid,
- * If a value is provided, use that instead.*/
-function getStrokeDashType(props: any) {
-  return props.strokeDashArray || 'none';
-}
-
 export const Header = styled.div`
   margin-bottom: ${theme.spacing(2)}px;
 `;
