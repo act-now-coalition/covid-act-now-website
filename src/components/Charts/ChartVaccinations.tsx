@@ -72,7 +72,7 @@ const VaccinesTooltip: React.FC<{
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
-  const isCapped = pointInitiated?.y >= VACCINATION_PERCENTAGE_CAP ?? false;
+  const isCapped = (pointInitiated?.y ?? 0) >= VACCINATION_PERCENTAGE_CAP;
 
   return pointInitiated ? (
     <Tooltip
