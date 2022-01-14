@@ -31,13 +31,20 @@ interface RegionOverride {
   disclaimer?: Markdown;
 }
 
-/** Looks for any override applied to the specified region + metric and returns it. */
+/**
+ * Looks for an override (without start / end dates) applied to the specified
+ * region + metric and returns it.
+ */
 export function getRegionMetricOverride(
   region: Region,
   metric: Metric,
 ): RegionOverride | undefined {
   for (const override of getOverridesForRegion(region)) {
-    if (metric === getMetricForOverride(override)) {
+    if (
+      metric === getMetricForOverride(override) &&
+      !override.start_date &&
+      !override.end_date
+    ) {
       return override;
     }
   }
