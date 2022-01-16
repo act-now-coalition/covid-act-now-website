@@ -315,6 +315,27 @@
     }
   },
   {
+    "name": "metrics.vaccinationsAdditionalDoseRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 48,
+      "totalStates": 53,
+      "statesAvailable": 48
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 2212,
+      "totalStates": 53,
+      "statesAvailable": 38
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 249,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
     "name": "actuals.cases",
     "state": {
       "totalRegions": 53,
@@ -562,6 +583,27 @@
     "metro": {
       "totalRegions": 392,
       "regionsAvailable": 363,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.vaccinationsAdditionalDose",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 48,
+      "totalStates": 53,
+      "statesAvailable": 48
+    },
+    "county": {
+      "totalRegions": 3222,
+      "regionsAvailable": 2212,
+      "totalStates": 53,
+      "statesAvailable": 38
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 249,
       "totalStates": 0,
       "statesAvailable": 0
     }
