@@ -192,15 +192,6 @@ export default function HomePage() {
               infoLink="/covid-risk-levels-metrics"
             />
 
-            <HomePageBlock>
-              <CompareMain
-                locationsViewable={8}
-                vaccinesFirst={compareShowVaccinationsFirst}
-                vulnerabilityFirst={compareShowVulnerabilityFirst}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
-              />
-            </HomePageBlock>
             <HomePageBlock
               ref={exploreSectionRef}
               id="explore-hospitalizations"
@@ -213,7 +204,15 @@ export default function HomePage() {
                 nationalSummary={<NationalText />}
               />
             </HomePageBlock>
-            <Announcements />
+            <HomePageBlock>
+              <CompareMain
+                locationsViewable={8}
+                vaccinesFirst={compareShowVaccinationsFirst}
+                vulnerabilityFirst={compareShowVulnerabilityFirst}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
+              />
+            </HomePageBlock>
             <PartnersSection />
           </Content>
           <div ref={shareBlockRef} id="alert_signup">
