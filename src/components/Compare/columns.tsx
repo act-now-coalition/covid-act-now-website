@@ -19,6 +19,7 @@ const UNKNOWN_VALUE_TEXT = '---';
 
 // Arbitrarily start non-Metric columns at 100.
 const CCVI_COLUMN_ID = 100;
+const HOSPITALIZATIONS_DENSITY_ID = 101;
 
 /**
  * Represents a column in the compare table (e.g. for the case density metric or CCVI).
@@ -163,6 +164,38 @@ class VaccinationsColumn extends MetricColumn {
   }
 }
 
+class HospitalizationsDensityColumn implements ColumnDefinition {
+  columnId = HOSPITALIZATIONS_DENSITY_ID;
+
+  name = 'Hospitalizations per 100k';
+
+  desiredWidthPercent = 14;
+  // Make it wide enough so progress bar doesn't look squashed on mobile.
+  minWidthPx = 130;
+
+  getValue(row: SummaryForCompare): number | null {
+    return row.metricsInfo.hd;
+  }
+
+  render(row: SummaryForCompare): React.ReactNode {
+    const hd = row.metricsInfo.hd;
+    let formattedValue = UNKNOWN_VALUE_TEXT;
+    if (hd !== null) {
+      formattedValue = hd.toFixed(1);
+    }
+
+    return (
+      <DataCellValue
+        $valueUnknown={hd === null}
+        $textAlign="left"
+        $fontSize="14px"
+      >
+        {formattedValue}
+      </DataCellValue>
+    );
+  }
+}
+
 // All of the compare table columns we use.
 const caseDensityColumn = new MetricColumn(Metric.CASE_DENSITY);
 const caseGrowthRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
@@ -170,15 +203,15 @@ const positiveTestsColumn = new MetricColumn(Metric.POSITIVE_TESTS);
 const vaccinationsColumn = new VaccinationsColumn();
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ccviColumn = new CcviColumn();
-const hospitalUsageColumn = new MetricColumn(Metric.HOSPITAL_USAGE);
+const hospitalizationsDensityColumn = new HospitalizationsDensityColumn();
 
 /** Ordered array of columns. */
 export const orderedColumns = [
   caseDensityColumn,
   caseGrowthRateColumn,
   positiveTestsColumn,
+  hospitalizationsDensityColumn,
   vaccinationsColumn,
-  hospitalUsageColumn,
 ];
 
 /** Ordered array of columns but with vaccinations first. */

@@ -108,6 +108,10 @@ export interface VaccinationsInfo {
   ratioDosesAdministered: number | null;
 }
 
+export interface HospitalizationInfo {
+  hospitalizationsDensity: number | null;
+}
+
 /**
  * We use use an estimated case fatality ratio of 1 % with lower and upper bounds
  * of 0.5% and 1.5% respectively, used to calculate case density by deaths (main
@@ -132,6 +136,7 @@ export class Projection {
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
   readonly vaccinationsInfo: VaccinationsInfo | null;
+  readonly hospitalizationInfo: HospitalizationInfo | null;
 
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
@@ -216,6 +221,7 @@ export class Projection {
       row => row && row.testPositivityRatio,
     );
 
+    this.hospitalizationInfo = this.getHospitalizationInfo();
     this.icuCapacityInfo = this.getIcuCapacityInfo(
       metrics,
       metricsTimeseries,
@@ -325,6 +331,22 @@ export class Projection {
       return null;
     }
     return getPercentChange(firstVal, lastVal);
+  }
+
+  private getHospitalizationInfo(): HospitalizationInfo | null {
+    const latestDatapoint = this.smoothedHospitalizations[
+      this.smoothedHospitalizations.length - 1
+    ];
+    if (!latestDatapoint) {
+      return null;
+    }
+
+    const hospitalizationsDensity =
+      latestDatapoint / (this.totalPopulation / 100_000);
+
+    return {
+      hospitalizationsDensity,
+    };
   }
 
   private getIcuCapacityInfo(

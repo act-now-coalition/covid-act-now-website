@@ -76,11 +76,14 @@ export class Projections {
 
     const vaccinationsCompleted =
       this.primary.vaccinationsInfo?.ratioVaccinated ?? null;
+    const hospitalizationsDensity =
+      this.primary.hospitalizationInfo?.hospitalizationsDensity ?? null;
     return {
       level: this.getAlarmLevel(),
       metrics,
       ccvi,
       vc: vaccinationsCompleted,
+      hd: hospitalizationsDensity,
     };
   }
 
