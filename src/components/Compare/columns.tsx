@@ -168,7 +168,9 @@ const caseDensityColumn = new MetricColumn(Metric.CASE_DENSITY);
 const caseGrowthRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
 const positiveTestsColumn = new MetricColumn(Metric.POSITIVE_TESTS);
 const vaccinationsColumn = new VaccinationsColumn();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ccviColumn = new CcviColumn();
+const hospitalUsageColumn = new MetricColumn(Metric.HOSPITAL_USAGE);
 
 /** Ordered array of columns. */
 export const orderedColumns = [
@@ -176,16 +178,11 @@ export const orderedColumns = [
   caseGrowthRateColumn,
   positiveTestsColumn,
   vaccinationsColumn,
-  ccviColumn,
+  hospitalUsageColumn,
 ];
 
 /** Ordered array of columns but with vaccinations first. */
 export const orderedColumnsVaccineFirst = [
   vaccinationsColumn,
   ...orderedColumns.filter(c => c !== vaccinationsColumn),
-];
-
-export const orderedColumnsVulnerabilityFirst = [
-  ccviColumn,
-  ...orderedColumns.filter(c => c !== ccviColumn),
 ];
