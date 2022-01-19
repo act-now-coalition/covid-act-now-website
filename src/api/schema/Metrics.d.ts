@@ -4,8 +4,6 @@
  * DO NOT MODIFY IT BY HAND. Run 'yarn update-api-types' to regenerate.
  */
 
-import { Vaccinationsadditionaldoseratio1 } from './AggregateRegionSummaryWithTimeseries';
-
 /**
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
