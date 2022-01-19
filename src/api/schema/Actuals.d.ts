@@ -123,6 +123,12 @@ export type Vaccinationsinitiated = number | null;
  *
  */
 export type Vaccinationscompleted = number | null;
+/**
+ *
+ * Number of people vaccinated with an additional dose.
+ *
+ */
+export type Vaccinationsadditionaldose = number | null;
 
 /**
  * Known actuals data.
@@ -140,6 +146,7 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
 }
 /**
  * Base model for API output.

@@ -57,6 +57,7 @@ export type DatasetId =
   | 'testPositiveRate'
   | 'vaccinations'
   | 'vaccinationsCompleted'
+  | 'vaccinationsAdditionalDose'
   | 'caseDensityByCases'
   | 'caseDensityRange'
   | 'smoothedDailyCases'
@@ -95,6 +96,7 @@ export interface ICUCapacityInfo {
 }
 
 export interface VaccinationsInfo {
+  ratioAdditionalDoseSeries: Array<number | null>;
   ratioCompletedSeries: Array<number | null>;
   ratioInitiatedSeries: Array<number | null>;
 
@@ -103,6 +105,9 @@ export interface VaccinationsInfo {
 
   peopleVaccinated: number;
   ratioVaccinated: number;
+
+  peopleAdditionalDose: number;
+  ratioAdditionalDose: number;
 
   dosesDistributed: number | null;
   ratioDosesAdministered: number | null;
@@ -152,6 +157,7 @@ export class Projection {
   private readonly testPositiveRate: Array<number | null>;
   private readonly vaccinations: Array<number | null>;
   private readonly vaccinationsCompleted: Array<number | null>;
+  private readonly vaccinationsAdditionalDose: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
@@ -234,6 +240,9 @@ export class Projection {
       this.dates.map(date => null);
     this.vaccinationsCompleted =
       this.vaccinationsInfo?.ratioCompletedSeries ||
+      this.dates.map(date => null);
+    this.vaccinationsAdditionalDose =
+      this.vaccinationsInfo?.ratioAdditionalDoseSeries ||
       this.dates.map(date => null);
 
     this.caseDensityByCases = metricsTimeseries.map(
@@ -391,17 +400,24 @@ export class Projection {
   ): VaccinationsInfo | null {
     const ratioInitiated = metrics.vaccinationsInitiatedRatio;
     const ratioVaccinated = metrics.vaccinationsCompletedRatio;
+    const ratioAdditionalDose = metrics.vaccinationsAdditionalDoseRatio;
 
+    // We shouldn't blank the vaccination data if booster data is missing--find a way to circumvent this
     if (
       ratioInitiated === null ||
       ratioInitiated === undefined ||
       ratioVaccinated === null ||
       ratioVaccinated === undefined ||
+      ratioAdditionalDose === null ||
+      ratioAdditionalDose === undefined ||
       this.isMetricDisabled(Metric.VACCINATIONS)
     ) {
       return null;
     }
 
+    const peopleAdditionalDose =
+      actuals.vaccinationsAdditionalDose ??
+      ratioAdditionalDose * this.totalPopulation;
     const peopleVaccinated =
       actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
     const peopleInitiated =
@@ -416,6 +432,9 @@ export class Projection {
       );
     }
 
+    const vaccinationsAdditionalDoseSeries = metricsTimeseries.map(
+      row => row?.vaccinationsAdditionalDoseRatio || null,
+    );
     const vaccinationsCompletedSeries = metricsTimeseries.map(
       row => row?.vaccinationsCompletedRatio || null,
     );
@@ -444,10 +463,13 @@ export class Projection {
     return {
       peopleVaccinated,
       peopleInitiated,
+      peopleAdditionalDose,
       ratioInitiated,
       ratioVaccinated,
+      ratioAdditionalDose,
       ratioCompletedSeries: vaccinationsCompletedSeries,
       ratioInitiatedSeries: vaccinationsInitiatedSeries,
+      ratioAdditionalDoseSeries: vaccinationsAdditionalDoseSeries,
       dosesDistributed,
       ratioDosesAdministered,
     };

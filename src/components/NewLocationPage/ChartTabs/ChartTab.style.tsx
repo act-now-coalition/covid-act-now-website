@@ -40,6 +40,7 @@ export const Tab = styled(MuiTab).attrs(props => ({
 }))`
   line-height: 1;
   text-align: left;
+  max-width: 372px; // (372 = 12*31 idk if we use a grid system) not ideal to change this :/
   padding: 6px 0;
   margin-right: 1.5rem;
   opacity: 1;

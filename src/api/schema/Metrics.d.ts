@@ -4,6 +4,8 @@
  * DO NOT MODIFY IT BY HAND. Run 'yarn update-api-types' to regenerate.
  */
 
+import { Vaccinationsadditionaldoseratio1 } from './AggregateRegionSummaryWithTimeseries';
+
 /**
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
@@ -66,6 +68,10 @@ export type Vaccinationsinitiatedratio = number | null;
  * Ratio of population that has completed vaccination.
  */
 export type Vaccinationscompletedratio = number | null;
+/**
+ * Ratio of population that have received an additional vaccine dose.
+ */
+export type Vaccinationsadditionaldoseratio = number | null;
 
 /**
  * Calculated metrics data based on known actuals.
@@ -82,6 +88,7 @@ export interface Metrics {
   icuCapacityRatio: Icucapacityratio;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.

@@ -124,6 +124,12 @@ export type Vaccinationsinitiated = number | null;
  */
 export type Vaccinationscompleted = number | null;
 /**
+ *
+ * Number of people vaccinated with an additional dose.
+ *
+ */
+export type Vaccinationsadditionaldose = number | null;
+/**
  * Date of timeseries data point
  */
 export type Date = string;
@@ -144,6 +150,7 @@ export interface ActualsTimeseriesRow {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
   date: Date;
 }
 /**

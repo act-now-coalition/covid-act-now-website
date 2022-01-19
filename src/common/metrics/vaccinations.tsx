@@ -68,6 +68,8 @@ function renderStatus(projections: Projections): React.ReactElement {
   const percentInitiated = formatPercent(info.ratioInitiated, 1);
   const peopleVaccinated = formatInteger(info.peopleVaccinated);
   const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
+  const peopleAdditionalDose = formatInteger(info.peopleAdditionalDose);
+  const percentAdditionalDose = formatPercent(info.ratioAdditionalDose, 1);
 
   const cappedVaccinatedCopy =
     info.ratioInitiated >= VACCINATION_PERCENTAGE_CAP ? (
@@ -82,10 +84,12 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
-      received at least one dose and {peopleVaccinated} ({percentVaccinated})
-      are fully vaccinated. Anybody who is at least 5 years old is eligible to
-      be vaccinated. Fewer than 0.001% of people who have received a dose
-      experienced a severe adverse reaction. {cappedVaccinatedCopy}
+      received at least one dose, {peopleVaccinated} ({percentVaccinated}) are
+      fully vaccinated, and {peopleAdditionalDose} ({percentAdditionalDose})
+      have received a booster (or additional) shot. Anybody who is at least 5
+      years old is eligible to be vaccinated. Fewer than 0.001% of people who
+      have received a dose experienced a severe adverse reaction.{' '}
+      {cappedVaccinatedCopy}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
     </Fragment>
   );

@@ -160,6 +160,12 @@ export type Vaccinationsinitiated = number | null;
  */
 export type Vaccinationscompleted = number | null;
 /**
+ *
+ * Number of people vaccinated with an additional dose.
+ *
+ */
+export type Vaccinationsadditionaldose = number | null;
+/**
  * Metrics for given day
  */
 export type Metrics1 = Metrics;
@@ -226,6 +232,10 @@ export type Vaccinationsinitiatedratio = number | null;
  */
 export type Vaccinationscompletedratio = number | null;
 /**
+ * Ratio of population that have received an additional vaccine dose.
+ */
+export type Vaccinationsadditionaldoseratio = number | null;
+/**
  * Risk Levels for given day
  */
 export type Risklevels = RiskLevelsRow;
@@ -278,6 +288,7 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
 }
 /**
  * Base model for API output.
@@ -303,6 +314,7 @@ export interface Metrics {
   icuCapacityRatio: Icucapacityratio;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.

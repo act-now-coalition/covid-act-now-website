@@ -108,6 +108,10 @@ export type Vaccinationsinitiatedratio = number | null;
  */
 export type Vaccinationscompletedratio = number | null;
 /**
+ * Ratio of population that have received an additional vaccine dose.
+ */
+export type Vaccinationsadditionaldoseratio = number | null;
+/**
  * Risk levels for region.
  */
 export type Risklevels = RiskLevels;
@@ -243,6 +247,12 @@ export type Vaccinationsinitiated = number | null;
  */
 export type Vaccinationscompleted = number | null;
 /**
+ *
+ * Number of people vaccinated with an additional dose.
+ *
+ */
+export type Vaccinationsadditionaldose = number | null;
+/**
  * Annotations for cases
  */
 export type Cases1 = FieldAnnotations;
@@ -337,6 +347,10 @@ export type Vaccinationsinitiated1 = FieldAnnotations;
  */
 export type Vaccinationscompleted1 = FieldAnnotations;
 /**
+ * Annotations for vaccinationsAdditionalDose
+ */
+export type Vaccinationsadditionaldose1 = FieldAnnotations;
+/**
  * Annotations for testPositivityRatio
  */
 export type Testpositivityratio1 = FieldAnnotations;
@@ -372,6 +386,10 @@ export type Vaccinationsinitiatedratio1 = FieldAnnotations;
  * Annotations for vaccinationsCompletedRatio
  */
 export type Vaccinationscompletedratio1 = FieldAnnotations;
+/**
+ * Annotations for vaccinationsAdditionalDoseRatio
+ */
+export type Vaccinationsadditionaldoseratio1 = FieldAnnotations;
 /**
  * Date of latest data
  */
@@ -423,6 +441,7 @@ export interface Metrics {
   icuCapacityRatio: Icucapacityratio;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
@@ -497,6 +516,7 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
 }
 /**
  * Base model for API output.
@@ -523,6 +543,7 @@ export interface Annotations {
   vaccinesDistributed?: Vaccinesdistributed1;
   vaccinationsInitiated?: Vaccinationsinitiated1;
   vaccinationsCompleted?: Vaccinationscompleted1;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose1;
   testPositivityRatio?: Testpositivityratio1;
   caseDensity?: Casedensity1;
   contactTracerCapacityRatio?: Contacttracercapacityratio1;
@@ -532,6 +553,7 @@ export interface Annotations {
   icuCapacityRatio?: Icucapacityratio1;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio1;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio1;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio1;
 }
 /**
  * Annotations associated with one field.

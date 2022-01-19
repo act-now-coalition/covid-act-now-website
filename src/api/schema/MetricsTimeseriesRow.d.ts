@@ -67,6 +67,10 @@ export type Vaccinationsinitiatedratio = number | null;
  */
 export type Vaccinationscompletedratio = number | null;
 /**
+ * Ratio of population that have received an additional vaccine dose.
+ */
+export type Vaccinationsadditionaldoseratio = number | null;
+/**
  * Date of timeseries data point
  */
 export type Date = string;
@@ -86,6 +90,7 @@ export interface MetricsTimeseriesRow {
   icuCapacityRatio: Icucapacityratio;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
   date: Date;
 }
 /**
