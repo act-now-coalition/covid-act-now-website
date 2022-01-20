@@ -8,7 +8,6 @@ import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import Announcements from './Announcements';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
@@ -63,11 +62,6 @@ export default function HomePage() {
     [largestMetroFips, userRegions],
   );
   const initialFipsListForExplore = exploreGeoLocations;
-
-  // TODO(Chelsi) - i think we can delete this:
-  // Location hash is uniquely set from vaccination banner button click
-  const compareShowVulnerabilityFirst =
-    location.hash === '#compare-vulnerabilities';
 
   useEffect(() => {
     if (location.pathname.includes('alert_signup')) {
@@ -192,15 +186,6 @@ export default function HomePage() {
               infoLink="/covid-risk-levels-metrics"
             />
 
-            <HomePageBlock>
-              <CompareMain
-                locationsViewable={8}
-                vaccinesFirst={compareShowVaccinationsFirst}
-                vulnerabilityFirst={compareShowVulnerabilityFirst}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
-              />
-            </HomePageBlock>
             <HomePageBlock
               ref={exploreSectionRef}
               id="explore-hospitalizations"
@@ -213,7 +198,14 @@ export default function HomePage() {
                 nationalSummary={<NationalText />}
               />
             </HomePageBlock>
-            <Announcements />
+            <HomePageBlock>
+              <CompareMain
+                locationsViewable={8}
+                vaccinesFirst={compareShowVaccinationsFirst}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
+              />
+            </HomePageBlock>
             <PartnersSection />
           </Content>
           <div ref={shareBlockRef} id="alert_signup">

@@ -28,11 +28,7 @@ import ShareButtonGroup from 'components/ShareButtons/ShareButtonGroup';
 import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { Region, MetroArea, State } from 'common/regions';
-import {
-  orderedColumns,
-  orderedColumnsVaccineFirst,
-  orderedColumnsVulnerabilityFirst,
-} from './columns';
+import { orderedColumns, orderedColumnsVaccineFirst } from './columns';
 import { EventCategory } from 'components/Analytics/utils';
 import ExpandableContainer from 'components/ExpandableContainer';
 import { ShareBlock } from 'components/Footer/Footer.style';
@@ -66,7 +62,6 @@ const CompareTable = (props: {
   homepageSliderValue: HomepageLocationScope;
   region?: Region;
   vaccinesFirst?: boolean;
-  vulnerabilityFirst?: boolean;
 }) => {
   const {
     currentCounty,
@@ -83,7 +78,6 @@ const CompareTable = (props: {
     homepageSliderValue,
     region,
     vaccinesFirst,
-    vulnerabilityFirst,
   } = props;
 
   const currentCountyFips = currentCounty ? currentCounty.region.fipsCode : 0;
@@ -104,7 +98,6 @@ const CompareTable = (props: {
   }
 
   let columns = vaccinesFirst ? orderedColumnsVaccineFirst : orderedColumns;
-  columns = vulnerabilityFirst ? orderedColumnsVulnerabilityFirst : columns;
 
   const getPopulation = (location: SummaryForCompare) =>
     location.region.population;

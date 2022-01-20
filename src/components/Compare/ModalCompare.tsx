@@ -34,7 +34,6 @@ interface ModalCompareProps {
   homepageSliderValue: HomepageLocationScope;
   region?: Region;
   vaccinesFirst?: boolean;
-  vulnerabilityFirst?: boolean;
 }
 
 const ModalCompare = (props: ModalCompareProps) => {
@@ -102,7 +101,6 @@ const ModalCompare = (props: ModalCompareProps) => {
         homepageSliderValue={props.homepageSliderValue}
         region={props.region}
         vaccinesFirst={props.vaccinesFirst}
-        vulnerabilityFirst={props.vulnerabilityFirst}
       />
     </Fragment>
   );

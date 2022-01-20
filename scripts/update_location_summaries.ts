@@ -1,7 +1,6 @@
 // You can run via `yarn update-location-summaries`
 import fs from 'fs-extra';
 import path from 'path';
-import _ from 'lodash';
 import {
   fetchAllStateProjections,
   fetchAllMetroProjections,
