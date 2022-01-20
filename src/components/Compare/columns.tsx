@@ -85,6 +85,7 @@ class MetricColumn implements ColumnDefinition {
 }
 
 /** Represents the CCVI column in the compare table. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class CcviColumn implements ColumnDefinition {
   columnId = CCVI_COLUMN_ID;
 
@@ -201,8 +202,6 @@ const caseDensityColumn = new MetricColumn(Metric.CASE_DENSITY);
 const caseGrowthRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
 const positiveTestsColumn = new MetricColumn(Metric.POSITIVE_TESTS);
 const vaccinationsColumn = new VaccinationsColumn();
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ccviColumn = new CcviColumn();
 const hospitalizationsDensityColumn = new HospitalizationsDensityColumn();
 
 /** Ordered array of columns. */

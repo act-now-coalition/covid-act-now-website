@@ -334,9 +334,7 @@ export class Projection {
   }
 
   private getHospitalizationInfo(): HospitalizationInfo | null {
-    const latestDatapoint = this.smoothedHospitalizations[
-      this.smoothedHospitalizations.length - 1
-    ];
+    const latestDatapoint = lastValue(this.smoothedHospitalizations);
     if (!latestDatapoint) {
       return null;
     }
