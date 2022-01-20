@@ -129,19 +129,19 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3079,
+      "regionsAvailable": 3050,
       "totalStates": 53,
       "statesAvailable": 50
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 358,
+      "regionsAvailable": 349,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -219,7 +219,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2986,
+      "regionsAvailable": 3010,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -240,7 +240,7 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 2986,
+      "regionsAvailable": 3010,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -282,13 +282,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3043,
+      "regionsAvailable": 3042,
       "totalStates": 53,
       "statesAvailable": 48
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 362,
+      "regionsAvailable": 361,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -303,13 +303,13 @@
     },
     "county": {
       "totalRegions": 3222,
-      "regionsAvailable": 3042,
+      "regionsAvailable": 3041,
       "totalStates": 53,
       "statesAvailable": 48
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 362,
+      "regionsAvailable": 361,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -381,9 +381,9 @@
     "name": "actuals.positiveTests",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3222,
@@ -402,9 +402,9 @@
     "name": "actuals.negativeTests",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3222,
