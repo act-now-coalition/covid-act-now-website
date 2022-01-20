@@ -41,56 +41,36 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const GridContainer = styled.div<{ showNote: boolean }>`
+export const GridContainer = styled.div`
   display: grid;
   max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
   row-gap: 1.25rem;
-  grid-template-areas: ${({ showNote }) =>
-    showNote
-      ? `'header' 'overview' 'spark' 'map' 'note' 'alerts'`
-      : `'header' 'overview' 'spark' 'map' 'alerts'`};
+  grid-template-areas: 'header' 'overview' 'spark' 'map' 'alerts';
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
     grid-gap: 2rem;
-    grid-template-areas: ${({ showNote }) =>
-      showNote
-        ? `'header header'
-    'overview overview'
-    'spark map'
-    'alerts alerts'
-    'note note'`
-        : `'header header'
-    'overview overview'
-    'spark map'
-    'alerts alerts'`};
+    grid-template-areas:
+      'header header'
+      'overview overview'
+      'spark map'
+      'alerts alerts';
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    grid-template-areas: ${({ showNote }) =>
-      showNote
-        ? `'header header'
+    grid-template-areas:
+      'header header'
       'overview overview'
       'spark map'
-      'alerts map'
-      'note note'`
-        : `'header header'
-      'overview overview'
-      'spark map'
-      'alerts map'`};
+      'alerts map';
   }
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: ${({ showNote }) =>
-      showNote
-        ? `'header header'
+    grid-template-areas:
+      'header header'
       'overview overview'
-      'spark alerts'
-      'note note'`
-        : `'header header'
-      'overview overview'
-      'spark alerts'`};
+      'spark alerts';
     margin-right: 2rem;
   }
 `;
