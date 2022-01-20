@@ -63,11 +63,6 @@ export default function HomePage() {
   );
   const initialFipsListForExplore = exploreGeoLocations;
 
-  // TODO(Chelsi) - i think we can delete this:
-  // Location hash is uniquely set from vaccination banner button click
-  const compareShowVulnerabilityFirst =
-    location.hash === '#compare-vulnerabilities';
-
   useEffect(() => {
     if (location.pathname.includes('alert_signup')) {
       window.location.href = '#alert_signup';
@@ -207,7 +202,6 @@ export default function HomePage() {
               <CompareMain
                 locationsViewable={8}
                 vaccinesFirst={compareShowVaccinationsFirst}
-                vulnerabilityFirst={compareShowVulnerabilityFirst}
                 showModal={showCompareModal}
                 setShowModal={setShowCompareModal}
               />
