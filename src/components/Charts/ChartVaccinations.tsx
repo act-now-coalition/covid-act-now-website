@@ -78,7 +78,6 @@ const VaccinesTooltip: React.FC<{
   const isCapped = (pointInitiated?.y ?? 0) >= VACCINATION_PERCENTAGE_CAP;
 
   return pointInitiated ? (
-    // Might need to add additional dose to properly set placement of tooltip
     <Tooltip
       width={'170px'}
       top={top(pointInitiated)}
