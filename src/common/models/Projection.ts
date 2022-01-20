@@ -402,7 +402,6 @@ export class Projection {
     const ratioVaccinated = metrics.vaccinationsCompletedRatio;
     const ratioAdditionalDose = metrics.vaccinationsAdditionalDoseRatio;
 
-    // We shouldn't blank the vaccination data if booster data is missing--find a way to circumvent this
     if (
       ratioInitiated === null ||
       ratioInitiated === undefined ||
