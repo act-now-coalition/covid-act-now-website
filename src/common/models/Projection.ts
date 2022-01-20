@@ -106,8 +106,8 @@ export interface VaccinationsInfo {
   peopleVaccinated: number;
   ratioVaccinated: number;
 
-  peopleAdditionalDose: number;
-  ratioAdditionalDose: number;
+  peopleAdditionalDose: number | null;
+  ratioAdditionalDose: number | null;
 
   dosesDistributed: number | null;
   ratioDosesAdministered: number | null;
@@ -408,16 +408,15 @@ export class Projection {
       ratioInitiated === undefined ||
       ratioVaccinated === null ||
       ratioVaccinated === undefined ||
-      ratioAdditionalDose === null ||
-      ratioAdditionalDose === undefined ||
       this.isMetricDisabled(Metric.VACCINATIONS)
     ) {
       return null;
     }
 
-    const peopleAdditionalDose =
-      actuals.vaccinationsAdditionalDose ??
-      ratioAdditionalDose * this.totalPopulation;
+    let peopleAdditionalDose = actuals.vaccinationsAdditionalDose ?? null;
+    if (peopleAdditionalDose != null && ratioAdditionalDose != null) {
+      peopleAdditionalDose = ratioAdditionalDose * this.totalPopulation;
+    }
     const peopleVaccinated =
       actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
     const peopleInitiated =
@@ -466,7 +465,7 @@ export class Projection {
       peopleAdditionalDose,
       ratioInitiated,
       ratioVaccinated,
-      ratioAdditionalDose,
+      ratioAdditionalDose: ratioAdditionalDose ?? null,
       ratioCompletedSeries: vaccinationsCompletedSeries,
       ratioInitiatedSeries: vaccinationsInitiatedSeries,
       ratioAdditionalDoseSeries: vaccinationsAdditionalDoseSeries,

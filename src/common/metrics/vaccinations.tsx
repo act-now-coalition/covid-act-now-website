@@ -68,8 +68,23 @@ function renderStatus(projections: Projections): React.ReactElement {
   const percentInitiated = formatPercent(info.ratioInitiated, 1);
   const peopleVaccinated = formatInteger(info.peopleVaccinated);
   const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
-  const peopleAdditionalDose = formatInteger(info.peopleAdditionalDose);
-  const percentAdditionalDose = formatPercent(info.ratioAdditionalDose, 1);
+  const peopleAdditionalDose = info.peopleAdditionalDose
+    ? formatInteger(info.peopleAdditionalDose)
+    : null;
+  const percentAdditionalDose = info.ratioAdditionalDose
+    ? formatPercent(info.ratioAdditionalDose, 1)
+    : null;
+
+  let additionalDoseText;
+  let ifNoAdditionalDoseAnd;
+  if (peopleAdditionalDose != null && percentAdditionalDose != null) {
+    additionalDoseText = `, and ${peopleAdditionalDose} (${percentAdditionalDose})
+    have received a booster (or additional) shot`;
+    ifNoAdditionalDoseAnd = ``;
+  } else {
+    additionalDoseText = ``;
+    ifNoAdditionalDoseAnd = ` and`;
+  }
 
   const cappedVaccinatedCopy =
     info.ratioInitiated >= VACCINATION_PERCENTAGE_CAP ? (
@@ -84,11 +99,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
-      received at least one dose, {peopleVaccinated} ({percentVaccinated}) are
-      fully vaccinated, and {peopleAdditionalDose} ({percentAdditionalDose})
-      have received a booster (or additional) shot. Anybody who is at least 5
-      years old is eligible to be vaccinated. Fewer than 0.001% of people who
-      have received a dose experienced a severe adverse reaction.{' '}
+      received at least one dose,{ifNoAdditionalDoseAnd} {peopleVaccinated} (
+      {percentVaccinated}) are fully vaccinated{additionalDoseText}. Anybody who
+      is at least 5 years old is eligible to be vaccinated. Fewer than 0.001% of
+      people who have received a dose experienced a severe adverse reaction.{' '}
       {cappedVaccinatedCopy}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
     </Fragment>
