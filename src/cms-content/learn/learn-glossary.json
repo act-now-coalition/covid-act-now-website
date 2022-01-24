@@ -147,6 +147,12 @@
       "category": "Treatment"
     },
     {
+      "term": "Endemic",
+      "termId": "endemic",
+      "definition": "An endemic disease is one that is always present at some baseline level in a particular place or population. An [epidemic](https://covidactnow.org/glossary#epidemic), in contrast, refers to an outbreak of disease. A global epidemic, like COVID, is referred to as a [pandemic](https://covidactnow.org/glossary#pandemic). Experts believe that the COVID pandemic may eventually become endemic. This would mean that we continue to have COVID transmission, but at much lower levels, leading to  fewer hospitalizations and deaths each year, as we now have from the flu. This would mean that the COVID virus may never disappear completely, but that enough people will become immune to it through infection and continued vaccination that the serious outbreaks we have experienced for the first two years of the pandemic will diminish or disappear.",
+      "category": "Disease science"
+    },
+    {
       "term": "Epidemic",
       "termId": "epidemic",
       "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which is an epidemic occurring over a wide geographic area, often across continents and even worldwide.",
