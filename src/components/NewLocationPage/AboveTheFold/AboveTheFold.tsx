@@ -1,5 +1,4 @@
 import React from 'react';
-import isNull from 'lodash/isNull';
 import {
   MainWrapper,
   HeaderContainer,
@@ -7,7 +6,6 @@ import {
   GridItemHeader,
   GridItemAlerts,
   GridItemMap,
-  GridItemNote,
   GridItemOverview,
   GridItemSparkLines,
   MapOutsideGrid,
@@ -16,7 +14,6 @@ import {
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
 import LocationOverview from '../LocationOverview';
-import VulnerabilityNote from '../NotesBlock/VulnerabilityNote';
 import GetAlertsBlock from '../GetAlertsBlock';
 import { CountyMap } from '../CountyMap';
 import HeaderButtons from '../HeaderButtons';
@@ -26,7 +23,6 @@ import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
 import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButton';
 import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
-import { hasVeryHighVulnerability } from '../NotesBlock/utils';
 
 interface AboveTheFoldProps {
   region: Region;
@@ -46,14 +42,10 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     onClickShare,
     onClickSparkLine,
   }) => {
-    const showVulnerabilityNote =
-      !isNull(locationSummary.ccvi) &&
-      hasVeryHighVulnerability(locationSummary.ccvi);
-
     return (
       <MainWrapper>
         <ContentContainer>
-          <GridContainer showNote={showVulnerabilityNote}>
+          <GridContainer>
             <GridItemHeader>
               <HeaderContainer>
                 <LocationName region={region} />
@@ -88,14 +80,6 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
             <GridItemMap>
               <CountyMap region={region} />
             </GridItemMap>
-            {showVulnerabilityNote && (
-              <GridItemNote>
-                <VulnerabilityNote
-                  ccviScore={locationSummary.ccvi}
-                  region={region}
-                />
-              </GridItemNote>
-            )}
           </GridContainer>
           <MapOutsideGrid>
             <CountyMap region={region} />
