@@ -109,7 +109,7 @@ function getVaccinationSeries(projection: Projection): Series[] {
     {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsCompleted')),
-      label: '2+ dose (or 1 shot series)',
+      label: '2+ doses or J&J',
       shortLabel: '2+ doses',
       tooltipLabel: '2+ doses',
       params: {

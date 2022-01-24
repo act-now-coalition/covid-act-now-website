@@ -37,7 +37,7 @@ const VaccinationChartTabs: React.FC<{
       iconColor: VACCINATIONS_COLOR_MAP.INITIATED,
     },
     {
-      metricName: '2+ Dose (or 1 shot series)',
+      metricName: '2+ doses or J&J',
       value: percentCompleted
         ? formatPercent(percentCompleted, 1)
         : nullValueString,
