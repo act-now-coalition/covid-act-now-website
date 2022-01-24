@@ -33,6 +33,12 @@
       "category": "Health and symptoms"
     },
     {
+      "term": "Booster",
+      "termId": "booster",
+      "definition": "Booster doses are given after a primary COVID vaccine series, such as the two dose Pfizer and Moderna vaccine or single dose J&J vaccine. They provide additional protection by boosting immunity for a longer period of time against the virus and can [protect specifically against variants](https://www.cdc.gov/mmwr/volumes/71/wr/mm7104e3.htm?s_cid=mm7104e3_x) of concern as they emerge.",
+      "category": "Treatment"
+    },
+    {
       "term": "Case density",
       "termId": "case-density",
       "definition": "Case density is a measure of the number of COVID cases divided by the number of people (per capita) in a given community. Case density can refer to new cases over, say, the last 14 days or it can refer to total cases since the onset of the pandemic. The word “density” means that the case counts are expressed as a per-capita value.",
@@ -173,7 +179,7 @@
     {
       "term": "Face mask",
       "termId": "face-mask",
-      "definition": "A face mask is used to prevent the spread of an [infection](https://covidactnow.org/glossary#infection) or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests wearing a mask can help protect you and those around you. Check the [CDC site](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) for the latest recommendations on when to wear a mask after you are fully vaccinated.\n\nCOVID can spread between people interacting in close proximity, even among those who are [asymptomatic](https://covidactnow.org/glossary#asymptomatic) or [presymptomatic](https://covidactnow.org/glossary/#presymptomatic-spread), so wearing a mask can give you an added layer of protection. The material used to make face masks can vary widely, but the [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that the public wear simple cloth face coverings in public to slow virus spread.",
+      "definition": "A face mask is used to prevent the spread of an [infection](https://covidactnow.org/glossary#infection) or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests wearing a mask can help protect you and those around you from contracting and spreading COVID. Check the [CDC site](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) for the latest recommendations on when to wear a mask after you are fully vaccinated.\n\nCOVID can spread between people interacting in close proximity, even among those who are [asymptomatic](https://covidactnow.org/glossary#asymptomatic) or [presymptomatic](https://covidactnow.org/glossary/#presymptomatic-spread), so wearing a mask can give you an added layer of protection. The material used to make face masks can vary widely, but the current [expert consensus](https://www.nytimes.com/article/covid-masks.html?action=click&state=default&region=hub&context=storyline_hub&module=styln-coronavirus&variant=show&pgtype=LegacyCollection) is that surgical masks, N95s, and KN95s provide the most protection.",
       "category": "Prevention and mitigation"
     },
     {
@@ -203,7 +209,7 @@
     {
       "term": "Fully vaccinated",
       "termId": "fully-vaccinated",
-      "definition": "People are considered fully vaccinated two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection and severe illness.",
+      "definition": "The waning efficacy of vaccinations over time and against new, more transmissible variants have created the need for additional [booster shots](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/booster-shot.html), especially for those who received the single dose J&J vaccine. However, as of January 2022, people are considered \"fully vaccinated\" after their primary vaccination series; two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection, severe illness and death",
       "category": "Prevention and mitigation"
     },
     {
@@ -365,7 +371,7 @@
     {
       "term": "Quarantine",
       "termId": "quarantine",
-      "definition": "Quarantine is used to slow the spread of COVID by keeping potentially [exposed](https://covidactnow.org/glossary#exposed) people away from others. Unvaccinated people who have been exposed to COVID should quarantine even if they appear healthy. Anyone who is exhibiting COVID symptoms, regardless of vaccination status, should quarantine for [14 days](https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/quarantine.html) and get tested.\n\nThis 14-day period comes from research on COVID’s [incubation period](https://covidactnow.org/glossary#incubation-period), which is the time between [infection](https://covidactnow.org/glossary#infection) and the onset of symptoms. A COVID patient can infect others during their entire incubation period, which is estimated to be between two and 14 days after exposure, but on average lasts for the first [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure.",
+      "definition": "Quarantine is a public health practice used to slow the spread of COVID by keeping potentially [exposed](https://covidactnow.org/glossary#exposed) people separated from others. People who have been exposed to COVID should quarantine even if they are not showing symptoms until they can confirm a negative test result. [Isolation](https://covidactnow.org/glossary#isolation) is a different public health practice which is used to prevent exposure by separating people with a *confirmed* and contagious illness from those who are not infected.",
       "category": "Prevention and mitigation"
     },
     {
@@ -427,6 +433,12 @@
       "termId": "serology-test",
       "definition": "A serology test, also known as an antibody test, is a type of COVID test. A serology test looks for [antibodies](https://covidactnow.org/glossary#antibodies) against COVID in the blood to determine whether someone has been infected in the past, regardless of whether the infected person presented with symptoms, as COVID can be [asymptomatic](https://covidactnow.org/glossary#asymptomatic).\n\nThis test does not identify whether a person is actively infected with COVID, in contrast to [PCR tests](https://covidactnow.org/glossary#pcr-test) and [antigen tests](https://covidactnow.org/glossary#antigen-test). Serology tests can be useful for tracking the spread of disease and understanding human [immunity](https://covidactnow.org/glossary#immunity) to the disease. The [CDC still encourages](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/faq.html) people who have had COVID in the past to get vaccinated, as it's possible, though rare, to get reinfected.",
       "category": "Testing"
+    },
+    {
+      "definition": "Seroprevalence refers to the number or percentage of people in a population who have [antibodies](https://covidactnow.org/glossary#antibodies) to a specific disease, in this case COVID. Estimating the seroprevalence of COVID in a population can tell us how many have already been infected.",
+      "term": "Seroprevalence",
+      "termId": "seroprevalence",
+      "category": "Disease science"
     },
     {
       "term": "Social distancing",
@@ -509,7 +521,7 @@
     {
       "term": "Variant",
       "termId": "variant",
-      "definition": "Variants are new versions of viruses that occur as the virus accumulates [mutations](https://covidactnow.org/glossary#mutation). Each time a [virus](https://covidactnow.org/glossary#virus) copies its genetic material in order to reproduce, there's a chance for an error or mutation to occur. Usually, mutations are random and have no significant impact on the virus’ behavior, leading the variant to die out. However, when a large number of helpful mutations changes the virus in a clinical or epidemiologically significant way, such as by making it more transmissible or more stable in its environment, the variant can become widespread. [See the CDC’s resource](https://www.cdc.gov/coronavirus/2019-ncov/transmission/variant.html) for more information on specific COVID variants and their impact on vaccines.",
+      "definition": "Variants are new versions of viruses that occur as the virus accumulates [mutations](https://covidactnow.org/glossary#mutation). Each time a [virus](https://covidactnow.org/glossary#virus) copies its genetic material in order to reproduce, there's a chance for an error or mutation to occur. Usually, mutations are random and have no significant impact on the virus’ behavior, leading the variant to die out. However, when a large number of helpful mutations changes the virus in a significant way, such as by making it more transmissible or more stable in its environment, the variant can become widespread. \n\nOver the course of the COVID pandemic, new variants have emerged across the globe. As of January 2022, the two primary variants of concern in the United States are the [Delta variant](https://www.cdc.gov/coronavirus/2019-ncov/variants/delta-variant.html#:~:text=Given%20new%20evidence%20on%20the,schools%2C%20regardless%20of%20vaccination%20status.) and the [Omicron variant](https://www.cdc.gov/coronavirus/2019-ncov/variants/omicron-variant.html). Within each variant, we see some changes in vaccine efficacy, transmissibility, and severity of symptoms. For example, experts have determined that the Omicron variant spreads more easily and may infect vaccinated individuals more easily than the original COVID strain. Staying up to date on vaccinations will help slow the spread of COVID, and therefore the rise of variants globally.",
       "category": "Disease science"
     },
     {
