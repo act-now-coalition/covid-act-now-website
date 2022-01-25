@@ -252,7 +252,7 @@ const Explore: React.FunctionComponent<{
     // (need to force the reset since the route doesnt change)
     useEffect(() => {
       setSelectedLocations(initialLocations);
-      setCurrentMetric(ExploreMetric.CASES);
+      setCurrentMetric(ExploreMetric.HOSPITALIZATIONS);
       setPeriod(Period.ALL);
     }, [pathname, region, initialLocations, setCurrentMetric]);
 

@@ -96,6 +96,8 @@ async function buildSiteSummaryData() {
 
     twoWeekPercentChangeInCases: usaProjection.twoWeekPercentChangeInCases,
     twoWeekPercentChangeInDeaths: usaProjection.twoWeekPercentChangeInDeaths,
+    twoWeekPercentChangeInHospitalizations:
+      usaProjection.twoWeekPercentChangeInHospitalizations,
 
     totalVaccinationsInitiated:
       usaProjection.vaccinationsInfo?.peopleInitiated ?? null,

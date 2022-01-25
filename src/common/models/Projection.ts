@@ -321,6 +321,10 @@ export class Projection {
     return this.getTwoWeekPercentChange(this.smoothedDailyDeaths);
   }
 
+  get twoWeekPercentChangeInHospitalizations() {
+    return this.getTwoWeekPercentChange(this.smoothedHospitalizations);
+  }
+
   private getTwoWeekPercentChange(series: any[]): number | null {
     const lastIndex = indexOfLastValue(series);
     assert(lastIndex != null, 'series is empty');
