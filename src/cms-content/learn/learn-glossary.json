@@ -209,7 +209,7 @@
     {
       "term": "Fully vaccinated",
       "termId": "fully-vaccinated",
-      "definition": "The waning efficacy of vaccinations over time and against new, more transmissible variants have created the need for additional [booster shots](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/booster-shot.html), especially for those who received the single dose J&J vaccine. However, as of January 2022, people are considered \"fully vaccinated\" after their primary vaccination series; two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection, severe illness and death",
+      "definition": "The waning efficacy of vaccinations over time and against new, more transmissible variants have created the need for additional [booster shots](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/booster-shot.html), especially for those who received the single dose J&J vaccine. However, as of January 2022, people are considered \"fully vaccinated\" after their primary vaccination series; two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection, severe illness and death",
       "category": "Prevention and mitigation"
     },
     {
