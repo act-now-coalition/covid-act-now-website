@@ -58,6 +58,7 @@ export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: fit-content;
+  min-width: 140px; // temporary for demo
   justify-content: space-between;
 `;
 
