@@ -51,7 +51,9 @@ export default function HomePage() {
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
-  const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
+  const [currentMetric, setCurrentMetric] = useState(
+    ExploreMetric.HOSPITALIZATIONS,
+  );
 
   const largestMetroFips = largestMetroFipsForExplore;
   const exploreGeoLocations = useMemo(
@@ -61,6 +63,8 @@ export default function HomePage() {
         : largestMetroFips,
     [largestMetroFips, userRegions],
   );
+  // Add USA to default view (Fips code: 0).
+  exploreGeoLocations.push('0');
   const initialFipsListForExplore = exploreGeoLocations;
 
   useEffect(() => {
@@ -110,7 +114,6 @@ export default function HomePage() {
       )}
     </>
   );
-
   return (
     <>
       <EnsureSharingIdInUrl />
