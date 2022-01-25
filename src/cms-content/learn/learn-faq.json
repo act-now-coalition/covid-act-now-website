@@ -149,7 +149,7 @@
         {
           "question": "What are the symptoms of COVID?",
           "questionId": "what-symptoms-covid",
-          "answer": "Symptoms of COVID vary widely between different people. The most common symptoms include fatigue, cough and fever. Loss of smell or taste is also a frequent, early symptom. Other symptoms that people with COVID may experience include shortness of breath, muscle or body ache, sore throat, chills, congestion, headache, stomach pain (including nausea and diarrhea), pink eye (conjunctivitis) and chest pain. COVID symptoms generally appear two to 14 days after exposure. For more information on symptoms and when to seek medical help, go to the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html)."
+          "answer": "Symptoms of COVID vary widely between different people. The most common symptoms include fatigue, cough and fever. Loss of smell or taste is also a frequent, early symptom. Other symptoms that people with COVID may experience include shortness of breath, muscle or body ache, sore throat, chills, congestion, headache, stomach pain (including nausea and diarrhea), pink eye (conjunctivitis) and chest pain. COVID symptoms generally appear two to 14 days after exposure. For more information on symptoms and when to seek medical help, [go to the CDC](https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html)."
         },
         {
           "question": "How common is it to have COVID but not have any symptoms?",
