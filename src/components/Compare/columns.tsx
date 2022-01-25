@@ -189,7 +189,7 @@ class HospitalizationsDensityColumn implements ColumnDefinition {
       <DataCellValue
         $valueUnknown={hd === null}
         $textAlign="left"
-        $fontSize="14px"
+        $fontSize="16px"
       >
         {formattedValue}
       </DataCellValue>
