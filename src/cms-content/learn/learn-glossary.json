@@ -245,7 +245,7 @@
     {
       "term": "Incubation period",
       "termId": "incubation-period",
-      "definition": "The incubation period marks the time between [infection](#infection) and the onset of symptoms. For COVID, the incubation period is estimated to be between two and 14 days, but on average about [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure. \n\n[Exposed](#exposed) people are encouraged to [quarantine](#quarantine) for the entire maximum incubation period of 14 days, as an infected person can unknowingly spread COVID despite not feeling symptoms. The incubation period of COVID makes it critical to have a robust [contact tracing](#contact-tracing) system that identifies people who have been exposed to the virus and encourages them to quarantine for 14 days or get tested themselves.",
+      "definition": "The incubation period marks the time between [infection](#infection) and the onset of symptoms. For COVID, the incubation period is estimated to be between two and 14 days, but on average about [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure. \n\n[Exposed](#exposed) people are encouraged to [quarantine](#quarantine) for 10 days especially if they are not up to date on vaccination, as an infected person can unknowingly spread COVID despite not feeling symptoms. The incubation period of COVID makes it critical to have a robust [contact tracing](#contact-tracing) system that identifies people who have been exposed to the virus and encourages them to quarantine or get tested themselves.",
       "category": "Transmission"
     },
     {
