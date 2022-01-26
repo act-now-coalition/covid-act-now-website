@@ -1,6 +1,6 @@
 {
   "header": "COVID Glossary",
-  "intro": "R₀ vs R(t) vs Infection rate. Here you can find clear definitions of the vocabulary being used to talk about COVID.",
+  "intro": "Antigen test vs PCR test. Here you can find clear definitions of the vocabulary being used to talk about COVID.",
   "terms": [
     {
       "term": "Antibodies",
@@ -31,6 +31,12 @@
       "termId": "asymptomatic",
       "definition": "An asymptomatic person is positive for the virus but never shows signs or symptoms of the infection. The fact that COVID can be asymptomatic means we do not always know if a person has COVID unless they get tested, and therefore the virus can be transmitted unknowingly.\n\nSome people with asymptomatic infection may actually be [presymptomatic](https://covidactnow.org/glossary#presymptomatic-spread), and develop symptoms later on.\n\nResearchers are unsure how many COVID cases are transmitted asymptomatically, but as of March 2021 experts estimate that around [30 percent](https://www.cdc.gov/coronavirus/2019-ncov/hcp/planning-scenarios.html) of infected people never develop symptoms.",
       "category": "Health and symptoms"
+    },
+    {
+      "term": "Booster",
+      "termId": "booster",
+      "definition": "Booster doses are given after a primary COVID vaccine series, such as the two dose Pfizer and Moderna vaccine or single dose J&J vaccine. They provide additional protection by boosting immunity for a longer period of time against the virus and can [protect specifically against variants](https://www.cdc.gov/mmwr/volumes/71/wr/mm7104e3.htm?s_cid=mm7104e3_x) of concern as they emerge.",
+      "category": "Treatment"
     },
     {
       "term": "Case density",
@@ -147,6 +153,12 @@
       "category": "Treatment"
     },
     {
+      "term": "Endemic",
+      "termId": "endemic",
+      "definition": "An endemic disease is one that is always present at some baseline level in a particular place or population. An [epidemic](https://covidactnow.org/glossary#epidemic), in contrast, refers to an outbreak of disease. A global epidemic, like COVID, is referred to as a [pandemic](https://covidactnow.org/glossary#pandemic). Experts believe that the COVID pandemic may eventually become endemic. This would mean that we continue to have COVID transmission, but at much lower levels, leading to  fewer hospitalizations and deaths each year, as we now have from the flu. This would mean that the COVID virus may never disappear completely, but that enough people will become immune to it through infection and continued vaccination that the serious outbreaks we have experienced for the first two years of the pandemic will diminish or disappear.",
+      "category": "Disease science"
+    },
+    {
       "term": "Epidemic",
       "termId": "epidemic",
       "definition": "An epidemic is an [outbreak](#outbreak) of a disease that spreads very quickly and affects many people. During an epidemic, the disease is actively spreading. COVID is referred to as a [pandemic](#pandemic), which is an epidemic occurring over a wide geographic area, often across continents and even worldwide.",
@@ -167,7 +179,7 @@
     {
       "term": "Face mask",
       "termId": "face-mask",
-      "definition": "A face mask is used to prevent the spread of an [infection](https://covidactnow.org/glossary#infection) or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests wearing a mask can help protect you and those around you. Check the [CDC site](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) for the latest recommendations on when to wear a mask after you are fully vaccinated.\n\nCOVID can spread between people interacting in close proximity, even among those who are [asymptomatic](https://covidactnow.org/glossary#asymptomatic) or [presymptomatic](https://covidactnow.org/glossary/#presymptomatic-spread), so wearing a mask can give you an added layer of protection. The material used to make face masks can vary widely, but the [CDC recommends](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/diy-cloth-face-coverings.html) that the public wear simple cloth face coverings in public to slow virus spread.",
+      "definition": "A face mask is used to prevent the spread of an [infection](https://covidactnow.org/glossary#infection) or illness by covering one’s nose and mouth. In line with [CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover-guidance.html) and [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks) guidelines, there is a body of research that suggests wearing a mask can help protect you and those around you from contracting and spreading COVID. Check the [CDC site](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) for the latest recommendations on when to wear a mask even after you have your completed primary vaccination series or gotten a booster.\n\nCOVID can spread between people interacting in close proximity, even among those who are [asymptomatic](https://covidactnow.org/glossary#asymptomatic) or [presymptomatic](https://covidactnow.org/glossary/#presymptomatic-spread), so wearing a mask can give you an added layer of protection. The material used to make face masks can vary widely, but the current [expert consensus](https://www.nytimes.com/article/covid-masks.html?action=click&state=default&region=hub&context=storyline_hub&module=styln-coronavirus&variant=show&pgtype=LegacyCollection) is that surgical masks, N95s, and KN95s provide the most protection.",
       "category": "Prevention and mitigation"
     },
     {
@@ -197,7 +209,7 @@
     {
       "term": "Fully vaccinated",
       "termId": "fully-vaccinated",
-      "definition": "People are considered fully vaccinated two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for fully vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection and severe illness.",
+      "definition": "The waning efficacy of vaccinations over time and against new, more transmissible variants have created the need for additional [booster shots](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/booster-shot.html), especially for those who received the single dose J&J vaccine. However, as of January 2022, people are considered \"fully vaccinated\" after their primary vaccination series; two weeks after a single dose of the Johnson & Johnson vaccine, or two weeks after the second dose of the Pfizer or Moderna vaccine. It’s important to wait the full two weeks before beginning to follow [guidance for vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) in order to ensure that you are protected against infection, severe illness and death",
       "category": "Prevention and mitigation"
     },
     {
@@ -233,7 +245,7 @@
     {
       "term": "Incubation period",
       "termId": "incubation-period",
-      "definition": "The incubation period marks the time between [infection](#infection) and the onset of symptoms. For COVID, the incubation period is estimated to be between two and 14 days, but on average about [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure. \n\n[Exposed](#exposed) people are encouraged to [quarantine](#quarantine) for the entire maximum incubation period of 14 days, as an infected person can unknowingly spread COVID despite not feeling symptoms. The incubation period of COVID makes it critical to have a robust [contact tracing](#contact-tracing) system that identifies people who have been exposed to the virus and encourages them to quarantine for 14 days or get tested themselves.",
+      "definition": "The incubation period marks the time between [infection](#infection) and the onset of symptoms. For COVID, the incubation period is estimated to be between two and 14 days, but on average about [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure. \n\n[Exposed](#exposed) people are encouraged to [quarantine](#quarantine) for 10 days especially if they are not up to date on vaccination, as an infected person can unknowingly spread COVID despite not feeling symptoms. The incubation period of COVID makes it critical to have a robust [contact tracing](#contact-tracing) system that identifies people who have been exposed to the virus and encourages them to quarantine or get tested themselves.",
       "category": "Transmission"
     },
     {
@@ -353,13 +365,13 @@
     {
       "term": "Presymptomatic spread",
       "termId": "presymptomatic-spread",
-      "definition": "Presymptomatic spread refers to the [transmission](https://covidactnow.org/glossary#transmission) of a [virus](https://covidactnow.org/glossary#virus) by someone who has not yet developed symptoms but eventually will have symptoms.\n\nCOVID presymptomatic spread happens during the incubation period, the time between infection and symptoms presenting themselves. After exposure to COVID, symptoms take an average of [four to five](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) days to appear, but can take up to 14 days. If you are exposed to COVID and have not been fully vaccinated, you should quarantine for the entire maximum [incubation period](https://covidactnow.org/glossary#incubation-period) of 14 days, given that you could be infected without feeling symptoms and could unknowingly spread COVID. \n\nPresymptomatic spread makes it critical to have a system for [testing](https://covidactnow.org/glossary#testing) and [contact tracing](https://covidactnow.org/glossary#contact-tracing), in order to identify exposed people and encourage them to quarantine for 14 days or while awaiting test results.",
+      "definition": "Presymptomatic spread refers to the [transmission](https://covidactnow.org/glossary#transmission) of a [virus](https://covidactnow.org/glossary#virus) by someone who has not yet developed symptoms but eventually will have symptoms.\n\nCOVID presymptomatic spread happens during the incubation period, the time between infection and symptoms presenting themselves. After exposure to COVID, symptoms take an average of [four to five](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) days to appear. If you are exposed to COVID and have not completed your primary vaccination series, you should quarantine given that you could be infected without feeling symptoms and could unknowingly spread COVID. \n\nPresymptomatic spread makes it critical to have a system for [testing](https://covidactnow.org/glossary#testing) and [contact tracing](https://covidactnow.org/glossary#contact-tracing), in order to identify exposed people and encourage them to quarantine for 10 days or while awaiting test results.",
       "category": "Transmission"
     },
     {
       "term": "Quarantine",
       "termId": "quarantine",
-      "definition": "Quarantine is used to slow the spread of COVID by keeping potentially [exposed](https://covidactnow.org/glossary#exposed) people away from others. Unvaccinated people who have been exposed to COVID should quarantine even if they appear healthy. Anyone who is exhibiting COVID symptoms, regardless of vaccination status, should quarantine for [14 days](https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/quarantine.html) and get tested.\n\nThis 14-day period comes from research on COVID’s [incubation period](https://covidactnow.org/glossary#incubation-period), which is the time between [infection](https://covidactnow.org/glossary#infection) and the onset of symptoms. A COVID patient can infect others during their entire incubation period, which is estimated to be between two and 14 days after exposure, but on average lasts for the first [five days](https://www.cdc.gov/coronavirus/2019-ncov/hcp/clinical-guidance-management-patients.html) after exposure.",
+      "definition": "Quarantine is a public health practice used to slow the spread of COVID by keeping potentially [exposed](https://covidactnow.org/glossary#exposed) people separated from others. People who have been exposed to COVID should quarantine even if they are not showing symptoms until they can confirm a negative test result. [Isolation](https://covidactnow.org/glossary#isolation) is a different public health practice which is used to prevent exposure by separating people with a *confirmed* and contagious illness from those who are not infected.",
       "category": "Prevention and mitigation"
     },
     {
@@ -423,9 +435,15 @@
       "category": "Testing"
     },
     {
+      "definition": "Seroprevalence refers to the number or percentage of people in a population who have [antibodies](https://covidactnow.org/glossary#antibodies) to a specific disease, in this case COVID. Estimating the seroprevalence of COVID in a population can tell us how many have already been infected.",
+      "term": "Seroprevalence",
+      "termId": "seroprevalence",
+      "category": "Disease science"
+    },
+    {
       "term": "Social distancing",
       "termId": "social-distancing",
-      "definition": "Social distancing, or physical distancing, means deliberately keeping a certain amount of physical space between people in order to avoid spreading or receiving respiratory droplets containing the virus.\n\nThroughout the pandemic, [the CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/social-distancing.html) has recommended maintaining a safe distance of six feet to avoid spreading COVID. Other examples of social distancing include working from home instead of at the office and cancelling large public events that could become [superspreading events](https://covidactnow.org/glossary#superspreading-event). Fully vaccinated people should follow the [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) to find out when it is necessary to socially distance.",
+      "definition": "Social distancing, or physical distancing, means deliberately keeping a certain amount of physical space between people in order to avoid spreading or receiving respiratory droplets containing the virus.\n\nThroughout the pandemic, [the CDC](https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/social-distancing.html) has recommended maintaining a safe distance of six feet to avoid spreading COVID. Other examples of social distancing include working from home instead of at the office and cancelling large public events that could become [superspreading events](https://covidactnow.org/glossary#superspreading-event). Vaccinated people should follow the [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html) to find out when it is necessary to socially distance.",
       "category": "Prevention and mitigation"
     },
     {
@@ -503,7 +521,7 @@
     {
       "term": "Variant",
       "termId": "variant",
-      "definition": "Variants are new versions of viruses that occur as the virus accumulates [mutations](https://covidactnow.org/glossary#mutation). Each time a [virus](https://covidactnow.org/glossary#virus) copies its genetic material in order to reproduce, there's a chance for an error or mutation to occur. Usually, mutations are random and have no significant impact on the virus’ behavior, leading the variant to die out. However, when a large number of helpful mutations changes the virus in a clinical or epidemiologically significant way, such as by making it more transmissible or more stable in its environment, the variant can become widespread. [See the CDC’s resource](https://www.cdc.gov/coronavirus/2019-ncov/transmission/variant.html) for more information on specific COVID variants and their impact on vaccines.",
+      "definition": "Variants are new versions of viruses that occur as the virus accumulates [mutations](https://covidactnow.org/glossary#mutation). Each time a [virus](https://covidactnow.org/glossary#virus) copies its genetic material in order to reproduce, there's a chance for an error or mutation to occur. Usually, mutations are random and have no significant impact on the virus’ behavior, leading the variant to die out. However, when a large number of helpful mutations changes the virus in a significant way, such as by making it more transmissible or more stable in its environment, the variant can become widespread. \n\nOver the course of the COVID pandemic, new variants have emerged across the globe. As of January 2022, the two primary variants of concern in the United States are the [Delta variant](https://www.cdc.gov/coronavirus/2019-ncov/variants/delta-variant.html#:~:text=Given%20new%20evidence%20on%20the,schools%2C%20regardless%20of%20vaccination%20status.) and the [Omicron variant](https://www.cdc.gov/coronavirus/2019-ncov/variants/omicron-variant.html). Within each variant, we see some changes in vaccine efficacy, transmissibility, and severity of symptoms. For example, experts have determined that the Omicron variant spreads more easily and may infect vaccinated individuals more easily than the original COVID strain. Staying up to date on vaccinations will help slow the spread of COVID, and therefore the rise of variants globally.",
       "category": "Disease science"
     },
     {
@@ -539,5 +557,5 @@
   ],
   "metadataTitle": "Glossary of COVID-19 Terminology",
   "metadataDescription": "Find clear definitions of the vocabulary and key terms of the novel Coronavirus (2019-nCoV). Understand the COVID terminology and make informed decisions to stop the pandemic.",
-  "lastUpdatedDate": "2021-05-27T07:00:00.000Z"
+  "lastUpdatedDate": "2022-01-24T08:00:00.000Z"
 }
