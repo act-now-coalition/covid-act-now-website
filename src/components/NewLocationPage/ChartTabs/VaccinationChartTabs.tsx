@@ -44,7 +44,7 @@ const VaccinationChartTabs: React.FC<{
       iconColor: VACCINATIONS_COLOR_MAP.COMPLETED,
     },
     {
-      metricName: 'Additional Dose',
+      metricName: 'Booster shot',
       value: percentAdditionalDose
         ? formatPercent(percentAdditionalDose, 1)
         : nullValueString,

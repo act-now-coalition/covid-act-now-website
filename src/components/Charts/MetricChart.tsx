@@ -120,9 +120,9 @@ function getVaccinationSeries(projection: Projection): Series[] {
     {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsAdditionalDose')),
-      label: 'Additional dose',
-      shortLabel: 'Additional dose',
-      tooltipLabel: 'Additional dose',
+      label: 'Booster shot',
+      shortLabel: 'Booster shot',
+      tooltipLabel: 'Booster shot',
       params: {
         stroke: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
         fill: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,

@@ -79,7 +79,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   let ifNoAdditionalDoseAnd;
   if (peopleAdditionalDose != null && percentAdditionalDose != null) {
     additionalDoseText = `, and ${peopleAdditionalDose} (${percentAdditionalDose})
-    have received a booster (or additional) shot`;
+    have received a booster shot`;
     ifNoAdditionalDoseAnd = ``;
   } else {
     additionalDoseText = ``;

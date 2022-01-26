@@ -305,16 +305,16 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: {
-    title: 'Percent vaccinated (additional dose)',
-    name: 'Percent vaccinated (additional dose)',
+    title: 'Percent vaccinated (booster shot)',
+    name: 'Percent vaccinated (booster shot)',
     chartId: 'vaccinations_additional_dose',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
     maxY: 1,
     seriesList: [
       {
-        label: 'Percent vaccinated (additional dose)',
-        tooltipLabel: 'Percent vaccinated (additional dose)',
+        label: 'Percent vaccinated (booster shot)',
+        tooltipLabel: 'Percent vaccinated (booster shot)',
         datasetId: 'vaccinationsAdditionalDose',
         type: SeriesType.LINE,
       },
@@ -543,7 +543,7 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
     case ExploreMetric.VACCINATIONS_COMPLETED:
       return `Percent vaccinated (2+ doses or J&J) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE:
-      return `Percent vaccinated (additional dose) in ${locationName}, according to @CovidActNow. See the chart: `;
+      return `Percent vaccinated (booster shot) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_USED:
       return `ICU capacity used in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.POSITIVITY_RATE:
