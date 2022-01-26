@@ -39,6 +39,7 @@ import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 import NationalText from 'components/NationalText';
 import DonationBanner from 'components/Banner/DonationBanner';
 import Box from '@material-ui/core/Box';
+import regions from 'common/regions';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -51,7 +52,9 @@ export default function HomePage() {
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
-  const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
+  const [currentMetric, setCurrentMetric] = useState(
+    ExploreMetric.HOSPITALIZATIONS,
+  );
 
   const largestMetroFips = largestMetroFipsForExplore;
   const exploreGeoLocations = useMemo(
@@ -61,6 +64,8 @@ export default function HomePage() {
         : largestMetroFips,
     [largestMetroFips, userRegions],
   );
+  // Add USA to default view (Fips code: 0).
+  exploreGeoLocations.push(regions.usa.fipsCode);
   const initialFipsListForExplore = exploreGeoLocations;
 
   useEffect(() => {
@@ -110,7 +115,6 @@ export default function HomePage() {
       )}
     </>
   );
-
   return (
     <>
       <EnsureSharingIdInUrl />
