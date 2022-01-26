@@ -40,7 +40,7 @@ export const Tab = styled(MuiTab).attrs(props => ({
 }))`
   line-height: 1;
   text-align: left;
-  max-width: 372px;
+  max-width: 600px;
   padding: 6px 0;
   margin-right: 1.5rem;
   opacity: 1;
@@ -85,8 +85,9 @@ export const VaccinationsTabsWrapper = styled(InactiveTabWrapper)`
   display: flex;
 
   ${TabContainer} {
-    &:first-of-type {
-      margin-right: 1.5rem;
+    margin-right: 1.5rem;
+    &:last-of-type {
+      margin-right: 0;
     }
   }
 `;
