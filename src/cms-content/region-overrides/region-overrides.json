@@ -13,16 +13,6 @@
     {
       "include": "subregions",
       "metric": "metrics.caseDensity",
-      "region": "CA",
-      "context": "[michael] https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19/COVID19CountyMonitoringOverview.aspx",
-      "disclaimer": "Note that our daily new cases per 100k metric is different than the \"adjusted case rate\" metric used by California for determining reopening tier assignments. Their adjusted case rate is adjusted to account for testing levels.",
-      "blocked": false,
-      "start_date": "",
-      "end_date": ""
-    },
-    {
-      "include": "subregions",
-      "metric": "metrics.caseDensity",
       "region": "TX",
       "context": "https://twitter.com/TexasDSHS/status/1407806450135666699",
       "disclaimer": "Texas DSHS: This week's increase in new cases is due to some catch-up in case reporting by counties",
@@ -39,16 +29,6 @@
       "blocked": false,
       "start_date": "",
       "end_date": ""
-    },
-    {
-      "include": "region",
-      "metric": "metrics.vaccinationsInitiatedRatio",
-      "blocked": false,
-      "start_date": "",
-      "end_date": "",
-      "region": "NH",
-      "disclaimer": "The data above reflects data as provided by the CDC. Data for New Hampshire has been revised multiple times resulting in jumps in the vaccination percentages.",
-      "context": "https://trello.com/c/N9qzPb7Q/1416-put-disclaimer-on-nh-vx-data"
     },
     {
       "include": "region",
@@ -236,13 +216,13 @@
       "context": "Blocking infection rate since it's inflated by the irregular reporting lately. - July 22, 2021"
     },
     {
-      "include": "region",
+      "include": "subregions",
       "metric": "metrics.vaccinationsInitiatedRatio",
       "blocked": false,
       "start_date": "",
       "end_date": "",
-      "region": "26029, 26081,  30051, 31091, 31001, 31003, 31005, 31007, 31009, 31011, 31013, 31015, 31019, 31021, 31023, 31027, 31029, 31035, 31039, 31041, 31045, 31049, 31051, 31053, 31059, 31061, 31063, 31065, 31067, 31069, 31071, 31073, 31075, 31077, 31079, 31081, 31085, 31087, 31089, 31093, 31097, 31101, 31103, 31105, 31107, 31111, 31113, 31115, 31117, 31119, 31123, 31125, 31127, 31131, 31135, 31137, 31139, 31141, 31143, 31145, 31149, 31151, 31155, 31157, 31159, 31161, 31163, 31165, 31167, 31169, 31171, 31175, 31179, 31181, 31183, 31185, 39005, 39075, 39077, 39091, 39111, 39123, 39127, 39137, 39147, 39161, 39163, 39171, 39175",
-      "disclaimer": "Note that data for this county is sourced from the CDC which, as of 7/26/2021, only provides data on fully-vaccinated people and therefore the \"1+ dose\" data above is approximated using the fully-vaccinated data and a state-wide average ratio.",
+      "region": "NE",
+      "disclaimer": "Note that data for this county is sourced from the CDC which, as of 7/26/2021, only provides trustworthy data on fully-vaccinated people and therefore the \"1+ dose\" data above is approximated using the fully-vaccinated data and a state-wide average ratio.",
       "context": "context: https://trello.com/c/Q2VorVkg/1484-cms-disclaimers-for-counties-with-1-dose-estimation"
     },
     {
@@ -268,9 +248,9 @@
       "metric": "metrics.testPositivityRatio",
       "blocked": true,
       "start_date": "2021-08-18",
-      "end_date": "",
+      "end_date": "2021-10-31",
       "region": "WA",
-      "context": "WA testing data suspiciously high (85% +)"
+      "context": "WA stopped reporting negative tests from 09/01 - 10/31"
     },
     {
       "include": "region",
@@ -324,28 +304,311 @@
       "include": "region",
       "metric": "metrics.icuCapacityRatio",
       "blocked": true,
-      "start_date": "2021-10-09",
-      "end_date": "",
-      "region": "IL",
-      "context": "https://trello.com/c/zoFUqdpi/1505-10-13-21-blocked-illinois-icu-data-due-to-spiking-data"
-    },
-    {
-      "include": "region",
-      "metric": "metrics.icuCapacityRatio",
-      "blocked": true,
       "start_date": "2021-10-19",
       "end_date": "",
       "region": "UT",
       "context": "https://trello.com/c/TMXRMiWy/1508-ut-icu-capacity-used-spike-10-22-21"
     },
     {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-10-27",
+      "end_date": "2021-10-28",
+      "region": "AL",
+      "context": "https://trello.com/c/O9vhthuu/1511-al-reporting-backlog-of-cases-on-10-28-and-10-29-2021"
+    },
+    {
       "include": "region",
       "metric": "metrics.testPositivityRatio",
       "blocked": true,
-      "start_date": "2021-10-19",
+      "start_date": "2021-10-27",
       "end_date": "",
-      "region": "12086, 12127",
-      "context": "CDC test positivity issue"
+      "region": "30013, 30063, 29077",
+      "context": "cdc test positivity issue"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": false,
+      "start_date": "",
+      "end_date": "",
+      "region": "MN",
+      "disclaimer": "On November 1st, 2021, Minnesota added a number of backlogged cases of people who have been infected with Covid multiple times.",
+      "context": "MN reporting backlog of reinfections"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": false,
+      "start_date": "",
+      "end_date": "",
+      "region": "KY",
+      "context": "https://trello.com/c/mUcu0jV5/1512-ky-and-il-vaccine-data-discontinuities-10-30-21",
+      "disclaimer": "On October 28th, 2021, a number of Kentucky vaccine doses were discovered to be duplicated. These doses have since been removed, causing the discontinuities seen in the vaccination metrics."
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": false,
+      "start_date": "",
+      "end_date": "",
+      "region": "IL",
+      "disclaimer": "The data above reflects data as provided by the CDC. On October 28th, 2021, data for Illinois was revised, resulting in jumps in the vaccination percentages.",
+      "context": "https://trello.com/c/mUcu0jV5/1512-ky-and-il-vaccine-data-discontinuities-10-30-21"
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-01",
+      "end_date": "2021-11-01",
+      "region": "NH",
+      "context": "DNC Spike on 11/01 due to technical reporting issues"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-09",
+      "end_date": "2021-11-09",
+      "region": "48245",
+      "context": "Spike in cases reported on 11/09/21: https://trello.com/c/ABvkk6l4/1515-jefferson-county-case-spike-11-09-21"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-11",
+      "end_date": "2021-11-11",
+      "context": "Errant report of 0 cases causing DNC to go low.",
+      "region": "ID"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "NH",
+      "context": "CDC seems to be including booster shots as 1st doses. https://www.nhpr.org/nh-news/2021-11-04/cdc-covid-booster-nh-data",
+      "disclaimer": "We have received user reports and press articles ([example](https://www.nhpr.org/nh-news/2021-11-04/cdc-covid-booster-nh-data)) with concerns that the CDC-provided vaccine data is incorrectly including booster shots as 1st-dose shots. We are reaching out to the CDC for clarification. In the meantime, accurate vaccine data is not available."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-16",
+      "end_date": "2021-11-16",
+      "region": "37133",
+      "context": "Onslow County not reporting cases consistently, causing decreases in DNC"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-19",
+      "end_date": "2021-11-19",
+      "region": "54039",
+      "context": "anamolous spike in new cases"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-20",
+      "end_date": "2021-11-20",
+      "region": "DE",
+      "context": "anomalous case reporting on 11/20 caused spike in DNC"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "ID",
+      "disclaimer": "Idaho provides vaccine data only for vaccine recipients who are 18 years and older, in line with state laws. Since no individuals under 18 from Idaho are included in their data, it is not possible to provide accurate overall vaccine metrics for Idaho or its counties.",
+      "context": "Idaho doesn't provide vaccine data for individuals under 18."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-11-22",
+      "end_date": "2021-11-22",
+      "region": "29097, 29037, 29095, 29047, 29165, 29145",
+      "context": "USAFacts cases backlog for MO counties on 11/22/21"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-12-10",
+      "end_date": "2021-12-10",
+      "region": "12620, 36220",
+      "context": "anomalous case reporting in Penobscot County, ME and Ector County, TX"
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-12-27",
+      "end_date": "2021-12-27",
+      "region": "MD",
+      "context": "remove backlog reporting after cyber attack https://www.baltimoresun.com/coronavirus/bs-md-maryland-department-of-health-cyberattack-covid-numbers-20211208-jowfs4kes5aprd7y3yzzp5o4je-story.html",
+      "disclaimer": ""
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-12-12",
+      "end_date": "2021-12-12",
+      "region": "36109",
+      "context": "spike in DNC on 12/13/2021"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-12-10",
+      "end_date": "",
+      "region": "29021",
+      "context": "Buchanan County, MO has not reported since 12/09 causing a dropoff in DNC"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-12-14",
+      "end_date": "2021-12-14",
+      "region": "39061",
+      "context": "Blocking case metric for Hamilton County, OH (NY Times reported an anomaly) on Dec 14th."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "2021-12-13",
+      "end_date": "2021-12-13",
+      "region": "24510",
+      "context": "Huge >40% spike on 2021-12-13"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2021-12-19",
+      "end_date": "2021-12-19",
+      "region": "MD",
+      "context": "blocking backlog of cases reported after cyber attack stall https://www.baltimoresun.com/coronavirus/bs-md-maryland-department-of-health-cyberattack-covid-numbers-20211208-jowfs4kes5aprd7y3yzzp5o4je-story.html"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "36061",
+      "context": "New York County vaccination rate near 100%. Either boosters or non-residents seem to be included in data",
+      "disclaimer": "We have received reports with concerns that the CDC-provided vaccine data is inaccurately overestimating the number of vaccinated individuals in this location. We are investigating this issue. In the meantime, accurate vaccine data is not available."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "35620",
+      "disclaimer": "We have received reports with concerns that the CDC-provided vaccine data is inaccurately overestimating the number of vaccinated individuals in this location. We are investigating this issue. In the meantime, accurate vaccine data is not available.",
+      "context": "https://trello.com/c/hDOIWdM4/133-add-disclaimer-to-nyc-metro-too"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "DC, NC",
+      "disclaimer": "The CDC-reported vaccine data for this location has an unusually large gap between 1+ dose and completed vaccinations, suggesting a likely data reporting issue. We are monitoring the data and will resume showing vaccine data once the issue is resolved.",
+      "context": "https://www.dropbox.com/scl/fi/9nxnpdtwlgn6lwe5cf4g9/CDC-Vaccine-Irregularities.paper?dl=0&rlkey=dxqax20k09p4el1pkivayq7h9"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "HI",
+      "disclaimer": "The CDC-reported vaccine data for Hawaii has an unusually large gap between 1+ dose and completed vaccinations, suggesting a likely data reporting issue. We are monitoring the data and will resume showing vaccine data once the issue is resolved.",
+      "context": "https://www.dropbox.com/scl/fi/9nxnpdtwlgn6lwe5cf4g9/CDC-Vaccine-Irregularities.paper?dl=0&rlkey=dxqax20k09p4el1pkivayq7h9"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "ID",
+      "disclaimer": "We have received [reports](https://apnews.com/article/coronavirus-pandemic-lifestyle-health-public-health-idaho-96b67c8d8c5c733aa68b1fe3fa8408e0) that Idaho is significantly under-reporting cases due to an inability to keep up with the current volume. We don't have accurate case counts to report at this time.",
+      "context": "https://apnews.com/article/coronavirus-pandemic-lifestyle-health-public-health-idaho-96b67c8d8c5c733aa68b1fe3fa8408e0"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.icuCapacityRatio",
+      "blocked": true,
+      "start_date": "2022-01-06",
+      "end_date": "2022-01-13",
+      "region": "35660",
+      "context": "ICU % Usage dropoff (80% -> 45%)"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-01-16",
+      "end_date": "2022-01-16",
+      "region": "WI",
+      "context": "WI elevated case data due to backlog https://www.dhs.wisconsin.gov/news/releases/011422.htm"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": false,
+      "start_date": "",
+      "end_date": "",
+      "context": "Disclaimer for WI backlog",
+      "region": "WI",
+      "disclaimer": "On the week of January 14th, 2022, the Wisconsin Department of Health Services updated its data collection processes. As a result of the new process, COVID case data is expected to be temporarily elevated over the following days while this process occurs and back-logged cases are brought into the live system. [See the Department of Health Services' press release for more information.](https://www.dhs.wisconsin.gov/news/releases/011422.htm)"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "WA",
+      "context": "WA testing reporting data",
+      "disclaimer": "The Washington State Department of Health has paused reporting on all testing data in order to increase the department's capacity. Data reporting is not expected to restart until approximately February 28, 2022. As a result, we do not have accurate test-positivity data at this time."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-01-17",
+      "end_date": "2022-01-17",
+      "region": "MI",
+      "context": "almost-0 reporting day threw off backfill code"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.vaccinationsInitiatedRatio",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "20061",
+      "context": "20% spike in vacc rate to > 95%"
     }
   ]
 }

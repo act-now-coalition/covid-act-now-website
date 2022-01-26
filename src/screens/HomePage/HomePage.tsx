@@ -8,7 +8,6 @@ import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
-import Announcements from './Announcements';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
@@ -38,6 +37,9 @@ import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
 import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 import NationalText from 'components/NationalText';
+import DonationBanner from 'components/Banner/DonationBanner';
+import Box from '@material-ui/core/Box';
+import regions from 'common/regions';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -50,7 +52,9 @@ export default function HomePage() {
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
-  const [currentMetric, setCurrentMetric] = useState(ExploreMetric.CASES);
+  const [currentMetric, setCurrentMetric] = useState(
+    ExploreMetric.HOSPITALIZATIONS,
+  );
 
   const largestMetroFips = largestMetroFipsForExplore;
   const exploreGeoLocations = useMemo(
@@ -60,12 +64,9 @@ export default function HomePage() {
         : largestMetroFips,
     [largestMetroFips, userRegions],
   );
+  // Add USA to default view (Fips code: 0).
+  exploreGeoLocations.push(regions.usa.fipsCode);
   const initialFipsListForExplore = exploreGeoLocations;
-
-  // TODO(Chelsi) - i think we can delete this:
-  // Location hash is uniquely set from vaccination banner button click
-  const compareShowVulnerabilityFirst =
-    location.hash === '#compare-vulnerabilities';
 
   useEffect(() => {
     if (location.pathname.includes('alert_signup')) {
@@ -91,7 +92,7 @@ export default function HomePage() {
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
-  const isMobileMap = useBreakpoint(600);
+  const isMobile = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
@@ -114,7 +115,6 @@ export default function HomePage() {
       )}
     </>
   );
-
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -129,6 +129,9 @@ export default function HomePage() {
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
+      <Box margin={'auto'} marginTop={isMobile ? 0 : 2} maxWidth={'1000px'}>
+        <DonationBanner />
+      </Box>
       <HomepageStructuredData />
       <HomePageHeader />
       <main>
@@ -154,7 +157,7 @@ export default function HomePage() {
                   tooltipMode={
                     // TODO(michael): There's some sort of bug / performance issue on iOS that makes
                     // the mobile tooltip on the county view unusable.
-                    isMobileMap && locationScope === MapView.STATES
+                    isMobile && locationScope === MapView.STATES
                       ? TooltipMode.ACTIVATE_ON_CLICK
                       : TooltipMode.ACTIVATE_ON_HOVER
                   }
@@ -187,15 +190,6 @@ export default function HomePage() {
               infoLink="/covid-risk-levels-metrics"
             />
 
-            <HomePageBlock>
-              <CompareMain
-                locationsViewable={8}
-                vaccinesFirst={compareShowVaccinationsFirst}
-                vulnerabilityFirst={compareShowVulnerabilityFirst}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
-              />
-            </HomePageBlock>
             <HomePageBlock
               ref={exploreSectionRef}
               id="explore-hospitalizations"
@@ -208,7 +202,14 @@ export default function HomePage() {
                 nationalSummary={<NationalText />}
               />
             </HomePageBlock>
-            <Announcements />
+            <HomePageBlock>
+              <CompareMain
+                locationsViewable={8}
+                vaccinesFirst={compareShowVaccinationsFirst}
+                showModal={showCompareModal}
+                setShowModal={setShowCompareModal}
+              />
+            </HomePageBlock>
             <PartnersSection />
           </Content>
           <div ref={shareBlockRef} id="alert_signup">

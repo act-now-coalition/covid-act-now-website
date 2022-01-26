@@ -18,6 +18,8 @@ export interface LocationSummary {
   ccvi: number | null;
   /** vaccinationsCompleted */
   vc: number | null;
+  /** hospitalizations density */
+  hd: number | null;
 }
 
 export type SummariesMap = { [fips: string]: LocationSummary };

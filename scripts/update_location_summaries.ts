@@ -1,7 +1,6 @@
 // You can run via `yarn update-location-summaries`
 import fs from 'fs-extra';
 import path from 'path';
-import _ from 'lodash';
 import {
   fetchAllStateProjections,
   fetchAllMetroProjections,
@@ -97,6 +96,8 @@ async function buildSiteSummaryData() {
 
     twoWeekPercentChangeInCases: usaProjection.twoWeekPercentChangeInCases,
     twoWeekPercentChangeInDeaths: usaProjection.twoWeekPercentChangeInDeaths,
+    twoWeekPercentChangeInHospitalizations:
+      usaProjection.twoWeekPercentChangeInHospitalizations,
 
     totalVaccinationsInitiated:
       usaProjection.vaccinationsInfo?.peopleInitiated ?? null,

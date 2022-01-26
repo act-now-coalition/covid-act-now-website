@@ -26,6 +26,7 @@ import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
 import { EventCategory } from 'components/Analytics';
 import { makeChartShareQuote } from 'common/utils/makeChartShareQuote';
 import * as urls from 'common/urls';
+import { MarkdownContent } from 'components/Markdown';
 
 const ShareButtonBlock: React.FC<{
   region: Region;
@@ -132,7 +133,9 @@ const MetricChartFooter: React.FC<{
             {'   '}
             <MetricModal {...dialogProps} />
             {overrideDisclaimer && (
-              <OverrideDisclaimer>{overrideDisclaimer}</OverrideDisclaimer>
+              <OverrideDisclaimer>
+                <MarkdownContent>{overrideDisclaimer}</MarkdownContent>
+              </OverrideDisclaimer>
             )}
           </FooterText>
           <ShareButtonBlock {...shareButtonProps} />

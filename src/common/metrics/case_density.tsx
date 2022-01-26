@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Projections } from 'common/models/Projections';
@@ -7,19 +6,12 @@ import { formatDecimal, formatInteger } from 'common/utils';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
-import {
-  InfoTooltip,
-  TextTooltip,
-  renderTooltipContent,
-} from 'components/InfoTooltip';
+import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
-import { Region } from 'common/regions';
-import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
-  renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
   metricName: 'Daily new cases',
@@ -102,39 +94,6 @@ function renderStatus(projections: Projections): React.ReactElement {
       Over the last week, {locationName} has averaged {newCasesPerDayText} new
       confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
       every 100,000 residents).
-    </Fragment>
-  );
-}
-
-function renderDisclaimer(
-  region: Region,
-  provenance?: Sources,
-): React.ReactElement {
-  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricCalculation;
-
-  return (
-    <Fragment>
-      {'Learn more about '}
-      <TextTooltip
-        title={getDataSourceTooltipContent(
-          Metric.CASE_DENSITY,
-          region,
-          provenance,
-        )}
-        mainCopy={'where our data comes from'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`Learn more: ${Metric.CASE_DENSITY}`)
-        }
-      />
-      {' and '}
-      <TextTooltip
-        title={renderTooltipContent(body)}
-        mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`How we calculate: ${Metric.CASE_DENSITY}`)
-        }
-      />
-      .
     </Fragment>
   );
 }

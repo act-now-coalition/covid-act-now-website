@@ -1,27 +1,20 @@
 import React, { Fragment } from 'react';
-import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfo, LevelInfoMap } from 'common/level';
 import { formatPercent, formatInteger } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
-import {
-  InfoTooltip,
-  TextTooltip,
-  renderTooltipContent,
-} from 'components/InfoTooltip';
+import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
-import { Region, State } from 'common/regions';
-import { getDataSourceTooltipContent } from 'common/utils/provenance';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Link } from 'react-router-dom';
 
 const METRIC_NAME = 'Vaccinated';
+const VACCINATION_PERCENTAGE_CAP = 0.95;
 
 export const VaccinationsMetric: MetricDefinition = {
   renderStatus,
-  renderDisclaimer,
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
@@ -76,59 +69,24 @@ function renderStatus(projections: Projections): React.ReactElement {
   const peopleVaccinated = formatInteger(info.peopleVaccinated);
   const percentVaccinated = formatPercent(info.ratioVaccinated, 1);
 
+  const cappedVaccinatedCopy =
+    info.ratioInitiated >= VACCINATION_PERCENTAGE_CAP ? (
+      <p>
+        We have capped the vaccination metrics at 95%. This cap helps address
+        potential overestimates of vaccination coverage due to incorrect
+        reporting of doses, census denominator data not including part-time
+        residents, or other potential data reporting errors.{' '}
+      </p>
+    ) : undefined;
+
   return (
     <Fragment>
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose and {peopleVaccinated} ({percentVaccinated})
-      are fully vaccinated. Anybody who is at least 12 years old is eligible to
+      are fully vaccinated. Anybody who is at least 5 years old is eligible to
       be vaccinated. Fewer than 0.001% of people who have received a dose
-      experienced a severe adverse reaction.{' '}
+      experienced a severe adverse reaction. {cappedVaccinatedCopy}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
-    </Fragment>
-  );
-}
-
-function renderDisclaimer(
-  region: Region,
-  provenance?: Sources,
-): React.ReactElement {
-  const { body } = metricToTooltipMap[Metric.VACCINATIONS].metricCalculation;
-
-  /**
-   * We don't have a fallback source for non-state vaccinations.
-   * If the page is not a state page or if there is no vaccinations provenance in the API,
-   * we don't render the first half of the disclaimer ("where our data comes from").
-   */
-  return (
-    <Fragment>
-      {'Learn more about '}
-      {region instanceof State ||
-      (provenance && provenance[0].name && provenance[0].url) ? (
-        <>
-          <TextTooltip
-            title={getDataSourceTooltipContent(
-              Metric.VACCINATIONS,
-              region,
-              provenance,
-            )}
-            mainCopy={'where our data comes from'}
-            trackOpenTooltip={() =>
-              trackOpenTooltip(`Learn more: ${Metric.VACCINATIONS}`)
-            }
-          />
-          {' and '}
-        </>
-      ) : (
-        ''
-      )}
-      <TextTooltip
-        title={renderTooltipContent(body)}
-        mainCopy={'how we calculate our metrics'}
-        trackOpenTooltip={() =>
-          trackOpenTooltip(`How we calculate: ${Metric.VACCINATIONS}`)
-        }
-      />
-      .
     </Fragment>
   );
 }

@@ -20,6 +20,7 @@ interface SiteSummary {
   lastDate: number;
   twoWeekPercentChangeInCases: number | null;
   twoWeekPercentChangeInDeaths: number | null;
+  twoWeekPercentChangeInHospitalizations: number | null;
 }
 
 export function getNationalText(): React.ReactElement {
@@ -28,8 +29,8 @@ export function getNationalText(): React.ReactElement {
     totalCases,
     totalDeaths,
     lastDate,
-    twoWeekPercentChangeInCases,
     twoWeekPercentChangeInDeaths,
+    twoWeekPercentChangeInHospitalizations,
   } = usa;
 
   const lastDateFormatted: string = formatUTCDateTime(
@@ -49,14 +50,16 @@ export function getNationalText(): React.ReactElement {
   return (
     <Fragment>
       As of {lastDateFormatted}, there have been roughly{' '}
-      {getTotalCasesCopy(totalCases)} cases and{' '}
-      {formatEstimate(totalDeaths, 3).toLocaleString()} deaths from COVID in the
+      {getTotalCasesCopy(totalCases)} reported cases, and{' '}
+      {formatEstimate(totalDeaths, 3).toLocaleString()} COVID deaths in the
       United States.{' '}
-      {!isNull(twoWeekPercentChangeInCases) &&
+      {!isNull(twoWeekPercentChangeInHospitalizations) &&
       !isNull(twoWeekPercentChangeInDeaths)
-        ? `Over the last 14 days, daily new
-    cases have ${getChangeDescriptorCopy(twoWeekPercentChangeInCases)} and daily
-    deaths have ${getChangeDescriptorCopy(twoWeekPercentChangeInDeaths)}.`
+        ? `Over the last 14 days, hospitalizations have ${getChangeDescriptorCopy(
+            twoWeekPercentChangeInHospitalizations,
+          )} and daily deaths have ${getChangeDescriptorCopy(
+            twoWeekPercentChangeInDeaths,
+          )}.`
         : ''}
     </Fragment>
   );

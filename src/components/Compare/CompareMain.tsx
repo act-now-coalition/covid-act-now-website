@@ -50,7 +50,6 @@ const CompareMain = React.memo(
     stateId?: string;
     region?: Region;
     vaccinesFirst?: boolean;
-    vulnerabilityFirst?: boolean;
     showModal: boolean;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
@@ -236,15 +235,6 @@ const CompareMain = React.memo(
       }
     }, [props.vaccinesFirst]);
 
-    useEffect(() => {
-      if (props.vulnerabilityFirst) {
-        setSorter(100);
-        setSortByPopulation(false);
-        setSortDescending(true);
-        setHomepageScope(HomepageLocationScope.COUNTY);
-      }
-    }, [props.vulnerabilityFirst]);
-
     /* Mostly a check for MSAs with only 1 county. Won't render a compare table if there aren't at least 2 locations */
     if (!locations || locations.length < 2) {
       return null;
@@ -269,7 +259,6 @@ const CompareMain = React.memo(
       homepageSliderValue,
       region: region,
       vaccinesFirst: props.vaccinesFirst,
-      vulnerabilityFirst: props.vulnerabilityFirst,
     };
 
     return (

@@ -149,12 +149,33 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
   }
 }
 
+export const formatDecimalAxis = (num: number, places = 2): string => {
+  if (num === null) {
+    return '-';
+  }
+  /**
+   * If value is between 100k and 1m, display in abbreviated form.
+   * Examples
+   * - 100,000 => 100K
+   * - 1,000,000 => 1M
+   * - 1,100,000 => 1.1M
+   */
+  if (num >= 100_000) {
+    //@ts-ignore
+    return new Intl.NumberFormat('en', { notation: 'compact' }).format(num);
+  } else {
+    return num.toLocaleString(undefined, {
+      minimumFractionDigits: places,
+      maximumFractionDigits: places,
+    });
+  }
+};
+
 export const getYFormat = (dataMeasure: DataMeasure, places: number) => {
   const yFormat = (value: number) =>
     dataMeasure === DataMeasure.PERCENT
       ? formatPercent(value, places)
-      : formatDecimal(value, places);
-
+      : formatDecimalAxis(value, places);
   return yFormat;
 };
 
