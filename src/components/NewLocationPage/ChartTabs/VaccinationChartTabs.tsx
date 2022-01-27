@@ -25,6 +25,8 @@ const VaccinationChartTabs: React.FC<{
     projections?.primary.vaccinationsInfo?.ratioInitiated;
   const percentCompleted =
     projections?.primary.vaccinationsInfo?.ratioVaccinated;
+  const percentAdditionalDose =
+    projections?.primary.vaccinationsInfo?.ratioAdditionalDose;
 
   const tabsContent = [
     {
@@ -35,11 +37,18 @@ const VaccinationChartTabs: React.FC<{
       iconColor: VACCINATIONS_COLOR_MAP.INITIATED,
     },
     {
-      metricName: 'Fully Vaccinated',
+      metricName: '2+ doses or J&J',
       value: percentCompleted
         ? formatPercent(percentCompleted, 1)
         : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.COMPLETED,
+    },
+    {
+      metricName: 'Booster shot',
+      value: percentAdditionalDose
+        ? formatPercent(percentAdditionalDose, 1)
+        : nullValueString,
+      iconColor: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
     },
   ];
 

@@ -109,12 +109,23 @@ function getVaccinationSeries(projection: Projection): Series[] {
     {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsCompleted')),
-      label: 'Vaccinations Completed',
-      shortLabel: 'Fully vaccinated',
-      tooltipLabel: 'Fully vaccinated',
+      label: '2+ doses or J&J',
+      shortLabel: '2+ doses',
+      tooltipLabel: '2+ doses',
       params: {
         stroke: VACCINATIONS_COLOR_MAP.COMPLETED,
         fill: VACCINATIONS_COLOR_MAP.COMPLETED,
+      },
+    },
+    {
+      type: SeriesType.LINE,
+      data: filterNull(projection.getDataset('vaccinationsAdditionalDose')),
+      label: 'Booster shot',
+      shortLabel: 'Booster shot',
+      tooltipLabel: 'Booster shot',
+      params: {
+        stroke: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
+        fill: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
       },
     },
   ].filter(series => series.data.length > 0);

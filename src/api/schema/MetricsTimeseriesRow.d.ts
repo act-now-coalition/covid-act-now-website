@@ -34,26 +34,6 @@ export type Infectionrate = number | null;
  * 90th percentile confidence interval upper endpoint of the infection rate.
  */
 export type Infectionrateci90 = number | null;
-export type Icuheadroomratio = number | null;
-/**
- * Current number of covid patients in the ICU.
- */
-export type Currenticucovid = number;
-/**
- * Method used to determine number of current ICU patients with covid.
- */
-export type CovidPatientsMethod = 'actual' | 'estimated';
-/**
- * Current number of covid patients in icu.
- */
-export type Currenticunoncovid = number;
-/**
- * Method used to determine number of current ICU patients without covid.
- */
-export type NonCovidPatientsMethod =
-  | 'actual'
-  | 'estimated_from_typical_utilization'
-  | 'estimated_from_total_icu_actual';
 /**
  * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
  */
@@ -66,6 +46,10 @@ export type Vaccinationsinitiatedratio = number | null;
  * Ratio of population that has completed vaccination.
  */
 export type Vaccinationscompletedratio = number | null;
+/**
+ * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldoseratio = number | null;
 /**
  * Date of timeseries data point
  */
@@ -81,11 +65,10 @@ export interface MetricsTimeseriesRow {
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
-  icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
   date: Date;
 }
 /**
@@ -96,19 +79,4 @@ export interface TestPositivityRatioDetails {
    * Source data for test positivity ratio.
    */
   source: TestPositivityRatioMethod;
-}
-/**
- * Details about how the ICU Headroom Metric was calculated.
- */
-export interface ICUHeadroomMetricDetails {
-  currentIcuCovid: Currenticucovid;
-  /**
-   * Method used to determine number of current ICU patients with covid.
-   */
-  currentIcuCovidMethod: CovidPatientsMethod;
-  currentIcuNonCovid: Currenticunoncovid;
-  /**
-   * Method used to determine number of current ICU patients without covid.
-   */
-  currentIcuNonCovidMethod: NonCovidPatientsMethod;
 }
