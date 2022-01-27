@@ -45,8 +45,9 @@ const VaccinationsBannerInner: React.FC = () => {
     <InnerContainer>
       <Header>New vaccine data</Header>
       <Body>
-        The CDC reports that {formatEstimate(totalVaccinationsInitiated, 5)}{' '}
-        Americans have received at least one dose.
+        The CDC reports that{' '}
+        {formatEstimate(totalVaccinationsInitiated ?? 0, 5)} Americans have
+        received at least one dose.
       </Body>
       <ButtonContainer>
         <Buttons />
