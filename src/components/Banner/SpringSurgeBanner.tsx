@@ -15,7 +15,9 @@ const trackClick = () => {
 
 const BannerInner: React.FC = () => {
   const { totalVaccinationsInitiated } = SiteSummaryJSON.usa;
-  const millionVaccinations = Math.round(totalVaccinationsInitiated / 1000000);
+  const millionVaccinations = Math.round(
+    (totalVaccinationsInitiated ?? 0) / 1000000,
+  );
 
   const HospitalizationsAreRisingTooLink = (
     <HashLink
