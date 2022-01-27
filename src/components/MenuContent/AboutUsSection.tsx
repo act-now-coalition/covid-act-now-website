@@ -9,6 +9,7 @@ import {
   LogoWrapper,
   RowWithSpacing,
 } from './Menu.style';
+import { MarkdownContent } from 'components/Markdown';
 
 const AboutUsSection: React.FC<{
   aboutUsCopy: string;
@@ -30,7 +31,9 @@ const AboutUsSection: React.FC<{
       ) : (
         <SectionHeader>About Us</SectionHeader>
       )}
-      <ParagraphCopy>{aboutUsCopy}</ParagraphCopy>
+      <ParagraphCopy>
+        <MarkdownContent>{aboutUsCopy}</MarkdownContent>
+      </ParagraphCopy>
       <RowWithSpacing>
         <OutlinedButton to="/about" onClick={() => onClick('About us')}>
           Learn more about us
