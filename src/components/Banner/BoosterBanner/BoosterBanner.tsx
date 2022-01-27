@@ -29,23 +29,19 @@ const Buttons: React.FC = () => {
 
 const BoosterBanner: React.FC = () => {
   const isMobile = useBreakpoint(600);
+  const headerCopy =
+    'Booster shots are 90% effective at preventing hospitalization from Omicron';
   return (
     <Container>
       {isMobile ? (
         <Box display="flex">
-          <Header>
-            Booster shots are 90% effective at preventing hospitalization from
-            Omicron
-          </Header>
+          <Header>{headerCopy}</Header>
           <VaccineIcon />
         </Box>
       ) : (
         <>
           <VaccineIcon />
-          <Header>
-            Booster shots are 90% effective at preventing hospitalization from
-            Omicron
-          </Header>
+          <Header>{headerCopy}</Header>
         </>
       )}
       <SubHeader>

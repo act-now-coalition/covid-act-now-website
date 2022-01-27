@@ -14,7 +14,6 @@ const BaseButtonStyles = css`
     padding: 0.75rem;
     height: 2.5rem;
     width: 100%;
-    max-width: 16rem;
   }
 `;
 
