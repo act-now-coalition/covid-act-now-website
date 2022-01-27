@@ -5,7 +5,7 @@
  */
 
 /**
- * FIPS Code. FIPS codes are either 2-digit state codes, 5-digit county codes, or 5-digit CBSA codes.
+ * FIPS Code. FIPS codes are either 2-digit state codes, 5-digit county codes, 5-digit CBSA codes, or 1-digit '0' for the entire USA.
  */
 export type Fips = string;
 /**
@@ -75,26 +75,6 @@ export type Infectionrate = number | null;
  * 90th percentile confidence interval upper endpoint of the infection rate.
  */
 export type Infectionrateci90 = number | null;
-export type Icuheadroomratio = number | null;
-/**
- * Current number of covid patients in the ICU.
- */
-export type Currenticucovid = number;
-/**
- * Method used to determine number of current ICU patients with covid.
- */
-export type CovidPatientsMethod = 'actual' | 'estimated';
-/**
- * Current number of covid patients in icu.
- */
-export type Currenticunoncovid = number;
-/**
- * Method used to determine number of current ICU patients without covid.
- */
-export type NonCovidPatientsMethod =
-  | 'actual'
-  | 'estimated_from_typical_utilization'
-  | 'estimated_from_total_icu_actual';
 /**
  * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
  */
@@ -107,6 +87,10 @@ export type Vaccinationsinitiatedratio = number | null;
  * Ratio of population that has completed vaccination.
  */
 export type Vaccinationscompletedratio = number | null;
+/**
+ * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldoseratio = number | null;
 /**
  * Risk levels for region.
  */
@@ -123,6 +107,10 @@ export type Risklevels = RiskLevels;
  *  *Extreme* - Severe outbreak
  */
 export type RiskLevel = 0 | 1 | 2 | 3 | 4 | 5;
+/**
+ * CDC community transmission level.
+ */
+export type CDCTransmissionLevel = 0 | 1 | 2 | 3 | 4;
 /**
  * Cumulative confirmed or suspected cases.
  */
@@ -151,7 +139,6 @@ export type Contacttracers = number | null;
  *  * capacity - Current staffed acute bed capacity.
  *  * currentUsageTotal - Total number of acute beds currently in use
  *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
- *  * typicalUsageRate - Typical acute bed utilization rate.
  *
  */
 export type Hospitalbeds = HospitalResourceUtilization;
@@ -168,10 +155,6 @@ export type Currentusagetotal = number | null;
  */
 export type Currentusagecovid = number | null;
 /**
- * Typical used capacity rate for resource. This excludes any COVID usage.
- */
-export type Typicalusagerate = number | null;
-/**
  *
  * Information about ICU bed utilization details.
  *
@@ -179,7 +162,6 @@ export type Typicalusagerate = number | null;
  *  * capacity - Current staffed ICU bed capacity.
  *  * currentUsageTotal - Total number of ICU beds currently in use
  *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
- *  * typicalUsageRate - Typical ICU utilization rate.
  *
  */
 export type Icubeds = HospitalResourceUtilization;
@@ -243,6 +225,34 @@ export type Vaccinationsinitiated = number | null;
  */
 export type Vaccinationscompleted = number | null;
 /**
+ * Number of individuals who are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldose = number | null;
+/**
+ * Total number of vaccine doses administered.
+ */
+export type Vaccinesadministered = number | null;
+/**
+ * Demographic distributions for administered vaccines.
+ */
+export type Vaccinesadministereddemographics = DemographicDistributions;
+export type Age = {
+  [k: string]: any;
+} | null;
+export type Race = {
+  [k: string]: any;
+} | null;
+export type Ethnicity = {
+  [k: string]: any;
+} | null;
+export type Sex = {
+  [k: string]: any;
+} | null;
+/**
+ * Demographic distributions for initiated vaccinations.
+ */
+export type Vaccinationsinitiateddemographics = DemographicDistributions;
+/**
  * Annotations for cases
  */
 export type Cases1 = FieldAnnotations;
@@ -284,6 +294,10 @@ export type TagType =
   | 'cumulative_tail_truncated'
   | 'cumulative_long_tail_truncated'
   | 'zscore_outlier'
+  | 'known_issue'
+  | 'known_issue_no_date'
+  | 'derived'
+  | 'drop_future_observation'
   | 'provenance'
   | 'source_url'
   | 'source';
@@ -337,6 +351,14 @@ export type Vaccinationsinitiated1 = FieldAnnotations;
  */
 export type Vaccinationscompleted1 = FieldAnnotations;
 /**
+ * Annotations for vaccinationsAdditionalDose
+ */
+export type Vaccinationsadditionaldose1 = FieldAnnotations;
+/**
+ * Annotations for vaccinesAdministered
+ */
+export type Vaccinesadministered1 = FieldAnnotations;
+/**
  * Annotations for testPositivityRatio
  */
 export type Testpositivityratio1 = FieldAnnotations;
@@ -357,10 +379,6 @@ export type Infectionrate1 = FieldAnnotations;
  */
 export type Infectionrateci901 = FieldAnnotations;
 /**
- * Annotations for icuHeadroomRatio
- */
-export type Icuheadroomratio1 = FieldAnnotations;
-/**
  * Annotations for icuCapacityRatio
  */
 export type Icucapacityratio1 = FieldAnnotations;
@@ -372,6 +390,10 @@ export type Vaccinationsinitiatedratio1 = FieldAnnotations;
  * Annotations for vaccinationsCompletedRatio
  */
 export type Vaccinationscompletedratio1 = FieldAnnotations;
+/**
+ * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldoseratio1 = FieldAnnotations;
 /**
  * Date of latest data
  */
@@ -400,7 +422,6 @@ export type Infectionrate2 = number | null;
  * 90th percentile confidence interval upper endpoint of the infection rate.
  */
 export type Infectionrateci902 = number | null;
-export type Icuheadroomratio2 = number | null;
 /**
  * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
  */
@@ -413,6 +434,10 @@ export type Vaccinationsinitiatedratio2 = number | null;
  * Ratio of population that has completed vaccination.
  */
 export type Vaccinationscompletedratio2 = number | null;
+/**
+ * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldoseratio2 = number | null;
 /**
  * Date of timeseries data point
  */
@@ -446,7 +471,6 @@ export type Contacttracers2 = number | null;
  *  * capacity - Current staffed acute bed capacity.
  *  * currentUsageTotal - Total number of acute beds currently in use
  *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
- *  * typicalUsageRate - Typical acute bed utilization rate.
  *
  */
 export type Hospitalbeds2 = HospitalResourceUtilization;
@@ -458,7 +482,6 @@ export type Hospitalbeds2 = HospitalResourceUtilization;
  *  * capacity - Current staffed ICU bed capacity.
  *  * currentUsageTotal - Total number of ICU beds currently in use
  *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
- *  * typicalUsageRate - Typical ICU utilization rate.
  *
  */
 export type Icubeds2 = HospitalResourceUtilization;
@@ -522,6 +545,22 @@ export type Vaccinationsinitiated2 = number | null;
  */
 export type Vaccinationscompleted2 = number | null;
 /**
+ * Number of individuals who are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldose2 = number | null;
+/**
+ * Total number of vaccine doses administered.
+ */
+export type Vaccinesadministered2 = number | null;
+/**
+ * Demographic distributions for administered vaccines.
+ */
+export type Vaccinesadministereddemographics1 = DemographicDistributions;
+/**
+ * Demographic distributions for initiated vaccinations.
+ */
+export type Vaccinationsinitiateddemographics1 = DemographicDistributions;
+/**
  * Date of timeseries data point
  */
 export type Date2 = string;
@@ -531,6 +570,11 @@ export type Actualstimeseries = ActualsTimeseriesRow[];
  */
 export type Date3 = string;
 export type Risklevelstimeseries = RiskLevelTimeseriesRow[];
+/**
+ * Date of timeseries data point
+ */
+export type Date4 = string;
+export type Cdctransmissionleveltimeseries = CdcTransmissionLevelTimeseriesRow[];
 
 /**
  * Summary data for a region with prediction timeseries data and actual timeseries data.
@@ -550,6 +594,30 @@ export interface RegionSummaryWithTimeseries {
   population: Population;
   metrics: Metrics;
   riskLevels: Risklevels;
+  /**
+   *
+   * Community transmission level for region, calculated using the CDC definition.
+   *
+   * Possible values:
+   *     - 0: Low
+   *     - 1: Moderate
+   *     - 2: Substantial
+   *     - 3: High
+   *     - 4: Unknown
+   *
+   * See [definitions of CDC community transmission levels](
+   * https://covid.cdc.gov/covid-data-tracker/#cases_community) for more
+   * details.
+   *
+   * Note that the value may differ from what the CDC website reports
+   * given we have different data sources. We have also introduced an
+   * "Unknown" level for when both case data and test positivity data are
+   * missing for at least 15 days. The CDC does not have an "Unknown"
+   * level and instead will designate a location as "Low" when case and
+   * test positivity data are missing.
+   *
+   */
+  cdcTransmissionLevel: CDCTransmissionLevel;
   actuals: Actuals;
   annotations: Annotations;
   lastUpdatedDate: Lastupdateddate;
@@ -557,6 +625,7 @@ export interface RegionSummaryWithTimeseries {
   metricsTimeseries: Metricstimeseries;
   actualsTimeseries: Actualstimeseries;
   riskLevelsTimeseries: Risklevelstimeseries;
+  cdcTransmissionLevelTimeseries: Cdctransmissionleveltimeseries;
 }
 /**
  * Calculated metrics data based on known actuals.
@@ -568,11 +637,10 @@ export interface Metrics {
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
-  icuHeadroomRatio: Icuheadroomratio;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
@@ -582,21 +650,6 @@ export interface TestPositivityRatioDetails {
    * Source data for test positivity ratio.
    */
   source: TestPositivityRatioMethod;
-}
-/**
- * Details about how the ICU Headroom Metric was calculated.
- */
-export interface ICUHeadroomMetricDetails {
-  currentIcuCovid: Currenticucovid;
-  /**
-   * Method used to determine number of current ICU patients with covid.
-   */
-  currentIcuCovidMethod: CovidPatientsMethod;
-  currentIcuNonCovid: Currenticunoncovid;
-  /**
-   * Method used to determine number of current ICU patients without covid.
-   */
-  currentIcuNonCovidMethod: NonCovidPatientsMethod;
 }
 /**
  * COVID risk levels for a region.
@@ -623,10 +676,6 @@ export interface RiskLevels {
    */
   infectionRate: RiskLevel;
   /**
-   * ICU headroom ratio risk level.
-   */
-  icuHeadroomRatio: RiskLevel;
-  /**
    * ICU capacity ratio risk level.
    */
   icuCapacityRatio: RiskLevel;
@@ -647,6 +696,10 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
+  vaccinesAdministered?: Vaccinesadministered;
+  vaccinesAdministeredDemographics?: Vaccinesadministereddemographics;
+  vaccinationsInitiatedDemographics?: Vaccinationsinitiateddemographics;
 }
 /**
  * Base model for API output.
@@ -655,7 +708,21 @@ export interface HospitalResourceUtilization {
   capacity: Capacity;
   currentUsageTotal: Currentusagetotal;
   currentUsageCovid: Currentusagecovid;
-  typicalUsageRate: Typicalusagerate;
+}
+/**
+ * Distributions of demographic data.
+ *
+ * Note that different regions may have different demographic distributions for
+ * the same field.  For instance, health departments in different states may report
+ * different age ranges.
+ *
+ * The data provided matches the source distributions.
+ */
+export interface DemographicDistributions {
+  age?: Age;
+  race?: Race;
+  ethnicity?: Ethnicity;
+  sex?: Sex;
 }
 /**
  * Annotations for each field.
@@ -673,15 +740,17 @@ export interface Annotations {
   vaccinesDistributed?: Vaccinesdistributed1;
   vaccinationsInitiated?: Vaccinationsinitiated1;
   vaccinationsCompleted?: Vaccinationscompleted1;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose1;
+  vaccinesAdministered?: Vaccinesadministered1;
   testPositivityRatio?: Testpositivityratio1;
   caseDensity?: Casedensity1;
   contactTracerCapacityRatio?: Contacttracercapacityratio1;
   infectionRate?: Infectionrate1;
   infectionRateCI90?: Infectionrateci901;
-  icuHeadroomRatio?: Icuheadroomratio1;
   icuCapacityRatio?: Icucapacityratio1;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio1;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio1;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio1;
 }
 /**
  * Annotations associated with one field.
@@ -722,11 +791,10 @@ export interface MetricsTimeseriesRow {
   contactTracerCapacityRatio: Contacttracercapacityratio2;
   infectionRate: Infectionrate2;
   infectionRateCI90: Infectionrateci902;
-  icuHeadroomRatio: Icuheadroomratio2;
-  icuHeadroomDetails?: ICUHeadroomMetricDetails | null;
   icuCapacityRatio: Icucapacityratio2;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio2;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio2;
+  vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio2;
   date: Date1;
 }
 /**
@@ -745,6 +813,10 @@ export interface ActualsTimeseriesRow {
   vaccinesDistributed?: Vaccinesdistributed2;
   vaccinationsInitiated?: Vaccinationsinitiated2;
   vaccinationsCompleted?: Vaccinationscompleted2;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose2;
+  vaccinesAdministered?: Vaccinesadministered2;
+  vaccinesAdministeredDemographics?: Vaccinesadministereddemographics1;
+  vaccinationsInitiatedDemographics?: Vaccinationsinitiateddemographics1;
   date: Date2;
 }
 /**
@@ -755,5 +827,39 @@ export interface RiskLevelTimeseriesRow {
    * Overall risk level for region.
    */
   overall: RiskLevel;
+  /**
+   * Case density risk level for region.
+   */
+  caseDensity: RiskLevel;
   date: Date3;
+}
+/**
+ * Base model for API output.
+ */
+export interface CdcTransmissionLevelTimeseriesRow {
+  date: Date4;
+  /**
+   *
+   * Community transmission level for region, calculated using the CDC definition.
+   *
+   * Possible values:
+   *     - 0: Low
+   *     - 1: Moderate
+   *     - 2: Substantial
+   *     - 3: High
+   *     - 4: Unknown
+   *
+   * See [definitions of CDC community transmission levels](
+   * https://covid.cdc.gov/covid-data-tracker/#cases_community) for more
+   * details.
+   *
+   * Note that the value may differ from what the CDC website reports
+   * given we have different data sources. We have also introduced an
+   * "Unknown" level for when both case data and test positivity data are
+   * missing for at least 15 days. The CDC does not have an "Unknown"
+   * level and instead will designate a location as "Low" when case and
+   * test positivity data are missing.
+   *
+   */
+  cdcTransmissionLevel: CDCTransmissionLevel;
 }

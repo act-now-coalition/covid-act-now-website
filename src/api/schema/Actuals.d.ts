@@ -32,7 +32,6 @@ export type Contacttracers = number | null;
  *  * capacity - Current staffed acute bed capacity.
  *  * currentUsageTotal - Total number of acute beds currently in use
  *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
- *  * typicalUsageRate - Typical acute bed utilization rate.
  *
  */
 export type Hospitalbeds = HospitalResourceUtilization;
@@ -49,10 +48,6 @@ export type Currentusagetotal = number | null;
  */
 export type Currentusagecovid = number | null;
 /**
- * Typical used capacity rate for resource. This excludes any COVID usage.
- */
-export type Typicalusagerate = number | null;
-/**
  *
  * Information about ICU bed utilization details.
  *
@@ -60,7 +55,6 @@ export type Typicalusagerate = number | null;
  *  * capacity - Current staffed ICU bed capacity.
  *  * currentUsageTotal - Total number of ICU beds currently in use
  *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
- *  * typicalUsageRate - Typical ICU utilization rate.
  *
  */
 export type Icubeds = HospitalResourceUtilization;
@@ -123,6 +117,34 @@ export type Vaccinationsinitiated = number | null;
  *
  */
 export type Vaccinationscompleted = number | null;
+/**
+ * Number of individuals who are fully vaccinated and have received a booster (or additional) dose.
+ */
+export type Vaccinationsadditionaldose = number | null;
+/**
+ * Total number of vaccine doses administered.
+ */
+export type Vaccinesadministered = number | null;
+/**
+ * Demographic distributions for administered vaccines.
+ */
+export type Vaccinesadministereddemographics = DemographicDistributions;
+export type Age = {
+  [k: string]: any;
+} | null;
+export type Race = {
+  [k: string]: any;
+} | null;
+export type Ethnicity = {
+  [k: string]: any;
+} | null;
+export type Sex = {
+  [k: string]: any;
+} | null;
+/**
+ * Demographic distributions for initiated vaccinations.
+ */
+export type Vaccinationsinitiateddemographics = DemographicDistributions;
 
 /**
  * Known actuals data.
@@ -140,6 +162,10 @@ export interface Actuals {
   vaccinesDistributed?: Vaccinesdistributed;
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
+  vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
+  vaccinesAdministered?: Vaccinesadministered;
+  vaccinesAdministeredDemographics?: Vaccinesadministereddemographics;
+  vaccinationsInitiatedDemographics?: Vaccinationsinitiateddemographics;
 }
 /**
  * Base model for API output.
@@ -148,5 +174,19 @@ export interface HospitalResourceUtilization {
   capacity: Capacity;
   currentUsageTotal: Currentusagetotal;
   currentUsageCovid: Currentusagecovid;
-  typicalUsageRate: Typicalusagerate;
+}
+/**
+ * Distributions of demographic data.
+ *
+ * Note that different regions may have different demographic distributions for
+ * the same field.  For instance, health departments in different states may report
+ * different age ranges.
+ *
+ * The data provided matches the source distributions.
+ */
+export interface DemographicDistributions {
+  age?: Age;
+  race?: Race;
+  ethnicity?: Ethnicity;
+  sex?: Sex;
 }
