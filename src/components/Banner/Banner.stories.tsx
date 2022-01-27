@@ -4,6 +4,10 @@ import {
   SpringSurgeBanner,
   VaccinationsBanner,
   Vaccinations100M,
+  VoteBanner,
+  FeatureBanner,
+  ThirdWaveBanner,
+  BoosterBanner,
 } from './index';
 
 export default {
@@ -18,3 +22,11 @@ export const SummerSurge = () => <SpringSurgeBanner />;
 export const Vaccinations = () => <VaccinationsBanner />;
 
 export const Vaccinations100 = () => <Vaccinations100M />;
+
+export const Vote = () => <VoteBanner />;
+
+export const Feature = () => <FeatureBanner scrollTo={'/'} />;
+
+export const ThirdWave = () => <ThirdWaveBanner />;
+
+export const Booster = () => <BoosterBanner />;
