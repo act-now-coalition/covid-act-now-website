@@ -96,11 +96,16 @@ export const FeaturedDescription = styled.p`
   color: ${props => props.theme.megaMenu.secondaryText};
 `;
 
+// Styles pointed at extra child `p` is needed to accommodate nested markdown.
 export const ParagraphCopy = styled.p`
   ${BodyCopy};
   color: ${props => props.theme.megaMenu.secondaryText};
   margin-bottom: 2rem;
   text-align: ${props => props.theme.megaMenu.paragraphAlignment};
+
+  p {
+    color: ${props => props.theme.megaMenu.secondaryText};
+  }
 
   @media (min-width: ${mobileBreakpoint}) {
     text-align: left;
