@@ -27,7 +27,7 @@ const Buttons: React.FC = () => {
   );
 };
 
-const VaccinationsBanner: React.FC = () => {
+const BoosterBanner: React.FC = () => {
   const isMobile = useBreakpoint(600);
   return (
     <Container>
@@ -59,4 +59,4 @@ const VaccinationsBanner: React.FC = () => {
   );
 };
 
-export default VaccinationsBanner;
+export default BoosterBanner;
