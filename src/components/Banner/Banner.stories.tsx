@@ -8,6 +8,7 @@ import {
   FeatureBanner,
   ThirdWaveBanner,
   BoosterBanner,
+  FeedbackSurveyBanner,
 } from './index';
 
 export default {
@@ -30,3 +31,5 @@ export const Feature = () => <FeatureBanner scrollTo={'/'} />;
 export const ThirdWave = () => <ThirdWaveBanner />;
 
 export const Booster = () => <BoosterBanner />;
+
+export const Feedback = () => <FeedbackSurveyBanner />;
