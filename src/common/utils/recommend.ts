@@ -178,7 +178,7 @@ export const summaryByLevel = {
   [Level.MEDIUM]: 'is at medium risk',
   [Level.HIGH]: 'is at high risk',
   [Level.CRITICAL]: 'is at very high risk',
-  [Level.SUPER_CRITICAL]: 'is at severe risk',
+  [Level.SUPER_CRITICAL]: 'is at extremely high risk',
 };
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {

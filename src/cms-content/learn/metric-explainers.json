@@ -29,7 +29,7 @@
         },
         {
           "question": "Levels",
-          "answer": "Levels for daily new cases are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others. \n\nThe deepest color indicates severe outbreak, for locations with daily new cases above 75 cases/100K.",
+          "answer": "Levels for daily new cases are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others.",
           "questionId": "daily-new-cases-levels"
         },
         {
