@@ -37,7 +37,8 @@ import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
 import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 import NationalText from 'components/NationalText';
-import BoosterBanner from 'components/Banner/BoosterBanner/BoosterBanner';
+// import BoosterBanner from 'components/Banner/BoosterBanner/BoosterBanner';
+import FeedbackBanner from 'components/Banner/FeedbackSurveyBanner';
 import Box from '@material-ui/core/Box';
 import regions from 'common/regions';
 
@@ -130,7 +131,7 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <Box margin={'auto'} marginTop={isMobile ? 0 : 2} maxWidth={'1000px'}>
-        <BoosterBanner />
+        <FeedbackBanner />
       </Box>
       <HomepageStructuredData />
       <HomePageHeader />
