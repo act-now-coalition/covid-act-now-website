@@ -3,7 +3,7 @@
     {
       "title": "Location page header",
       "id": "location-page-header",
-      "body": "Our COVID risk level looks at three things: daily new cases (per 100K), infection rate, and positive test rate. Each is graded on a five-color scale and the highest risk color becomes the location’s overall risk level. The one exception is that if a location's daily new cases is green, then its overall risk level is green. \n\nWe developed our risk framework in partnership with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics. As there is not a standardized framework for risk in the U.S., it may not match your state or county's risk level. \n\n[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics).   ",
+      "body": "Our COVID risk level looks at three things: daily new cases (per 100K), infection rate, and positive test rate. Each is graded on a five-color scale and the highest risk color becomes the location’s overall risk level. The one exception is that if a location's daily new cases is green, then its overall risk level is green. \n\nWe developed our risk framework in partnership with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics. As there is not a standardized framework for risk in the U.S., it may not match your state or county's risk level.\n\nAs of January 2022 We have updated our “severe” risk label to “extremely high” for the sake of using consistent terminology. Risk thresholds remain the same.\n\n[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics).   ",
       "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics)."
     },
     {

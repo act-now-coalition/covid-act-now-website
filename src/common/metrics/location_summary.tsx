@@ -9,14 +9,14 @@ const LOW_NAME = 'Low';
 const MEDIUM_NAME = 'Medium';
 const MEDIUM_HIGH_NAME = 'High';
 const HIGH_NAME = 'Very high';
-const SUPER_CRITICAL_NAME = 'Severe';
+const SUPER_CRITICAL_NAME = 'Extremely high';
 const UNKNOWN = 'Unknown';
 
 const LEGEND_SUMMARY_LOW = 'Low risk';
 const LEGEND_SUMMARY_MEDIUM = 'Medium risk';
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'High risk';
 const LEGEND_SUMMARY_HIGH = 'Very high risk';
-const LEGEND_SUMMARY_SUPER_CRITICAL = 'Severe risk';
+const LEGEND_SUMMARY_SUPER_CRITICAL = 'Extremely high risk';
 
 const recommendationsLink = (
   <HashLink

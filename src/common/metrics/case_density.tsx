@@ -109,7 +109,7 @@ function renderThermometer(): React.ReactElement {
   const items = [
     {
       title: `Over ${levelCritical.upperLimit}`,
-      description: 'Severe outbreak',
+      description: 'Extremely high risk',
       color: levelExtreme.color,
       roundTop: true,
       roundBottom: false,

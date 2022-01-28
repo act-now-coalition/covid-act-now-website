@@ -43,7 +43,7 @@ const RiskLevelThermometer: React.FC = () => {
       {items.map((item: ThermometerItem) => {
         return <ColorBlock color={item.color} key={item.label} />;
       })}
-      <ThermometerLabel label="Severe" />
+      <ThermometerLabel label="Extremely high" />
     </ThermometerContainer>
   );
 };
