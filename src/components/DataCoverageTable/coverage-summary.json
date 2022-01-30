@@ -135,7 +135,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3101,
+      "regionsAvailable": 3106,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -192,15 +192,15 @@
     "name": "metrics.contactTracerCapacityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 48,
+      "regionsAvailable": 0,
       "totalStates": 53,
-      "statesAvailable": 48
+      "statesAvailable": 0
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1,
+      "regionsAvailable": 0,
       "totalStates": 53,
-      "statesAvailable": 1
+      "statesAvailable": 0
     },
     "metro": {
       "totalRegions": 392,
@@ -219,7 +219,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3019,
+      "regionsAvailable": 3012,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -240,7 +240,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3019,
+      "regionsAvailable": 3012,
       "totalStates": 53,
       "statesAvailable": 51
     },
