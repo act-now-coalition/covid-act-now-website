@@ -551,7 +551,7 @@
       "start_date": "",
       "end_date": "",
       "region": "ID",
-      "disclaimer": "We have received [reports](https://apnews.com/article/coronavirus-pandemic-lifestyle-health-public-health-idaho-96b67c8d8c5c733aa68b1fe3fa8408e0) that Idaho is significantly under-reporting cases due to an inability to keep up with the current volume. We don't have accurate case counts to report at this time.",
+      "disclaimer": "According to the \\[Idaho Division of Public Health](https://public.tableau.com/app/profile/idaho.division.of.public.health/viz/DPHIdahoCOVID-19Dashboard/Home) there is a significant backlog of test results pending review (42,400 as of February 1st). Given that this represents over 10x the daily average number of cases being reported, we cannot provide a trustworthy daily case count at this time.",
       "context": "https://apnews.com/article/coronavirus-pandemic-lifestyle-health-public-health-idaho-96b67c8d8c5c733aa68b1fe3fa8408e0"
     },
     {
@@ -639,6 +639,15 @@
       "region": "CA",
       "context": "CA CDC data revision 1/27/2021",
       "disclaimer": "On 1/27/2022, California made updates to data previously submitted to CDC that resulted in a decrease of 1,593,072 vaccine doses administered."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.icuCapacityRatio",
+      "blocked": true,
+      "start_date": "2022-01-27",
+      "end_date": "",
+      "region": "MA",
+      "context": "dropoff in ICU usage on 1/28/2022"
     }
   ]
 }
