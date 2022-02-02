@@ -25,7 +25,6 @@ export type ActualsTimeseries = Actualstimeseries;
 
 export interface SnapshotVersion {
   timestamp: string;
-  'covid-data-public': string;
   'covid-data-model': string;
 }
 
