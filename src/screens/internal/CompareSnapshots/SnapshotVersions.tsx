@@ -37,9 +37,6 @@ function VersionInfo({ version }: { version: SnapshotVersion | null }) {
         <b>covid-data-model:</b>{' '}
         {JSON.stringify(version['covid-data-model']).replace(',', ', ')}
         <br />
-        <b>covid-data-public:</b>{' '}
-        {JSON.stringify(version['covid-data-public']).replace(',', ', ')}
-        <br />
       </div>
     )
   );
