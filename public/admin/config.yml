@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: faihegberg/update-recommendations-section
   base_url: https://api.netlify.com
 
 # To use the CMS locally during development, run:

@@ -52,6 +52,7 @@ const Recommend = (props: {
                     className={recommendation.recommendationInfo.category}
                     source={recommendation.recommendationInfo.body}
                   />
+                  {recommendation.ctaInfo && <div>test</div>}
                 </RecommendationItem>
               );
             })}

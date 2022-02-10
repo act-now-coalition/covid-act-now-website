@@ -76,5 +76,17 @@
       "altText": "Airplane icon",
       "iconImage": "/images_cms/recommendations-travel-icon.svg"
     }
+  ],
+  "ctaLinks": [
+    {
+      "category": "MASKS",
+      "link": "https://www.google.ca/",
+      "buttonType": "FILL"
+    },
+    {
+      "category": "GATHERINGS",
+      "link": "https://www.covidactnow.org/",
+      "buttonType": "OUTLINE"
+    }
   ]
 }

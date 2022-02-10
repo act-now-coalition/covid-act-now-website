@@ -67,6 +67,12 @@ export interface RecommendIcon {
   iconImage: ImageUrl;
 }
 
+export interface RecommendCTA {
+  category: RecommendCategory;
+  link: string;
+  buttonType: string;
+}
+
 interface FullFedLevel {
   color: FedLevel;
   content: Markdown;
@@ -86,6 +92,7 @@ export interface RecommendationsMainContent {
     shareText: Markdown;
   };
   icons: RecommendIcon[];
+  ctaLinks: RecommendCTA[];
 }
 
 export interface RecommendationsModalContent {
@@ -105,9 +112,11 @@ export interface RecommendationsModalContent {
 export interface RecommendationWithIcon {
   recommendationInfo: Recommendation;
   iconInfo: RecommendIcon;
+  ctaInfo: RecommendCTA;
   index: number;
 }
 
 export const allIcons = recommendationsMain.icons as RecommendIcon[];
+export const allCtaLinks = recommendationsMain.ctaLinks as RecommendCTA[];
 export const mainContent = recommendationsMain as RecommendationsMainContent;
 export const modalContent = recommendationsModal as RecommendationsModalContent;

@@ -10,10 +10,12 @@ import {
   Recommendation,
   RecommendationSource,
   RecommendIcon,
+  RecommendCTA,
   RecommendationWithIcon,
   RecommendCategory,
   RecommendID,
   allIcons,
+  allCtaLinks,
 } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { formatDecimal } from '.';
@@ -162,9 +164,13 @@ function getIcon(
   const correspondingIcon = allIcons.filter(
     (icon: RecommendIcon) => icon.category === recommendation.category,
   );
+  const correspondingCta = allCtaLinks.filter(
+    (ctaLink: RecommendCTA) => ctaLink.category === recommendation.category,
+  );
   return {
     recommendationInfo: recommendation,
     iconInfo: correspondingIcon[0],
+    ctaInfo: correspondingCta[0],
     index: i,
   };
 }
