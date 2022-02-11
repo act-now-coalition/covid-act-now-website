@@ -65,7 +65,9 @@ export default function HomePage() {
     [largestMetroFips, userRegions],
   );
   // Add USA to default view (Fips code: 0).
-  exploreGeoLocations.push(regions.usa.fipsCode);
+  if (!exploreGeoLocations.includes(regions.usa.fipsCode)) {
+    exploreGeoLocations.push(regions.usa.fipsCode);
+  }
   const initialFipsListForExplore = exploreGeoLocations;
 
   useEffect(() => {
