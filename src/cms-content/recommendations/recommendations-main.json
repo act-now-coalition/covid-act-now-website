@@ -80,13 +80,15 @@
   "ctaLinks": [
     {
       "category": "MASKS",
-      "link": "https://www.google.ca/",
-      "buttonType": "FILL"
+      "link": "https://www.covidactnow.org/",
+      "buttonType": "FILL",
+      "buttonText": "Masks placeholder text"
     },
     {
       "category": "GATHERINGS",
       "link": "https://www.covidactnow.org/",
-      "buttonType": "OUTLINE"
+      "buttonType": "OUTLINE",
+      "buttonText": "Gatherings placeholder text"
     }
   ]
 }

@@ -71,6 +71,7 @@ export interface RecommendCTA {
   category: RecommendCategory;
   link: string;
   buttonType: string;
+  buttonText: string;
 }
 
 interface FullFedLevel {

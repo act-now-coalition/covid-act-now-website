@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { MarkdownContent, anchorStyles } from 'components/Markdown';
+import { FilledButton, OutlinedButton } from 'components/ButtonSystem';
+import { ButtonType } from 'assets/theme/buttons';
 
 export const Column = styled.div`
   display: flex;
@@ -50,6 +52,8 @@ export const RecommendationsContainer = styled.div`
   }
 `;
 
+export const RecommendationContent = styled.div``;
+
 export const RecommendationBody = styled(MarkdownContent)`
   margin: auto 0;
 
@@ -71,4 +75,31 @@ export const RecommendationBody = styled(MarkdownContent)`
 export const Icon = styled.img`
   margin-right: 1.25rem;
   min-width: 2rem;
+`;
+
+export const StyledFilledButton = styled(FilledButton)`
+  width: 100%;
+  margin: 0.5rem 0;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: initial;
+    margin: 0.75rem 0 1rem 0;
+  }
+`;
+
+export const StyledOutlinedButton = styled(OutlinedButton)`
+  width: 100%;
+  margin: 0.5rem 0;
+
+  &:hover {
+    background-color: ${props =>
+      props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
+    border: ${props =>
+      `1px solid ${props.theme.buttons[ButtonType.OUTLINE].borderHover}`};
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: initial;
+    margin: 0.75rem 0 1rem 0;
+  }
 `;
