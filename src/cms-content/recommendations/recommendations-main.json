@@ -77,12 +77,5 @@
       "iconImage": "/images_cms/recommendations-travel-icon.svg"
     }
   ],
-  "ctaLinks": [
-    {
-      "category": "MASKS",
-      "link": "https://www.covidactnow.org/",
-      "buttonType": "FILL",
-      "buttonText": "Placeholder text"
-    }
-  ]
+  "ctaLinks": []
 }
