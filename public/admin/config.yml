@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: faihegberg/update-recommendations-section
+  branch: cms-content-entry
   base_url: https://api.netlify.com
 
 # To use the CMS locally during development, run:
@@ -317,6 +317,7 @@ collections:
               - { label: Category, name: category, widget: string }
               - { label: Link, name: link, widget: string }
               - { label: Button type, name: buttonType, widget: string }
+              - { label: Button text, name: buttonText, widget: string }
       - name: Recommendations-Modal
         label: 'Modal'
         file: src/cms-content/recommendations/recommendations-modal.json
