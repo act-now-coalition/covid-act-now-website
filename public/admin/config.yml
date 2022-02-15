@@ -292,8 +292,8 @@ collections:
                 widget: object
                 required: false
                 fields:
-                  - { label: Alt text, name: altText, widget: string }
-                  - { label: Icon image, name: iconImage, widget: image }
+                  - { label: Alt text, name: altText, widget: string, required: false }
+                  - { label: Icon image, name: iconImage, widget: image, required: false }
               - label: CTA
                 name: cta
                 widget: object
@@ -303,10 +303,11 @@ collections:
                       label: Button type,
                       name: buttonType,
                       widget: select,
-                      options: ["FILL", "OUTLINE", "TEXT"]
+                      options: ["FILL", "OUTLINE", "TEXT"],
+                      required: false
                     }
-                  - { label: Text, name: text, widget: string }
-                  - { label: URL, name: url, widget: string }
+                  - { label: Text, name: text, widget: string, required: false }
+                  - { label: URL, name: url, widget: string, required: false }
           - label: Footer
             name: footer
             widget: object
