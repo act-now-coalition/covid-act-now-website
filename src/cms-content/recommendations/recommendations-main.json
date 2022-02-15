@@ -5,7 +5,11 @@
       "source": "FED",
       "category": "MASKS",
       "level": "ALL",
-      "id": "MASKS_ALL"
+      "id": "MASKS_ALL",
+      "icon": {
+        "altText": "Mask icon",
+        "iconImage": "/images_cms/mask_recommends_icon.svg"
+      }
     },
     {
       "body": "**Indoor gatherings** should be avoided with people outside the immediate household, unless you are fully vaccinated. See [guidance for vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html). Outdoor gatherings with masks and distancing are a safer alternative.",
