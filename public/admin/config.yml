@@ -314,10 +314,31 @@ collections:
             name: ctaLinks
             widget: list
             fields:
-              - { label: Category, name: category, widget: string }
-              - { label: Link, name: link, widget: string }
-              - { label: Button type, name: buttonType, widget: string }
-              - { label: Button text, name: buttonText, widget: string }
+              - {
+                  label: Category,
+                  name: category,
+                  widget: select,
+                  options:
+                    [
+                      "BARS",
+                      "GYMS",
+                      "RESTAURANTS",
+                      "MASKS",
+                      "GATHERINGS",
+                      "SCHOOLS",
+                      "TRAVEL",
+                      "EXPOSURE_APP",
+                    ]
+                }
+              - {
+                  label: Button type,
+                  name: buttonType,
+                  widget: select,
+                  options: ["FILL", "OUTLINE", "TEXT"]
+                }
+              - { label: Text, name: text, widget: string }
+              - { label: URL, name: url, widget: string }
+            required: false
       - name: Recommendations-Modal
         label: 'Modal'
         file: src/cms-content/recommendations/recommendations-modal.json
