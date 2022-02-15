@@ -135,10 +135,9 @@ const About = () => {
           <AboutHeading2>{aboutContent.impactHeader}</AboutHeading2>
           <SectionContent>
             <MarkdownContent source={aboutContent.impactContent} />
-            <Button href="https://actnowcoalition.org" cta="Learn more" />
           </SectionContent>
           <ButtonContainer>
-            <Button to="/case-studies" cta="View case studies" />
+            <Button href="https://actnowcoalition.org" cta="Learn more" />
           </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="partners">
@@ -176,6 +175,9 @@ const About = () => {
               </PartnersSectionWrapper>
             </ExpandableContainer>
           </SectionContent>
+          <ButtonContainer>
+            <Button to="/case-studies" cta="See case studies" />
+          </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="team">
           <AboutHeading2>{aboutContent.teamHeader}</AboutHeading2>
