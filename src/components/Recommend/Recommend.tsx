@@ -2,7 +2,7 @@ import React from 'react';
 import chunk from 'lodash/chunk';
 import ceil from 'lodash/ceil';
 import partition from 'lodash/partition';
-import { RecommendationWithIcon } from 'cms-content/recommendations';
+import { Recommendation } from 'cms-content/recommendations';
 import {
   RecommendationsContainer,
   RecommendationBody,
@@ -13,7 +13,7 @@ import {
 import { useBreakpoint } from 'common/hooks';
 
 const Recommend = (props: {
-  recommendations: RecommendationWithIcon[];
+  recommendations: Recommendation[];
   recommendationsRef: React.RefObject<HTMLDivElement>;
 }) => {
   const { recommendations, recommendationsRef } = props;
@@ -25,8 +25,12 @@ const Recommend = (props: {
   */
   const midpoint = ceil(recommendations.length / 2);
   const halvedInOrder = chunk(recommendations, midpoint);
+  const indexedRecommendations = recommendations.map((item, index) => ({
+    index,
+    ...item,
+  }));
   const partitionedByIndex = partition(
-    recommendations,
+    indexedRecommendations,
     item => item.index % 2 === 0,
   );
 
@@ -45,12 +49,12 @@ const Recommend = (props: {
                   highlight={false}
                 >
                   <Icon
-                    src={recommendation.iconInfo.iconImage}
-                    alt={recommendation.iconInfo.altText}
+                    src={recommendation.icon.iconImage}
+                    alt={recommendation.icon.altText}
                   />
                   <RecommendationBody
-                    className={recommendation.recommendationInfo.category}
-                    source={recommendation.recommendationInfo.body}
+                    className={recommendation.category}
+                    source={recommendation.body}
                   />
                 </RecommendationItem>
               );
