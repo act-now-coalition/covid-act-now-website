@@ -9,11 +9,8 @@ import {
   FedLevel,
   Recommendation,
   RecommendationSource,
-  RecommendIcon,
-  RecommendationWithIcon,
   RecommendCategory,
   RecommendID,
-  allIcons,
 } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { formatDecimal } from '.';
@@ -49,6 +46,10 @@ function getExposureRecommendation(
     level: FedLevel.GREEN,
     category: RecommendCategory.EXPOSURE_APP,
     id: RecommendID.EXPOSURE_APP,
+    icon: {
+      iconImage: '/images_cms/exposure_recommends_icon.svg',
+      altText: 'Notification icon',
+    },
   };
 
   return showExposureNotifications(region) ? exposureRecommendation : null;
@@ -97,7 +98,7 @@ export function getRecommendations(
     ...otherRecommendations,
   ];
 
-  return allRecommendations.map(getIcon);
+  return allRecommendations;
 }
 
 /**
@@ -153,20 +154,6 @@ export function getDynamicIntroCopy(
   }, people in ${locationName} are advised to adhere to the following recommendations.`;
 
   return blurb;
-}
-
-function getIcon(
-  recommendation: Recommendation,
-  i: number,
-): RecommendationWithIcon {
-  const correspondingIcon = allIcons.filter(
-    (icon: RecommendIcon) => icon.category === recommendation.category,
-  );
-  return {
-    recommendationInfo: recommendation,
-    iconInfo: correspondingIcon[0],
-    index: i,
-  };
 }
 
 /*
