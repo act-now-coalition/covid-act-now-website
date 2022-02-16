@@ -137,7 +137,7 @@ const About = () => {
             <MarkdownContent source={aboutContent.impactContent} />
           </SectionContent>
           <ButtonContainer>
-            <Button href="https://actnowcoalition.org" cta="Learn more" />
+            <Button href="https://www.actnowcoalition.org" cta="Learn more" />
           </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="partners">
