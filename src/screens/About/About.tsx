@@ -48,10 +48,6 @@ export const sidebarItems: TocItem[] = [
         label: aboutContent.impactHeader,
       },
       {
-        to: '/about#future-projects',
-        label: aboutContent.futureProjectsHeader,
-      },
-      {
         to: '/about#partners',
         label: aboutContent.partnersHeader,
       },
@@ -141,14 +137,8 @@ const About = () => {
             <MarkdownContent source={aboutContent.impactContent} />
           </SectionContent>
           <ButtonContainer>
-            <Button to="/case-studies" cta="View case studies" />
+            <Button href="https://www.actnowcoalition.org" cta="Learn more" />
           </ButtonContainer>
-        </HashWrapper>
-        <HashWrapper id="future-projects">
-          <AboutHeading2>{aboutContent.futureProjectsHeader}</AboutHeading2>
-          <SectionContent>
-            <MarkdownContent source={aboutContent.futureProjectsContent} />
-          </SectionContent>
         </HashWrapper>
         <HashWrapper id="partners">
           <AboutHeading2>{aboutContent.partnersHeader}</AboutHeading2>
@@ -185,6 +175,9 @@ const About = () => {
               </PartnersSectionWrapper>
             </ExpandableContainer>
           </SectionContent>
+          <ButtonContainer>
+            <Button to="/case-studies" cta="See case studies" />
+          </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="team">
           <AboutHeading2>{aboutContent.teamHeader}</AboutHeading2>

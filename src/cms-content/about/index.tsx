@@ -30,8 +30,6 @@ interface AboutContent {
   partnersContent: PartnersContent[];
   teamHeader: string;
   teamIntro: Markdown;
-  futureProjectsHeader: string;
-  futureProjectsContent: Markdown;
   contactUsHeader: string;
   contactUsContent: Markdown;
 }
