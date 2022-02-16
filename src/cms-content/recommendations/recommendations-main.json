@@ -7,9 +7,9 @@
       "level": "ALL",
       "id": "MASKS_ALL",
       "cta": {
-        "buttonType": "FILL",
-        "text": "Mask placeholder",
-        "url": "https://www.covidactnow.org/"
+        "buttonType": null,
+        "text": "",
+        "url": ""
       }
     },
     {
