@@ -25,7 +25,6 @@ const CTAButton: React.FC<{
   category: RecommendCategory;
 }> = ({ cta, category }) => {
   if (getButtonType(cta.buttonType) === ButtonType.FILL) {
-    console.log(`${category}: CTA button`);
     return (
       <StyledFilledButton
         trackingCategory={EventCategory.RECOMMENDATIONS}
@@ -33,7 +32,7 @@ const CTAButton: React.FC<{
         href={cta.url}
         endIcon={<OpenInNewIcon />}
       >
-        {cta.buttonText}
+        {cta.text}
       </StyledFilledButton>
     );
   } else if (getButtonType(cta.buttonType) === ButtonType.OUTLINE) {
@@ -44,7 +43,7 @@ const CTAButton: React.FC<{
         href={cta.url}
         endIcon={<OpenInNewIcon />}
       >
-        {cta.buttonText}
+        {cta.text}
       </StyledOutlinedButton>
     );
   }
