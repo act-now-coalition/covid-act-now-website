@@ -2,7 +2,7 @@ import React from 'react';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { StyledFilledButton, StyledOutlinedButton } from './Recommend.style';
 import { EventCategory } from 'components/Analytics';
-import { RecommendCTA } from 'cms-content/recommendations';
+import { RecommendCTA, RecommendCategory } from 'cms-content/recommendations';
 import { ButtonType } from 'assets/theme/buttons';
 
 function getButtonType(rawButtonType: string): ButtonType {
@@ -20,32 +20,31 @@ function getButtonType(rawButtonType: string): ButtonType {
   }
 }
 
-const CTAButton: React.FC<RecommendCTA> = ({
-  category,
-  link,
-  buttonType,
-  buttonText,
-}) => {
-  if (getButtonType(buttonType) === ButtonType.FILL) {
+const CTAButton: React.FC<{
+  cta: RecommendCTA;
+  category: RecommendCategory;
+}> = ({ cta, category }) => {
+  if (getButtonType(cta.buttonType) === ButtonType.FILL) {
+    console.log(`${category}: CTA button`);
     return (
       <StyledFilledButton
         trackingCategory={EventCategory.RECOMMENDATIONS}
         trackingLabel={`${category}: CTA button`}
-        href={link}
+        href={cta.url}
         endIcon={<OpenInNewIcon />}
       >
-        {buttonText}
+        {cta.buttonText}
       </StyledFilledButton>
     );
-  } else if (getButtonType(buttonType) === ButtonType.OUTLINE) {
+  } else if (getButtonType(cta.buttonType) === ButtonType.OUTLINE) {
     return (
       <StyledOutlinedButton
         trackingCategory={EventCategory.RECOMMENDATIONS}
         trackingLabel={`${category}: CTA button`}
-        href={link}
+        href={cta.url}
         endIcon={<OpenInNewIcon />}
       >
-        {buttonText}
+        {cta.buttonText}
       </StyledOutlinedButton>
     );
   }

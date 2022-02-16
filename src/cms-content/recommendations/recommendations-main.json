@@ -5,28 +5,44 @@
       "source": "FED",
       "category": "MASKS",
       "level": "ALL",
-      "id": "MASKS_ALL"
+      "id": "MASKS_ALL",
+      "icon": {
+        "altText": "Mask icon",
+        "iconImage": "/images_cms/mask_recommends_icon.svg"
+      }
     },
     {
       "body": "**Indoor gatherings** should be avoided with people outside the immediate household, unless you are fully vaccinated. See [guidance for vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html). Outdoor gatherings with masks and distancing are a safer alternative.",
       "source": "FED",
       "category": "GATHERINGS",
       "level": "ALL",
-      "id": "GATHERINGS_ALL"
+      "id": "GATHERINGS_ALL",
+      "icon": {
+        "altText": "Gatherings icon",
+        "iconImage": "/images_cms/gathering_recommends_icon.svg"
+      }
     },
     {
       "body": "**Travel** should be avoided unless it is necessary or you are fully vaccinated.",
       "source": "FED",
       "category": "TRAVEL",
       "level": "ALL",
-      "id": "TRAVEL_ALL"
+      "id": "TRAVEL_ALL",
+      "icon": {
+        "altText": "Airplane icon",
+        "iconImage": "/images_cms/recommendations-travel-icon.svg"
+      }
     },
     {
       "body": "**Schools** can safely offer in-person learning only when [these infection control measures](https://covidactnow.org/covid-explained/school-guidance) are in place.",
       "category": "SCHOOLS",
       "source": "HGHI",
       "level": "ALL",
-      "id": "SCHOOLS_ALL"
+      "id": "SCHOOLS_ALL",
+      "icon": {
+        "altText": "Schools icon",
+        "iconImage": "/images_cms/school_recommends_icon.svg"
+      }
     }
   ],
   "header": "Recommended actions",
@@ -34,48 +50,5 @@
     "feedbackButtonLabel": "Leave feedback",
     "modalButtonLabel": "Sources & Methodology",
     "shareText": "Please share with policy makers, business owners, and any other decision makers, especially if these recommendations don’t match reality."
-  },
-  "icons": [
-    {
-      "category": "MASKS",
-      "altText": "Mask icon",
-      "iconImage": "/images_cms/mask_recommends_icon.svg"
-    },
-    {
-      "category": "EXPOSURE_APP",
-      "altText": "Exposure App",
-      "iconImage": "/images_cms/exposure_recommends_icon.svg"
-    },
-    {
-      "category": "GATHERINGS",
-      "altText": "Gatherings icon",
-      "iconImage": "/images_cms/gathering_recommends_icon.svg"
-    },
-    {
-      "category": "RESTAURANTS",
-      "altText": "Restaurants icon",
-      "iconImage": "/images_cms/restaurant_recommends_icon.svg"
-    },
-    {
-      "category": "BARS",
-      "altText": "Bars icon",
-      "iconImage": "/images_cms/bar_recommends_icon.svg"
-    },
-    {
-      "category": "GYMS",
-      "altText": "Gyms icon",
-      "iconImage": "/images_cms/gym_recommends_icon.svg"
-    },
-    {
-      "category": "SCHOOLS",
-      "altText": "Schools icon",
-      "iconImage": "/images_cms/school_recommends_icon.svg"
-    },
-    {
-      "category": "TRAVEL",
-      "altText": "Airplane icon",
-      "iconImage": "/images_cms/recommendations-travel-icon.svg"
-    }
-  ],
-  "ctaLinks": []
+  }
 }

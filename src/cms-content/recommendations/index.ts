@@ -59,19 +59,19 @@ export interface Recommendation {
   level: FedLevel | HarvardLevel;
   category: RecommendCategory;
   id: RecommendID;
+  icon: RecommendIcon;
+  cta?: RecommendCTA;
 }
 
-export interface RecommendIcon {
-  category: RecommendCategory;
+interface RecommendIcon {
   altText: string;
   iconImage: ImageUrl;
 }
 
 export interface RecommendCTA {
-  category: RecommendCategory;
-  link: string;
   buttonType: string;
   buttonText: string;
+  url: string;
 }
 
 interface FullFedLevel {
@@ -110,14 +110,5 @@ export interface RecommendationsModalContent {
   };
 }
 
-export interface RecommendationWithIcon {
-  recommendationInfo: Recommendation;
-  iconInfo: RecommendIcon;
-  ctaInfo: RecommendCTA;
-  index: number;
-}
-
-export const allIcons = recommendationsMain.icons as RecommendIcon[];
-export const allCtaLinks = recommendationsMain.ctaLinks as RecommendCTA[];
 export const mainContent = recommendationsMain as RecommendationsMainContent;
 export const modalContent = recommendationsModal as RecommendationsModalContent;
