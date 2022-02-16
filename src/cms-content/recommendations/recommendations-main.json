@@ -11,9 +11,9 @@
         "iconImage": "/images_cms/mask_recommends_icon.svg"
       },
       "cta": {
-        "buttonType": "FILL",
-        "text": "Button text",
-        "url": "https://www.covidactnow.org/"
+        "buttonType": null,
+        "text": "",
+        "url": ""
       }
     },
     {
