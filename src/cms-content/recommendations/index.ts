@@ -92,8 +92,6 @@ export interface RecommendationsMainContent {
     modalButtonLabel: string;
     shareText: Markdown;
   };
-  icons: RecommendIcon[];
-  ctaLinks: RecommendCTA[];
 }
 
 export interface RecommendationsModalContent {

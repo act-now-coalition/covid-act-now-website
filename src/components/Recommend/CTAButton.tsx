@@ -9,8 +9,7 @@ function getButtonType(rawButtonType: string): ButtonType {
   if (!rawButtonType) {
     return ButtonType.FILL;
   }
-  const buttonType = rawButtonType.toUpperCase();
-  switch (buttonType) {
+  switch (rawButtonType) {
     case 'OUTLINE':
       return ButtonType.OUTLINE;
     case 'TEXT':
@@ -24,7 +23,13 @@ const CTAButton: React.FC<{
   cta: RecommendCTA;
   category: RecommendCategory;
 }> = ({ cta, category }) => {
-  if (getButtonType(cta.buttonType) === ButtonType.FILL) {
+  /**
+   * Although CTA buttons are optional, in Netlify, if a parent (i.e. CTA button) is optional, all fields underneath it (i.e. buttonType, text, url) must be optional.
+   * This leaves room for content writers to fill in some fields for the CTA button, but not all.
+   * `validFields` confirms all fields are filled prior to returning a button.
+   */
+  const validFields = cta.buttonType && cta.text && cta.url;
+  if (validFields && getButtonType(cta.buttonType) === ButtonType.FILL) {
     return (
       <StyledFilledButton
         trackingCategory={EventCategory.RECOMMENDATIONS}
@@ -35,7 +40,10 @@ const CTAButton: React.FC<{
         {cta.text}
       </StyledFilledButton>
     );
-  } else if (getButtonType(cta.buttonType) === ButtonType.OUTLINE) {
+  } else if (
+    validFields &&
+    getButtonType(cta.buttonType) === ButtonType.OUTLINE
+  ) {
     return (
       <StyledOutlinedButton
         trackingCategory={EventCategory.RECOMMENDATIONS}
