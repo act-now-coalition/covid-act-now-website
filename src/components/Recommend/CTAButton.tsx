@@ -5,10 +5,7 @@ import { EventCategory } from 'components/Analytics';
 import { RecommendCTA, RecommendCategory } from 'cms-content/recommendations';
 import { ButtonType } from 'assets/theme/buttons';
 
-function getButtonType(rawButtonType: string): ButtonType {
-  if (!rawButtonType) {
-    return ButtonType.FILL;
-  }
+function getButtonType(rawButtonType: 'FILL' | 'OUTLINE' | 'TEXT'): ButtonType {
   switch (rawButtonType) {
     case 'OUTLINE':
       return ButtonType.OUTLINE;
@@ -18,6 +15,36 @@ function getButtonType(rawButtonType: string): ButtonType {
       return ButtonType.FILL;
   }
 }
+
+const StyledButton: React.FC<{
+  buttonType: ButtonType;
+  trackingCategory: EventCategory;
+  trackingLabel: string;
+  href: string;
+  endIcon: JSX.Element;
+}> = ({
+  buttonType,
+  trackingCategory,
+  trackingLabel,
+  href,
+  endIcon,
+  children,
+}) => {
+  const buttonProps = {
+    trackingCategory,
+    trackingLabel,
+    href,
+    endIcon,
+  };
+  if (buttonType === ButtonType.FILL) {
+    return <StyledFilledButton {...buttonProps}>{children}</StyledFilledButton>;
+  } else if (buttonType === ButtonType.OUTLINE) {
+    return (
+      <StyledOutlinedButton {...buttonProps}>{children}</StyledOutlinedButton>
+    );
+  }
+  return null;
+};
 
 const CTAButton: React.FC<{
   cta: RecommendCTA;
@@ -30,33 +57,20 @@ const CTAButton: React.FC<{
    * `validFields` confirms all fields are filled prior to returning a button.
    */
   const validFields = cta.buttonType && cta.text && cta.url;
-  if (validFields && getButtonType(cta.buttonType) === ButtonType.FILL) {
-    return (
-      <StyledFilledButton
-        trackingCategory={EventCategory.RECOMMENDATIONS}
-        trackingLabel={`${category}: CTA button`}
-        href={cta.url}
-        endIcon={<OpenInNewIcon />}
-      >
-        {cta.text}
-      </StyledFilledButton>
-    );
-  } else if (
-    validFields &&
-    getButtonType(cta.buttonType) === ButtonType.OUTLINE
-  ) {
-    return (
-      <StyledOutlinedButton
-        trackingCategory={EventCategory.RECOMMENDATIONS}
-        trackingLabel={`${category}: CTA button`}
-        href={cta.url}
-        endIcon={<OpenInNewIcon />}
-      >
-        {cta.text}
-      </StyledOutlinedButton>
-    );
+  if (!validFields) {
+    return null;
   }
-  return null;
+  return (
+    <StyledButton
+      buttonType={getButtonType(cta.buttonType)}
+      trackingCategory={EventCategory.RECOMMENDATIONS}
+      trackingLabel={category}
+      href={cta.url}
+      endIcon={<OpenInNewIcon />}
+    >
+      {cta.text}
+    </StyledButton>
+  );
 };
 
 export default CTAButton;

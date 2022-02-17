@@ -3,7 +3,6 @@ import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { MarkdownContent, anchorStyles } from 'components/Markdown';
 import { FilledButton, OutlinedButton } from 'components/ButtonSystem';
-import { ButtonType } from 'assets/theme/buttons';
 
 export const Column = styled.div`
   display: flex;
@@ -90,13 +89,6 @@ export const StyledFilledButton = styled(FilledButton)`
 export const StyledOutlinedButton = styled(OutlinedButton)`
   width: 100%;
   margin: 0.5rem 0;
-
-  &:hover {
-    background-color: ${props =>
-      props.theme.buttons[ButtonType.OUTLINE].backgroundHover};
-    border: ${props =>
-      `1px solid ${props.theme.buttons[ButtonType.OUTLINE].borderHover}`};
-  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     width: initial;

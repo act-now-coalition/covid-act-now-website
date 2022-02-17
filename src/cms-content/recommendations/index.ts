@@ -69,7 +69,7 @@ interface RecommendIcon {
 }
 
 export interface RecommendCTA {
-  buttonType: string;
+  buttonType: 'FILL' | 'OUTLINE' | 'TEXT';
   text: string;
   url: string;
 }
