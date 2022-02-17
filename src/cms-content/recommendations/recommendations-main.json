@@ -50,47 +50,5 @@
     "feedbackButtonLabel": "Leave feedback",
     "modalButtonLabel": "Sources & Methodology",
     "shareText": "Please share with policy makers, business owners, and any other decision makers, especially if these recommendations don’t match reality."
-  },
-  "icons": [
-    {
-      "category": "MASKS",
-      "altText": "Mask icon",
-      "iconImage": "/images_cms/mask_recommends_icon.svg"
-    },
-    {
-      "category": "EXPOSURE_APP",
-      "altText": "Exposure App",
-      "iconImage": "/images_cms/exposure_recommends_icon.svg"
-    },
-    {
-      "category": "GATHERINGS",
-      "altText": "Gatherings icon",
-      "iconImage": "/images_cms/gathering_recommends_icon.svg"
-    },
-    {
-      "category": "RESTAURANTS",
-      "altText": "Restaurants icon",
-      "iconImage": "/images_cms/restaurant_recommends_icon.svg"
-    },
-    {
-      "category": "BARS",
-      "altText": "Bars icon",
-      "iconImage": "/images_cms/bar_recommends_icon.svg"
-    },
-    {
-      "category": "GYMS",
-      "altText": "Gyms icon",
-      "iconImage": "/images_cms/gym_recommends_icon.svg"
-    },
-    {
-      "category": "SCHOOLS",
-      "altText": "Schools icon",
-      "iconImage": "/images_cms/school_recommends_icon.svg"
-    },
-    {
-      "category": "TRAVEL",
-      "altText": "Airplane icon",
-      "iconImage": "/images_cms/recommendations-travel-icon.svg"
-    }
-  ]
+  }
 }

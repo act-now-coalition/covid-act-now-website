@@ -59,10 +59,10 @@ export interface Recommendation {
   level: FedLevel | HarvardLevel;
   category: RecommendCategory;
   id: RecommendID;
+  icon: RecommendIcon;
 }
 
-export interface RecommendIcon {
-  category: RecommendCategory;
+interface RecommendIcon {
   altText: string;
   iconImage: ImageUrl;
 }
@@ -102,12 +102,5 @@ export interface RecommendationsModalContent {
   };
 }
 
-export interface RecommendationWithIcon {
-  recommendationInfo: Recommendation;
-  iconInfo: RecommendIcon;
-  index: number;
-}
-
-export const allIcons = recommendationsMain.icons as RecommendIcon[];
 export const mainContent = recommendationsMain as RecommendationsMainContent;
 export const modalContent = recommendationsModal as RecommendationsModalContent;
