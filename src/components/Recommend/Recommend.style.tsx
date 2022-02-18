@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { MarkdownContent, anchorStyles } from 'components/Markdown';
@@ -76,7 +76,7 @@ export const Icon = styled.img`
   min-width: 2rem;
 `;
 
-export const StyledFilledButton = styled(FilledButton)`
+export const ButtonStyles = css`
   width: 100%;
   margin: 0.5rem 0;
 
@@ -86,12 +86,10 @@ export const StyledFilledButton = styled(FilledButton)`
   }
 `;
 
-export const StyledOutlinedButton = styled(OutlinedButton)`
-  width: 100%;
-  margin: 0.5rem 0;
+export const StyledFilledButton = styled(FilledButton)`
+  ${ButtonStyles};
+`;
 
-  @media (min-width: ${materialSMBreakpoint}) {
-    width: initial;
-    margin: 0.75rem 0 1rem 0;
-  }
+export const StyledOutlinedButton = styled(OutlinedButton)`
+  ${ButtonStyles};
 `;
