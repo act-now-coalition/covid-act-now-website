@@ -61,46 +61,23 @@ export function getRecommendations(
 ): any[] {
   // Partitioning to control order:
 
-  const [travelRecommendation, recommendationsWithoutTravel] = partition(
-    recommendations,
-    item => item.category === RecommendCategory.TRAVEL,
-  );
+  const recommendationCategoryOrdering = [
+    RecommendCategory.BOOSTER,
+    RecommendCategory.TESTING,
+    RecommendCategory.VACCINATION,
+    RecommendCategory.MASKS,
+  ];
 
-  const [schoolRecommendation, recommendationsWithoutSchool] = partition(
-    recommendationsWithoutTravel,
-    item => item.category === RecommendCategory.SCHOOLS,
-  );
-
-  const [
-    gatheringsRecommendation,
-    recommendationsWithoutGatherings,
-  ] = partition(
-    recommendationsWithoutSchool,
-    item => item.category === RecommendCategory.GATHERINGS,
-  );
-
-  const [masksRecommendation, recommendationsWithoutMasks] = partition(
-    recommendationsWithoutGatherings,
-    item => item.category === RecommendCategory.MASKS,
-  );
-
-  const [
-    vaccinationRecommendation,
-    recommendationsWithoutVaccination,
-  ] = partition(
-    recommendationsWithoutMasks,
-    item => item.category === RecommendCategory.VACCINATION,
-  );
-
-  const [boosterRecommendation, recommendationsWithoutBooster] = partition(
-    recommendationsWithoutVaccination,
-    item => item.category === RecommendCategory.BOOSTER,
-  );
-
-  const [testingRecommendation, otherRecommendations] = partition(
-    recommendationsWithoutBooster,
-    item => item.category === RecommendCategory.TESTING,
-  );
+  let remainingRecommendations = recommendations;
+  let orderedRecommendations: Recommendation[] = [];
+  for (const category of recommendationCategoryOrdering) {
+    const [inCategory, notInCategory] = partition(
+      remainingRecommendations,
+      item => item.category === category,
+    );
+    orderedRecommendations = orderedRecommendations.concat(inCategory);
+    remainingRecommendations = notInCategory;
+  }
 
   const notificationRecommendation = getExposureRecommendation(region);
   const exposureRecommendations = notificationRecommendation
@@ -108,15 +85,9 @@ export function getRecommendations(
     : [];
 
   const allRecommendations = [
-    ...masksRecommendation,
-    ...gatheringsRecommendation,
+    ...orderedRecommendations,
+    ...remainingRecommendations,
     ...exposureRecommendations,
-    ...schoolRecommendation,
-    ...travelRecommendation,
-    ...vaccinationRecommendation,
-    ...boosterRecommendation,
-    ...testingRecommendation,
-    ...otherRecommendations,
   ];
 
   return allRecommendations;
