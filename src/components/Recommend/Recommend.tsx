@@ -9,8 +9,10 @@ import {
   Icon,
   Column,
   RecommendationItem,
+  RecommendationContent,
 } from './Recommend.style';
 import { useBreakpoint } from 'common/hooks';
+import CTAButton from './CTAButton';
 
 const Recommend = (props: {
   recommendations: Recommendation[];
@@ -52,10 +54,18 @@ const Recommend = (props: {
                     src={recommendation.icon.iconImage}
                     alt={recommendation.icon.altText}
                   />
-                  <RecommendationBody
-                    className={recommendation.category}
-                    source={recommendation.body}
-                  />
+                  <RecommendationContent>
+                    <RecommendationBody
+                      className={recommendation.category}
+                      source={recommendation.body}
+                    />
+                    {recommendation.cta && (
+                      <CTAButton
+                        cta={recommendation.cta}
+                        category={recommendation.category}
+                      />
+                    )}
+                  </RecommendationContent>
                 </RecommendationItem>
               );
             })}
