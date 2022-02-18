@@ -33,6 +33,9 @@ export enum RecommendCategory {
   SCHOOLS = 'SCHOOLS',
   TRAVEL = 'TRAVEL',
   EXPOSURE_APP = 'EXPOSURE_APP',
+  VACCINATION = 'VACCINATION',
+  BOOSTER = 'BOOSTER',
+  TESTING = 'TESTING',
 }
 
 export enum RecommendID {

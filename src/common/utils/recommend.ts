@@ -79,9 +79,27 @@ export function getRecommendations(
     item => item.category === RecommendCategory.GATHERINGS,
   );
 
-  const [masksRecommendation, otherRecommendations] = partition(
+  const [masksRecommendation, recommendationsWithoutMasks] = partition(
     recommendationsWithoutGatherings,
     item => item.category === RecommendCategory.MASKS,
+  );
+
+  const [
+    vaccinationRecommendation,
+    recommendationsWithoutVaccination,
+  ] = partition(
+    recommendationsWithoutMasks,
+    item => item.category === RecommendCategory.VACCINATION,
+  );
+
+  const [boosterRecommendation, recommendationsWithoutBooster] = partition(
+    recommendationsWithoutVaccination,
+    item => item.category === RecommendCategory.BOOSTER,
+  );
+
+  const [testingRecommendation, otherRecommendations] = partition(
+    recommendationsWithoutBooster,
+    item => item.category === RecommendCategory.TESTING,
   );
 
   const notificationRecommendation = getExposureRecommendation(region);
@@ -95,6 +113,9 @@ export function getRecommendations(
     ...exposureRecommendations,
     ...schoolRecommendation,
     ...travelRecommendation,
+    ...vaccinationRecommendation,
+    ...boosterRecommendation,
+    ...testingRecommendation,
     ...otherRecommendations,
   ];
 
