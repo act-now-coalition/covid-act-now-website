@@ -7,7 +7,8 @@
       "level": "ALL",
       "id": "BOOSTER_ALL",
       "icon": {
-        "iconImage": ""
+        "iconImage": "/images_cms/booster_recommends_icon.svg",
+        "altText": "Booster icon"
       },
       "cta": {
         "buttonType": "FILL",
@@ -25,6 +26,10 @@
         "buttonType": "OUTLINE",
         "text": "Find a vaccine",
         "url": "https://www.vaccines.gov/"
+      },
+      "icon": {
+        "iconImage": "/images_cms/vaccine_recommends_icon.svg",
+        "altText": "Vaccine icon"
       }
     },
     {
@@ -37,6 +42,10 @@
         "buttonType": "OUTLINE",
         "text": "Order free at-homes tests today",
         "url": "https://www.covidtests.gov/"
+      },
+      "icon": {
+        "altText": "Testing icon",
+        "iconImage": "/images_cms/testing-recommends_icon.svg"
       }
     },
     {
