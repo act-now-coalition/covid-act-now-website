@@ -73,7 +73,7 @@ const Recommendations = ({
           {', '}
           <ExternalLink
             style={{ color: 'inherit' }}
-            href="https://www.cdc.gov/"
+            href="https://www.nytimes.com/"
             onClick={() => trackSourceClick('NYT')}
           >
             NYT
