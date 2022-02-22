@@ -37,6 +37,18 @@
         "text": "Find a vaccine",
         "url": "https://www.vaccines.gov/"
       }
+    },
+    {
+      "body": "**Testing frequently** is important for reducing spread. Rapid testing prior to in-person gatherings can help reduce risk of infection and protect vulnerable individuals.",
+      "source": "FED",
+      "category": "TESTING",
+      "level": "ALL",
+      "id": "TESTING_ALL",
+      "cta": {
+        "buttonType": "OUTLINE",
+        "text": "Order free at-homes tests today",
+        "url": "https://www.covidtests.gov/"
+      }
     }
   ],
   "header": "Recommended actions",
