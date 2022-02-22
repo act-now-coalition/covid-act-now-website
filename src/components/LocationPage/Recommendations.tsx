@@ -12,6 +12,7 @@ import { getRecommendationsShareUrl } from 'common/urls';
 import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import { Region } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
+import { useBreakpoint } from 'common/hooks';
 
 interface RecommendationsProps {
   projections: Projections;
@@ -38,8 +39,10 @@ const Recommendations = ({
     alarmLevel,
   );
 
+  const isMobile = useBreakpoint(600);
+
   const containerProps = {
-    collapsedHeightMobile: '275px',
+    collapsedHeightMobile: '350px',
     collapsedHeightDesktop: '165px',
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
@@ -54,12 +57,19 @@ const Recommendations = ({
   return (
     <>
       <SectionHeader id="recommendations">Recommendations</SectionHeader>
-      <ExpandableContainer {...containerProps}>
+      {isMobile ? (
+        <ExpandableContainer {...containerProps}>
+          <Recommend
+            recommendations={recommendationsMainContent}
+            recommendationsRef={recommendationsRef}
+          />
+        </ExpandableContainer>
+      ) : (
         <Recommend
           recommendations={recommendationsMainContent}
           recommendationsRef={recommendationsRef}
         />
-      </ExpandableContainer>
+      )}
       <LocationPageSectionFooter>
         <DisclaimerWrapper>
           Source:{' '}
