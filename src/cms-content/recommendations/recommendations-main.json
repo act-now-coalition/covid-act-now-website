@@ -43,6 +43,21 @@
         "altText": "Schools icon",
         "iconImage": "/images_cms/school_recommends_icon.svg"
       }
+    },
+    {
+      "body": "**Booster shots** [offer necessary protection](https://covid.cdc.gov/covid-data-tracker/#covidnet-hospitalizations-vaccination) against infection, serious illness and death from all COVID variants, and are [90% effective at preventing hospitalization](https://www.cdc.gov/mmwr/volumes/71/wr/mm7104e3.htm?s_cid=mm7104e3_x) from Omicron.",
+      "source": "FED",
+      "category": "BOOSTER",
+      "level": "ALL",
+      "id": "BOOSTER_ALL",
+      "icon": {
+        "iconImage": ""
+      },
+      "cta": {
+        "buttonType": "FILL",
+        "text": "Find a booster",
+        "url": "https://www.vaccines.gov/"
+      }
     }
   ],
   "header": "Recommended actions",
