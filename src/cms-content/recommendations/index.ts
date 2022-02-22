@@ -60,11 +60,18 @@ export interface Recommendation {
   category: RecommendCategory;
   id: RecommendID;
   icon: RecommendIcon;
+  cta?: RecommendCTA;
 }
 
 interface RecommendIcon {
   altText: string;
   iconImage: ImageUrl;
+}
+
+export interface RecommendCTA {
+  buttonType: 'FILL' | 'OUTLINE' | 'TEXT';
+  text: string;
+  url: string;
 }
 
 interface FullFedLevel {
@@ -85,7 +92,6 @@ export interface RecommendationsMainContent {
     modalButtonLabel: string;
     shareText: Markdown;
   };
-  icons: RecommendIcon[];
 }
 
 export interface RecommendationsModalContent {
