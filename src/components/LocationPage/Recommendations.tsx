@@ -47,8 +47,8 @@ const Recommendations = ({
     trackingCategory: EventCategory.RECOMMENDATIONS,
   };
 
-  const trackSourceClick = () => {
-    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.REDIRECT, 'CDC');
+  const trackSourceClick = (source: string) => {
+    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.REDIRECT, source);
   };
 
   return (
@@ -66,9 +66,17 @@ const Recommendations = ({
           <ExternalLink
             style={{ color: 'inherit' }}
             href="https://www.cdc.gov/"
-            onClick={trackSourceClick}
+            onClick={() => trackSourceClick('CDC')}
           >
             CDC
+          </ExternalLink>
+          {', '}
+          <ExternalLink
+            style={{ color: 'inherit' }}
+            href="https://www.cdc.gov/"
+            onClick={() => trackSourceClick('NYT')}
+          >
+            NYT
           </ExternalLink>
         </DisclaimerWrapper>
         <ShareButtons
