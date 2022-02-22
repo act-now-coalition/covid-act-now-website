@@ -12,39 +12,6 @@
       }
     },
     {
-      "body": "**Indoor gatherings** should be avoided with people outside the immediate household, unless you are fully vaccinated. See [guidance for vaccinated individuals](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated.html). Outdoor gatherings with masks and distancing are a safer alternative.",
-      "source": "FED",
-      "category": "GATHERINGS",
-      "level": "ALL",
-      "id": "GATHERINGS_ALL",
-      "icon": {
-        "altText": "Gatherings icon",
-        "iconImage": "/images_cms/gathering_recommends_icon.svg"
-      }
-    },
-    {
-      "body": "**Travel** should be avoided unless it is necessary or you are fully vaccinated.",
-      "source": "FED",
-      "category": "TRAVEL",
-      "level": "ALL",
-      "id": "TRAVEL_ALL",
-      "icon": {
-        "altText": "Airplane icon",
-        "iconImage": "/images_cms/recommendations-travel-icon.svg"
-      }
-    },
-    {
-      "body": "**Schools** can safely offer in-person learning only when [these infection control measures](https://covidactnow.org/covid-explained/school-guidance) are in place.",
-      "category": "SCHOOLS",
-      "source": "HGHI",
-      "level": "ALL",
-      "id": "SCHOOLS_ALL",
-      "icon": {
-        "altText": "Schools icon",
-        "iconImage": "/images_cms/school_recommends_icon.svg"
-      }
-    },
-    {
       "body": "**Booster shots** [offer necessary protection](https://covid.cdc.gov/covid-data-tracker/#covidnet-hospitalizations-vaccination) against infection, serious illness and death from all COVID variants, and are [90% effective at preventing hospitalization](https://www.cdc.gov/mmwr/volumes/71/wr/mm7104e3.htm?s_cid=mm7104e3_x) from Omicron.",
       "source": "FED",
       "category": "BOOSTER",
@@ -56,6 +23,18 @@
       "cta": {
         "buttonType": "FILL",
         "text": "Find a booster",
+        "url": "https://www.vaccines.gov/"
+      }
+    },
+    {
+      "body": "**Vaccinations** for children 5 and up can protect against infection, serious illness and death from COVID.",
+      "source": "FED",
+      "category": "VACCINATION",
+      "level": "ALL",
+      "id": "VACCINATION_ALL",
+      "cta": {
+        "buttonType": "OUTLINE",
+        "text": "Find a vaccine",
         "url": "https://www.vaccines.gov/"
       }
     }
