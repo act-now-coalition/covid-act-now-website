@@ -41,6 +41,7 @@ const Recommendations = ({
 
   const isMobile = useBreakpoint(600);
 
+  // TODO (Fai): Rework component so we can specify undefined for collapsedHeightDesktop.
   const containerProps = {
     collapsedHeightMobile: '350px',
     collapsedHeightDesktop: '165px',
