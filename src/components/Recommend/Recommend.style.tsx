@@ -46,8 +46,9 @@ export const RecommendationsContainer = styled.div`
   width: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    border: 1px solid ${COLOR_MAP.GREY_2};
     flex-direction: row;
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
 `;
 
