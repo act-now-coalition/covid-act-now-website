@@ -5,19 +5,9 @@ import { Projection, Column } from 'common/models/Projection';
 import { getMetricNameForCompare, formatValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
-import {
-  FedLevel,
-  Recommendation,
-  RecommendationSource,
-  RecommendCategory,
-  RecommendID,
-} from 'cms-content/recommendations';
+import { Recommendation, RecommendCategory } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { formatDecimal } from '.';
-import {
-  getStateName,
-  showExposureNotifications,
-} from 'components/LocationPage/Notifications';
 import { getAbbreviatedCounty, Region } from 'common/regions';
 import { TimeUnit, getStartOf, subtractTime } from 'common/utils/time-utils';
 
@@ -27,75 +17,33 @@ export function trackRecommendationsEvent(action: EventAction, label: string) {
 
 const casesPerWeekMetricName = 'new cases per 100k in the last 7 days';
 
-function getExposureRecommendation(
-  region: Region | null,
-): Recommendation | null {
-  if (!region) {
-    return null;
-  }
-
-  const recommendationCopy = `**Notifications**: Add your phone to [${getStateName(
-    region,
-  )}'s
-  exposure notification system](https://g.co/ens) to receive alerts when you have been
-  in close contact with someone who later tests positive for COVID.`;
-
-  const exposureRecommendation: Recommendation = {
-    body: recommendationCopy,
-    source: RecommendationSource.NONE,
-    level: FedLevel.GREEN,
-    category: RecommendCategory.EXPOSURE_APP,
-    id: RecommendID.EXPOSURE_APP,
-    icon: {
-      iconImage: '/images_cms/exposure_recommends_icon.svg',
-      altText: 'Notification icon',
-    },
-  };
-
-  return showExposureNotifications(region) ? exposureRecommendation : null;
-}
-
 export function getRecommendations(
   region: Region | null,
   recommendations: Recommendation[],
 ): any[] {
-  // Partitioning to control order:
+  const recommendationCategoryOrdering = [
+    RecommendCategory.BOOSTER,
+    RecommendCategory.TESTING,
+    RecommendCategory.VACCINATION,
+    RecommendCategory.MASKS,
+  ];
 
-  const [travelRecommendation, recommendationsWithoutTravel] = partition(
-    recommendations,
-    item => item.category === RecommendCategory.TRAVEL,
-  );
+  let remainingRecommendations = recommendations;
+  let orderedRecommendations: Recommendation[] = [];
 
-  const [schoolRecommendation, recommendationsWithoutSchool] = partition(
-    recommendationsWithoutTravel,
-    item => item.category === RecommendCategory.SCHOOLS,
-  );
-
-  const [
-    gatheringsRecommendation,
-    recommendationsWithoutGatherings,
-  ] = partition(
-    recommendationsWithoutSchool,
-    item => item.category === RecommendCategory.GATHERINGS,
-  );
-
-  const [masksRecommendation, otherRecommendations] = partition(
-    recommendationsWithoutGatherings,
-    item => item.category === RecommendCategory.MASKS,
-  );
-
-  const notificationRecommendation = getExposureRecommendation(region);
-  const exposureRecommendations = notificationRecommendation
-    ? [notificationRecommendation]
-    : [];
+  // Partitioning to control order.
+  for (const category of recommendationCategoryOrdering) {
+    const [inCategory, notInCategory] = partition(
+      remainingRecommendations,
+      item => item.category === category,
+    );
+    orderedRecommendations = orderedRecommendations.concat(inCategory);
+    remainingRecommendations = notInCategory;
+  }
 
   const allRecommendations = [
-    ...masksRecommendation,
-    ...gatheringsRecommendation,
-    ...exposureRecommendations,
-    ...schoolRecommendation,
-    ...travelRecommendation,
-    ...otherRecommendations,
+    ...orderedRecommendations,
+    ...remainingRecommendations,
   ];
 
   return allRecommendations;
