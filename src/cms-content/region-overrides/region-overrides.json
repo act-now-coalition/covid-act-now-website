@@ -580,7 +580,7 @@
       "end_date": "",
       "region": "WA",
       "context": "WA testing reporting data",
-      "disclaimer": "The Washington State Department of Health has paused reporting on all testing data in order to increase the department's capacity. Data reporting is not expected to restart until approximately February 28, 2022. As a result, we do not have accurate test-positivity data at this time."
+      "disclaimer": "The Washington State Department of Health has paused reporting on all testing data in order to increase the department's capacity. Data reporting is not expected to restart until approximately March 31, 2022. As a result, we do not have accurate test-positivity data at this time."
     },
     {
       "include": "region",
@@ -652,7 +652,7 @@
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2022-02-25",
-      "end_date": "",
+      "end_date": "2022-02-25",
       "region": "CA",
       "context": "4,400 backlog of cases from one lab"
     },
