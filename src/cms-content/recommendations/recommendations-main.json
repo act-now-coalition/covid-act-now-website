@@ -1,19 +1,19 @@
 {
   "recommendations": [
     {
-      "body": "**Booster shots** [offer necessary protection](https://covid.cdc.gov/covid-data-tracker/#covidnet-hospitalizations-vaccination) against infection, serious illness and death from all COVID variants, and are [90% effective at preventing hospitalization](https://www.cdc.gov/mmwr/volumes/71/wr/mm7104e3.htm?s_cid=mm7104e3_x) from Omicron.",
+      "body": "**Masks** are recommended if your community is very high risk, you have recently been exposed to or infected with COVID, or you’ve been told by a health professional to wear a mask based on your personal risk factors.",
       "source": "FED",
-      "category": "BOOSTER",
+      "category": "MASKS",
       "level": "ALL",
-      "id": "BOOSTER_ALL",
+      "id": "MASKS_ALL",
       "icon": {
-        "iconImage": "/images_cms/booster_recommends_icon.svg",
-        "altText": "Booster icon"
+        "altText": "Mask icon",
+        "iconImage": "/images_cms/mask_recommends_icon.svg"
       },
       "cta": {
-        "buttonType": "FILL",
-        "text": "Find a booster",
-        "url": "https://www.vaccines.gov/"
+        "buttonType": "OUTLINE",
+        "text": "Get tips on masking",
+        "url": "https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/about-face-coverings.html"
       }
     },
     {
@@ -33,7 +33,7 @@
       }
     },
     {
-      "body": "**Testing frequently** is important for reducing spread. Rapid testing prior to in-person gatherings can help reduce risk of infection and protect vulnerable individuals.",
+      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. The **Test to Treat** initiativelaunching early March will provide high-risk individuals who test positive at certified pharmacies with immediate access to antivirals.",
       "source": "FED",
       "category": "TESTING",
       "level": "ALL",
@@ -49,19 +49,19 @@
       }
     },
     {
-      "body": "**Masks** are recommended for vaccinated and boosted individuals in public indoor spaces. Unvaccinated people should mask in all public spaces. The [most effective masks](https://www.nytimes.com/article/covid-masks.html) are N95, KN95, KF94 and surgical masks.",
+      "body": "**Booster shots** [offer necessary protection](https://covid.cdc.gov/covid-data-tracker/#covidnet-hospitalizations-vaccination) against infection, serious illness and death from all COVID variants, and are [90% effective at preventing hospitalization](https://www.cdc.gov/mmwr/volumes/71/wr/mm7104e3.htm?s_cid=mm7104e3_x) from Omicron.",
       "source": "FED",
-      "category": "MASKS",
+      "category": "BOOSTER",
       "level": "ALL",
-      "id": "MASKS_ALL",
+      "id": "BOOSTER_ALL",
       "icon": {
-        "altText": "Mask icon",
-        "iconImage": "/images_cms/mask_recommends_icon.svg"
+        "iconImage": "/images_cms/booster_recommends_icon.svg",
+        "altText": "Booster icon"
       },
       "cta": {
-        "buttonType": null,
-        "text": "",
-        "url": ""
+        "buttonType": "OUTLINE",
+        "text": "Find a booster",
+        "url": "https://www.vaccines.gov/"
       }
     }
   ],
