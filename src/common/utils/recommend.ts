@@ -22,10 +22,10 @@ export function getRecommendations(
   recommendations: Recommendation[],
 ): any[] {
   const recommendationCategoryOrdering = [
-    RecommendCategory.BOOSTER,
+    RecommendCategory.MASKS,
     RecommendCategory.TESTING,
     RecommendCategory.VACCINATION,
-    RecommendCategory.MASKS,
+    RecommendCategory.BOOSTER,
   ];
 
   let remainingRecommendations = recommendations;

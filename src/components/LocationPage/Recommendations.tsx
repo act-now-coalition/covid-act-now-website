@@ -81,14 +81,6 @@ const Recommendations = ({
           >
             CDC
           </ExternalLink>
-          {', '}
-          <ExternalLink
-            style={{ color: 'inherit' }}
-            href="https://www.nytimes.com/"
-            onClick={() => trackSourceClick('NYT')}
-          >
-            NYT
-          </ExternalLink>
         </DisclaimerWrapper>
         <ShareButtons
           eventCategory={EventCategory.RECOMMENDATIONS}
