@@ -17,11 +17,11 @@ export const Header = styled.span`
   text-align: center;
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 
   @media (max-width: ${materialSMBreakpoint}) {
     text-align: left;
-    margin-right: 0.75rem;
+    margin-right: 1rem;
   }
 `;
 
