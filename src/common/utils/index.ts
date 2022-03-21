@@ -115,8 +115,7 @@ export const pluralize = (num: number, singular: string, plural: string) =>
   num === 1 ? singular : plural;
 
 /**
- *
- * @returns
+ * Returns true if the CAN 8.2 feature flag is enabled.
  */
 export function enableCDCUpdate(): boolean {
   return process.env.REACT_APP_ENABLE_CDC_UPDATE === 'true';
