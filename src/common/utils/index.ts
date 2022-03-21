@@ -115,8 +115,10 @@ export const pluralize = (num: number, singular: string, plural: string) =>
   num === 1 ? singular : plural;
 
 /**
- * Returns true if the CAN 8.2 feature flag is enabled.
+ * Returns true if the CAN 8.2 feature flag is enabled. The value should be
+ * updated in `.env.development` for local development and preview deployments,
+ * and in https://vercel.com/covidactnow/covid-projections/settings/environment-variables
  */
-export function enableCDCUpdate(): boolean {
-  return process.env.REACT_APP_ENABLE_CDC_UPDATE === 'true';
+export function enableCan82(): boolean {
+  return process.env.REACT_APP_ENABLE_CAN_8_2 === 'true';
 }
