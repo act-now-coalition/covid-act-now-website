@@ -14,6 +14,7 @@ import LocationToggle from './LocationToggle';
 import { MapView } from './utils';
 import { getUrlAndShareQuote } from 'components/ShareBlock/ShareModelBlock';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
+import { enableCDCUpdate } from 'common/utils';
 
 interface MapBlockProps {
   title: React.ReactNode;
@@ -59,7 +60,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
         {renderMap(locationScope)}
         <MapSubitemsWrapper>
           {renderThermometer()}
-          {renderTable && (
+          {renderTable && enableCDCUpdate() && (
             <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
           <Row>

@@ -113,3 +113,11 @@ export function getPercentChange(numA: number, numB: number): number | null {
  */
 export const pluralize = (num: number, singular: string, plural: string) =>
   num === 1 ? singular : plural;
+
+/**
+ *
+ * @returns
+ */
+export function enableCDCUpdate(): boolean {
+  return process.env.REACT_APP_ENABLE_CDC_UPDATE === 'true';
+}
