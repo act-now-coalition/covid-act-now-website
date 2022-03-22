@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
-import USVaccineMap from 'components/USMap/USVaccineMap';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -11,34 +10,21 @@ import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
-import { formatMetatagDate, formatPercent } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 import { getFilterLimit } from 'components/Search';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
 import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
-import {
-  Content,
-  HomePageBlock,
-  ColumnCentered,
-  VaccinationsThermometerHeading,
-} from './HomePage.style';
+import { Content, HomePageBlock, ColumnCentered } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
-import {
-  RiskLevelThermometer,
-  VaccinationsThermometer,
-} from 'components/HorizontalThermometer';
+import { RiskLevelThermometer } from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
-import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
-import { TooltipMode } from 'components/USMap/USMapTooltip';
-import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 import NationalText from 'components/NationalText';
-import BoosterBanner from 'components/Banner/BoosterBanner/BoosterBanner';
-import Box from '@material-ui/core/Box';
 import regions from 'common/regions';
 
 function getPageDescription() {
@@ -79,22 +65,11 @@ export default function HomePage() {
   const exploreSectionRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [showCompareModal, setShowCompareModal] = useState(false);
-  const [
-    compareShowVaccinationsFirst,
-    setCompareShowVaccinationsFirst,
-  ] = useState<boolean>(false);
-
-  const vaccinationsTableButtonOnClick = () => {
-    setCompareShowVaccinationsFirst(true);
-    setShowCompareModal(true);
-  };
 
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
-  const isMobile = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
 
@@ -131,9 +106,6 @@ export default function HomePage() {
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
-      <Box margin={'auto'} marginTop={isMobile ? 0 : 2} maxWidth={'1000px'}>
-        <BoosterBanner />
-      </Box>
       <HomepageStructuredData />
       <HomePageHeader />
       <main>
@@ -149,38 +121,6 @@ export default function HomePage() {
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
             </ColumnCentered>
-
-            <MapBlock
-              title="Vaccination progress"
-              subtitle={getVaccinationProgressSubtitle()}
-              renderMap={locationScope => (
-                <USVaccineMap
-                  showCounties={locationScope === MapView.COUNTIES}
-                  tooltipMode={
-                    // TODO(michael): There's some sort of bug / performance issue on iOS that makes
-                    // the mobile tooltip on the county view unusable.
-                    isMobile && locationScope === MapView.STATES
-                      ? TooltipMode.ACTIVATE_ON_CLICK
-                      : TooltipMode.ACTIVATE_ON_HOVER
-                  }
-                />
-              )}
-              renderThermometer={() => (
-                <>
-                  <VaccinationsThermometerHeading>
-                    Population with <b>1+ dose</b>
-                  </VaccinationsThermometerHeading>
-                  <VaccinationsThermometer />
-                </>
-              )}
-              infoLink="/covid-risk-levels-metrics#percent-vaccinated"
-              renderTable={locationScope => (
-                <VaccinationsTable
-                  mapView={locationScope}
-                  seeAllOnClick={vaccinationsTableButtonOnClick}
-                />
-              )}
-            />
 
             <MapBlock
               title="Risk levels"
@@ -207,7 +147,6 @@ export default function HomePage() {
             <HomePageBlock>
               <CompareMain
                 locationsViewable={8}
-                vaccinesFirst={compareShowVaccinationsFirst}
                 showModal={showCompareModal}
                 setShowModal={setShowCompareModal}
               />
@@ -219,19 +158,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-    </>
-  );
-}
-
-function getVaccinationProgressSubtitle() {
-  const { totalVaccinationsInitiated, totalPopulation } = SiteSummaryJSON.usa;
-  const percentVaccinated = formatPercent(
-    totalVaccinationsInitiated / totalPopulation,
-  );
-  return (
-    <>
-      <b>{percentVaccinated}</b> of the entire U.S. population has received{' '}
-      <b>1+ dose</b>.
     </>
   );
 }
