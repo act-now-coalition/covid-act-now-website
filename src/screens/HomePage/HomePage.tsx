@@ -131,9 +131,6 @@ export default function HomePage() {
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
-      <Box margin={'auto'} marginTop={isMobile ? 0 : 2} maxWidth={'1000px'}>
-        <BoosterBanner />
-      </Box>
       <HomepageStructuredData />
       <HomePageHeader />
       <main>
@@ -151,39 +148,7 @@ export default function HomePage() {
             </ColumnCentered>
 
             <MapBlock
-              title="Vaccination progress"
-              subtitle={getVaccinationProgressSubtitle()}
-              renderMap={locationScope => (
-                <USVaccineMap
-                  showCounties={locationScope === MapView.COUNTIES}
-                  tooltipMode={
-                    // TODO(michael): There's some sort of bug / performance issue on iOS that makes
-                    // the mobile tooltip on the county view unusable.
-                    isMobile && locationScope === MapView.STATES
-                      ? TooltipMode.ACTIVATE_ON_CLICK
-                      : TooltipMode.ACTIVATE_ON_HOVER
-                  }
-                />
-              )}
-              renderThermometer={() => (
-                <>
-                  <VaccinationsThermometerHeading>
-                    Population with <b>1+ dose</b>
-                  </VaccinationsThermometerHeading>
-                  <VaccinationsThermometer />
-                </>
-              )}
-              infoLink="/covid-risk-levels-metrics#percent-vaccinated"
-              renderTable={locationScope => (
-                <VaccinationsTable
-                  mapView={locationScope}
-                  seeAllOnClick={vaccinationsTableButtonOnClick}
-                />
-              )}
-            />
-
-            <MapBlock
-              title="Risk levels"
+              title="Community transmission levels"
               subtitle="Risk is reduced for those who are vaccinated."
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
