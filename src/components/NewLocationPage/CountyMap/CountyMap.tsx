@@ -15,7 +15,7 @@ import {
 } from 'components/SharedComponents/SharedComponents.style';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 import {
-  RiskLevelThermometer,
+  CommunityLevelThermometer,
   VaccinationsThermometer,
 } from 'components/HorizontalThermometer';
 import { getAlertColor } from 'components/RegionMap/RegionMap.style';
@@ -25,7 +25,7 @@ import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 
 enum MapType {
   VACCINATIONS = '% Vaccinated',
-  RISK_LEVEL = 'Risk levels',
+  COMMUNITY_LEVEL = 'Community levels',
 }
 
 interface MapTypeInfo {
@@ -48,8 +48,8 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
     colorMap: (locationSummary: LocationSummary) =>
       vaccineColorFromLocationSummary(locationSummary),
   },
-  [MapType.RISK_LEVEL]: {
-    thermometer: <RiskLevelThermometer />,
+  [MapType.COMMUNITY_LEVEL]: {
+    thermometer: <CommunityLevelThermometer />,
     colorMap: (locationSummary: LocationSummary) =>
       getAlertColor(locationSummary),
   },
@@ -86,7 +86,9 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
         <ToggleWrapper>
           <ButtonGroup value={mapType} exclusive onChange={onClickToggle}>
             <Button value={MapType.VACCINATIONS}>{MapType.VACCINATIONS}</Button>
-            <Button value={MapType.RISK_LEVEL}>{MapType.RISK_LEVEL}</Button>
+            <Button value={MapType.COMMUNITY_LEVEL}>
+              {MapType.COMMUNITY_LEVEL}
+            </Button>
           </ButtonGroup>
         </ToggleWrapper>
         {MAP_TYPE_INFO[mapType].thermometer}
