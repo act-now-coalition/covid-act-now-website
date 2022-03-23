@@ -25,7 +25,7 @@ import {
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
-  RiskLevelThermometer,
+  CommunityLevelThermometer,
   VaccinationsThermometer,
 } from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -141,7 +141,7 @@ export default function HomePage() {
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}
-              renderThermometer={() => <RiskLevelThermometer />}
+              renderThermometer={() => <CommunityLevelThermometer />}
               infoLink="/covid-risk-levels-metrics"
             />
 
