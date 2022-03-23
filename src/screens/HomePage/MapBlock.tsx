@@ -32,7 +32,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
   renderThermometer,
   infoLink,
 }) => {
-  const [locationScope, setLocationScope] = useState(MapView.STATES);
+  const [locationScope, setLocationScope] = useState(MapView.COUNTIES);
   const onToggle = (
     event: React.MouseEvent<HTMLElement>,
     newSelection: MapView,
