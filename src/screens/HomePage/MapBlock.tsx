@@ -14,7 +14,6 @@ import LocationToggle from './LocationToggle';
 import { MapView } from './utils';
 import { getUrlAndShareQuote } from 'components/ShareBlock/ShareModelBlock';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
-import { enableCan82 } from 'common/utils';
 
 interface MapBlockProps {
   title: React.ReactNode;
@@ -60,7 +59,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
         {renderMap(locationScope)}
         <MapSubitemsWrapper>
           {renderThermometer()}
-          {renderTable && enableCan82() && (
+          {renderTable && (
             <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
           <Row>
