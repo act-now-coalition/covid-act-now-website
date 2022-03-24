@@ -367,7 +367,7 @@
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Xinyu Zhang",
-      "profileUrl": ""
+      "profileUrl": "covidactnow.org/about"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
@@ -463,7 +463,7 @@
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Christopher Turner",
-      "profileUrl": ""
+      "profileUrl": "covidactnow.org/about"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
@@ -499,6 +499,11 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Luci Paczkowski",
       "profileUrl": "https://www.linkedin.com/in/luci-paczkowski-3160a81b6/"
+    },
+    {
+      "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
+      "fullName": "Aaron Hoffer",
+      "profileUrl": "https://www.linkedin.com/in/hofferaaron/"
     }
   ]
 }
