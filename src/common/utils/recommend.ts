@@ -118,8 +118,7 @@ export const summaryByLevel = {
 
 export function getShareQuote(locationName: string, alarmLevel: Level): string {
   const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
-
-  // This needs updating (still mentions WH):
+  // We also use Level.UNKNOWN when giving recommendations for the whole US
   const unknownShareQuote = `These are the COVID guidelines set by the CDC:`;
 
   if (alarmLevel === Level.UNKNOWN) {

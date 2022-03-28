@@ -3,42 +3,37 @@ import { mainContent } from 'cms-content/recommendations';
 import Recommend from 'components/Recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
-import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
-import { DisclaimerWrapper } from 'components/LocationPage/ChartsHolder.style';
+import PageSectionFooter from 'components/SharedComponents/PageSectionFooter';
+import { DisclaimerWrapper } from 'components/SharedComponents/DisclaimerWrapper.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
-import { Projections } from 'common/models/Projections';
 import { getRecommendationsShareUrl } from 'common/urls';
 import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import { Region } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
 import { useBreakpoint } from 'common/hooks';
+import { Level } from 'common/level';
 
 interface RecommendationsProps {
-  projections: Projections;
   recommendationsRef: React.RefObject<HTMLDivElement>;
+  alarmLevel: Level;
   region: Region;
+  isHomepage: boolean;
 }
 
 const Recommendations = ({
   region,
-  projections,
   recommendationsRef,
+  alarmLevel,
+  isHomepage,
 }: RecommendationsProps) => {
-  const alarmLevel = projections.getAlarmLevel();
-
   const recommendationsMainContent = getRecommendations(
     region,
     mainContent.recommendations,
   );
 
+  const recommendsShareQuote = getShareQuote(region.name, alarmLevel);
   const recommendsShareUrl = getRecommendationsShareUrl(region);
-
-  const recommendsShareQuote = getShareQuote(
-    projections.locationName,
-    alarmLevel,
-  );
-
   const isMobile = useBreakpoint(600);
 
   // TODO (Fai): Rework component so we can specify undefined for collapsedHeightDesktop.
@@ -57,7 +52,9 @@ const Recommendations = ({
 
   return (
     <>
-      <SectionHeader id="recommendations">Recommendations</SectionHeader>
+      <SectionHeader id="recommendations" $isHomepage={isHomepage}>
+        Recommendations
+      </SectionHeader>
       {isMobile ? (
         <ExpandableContainer {...containerProps}>
           <Recommend
@@ -71,7 +68,7 @@ const Recommendations = ({
           recommendationsRef={recommendationsRef}
         />
       )}
-      <LocationPageSectionFooter>
+      <PageSectionFooter>
         <DisclaimerWrapper>
           Source:{' '}
           <ExternalLink
@@ -88,7 +85,7 @@ const Recommendations = ({
           shareQuote={recommendsShareQuote}
           region={region}
         />
-      </LocationPageSectionFooter>
+      </PageSectionFooter>
     </>
   );
 };

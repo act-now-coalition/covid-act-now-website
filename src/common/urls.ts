@@ -4,6 +4,7 @@ import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
 import { Region } from './regions';
 import { DateFormat, formatDateTime } from 'common/utils/time-utils';
+import { USA } from 'common/regions';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -48,7 +49,14 @@ export function getPageUrl(region: Region): string {
   social/copy-link button in Recommends footer
 */
 export function getRecommendationsShareUrl(region: Region): string {
-  return addSharingId(urlJoin(region.canonicalUrl, 'recommendations'));
+  if (region === USA.instance) {
+    // we have recommendations on the homepage now for the whole US
+    return addSharingId(
+      `${window.location.protocol}:${window.location.hostname}`,
+    );
+  } else {
+    return addSharingId(urlJoin(region.canonicalUrl, 'recommendations'));
+  }
 }
 
 export function getComparePageUrl(
