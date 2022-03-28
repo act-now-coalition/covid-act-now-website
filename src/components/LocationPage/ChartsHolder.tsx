@@ -20,7 +20,7 @@ import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
-import Recommendations from './Recommendations';
+import Recommendations from '../Recommend/Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import LocationPageBlock from './LocationPageBlock';
@@ -228,8 +228,9 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
               <LocationPageBlock>
                 <Recommendations
                   region={region}
-                  projections={projections}
+                  alarmLevel={projections.getAlarmLevel()}
                   recommendationsRef={recommendationsRef}
+                  isHomepage={false}
                 />
               </LocationPageBlock>
             )}

@@ -36,7 +36,9 @@ import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
 import NationalText from 'components/NationalText';
-import regions from 'common/regions';
+import Recommendations from 'components/Recommend/Recommendations';
+import regions, { USA } from 'common/regions';
+import { Level } from 'common/level';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -45,6 +47,8 @@ function getPageDescription() {
 
 export default function HomePage() {
   const shareBlockRef = useRef(null);
+  const recommendationsRef = useRef<HTMLDivElement>(null);
+
   const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
@@ -85,7 +89,6 @@ export default function HomePage() {
   const isMobile = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
-
   const renderNavBarSearch = () => (
     <>
       {hasScrolled && (
@@ -188,6 +191,14 @@ export default function HomePage() {
                 locationsViewable={8}
                 showModal={showCompareModal}
                 setShowModal={setShowCompareModal}
+              />
+            </HomePageBlock>
+            <HomePageBlock>
+              <Recommendations
+                alarmLevel={Level.UNKNOWN}
+                recommendationsRef={recommendationsRef}
+                region={USA.instance}
+                isHomepage={true}
               />
             </HomePageBlock>
             <PartnersSection />
