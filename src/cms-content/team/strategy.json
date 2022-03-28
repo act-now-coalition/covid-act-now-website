@@ -15,26 +15,14 @@
       "profileImgUrl": "/images_cms/tommacmullen.jpeg"
     },
     {
-      "fullName": "Amanda Fassler",
-      "profileUrl": "https://www.linkedin.com/in/amanda-fassler/\t\t",
-      "description": "",
-      "profileImgUrl": "/images_cms/amandafassler.jpeg"
+      "profileImgUrl": "/images_cms/anna-maybach.jpeg",
+      "fullName": "Anna Maybach",
+      "profileUrl": "https://www.linkedin.com/in/anna-maybach-946883180/"
     },
     {
-      "fullName": "Jillian Graver",
-      "profileUrl": "https://www.linkedin.com/in/jilliangraver/",
-      "description": "",
-      "profileImgUrl": "/images_cms/jilliangraver.jpeg"
-    },
-    {
-      "profileImgUrl": "/images_cms/ryan-headshot.png",
-      "fullName": "Ryan Fuentes",
-      "profileUrl": "https://www.linkedin.com/in/ryan-fuentes-0944301a7/"
-    },
-    {
-      "profileImgUrl": "/images_cms/natmarkey.jpeg",
-      "fullName": "Nat Markey",
-      "profileUrl": "https://www.linkedin.com/in/nat-markey-80a5a31a4/"
+      "profileImgUrl": "/images_cms/rebecca-qui.jpeg",
+      "fullName": "Rebecca Qui",
+      "profileUrl": "https://www.linkedin.com/in/rebeccaqiu/"
     }
   ]
 }

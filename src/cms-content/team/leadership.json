@@ -4,13 +4,13 @@
   "teamMembers": [
     {
       "fullName": "Igor Kofman",
-      "description": "CEO",
+      "description": "Co-CEO",
       "profileUrl": "https://www.linkedin.com/in/ikofman/",
       "profileImgUrl": "/images_cms/igor.jpeg"
     },
     {
       "fullName": "Debbie Lai",
-      "description": "COO",
+      "description": "Co-CEO",
       "profileUrl": "https://www.linkedin.com/in/iamdlai/",
       "profileImgUrl": "/images_cms/debbie-headshot.jpeg"
     }
