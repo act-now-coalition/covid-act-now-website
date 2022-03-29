@@ -42,7 +42,6 @@ export const RecommendationsContainer = styled.div`
   padding: 0.75rem;
   flex-direction: column;
 
-  max-width: 900px;
   width: 100%;
 
   @media (min-width: ${materialSMBreakpoint}) {

@@ -6,7 +6,7 @@ import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 import { EventCategory } from 'components/Analytics';
 import ShareButtons from '../SharedComponents/ShareButtons';
-import LocationPageSectionFooter from 'components/LocationPageSectionFooter/LocationPageSectionFooter';
+import PageSectionFooter from 'components/SharedComponents/PageSectionFooter';
 import { DialogMain } from 'components/Dialogs';
 import { vulnerabilitiesModal } from 'cms-content/modals';
 import { SectionHeader } from 'components/SharedComponents';
@@ -62,7 +62,7 @@ const VulnerabilitiesBlock: React.FC<{
           percentPopulationVulnerable={percentPopulationVulnerable}
         />
       </ExpandableContainer>
-      <LocationPageSectionFooter>
+      <PageSectionFooter>
         <ModalButton onClick={openDialog}>
           <AboutText>About this data</AboutText>
         </ModalButton>
@@ -80,7 +80,7 @@ const VulnerabilitiesBlock: React.FC<{
           shareQuote={shareQuote}
           region={region}
         />
-      </LocationPageSectionFooter>
+      </PageSectionFooter>
     </>
   );
 };
