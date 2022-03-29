@@ -1,18 +1,5 @@
 {
-  "teamMembers": [
-    {
-      "profileImgUrl": "/images_cms/saraberman.jpeg",
-      "fullName": "Sara Berman",
-      "description": "Junior designer",
-      "profileUrl": "https://www.linkedin.com/in/sara-m-berman/"
-    },
-    {
-      "profileImgUrl": "/images_cms/brad-artziniega.png",
-      "fullName": "Brad Artiziniega ",
-      "description": "Product Designer",
-      "profileUrl": "https://www.linkedin.com/in/bradartziniega/"
-    }
-  ],
+  "teamMembers": [],
   "teamName": "Graphic Design",
   "teamID": "graphic-design"
 }

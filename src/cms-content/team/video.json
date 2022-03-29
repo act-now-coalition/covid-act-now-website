@@ -1,12 +1,5 @@
 {
   "teamName": "Video",
   "teamID": "video",
-  "teamMembers": [
-    {
-      "profileImgUrl": "/images_cms/halpearlman.jpeg",
-      "fullName": "Hal Pearlman",
-      "description": "Video editor",
-      "profileUrl": "https://www.linkedin.com/in/halpearlman/"
-    }
-  ]
+  "teamMembers": []
 }
