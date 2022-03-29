@@ -3,14 +3,16 @@ import { mainContent } from 'cms-content/recommendations';
 import Recommend from 'components/Recommend';
 import ExpandableContainer from 'components/ExpandableContainer';
 import ShareButtons from 'components/SharedComponents/ShareButtons';
-import PageSectionFooter from 'components/SharedComponents/PageSectionFooter';
-import { DisclaimerWrapper } from 'components/SharedComponents/DisclaimerWrapper.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import ExternalLink from 'components/ExternalLink';
 import { getRecommendationsShareUrl } from 'common/urls';
 import { getRecommendations, getShareQuote } from 'common/utils/recommend';
 import { Region } from 'common/regions';
-import { SectionHeader } from 'components/SharedComponents';
+import {
+  SectionHeader,
+  DisclaimerWrapper,
+  PageSectionFooter,
+} from 'components/SharedComponents';
 import { useBreakpoint } from 'common/hooks';
 import { Level } from 'common/level';
 

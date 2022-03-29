@@ -9,5 +9,14 @@ import SwitchComponent from './SwitchComponent';
 import StyledAccordion from './Accordion';
 import StyledRegionName from './StyledRegionName/StyledRegionName';
 import { SectionHeader } from './SharedComponents.style';
+import PageSectionFooter from './PageSectionFooter';
+import { DisclaimerWrapper } from './DisclaimerWrapper.style';
 
-export { SwitchComponent, StyledAccordion, StyledRegionName, SectionHeader };
+export {
+  SwitchComponent,
+  StyledAccordion,
+  StyledRegionName,
+  SectionHeader,
+  PageSectionFooter,
+  DisclaimerWrapper,
+};
