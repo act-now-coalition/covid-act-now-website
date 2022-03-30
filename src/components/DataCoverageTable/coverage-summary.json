@@ -294,6 +294,27 @@
     }
   },
   {
+    "name": "metrics.bedsWithCovidPatientsRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 50,
+      "totalStates": 53,
+      "statesAvailable": 50
+    },
+    "county": {
+      "totalRegions": 3223,
+      "regionsAvailable": 2830,
+      "totalStates": 53,
+      "statesAvailable": 51
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 232,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
     "name": "metrics.vaccinationsInitiatedRatio",
     "state": {
       "totalRegions": 53,
