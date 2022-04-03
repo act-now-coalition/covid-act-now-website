@@ -175,6 +175,7 @@ export class Projection {
   private readonly smoothedICUHospitalizations: Array<number | null>;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
+  readonly communityLevel: number | null;
 
   constructor(
     summaryWithTimeseries: RegionSummaryWithTimeseries,
@@ -187,6 +188,8 @@ export class Projection {
       dates,
     } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
+    this.communityLevel =
+      summaryWithTimeseries.communityLevels.canCommunityLevel;
 
     this.metrics = metrics || null;
     this.dates = dates;

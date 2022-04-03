@@ -34,7 +34,7 @@ const BANNER_COMMENT = `
 
 const OUTPUT_FOLDER = path.join(__dirname, '..', 'src', 'api', 'schema');
 const SCHEMAS_BASE_URL =
-  'https://github.com/covid-projections/covid-data-model/raw/main/api/schemas_v2/';
+  'https://github.com/covid-projections/covid-data-model/raw/mikelehen/cdc-community-level/api/schemas_v2/';
 
 (async () => {
   for (const file of SCHEMA_FILES) {
