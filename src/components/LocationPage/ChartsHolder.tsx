@@ -270,11 +270,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
         </BelowTheFold>
       </LocationPageContentWrapper>
       <div ref={shareBlockRef}>
-        <ShareModelBlock
-          region={region}
-          projections={projections}
-          stats={stats}
-        />
+        <ShareModelBlock region={region} />
       </div>
     </>
   );
