@@ -32,9 +32,10 @@ export type Contacttracers = number | null;
  *  * capacity - Current staffed acute bed capacity.
  *  * currentUsageTotal - Total number of acute beds currently in use
  *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * weeklyCovidAdmissions - Number of COVID patients admitted in the past week.
  *
  */
-export type Hospitalbeds = HospitalResourceUtilization;
+export type Hospitalbeds = HospitalResourceUtilizationWithAdmissions;
 /**
  * Total capacity for resource.
  */
@@ -48,6 +49,24 @@ export type Currentusagetotal = number | null;
  */
 export type Currentusagecovid = number | null;
 /**
+ * Number of COVID patients admitted in the past week.
+ */
+export type Weeklycovidadmissions = number | null;
+/**
+ *
+ * Information about acute bed utilization details aggregated for the county's corresponding
+ * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
+ * For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ *
+ * Fields:
+ *  * capacity - Current staffed acute bed capacity.
+ *  * currentUsageTotal - Total number of acute beds currently in use
+ *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * weeklyCovidAdmissions - Number of COVID patients admitted in the past week.
+ *
+ */
+export type Hsahospitalbeds = HospitalResourceUtilizationWithAdmissions;
+/**
  *
  * Information about ICU bed utilization details.
  *
@@ -58,6 +77,31 @@ export type Currentusagecovid = number | null;
  *
  */
 export type Icubeds = HospitalResourceUtilization;
+/**
+ * Total capacity for resource.
+ */
+export type Capacity1 = number | null;
+/**
+ * Currently used capacity for resource by all patients (COVID + Non-COVID)
+ */
+export type Currentusagetotal1 = number | null;
+/**
+ * Currently used capacity for resource by COVID
+ */
+export type Currentusagecovid1 = number | null;
+/**
+ *
+ * Information about ICU bed utilization details aggregated for the county's corresponding
+ * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
+ * For For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ *
+ * Fields:
+ *  * capacity - Current staffed ICU bed capacity.
+ *  * currentUsageTotal - Total number of ICU beds currently in use
+ *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
+ *
+ */
+export type Hsaicubeds = HospitalResourceUtilization;
 /**
  *
  * New confirmed or suspected cases.
@@ -156,7 +200,9 @@ export interface Actuals {
   negativeTests: Negativetests;
   contactTracers: Contacttracers;
   hospitalBeds: Hospitalbeds;
+  hsaHospitalBeds: Hsahospitalbeds;
   icuBeds: Icubeds;
+  hsaIcuBeds: Hsaicubeds;
   newCases: Newcases;
   newDeaths: Newdeaths;
   vaccinesDistributed?: Vaccinesdistributed;
@@ -170,10 +216,19 @@ export interface Actuals {
 /**
  * Base model for API output.
  */
-export interface HospitalResourceUtilization {
+export interface HospitalResourceUtilizationWithAdmissions {
   capacity: Capacity;
   currentUsageTotal: Currentusagetotal;
   currentUsageCovid: Currentusagecovid;
+  weeklyCovidAdmissions: Weeklycovidadmissions;
+}
+/**
+ * Base model for API output.
+ */
+export interface HospitalResourceUtilization {
+  capacity: Capacity1;
+  currentUsageTotal: Currentusagetotal1;
+  currentUsageCovid: Currentusagecovid1;
 }
 /**
  * Distributions of demographic data.

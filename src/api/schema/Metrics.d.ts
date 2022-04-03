@@ -23,6 +23,10 @@ export type TestPositivityRatioMethod =
  */
 export type Casedensity = number | null;
 /**
+ * The number of new cases per 100k population over the last week.
+ */
+export type Weeklynewcasesper100K = number | null;
+/**
  * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
  */
 export type Contacttracercapacityratio = number | null;
@@ -38,6 +42,14 @@ export type Infectionrateci90 = number | null;
  * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
  */
 export type Icucapacityratio = number | null;
+/**
+ * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area.
+ */
+export type Bedswithcovidpatientsratio = number | null;
+/**
+ * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area.
+ */
+export type Weeklycovidadmissionsper100K = number | null;
 /**
  * Ratio of population that has initiated vaccination.
  */
@@ -58,10 +70,13 @@ export interface Metrics {
   testPositivityRatio: Testpositivityratio;
   testPositivityRatioDetails?: TestPositivityRatioDetails | null;
   caseDensity: Casedensity;
+  weeklyNewCasesPer100k: Weeklynewcasesper100K;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuCapacityRatio: Icucapacityratio;
+  bedsWithCovidPatientsRatio: Bedswithcovidpatientsratio;
+  weeklyCovidAdmissionsPer100k: Weeklycovidadmissionsper100K;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
