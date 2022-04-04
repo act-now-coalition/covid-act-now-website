@@ -39,7 +39,13 @@ const HeaderCell = (props: {
     sortByPopulation,
   } = props;
 
-  const columnName = column.name;
+  const testColumnNames = new Map<string, string>([
+    ['Infection rate', 'Weekly new cases'],
+    ['Positive test rate', 'Weekly new admissions'],
+    ['Hospitalizations per 100k', 'Patients w/ COVID'],
+  ]);
+
+  const columnName = testColumnNames.get(column.name) ?? column.name;
 
   function cellOnClick() {
     if (sortByPopulation) {

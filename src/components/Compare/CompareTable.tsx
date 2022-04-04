@@ -97,7 +97,9 @@ const CompareTable = (props: {
     return [...sortedLocations, ...locationsWithoutValue];
   }
 
-  let columns = vaccinesFirst ? orderedColumnsVaccineFirst : orderedColumns;
+  let columns = vaccinesFirst
+    ? orderedColumnsVaccineFirst.slice(-4)
+    : orderedColumns.slice(-4);
 
   const getPopulation = (location: SummaryForCompare) =>
     location.region.population;
