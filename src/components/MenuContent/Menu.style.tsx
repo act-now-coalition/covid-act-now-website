@@ -103,8 +103,19 @@ export const ParagraphCopy = styled.p`
   margin-bottom: 2rem;
   text-align: ${props => props.theme.megaMenu.paragraphAlignment};
 
-  p {
+  p,
+  a {
     color: ${props => props.theme.megaMenu.secondaryText};
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    a {
+      color: ${props => props.theme.megaMenu.secondaryText};
+    }
   }
 
   @media (min-width: ${mobileBreakpoint}) {
