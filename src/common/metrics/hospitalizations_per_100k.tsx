@@ -12,16 +12,16 @@ import { CommunityLevel, CommunityLevelInfoMap } from 'common/community_level';
 
 // TODO : Update with real metric + content:
 
-export const HospitalAdmissionsPer100kMetric: MetricDefinition = {
+export const HospitalizationsPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
-  metricName: 'Hospital admissions',
-  extendedMetricName: 'Hospital admissions per 100k population',
-  metricNameForCompare: `Hospital admissions per 100k`,
+  metricName: 'Hospitalizations',
+  extendedMetricName: 'Hospitalizations per 100k population',
+  metricNameForCompare: `Hospitalizations per 100k`,
 };
 
-export const HOSPITAL_ADMISSIONS_PER_100K_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
+export const HOSPITALIZATIONS_PER_100K_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
   [CommunityLevel.LOW]: {
     communityLevel: CommunityLevel.LOW,
     upperLimit: 1,
@@ -57,7 +57,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     return (
       <Fragment>
         Unable to generate{' '}
-        {HospitalAdmissionsPer100kMetric.extendedMetricName.toLowerCase()}. This
+        {HospitalizationsPer100kMetric.extendedMetricName.toLowerCase()}. This
         could be due to insufficient data.
       </Fragment>
     );
@@ -115,7 +115,7 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Show definition of ${HospitalAdmissionsPer100kMetric.metricName} metric`}
+      aria-label={`Show definition of ${HospitalizationsPer100kMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
       }
