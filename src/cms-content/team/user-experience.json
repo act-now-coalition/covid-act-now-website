@@ -3,12 +3,6 @@
   "teamID": "user-experience",
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/grace.jpeg",
-      "fullName": "Grace Zec",
-      "description": "UX researcher",
-      "profileUrl": "https://www.linkedin.com/in/gracezec/"
-    },
-    {
       "fullName": "Josh Ziman",
       "description": "User experience lead",
       "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
