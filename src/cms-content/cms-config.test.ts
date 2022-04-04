@@ -17,7 +17,8 @@ describe('CMS Config', () => {
     // cms-content-entry is the current CMS branch we work off of. During development
     // this branch is often changed.  This check ensures that it is
     // set to the default before merging.
-    expect(configBranchName).toBe('cms-content-entry');
+    // TODO(8.2) - Restore cms-content-entry after 8.2 launch
+    expect(configBranchName).toBe('can-82');
   });
 
   test('Config branch is cms-vaccine-info for vaccination CMS config', () => {
