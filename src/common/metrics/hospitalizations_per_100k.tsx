@@ -80,7 +80,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderThermometer(): React.ReactElement {
-  const levelInfo = HOSPITAL_ADMISSIONS_PER_100K_LEVEL_INFO_MAP;
+  const levelInfo = HOSPITALIZATIONS_PER_100K_LEVEL_INFO_MAP;
   const levelHigh = levelInfo[CommunityLevel.HIGH];
   const levelMedium = levelInfo[CommunityLevel.MEDIUM];
   const levelLow = levelInfo[CommunityLevel.LOW];
