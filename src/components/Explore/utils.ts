@@ -132,7 +132,7 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
     case 'testPositiveRate':
       return ExploreMetric.POSITIVITY_RATE;
 
-    // Todo (update with correct dataset id):
+    // TODO(8.2) - update with correct dataset id
     case 'hospitalizationsPer100kId':
       return ExploreMetric.HOSPITALIZATIONS_PER_100K;
     case 'ratioBedsWithCovidId':
@@ -163,7 +163,7 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
     case ExploreMetric.POSITIVITY_RATE:
       return 'testPositiveRate';
 
-    // Todo (update with correct dataset id):
+    // TODO(8.2) - update with correct dataset id:
     case ExploreMetric.HOSPITALIZATIONS_PER_100K:
       return 'vaccinationsAdditionalDose';
     case ExploreMetric.RATIO_BEDS_WITH_COVID:
@@ -386,7 +386,7 @@ export const exploreMetricData: {
     ],
   },
 
-  // Todo (update with real content)
+  // TODO(8.2) - update with real content:
   [ExploreMetric.HOSPITALIZATIONS_PER_100K]: {
     title: 'Hospitalizations per 100k',
     name: 'Hospitalizations per 100k',
