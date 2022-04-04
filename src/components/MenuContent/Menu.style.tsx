@@ -110,10 +110,7 @@ export const ParagraphCopy = styled.p`
 
   a {
     text-decoration: underline;
-  }
-
-  &:hover {
-    a {
+    &:hover {
       color: ${props => props.theme.megaMenu.secondaryText};
     }
   }
