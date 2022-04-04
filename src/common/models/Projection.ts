@@ -65,6 +65,7 @@ export type DatasetId =
   | 'rawDailyCases'
   | 'rawDailyDeaths'
   | 'rawHospitalizations'
+  | 'rawWeeklyCovidAdmissions'
   | 'smoothedHospitalizations'
   | 'rawICUHospitalizations'
   | 'smoothedICUHospitalizations';
@@ -136,7 +137,10 @@ export const CASE_FATALITY_RATIO = 0.01;
  */
 export class Projection {
   readonly totalPopulation: number;
+  readonly hsaPopulation: number | null;
   readonly fips: string;
+  readonly hsa: string | null;
+  readonly hsaName: string | null;
   readonly region: Region;
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
@@ -146,6 +150,7 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
+  private readonly currentWeeklyNewCasesPer100k: number | null; // add to switch statement
   readonly currentDailyDeaths: number | null;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -171,6 +176,7 @@ export class Projection {
   private readonly rawDailyDeaths: Array<number | null>;
   private readonly rawHospitalizations: Array<number | null>;
   private readonly smoothedHospitalizations: Array<number | null>;
+  private readonly rawWeeklyCovidAdmissions: Array<number | null>;
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
   private readonly metrics: Metrics | null;
@@ -193,7 +199,10 @@ export class Projection {
 
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
+    this.hsaPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
+    this.hsa = summaryWithTimeseries.hsa;
+    this.hsaName = summaryWithTimeseries.hsaName;
     this.region = region;
 
     // Set up our series data exposed via getDataset().
@@ -211,6 +220,11 @@ export class Projection {
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
+
+    this.rawWeeklyCovidAdmissions = actualTimeseries.map(
+      row => row && row.hospitalBeds.weeklyCovidAdmissions,
+    );
+
     this.rawICUHospitalizations = actualTimeseries.map(row =>
       row?.icuBeds ? row.icuBeds.currentUsageCovid : null,
     );
@@ -258,6 +272,7 @@ export class Projection {
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
+    this.currentWeeklyNewCasesPer100k = metrics?.weeklyNewCasesPer100k ?? null;
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
