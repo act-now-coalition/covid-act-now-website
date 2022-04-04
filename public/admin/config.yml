@@ -4,7 +4,7 @@
 backend:
   name: github
   repo: covid-projections/covid-projections
-  branch: cms-content-entry
+  branch: can-82
   base_url: https://api.netlify.com
 
 # To use the CMS locally during development, run:
@@ -29,11 +29,7 @@ collections:
         label: 'About page content'
         file: 'src/cms-content/about/about-page.json'
         fields:
-          - {
-              label: 'About us: Header',
-              name: 'aboutHeader',
-              widget: 'string',
-            }
+          - { label: 'About us: Header', name: 'aboutHeader', widget: 'string' }
           - {
               label: 'About us: Content',
               name: 'aboutContent',
@@ -60,11 +56,7 @@ collections:
                 name: 'icon'
                 widget: 'image'
               - { label: 'Section copy', name: 'copy', widget: 'markdown' }
-          - {
-              label: 'Impact: Header',
-              name: 'impactHeader',
-              widget: 'string',
-            }
+          - { label: 'Impact: Header', name: 'impactHeader', widget: 'string' }
           - {
               label: 'Impact: Content',
               name: 'impactContent',
@@ -290,8 +282,18 @@ collections:
                 widget: object
                 required: false
                 fields:
-                  - { label: Alt text, name: altText, widget: string, required: false }
-                  - { label: Icon image, name: iconImage, widget: image, required: false }
+                  - {
+                      label: Alt text,
+                      name: altText,
+                      widget: string,
+                      required: false,
+                    }
+                  - {
+                      label: Icon image,
+                      name: iconImage,
+                      widget: image,
+                      required: false,
+                    }
               - label: CTA
                 name: cta
                 widget: object
@@ -301,8 +303,8 @@ collections:
                       label: Button type,
                       name: buttonType,
                       widget: select,
-                      options: ["FILL", "OUTLINE", "TEXT"],
-                      required: false
+                      options: ['FILL', 'OUTLINE', 'TEXT'],
+                      required: false,
                     }
                   - { label: Text, name: text, widget: string, required: false }
                   - { label: URL, name: url, widget: string, required: false }
@@ -683,7 +685,12 @@ collections:
                 name: questions
                 widget: list
                 fields:
-                  - { label: Question, name: question, widget: text, required: false }
+                  - {
+                      label: Question,
+                      name: question,
+                      widget: text,
+                      required: false,
+                    }
                   - { label: Question ID, name: questionId, widget: text }
                   - { label: Answer, name: answer, widget: markdown }
           - label: 'Framework section logos'
@@ -820,7 +827,7 @@ collections:
                 label: Icon ID
                 hint: Determines the associated icon
                 widget: select
-                options: ["ALERTS", "API", "DAILY_DOWNLOAD"]
+                options: ['ALERTS', 'API', 'DAILY_DOWNLOAD']
   - name: modals
     label: Modals
     folder: 'src/cms-content/modals'
