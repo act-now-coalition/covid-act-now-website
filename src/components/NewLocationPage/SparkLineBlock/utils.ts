@@ -47,7 +47,6 @@ interface MetricDescription {
   seriesList: Series[];
 }
 
-// TODO(8.2) : set correct dataSetIds once API update is merged in
 export const sparkLinesMetricData: {
   [metric in SparkLineMetric]: MetricDescription;
 } = {
@@ -55,10 +54,10 @@ export const sparkLinesMetricData: {
     title: 'Cases',
     seriesList: [
       {
-        datasetId: 'rawDailyCases',
+        datasetId: 'weeklyNewCasesPer100k',
       },
       {
-        datasetId: 'smoothedDailyCases',
+        datasetId: 'weeklyNewCasesPer100k',
       },
     ],
   },
@@ -66,10 +65,10 @@ export const sparkLinesMetricData: {
     title: 'Hospitalizations',
     seriesList: [
       {
-        datasetId: 'rawDailyDeaths',
+        datasetId: 'weeklyCovidAdmissionsPer100k',
       },
       {
-        datasetId: 'smoothedDailyDeaths',
+        datasetId: 'weeklyCovidAdmissionsPer100k',
       },
     ],
   },
@@ -77,10 +76,10 @@ export const sparkLinesMetricData: {
     title: 'COVID Patients',
     seriesList: [
       {
-        datasetId: 'rawHospitalizations',
+        datasetId: 'bedsWithCovidPatientsRatio',
       },
       {
-        datasetId: 'smoothedHospitalizations',
+        datasetId: 'bedsWithCovidPatientsRatio',
       },
     ],
   },
