@@ -19,8 +19,6 @@ export const metricSubLabelText: { [key in Metric]: string[] } = {
   [Metric.CASE_GROWTH_RATE]: [''], // figure out deleting these empties without typescript complaining
   [Metric.HOSPITAL_USAGE]: [''],
   [Metric.POSITIVE_TESTS]: [''],
-
-  // TODO(8.2): verify these
   [Metric.WEEKLY_CASES_PER_100K]: ['per', '100k'],
   [Metric.RATIO_BEDS_WITH_COVID]: ['of all', 'beds'],
   [Metric.ADMISSIONS_PER_100K]: ['per', '100k'],
