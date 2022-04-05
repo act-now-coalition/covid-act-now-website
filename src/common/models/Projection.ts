@@ -73,7 +73,8 @@ export type DatasetId =
   | 'rawICUHospitalizations'
   | 'smoothedICUHospitalizations'
   | 'weeklyCovidAdmissionsPer100k'
-  | 'bedsWithCovidPatientsRatio';
+  | 'bedsWithCovidPatientsRatio'
+  | 'canCommunityLevel';
 
 export interface RtRange {
   /** The actual Rt value. */
