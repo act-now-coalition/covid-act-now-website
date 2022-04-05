@@ -3,13 +3,13 @@ import fs from 'fs-extra';
 import * as Handlebars from 'handlebars';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
-import regions from '../../src/common/regions';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 import { DateFormat, formatDateTime } from '../../src/common/utils/time-utils';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
+// TODO(8.2): Update the thermometerBaseURL
 const thermometerBaseURL =
   'https://data.covidactnow.org/thermometer_screenshot';
 const unsubscribeURL = 'https://covidactnow.org/alert_unsubscribe';
@@ -18,6 +18,7 @@ export function toISO8601(date: Date): string {
   return formatDateTime(date, DateFormat.YYYY_MM_DD);
 }
 
+// TODO(8.2): Update the template.html copy
 const alertTemplate = Handlebars.compile(
   fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8'),
 );
@@ -102,6 +103,7 @@ function generateAlertEmailContent(
   return alertTemplate(data);
 }
 
+// TODO(8.2): Update copy for the change summary
 function changeText(oldLevel: Level, newLevel: Level) {
   if (oldLevel === Level.UNKNOWN) {
     return 'new risk score';
@@ -118,6 +120,7 @@ export function generateAlertEmailData(
 ) {
   const { locationName } = locationAlert;
   const htmlContent = generateAlertEmailContent(emailAddress, locationAlert);
+  // TODO(8.2) - Update the copy of the subject line
   const subjectLine = `${locationName}'s Risk Level Has Changed`;
 
   return {

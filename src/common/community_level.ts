@@ -1,7 +1,8 @@
 export enum CommunityLevel {
-  LOW,
-  MEDIUM,
-  HIGH,
+  LOW = 0,
+  MEDIUM = 1,
+  HIGH = 2,
+  UNKNOWN = 4,
 }
 
 export const ALL_COMMUNITY_LEVELS = [
