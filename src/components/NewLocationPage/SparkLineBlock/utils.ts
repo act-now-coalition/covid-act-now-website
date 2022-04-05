@@ -14,24 +14,24 @@ export const daysToChart = 30;
 export type dateItem = number | Date;
 
 export enum SparkLineMetric {
-  CASES,
-  DEATHS,
-  HOSPITALIZATIONS,
+  WEEKLY_CASES_PER_100K,
+  ADMISSIONS_PER_100K,
+  RATIO_BEDS_WITH_COVID,
 }
 
 export const SPARK_LINE_METRICS = [
-  SparkLineMetric.CASES,
-  SparkLineMetric.HOSPITALIZATIONS,
-  SparkLineMetric.DEATHS,
+  SparkLineMetric.WEEKLY_CASES_PER_100K,
+  SparkLineMetric.ADMISSIONS_PER_100K,
+  SparkLineMetric.RATIO_BEDS_WITH_COVID,
 ];
 
 // Used to select explore tab when clicking corresponding metric's spark line:
 export const SparkLineToExploreMetric: {
   [metric in SparkLineMetric]: ExploreMetric;
 } = {
-  [SparkLineMetric.CASES]: ExploreMetric.CASES,
-  [SparkLineMetric.DEATHS]: ExploreMetric.DEATHS,
-  [SparkLineMetric.HOSPITALIZATIONS]: ExploreMetric.HOSPITALIZATIONS,
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES_PER_100K,
+  [SparkLineMetric.ADMISSIONS_PER_100K]: ExploreMetric.ADMISSIONS_PER_100K,
+  [SparkLineMetric.RATIO_BEDS_WITH_COVID]: ExploreMetric.RATIO_BEDS_WITH_COVID,
 };
 
 export interface Series {
@@ -47,10 +47,11 @@ interface MetricDescription {
   seriesList: Series[];
 }
 
+// TODO(8.2) : set correct dataSetIds once API update is merged in
 export const sparkLinesMetricData: {
   [metric in SparkLineMetric]: MetricDescription;
 } = {
-  [SparkLineMetric.CASES]: {
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: {
     title: 'Cases',
     seriesList: [
       {
@@ -61,8 +62,8 @@ export const sparkLinesMetricData: {
       },
     ],
   },
-  [SparkLineMetric.DEATHS]: {
-    title: 'Deaths',
+  [SparkLineMetric.ADMISSIONS_PER_100K]: {
+    title: 'Hospitalizations',
     seriesList: [
       {
         datasetId: 'rawDailyDeaths',
@@ -72,8 +73,8 @@ export const sparkLinesMetricData: {
       },
     ],
   },
-  [SparkLineMetric.HOSPITALIZATIONS]: {
-    title: 'Hospitalizations',
+  [SparkLineMetric.RATIO_BEDS_WITH_COVID]: {
+    title: 'COVID Patients',
     seriesList: [
       {
         datasetId: 'rawHospitalizations',
