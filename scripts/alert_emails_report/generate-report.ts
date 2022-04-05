@@ -35,22 +35,23 @@ interface FipsCount {
 async function main() {
   const db = getFirestore();
   const subscriptions = await fetchAllAlertSubscriptions(db);
-  await updateSubscriptionsByLocation(subscriptions);
-  await updateSubscriptionsByDate(subscriptions);
+  console.log(subscriptions.keys);
+  // await updateSubscriptionsByLocation(subscriptions);
+  // await updateSubscriptionsByDate(subscriptions);
 
-  try {
-    // TODO(michael): Get engagement stats from AWS.
-    // await updateEngagementStats();
-  } catch (err) {
-    console.error('Error updating engagement stats', err);
-  }
+  // try {
+  //   // TODO(michael): Get engagement stats from AWS.
+  //   // await updateEngagementStats();
+  // } catch (err) {
+  //   console.error('Error updating engagement stats', err);
+  // }
 
-  const spreadsheetId = getSpreadsheetId();
-  const reportUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}`;
+  // const spreadsheetId = getSpreadsheetId();
+  // const reportUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}`;
 
-  console.info('Done.');
-  console.info(`Check the report: ${reportUrl}`);
-  process.exit(0);
+  // console.info('Done.');
+  // console.info(`Check the report: ${reportUrl}`);
+  // process.exit(0);
 }
 
 async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
