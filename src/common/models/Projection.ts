@@ -11,13 +11,13 @@ import {
   Metrics,
   Actuals,
   Annotations,
-  CommunityLevel,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent, getPercentChange } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { Level } from 'common/level';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -154,7 +154,7 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
-  readonly canCommunityLevel: CommunityLevel;
+  readonly canCommunityLevel: Level;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
 
@@ -285,7 +285,7 @@ export class Projection {
     );
 
     this.canCommunityLevel =
-      summaryWithTimeseries.communityLevels.canCommunityLevel;
+      summaryWithTimeseries.communityLevels?.canCommunityLevel ?? Level.UNKNOWN;
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
@@ -573,8 +573,6 @@ export class Projection {
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
-    const communityLevelsTimeseriesRaw =
-      summaryWithTimeseries.communityLevelsTimeseries;
 
     if (actualsTimeseriesRaw.length === 0) {
       return {
