@@ -11,6 +11,9 @@ import {
   Metrics,
   Actuals,
   Annotations,
+  CommunityLevelsTimeseriesRow,
+  Communitylevelstimeseries,
+  CommunityLevel,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent, getPercentChange } from 'common/utils';
@@ -66,10 +69,11 @@ export type DatasetId =
   | 'rawDailyCases'
   | 'rawDailyDeaths'
   | 'rawHospitalizations'
-  | 'rawWeeklyCovidAdmissions'
   | 'smoothedHospitalizations'
   | 'rawICUHospitalizations'
-  | 'smoothedICUHospitalizations';
+  | 'smoothedICUHospitalizations'
+  | 'weeklyCovidAdmissionsPer100k'
+  | 'bedsWithCovidPatientsRatio';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -151,7 +155,6 @@ export class Projection {
   readonly currentCumulativeDeaths: number | null;
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
-  private readonly currentWeeklyNewCasesPer100k: number | null; // add to switch statement
   readonly currentDailyDeaths: number | null;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -178,9 +181,13 @@ export class Projection {
   private readonly rawDailyDeaths: Array<number | null>;
   private readonly rawHospitalizations: Array<number | null>;
   private readonly smoothedHospitalizations: Array<number | null>;
-  private readonly rawWeeklyCovidAdmissions: Array<number | null>;
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
+  private readonly weeklyCovidAdmissionsPer100k: Array<number | null>;
+  private readonly bedsWithCovidPatientsRatio: Array<number | null>;
+  private readonly canCommunityLevel:
+    | Array<CommunityLevel | undefined>
+    | undefined;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
 
@@ -192,6 +199,7 @@ export class Projection {
     const {
       actualTimeseries,
       metricsTimeseries,
+      communityLevelTimeseries,
       dates,
     } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
@@ -221,10 +229,6 @@ export class Projection {
     );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
-    );
-
-    this.rawWeeklyCovidAdmissions = actualTimeseries.map(
-      row => row && row.hospitalBeds.weeklyCovidAdmissions,
     );
 
     this.rawICUHospitalizations = actualTimeseries.map(row =>
@@ -274,12 +278,23 @@ export class Projection {
     this.caseDensityRange = this.calcCaseDensityRange();
 
     this.weeklyNewCasesPer100k = metricsTimeseries.map(
-      row => row && row.weeklyNewCasesPer100k,
+      row => row?.weeklyNewCasesPer100k ?? null,
+    );
+
+    this.weeklyCovidAdmissionsPer100k = metricsTimeseries.map(
+      row => row?.weeklyNewCasesPer100k ?? null,
+    );
+
+    this.bedsWithCovidPatientsRatio = metricsTimeseries.map(
+      row => row?.bedsWithCovidPatientsRatio ?? null,
+    );
+
+    this.canCommunityLevel = communityLevelTimeseries?.map(
+      row => row?.canCommunityLevel ?? undefined,
     );
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
-    this.currentWeeklyNewCasesPer100k = metrics?.weeklyNewCasesPer100k ?? null;
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
@@ -305,6 +320,8 @@ export class Projection {
     return this.metrics?.testPositivityRatioDetails?.source || null;
   }
 
+  // TODO: Add new metrics to Metric Enum, add to getMetricValue() and resolve any issues
+  // from adding new metrics to Metric.
   getMetricValue(metric: Metric): number | null {
     if (this.isMetricDisabled(metric)) {
       return null;
@@ -534,13 +551,25 @@ export class Projection {
    * based off the date. Eventually would be nice to use this around instead of the
    * two list scenario we have going right now.
    */
-  private makeDateDictionary(ts: ActualsTimeseries | Metricstimeseries) {
+  private makeDateDictionary(
+    ts: ActualsTimeseries | Metricstimeseries | Communitylevelstimeseries,
+  ) {
     const dict: {
-      [date: string]: ActualsTimeseriesRow | MetricsTimeseriesRow;
+      [date: string]:
+        | ActualsTimeseriesRow
+        | MetricsTimeseriesRow
+        | CommunityLevelsTimeseriesRow;
     } = {};
-    ts.forEach((row: ActualsTimeseriesRow | MetricsTimeseriesRow) => {
-      dict[row.date] = row;
-    });
+    ts.forEach(
+      (
+        row:
+          | ActualsTimeseriesRow
+          | MetricsTimeseriesRow
+          | CommunityLevelsTimeseriesRow,
+      ) => {
+        dict[row.date] = row;
+      },
+    );
     return dict;
   }
 
@@ -558,6 +587,9 @@ export class Projection {
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
+    const communityLevelTimeseriesRaw =
+      summaryWithTimeseries.communityLevelsTimeseries || [];
+
     if (actualsTimeseriesRaw.length === 0) {
       return {
         actualTimeseries: [],
@@ -581,6 +613,7 @@ export class Projection {
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
+    const communityLevelTimeseries: Array<CommunityLevelsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
     const actualsTimeseriesDictionary = this.makeDateDictionary(
@@ -588,6 +621,9 @@ export class Projection {
     );
     const metricsTimeseriesDictionary = this.makeDateDictionary(
       metricsTimeseriesRaw,
+    );
+    const communityLevelTimeseriesDictionary = this.makeDateDictionary(
+      communityLevelTimeseriesRaw,
     );
 
     let currDate = new Date(earliestDate.getTime());
@@ -600,8 +636,12 @@ export class Projection {
       const metricsTimeseriesRowForDate = metricsTimeseriesDictionary[
         ts
       ] as MetricsTimeseriesRow;
+      const communityLevelTimeseriesRowForDate = communityLevelTimeseriesDictionary[
+        ts
+      ] as CommunityLevelsTimeseriesRow;
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
+      communityLevelTimeseries.push(communityLevelTimeseriesRowForDate || null);
       // Clone the date since we're about to mutate it below.
       dates.push(new Date(currDate.getTime()));
 
@@ -616,6 +656,7 @@ export class Projection {
     return {
       actualTimeseries: actualsTimeseries,
       metricsTimeseries: metricsTimeseries,
+      communityLevelTimeseries: communityLevelTimeseries,
       dates: dates,
     };
   }
