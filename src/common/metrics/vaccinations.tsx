@@ -20,6 +20,7 @@ export const VaccinationsMetric: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent Vaccinated',
   metricNameForCompare: 'Vaccinated (1+ dose)',
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 const SHORT_DESCRIPTION_LOW = 'Population given at least one dose';

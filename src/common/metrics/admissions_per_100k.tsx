@@ -8,9 +8,9 @@ import { Metric } from 'common/metricEnum';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
-import { CommunityLevel, CommunityLevelInfoMap } from 'common/community_level';
+import { Level, LevelInfoMap } from 'common/level';
 
-// TODO : Update with real metric + content:
+// TODO(8.2) : Update with real metric + content:
 
 export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
@@ -19,29 +19,53 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
   metricName: 'Weekly Covid Admissions per 100k',
   extendedMetricName: 'Weekly Covid Admissions per 100k population',
   metricNameForCompare: `Weekly Covid Admissions per 100k`,
+  metricNameForSummaryStat: 'Hospitalizations',
 };
 
-export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
-  [CommunityLevel.LOW]: {
-    communityLevel: CommunityLevel.LOW,
+export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
+  [Level.LOW]: {
+    level: Level.LOW,
     upperLimit: 1,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
     detail: () => 'COVID is being effectively contained',
   },
-  [CommunityLevel.MEDIUM]: {
-    communityLevel: CommunityLevel.MEDIUM,
+  [Level.MEDIUM]: {
+    level: Level.MEDIUM,
     upperLimit: 10,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => 'COVID not contained, but at low levels',
   },
-  [CommunityLevel.HIGH]: {
-    communityLevel: CommunityLevel.HIGH,
+  [Level.HIGH]: {
+    level: Level.HIGH,
     upperLimit: 25,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => 'Very large number of new cases',
+  },
+  [Level.UNKNOWN]: {
+    level: Level.UNKNOWN,
+    upperLimit: 0,
+    name: 'Unknown',
+    color: COLOR_MAP.GRAY.BASE,
+    detail: () => 'Insufficient data to assess',
+  },
+
+  // Not to be used:
+  [Level.CRITICAL]: {
+    level: Level.CRITICAL,
+    upperLimit: 75,
+    name: 'Critical',
+    color: COLOR_MAP.RED.BASE,
+    detail: () => 'Dangerous number of new cases',
+  },
+  [Level.SUPER_CRITICAL]: {
+    level: Level.SUPER_CRITICAL,
+    upperLimit: Infinity,
+    name: 'Extreme',
+    color: COLOR_MAP.RED.DARK,
+    detail: () => 'Very dangerous number of new cases',
   },
 };
 
@@ -81,9 +105,9 @@ function renderStatus(projections: Projections): React.ReactElement {
 
 function renderThermometer(): React.ReactElement {
   const levelInfo = ADMISSIONS_PER_100K_LEVEL_INFO_MAP;
-  const levelHigh = levelInfo[CommunityLevel.HIGH];
-  const levelMedium = levelInfo[CommunityLevel.MEDIUM];
-  const levelLow = levelInfo[CommunityLevel.LOW];
+  const levelHigh = levelInfo[Level.HIGH];
+  const levelMedium = levelInfo[Level.MEDIUM];
+  const levelLow = levelInfo[Level.LOW];
 
   const items = [
     {

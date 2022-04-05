@@ -46,6 +46,11 @@ export const metricToTooltipMap: MetricToTooltipContentMap = {
   [Metric.POSITIVE_TESTS]: getMetricMapById('positive-test-rate'),
   [Metric.VACCINATIONS]: getMetricMapById('percent-vaccinated'),
   [Metric.HOSPITAL_USAGE]: getMetricMapById('icu-capacity-used'),
+
+  // TODO(8.2) - update with real tooltip content via cms
+  [Metric.RATIO_BEDS_WITH_COVID]: getMetricMapById('positive-test-rate'),
+  [Metric.ADMISSIONS_PER_100K]: getMetricMapById('percent-vaccinated'),
+  [Metric.WEEKLY_CASES_PER_100K]: getMetricMapById('icu-capacity-used'),
 };
 
 export const locationPageHeaderTooltipContent: Tooltip = getTooltipContentById(

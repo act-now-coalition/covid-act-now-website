@@ -1,6 +1,6 @@
 import { LocationSummary } from 'common/location_summaries';
 import { MetricValues } from 'common/models/Projections';
-import { getMetricName, ALL_METRICS } from 'common/metric';
+import { getMetricNameForSummaryStat, ALL_METRICS } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { LevelInfo } from 'common/level';
 
@@ -19,6 +19,9 @@ export const metricSubLabelText: { [key in Metric]: string[] } = {
   [Metric.CASE_GROWTH_RATE]: [''], // figure out deleting these empties without typescript complaining
   [Metric.HOSPITAL_USAGE]: [''],
   [Metric.POSITIVE_TESTS]: [''],
+  [Metric.WEEKLY_CASES_PER_100K]: ['per', '100k'],
+  [Metric.RATIO_BEDS_WITH_COVID]: ['of all', 'beds'],
+  [Metric.ADMISSIONS_PER_100K]: ['per', '100k'],
 };
 
 export const summaryToStats = (summary: LocationSummary): MetricValues => {
@@ -31,8 +34,8 @@ export const summaryToStats = (summary: LocationSummary): MetricValues => {
 
 export function getMetricNameForStat(metric: Metric): string {
   if (metric === Metric.VACCINATIONS) {
-    return `% ${getMetricName(metric)}`;
+    return `% ${getMetricNameForSummaryStat(metric)}`;
   } else {
-    return getMetricName(metric);
+    return getMetricNameForSummaryStat(metric);
   }
 }
