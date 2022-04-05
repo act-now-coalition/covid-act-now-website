@@ -277,7 +277,7 @@ export class Projection {
     );
 
     this.weeklyCovidAdmissionsPer100k = metricsTimeseries.map(
-      row => row?.weeklyNewCasesPer100k ?? null,
+      row => row?.weeklyCovidAdmissionsPer100k ?? null,
     );
 
     this.bedsWithCovidPatientsRatio = metricsTimeseries.map(
