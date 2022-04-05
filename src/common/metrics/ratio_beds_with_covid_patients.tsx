@@ -134,14 +134,16 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition;
+  const { body } = metricToTooltipMap[
+    Metric.RATIO_BEDS_WITH_COVID
+  ].metricDefinition;
 
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Show definition of ${RatioBedsWithCovidPatientsMetric.metricName} metric`}
       trackOpenTooltip={() =>
-        trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
+        trackOpenTooltip(`Metric definition: ${Metric.RATIO_BEDS_WITH_COVID}`)
       }
     />
   );

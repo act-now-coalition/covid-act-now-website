@@ -134,14 +134,16 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const { body } = metricToTooltipMap[Metric.CASE_DENSITY].metricDefinition;
+  const { body } = metricToTooltipMap[
+    Metric.WEEKLY_CASES_PER_100K
+  ].metricDefinition;
 
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Show definition of ${WeeklyNewCasesPer100kMetric.metricName} metric`}
       trackOpenTooltip={() =>
-        trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
+        trackOpenTooltip(`Metric definition: ${Metric.WEEKLY_CASES_PER_100K}`)
       }
     />
   );

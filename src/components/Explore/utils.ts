@@ -131,13 +131,11 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.ICU_USED;
     case 'testPositiveRate':
       return ExploreMetric.POSITIVITY_RATE;
-
-    // TODO(8.2) - update with correct dataset id
-    case 'hospitalizationsPer100kId':
+    case 'weeklyCovidAdmissionsPer100k':
       return ExploreMetric.ADMISSIONS_PER_100K;
-    case 'ratioBedsWithCovidId':
+    case 'bedsWithCovidPatientsRatio':
       return ExploreMetric.RATIO_BEDS_WITH_COVID;
-    case 'weeklyNewCasesId':
+    case 'weeklyNewCasesPer100k':
       return ExploreMetric.WEEKLY_CASES_PER_100K;
   }
 }
@@ -162,14 +160,12 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'icuUtilization';
     case ExploreMetric.POSITIVITY_RATE:
       return 'testPositiveRate';
-
-    // TODO(8.2) - update with correct dataset id:
     case ExploreMetric.ADMISSIONS_PER_100K:
-      return 'vaccinationsAdditionalDose';
+      return 'weeklyCovidAdmissionsPer100k';
     case ExploreMetric.RATIO_BEDS_WITH_COVID:
-      return 'icuUtilization';
+      return 'bedsWithCovidPatientsRatio';
     case ExploreMetric.WEEKLY_CASES_PER_100K:
-      return 'testPositiveRate';
+      return 'weeklyNewCasesPer100k';
   }
 }
 
@@ -386,18 +382,17 @@ export const exploreMetricData: {
     ],
   },
 
-  // TODO(8.2) - update with real content:
   [ExploreMetric.ADMISSIONS_PER_100K]: {
     title: 'Hospitalizations per 100k',
     name: 'Hospitalizations per 100k',
-    chartId: 'positivity_rate',
+    chartId: 'admissions_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Hospitalizations per 100k',
         tooltipLabel: 'Hospitalizations per 100k',
-        datasetId: 'testPositiveRate',
+        datasetId: 'weeklyCovidAdmissionsPer100k',
         type: SeriesType.LINE,
       },
     ],
@@ -405,14 +400,14 @@ export const exploreMetricData: {
   [ExploreMetric.RATIO_BEDS_WITH_COVID]: {
     title: 'Percent hospital beds with Covid patients',
     name: 'Percent hospital beds with Covid patients',
-    chartId: 'positivity_rate',
+    chartId: 'ratio_beds_with_covid_patients', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 1,
     seriesList: [
       {
         label: 'Percent hospital beds with Covid patients',
         tooltipLabel: 'Percent hospital beds with Covid patients',
-        datasetId: 'testPositiveRate',
+        datasetId: 'bedsWithCovidPatientsRatio',
         type: SeriesType.LINE,
       },
     ],
@@ -420,14 +415,14 @@ export const exploreMetricData: {
   [ExploreMetric.WEEKLY_CASES_PER_100K]: {
     title: 'Weekly cases per 100k',
     name: 'Weekly cases per 100k',
-    chartId: 'positivity_rate',
+    chartId: 'weekly_new_cases_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
-    yAxisDecimalPlaces: 1,
+    yAxisDecimalPlaces: 0,
     seriesList: [
       {
         label: 'Weekly cases per 100k',
         tooltipLabel: 'Weekly cases per 100k',
-        datasetId: 'testPositiveRate',
+        datasetId: 'weeklyNewCasesPer100k',
         type: SeriesType.LINE,
       },
     ],
