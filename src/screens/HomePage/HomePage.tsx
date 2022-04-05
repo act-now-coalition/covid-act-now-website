@@ -212,9 +212,9 @@ export default function HomePage() {
                 setShowModal={setShowCompareModal}
               />
             </HomePageBlock>
-            <div ref={shareBlockRef} id="alert_signup">
+            <HomePageBlock id="alert_signup">
               <ShareModelBlock />
-            </div>
+            </HomePageBlock>
             <PartnersSection />
           </Content>
         </div>

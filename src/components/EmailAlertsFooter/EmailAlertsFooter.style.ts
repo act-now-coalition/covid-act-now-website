@@ -6,7 +6,6 @@ import AlertIcon from 'assets/images/EmailAlertIcon';
 export const Container = styled.div`
   text-align: center;
 
-  padding: 40px 16px;
   @media (min-width: ${mobileBreakpoint}) {
     padding: 70px auto;
   }
