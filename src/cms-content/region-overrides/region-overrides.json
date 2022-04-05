@@ -817,7 +817,7 @@
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2022-03-30",
-      "end_date": "2022-04-30",
+      "end_date": "2022-03-30",
       "region": "GA",
       "context": "Georgia added a backlog of several thousand cases, dating primarily from January 2022. "
     },
@@ -829,15 +829,6 @@
       "end_date": "2022-04-01",
       "region": "26161, 06085",
       "context": "suspected backlogs in Santa Bara and Washtenaw counties."
-    },
-    {
-      "include": "subregions",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
-      "start_date": "",
-      "end_date": "",
-      "region": "AZ",
-      "context": "AZ conties dropping to 0 DNC"
     },
     {
       "include": "region",
