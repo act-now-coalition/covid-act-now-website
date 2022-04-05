@@ -62,6 +62,7 @@ export type DatasetId =
   | 'caseDensityRange'
   | 'smoothedDailyCases'
   | 'smoothedDailyDeaths'
+  | 'weeklyNewCasesPer100k'
   | 'rawDailyCases'
   | 'rawDailyDeaths'
   | 'rawHospitalizations'
@@ -170,6 +171,7 @@ export class Projection {
   private readonly vaccinationsAdditionalDose: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
+  private readonly weeklyNewCasesPer100k: Array<number | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
 
   private readonly rawDailyCases: Array<number | null>;
@@ -268,7 +270,12 @@ export class Projection {
     this.caseDensityByCases = metricsTimeseries.map(
       row => row && row.caseDensity,
     );
+
     this.caseDensityRange = this.calcCaseDensityRange();
+
+    this.weeklyNewCasesPer100k = metricsTimeseries.map(
+      row => row && row.weeklyNewCasesPer100k,
+    );
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
