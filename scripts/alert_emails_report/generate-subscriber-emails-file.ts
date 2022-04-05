@@ -6,7 +6,7 @@ async function main() {
   const db = getFirestore();
   const subscriptions = await fetchAllAlertSubscriptions(db);
   const fs = require('fs');
-  let output = subscriptions.map(s => s.email).join(',');
+  const output = subscriptions.map(s => s.email).join(',');
   fs.writeFileSync('subscriber-emails.txt', output);
 }
 
