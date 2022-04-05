@@ -573,7 +573,6 @@ export class Projection {
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
-
     if (actualsTimeseriesRaw.length === 0) {
       return {
         actualTimeseries: [],
