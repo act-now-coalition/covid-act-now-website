@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'assets/theme/palette';
 import { Typography } from '@material-ui/core';
-import { COLOR_MAP } from 'common/colors';
-import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
+import { mobileBreakpoint } from 'assets/theme/sizes';
 
 export const LocationPageContentWrapper = styled.div`
   @media print {
@@ -48,19 +47,4 @@ export const BetaTag = styled.div`
   background-color: ${palette.info.main};
   color: white;
   transform: translateY(-0.375rem);
-`;
-
-export const DisclaimerWrapper = styled.div`
-  max-width: 600px;
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.9rem;
-  padding-right: 2rem;
-
-  p {
-    font-size: inherit;
-  }
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    font-size: 1rem;
-  }
 `;

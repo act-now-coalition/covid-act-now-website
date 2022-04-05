@@ -3,7 +3,7 @@ import { range } from 'd3-array';
 import { scaleBand } from 'd3-scale';
 import { ParentSize } from '@vx/responsive';
 import { Label } from './VaccinationsThermometer.style';
-import { thermometerBarHeight } from '../RiskLevelThermometer/RiskLevelThermometer.style';
+import { thermometerBarHeight } from '../CommunityLevelThermometer/CommunityLevelThermometer.style';
 import { COLOR_MAP } from 'common/colors';
 import { v4 as uuidv4 } from 'uuid';
 
