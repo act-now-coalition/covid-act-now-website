@@ -12,7 +12,7 @@ import { CommunityLevel, CommunityLevelInfoMap } from 'common/community_level';
 
 // TODO : Update with real metric + content:
 
-export const WeeklyNewCasesMetric: MetricDefinition = {
+export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
@@ -21,7 +21,7 @@ export const WeeklyNewCasesMetric: MetricDefinition = {
   metricNameForCompare: `Weekly new cases per 100k`,
 };
 
-export const WEEKLY_NEW_CASES_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
+export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
   [CommunityLevel.LOW]: {
     communityLevel: CommunityLevel.LOW,
     upperLimit: 1,
@@ -57,8 +57,8 @@ function renderStatus(projections: Projections): React.ReactElement {
     return (
       <Fragment>
         Unable to generate{' '}
-        {WeeklyNewCasesMetric.extendedMetricName.toLowerCase()}. This could be
-        due to insufficient data.
+        {WeeklyNewCasesPer100kMetric.extendedMetricName.toLowerCase()}. This
+        could be due to insufficient data.
       </Fragment>
     );
   }
@@ -80,7 +80,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderThermometer(): React.ReactElement {
-  const levelInfo = WEEKLY_NEW_CASES_LEVEL_INFO_MAP;
+  const levelInfo = WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP;
   const levelHigh = levelInfo[CommunityLevel.HIGH];
   const levelMedium = levelInfo[CommunityLevel.MEDIUM];
   const levelLow = levelInfo[CommunityLevel.LOW];
@@ -115,7 +115,7 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Show definition of ${WeeklyNewCasesMetric.metricName} metric`}
+      aria-label={`Show definition of ${WeeklyNewCasesPer100kMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
       }
