@@ -12,16 +12,16 @@ import { CommunityLevel, CommunityLevelInfoMap } from 'common/community_level';
 
 // TODO : Update with real metric + content:
 
-export const HospitalizationsPer100kMetric: MetricDefinition = {
+export const WeeklyNewCasesMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
-  metricName: 'Hospitalizations',
-  extendedMetricName: 'Hospitalizations per 100k population',
-  metricNameForCompare: `Hospitalizations per 100k`,
+  metricName: 'Weekly new cases',
+  extendedMetricName: 'Weekly new cases per 100k population',
+  metricNameForCompare: `Weekly new cases per 100k`,
 };
 
-export const HOSPITALIZATIONS_PER_100K_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
+export const WEEKLY_NEW_CASES_LEVEL_INFO_MAP: CommunityLevelInfoMap = {
   [CommunityLevel.LOW]: {
     communityLevel: CommunityLevel.LOW,
     upperLimit: 1,
@@ -57,8 +57,8 @@ function renderStatus(projections: Projections): React.ReactElement {
     return (
       <Fragment>
         Unable to generate{' '}
-        {HospitalizationsPer100kMetric.extendedMetricName.toLowerCase()}. This
-        could be due to insufficient data.
+        {WeeklyNewCasesMetric.extendedMetricName.toLowerCase()}. This could be
+        due to insufficient data.
       </Fragment>
     );
   }
@@ -80,7 +80,7 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderThermometer(): React.ReactElement {
-  const levelInfo = HOSPITALIZATIONS_PER_100K_LEVEL_INFO_MAP;
+  const levelInfo = WEEKLY_NEW_CASES_LEVEL_INFO_MAP;
   const levelHigh = levelInfo[CommunityLevel.HIGH];
   const levelMedium = levelInfo[CommunityLevel.MEDIUM];
   const levelLow = levelInfo[CommunityLevel.LOW];
@@ -115,7 +115,7 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Show definition of ${HospitalizationsPer100kMetric.metricName} metric`}
+      aria-label={`Show definition of ${WeeklyNewCasesMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
       }
