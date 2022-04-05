@@ -11,8 +11,6 @@ import {
   Metrics,
   Actuals,
   Annotations,
-  CommunityLevelsTimeseriesRow,
-  Communitylevelstimeseries,
   CommunityLevel,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
@@ -73,8 +71,7 @@ export type DatasetId =
   | 'rawICUHospitalizations'
   | 'smoothedICUHospitalizations'
   | 'weeklyCovidAdmissionsPer100k'
-  | 'bedsWithCovidPatientsRatio'
-  | 'canCommunityLevel';
+  | 'bedsWithCovidPatientsRatio';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -157,6 +154,7 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
+  readonly canCommunityLevel: CommunityLevel;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
 
@@ -186,7 +184,6 @@ export class Projection {
   private readonly smoothedICUHospitalizations: Array<number | null>;
   private readonly weeklyCovidAdmissionsPer100k: Array<number | null>;
   private readonly bedsWithCovidPatientsRatio: Array<number | null>;
-  private readonly canCommunityLevel: Array<CommunityLevel | undefined>;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
 
@@ -198,7 +195,6 @@ export class Projection {
     const {
       actualTimeseries,
       metricsTimeseries,
-      communityLevelsTimeseries,
       dates,
     } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
@@ -288,9 +284,8 @@ export class Projection {
       row => row?.bedsWithCovidPatientsRatio ?? null,
     );
 
-    this.canCommunityLevel = communityLevelsTimeseries?.map(
-      row => row?.canCommunityLevel ?? undefined,
-    );
+    this.canCommunityLevel =
+      summaryWithTimeseries.communityLevels.canCommunityLevel;
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
@@ -550,25 +545,13 @@ export class Projection {
    * based off the date. Eventually would be nice to use this around instead of the
    * two list scenario we have going right now.
    */
-  private makeDateDictionary(
-    ts: ActualsTimeseries | Metricstimeseries | Communitylevelstimeseries,
-  ) {
+  private makeDateDictionary(ts: ActualsTimeseries | Metricstimeseries) {
     const dict: {
-      [date: string]:
-        | ActualsTimeseriesRow
-        | MetricsTimeseriesRow
-        | CommunityLevelsTimeseriesRow;
+      [date: string]: ActualsTimeseriesRow | MetricsTimeseriesRow;
     } = {};
-    ts.forEach(
-      (
-        row:
-          | ActualsTimeseriesRow
-          | MetricsTimeseriesRow
-          | CommunityLevelsTimeseriesRow,
-      ) => {
-        dict[row.date] = row;
-      },
-    );
+    ts.forEach((row: ActualsTimeseriesRow | MetricsTimeseriesRow) => {
+      dict[row.date] = row;
+    });
     return dict;
   }
 
@@ -593,7 +576,6 @@ export class Projection {
       return {
         actualTimeseries: [],
         metricsTimeseries: [],
-        communityLevelsTimeseries: [],
         dates: [],
       };
     }
@@ -613,7 +595,6 @@ export class Projection {
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
-    const communityLevelsTimeseries: Array<CommunityLevelsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
     const actualsTimeseriesDictionary = this.makeDateDictionary(
@@ -621,9 +602,6 @@ export class Projection {
     );
     const metricsTimeseriesDictionary = this.makeDateDictionary(
       metricsTimeseriesRaw,
-    );
-    const communityLevelsTimeseriesDictionary = this.makeDateDictionary(
-      communityLevelsTimeseriesRaw || [],
     );
 
     let currDate = new Date(earliestDate.getTime());
@@ -636,14 +614,8 @@ export class Projection {
       const metricsTimeseriesRowForDate = metricsTimeseriesDictionary[
         ts
       ] as MetricsTimeseriesRow;
-      const communityLevelsTimeseriesRowForDate = communityLevelsTimeseriesDictionary[
-        ts
-      ] as CommunityLevelsTimeseriesRow;
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
-      communityLevelsTimeseries.push(
-        communityLevelsTimeseriesRowForDate || null,
-      );
       // Clone the date since we're about to mutate it below.
       dates.push(new Date(currDate.getTime()));
 
@@ -658,7 +630,6 @@ export class Projection {
     return {
       actualTimeseries: actualsTimeseries,
       metricsTimeseries: metricsTimeseries,
-      communityLevelsTimeseries: communityLevelsTimeseries,
       dates: dates,
     };
   }
