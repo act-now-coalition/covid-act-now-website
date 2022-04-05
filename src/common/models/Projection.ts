@@ -314,8 +314,6 @@ export class Projection {
     return this.metrics?.testPositivityRatioDetails?.source || null;
   }
 
-  // TODO: Add new metrics to Metric Enum, add to getMetricValue() and resolve any issues
-  // from adding new metrics to Metric.
   getMetricValue(metric: Metric): number | null {
     if (this.isMetricDisabled(metric)) {
       return null;
@@ -334,6 +332,12 @@ export class Projection {
           : null;
       case Metric.CASE_DENSITY:
         return this.currentCaseDensity;
+      case Metric.ADMISSIONS_PER_100K:
+        return this.metrics?.weeklyCovidAdmissionsPer100k ?? null;
+      case Metric.WEEKLY_CASES_PER_100K:
+        return this.metrics?.weeklyNewCasesPer100k ?? null;
+      case Metric.RATIO_BEDS_WITH_COVID:
+        return this.metrics?.bedsWithCovidPatientsRatio ?? null;
       default:
         fail('Unknown metric: ' + metric);
     }
