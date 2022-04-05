@@ -47,7 +47,6 @@ function getPageDescription() {
 }
 
 export default function HomePage() {
-  const shareBlockRef = useRef(null);
   const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
