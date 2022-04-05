@@ -60,7 +60,7 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
 const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
   const [mapType, setMapType] = useLocalStorage<MapType>(
     StorageKeys.COUNTY_MAP_TYPE,
-    MapType.VACCINATIONS,
+    MapType.COMMUNITY_LEVEL,
   );
 
   const onClickToggle = (

@@ -32,8 +32,9 @@ export const GridContainer = styled.div`
     grid-gap: 1.5rem;
   }
 
+  // Note: 1.8fr instead of 2fr to manipulate wrapping of summary stat metric names
   @media (min-width: ${gridBreakpoint}) {
-    grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1.8fr;
     grid-template-areas:
       'level level level progress'
       'metric1 metric2 metric3 metricVax';

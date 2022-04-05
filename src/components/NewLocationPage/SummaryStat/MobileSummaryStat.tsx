@@ -15,7 +15,7 @@ const MobileSummaryStat: React.FC<SummaryStatProps> = ({
 }) => {
   return (
     <StatContent>
-      <Row>
+      <Row style={{ marginRight: '20px' }}>
         <MetricLabel>{metricName}</MetricLabel>
         {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
       </Row>

@@ -94,6 +94,9 @@ export const EXPLORE_METRICS = [
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
   ExploreMetric.ICU_USED,
   ExploreMetric.POSITIVITY_RATE,
+  ExploreMetric.ADMISSIONS_PER_100K,
+  ExploreMetric.RATIO_BEDS_WITH_COVID,
+  ExploreMetric.WEEKLY_CASES_PER_100K,
 ];
 
 // Note that these specifically are counts, not percentages, and can normalized
@@ -128,6 +131,14 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.ICU_USED;
     case 'testPositiveRate':
       return ExploreMetric.POSITIVITY_RATE;
+
+    // TODO(8.2) - update with correct dataset id
+    case 'hospitalizationsPer100kId':
+      return ExploreMetric.ADMISSIONS_PER_100K;
+    case 'ratioBedsWithCovidId':
+      return ExploreMetric.RATIO_BEDS_WITH_COVID;
+    case 'weeklyNewCasesId':
+      return ExploreMetric.WEEKLY_CASES_PER_100K;
   }
 }
 
@@ -150,6 +161,14 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
     case ExploreMetric.ICU_USED:
       return 'icuUtilization';
     case ExploreMetric.POSITIVITY_RATE:
+      return 'testPositiveRate';
+
+    // TODO(8.2) - update with correct dataset id:
+    case ExploreMetric.ADMISSIONS_PER_100K:
+      return 'vaccinationsAdditionalDose';
+    case ExploreMetric.RATIO_BEDS_WITH_COVID:
+      return 'icuUtilization';
+    case ExploreMetric.WEEKLY_CASES_PER_100K:
       return 'testPositiveRate';
   }
 }
@@ -361,6 +380,53 @@ export const exploreMetricData: {
       {
         label: 'Positive test rate',
         tooltipLabel: 'Positive test rate',
+        datasetId: 'testPositiveRate',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+
+  // TODO(8.2) - update with real content:
+  [ExploreMetric.ADMISSIONS_PER_100K]: {
+    title: 'Hospitalizations per 100k',
+    name: 'Hospitalizations per 100k',
+    chartId: 'positivity_rate',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
+    seriesList: [
+      {
+        label: 'Hospitalizations per 100k',
+        tooltipLabel: 'Hospitalizations per 100k',
+        datasetId: 'testPositiveRate',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.RATIO_BEDS_WITH_COVID]: {
+    title: 'Percent hospital beds with Covid patients',
+    name: 'Percent hospital beds with Covid patients',
+    chartId: 'positivity_rate',
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 1,
+    seriesList: [
+      {
+        label: 'Percent hospital beds with Covid patients',
+        tooltipLabel: 'Percent hospital beds with Covid patients',
+        datasetId: 'testPositiveRate',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.WEEKLY_CASES_PER_100K]: {
+    title: 'Weekly cases per 100k',
+    name: 'Weekly cases per 100k',
+    chartId: 'positivity_rate',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
+    seriesList: [
+      {
+        label: 'Weekly cases per 100k',
+        tooltipLabel: 'Weekly cases per 100k',
         datasetId: 'testPositiveRate',
         type: SeriesType.LINE,
       },

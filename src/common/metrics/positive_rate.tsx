@@ -21,6 +21,7 @@ export const PositiveTestRateMetric: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 const LOW_NAME = 'Low';

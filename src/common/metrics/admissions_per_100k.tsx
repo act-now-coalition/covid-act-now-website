@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
-import { Level, LevelInfoMap } from 'common/level';
 import { Projections } from 'common/models/Projections';
 import { formatDecimal, formatInteger } from 'common/utils';
 import Thermometer from 'components/Thermometer';
@@ -9,18 +8,21 @@ import { Metric } from 'common/metricEnum';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { Level, LevelInfoMap } from 'common/level';
 
-export const CaseIncidenceMetric: MetricDefinition = {
+// TODO(8.2) : Update with real metric + content:
+
+export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
-  metricName: 'Daily new cases',
-  extendedMetricName: 'Daily new cases per 100k population',
-  metricNameForCompare: `Daily new cases per 100k`,
-  metricNameForSummaryStat: 'Daily new cases',
+  metricName: 'Weekly Covid Admissions per 100k',
+  extendedMetricName: 'Weekly Covid Admissions per 100k population',
+  metricNameForCompare: `Weekly Covid Admissions per 100k`,
+  metricNameForSummaryStat: 'Hospitalizations',
 };
 
-export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
+export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: 1,
@@ -42,6 +44,15 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => 'Very large number of new cases',
   },
+  [Level.UNKNOWN]: {
+    level: Level.UNKNOWN,
+    upperLimit: 0,
+    name: 'Unknown',
+    color: COLOR_MAP.GRAY.BASE,
+    detail: () => 'Insufficient data to assess',
+  },
+
+  // Not to be used:
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
     upperLimit: 75,
@@ -55,13 +66,6 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
     name: 'Extreme',
     color: COLOR_MAP.RED.DARK,
     detail: () => 'Very dangerous number of new cases',
-  },
-  [Level.UNKNOWN]: {
-    level: Level.UNKNOWN,
-    upperLimit: 0,
-    name: 'Unknown',
-    color: COLOR_MAP.GRAY.BASE,
-    detail: () => 'Insufficient data to assess',
   },
 };
 
@@ -77,8 +81,8 @@ function renderStatus(projections: Projections): React.ReactElement {
     return (
       <Fragment>
         Unable to generate{' '}
-        {CaseIncidenceMetric.extendedMetricName.toLowerCase()}. This could be
-        due to insufficient data.
+        {AdmissionsPer100kMetric.extendedMetricName.toLowerCase()}. This could
+        be due to insufficient data.
       </Fragment>
     );
   }
@@ -100,27 +104,12 @@ function renderStatus(projections: Projections): React.ReactElement {
 }
 
 function renderThermometer(): React.ReactElement {
-  const levelInfo = CASE_DENSITY_LEVEL_INFO_MAP;
-  const levelExtreme = levelInfo[Level.SUPER_CRITICAL];
-  const levelCritical = levelInfo[Level.CRITICAL];
+  const levelInfo = ADMISSIONS_PER_100K_LEVEL_INFO_MAP;
   const levelHigh = levelInfo[Level.HIGH];
   const levelMedium = levelInfo[Level.MEDIUM];
   const levelLow = levelInfo[Level.LOW];
 
   const items = [
-    {
-      title: `Over ${levelCritical.upperLimit}`,
-      description: 'Extremely high risk',
-      color: levelExtreme.color,
-      roundTop: true,
-      roundBottom: false,
-    },
-    {
-      title: `${levelHigh.upperLimit} - ${levelCritical.upperLimit}`,
-      color: levelCritical.color,
-      roundTop: false,
-      roundBottom: false,
-    },
     {
       title: `${levelMedium.upperLimit} - ${levelHigh.upperLimit}`,
       color: levelHigh.color,
@@ -150,7 +139,7 @@ function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label={`Show definition of ${CaseIncidenceMetric.metricName} metric`}
+      aria-label={`Show definition of ${AdmissionsPer100kMetric.metricName} metric`}
       trackOpenTooltip={() =>
         trackOpenTooltip(`Metric definition: ${Metric.CASE_DENSITY}`)
       }
