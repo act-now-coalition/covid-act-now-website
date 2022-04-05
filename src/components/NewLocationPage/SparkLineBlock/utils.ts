@@ -62,7 +62,7 @@ export const sparkLinesMetricData: {
     ],
   },
   [SparkLineMetric.ADMISSIONS_PER_100K]: {
-    title: 'Hospitalizations',
+    title: 'Admissions',
     seriesList: [
       {
         datasetId: 'weeklyCovidAdmissionsPer100k',
