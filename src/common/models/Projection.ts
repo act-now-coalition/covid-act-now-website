@@ -185,9 +185,7 @@ export class Projection {
   private readonly smoothedICUHospitalizations: Array<number | null>;
   private readonly weeklyCovidAdmissionsPer100k: Array<number | null>;
   private readonly bedsWithCovidPatientsRatio: Array<number | null>;
-  private readonly canCommunityLevel:
-    | Array<CommunityLevel | undefined>
-    | undefined;
+  private readonly canCommunityLevel: Array<CommunityLevel | undefined>;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
 
@@ -199,7 +197,7 @@ export class Projection {
     const {
       actualTimeseries,
       metricsTimeseries,
-      communityLevelTimeseries,
+      communityLevelsTimeseries,
       dates,
     } = this.getAlignedTimeseriesAndDates(summaryWithTimeseries);
     const metrics = summaryWithTimeseries.metrics;
@@ -289,7 +287,7 @@ export class Projection {
       row => row?.bedsWithCovidPatientsRatio ?? null,
     );
 
-    this.canCommunityLevel = communityLevelTimeseries?.map(
+    this.canCommunityLevel = communityLevelsTimeseries?.map(
       row => row?.canCommunityLevel ?? undefined,
     );
 
@@ -587,13 +585,14 @@ export class Projection {
   ) {
     const actualsTimeseriesRaw = summaryWithTimeseries.actualsTimeseries;
     const metricsTimeseriesRaw = summaryWithTimeseries.metricsTimeseries || [];
-    const communityLevelTimeseriesRaw =
-      summaryWithTimeseries.communityLevelsTimeseries || [];
+    const communityLevelsTimeseriesRaw =
+      summaryWithTimeseries.communityLevelsTimeseries;
 
     if (actualsTimeseriesRaw.length === 0) {
       return {
         actualTimeseries: [],
         metricsTimeseries: [],
+        communityLevelsTimeseries: [],
         dates: [],
       };
     }
@@ -613,7 +612,7 @@ export class Projection {
 
     const actualsTimeseries: Array<ActualsTimeseriesRow | null> = [];
     const metricsTimeseries: Array<MetricsTimeseriesRow | null> = [];
-    const communityLevelTimeseries: Array<CommunityLevelsTimeseriesRow | null> = [];
+    const communityLevelsTimeseries: Array<CommunityLevelsTimeseriesRow | null> = [];
     const dates: Date[] = [];
 
     const actualsTimeseriesDictionary = this.makeDateDictionary(
@@ -622,8 +621,8 @@ export class Projection {
     const metricsTimeseriesDictionary = this.makeDateDictionary(
       metricsTimeseriesRaw,
     );
-    const communityLevelTimeseriesDictionary = this.makeDateDictionary(
-      communityLevelTimeseriesRaw,
+    const communityLevelsTimeseriesDictionary = this.makeDateDictionary(
+      communityLevelsTimeseriesRaw || [],
     );
 
     let currDate = new Date(earliestDate.getTime());
@@ -636,12 +635,14 @@ export class Projection {
       const metricsTimeseriesRowForDate = metricsTimeseriesDictionary[
         ts
       ] as MetricsTimeseriesRow;
-      const communityLevelTimeseriesRowForDate = communityLevelTimeseriesDictionary[
+      const communityLevelsTimeseriesRowForDate = communityLevelsTimeseriesDictionary[
         ts
       ] as CommunityLevelsTimeseriesRow;
       actualsTimeseries.push(actualsTimeseriesrowForDate || null);
       metricsTimeseries.push(metricsTimeseriesRowForDate || null);
-      communityLevelTimeseries.push(communityLevelTimeseriesRowForDate || null);
+      communityLevelsTimeseries.push(
+        communityLevelsTimeseriesRowForDate || null,
+      );
       // Clone the date since we're about to mutate it below.
       dates.push(new Date(currDate.getTime()));
 
@@ -656,7 +657,7 @@ export class Projection {
     return {
       actualTimeseries: actualsTimeseries,
       metricsTimeseries: metricsTimeseries,
-      communityLevelTimeseries: communityLevelTimeseries,
+      communityLevelsTimeseries: communityLevelsTimeseries,
       dates: dates,
     };
   }
