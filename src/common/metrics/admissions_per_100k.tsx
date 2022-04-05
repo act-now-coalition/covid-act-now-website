@@ -19,6 +19,7 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
   metricName: 'Weekly Covid Admissions per 100k',
   extendedMetricName: 'Weekly Covid Admissions per 100k population',
   metricNameForCompare: `Weekly Covid Admissions per 100k`,
+  metricNameForSummaryStat: 'Hospitalizations',
 };
 
 export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {

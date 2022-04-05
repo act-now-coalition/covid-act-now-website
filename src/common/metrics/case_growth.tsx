@@ -21,6 +21,7 @@ export const CaseGrowthMetric: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 const SHORT_DESCRIPTION_LOW = 'Active cases are decreasing';

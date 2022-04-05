@@ -21,6 +21,7 @@ export const ICUCapacityUsed: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];

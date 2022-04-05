@@ -19,6 +19,7 @@ export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   metricName: 'Weekly new cases',
   extendedMetricName: 'Weekly new cases per 100k population',
   metricNameForCompare: `Weekly new cases per 100k`,
+  metricNameForSummaryStat: 'Weekly new cases',
 };
 
 export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {

@@ -20,8 +20,6 @@ export const ALL_METRICS = [
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
   Metric.VACCINATIONS,
-
-  // TODO(8.2)
   Metric.RATIO_BEDS_WITH_COVID,
   Metric.ADMISSIONS_PER_100K,
   Metric.WEEKLY_CASES_PER_100K,
@@ -33,8 +31,6 @@ const ALL_METRICS_LEVEL_INFO_MAP: { [metric in Metric]: LevelInfoMap } = {
   [Metric.HOSPITAL_USAGE]: Hospitalizations.HOSPITAL_USAGE_LEVEL_INFO_MAP,
   [Metric.VACCINATIONS]: Vaccinations.VACCINATIONS_LEVEL_INFO_MAP,
   [Metric.CASE_DENSITY]: CaseDensity.CASE_DENSITY_LEVEL_INFO_MAP,
-
-  // TODO(8.2)
   [Metric.RATIO_BEDS_WITH_COVID]:
     RatioBedsWithCovid.RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP,
   [Metric.ADMISSIONS_PER_100K]:
@@ -70,8 +66,6 @@ const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.HOSPITAL_USAGE]: Hospitalizations.ICUCapacityUsed,
   [Metric.VACCINATIONS]: Vaccinations.VaccinationsMetric,
   [Metric.CASE_DENSITY]: CaseDensity.CaseIncidenceMetric,
-
-  // TODO(8.2)
   [Metric.RATIO_BEDS_WITH_COVID]:
     RatioBedsWithCovid.RatioBedsWithCovidPatientsMetric,
   [Metric.ADMISSIONS_PER_100K]: AdmissionsPer100k.AdmissionsPer100kMetric,
@@ -106,6 +100,11 @@ export function getMetricNameForCompare(metric: Metric) {
   return metricDefinition.metricNameForCompare;
 }
 
+export function getMetricNameForSummaryStat(metric: Metric) {
+  const metricDefinition = getMetricDefinition(metric);
+  return metricDefinition.metricNameForSummaryStat;
+}
+
 /**
  * How many decimals to include when formatting each metric for display (e.g. in
  * the location header or compare table).
@@ -117,7 +116,7 @@ const MetricDecimalPlaces: { [metric in Metric]: number } = {
   [Metric.POSITIVE_TESTS]: 1,
   [Metric.VACCINATIONS]: 1,
 
-  // TODO(8.2)
+  // TODO(8.2) : confirm these decimal places
   [Metric.RATIO_BEDS_WITH_COVID]: 1,
   [Metric.ADMISSIONS_PER_100K]: 1,
   [Metric.WEEKLY_CASES_PER_100K]: 1,

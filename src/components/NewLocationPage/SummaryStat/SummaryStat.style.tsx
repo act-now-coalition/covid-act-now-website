@@ -38,8 +38,16 @@ export const SubLabelWrapper = styled.div`
 export const SubLabel = styled(GrayTitle).attrs(props => ({
   as: 'span',
 }))`
+  ${props => props.theme.fonts.regularBook};
   line-height: 1;
   margin: 0;
+  font-size: 0.8rem;
+  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    line-height: 1.1;
+    margin-top: 0;
+  }
 `;
 
 export const MetricLabel = styled.span`

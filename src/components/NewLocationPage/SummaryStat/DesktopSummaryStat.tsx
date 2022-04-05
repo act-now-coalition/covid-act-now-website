@@ -28,7 +28,7 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
         {hasSubLabel && (
           <MetricSubLabel
             text={metricSubLabelText[metric]}
-            splitText={metric === Metric.CASE_DENSITY}
+            splitText={metric !== Metric.VACCINATIONS}
           />
         )}
       </Row>
