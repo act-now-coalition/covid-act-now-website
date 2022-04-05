@@ -94,7 +94,7 @@ export const EXPLORE_METRICS = [
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
   ExploreMetric.ICU_USED,
   ExploreMetric.POSITIVITY_RATE,
-  ExploreMetric.HOSPITALIZATIONS_PER_100K,
+  ExploreMetric.ADMISSIONS_PER_100K,
   ExploreMetric.RATIO_BEDS_WITH_COVID,
   ExploreMetric.WEEKLY_CASES_PER_100K,
 ];
@@ -134,7 +134,7 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
 
     // TODO(8.2) - update with correct dataset id
     case 'hospitalizationsPer100kId':
-      return ExploreMetric.HOSPITALIZATIONS_PER_100K;
+      return ExploreMetric.ADMISSIONS_PER_100K;
     case 'ratioBedsWithCovidId':
       return ExploreMetric.RATIO_BEDS_WITH_COVID;
     case 'weeklyNewCasesId':
@@ -164,7 +164,7 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'testPositiveRate';
 
     // TODO(8.2) - update with correct dataset id:
-    case ExploreMetric.HOSPITALIZATIONS_PER_100K:
+    case ExploreMetric.ADMISSIONS_PER_100K:
       return 'vaccinationsAdditionalDose';
     case ExploreMetric.RATIO_BEDS_WITH_COVID:
       return 'icuUtilization';
@@ -387,7 +387,7 @@ export const exploreMetricData: {
   },
 
   // TODO(8.2) - update with real content:
-  [ExploreMetric.HOSPITALIZATIONS_PER_100K]: {
+  [ExploreMetric.ADMISSIONS_PER_100K]: {
     title: 'Hospitalizations per 100k',
     name: 'Hospitalizations per 100k',
     chartId: 'positivity_rate',

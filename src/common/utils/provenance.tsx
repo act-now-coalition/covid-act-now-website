@@ -103,6 +103,53 @@ const metricToSourceMap: RegionSourceMap = {
       url: 'n/a',
     },
   },
+
+  // TODO(8.2)
+  [Metric.WEEKLY_CASES_PER_100K]: {
+    state: {
+      sourceName: 'CDC Covid Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+    },
+    // these do not render:
+    metro: {
+      sourceName: 'n/a',
+      url: 'n/a',
+    },
+    county: {
+      sourceName: 'n/a',
+      url: 'n/a',
+    },
+  },
+  [Metric.ADMISSIONS_PER_100K]: {
+    state: {
+      sourceName: 'CDC Covid Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+    },
+    // these do not render:
+    metro: {
+      sourceName: 'n/a',
+      url: 'n/a',
+    },
+    county: {
+      sourceName: 'n/a',
+      url: 'n/a',
+    },
+  },
+  [Metric.RATIO_BEDS_WITH_COVID]: {
+    state: {
+      sourceName: 'CDC Covid Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+    },
+    // these do not render:
+    metro: {
+      sourceName: 'n/a',
+      url: 'n/a',
+    },
+    county: {
+      sourceName: 'n/a',
+      url: 'n/a',
+    },
+  },
 };
 
 export function getSourceLinks(metric: Metric, region: Region): SourceInfo {
@@ -155,6 +202,7 @@ export const getDataSourceTooltipContent = (
   );
 };
 
+// TODO(8.2) : annotations for new metrics
 export function getSourcesForMetric(
   annotations: Annotations,
   metric: Metric,

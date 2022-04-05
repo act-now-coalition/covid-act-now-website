@@ -65,6 +65,11 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const positiveTestsRef = useRef<HTMLDivElement>(null);
   const hospitalUsageRef = useRef<HTMLDivElement>(null);
   const vaccinationsRef = useRef<HTMLDivElement>(null);
+
+  // TODO(8.2)
+  const weeklyNewCasesRef = useRef<HTMLDivElement>(null);
+  const admissionsPer100kRef = useRef<HTMLDivElement>(null);
+  const ratioBedsWithCovidRef = useRef<HTMLDivElement>(null);
   const metricRefs = useMemo(
     () => ({
       [Metric.CASE_DENSITY]: caseDensityRef,
@@ -72,6 +77,9 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       [Metric.POSITIVE_TESTS]: positiveTestsRef,
       [Metric.HOSPITAL_USAGE]: hospitalUsageRef,
       [Metric.VACCINATIONS]: vaccinationsRef,
+      [Metric.WEEKLY_CASES_PER_100K]: weeklyNewCasesRef,
+      [Metric.ADMISSIONS_PER_100K]: admissionsPer100kRef,
+      [Metric.RATIO_BEDS_WITH_COVID]: ratioBedsWithCovidRef,
     }),
     [],
   );
