@@ -93,11 +93,11 @@ const ShareBlock = ({
             <SocialTextAreaWrapper id="shareblock">
               <SocialTextArea>
                 <ShareInstructionHeader>
-                  Share COVID risk in your community
+                  Share COVID community levels
                 </ShareInstructionHeader>
                 <ShareInstructionBody>
-                  Share real-time, local COVID data with your neighbors,
-                  friends, and family.
+                  Share real-time, local COVID data with your neighbors, friends
+                  and family.
                 </ShareInstructionBody>
                 <ShareButtonContainer reflow>
                   <StyledShareButton variant="contained" color="#3b5998">

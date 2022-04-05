@@ -5,7 +5,7 @@
     {
       "cta": "Alerts",
       "url": "#share",
-      "description": "Receive emails when your location changes risk level or vaccine eligibility",
+      "description": "Receive emails when your community's COVID level changes.",
       "iconId": "ALERTS"
     },
     {
