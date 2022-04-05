@@ -17,6 +17,7 @@ import { assert, formatPercent, getPercentChange } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { Level } from 'common/level';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -62,12 +63,15 @@ export type DatasetId =
   | 'caseDensityRange'
   | 'smoothedDailyCases'
   | 'smoothedDailyDeaths'
+  | 'weeklyNewCasesPer100k'
   | 'rawDailyCases'
   | 'rawDailyDeaths'
   | 'rawHospitalizations'
   | 'smoothedHospitalizations'
   | 'rawICUHospitalizations'
-  | 'smoothedICUHospitalizations';
+  | 'smoothedICUHospitalizations'
+  | 'weeklyCovidAdmissionsPer100k'
+  | 'bedsWithCovidPatientsRatio';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -136,7 +140,10 @@ export const CASE_FATALITY_RATIO = 0.01;
  */
 export class Projection {
   readonly totalPopulation: number;
+  readonly hsaPopulation: number | null;
   readonly fips: string;
+  readonly hsa: string | null;
+  readonly hsaName: string | null;
   readonly region: Region;
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
@@ -147,6 +154,7 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
+  readonly canCommunityLevel: Level;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
 
@@ -165,6 +173,7 @@ export class Projection {
   private readonly vaccinationsAdditionalDose: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
+  private readonly weeklyNewCasesPer100k: Array<number | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
 
   private readonly rawDailyCases: Array<number | null>;
@@ -173,6 +182,8 @@ export class Projection {
   private readonly smoothedHospitalizations: Array<number | null>;
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
+  private readonly weeklyCovidAdmissionsPer100k: Array<number | null>;
+  private readonly bedsWithCovidPatientsRatio: Array<number | null>;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
 
@@ -193,7 +204,10 @@ export class Projection {
 
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
+    this.hsaPopulation = summaryWithTimeseries.population;
     this.fips = summaryWithTimeseries.fips;
+    this.hsa = summaryWithTimeseries.hsa;
+    this.hsaName = summaryWithTimeseries.hsaName;
     this.region = region;
 
     // Set up our series data exposed via getDataset().
@@ -211,6 +225,7 @@ export class Projection {
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
+
     this.rawICUHospitalizations = actualTimeseries.map(row =>
       row?.icuBeds ? row.icuBeds.currentUsageCovid : null,
     );
@@ -254,7 +269,23 @@ export class Projection {
     this.caseDensityByCases = metricsTimeseries.map(
       row => row && row.caseDensity,
     );
+
     this.caseDensityRange = this.calcCaseDensityRange();
+
+    this.weeklyNewCasesPer100k = metricsTimeseries.map(
+      row => row?.weeklyNewCasesPer100k ?? null,
+    );
+
+    this.weeklyCovidAdmissionsPer100k = metricsTimeseries.map(
+      row => row?.weeklyCovidAdmissionsPer100k ?? null,
+    );
+
+    this.bedsWithCovidPatientsRatio = metricsTimeseries.map(
+      row => row?.bedsWithCovidPatientsRatio ?? null,
+    );
+
+    this.canCommunityLevel =
+      summaryWithTimeseries.communityLevels?.canCommunityLevel ?? Level.UNKNOWN;
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
@@ -301,6 +332,12 @@ export class Projection {
           : null;
       case Metric.CASE_DENSITY:
         return this.currentCaseDensity;
+      case Metric.ADMISSIONS_PER_100K:
+        return this.metrics?.weeklyCovidAdmissionsPer100k ?? null;
+      case Metric.WEEKLY_CASES_PER_100K:
+        return this.metrics?.weeklyNewCasesPer100k ?? null;
+      case Metric.RATIO_BEDS_WITH_COVID:
+        return this.metrics?.bedsWithCovidPatientsRatio ?? null;
       default:
         fail('Unknown metric: ' + metric);
     }
