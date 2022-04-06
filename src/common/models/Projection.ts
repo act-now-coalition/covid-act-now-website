@@ -222,18 +222,21 @@ export class Projection {
 
     this.rawHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? row?.hsaHospitalBeds.currentUsageCovid ?? null
+        ? this.disaggregateHsaValue(
+            row?.hsaHospitalBeds.currentUsageCovid ?? null,
+          )
         : row?.hospitalBeds.currentUsageCovid ?? null,
     );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
 
+    // TODO: This is an unholy amount of ternary operators and should probably be refactored
     this.rawICUHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? row?.hsaIcuBeds
-          ? row.hsaIcuBeds.currentUsageCovid
-          : null
+        ? this.disaggregateHsaValue(
+            row?.hsaIcuBeds ? row.hsaIcuBeds.currentUsageCovid : null,
+          )
         : row?.icuBeds
         ? row.icuBeds.currentUsageCovid
         : null,
@@ -449,9 +452,15 @@ export class Projection {
         ? countyHsaIcuCapacityRatio
         : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
 
-      const totalBeds = icuActuals.capacity;
-      const covidPatients = icuActuals.currentUsageCovid;
-      const totalPatients = icuActuals.currentUsageTotal;
+      const totalBeds = this.isCounty
+        ? this.disaggregateHsaValue(icuActuals.capacity)
+        : icuActuals.capacity;
+      const covidPatients = this.isCounty
+        ? this.disaggregateHsaValue(icuActuals.currentUsageCovid)
+        : icuActuals.currentUsageCovid;
+      const totalPatients = this.isCounty
+        ? this.disaggregateHsaValue(icuActuals.currentUsageTotal)
+        : icuActuals.currentUsageTotal;
 
       const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
       const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;
@@ -903,5 +912,12 @@ export class Projection {
       }
     }
     return result;
+  }
+
+  disaggregateHsaValue(hsaValue: number | null) {
+    if (hsaValue === null || this.hsaPopulation === null) {
+      return null;
+    }
+    return (this.totalPopulation / this.hsaPopulation) * hsaValue;
   }
 }
