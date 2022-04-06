@@ -205,7 +205,7 @@ export class Projection {
 
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
-    this.hsaPopulation = summaryWithTimeseries.population;
+    this.hsaPopulation = summaryWithTimeseries.hsaPopulation;
     this.fips = summaryWithTimeseries.fips;
     this.hsa = summaryWithTimeseries.hsa;
     this.hsaName = summaryWithTimeseries.hsaName;
@@ -222,9 +222,7 @@ export class Projection {
 
     this.rawHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? this.disaggregateHsaValue(
-            row?.hsaHospitalBeds.currentUsageCovid ?? null,
-          )
+        ? row?.hsaHospitalBeds.currentUsageCovid ?? null
         : row?.hospitalBeds.currentUsageCovid ?? null,
     );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
@@ -234,9 +232,9 @@ export class Projection {
     // TODO: This is an unholy amount of ternary operators and should probably be refactored
     this.rawICUHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? this.disaggregateHsaValue(
-            row?.hsaIcuBeds ? row.hsaIcuBeds.currentUsageCovid : null,
-          )
+        ? row?.hsaIcuBeds
+          ? row.hsaIcuBeds.currentUsageCovid
+          : null
         : row?.icuBeds
         ? row.icuBeds.currentUsageCovid
         : null,
@@ -444,12 +442,14 @@ export class Projection {
       const hsaIcuActualsTimeseries = actualsTimeseries.map(
         row => row && row.hsaIcuBeds,
       );
-      const countyHsaIcuCapacityRatio = hsaIcuActualsTimeseries.map(
+      const countyHsaIcuCapacityRatioTimeseries = hsaIcuActualsTimeseries.map(
         this.divideICUDataWithNulls,
       );
+      const countyHsaIcuCapacityRatio =
+        countyHsaIcuCapacityRatioTimeseries[icuIndex];
 
       const metricSeries = this.isCounty
-        ? countyHsaIcuCapacityRatio
+        ? countyHsaIcuCapacityRatioTimeseries
         : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
 
       const totalBeds = this.isCounty
@@ -459,11 +459,16 @@ export class Projection {
         ? this.disaggregateHsaValue(icuActuals.currentUsageCovid)
         : icuActuals.currentUsageCovid;
       const totalPatients = this.isCounty
-        ? this.disaggregateHsaValue(icuActuals.currentUsageTotal)
+        ? icuActuals.currentUsageTotal
         : icuActuals.currentUsageTotal;
 
       const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
-      const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;
+      let metricValue = null;
+      if (enoughBeds) {
+        metricValue = this.isCounty
+          ? countyHsaIcuCapacityRatio
+          : metrics.icuCapacityRatio;
+      }
 
       assert(
         totalBeds !== null && totalPatients !== null,
@@ -914,10 +919,10 @@ export class Projection {
     return result;
   }
 
-  disaggregateHsaValue(hsaValue: number | null) {
+  private disaggregateHsaValue(hsaValue: number | null) {
     if (hsaValue === null || this.hsaPopulation === null) {
       return null;
     }
-    return (this.totalPopulation / this.hsaPopulation) * hsaValue;
+    return hsaValue * (this.totalPopulation / this.hsaPopulation);
   }
 }
