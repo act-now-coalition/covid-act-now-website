@@ -438,10 +438,10 @@ export class Projection {
         : actualsTimeseries[icuIndex]!.icuBeds;
 
       // We calculate HSA level ICU Capacity Ratio in the frontend instead of in the backend API
-      const icuActualsTimeseries = actualsTimeseries.map(
+      const hsaIcuActualsTimeseries = actualsTimeseries.map(
         row => row && row.hsaIcuBeds,
       );
-      const countyHsaIcuCapacityRatio = icuActualsTimeseries.map(
+      const countyHsaIcuCapacityRatio = hsaIcuActualsTimeseries.map(
         this.divideICUDataWithNulls,
       );
 
