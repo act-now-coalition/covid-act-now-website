@@ -42,10 +42,10 @@ export interface MetricChartInfo {
 
 // TODO(8.2) Finalize group header
 export enum GroupHeader {
-  NEW = 'New',
+  COMMUNITY_LEVEL_COMPONENTS = 'Community Level Components',
   VACCINATED = '% Vaccinated',
   CASES = 'Cases',
-  HOSPITALIZATIONS = 'Hospitalizations',
+  HOSPITALIZATIONS = 'Additional Hospitalization Metrics',
   DEATHS = 'Deaths',
 }
 
@@ -57,7 +57,7 @@ export interface ChartGroup {
 // TODO(8.2) Replace with final group header
 export const CHART_GROUPS: ChartGroup[] = [
   {
-    groupHeader: GroupHeader.NEW,
+    groupHeader: GroupHeader.COMMUNITY_LEVEL_COMPONENTS,
     metricList: [
       {
         metric: Metric.WEEKLY_CASES_PER_100K,

@@ -111,7 +111,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const deathsBlockRed = useRef<HTMLDivElement>(null);
   const chartBlockRefs = useMemo(
     () => ({
-      [GroupHeader.NEW]: newBlockRef,
+      [GroupHeader.COMMUNITY_LEVEL_COMPONENTS]: newBlockRef,
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
       [GroupHeader.CASES]: casesBlockRef,
       [GroupHeader.HOSPITALIZATIONS]: hospitalizationsBlockRef,
