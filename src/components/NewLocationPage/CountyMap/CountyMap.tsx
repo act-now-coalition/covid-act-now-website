@@ -23,6 +23,9 @@ import { LocationSummary } from 'common/location_summaries';
 import { vaccineColorFromLocationSummary } from 'common/colors';
 import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 
+// The browser stores the last map type selected by the user in localStorage,
+// we need to keep "Risk levels" for COMMUNITY_LEVEL to prevent breaking the
+// state for users that had selected "Risk levels" in the past.
 enum MapType {
   VACCINATIONS = '% Vaccinated',
   COMMUNITY_LEVEL = 'Risk levels',
@@ -31,6 +34,7 @@ enum MapType {
 interface MapTypeInfo {
   thermometer: React.ReactNode;
   colorMap: (locationSummary: LocationSummary) => string;
+  mapButtonLabel: string;
 }
 
 const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
@@ -47,11 +51,13 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
     ),
     colorMap: (locationSummary: LocationSummary) =>
       vaccineColorFromLocationSummary(locationSummary),
+    mapButtonLabel: '% Vaccinated',
   },
   [MapType.COMMUNITY_LEVEL]: {
     thermometer: <CommunityLevelThermometer />,
     colorMap: (locationSummary: LocationSummary) =>
       getAlertColor(locationSummary),
+    mapButtonLabel: 'Community levels',
   },
 };
 
@@ -77,21 +83,25 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
     }
   };
 
+  const mapTypeInfo = MAP_TYPE_INFO[mapType];
+
   return (
     <MapContainer>
       <FixedAspectRatio widthToHeight={800 / 600}>
-        <RegionMap region={region} colorMap={MAP_TYPE_INFO[mapType].colorMap} />
+        <RegionMap region={region} colorMap={mapTypeInfo.colorMap} />
       </FixedAspectRatio>
       <ThermometerContainer>
         <ToggleWrapper>
           <ButtonGroup value={mapType} exclusive onChange={onClickToggle}>
-            <Button value={MapType.VACCINATIONS}>{MapType.VACCINATIONS}</Button>
+            <Button value={MapType.VACCINATIONS}>
+              {MAP_TYPE_INFO[MapType.VACCINATIONS].mapButtonLabel}
+            </Button>
             <Button value={MapType.COMMUNITY_LEVEL}>
-              {MapType.COMMUNITY_LEVEL}
+              {MAP_TYPE_INFO[MapType.COMMUNITY_LEVEL].mapButtonLabel}
             </Button>
           </ButtonGroup>
         </ToggleWrapper>
-        {MAP_TYPE_INFO[mapType].thermometer}
+        {mapTypeInfo.thermometer}
       </ThermometerContainer>
     </MapContainer>
   );
