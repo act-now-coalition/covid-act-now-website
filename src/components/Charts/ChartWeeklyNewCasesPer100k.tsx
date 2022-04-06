@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import isDate from 'lodash/isDate';
-import { min as d3min, max as d3max } from 'd3-array';
+// import { min as d3min, max as d3max } from 'd3-array';
+import { min as d3min } from 'd3-array';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { scaleLinear } from '@vx/scale';
@@ -23,7 +24,7 @@ import {
   getChartRegions,
   getZoneByValue,
   last,
-  getAxisLimits,
+  // getAxisLimits,
   getUtcScale,
   getTimeAxisTicks,
 } from './utils';
@@ -78,8 +79,8 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
   const [startDate, endDate] = xScale.domain();
   const dateTicks = getTimeAxisTicks(startDate, endDate);
 
-  const yDataMax = d3max(data, getWeeklyNewCasesPer100k) || 100;
-  const yAxisLimits = getAxisLimits(0, yDataMax, zones);
+  // const yDataMax = d3max(data, getWeeklyNewCasesPer100k) || 100;
+  // const yAxisLimits = getAxisLimits(0, yDataMax, zones);
 
   // Adjusts the min y-axis to make the Low label fit only if
   // the current level is Low
