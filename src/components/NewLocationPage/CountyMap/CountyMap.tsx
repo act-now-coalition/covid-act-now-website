@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RegionMap from 'components/RegionMap';
 import FixedAspectRatio from 'components/FixedAspectRatio/FixedAspectRatio';
 import {
@@ -63,6 +63,23 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
     MapType.COMMUNITY_LEVEL,
   );
 
+  // The user selection for map type is stored in localStorage. Once we launch
+  // CAN 8.2, the "Risk level" map type will be invalid. If the user has an
+  // invalid key for the map type, we reset it to MapType.COMMUNITY_LEVEL.
+  //
+  // We also set the mapTypeInfo variable to handle this case, since the app
+  // might attempt to render before the map type state is reset.
+  useEffect(() => {
+    if (!(mapType in MAP_TYPE_INFO)) {
+      setMapType(MapType.COMMUNITY_LEVEL);
+    }
+  }, [setMapType, mapType]);
+
+  const mapTypeInfo =
+    mapType in MAP_TYPE_INFO
+      ? MAP_TYPE_INFO[mapType]
+      : MAP_TYPE_INFO[MapType.COMMUNITY_LEVEL];
+
   const onClickToggle = (
     event: React.MouseEvent<HTMLElement>,
     newView: MapType | null,
@@ -80,7 +97,7 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
   return (
     <MapContainer>
       <FixedAspectRatio widthToHeight={800 / 600}>
-        <RegionMap region={region} colorMap={MAP_TYPE_INFO[mapType].colorMap} />
+        <RegionMap region={region} colorMap={mapTypeInfo.colorMap} />
       </FixedAspectRatio>
       <ThermometerContainer>
         <ToggleWrapper>
@@ -91,7 +108,7 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
             </Button>
           </ButtonGroup>
         </ToggleWrapper>
-        {MAP_TYPE_INFO[mapType].thermometer}
+        {mapTypeInfo.thermometer}
       </ThermometerContainer>
     </MapContainer>
   );
