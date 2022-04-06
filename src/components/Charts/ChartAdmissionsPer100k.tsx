@@ -13,7 +13,7 @@ import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
-import ZoneAnnotation from './ZoneAnnotation';
+// import ZoneAnnotation from './ZoneAnnotation';
 import Tooltip from './Tooltip';
 import LinePathRegion from './LinePathRegion';
 import * as TooltipStyle from './Tooltip.style';
@@ -100,7 +100,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
 
   // Hide the Low label if the current level is Medium or higher
-  const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
+  // const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
 
   const renderTooltip = (p: Point) => (
     <Tooltip
@@ -120,7 +120,8 @@ const ChartAdmissionsPer100k: FunctionComponent<{
       cx={getXCoord(p)}
       cy={getYCoord(p)}
       r={6}
-      fill={getZoneByValue(getAdmissionsPer100k(p), zones).color}
+      // fill={getZoneByValue(getAdmissionsPer100k(p), zones).color}
+      fill="black"
     />
   );
 
@@ -159,7 +160,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
           />
         </Style.TextAnnotation>
       </RectClipGroup>
-      {regionLabels.map((region, i) => (
+      {/* {regionLabels.map((region, i) => (
         <ZoneAnnotation
           key={`zone-annotation-${i}`}
           color={region.color}
@@ -168,7 +169,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
           x={chartWidth - 10}
           y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
-      ))}
+      ))} */}
       <AxisBottom
         innerHeight={chartHeight}
         scale={xScale}

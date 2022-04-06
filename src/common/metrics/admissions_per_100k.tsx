@@ -22,24 +22,28 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
   metricNameForSummaryStat: 'Admissions',
 };
 
+const LIMIT_LOW = 10;
+const LIMIT_MEDIUM = 19.9;
+const LIMIT_HIGH = Infinity;
+
 export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
-    upperLimit: 1,
+    upperLimit: LIMIT_LOW,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
     detail: () => 'COVID is being effectively contained',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: 10,
+    upperLimit: LIMIT_MEDIUM,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
     detail: () => 'COVID not contained, but at low levels',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: 25,
+    upperLimit: LIMIT_HIGH,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => 'Very large number of new cases',
@@ -55,14 +59,14 @@ export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   // Not to be used:
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
-    upperLimit: 75,
+    upperLimit: LIMIT_HIGH,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
     detail: () => 'Dangerous number of new cases',
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
-    upperLimit: Infinity,
+    upperLimit: LIMIT_HIGH,
     name: 'Extreme',
     color: COLOR_MAP.RED.DARK,
     detail: () => 'Very dangerous number of new cases',

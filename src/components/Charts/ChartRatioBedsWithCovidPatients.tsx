@@ -11,7 +11,7 @@ const getPointText = (valueY: number) => formatPercent(valueY, 1);
 
 const getTooltipContent = (valueY: number) => ({
   subtitle: `COVID PATIENTS`,
-  body: `${formatPercent(CAP_Y, 0)} of all beds`,
+  body: `${formatPercent(valueY, 0)} of all beds`,
   width: '125px',
 });
 

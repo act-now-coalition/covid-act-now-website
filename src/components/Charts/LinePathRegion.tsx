@@ -27,7 +27,8 @@ const LinePathRegion = <T extends unknown>({
   <>
     {regions.map((region, i) => (
       <Group key={`chart-region-${i}`}>
-        <Style.SeriesLine stroke={region.color}>
+        {/* <Style.SeriesLine stroke={region.color}> */}
+        <Style.SeriesLine stroke="black">
           <RectClipGroup
             y={yScale(region.valueTo)}
             width={width}

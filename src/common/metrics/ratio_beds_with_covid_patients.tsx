@@ -22,11 +22,9 @@ export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
   metricNameForSummaryStat: 'COVID Patients',
 };
 
-// ranges copied/pasted from positive_rate.tsx
-const LIMIT_LOW = 0.03;
-const LIMIT_MEDIUM = 0.1;
-const LIMIT_MEDIUM_HIGH = 0.2;
-const LIMIT_HIGH = Infinity;
+const LIMIT_LOW = 0.1;
+const LIMIT_MEDIUM = 0.15;
+const LIMIT_HIGH = 1;
 
 export const RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
@@ -45,7 +43,7 @@ export const RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP: LevelInfoMap = {
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: LIMIT_MEDIUM_HIGH,
+    upperLimit: LIMIT_HIGH,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
     detail: () => 'Very large number of new cases',
