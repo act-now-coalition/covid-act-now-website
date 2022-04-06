@@ -11,6 +11,7 @@ import {
   Metrics,
   Actuals,
   Annotations,
+  HospitalResourceUtilization,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent, getPercentChange } from 'common/utils';
@@ -219,15 +220,23 @@ export class Projection {
       this.rawDailyDeaths,
     );
 
-    this.rawHospitalizations = actualTimeseries.map(
-      row => row && row.hospitalBeds.currentUsageCovid,
+    this.rawHospitalizations = actualTimeseries.map(row =>
+      this.isCounty
+        ? row?.hsaHospitalBeds.currentUsageCovid ?? null
+        : row?.hospitalBeds.currentUsageCovid ?? null,
     );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
 
     this.rawICUHospitalizations = actualTimeseries.map(row =>
-      row?.icuBeds ? row.icuBeds.currentUsageCovid : null,
+      this.isCounty
+        ? row?.hsaIcuBeds
+          ? row.hsaIcuBeds.currentUsageCovid
+          : null
+        : row?.icuBeds
+        ? row.icuBeds.currentUsageCovid
+        : null,
     );
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
@@ -423,11 +432,22 @@ export class Projection {
         metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
         "Dates in actualTimeseries and metricTimeseries aren't aligned.",
       );
-      const icuActuals = actualsTimeseries[icuIndex]!.icuBeds;
 
-      const metricSeries = metricsTimeseries.map(
-        row => row && row.icuCapacityRatio,
+      const icuActuals = this.isCounty
+        ? actualsTimeseries[icuIndex]!.hsaIcuBeds
+        : actualsTimeseries[icuIndex]!.icuBeds;
+
+      // We calculate HSA level ICU Capacity Ratio in the frontend instead of in the backend API
+      const icuActualsTimeseries = actualsTimeseries.map(
+        row => row && row.hsaIcuBeds,
       );
+      const countyHsaIcuCapacityRatio = icuActualsTimeseries.map(
+        this.divideICUDataWithNulls,
+      );
+
+      const metricSeries = this.isCounty
+        ? countyHsaIcuCapacityRatio
+        : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
 
       const totalBeds = icuActuals.capacity;
       const covidPatients = icuActuals.currentUsageCovid;
@@ -452,6 +472,16 @@ export class Projection {
       };
     }
     return null;
+  }
+
+  private divideICUDataWithNulls(data: HospitalResourceUtilization | null) {
+    const icuCapacity = data?.capacity ?? null;
+    const icuUsage = data?.currentUsageTotal ?? null;
+
+    if (icuCapacity === null || icuUsage === null) {
+      return null;
+    }
+    return icuUsage / icuCapacity;
   }
 
   private getVaccinationsInfo(
