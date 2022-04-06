@@ -25,7 +25,7 @@ import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 
 enum MapType {
   VACCINATIONS = '% Vaccinated',
-  COMMUNITY_LEVEL = 'Community levels',
+  COMMUNITY_LEVEL = 'Risk levels',
 }
 
 interface MapTypeInfo {
