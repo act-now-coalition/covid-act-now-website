@@ -13,7 +13,7 @@ import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
-// import ZoneAnnotation from './ZoneAnnotation';
+import ZoneAnnotation from './ZoneAnnotation';
 import Tooltip from './Tooltip';
 import LinePathRegion from './LinePathRegion';
 import * as TooltipStyle from './Tooltip.style';
@@ -85,8 +85,7 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
   // the current level is Low
   const isLow = activeZone.level === Level.LOW;
   const yAxisMin = isLow ? -6 : 0;
-  const yAxisMax =
-    yAxisLimits[1] === Infinity ? capY : Math.min(yAxisLimits[1], capY);
+  const yAxisMax = capY; // TODO (Chelsi) - check if this is right
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -101,7 +100,7 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
 
   // Hide the Low label if the current level is Medium or higher
-  // const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
+  const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
 
   const renderTooltip = (p: Point) => (
     <Tooltip
@@ -121,8 +120,7 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
       cx={getXCoord(p)}
       cy={getYCoord(p)}
       r={6}
-      // fill={getZoneByValue(getWeeklyNewCasesPer100k(p), zones).color}
-      fill="black"
+      fill={getZoneByValue(getWeeklyNewCasesPer100k(p), zones).color}
     />
   );
 
@@ -161,7 +159,7 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
           />
         </Style.TextAnnotation>
       </RectClipGroup>
-      {/* {regionLabels.map((region, i) => (
+      {regionLabels.map((region, i) => (
         <ZoneAnnotation
           key={`zone-annotation-${i}`}
           color={region.color}
@@ -170,7 +168,7 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
           x={chartWidth - 10}
           y={yScale(0.5 * (region.valueFrom + region.valueTo))}
         />
-      ))} */}
+      ))}
       <AxisBottom
         innerHeight={chartHeight}
         scale={xScale}

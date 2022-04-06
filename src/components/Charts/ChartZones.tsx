@@ -13,7 +13,7 @@ import RectClipGroup from './RectClipGroup';
 import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
-// import ZoneAnnotation from './ZoneAnnotation';
+import ZoneAnnotation from './ZoneAnnotation';
 import ZoneLinePath from './ZoneLinePath';
 import Tooltip from './Tooltip';
 import * as TooltipStyle from './Tooltip.style';
@@ -23,7 +23,7 @@ import {
   computeTickPositions,
   last,
   getAxisLimits,
-  // getZoneByValue,
+  getZoneByValue,
   getUtcScale,
   getTimeAxisTicks,
 } from './utils';
@@ -98,15 +98,14 @@ const ChartZones = ({
 
   const lastPoint = last(data);
   const lastPointY = getY(lastPoint);
-  // const lastPointZone = getZoneByValue(lastPointY, zones);
+  const lastPointZone = getZoneByValue(lastPointY, zones);
 
   const renderMarker = (d: Point) => (
     <Style.CircleMarker
       cx={getXCoord(d)}
       cy={getYCoord(d)}
       r={6}
-      // fill={getZoneByValue(getY(d), zones).color}
-      fill="black"
+      fill={getZoneByValue(getY(d), zones).color}
     />
   );
 
@@ -139,8 +138,7 @@ const ChartZones = ({
       <RectClipGroup width={chartWidth} height={chartHeight}>
         {regions.map((region, i) => (
           <Group key={`chart-region-${i}`}>
-            {/* <Style.SeriesLine stroke={region.color}> */}
-            <Style.SeriesLine stroke="black">
+            <Style.SeriesLine stroke={region.color}>
               <ZoneLinePath<Point>
                 data={data}
                 x={getXCoord}
@@ -151,7 +149,7 @@ const ChartZones = ({
                 curve={curveLinear}
               />
             </Style.SeriesLine>
-            {/* <ZoneAnnotation
+            <ZoneAnnotation
               color={region.color}
               name={region.name}
               isActive={
@@ -159,7 +157,7 @@ const ChartZones = ({
               }
               x={chartWidth - 10}
               y={yScale(0.5 * (region.valueFrom + region.valueTo))}
-            /> */}
+            />
           </Group>
         ))}
       </RectClipGroup>
