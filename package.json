@@ -116,6 +116,7 @@
     "send-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send_emails.ts",
     "send-test-email": "ts-node-script -r tsconfig-paths/register scripts/alert_emails/send-test-email.ts",
     "report-alert-emails": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-report.ts",
+    "generate-subscriber-emails-file": "ts-node-script -r tsconfig-paths/register scripts/alert_emails_report/generate-subscriber-emails-file.ts",
     "generate-county-history-data": "ts-node-script -r tsconfig-paths/register scripts/county_history_data/generate.ts",
     "generate-metro-areas": "ts-node-script -r tsconfig-paths/register scripts/cbsa/parse-metro-areas.ts",
     "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
