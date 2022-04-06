@@ -86,6 +86,25 @@ const MetricChart = React.memo(
             seriesList={getVaccinationSeries(projection)}
           />
         )}
+        {/* // TODO(8.2) - replace with correct charts */}
+        {metric === Metric.WEEKLY_CASES_PER_100K && (
+          <ChartCaseDensity
+            height={chartHeight}
+            columnData={projection.getDataset('caseDensityRange')}
+          />
+        )}
+        {metric === Metric.RATIO_BEDS_WITH_COVID && (
+          <ChartCaseDensity
+            height={chartHeight}
+            columnData={projection.getDataset('caseDensityRange')}
+          />
+        )}
+        {metric === Metric.ADMISSIONS_PER_100K && (
+          <ChartCaseDensity
+            height={chartHeight}
+            columnData={projection.getDataset('caseDensityRange')}
+          />
+        )}
       </>
     );
   },

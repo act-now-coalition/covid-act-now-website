@@ -40,7 +40,9 @@ export interface MetricChartInfo {
   ) => React.ReactElement;
 }
 
+// TODO(8.2) Finalize group header
 export enum GroupHeader {
+  NEW = 'New',
   VACCINATED = '% Vaccinated',
   CASES = 'Cases',
   HOSPITALIZATIONS = 'Hospitalizations',
@@ -52,7 +54,64 @@ export interface ChartGroup {
   metricList: MetricChartInfo[];
 }
 
+// TODO(8.2) Replace with final group header
 export const CHART_GROUPS: ChartGroup[] = [
+  {
+    groupHeader: GroupHeader.NEW,
+    metricList: [
+      {
+        metric: Metric.WEEKLY_CASES_PER_100K,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.WEEKLY_CASES_PER_100K)}
+            subLabel={metricSubLabelText[Metric.WEEKLY_CASES_PER_100K]}
+            metricValueInfo={metricValue}
+          />
+        ),
+        renderChart: projections => (
+          <MetricChart
+            metric={Metric.WEEKLY_CASES_PER_100K}
+            projections={projections}
+          />
+        ),
+      },
+      {
+        metric: Metric.ADMISSIONS_PER_100K,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.ADMISSIONS_PER_100K)}
+            subLabel={metricSubLabelText[Metric.ADMISSIONS_PER_100K]}
+            metricValueInfo={metricValue}
+          />
+        ),
+        renderChart: projections => (
+          <MetricChart
+            metric={Metric.ADMISSIONS_PER_100K}
+            projections={projections}
+          />
+        ),
+      },
+      {
+        metric: Metric.RATIO_BEDS_WITH_COVID,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.RATIO_BEDS_WITH_COVID)}
+            subLabel={metricSubLabelText[Metric.RATIO_BEDS_WITH_COVID]}
+            metricValueInfo={metricValue}
+          />
+        ),
+        renderChart: projections => (
+          <MetricChart
+            metric={Metric.RATIO_BEDS_WITH_COVID}
+            projections={projections}
+          />
+        ),
+      },
+    ],
+  },
   {
     groupHeader: GroupHeader.VACCINATED,
     metricList: [

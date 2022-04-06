@@ -65,8 +65,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const positiveTestsRef = useRef<HTMLDivElement>(null);
   const hospitalUsageRef = useRef<HTMLDivElement>(null);
   const vaccinationsRef = useRef<HTMLDivElement>(null);
-
-  // TODO(8.2)
   const weeklyNewCasesRef = useRef<HTMLDivElement>(null);
   const admissionsPer100kRef = useRef<HTMLDivElement>(null);
   const ratioBedsWithCovidRef = useRef<HTMLDivElement>(null);
@@ -105,12 +103,15 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const [scrolledWithUrl, setScrolledWithUrl] = useState(false);
 
+  // TODO(8.2) rename ref once group header is finalized
+  const newBlockRef = useRef<HTMLDivElement>(null);
   const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
   const casesBlockRef = useRef<HTMLDivElement>(null);
   const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
   const deathsBlockRed = useRef<HTMLDivElement>(null);
   const chartBlockRefs = useMemo(
     () => ({
+      [GroupHeader.NEW]: newBlockRef,
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
       [GroupHeader.CASES]: casesBlockRef,
       [GroupHeader.HOSPITALIZATIONS]: hospitalizationsBlockRef,
