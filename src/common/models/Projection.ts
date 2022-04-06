@@ -220,21 +220,21 @@ export class Projection {
       this.rawDailyDeaths,
     );
 
+    // TODO: This is an unholy amount of ternary operators and should probably be refactored
     this.rawHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? row?.hsaHospitalBeds.currentUsageCovid ?? null
+        ? this.disaggregateHsaValue(
+            row?.hsaHospitalBeds.currentUsageCovid ?? null,
+          )
         : row?.hospitalBeds.currentUsageCovid ?? null,
     );
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
 
-    // TODO: This is an unholy amount of ternary operators and should probably be refactored
     this.rawICUHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? row?.hsaIcuBeds
-          ? row.hsaIcuBeds.currentUsageCovid
-          : null
+        ? this.disaggregateHsaValue(row?.hsaIcuBeds.currentUsageCovid ?? null)
         : row?.icuBeds
         ? row.icuBeds.currentUsageCovid
         : null,
@@ -439,11 +439,8 @@ export class Projection {
         : actualsTimeseries[icuIndex]!.icuBeds;
 
       // We calculate HSA level ICU Capacity Ratio in the frontend instead of in the backend API
-      const hsaIcuActualsTimeseries = actualsTimeseries.map(
-        row => row && row.hsaIcuBeds,
-      );
-      const countyHsaIcuCapacityRatioTimeseries = hsaIcuActualsTimeseries.map(
-        this.divideICUDataWithNulls,
+      const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
+        this.divideICUDataWithNulls(row && row.hsaIcuBeds),
       );
       const countyHsaIcuCapacityRatio =
         countyHsaIcuCapacityRatioTimeseries[icuIndex];
@@ -459,10 +456,12 @@ export class Projection {
         ? this.disaggregateHsaValue(icuActuals.currentUsageCovid)
         : icuActuals.currentUsageCovid;
       const totalPatients = this.isCounty
-        ? icuActuals.currentUsageTotal
+        ? this.disaggregateHsaValue(icuActuals.currentUsageTotal)
         : icuActuals.currentUsageTotal;
 
-      const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
+      const enoughBeds =
+        icuActuals.capacity !== null && icuActuals.capacity >= MIN_ICU_BEDS;
+      console.log(totalBeds);
       let metricValue = null;
       if (enoughBeds) {
         metricValue = this.isCounty
@@ -919,7 +918,7 @@ export class Projection {
     return result;
   }
 
-  private disaggregateHsaValue(hsaValue: number | null) {
+  disaggregateHsaValue(hsaValue: number | null) {
     if (hsaValue === null || this.hsaPopulation === null) {
       return null;
     }
