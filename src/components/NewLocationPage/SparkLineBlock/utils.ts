@@ -14,24 +14,24 @@ export const daysToChart = 30;
 export type dateItem = number | Date;
 
 export enum SparkLineMetric {
-  CASES,
-  DEATHS,
-  HOSPITALIZATIONS,
+  WEEKLY_CASES_PER_100K,
+  ADMISSIONS_PER_100K,
+  RATIO_BEDS_WITH_COVID,
 }
 
 export const SPARK_LINE_METRICS = [
-  SparkLineMetric.CASES,
-  SparkLineMetric.HOSPITALIZATIONS,
-  SparkLineMetric.DEATHS,
+  SparkLineMetric.WEEKLY_CASES_PER_100K,
+  SparkLineMetric.ADMISSIONS_PER_100K,
+  SparkLineMetric.RATIO_BEDS_WITH_COVID,
 ];
 
 // Used to select explore tab when clicking corresponding metric's spark line:
 export const SparkLineToExploreMetric: {
   [metric in SparkLineMetric]: ExploreMetric;
 } = {
-  [SparkLineMetric.CASES]: ExploreMetric.CASES,
-  [SparkLineMetric.DEATHS]: ExploreMetric.DEATHS,
-  [SparkLineMetric.HOSPITALIZATIONS]: ExploreMetric.HOSPITALIZATIONS,
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES_PER_100K,
+  [SparkLineMetric.ADMISSIONS_PER_100K]: ExploreMetric.ADMISSIONS_PER_100K,
+  [SparkLineMetric.RATIO_BEDS_WITH_COVID]: ExploreMetric.RATIO_BEDS_WITH_COVID,
 };
 
 export interface Series {
@@ -50,36 +50,36 @@ interface MetricDescription {
 export const sparkLinesMetricData: {
   [metric in SparkLineMetric]: MetricDescription;
 } = {
-  [SparkLineMetric.CASES]: {
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: {
     title: 'Cases',
     seriesList: [
       {
-        datasetId: 'rawDailyCases',
+        datasetId: 'weeklyNewCasesPer100k',
       },
       {
-        datasetId: 'smoothedDailyCases',
-      },
-    ],
-  },
-  [SparkLineMetric.DEATHS]: {
-    title: 'Deaths',
-    seriesList: [
-      {
-        datasetId: 'rawDailyDeaths',
-      },
-      {
-        datasetId: 'smoothedDailyDeaths',
+        datasetId: 'weeklyNewCasesPer100k',
       },
     ],
   },
-  [SparkLineMetric.HOSPITALIZATIONS]: {
-    title: 'Hospitalizations',
+  [SparkLineMetric.ADMISSIONS_PER_100K]: {
+    title: 'Admissions',
     seriesList: [
       {
-        datasetId: 'rawHospitalizations',
+        datasetId: 'weeklyCovidAdmissionsPer100k',
       },
       {
-        datasetId: 'smoothedHospitalizations',
+        datasetId: 'weeklyCovidAdmissionsPer100k',
+      },
+    ],
+  },
+  [SparkLineMetric.RATIO_BEDS_WITH_COVID]: {
+    title: 'COVID Patients',
+    seriesList: [
+      {
+        datasetId: 'bedsWithCovidPatientsRatio',
+      },
+      {
+        datasetId: 'bedsWithCovidPatientsRatio',
       },
     ],
   },

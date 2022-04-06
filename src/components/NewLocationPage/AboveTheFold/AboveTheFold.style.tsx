@@ -66,7 +66,7 @@ export const GridContainer = styled.div`
   }
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 3fr;
     grid-template-areas:
       'header header'
       'overview overview'
