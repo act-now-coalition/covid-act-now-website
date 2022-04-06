@@ -385,7 +385,7 @@ export const exploreMetricData: {
   [ExploreMetric.ADMISSIONS_PER_100K]: {
     title: 'Hospitalizations per 100k',
     name: 'Hospitalizations per 100k',
-    chartId: 'admissions_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
+    chartId: 'positivity_rate', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 1,
     seriesList: [
@@ -400,7 +400,7 @@ export const exploreMetricData: {
   [ExploreMetric.RATIO_BEDS_WITH_COVID]: {
     title: 'Percent hospital beds with Covid patients',
     name: 'Percent hospital beds with Covid patients',
-    chartId: 'ratio_beds_with_covid_patients', // TODO(8.2) (Chelsi) - what are these ids used for
+    chartId: 'positivity_rate', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 1,
     seriesList: [
@@ -415,7 +415,7 @@ export const exploreMetricData: {
   [ExploreMetric.WEEKLY_CASES_PER_100K]: {
     title: 'Weekly cases per 100k',
     name: 'Weekly cases per 100k',
-    chartId: 'weekly_new_cases_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
+    chartId: 'positivity_rate', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 0,
     seriesList: [
