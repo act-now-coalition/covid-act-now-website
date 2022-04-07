@@ -220,16 +220,15 @@ export class Projection {
       this.rawDailyDeaths,
     );
 
-    // TODO: This is an unholy amount of ternary operators and should probably be refactored
+    // TODO: This is an unholy amount of ternary operators and should probably be refactored.
+    // Disaggregate county hospitalization data from HSAs to county's in order to display
+    // county estimates in charts.
     this.rawHospitalizations = actualTimeseries.map(row =>
       this.isCounty
         ? this.disaggregateHsaValue(
             row?.hsaHospitalBeds.currentUsageCovid ?? null,
           )
         : row?.hospitalBeds.currentUsageCovid ?? null,
-    );
-    this.smoothedHospitalizations = this.smoothWithRollingAverage(
-      this.rawHospitalizations,
     );
 
     this.rawICUHospitalizations = actualTimeseries.map(row =>
@@ -239,6 +238,11 @@ export class Projection {
         ? row.icuBeds.currentUsageCovid
         : null,
     );
+
+    this.smoothedHospitalizations = this.smoothWithRollingAverage(
+      this.rawHospitalizations,
+    );
+
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
     );
@@ -258,7 +262,6 @@ export class Projection {
       metricsTimeseries,
       actualTimeseries,
     );
-    console.log('usage, ', this.getMetricValue(Metric.HOSPITAL_USAGE));
 
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
@@ -335,6 +338,9 @@ export class Projection {
       case Metric.CASE_GROWTH_RATE:
         return this.metrics?.infectionRate ?? null;
       case Metric.HOSPITAL_USAGE:
+        console.log(
+          this.icuCapacityInfo ? this.icuCapacityInfo.metricValue : null,
+        );
         return this.icuCapacityInfo ? this.icuCapacityInfo.metricValue : null;
       case Metric.POSITIVE_TESTS:
         return this.metrics?.testPositivityRatio ?? null;
