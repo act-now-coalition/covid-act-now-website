@@ -17,8 +17,8 @@ const locationAlert: Alert = {
   locationName: 'District of Columbia',
   locationURL: 'https://covidactnow.org/us/district_of_columbia-dc/',
   lastUpdated: '06/26/2020',
-  oldLevel: 2,
-  newLevel: 3,
+  oldLevel: 4,
+  newLevel: 1,
 };
 
 async function main(emailAddress: string) {
