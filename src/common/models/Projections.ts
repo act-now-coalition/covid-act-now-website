@@ -126,29 +126,7 @@ export class Projections {
   }
 
   getAlarmLevel(): Level {
-    const { rt_level, test_rate_level, case_density } = this.getLevels();
-    const metricLevels = [rt_level, test_rate_level, case_density];
-
-    // If case_density is low or unknown, it overrides other metrics. Else we
-    // use the highest metric level.
-    if (case_density === Level.LOW || case_density === Level.UNKNOWN) {
-      return case_density;
-    }
-
-    for (const level of [
-      Level.SUPER_CRITICAL,
-      Level.CRITICAL,
-      Level.HIGH,
-      Level.MEDIUM,
-    ]) {
-      if (metricLevels.includes(level)) {
-        return level;
-      }
-    }
-
-    fail(
-      `Failed to determine risk level for ${this.locationName} (fips=${this.fips}).`,
-    );
+    return this.primary.canCommunityLevel;
   }
 
   getAlarmLevelColor() {
