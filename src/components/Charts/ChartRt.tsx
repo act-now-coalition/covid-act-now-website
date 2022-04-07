@@ -2,7 +2,6 @@ import React from 'react';
 import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
 import { curveNatural } from '@vx/curve';
-import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear } from '@vx/scale';
@@ -10,7 +9,6 @@ import { Area } from '@vx/shape';
 import { Column, RtRange, RT_TRUNCATION_DAYS } from 'common/models/Projection';
 import { CASE_GROWTH_RATE_LEVEL_INFO_MAP as zones } from 'common/metrics/case_growth';
 import { formatDecimal } from 'common/utils';
-import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
@@ -19,16 +17,21 @@ import Tooltip from './Tooltip';
 import * as TooltipStyle from './Tooltip.style';
 import * as Style from './Charts.style';
 import {
-  computeTickPositions,
   getChartRegions,
   getTruncationDate,
   last,
   getAxisLimits,
   getUtcScale,
-  getTimeAxisTicks,
 } from './utils';
-import { AxisBottom } from 'components/Charts/Axis';
 import { formatTooltipColumnDate, getColumnDate } from './utils';
+import GridLines from 'components/Explore/GridLines';
+import Axes from 'components/Explore/Axes';
+import { scaleUtc } from '@vx/scale';
+import { getYFormat } from 'components/Explore/utils';
+import { DataMeasure } from 'components/Explore/interfaces';
+import { TimeUnit } from 'common/utils/time-utils';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 type PointRt = Omit<Column, 'y'> & {
   y: RtRange;
@@ -75,8 +78,6 @@ const ChartRt = ({
   const [yAxisMin, yAxisMax] = getAxisLimits(yDataMin, yDataMax, zones);
 
   const xScale = getUtcScale(minDate, currDate, 0, chartWidth);
-  const [startDate, endDate] = xScale.domain();
-  const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -86,7 +87,6 @@ const ChartRt = ({
   const getXCoord = (d: PointRt) => xScale(getColumnDate(d));
   const getYCoord = (d: PointRt) => yScale(getRt(d));
 
-  const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
 
   const lastValidDate = getColumnDate(last(data));
@@ -101,6 +101,15 @@ const ChartRt = ({
   const truncationPoint = last(prevData);
   const truncationRt = getRt(truncationPoint);
   const yTruncationRt = yScale(truncationRt);
+  const xTruncationRt = xScale(getColumnDate(truncationPoint));
+
+  const yTickFormat = getYFormat(DataMeasure.INTEGER, 1);
+  const dateScale = scaleUtc({
+    domain: [minDate, currDate],
+    range: [0, chartWidth],
+  });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const renderTooltip = (d: PointRt) => {
     const isConfirmed = getColumnDate(d) < truncationDate;
@@ -132,8 +141,6 @@ const ChartRt = ({
     />
   );
 
-  const xTruncationRt = xScale(getColumnDate(truncationPoint));
-
   return (
     <ChartContainer<PointRt>
       data={data}
@@ -148,6 +155,16 @@ const ChartRt = ({
       marginLeft={marginLeft}
       marginRight={marginRight}
     >
+      <GridLines width={chartWidth} yScale={yScale} numTicksRows={5} />
+      <Axes
+        height={chartHeight}
+        dateScale={dateScale}
+        yScale={yScale}
+        isMobile={isMobile}
+        yNumTicks={5}
+        yTickFormat={yTickFormat}
+        xTickTimeUnit={TimeUnit.MONTHS}
+      />
       <RectClipGroup width={chartWidth} height={chartHeight}>
         <RectClipGroup width={chartWidth} height={chartHeight} topPadding={0}>
           <Style.SeriesArea>
@@ -186,9 +203,9 @@ const ChartRt = ({
             </Group>
           ))}
       </RectClipGroup>
-      <Style.LineGrid>
+      {/* <Style.LineGrid>
         <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
-      </Style.LineGrid>
+      </Style.LineGrid> */}
       <Style.TextAnnotation>
         <BoxedAnnotation
           x={xTruncationRt}
@@ -197,12 +214,12 @@ const ChartRt = ({
         />
       </Style.TextAnnotation>
       <Style.CircleMarker cx={xTruncationRt} cy={yTruncationRt} r={6} />
-      <AxisBottom
+      {/* <AxisBottom
         innerHeight={chartHeight}
         scale={xScale}
         tickValues={dateTicks}
-      />
-      <AxisLeft scale={yScale} tickValues={yTicks} />
+      /> */}
+      {/* <AxisLeft scale={yScale} tickValues={yTicks} /> */}
     </ChartContainer>
   );
 };
