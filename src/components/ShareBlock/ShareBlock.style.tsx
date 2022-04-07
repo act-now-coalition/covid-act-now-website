@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const ShareContainer = styled.div`
+  margin-top: 32px;
   @media print {
     display: none;
   }

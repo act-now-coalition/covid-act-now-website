@@ -32,7 +32,10 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
         setMenuOpen={setMenuOpen}
       />
       <PageContainer>
-        <MainContent>{children}</MainContent>
+        <MainContent>
+          {children}
+          <ShareModelBlock />
+        </MainContent>
         <DesktopOnly>
           <Sidebar>
             <Sticky>
@@ -41,7 +44,6 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
           </Sidebar>
         </DesktopOnly>
       </PageContainer>
-      <ShareModelBlock />
     </Fragment>
   );
 };

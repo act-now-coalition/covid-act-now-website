@@ -15,7 +15,6 @@ import {
 } from 'screens/Donate/Donate.style';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import donateContent from 'cms-content/donate';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { DesktopOnlyDonateButton } from 'components/DonateButton';
 
 const Intro: React.FC = () => {
@@ -68,7 +67,6 @@ const Donate: React.FC = () => {
           ))}
         </ContentWrapper>
       </Container>
-      <ShareModelBlock />
     </>
   );
 };
