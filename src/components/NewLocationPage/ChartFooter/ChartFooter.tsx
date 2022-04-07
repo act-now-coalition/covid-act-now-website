@@ -6,7 +6,7 @@ import { MetricValues } from 'common/models/Projections';
 import { Region } from 'common/regions';
 import MetricChartFooter from 'components/NewLocationPage/ChartFooter/MetricChartFooter';
 import AddedMetricChartFooter from 'components/NewLocationPage/ChartFooter/AddedMetricChartFooter';
-import { MetricType } from 'components/Charts/Groupings';
+import { MetricType, ValueInfo } from 'components/Charts/Groupings';
 
 const ChartFooter: React.FC<{
   metric: Metric | ExploreMetric;
@@ -14,8 +14,8 @@ const ChartFooter: React.FC<{
   region: Region;
   stats: MetricValues;
   metricType: MetricType;
-  formattedValue: string;
-}> = ({ projections, region, stats, metricType, metric, formattedValue }) => {
+  valueInfo: ValueInfo;
+}> = ({ projections, region, stats, metricType, metric, valueInfo }) => {
   return (
     <>
       {metricType === MetricType.KEY_METRIC ? (
@@ -30,7 +30,7 @@ const ChartFooter: React.FC<{
           metric={metric as ExploreMetric}
           projections={projections}
           region={region}
-          formattedValue={formattedValue}
+          valueInfo={valueInfo}
         />
       )}
     </>

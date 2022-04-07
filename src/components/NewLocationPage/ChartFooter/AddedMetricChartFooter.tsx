@@ -27,6 +27,8 @@ import { EventCategory } from 'components/Analytics';
 import { ExploreMetric } from 'components/Explore';
 import { getAddedMetricStatusText, DialogProps } from './utils';
 import Legend from 'components/Explore/Legend';
+import { formatValue } from 'common/metric';
+import { ValueInfo } from 'components/Charts/Groupings';
 
 const ShareButtonBlock: React.FC<{ region: Region; metric: ExploreMetric }> = ({
   region,
@@ -83,11 +85,16 @@ const AddedMetricChartFooter: React.FC<{
   metric: ExploreMetric;
   projections: Projections;
   region: Region;
-  formattedValue: string;
-}> = ({ metric, region, formattedValue, projections }) => {
+  valueInfo: ValueInfo;
+}> = ({ metric, region, projections, valueInfo }) => {
   const modalContent = getExploreMetricModalContent(region, metric);
 
-  const statusText = getAddedMetricStatusText(metric, formattedValue, region);
+  const statusText = getAddedMetricStatusText(
+    metric,
+    valueInfo,
+    region,
+    projections,
+  );
 
   const [isOpen, openDialog, closeDialog] = useDialog(
     false,

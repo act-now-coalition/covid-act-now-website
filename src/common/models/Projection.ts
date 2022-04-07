@@ -258,6 +258,8 @@ export class Projection {
       metricsTimeseries,
       actualTimeseries,
     );
+    console.log('usage, ', this.getMetricValue(Metric.HOSPITAL_USAGE));
+
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
@@ -434,11 +436,14 @@ export class Projection {
         "Dates in actualTimeseries and metricTimeseries aren't aligned.",
       );
 
+      // If Projection is for a county, use HSA level ICU data.
       const icuActuals = this.isCounty
         ? actualsTimeseries[icuIndex]!.hsaIcuBeds
         : actualsTimeseries[icuIndex]!.icuBeds;
 
-      // We calculate HSA level ICU Capacity Ratio in the frontend instead of in the backend API
+      // ICU Capacity on the backend does not use HSA-level data for counties.
+      // So, we calculate it here so that the ICU Capacity metric lines up with the
+      // ICU actuals in this class.
       const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
         this.divideICUDataWithNulls(row && row.hsaIcuBeds),
       );
@@ -449,19 +454,11 @@ export class Projection {
         ? countyHsaIcuCapacityRatioTimeseries
         : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
 
-      const totalBeds = this.isCounty
-        ? this.disaggregateHsaValue(icuActuals.capacity)
-        : icuActuals.capacity;
-      const covidPatients = this.isCounty
-        ? this.disaggregateHsaValue(icuActuals.currentUsageCovid)
-        : icuActuals.currentUsageCovid;
-      const totalPatients = this.isCounty
-        ? this.disaggregateHsaValue(icuActuals.currentUsageTotal)
-        : icuActuals.currentUsageTotal;
+      const totalBeds = icuActuals.capacity;
+      const covidPatients = icuActuals.currentUsageCovid;
+      const totalPatients = icuActuals.currentUsageTotal;
 
-      const enoughBeds =
-        icuActuals.capacity !== null && icuActuals.capacity >= MIN_ICU_BEDS;
-      console.log(totalBeds);
+      const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
       let metricValue = null;
       if (enoughBeds) {
         metricValue = this.isCounty
