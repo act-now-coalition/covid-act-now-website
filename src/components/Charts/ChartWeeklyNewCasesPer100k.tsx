@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import isDate from 'lodash/isDate';
-// import { min as d3min, max as d3max } from 'd3-array';
-import { min as d3min } from 'd3-array';
+import { min as d3min, max as d3max } from 'd3-array';
 import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { scaleLinear } from '@vx/scale';
@@ -24,7 +23,6 @@ import {
   getChartRegions,
   getZoneByValue,
   last,
-  // getAxisLimits,
   getUtcScale,
   getTimeAxisTicks,
 } from './utils';
@@ -79,14 +77,13 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
   const [startDate, endDate] = xScale.domain();
   const dateTicks = getTimeAxisTicks(startDate, endDate);
 
-  // const yDataMax = d3max(data, getWeeklyNewCasesPer100k) || 100;
-  // const yAxisLimits = getAxisLimits(0, yDataMax, zones);
+  const yDataMax = d3max(data, getWeeklyNewCasesPer100k) || 100;
 
   // Adjusts the min y-axis to make the Low label fit only if
   // the current level is Low
   const isLow = activeZone.level === Level.LOW;
   const yAxisMin = isLow ? -6 : 0;
-  const yAxisMax = capY; // TODO (Chelsi) - check if this is right
+  const yAxisMax = Math.min(Math.max(yDataMax, 30), capY);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -98,7 +95,11 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
     yScale(Math.min(getWeeklyNewCasesPer100k(p), capY));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
-  const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
+  const yTicks = computeTickPositions(
+    yAxisMin,
+    yAxisMax,
+    zones,
+  ).filter(tickVal => Number.isFinite(tickVal));
 
   // Hide the Low label if the current level is Medium or higher
   const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);

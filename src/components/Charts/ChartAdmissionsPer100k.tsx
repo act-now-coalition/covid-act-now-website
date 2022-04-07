@@ -23,7 +23,6 @@ import {
   getChartRegions,
   getZoneByValue,
   last,
-  getAxisLimits,
   getUtcScale,
   getTimeAxisTicks,
 } from './utils';
@@ -79,13 +78,14 @@ const ChartAdmissionsPer100k: FunctionComponent<{
   const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yDataMax = d3max(data, getAdmissionsPer100k) || 100;
-  const yAxisLimits = getAxisLimits(0, yDataMax, zones);
 
   // Adjusts the min y-axis to make the Low label fit only if
   // the current level is Low
   const isLow = activeZone.level === Level.LOW;
   const yAxisMin = isLow ? -6 : 0;
-  const yAxisMax = Math.min(yAxisLimits[1], capY);
+
+  //TODO (Chelsi): remove need for hard coded 30
+  const yAxisMax = Math.min(Math.max(yDataMax, 30), capY);
 
   const yScale = scaleLinear({
     domain: [yAxisMin, yAxisMax],
@@ -97,7 +97,11 @@ const ChartAdmissionsPer100k: FunctionComponent<{
     yScale(Math.min(getAdmissionsPer100k(p), capY));
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
-  const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);
+  const yTicks = computeTickPositions(
+    yAxisMin,
+    yAxisMax,
+    zones,
+  ).filter(tickVal => Number.isFinite(tickVal));
 
   // Hide the Low label if the current level is Medium or higher
   const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
