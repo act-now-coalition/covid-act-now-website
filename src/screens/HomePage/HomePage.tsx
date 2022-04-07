@@ -139,8 +139,8 @@ export default function HomePage() {
             </ColumnCentered>
 
             <MapBlock
-              title="Community transmission levels"
-              subtitle="Risk is reduced for those who are vaccinated."
+              title="Community levels"
+              subtitle=""
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}

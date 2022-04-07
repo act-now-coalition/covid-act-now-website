@@ -83,7 +83,7 @@ function generateAlertEmailContent(
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
-    img_alt: `Image depicting that ${locationName} went from "${oldLevelText}" to "${newLevelText}"`,
+    img_alt: `Image depicting that ${locationName} went from ${oldLevelText} to ${newLevelText}`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
     location_url: `${locationURL}?utm_source=risk_alerts&utm_medium=email`,
@@ -116,7 +116,7 @@ export function generateAlertEmailData(
 ) {
   const { locationName } = locationAlert;
   const htmlContent = generateAlertEmailContent(emailAddress, locationAlert);
-  const subjectLine = `${locationName}'s Risk Level Has Changed`;
+  const subjectLine = `${locationName}'s Community Level Has Changed`;
 
   return {
     Subject: subjectLine,
