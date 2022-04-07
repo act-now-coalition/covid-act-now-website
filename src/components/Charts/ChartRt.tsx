@@ -14,7 +14,6 @@ import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
 import RectClipGroup from './RectClipGroup';
-import ZoneAnnotation from './ZoneAnnotation';
 import ZoneLinePath from './ZoneLinePath';
 import Tooltip from './Tooltip';
 import * as TooltipStyle from './Tooltip.style';
@@ -23,7 +22,6 @@ import {
   computeTickPositions,
   getChartRegions,
   getTruncationDate,
-  getZoneByValue,
   last,
   getAxisLimits,
   getUtcScale,
@@ -103,7 +101,6 @@ const ChartRt = ({
   const truncationPoint = last(prevData);
   const truncationRt = getRt(truncationPoint);
   const yTruncationRt = yScale(truncationRt);
-  const truncationZone = getZoneByValue(truncationRt, zones);
 
   const renderTooltip = (d: PointRt) => {
     const isConfirmed = getColumnDate(d) < truncationDate;
@@ -131,7 +128,7 @@ const ChartRt = ({
       cx={getXCoord(d)}
       cy={getYCoord(d)}
       r={6}
-      fill={getZoneByValue(getRt(d), zones).color}
+      fill="black"
     />
   );
 
@@ -163,37 +160,31 @@ const ChartRt = ({
             />
           </Style.SeriesArea>
         </RectClipGroup>
-        {regions.map((region, i) => (
-          <Group key={`chart-region-${i}`}>
-            <Style.SeriesLine stroke={region.color}>
-              <ZoneLinePath<PointRt>
-                data={prevData}
-                x={getXCoord}
-                y={getYCoord}
-                region={region}
-                width={chartWidth}
-                yScale={yScale}
-              />
-            </Style.SeriesLine>
-            <Style.SeriesDotted stroke={region.color}>
-              <ZoneLinePath<PointRt>
-                data={restData}
-                x={getXCoord}
-                y={getYCoord}
-                region={region}
-                width={chartWidth}
-                yScale={yScale}
-              />
-            </Style.SeriesDotted>
-            <ZoneAnnotation
-              color={region.color}
-              name={region.name}
-              isActive={truncationZone.name === region.name}
-              x={chartWidth - 10}
-              y={yScale(0.5 * (region.valueFrom + region.valueTo))}
-            />
-          </Group>
-        ))}
+        {regions &&
+          regions.map((region, i) => (
+            <Group key={`chart-region-${i}`}>
+              <Style.SeriesLine stroke="black">
+                <ZoneLinePath<PointRt>
+                  data={prevData}
+                  x={getXCoord}
+                  y={getYCoord}
+                  region={region}
+                  width={chartWidth}
+                  yScale={yScale}
+                />
+              </Style.SeriesLine>
+              <Style.SeriesDotted stroke="black">
+                <ZoneLinePath<PointRt>
+                  data={restData}
+                  x={getXCoord}
+                  y={getYCoord}
+                  region={region}
+                  width={chartWidth}
+                  yScale={yScale}
+                />
+              </Style.SeriesDotted>
+            </Group>
+          ))}
       </RectClipGroup>
       <Style.LineGrid>
         <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />

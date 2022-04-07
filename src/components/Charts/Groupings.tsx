@@ -136,8 +136,8 @@ export const CHART_GROUPS: ChartGroup[] = [
           <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // TODO (chelsi): make a map of these chart-specific metric names
         ),
         renderChart: projections => (
-          <MetricChart
-            metric={Metric.HOSPITAL_USAGE}
+          <SingleLocationChartContainer
+            metric={ExploreMetric.ICU_USED}
             projections={projections}
           />
         ),
@@ -202,8 +202,8 @@ export const CHART_GROUPS: ChartGroup[] = [
           />
         ),
         renderChart: projections => (
-          <MetricChart
-            metric={Metric.POSITIVE_TESTS}
+          <SingleLocationChartContainer
+            metric={ExploreMetric.POSITIVITY_RATE}
             projections={projections}
           />
         ),
