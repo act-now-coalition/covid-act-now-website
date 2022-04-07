@@ -25,8 +25,8 @@ export function getAddedMetricStatusText(
   region: Region,
   projections: Projections,
 ) {
-  // For county-level hospital data we want to display copy for the default disaggregated county data and
-  //HSA level data. We need to plug in custom copy and re-aggregate the estimated county data to the HSA level.
+  // For county-level hospital data display copy for the default disaggregated county data as well as
+  // HSA level data. We need to plug in custom copy and re-aggregate the HSA data from the estimated county data.
   if (
     projections.isCounty &&
     [
@@ -38,7 +38,7 @@ export function getAddedMetricStatusText(
       valueInfo.unformattedValue,
       projections,
     );
-    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${valueInfo.formattedValue} coming from ${region.shortName} county.`;
+    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${valueInfo.formattedValue} coming from ${region.shortName}.`;
   }
 
   return `Over the last week, ${region.shortName} has averaged ${valueInfo.formattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
