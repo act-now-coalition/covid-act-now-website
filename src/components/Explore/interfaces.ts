@@ -22,6 +22,7 @@ export interface Series {
 }
 
 export enum ExploreMetric {
+  CASES,
   DEATHS,
   HOSPITALIZATIONS,
   ICU_HOSPITALIZATIONS,

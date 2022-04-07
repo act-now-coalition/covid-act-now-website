@@ -134,6 +134,8 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
 
 function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
   switch (metric) {
+    case ExploreMetric.CASES:
+      return 'smoothedDailyCases';
     case ExploreMetric.DEATHS:
       return 'smoothedDailyDeaths';
     case ExploreMetric.HOSPITALIZATIONS:
@@ -209,6 +211,27 @@ interface ExploreMetricDescription {
 export const exploreMetricData: {
   [metric in ExploreMetric]: ExploreMetricDescription;
 } = {
+  [ExploreMetric.CASES]: {
+    title: 'Cases',
+    name: 'Cases',
+    chartId: 'cases',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'Cases',
+        tooltipLabel: 'cases',
+        datasetId: 'rawDailyCases',
+        type: SeriesType.BAR,
+      },
+      {
+        label: '7 Day Average',
+        tooltipLabel: 'cases',
+        datasetId: 'smoothedDailyCases',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
   [ExploreMetric.DEATHS]: {
     title: 'Deaths',
     name: 'Deaths',
