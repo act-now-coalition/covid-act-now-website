@@ -33,6 +33,7 @@ const ShareButtonBlock: React.FC<{ region: Region; metric: ExploreMetric }> = ({
   metric,
 }) => {
   const metricToShareQuoteName: { [key: number]: string } = {
+    [ExploreMetric.DEATHS]: 'Daily COVID deaths',
     [ExploreMetric.ICU_HOSPITALIZATIONS]: 'Current COVID ICU hospitalizations',
     [ExploreMetric.HOSPITALIZATIONS]: 'Current COVID hospitalizations',
   };
