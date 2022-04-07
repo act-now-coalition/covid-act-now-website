@@ -13,7 +13,7 @@ import {
 import ChartTab from 'components/NewLocationPage/ChartTabs/ChartTab';
 import { MetricValues } from 'common/models/Projections';
 import { getAveragedSeriesForMetric } from 'components/Explore/utils';
-import { formatValue, getLevelInfo, getMetricName } from 'common/metric';
+import { formatValue, getMetricName } from 'common/metric';
 import { last } from 'components/Charts/utils';
 import { formatDecimal } from 'common/utils';
 import VaccinationChartTabs from 'components/NewLocationPage/ChartTabs/VaccinationChartTabs';
@@ -42,11 +42,10 @@ export interface MetricChartInfo {
 
 // TODO(8.2) Finalize group header
 export enum GroupHeader {
-  NEW = 'New',
+  COMMUNITY_LEVEL = 'Community Level Components',
   VACCINATED = '% Vaccinated',
-  CASES = 'Cases',
-  HOSPITALIZATIONS = 'Hospitalizations',
-  DEATHS = 'Deaths',
+  ADDITIONAL_HOSPITALIZATION = 'Additional Hospitalization Metrics',
+  ADDITIONAL_MISC = 'Additional Metrics',
 }
 
 export interface ChartGroup {
@@ -57,7 +56,7 @@ export interface ChartGroup {
 // TODO(8.2) Replace with final group header
 export const CHART_GROUPS: ChartGroup[] = [
   {
-    groupHeader: GroupHeader.NEW,
+    groupHeader: GroupHeader.COMMUNITY_LEVEL,
     metricList: [
       {
         metric: Metric.WEEKLY_CASES_PER_100K,
@@ -128,58 +127,7 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
   {
-    groupHeader: GroupHeader.CASES,
-    metricList: [
-      {
-        metric: Metric.CASE_DENSITY,
-        metricType: MetricType.KEY_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName={getMetricNameForStat(Metric.CASE_DENSITY)}
-            subLabel={metricSubLabelText[Metric.CASE_DENSITY]}
-            metricValueInfo={metricValue}
-          />
-        ),
-        renderChart: projections => (
-          <MetricChart metric={Metric.CASE_DENSITY} projections={projections} />
-        ),
-      },
-      {
-        metric: Metric.CASE_GROWTH_RATE,
-        metricType: MetricType.KEY_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName={getMetricNameForStat(Metric.CASE_GROWTH_RATE)}
-            metricValueInfo={metricValue}
-          />
-        ),
-        renderChart: projections => (
-          <MetricChart
-            metric={Metric.CASE_GROWTH_RATE}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: Metric.POSITIVE_TESTS,
-        metricType: MetricType.KEY_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)}
-            metricValueInfo={metricValue}
-          />
-        ),
-        renderChart: projections => (
-          <MetricChart
-            metric={Metric.POSITIVE_TESTS}
-            projections={projections}
-          />
-        ),
-      },
-    ],
-  },
-  {
-    groupHeader: GroupHeader.HOSPITALIZATIONS,
+    groupHeader: GroupHeader.ADDITIONAL_HOSPITALIZATION,
     metricList: [
       {
         metric: Metric.HOSPITAL_USAGE,
@@ -226,8 +174,40 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
   {
-    groupHeader: GroupHeader.DEATHS,
+    groupHeader: GroupHeader.ADDITIONAL_MISC,
     metricList: [
+      {
+        metric: Metric.CASE_GROWTH_RATE,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.CASE_GROWTH_RATE)}
+            metricValueInfo={metricValue}
+          />
+        ),
+        renderChart: projections => (
+          <MetricChart
+            metric={Metric.CASE_GROWTH_RATE}
+            projections={projections}
+          />
+        ),
+      },
+      {
+        metric: Metric.POSITIVE_TESTS,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab
+            metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)}
+            metricValueInfo={metricValue}
+          />
+        ),
+        renderChart: projections => (
+          <MetricChart
+            metric={Metric.POSITIVE_TESTS}
+            projections={projections}
+          />
+        ),
+      },
       {
         metric: ExploreMetric.DEATHS,
         metricType: MetricType.EXPLORE_METRIC,
@@ -255,7 +235,7 @@ export function getValueInfo(
   const { metric, metricType } = metricItem;
   if (metricType === MetricType.KEY_METRIC) {
     const statValue = stats[metric as Metric];
-    const levelInfo = getLevelInfo(metric as Metric, statValue);
+    // const levelInfo = getLevelInfo(metric as Metric, statValue);
     const formattedValue = formatValue(
       metric as Metric,
       statValue,
@@ -264,7 +244,7 @@ export function getValueInfo(
     return {
       unformattedValue: statValue,
       formattedValue,
-      levelColor: levelInfo.color,
+      // levelColor: levelInfo.color,
     };
   } else {
     const smoothedSeries = getAveragedSeriesForMetric(
