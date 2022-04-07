@@ -25,7 +25,7 @@ export function getAddedMetricStatusText(
   region: Region,
   projections: Projections,
 ) {
-  // For county-level hospital data display copy for the default disaggregated county data as well as
+  // For county-level hospital data we display copy for the default disaggregated county data as well as
   // HSA level data. We need to plug in custom copy and re-aggregate the HSA data from the estimated county data.
   if (
     projections.isCounty &&
@@ -34,10 +34,7 @@ export function getAddedMetricStatusText(
       ExploreMetric.HOSPITALIZATIONS,
     ].includes(metric)
   ) {
-    const hsaFormattedValue = formattedHsaHospitalValue(
-      valueInfo.unformattedValue,
-      projections,
-    );
+    const hsaFormattedValue = formattedHsaHospitalValue(metric, projections);
     return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${valueInfo.formattedValue} coming from ${region.shortName}.`;
   }
 
@@ -53,15 +50,13 @@ export interface DialogProps {
 }
 
 function formattedHsaHospitalValue(
-  countyValue: number | null,
+  metric: ExploreMetric,
   projections: Projections,
 ) {
-  const population = projections.primary.totalPopulation;
-  const hsaPopulation = projections.primary.hsaPopulation;
-  let hsaValue = null;
-  if (countyValue !== null && hsaPopulation !== null) {
-    hsaValue = countyValue * (hsaPopulation / population);
-  }
-
-  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, 'no data'); // TODO FIX METRIC TYPE AND NULL TEXT
+  const value = projections.primary.getCurrentHsaActuals(metric);
+  return formatValue(
+    Metric.ADMISSIONS_PER_100K,
+    value.currentUsageCovid,
+    'no data',
+  ); // TODO(sean): FIX METRIC TYPE AND NULL TEXT
 }

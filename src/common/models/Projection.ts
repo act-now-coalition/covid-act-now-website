@@ -12,6 +12,7 @@ import {
   Actuals,
   Annotations,
   HospitalResourceUtilization,
+  HospitalResourceUtilizationWithAdmissions,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent, getPercentChange } from 'common/utils';
@@ -19,6 +20,7 @@ import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { Level } from 'common/level';
+import { ExploreMetric } from 'components/Explore';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -155,6 +157,8 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
+  readonly currentHsaIcuInfo: HospitalResourceUtilization;
+  readonly currentHsaHospitalInfo: HospitalResourceUtilizationWithAdmissions;
   readonly canCommunityLevel: Level;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -308,6 +312,9 @@ export class Projection {
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
 
+    this.currentHsaIcuInfo = summaryWithTimeseries.actuals.hsaIcuBeds;
+    this.currentHsaHospitalInfo = summaryWithTimeseries.actuals.hsaHospitalBeds;
+
     this.annotations = summaryWithTimeseries.annotations;
   }
 
@@ -442,14 +449,14 @@ export class Projection {
         "Dates in actualTimeseries and metricTimeseries aren't aligned.",
       );
 
-      // If Projection is for a county, use HSA level ICU data.
+      // If Projection is for a county, use HSA-level ICU data.
       const icuActuals = this.isCounty
         ? actualsTimeseries[icuIndex]!.hsaIcuBeds
         : actualsTimeseries[icuIndex]!.icuBeds;
 
-      // ICU Capacity on the backend does not use HSA-level data for counties.
-      // So, we calculate it here so that the ICU Capacity metric lines up with the
-      // ICU actuals in this class.
+      // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
+      // We calculate it here so that the ICU Capacity metric lines up with the
+      // ICU actuals in this method (make everything HSA-level for counties).
       const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
         this.divideICUDataWithNulls(row && row.hsaIcuBeds),
       );
@@ -589,6 +596,20 @@ export class Projection {
 
   getDataset(dataset: DatasetId): Column[] {
     return this.getColumn(dataset);
+  }
+
+  getCurrentHsaActuals(
+    metric: ExploreMetric,
+  ): HospitalResourceUtilization | HospitalResourceUtilizationWithAdmissions {
+    // Does using ExploreMetric here cause a circular dependency? Something breaks :(
+    switch (metric) {
+      case ExploreMetric.ICU_HOSPITALIZATIONS:
+        return this.currentHsaIcuInfo;
+      case ExploreMetric.HOSPITALIZATIONS:
+        return this.currentHsaHospitalInfo;
+      default:
+        fail('Unsupported hospital metric');
+    }
   }
 
   /** Makes a dictionary from a timerseries to a row so that we can look up the values
