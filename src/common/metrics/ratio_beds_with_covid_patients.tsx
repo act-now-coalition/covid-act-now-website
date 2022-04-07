@@ -19,7 +19,7 @@ export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
   metricName: '% Hospital beds with Covid patients',
   extendedMetricName: '% Hospital beds with Covid patients',
   metricNameForCompare: `% Hospital beds with Covid patients`,
-  metricNameForSummaryStat: 'COVID Patients',
+  metricNameForSummaryStat: 'Patients w/ COVID',
 };
 
 const LIMIT_LOW = 0.1;
