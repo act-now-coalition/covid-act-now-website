@@ -225,24 +225,6 @@ export const CHART_GROUPS: ChartGroup[] = [
       },
     ],
   },
-  {
-    groupHeader: GroupHeader.DEATHS,
-    metricList: [
-      {
-        metric: ExploreMetric.DEATHS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.DEATHS}
-            projections={projections}
-          />
-        ),
-      },
-    ],
-  },
 ];
 
 export const nullValueString = '--';

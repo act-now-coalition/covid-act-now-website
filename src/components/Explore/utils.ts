@@ -85,8 +85,6 @@ export function getDateRange(period: Period): Date[] {
 }
 
 export const EXPLORE_METRICS = [
-  ExploreMetric.CASES,
-  ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
@@ -105,18 +103,12 @@ export const EXPLORE_METRICS = [
 // Therefore, don't add a 'percentage' type metric to this without updating
 // that code accordingly.
 export const ORIGINAL_EXPLORE_METRICS = [
-  ExploreMetric.CASES,
-  ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
 ];
 
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
   switch (chartId) {
-    case 'cases':
-      return ExploreMetric.CASES;
-    case 'deaths':
-      return ExploreMetric.DEATHS;
     case 'hospitalizations':
       return ExploreMetric.HOSPITALIZATIONS;
     case 'icu-hospitalizations':
@@ -142,10 +134,6 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
 
 function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
   switch (metric) {
-    case ExploreMetric.CASES:
-      return 'smoothedDailyCases';
-    case ExploreMetric.DEATHS:
-      return 'smoothedDailyDeaths';
     case ExploreMetric.HOSPITALIZATIONS:
       return 'smoothedHospitalizations';
     case ExploreMetric.ICU_HOSPITALIZATIONS:
@@ -219,48 +207,6 @@ interface ExploreMetricDescription {
 export const exploreMetricData: {
   [metric in ExploreMetric]: ExploreMetricDescription;
 } = {
-  [ExploreMetric.CASES]: {
-    title: 'Cases',
-    name: 'Cases',
-    chartId: 'cases',
-    dataMeasure: DataMeasure.INTEGER,
-    yAxisDecimalPlaces: 0,
-    seriesList: [
-      {
-        label: 'Cases',
-        tooltipLabel: 'cases',
-        datasetId: 'rawDailyCases',
-        type: SeriesType.BAR,
-      },
-      {
-        label: '7 Day Average',
-        tooltipLabel: 'cases',
-        datasetId: 'smoothedDailyCases',
-        type: SeriesType.LINE,
-      },
-    ],
-  },
-  [ExploreMetric.DEATHS]: {
-    title: 'Deaths',
-    name: 'Deaths',
-    chartId: 'deaths',
-    dataMeasure: DataMeasure.INTEGER,
-    yAxisDecimalPlaces: 1,
-    seriesList: [
-      {
-        label: 'Deaths',
-        tooltipLabel: 'Deaths',
-        datasetId: 'rawDailyDeaths',
-        type: SeriesType.BAR,
-      },
-      {
-        label: '7 Day Average',
-        tooltipLabel: 'Deaths',
-        datasetId: 'smoothedDailyDeaths',
-        type: SeriesType.LINE,
-      },
-    ],
-  },
   [ExploreMetric.HOSPITALIZATIONS]: {
     title: 'Hospitalizations',
     name: 'Current COVID Hospitalizations',
@@ -591,10 +537,6 @@ export function getChartUrl(sharedComponentId: string, region: Region | null) {
 export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
   const locationName = getLocationNames(regions, /*limit=*/ 5);
   switch (metric) {
-    case ExploreMetric.CASES:
-      return `Daily cases in ${locationName}, according to @CovidActNow. See the chart: `;
-    case ExploreMetric.DEATHS:
-      return `Daily deaths in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.HOSPITALIZATIONS:
       return `Hospitalizations in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_HOSPITALIZATIONS:
