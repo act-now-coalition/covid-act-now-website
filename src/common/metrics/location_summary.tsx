@@ -16,7 +16,7 @@ const LEGEND_SUMMARY_LOW = 'Low COVID Community Level';
 const LEGEND_SUMMARY_MEDIUM = 'Medium COVID Community Level';
 const LEGEND_SUMMARY_HIGH = 'High COVID Community Level';
 
-// TODO (Fai): Remove once community level changes are shipped.
+// TODO(8.2): Remove once community level changes are shipped.
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'Very high risk';
 const LEGEND_SUMMARY_SUPER_CRITICAL = 'Extremely high risk';
 
