@@ -3,7 +3,6 @@ import { getLevel, ALL_METRICS, roundMetricValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
-import { fail } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { County, Region } from 'common/regions';
@@ -126,29 +125,7 @@ export class Projections {
   }
 
   getAlarmLevel(): Level {
-    const { rt_level, test_rate_level, case_density } = this.getLevels();
-    const metricLevels = [rt_level, test_rate_level, case_density];
-
-    // If case_density is low or unknown, it overrides other metrics. Else we
-    // use the highest metric level.
-    if (case_density === Level.LOW || case_density === Level.UNKNOWN) {
-      return case_density;
-    }
-
-    for (const level of [
-      Level.SUPER_CRITICAL,
-      Level.CRITICAL,
-      Level.HIGH,
-      Level.MEDIUM,
-    ]) {
-      if (metricLevels.includes(level)) {
-        return level;
-      }
-    }
-
-    fail(
-      `Failed to determine risk level for ${this.locationName} (fips=${this.fips}).`,
-    );
+    return this.primary.canCommunityLevel;
   }
 
   getAlarmLevelColor() {
