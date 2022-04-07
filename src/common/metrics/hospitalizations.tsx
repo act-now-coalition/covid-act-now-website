@@ -92,17 +92,7 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 function renderStatus(projections: Projections): React.ReactElement {
   const icu = projections.primary.icuCapacityInfo;
   const locationName = projections.locationName;
-  const hsaPopulation = projections.primary.hsaPopulation;
-  const population = projections.primary.totalPopulation;
   const isCounty = projections.isCounty;
-  if (projections.isCounty && hsaPopulation === null) {
-    return (
-      <Fragment>
-        {ICUCapacityUsed.extendedMetricName} is not available due to missing
-        Health Service Area data.
-      </Fragment>
-    );
-  }
 
   if (icu === null || icu.totalBeds === 0) {
     return (

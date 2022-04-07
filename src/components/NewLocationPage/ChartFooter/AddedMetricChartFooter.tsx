@@ -27,7 +27,6 @@ import { EventCategory } from 'components/Analytics';
 import { ExploreMetric } from 'components/Explore';
 import { getAddedMetricStatusText, DialogProps } from './utils';
 import Legend from 'components/Explore/Legend';
-import { formatValue } from 'common/metric';
 import { ValueInfo } from 'components/Charts/Groupings';
 
 const ShareButtonBlock: React.FC<{ region: Region; metric: ExploreMetric }> = ({
