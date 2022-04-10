@@ -20,7 +20,7 @@ export function getOverrideDisclaimer(
 
 export function getAddedMetricStatusText(
   metric: ExploreMetric,
-  formattedValue: string,
+  value: string,
   region: Region,
   projections: Projections,
 ) {
@@ -34,10 +34,10 @@ export function getAddedMetricStatusText(
     ].includes(metric)
   ) {
     const hsaFormattedValue = formattedHsaCovidUsage(metric, projections);
-    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${formattedValue} coming from ${region.shortName}.`;
+    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${value} coming from ${region.shortName}.`;
   }
 
-  return `Over the last week, ${region.shortName} has averaged ${formattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
+  return `Over the last week, ${region.shortName} has averaged ${value} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
 }
 
 export interface DialogProps {
@@ -61,5 +61,5 @@ function formattedHsaCovidUsage(
     fail('Unexpected HSA level metric.');
   }
 
-  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, 'no data');
+  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, 'an unknown amount');
 }

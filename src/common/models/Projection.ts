@@ -344,9 +344,6 @@ export class Projection {
       case Metric.CASE_GROWTH_RATE:
         return this.metrics?.infectionRate ?? null;
       case Metric.HOSPITAL_USAGE:
-        console.log(
-          this.icuCapacityInfo ? this.icuCapacityInfo.metricValue : null,
-        );
         return this.icuCapacityInfo ? this.icuCapacityInfo.metricValue : null;
       case Metric.POSITIVE_TESTS:
         return this.metrics?.testPositivityRatio ?? null;
