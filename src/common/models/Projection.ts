@@ -225,7 +225,7 @@ export class Projection {
     );
 
     // TODO: This is an unholy amount of ternary operators and should probably be refactored.
-    // Disaggregate county hospitalization data from HSAs to county's in order to display
+    // Disaggregate county hospitalization data from HSAs to counties in order to display
     // county estimates in charts.
     this.rawHospitalizations = actualTimeseries.map(row =>
       this.isCounty
