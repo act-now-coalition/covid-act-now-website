@@ -53,10 +53,14 @@ function formattedHsaHospitalValue(
   metric: ExploreMetric,
   projections: Projections,
 ) {
-  const value = projections.primary.getCurrentHsaActuals(metric);
-  return formatValue(
-    Metric.ADMISSIONS_PER_100K,
-    value.currentUsageCovid,
-    'no data',
-  ); // TODO(sean): FIX METRIC TYPE AND NULL TEXT
+  let hsaValue;
+  if (metric === ExploreMetric.ICU_HOSPITALIZATIONS) {
+    hsaValue = projections.primary.currentHsaIcuInfo.currentUsageCovid;
+  } else if (metric === ExploreMetric.HOSPITALIZATIONS) {
+    hsaValue = projections.primary.currentHsaIcuInfo.currentUsageCovid;
+  } else {
+    fail('Unexpected HSA level metric.');
+  }
+
+  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, 'no data');
 }

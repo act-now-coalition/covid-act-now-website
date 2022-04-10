@@ -598,18 +598,11 @@ export class Projection {
     return this.getColumn(dataset);
   }
 
-  getCurrentHsaActuals(
-    metric: ExploreMetric,
-  ): HospitalResourceUtilization | HospitalResourceUtilizationWithAdmissions {
-    // Does using ExploreMetric here cause a circular dependency? Something breaks :(
-    switch (metric) {
-      case ExploreMetric.ICU_HOSPITALIZATIONS:
-        return this.currentHsaIcuInfo;
-      case ExploreMetric.HOSPITALIZATIONS:
-        return this.currentHsaHospitalInfo;
-      default:
-        fail('Unsupported hospital metric');
-    }
+  getCurrentHsaActuals(): Object {
+    return {
+      Hospitalizations: this.currentHsaIcuInfo,
+      ICU: this.currentHsaHospitalInfo,
+    };
   }
 
   /** Makes a dictionary from a timerseries to a row so that we can look up the values
