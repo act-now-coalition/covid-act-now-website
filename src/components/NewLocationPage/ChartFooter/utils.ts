@@ -9,7 +9,6 @@ import {
 } from 'components/Dialogs';
 import { Projections } from 'common/models/Projections';
 import { formatValue } from 'common/metric';
-import { ValueInfo } from 'components/Charts/Groupings';
 
 export function getOverrideDisclaimer(
   region: Region,
@@ -21,7 +20,7 @@ export function getOverrideDisclaimer(
 
 export function getAddedMetricStatusText(
   metric: ExploreMetric,
-  valueInfo: ValueInfo,
+  formattedValue: string,
   region: Region,
   projections: Projections,
 ) {
@@ -34,11 +33,11 @@ export function getAddedMetricStatusText(
       ExploreMetric.HOSPITALIZATIONS,
     ].includes(metric)
   ) {
-    const hsaFormattedValue = formattedHsaHospitalValue(metric, projections);
-    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${valueInfo.formattedValue} coming from ${region.shortName}.`;
+    const hsaFormattedValue = formattedHsaCovidUsage(metric, projections);
+    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${formattedValue} coming from ${region.shortName}.`;
   }
 
-  return `Over the last week, ${region.shortName} has averaged ${valueInfo.formattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
+  return `Over the last week, ${region.shortName} has averaged ${formattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
 }
 
 export interface DialogProps {
@@ -49,7 +48,7 @@ export interface DialogProps {
   modalHeader: string;
 }
 
-function formattedHsaHospitalValue(
+function formattedHsaCovidUsage(
   metric: ExploreMetric,
   projections: Projections,
 ) {
@@ -57,7 +56,7 @@ function formattedHsaHospitalValue(
   if (metric === ExploreMetric.ICU_HOSPITALIZATIONS) {
     hsaValue = projections.primary.currentHsaIcuInfo.currentUsageCovid;
   } else if (metric === ExploreMetric.HOSPITALIZATIONS) {
-    hsaValue = projections.primary.currentHsaIcuInfo.currentUsageCovid;
+    hsaValue = projections.primary.currentHsaHospitalInfo.currentUsageCovid;
   } else {
     fail('Unexpected HSA level metric.');
   }

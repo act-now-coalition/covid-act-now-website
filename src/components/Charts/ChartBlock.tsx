@@ -51,12 +51,12 @@ const ChartBlock: React.FC<{
 
   const TabsWrapper = metricList.length === 1 ? InactiveTabWrapper : ChartTabs;
 
-  const valueInfo = getValueInfo(
+  const { unformattedValue, formattedValue } = getValueInfo(
     stats,
     metricList[activeTabIndex],
     projections,
   );
-  const hasValue = Number.isFinite(valueInfo.unformattedValue);
+  const hasValue = Number.isFinite(unformattedValue);
 
   return (
     <>
@@ -82,7 +82,7 @@ const ChartBlock: React.FC<{
           region={region}
           stats={stats}
           metricType={metricList[activeTabIndex].metricType}
-          valueInfo={valueInfo}
+          formattedValue={formattedValue}
         />
       )}
     </>

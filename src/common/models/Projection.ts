@@ -20,7 +20,6 @@ import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { Level } from 'common/level';
-import { ExploreMetric } from 'components/Explore';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -437,13 +436,6 @@ export class Projection {
       metricsTimeseries.map(row => row?.icuCapacityRatio),
     );
     if (icuIndex != null && metrics.icuCapacityRatio !== null) {
-      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
-      assert(
-        metrics.icuCapacityRatio === null ||
-          metrics.icuCapacityRatio ===
-            metricsTimeseries[icuIndex]?.icuCapacityRatio,
-        "Timeseries icuCapacityRatio doesn't match current metric value.",
-      );
       assert(
         metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
         "Dates in actualTimeseries and metricTimeseries aren't aligned.",
@@ -456,7 +448,7 @@ export class Projection {
 
       // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
       // We calculate it here so that the ICU Capacity metric lines up with the
-      // ICU actuals in this method (make everything HSA-level for counties).
+      // ICU actuals in this method (or, to make everything HSA-level for counties).
       const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
         this.divideICUDataWithNulls(row && row.hsaIcuBeds),
       );
@@ -479,6 +471,12 @@ export class Projection {
           : metrics.icuCapacityRatio;
       }
 
+      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
+      assert(
+        metrics.icuCapacityRatio === null ||
+          metrics.icuCapacityRatio === metricSeries[icuIndex],
+        "Timeseries icuCapacityRatio doesn't match current metric value.",
+      );
       assert(
         totalBeds !== null && totalPatients !== null,
         'These must be non-null for the metric to be non-null',
@@ -596,13 +594,6 @@ export class Projection {
 
   getDataset(dataset: DatasetId): Column[] {
     return this.getColumn(dataset);
-  }
-
-  getCurrentHsaActuals(): Object {
-    return {
-      Hospitalizations: this.currentHsaIcuInfo,
-      ICU: this.currentHsaHospitalInfo,
-    };
   }
 
   /** Makes a dictionary from a timerseries to a row so that we can look up the values
