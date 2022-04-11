@@ -33,15 +33,15 @@
       }
     },
     {
-      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. The **Test to Treat** initiative launching early March will provide high-risk individuals who test positive at certified pharmacies with immediate access to antivirals.",
+      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. The **Test to Treat** initiative provides high-risk individuals who test positive at certified pharmacies with immediate access to antivirals.",
       "source": "FED",
       "category": "TESTING",
       "level": "ALL",
       "id": "TESTING_ALL",
       "cta": {
         "buttonType": "OUTLINE",
-        "text": "Order free at-homes tests today",
-        "url": "https://www.covidtests.gov/"
+        "text": "Find a Test to Treat location",
+        "url": "https://aspr.hhs.gov/TestToTreat/Pages/default.aspx"
       },
       "icon": {
         "altText": "Testing icon",
