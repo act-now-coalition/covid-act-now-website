@@ -84,9 +84,12 @@ export function getDateRange(period: Period): Date[] {
   return [dateFrom, dateTo];
 }
 
+/**
+ * If we change the ordering of items in the following array,
+ * we need to adjust indices assigned to each enumerated explore metric
+ * in ExploreMetric enum in Explore/interfaces.ts.
+ */
 export const EXPLORE_METRICS = [
-  ExploreMetric.CASES,
-  ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
