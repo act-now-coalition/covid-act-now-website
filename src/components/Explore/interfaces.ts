@@ -25,12 +25,10 @@ export interface Series {
  * Indices assigned to each enumerated explore metric needs to match
  * the order of the dropdown items in EXPLORE_METRICS in Explore/utils.ts.
  *
- * So if we change the ordering of items in EXPLORE_METRIC,
+ * So if we change the ordering of items in EXPLORE_METRICS in Explore/utils.ts,
  * we need to update these assigned indices to match.
  */
 export enum ExploreMetric {
-  CASES = 10,
-  DEATHS = 11,
   HOSPITALIZATIONS = 0,
   ICU_HOSPITALIZATIONS = 1,
   VACCINATIONS_FIRST_DOSE = 2,
@@ -41,6 +39,14 @@ export enum ExploreMetric {
   ADMISSIONS_PER_100K = 7,
   RATIO_BEDS_WITH_COVID = 8,
   WEEKLY_CASES_PER_100K = 9,
+
+  /**
+   * Cases and Deaths no longer used in Trends
+   * (i.e. no longer included in EXPLORE_METRICS in Explore/utils.ts),
+   * and so we order them last in the enum.
+   */
+  CASES = 10,
+  DEATHS = 11,
 }
 
 export enum DataMeasure {
