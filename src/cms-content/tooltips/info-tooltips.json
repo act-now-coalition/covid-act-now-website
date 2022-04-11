@@ -9,7 +9,7 @@
     {
       "title": "Daily new cases",
       "body": "Daily new cases, also known as incidence, is the number of new COVID cases emerging each day in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
-      "id": "daily-new-cases",
+      "id": "Daily-new-cases",
       "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
     },
     {
