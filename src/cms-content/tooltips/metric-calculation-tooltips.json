@@ -29,6 +29,18 @@
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
+    },
+    {
+      "title": "Weekly admissions",
+      "id": "weekly-admissions",
+      "body": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni).  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population.",
+      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
+    },
+    {
+      "title": "Patients w/ COVID",
+      "id": "patients-with-COVID",
+      "body": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) which is based on hospitals in the health service area.  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of patients with confirmed COVID divided by the number of staffed inpatient beds.",
+      "cta": "[Read more about patients with COVID. ](/covid-risk-levels-metrics#patients-with-COVID)"
     }
   ]
 }
