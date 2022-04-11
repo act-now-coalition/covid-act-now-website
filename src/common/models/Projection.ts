@@ -430,47 +430,44 @@ export class Projection {
     // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
     // We calculate it here so that the ICU Capacity metric matches the
     // ICU actuals in this method (meaning, make everything HSA-level for counties).
-    const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
+    const countyHsaTimeseriesIcuCapacityRatio = actualsTimeseries.map(row =>
       this.divideICUDataWithNulls(row && row.hsaIcuBeds),
     );
-    const metricTimeseriesIcuCapacityRatio = metricsTimeseries.map(
-      row => row?.icuCapacityRatio,
-    );
+
+    const metricSeries = this.isCounty
+      ? countyHsaTimeseriesIcuCapacityRatio
+      : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
 
     // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
     // top-level actuals don't match the current metric value. So we extract
     // them from the timeseries for now.
-    const icuIndex = this.isCounty
-      ? indexOfLastValue(countyHsaIcuCapacityRatioTimeseries)
-      : indexOfLastValue(metricTimeseriesIcuCapacityRatio);
-    if (icuIndex != null && metrics.icuCapacityRatio !== null) {
+    const icuIndex = indexOfLastValue(metricSeries);
+
+    if (icuIndex != null) {
+      let metricValue = this.isCounty
+        ? countyHsaTimeseriesIcuCapacityRatio[icuIndex]
+        : metrics.icuCapacityRatio;
+      if (metricValue === null) {
+        return null;
+      }
+
       assert(
         metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
         "Dates in actualTimeseries and metricTimeseries aren't aligned.",
       );
 
-      // If Projection is for a county, use HSA-level ICU data.
+      // If Projection is for a county then use HSA-level ICU data.
       const icuActuals = this.isCounty
         ? actualsTimeseries[icuIndex]!.hsaIcuBeds
         : actualsTimeseries[icuIndex]!.icuBeds;
-
-      const countyHsaIcuCapacityRatio =
-        countyHsaIcuCapacityRatioTimeseries[icuIndex];
-
-      const metricSeries = this.isCounty
-        ? countyHsaIcuCapacityRatioTimeseries
-        : metricTimeseriesIcuCapacityRatio;
 
       const totalBeds = icuActuals.capacity;
       const covidPatients = icuActuals.currentUsageCovid;
       const totalPatients = icuActuals.currentUsageTotal;
 
       const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
-      let metricValue = null;
-      if (enoughBeds) {
-        metricValue = this.isCounty
-          ? countyHsaIcuCapacityRatio
-          : metrics.icuCapacityRatio;
+      if (!enoughBeds) {
+        metricValue = null;
       }
 
       // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
