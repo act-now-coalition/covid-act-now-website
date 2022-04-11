@@ -1,9 +1,9 @@
 {
   "tooltip": [
     {
-      "title": "Daily new cases",
-      "id": "daily-new-cases",
-      "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.",
+      "title": "Weekly new cases",
+      "id": "weekly-new-cases",
+      "body": "The weekly new cases number is divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average weekly new cases by two.\n\nWeekly new cases per 100K: <200 is Lower, >=200 is Higher.",
       "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
     },
     {
