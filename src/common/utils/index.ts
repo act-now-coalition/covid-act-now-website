@@ -59,7 +59,7 @@ export const formatDecimal = (num: number, places = 2): string => {
       minimumFractionDigits: places,
       maximumFractionDigits: places,
     })
-    .replace('-0', '0');
+    .replace('-0', '0'); // floating point precision errors can cause expected-zero values to return "-0"
 };
 
 /**
