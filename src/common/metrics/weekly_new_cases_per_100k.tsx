@@ -25,6 +25,7 @@ export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
 const LIMIT_LOW = 200;
 const LIMIT_HIGH = Infinity;
 
+// Weekly new cases doesn't have a medium level, only low and high. So we use the following variables for both medium and high:
 const colorHigh = COLOR_MAP.ORANGE_DARK.BASE;
 const nameHigh = 'High';
 
