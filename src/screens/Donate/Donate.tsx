@@ -66,9 +66,9 @@ const Donate: React.FC = () => {
               <BodyCopy source={section.copy} />
             </Fragment>
           ))}
+          <ShareModelBlock />
         </ContentWrapper>
       </Container>
-      <ShareModelBlock />
     </>
   );
 };
