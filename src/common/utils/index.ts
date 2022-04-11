@@ -54,10 +54,12 @@ export const formatDecimal = (num: number, places = 2): string => {
     return '-';
   }
 
-  return num.toLocaleString(undefined, {
-    minimumFractionDigits: places,
-    maximumFractionDigits: places,
-  });
+  return num
+    .toLocaleString(undefined, {
+      minimumFractionDigits: places,
+      maximumFractionDigits: places,
+    })
+    .replace('-0', '0');
 };
 
 /**
