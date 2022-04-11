@@ -28,7 +28,7 @@ const summariesFolder = path.join(__dirname, 'summaries');
 const outputFile = path.join(__dirname, 'alerts.json');
 
 async function main() {
-  const { newSnap } = await parseArgs();
+  const { newSnap, sendToEverybody } = await parseArgs();
   const oldSnap = await getLastSnapshotNumber();
 
   const oldSummaries: SummariesMap = await fs.readJSON(
@@ -43,7 +43,8 @@ async function main() {
     const region = regions.findByFipsCodeStrict(fips);
     const newSummary = newSummaries[fips];
     const oldSummary = oldSummaries[fips];
-    const oldLevel = oldSummary ? oldSummary.level : Level.UNKNOWN;
+    const oldLevel =
+      oldSummary && !sendToEverybody ? oldSummary.level : Level.UNKNOWN;
     const newLevel = newSummary.level;
     const locationName = region.fullName;
     const locationURL = region.canonicalUrl;
@@ -69,14 +70,17 @@ async function main() {
   console.log(`Done. Generated ${outputFile}`);
 }
 
-async function parseArgs(): Promise<{ newSnap: number }> {
+async function parseArgs(): Promise<{
+  newSnap: number;
+  sendToEverybody: boolean;
+}> {
   const args = process.argv.slice(2);
-  if (args.length === 1) {
-    const newSnap = await resolveSnapshot(args[0]);
-    return { newSnap };
-  } else {
+  if (args.length === 0) {
     exitWithUsage();
   }
+  const newSnap = await resolveSnapshot(args[0]);
+  const sendToEverybody = args[1] === 'true';
+  return { newSnap, sendToEverybody };
 }
 
 function exitWithUsage(): never {

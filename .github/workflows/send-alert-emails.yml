@@ -15,13 +15,20 @@ on:
         description: 'Snapshot to send alerts for (auto uses currently deployed snapshot).'
         required: true
         default: auto
+      send_to_everybody:
+        description: 'Whether to send emails to everybody (as if old level was unknown)'
+        required: true
+        default: false
 
 env:
   SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id }}
   # Should be 'dev', 'staging', or 'prod'. Determines which Firebase project to use.
   FIREBASE_ENV: ${{ github.event.inputs.firebase_env }}
-  # 'true' or 'false' to indicuate whether we should send the emails or just run (true will send the emails)
+  # 'true' or 'false' to indicate whether we should send the emails or just run (true will send the emails)
   SEND_EMAILS: ${{ github.event.inputs.send_emails }}
+  # 'true' or 'false' to indicate whether we should send emails to everybody.
+  SEND_TO_EVERYBODY: ${{ github.event.inputs.send_to_everybody }}
+
 jobs:
   send-alert-emails:
     runs-on: ubuntu-latest
@@ -52,7 +59,7 @@ jobs:
           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
 
       # Generate / send emails.
-      - run: yarn generate-daily-alerts ${{ env.SNAPSHOT_ID }}
+      - run: yarn generate-daily-alerts ${{ env.SNAPSHOT_ID }} ${{ env.SEND_TO_EVERYBODY }}
       - run: yarn create-lists-to-email alerts.json ${{ env.SNAPSHOT_ID }}
       - name: Send emails
         run: yarn send-emails alerts.json ${{ env.SNAPSHOT_ID }} ${{env.SEND_EMAILS}}
