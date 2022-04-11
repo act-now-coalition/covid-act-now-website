@@ -9,7 +9,7 @@ export const charts = {
   fontSize: '13px',
   series: {
     lineWidthMobile: '2.5px',
-    lineWidthDesktop: '4px',
+    lineWidthDesktop: '3px',
   },
 };
 
@@ -45,9 +45,8 @@ export const LineGrid = styled.g`
   line,
   path {
     fill: none;
-    stroke: ${props => palette(props).grid};
-    stroke-opacity: 0.6;
-    stroke-dasharray: 4, 3;
+    stroke: ${props => props.theme.palette.grey[300]};
+    stroke-dasharray: 5, 5;
     stroke-width: 1px;
   }
 `;
