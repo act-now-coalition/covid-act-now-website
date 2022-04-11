@@ -1,9 +1,6 @@
 import replace from 'lodash/replace';
-import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
-import { formatMetatagDate, formatPercent } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 import { Region, State, County, MetroArea } from 'common/regions';
-import { LocationSummariesByFIPS } from 'common/location_summaries';
-import { Metric } from 'common/metricEnum';
 
 function locationName(region: Region) {
   if (region instanceof State) {
@@ -18,23 +15,12 @@ function locationName(region: Region) {
 }
 
 export function getPageTitle(region: Region): string {
-  return `${locationName(region)} - COVID Vaccine & Risk Tracker`;
+  const location = locationName(region);
+  return `${location} - U.S. COVID Community Level & Vaccine Tracker`;
 }
 
 export function getPageDescription(region: Region): string {
   const date = formatMetatagDate();
-  const { level: alarmLevel, metrics } = LocationSummariesByFIPS[
-    region.fipsCode
-  ];
-  const levelInfo = LOCATION_SUMMARY_LEVELS[alarmLevel];
-  const vaccinationRatio = metrics[Metric.VACCINATIONS]?.value;
-  const vaccinationText = vaccinationRatio
-    ? ` and ${formatPercent(
-        vaccinationRatio,
-        1,
-      )} of the population has received at least one vaccine dose`
-    : '';
-  return `${date}: ${locationName(
-    region,
-  )} is at ${levelInfo.name.toLowerCase()} COVID risk level${vaccinationText}.`;
+  const location = locationName(region);
+  return `${date}: Covid Act Now has real-time tracking of your community’s COVID level. See how ${location} is doing.`;
 }
