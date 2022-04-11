@@ -85,8 +85,6 @@ export function getDateRange(period: Period): Date[] {
 }
 
 export const EXPLORE_METRICS = [
-  ExploreMetric.CASES,
-  ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
@@ -707,6 +705,7 @@ export function getChartSeries(
   regions: Region[],
   normalizeData: boolean,
 ): Promise<Series[]> {
+  console.log(metric);
   if (regions.length === 1) {
     return getProjectionForRegion(regions[0]).then(projection =>
       getAllSeriesForMetric(metric, projection),
