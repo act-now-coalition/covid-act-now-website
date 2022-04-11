@@ -4,7 +4,7 @@
       "title": "Weekly new cases",
       "id": "weekly-new-cases",
       "body": "The weekly new cases number is divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average weekly new cases by two.\n\nWeekly new cases per 100K: <200 is Lower, >=200 is Higher.",
-      "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
     },
     {
       "title": "Infection rate",
