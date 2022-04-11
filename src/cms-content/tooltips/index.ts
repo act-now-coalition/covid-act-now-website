@@ -31,10 +31,14 @@ type MetricToTooltipContentMap = {
 };
 
 function getMetricMapById(id: string): MetricTooltipObj {
+  const lowercasedId = id.toLowerCase();
   return {
-    metricDefinition: getTooltipContentById(id, infoToolTipContent.tooltip),
+    metricDefinition: getTooltipContentById(
+      lowercasedId,
+      infoToolTipContent.tooltip,
+    ),
     metricCalculation: getTooltipContentById(
-      id,
+      lowercasedId,
       metricCaculationTooltipContent.tooltip,
     ),
   };
@@ -46,11 +50,9 @@ export const metricToTooltipMap: MetricToTooltipContentMap = {
   [Metric.POSITIVE_TESTS]: getMetricMapById('positive-test-rate'),
   [Metric.VACCINATIONS]: getMetricMapById('percent-vaccinated'),
   [Metric.HOSPITAL_USAGE]: getMetricMapById('icu-capacity-used'),
-
-  // TODO(8.2) - update with real tooltip content via cms
-  [Metric.RATIO_BEDS_WITH_COVID]: getMetricMapById('positive-test-rate'),
-  [Metric.ADMISSIONS_PER_100K]: getMetricMapById('percent-vaccinated'),
-  [Metric.WEEKLY_CASES_PER_100K]: getMetricMapById('icu-capacity-used'),
+  [Metric.RATIO_BEDS_WITH_COVID]: getMetricMapById('patients-with-covid'),
+  [Metric.ADMISSIONS_PER_100K]: getMetricMapById('weekly-admissions'),
+  [Metric.WEEKLY_CASES_PER_100K]: getMetricMapById('weekly-new-cases'),
 };
 
 export const locationPageHeaderTooltipContent: Tooltip = getTooltipContentById(

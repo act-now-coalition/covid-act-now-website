@@ -1,10 +1,10 @@
 {
   "tooltip": [
     {
-      "title": "Daily new cases",
-      "id": "daily-new-cases",
-      "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.",
-      "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+      "title": "Weekly new cases",
+      "id": "weekly-new-cases",
+      "body": "The weekly new cases number is divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average weekly new cases by two.",
+      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
     },
     {
       "title": "Infection rate",
@@ -29,6 +29,24 @@
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
+    },
+    {
+      "title": "Weekly admissions",
+      "id": "weekly-admissions",
+      "body": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni).  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population.",
+      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
+    },
+    {
+      "title": "Patients w/ COVID",
+      "id": "patients-with-covid",
+      "body": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) which is based on hospitals in the health service area.  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of patients with confirmed COVID divided by the number of staffed inpatient beds.",
+      "cta": "[Read more about patients with COVID. ](/covid-risk-levels-metrics#patients-with-COVID)"
+    },
+    {
+      "title": "Daily new cases",
+      "id": "daily-new-cases",
+      "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.",
+      "cta": "[Learn more](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)"
     }
   ]
 }
