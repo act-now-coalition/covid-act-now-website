@@ -198,18 +198,16 @@ class HospitalizationsDensityColumn implements ColumnDefinition {
 }
 
 // All of the compare table columns we use.
-const caseDensityColumn = new MetricColumn(Metric.CASE_DENSITY);
-const caseGrowthRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
-const positiveTestsColumn = new MetricColumn(Metric.POSITIVE_TESTS);
+const weeklyCasesPer100kColumn = new MetricColumn(Metric.WEEKLY_CASES_PER_100K);
+const admissionsPer100kColumn = new MetricColumn(Metric.ADMISSIONS_PER_100K);
+const ratioBedsWithCovidColumn = new MetricColumn(Metric.RATIO_BEDS_WITH_COVID);
 const vaccinationsColumn = new VaccinationsColumn();
-const hospitalizationsDensityColumn = new HospitalizationsDensityColumn();
 
 /** Ordered array of columns. */
 export const orderedColumns = [
-  caseDensityColumn,
-  caseGrowthRateColumn,
-  positiveTestsColumn,
-  hospitalizationsDensityColumn,
+  weeklyCasesPer100kColumn,
+  admissionsPer100kColumn,
+  ratioBedsWithCovidColumn,
   vaccinationsColumn,
 ];
 
