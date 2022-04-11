@@ -52,6 +52,7 @@ function formattedHsaCovidUsage(
   metric: ExploreMetric,
   projections: Projections,
 ) {
+  /* Grab and format the corresponding HSA-level hospital metric data. */
   let hsaValue;
   if (metric === ExploreMetric.ICU_HOSPITALIZATIONS) {
     hsaValue = projections.primary.currentHsaIcuInfo.currentUsageCovid;
@@ -61,5 +62,5 @@ function formattedHsaCovidUsage(
     fail('Unexpected HSA level metric.');
   }
 
-  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, 'an unknown amount');
+  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, '-');
 }

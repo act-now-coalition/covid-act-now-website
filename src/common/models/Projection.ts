@@ -426,12 +426,23 @@ export class Projection {
     if (this.isMetricDisabled(Metric.HOSPITAL_USAGE)) {
       return null;
     }
+
+    // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
+    // We calculate it here so that the ICU Capacity metric matches the
+    // ICU actuals in this method (meaning, make everything HSA-level for counties).
+    const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
+      this.divideICUDataWithNulls(row && row.hsaIcuBeds),
+    );
+    const metricTimeseriesIcuCapacityRatio = metricsTimeseries.map(
+      row => row?.icuCapacityRatio,
+    );
+
     // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
     // top-level actuals don't match the current metric value. So we extract
     // them from the timeseries for now.
-    const icuIndex = indexOfLastValue(
-      metricsTimeseries.map(row => row?.icuCapacityRatio),
-    );
+    const icuIndex = this.isCounty
+      ? indexOfLastValue(countyHsaIcuCapacityRatioTimeseries)
+      : indexOfLastValue(metricTimeseriesIcuCapacityRatio);
     if (icuIndex != null && metrics.icuCapacityRatio !== null) {
       assert(
         metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
@@ -443,18 +454,12 @@ export class Projection {
         ? actualsTimeseries[icuIndex]!.hsaIcuBeds
         : actualsTimeseries[icuIndex]!.icuBeds;
 
-      // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
-      // We calculate it here so that the ICU Capacity metric lines up with the
-      // ICU actuals in this method (or, to make everything HSA-level for counties).
-      const countyHsaIcuCapacityRatioTimeseries = actualsTimeseries.map(row =>
-        this.divideICUDataWithNulls(row && row.hsaIcuBeds),
-      );
       const countyHsaIcuCapacityRatio =
         countyHsaIcuCapacityRatioTimeseries[icuIndex];
 
       const metricSeries = this.isCounty
         ? countyHsaIcuCapacityRatioTimeseries
-        : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
+        : metricTimeseriesIcuCapacityRatio;
 
       const totalBeds = icuActuals.capacity;
       const covidPatients = icuActuals.currentUsageCovid;
@@ -470,8 +475,7 @@ export class Projection {
 
       // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
       assert(
-        metrics.icuCapacityRatio === null ||
-          metrics.icuCapacityRatio === metricSeries[icuIndex],
+        metricValue === null || metricValue === metricSeries[icuIndex],
         "Timeseries icuCapacityRatio doesn't match current metric value.",
       );
       assert(
