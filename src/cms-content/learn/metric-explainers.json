@@ -28,11 +28,6 @@
           "question": "Limitations",
           "questionId": "weekly-new-cases-limitations",
           "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n3. At-home tests are not tracked, and therefore not represented in the data.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
-        },
-        {
-          "question": "More information on daily new cases",
-          "questionId": "more-info-daily-new-cases",
-          "answer": "[What is R-naught (R₀) and how is it different from R(t)?](https://covidactnow.org/faq#r-0-vs-r-t)\n\n[Video explainer](https://www.youtube.com/embed/_S0k1I3kIbM)"
         }
       ]
     },
@@ -45,12 +40,7 @@
         {
           "question": "Sources and methodology",
           "questionId": "infection-rate-sources-methodology",
-          "answer": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\nTo calculate the infection rate, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
-        },
-        {
-          "question": "Levels",
-          "questionId": "infection-rate-levels",
-          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. \n\nWe use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline. An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
+          "answer": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\nAn R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing.\n\nTo calculate the infection rate, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
           "question": "Limitations",
@@ -73,27 +63,17 @@
         {
           "question": "Sources and methodology",
           "questionId": "positive-test-rate-sources-methodology",
-          "answer": "Positive test rate is calculated by dividing the number of positive PCR tests over the last 7 days by the total number of PCR tests over the last 7 days. It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
-        },
-        {
-          "question": "Levels",
-          "questionId": "positive-test-rate-levels",
-          "answer": "Driving the positive test rate downwards of [3 percent](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) should be a priority, which is why we have set 3 percent as the threshold for the lowest level.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
+          "answer": "Positive test rate is calculated by dividing the number of positive PCR tests over the last 7 days by the total number of PCR tests over the last 7 days. It should be looked at in conjunction with other metrics such as infection rate and weekly new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
         },
         {
           "question": "Limitations",
           "questionId": "positive-test-rate-limitations",
-          "answer": "Federal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. However there are limitations due to some states reporting testing data differently.\n\n1. While we try to strictly use PCR tests, it’s possible that some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters.\n\n[Learn more about the current state of federal testing data and its limitations](https://covidtracking.com/analysis-updates/federal-testing-datas-last-mile/)."
+          "answer": "Federal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. However there are limitations due to some states reporting testing data differently.\n\n1. While we try to strictly use PCR tests, it’s possible that some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters."
         },
         {
           "question": "More information on positive test rate",
           "questionId": "more-info-positive-test-rate\n",
           "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/embed/RpqI-ZVGGoY)"
-        },
-        {
-          "question": "More information on COVID testing",
-          "questionId": "more-info-testing",
-          "answer": "[Why is testing important? ](https://covidactnow.org/faq#why-is-testing-important)\n\n[How soon after a possible exposure to COVID should I get tested?](https://covidactnow.org/faq#covid-how-soon-after-exposure-tested)\n\n[Are rapid tests less accurate than PCR tests?](https://covidactnow.org/faq#rapid-tests-less-accurate-than-pcr)\n\n[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
         }
       ]
     },
