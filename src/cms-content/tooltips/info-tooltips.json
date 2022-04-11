@@ -43,10 +43,10 @@
       "cta": "[Learn more about patients with COVID.](/covid-risk-levels-metrics#patients-with-covid)"
     },
     {
-      "title": "Weekly COVID admissions",
-      "id": "covid-admissions",
+      "title": "Weekly admissions",
+      "id": "weekly-admissions",
       "body": "Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).",
-      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#covid-admissions)"
+      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
     }
   ]
 }
