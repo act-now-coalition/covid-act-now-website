@@ -23,7 +23,7 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
 };
 
 const LIMIT_LOW = 10;
-const LIMIT_MEDIUM = 19.9;
+const LIMIT_MEDIUM = 19.999;
 const LIMIT_HIGH = Infinity;
 
 export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {

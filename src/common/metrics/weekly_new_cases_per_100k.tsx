@@ -23,7 +23,10 @@ export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
 };
 
 const LIMIT_LOW = 200;
-const LIMIT_MEDIUM = Infinity;
+const LIMIT_HIGH = Infinity;
+
+const colorHigh = COLOR_MAP.ORANGE_DARK.BASE;
+const nameHigh = 'High';
 
 export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
@@ -35,16 +38,16 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
-    upperLimit: LIMIT_MEDIUM,
-    name: 'Medium',
-    color: COLOR_MAP.ORANGE.BASE,
+    upperLimit: LIMIT_HIGH,
+    name: nameHigh,
+    color: colorHigh,
     detail: () => 'COVID not contained, but at low levels',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
-    upperLimit: LIMIT_MEDIUM,
-    name: 'High',
-    color: COLOR_MAP.ORANGE_DARK.BASE,
+    upperLimit: LIMIT_HIGH,
+    name: nameHigh,
+    color: colorHigh,
     detail: () => 'Very large number of new cases',
   },
   [Level.UNKNOWN]: {
@@ -58,14 +61,14 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   // Not to be used:
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
-    upperLimit: LIMIT_MEDIUM,
+    upperLimit: LIMIT_HIGH,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
     detail: () => 'Dangerous number of new cases',
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
-    upperLimit: LIMIT_MEDIUM,
+    upperLimit: LIMIT_HIGH,
     name: 'Extreme',
     color: COLOR_MAP.RED.DARK,
     detail: () => 'Very dangerous number of new cases',

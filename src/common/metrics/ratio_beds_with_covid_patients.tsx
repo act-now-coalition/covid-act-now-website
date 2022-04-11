@@ -23,7 +23,7 @@ export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
 };
 
 const LIMIT_LOW = 0.1;
-const LIMIT_MEDIUM = 0.15;
+const LIMIT_MEDIUM = 0.14999;
 const LIMIT_HIGH = 1;
 
 export const RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP: LevelInfoMap = {
