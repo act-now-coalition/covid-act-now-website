@@ -67,12 +67,13 @@ const MetricExplainer = () => {
         </ExplainersHeading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
         <ThermometerIntro />
-        {introSection[0].questions.map(question => (
-          <Fragment key={question.questionId}>
-            <ItemName>{question.question}</ItemName>
-            <MarkdownContent source={question.answer} />
-          </Fragment>
-        ))}
+        {introSection[0].questions &&
+          introSection[0].questions.map(question => (
+            <Fragment key={question.questionId}>
+              <ItemName>{question.question}</ItemName>
+              <MarkdownContent source={question.answer} />
+            </Fragment>
+          ))}
         <LogoGrid logos={frameworkLogos} />
         {metricSections.map(section => {
           const sectionThermometer = getThermometer(section.sectionId);
