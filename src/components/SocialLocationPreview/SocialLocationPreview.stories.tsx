@@ -17,9 +17,11 @@ export const California = () => {
   }
 
   return (
-    <SocialLocationPreview
-      projections={projections!}
-      stats={projections.getMetricValues()}
-    />
+    <div style={{ width: 450 }}>
+      <SocialLocationPreview
+        projections={projections!}
+        stats={projections.getMetricValues()}
+      />
+    </div>
   );
 };
