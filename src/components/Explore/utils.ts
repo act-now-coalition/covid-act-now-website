@@ -383,45 +383,45 @@ export const exploreMetricData: {
   },
 
   [ExploreMetric.ADMISSIONS_PER_100K]: {
-    title: 'Hospitalizations per 100k',
-    name: 'Hospitalizations per 100k',
+    title: 'Weekly COVID admissions per 100k',
+    name: 'Weekly COVID admissions per 100k',
     chartId: 'admissions_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 1,
     seriesList: [
       {
-        label: 'Hospitalizations per 100k',
-        tooltipLabel: 'Hospitalizations per 100k',
+        label: 'Weekly COVID admissions per 100k',
+        tooltipLabel: 'Weekly COVID admissions per 100k',
         datasetId: 'weeklyCovidAdmissionsPer100k',
         type: SeriesType.LINE,
       },
     ],
   },
   [ExploreMetric.RATIO_BEDS_WITH_COVID]: {
-    title: 'Percent hospital beds with Covid patients',
-    name: 'Percent hospital beds with Covid patients',
+    title: 'Patients w/ COVID (% of all beds)',
+    name: 'Patients w/ COVID (% of all beds)',
     chartId: 'ratio_beds_with_covid_patients', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 1,
     seriesList: [
       {
-        label: 'Percent hospital beds with Covid patients',
-        tooltipLabel: 'Percent hospital beds with Covid patients',
+        label: 'Patients w/ COVID (% of all beds)',
+        tooltipLabel: 'Patients w/ COVID (% of all beds)',
         datasetId: 'bedsWithCovidPatientsRatio',
         type: SeriesType.LINE,
       },
     ],
   },
   [ExploreMetric.WEEKLY_CASES_PER_100K]: {
-    title: 'Weekly cases per 100k',
-    name: 'Weekly cases per 100k',
+    title: 'Weekly reported cases per 100k',
+    name: 'Weekly reported cases per 100k',
     chartId: 'weekly_new_cases_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 0,
     seriesList: [
       {
-        label: 'Weekly cases per 100k',
-        tooltipLabel: 'Weekly cases per 100k',
+        label: 'Weekly reported cases per 100k',
+        tooltipLabel: 'Weekly reported cases per 100k',
         datasetId: 'weeklyNewCasesPer100k',
         type: SeriesType.LINE,
       },

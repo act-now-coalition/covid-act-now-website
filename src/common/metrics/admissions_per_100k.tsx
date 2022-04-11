@@ -16,10 +16,10 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
-  metricName: 'Weekly Covid Admissions per 100k',
-  extendedMetricName: 'Weekly Covid Admissions per 100k population',
-  metricNameForCompare: `Weekly Covid Admissions per 100k`,
-  metricNameForSummaryStat: 'Weekly New Admissions',
+  metricName: 'Weekly COVID admissions',
+  extendedMetricName: 'Weekly hospital admissions of COVID patients per 100k',
+  metricNameForCompare: `Weekly COVID admissions per 100k`,
+  metricNameForSummaryStat: 'Weekly COVID admissions',
 };
 
 const LIMIT_LOW = 10;

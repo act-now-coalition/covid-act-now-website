@@ -16,10 +16,10 @@ export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
-  metricName: 'Weekly new cases',
-  extendedMetricName: 'Weekly new cases per 100k population',
+  metricName: 'Weekly new reported cases',
+  extendedMetricName: 'Weekly new reported cases per 100k',
   metricNameForCompare: `Weekly new cases per 100k`,
-  metricNameForSummaryStat: 'Weekly new cases',
+  metricNameForSummaryStat: 'Weekly new reported cases',
 };
 
 const LIMIT_LOW = 200;
