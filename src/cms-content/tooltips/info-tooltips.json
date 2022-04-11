@@ -7,10 +7,10 @@
       "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics)."
     },
     {
-      "title": "Daily new cases",
-      "body": "Daily new cases, also known as incidence, is the number of new COVID cases emerging each day in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
-      "id": "Daily-new-cases",
-      "cta": "[Learn more about daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+      "title": "Weekly new cases",
+      "body": "Weekly new cases is the number of new COVID cases emerging each week in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
+      "id": "Weekly-new-cases",
+      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#weekly-new-cases)."
     },
     {
       "title": "Infection rate",
@@ -35,6 +35,18 @@
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
+    },
+    {
+      "title": "Patients w/ COVID",
+      "id": "patients-with-covid",
+      "body": "Patients w/ COVID % of all beds is the percentage of staffed inpatient beds occupied by COVID patients. In combination with weekly COVID admissions, it represents the potential for strain on the health system.",
+      "cta": "[Learn more about patients with COVID.](/covid-risk-levels-metrics#patients-with-covid)"
+    },
+    {
+      "title": "Weekly COVID admissions",
+      "id": "covid-admissions",
+      "body": "Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).",
+      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#covid-admissions)"
     }
   ]
 }
