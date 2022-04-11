@@ -4,38 +4,30 @@
   "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive test rate, ICU capacity used, contact tracing.",
   "sections": [
     {
+      "sectionHeader": "How COVID community levels are determined",
       "sectionId": "how-covid-risk-is-determined",
-      "sectionIntro": "A state or county’s overall risk level takes into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* [Daily new cases](/covid-risk-levels-metrics#daily-new-cases), also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* [Infection rate](/covid-risk-levels-metrics#infection-rate) is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* [Positive test rate](/covid-risk-levels-metrics#positive-test-rate) is a measure of our confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nEach metric has the following levels: green, yellow, orange, and red. Incidence is the only metric for which there is a dark red, a fifth color we added after the third surge in winter 2020, in order to capture unprecedented case counts. \n\nIf a region’s daily new cases is green, then its overall risk level is green. For instance, if the daily new cases metric is green, but test positivity is yellow, the overall risk level is still green. Otherwise, a region’s overall risk level reflects the highest risk level across all three metrics. For instance, if daily new cases and test positivity are both yellow, but infection growth is orange, then the overall risk level is orange.",
-      "questions": [
-        {
-          "question": "",
-          "questionId": "framework",
-          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop our COVID risk framework in 2020. As there is no standardized risk framework across the U.S., it may not match how your state or county is calculating their risk level. Our framework is the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
-        }
-      ],
-      "sectionHeader": "How COVID risk is determined",
-      "sectionSubheader": ""
+      "sectionIntro": "A state or county’s community level takes into account three metrics: new COVID admissions per 100,000 population in the past 7 days, the percent of staffed inpatient beds occupied by COVID patients, and total new COVID cases per 100,000 population in the past 7 days.\n\n* [COVID admissions](/covid-risk-levels-metrics#COVID-admissions) and [patients with COVID](/covid-risk-levels-metrics#patients-with-covid) represent the current potential for health system strain.\n* [New COVID cases](/covid-risk-levels-metrics#weekly-new-cases) represents the current amount of COVID in a community and acts as an early warning indicator of potential increases in health system strain.\n\nTo calculate the community level we first assign a level to each of the three metrics based on their values:\n\n* Weekly new cases: <200 is Lower, >=200 is Higher.\n* Weekly hospital admissions per 100k: <10 is Low, 10-19.9 is Medium, >=20 is High\n* Staffed inpatient beds occupied by COVID-19 patients: <10% is Low, 10-14.9% is Medium, >=15% is High.\n\nWe then combine the levels to get the community level as follows:\n\n* If cases are below 200 and both hospital metrics are Low, then the community level is Low.\n* If cases are above 200 and one of the hospital metrics is Medium, then the community level is High.\n* If cases are below 200 then the community level is the higher of the two hospital metrics.\n* If cases are above 200 then the community level is one level worse than the higher of the two hospital metrics. i.e. If both hospital metrics are Low then the community level is Medium. If either hospital metric is Medium or High, then the community level is High.\n\n\\\n[Read more details on the CDC's methodology.](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html)\n\nCovid Act Now’s former COVID risk framework was developed in March 2020 in response to the lack of a standardized risk framework across the U.S. [Read about our former COVID risk framework.](/covid-risk-levels-metrics#former-risk-framework)"
     },
     {
-      "sectionHeader": "Daily new cases",
+      "sectionHeader": "Weekly new cases",
       "sectionSubheader": "Also known as: incidence",
-      "sectionId": "daily-new-cases",
-      "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measure per 100K people).",
+      "sectionId": "weekly-new-cases",
+      "sectionIntro": "**Weekly new cases is the number of new COVID cases per week per unit of population** (we measure per 100K people).",
       "questions": [
         {
           "question": "Sources and methodology",
-          "questionId": "daily-new-cases-sources-methodology",
-          "answer": "Our daily new cases number is a seven-day average, and divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the daily new cases by two.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png)\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
+          "questionId": "weekly-new-cases-sources-methodology",
+          "answer": "The weekly new cases number is a seven-day total of new cases, divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the weekly new cases by two.\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
           "question": "Levels",
-          "answer": "Levels for daily new cases are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others.",
-          "questionId": "daily-new-cases-levels"
+          "answer": "Levels for weekly new cases are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 200 cases is considered Lower, while greater than or equal to 200 cases is considered Higher.",
+          "questionId": "weekly-new-cases-levels"
         },
         {
           "question": "Limitations",
-          "questionId": "daily-new-cases-limitations",
-          "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
+          "questionId": "weekly-new-cases-limitations",
+          "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n3. At-home tests are not tracked, and therefore not represented in the data.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
         },
         {
           "question": "More information on daily new cases",
@@ -181,10 +173,23 @@
           "answer": "[Why vulnerability data is important for all communities ](/covid-explained/covid-vulnerability-data)\n\n[Resources for vulnerable people](/covid-explained/federal-resources-covid-relief)"
         }
       ]
+    },
+    {
+      "sectionId": "fomer-risk-framework",
+      "sectionIntro": "Until Spring of 2022 when the CDC released their [community level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html), Covid Act Now used three key metrics to assess a location's overall risk level—**daily new cases** (incidence), **infection rate** (RT) and **positive test rate**. The other three metrics—**ICU capacity used**, **% vaccinated** and **vulnerability**—reflected a location's ability to protect itself and recover from COVID. Below, learn more about each metric and how it was assessed.\n\nA state or county’s overall risk level took into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* **Daily new cases**, also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* **Infection rate** is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* **Positive test rate** is a measure of confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nIf a region’s daily new cases was green, then its overall risk level was green. Otherwise, a region’s overall risk level reflected the highest risk level across all three metrics.",
+      "questions": [
+        {
+          "question": "",
+          "questionId": "framework",
+          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop the former COVID risk framework in 2020. This framework was the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
+        }
+      ],
+      "sectionHeader": "Covid Act Now's former risk levels",
+      "sectionSubheader": ""
     }
   ],
   "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now uses six key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other three—[ICU capacity used](#icu-capacity-used), [% vaccinated](#percent-vaccinated) and [vulnerability](https://covidactnow.org/covid-risk-levels-metrics#vulnerability)—reflect a location's ability to protect itself and recover from COVID. Below, learn more about each metric and how it is assessed.",
+  "pageIntro": "As of March 2022, Covid Act Now follows the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). This framework looks at three key metrics to assess COVID across the U.S. - new COVID admissions, percent of staffed inpatient beds occupied by COVID patients, and new COVID cases. \n\nAccording to the CDC, this new community level framework better reflects medically significant disease or healthcare strain. The rise of vaccines and immunity from infection has greatly reduced the risk of severe illness and death for most people, and therefore community prevention strategies and individual behaviors should be driven by an understanding of the potential strain on local hospital systems, in addition to cases.",
   "frameworkLogos": [
     {
       "image": "/images_cms/the-rockefeller-foundation-logo.png",
