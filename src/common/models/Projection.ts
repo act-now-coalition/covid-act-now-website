@@ -223,7 +223,6 @@ export class Projection {
       this.rawDailyDeaths,
     );
 
-    // TODO: This is an unholy amount of ternary operators and should probably be refactored.
     // Disaggregate county hospitalization data from HSAs to counties in order to display
     // county estimates in charts.
     this.rawHospitalizations = actualTimeseries.map(row =>
@@ -429,7 +428,8 @@ export class Projection {
 
     // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
     // We calculate it here so that the ICU Capacity metric matches the
-    // ICU actuals in this method (meaning, make everything HSA-level for counties).
+    // ICU actuals in this method. All counties will have HSA-level data, and all other
+    // location types will have their standard/corresponding level data.
     const countyHsaTimeseriesIcuCapacityRatio = actualsTimeseries.map(row =>
       this.divideICUDataWithNulls(row && row.hsaIcuBeds),
     );
