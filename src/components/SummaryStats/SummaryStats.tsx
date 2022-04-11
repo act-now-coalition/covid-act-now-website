@@ -14,10 +14,9 @@ import {
   StatTextWrapper,
   StatValueWrapper,
 } from './SummaryStats.style';
-import SignalStatus from 'components/SignalStatus/SignalStatus';
-import { SignalStatusWrapper } from 'components/SignalStatus/SignalStatus.style';
 import * as urls from 'common/urls';
 import StatTag from 'components/SummaryStats/StatTag';
+import { CircleIcon } from 'components/NewLocationPage/Shared/Shared.style';
 
 //TODO (Chelsi) - remove dupication: extract 'LocationHeaderStats' and 'SummaryStats' into a single separate component
 
@@ -69,21 +68,12 @@ const SummaryStat: React.FC<{
       <StatValueWrapper $condensed={condensed}>
         {value == null ? null : (
           <>
+            <CircleIcon $iconColor={levelInfo.color} />
             <StatValueText $condensed={condensed} $isEmbed={isEmbed}>
               {formatValue(chartType, value, /*nullValueCopy=*/ '-')}
               {!condensed && beta && !isMobile && <StatTag beta />}
             </StatValueText>
           </>
-        )}
-        {chartType !== Metric.VACCINATIONS ? (
-          <SignalStatus
-            levelInfo={levelInfo}
-            condensed={condensed}
-            flipOrder={flipSignalStatusOrder}
-            isEmbed={isEmbed}
-          />
-        ) : (
-          <SignalStatusWrapper $condensed={condensed} $isEmbed={isEmbed} />
         )}
       </StatValueWrapper>
     </SummaryStatWrapper>
@@ -121,35 +111,20 @@ const SummaryStats = (props: {
         <SummaryStatsWrapper $condensed={props.condensed}>
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
-            chartType={Metric.CASE_DENSITY}
-            value={props.stats[Metric.CASE_DENSITY] as number}
+            chartType={Metric.WEEKLY_CASES_PER_100K}
+            value={props.stats[Metric.WEEKLY_CASES_PER_100K] as number}
             {...sharedStatProps}
           />
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
-            chartType={Metric.CASE_GROWTH_RATE}
-            value={props.stats[Metric.CASE_GROWTH_RATE] as number}
+            chartType={Metric.ADMISSIONS_PER_100K}
+            value={props.stats[Metric.ADMISSIONS_PER_100K] as number}
             {...sharedStatProps}
           />
           <SummaryStat
-            onClick={props.onTestPositiveClick || noop}
-            chartType={Metric.POSITIVE_TESTS}
-            value={props.stats[Metric.POSITIVE_TESTS] as number}
-            {...sharedStatProps}
-          />
-          <SummaryStat
-            onClick={props.onIcuUtilizationClick || noop}
-            chartType={Metric.HOSPITAL_USAGE}
-            beta={true}
-            value={props.stats[Metric.HOSPITAL_USAGE] as number}
-            {...sharedStatProps}
-          />
-          <SummaryStat
-            onClick={props.onVaccinationsClick || noop}
-            chartType={Metric.VACCINATIONS}
-            beta={true}
-            value={props.stats[Metric.VACCINATIONS] as number}
-            flipSignalStatusOrder
+            onClick={props.onRtRangeClick || noop}
+            chartType={Metric.RATIO_BEDS_WITH_COVID}
+            value={props.stats[Metric.RATIO_BEDS_WITH_COVID] as number}
             {...sharedStatProps}
           />
         </SummaryStatsWrapper>
