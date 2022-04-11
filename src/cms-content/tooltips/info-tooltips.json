@@ -47,6 +47,12 @@
       "id": "weekly-admissions",
       "body": "Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).",
       "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
+    },
+    {
+      "title": "Daily new cases",
+      "id": "daily-new-cases",
+      "body": "Daily new cases, also known as incidence, is the number of new COVID cases emerging each day in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
+      "cta": "[Learn more](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)"
     }
   ]
 }
