@@ -188,7 +188,7 @@
         {
           "question": "Levels",
           "questionId": "levels-patients-with-covid",
-          "answer": "Levels for percentage of patients with COVID are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html)."
+          "answer": "Levels for percentage of patients with COVID are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10% of all new beds is considered Low, between 10 and 14.9% is considered Medium, and greater than or equal to 15 is considered High."
         },
         {
           "question": "Limitations",
