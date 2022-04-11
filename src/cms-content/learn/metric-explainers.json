@@ -32,6 +32,51 @@
       ]
     },
     {
+      "sectionIntro": "**Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
+      "sectionHeader": "Weekly admissions",
+      "questions": [
+        {
+          "question": "Sources and methodology",
+          "questionId": "sources-methodology-admissions",
+          "answer": "The weekly new admissions number is a seven-day total of new admissions, divided by every 100K people in a location.\n\nTo calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) which uses data from the US Department of Health and Human Services Unified Hospital Data Surveillance System.  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population."
+        },
+        {
+          "question": "Levels",
+          "questionId": "levels-admissions",
+          "answer": "Levels for weekly new admissions are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10 weekly new admissions is considered Low, between 10 and 19.9 is considered Medium, and greater than or equal to 20 is considered High."
+        },
+        {
+          "question": "Limitations",
+          "questionId": "limitations-admissions",
+          "answer": "1. County-level data are only reported once a week. \n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have admissions data, based on the admission rates of other hospitals within the health service area.\n3. This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS."
+        }
+      ],
+      "sectionId": "weekly-admissions"
+    },
+    {
+      "sectionHeader": "Patients w/ COVID",
+      "sectionSubheader": "",
+      "sectionId": "patients-with-covid",
+      "sectionIntro": "**Patients w/ COVID is the percent of staffed inpatient beds occupied by COVID-19 patients.**",
+      "questions": [
+        {
+          "question": "Sources and methodology",
+          "questionId": "sources-and-methodology-patients-with-covid",
+          "answer": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) which uses data from the US Department of Health and Human Services Unified Hospital Data Surveillance System.  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of patients with confirmed covid divided by the number of staffed inpatient beds."
+        },
+        {
+          "question": "Levels",
+          "questionId": "levels-patients-with-covid",
+          "answer": "Levels for percentage of patients with COVID are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10% of all new beds is considered Low, between 10 and 14.9% is considered Medium, and greater than or equal to 15 is considered High."
+        },
+        {
+          "question": "Limitations",
+          "questionId": "limitations-patients-with-covid",
+          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the health service area the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
+        }
+      ]
+    },
+    {
       "sectionHeader": "Infection rate",
       "sectionSubheader": "Also known as: R(t) or “R-effective”",
       "sectionId": "infection-rate",
@@ -151,51 +196,6 @@
       ],
       "sectionHeader": "Covid Act Now's former risk levels",
       "sectionSubheader": ""
-    },
-    {
-      "sectionIntro": "**Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
-      "sectionHeader": "Weekly admissions",
-      "questions": [
-        {
-          "question": "Sources and methodology",
-          "questionId": "sources-methodology-admissions",
-          "answer": "The weekly new admissions number is a seven-day total of new admissions, divided by every 100K people in a location.\n\nTo calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) which uses data from the US Department of Health and Human Services Unified Hospital Data Surveillance System.  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population."
-        },
-        {
-          "question": "Levels",
-          "questionId": "levels-admissions",
-          "answer": "Levels for weekly new admissions are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10 weekly new admissions is considered Low, between 10 and 19.9 is considered Medium, and greater than or equal to 20 is considered High."
-        },
-        {
-          "question": "Limitations",
-          "questionId": "limitations-admissions",
-          "answer": "1. County-level data are only reported once a week. \n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have admissions data, based on the admission rates of other hospitals within the health service area.\n3. This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS."
-        }
-      ],
-      "sectionId": "weekly-admissions"
-    },
-    {
-      "sectionHeader": "Patients w/ COVID",
-      "sectionSubheader": "",
-      "sectionId": "patients-with-covid",
-      "sectionIntro": "**Patients w/ COVID is the percent of staffed inpatient beds occupied by COVID-19 patients.**",
-      "questions": [
-        {
-          "question": "Sources and methodology",
-          "questionId": "sources-and-methodology-patients-with-covid",
-          "answer": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) which uses data from the US Department of Health and Human Services Unified Hospital Data Surveillance System.  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of patients with confirmed covid divided by the number of staffed inpatient beds."
-        },
-        {
-          "question": "Levels",
-          "questionId": "levels-patients-with-covid",
-          "answer": "Levels for percentage of patients with COVID are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10% of all new beds is considered Low, between 10 and 14.9% is considered Medium, and greater than or equal to 15 is considered High."
-        },
-        {
-          "question": "Limitations",
-          "questionId": "limitations-patients-with-covid",
-          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the health service area the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
-        }
-      ]
     }
   ],
   "pageHeader": "Risk levels & key metrics",
