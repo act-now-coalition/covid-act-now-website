@@ -78,10 +78,12 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const { totalPopulation, currentDailyAverageCases } = projections.primary;
-  const currentCaseDensity = projections.getMetricValue(Metric.CASE_DENSITY);
+  const currentWeeklyReportedCases = projections.getMetricValue(
+    Metric.WEEKLY_CASES_PER_100K,
+  );
   const locationName = projections.locationName;
   if (
-    currentCaseDensity === null ||
+    currentWeeklyReportedCases === null ||
     totalPopulation === null ||
     currentDailyAverageCases === null
   ) {
@@ -103,9 +105,10 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      Over the last week, {locationName} has averaged {newCasesPerDayText} new
-      confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents).
+      Over the last week, {locationName} had {newCasesPerDayText} new reported
+      cases (<b>{formatDecimal(currentWeeklyReportedCases, 1)}</b> for every
+      100,000 residents). Reported cases do not include all at-home positive
+      tests.
     </Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Projections } from 'common/models/Projections';
-import { formatDecimal, formatInteger } from 'common/utils';
+import { formatPercent } from 'common/utils';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
@@ -75,14 +75,11 @@ export const RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const { totalPopulation, currentDailyAverageCases } = projections.primary;
-  const currentCaseDensity = projections.getMetricValue(Metric.CASE_DENSITY);
+  const currentRatioBedsWithCovid = projections.getMetricValue(
+    Metric.RATIO_BEDS_WITH_COVID,
+  );
   const locationName = projections.locationName;
-  if (
-    currentCaseDensity === null ||
-    totalPopulation === null ||
-    currentDailyAverageCases === null
-  ) {
+  if (currentRatioBedsWithCovid === null) {
     return (
       <Fragment>
         Unable to generate{' '}
@@ -92,18 +89,10 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const newCasesPerDay = currentDailyAverageCases;
-  // Try not to round cases/day to zero (since it will probably be >0 per 100k).
-  const newCasesPerDayText =
-    newCasesPerDay >= 0.1 && newCasesPerDay < 1
-      ? formatDecimal(newCasesPerDay, 1)
-      : formatInteger(newCasesPerDay);
-
   return (
     <Fragment>
-      Over the last week, {locationName} has averaged {newCasesPerDayText} new
-      confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents).
+      {formatPercent(currentRatioBedsWithCovid)} of staffed inpatient beds in{' '}
+      {locationName} are occupied by COVID patients.
     </Fragment>
   );
 }

@@ -42,7 +42,7 @@ export interface MetricChartInfo {
 
 // TODO(8.2) Finalize group header
 export enum GroupHeader {
-  COMMUNITY_LEVEL = 'Community Level Components',
+  COMMUNITY_LEVEL = 'Community Level Metrics',
   VACCINATED = '% Vaccinated',
   ADDITIONAL_HOSPITALIZATION = 'Additional Hospitalization Metrics',
   ADDITIONAL_MISC = 'Additional Metrics',

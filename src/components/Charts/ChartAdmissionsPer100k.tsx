@@ -111,7 +111,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
       left={marginLeft + getXCoord(p)}
       top={marginTop + getYCoord(p)}
       title={formatTooltipColumnDate(p)}
-      subtitle="HOSPITAL ADMISSIONS"
+      subtitle="WEEKLY COVID ADMISSIONS"
       width={'145px'}
     >
       <TooltipStyle.Body>
