@@ -18,7 +18,7 @@ export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
   renderInfoTooltip,
   metricName: '% Hospital beds with Covid patients',
   extendedMetricName: '% Hospital beds with Covid patients',
-  metricNameForCompare: `% Hospital beds with Covid patients`,
+  metricNameForCompare: `Patients w/ COVID (% of all beds)`,
   metricNameForSummaryStat: 'Patients w/ COVID',
 };
 

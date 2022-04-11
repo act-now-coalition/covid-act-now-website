@@ -127,6 +127,7 @@ const MetricsFormattedAsPercentage = [
   Metric.HOSPITAL_USAGE,
   Metric.POSITIVE_TESTS,
   Metric.VACCINATIONS,
+  Metric.RATIO_BEDS_WITH_COVID,
 ];
 
 /**
