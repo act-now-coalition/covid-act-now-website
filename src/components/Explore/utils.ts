@@ -90,6 +90,8 @@ export function getDateRange(period: Period): Date[] {
  * in ExploreMetric enum in Explore/interfaces.ts.
  */
 export const EXPLORE_METRICS = [
+  ExploreMetric.ADMISSIONS_PER_100K,
+  ExploreMetric.RATIO_BEDS_WITH_COVID,
   ExploreMetric.WEEKLY_CASES_PER_100K,
   ExploreMetric.WEEKLY_DEATHS_PER_100K,
   ExploreMetric.CASES,
@@ -101,8 +103,6 @@ export const EXPLORE_METRICS = [
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
   ExploreMetric.ICU_USED,
   ExploreMetric.POSITIVITY_RATE,
-  ExploreMetric.ADMISSIONS_PER_100K,
-  ExploreMetric.RATIO_BEDS_WITH_COVID,
 ];
 
 // Note that these specifically are counts, not percentages, and can normalized
