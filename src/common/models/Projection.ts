@@ -228,17 +228,15 @@ export class Projection {
     this.rawHospitalizations = actualTimeseries.map(row =>
       this.isCounty
         ? this.disaggregateHsaValue(
-            row?.hsaHospitalBeds.currentUsageCovid ?? null,
+            row?.hsaHospitalBeds?.currentUsageCovid ?? null,
           )
-        : row?.hospitalBeds.currentUsageCovid ?? null,
+        : row?.hospitalBeds?.currentUsageCovid ?? null,
     );
 
     this.rawICUHospitalizations = actualTimeseries.map(row =>
       this.isCounty
-        ? this.disaggregateHsaValue(row?.hsaIcuBeds.currentUsageCovid ?? null)
-        : row?.icuBeds
-        ? row.icuBeds.currentUsageCovid
-        : null,
+        ? this.disaggregateHsaValue(row?.hsaIcuBeds?.currentUsageCovid ?? null)
+        : row?.icuBeds?.currentUsageCovid ?? null,
     );
 
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
@@ -431,7 +429,7 @@ export class Projection {
     // ICU actuals in this method. All counties will have HSA-level data, and all other
     // location types will have their standard/corresponding level data.
     const countyHsaTimeseriesIcuCapacityRatio = actualsTimeseries.map(row =>
-      this.divideICUDataWithNulls(row && row.hsaIcuBeds),
+      this.calcIcuCapacityUsage(row && row.hsaIcuBeds),
     );
 
     const metricSeries = this.isCounty
@@ -447,9 +445,6 @@ export class Projection {
       let metricValue = this.isCounty
         ? countyHsaTimeseriesIcuCapacityRatio[icuIndex]
         : metrics.icuCapacityRatio;
-      if (metricValue === null) {
-        return null;
-      }
 
       assert(
         metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
@@ -493,7 +488,7 @@ export class Projection {
     return null;
   }
 
-  private divideICUDataWithNulls(data: HospitalResourceUtilization | null) {
+  private calcIcuCapacityUsage(data: HospitalResourceUtilization | null) {
     const icuCapacity = data?.capacity ?? null;
     const icuUsage = data?.currentUsageTotal ?? null;
 

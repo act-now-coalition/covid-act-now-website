@@ -9,6 +9,7 @@ import {
 } from 'components/Dialogs';
 import { Projections } from 'common/models/Projections';
 import { formatValue } from 'common/metric';
+import { formatDecimal } from 'common/utils';
 
 export function getOverrideDisclaimer(
   region: Region,
@@ -62,5 +63,5 @@ function formattedHsaCovidUsage(
     fail('Unexpected HSA level metric.');
   }
 
-  return formatValue(Metric.ADMISSIONS_PER_100K, hsaValue, '-');
+  return hsaValue ? formatDecimal(hsaValue, 1) : '-';
 }
