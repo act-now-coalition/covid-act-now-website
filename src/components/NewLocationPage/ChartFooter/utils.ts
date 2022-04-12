@@ -34,7 +34,7 @@ export function getAddedMetricStatusText(
     ].includes(metric)
   ) {
     const hsaFormattedValue = formattedHsaCovidUsage(metric, projections);
-    return `Over the last week, the ${projections.primary.hsaName} health service area has reported having ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${value} coming from ${region.shortName}.`;
+    return `Over the last week, the ${projections.primary.hsaName} health service area has averaged ${hsaFormattedValue} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}, for an estimated ${value} coming from ${region.shortName}.`;
   }
 
   return `Over the last week, ${region.shortName} has averaged ${value} ${exploreMetricToFooterContentMap[metric].statusTextMeasure}.`;
