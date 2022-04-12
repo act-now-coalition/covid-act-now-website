@@ -89,10 +89,12 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
+  const hsaCopy = `the ${projections.primary.hsaName} health service area`;
   return (
     <Fragment>
       {formatPercent(currentRatioBedsWithCovid)} of staffed inpatient beds in{' '}
-      {locationName} are occupied by COVID patients.
+      {projections.isCounty ? hsaCopy : locationName} are occupied by COVID
+      patients.
     </Fragment>
   );
 }

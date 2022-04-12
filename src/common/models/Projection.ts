@@ -158,6 +158,7 @@ export class Projection {
   readonly currentDailyDeaths: number | null;
   readonly currentHsaIcuInfo: HospitalResourceUtilization;
   readonly currentHsaHospitalInfo: HospitalResourceUtilizationWithAdmissions;
+  readonly currentWeeklyCovidAdmissions: number | null;
   readonly canCommunityLevel: Level;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -310,6 +311,9 @@ export class Projection {
 
     this.currentHsaIcuInfo = summaryWithTimeseries.actuals.hsaIcuBeds;
     this.currentHsaHospitalInfo = summaryWithTimeseries.actuals.hsaHospitalBeds;
+    // For counties, in most cases we will want to access hsaHospitalBeds (usually via currentHsaHospitalInfo)
+    this.currentWeeklyCovidAdmissions =
+      summaryWithTimeseries.actuals.hospitalBeds.weeklyCovidAdmissions;
 
     this.annotations = summaryWithTimeseries.annotations;
   }
