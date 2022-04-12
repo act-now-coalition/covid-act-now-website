@@ -107,47 +107,50 @@ const metricToSourceMap: RegionSourceMap = {
   // TODO(8.2) : Fill in correct sources (or remove if we correctly get them from the API)
   [Metric.WEEKLY_CASES_PER_100K]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      sourceName: 'The New York Times',
+      url: 'https://github.com/nytimes/covid-19-data',
     },
-    // these do not render:
     metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'The New York Times',
+      url: 'https://github.com/nytimes/covid-19-data',
     },
     county: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'The New York Times',
+      url: 'https://github.com/nytimes/covid-19-data',
     },
   },
   [Metric.ADMISSIONS_PER_100K]: {
     state: {
       sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      url:
+        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
     },
-    // these do not render:
     metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC Covid Tracker',
+      url:
+        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
     },
     county: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC Covid Tracker',
+      url:
+        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
     },
   },
   [Metric.RATIO_BEDS_WITH_COVID]: {
     state: {
       sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      url:
+        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
     },
-    // these do not render:
     metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC Covid Tracker',
+      url:
+        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
     },
     county: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC Covid Tracker',
+      url:
+        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
     },
   },
 };
@@ -171,7 +174,9 @@ function getDisclaimerMetricName(metric: Metric): string {
   } else if (metric === Metric.HOSPITAL_USAGE) {
     return getMetricName(metric);
   } else {
-    return getMetricName(metric).toLowerCase();
+    const metricName = getMetricName(metric);
+    // Note: hacky way to lowercase metric name but make sure COVID is always uppercase
+    return metricName.charAt(0).toLowerCase() + metricName.slice(1);
   }
 }
 
