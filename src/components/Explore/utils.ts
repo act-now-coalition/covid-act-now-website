@@ -91,6 +91,7 @@ export function getDateRange(period: Period): Date[] {
  */
 export const EXPLORE_METRICS = [
   ExploreMetric.WEEKLY_CASES_PER_100K,
+  ExploreMetric.WEEKLY_DEATHS_PER_100K,
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
@@ -171,6 +172,8 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'bedsWithCovidPatientsRatio';
     case ExploreMetric.WEEKLY_CASES_PER_100K:
       return 'weeklyNewCasesPer100k';
+    case ExploreMetric.WEEKLY_DEATHS_PER_100K:
+      return 'weeklyDeathsPer100k';
   }
 }
 
@@ -428,6 +431,21 @@ export const exploreMetricData: {
         label: 'Weekly reported cases per 100k',
         tooltipLabel: 'Weekly reported cases per 100k',
         datasetId: 'weeklyNewCasesPer100k',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.WEEKLY_DEATHS_PER_100K]: {
+    title: 'Weekly reported deaths per 100k',
+    name: 'Weekly reported deaths per 100k',
+    chartId: 'weekly_reported_deaths_per_100k',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'Weekly reported deaths per 100k',
+        tooltipLabel: 'Weekly reported deaths per 100k',
+        datasetId: 'weeklyDeathsPer100k',
         type: SeriesType.LINE,
       },
     ],
