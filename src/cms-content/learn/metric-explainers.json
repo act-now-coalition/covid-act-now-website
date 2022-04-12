@@ -32,8 +32,8 @@
       ]
     },
     {
-      "sectionIntro": "**Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
-      "sectionHeader": "Weekly admissions",
+      "sectionIntro": "**Weekly COVID admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
+      "sectionHeader": "Weekly COVID admissions",
       "questions": [
         {
           "question": "Sources and methodology",
