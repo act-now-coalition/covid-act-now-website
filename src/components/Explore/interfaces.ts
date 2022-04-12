@@ -30,23 +30,17 @@ export interface Series {
  */
 export enum ExploreMetric {
   WEEKLY_CASES_PER_100K = 0,
-  HOSPITALIZATIONS = 1,
-  ICU_HOSPITALIZATIONS = 2,
-  VACCINATIONS_FIRST_DOSE = 3,
-  VACCINATIONS_COMPLETED = 4,
-  VACCINATIONS_ADDITIONAL_DOSE = 5,
-  ICU_USED = 6,
-  POSITIVITY_RATE = 7,
-  ADMISSIONS_PER_100K = 8,
-  RATIO_BEDS_WITH_COVID = 9,
-
-  /**
-   * Cases and Deaths no longer used in Trends
-   * (i.e. no longer included in EXPLORE_METRICS in Explore/utils.ts),
-   * and so we order them last in the enum.
-   */
-  CASES = 10,
-  DEATHS = 11,
+  CASES = 1,
+  DEATHS = 2,
+  HOSPITALIZATIONS = 3,
+  ICU_HOSPITALIZATIONS = 4,
+  VACCINATIONS_FIRST_DOSE = 5,
+  VACCINATIONS_COMPLETED = 6,
+  VACCINATIONS_ADDITIONAL_DOSE = 7,
+  ICU_USED = 8,
+  POSITIVITY_RATE = 9,
+  ADMISSIONS_PER_100K = 10,
+  RATIO_BEDS_WITH_COVID = 11,
 }
 
 export enum DataMeasure {

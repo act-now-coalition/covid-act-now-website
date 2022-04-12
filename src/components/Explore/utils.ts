@@ -91,6 +91,8 @@ export function getDateRange(period: Period): Date[] {
  */
 export const EXPLORE_METRICS = [
   ExploreMetric.WEEKLY_CASES_PER_100K,
+  ExploreMetric.CASES,
+  ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
