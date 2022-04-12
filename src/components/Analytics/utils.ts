@@ -139,15 +139,6 @@ export function trackCopyLink(category: EventCategory, label: string) {
 }
 
 /**
- * TODO (Pablo): In my opinion, this way of tracking is not granular enough,
- * since it doesn't tell us anything about what was shared (only where,
- * Facebook, Twitter, etc).
- */
-export function trackShare(label: string) {
-  trackEvent(EventCategory.ENGAGEMENT, EventAction.SHARE, label);
-}
-
-/**
  * All 2020 election related link clicks
  */
 export function trackVoteClick(label: string) {

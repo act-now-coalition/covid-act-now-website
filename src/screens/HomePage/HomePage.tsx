@@ -47,7 +47,6 @@ function getPageDescription() {
 }
 
 export default function HomePage() {
-  const shareBlockRef = useRef(null);
   const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
@@ -212,11 +211,11 @@ export default function HomePage() {
                 setShowModal={setShowCompareModal}
               />
             </HomePageBlock>
+            <HomePageBlock id="alert_signup">
+              <ShareModelBlock />
+            </HomePageBlock>
             <PartnersSection />
           </Content>
-          <div ref={shareBlockRef} id="alert_signup">
-            <ShareModelBlock />
-          </div>
         </div>
       </main>
     </>

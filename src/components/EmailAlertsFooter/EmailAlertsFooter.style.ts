@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import { COLOR_MAP } from 'common/colors';
 import { mobileBreakpoint } from 'assets/theme/sizes';
 import { Heading2 as H2, Paragraph as P } from 'components/Markdown';
 import AlertIcon from 'assets/images/EmailAlertIcon';
 
 export const Container = styled.div`
   text-align: center;
-  background-color: ${COLOR_MAP.GREY_0};
 
-  padding: 40px 16px;
   @media (min-width: ${mobileBreakpoint}) {
     padding: 70px auto;
   }
