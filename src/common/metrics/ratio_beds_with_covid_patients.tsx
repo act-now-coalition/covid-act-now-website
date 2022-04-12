@@ -89,7 +89,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const hsaCopy = `the ${projections.primary.hsaName} health service area`;
+  const hsaCopy = `the ${projections.primary.hsaName} Health Service Area`;
   return (
     <Fragment>
       {formatPercent(currentRatioBedsWithCovid)} of staffed inpatient beds in{' '}
