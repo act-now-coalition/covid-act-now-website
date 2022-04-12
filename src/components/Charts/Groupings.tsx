@@ -42,7 +42,7 @@ export interface MetricChartInfo {
 
 // TODO(8.2) Finalize group header
 export enum GroupHeader {
-  COMMUNITY_LEVEL = 'Community Level Components',
+  COMMUNITY_LEVEL = 'Community Level Metrics',
   VACCINATED = '% Vaccinated',
   ADDITIONAL_HOSPITALIZATION = 'Additional Hospitalization Metrics',
   ADDITIONAL_MISC = 'Additional Metrics',
@@ -177,6 +177,23 @@ export const CHART_GROUPS: ChartGroup[] = [
     groupHeader: GroupHeader.ADDITIONAL_MISC,
     metricList: [
       {
+        metric: ExploreMetric.DEATHS,
+        metricType: MetricType.EXPLORE_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <ChartTab
+            metricName="Weekly deaths"
+            metricValueInfo={metricValue}
+            subLabel={['per 100k']}
+          />
+        ),
+        renderChart: projections => (
+          <SingleLocationChartContainer
+            metric={ExploreMetric.DEATHS}
+            projections={projections}
+          />
+        ),
+      },
+      {
         metric: Metric.CASE_GROWTH_RATE,
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
@@ -204,19 +221,6 @@ export const CHART_GROUPS: ChartGroup[] = [
         renderChart: projections => (
           <SingleLocationChartContainer
             metric={ExploreMetric.POSITIVITY_RATE}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: ExploreMetric.DEATHS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="Daily deaths" metricValueInfo={metricValue} />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.DEATHS}
             projections={projections}
           />
         ),

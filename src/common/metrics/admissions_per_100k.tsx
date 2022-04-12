@@ -16,10 +16,10 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
   renderInfoTooltip,
-  metricName: 'Weekly Covid Admissions per 100k',
-  extendedMetricName: 'Weekly Covid Admissions per 100k population',
-  metricNameForCompare: `Weekly Covid Admissions per 100k`,
-  metricNameForSummaryStat: 'Weekly New Admissions',
+  metricName: 'Weekly COVID admissions',
+  extendedMetricName: 'Weekly hospital admissions of COVID patients per 100k',
+  metricNameForCompare: `Weekly COVID admissions per 100k`,
+  metricNameForSummaryStat: 'Weekly COVID admissions',
 };
 
 const LIMIT_LOW = 10;
@@ -75,10 +75,12 @@ export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const { totalPopulation, currentDailyAverageCases } = projections.primary;
-  const currentCaseDensity = projections.getMetricValue(Metric.CASE_DENSITY);
+  const weeklyCovidAdmissionsPer100k = projections.getMetricValue(
+    Metric.ADMISSIONS_PER_100K,
+  );
   const locationName = projections.locationName;
   if (
-    currentCaseDensity === null ||
+    weeklyCovidAdmissionsPer100k === null ||
     totalPopulation === null ||
     currentDailyAverageCases === null
   ) {
@@ -100,8 +102,8 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      Over the last week, {locationName} has averaged {newCasesPerDayText} new
-      confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
+      Over the last week, {locationName} had {newCasesPerDayText} COVID hospital
+      admissions (<b>{formatDecimal(weeklyCovidAdmissionsPer100k, 1)}</b> for
       every 100,000 residents).
     </Fragment>
   );
