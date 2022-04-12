@@ -8,7 +8,6 @@ import {
   MetricModalContent,
 } from 'components/Dialogs';
 import { Projections } from 'common/models/Projections';
-import { formatValue } from 'common/metric';
 import { formatDecimal } from 'common/utils';
 
 export function getOverrideDisclaimer(
