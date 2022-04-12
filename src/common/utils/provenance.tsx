@@ -63,11 +63,11 @@ const metricToSourceMap: RegionSourceMap = {
         'https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb',
     },
     metro: {
-      sourceName: 'CDC Covid Tracker',
+      sourceName: 'CDC COVID Data Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
     },
     county: {
-      sourceName: 'CDC Covid Tracker',
+      sourceName: 'CDC COVID Data Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
     },
   },
@@ -90,7 +90,7 @@ const metricToSourceMap: RegionSourceMap = {
   },
   [Metric.VACCINATIONS]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
+      sourceName: 'CDC COVID Data Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
     },
     // these do not render:
@@ -119,36 +119,30 @@ const metricToSourceMap: RegionSourceMap = {
   },
   [Metric.ADMISSIONS_PER_100K]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
-      url:
-        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
     metro: {
-      sourceName: 'CDC Covid Tracker',
-      url:
-        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
     county: {
-      sourceName: 'CDC Covid Tracker',
-      url:
-        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
   },
   [Metric.RATIO_BEDS_WITH_COVID]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
-      url:
-        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
     metro: {
-      sourceName: 'CDC Covid Tracker',
-      url:
-        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
     county: {
-      sourceName: 'CDC Covid Tracker',
-      url:
-        'https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
   },
 };
