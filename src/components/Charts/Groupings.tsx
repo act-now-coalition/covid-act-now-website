@@ -177,7 +177,7 @@ export const CHART_GROUPS: ChartGroup[] = [
     groupHeader: GroupHeader.ADDITIONAL_MISC,
     metricList: [
       {
-        metric: ExploreMetric.DEATHS,
+        metric: ExploreMetric.WEEKLY_DEATHS_PER_100K,
         metricType: MetricType.EXPLORE_METRIC,
         renderTabLabel: (metricValue, projections) => (
           <ChartTab
@@ -188,7 +188,7 @@ export const CHART_GROUPS: ChartGroup[] = [
         ),
         renderChart: projections => (
           <SingleLocationChartContainer
-            metric={ExploreMetric.DEATHS}
+            metric={ExploreMetric.WEEKLY_DEATHS_PER_100K}
             projections={projections}
           />
         ),
