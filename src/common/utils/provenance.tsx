@@ -63,11 +63,11 @@ const metricToSourceMap: RegionSourceMap = {
         'https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb',
     },
     metro: {
-      sourceName: 'CDC Covid Tracker',
+      sourceName: 'CDC COVID Data Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
     },
     county: {
-      sourceName: 'CDC Covid Tracker',
+      sourceName: 'CDC COVID Data Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
     },
   },
@@ -90,7 +90,7 @@ const metricToSourceMap: RegionSourceMap = {
   },
   [Metric.VACCINATIONS]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
+      sourceName: 'CDC COVID Data Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
     },
     // these do not render:
@@ -103,51 +103,46 @@ const metricToSourceMap: RegionSourceMap = {
       url: 'n/a',
     },
   },
-
-  // TODO(8.2) : Fill in correct sources (or remove if we correctly get them from the API)
   [Metric.WEEKLY_CASES_PER_100K]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      sourceName: 'The New York Times',
+      url: 'https://github.com/nytimes/covid-19-data',
     },
-    // these do not render:
     metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'The New York Times',
+      url: 'https://github.com/nytimes/covid-19-data',
     },
     county: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'The New York Times',
+      url: 'https://github.com/nytimes/covid-19-data',
     },
   },
   [Metric.ADMISSIONS_PER_100K]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
-    // these do not render:
     metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
     county: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
   },
   [Metric.RATIO_BEDS_WITH_COVID]: {
     state: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
-    // these do not render:
     metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
     county: {
-      sourceName: 'n/a',
-      url: 'n/a',
+      sourceName: 'CDC COVID Data Tracker',
+      url: 'https://covid.cdc.gov/covid-data-tracker/',
     },
   },
 };
@@ -171,7 +166,9 @@ function getDisclaimerMetricName(metric: Metric): string {
   } else if (metric === Metric.HOSPITAL_USAGE) {
     return getMetricName(metric);
   } else {
-    return getMetricName(metric).toLowerCase();
+    const metricName = getMetricName(metric);
+    // Note: hacky way to lowercase metric name but make sure COVID is always uppercase
+    return metricName.charAt(0).toLowerCase() + metricName.slice(1);
   }
 }
 
