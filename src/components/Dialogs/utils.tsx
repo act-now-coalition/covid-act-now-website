@@ -71,7 +71,7 @@ export const exploreMetricToFooterContentMap: {
     howItsCalculated: 'Our daily deaths number is a seven-day average.',
     metricDefinition: 'This is the number of COVID deaths per day.',
     source: 'The New York Times',
-    statusTextMeasure: 'daily deaths',
+    statusTextMeasure: 'weekly deaths',
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     metricName: 'ICU hospitalizations',
