@@ -136,16 +136,17 @@ function renderStatus(projections: Projections): React.ReactElement {
   const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
   const textLevel = levelText(
     level,
-    'This suggests there is likely enough capacity to absorb a wave of new COVID infections',
-    'This suggests some ability to absorb an increase in COVID cases',
-    'This suggests hospitals may not be well positioned to absorb a wave of new COVID infections without substantial surge capacity. Caution is warranted',
+    'This suggests there is likely enough capacity to absorb a wave of new COVID infections.',
+    'This suggests some ability to absorb an increase in COVID cases.',
+    'This suggests hospitals may not be well positioned to absorb a wave of new COVID infections without substantial surge capacity. Caution is warranted.',
     'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity.',
   );
   return (
     <Fragment>
       {isCounty ? hsaCopy : locationName} has reported having {totalICUBeds}{' '}
       staffed adult ICU beds. {patientBreakdown} Overall, {totalICUPatients} out
-      of {totalICUBeds} ({icuCapacityUsed}) are filled. {textLevel}.
+      of {totalICUBeds} ({icuCapacityUsed}) are filled.{' '}
+      {isCounty ? textLevel : ''}
     </Fragment>
   );
 }
