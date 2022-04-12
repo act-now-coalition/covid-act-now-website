@@ -72,7 +72,7 @@
         {
           "question": "Limitations",
           "questionId": "limitations-patients-with-covid",
-          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the health service area the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
+          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
         }
       ]
     },
