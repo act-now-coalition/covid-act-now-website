@@ -274,16 +274,12 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 setCurrentMetric={setCurrentExploreMetric}
               />
             </LocationPageBlock>
+            <LocationPageBlock ref={shareBlockRef}>
+              <ShareModelBlock region={region} />
+            </LocationPageBlock>
           </WidthContainer>
         </BelowTheFold>
       </LocationPageContentWrapper>
-      <div ref={shareBlockRef}>
-        <ShareModelBlock
-          region={region}
-          projections={projections}
-          stats={stats}
-        />
-      </div>
     </>
   );
 });

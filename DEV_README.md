@@ -43,13 +43,9 @@ yarn lint-fix
 
 ### Testing
 
-Testing is run via cypress. Once cypress starts running, we need
-
+Testing is run via jest.
 ```
-npm test
-```
-```
-yarn test
+yarn jest
 ```
 
 ### Updating the Data Snapshot, Map Colors, etc.
