@@ -13,13 +13,25 @@
       "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#weekly-new-cases)."
     },
     {
+      "title": "Weekly COVID admissions",
+      "id": "weekly-admissions",
+      "body": "Weekly COVID admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).",
+      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
+    },
+    {
+      "title": "Patients w/ COVID",
+      "id": "patients-with-covid",
+      "body": "Patients w/ COVID refers to the percentage of staffed inpatient beds occupied by COVID patients. In combination with weekly COVID admissions, it represents the potential for strain on the health system.",
+      "cta": "[Learn more about patients with COVID.](/covid-risk-levels-metrics#patients-with-covid)"
+    },
+    {
       "title": "Infection rate",
       "id": "infection-rate",
-      "body": "Infection rate represents how fast COVID is spreading in a given area right now by estimating the number of people that a newly infected person goes on to eventually infect.\n\nDaily new cases may be low, but if the infection rate is high, then we know that daily new cases will be high in the near future.",
+      "body": "Infection rate represents how fast COVID is spreading in a given area right now by estimating the number of people that a newly infected person goes on to eventually infect.",
       "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
     },
     {
-      "body": "Positive test rate is the percentage of COVID tests that come back positive. It measures both the severity of COVID and the limitations of testing. If a place has a high positive test rate, it is a sign of insufficient testing in that area.\n\nTesting a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.",
+      "body": "Positive test rate is the percentage of COVID tests that come back positive. It measures both the severity of COVID and the limitations of testing. If a place has a high positive test rate, it is a sign of insufficient testing in that area. Positive test rate does *not* include at-home positive test data.\n\nTesting a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.",
       "title": "Positive test rate",
       "id": "positive-test-rate",
       "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
@@ -35,18 +47,6 @@
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
-    },
-    {
-      "title": "Patients w/ COVID",
-      "id": "patients-with-covid",
-      "body": "Patients w/ COVID % of all beds is the percentage of staffed inpatient beds occupied by COVID patients. In combination with weekly COVID admissions, it represents the potential for strain on the health system.",
-      "cta": "[Learn more about patients with COVID.](/covid-risk-levels-metrics#patients-with-covid)"
-    },
-    {
-      "title": "Weekly admissions",
-      "id": "weekly-admissions",
-      "body": "Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).",
-      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
     },
     {
       "title": "Daily new cases",
