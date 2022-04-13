@@ -80,7 +80,7 @@
       "sectionHeader": "Infection rate",
       "sectionSubheader": "Also known as: R(t) or “R-effective”",
       "sectionId": "infection-rate",
-      "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
+      "sectionIntro": "**Infection rate (also known as “R(t)”) is the estimated number of new people each COVID-positive person will infect.**",
       "questions": [
         {
           "question": "Sources and methodology",
@@ -90,7 +90,7 @@
         {
           "question": "Limitations",
           "questionId": "infection-rate-limitations",
-          "answer": "Because you can’t measure infection rate directly, our estimates hinge upon our epidemiological assumptions and the accuracy of our data sources. \n\n1. Infection rate can only track COVID growth once a positive case gets reported through the system. By then, infectious individuals have likely been COVID positive for some time, so the metric will always lag the true risk on the ground. For example, if someone was exposed over the holidays, they likely didn’t test positive until the new year.\n2. Infection rate should be considered in context with the other metrics. Daily new cases refers to the number of new COVID infections, while the infection rate represents the trend. A place with high daily new cases may have an infection rate less than 1 and still have higher exposure than a place with relatively few, but growing, cases."
+          "answer": "Because you can’t measure infection rate directly, our estimates hinge upon our epidemiological assumptions and the accuracy of our data sources. \n\n1. Infection rate can only track COVID growth once a positive case gets reported through the system. By then, infectious individuals have likely been COVID positive for some time, so the metric will always lag the true risk in the community. For example, if someone was exposed over the holidays, they likely didn’t test positive until the new year.\n2. Infection rate should be considered in context with the other metrics. Daily new cases refers to the number of new COVID infections, while the infection rate represents the trend. A place with high daily new cases may have an infection rate less than 1 and still have higher exposure than a place with relatively few, but growing, cases."
         },
         {
           "question": "More information on infection rate",
