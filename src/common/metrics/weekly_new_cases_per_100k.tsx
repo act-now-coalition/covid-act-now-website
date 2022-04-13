@@ -27,13 +27,13 @@ const LIMIT_HIGH = Infinity;
 
 // Weekly new cases doesn't have a medium level, only low and high. So we use the following variables for both medium and high:
 const colorHigh = COLOR_MAP.ORANGE_DARK.BASE;
-const nameHigh = 'High';
+const nameHigh = 'Higher';
 
 export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: LIMIT_LOW,
-    name: 'Low',
+    name: 'Lower',
     color: COLOR_MAP.GREEN.BASE,
     detail: () => 'COVID is being effectively contained',
   },
