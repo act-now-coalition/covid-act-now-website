@@ -29,10 +29,10 @@ export interface Series {
  * we need to update these assigned indices to match.
  */
 export enum ExploreMetric {
-  ADMISSIONS_PER_100K = 0,
-  RATIO_BEDS_WITH_COVID = 1,
-  WEEKLY_CASES = 2,
-  WEEKLY_DEATHS = 3,
+  RATIO_BEDS_WITH_COVID = 0,
+  ADMISSIONS_PER_100K = 1,
+  WEEKLY_DEATHS = 2,
+  WEEKLY_CASES = 3,
   CASES = 4,
   DEATHS = 5,
   HOSPITALIZATIONS = 6,
