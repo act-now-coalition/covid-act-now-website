@@ -75,7 +75,6 @@ function renderStatus(projections: Projections): React.ReactElement {
   const {
     totalPopulation,
     currentWeeklyCovidAdmissions,
-    currentHsaHospitalInfo,
     hsaName,
   } = projections.primary;
   const weeklyCovidAdmissionsPer100k = projections.getMetricValue(
