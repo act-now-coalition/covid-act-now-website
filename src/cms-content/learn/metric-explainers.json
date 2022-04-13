@@ -54,10 +54,10 @@
       "sectionId": "weekly-admissions"
     },
     {
-      "sectionHeader": "Patients w/ COVID",
+      "sectionHeader": "Patients with COVID",
       "sectionSubheader": "",
       "sectionId": "patients-with-covid",
-      "sectionIntro": "**Patients w/ COVID is the percent of staffed inpatient beds occupied by COVID-19 patients.**",
+      "sectionIntro": "**Patients with COVID is the percent of staffed inpatient beds occupied by COVID patients.**",
       "questions": [
         {
           "question": "Sources and methodology",
