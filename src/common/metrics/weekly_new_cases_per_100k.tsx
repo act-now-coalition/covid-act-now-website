@@ -110,25 +110,17 @@ function renderStatus(projections: Projections): React.ReactElement {
 function renderThermometer(): React.ReactElement {
   const levelInfo = WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP;
   const levelHigh = levelInfo[Level.HIGH];
-  const levelMedium = levelInfo[Level.MEDIUM];
   const levelLow = levelInfo[Level.LOW];
 
   const items = [
     {
-      title: `${levelMedium.upperLimit} - ${levelHigh.upperLimit}`,
+      title: `> ${LIMIT_LOW}`,
       color: levelHigh.color,
-      roundTop: false,
+      roundTop: true,
       roundBottom: false,
     },
     {
-      title: `${levelLow.upperLimit} - ${levelMedium.upperLimit}`,
-      color: levelMedium.color,
-      roundTop: false,
-      roundBottom: false,
-    },
-    {
-      title: `Under ${levelLow.upperLimit}`,
-      description: 'On track for containment',
+      title: `<= ${LIMIT_LOW}`,
       color: levelLow.color,
       roundTop: false,
       roundBottom: true,
