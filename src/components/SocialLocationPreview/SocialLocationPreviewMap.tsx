@@ -39,7 +39,9 @@ const SocialLocationPreview = (props: {
 
   return (
     <Wrapper noShadow={!isEmbedPreview} border={border}>
-      <MapHeaderHeader>US COVID Risk &amp; Vaccine Tracker</MapHeaderHeader>
+      <MapHeaderHeader>
+        US COVID Community Levels & Vaccine Tracker
+      </MapHeaderHeader>
       {!isEmbedPreview && (
         <LastUpdatedWrapper>Updated {lastUpdatedDateString}</LastUpdatedWrapper>
       )}
@@ -69,14 +71,8 @@ const SocialLocationPreview = (props: {
 };
 
 const RiskMapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
-  <Legend condensed={!isEmbed}>
-    {[
-      Level.SUPER_CRITICAL,
-      Level.CRITICAL,
-      Level.HIGH,
-      Level.MEDIUM,
-      Level.LOW,
-    ].map(level => (
+  <Legend condensed={!isEmbed} header="Community Level">
+    {[Level.HIGH, Level.MEDIUM, Level.LOW].map(level => (
       <LegendItem
         key={`legend-${level}`}
         title={
