@@ -8,7 +8,7 @@ const levels = [Level.HIGH, Level.MEDIUM, Level.LOW];
 const items = levels.map(level => {
   const summaryLevel = LOCATION_SUMMARY_LEVELS[level];
   return {
-    title: summaryLevel.name + ' risk',
+    title: summaryLevel.name,
     description: '',
     color: summaryLevel.color,
     roundTop: level === Level.HIGH,
