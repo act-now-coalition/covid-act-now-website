@@ -82,7 +82,8 @@ export const exploreMetricToFooterContentMap: {
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     metricName: 'hospitalizations',
-    howItsCalculated: 'Our hospitalizations number is a seven-day average.',
+    howItsCalculated:
+      'Our hospitalizations number is a seven-day average. For counties, it is calculated for the health service area that contains the county, and then county-level data is estimated by disaggregating the data by population.',
     metricDefinition:
       'This is the number of patients currently hospitalized with COVID.',
     source: 'Department of Health and Human Services',

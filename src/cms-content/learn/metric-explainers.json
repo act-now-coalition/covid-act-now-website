@@ -32,8 +32,8 @@
       ]
     },
     {
-      "sectionIntro": "**Weekly admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
-      "sectionHeader": "Weekly admissions",
+      "sectionIntro": "**Weekly COVID admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
+      "sectionHeader": "Weekly COVID admissions",
       "questions": [
         {
           "question": "Sources and methodology",
@@ -72,7 +72,7 @@
         {
           "question": "Limitations",
           "questionId": "limitations-patients-with-covid",
-          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the health service area the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
+          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
         }
       ]
     },
@@ -153,7 +153,7 @@
         {
           "question": "Limitations",
           "questionId": "limitations-percent-vaccination",
-          "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated.\n2. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n3. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public.\n4. **Underestimation of booster shots and overestimation of primary dose:** If a booster is administered in a different location than the primary vaccine series, the CDC may report the booster shot as a first dose in some instances.\n\nCounty-level vaccination data can suffer from additional limitations including:\n\n1. **Lack of 1st dose data:** For rare cases where county-level 1st dose data is unavailable, we estimate 1st dose vaccinations based on the ratio of first dose and second dose (or J&J) vaccinations at the state level.\n2. **Under-reporting**: If a vaccine is administered within a state but accurate county of residence information is not collected then the vaccination cannot be attributed to any specific county, leading to under-reporting.\n3. **Misattribution**: Some vaccinations may be attributed to the county of administration rather than the county of residence, leading to over and under-reporting.\n4. **Missing federally-administered doses:** Doses administered through federal programs (e.g. Indian Health Services, Department of Defense, Bureau of Prisons, and Veteran's Affairs) are sometimes not included in state-reported vaccination numbers leading to under-reporting."
+          "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated.\n2. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n3. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public.\n4. **Underestimation of booster shots and overestimation of primary dose:** If a booster is administered in a different location than the primary vaccine series, the CDC may report the booster shot as a first dose in some instances.\n\nCounty-level vaccination data can suffer from additional limitations including:\n\n1. **Lack of 1st dose data:** For rare cases where county-level 1st dose data is unavailable, we estimate 1st dose vaccinations based on the ratio of first dose and second dose (or J&J) vaccinations at the state level.\n2. **Under-reporting**: If a vaccine is administered within a state but accurate county of residence information is not collected then the vaccination cannot be attributed to any specific county, leading to under-reporting.\n3. **Misattribution**: Some vaccinations may be attributed to the county of administration rather than the county of residence, leading to over and under-reporting.\n4. **Missing federally-administered doses:** Doses administered through federal programs (e.g. Indian Health Services, Department of Defense, Bureau of Prisons, and Veterans Affairs) are sometimes not included in state-reported vaccination numbers leading to under-reporting."
         }
       ]
     },
@@ -191,14 +191,14 @@
         {
           "question": "",
           "questionId": "framework",
-          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop the former COVID risk framework in 2020. This framework was the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
+          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop the COVID risk framework we used between Spring 2020 to Spring 2022. This framework was the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
         }
       ],
       "sectionHeader": "Covid Act Now's former risk levels",
       "sectionSubheader": ""
     }
   ],
-  "pageHeader": "Risk levels & key metrics",
+  "pageHeader": "Community levels & key metrics",
   "pageIntro": "As of March 2022, Covid Act Now follows the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). This framework looks at three key metrics to assess COVID across the U.S. - new COVID admissions, percent of staffed inpatient beds occupied by COVID patients, and new COVID cases. \n\nAccording to the CDC, this new community level framework better reflects medically significant disease or healthcare strain. The rise of vaccines and immunity from infection has greatly reduced the risk of severe illness and death for most people, and therefore community prevention strategies and individual behaviors should be driven by an understanding of the potential strain on local hospital systems, in addition to cases.",
   "frameworkLogos": [
     {

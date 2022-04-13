@@ -1,10 +1,13 @@
+// Make sure to not change the level numbers (even if we delete CRITICAL and
+// SUPER_CRITICAL). The values are used to determine which image to show in
+// the alert emails.
 export enum Level {
-  LOW,
-  MEDIUM,
-  HIGH,
-  CRITICAL,
-  UNKNOWN,
-  SUPER_CRITICAL,
+  LOW = 0,
+  MEDIUM = 1,
+  HIGH = 2,
+  CRITICAL = 3,
+  UNKNOWN = 4,
+  SUPER_CRITICAL = 5,
 }
 
 export const ALL_LEVELS = [

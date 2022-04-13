@@ -25,31 +25,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
-      # TODO: Discuss yarn vs. npm. I personally don't want to have to install yarn.
-      # It's not needed for anything and only adds an additional
-      # - name: Cache Node Modules
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-      #     key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: ${{ runner.os }}-node-
-
-      - name: Cache Cypress
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/Cypress # npm cache files are stored in `~/.npm` on Linux/macOS
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-cypress-
-
       - run: yarn install
       - run: yarn run lint
       - run: yarn run tsc
-      - run: yarn run test.ci
       - run: yarn run jest.ci
-      - run: npx nyc report --reporter=text-summary
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v1
-        with:
-          name: code-coverage-report
-          path: coverage

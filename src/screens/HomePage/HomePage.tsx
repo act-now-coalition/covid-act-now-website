@@ -7,7 +7,6 @@ import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
@@ -46,9 +45,7 @@ function getPageDescription() {
 }
 
 export default function HomePage() {
-  const shareBlockRef = useRef(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
-
   const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
@@ -203,9 +200,6 @@ export default function HomePage() {
             </HomePageBlock>
             <PartnersSection />
           </Content>
-          <div ref={shareBlockRef} id="alert_signup">
-            <ShareModelBlock />
-          </div>
         </div>
       </main>
     </>

@@ -10,8 +10,6 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
 
-// TODO(8.2) : Update with real metric + content:
-
 export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
@@ -74,15 +72,23 @@ export const ADMISSIONS_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const { totalPopulation, currentDailyAverageCases } = projections.primary;
+  const {
+    totalPopulation,
+    currentWeeklyCovidAdmissions,
+    currentHsaHospitalInfo,
+    hsaName,
+  } = projections.primary;
   const weeklyCovidAdmissionsPer100k = projections.getMetricValue(
     Metric.ADMISSIONS_PER_100K,
   );
+  const weeklyNewCovidAdmissions = projections.isCounty
+    ? currentHsaHospitalInfo.weeklyCovidAdmissions
+    : currentWeeklyCovidAdmissions;
   const locationName = projections.locationName;
   if (
     weeklyCovidAdmissionsPer100k === null ||
     totalPopulation === null ||
-    currentDailyAverageCases === null
+    weeklyNewCovidAdmissions === null
   ) {
     return (
       <Fragment>
@@ -93,18 +99,19 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const newCasesPerDay = currentDailyAverageCases;
-  // Try not to round cases/day to zero (since it will probably be >0 per 100k).
-  const newCasesPerDayText =
-    newCasesPerDay >= 0.1 && newCasesPerDay < 1
-      ? formatDecimal(newCasesPerDay, 1)
-      : formatInteger(newCasesPerDay);
+  const hsaCopy = `The ${hsaName} Health Service Area`;
+  // Try not to round to zero (since it will probably be >0 per 100k).
+  const weeklyNewCovidAdmissionsText =
+    weeklyNewCovidAdmissions >= 0.1 && weeklyNewCovidAdmissions < 1
+      ? formatDecimal(weeklyNewCovidAdmissions, 1)
+      : formatInteger(weeklyNewCovidAdmissions);
 
   return (
     <Fragment>
-      Over the last week, {locationName} had {newCasesPerDayText} COVID hospital
-      admissions (<b>{formatDecimal(weeklyCovidAdmissionsPer100k, 1)}</b> for
-      every 100,000 residents).
+      Over the last week, {projections.isCounty ? hsaCopy : locationName} had{' '}
+      {weeklyNewCovidAdmissionsText} COVID hospital admissions (
+      <b>{formatDecimal(weeklyCovidAdmissionsPer100k, 1)}</b> for every 100,000
+      residents).
     </Fragment>
   );
 }

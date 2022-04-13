@@ -5,7 +5,6 @@ import {
   trackEvent,
   trackSaveImage,
   trackCopyLink,
-  trackShare,
   trackVoteClick,
   trackWebVitals,
 } from './utils';
@@ -18,7 +17,6 @@ export {
   trackEvent,
   trackSaveImage,
   trackCopyLink,
-  trackShare,
   trackVoteClick,
   trackWebVitals,
 };

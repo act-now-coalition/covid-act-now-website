@@ -19,6 +19,7 @@ export async function fetchAllAlertSubscriptions(
       .stream()
       .on('data', subscription => {
         const data = subscription.data();
+        data.email = subscription.id;
         // Convert Firestore timestamp to plain Date.
         data.subscribedAt = data.subscribedAt && data.subscribedAt.toDate();
         subscriptions.push(data);
