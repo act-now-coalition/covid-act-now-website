@@ -158,6 +158,8 @@ export class Projection {
   readonly currentDailyDeaths: number | null;
   readonly currentHsaIcuInfo: HospitalResourceUtilization;
   readonly currentHsaHospitalInfo: HospitalResourceUtilizationWithAdmissions;
+  /** Gets the latest weekly covid admissions data for this location. Note that for
+   * counties you likely want to use the HSA data (e.g. via currentHsaHospitalInfo) instead of this. */
   readonly currentWeeklyCovidAdmissions: number | null;
   readonly canCommunityLevel: Level;
 
@@ -311,7 +313,6 @@ export class Projection {
 
     this.currentHsaIcuInfo = summaryWithTimeseries.actuals.hsaIcuBeds;
     this.currentHsaHospitalInfo = summaryWithTimeseries.actuals.hsaHospitalBeds;
-    // For counties, in most cases we will want to access hsaHospitalBeds (usually via currentHsaHospitalInfo)
     this.currentWeeklyCovidAdmissions =
       summaryWithTimeseries.actuals.hospitalBeds.weeklyCovidAdmissions;
 
