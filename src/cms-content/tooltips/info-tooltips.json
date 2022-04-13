@@ -8,7 +8,7 @@
     },
     {
       "title": "Weekly new reported cases per 100k",
-      "body": "Weekly new reported cases is the number of new COVID cases emerging each week in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
+      "body": "Weekly new reported cases is the number of new COVID cases emerging each week in a location. This is measured by the number of reported positive test results, and it does not include at-home positive test results.",
       "id": "weekly-new-cases",
       "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#weekly-new-cases)."
     },
