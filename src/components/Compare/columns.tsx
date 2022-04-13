@@ -121,7 +121,7 @@ class VaccinationsColumn extends MetricColumn {
 }
 
 // All of the compare table columns we use.
-const weeklyCasesPer100kColumn = new MetricColumn(Metric.WEEKLY_CASES_PER_100K);
+const weeklyCasesPer100kColumn = new MetricColumn(Metric.WEEKLY_CASES);
 const admissionsPer100kColumn = new MetricColumn(Metric.ADMISSIONS_PER_100K);
 const ratioBedsWithCovidColumn = new MetricColumn(Metric.RATIO_BEDS_WITH_COVID);
 const vaccinationsColumn = new VaccinationsColumn();

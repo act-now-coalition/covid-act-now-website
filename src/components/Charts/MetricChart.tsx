@@ -89,7 +89,7 @@ const MetricChart = React.memo(
             seriesList={getVaccinationSeries(projection)}
           />
         )}
-        {metric === Metric.WEEKLY_CASES_PER_100K && (
+        {metric === Metric.WEEKLY_CASES && (
           <ChartWeeklyNewCasesPer100k
             height={chartHeight}
             columnData={projection.getDataset('weeklyNewCasesPer100k')}

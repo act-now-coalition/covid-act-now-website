@@ -27,8 +27,7 @@ const metricToLearnLink: { [key in Metric]: string } = {
     '/covid-risk-levels-metrics#admissions-per-100k',
   [Metric.RATIO_BEDS_WITH_COVID]:
     '/covid-risk-levels-metrics#ratio-beds-with-covid',
-  [Metric.WEEKLY_CASES_PER_100K]:
-    '/covid-risk-levels-metrics#weekly-cases-per-100k',
+  [Metric.WEEKLY_CASES]: '/covid-risk-levels-metrics#weekly-cases-per-100k',
 };
 
 export function getMetricModalContent(
@@ -66,9 +65,9 @@ interface ExploreMetricModalMapContent {
 export const exploreMetricToFooterContentMap: {
   [key: number]: ExploreMetricModalMapContent;
 } = {
-  [ExploreMetric.WEEKLY_DEATHS_PER_100K]: {
+  [ExploreMetric.WEEKLY_DEATHS]: {
     metricName: 'weekly deaths',
-    howItsCalculated: 'Our weekly deaths number is a seven-day average.',
+    howItsCalculated: 'Our weekly deaths number is a rolling seven-day sum.',
     metricDefinition: 'This is the number of COVID deaths per week.',
     source: 'The New York Times',
     statusTextMeasure: 'weekly deaths',

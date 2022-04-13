@@ -92,8 +92,8 @@ export function getDateRange(period: Period): Date[] {
 export const EXPLORE_METRICS = [
   ExploreMetric.ADMISSIONS_PER_100K,
   ExploreMetric.RATIO_BEDS_WITH_COVID,
-  ExploreMetric.WEEKLY_CASES_PER_100K,
-  ExploreMetric.WEEKLY_DEATHS_PER_100K,
+  ExploreMetric.WEEKLY_CASES,
+  ExploreMetric.WEEKLY_DEATHS,
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
@@ -115,6 +115,8 @@ export const ORIGINAL_EXPLORE_METRICS = [
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
+  ExploreMetric.WEEKLY_CASES,
+  ExploreMetric.WEEKLY_DEATHS,
 ];
 
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
@@ -142,7 +144,7 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
     case 'bedsWithCovidPatientsRatio':
       return ExploreMetric.RATIO_BEDS_WITH_COVID;
     case 'weeklyNewCasesPer100k':
-      return ExploreMetric.WEEKLY_CASES_PER_100K;
+      return ExploreMetric.WEEKLY_CASES;
   }
 }
 
@@ -170,10 +172,10 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'weeklyCovidAdmissionsPer100k';
     case ExploreMetric.RATIO_BEDS_WITH_COVID:
       return 'bedsWithCovidPatientsRatio';
-    case ExploreMetric.WEEKLY_CASES_PER_100K:
+    case ExploreMetric.WEEKLY_CASES:
       return 'weeklyNewCasesPer100k';
-    case ExploreMetric.WEEKLY_DEATHS_PER_100K:
-      return 'weeklyDeathsPer100k';
+    case ExploreMetric.WEEKLY_DEATHS:
+      return 'weeklyDeaths';
   }
 }
 
@@ -420,32 +422,32 @@ export const exploreMetricData: {
       },
     ],
   },
-  [ExploreMetric.WEEKLY_CASES_PER_100K]: {
-    title: 'Weekly reported cases per 100k',
-    name: 'Weekly reported cases per 100k',
-    chartId: 'weekly_new_cases_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
+  [ExploreMetric.WEEKLY_CASES]: {
+    title: 'Weekly reported cases',
+    name: 'Weekly reported cases',
+    chartId: 'weekly_new_cases', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 0,
     seriesList: [
       {
-        label: 'Weekly reported cases per 100k',
-        tooltipLabel: 'Weekly reported cases per 100k',
+        label: 'Weekly reported cases',
+        tooltipLabel: 'Weekly reported cases',
         datasetId: 'weeklyNewCasesPer100k',
         type: SeriesType.LINE,
       },
     ],
   },
-  [ExploreMetric.WEEKLY_DEATHS_PER_100K]: {
-    title: 'Weekly reported deaths per 100k',
-    name: 'Weekly reported deaths per 100k',
-    chartId: 'weekly_reported_deaths_per_100k',
+  [ExploreMetric.WEEKLY_DEATHS]: {
+    title: 'Weekly deaths',
+    name: 'Weekly deaths',
+    chartId: 'weekly_deaths',
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 0,
     seriesList: [
       {
-        label: 'Weekly reported deaths per 100k',
-        tooltipLabel: 'Weekly reported deaths per 100k',
-        datasetId: 'weeklyDeathsPer100k',
+        label: 'Weekly deaths',
+        tooltipLabel: 'Weekly deaths',
+        datasetId: 'weeklyDeaths',
         type: SeriesType.LINE,
       },
     ],

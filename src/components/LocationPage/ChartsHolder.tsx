@@ -75,7 +75,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       [Metric.POSITIVE_TESTS]: positiveTestsRef,
       [Metric.HOSPITAL_USAGE]: hospitalUsageRef,
       [Metric.VACCINATIONS]: vaccinationsRef,
-      [Metric.WEEKLY_CASES_PER_100K]: weeklyNewCasesRef,
+      [Metric.WEEKLY_CASES]: weeklyNewCasesRef,
       [Metric.ADMISSIONS_PER_100K]: admissionsPer100kRef,
       [Metric.RATIO_BEDS_WITH_COVID]: ratioBedsWithCovidRef,
     }),
@@ -93,11 +93,11 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const [currentExploreMetric, setCurrentExploreMetric] = useState<
     ExploreMetric
-  >(ExploreMetric.WEEKLY_CASES_PER_100K);
+  >(ExploreMetric.WEEKLY_CASES);
 
   useEffect(() => {
     if (hash === '#explore-chart') {
-      setCurrentExploreMetric(ExploreMetric.WEEKLY_CASES_PER_100K);
+      setCurrentExploreMetric(ExploreMetric.WEEKLY_CASES);
     }
   }, [hash]);
 

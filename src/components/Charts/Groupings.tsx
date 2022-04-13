@@ -59,20 +59,17 @@ export const CHART_GROUPS: ChartGroup[] = [
     groupHeader: GroupHeader.COMMUNITY_LEVEL,
     metricList: [
       {
-        metric: Metric.WEEKLY_CASES_PER_100K,
+        metric: Metric.WEEKLY_CASES,
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
           <ChartTab
-            metricName={getMetricNameForStat(Metric.WEEKLY_CASES_PER_100K)}
-            subLabel={metricSubLabelText[Metric.WEEKLY_CASES_PER_100K]}
+            metricName={getMetricNameForStat(Metric.WEEKLY_CASES)}
+            subLabel={metricSubLabelText[Metric.WEEKLY_CASES]}
             metricValueInfo={metricValue}
           />
         ),
         renderChart: projections => (
-          <MetricChart
-            metric={Metric.WEEKLY_CASES_PER_100K}
-            projections={projections}
-          />
+          <MetricChart metric={Metric.WEEKLY_CASES} projections={projections} />
         ),
       },
       {
@@ -177,18 +174,14 @@ export const CHART_GROUPS: ChartGroup[] = [
     groupHeader: GroupHeader.ADDITIONAL_MISC,
     metricList: [
       {
-        metric: ExploreMetric.WEEKLY_DEATHS_PER_100K,
+        metric: ExploreMetric.WEEKLY_DEATHS,
         metricType: MetricType.EXPLORE_METRIC,
         renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName="Weekly deaths"
-            metricValueInfo={metricValue}
-            subLabel={['per 100k']}
-          />
+          <ChartTab metricName="Weekly deaths" metricValueInfo={metricValue} />
         ),
         renderChart: projections => (
           <SingleLocationChartContainer
-            metric={ExploreMetric.WEEKLY_DEATHS_PER_100K}
+            metric={ExploreMetric.WEEKLY_DEATHS}
             projections={projections}
           />
         ),

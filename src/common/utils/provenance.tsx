@@ -105,7 +105,7 @@ const metricToSourceMap: RegionSourceMap = {
   },
 
   // TODO(8.2) : Fill in correct sources (or remove if we correctly get them from the API)
-  [Metric.WEEKLY_CASES_PER_100K]: {
+  [Metric.WEEKLY_CASES]: {
     state: {
       sourceName: 'CDC Covid Tracker',
       url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',

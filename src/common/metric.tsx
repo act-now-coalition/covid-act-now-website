@@ -22,7 +22,7 @@ export const ALL_METRICS = [
   Metric.VACCINATIONS,
   Metric.RATIO_BEDS_WITH_COVID,
   Metric.ADMISSIONS_PER_100K,
-  Metric.WEEKLY_CASES_PER_100K,
+  Metric.WEEKLY_CASES,
 ];
 
 const ALL_METRICS_LEVEL_INFO_MAP: { [metric in Metric]: LevelInfoMap } = {
@@ -35,7 +35,7 @@ const ALL_METRICS_LEVEL_INFO_MAP: { [metric in Metric]: LevelInfoMap } = {
     RatioBedsWithCovid.RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP,
   [Metric.ADMISSIONS_PER_100K]:
     AdmissionsPer100k.ADMISSIONS_PER_100K_LEVEL_INFO_MAP,
-  [Metric.WEEKLY_CASES_PER_100K]:
+  [Metric.WEEKLY_CASES]:
     WeeklyNewCasesPer100k.WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP,
 };
 
@@ -69,8 +69,7 @@ const metricDefinitions: { [metric in Metric]: MetricDefinition } = {
   [Metric.RATIO_BEDS_WITH_COVID]:
     RatioBedsWithCovid.RatioBedsWithCovidPatientsMetric,
   [Metric.ADMISSIONS_PER_100K]: AdmissionsPer100k.AdmissionsPer100kMetric,
-  [Metric.WEEKLY_CASES_PER_100K]:
-    WeeklyNewCasesPer100k.WeeklyNewCasesPer100kMetric,
+  [Metric.WEEKLY_CASES]: WeeklyNewCasesPer100k.WeeklyNewCasesPer100kMetric,
 };
 
 export function getMetricDefinition(metric: Metric) {
@@ -119,7 +118,7 @@ const MetricDecimalPlaces: { [metric in Metric]: number } = {
   // TODO(8.2) : confirm these decimal places
   [Metric.RATIO_BEDS_WITH_COVID]: 1,
   [Metric.ADMISSIONS_PER_100K]: 1,
-  [Metric.WEEKLY_CASES_PER_100K]: 1,
+  [Metric.WEEKLY_CASES]: 1,
 };
 
 /** which metrics should be formatted as percentages. */

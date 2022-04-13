@@ -13,5 +13,5 @@ export enum Metric {
 
   RATIO_BEDS_WITH_COVID = 7,
   ADMISSIONS_PER_100K = 8,
-  WEEKLY_CASES_PER_100K = 9,
+  WEEKLY_CASES = 9,
 }

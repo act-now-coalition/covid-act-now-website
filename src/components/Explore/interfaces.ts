@@ -31,8 +31,8 @@ export interface Series {
 export enum ExploreMetric {
   ADMISSIONS_PER_100K = 0,
   RATIO_BEDS_WITH_COVID = 1,
-  WEEKLY_CASES_PER_100K = 2,
-  WEEKLY_DEATHS_PER_100K = 3,
+  WEEKLY_CASES = 2,
+  WEEKLY_DEATHS = 3,
   CASES = 4,
   DEATHS = 5,
   HOSPITALIZATIONS = 6,

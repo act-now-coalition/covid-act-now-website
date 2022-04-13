@@ -74,7 +74,7 @@ export type DatasetId =
   | 'smoothedICUHospitalizations'
   | 'weeklyCovidAdmissionsPer100k'
   | 'bedsWithCovidPatientsRatio'
-  | 'weeklyDeathsPer100k';
+  | 'weeklyDeaths';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -180,7 +180,7 @@ export class Projection {
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly weeklyNewCasesPer100k: Array<number | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
-  private readonly weeklyDeathsPer100k: Array<number | null>;
+  private readonly weeklyDeaths: Array<number | null>;
 
   private readonly rawDailyCases: Array<number | null>;
   private readonly rawDailyDeaths: Array<number | null>;
@@ -224,9 +224,7 @@ export class Projection {
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.rawDailyDeaths,
     );
-    this.weeklyDeathsPer100k = this.smoothedDailyDeaths.map(
-      row => row && row * 7,
-    );
+    this.weeklyDeaths = this.smoothedDailyDeaths.map(row => row && row * 7);
 
     // Disaggregate county hospitalization data from HSAs to counties in order to display
     // county estimates in charts.
@@ -357,7 +355,7 @@ export class Projection {
         return this.currentCaseDensity;
       case Metric.ADMISSIONS_PER_100K:
         return this.metrics?.weeklyCovidAdmissionsPer100k ?? null;
-      case Metric.WEEKLY_CASES_PER_100K:
+      case Metric.WEEKLY_CASES:
         return this.metrics?.weeklyNewCasesPer100k ?? null;
       case Metric.RATIO_BEDS_WITH_COVID:
         return this.metrics?.bedsWithCovidPatientsRatio ?? null;

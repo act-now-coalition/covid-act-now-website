@@ -79,7 +79,7 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
 function renderStatus(projections: Projections): React.ReactElement {
   const { totalPopulation, currentDailyAverageCases } = projections.primary;
   const currentWeeklyReportedCases = projections.getMetricValue(
-    Metric.WEEKLY_CASES_PER_100K,
+    Metric.WEEKLY_CASES,
   );
   const locationName = projections.locationName;
   if (
@@ -144,16 +144,14 @@ function renderThermometer(): React.ReactElement {
 }
 
 function renderInfoTooltip(): React.ReactElement {
-  const { body } = metricToTooltipMap[
-    Metric.WEEKLY_CASES_PER_100K
-  ].metricDefinition;
+  const { body } = metricToTooltipMap[Metric.WEEKLY_CASES].metricDefinition;
 
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
       aria-label={`Show definition of ${WeeklyNewCasesPer100kMetric.metricName} metric`}
       trackOpenTooltip={() =>
-        trackOpenTooltip(`Metric definition: ${Metric.WEEKLY_CASES_PER_100K}`)
+        trackOpenTooltip(`Metric definition: ${Metric.WEEKLY_CASES}`)
       }
     />
   );
