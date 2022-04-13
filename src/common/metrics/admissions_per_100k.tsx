@@ -81,8 +81,21 @@ function renderStatus(projections: Projections): React.ReactElement {
   const weeklyCovidAdmissionsPer100k = projections.getMetricValue(
     Metric.ADMISSIONS_PER_100K,
   );
+
+  // NOTE: We reverse engineer the actual weekly admissions number for counties because the HHS source
+  // data does not match due to data suppression.
+  let weeklyCovidAdmissionsCdc: number | null = null;
+  if (
+    weeklyCovidAdmissionsPer100k !== null &&
+    projections.primary.hsaPopulation !== null
+  ) {
+    weeklyCovidAdmissionsCdc =
+      weeklyCovidAdmissionsPer100k *
+      (projections.primary.hsaPopulation / 100_000);
+  }
+
   const weeklyNewCovidAdmissions = projections.isCounty
-    ? currentHsaHospitalInfo.weeklyCovidAdmissions
+    ? weeklyCovidAdmissionsCdc
     : currentWeeklyCovidAdmissions;
   const locationName = projections.locationName;
   if (
