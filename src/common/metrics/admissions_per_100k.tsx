@@ -121,7 +121,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       Over the last week, {projections.isCounty ? hsaCopy : locationName} had{' '}
-      {weeklyNewCovidAdmissionsText} COVID hospital admissions (
+      {weeklyNewCovidAdmissionsText} new COVID hospital admissions (
       <b>{formatDecimal(weeklyCovidAdmissionsPer100k, 1)}</b> for every 100,000
       residents).
     </Fragment>
