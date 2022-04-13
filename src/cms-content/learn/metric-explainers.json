@@ -12,7 +12,7 @@
       "sectionHeader": "Weekly new cases",
       "sectionSubheader": "Also known as: incidence",
       "sectionId": "weekly-new-cases",
-      "sectionIntro": "**Weekly new cases is the number of new COVID cases per week per unit of population** (we measure per 100K people).",
+      "sectionIntro": "**Weekly new cases is the number of new COVID cases per week per unit of population** **(we measure per 100K people).**",
       "questions": [
         {
           "question": "Sources and methodology",
