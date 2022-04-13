@@ -90,10 +90,10 @@ export function getDateRange(period: Period): Date[] {
  * in ExploreMetric enum in Explore/interfaces.ts.
  */
 export const EXPLORE_METRICS = [
-  ExploreMetric.ADMISSIONS_PER_100K,
   ExploreMetric.RATIO_BEDS_WITH_COVID,
-  ExploreMetric.WEEKLY_CASES,
+  ExploreMetric.ADMISSIONS_PER_100K,
   ExploreMetric.WEEKLY_DEATHS,
+  ExploreMetric.WEEKLY_CASES,
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
