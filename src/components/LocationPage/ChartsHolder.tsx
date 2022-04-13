@@ -93,11 +93,11 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const [currentExploreMetric, setCurrentExploreMetric] = useState<
     ExploreMetric
-  >(ExploreMetric.WEEKLY_CASES_PER_100K);
+  >(ExploreMetric.WEEKLY_CASES);
 
   useEffect(() => {
     if (hash === '#explore-chart') {
-      setCurrentExploreMetric(ExploreMetric.WEEKLY_CASES_PER_100K);
+      setCurrentExploreMetric(ExploreMetric.WEEKLY_CASES);
     }
   }, [hash]);
 

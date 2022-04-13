@@ -10,8 +10,6 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
 
-// TODO(8.2) : Update with real metric + content:
-
 export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
@@ -27,13 +25,13 @@ const LIMIT_HIGH = Infinity;
 
 // Weekly new cases doesn't have a medium level, only low and high. So we use the following variables for both medium and high:
 const colorHigh = COLOR_MAP.ORANGE_DARK.BASE;
-const nameHigh = 'High';
+const nameHigh = 'Higher';
 
 export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
   [Level.LOW]: {
     level: Level.LOW,
     upperLimit: LIMIT_LOW,
-    name: 'Low',
+    name: 'Lower',
     color: COLOR_MAP.GREEN.BASE,
     detail: () => 'COVID is being effectively contained',
   },
@@ -96,16 +94,12 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const newCasesPerDay = currentDailyAverageCases;
-  // Try not to round cases/day to zero (since it will probably be >0 per 100k).
-  const newCasesPerDayText =
-    newCasesPerDay >= 0.1 && newCasesPerDay < 1
-      ? formatDecimal(newCasesPerDay, 1)
-      : formatInteger(newCasesPerDay);
+  const newCasesPerWeek = currentDailyAverageCases * 7;
+  const newCasesPerWeekText = formatInteger(newCasesPerWeek);
 
   return (
     <Fragment>
-      Over the last week, {locationName} had {newCasesPerDayText} new reported
+      Over the last week, {locationName} had {newCasesPerWeekText} new reported
       cases (<b>{formatDecimal(currentWeeklyReportedCases, 1)}</b> for every
       100,000 residents). Reported cases do not include all at-home positive
       tests.

@@ -12,7 +12,7 @@ const HomeShareCardImage = () => {
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <ShareCardWrapper isHomePage>
-        <SocialLocationPreviewMap />
+        <SocialLocationPreviewMap isRiskMap />
       </ShareCardWrapper>
     </ScreenshotWrapper>
   );

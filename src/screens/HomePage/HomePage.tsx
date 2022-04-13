@@ -41,7 +41,7 @@ import { Level } from 'common/level';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Deaths, Positivity rate, and ICU capacity for your State, City, or County.`;
+  return `${date} Covid Act Now has real-time COVID data and community levels for your location. See how your community is doing.`;
 }
 
 export default function HomePage() {
@@ -110,7 +110,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
+        pageTitle="US COVID Community Levels & Vaccine Tracker"
         pageDescription={getPageDescription()}
       />
       <NavAllOtherPages

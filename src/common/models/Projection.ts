@@ -73,7 +73,8 @@ export type DatasetId =
   | 'rawICUHospitalizations'
   | 'smoothedICUHospitalizations'
   | 'weeklyCovidAdmissionsPer100k'
-  | 'bedsWithCovidPatientsRatio';
+  | 'bedsWithCovidPatientsRatio'
+  | 'weeklyDeaths';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -158,6 +159,9 @@ export class Projection {
   readonly currentDailyDeaths: number | null;
   readonly currentHsaIcuInfo: HospitalResourceUtilization;
   readonly currentHsaHospitalInfo: HospitalResourceUtilizationWithAdmissions;
+  /** Gets the latest weekly covid admissions data for this location. Note that for
+   * counties you likely want to use the HSA data (e.g. via currentHsaHospitalInfo) instead of this. */
+  readonly currentWeeklyCovidAdmissions: number | null;
   readonly canCommunityLevel: Level;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
@@ -179,6 +183,7 @@ export class Projection {
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
   private readonly weeklyNewCasesPer100k: Array<number | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
+  private readonly weeklyDeaths: Array<number | null>;
 
   private readonly rawDailyCases: Array<number | null>;
   private readonly rawDailyDeaths: Array<number | null>;
@@ -222,6 +227,7 @@ export class Projection {
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.rawDailyDeaths,
     );
+    this.weeklyDeaths = this.smoothedDailyDeaths.map(row => row && row * 7);
 
     // Disaggregate county hospitalization data from HSAs to counties in order to display
     // county estimates in charts.
@@ -310,6 +316,8 @@ export class Projection {
 
     this.currentHsaIcuInfo = summaryWithTimeseries.actuals.hsaIcuBeds;
     this.currentHsaHospitalInfo = summaryWithTimeseries.actuals.hsaHospitalBeds;
+    this.currentWeeklyCovidAdmissions =
+      summaryWithTimeseries.actuals.hospitalBeds.weeklyCovidAdmissions;
 
     this.annotations = summaryWithTimeseries.annotations;
   }

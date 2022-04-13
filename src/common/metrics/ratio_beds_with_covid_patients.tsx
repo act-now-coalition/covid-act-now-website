@@ -10,8 +10,6 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
 
-// TODO(8.2) : Update with real metric + content:
-
 export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
@@ -89,10 +87,12 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
+  const hsaCopy = `the ${projections.primary.hsaName} Health Service Area`;
   return (
     <Fragment>
       {formatPercent(currentRatioBedsWithCovid)} of staffed inpatient beds in{' '}
-      {locationName} are occupied by COVID patients.
+      {projections.isCounty ? hsaCopy : locationName} are occupied by COVID
+      patients.
     </Fragment>
   );
 }
