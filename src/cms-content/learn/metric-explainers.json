@@ -103,12 +103,12 @@
       "sectionHeader": " Positive test rate",
       "sectionSubheader": "Also known as: test positivity",
       "sectionId": "positive-test-rate",
-      "sectionIntro": "**Positive test rate is the *percentage* of COVID PCR testing that comes back positive** (not the total number of positive PCR tests).",
+      "sectionIntro": "**Positive test rate is the *percentage* of reported COVID PCR testing that comes back positive** **(not the total number of positive PCR tests).**",
       "questions": [
         {
           "question": "Sources and methodology",
           "questionId": "positive-test-rate-sources-methodology",
-          "answer": "Positive test rate is calculated by dividing the number of positive PCR tests over the last 7 days by the total number of PCR tests over the last 7 days. It should be looked at in conjunction with other metrics such as infection rate and weekly new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
+          "answer": "Positive test rate is calculated by dividing the number of positive reported PCR tests over the last 7 days by the total number of reported PCR tests over the last 7 days. It should be looked at in conjunction with other metrics such as infection rate and weekly new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
         },
         {
           "question": "Limitations",
