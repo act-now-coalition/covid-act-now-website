@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { levelText } from 'common/utils/chart';
-import { getLevel } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { formatPercent, formatInteger, assert } from 'common/utils';
 import { Projections } from 'common/models/Projections';
@@ -133,20 +131,11 @@ function renderStatus(projections: Projections): React.ReactElement {
     patientBreakdown = `${nonCovidICUPatients} are filled by non-COVID patients and ${covidICUPatients} are filled by COVID patients.`;
   }
 
-  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
-  const textLevel = levelText(
-    level,
-    'This suggests there is likely enough capacity to absorb a wave of new COVID infections.',
-    'This suggests some ability to absorb an increase in COVID cases.',
-    'This suggests hospitals may not be well positioned to absorb a wave of new COVID infections without substantial surge capacity. Caution is warranted.',
-    'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity.',
-  );
   return (
     <Fragment>
       {isCounty ? hsaCopy : locationName} has reported having {totalICUBeds}{' '}
       staffed adult ICU beds. {patientBreakdown} Overall, {totalICUPatients} out
-      of {totalICUBeds} ({icuCapacityUsed}) are filled.{' '}
-      {isCounty ? textLevel : ''}
+      of {totalICUBeds} ({icuCapacityUsed}) are filled.
     </Fragment>
   );
 }
