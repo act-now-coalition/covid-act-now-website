@@ -44,7 +44,6 @@ export interface MetricChartInfo {
 export enum GroupHeader {
   COMMUNITY_LEVEL = 'Community Level Metrics',
   VACCINATED = '% Vaccinated',
-  ADDITIONAL_HOSPITALIZATION = 'Additional Hospitalization Metrics',
   ADDITIONAL_MISC = 'Additional Metrics',
 }
 
@@ -122,53 +121,6 @@ export const CHART_GROUPS: ChartGroup[] = [
         ),
         renderChart: projections => (
           <MetricChart metric={Metric.VACCINATIONS} projections={projections} />
-        ),
-      },
-    ],
-  },
-  {
-    groupHeader: GroupHeader.ADDITIONAL_HOSPITALIZATION,
-    metricList: [
-      {
-        metric: Metric.HOSPITAL_USAGE,
-        metricType: MetricType.KEY_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="ICU used" metricValueInfo={metricValue} /> // TODO (chelsi): make a map of these chart-specific metric names
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.ICU_USED}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: ExploreMetric.ICU_HOSPITALIZATIONS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="ICU patients" metricValueInfo={metricValue} />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.ICU_HOSPITALIZATIONS}
-            projections={projections}
-          />
-        ),
-      },
-      {
-        metric: ExploreMetric.HOSPITALIZATIONS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab
-            metricName="Hospitalized patients"
-            metricValueInfo={metricValue}
-          />
-        ),
-        renderChart: projections => (
-          <SingleLocationChartContainer
-            metric={ExploreMetric.HOSPITALIZATIONS}
-            projections={projections}
-          />
         ),
       },
     ],
