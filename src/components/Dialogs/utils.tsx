@@ -27,7 +27,8 @@ const metricToLearnLink: { [key in Metric]: string } = {
     '/covid-risk-levels-metrics#admissions-per-100k',
   [Metric.RATIO_BEDS_WITH_COVID]:
     '/covid-risk-levels-metrics#ratio-beds-with-covid',
-  [Metric.WEEKLY_CASES]: '/covid-risk-levels-metrics#weekly-cases-per-100k',
+  [Metric.WEEKLY_CASES_PER_100K]:
+    '/covid-risk-levels-metrics#weekly-cases-per-100k',
 };
 
 export function getMetricModalContent(

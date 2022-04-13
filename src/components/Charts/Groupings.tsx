@@ -59,17 +59,20 @@ export const CHART_GROUPS: ChartGroup[] = [
     groupHeader: GroupHeader.COMMUNITY_LEVEL,
     metricList: [
       {
-        metric: Metric.WEEKLY_CASES,
+        metric: Metric.WEEKLY_CASES_PER_100K,
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
           <ChartTab
-            metricName={getMetricNameForStat(Metric.WEEKLY_CASES)}
-            subLabel={metricSubLabelText[Metric.WEEKLY_CASES]}
+            metricName={getMetricNameForStat(Metric.WEEKLY_CASES_PER_100K)}
+            subLabel={metricSubLabelText[Metric.WEEKLY_CASES_PER_100K]}
             metricValueInfo={metricValue}
           />
         ),
         renderChart: projections => (
-          <MetricChart metric={Metric.WEEKLY_CASES} projections={projections} />
+          <MetricChart
+            metric={Metric.WEEKLY_CASES_PER_100K}
+            projections={projections}
+          />
         ),
       },
       {

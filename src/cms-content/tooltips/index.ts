@@ -52,7 +52,7 @@ export const metricToTooltipMap: MetricToTooltipContentMap = {
   [Metric.HOSPITAL_USAGE]: getMetricMapById('icu-capacity-used'),
   [Metric.RATIO_BEDS_WITH_COVID]: getMetricMapById('patients-with-covid'),
   [Metric.ADMISSIONS_PER_100K]: getMetricMapById('weekly-admissions'),
-  [Metric.WEEKLY_CASES]: getMetricMapById('weekly-new-cases'),
+  [Metric.WEEKLY_CASES_PER_100K]: getMetricMapById('weekly-new-cases'),
 };
 
 export const locationPageHeaderTooltipContent: Tooltip = getTooltipContentById(

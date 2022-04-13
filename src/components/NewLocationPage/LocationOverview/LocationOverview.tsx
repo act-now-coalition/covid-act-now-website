@@ -57,10 +57,12 @@ const LocationOverview: React.FC<{
             value={stats[Metric.VACCINATIONS]}
           />
         </GridItemMetricVax>
-        <GridItemMetric1 onClick={() => onClickMetric(Metric.WEEKLY_CASES)}>
+        <GridItemMetric1
+          onClick={() => onClickMetric(Metric.WEEKLY_CASES_PER_100K)}
+        >
           <SummaryStat
-            metric={Metric.WEEKLY_CASES}
-            value={stats[Metric.WEEKLY_CASES]}
+            metric={Metric.WEEKLY_CASES_PER_100K}
+            value={stats[Metric.WEEKLY_CASES_PER_100K]}
           />
         </GridItemMetric1>
         <GridItemMetric2

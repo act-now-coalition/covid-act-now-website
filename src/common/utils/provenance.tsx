@@ -103,8 +103,7 @@ const metricToSourceMap: RegionSourceMap = {
       url: 'n/a',
     },
   },
-  // TODO(8.2) : Fill in correct sources (or remove if we correctly get them from the API)
-  [Metric.WEEKLY_CASES]: {
+  [Metric.WEEKLY_CASES_PER_100K]: {
     state: {
       sourceName: 'The New York Times',
       url: 'https://github.com/nytimes/covid-19-data',

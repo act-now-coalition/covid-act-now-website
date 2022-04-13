@@ -360,7 +360,7 @@ export class Projection {
         return this.currentCaseDensity;
       case Metric.ADMISSIONS_PER_100K:
         return this.metrics?.weeklyCovidAdmissionsPer100k ?? null;
-      case Metric.WEEKLY_CASES:
+      case Metric.WEEKLY_CASES_PER_100K:
         return this.metrics?.weeklyNewCasesPer100k ?? null;
       case Metric.RATIO_BEDS_WITH_COVID:
         return this.metrics?.bedsWithCovidPatientsRatio ?? null;

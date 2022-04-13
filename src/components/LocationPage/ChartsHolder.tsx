@@ -75,7 +75,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       [Metric.POSITIVE_TESTS]: positiveTestsRef,
       [Metric.HOSPITAL_USAGE]: hospitalUsageRef,
       [Metric.VACCINATIONS]: vaccinationsRef,
-      [Metric.WEEKLY_CASES]: weeklyNewCasesRef,
+      [Metric.WEEKLY_CASES_PER_100K]: weeklyNewCasesRef,
       [Metric.ADMISSIONS_PER_100K]: admissionsPer100kRef,
       [Metric.RATIO_BEDS_WITH_COVID]: ratioBedsWithCovidRef,
     }),

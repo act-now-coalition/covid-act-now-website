@@ -14,13 +14,13 @@ export const daysToChart = 30;
 export type dateItem = number | Date;
 
 export enum SparkLineMetric {
-  WEEKLY_CASES,
+  WEEKLY_CASES_PER_100K,
   ADMISSIONS_PER_100K,
   RATIO_BEDS_WITH_COVID,
 }
 
 export const SPARK_LINE_METRICS = [
-  SparkLineMetric.WEEKLY_CASES,
+  SparkLineMetric.WEEKLY_CASES_PER_100K,
   SparkLineMetric.ADMISSIONS_PER_100K,
   SparkLineMetric.RATIO_BEDS_WITH_COVID,
 ];
@@ -29,7 +29,7 @@ export const SPARK_LINE_METRICS = [
 export const SparkLineToExploreMetric: {
   [metric in SparkLineMetric]: ExploreMetric;
 } = {
-  [SparkLineMetric.WEEKLY_CASES]: ExploreMetric.WEEKLY_CASES,
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES,
   [SparkLineMetric.ADMISSIONS_PER_100K]: ExploreMetric.ADMISSIONS_PER_100K,
   [SparkLineMetric.RATIO_BEDS_WITH_COVID]: ExploreMetric.RATIO_BEDS_WITH_COVID,
 };
@@ -50,7 +50,7 @@ interface MetricDescription {
 export const sparkLinesMetricData: {
   [metric in SparkLineMetric]: MetricDescription;
 } = {
-  [SparkLineMetric.WEEKLY_CASES]: {
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: {
     title: 'Cases',
     seriesList: [
       {

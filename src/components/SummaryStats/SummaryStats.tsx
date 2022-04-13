@@ -111,8 +111,8 @@ const SummaryStats = (props: {
         <SummaryStatsWrapper $condensed={props.condensed}>
           <SummaryStat
             onClick={props.onRtRangeClick || noop}
-            chartType={Metric.WEEKLY_CASES}
-            value={props.stats[Metric.WEEKLY_CASES] as number}
+            chartType={Metric.WEEKLY_CASES_PER_100K}
+            value={props.stats[Metric.WEEKLY_CASES_PER_100K] as number}
             {...sharedStatProps}
           />
           <SummaryStat
