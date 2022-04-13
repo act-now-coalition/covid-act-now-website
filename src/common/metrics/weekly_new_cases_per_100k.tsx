@@ -120,7 +120,7 @@ function renderThermometer(): React.ReactElement {
       roundBottom: false,
     },
     {
-      title: `<= ${LIMIT_LOW}`,
+      title: `≤ ${LIMIT_LOW}`,
       color: levelLow.color,
       roundTop: false,
       roundBottom: true,
