@@ -66,10 +66,10 @@ interface ExploreMetricModalMapContent {
 export const exploreMetricToFooterContentMap: {
   [key: number]: ExploreMetricModalMapContent;
 } = {
-  [ExploreMetric.DEATHS]: {
-    metricName: 'daily deaths',
-    howItsCalculated: 'Our daily deaths number is a seven-day average.',
-    metricDefinition: 'This is the number of COVID deaths per day.',
+  [ExploreMetric.WEEKLY_DEATHS]: {
+    metricName: 'weekly deaths',
+    howItsCalculated: 'Our weekly deaths number is a rolling seven-day sum.',
+    metricDefinition: 'This is the number of COVID deaths per week.',
     source: 'The New York Times',
     statusTextMeasure: 'weekly deaths',
   },

@@ -29,24 +29,19 @@ export interface Series {
  * we need to update these assigned indices to match.
  */
 export enum ExploreMetric {
-  WEEKLY_CASES_PER_100K = 0,
-  HOSPITALIZATIONS = 1,
-  ICU_HOSPITALIZATIONS = 2,
-  VACCINATIONS_FIRST_DOSE = 3,
-  VACCINATIONS_COMPLETED = 4,
-  VACCINATIONS_ADDITIONAL_DOSE = 5,
-  ICU_USED = 6,
-  POSITIVITY_RATE = 7,
-  ADMISSIONS_PER_100K = 8,
-  RATIO_BEDS_WITH_COVID = 9,
-
-  /**
-   * Cases and Deaths no longer used in Trends
-   * (i.e. no longer included in EXPLORE_METRICS in Explore/utils.ts),
-   * and so we order them last in the enum.
-   */
-  CASES = 10,
-  DEATHS = 11,
+  ADMISSIONS_PER_100K = 0,
+  RATIO_BEDS_WITH_COVID = 1,
+  WEEKLY_CASES = 2,
+  WEEKLY_DEATHS = 3,
+  CASES = 4,
+  DEATHS = 5,
+  HOSPITALIZATIONS = 6,
+  ICU_HOSPITALIZATIONS = 7,
+  VACCINATIONS_FIRST_DOSE = 8,
+  VACCINATIONS_COMPLETED = 9,
+  VACCINATIONS_ADDITIONAL_DOSE = 10,
+  ICU_USED = 11,
+  POSITIVITY_RATE = 12,
 }
 
 export enum DataMeasure {

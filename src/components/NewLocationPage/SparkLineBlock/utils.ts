@@ -29,7 +29,7 @@ export const SPARK_LINE_METRICS = [
 export const SparkLineToExploreMetric: {
   [metric in SparkLineMetric]: ExploreMetric;
 } = {
-  [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES_PER_100K,
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES,
   [SparkLineMetric.ADMISSIONS_PER_100K]: ExploreMetric.ADMISSIONS_PER_100K,
   [SparkLineMetric.RATIO_BEDS_WITH_COVID]: ExploreMetric.RATIO_BEDS_WITH_COVID,
 };
