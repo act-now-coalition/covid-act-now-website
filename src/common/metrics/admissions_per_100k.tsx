@@ -10,8 +10,6 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
 
-// TODO(8.2) : Update with real metric + content:
-
 export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,

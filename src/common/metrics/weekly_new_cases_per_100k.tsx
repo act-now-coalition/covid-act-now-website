@@ -10,8 +10,6 @@ import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
 
-// TODO(8.2) : Update with real metric + content:
-
 export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   renderStatus,
   renderThermometer,
@@ -97,11 +95,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   }
 
   const newCasesPerWeek = currentDailyAverageCases * 7;
-  // Try not to round cases/day to zero (since it will probably be >0 per 100k).
-  const newCasesPerWeekText =
-    newCasesPerWeek >= 0.1 && newCasesPerWeek < 1
-      ? formatDecimal(newCasesPerWeek, 1)
-      : formatInteger(newCasesPerWeek);
+  const newCasesPerWeekText = formatInteger(newCasesPerWeek);
 
   return (
     <Fragment>
