@@ -106,13 +106,11 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   // TODO(8.2) rename ref once group header is finalized // confirm that removing refs doesn't break anything
   const communityMetricsRef = useRef<HTMLDivElement>(null);
   const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
-  const additionalHospitalizationsMetricsRef = useRef<HTMLDivElement>(null);
   const additionalMiscMetricsRef = useRef<HTMLDivElement>(null);
   const chartBlockRefs = useMemo(
     () => ({
       [GroupHeader.COMMUNITY_LEVEL]: communityMetricsRef,
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
-      [GroupHeader.ADDITIONAL_HOSPITALIZATION]: additionalHospitalizationsMetricsRef,
       [GroupHeader.ADDITIONAL_MISC]: additionalMiscMetricsRef,
     }),
     [],

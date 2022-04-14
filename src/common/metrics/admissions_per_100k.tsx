@@ -75,14 +75,26 @@ function renderStatus(projections: Projections): React.ReactElement {
   const {
     totalPopulation,
     currentWeeklyCovidAdmissions,
-    currentHsaHospitalInfo,
     hsaName,
   } = projections.primary;
   const weeklyCovidAdmissionsPer100k = projections.getMetricValue(
     Metric.ADMISSIONS_PER_100K,
   );
+
+  // NOTE: We reverse engineer the actual weekly admissions number for counties because the HHS source
+  // data does not match due to data suppression.
+  let weeklyCovidAdmissionsCdc: number | null = null;
+  if (
+    weeklyCovidAdmissionsPer100k !== null &&
+    projections.primary.hsaPopulation !== null
+  ) {
+    weeklyCovidAdmissionsCdc =
+      weeklyCovidAdmissionsPer100k *
+      (projections.primary.hsaPopulation / 100_000);
+  }
+
   const weeklyNewCovidAdmissions = projections.isCounty
-    ? currentHsaHospitalInfo.weeklyCovidAdmissions
+    ? weeklyCovidAdmissionsCdc
     : currentWeeklyCovidAdmissions;
   const locationName = projections.locationName;
   if (
@@ -109,7 +121,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   return (
     <Fragment>
       Over the last week, {projections.isCounty ? hsaCopy : locationName} had{' '}
-      {weeklyNewCovidAdmissionsText} COVID hospital admissions (
+      {weeklyNewCovidAdmissionsText} new COVID hospital admissions (
       <b>{formatDecimal(weeklyCovidAdmissionsPer100k, 1)}</b> for every 100,000
       residents).
     </Fragment>

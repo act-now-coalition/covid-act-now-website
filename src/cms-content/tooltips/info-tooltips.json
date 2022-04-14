@@ -3,12 +3,12 @@
     {
       "title": "Location page header",
       "id": "location-page-header",
-      "body": "Our COVID assessment is based on the CDC’s Community Levels framework. This looks at three primary things: weekly new reported cases per 100K, weekly COVID admissions per 100K, and the percent of staffed inpatient beds occupied by COVID patients.\n\nEach metric is graded on a three-color scale. If weekly new reported cases per 100K population is below 200, depending on the levels of the other two indicators, community level can range from Low to Medium to High. If weekly new reported cases per 100K population is at or above 200, depending on the levels of the other two indicators, community level is either Medium or High.\n\n[Read more about the CDC’s framework.](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html)\n\nWe updated our COVID scoring in April of 2022 to better reflect the rise in vaccinations and natural immunity. [Learn more about the change and our former risk framework](https://covidactnow.org/covid-risk-levels-metrics).",
+      "body": "Our COVID assessment is based on the CDC’s Community Levels framework. This looks at three primary things: weekly new reported cases per 100K, weekly COVID admissions per 100K, and the percent of staffed inpatient beds occupied by COVID patients.\n\nEach metric is graded on a three-color scale. If weekly new reported cases per 100K population is below 200, depending on the levels of the other two indicators, community level can range from Low to Medium to High. If weekly new reported cases per 100K population is equal to or above 200, depending on the levels of the other two indicators, community level is either Medium or High.\n\n[Read more about Community Levels.](https://covidactnow.org/covid-risk-levels-metrics)\n\nNote that we updated our COVID scoring in April of 2022 to better reflect the rise in vaccinations and natural immunity. [](https://covidactnow.org/covid-risk-levels-metrics)",
       "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics)."
     },
     {
       "title": "Weekly new reported cases per 100k",
-      "body": "Weekly new reported cases is the number of new COVID cases emerging each week in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
+      "body": "Weekly new reported cases is the number of new COVID cases emerging each week in a location. This is measured by the number of reported positive test results, and it does not include at-home positive test results.",
       "id": "weekly-new-cases",
       "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#weekly-new-cases)."
     },
