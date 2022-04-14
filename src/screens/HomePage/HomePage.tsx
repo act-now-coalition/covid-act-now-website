@@ -14,7 +14,11 @@ import { formatMetatagDate, formatPercent } from 'common/utils';
 import { getFilterLimit } from 'components/Search';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
-import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
+import {
+  useGeolocatedRegions,
+  useShowPastPosition,
+  useScrollToRecommendations,
+} from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
@@ -46,7 +50,7 @@ function getPageDescription() {
 
 export default function HomePage() {
   const recommendationsRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -69,10 +73,10 @@ export default function HomePage() {
   const initialFipsListForExplore = exploreGeoLocations;
 
   useEffect(() => {
-    if (location.pathname.includes('alert_signup')) {
+    if (pathname.includes('alert_signup')) {
       window.location.href = '#alert_signup';
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   const exploreSectionRef = useRef(null);
 
@@ -93,6 +97,8 @@ export default function HomePage() {
       )}
     </>
   );
+
+  useScrollToRecommendations(pathname, recommendationsRef);
 
   const renderDonateButton = () => (
     <>

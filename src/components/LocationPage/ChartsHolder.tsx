@@ -11,6 +11,7 @@ import {
   useScrollToElement,
   useBreakpoint,
   useLocationSummariesForFips,
+  useScrollToRecommendations,
 } from 'common/hooks';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
@@ -89,7 +90,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   useScrollToElement();
 
   const { pathname, hash } = useLocation();
-  const isRecommendationsShareUrl = pathname.includes('recommendations');
 
   const [currentExploreMetric, setCurrentExploreMetric] = useState<
     ExploreMetric
@@ -130,21 +130,10 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       return () => clearTimeout(timeoutId);
     };
 
-    const scrollToRecommendations = () => {
-      const timeoutId = setTimeout(() => {
-        if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current && !scrolledWithUrl) {
-            setScrolledWithUrl(true);
-            scrollTo(recommendationsRef.current);
-          }
-        }
-      }, 200);
-      return () => clearTimeout(timeoutId);
-    };
-
     scrollToChart();
-    scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithUrl]);
+  }, [chartId, metricRefs, scrolledWithUrl]);
+
+  useScrollToRecommendations(pathname, recommendationsRef, !scrolledWithUrl);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
