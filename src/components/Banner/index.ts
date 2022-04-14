@@ -10,6 +10,6 @@ export { default as VaccinationsBanner } from './VaccinationsBanner';
 export { default as SpringSurgeBanner } from './SpringSurgeBanner';
 export { default as Vaccinations100M } from './Vaccinations100M';
 export { default as BoosterBanner } from './BoosterBanner/BoosterBanner';
-
+export * from './Can82Banner';
 export default Banner;
 export { FeedbackSurveyBanner, getFeedbackSurveyUrl };

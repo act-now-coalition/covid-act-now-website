@@ -2,8 +2,9 @@ import Grid from '@material-ui/core/Grid';
 import styled, { css } from 'styled-components';
 import theme from 'assets/theme';
 import MuiButton from '@material-ui/core/Button';
-import { mobileBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 import { COLOR_MAP } from 'common/colors';
+import Box from '@material-ui/core/Box';
 
 const colorButton = `${COLOR_MAP.PURPLE}`;
 const bannerBackgroundColor = `${COLOR_MAP.PURPLE}`;
@@ -122,5 +123,40 @@ export const MessageContainer = styled(Grid)`
 
   strong {
     color: black;
+  }
+`;
+
+export const CondensedBannerWrapperHomepage = styled(Box)`
+  margin: ${({ theme }) => `0 ${theme.spacing(2)}px`};
+  padding: ${({ theme }) => `${theme.spacing(2)}px 0`};
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: ${({ theme }) => `${theme.spacing(6)}px 0 ${theme.spacing(2)}px`};
+  }
+`;
+
+export const CondensedBannerWrapperLocationPage = styled(Box)`
+  padding-bottom: ${({ theme }) => theme.spacing(5)}px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: ${({ theme }) => `${theme.spacing(2)}px 0 ${theme.spacing(4)}px`};
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: ${({ theme }) => `${theme.spacing(2)}px 0 ${theme.spacing(6)}px`};
+  }
+`;
+
+export const CondensedBanner = styled(Box)`
+  background-color: ${bannerBackgroundColor};
+  padding: ${({ theme }) => `${theme.spacing(2)}px ${theme.spacing(3)}px`};
+  width: fit-content;
+  border-radius: 4px;
+  color: white;
+  margin: auto;
+  text-align: center;
+
+  a {
+    color: white;
   }
 `;

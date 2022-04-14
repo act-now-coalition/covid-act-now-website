@@ -23,6 +23,7 @@ import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
 import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButton';
 import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
+import { Can82BannerLocationPage } from 'components/Banner';
 
 interface AboveTheFoldProps {
   region: Region;
@@ -44,6 +45,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
   }) => {
     return (
       <MainWrapper>
+        <Can82BannerLocationPage />
         <ContentContainer>
           <GridContainer>
             <GridItemHeader>
