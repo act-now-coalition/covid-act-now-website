@@ -23,12 +23,10 @@ const metricToLearnLink: { [key in Metric]: string } = {
   [Metric.VACCINATIONS]: '/covid-risk-levels-metrics#percent-vaccinated',
 
   // TODO(8.2) - finalize hash links
-  [Metric.ADMISSIONS_PER_100K]:
-    '/covid-risk-levels-metrics#admissions-per-100k',
+  [Metric.ADMISSIONS_PER_100K]: '/covid-risk-levels-metrics#weekly-admissions',
   [Metric.RATIO_BEDS_WITH_COVID]:
-    '/covid-risk-levels-metrics#ratio-beds-with-covid',
-  [Metric.WEEKLY_CASES_PER_100K]:
-    '/covid-risk-levels-metrics#weekly-cases-per-100k',
+    '/covid-risk-levels-metrics#patients-with-covid',
+  [Metric.WEEKLY_CASES_PER_100K]: '/covid-risk-levels-metrics#weekly-new-cases',
 };
 
 export function getMetricModalContent(
