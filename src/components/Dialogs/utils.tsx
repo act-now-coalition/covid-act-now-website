@@ -21,8 +21,6 @@ const metricToLearnLink: { [key in Metric]: string } = {
   [Metric.HOSPITAL_USAGE]: '/covid-risk-levels-metrics#icu-capacity-used',
   [Metric.POSITIVE_TESTS]: '/covid-risk-levels-metrics#positive-test-rate',
   [Metric.VACCINATIONS]: '/covid-risk-levels-metrics#percent-vaccinated',
-
-  // TODO(8.2) - finalize hash links
   [Metric.ADMISSIONS_PER_100K]: '/covid-risk-levels-metrics#weekly-admissions',
   [Metric.RATIO_BEDS_WITH_COVID]:
     '/covid-risk-levels-metrics#patients-with-covid',
