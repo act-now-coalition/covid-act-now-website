@@ -10,7 +10,7 @@ import {
 const Can82Banner: React.FC = () => (
   <CondensedBanner role="banner">
     We've made some changes to better align with the CDC.{' '}
-    <a href="/" target="_blank" rel="noopener noreferrer">
+    <a href="/" target="_blank">
       Learn more
     </a>
   </CondensedBanner>
