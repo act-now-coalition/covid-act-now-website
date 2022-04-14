@@ -25,6 +25,18 @@ interface MetricField {
 
 export const FIELDS: MetricField[] = [
   { displayName: 'Overall risk level', field: 'riskLevels.overall' },
+  {
+    displayName: 'Weekly new reported cases',
+    field: 'metrics.weeklyNewCasesPer100k',
+  },
+  {
+    displayName: 'Weekly COVID admissions',
+    field: 'metrics.weeklyCovidAdmissionsPer100k',
+  },
+  {
+    displayName: 'Patients with COVID',
+    field: 'metrics.bedsWithCovidPatientsRatio',
+  },
   { displayName: 'Daily new cases', field: 'metrics.caseDensity' },
   { displayName: 'Infection rate', field: 'metrics.infectionRate' },
   { displayName: 'Positive test rate', field: 'metrics.testPositivityRatio' },
