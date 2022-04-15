@@ -155,6 +155,7 @@ export const CondensedBanner = styled(Box)`
   color: white;
   margin: auto;
   text-align: center;
+  max-width: 800px;
 
   a {
     color: white;
