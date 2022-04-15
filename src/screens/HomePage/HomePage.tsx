@@ -50,7 +50,7 @@ function getPageDescription() {
 
 export default function HomePage() {
   const recommendationsRef = useRef<HTMLDivElement>(null);
-  const { pathname } = useLocation();
+  const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -73,10 +73,10 @@ export default function HomePage() {
   const initialFipsListForExplore = exploreGeoLocations;
 
   useEffect(() => {
-    if (pathname.includes('alert_signup')) {
+    if (location.pathname.includes('alert_signup')) {
       window.location.href = '#alert_signup';
     }
-  }, [pathname]);
+  }, [location.pathname]);
 
   const exploreSectionRef = useRef(null);
 
@@ -98,7 +98,7 @@ export default function HomePage() {
     </>
   );
 
-  useScrollToRecommendations(pathname, recommendationsRef);
+  useScrollToRecommendations(recommendationsRef);
 
   const renderDonateButton = () => (
     <>

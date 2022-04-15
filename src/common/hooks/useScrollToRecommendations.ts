@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   div &&
@@ -9,10 +10,12 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   });
 
 export default function useScrollToRecommendations(
-  pathname: string,
   ref: React.RefObject<HTMLDivElement> | null,
 ) {
-  const isRecommendationsShareUrl = pathname.includes('recommendations');
+  const location = useLocation();
+  const isRecommendationsShareUrl = location.pathname.includes(
+    'recommendations',
+  );
 
   useEffect(() => {
     const scrollToRecommendations = () => {
@@ -27,5 +30,5 @@ export default function useScrollToRecommendations(
     };
 
     scrollToRecommendations();
-  }, [isRecommendationsShareUrl, ref]);
+  }, [ref, isRecommendationsShareUrl]);
 }

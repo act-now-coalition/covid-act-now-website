@@ -89,7 +89,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const isMobile = useBreakpoint(600);
   useScrollToElement();
 
-  const { pathname, hash } = useLocation();
+  const { hash } = useLocation();
 
   const [currentExploreMetric, setCurrentExploreMetric] = useState<
     ExploreMetric
@@ -133,7 +133,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollToChart();
   }, [chartId, metricRefs, scrolledWithUrl]);
 
-  useScrollToRecommendations(pathname, recommendationsRef);
+  useScrollToRecommendations(recommendationsRef);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
