@@ -133,7 +133,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollToChart();
   }, [chartId, metricRefs, scrolledWithUrl]);
 
-  useScrollToRecommendations(pathname, recommendationsRef, !scrolledWithUrl);
+  useScrollToRecommendations(pathname, recommendationsRef);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 

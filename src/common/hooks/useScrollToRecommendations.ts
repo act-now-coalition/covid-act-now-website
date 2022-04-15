@@ -8,11 +8,9 @@ const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
     behavior: 'smooth',
   });
 
-// allowScroll is an optional additional check before scrolling to recommendations. On location pages, we first check to see if there is another param in the url that controls scrolling (ie. a chart share url)
 export default function useScrollToRecommendations(
   pathname: string,
   ref: React.RefObject<HTMLDivElement> | null,
-  allowScroll: boolean = true,
 ) {
   const isRecommendationsShareUrl = pathname.includes('recommendations');
 
@@ -20,7 +18,7 @@ export default function useScrollToRecommendations(
     const scrollToRecommendations = () => {
       const timeoutId = setTimeout(() => {
         if (isRecommendationsShareUrl) {
-          if (ref && ref.current && allowScroll) {
+          if (ref && ref.current) {
             scrollTo(ref.current);
           }
         }
@@ -29,5 +27,5 @@ export default function useScrollToRecommendations(
     };
 
     scrollToRecommendations();
-  }, [isRecommendationsShareUrl, allowScroll, ref]);
+  }, [isRecommendationsShareUrl, ref]);
 }
