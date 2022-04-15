@@ -40,11 +40,10 @@ export interface MetricChartInfo {
   ) => React.ReactElement;
 }
 
-// TODO(8.2) Finalize group header
 export enum GroupHeader {
-  COMMUNITY_LEVEL = 'Community Level Metrics',
+  COMMUNITY_LEVEL = 'Community level metrics',
   VACCINATED = '% Vaccinated',
-  ADDITIONAL_MISC = 'Additional Metrics',
+  ADDITIONAL_MISC = 'Additional metrics',
 }
 
 export interface ChartGroup {
@@ -52,7 +51,6 @@ export interface ChartGroup {
   metricList: MetricChartInfo[];
 }
 
-// TODO(8.2) Replace with final group header
 export const CHART_GROUPS: ChartGroup[] = [
   {
     groupHeader: GroupHeader.COMMUNITY_LEVEL,
