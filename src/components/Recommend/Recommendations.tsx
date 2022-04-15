@@ -54,21 +54,19 @@ const Recommendations = ({
 
   return (
     <>
-      <SectionHeader id="recommendations" $isHomepage={isHomepage}>
+      <SectionHeader
+        id="recommendations"
+        $isHomepage={isHomepage}
+        ref={recommendationsRef}
+      >
         Recommendations
       </SectionHeader>
       {isMobile ? (
         <ExpandableContainer {...containerProps}>
-          <Recommend
-            recommendations={recommendationsMainContent}
-            recommendationsRef={recommendationsRef}
-          />
+          <Recommend recommendations={recommendationsMainContent} />
         </ExpandableContainer>
       ) : (
-        <Recommend
-          recommendations={recommendationsMainContent}
-          recommendationsRef={recommendationsRef}
-        />
+        <Recommend recommendations={recommendationsMainContent} />
       )}
       <PageSectionFooter>
         <DisclaimerWrapper>

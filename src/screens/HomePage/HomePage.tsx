@@ -14,7 +14,11 @@ import { formatMetatagDate, formatPercent } from 'common/utils';
 import { getFilterLimit } from 'components/Search';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
-import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
+import {
+  useGeolocatedRegions,
+  useShowPastPosition,
+  useScrollToRecommendations,
+} from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
@@ -94,6 +98,8 @@ export default function HomePage() {
       )}
     </>
   );
+
+  useScrollToRecommendations(recommendationsRef);
 
   const renderDonateButton = () => (
     <>
