@@ -9,7 +9,9 @@ import {
 
 const Can82Banner: React.FC = () => (
   <CondensedBanner role="banner">
-    We've made some changes to better align with the CDC.{' '}
+    We've made some changes to align with the current state of COVID and CDC
+    guidelines. Most metrics that we've previously tracked will continue to be
+    available.{' '}
     <a href="/" target="_blank">
       Learn more
     </a>
