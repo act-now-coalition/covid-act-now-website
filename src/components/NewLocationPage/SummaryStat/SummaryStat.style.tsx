@@ -8,7 +8,8 @@ export const StatContent = styled.div`
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
-    justify-content: unset;
+    height: 100%;
+    justify-content: space-between;
   }
 `;
 
