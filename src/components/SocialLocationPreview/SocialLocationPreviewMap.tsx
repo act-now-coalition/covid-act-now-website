@@ -5,7 +5,7 @@ import {
   Wrapper,
   USMapPreviewHeader,
   USMapHeaderText,
-  MapHeaderHeader,
+  MapHeader,
   LastUpdatedWrapper,
   PreviewFooter,
   FooterText,
@@ -39,7 +39,7 @@ const SocialLocationPreview = (props: {
 
   return (
     <Wrapper noShadow={!isEmbedPreview} border={border}>
-      <MapHeaderHeader>US COVID Tracker</MapHeaderHeader>
+      <MapHeader>US COVID Tracker</MapHeader>
       {!isEmbedPreview && (
         <LastUpdatedWrapper>Updated {lastUpdatedDateString}</LastUpdatedWrapper>
       )}
