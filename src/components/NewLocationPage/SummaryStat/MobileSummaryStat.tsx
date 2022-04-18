@@ -1,8 +1,12 @@
 import React from 'react';
 import MetricSubLabel from './MetricSubLabel';
 import MetricValue from './MetricValue';
-import { MetricLabel, StatContent, Row } from './SummaryStat.style';
-import { Chevron } from '../Shared/Shared.style';
+import {
+  MetricLabel,
+  StatContent,
+  Row,
+  CondensedChevron,
+} from './SummaryStat.style';
 import { metricSubLabelText, SummaryStatProps } from './utils';
 
 const MobileSummaryStat: React.FC<SummaryStatProps> = ({
@@ -25,7 +29,7 @@ const MobileSummaryStat: React.FC<SummaryStatProps> = ({
           iconColor={levelInfo.color}
           metric={metric}
         />
-        <Chevron />
+        <CondensedChevron />
       </Row>
     </StatContent>
   );
