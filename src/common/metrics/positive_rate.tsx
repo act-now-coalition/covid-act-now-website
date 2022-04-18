@@ -93,16 +93,6 @@ function renderStatus(projections: Projections) {
   );
   const locationName = projections.locationName;
   if (currentTestPositiveRate === null) {
-    const fips = projections.fips;
-    if ((fips.length > 2 && fips.startsWith('12')) || fips.startsWith('42')) {
-      return (
-        <Fragment>
-          {PositiveTestRateMetric.extendedMetricName} is currently unavailable
-          for {projections.locationName} while we make improvements to our data
-          source.
-        </Fragment>
-      );
-    }
     return (
       <Fragment>
         Unable to generate{' '}
