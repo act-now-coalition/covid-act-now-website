@@ -7,8 +7,9 @@ import { scaleLinear } from '@vx/scale';
 import { ParentSize } from '@vx/responsive';
 import { Column } from 'common/models/Projection';
 import { ADMISSIONS_PER_100K_LEVEL_INFO_MAP } from 'common/metrics/admissions_per_100k';
-import { LevelInfoMap, Level } from 'common/level';
+import { LevelInfoMap } from 'common/level';
 import { formatDecimal } from 'common/utils';
+import { AxisBottom } from 'components/Charts/Axis';
 import { AxisLeft } from './Axis';
 import BoxedAnnotation from './BoxedAnnotation';
 import ChartContainer from './ChartContainer';
@@ -25,11 +26,9 @@ import {
   last,
   getUtcScale,
   getTimeAxisTicks,
+  getColumnDate,
+  formatTooltipColumnDate,
 } from './utils';
-import { AxisBottom } from 'components/Charts/Axis';
-import { getColumnDate, formatTooltipColumnDate } from './utils';
-
-// TODO(8.2) - confirm thresholds/chart/tooltip content
 
 type Point = {
   x: number;
@@ -78,11 +77,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
   const dateTicks = getTimeAxisTicks(startDate, endDate);
 
   const yDataMax = d3max(data, getAdmissionsPer100k) || 100;
-
-  // Adjusts the min y-axis to make the Low label fit only if
-  // the current level is Low
-  const isLow = activeZone.level === Level.LOW;
-  const yAxisMin = isLow ? -6 : 0;
+  const yAxisMin = 0;
 
   //TODO (Chelsi): remove need for hard coded 30
   const yAxisMax = Math.min(Math.max(yDataMax, 30), capY);
@@ -102,9 +97,6 @@ const ChartAdmissionsPer100k: FunctionComponent<{
     yAxisMax,
     zones,
   ).filter(tickVal => Number.isFinite(tickVal));
-
-  // Hide the Low label if the current level is Medium or higher
-  const regionLabels = isLow ? regions : regions.slice(Level.MEDIUM);
 
   const renderTooltip = (p: Point) => (
     <Tooltip
@@ -163,7 +155,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
           />
         </Style.TextAnnotation>
       </RectClipGroup>
-      {regionLabels.map((region, i) => (
+      {regions.map((region, i) => (
         <ZoneAnnotation
           key={`zone-annotation-${i}`}
           color={region.color}
