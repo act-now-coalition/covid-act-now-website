@@ -43,6 +43,7 @@ import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
 import { Can82BannerHomepage } from 'components/Banner';
+import EmailAlertsFooter from 'components/EmailAlertsFooter';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -205,6 +206,9 @@ export default function HomePage() {
                 region={USA.instance}
                 isHomepage={true}
               />
+            </HomePageBlock>
+            <HomePageBlock id="share">
+              <EmailAlertsFooter defaultRegions={[]} />
             </HomePageBlock>
             <PartnersSection />
           </Content>
