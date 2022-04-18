@@ -114,12 +114,9 @@ function renderStatus(projections: Projections) {
 
   return (
     <Fragment>
-      Disclaimer: This test positivity rate does not include at-home test
-      positivity data.
-      <br />
-      <br />
       In {locationName} {percentage} of COVID tests were positive this past
-      week.
+      week. The positive test rate does not include data on at-home positive
+      tests.
     </Fragment>
   );
 }
