@@ -103,14 +103,14 @@ export const AlarmLevel = styled.div`
   padding: 0.25rem 0.5rem;
 `;
 
-export const HeaderHeader = styled(Typography)`
+export const SocialLocationPreviewHeader = styled(Typography)`
   font-size: 1.125rem;
   line-height: 1.25rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
 `;
 
-export const MapHeaderHeader = styled(Typography)`
+export const MapHeader = styled(Typography)`
   font-size: 1rem;
   line-height: 1rem;
   font-weight: 700;

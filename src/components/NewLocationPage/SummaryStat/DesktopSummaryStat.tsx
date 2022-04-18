@@ -1,8 +1,12 @@
 import React from 'react';
 import MetricSubLabel from './MetricSubLabel';
 import MetricValue from './MetricValue';
-import { StatContent, Row, MetricLabel } from './SummaryStat.style';
-import { Chevron } from '../Shared/Shared.style';
+import {
+  StatContent,
+  Row,
+  MetricLabel,
+  CondensedChevron,
+} from './SummaryStat.style';
 import { metricSubLabelText, SummaryStatProps } from './utils';
 import { Metric } from 'common/metricEnum';
 
@@ -17,7 +21,7 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
     <StatContent>
       <Row>
         <MetricLabel>{metricName}</MetricLabel>
-        <Chevron />
+        <CondensedChevron />
       </Row>
       <Row>
         <MetricValue

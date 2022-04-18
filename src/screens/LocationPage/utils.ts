@@ -16,7 +16,7 @@ function locationName(region: Region) {
 
 export function getPageTitle(region: Region): string {
   const location = locationName(region);
-  return `${location} - U.S. COVID Community Level & Vaccine Tracker`;
+  return `${location} - U.S. COVID Tracker`;
 }
 
 export function getPageDescription(region: Region): string {

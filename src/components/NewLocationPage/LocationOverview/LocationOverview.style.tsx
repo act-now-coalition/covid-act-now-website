@@ -29,7 +29,8 @@ export const GridContainer = styled.div`
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
-    grid-gap: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
   }
 
   // Note: 1.8fr instead of 2fr to manipulate wrapping of summary stat metric names
@@ -81,6 +82,7 @@ export const GridItemProgress = styled.div`
   @media (min-width: ${materialSMBreakpoint}) {
     padding-bottom: 0;
     border-bottom: none;
+    margin-top: auto;
   }
 `;
 

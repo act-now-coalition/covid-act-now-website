@@ -25,7 +25,7 @@ const HomePageHeader: React.FC = () => {
   return (
     <Wrapper>
       <Content>
-        <Header>U.S. COVID Community Level &amp; Vaccine Tracker</Header>
+        <Header>U.S. COVID Tracker</Header>
         <Subcopy>
           Updated on {formatDateTime(lastUpdatedDate, DateFormat.MMMM_D)}{' '}
           {renderInfoTooltip(lastUpdatedDate)}
