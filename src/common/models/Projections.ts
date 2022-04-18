@@ -63,7 +63,13 @@ export class Projections {
    */
   summary(ccvi: number): LocationSummary {
     const metrics = {} as { [metric in Metric]: MetricSummary };
-    for (const metric of ALL_METRICS) {
+    const summaryMetrics = [
+      Metric.ADMISSIONS_PER_100K,
+      Metric.RATIO_BEDS_WITH_COVID,
+      Metric.WEEKLY_CASES_PER_100K,
+      Metric.VACCINATIONS,
+    ];
+    for (const metric of summaryMetrics) {
       const value = this.getMetricValue(metric);
       const roundedValue = roundMetricValue(metric, value);
 
@@ -75,14 +81,10 @@ export class Projections {
 
     const vaccinationsCompleted =
       this.primary.vaccinationsInfo?.ratioVaccinated ?? null;
-    const hospitalizationsDensity =
-      this.primary.hospitalizationInfo?.hospitalizationsDensity ?? null;
     return {
       level: this.getAlarmLevel(),
       metrics,
-      ccvi,
       vc: vaccinationsCompleted,
-      hd: hospitalizationsDensity,
     };
   }
 
