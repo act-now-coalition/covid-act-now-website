@@ -173,7 +173,7 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
     case ExploreMetric.RATIO_BEDS_WITH_COVID:
       return 'bedsWithCovidPatientsRatio';
     case ExploreMetric.WEEKLY_CASES:
-      return 'weeklyNewCasesPer100k';
+      return 'weeklyCases';
     case ExploreMetric.WEEKLY_DEATHS:
       return 'weeklyDeaths';
   }
@@ -432,7 +432,7 @@ export const exploreMetricData: {
       {
         label: 'Weekly reported cases',
         tooltipLabel: 'Weekly reported cases',
-        datasetId: 'weeklyNewCasesPer100k',
+        datasetId: 'weeklyCases',
         type: SeriesType.LINE,
       },
     ],
