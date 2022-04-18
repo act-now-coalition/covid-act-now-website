@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-import { GrayTitle } from '../Shared/Shared.style';
+import { GrayTitle, Chevron } from '../Shared/Shared.style';
 
 export const StatContent = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
     height: 100%;
-    justify-content: space-between;
+    justify-content: flex-end;
+    align-items: unset;
   }
 `;
 
@@ -82,4 +84,10 @@ export const Row = styled.div`
       align-items: center;
     }
   }
+`;
+
+// Alignment specific to desktop summary stat:
+export const CondensedChevron = styled(Chevron)`
+  transform: translateY(-1px);
+  margin: auto 0 auto 0.4rem;
 `;
