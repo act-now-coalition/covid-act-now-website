@@ -4,6 +4,7 @@ import {
   CondensedBannerWrapperHomepage,
   CondensedBannerWrapperLocationPage,
 } from './Banner.style';
+import { Link } from 'react-router-dom';
 
 //TODO(8.2) - update with correct learn more URL
 
@@ -11,10 +12,7 @@ const Can82Banner: React.FC = () => (
   <CondensedBanner role="banner">
     We've made some changes to align with the current state of COVID and CDC
     guidelines. Most metrics that we've previously tracked will continue to be
-    available.{' '}
-    <a href="/" target="_blank">
-      Learn more
-    </a>
+    available. <Link to="/covid-risk-levels-metrics">Learn more</Link>
   </CondensedBanner>
 );
 
