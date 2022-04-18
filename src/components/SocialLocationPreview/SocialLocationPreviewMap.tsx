@@ -39,9 +39,7 @@ const SocialLocationPreview = (props: {
 
   return (
     <Wrapper noShadow={!isEmbedPreview} border={border}>
-      <MapHeaderHeader>
-        US COVID Community Levels & Vaccine Tracker
-      </MapHeaderHeader>
+      <MapHeaderHeader>US COVID Tracker</MapHeaderHeader>
       {!isEmbedPreview && (
         <LastUpdatedWrapper>Updated {lastUpdatedDateString}</LastUpdatedWrapper>
       )}

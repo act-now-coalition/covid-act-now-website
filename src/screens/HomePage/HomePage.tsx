@@ -117,7 +117,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="US COVID Community Levels & Vaccine Tracker"
+        pageTitle="US COVID Tracker"
         pageDescription={getPageDescription()}
       />
       <NavAllOtherPages
