@@ -145,7 +145,7 @@ export default function HomePage() {
             </ColumnCentered>
 
             <MapBlock
-              title="COVID Community Level"
+              title="COVID community level"
               subtitle=""
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
