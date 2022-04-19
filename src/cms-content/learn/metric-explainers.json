@@ -17,7 +17,7 @@
         {
           "question": "Sources and methodology",
           "questionId": "weekly-new-cases-sources-methodology",
-          "answer": "The weekly new cases number is a seven-day total of new cases, divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the weekly new cases by two.\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
+          "answer": "The weekly new cases number is a seven-day total of new cases, divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the weekly new cases by two.\n\nTo calculate new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
           "question": "Levels",
