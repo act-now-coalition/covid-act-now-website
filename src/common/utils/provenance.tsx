@@ -3,7 +3,12 @@ import { Region, MetroArea, County } from 'common/regions';
 import { Annotations, Sources } from 'api/schema/RegionSummaryWithTimeseries';
 import { getMetricName } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { TextButton } from 'components/ButtonSystem';
+import { anchorStyles } from 'components/Markdown';
+import styled from 'styled-components';
+
+const ProvenanceText = styled.p`
+  ${anchorStyles};
+`;
 
 /**
  * Hardcoding sources as fallback (metricToSourceMap) for the time being
@@ -18,9 +23,9 @@ interface SourceInfo {
 }
 
 interface Regions {
-  state: SourceInfo;
-  county: SourceInfo;
-  metro: SourceInfo;
+  state: SourceInfo[];
+  county: SourceInfo[];
+  metro: SourceInfo[];
 }
 
 type RegionSourceMap = {
@@ -29,86 +34,196 @@ type RegionSourceMap = {
 
 const metricToSourceMap: RegionSourceMap = {
   [Metric.CASE_DENSITY]: {
-    state: {
-      sourceName: 'The New York Times',
-      url: 'https://github.com/nytimes/covid-19-data',
-    },
-    metro: {
-      sourceName: 'The New York Times',
-      url: 'https://github.com/nytimes/covid-19-data',
-    },
-    county: {
-      sourceName: 'The New York Times',
-      url: 'https://github.com/nytimes/covid-19-data',
-    },
+    state: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
   },
   [Metric.CASE_GROWTH_RATE]: {
-    state: {
-      sourceName: 'The New York Times',
-      url: 'https://github.com/nytimes/covid-19-data',
-    },
-    metro: {
-      sourceName: 'The New York Times',
-      url: 'https://github.com/nytimes/covid-19-data',
-    },
-    county: {
-      sourceName: 'The New York Times',
-      url: 'https://github.com/nytimes/covid-19-data',
-    },
+    state: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
   },
   [Metric.POSITIVE_TESTS]: {
-    state: {
-      sourceName: 'HHS Protect',
-      url:
-        'https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb',
-    },
-    metro: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
-    },
-    county: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
-    },
+    state: [
+      {
+        sourceName: 'HHS Protect',
+        url:
+          'https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
+      },
+    ],
   },
   [Metric.HOSPITAL_USAGE]: {
-    state: {
-      sourceName: 'HHS Protect',
-      url:
-        'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
-    },
-    metro: {
-      sourceName: 'HHS Protect',
-      url:
-        'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/anag-cw7u',
-    },
-    county: {
-      sourceName: 'HHS Protect',
-      url:
-        'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/anag-cw7u',
-    },
+    state: [
+      {
+        sourceName: 'HHS Protect',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'HHS Protect',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/anag-cw7u',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'HHS Protect',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/anag-cw7u',
+      },
+    ],
   },
   [Metric.VACCINATIONS]: {
-    state: {
-      sourceName: 'CDC Covid Tracker',
-      url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
-    },
+    state: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/#vaccinations',
+      },
+    ],
     // these do not render:
-    metro: {
-      sourceName: 'n/a',
-      url: 'n/a',
-    },
-    county: {
-      sourceName: 'n/a',
-      url: 'n/a',
-    },
+    metro: [
+      {
+        sourceName: 'n/a',
+        url: 'n/a',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'n/a',
+        url: 'n/a',
+      },
+    ],
+  },
+  [Metric.WEEKLY_CASES_PER_100K]: {
+    state: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'The New York Times',
+        url: 'https://github.com/nytimes/covid-19-data',
+      },
+    ],
+  },
+  [Metric.ADMISSIONS_PER_100K]: {
+    state: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/',
+      },
+      {
+        sourceName: 'The Department of Health and Human Services',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/',
+      },
+      {
+        sourceName: 'The Department of Health and Human Services',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
+      },
+    ],
+  },
+  [Metric.RATIO_BEDS_WITH_COVID]: {
+    state: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/',
+      },
+    ],
+    metro: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/',
+      },
+      {
+        sourceName: 'The Department of Health and Human Services',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
+      },
+    ],
+    county: [
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/',
+      },
+      {
+        sourceName: 'The Department of Health and Human Services',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh',
+      },
+    ],
   },
 };
 
-export function getSourceLinks(metric: Metric, region: Region): SourceInfo {
+export function getSourceLinks(metric: Metric, region: Region): SourceInfo[] {
   const metricSources: Regions = metricToSourceMap[metric];
 
-  const source: SourceInfo =
+  const source: SourceInfo[] =
     region instanceof MetroArea
       ? metricSources.metro
       : region instanceof County
@@ -124,7 +239,9 @@ function getDisclaimerMetricName(metric: Metric): string {
   } else if (metric === Metric.HOSPITAL_USAGE) {
     return getMetricName(metric);
   } else {
-    return getMetricName(metric).toLowerCase();
+    const metricName = getMetricName(metric);
+    // Note: hacky way to lowercase metric name but make sure COVID is always uppercase
+    return metricName.charAt(0).toLowerCase() + metricName.slice(1);
   }
 }
 
@@ -136,25 +253,35 @@ export const getDataSourceTooltipContent = (
 ): React.ReactElement => {
   const sourceFromMap = getSourceLinks(metric, region);
 
-  const source =
+  const sources =
     provenanceInfo && provenanceInfo[0].url && provenanceInfo[0].name
-      ? {
-          url: provenanceInfo[0].url,
-          name: provenanceInfo[0].name,
-        }
-      : {
-          url: sourceFromMap.url,
-          name: sourceFromMap.sourceName,
-        };
+      ? [
+          {
+            url: provenanceInfo[0].url,
+            sourceName: provenanceInfo[0].name,
+          },
+        ]
+      : sourceFromMap;
+
+  const [firstSource, ...additionalSources] = sources;
 
   return (
-    <p>
+    <ProvenanceText>
       Our data for {getDisclaimerMetricName(metric)} in {region.name} comes from{' '}
-      <TextButton href={source.url}>{source.name}</TextButton>.
-    </p>
+      <a href={firstSource.url}>{firstSource.sourceName}</a>
+      {additionalSources &&
+        additionalSources.map(source => (
+          <>
+            {' '}
+            and <a href={source.url}>{source.sourceName}</a>
+          </>
+        ))}
+      .
+    </ProvenanceText>
   );
 };
 
+// TODO(8.2) : annotations for new metrics
 export function getSourcesForMetric(
   annotations: Annotations,
   metric: Metric,

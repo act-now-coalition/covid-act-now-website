@@ -84,7 +84,16 @@ export function getDateRange(period: Period): Date[] {
   return [dateFrom, dateTo];
 }
 
+/**
+ * If we change the ordering of items in the following array,
+ * we need to adjust indices assigned to each enumerated explore metric
+ * in ExploreMetric enum in Explore/interfaces.ts.
+ */
 export const EXPLORE_METRICS = [
+  ExploreMetric.RATIO_BEDS_WITH_COVID,
+  ExploreMetric.ADMISSIONS_PER_100K,
+  ExploreMetric.WEEKLY_DEATHS,
+  ExploreMetric.WEEKLY_CASES,
   ExploreMetric.CASES,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
@@ -106,6 +115,8 @@ export const ORIGINAL_EXPLORE_METRICS = [
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_HOSPITALIZATIONS,
+  ExploreMetric.WEEKLY_CASES,
+  ExploreMetric.WEEKLY_DEATHS,
 ];
 
 export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
@@ -128,6 +139,12 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.ICU_USED;
     case 'testPositiveRate':
       return ExploreMetric.POSITIVITY_RATE;
+    case 'weeklyCovidAdmissionsPer100k':
+      return ExploreMetric.ADMISSIONS_PER_100K;
+    case 'bedsWithCovidPatientsRatio':
+      return ExploreMetric.RATIO_BEDS_WITH_COVID;
+    case 'weeklyNewCasesPer100k':
+      return ExploreMetric.WEEKLY_CASES;
   }
 }
 
@@ -151,6 +168,14 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'icuUtilization';
     case ExploreMetric.POSITIVITY_RATE:
       return 'testPositiveRate';
+    case ExploreMetric.ADMISSIONS_PER_100K:
+      return 'weeklyCovidAdmissionsPer100k';
+    case ExploreMetric.RATIO_BEDS_WITH_COVID:
+      return 'bedsWithCovidPatientsRatio';
+    case ExploreMetric.WEEKLY_CASES:
+      return 'weeklyCases';
+    case ExploreMetric.WEEKLY_DEATHS:
+      return 'weeklyDeaths';
   }
 }
 
@@ -362,6 +387,67 @@ export const exploreMetricData: {
         label: 'Positive test rate',
         tooltipLabel: 'Positive test rate',
         datasetId: 'testPositiveRate',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+
+  [ExploreMetric.ADMISSIONS_PER_100K]: {
+    title: 'Weekly COVID admissions per 100k',
+    name: 'Weekly COVID admissions per 100k',
+    chartId: 'admissions_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 1,
+    seriesList: [
+      {
+        label: 'Weekly COVID admissions per 100k',
+        tooltipLabel: 'Weekly COVID admissions per 100k',
+        datasetId: 'weeklyCovidAdmissionsPer100k',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.RATIO_BEDS_WITH_COVID]: {
+    title: 'Patients w/ COVID (% of all beds)',
+    name: 'Patients w/ COVID (% of all beds)',
+    chartId: 'ratio_beds_with_covid_patients', // TODO(8.2) (Chelsi) - what are these ids used for
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 1,
+    seriesList: [
+      {
+        label: 'Patients w/ COVID (% of all beds)',
+        tooltipLabel: 'Patients w/ COVID (% of all beds)',
+        datasetId: 'bedsWithCovidPatientsRatio',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.WEEKLY_CASES]: {
+    title: 'Weekly reported cases',
+    name: 'Weekly reported cases',
+    chartId: 'weekly_new_cases', // TODO(8.2) (Chelsi) - what are these ids used for
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'Weekly reported cases',
+        tooltipLabel: 'Weekly reported cases',
+        datasetId: 'weeklyCases',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.WEEKLY_DEATHS]: {
+    title: 'Weekly deaths',
+    name: 'Weekly deaths',
+    chartId: 'weekly_deaths',
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'Weekly deaths',
+        tooltipLabel: 'Weekly deaths',
+        datasetId: 'weeklyDeaths',
         type: SeriesType.LINE,
       },
     ],

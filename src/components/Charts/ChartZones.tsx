@@ -45,7 +45,7 @@ const ChartZones = ({
   zones,
   marginTop = 6,
   marginBottom = 40,
-  marginLeft = 32,
+  marginLeft = 38,
   marginRight = 5,
   capY,
   getTooltipContent,

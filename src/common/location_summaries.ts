@@ -15,11 +15,8 @@ export interface LocationSummary {
   metrics: {
     [metric in Metric]?: MetricSummary;
   };
-  ccvi: number | null;
   /** vaccinationsCompleted */
   vc: number | null;
-  /** hospitalizations density */
-  hd: number | null;
 }
 
 export type SummariesMap = { [fips: string]: LocationSummary };

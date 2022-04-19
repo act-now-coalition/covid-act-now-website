@@ -84,10 +84,15 @@ const AddedMetricChartFooter: React.FC<{
   projections: Projections;
   region: Region;
   formattedValue: string;
-}> = ({ metric, region, formattedValue, projections }) => {
+}> = ({ metric, region, projections, formattedValue }) => {
   const modalContent = getExploreMetricModalContent(region, metric);
 
-  const statusText = getAddedMetricStatusText(metric, formattedValue, region);
+  const statusText = getAddedMetricStatusText(
+    metric,
+    formattedValue,
+    region,
+    projections,
+  );
 
   const [isOpen, openDialog, closeDialog] = useDialog(
     false,

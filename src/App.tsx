@@ -82,6 +82,7 @@ export default function App() {
                     path="/explore/:sharedComponentId?"
                     component={HomePage}
                   />
+                  <Route exact path="/recommendations" component={HomePage} />
 
                   <Route
                     exact

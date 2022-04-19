@@ -7,13 +7,7 @@ import {
   MobileThermometerContainer,
 } from './RiskThermometer.style';
 
-const orderedLevels: Level[] = [
-  Level.LOW,
-  Level.MEDIUM,
-  Level.HIGH,
-  Level.CRITICAL,
-  Level.SUPER_CRITICAL,
-];
+const orderedLevels: Level[] = [Level.LOW, Level.MEDIUM, Level.HIGH];
 
 const MobileThermometer: React.FC<{
   currentLevel: Level;
@@ -21,7 +15,7 @@ const MobileThermometer: React.FC<{
 }> = ({ currentLevel, locationName }) => {
   const levelUnknown = currentLevel === Level.UNKNOWN;
   const levelName = LOCATION_SUMMARY_LEVELS[currentLevel].name;
-  const imageDescription = `Thermometer image showing that ${locationName}'s COVID risk level is ${levelName}.`;
+  const imageDescription = `Thermometer image showing that ${locationName} community level is ${levelName}.`;
 
   return (
     <MobileThermometerContainer role="img" aria-label={imageDescription}>

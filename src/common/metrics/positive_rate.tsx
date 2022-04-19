@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { levelText } from 'common/utils/chart';
-import { getLevel } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { formatPercent } from 'common/utils';
 import { Projections } from 'common/models/Projections';
@@ -21,6 +19,7 @@ export const PositiveTestRateMetric: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 const LOW_NAME = 'Low';
@@ -101,28 +100,13 @@ function renderStatus(projections: Projections) {
       </Fragment>
     );
   }
-  const level = getLevel(Metric.POSITIVE_TESTS, currentTestPositiveRate);
-  const lowSizableLarge = levelText(
-    level,
-    'low',
-    'significant',
-    'relatively high',
-    'relatively high',
-  );
   const percentage = formatPercent(currentTestPositiveRate, 1);
-
-  const testingBroadlyText = levelText(
-    level,
-    `which suggests enough widespread, aggressive testing in ${locationName} to detect most new cases`,
-    `meaning that ${locationName}’s testing meets WHO minimums but needs to be further expanded to detect most new cases`,
-    `which indicates that testing in ${locationName} is limited and that most cases may go undetected`,
-    `which indicates that testing in ${locationName} is limited and that most cases likely go undetected`,
-  );
 
   return (
     <Fragment>
-      A {lowSizableLarge} percentage ({percentage}) of COVID tests were
-      positive, {testingBroadlyText}.
+      In {locationName} {percentage} of COVID tests were positive this past
+      week. The positive test rate does not include data on at-home positive
+      tests.
     </Fragment>
   );
 }

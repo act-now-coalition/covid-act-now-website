@@ -42,6 +42,7 @@ import {
   getMaxYFromDefinition,
 } from './utils';
 import * as Styles from './Explore.style';
+import { SectionHeader } from 'components/SharedComponents/SharedComponents.style';
 import {
   SharedComponent,
   storeSharedComponentParams,
@@ -294,9 +295,7 @@ const Explore: React.FunctionComponent<{
 
     return (
       <div ref={exploreRef}>
-        <Styles.ExploreSectionHeader $isHomepage={isHomepage}>
-          {title}
-        </Styles.ExploreSectionHeader>
+        <SectionHeader $isHomepage={isHomepage}>{title}</SectionHeader>
         {nationalSummary && nationalSummary}
         <Styles.ChartControlsContainer $isHomepage={isHomepage}>
           <Dropdown

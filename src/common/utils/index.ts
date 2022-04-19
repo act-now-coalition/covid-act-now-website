@@ -54,10 +54,14 @@ export const formatDecimal = (num: number, places = 2): string => {
     return '-';
   }
 
-  return num.toLocaleString(undefined, {
-    minimumFractionDigits: places,
-    maximumFractionDigits: places,
-  });
+  // TODO: remove replace() call by including ...{signDisplay: "exceptZero"} in NumberFormatOptions.
+  // Currently, this throws an error seemingly related to https://github.com/microsoft/TypeScript/issues/40038
+  return num
+    .toLocaleString(undefined, {
+      minimumFractionDigits: places,
+      maximumFractionDigits: places,
+    })
+    .replace('-0', '0');
 };
 
 /**

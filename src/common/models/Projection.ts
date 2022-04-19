@@ -11,12 +11,15 @@ import {
   Metrics,
   Actuals,
   Annotations,
+  HospitalResourceUtilization,
+  HospitalResourceUtilizationWithAdmissions,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
 import { assert, formatPercent, getPercentChange } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { Level } from 'common/level';
 
 /**
  * Override any disabled metrics and make them reenabled. Used by internal tools.
@@ -62,12 +65,17 @@ export type DatasetId =
   | 'caseDensityRange'
   | 'smoothedDailyCases'
   | 'smoothedDailyDeaths'
+  | 'weeklyNewCasesPer100k'
   | 'rawDailyCases'
   | 'rawDailyDeaths'
   | 'rawHospitalizations'
   | 'smoothedHospitalizations'
   | 'rawICUHospitalizations'
-  | 'smoothedICUHospitalizations';
+  | 'smoothedICUHospitalizations'
+  | 'weeklyCovidAdmissionsPer100k'
+  | 'bedsWithCovidPatientsRatio'
+  | 'weeklyDeaths'
+  | 'weeklyCases';
 
 export interface RtRange {
   /** The actual Rt value. */
@@ -136,7 +144,10 @@ export const CASE_FATALITY_RATIO = 0.01;
  */
 export class Projection {
   readonly totalPopulation: number;
+  readonly hsaPopulation: number | null;
   readonly fips: string;
+  readonly hsa: string | null;
+  readonly hsaName: string | null;
   readonly region: Region;
 
   readonly icuCapacityInfo: ICUCapacityInfo | null;
@@ -147,6 +158,12 @@ export class Projection {
   readonly currentCumulativeCases: number | null;
   private readonly currentCaseDensity: number | null;
   readonly currentDailyDeaths: number | null;
+  readonly currentHsaIcuInfo: HospitalResourceUtilization;
+  readonly currentHsaHospitalInfo: HospitalResourceUtilizationWithAdmissions;
+  /** Gets the latest weekly covid admissions data for this location. Note that for
+   * counties you likely want to use the HSA data (e.g. via currentHsaHospitalInfo) instead of this. */
+  readonly currentWeeklyCovidAdmissions: number | null;
+  readonly canCommunityLevel: Level;
 
   private readonly cumulativeActualDeaths: Array<number | null>;
 
@@ -165,7 +182,10 @@ export class Projection {
   private readonly vaccinationsAdditionalDose: Array<number | null>;
   private readonly caseDensityByCases: Array<number | null>;
   private readonly caseDensityRange: Array<CaseDensityRange | null>;
+  private readonly weeklyNewCasesPer100k: Array<number | null>;
   private readonly smoothedDailyDeaths: Array<number | null>;
+  private readonly weeklyDeaths: Array<number | null>;
+  private readonly weeklyCases: Array<number | null>;
 
   private readonly rawDailyCases: Array<number | null>;
   private readonly rawDailyDeaths: Array<number | null>;
@@ -173,6 +193,8 @@ export class Projection {
   private readonly smoothedHospitalizations: Array<number | null>;
   private readonly rawICUHospitalizations: Array<number | null>;
   private readonly smoothedICUHospitalizations: Array<number | null>;
+  private readonly weeklyCovidAdmissionsPer100k: Array<number | null>;
+  private readonly bedsWithCovidPatientsRatio: Array<number | null>;
   private readonly metrics: Metrics | null;
   readonly annotations: Annotations;
 
@@ -193,7 +215,10 @@ export class Projection {
 
     this.isCounty = parameters.isCounty;
     this.totalPopulation = summaryWithTimeseries.population;
+    this.hsaPopulation = summaryWithTimeseries.hsaPopulation;
     this.fips = summaryWithTimeseries.fips;
+    this.hsa = summaryWithTimeseries.hsa;
+    this.hsaName = summaryWithTimeseries.hsaName;
     this.region = region;
 
     // Set up our series data exposed via getDataset().
@@ -204,16 +229,29 @@ export class Projection {
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
       this.rawDailyDeaths,
     );
+    this.weeklyDeaths = this.smoothedDailyDeaths.map(row => row && row * 7);
+    this.weeklyCases = this.smoothedDailyCases.map(row => row && row * 7);
 
-    this.rawHospitalizations = actualTimeseries.map(
-      row => row && row.hospitalBeds.currentUsageCovid,
+    // Disaggregate county hospitalization data from HSAs to counties in order to display
+    // county estimates in charts.
+    this.rawHospitalizations = actualTimeseries.map(row =>
+      this.isCounty
+        ? this.disaggregateHsaValue(
+            row?.hsaHospitalBeds?.currentUsageCovid ?? null,
+          )
+        : row?.hospitalBeds?.currentUsageCovid ?? null,
     );
+
+    this.rawICUHospitalizations = actualTimeseries.map(row =>
+      this.isCounty
+        ? this.disaggregateHsaValue(row?.hsaIcuBeds?.currentUsageCovid ?? null)
+        : row?.icuBeds?.currentUsageCovid ?? null,
+    );
+
     this.smoothedHospitalizations = this.smoothWithRollingAverage(
       this.rawHospitalizations,
     );
-    this.rawICUHospitalizations = actualTimeseries.map(row =>
-      row?.icuBeds ? row.icuBeds.currentUsageCovid : null,
-    );
+
     this.smoothedICUHospitalizations = this.smoothWithRollingAverage(
       this.rawICUHospitalizations,
     );
@@ -233,6 +271,7 @@ export class Projection {
       metricsTimeseries,
       actualTimeseries,
     );
+
     this.icuUtilization =
       this.icuCapacityInfo?.metricSeries || this.dates.map(date => null);
 
@@ -254,13 +293,34 @@ export class Projection {
     this.caseDensityByCases = metricsTimeseries.map(
       row => row && row.caseDensity,
     );
+
     this.caseDensityRange = this.calcCaseDensityRange();
+
+    this.weeklyNewCasesPer100k = metricsTimeseries.map(
+      row => row?.weeklyNewCasesPer100k ?? null,
+    );
+
+    this.weeklyCovidAdmissionsPer100k = metricsTimeseries.map(
+      row => row?.weeklyCovidAdmissionsPer100k ?? null,
+    );
+
+    this.bedsWithCovidPatientsRatio = metricsTimeseries.map(
+      row => row?.bedsWithCovidPatientsRatio ?? null,
+    );
+
+    this.canCommunityLevel =
+      summaryWithTimeseries.communityLevels?.canCommunityLevel ?? Level.UNKNOWN;
 
     this.currentCaseDensity = metrics?.caseDensity ?? null;
     this.currentDailyDeaths = lastValue(this.smoothedDailyDeaths);
 
     this.currentCumulativeDeaths = summaryWithTimeseries.actuals.deaths;
     this.currentCumulativeCases = summaryWithTimeseries.actuals.cases;
+
+    this.currentHsaIcuInfo = summaryWithTimeseries.actuals.hsaIcuBeds;
+    this.currentHsaHospitalInfo = summaryWithTimeseries.actuals.hsaHospitalBeds;
+    this.currentWeeklyCovidAdmissions =
+      summaryWithTimeseries.actuals.hospitalBeds.weeklyCovidAdmissions;
 
     this.annotations = summaryWithTimeseries.annotations;
   }
@@ -301,6 +361,12 @@ export class Projection {
           : null;
       case Metric.CASE_DENSITY:
         return this.currentCaseDensity;
+      case Metric.ADMISSIONS_PER_100K:
+        return this.metrics?.weeklyCovidAdmissionsPer100k ?? null;
+      case Metric.WEEKLY_CASES_PER_100K:
+        return this.metrics?.weeklyNewCasesPer100k ?? null;
+      case Metric.RATIO_BEDS_WITH_COVID:
+        return this.metrics?.bedsWithCovidPatientsRatio ?? null;
       default:
         fail('Unknown metric: ' + metric);
     }
@@ -368,37 +434,53 @@ export class Projection {
     if (this.isMetricDisabled(Metric.HOSPITAL_USAGE)) {
       return null;
     }
+
+    // The ICU Capacity metric on the backend doesn't use HSA-level data for counties.
+    // We calculate it here so that the ICU Capacity metric matches the
+    // ICU actuals in this method. All counties will have HSA-level data, and all other
+    // location types will have their standard/corresponding level data.
+    const countyHsaTimeseriesIcuCapacityRatio = actualsTimeseries.map(row =>
+      this.calcIcuCapacityUsage(row && row.hsaIcuBeds),
+    );
+
+    const metricSeries = this.isCounty
+      ? countyHsaTimeseriesIcuCapacityRatio
+      : metricsTimeseries.map(row => row?.icuCapacityRatio ?? null);
+
     // TODO(https://trello.com/c/bnwRazOo/): Something is broken where the API
     // top-level actuals don't match the current metric value. So we extract
     // them from the timeseries for now.
-    const icuIndex = indexOfLastValue(
-      metricsTimeseries.map(row => row?.icuCapacityRatio),
-    );
-    if (icuIndex != null && metrics.icuCapacityRatio !== null) {
-      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
-      assert(
-        metrics.icuCapacityRatio === null ||
-          metrics.icuCapacityRatio ===
-            metricsTimeseries[icuIndex]?.icuCapacityRatio,
-        "Timeseries icuCapacityRatio doesn't match current metric value.",
-      );
+    const icuIndex = indexOfLastValue(metricSeries);
+
+    if (icuIndex != null) {
+      let metricValue = this.isCounty
+        ? countyHsaTimeseriesIcuCapacityRatio[icuIndex]
+        : metrics.icuCapacityRatio;
+
       assert(
         metricsTimeseries[icuIndex]?.date === actualsTimeseries[icuIndex]?.date,
         "Dates in actualTimeseries and metricTimeseries aren't aligned.",
       );
-      const icuActuals = actualsTimeseries[icuIndex]!.icuBeds;
 
-      const metricSeries = metricsTimeseries.map(
-        row => row && row.icuCapacityRatio,
-      );
+      // If Projection is for a county then use HSA-level ICU data.
+      const icuActuals = this.isCounty
+        ? actualsTimeseries[icuIndex]!.hsaIcuBeds
+        : actualsTimeseries[icuIndex]!.icuBeds;
 
       const totalBeds = icuActuals.capacity;
       const covidPatients = icuActuals.currentUsageCovid;
       const totalPatients = icuActuals.currentUsageTotal;
 
       const enoughBeds = totalBeds !== null && totalBeds >= MIN_ICU_BEDS;
-      const metricValue = enoughBeds ? metrics.icuCapacityRatio : null;
+      if (!enoughBeds) {
+        metricValue = null;
+      }
 
+      // Make sure we don't somehow grab the wrong data, given we're pulling it from the metrics / actuals timeseries.
+      assert(
+        metricValue === null || metricValue === metricSeries[icuIndex],
+        "Timeseries icuCapacityRatio doesn't match current metric value.",
+      );
       assert(
         totalBeds !== null && totalPatients !== null,
         'These must be non-null for the metric to be non-null',
@@ -415,6 +497,16 @@ export class Projection {
       };
     }
     return null;
+  }
+
+  private calcIcuCapacityUsage(data: HospitalResourceUtilization | null) {
+    const icuCapacity = data?.capacity ?? null;
+    const icuUsage = data?.currentUsageTotal ?? null;
+
+    if (icuCapacity === null || icuUsage === null) {
+      return null;
+    }
+    return icuUsage / icuCapacity;
   }
 
   private getVaccinationsInfo(
@@ -836,5 +928,12 @@ export class Projection {
       }
     }
     return result;
+  }
+
+  disaggregateHsaValue(hsaValue: number | null) {
+    if (hsaValue === null || this.hsaPopulation === null) {
+      return null;
+    }
+    return hsaValue * (this.totalPopulation / this.hsaPopulation);
   }
 }

@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { levelText } from 'common/utils/chart';
-import { getLevel } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { formatPercent, formatInteger, assert } from 'common/utils';
 import { Projections } from 'common/models/Projections';
@@ -21,6 +19,7 @@ export const ICUCapacityUsed: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
@@ -91,6 +90,7 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
 function renderStatus(projections: Projections): React.ReactElement {
   const icu = projections.primary.icuCapacityInfo;
   const locationName = projections.locationName;
+  const isCounty = projections.isCounty;
 
   if (icu === null || icu.totalBeds === 0) {
     return (
@@ -101,6 +101,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
+  const hsaCopy = `The ${projections.primary.hsaName} Health Service Area`;
   const totalICUBeds = formatInteger(icu.totalBeds);
   const totalICUPatients = formatInteger(icu.totalPatients);
   if (icu.metricValue === null) {
@@ -108,11 +109,13 @@ function renderStatus(projections: Projections): React.ReactElement {
       icu.totalBeds <= 15,
       'value should only be missing due to insufficient beds.',
     );
+
     return (
       <Fragment>
-        {locationName} has reported having {totalICUBeds} staffed adult ICU beds
-        and {totalICUPatients} are currently filled. Due to the low number of
-        beds, we do not report {ICUCapacityUsed.extendedMetricName} data.
+        {isCounty ? hsaCopy : locationName} has reported having {totalICUBeds}{' '}
+        staffed adult ICU beds and {totalICUPatients} are currently filled. Due
+        to the low number of beds, we do not report{' '}
+        {ICUCapacityUsed.extendedMetricName} data.
       </Fragment>
     );
   }
@@ -128,20 +131,11 @@ function renderStatus(projections: Projections): React.ReactElement {
     patientBreakdown = `${nonCovidICUPatients} are filled by non-COVID patients and ${covidICUPatients} are filled by COVID patients.`;
   }
 
-  const level = getLevel(Metric.HOSPITAL_USAGE, icu.metricValue);
-  const textLevel = levelText(
-    level,
-    'This suggests there is likely enough capacity to absorb a wave of new COVID infections',
-    'This suggests some ability to absorb an increase in COVID cases',
-    'This suggests hospitals may not be well positioned to absorb a wave of new COVID infections without substantial surge capacity. Caution is warranted',
-    'This suggests hospitals cannot absorb a wave of new COVID infections without substantial surge capacity.',
-  );
-
   return (
     <Fragment>
-      {locationName} has reported having {totalICUBeds} staffed adult ICU beds.{' '}
-      {patientBreakdown} Overall, {totalICUPatients} out of {totalICUBeds} (
-      {icuCapacityUsed}) are filled. {textLevel}.
+      {isCounty ? hsaCopy : locationName} has reported having {totalICUBeds}{' '}
+      staffed adult ICU beds. {patientBreakdown} Overall, {totalICUPatients} out
+      of {totalICUBeds} ({icuCapacityUsed}) are filled.
     </Fragment>
   );
 }

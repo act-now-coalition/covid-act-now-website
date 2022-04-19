@@ -4,43 +4,75 @@
   "metadataDescription": "Understand the Risk Levels in your community and COVID Metrics: daily new cases, infection rate, positive test rate, ICU capacity used, contact tracing.",
   "sections": [
     {
+      "sectionHeader": "How COVID community levels are determined",
       "sectionId": "how-covid-risk-is-determined",
-      "sectionIntro": "A state or county’s overall risk level takes into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* [Daily new cases](/covid-risk-levels-metrics#daily-new-cases), also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* [Infection rate](/covid-risk-levels-metrics#infection-rate) is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* [Positive test rate](/covid-risk-levels-metrics#positive-test-rate) is a measure of our confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nEach metric has the following levels: green, yellow, orange, and red. Incidence is the only metric for which there is a dark red, a fifth color we added after the third surge in winter 2020, in order to capture unprecedented case counts. \n\nIf a region’s daily new cases is green, then its overall risk level is green. For instance, if the daily new cases metric is green, but test positivity is yellow, the overall risk level is still green. Otherwise, a region’s overall risk level reflects the highest risk level across all three metrics. For instance, if daily new cases and test positivity are both yellow, but infection growth is orange, then the overall risk level is orange.",
-      "questions": [
-        {
-          "question": "",
-          "questionId": "framework",
-          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop our COVID risk framework in 2020. As there is no standardized risk framework across the U.S., it may not match how your state or county is calculating their risk level. Our framework is the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
-        }
-      ],
-      "sectionHeader": "How COVID risk is determined",
-      "sectionSubheader": ""
+      "sectionIntro": "A state or county’s community level takes into account three metrics: total new COVID cases per 100,000 population in the past 7 days, new COVID admissions per 100,000 population in the past 7 days, and the percent of staffed inpatient beds occupied by COVID patients.\n\n* [New COVID cases](/covid-risk-levels-metrics#weekly-new-cases) represent the current amount of COVID in a community and acts as an early warning indicator of potential increases in health system strain.\n* [COVID admissions](/covid-risk-levels-metrics#COVID-admissions) and [patients with COVID](/covid-risk-levels-metrics#patients-with-covid) represent the current potential for health system strain.\n\nTo calculate the community level, a color or level is assigned to each of the three metrics based on their values:\n\n* Weekly new cases: Less than 200 = Lower, and more than or equal to 200 = Higher\n* Weekly hospital admissions per 100k: Less than 10 = Low, between 10 and 19.9 = Medium, and more than or equal to 20 = High. \n* Staffed inpatient beds occupied by COVID patients: Less than 10% = Low, 10% to 14.9% = Medium, and more than or equal to 15% = High \n\nBased on the CDC’s framework, we then combine the levels to get the community level as follows:\n\n* If CASES are LOWER, and both HOSPITAL metrics are LOW = Community level is LOW\n* If CASES are HIGHER, and (1) HOSPITAL metric is MEDIUM = Community level is HIGH\n* If CASES are LOWER, and HOSPITAL metrics are NOT LOW = Community level is the HIGHER of the two HOSPITAL metrics\n* If CASES are HIGHER = Community Level is one level higher than the higher of the two HOSPITAL metrics. Examples below:\n\n  * If Springfield County has HIGHER CASES, but (2) LOW HOSPITAL metrics =  Community Level is MEDIUM\n  * If Springfield County has HIGHER CASES, but (2) LOW HOSPITAL metrics =  Community Level is MEDIUM\n\n[Read more details on the CDC's methodology.](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html)\n\nCovid Act Now’s former COVID risk framework was developed in the summer of 2020 in response to a lack of government risk standardization in the U.S. At the time there was also limited access to testing, it was prior to any vaccination authorization, and it was before new highly infectious variants like Omicron. [Read about our former COVID risk framework.](/covid-risk-levels-metrics#former-risk-framework)"
     },
     {
-      "sectionHeader": "Daily new cases",
+      "sectionHeader": "Weekly new cases",
       "sectionSubheader": "Also known as: incidence",
-      "sectionId": "daily-new-cases",
-      "sectionIntro": "**Daily new cases is the number of new COVID cases per day per unit of population** (we measure per 100K people).",
+      "sectionId": "weekly-new-cases",
+      "sectionIntro": "**Weekly new cases is the number of new COVID cases per week per unit of population** **(we measure per 100K people).**",
       "questions": [
         {
           "question": "Sources and methodology",
-          "questionId": "daily-new-cases-sources-methodology",
-          "answer": "Our daily new cases number is a seven-day average, and divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the daily new cases by two.\n\n![Daily new cases metric calculation](/images_cms/daily-new-cases-calculation.png)\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
+          "questionId": "weekly-new-cases-sources-methodology",
+          "answer": "The weekly new cases number is a seven-day total of new cases, divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the weekly new cases by two.\n\nTo calculate daily new cases, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
           "question": "Levels",
-          "answer": "Levels for daily new cases are based on the [“Key](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) [Metrics for Covid Suppression”](https://ethics.harvard.edu/files/center-for-ethics/files/key_metrics_and_indicators_v4.pdf) by Harvard Global Health Institute and others.",
-          "questionId": "daily-new-cases-levels"
+          "answer": "Levels for weekly new cases are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 200 cases is considered Lower, while greater than or equal to 200 cases is considered Higher.",
+          "questionId": "weekly-new-cases-levels"
         },
         {
           "question": "Limitations",
-          "questionId": "daily-new-cases-limitations",
-          "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
+          "questionId": "weekly-new-cases-limitations",
+          "answer": "Our case data faces several limitations due to lack of federal reporting standards.\n\n1. Not all states specify and report both confirmed and probable COVID cases. Confirmed cases are those that have been confirmed by PCR test and probable cases are counted by assumptions based on epidemiological evidence like antigen tests and reported symptoms. A state may report only confirmed cases, both confirmed and probable cases separately, or the two together without specification.\n2. There are also inconsistencies when patients move across counties or when a patient’s treatment location is not reported.\n3. At-home tests are not tracked, and therefore not represented in the data.\n\nCredible data sources such as The New York Times (NYT) work to address these limitations by interpreting and verifying the data, and counting patients based on where they are being treated rather than where they live, when possible."
+        }
+      ]
+    },
+    {
+      "sectionIntro": "**Weekly COVID admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).**",
+      "sectionHeader": "Weekly COVID admissions",
+      "questions": [
+        {
+          "question": "Sources and methodology",
+          "questionId": "sources-methodology-admissions",
+          "answer": "The weekly COVID admissions number is a seven-day total of new COVID admissions, divided by every 100K people in a location. We source this metric directly from the CDC's community level dataset wherever possible, and calculate it ourselves using HHS provided data wherever CDC metric data isn't available. Generally, new county-level data is ingested from the CDC metrics, while all state-level data, and county-level data from before February 24th, 2022 is calculated using HHS data.\n\nTo calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni), which uses data from the US Department of Health and Human Services Unified Hospital Data Surveillance System. To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population."
         },
         {
-          "question": "More information on daily new cases",
-          "questionId": "more-info-daily-new-cases",
-          "answer": "[What is R-naught (R₀) and how is it different from R(t)?](https://covidactnow.org/faq#r-0-vs-r-t)\n\n[Video explainer](https://www.youtube.com/embed/_S0k1I3kIbM)"
+          "question": "Levels",
+          "questionId": "levels-admissions",
+          "answer": "Levels for weekly new admissions are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10 weekly new admissions is considered Low, between 10 and 19.9 is considered Medium, and greater than or equal to 20 is considered High."
+        },
+        {
+          "question": "Limitations",
+          "questionId": "limitations-admissions",
+          "answer": "1. County-level data is only reported once a week. \n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have admissions data, based on the admission rates of other hospitals within the health service area.\n3. This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies."
+        }
+      ],
+      "sectionId": "weekly-admissions"
+    },
+    {
+      "sectionHeader": "Patients with COVID",
+      "sectionSubheader": "",
+      "sectionId": "patients-with-covid",
+      "sectionIntro": "**The patients with COVID metric is the percent of staffed inpatient beds occupied by COVID patients.**",
+      "questions": [
+        {
+          "question": "Sources and methodology",
+          "questionId": "sources-and-methodology-patients-with-covid",
+          "answer": "We source this metric directly from the CDC's community level dataset wherever possible, and calculate it ourselves using HHS provided data wherever CDC metric data isn't available. Generally, new county-level data is ingested from the CDC metrics, while all state-level data, and county-level data from before February 24th, 2022 is calculated using HHS data.\n\nTo calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni), which uses data from the US Department of Health and Human Services Unified Hospital Data Surveillance System. To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population."
+        },
+        {
+          "question": "Levels",
+          "questionId": "levels-patients-with-covid",
+          "answer": "Levels for percentage of patients with COVID are generally based on the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). Less than 10% of all new beds is considered Low, between 10 and 14.9% is considered Medium, and greater than or equal to 15 is considered High."
+        },
+        {
+          "question": "Limitations",
+          "questionId": "limitations-patients-with-covid",
+          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
         }
       ]
     },
@@ -48,22 +80,17 @@
       "sectionHeader": "Infection rate",
       "sectionSubheader": "Also known as: R(t) or “R-effective”",
       "sectionId": "infection-rate",
-      "sectionIntro": "**Infection rate is the estimated number of new people each COVID-positive person will infect.**",
+      "sectionIntro": "**Infection rate (also known as “R(t)”) is the estimated number of new people each COVID-positive person will infect.**",
       "questions": [
         {
           "question": "Sources and methodology",
           "questionId": "infection-rate-sources-methodology",
-          "answer": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\nTo calculate the infection rate, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
-        },
-        {
-          "question": "Levels",
-          "questionId": "infection-rate-levels",
-          "answer": "In order to control COVID, the infection rate, or R(t), must be driven below 1.0 until the daily new cases metric is green. At that point community spread is effectively stopped and we can focus on controlling isolated outbreaks. \n\nWe use 0.9 as the cutoff for a green score because at that rate the number of newly infected people begins to significantly decline. An R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing."
+          "answer": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.\n\nAn R(t) of 1.0 means that the daily new cases of COVID are stable, while an R(t) greater than 1.0 means that daily new cases are growing.\n\nTo calculate the infection rate, we use new positive cases [from The New York Times](https://developer.nytimes.com/covid)."
         },
         {
           "question": "Limitations",
           "questionId": "infection-rate-limitations",
-          "answer": "Because you can’t measure infection rate directly, our estimates hinge upon our epidemiological assumptions and the accuracy of our data sources. \n\n1. Infection rate can only track COVID growth once a positive case gets reported through the system. By then, infectious individuals have likely been COVID positive for some time, so the metric will always lag the true risk on the ground. For example, if someone was exposed over the holidays, they likely didn’t test positive until the new year.\n2. Infection rate should be considered in context with the other metrics. Daily new cases refers to the number of new COVID infections, while the infection rate represents the trend. A place with high daily new cases may have an infection rate less than 1 and still have higher exposure than a place with relatively few, but growing, cases."
+          "answer": "Because you can’t measure infection rate directly, our estimates hinge upon our epidemiological assumptions and the accuracy of our data sources. \n\n1. Infection rate can only track COVID growth once a positive case gets reported through the system. By then, infectious individuals have likely been COVID positive for some time, so the metric will always lag the true infection rate in the community. For example, if someone was exposed over the holidays, they likely didn’t test positive until the new year.\n2. Infection rate should be considered in context with the other metrics. Daily new cases refers to the number of new COVID infections, while the infection rate represents the trend. A place with high daily new cases may have an infection rate less than 1 and still have higher exposure than a place with relatively few, but growing, cases."
         },
         {
           "question": "More information on infection rate",
@@ -76,32 +103,22 @@
       "sectionHeader": " Positive test rate",
       "sectionSubheader": "Also known as: test positivity",
       "sectionId": "positive-test-rate",
-      "sectionIntro": "**Positive test rate is the *percentage* of COVID PCR testing that comes back positive** (not the total number of positive PCR tests).",
+      "sectionIntro": "**Positive test rate is the *percentage* of reported COVID PCR testing that comes back positive** **(not the total number of positive PCR tests).**",
       "questions": [
         {
           "question": "Sources and methodology",
           "questionId": "positive-test-rate-sources-methodology",
-          "answer": "Positive test rate is calculated by dividing the number of positive PCR tests over the last 7 days by the total number of PCR tests over the last 7 days. It should be looked at in conjunction with other metrics such as infection rate and daily new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
-        },
-        {
-          "question": "Levels",
-          "questionId": "positive-test-rate-levels",
-          "answer": "Driving the positive test rate downwards of [3 percent](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) should be a priority, which is why we have set 3 percent as the threshold for the lowest level.\n\nIt can also be helpful to look at countries that have been most effective and efficient in their containment of COVID. South Korea was back to normal activity with a test positivity rate below 3 percent. As of November 2020, [South Korea’s test positivity](http://ncov.mohw.go.kr/en/) was 1 percent."
+          "answer": "Positive test rate is calculated by dividing the number of positive reported PCR tests over the last 7 days by the total number of reported PCR tests over the last 7 days. It should be looked at in conjunction with other metrics such as infection rate and new cases.\n\nWe source state level testing data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/dataset/COVID-19-Diagnostic-Laboratory-Testing-PCR-Testing/j8mb-icvb) and county/metro level testing data from the [Centers for Disease Control and Prevention (CDC) Covid Data Tracker](https://covid.cdc.gov/covid-data-tracker/#county-view). Check out your location’s page for more details."
         },
         {
           "question": "Limitations",
           "questionId": "positive-test-rate-limitations",
-          "answer": "Federal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. However there are limitations due to some states reporting testing data differently.\n\n1. While we try to strictly use PCR tests, it’s possible that some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters.\n\n[Learn more about the current state of federal testing data and its limitations](https://covidtracking.com/analysis-updates/federal-testing-datas-last-mile/)."
+          "answer": "Federal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. However there are limitations due to some states reporting testing data differently.\n\n1. While we try to strictly use PCR tests, it’s possible that some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters."
         },
         {
           "question": "More information on positive test rate",
           "questionId": "more-info-positive-test-rate\n",
           "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/embed/RpqI-ZVGGoY)"
-        },
-        {
-          "question": "More information on COVID testing",
-          "questionId": "more-info-testing",
-          "answer": "[Why is testing important? ](https://covidactnow.org/faq#why-is-testing-important)\n\n[How soon after a possible exposure to COVID should I get tested?](https://covidactnow.org/faq#covid-how-soon-after-exposure-tested)\n\n[Are rapid tests less accurate than PCR tests?](https://covidactnow.org/faq#rapid-tests-less-accurate-than-pcr)\n\n[The Potential Role of Antigen Testing in the Pandemic](https://covidactnow.org/covid-explained/potential-role-antigen-tests-pandemic)"
         }
       ]
     },
@@ -114,22 +131,12 @@
         {
           "questionId": "icu-capacity-used-sources-methodology",
           "question": "Sources and methodology",
-          "answer": "We calculate ICU capacity by taking the number of staffed ICU beds that are occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the metric. This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15).\n\nFor more details, see your location’s page."
-        },
-        {
-          "question": "Levels\n",
-          "questionId": "icu-capacity-levels",
-          "answer": "[Studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3840149/#:~:text=The%20mean%20hourly%20occupancy%20for,ICUs%20(P%20%3D%200.036).) have found that, on average, before the pandemic, U.S. ICUs operated at about 68 percent of full capacity. However, that number depends heavily on things like the overall size of the hospital and the urban or rural region it serves. For instance, a small hospital with only four ICU beds running at 75 percent of full capacity has only one bed available, whereas a larger hospital with 100 ICU beds running at 75 percent of full capacity has twenty five ICU beds available.\n\nSo smaller hospitals with only a few (three to four) staffed ICU beds typically have lower occupancy (30 percent to 50 percent), and generally have a system for transferring critically ill patients to larger hospitals. Meanwhile, larger hospitals tend to run fuller, with higher ICU usage (60 percent to 80 percent). \n\nIn general, experts agree that as ICU capacity usage approaches 85 percent, the likelihood of an abrupt outbreak overwhelming hospital systems increases. At such levels of ICU usage, NPIs ([nonpharmaceutical interventions](https://covidactnow.org/glossary#npi)), ranging from business closures to stay-at-home orders, may be needed to prevent a hospital system’s ICU from being overwhelmed, which means that it would not be able to serve patients in need of any type of lifesaving care. For instance, in California, the [California Department of Public Health (CDPH)](https://www.gov.ca.gov/wp-content/uploads/2020/12/12.3.20-Stay-at-Home-Order-ICU-Scenario.pdf) calls for stay-at-home orders when this 85 percent threshold is met."
+          "answer": "We calculate ICU capacity by taking the number of staffed ICU beds that are occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the metric. This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15). For counties we aggregate the data for all counties in the [health service area](/faq#health-service-area).\n\nFor more details, see the Trends module."
         },
         {
           "question": "Limitations",
           "questionId": "icu-capacity-used-limitations",
           "answer": "This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nThe biggest source of uncertainty in this metric is the ability for a hospital to quickly expand beyond its normal capacity to meet increased demand. This “[surge” capacity](https://covidactnow.org/glossary#surge-capacity) is difficult to predict in advance because it depends on both physical hospital resources like available beds and non-physical resources like healthy nurses and doctors to run them.\n\nHHS tries to control for this by requiring that hospitals report staffed ICU beds on a daily basis, but this doesn’t give a complete picture about theoretical surge capacity."
-        },
-        {
-          "question": "More information on ICU capacity used",
-          "questionId": "more-info-icu-capacity",
-          "answer": "[Why is ICU capacity used important?](https://covidactnow.org/faq#why-icu-capacity-used-important)"
         }
       ]
     },
@@ -146,12 +153,7 @@
         {
           "question": "Limitations",
           "questionId": "limitations-percent-vaccination",
-          "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated.\n2. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n3. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public.\n4. **Underestimation of booster shots and overestimation of primary dose:** If a booster is administered in a different location than the primary vaccine series, the CDC may report the booster shot as a first dose in some instances.\n\nCounty-level vaccination data can suffer from additional limitations including:\n\n1. **Lack of 1st dose data:** For rare cases where county-level 1st dose data is unavailable, we estimate 1st dose vaccinations based on the ratio of first dose and second dose (or J&J) vaccinations at the state level.\n2. **Under-reporting**: If a vaccine is administered within a state but accurate county of residence information is not collected then the vaccination cannot be attributed to any specific county, leading to under-reporting.\n3. **Misattribution**: Some vaccinations may be attributed to the county of administration rather than the county of residence, leading to over and under-reporting.\n4. **Missing federally-administered doses:** Doses administered through federal programs (e.g. Indian Health Services, Department of Defense, Bureau of Prisons, and Veteran's Affairs) are sometimes not included in state-reported vaccination numbers leading to under-reporting."
-        },
-        {
-          "question": "More information on COVID vaccines",
-          "questionId": "more-info-vaccines",
-          "answer": "[Information on vaccine safety, eligibility, and immunity](https://covidactnow.org/faq#vaccines)\n\n[The Demographic Make-Up of COVID Vaccine Trials](https://covidactnow.org/covid-explained/covid-vaccine-trials)\n\n[The Basics of COVID Vaccine Development](https://covidactnow.org/covid-explained/covid-vaccine-basics)"
+          "answer": "The vaccination data we show contains a number of limitations: \n\n1. **Vaccine vs. infection-acquired immunity**: We focus on vaccine-acquired immunity and do not account for infection-acquired immunity. At this time, we are not sufficiently confident in the ability to estimate vaccine-acquired plus infection-acquired immunity. We will revisit this choice if the CDC puts out more information about general seroprevalence and the infection history of people getting vaccinated.\n2. **Vaccine variations**: We treat all vaccine manufacturers equally, e.g. our data combines people who have received the Pfizer, Moderna, and J&J vaccines. We will re-evaluate this with any additional data, especially as more types of vaccines become available. \n3. **Timeliness**: We get our national and state data from the CDC, which does not always update daily. There are currently unavoidable delays from the provider to the CDC and from the CDC to the public.\n4. **Underestimation of booster shots and overestimation of primary dose:** If a booster is administered in a different location than the primary vaccine series, the CDC may report the booster shot as a first dose in some instances.\n\nCounty-level vaccination data can suffer from additional limitations including:\n\n1. **Lack of 1st dose data:** For rare cases where county-level 1st dose data is unavailable, we estimate 1st dose vaccinations based on the ratio of first dose and second dose (or J&J) vaccinations at the state level.\n2. **Under-reporting**: If a vaccine is administered within a state but accurate county of residence information is not collected then the vaccination cannot be attributed to any specific county, leading to under-reporting.\n3. **Misattribution**: Some vaccinations may be attributed to the county of administration rather than the county of residence, leading to over and under-reporting.\n4. **Missing federally-administered doses:** Doses administered through federal programs (e.g. Indian Health Services, Department of Defense, Bureau of Prisons, and Veterans Affairs) are sometimes not included in state-reported vaccination numbers leading to under-reporting."
         }
       ]
     },
@@ -181,10 +183,23 @@
           "answer": "[Why vulnerability data is important for all communities ](/covid-explained/covid-vulnerability-data)\n\n[Resources for vulnerable people](/covid-explained/federal-resources-covid-relief)"
         }
       ]
+    },
+    {
+      "sectionId": "former-risk-framework",
+      "sectionIntro": "Until Spring of 2022 when the CDC released their [community level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html), Covid Act Now used three key metrics to assess a location's overall risk level—**daily new cases** (incidence), **infection rate** (RT) and **positive test rate**. The other three metrics—**ICU capacity used**, **% vaccinated** and **vulnerability**—reflected a location's ability to protect itself and recover from COVID. Below, learn more about each metric and how it was assessed.\n\nA state or county’s overall risk level took into account three metrics: daily new cases per 100K (incidence), infection rate (Rt), and test positivity. \n\n* **Daily new cases**, also known as “incidence” in epidemiology, represents the current amount of COVID in a community. \n* **Infection rate** is the direction and speed of growth. For instance, daily new cases may be low, but if infection rate is high, then we know that daily new cases will be high in the near future. \n* **Positive test rate** is a measure of confidence in the underlying data. For instance, if daily new cases and infection rate are both low, but test positivity is high, then the lack of sufficient testing suggests that we are not capturing the true levels of COVID and both daily new cases and infection rate are actually higher than what is currently reported. \n\nIf a region’s daily new cases was green, then its overall risk level was green. Otherwise, a region’s overall risk level reflected the highest risk level across all three metrics.",
+      "questions": [
+        {
+          "question": "",
+          "questionId": "framework",
+          "answer": "Covid Act Now partnered with the Harvard Global Health Institute and Harvard Edmond J. Safra Center for Ethics to develop the COVID risk framework we used between Spring 2020 to Spring 2022. This framework was the result of collaboration between public health, epidemiology, and policy experts from the following organizations:"
+        }
+      ],
+      "sectionHeader": "Covid Act Now's former risk levels",
+      "sectionSubheader": ""
     }
   ],
-  "pageHeader": "Risk levels & key metrics",
-  "pageIntro": "Covid Act Now uses six key metrics to assess COVID across U.S. states, metros, and counties. Three of these—[daily new cases](#daily-new-cases) (incidence), [infection rate](#infection-rate) (RT) and [positive test rate](#positive-test-rate)—assess a location's overall risk level. The other three—[ICU capacity used](#icu-capacity-used), [% vaccinated](#percent-vaccinated) and [vulnerability](https://covidactnow.org/covid-risk-levels-metrics#vulnerability)—reflect a location's ability to protect itself and recover from COVID. Below, learn more about each metric and how it is assessed.",
+  "pageHeader": "Community level & key metrics",
+  "pageIntro": "As of April 2022, Covid Act Now's community level framework follows the [CDC’s Community Level framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html). The community level framework looks at three key metrics to assess COVID across the U.S.: weekly new reported cases, weekly COVID hospital admissions, and percent of staffed inpatient beds occupied by COVID patients. \n\nAccording to the CDC, this new community level framework better reflects the risk of a medically significant disease and healthcare strain. The rise of vaccines and immunity from infection has greatly reduced the risk of severe illness and death for most people, and therefore community prevention strategies and individual behaviors should be driven by an understanding of the potential strain on local hospital systems, in addition to cases.",
   "frameworkLogos": [
     {
       "image": "/images_cms/the-rockefeller-foundation-logo.png",

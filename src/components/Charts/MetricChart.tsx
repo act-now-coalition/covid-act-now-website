@@ -7,6 +7,9 @@ import {
   ChartICUCapacityUsed,
   ChartVaccinations,
   ChartCaseDensity,
+  ChartWeeklyNewCasesPer100k,
+  ChartAdmissionsPer100k,
+  ChartRatioBedsWithCovidPatients,
 } from 'components/Charts';
 import { Metric } from 'common/metricEnum';
 import { SeriesType, Series } from 'components/Explore/interfaces';
@@ -84,6 +87,24 @@ const MetricChart = React.memo(
           <ChartVaccinations
             height={chartHeight}
             seriesList={getVaccinationSeries(projection)}
+          />
+        )}
+        {metric === Metric.WEEKLY_CASES_PER_100K && (
+          <ChartWeeklyNewCasesPer100k
+            height={chartHeight}
+            columnData={projection.getDataset('weeklyNewCasesPer100k')}
+          />
+        )}
+        {metric === Metric.RATIO_BEDS_WITH_COVID && (
+          <ChartRatioBedsWithCovidPatients
+            height={chartHeight}
+            columnData={projection.getDataset('bedsWithCovidPatientsRatio')}
+          />
+        )}
+        {metric === Metric.ADMISSIONS_PER_100K && (
+          <ChartAdmissionsPer100k
+            height={chartHeight}
+            columnData={projection.getDataset('weeklyCovidAdmissionsPer100k')}
           />
         )}
       </>

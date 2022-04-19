@@ -57,22 +57,28 @@ const LocationOverview: React.FC<{
             value={stats[Metric.VACCINATIONS]}
           />
         </GridItemMetricVax>
-        <GridItemMetric1 onClick={() => onClickMetric(Metric.CASE_DENSITY)}>
+        <GridItemMetric1
+          onClick={() => onClickMetric(Metric.WEEKLY_CASES_PER_100K)}
+        >
           <SummaryStat
-            metric={Metric.CASE_DENSITY}
-            value={stats[Metric.CASE_DENSITY]}
+            metric={Metric.WEEKLY_CASES_PER_100K}
+            value={stats[Metric.WEEKLY_CASES_PER_100K]}
           />
         </GridItemMetric1>
-        <GridItemMetric2 onClick={() => onClickMetric(Metric.CASE_GROWTH_RATE)}>
+        <GridItemMetric2
+          onClick={() => onClickMetric(Metric.ADMISSIONS_PER_100K)}
+        >
           <SummaryStat
-            metric={Metric.CASE_GROWTH_RATE}
-            value={stats[Metric.CASE_GROWTH_RATE]}
+            metric={Metric.ADMISSIONS_PER_100K}
+            value={stats[Metric.ADMISSIONS_PER_100K]}
           />
         </GridItemMetric2>
-        <GridItemMetric3 onClick={() => onClickMetric(Metric.POSITIVE_TESTS)}>
+        <GridItemMetric3
+          onClick={() => onClickMetric(Metric.RATIO_BEDS_WITH_COVID)}
+        >
           <SummaryStat
-            metric={Metric.POSITIVE_TESTS}
-            value={stats[Metric.POSITIVE_TESTS]}
+            metric={Metric.RATIO_BEDS_WITH_COVID}
+            value={stats[Metric.RATIO_BEDS_WITH_COVID]}
           />
         </GridItemMetric3>
       </GridContainer>

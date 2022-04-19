@@ -7,3 +7,6 @@ export { default as ChartVaccinations } from './ChartVaccinations';
 export { default as ChartCaseDensity } from './ChartCaseDensity';
 export { default as Tooltip } from './Tooltip';
 export { default as RectClipGroup } from './RectClipGroup';
+export { default as ChartWeeklyNewCasesPer100k } from './ChartWeeklyNewCasesPer100k';
+export { default as ChartAdmissionsPer100k } from './ChartAdmissionsPer100k';
+export { default as ChartRatioBedsWithCovidPatients } from './ChartRatioBedsWithCovidPatients';

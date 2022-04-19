@@ -3,15 +3,13 @@ import fs from 'fs-extra';
 import * as Handlebars from 'handlebars';
 import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
-import regions from '../../src/common/regions';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
 import { DateFormat, formatDateTime } from '../../src/common/utils/time-utils';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
-const thermometerBaseURL =
-  'https://data.covidactnow.org/thermometer_screenshot';
+const thermometerBaseURL = 'https://covidactnow.org/images/email_alerts';
 const unsubscribeURL = 'https://covidactnow.org/alert_unsubscribe';
 
 export function toISO8601(date: Date): string {
@@ -85,7 +83,7 @@ function generateAlertEmailContent(
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
-    img_alt: `Image depicting that ${locationName} went from "${oldLevelText}" to "${newLevelText}"`,
+    img_alt: `Image depicting that ${locationName} went from ${oldLevelText} to ${newLevelText}`,
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
     location_url: `${locationURL}?utm_source=risk_alerts&utm_medium=email`,
@@ -104,11 +102,11 @@ function generateAlertEmailContent(
 
 function changeText(oldLevel: Level, newLevel: Level) {
   if (oldLevel === Level.UNKNOWN) {
-    return 'new risk score';
+    return 'new community level';
   } else if (oldLevel < newLevel) {
-    return 'risk increased';
+    return 'community level increased';
   } else {
-    return 'risk decreased';
+    return 'community level decreased';
   }
 }
 
@@ -118,7 +116,7 @@ export function generateAlertEmailData(
 ) {
   const { locationName } = locationAlert;
   const htmlContent = generateAlertEmailContent(emailAddress, locationAlert);
-  const subjectLine = `${locationName}'s Risk Level Has Changed`;
+  const subjectLine = `${locationName}'s Community Level Has Changed`;
 
   return {
     Subject: subjectLine,

@@ -7,7 +7,6 @@ import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
@@ -15,7 +14,11 @@ import { formatMetatagDate, formatPercent } from 'common/utils';
 import { getFilterLimit } from 'components/Search';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
-import { useGeolocatedRegions, useShowPastPosition } from 'common/hooks';
+import {
+  useGeolocatedRegions,
+  useShowPastPosition,
+  useScrollToRecommendations,
+} from 'common/hooks';
 import HomePageHeader from 'components/Header/HomePageHeader';
 import {
   Content,
@@ -25,7 +28,7 @@ import {
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
-  RiskLevelThermometer,
+  CommunityLevelThermometer,
   VaccinationsThermometer,
 } from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
@@ -35,18 +38,20 @@ import { DonateButtonHeart } from 'components/DonateButton';
 import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
 import { TooltipMode } from 'components/USMap/USMapTooltip';
-import VaccinationsTable from 'components/VaccinationsTable/VaccinationsTable';
 import NationalText from 'components/NationalText';
-import BoosterBanner from 'components/Banner/BoosterBanner/BoosterBanner';
-import Box from '@material-ui/core/Box';
-import regions from 'common/regions';
+import Recommendations from 'components/Recommend/Recommendations';
+import regions, { USA } from 'common/regions';
+import { Level } from 'common/level';
+import { Can82BannerHomepage } from 'components/Banner';
+import EmailAlertsFooter from 'components/EmailAlertsFooter';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Explore our interactive U.S. COVID Map for the latest data on Cases, Vaccinations, Deaths, Positivity rate, and ICU capacity for your State, City, or County.`;
+  return `${date} Covid Act Now has real-time tracking of your community's COVID level. Explore how your community is doing.`;
 }
 
 export default function HomePage() {
+  const recommendationsRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
@@ -80,15 +85,6 @@ export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [showCompareModal, setShowCompareModal] = useState(false);
-  const [
-    compareShowVaccinationsFirst,
-    setCompareShowVaccinationsFirst,
-  ] = useState<boolean>(false);
-
-  const vaccinationsTableButtonOnClick = () => {
-    setCompareShowVaccinationsFirst(true);
-    setShowCompareModal(true);
-  };
 
   const searchLocations = useFinalAutocompleteLocations();
 
@@ -96,7 +92,6 @@ export default function HomePage() {
   const isMobile = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
-
   const renderNavBarSearch = () => (
     <>
       {hasScrolled && (
@@ -104,6 +99,8 @@ export default function HomePage() {
       )}
     </>
   );
+
+  useScrollToRecommendations(recommendationsRef);
 
   const renderDonateButton = () => (
     <>
@@ -121,7 +118,7 @@ export default function HomePage() {
       <EnsureSharingIdInUrl />
       <AppMetaTags
         canonicalUrl="/"
-        pageTitle="Realtime U.S. COVID Map & Vaccine Tracker"
+        pageTitle="US COVID Tracker"
         pageDescription={getPageDescription()}
       />
       <NavAllOtherPages
@@ -130,10 +127,8 @@ export default function HomePage() {
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
-      <Box margin={'auto'} marginTop={isMobile ? 0 : 2} maxWidth={'1000px'}>
-        <BoosterBanner />
-      </Box>
       <HomepageStructuredData />
+      <Can82BannerHomepage />
       <HomePageHeader />
       <main>
         <div className="App">
@@ -148,6 +143,16 @@ export default function HomePage() {
               />
               <HomepageItems isLoading={isLoading} userRegions={userRegions} />
             </ColumnCentered>
+
+            <MapBlock
+              title="COVID community level"
+              subtitle=""
+              renderMap={locationScope => (
+                <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
+              )}
+              renderThermometer={() => <CommunityLevelThermometer />}
+              infoLink="/covid-risk-levels-metrics"
+            />
 
             <MapBlock
               title="Vaccination progress"
@@ -173,22 +178,6 @@ export default function HomePage() {
                 </>
               )}
               infoLink="/covid-risk-levels-metrics#percent-vaccinated"
-              renderTable={locationScope => (
-                <VaccinationsTable
-                  mapView={locationScope}
-                  seeAllOnClick={vaccinationsTableButtonOnClick}
-                />
-              )}
-            />
-
-            <MapBlock
-              title="Risk levels"
-              subtitle="Risk is reduced for those who are vaccinated."
-              renderMap={locationScope => (
-                <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
-              )}
-              renderThermometer={() => <RiskLevelThermometer />}
-              infoLink="/covid-risk-levels-metrics"
             />
 
             <HomePageBlock
@@ -206,13 +195,20 @@ export default function HomePage() {
             <HomePageBlock>
               <CompareMain
                 locationsViewable={8}
-                vaccinesFirst={compareShowVaccinationsFirst}
                 showModal={showCompareModal}
                 setShowModal={setShowCompareModal}
               />
             </HomePageBlock>
-            <HomePageBlock id="alert_signup">
-              <ShareModelBlock />
+            <HomePageBlock>
+              <Recommendations
+                alarmLevel={Level.UNKNOWN}
+                recommendationsRef={recommendationsRef}
+                region={USA.instance}
+                isHomepage={true}
+              />
+            </HomePageBlock>
+            <HomePageBlock id="share">
+              <EmailAlertsFooter defaultRegions={[]} />
             </HomePageBlock>
             <PartnersSection />
           </Content>

@@ -166,8 +166,9 @@ export class USA extends Region {
   abbreviation = 'USA';
 
   get relativeUrl(): string {
-    throw new Error('Method not implemented.');
+    return '';
   }
+
   contains(subregion: Region): boolean {
     throw new Error('Method not implemented.');
   }
