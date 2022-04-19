@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const Can82Banner: React.FC = () => (
   <CondensedBanner role="banner">
     We've made some changes to align with the current state of COVID and CDC
-    guidelines. Most metrics that we've previously tracked will continue to be
+    guidelines. All metrics that we've previously tracked will continue to be
     available. <Link to="/covid-risk-levels-metrics">Learn more</Link>
   </CondensedBanner>
 );
