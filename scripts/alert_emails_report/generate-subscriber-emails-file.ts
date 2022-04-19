@@ -1,3 +1,15 @@
+/**
+ * Generates a CSV file with the email addresses of all the subscribers to
+ * the alert emails.
+ *
+ * In order to run the script, you need to have a valid Google service account
+ * file in the `scripts/common/firebase` directory. Make sure that the file
+ * corresponds to the environment that you want to use to run the script.
+ *
+ * Usage:
+ *
+ *    yarn generate-subscriber-emails-file
+ */
 import fs from 'fs';
 import _ from 'lodash';
 import { fetchAllAlertSubscriptions } from '../alert_emails/firestore';
