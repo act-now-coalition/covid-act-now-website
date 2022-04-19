@@ -68,6 +68,8 @@ export class Projections {
       Metric.RATIO_BEDS_WITH_COVID,
       Metric.WEEKLY_CASES_PER_100K,
       Metric.VACCINATIONS,
+      Metric.CASE_GROWTH_RATE,
+      Metric.POSITIVE_TESTS,
     ];
     for (const metric of summaryMetrics) {
       const value = this.getMetricValue(metric);
