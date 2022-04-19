@@ -2,11 +2,16 @@ import React from 'react';
 import { CircleIcon } from 'components/NewLocationPage/Shared/Shared.style';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
-import { Row, LevelLabel, Wrapper, Title } from './OverallLevelText.style';
+import {
+  Row,
+  LevelLabel,
+  Wrapper,
+  DesktopTitle,
+  MobileTitle,
+} from './OverallLevelText.style';
 import { locationPageHeaderTooltipContent } from 'cms-content/tooltips';
 import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 import { Level } from 'common/level';
-import { useBreakpoint } from 'common/hooks';
 
 export function renderInfoTooltip(): React.ReactElement {
   const { body } = locationPageHeaderTooltipContent;
@@ -23,21 +28,22 @@ export function renderInfoTooltip(): React.ReactElement {
 const OverallLevelText: React.FC<{ currentLevel: Level }> = ({
   currentLevel,
 }) => {
-  const isMobile = useBreakpoint(600);
-  const levelInfo = LOCATION_SUMMARY_LEVELS[currentLevel];
-  const levelName = isMobile ? levelInfo.summary : levelInfo.name;
+  const { name, color } = LOCATION_SUMMARY_LEVELS[currentLevel];
 
   return (
-    <Wrapper>
-      <Row>
-        <Title>Community level</Title>
-        {renderInfoTooltip()}
-      </Row>
-      <Row>
-        <CircleIcon $iconColor={levelInfo.color} />
-        <LevelLabel>{levelName}</LevelLabel>
-      </Row>
-    </Wrapper>
+    <div>
+      <MobileTitle>Community level</MobileTitle>
+      <Wrapper>
+        <Row>
+          <DesktopTitle>Community level</DesktopTitle>
+          {renderInfoTooltip()}
+        </Row>
+        <Row>
+          <CircleIcon $iconColor={color} />
+          <LevelLabel>{name}</LevelLabel>
+        </Row>
+      </Wrapper>
+    </div>
   );
 };
 
