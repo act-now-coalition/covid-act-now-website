@@ -7,7 +7,7 @@ async function main() {
   const subscriptions = await fetchAllAlertSubscriptions(db);
   const fs = require('fs');
   const output = subscriptions.map(s => s.email).join(',');
-  fs.writeFileSync('subscriber-emails.txt', output);
+  fs.writeFileSync('subscriber-emails.csv', output);
 }
 
 if (require.main === module) {
