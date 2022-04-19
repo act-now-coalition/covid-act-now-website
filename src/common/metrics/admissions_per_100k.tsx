@@ -111,7 +111,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const hsaCopy = `The ${hsaName} Health Service Area`;
+  const hsaCopy = `the ${hsaName} Health Service Area`;
   // Try not to round to zero (since it will probably be >0 per 100k).
   const weeklyNewCovidAdmissionsText =
     weeklyNewCovidAdmissions >= 0.1 && weeklyNewCovidAdmissions < 1
