@@ -12,6 +12,7 @@ env:
   SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id }}
   # Used in the shared images URL and in the PR branch.
   RUN_ID: ${{ github.event.inputs.snapshot_id }}-${{github.run_number}}
+  NODE_OPTIONS: "--max-old-space-size=(2 * 1024)"
 
 jobs:
   update-data-snapshot:
@@ -26,9 +27,6 @@ jobs:
         with:
           node-version: 12.x
       - run: yarn install
-
-      - name: Increase memory
-        run: export NODE_OPTIONS="--max-old-space-size=(2 * 1024)"
 
       # Copy region-overrides.json file from backend repo.
       - run: curl https://raw.githubusercontent.com/covid-projections/covid-data-model/main/data/region-overrides.json > src/cms-content/region-overrides/region-overrides.json
