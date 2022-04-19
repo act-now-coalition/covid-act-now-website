@@ -12,7 +12,7 @@ env:
   SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id }}
   # Used in the shared images URL and in the PR branch.
   RUN_ID: ${{ github.event.inputs.snapshot_id }}-${{github.run_number}}
-  NODE_OPTIONS: "--max-old-space-size=(8192)"
+  NODE_OPTIONS: "--max-old-space-size=4096"
 
 jobs:
   update-data-snapshot:
