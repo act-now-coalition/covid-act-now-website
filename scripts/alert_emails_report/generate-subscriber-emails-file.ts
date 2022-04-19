@@ -9,6 +9,8 @@
  * Usage:
  *
  *    yarn generate-subscriber-emails-file
+ *
+ * - https://cloud.google.com/iam/docs/creating-managing-service-account-keys
  */
 import fs from 'fs';
 import { fetchAllAlertSubscriptions } from '../alert_emails/firestore';
