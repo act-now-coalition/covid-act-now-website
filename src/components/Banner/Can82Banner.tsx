@@ -11,7 +11,7 @@ const trackClick = () => {
   trackEvent(
     EventCategory.HOMEPAGE_BANNER,
     EventAction.CLICK_LINK,
-    'Banner Learn More Link',
+    'Learn Community Levels',
   );
 };
 
