@@ -14,13 +14,13 @@ export const Headers = styled.div`
   margin-top: 20px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
+  font-size: 18px;
+  line-height: 1.05;
   font-family: 'Roboto';
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 18px;
   text-transform: capitalize;
   width: 400px;
+  margin-bottom: 0;
 `;
 
 export const ExploreTitle = styled(Title)`
@@ -33,7 +33,6 @@ export const ExploreTitle = styled(Title)`
 
 export const Subtitle = styled.div`
   margin-top: 5px;
-
   font-family: 'Source Code Pro';
   font-weight: 500;
   font-size: 16px;
