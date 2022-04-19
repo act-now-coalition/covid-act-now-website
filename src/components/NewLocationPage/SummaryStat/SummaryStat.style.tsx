@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
-import { GrayTitle } from '../Shared/Shared.style';
+import { GrayTitle, Chevron } from '../Shared/Shared.style';
 
 export const StatContent = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
-    justify-content: unset;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: unset;
   }
 `;
 
@@ -38,8 +41,16 @@ export const SubLabelWrapper = styled.div`
 export const SubLabel = styled(GrayTitle).attrs(props => ({
   as: 'span',
 }))`
+  ${props => props.theme.fonts.regularBook};
   line-height: 1;
   margin: 0;
+  font-size: 0.8rem;
+  margin-top: ${({ theme }) => theme.spacing(0.5)}px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    line-height: 1.1;
+    margin-top: 0;
+  }
 `;
 
 export const MetricLabel = styled.span`
@@ -73,4 +84,10 @@ export const Row = styled.div`
       align-items: center;
     }
   }
+`;
+
+// Alignment specific to desktop summary stat:
+export const CondensedChevron = styled(Chevron)`
+  transform: translateY(-1px);
+  margin: auto 0 auto 0.4rem;
 `;

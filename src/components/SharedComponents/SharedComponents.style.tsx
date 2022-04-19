@@ -4,15 +4,21 @@ import { COLOR_MAP } from 'common/colors';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-export const SectionHeader = styled.h2`
+export const SectionHeader = styled.h2<{
+  $isHomepage?: boolean;
+}>`
   ${props => props.theme.fonts.regularBookBold};
   font-size: 1.5rem;
   line-height: 1.1;
   margin: 0 0 1rem;
   letter-spacing: 0;
 
+  text-align: ${({ $isHomepage }) => ($isHomepage ? 'center' : 'left')};
+  font-size: ${({ $isHomepage }) => ($isHomepage ? '1.625rem' : '1.5rem')};
+
   @media (min-width: ${materialSMBreakpoint}) {
-    margin: 0 0 1.25rem;
+    margin: ${({ $isHomepage }) => ($isHomepage ? '0 0 1rem' : '0 0 1.25rem')};
+    font-size: ${({ $isHomepage }) => ($isHomepage ? '2.25rem' : '1.5rem')};
   }
 `;
 

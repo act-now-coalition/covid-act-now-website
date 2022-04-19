@@ -67,13 +67,13 @@ const MetricExplainer = () => {
         </ExplainersHeading2>
         <MarkdownContent source={introSection[0].sectionIntro} />
         <ThermometerIntro />
-        {introSection[0].questions.map(question => (
-          <Fragment key={question.questionId}>
-            <ItemName>{question.question}</ItemName>
-            <MarkdownContent source={question.answer} />
-          </Fragment>
-        ))}
-        <LogoGrid logos={frameworkLogos} />
+        {introSection[0].questions &&
+          introSection[0].questions.map(question => (
+            <Fragment key={question.questionId}>
+              <ItemName>{question.question}</ItemName>
+              <MarkdownContent source={question.answer} />
+            </Fragment>
+          ))}
         {metricSections.map(section => {
           const sectionThermometer = getThermometer(section.sectionId);
           return (
@@ -96,6 +96,7 @@ const MetricExplainer = () => {
             </Fragment>
           );
         })}
+        <LogoGrid logos={frameworkLogos} />
         <Footer />
         <ScrollToTopButton
           showButton={showScrollToTopButton}
@@ -110,10 +111,9 @@ function getThermometer(sectionId: string) {
   // TODO(pablo): This map depends on the IDs entered by the user on the
   // CMS, I'm not sure how to make it better
   const mapSectionIdMetric: { [key: string]: Metric } = {
-    'daily-new-cases': Metric.CASE_DENSITY,
-    'infection-rate': Metric.CASE_GROWTH_RATE,
-    'positive-test-rate': Metric.POSITIVE_TESTS,
-    'icu-capacity-used': Metric.HOSPITAL_USAGE,
+    'weekly-new-cases': Metric.WEEKLY_CASES_PER_100K,
+    'weekly-admissions': Metric.ADMISSIONS_PER_100K,
+    'patients-with-covid': Metric.RATIO_BEDS_WITH_COVID,
     // NOTE: No thermometer for 'vaccinations' since we don't grade it yet.
   };
 

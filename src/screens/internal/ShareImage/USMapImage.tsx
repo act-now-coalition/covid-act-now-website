@@ -8,7 +8,7 @@ export const USMapImage = () => {
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
       <USMapWrapper>
-        <SocialLocationPreviewMap />
+        <SocialLocationPreviewMap isRiskMap />
       </USMapWrapper>
     </ScreenshotWrapper>
   );

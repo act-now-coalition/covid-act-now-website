@@ -4,7 +4,7 @@ import {
   countyMapToFixedBreakpoint,
 } from 'assets/theme/sizes';
 import { FixedAspectRatioContainer } from 'components/FixedAspectRatio/FixedAspectRatio.style';
-import { Label } from 'components/HorizontalThermometer/RiskLevelThermometer/RiskLevelThermometer.style';
+import { Label } from 'components/HorizontalThermometer/CommunityLevelThermometer/CommunityLevelThermometer.style';
 
 export const PinnedContainer = css`
   position: fixed;

@@ -21,6 +21,14 @@ export type State = string | null;
  */
 export type County = string | null;
 /**
+ * 3 digit Health Service Area identification code. For CBSA, state, and country regions hsa is omitted. For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md
+ */
+export type Hsa = string | null;
+/**
+ * Name of Health Service Area. For CBSA, state, and country regions hsaName is omitted. For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md
+ */
+export type Hsaname = string | null;
+/**
  * An enumeration.
  */
 export type AggregationLevel =
@@ -28,7 +36,8 @@ export type AggregationLevel =
   | 'state'
   | 'county'
   | 'cbsa'
-  | 'place';
+  | 'place'
+  | 'hsa';
 /**
  * Latitude of point within the state or county. Currently a placeholder.
  */
@@ -45,6 +54,10 @@ export type Long = number | null;
  * Total Population in geographic region.
  */
 export type Population = number;
+/**
+ * Total Population of county's corresponding Health Service Area. For CBSA, state, and country regions hsaPopulation is omitted. For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md
+ */
+export type Hsapopulation = number | null;
 /**
  * Ratio of people who test positive calculated using a 7-day rolling average.
  */
@@ -64,6 +77,10 @@ export type TestPositivityRatioMethod =
  */
 export type Casedensity = number | null;
 /**
+ * The number of new cases per 100k population over the last week.
+ */
+export type Weeklynewcasesper100K = number | null;
+/**
  * Ratio of currently hired tracers to estimated tracers needed based on 7-day daily case average.
  */
 export type Contacttracercapacityratio = number | null;
@@ -79,6 +96,14 @@ export type Infectionrateci90 = number | null;
  * Ratio of staffed intensive care unit (ICU) beds that are currently in use.
  */
 export type Icucapacityratio = number | null;
+/**
+ * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area.
+ */
+export type Bedswithcovidpatientsratio = number | null;
+/**
+ * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area.
+ */
+export type Weeklycovidadmissionsper100K = number | null;
 /**
  * Ratio of population that has initiated vaccination.
  */
@@ -112,6 +137,10 @@ export type RiskLevel = 0 | 1 | 2 | 3 | 4 | 5;
  */
 export type CDCTransmissionLevel = 0 | 1 | 2 | 3 | 4;
 /**
+ * Community level.
+ */
+export type CommunityLevel = 0 | 1 | 2;
+/**
  * Cumulative confirmed or suspected cases.
  */
 export type Cases = number | null;
@@ -139,9 +168,10 @@ export type Contacttracers = number | null;
  *  * capacity - Current staffed acute bed capacity.
  *  * currentUsageTotal - Total number of acute beds currently in use
  *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * weeklyCovidAdmissions - Number of COVID patients admitted in the past week.
  *
  */
-export type Hospitalbeds = HospitalResourceUtilization;
+export type Hospitalbeds = HospitalResourceUtilizationWithAdmissions;
 /**
  * Total capacity for resource.
  */
@@ -155,6 +185,24 @@ export type Currentusagetotal = number | null;
  */
 export type Currentusagecovid = number | null;
 /**
+ * Number of COVID patients admitted in the past week.
+ */
+export type Weeklycovidadmissions = number | null;
+/**
+ *
+ * Information about acute bed utilization details aggregated for the county's corresponding
+ * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
+ * For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ *
+ * Fields:
+ *  * capacity - Current staffed acute bed capacity.
+ *  * currentUsageTotal - Total number of acute beds currently in use
+ *  * currentUsageCovid - Number of acute beds currently in use by COVID patients.
+ *  * weeklyCovidAdmissions - Number of COVID patients admitted in the past week.
+ *
+ */
+export type Hsahospitalbeds = HospitalResourceUtilizationWithAdmissions;
+/**
  *
  * Information about ICU bed utilization details.
  *
@@ -165,6 +213,31 @@ export type Currentusagecovid = number | null;
  *
  */
 export type Icubeds = HospitalResourceUtilization;
+/**
+ * Total capacity for resource.
+ */
+export type Capacity1 = number | null;
+/**
+ * Currently used capacity for resource by all patients (COVID + Non-COVID)
+ */
+export type Currentusagetotal1 = number | null;
+/**
+ * Currently used capacity for resource by COVID
+ */
+export type Currentusagecovid1 = number | null;
+/**
+ *
+ * Information about ICU bed utilization details aggregated for the county's corresponding
+ * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
+ * For For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ *
+ * Fields:
+ *  * capacity - Current staffed ICU bed capacity.
+ *  * currentUsageTotal - Total number of ICU beds currently in use
+ *  * currentUsageCovid - Number of ICU beds currently in use by COVID patients.
+ *
+ */
+export type Hsaicubeds = HospitalResourceUtilization;
 /**
  *
  * New confirmed or suspected cases.
@@ -327,9 +400,17 @@ export type Contacttracers1 = FieldAnnotations;
  */
 export type Hospitalbeds1 = FieldAnnotations;
 /**
+ * Annotations for hsaHospitalBeds
+ */
+export type Hsahospitalbeds1 = FieldAnnotations;
+/**
  * Annotations for icuBeds
  */
 export type Icubeds1 = FieldAnnotations;
+/**
+ * Annotations for hsaIcuBeds
+ */
+export type Hsaicubeds1 = FieldAnnotations;
 /**
  * Annotations for newCases
  */
@@ -367,6 +448,10 @@ export type Testpositivityratio1 = FieldAnnotations;
  */
 export type Casedensity1 = FieldAnnotations;
 /**
+ * Annotations for weeklyNewCasesPer100k
+ */
+export type Weeklynewcasesper100K1 = FieldAnnotations;
+/**
  * Annotations for contactTracerCapacityRatio
  */
 export type Contacttracercapacityratio1 = FieldAnnotations;
@@ -382,6 +467,14 @@ export type Infectionrateci901 = FieldAnnotations;
  * Annotations for icuCapacityRatio
  */
 export type Icucapacityratio1 = FieldAnnotations;
+/**
+ * Annotations for bedsWithCovidPatientsRatio
+ */
+export type Bedswithcovidpatientsratio1 = FieldAnnotations;
+/**
+ * Annotations for weeklyCovidAdmissionsPer100k
+ */
+export type Weeklycovidadmissionsper100K1 = FieldAnnotations;
 /**
  * Annotations for vaccinationsInitiatedRatio
  */
@@ -415,6 +508,8 @@ export interface RegionSummary {
   country: Country;
   state: State;
   county: County;
+  hsa: Hsa;
+  hsaName: Hsaname;
   /**
    * Level of region.
    */
@@ -423,6 +518,7 @@ export interface RegionSummary {
   locationId: Locationid;
   long: Long;
   population: Population;
+  hsaPopulation: Hsapopulation;
   metrics: Metrics;
   riskLevels: Risklevels;
   /**
@@ -449,6 +545,7 @@ export interface RegionSummary {
    *
    */
   cdcTransmissionLevel: CDCTransmissionLevel;
+  communityLevels: CommunityLevels;
   actuals: Actuals;
   annotations: Annotations;
   lastUpdatedDate: Lastupdateddate;
@@ -461,10 +558,13 @@ export interface Metrics {
   testPositivityRatio: Testpositivityratio;
   testPositivityRatioDetails?: TestPositivityRatioDetails | null;
   caseDensity: Casedensity;
+  weeklyNewCasesPer100k: Weeklynewcasesper100K;
   contactTracerCapacityRatio: Contacttracercapacityratio;
   infectionRate: Infectionrate;
   infectionRateCI90: Infectionrateci90;
   icuCapacityRatio: Icucapacityratio;
+  bedsWithCovidPatientsRatio: Bedswithcovidpatientsratio;
+  weeklyCovidAdmissionsPer100k: Weeklycovidadmissionsper100K;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
@@ -508,6 +608,54 @@ export interface RiskLevels {
   icuCapacityRatio: RiskLevel;
 }
 /**
+ * Community levels for a region.
+ */
+export interface CommunityLevels {
+  /**
+   *
+   * CDC Community level for county, as provided by the CDC.
+   *
+   * Possible values:
+   *     - 0: Low
+   *     - 1: Medium
+   *     - 2: High
+   *
+   * See https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html
+   * for details about how the Community Level is calculated and should be
+   * interpretted.
+   *
+   * Note that we provide two versions of the Community Level. One is called
+   * canCommunityLevel which is calculated on a daily basis using CAN's data
+   * sources and is available for states, counties, and metros.  The other is
+   * called cdcCommunityLevel and is the raw Community Level published by the
+   * CDC. It is only available for counties, and updates on a weekly basis.
+   *
+   */
+  cdcCommunityLevel: CommunityLevel;
+  /**
+   *
+   * Community level for region, calculated using the CDC definition but with CAN
+   * data sources.
+   *
+   * Possible values:
+   *     - 0: Low
+   *     - 1: Medium
+   *     - 2: High
+   *
+   * See https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html
+   * for details about how the Community Level is calculated and should be
+   * interpretted.
+   *
+   * Note that we provide two versions of the Community Level. One is called
+   * canCommunityLevel which is calculated on a daily basis using CAN's data
+   * sources and is available for states, counties, and metros.  The other is
+   * called cdcCommunityLevel and is the raw Community Level published by the
+   * CDC. It is only available for counties, and updates on a weekly basis.
+   *
+   */
+  canCommunityLevel: CommunityLevel;
+}
+/**
  * Known actuals data.
  */
 export interface Actuals {
@@ -517,7 +665,9 @@ export interface Actuals {
   negativeTests: Negativetests;
   contactTracers: Contacttracers;
   hospitalBeds: Hospitalbeds;
+  hsaHospitalBeds: Hsahospitalbeds;
   icuBeds: Icubeds;
+  hsaIcuBeds: Hsaicubeds;
   newCases: Newcases;
   newDeaths: Newdeaths;
   vaccinesDistributed?: Vaccinesdistributed;
@@ -531,10 +681,19 @@ export interface Actuals {
 /**
  * Base model for API output.
  */
-export interface HospitalResourceUtilization {
+export interface HospitalResourceUtilizationWithAdmissions {
   capacity: Capacity;
   currentUsageTotal: Currentusagetotal;
   currentUsageCovid: Currentusagecovid;
+  weeklyCovidAdmissions: Weeklycovidadmissions;
+}
+/**
+ * Base model for API output.
+ */
+export interface HospitalResourceUtilization {
+  capacity: Capacity1;
+  currentUsageTotal: Currentusagetotal1;
+  currentUsageCovid: Currentusagecovid1;
 }
 /**
  * Distributions of demographic data.
@@ -561,7 +720,9 @@ export interface Annotations {
   negativeTests?: Negativetests1;
   contactTracers?: Contacttracers1;
   hospitalBeds?: Hospitalbeds1;
+  hsaHospitalBeds?: Hsahospitalbeds1;
   icuBeds?: Icubeds1;
+  hsaIcuBeds?: Hsaicubeds1;
   newCases?: Newcases1;
   newDeaths?: Newdeaths1;
   vaccinesDistributed?: Vaccinesdistributed1;
@@ -571,10 +732,13 @@ export interface Annotations {
   vaccinesAdministered?: Vaccinesadministered1;
   testPositivityRatio?: Testpositivityratio1;
   caseDensity?: Casedensity1;
+  weeklyNewCasesPer100k?: Weeklynewcasesper100K1;
   contactTracerCapacityRatio?: Contacttracercapacityratio1;
   infectionRate?: Infectionrate1;
   infectionRateCI90?: Infectionrateci901;
   icuCapacityRatio?: Icucapacityratio1;
+  bedsWithCovidPatientsRatio?: Bedswithcovidpatientsratio1;
+  weeklyCovidAdmissionsPer100k?: Weeklycovidadmissionsper100K1;
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio1;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio1;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio1;

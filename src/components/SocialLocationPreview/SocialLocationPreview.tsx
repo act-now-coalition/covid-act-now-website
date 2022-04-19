@@ -6,7 +6,7 @@ import {
   Wrapper,
   PreviewHeader,
   HeaderText,
-  HeaderHeader,
+  SocialLocationPreviewHeader,
   HeaderSubhead,
   AlarmLevel,
   PreviewBody,
@@ -35,8 +35,10 @@ const SocialLocationPreview = (props: {
     <Wrapper>
       <PreviewHeader>
         <HeaderText>
-          <HeaderHeader>{props.projections?.region.fullName}</HeaderHeader>
-          <HeaderSubhead>Overall COVID risk</HeaderSubhead>
+          <SocialLocationPreviewHeader>
+            {props.projections?.region.fullName}
+          </SocialLocationPreviewHeader>
+          <HeaderSubhead>covid community level</HeaderSubhead>
         </HeaderText>
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
       </PreviewHeader>

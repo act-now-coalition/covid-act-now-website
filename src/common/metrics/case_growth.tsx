@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { getLevel } from 'common/metric';
 import { Metric } from 'common/metricEnum';
-import { levelText } from 'common/utils/chart';
 import { formatDecimal } from 'common/utils';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
@@ -21,6 +19,7 @@ export const CaseGrowthMetric: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: METRIC_NAME,
   metricNameForCompare: METRIC_NAME,
+  metricNameForSummaryStat: METRIC_NAME,
 };
 
 const SHORT_DESCRIPTION_LOW = 'Active cases are decreasing';
@@ -99,19 +98,11 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const level = getLevel(Metric.CASE_GROWTH_RATE, rt);
-  const epidemiologyReasoning = levelText(
-    level,
-    `Because each person is infecting fewer than one other person, the total number of current cases in ${locationName} is shrinking.`,
-    `Because this number is around 1.0, it means that COVID continues to spread at about a constant rate.`,
-    `As such, the total number of active cases in ${locationName} is growing.`,
-    `As such, the total number of current cases in ${locationName} is quickly growing.`,
-  );
-
   return (
     <Fragment>
       On average, each person in {locationName} with COVID is infecting{' '}
-      {formatDecimal(rt)} other people. {epidemiologyReasoning}
+      {formatDecimal(rt)} other people. If this number is over 1.0, it means
+      that the total number of COVID cases is growing.
     </Fragment>
   );
 }

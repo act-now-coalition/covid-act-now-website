@@ -11,6 +11,7 @@ import {
   useScrollToElement,
   useBreakpoint,
   useLocationSummariesForFips,
+  useScrollToRecommendations,
 } from 'common/hooks';
 import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
@@ -20,7 +21,7 @@ import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
-import Recommendations from './Recommendations';
+import Recommendations from '../Recommend/Recommendations';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import LocationPageBlock from './LocationPageBlock';
@@ -65,6 +66,9 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const positiveTestsRef = useRef<HTMLDivElement>(null);
   const hospitalUsageRef = useRef<HTMLDivElement>(null);
   const vaccinationsRef = useRef<HTMLDivElement>(null);
+  const weeklyNewCasesRef = useRef<HTMLDivElement>(null);
+  const admissionsPer100kRef = useRef<HTMLDivElement>(null);
+  const ratioBedsWithCovidRef = useRef<HTMLDivElement>(null);
   const metricRefs = useMemo(
     () => ({
       [Metric.CASE_DENSITY]: caseDensityRef,
@@ -72,6 +76,9 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       [Metric.POSITIVE_TESTS]: positiveTestsRef,
       [Metric.HOSPITAL_USAGE]: hospitalUsageRef,
       [Metric.VACCINATIONS]: vaccinationsRef,
+      [Metric.WEEKLY_CASES_PER_100K]: weeklyNewCasesRef,
+      [Metric.ADMISSIONS_PER_100K]: admissionsPer100kRef,
+      [Metric.RATIO_BEDS_WITH_COVID]: ratioBedsWithCovidRef,
     }),
     [],
   );
@@ -82,31 +89,29 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const isMobile = useBreakpoint(600);
   useScrollToElement();
 
-  const { pathname, hash } = useLocation();
-  const isRecommendationsShareUrl = pathname.includes('recommendations');
+  const { hash } = useLocation();
 
   const [currentExploreMetric, setCurrentExploreMetric] = useState<
     ExploreMetric
-  >(ExploreMetric.CASES);
+  >(ExploreMetric.WEEKLY_CASES);
 
   useEffect(() => {
     if (hash === '#explore-chart') {
-      setCurrentExploreMetric(ExploreMetric.HOSPITALIZATIONS);
+      setCurrentExploreMetric(ExploreMetric.WEEKLY_CASES);
     }
   }, [hash]);
 
   const [scrolledWithUrl, setScrolledWithUrl] = useState(false);
 
+  // TODO(8.2) rename ref once group header is finalized // confirm that removing refs doesn't break anything
+  const communityMetricsRef = useRef<HTMLDivElement>(null);
   const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
-  const casesBlockRef = useRef<HTMLDivElement>(null);
-  const hospitalizationsBlockRef = useRef<HTMLDivElement>(null);
-  const deathsBlockRed = useRef<HTMLDivElement>(null);
+  const additionalMiscMetricsRef = useRef<HTMLDivElement>(null);
   const chartBlockRefs = useMemo(
     () => ({
+      [GroupHeader.COMMUNITY_LEVEL]: communityMetricsRef,
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
-      [GroupHeader.CASES]: casesBlockRef,
-      [GroupHeader.HOSPITALIZATIONS]: hospitalizationsBlockRef,
-      [GroupHeader.DEATHS]: deathsBlockRed,
+      [GroupHeader.ADDITIONAL_MISC]: additionalMiscMetricsRef,
     }),
     [],
   );
@@ -125,21 +130,10 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
       return () => clearTimeout(timeoutId);
     };
 
-    const scrollToRecommendations = () => {
-      const timeoutId = setTimeout(() => {
-        if (isRecommendationsShareUrl) {
-          if (recommendationsRef.current && !scrolledWithUrl) {
-            setScrolledWithUrl(true);
-            scrollTo(recommendationsRef.current);
-          }
-        }
-      }, 200);
-      return () => clearTimeout(timeoutId);
-    };
-
     scrollToChart();
-    scrollToRecommendations();
-  }, [chartId, metricRefs, isRecommendationsShareUrl, scrolledWithUrl]);
+  }, [chartId, metricRefs, scrolledWithUrl]);
+
+  useScrollToRecommendations(recommendationsRef);
 
   const initialFipsList = useMemo(() => [region.fipsCode], [region.fipsCode]);
 
@@ -228,8 +222,9 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
               <LocationPageBlock>
                 <Recommendations
                   region={region}
-                  projections={projections}
+                  alarmLevel={projections.getAlarmLevel()}
                   recommendationsRef={recommendationsRef}
+                  isHomepage={false}
                 />
               </LocationPageBlock>
             )}

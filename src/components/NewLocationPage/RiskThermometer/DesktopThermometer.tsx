@@ -6,7 +6,7 @@ const DesktopThermometer: React.FC<{ currentLevel: Level }> = ({
   currentLevel,
 }) => {
   const levelUnknown = currentLevel === Level.UNKNOWN;
-  const imageDescription = `Thermometer image showing the colors corresponding to Covid Act Now's COVID risk levels`;
+  const imageDescription = `Thermometer image showing the colors corresponding to the COVID community levels`;
 
   return (
     <Thermometer

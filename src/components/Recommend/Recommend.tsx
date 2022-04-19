@@ -14,11 +14,8 @@ import {
 import { useBreakpoint } from 'common/hooks';
 import CTAButton from './CTAButton';
 
-const Recommend = (props: {
-  recommendations: Recommendation[];
-  recommendationsRef: React.RefObject<HTMLDivElement>;
-}) => {
-  const { recommendations, recommendationsRef } = props;
+const Recommend = (props: { recommendations: Recommendation[] }) => {
+  const { recommendations } = props;
 
   /*
     Divides recommendations into 2 columns.
@@ -40,7 +37,7 @@ const Recommend = (props: {
   const recommendationsColumns = isMobile ? halvedInOrder : partitionedByIndex;
 
   return (
-    <RecommendationsContainer ref={recommendationsRef}>
+    <RecommendationsContainer>
       {recommendationsColumns.map((half, j) => {
         return (
           <Column key={`half-${j}`}>

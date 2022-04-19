@@ -188,6 +188,11 @@
       "sectionId": "metrics",
       "questions": [
         {
+          "question": "What are health service areas?",
+          "questionId": "health-service-area",
+          "answer": "Health Service Areas (HSAs) are defined by the CDC to be a single county or a cluster of adjacent counties which are relatively self-contained with respect to hospital care. \n\nThe CDC bases its [Community Level Framework](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html) on a set of hospital health metrics that are measured at the Health Service Area-level so that counties without significant hospital resources are still assigned a meaningful Community Level.  As such, the hospital metrics on our county location pages are often calculated at the HSA-level.  This means that a county with no (or few) hospitals may still show a non-trivial number of hospital admissions or ICU beds used, etc."
+        },
+        {
           "question": "Why is infection rate important?",
           "questionId": "infection-rate-important",
           "answer": "Infection rate, also known as R(t) or “R-effective,” is important because it estimates how fast COVID is spreading right now.\n\nTo give an example, if the R(t) is 3, it indicates that one infected person will most likely infect three other people, and those three people will each go on to infect three more people. We as a community can change it by modifying community behavior (whether there are large gatherings) and intervention practices (whether people wear masks and maintain social distancing).\n\n![infection rate diagram shows how many people one person would go on to infect if RT is 3.](/images_cms/infection-rate-diagram.png \"COVID spread if infection rate is 3\")"

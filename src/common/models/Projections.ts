@@ -3,7 +3,6 @@ import { getLevel, ALL_METRICS, roundMetricValue } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { Level } from 'common/level';
 import { LEVEL_COLOR } from 'common/colors';
-import { fail } from 'common/utils';
 import { LocationSummary, MetricSummary } from 'common/location_summaries';
 import { RegionSummaryWithTimeseries } from 'api/schema/RegionSummaryWithTimeseries';
 import { County, Region } from 'common/regions';
@@ -64,7 +63,13 @@ export class Projections {
    */
   summary(ccvi: number): LocationSummary {
     const metrics = {} as { [metric in Metric]: MetricSummary };
-    for (const metric of ALL_METRICS) {
+    const summaryMetrics = [
+      Metric.ADMISSIONS_PER_100K,
+      Metric.RATIO_BEDS_WITH_COVID,
+      Metric.WEEKLY_CASES_PER_100K,
+      Metric.VACCINATIONS,
+    ];
+    for (const metric of summaryMetrics) {
       const value = this.getMetricValue(metric);
       const roundedValue = roundMetricValue(metric, value);
 
@@ -76,14 +81,10 @@ export class Projections {
 
     const vaccinationsCompleted =
       this.primary.vaccinationsInfo?.ratioVaccinated ?? null;
-    const hospitalizationsDensity =
-      this.primary.hospitalizationInfo?.hospitalizationsDensity ?? null;
     return {
       level: this.getAlarmLevel(),
       metrics,
-      ccvi,
       vc: vaccinationsCompleted,
-      hd: hospitalizationsDensity,
     };
   }
 
@@ -126,29 +127,7 @@ export class Projections {
   }
 
   getAlarmLevel(): Level {
-    const { rt_level, test_rate_level, case_density } = this.getLevels();
-    const metricLevels = [rt_level, test_rate_level, case_density];
-
-    // If case_density is low or unknown, it overrides other metrics. Else we
-    // use the highest metric level.
-    if (case_density === Level.LOW || case_density === Level.UNKNOWN) {
-      return case_density;
-    }
-
-    for (const level of [
-      Level.SUPER_CRITICAL,
-      Level.CRITICAL,
-      Level.HIGH,
-      Level.MEDIUM,
-    ]) {
-      if (metricLevels.includes(level)) {
-        return level;
-      }
-    }
-
-    fail(
-      `Failed to determine risk level for ${this.locationName} (fips=${this.fips}).`,
-    );
+    return this.primary.canCommunityLevel;
   }
 
   getAlarmLevelColor() {

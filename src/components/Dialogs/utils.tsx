@@ -21,6 +21,10 @@ const metricToLearnLink: { [key in Metric]: string } = {
   [Metric.HOSPITAL_USAGE]: '/covid-risk-levels-metrics#icu-capacity-used',
   [Metric.POSITIVE_TESTS]: '/covid-risk-levels-metrics#positive-test-rate',
   [Metric.VACCINATIONS]: '/covid-risk-levels-metrics#percent-vaccinated',
+  [Metric.ADMISSIONS_PER_100K]: '/covid-risk-levels-metrics#weekly-admissions',
+  [Metric.RATIO_BEDS_WITH_COVID]:
+    '/covid-risk-levels-metrics#patients-with-covid',
+  [Metric.WEEKLY_CASES_PER_100K]: '/covid-risk-levels-metrics#weekly-new-cases',
 };
 
 export function getMetricModalContent(
@@ -58,12 +62,12 @@ interface ExploreMetricModalMapContent {
 export const exploreMetricToFooterContentMap: {
   [key: number]: ExploreMetricModalMapContent;
 } = {
-  [ExploreMetric.DEATHS]: {
-    metricName: 'daily deaths',
-    howItsCalculated: 'Our daily deaths number is a seven-day average.',
-    metricDefinition: 'This is the number of COVID deaths per day.',
+  [ExploreMetric.WEEKLY_DEATHS]: {
+    metricName: 'weekly deaths',
+    howItsCalculated: 'Our weekly deaths number is a rolling seven-day sum.',
+    metricDefinition: 'This is the number of COVID deaths per week.',
     source: 'The New York Times',
-    statusTextMeasure: 'daily deaths',
+    statusTextMeasure: 'weekly deaths',
   },
   [ExploreMetric.ICU_HOSPITALIZATIONS]: {
     metricName: 'ICU hospitalizations',
@@ -75,7 +79,8 @@ export const exploreMetricToFooterContentMap: {
   },
   [ExploreMetric.HOSPITALIZATIONS]: {
     metricName: 'hospitalizations',
-    howItsCalculated: 'Our hospitalizations number is a seven-day average.',
+    howItsCalculated:
+      'Our hospitalizations number is a seven-day average. For counties, it is calculated for the health service area that contains the county, and then county-level data is estimated by disaggregating the data by population.',
     metricDefinition:
       'This is the number of patients currently hospitalized with COVID.',
     source: 'Department of Health and Human Services',

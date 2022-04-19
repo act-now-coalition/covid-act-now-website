@@ -17,6 +17,7 @@ export const CaseIncidenceMetric: MetricDefinition = {
   metricName: 'Daily new cases',
   extendedMetricName: 'Daily new cases per 100k population',
   metricNameForCompare: `Daily new cases per 100k`,
+  metricNameForSummaryStat: 'Daily new cases',
 };
 
 export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
