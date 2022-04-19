@@ -11,7 +11,6 @@
  *    yarn generate-subscriber-emails-file
  */
 import fs from 'fs';
-import _ from 'lodash';
 import { fetchAllAlertSubscriptions } from '../alert_emails/firestore';
 import { getFirestore } from '../common/firebase';
 import { isValidEmail } from '../../src/common/utils';
