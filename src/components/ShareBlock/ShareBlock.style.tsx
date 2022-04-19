@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import theme from 'assets/theme';
 
 export const ShareContainer = styled.div`
-  margin: ${theme.spacing(6)}px ${theme.spacing(3)}px ${theme.spacing(9)}px;
+  margin-top: 48px;
+  margin-bottom: 72px;
   @media print {
     display: none;
   }
