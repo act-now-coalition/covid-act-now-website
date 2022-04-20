@@ -43,7 +43,7 @@ export interface MetricChartInfo {
 export enum GroupHeader {
   COMMUNITY_LEVEL = 'Community level metrics',
   VACCINATED = '% Vaccinated',
-  ADDITIONAL_MISC = 'Additional metrics',
+  TRANSMISSION = 'Transmission metrics',
 }
 
 export interface ChartGroup {
@@ -109,32 +109,20 @@ export const CHART_GROUPS: ChartGroup[] = [
     ],
   },
   {
-    groupHeader: GroupHeader.VACCINATED,
+    groupHeader: GroupHeader.TRANSMISSION,
     metricList: [
       {
-        metric: Metric.VACCINATIONS,
+        metric: Metric.CASE_DENSITY,
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
-          <VaccinationChartTabs projections={projections} />
-        ),
-        renderChart: projections => (
-          <MetricChart metric={Metric.VACCINATIONS} projections={projections} />
-        ),
-      },
-    ],
-  },
-  {
-    groupHeader: GroupHeader.ADDITIONAL_MISC,
-    metricList: [
-      {
-        metric: ExploreMetric.WEEKLY_DEATHS,
-        metricType: MetricType.EXPLORE_METRIC,
-        renderTabLabel: (metricValue, projections) => (
-          <ChartTab metricName="Weekly deaths" metricValueInfo={metricValue} />
+          <ChartTab
+            metricName="Daily New Cases per 100k"
+            metricValueInfo={metricValue}
+          />
         ),
         renderChart: projections => (
           <SingleLocationChartContainer
-            metric={ExploreMetric.WEEKLY_DEATHS}
+            metric={ExploreMetric.DAILY_CASES_PER_100K}
             projections={projections}
           />
         ),
@@ -169,6 +157,21 @@ export const CHART_GROUPS: ChartGroup[] = [
             metric={ExploreMetric.POSITIVITY_RATE}
             projections={projections}
           />
+        ),
+      },
+    ],
+  },
+  {
+    groupHeader: GroupHeader.VACCINATED,
+    metricList: [
+      {
+        metric: Metric.VACCINATIONS,
+        metricType: MetricType.KEY_METRIC,
+        renderTabLabel: (metricValue, projections) => (
+          <VaccinationChartTabs projections={projections} />
+        ),
+        renderChart: projections => (
+          <MetricChart metric={Metric.VACCINATIONS} projections={projections} />
         ),
       },
     ],

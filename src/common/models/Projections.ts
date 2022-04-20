@@ -70,6 +70,7 @@ export class Projections {
       Metric.VACCINATIONS,
       Metric.CASE_GROWTH_RATE,
       Metric.POSITIVE_TESTS,
+      Metric.CASE_DENSITY,
     ];
     for (const metric of summaryMetrics) {
       const value = this.getMetricValue(metric);
