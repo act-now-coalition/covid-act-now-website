@@ -458,15 +458,15 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.DAILY_CASES_PER_100K]: {
-    title: 'Daily New Cases per 100k',
-    name: 'Daily New Cases per 100k',
+    title: 'Daily new cases per 100k',
+    name: 'Daily new cases per 100k',
     chartId: 'daily_new_cases',
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 0,
     seriesList: [
       {
-        label: 'Daily New Cases per 100k',
-        tooltipLabel: 'Daily New Cases per 100k',
+        label: 'Daily new cases per 100k',
+        tooltipLabel: 'Daily new cases per 100k',
         datasetId: 'caseDensityByCases',
         type: SeriesType.LINE,
       },
