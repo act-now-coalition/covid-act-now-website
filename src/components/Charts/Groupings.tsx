@@ -51,6 +51,16 @@ export interface ChartGroup {
   metricList: MetricChartInfo[];
 }
 
+// function getGroupHeaderFromMetric (metric:Metric): GroupHeader {
+//   const groupObj = find(CHART_GROUPS, group => find(group.metricList, listItem => listItem.metric === metric))
+//   if (!groupObj){
+//   return GroupHeader.COMMUNITY_LEVEL
+// } else {
+//   // return groupObj.groupHeader
+//   return GroupHeader.COMMUNITY_LEVEL
+// }
+// }
+
 export const CHART_GROUPS: ChartGroup[] = [
   {
     groupHeader: GroupHeader.COMMUNITY_LEVEL,

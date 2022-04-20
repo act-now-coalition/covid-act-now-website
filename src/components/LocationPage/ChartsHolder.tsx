@@ -58,6 +58,7 @@ interface ChartsHolderProps {
 
 const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
+  console.log('chartId', chartId);
 
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
@@ -116,17 +117,22 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     [],
   );
 
+  //chartBlockRefs[groupHeader] --> ref, scroll to that ref
+
   useEffect(() => {
     const scrollToChart = () => {
+      const metricRef = metricRefs[(chartId as unknown) as Metric];
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
-          const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current && !scrolledWithUrl) {
+          if (metricRef.current) {
+            console.log('CURRENT');
             setScrolledWithUrl(true);
             scrollTo(metricRef.current);
+          } else {
+            console.log('IN THE ELSE');
           }
         }
-      }, 200);
+      }, 1000);
       return () => clearTimeout(timeoutId);
     };
 
