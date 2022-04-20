@@ -14,7 +14,8 @@ const ChartTab: React.FC<{
   metricName: string;
   subLabel?: string[];
   metricValueInfo: ValueInfo;
-}> = ({ metricName, subLabel, metricValueInfo }) => {
+  showColorIndicator?: boolean;
+}> = ({ metricName, subLabel, metricValueInfo, showColorIndicator = true }) => {
   const isMobile = useBreakpoint(600);
 
   return (
@@ -26,7 +27,7 @@ const ChartTab: React.FC<{
         )}
       </TabTitle>
       <TabContent>
-        {metricValueInfo.levelColor && (
+        {showColorIndicator && metricValueInfo.levelColor && (
           <CircleIcon $iconColor={metricValueInfo.levelColor} />
         )}
         <Value>{metricValueInfo.formattedValue}</Value>
