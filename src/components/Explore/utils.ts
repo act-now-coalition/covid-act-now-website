@@ -460,7 +460,7 @@ export const exploreMetricData: {
   [ExploreMetric.DAILY_CASES_PER_100K]: {
     title: 'Daily New Cases per 100k',
     name: 'Daily New Cases per 100k',
-    chartId: 'daily_new_cases', // TODO(8.2) (Chelsi) - what are these ids used for
+    chartId: 'daily_new_cases',
     dataMeasure: DataMeasure.INTEGER,
     yAxisDecimalPlaces: 0,
     seriesList: [
