@@ -118,6 +118,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           <ChartTab
             metricName="Daily New Cases per 100k"
             metricValueInfo={metricValue}
+            showColorIndicator={false}
           />
         ),
         renderChart: projections => (
@@ -134,6 +135,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           <ChartTab
             metricName={getMetricNameForStat(Metric.CASE_GROWTH_RATE)}
             metricValueInfo={metricValue}
+            showColorIndicator={false}
           />
         ),
         renderChart: projections => (
@@ -150,6 +152,7 @@ export const CHART_GROUPS: ChartGroup[] = [
           <ChartTab
             metricName={getMetricNameForStat(Metric.POSITIVE_TESTS)}
             metricValueInfo={metricValue}
+            showColorIndicator={false}
           />
         ),
         renderChart: projections => (
