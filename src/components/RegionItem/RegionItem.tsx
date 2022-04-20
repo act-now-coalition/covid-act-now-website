@@ -14,20 +14,7 @@ import { StyledRegionName } from 'components/SharedComponents';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { colorFromLocationSummary } from 'common/colors';
-import { Level } from 'common/level';
-
-function getLevelName(level: Level): string {
-  switch (level) {
-    case Level.LOW:
-      return 'Low';
-    case Level.MEDIUM:
-      return 'Medium';
-    case Level.HIGH:
-      return 'High';
-    default:
-      return 'Unknown';
-  }
-}
+import { LOCATION_SUMMARY_LEVELS } from 'common/metrics/location_summary';
 
 const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const regionSummary = getSummaryFromFips(region.fipsCode);
@@ -35,7 +22,7 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = colorFromLocationSummary(regionSummary);
 
   const levelDescriptionCopy = regionSummary
-    ? `${getLevelName(regionSummary.level)} community level`
+    ? `${LOCATION_SUMMARY_LEVELS[regionSummary.level].name} community level`
     : '';
 
   return (
