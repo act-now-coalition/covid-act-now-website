@@ -13,7 +13,7 @@ import {
 import ChartTab from 'components/NewLocationPage/ChartTabs/ChartTab';
 import { MetricValues } from 'common/models/Projections';
 import { getAveragedSeriesForMetric } from 'components/Explore/utils';
-import { formatValue, getMetricName } from 'common/metric';
+import { formatValue, getMetricName, getLevelInfo } from 'common/metric';
 import { last } from 'components/Charts/utils';
 import { formatDecimal } from 'common/utils';
 import VaccinationChartTabs from 'components/NewLocationPage/ChartTabs/VaccinationChartTabs';
@@ -188,7 +188,7 @@ export function getValueInfo(
   const { metric, metricType } = metricItem;
   if (metricType === MetricType.KEY_METRIC) {
     const statValue = stats[metric as Metric];
-    // const levelInfo = getLevelInfo(metric as Metric, statValue);
+    const levelInfo = getLevelInfo(metric as Metric, statValue);
     const formattedValue = formatValue(
       metric as Metric,
       statValue,
@@ -197,7 +197,7 @@ export function getValueInfo(
     return {
       unformattedValue: statValue,
       formattedValue,
-      // levelColor: levelInfo.color,
+      levelColor: levelInfo.color,
     };
   } else {
     const smoothedSeries = getAveragedSeriesForMetric(
