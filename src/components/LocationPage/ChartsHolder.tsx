@@ -111,7 +111,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     () => ({
       [GroupHeader.COMMUNITY_LEVEL]: communityMetricsRef,
       [GroupHeader.VACCINATED]: vaccinationsBlockRef,
-      [GroupHeader.ADDITIONAL_MISC]: additionalMiscMetricsRef,
+      [GroupHeader.TRANSMISSION]: additionalMiscMetricsRef,
     }),
     [],
   );

@@ -42,6 +42,7 @@ export enum ExploreMetric {
   VACCINATIONS_ADDITIONAL_DOSE = 10,
   ICU_USED = 11,
   POSITIVITY_RATE = 12,
+  DAILY_CASES_PER_100K = 13,
 }
 
 export enum DataMeasure {

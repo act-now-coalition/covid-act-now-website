@@ -103,6 +103,7 @@ export const EXPLORE_METRICS = [
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
   ExploreMetric.ICU_USED,
   ExploreMetric.POSITIVITY_RATE,
+  ExploreMetric.DAILY_CASES_PER_100K,
 ];
 
 // Note that these specifically are counts, not percentages, and can normalized
@@ -145,6 +146,8 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.RATIO_BEDS_WITH_COVID;
     case 'weeklyNewCasesPer100k':
       return ExploreMetric.WEEKLY_CASES;
+    case 'caseDensityByCases':
+      return ExploreMetric.DAILY_CASES_PER_100K;
   }
 }
 
@@ -176,6 +179,8 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'weeklyCases';
     case ExploreMetric.WEEKLY_DEATHS:
       return 'weeklyDeaths';
+    case ExploreMetric.DAILY_CASES_PER_100K:
+      return 'caseDensityByCases';
   }
 }
 
@@ -448,6 +453,21 @@ export const exploreMetricData: {
         label: 'Weekly deaths',
         tooltipLabel: 'Weekly deaths',
         datasetId: 'weeklyDeaths',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.DAILY_CASES_PER_100K]: {
+    title: 'Daily New Cases per 100k',
+    name: 'Daily New Cases per 100k',
+    chartId: 'daily_new_cases', // TODO(8.2) (Chelsi) - what are these ids used for
+    dataMeasure: DataMeasure.INTEGER,
+    yAxisDecimalPlaces: 0,
+    seriesList: [
+      {
+        label: 'Daily New Cases per 100k',
+        tooltipLabel: 'Daily New Cases per 100k',
+        datasetId: 'caseDensityByCases',
         type: SeriesType.LINE,
       },
     ],
