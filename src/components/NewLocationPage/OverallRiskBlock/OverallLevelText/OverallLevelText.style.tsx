@@ -33,10 +33,19 @@ export const LevelLabel = styled.span`
   }
 `;
 
-export const Title = styled(GrayTitle)`
+export const DesktopTitle = styled(GrayTitle)`
   display: none;
   @media (min-width: ${materialSMBreakpoint}) {
     display: unset;
     margin-bottom: 0.5rem;
+  }
+`;
+
+export const MobileTitle = styled(GrayTitle)`
+  margin-bottom: 0.5rem;
+  text-align: center;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: none;
   }
 `;
