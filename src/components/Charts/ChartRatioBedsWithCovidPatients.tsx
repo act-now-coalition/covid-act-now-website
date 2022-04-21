@@ -4,7 +4,7 @@ import { formatPercent } from 'common/utils';
 import { Column } from 'common/models/Projection';
 import { RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP } from 'common/metrics/ratio_beds_with_covid_patients';
 
-// Add CAP_PADDING% extra padding above the maximum chart value
+// Add (100 * CAP_PADDING)% extra padding above the maximum chart value
 const CAP_PADDING = 0.05;
 
 const getPointText = (valueY: number) => formatPercent(valueY, 1);
