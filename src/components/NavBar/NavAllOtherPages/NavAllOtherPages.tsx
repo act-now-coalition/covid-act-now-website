@@ -6,7 +6,7 @@ import * as Style from 'components/NavBar/NavBar.style';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from '../utils';
 import { useBreakpoint } from 'common/hooks';
-import MiniStickyBanner from '../MiniStickyBanner/MiniStickyBanner';
+import RecruitingBanner from '../MiniStickyBanner/RecruitingBanner';
 
 const NavAllOtherPages: React.FC<{
   renderSearch: (menuOpen: boolean) => React.ReactElement;
@@ -63,7 +63,7 @@ const NavAllOtherPages: React.FC<{
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
-      <MiniStickyBanner />
+      <RecruitingBanner />
       <Style.Toolbar>
         <Link
           to="/"
