@@ -1,4 +1,5 @@
 import React from 'react';
+import max from 'lodash/max';
 import ChartZones from './ChartZones';
 import { formatPercent } from 'common/utils';
 import { Column } from 'common/models/Projection';
@@ -6,6 +7,8 @@ import { RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP } from 'common/metrics/ra
 
 // Add (100 * CAP_PADDING)% extra padding above the maximum chart value
 const CAP_PADDING = 0.05;
+const MIN_Y_LIMIT = 0.2; // 20%
+const maxColumnValue = (data: Column[]) => max(data.map(col => col.y));
 
 const getPointText = (valueY: number) => formatPercent(valueY, 1);
 
@@ -14,15 +17,6 @@ const getTooltipContent = (valueY: number) => ({
   body: `${formatPercent(valueY, 0)} of all beds`,
   width: '125px',
 });
-
-const maxColumnValue = (data: Column[]) => {
-  return Math.max.apply(
-    null,
-    data.map(function (column) {
-      return column.y;
-    }),
-  );
-};
 
 const ChartRatioBedsWithCovidPatients = ({
   columnData,
@@ -34,7 +28,7 @@ const ChartRatioBedsWithCovidPatients = ({
   <ChartZones
     height={height}
     columnData={columnData}
-    capY={maxColumnValue(columnData) + CAP_PADDING}
+    capY={Math.max(maxColumnValue(columnData) + CAP_PADDING, MIN_Y_LIMIT)}
     zones={RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP}
     getTooltipContent={getTooltipContent}
     getPointText={getPointText}
