@@ -62,6 +62,7 @@ const ChartBlock: React.FC<{
   // Checks if url is a chart-share-link (ie. it contains a chartId)
   // If so - selects tab of respective metric's chart tab
   useEffect(() => {
+    // Turn all metrics into strings so we check for equivalence against chartId
     const metricsInMetricListAsString = metricList
       .map(metricListItem => metricListItem.metric)
       .map(item => item.toString());

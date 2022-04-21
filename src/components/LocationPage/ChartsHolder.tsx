@@ -73,6 +73,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     [],
   );
 
+  // A map of each metric to the ref of its chart group
   const metricRefs = useMemo(
     () => ({
       [Metric.CASE_DENSITY]: transmissionMetricsRef,
