@@ -308,7 +308,7 @@ const Explore: React.FunctionComponent<{
             buttonSelectionLabel={metricMenuLabel}
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
-            maxWidth={250}
+            maxWidth={336}
           />
           <Dropdown
             menuLabel="Past # of days"
@@ -321,7 +321,7 @@ const Explore: React.FunctionComponent<{
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
-            maxWidth={400}
+            maxWidth={314}
             regionNamesMenuLabel={regionsMenuLabel}
           />
         </Styles.ChartControlsContainer>

@@ -85,20 +85,20 @@ export function getDateRange(period: Period): Date[] {
 }
 
 export const EXPLORE_METRICS = [
-  ExploreMetric.RATIO_BEDS_WITH_COVID,
-  ExploreMetric.ADMISSIONS_PER_100K,
-  ExploreMetric.WEEKLY_DEATHS,
-  ExploreMetric.WEEKLY_CASES,
   ExploreMetric.CASES,
+  ExploreMetric.DAILY_CASES_PER_100K,
   ExploreMetric.DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
+  ExploreMetric.ICU_USED,
   ExploreMetric.ICU_HOSPITALIZATIONS,
+  ExploreMetric.RATIO_BEDS_WITH_COVID,
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
   ExploreMetric.VACCINATIONS_COMPLETED,
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
-  ExploreMetric.ICU_USED,
   ExploreMetric.POSITIVITY_RATE,
-  ExploreMetric.DAILY_CASES_PER_100K,
+  ExploreMetric.ADMISSIONS_PER_100K,
+  ExploreMetric.WEEKLY_DEATHS,
+  ExploreMetric.WEEKLY_CASES,
 ];
 
 // Note that these specifically are counts, not percentages, and can normalized
