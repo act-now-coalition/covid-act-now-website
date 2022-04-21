@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import { COLOR_MAP } from 'common/colors';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ExternalLink from 'components/ExternalLink';
 import { trackEvent, EventAction, EventCategory } from 'components/Analytics';
 
@@ -44,7 +43,6 @@ const RecruitingBanner: React.FC = () => {
         UX Designer
       </ExternalLink>
       , come work with us!
-      <ArrowForwardIosIcon fontSize="inherit" style={{ paddingTop: '4px' }} />
     </Box>
   );
 };
