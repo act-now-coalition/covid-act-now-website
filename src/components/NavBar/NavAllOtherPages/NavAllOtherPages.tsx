@@ -6,6 +6,10 @@ import * as Style from 'components/NavBar/NavBar.style';
 import { useIsEmbed } from 'common/utils/hooks';
 import { trackNavigation, trackMobileMenuOpen } from '../utils';
 import { useBreakpoint } from 'common/hooks';
+import { Box } from '@material-ui/core';
+import { COLOR_MAP } from 'common/colors';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ExternalLink from 'components/ExternalLink';
 
 const NavAllOtherPages: React.FC<{
   renderSearch: (menuOpen: boolean) => React.ReactElement;
@@ -62,6 +66,25 @@ const NavAllOtherPages: React.FC<{
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
+      <Box
+        bgcolor={COLOR_MAP.GREEN.BASE}
+        color={COLOR_MAP.GREEN.DARK}
+        p={0.5}
+        fontSize="12px"
+        textAlign="center"
+      >
+        <ExternalLink
+          href="https://docs.google.com/document/d/19i6aWbMcAHPImWGwY1KoGlkCBqP-DDSQlDE1PO0QthE/"
+          style={{ color: 'inherit', textDecoration: 'none' }}
+        >
+          &#128075; &nbsp; We’re hiring a senior front-end engineer! Join the
+          team behind Covid Act Now &nbsp;
+          <ArrowForwardIosIcon
+            fontSize="inherit"
+            style={{ paddingTop: '4px' }}
+          />
+        </ExternalLink>
+      </Box>
       <Style.Toolbar>
         <Link
           to="/"
