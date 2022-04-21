@@ -26,32 +26,9 @@ const ChartBlock: React.FC<{
   projections: Projections;
   group: ChartGroup;
   clickedStatMetric: Metric | null;
-  chartIdFromUrl: Metric;
-}> = ({
-  projections,
-  stats,
-  group,
-  region,
-  clickedStatMetric,
-  chartIdFromUrl,
-}) => {
+  chartId?: string;
+}> = ({ projections, stats, group, region, clickedStatMetric, chartId }) => {
   const { metricList, groupHeader } = group;
-
-  useEffect(() => {
-    const metricsInMetricList = metricList.map(
-      metricListItem => metricListItem.metric,
-    );
-    if (metricsInMetricList.includes((chartIdFromUrl as unknown) as number)) {
-      console.log('metricsInMetricList', metricsInMetricList);
-      console.log('chartIdFromUrl', chartIdFromUrl);
-      console.log('yes');
-      const idx = findIndex(metricList, item => item.metric === chartIdFromUrl);
-      console.log('idx', idx);
-      setActiveTabIndex(idx);
-    } else {
-      console.log('no');
-    }
-  }, [chartIdFromUrl, metricList]);
 
   // TODO (chelsi) - revisit placement of these state/setState variables
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -81,6 +58,21 @@ const ChartBlock: React.FC<{
     projections,
   );
   const hasValue = Number.isFinite(unformattedValue);
+
+  // Checks if url is a chart-share-link (ie. it contains a chartId)
+  // If so - selects tab of respective metric's chart tab
+  useEffect(() => {
+    const metricsInMetricListAsString = metricList
+      .map(metricListItem => metricListItem.metric)
+      .map(item => item.toString());
+    if (chartId && metricsInMetricListAsString.includes(chartId)) {
+      const idx = findIndex(
+        metricsInMetricListAsString,
+        item => item === chartId,
+      );
+      setActiveTabIndex(idx);
+    }
+  }, [activeTabIndex, chartId, metricList]);
 
   return (
     <>

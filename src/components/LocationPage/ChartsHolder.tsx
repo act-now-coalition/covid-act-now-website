@@ -58,7 +58,6 @@ interface ChartsHolderProps {
 
 const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
   const projections = useProjectionsFromRegion(region);
-  console.log('chartId', chartId);
 
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
@@ -108,15 +107,12 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const [scrolledWithUrl, setScrolledWithUrl] = useState(false);
 
-  const chartIdFromUrl = (chartId as unknown) as Metric;
-
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
-          const metricGroupRef = metricRefs[chartIdFromUrl];
+          const metricGroupRef = metricRefs[(chartId as unknown) as Metric];
           if (metricGroupRef.current && !scrolledWithUrl) {
-            console.log('metricGroupRef.current');
             setScrolledWithUrl(true);
             scrollTo(metricGroupRef.current);
           }
@@ -126,7 +122,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     };
 
     scrollToChart();
-  }, [chartId, chartIdFromUrl, metricRefs, scrolledWithUrl]);
+  }, [chartId, metricRefs, scrolledWithUrl]);
 
   useScrollToRecommendations(recommendationsRef);
 
@@ -239,7 +235,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                         stats={stats}
                         group={group}
                         clickedStatMetric={clickedStatMetric}
-                        chartIdFromUrl={chartIdFromUrl}
+                        chartId={chartId}
                       />
                     </LocationPageBlock>
                   )}
