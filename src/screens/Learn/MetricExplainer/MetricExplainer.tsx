@@ -65,8 +65,8 @@ const MetricExplainer = () => {
         <ExplainersHeading2 id={introSection[0].sectionId}>
           {introSection[0].sectionHeader}
         </ExplainersHeading2>
-        <MarkdownContent source={introSection[0].sectionIntro} />
         <ThermometerIntro />
+        <MarkdownContent source={introSection[0].sectionIntro} />
         {introSection[0].questions &&
           introSection[0].questions.map(question => (
             <Fragment key={question.questionId}>
