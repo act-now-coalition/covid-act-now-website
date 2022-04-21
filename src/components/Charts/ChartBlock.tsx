@@ -26,8 +26,32 @@ const ChartBlock: React.FC<{
   projections: Projections;
   group: ChartGroup;
   clickedStatMetric: Metric | null;
-}> = ({ projections, stats, group, region, clickedStatMetric }) => {
+  chartIdFromUrl: Metric;
+}> = ({
+  projections,
+  stats,
+  group,
+  region,
+  clickedStatMetric,
+  chartIdFromUrl,
+}) => {
   const { metricList, groupHeader } = group;
+
+  useEffect(() => {
+    const metricsInMetricList = metricList.map(
+      metricListItem => metricListItem.metric,
+    );
+    if (metricsInMetricList.includes((chartIdFromUrl as unknown) as number)) {
+      console.log('metricsInMetricList', metricsInMetricList);
+      console.log('chartIdFromUrl', chartIdFromUrl);
+      console.log('yes');
+      const idx = findIndex(metricList, item => item.metric === chartIdFromUrl);
+      console.log('idx', idx);
+      setActiveTabIndex(idx);
+    } else {
+      console.log('no');
+    }
+  }, [chartIdFromUrl, metricList]);
 
   // TODO (chelsi) - revisit placement of these state/setState variables
   const [activeTabIndex, setActiveTabIndex] = useState(0);
