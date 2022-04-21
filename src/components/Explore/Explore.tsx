@@ -40,6 +40,7 @@ import {
   getYAxisDecimalPlaces,
   getXTickTimeUnitForPeriod,
   getMaxYFromDefinition,
+  EXPLORE_METRICS,
 } from './utils';
 import * as Styles from './Explore.style';
 import { SectionHeader } from 'components/SharedComponents/SharedComponents.style';
@@ -56,6 +57,7 @@ import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
 import { EmptyPanel } from 'components/Charts/Charts.style';
 import { useChartHeightForBreakpoint } from 'common/hooks';
+import { assert } from 'common/utils';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -134,9 +136,10 @@ const Explore: React.FunctionComponent<{
       setCurrentMetric(sharedMetric);
     }
 
-    const onSelectCurrentMetric = (newMetric: number) => {
-      const newMetricName = metricLabels[newMetric];
-      setCurrentMetric(newMetric);
+    const onSelectCurrentMetric = (newMetricIndex: number) => {
+      const newMetricName = metricLabels[newMetricIndex];
+      const metric = EXPLORE_METRICS[newMetricIndex];
+      setCurrentMetric(metric);
       trackExploreEvent(EventAction.SELECT, `Metric: ${newMetricName}`);
     };
 
@@ -287,7 +290,9 @@ const Explore: React.FunctionComponent<{
       ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
 
     // menu labels for metric, time period, and selected locations:
-    const metricMenuLabel = metricLabels[currentMetric];
+    const selectedMetricIndex = EXPLORE_METRICS.indexOf(currentMetric);
+    assert(selectedMetricIndex >= 0);
+    const metricMenuLabel = metricLabels[selectedMetricIndex];
     const regionsMenuLabel = selectedLocations.map(getLocationLabel).join('; ');
     const periodMenuLabel = allPeriodLabels[period];
 
@@ -303,7 +308,7 @@ const Explore: React.FunctionComponent<{
             buttonSelectionLabel={metricMenuLabel}
             itemLabels={metricLabels}
             onSelect={onSelectCurrentMetric}
-            maxWidth={250}
+            maxWidth={336}
           />
           <Dropdown
             menuLabel="Past # of days"
@@ -316,7 +321,7 @@ const Explore: React.FunctionComponent<{
             regions={autocompleteLocations}
             selectedRegions={selectedLocations}
             onChangeSelectedRegions={onChangeSelectedLocations}
-            maxWidth={400}
+            maxWidth={314}
             regionNamesMenuLabel={regionsMenuLabel}
           />
         </Styles.ChartControlsContainer>
