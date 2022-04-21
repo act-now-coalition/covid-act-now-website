@@ -84,6 +84,7 @@ export function getDateRange(period: Period): Date[] {
   return [dateFrom, dateTo];
 }
 
+// We try to keep these alphabetized by metric name to make the trends metric list easier to navigate for users.
 export const EXPLORE_METRICS = [
   ExploreMetric.CASES,
   ExploreMetric.DAILY_CASES_PER_100K,
