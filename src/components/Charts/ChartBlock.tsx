@@ -59,6 +59,11 @@ const ChartBlock: React.FC<{
   );
   const hasValue = Number.isFinite(unformattedValue);
 
+  // Used to make sure user can change tabs after landing on a page via a share link (and having a tab auto-selected)
+  const [hasSelectedSharedTab, setHasSelectedSharedTab] = useState<boolean>(
+    false,
+  );
+
   // Checks if url is a chart-share-link (ie. it contains a chartId)
   // If so - selects tab of respective metric's chart tab
   useEffect(() => {
@@ -66,14 +71,19 @@ const ChartBlock: React.FC<{
     const metricsInMetricListAsString = metricList
       .map(metricListItem => metricListItem.metric)
       .map(item => item.toString());
-    if (chartId && metricsInMetricListAsString.includes(chartId)) {
+    if (
+      chartId &&
+      metricsInMetricListAsString.includes(chartId) &&
+      !hasSelectedSharedTab
+    ) {
       const idx = findIndex(
         metricsInMetricListAsString,
         item => item === chartId,
       );
       setActiveTabIndex(idx);
+      setHasSelectedSharedTab(true);
     }
-  }, [activeTabIndex, chartId, metricList]);
+  }, [activeTabIndex, chartId, metricList, hasSelectedSharedTab]);
 
   return (
     <>
