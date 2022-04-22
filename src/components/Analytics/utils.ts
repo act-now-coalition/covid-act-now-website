@@ -53,6 +53,7 @@ export enum EventCategory {
   METRIC_EXPLAINERS = 'metric explainers',
   NONE = 'none', // use NONE for development
   RECOMMENDATIONS = 'recommendations',
+  RECRUITING = 'recruiting',
   SEARCH = 'search',
   TOP_NAVBAR = 'top navbar',
   TOOLTIPS = 'tooltips',
