@@ -67,21 +67,27 @@ const ChartBlock: React.FC<{
   // Checks if url is a chart-share-link (ie. it contains a chartId)
   // If so - selects tab of respective metric's chart tab
   useEffect(() => {
-    // Turn all metrics into strings so we check for equivalence against chartId
-    const metricsInMetricListAsString = metricList
-      .map(metricListItem => metricListItem.metric)
-      .map(item => item.toString());
-    if (
-      chartId &&
-      metricsInMetricListAsString.includes(chartId) &&
-      !hasSelectedSharedTab
-    ) {
-      const idx = findIndex(
-        metricsInMetricListAsString,
-        item => item === chartId,
+    if (!chartId) {
+      return;
+    } else {
+      // Turn all metrics into strings so we check for equivalence against chartId
+      const metricsInMetricListAsString = metricList.map(item =>
+        item.metric.toString(),
       );
-      setActiveTabIndex(idx);
-      setHasSelectedSharedTab(true);
+      if (
+        chartId &&
+        metricsInMetricListAsString.includes(chartId) &&
+        !hasSelectedSharedTab
+      ) {
+        const idx = findIndex(
+          metricsInMetricListAsString,
+          item => item === chartId,
+        );
+        if (idx >= 0) {
+          setActiveTabIndex(idx);
+          setHasSelectedSharedTab(true);
+        }
+      }
     }
   }, [activeTabIndex, chartId, metricList, hasSelectedSharedTab]);
 
