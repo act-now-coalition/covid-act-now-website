@@ -32,6 +32,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
 
   const currentMetric = componentParams.currentMetric;
   const currentMetricName = getMetricName(currentMetric);
+  const currentPeriod = componentParams.period;
   const normalizeData = componentParams.normalizeData;
 
   const [selectedLocations] = useState<Region[]>(
@@ -52,7 +53,7 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
   const yTooltipFormat = getYFormat(dataMeasure, 1);
   const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
-  const dateRange = getDateRange(Period.ALL);
+  const dateRange = getDateRange(currentPeriod);
 
   return (
     <DarkScreenshotWrapper className={SCREENSHOT_CLASS}>
@@ -86,7 +87,11 @@ const ExploreChartImage = ({ componentParams }: { componentParams: any }) => {
                   dateRange={dateRange}
                   yTickFormat={yTickFormat}
                   yTooltipFormat={yTooltipFormat}
-                  xTickTimeUnit={TimeUnit.MONTHS}
+                  xTickTimeUnit={
+                    currentPeriod === Period.ALL
+                      ? TimeUnit.MONTHS
+                      : TimeUnit.WEEKS
+                  }
                   maxYFromDefinition={maxYFromDefinition}
                 />
               )}

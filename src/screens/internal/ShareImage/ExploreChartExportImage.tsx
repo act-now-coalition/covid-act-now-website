@@ -37,6 +37,7 @@ const ExploreChartExportImage = ({
   const lastUpdated = useModelLastUpdatedDate()!;
   const currentMetric = componentParams.currentMetric;
   const currentMetricName = getMetricName(currentMetric);
+  const currentPeriod = componentParams.period;
   const normalizeData = componentParams.normalizeData;
 
   const [selectedLocations] = useState<Region[]>(
@@ -66,7 +67,7 @@ const ExploreChartExportImage = ({
   const yTooltipFormat = getYFormat(dataMeasure, 1);
   const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
-  const dateRange = getDateRange(Period.ALL);
+  const dateRange = getDateRange(currentPeriod);
 
   return (
     <ScreenshotWrapper className={SCREENSHOT_CLASS}>
@@ -95,7 +96,11 @@ const ExploreChartExportImage = ({
                 dateRange={dateRange}
                 yTickFormat={yTickFormat}
                 yTooltipFormat={yTooltipFormat}
-                xTickTimeUnit={TimeUnit.MONTHS}
+                xTickTimeUnit={
+                  currentPeriod === Period.ALL
+                    ? TimeUnit.MONTHS
+                    : TimeUnit.WEEKS
+                }
                 maxYFromDefinition={maxYFromDefinition}
               />
             )}
