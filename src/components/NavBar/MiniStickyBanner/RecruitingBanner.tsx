@@ -26,15 +26,15 @@ const RecruitingBanner: React.FC = () => {
       fontSize="12px"
       textAlign="center"
     >
-      We're hiring a &nbsp;
+      We're hiring a{' '}
       <ExternalLink
         href="https://docs.google.com/document/d/19i6aWbMcAHPImWGwY1KoGlkCBqP-DDSQlDE1PO0QthE/"
         style={{ color: 'inherit' }}
         onClick={() => trackRecruitingBannerClick(OpenPosition.SR_FE_ENGINEER)}
       >
         Front-end Engineer
-      </ExternalLink>
-      &nbsp; and a &nbsp;
+      </ExternalLink>{' '}
+      and a{' '}
       <ExternalLink
         href="https://docs.google.com/document/d/1umyoQTKSXkQt7meRKyZ7nLlyneeyYjTYpAhUgQRxxkE/"
         style={{ color: 'inherit' }}
