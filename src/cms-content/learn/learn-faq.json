@@ -221,6 +221,11 @@
           "question": "Why is ICU capacity used important? ",
           "answer": "The ICU is the part of a hospital for people who are the sickest. Each ICU bed is staffed by specially trained personnel and supported with special equipment, such as ventilators. They are needed to treat not only COVID patients, but also other patients, such as people who have had a heart attack or suffered a life-threatening injury.",
           "questionId": "why-icu-capacity-used-important"
+        },
+        {
+          "question": "Where are the previous highlighted metrics like Daily New Cases, Infection Growth Rate, Hospitalizations, and Deaths?",
+          "questionId": "where-are-previous-metrics",
+          "answer": "We remain committed to continuing to make all of our previous metrics available on our site and in our API. We acknowledge that these old metrics may remain useful to those who want to avoid infection. \n\nDaily New Cases, Hospitalizations, and Deaths: \n\n* On the homepage or location pages, scroll down to Trends, then select the “Metrics” drop-down menu and select the metric you would like to see, e.g. Daily New Cases per 100K, Hospitalizations, ICU Hospitalizations, ICU Capacity Used, Deaths.\n* Note that you can also find Daily New Cases under “Transmission Metrics” (see below).\n\nInfection Growth Rate, Test Positivity \n\n* Navigate to the state or county location page by either entering the location name into the search bar or clicking on the location on the national map.\n* On the location page, scroll down to “Transmission metrics” and select the metric you would like to see, e.g. Daily New Cases per 100K, Infection Growth Rate, Test Positivity.\n* Note that you can also find Daily new Cases under Trends (see above)."
         }
       ]
     },
