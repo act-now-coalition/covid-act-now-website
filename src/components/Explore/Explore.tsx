@@ -228,6 +228,7 @@ const Explore: React.FunctionComponent<{
     const createSharedComponentId = async () => {
       return storeSharedComponentParams(SharedComponent.Explore, {
         currentMetric,
+        period,
         normalizeData,
         selectedFips: selectedLocations.map(location => location.fipsCode),
       });
@@ -266,6 +267,7 @@ const Explore: React.FunctionComponent<{
       if (sharedParams) {
         setCurrentMetric(sharedParams.currentMetric);
         setNormalizeData(sharedParams.normalizeData);
+        setPeriod(sharedParams.period);
         const locations = sharedParams.selectedFips.map(
           (fips: string) => regions.findByFipsCode(fips)!,
         );
