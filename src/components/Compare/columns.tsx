@@ -124,6 +124,7 @@ class VaccinationsColumn extends MetricColumn {
 const weeklyCasesPer100kColumn = new MetricColumn(Metric.WEEKLY_CASES_PER_100K);
 const admissionsPer100kColumn = new MetricColumn(Metric.ADMISSIONS_PER_100K);
 const ratioBedsWithCovidColumn = new MetricColumn(Metric.RATIO_BEDS_WITH_COVID);
+const infectionRateColumn = new MetricColumn(Metric.CASE_GROWTH_RATE);
 const vaccinationsColumn = new VaccinationsColumn();
 
 /** Ordered array of columns. */
@@ -131,6 +132,7 @@ export const orderedColumns = [
   weeklyCasesPer100kColumn,
   admissionsPer100kColumn,
   ratioBedsWithCovidColumn,
+  infectionRateColumn,
   vaccinationsColumn,
 ];
 
