@@ -22,6 +22,7 @@ interface MapBlockProps {
   renderThermometer: () => React.ReactElement;
   renderTable?: (locationScope: MapView) => React.ReactElement;
   infoLink: string;
+  underMapText?: React.ReactNode;
 }
 
 export const MapBlock: React.FC<MapBlockProps> = ({
@@ -31,6 +32,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
   renderTable,
   renderThermometer,
   infoLink,
+  underMapText,
 }) => {
   const [locationScope, setLocationScope] = useState(MapView.COUNTIES);
   const onToggle = (
@@ -70,6 +72,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
               shareQuote={shareQuote}
             />
           </Row>
+          {underMapText}
         </MapSubitemsWrapper>
       </ColumnCentered>
     </HomePageBlock>

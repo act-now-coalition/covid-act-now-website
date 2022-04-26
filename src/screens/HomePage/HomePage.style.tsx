@@ -8,6 +8,7 @@ import {
   SkeletonWrapper as RegionItemSkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
 import { COLOR_MAP } from 'common/colors';
+import Typography from '@material-ui/core/Typography';
 
 export const ColumnCentered = styled.div`
   display: flex;
@@ -144,6 +145,22 @@ export const Row = styled.div`
   display: flex;
   align-items: center;
   margin-top: 1rem;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    margin-top: 1.25rem;
+  }
+`;
+
+export const UnderMapText = styled(Typography)`
+  margin-top: 1rem;
+  text-align: center;
+  a {
+    color: ${COLOR_MAP.NEW_BLUE.BASE};
+
+    &:hover {
+      color: ${COLOR_MAP.NEW_BLUE.DARK};
+    }
+  }
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-top: 1.25rem;
