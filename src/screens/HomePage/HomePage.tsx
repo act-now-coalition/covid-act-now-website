@@ -151,7 +151,7 @@ export default function HomePage() {
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}
               renderThermometer={() => <CommunityLevelThermometer />}
-              infoLink="/covid-risk-levels-metrics"
+              infoLink="/covid-community-level-metrics"
             />
 
             <MapBlock
@@ -177,7 +177,7 @@ export default function HomePage() {
                   <VaccinationsThermometer />
                 </>
               )}
-              infoLink="/covid-risk-levels-metrics#percent-vaccinated"
+              infoLink="/covid-community-level-metrics#percent-vaccinated"
             />
 
             <HomePageBlock

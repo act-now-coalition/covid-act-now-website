@@ -70,7 +70,7 @@ const MetricModal: React.FC<DialogProps> = ({
     links: [
       {
         cta: 'Learn more',
-        url: modalContent.learnLink || '/covid-risk-levels-metrics',
+        url: modalContent.learnLink || '/covid-community-level-metrics',
         ariaLabel: `Learn more about ${modalHeader}`,
       },
     ],

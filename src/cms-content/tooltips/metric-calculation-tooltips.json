@@ -4,41 +4,41 @@
       "title": "Weekly new reported cases per 100k",
       "id": "weekly-new-cases",
       "body": "The weekly new reported cases number is divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average weekly new cases by two.",
-      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)."
+      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-community-level-metrics#daily-new-cases)."
     },
     {
       "title": "Weekly COVID admissions",
       "id": "weekly-admissions",
       "body": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) wherever possible, and backfill historical data with calculations from [HHS data](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh).  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of admissions over the last week and then normalize that by the state’s population.",
-      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
+      "cta": "[Read more about weekly admissions.](/covid-community-level-metrics#weekly-admissions)"
     },
     {
       "title": "Patients w/ COVID",
       "id": "patients-with-covid",
       "body": "To calculate this metric for counties, we use data [from the CDC](https://data.cdc.gov/Public-Health-Surveillance/United-States-COVID-19-Community-Levels-by-County/3nnm-4jni) based on hospitals in the health service area wherever possible, and backfill historical data with calculations from [HHS data](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh).  To calculate this metric for metros, we aggregate the county data using a population-weighted average. To calculate this metric for states, we use data [from the HHS](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the number of patients with confirmed COVID divided by the number of staffed inpatient beds.",
-      "cta": "[Read more about patients with COVID. ](/covid-risk-levels-metrics#patients-with-COVID)"
+      "cta": "[Read more about patients with COVID. ](/covid-community-level-metrics#patients-with-COVID)"
     },
     {
       "title": "Infection rate",
       "id": "infection-rate",
       "body": "This one is a bit complicated. To calculate the infection growth, a mathematical model combines trends in daily new cases from approximately the last 14 days, with estimates for other variables, such as how many days on average occur between infection and transmission.",
-      "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
+      "cta": "[Learn more about infection rate](https://covidactnow.org/covid-community-level-metrics#infection-rate)."
     },
     {
       "title": "Positive test rate",
       "id": "positive-test-rate",
       "body": "Positive test rate is the number of positive PCR tests over the last 7 days, divided by the total number of PCR tests over the last 7 days.",
-      "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
+      "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-community-level-metrics#positive-test-rate)."
     },
     {
       "title": "ICU capacity used",
       "id": "icu-capacity-used",
       "body": "ICU capacity used is the number of staffed ICU beds that are occupied (by both COVID and non-COVID patients), divided by the total number of staffed ICU beds. For counties, it is calculated for the [health service area](/faq#health-service-area) that contains the county.",
-      "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)."
+      "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-community-level-metrics#icu-capacity-used)."
     },
     {
       "body": "For “Shot 1” in a given location, we take the number of people who have received their first shot and divide it by that location’s total population, according to the U.S. Census Bureau.",
-      "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-community-level-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
     },
@@ -46,7 +46,7 @@
       "title": "Daily new cases",
       "id": "daily-new-cases",
       "body": "Our daily new cases number is a seven-day average divided by every 100K people in a location. For instance, if a location has 200K people, we would divide the average daily new cases by two.",
-      "cta": "[Learn more](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)"
+      "cta": "[Learn more](https://covidactnow.org/covid-community-level-metrics#daily-new-cases)"
     }
   ]
 }
