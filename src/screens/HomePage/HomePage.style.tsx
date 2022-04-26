@@ -161,7 +161,7 @@ export const UnderMapText = styled(Typography)`
   max-width: 300px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    max-width: initial;
+    max-width: unset;
     margin-top: 1.25rem;
   }
 `;
