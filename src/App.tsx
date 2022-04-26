@@ -57,6 +57,13 @@ const AfterUnsubscribe = lazy(() =>
   import('screens/Subscriptions/AfterUnsubscribe'),
 );
 
+const metricExplainerHashes = [
+  '#icu-capacity-used',
+  '#daily-new-cases',
+  '#positive-test-rate',
+  '#infection-rate',
+];
+
 export default function App() {
   return (
     <MuiThemeProvider theme={theme}>
@@ -184,9 +191,21 @@ export default function App() {
                   <Redirect from="/updates" to="/covid-explained" />
                   {/* TODO(pablo): Route every article */}
                   <Route from="/deep-dives" component={DeepDivesRedirect} />
-                  <Redirect
-                    from="/covid-risk-levels-metrics"
-                    to="/covid-community-level-metrics"
+                  <Route
+                    path="/covid-risk-levels-metrics"
+                    render={props => {
+                      if (
+                        props.location.hash &&
+                        metricExplainerHashes.includes(props.location.hash)
+                      ) {
+                        return (
+                          <Redirect
+                            to={`covid-community-level-metrics${props.location.hash}`}
+                          />
+                        );
+                      }
+                      return <Redirect to="/covid-community-level-metrics" />;
+                    }}
                   />
                   <Route
                     path="/covid-community-level-metrics"
@@ -343,22 +362,6 @@ export default function App() {
                   />
                   <Redirect
                     from="/infection-rate-explained-2"
-                    to="/covid-community-level-metrics#infection-rate"
-                  />
-                  <Redirect
-                    from="/covid-risk-levels-metrics#icu-capacity-used"
-                    to="/covid-community-level-metrics#icu-capacity-used"
-                  />
-                  <Redirect
-                    from="/covid-risk-levels-metrics#daily-new-cases"
-                    to="/covid-community-level-metrics#daily-new-cases"
-                  />
-                  <Redirect
-                    from="/covid-risk-levels-metrics#positive-test-rate"
-                    to="/covid-community-level-metrics#positive-test-rate"
-                  />
-                  <Redirect
-                    from="/covid-risk-levels-metrics#infection-rate"
                     to="/covid-community-level-metrics#infection-rate"
                   />
                   <Redirect
