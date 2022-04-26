@@ -6,8 +6,9 @@ import {
   StatContent,
   Row,
   CondensedChevron,
+  StatInfoText,
 } from './SummaryStat.style';
-import { metricSubLabelText, SummaryStatProps } from './utils';
+import { SummaryStatProps, metricNameSubLabel } from './utils';
 
 const MobileSummaryStat: React.FC<SummaryStatProps> = ({
   levelInfo,
@@ -19,10 +20,10 @@ const MobileSummaryStat: React.FC<SummaryStatProps> = ({
 }) => {
   return (
     <StatContent>
-      <Row style={{ marginRight: '20px' }}>
+      <StatInfoText>
         <MetricLabel>{metricName}</MetricLabel>
-        {hasSubLabel && <MetricSubLabel text={metricSubLabelText[metric]} />}
-      </Row>
+        {hasSubLabel && <MetricSubLabel text={metricNameSubLabel[metric]} />}
+      </StatInfoText>
       <Row>
         <MetricValue
           value={formattedValue}

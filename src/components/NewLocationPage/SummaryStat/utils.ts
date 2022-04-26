@@ -24,6 +24,17 @@ export const metricSubLabelText: { [key in Metric]: string[] } = {
   [Metric.ADMISSIONS_PER_100K]: ['per', '100k'],
 };
 
+export const metricNameSubLabel: { [key in Metric]: string } = {
+  [Metric.CASE_DENSITY]: '',
+  [Metric.VACCINATIONS]: '1+ dose',
+  [Metric.CASE_GROWTH_RATE]: '',
+  [Metric.HOSPITAL_USAGE]: '',
+  [Metric.POSITIVE_TESTS]: '',
+  [Metric.WEEKLY_CASES_PER_100K]: 'Weekly new reported cases per 100k',
+  [Metric.RATIO_BEDS_WITH_COVID]: 'Patients with COVID of all beds',
+  [Metric.ADMISSIONS_PER_100K]: 'Weekly COVID admissions per 100k',
+};
+
 export const summaryToStats = (summary: LocationSummary): MetricValues => {
   const stats = {} as MetricValues;
   for (const metric of ALL_METRICS) {
