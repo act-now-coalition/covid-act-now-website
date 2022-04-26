@@ -9,6 +9,7 @@ import {
 } from 'components/RegionItem/RegionItem.style';
 import { COLOR_MAP } from 'common/colors';
 import Typography from '@material-ui/core/Typography';
+import { anchorStyles } from 'components/Markdown';
 
 export const ColumnCentered = styled.div`
   display: flex;
@@ -152,15 +153,11 @@ export const Row = styled.div`
 `;
 
 export const UnderMapText = styled(Typography)`
-  margin-top: 1rem;
+  ${anchorStyles};
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  font-size: 0.9rem;
   text-align: center;
-  a {
-    color: ${COLOR_MAP.NEW_BLUE.BASE};
-
-    &:hover {
-      color: ${COLOR_MAP.NEW_BLUE.DARK};
-    }
-  }
+  margin-top: 1rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
     margin-top: 1.25rem;
