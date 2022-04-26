@@ -191,6 +191,13 @@ export default function App() {
                   <Redirect from="/updates" to="/covid-explained" />
                   {/* TODO(pablo): Route every article */}
                   <Route from="/deep-dives" component={DeepDivesRedirect} />
+                  {/*
+                    If path is /covid-risk-levels-metrics,
+                    redirect to /covid-community-level-metrics and
+                    scroll to appropriate section if path has a hash.
+
+                    More info on render prop: https://v5.reactrouter.com/web/api/Route/render-func
+                  */}
                   <Route
                     path="/covid-risk-levels-metrics"
                     render={props => {
