@@ -225,7 +225,7 @@ function getCommunityLevelUnderMapText() {
   return (
     <UnderMapText>
       Understand what your Community Level Color rating means{' '}
-      <Link to="/covid-risk-levels-metrics">here</Link>.
+      <Link to="/covid-community-level-metrics">here</Link>.
     </UnderMapText>
   );
 }
