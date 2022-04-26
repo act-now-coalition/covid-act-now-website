@@ -98,7 +98,7 @@ const RegionMap: React.FC<{
                 return (
                   <Link
                     key={geo.id}
-                    to={region ? region.relativeUrl : '/'}
+                    to={getCountyShapeLink(region)}
                     aria-label={region?.shortName || ''}
                     onMouseEnter={() => onMouseEnter(region?.shortName || '')}
                     onMouseLeave={onMouseLeave}
@@ -213,6 +213,19 @@ function getCountyFipsList(region: Region): string[] {
       .map(c => c.fipsCode);
   } else {
     return [];
+  }
+}
+
+function getCountyShapeLink(region: Region | null): string {
+  if (!region) {
+    return '/';
+  } else {
+    // DC has a state- and county-level page, we only want to use the state page.
+    if (region.fipsCode === '11001') {
+      const dcStateRegion = regions.findByFipsCodeStrict('11');
+      return dcStateRegion.relativeUrl;
+    }
+    return region.relativeUrl;
   }
 }
 
