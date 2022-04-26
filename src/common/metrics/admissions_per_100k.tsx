@@ -17,7 +17,7 @@ export const AdmissionsPer100kMetric: MetricDefinition = {
   metricName: 'Weekly COVID admissions',
   extendedMetricName: 'Weekly hospital admissions of COVID patients per 100k',
   metricNameForCompare: `Weekly COVID admissions per 100k`,
-  metricNameForSummaryStat: 'Weekly COVID admissions',
+  metricNameForSummaryStat: 'Admissions',
 };
 
 const LIMIT_LOW = 10;
