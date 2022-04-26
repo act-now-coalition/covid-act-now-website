@@ -257,20 +257,16 @@ const Explore: React.FunctionComponent<{
 
     const defaultTimePeriod = useDefaultTrendsPeriod();
 
-    // if the pathname changes (ie. if navigating between location pages via compare or regionmap)-
-    // resets metric, time period, and locations
-    // (need to force the reset since the route doesnt change)
+    // Resets time period state variable when pathname changes (need to force the reset since the route doesn't change):
+    useEffect(() => {
+      setPeriod(defaultTimePeriod);
+    }, [pathname, defaultTimePeriod]);
+
+    // Resets locations+current metric state variables when pathname changes (need to force the reset since the route doesn't change):
     useEffect(() => {
       setSelectedLocations(initialLocations);
       setCurrentMetric(ExploreMetric.HOSPITALIZATIONS);
-      setPeriod(defaultTimePeriod);
-    }, [
-      pathname,
-      region,
-      initialLocations,
-      setCurrentMetric,
-      defaultTimePeriod,
-    ]);
+    }, [pathname, region, initialLocations, setCurrentMetric]);
 
     // checks for shared parameters (ie. if arriving from a share link)
     // and sets state according to the shared params
