@@ -222,8 +222,8 @@ function getCountyShapeLink(region: Region | null): string {
   } else {
     // DC has a state- and county-level page, we only want to use the state page.
     if (region.fipsCode === '11001') {
-      const dcRelativeUrl = regions.findByFipsCodeStrict('11');
-      return dcRelativeUrl.relativeUrl;
+      const dcStateRegion = regions.findByFipsCodeStrict('11');
+      return dcStateRegion.relativeUrl;
     }
     return region.relativeUrl;
   }
