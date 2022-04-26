@@ -47,7 +47,11 @@ const CompareTableRow = (props: {
   if (!region) {
     fail(`missing region for fips code ${fipsCode}`);
   }
-  const locationLink = region.relativeUrl;
+
+  // DC has a state- and county-level page, we only want to use the state page.
+  const dcRelativeUrl = regions.findByFipsCodeStrict('11').relativeUrl;
+  const locationLink =
+    region.fipsCode !== '11001' ? region.relativeUrl : dcRelativeUrl;
 
   const populationRoundTo = isHomepage ? 3 : 2;
 
