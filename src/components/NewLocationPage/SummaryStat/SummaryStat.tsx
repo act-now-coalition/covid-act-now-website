@@ -5,7 +5,7 @@ import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import { formatValue, getLevelInfo } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
-import { getMetricNameForStat, metricSubLabelText } from './utils';
+import { getMetricNameForStat, metricNameSubLabel } from './utils';
 
 const SummaryStat: React.FC<{ metric: Metric; value: number | null }> = ({
   metric,
@@ -13,7 +13,7 @@ const SummaryStat: React.FC<{ metric: Metric; value: number | null }> = ({
 }) => {
   const levelInfo = getLevelInfo(metric, value);
   const formattedValue = formatValue(metric, value, /*nullValueCopy=*/ '-');
-  const hasSubLabel = metric in metricSubLabelText;
+  const hasSubLabel = metric in metricNameSubLabel;
   const metricName = getMetricNameForStat(metric);
   const isMobile = useBreakpoint(600);
 

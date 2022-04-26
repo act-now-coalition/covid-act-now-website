@@ -136,7 +136,7 @@ export const CondensedBannerWrapperHomepage = styled(Box)`
 `;
 
 export const CondensedBannerWrapperLocationPage = styled(Box)`
-  padding-bottom: ${({ theme }) => theme.spacing(5)}px;
+  padding-bottom: ${({ theme }) => theme.spacing(3.5)}px;
 
   @media (min-width: ${materialSMBreakpoint}) {
     padding: ${({ theme }) => `${theme.spacing(2)}px 0 ${theme.spacing(4)}px`};
