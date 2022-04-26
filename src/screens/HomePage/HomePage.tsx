@@ -224,7 +224,7 @@ export default function HomePage() {
 function getCommunityLevelUnderMapText() {
   return (
     <UnderMapText>
-      Curious what it means if your location is green? Read more{' '}
+      Understand what your Community Level Color rating means{' '}
       <Link to="/covid-risk-levels-metrics">here</Link>.
     </UnderMapText>
   );

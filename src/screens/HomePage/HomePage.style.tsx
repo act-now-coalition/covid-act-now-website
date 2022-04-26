@@ -158,8 +158,10 @@ export const UnderMapText = styled(Typography)`
   font-size: 0.9rem;
   text-align: center;
   margin-top: 1rem;
+  max-width: 300px;
 
   @media (min-width: ${materialSMBreakpoint}) {
+    max-width: initial;
     margin-top: 1.25rem;
   }
 `;
