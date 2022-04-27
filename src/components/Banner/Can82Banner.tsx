@@ -21,7 +21,7 @@ const Can82Banner: React.FC = () => (
     guidelines. All metrics that we've previously tracked will continue to be
     available.{' '}
     <Link
-      to="/covid-risk-levels-metrics"
+      to="/covid-community-level-metrics"
       id="banner-learn-more-link"
       onClick={trackClick}
     >
