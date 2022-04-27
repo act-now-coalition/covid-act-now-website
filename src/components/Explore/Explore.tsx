@@ -56,7 +56,10 @@ import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
 import { EmptyPanel } from 'components/Charts/Charts.style';
-import { useChartHeightForBreakpoint } from 'common/hooks';
+import {
+  useChartHeightForBreakpoint,
+  useDefaultTrendsPeriod,
+} from 'common/hooks';
 import { assert } from 'common/utils';
 
 const MARGIN_SINGLE_LOCATION = 20;
@@ -252,13 +255,17 @@ const Explore: React.FunctionComponent<{
       }
     }, [pathname, scrollToExplore]);
 
-    // if the pathname changes (ie. if navigating between location pages via compare or regionmap)-
-    // resets metric, time period, and locations
-    // (need to force the reset since the route doesnt change)
+    const defaultTimePeriod = useDefaultTrendsPeriod();
+
+    // Resets time period state variable when pathname changes (need to force the reset since the route doesn't change):
+    useEffect(() => {
+      setPeriod(defaultTimePeriod);
+    }, [pathname, defaultTimePeriod]);
+
+    // Resets locations+current metric state variables when pathname changes (need to force the reset since the route doesn't change):
     useEffect(() => {
       setSelectedLocations(initialLocations);
       setCurrentMetric(ExploreMetric.HOSPITALIZATIONS);
-      setPeriod(Period.ALL);
     }, [pathname, region, initialLocations, setCurrentMetric]);
 
     // checks for shared parameters (ie. if arriving from a share link)

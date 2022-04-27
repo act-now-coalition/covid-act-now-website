@@ -21,3 +21,4 @@ export * from './useGeolocatedRegions';
 export { default as useDialog } from './useDialog';
 export { default as useChartHeightForBreakpoint } from './useChartHeightForBreakpoint';
 export { default as useScrollToRecommendations } from './useScrollToRecommendations';
+export { default as useDefaultTrendsPeriod } from './useDefaultTrendsPeriod';
