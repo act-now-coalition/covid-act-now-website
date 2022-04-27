@@ -57,8 +57,12 @@ export const Tab = styled(MuiTab).attrs(props => ({
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 80px;
   justify-content: space-between;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: fit-content;
+  }
 `;
 
 export const TabContent = styled.div`
