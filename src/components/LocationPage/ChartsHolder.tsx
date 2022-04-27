@@ -61,24 +61,29 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  const caseDensityRef = useRef<HTMLDivElement>(null);
-  const caseGrowthRateRef = useRef<HTMLDivElement>(null);
-  const positiveTestsRef = useRef<HTMLDivElement>(null);
-  const hospitalUsageRef = useRef<HTMLDivElement>(null);
-  const vaccinationsRef = useRef<HTMLDivElement>(null);
-  const weeklyNewCasesRef = useRef<HTMLDivElement>(null);
-  const admissionsPer100kRef = useRef<HTMLDivElement>(null);
-  const ratioBedsWithCovidRef = useRef<HTMLDivElement>(null);
+  const communityMetricsRef = useRef<HTMLDivElement>(null);
+  const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
+  const transmissionMetricsRef = useRef<HTMLDivElement>(null);
+  const chartBlockRefs = useMemo(
+    () => ({
+      [GroupHeader.COMMUNITY_LEVEL]: communityMetricsRef,
+      [GroupHeader.VACCINATED]: vaccinationsBlockRef,
+      [GroupHeader.TRANSMISSION]: transmissionMetricsRef,
+    }),
+    [],
+  );
+
+  // A map of each metric to the ref of its chart group
   const metricRefs = useMemo(
     () => ({
-      [Metric.CASE_DENSITY]: caseDensityRef,
-      [Metric.CASE_GROWTH_RATE]: caseGrowthRateRef,
-      [Metric.POSITIVE_TESTS]: positiveTestsRef,
-      [Metric.HOSPITAL_USAGE]: hospitalUsageRef,
-      [Metric.VACCINATIONS]: vaccinationsRef,
-      [Metric.WEEKLY_CASES_PER_100K]: weeklyNewCasesRef,
-      [Metric.ADMISSIONS_PER_100K]: admissionsPer100kRef,
-      [Metric.RATIO_BEDS_WITH_COVID]: ratioBedsWithCovidRef,
+      [Metric.CASE_DENSITY]: transmissionMetricsRef,
+      [Metric.CASE_GROWTH_RATE]: transmissionMetricsRef,
+      [Metric.POSITIVE_TESTS]: transmissionMetricsRef,
+      [Metric.HOSPITAL_USAGE]: transmissionMetricsRef,
+      [Metric.VACCINATIONS]: vaccinationsBlockRef,
+      [Metric.WEEKLY_CASES_PER_100K]: communityMetricsRef,
+      [Metric.ADMISSIONS_PER_100K]: communityMetricsRef,
+      [Metric.RATIO_BEDS_WITH_COVID]: communityMetricsRef,
     }),
     [],
   );
@@ -103,30 +108,17 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const [scrolledWithUrl, setScrolledWithUrl] = useState(false);
 
-  // TODO(8.2) rename ref once group header is finalized // confirm that removing refs doesn't break anything
-  const communityMetricsRef = useRef<HTMLDivElement>(null);
-  const vaccinationsBlockRef = useRef<HTMLDivElement>(null);
-  const transmissionMetricsRef = useRef<HTMLDivElement>(null);
-  const chartBlockRefs = useMemo(
-    () => ({
-      [GroupHeader.COMMUNITY_LEVEL]: communityMetricsRef,
-      [GroupHeader.VACCINATED]: vaccinationsBlockRef,
-      [GroupHeader.TRANSMISSION]: transmissionMetricsRef,
-    }),
-    [],
-  );
-
   useEffect(() => {
     const scrollToChart = () => {
       const timeoutId = setTimeout(() => {
         if (chartId in metricRefs) {
-          const metricRef = metricRefs[(chartId as unknown) as Metric];
-          if (metricRef.current && !scrolledWithUrl) {
+          const metricGroupRef = metricRefs[(chartId as unknown) as Metric];
+          if (metricGroupRef.current && !scrolledWithUrl) {
             setScrolledWithUrl(true);
-            scrollTo(metricRef.current);
+            scrollTo(metricGroupRef.current);
           }
         }
-      }, 200);
+      }, 1000);
       return () => clearTimeout(timeoutId);
     };
 
@@ -244,6 +236,7 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                         stats={stats}
                         group={group}
                         clickedStatMetric={clickedStatMetric}
+                        chartId={chartId}
                       />
                     </LocationPageBlock>
                   )}
