@@ -56,10 +56,7 @@ import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
 import { EmptyPanel } from 'components/Charts/Charts.style';
-import {
-  useChartHeightForBreakpoint,
-  useDefaultTrendsPeriod,
-} from 'common/hooks';
+import { useChartHeightForBreakpoint } from 'common/hooks';
 import { assert } from 'common/utils';
 
 const MARGIN_SINGLE_LOCATION = 20;
@@ -255,7 +252,7 @@ const Explore: React.FunctionComponent<{
       }
     }, [pathname, scrollToExplore]);
 
-    const defaultTimePeriod = useDefaultTrendsPeriod();
+    const defaultTimePeriod = isMobile ? Period.DAYS_180 : Period.ALL;
 
     // Resets time period state variable when pathname changes (need to force the reset since the route doesn't change):
     useEffect(() => {
