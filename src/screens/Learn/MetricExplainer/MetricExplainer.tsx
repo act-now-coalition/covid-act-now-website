@@ -49,7 +49,7 @@ const MetricExplainer = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/covid-risk-levels-metrics"
+        canonicalUrl="/covid-community-level-metrics"
         pageTitle={metadataTitle}
         pageDescription={metadataDescription}
       />

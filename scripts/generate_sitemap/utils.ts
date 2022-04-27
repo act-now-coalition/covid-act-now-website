@@ -17,7 +17,7 @@ export function getLearnPageItems(): SitemapItemLoose[] {
     '/faq',
     '/case-studies',
     '/covid-explained',
-    '/covid-risk-levels-metrics',
+    '/covid-community-level-metrics',
   ];
 
   const caseStudyUrls = allCaseStudies.map(caseStudy =>

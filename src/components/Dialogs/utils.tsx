@@ -16,15 +16,17 @@ export interface MetricModalContent {
 }
 
 const metricToLearnLink: { [key in Metric]: string } = {
-  [Metric.CASE_DENSITY]: '/covid-risk-levels-metrics#daily-new-cases',
-  [Metric.CASE_GROWTH_RATE]: '/covid-risk-levels-metrics#infection-rate',
-  [Metric.HOSPITAL_USAGE]: '/covid-risk-levels-metrics#icu-capacity-used',
-  [Metric.POSITIVE_TESTS]: '/covid-risk-levels-metrics#positive-test-rate',
-  [Metric.VACCINATIONS]: '/covid-risk-levels-metrics#percent-vaccinated',
-  [Metric.ADMISSIONS_PER_100K]: '/covid-risk-levels-metrics#weekly-admissions',
+  [Metric.CASE_DENSITY]: '/covid-community-level-metrics#daily-new-cases',
+  [Metric.CASE_GROWTH_RATE]: '/covid-community-level-metrics#infection-rate',
+  [Metric.HOSPITAL_USAGE]: '/covid-community-level-metrics#icu-capacity-used',
+  [Metric.POSITIVE_TESTS]: '/covid-community-level-metrics#positive-test-rate',
+  [Metric.VACCINATIONS]: '/covid-community-level-metrics#percent-vaccinated',
+  [Metric.ADMISSIONS_PER_100K]:
+    '/covid-community-level-metrics#weekly-admissions',
   [Metric.RATIO_BEDS_WITH_COVID]:
-    '/covid-risk-levels-metrics#patients-with-covid',
-  [Metric.WEEKLY_CASES_PER_100K]: '/covid-risk-levels-metrics#weekly-new-cases',
+    '/covid-community-level-metrics#patients-with-covid',
+  [Metric.WEEKLY_CASES_PER_100K]:
+    '/covid-community-level-metrics#weekly-new-cases',
 };
 
 export function getMetricModalContent(
