@@ -57,13 +57,6 @@ const AfterUnsubscribe = lazy(() =>
   import('screens/Subscriptions/AfterUnsubscribe'),
 );
 
-const metricExplainerHashes = [
-  '#icu-capacity-used',
-  '#daily-new-cases',
-  '#positive-test-rate',
-  '#infection-rate',
-];
-
 export default function App() {
   return (
     <MuiThemeProvider theme={theme}>
@@ -201,17 +194,13 @@ export default function App() {
                   <Route
                     path="/covid-risk-levels-metrics"
                     render={props => {
-                      if (
-                        props.location.hash &&
-                        metricExplainerHashes.includes(props.location.hash)
-                      ) {
-                        return (
-                          <Redirect
-                            to={`covid-community-level-metrics${props.location.hash}`}
-                          />
-                        );
-                      }
-                      return <Redirect to="/covid-community-level-metrics" />;
+                      return props.location.hash ? (
+                        <Redirect
+                          to={`covid-community-level-metrics${props.location.hash}`}
+                        />
+                      ) : (
+                        <Redirect to="/covid-community-level-metrics" />
+                      );
                     }}
                   />
                   <Route
@@ -344,20 +333,8 @@ export default function App() {
                     to="/covid-community-level-metrics#icu-capacity-used"
                   />
                   <Redirect
-                    from="/what-is-covid-incidence"
-                    to="/covid-community-level-metrics#daily-new-cases"
-                  />
-                  <Redirect
-                    from="/new-daily-covid-cases"
-                    to="/covid-community-level-metrics#daily-new-cases"
-                  />
-                  <Redirect
                     from="/old-hospitalization-projections"
                     to="/covid-community-level-metrics#icu-capacity-used"
-                  />
-                  <Redirect
-                    from="/daily-new-cases-explained"
-                    to="/covid-community-level-metrics#daily-new-cases"
                   />
                   <Redirect
                     from="/test-positivity-explained"
