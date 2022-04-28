@@ -2,7 +2,6 @@ import get from 'lodash/get';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { fail } from 'common/utils';
 import * as QueryString from 'query-string';
 import { OptionsSelectorWrapper } from 'screens/internal/CompareSnapshots/OptionsSelector.style';
 import {
@@ -158,10 +157,7 @@ function getStateFipsParamValue(
   params: QueryString.ParsedQuery,
   defaultValue: string,
 ): string {
-  let value = get(params, 'stateFips', defaultValue);
-  if (typeof value !== 'string' || regions.findByStateCode(value) === null) {
-    fail(`Parameter 'stateFips' has unexpected value: ${value}`);
-  } else {
-    return value;
-  }
+  let value = String(get(params, 'stateFips', defaultValue));
+  regions.findByFipsCodeStrict(value); // Catch non-valid state FIPS values
+  return value;
 }
