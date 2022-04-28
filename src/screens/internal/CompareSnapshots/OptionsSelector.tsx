@@ -39,7 +39,7 @@ interface OptionsSelectorProps {
  * page (all graphs, etc.) to re-render causing a big perf hiccup.  See:
  * https://stackoverflow.com/q/60682426
  */
-const Select: React.FunctionComponent<SelectProps> = ({
+export const Select: React.FunctionComponent<SelectProps> = ({
   children,
   ...props
 }) => {
@@ -98,7 +98,7 @@ function OptionsSelectorInner({
     getNumericParamValue(params, 'sort', SortType.METRIC_DIFF),
   );
   const [metric, setMetric] = useState(
-    getNumericParamValue(params, 'metric', Metric.CASE_DENSITY),
+    getNumericParamValue(params, 'metric', Metric.WEEKLY_CASES_PER_100K),
   );
 
   const [locations, setLocations] = useState<string | number>(
@@ -263,7 +263,7 @@ function OptionsSelectorInner({
   );
 }
 
-function getNumericParamValue(
+export function getNumericParamValue(
   params: QueryString.ParsedQuery,
   param: string,
   defaultValue: number,
@@ -304,7 +304,7 @@ function getLocationsParamValue(
   return value;
 }
 
-function useMainSnapshot(): number | null {
+export function useMainSnapshot(): number | null {
   const [snapshot, setSnapshot] = useState<number | null>(null);
   useEffect(() => {
     async function fetchData() {

@@ -15,14 +15,14 @@ import { formatDecimal, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 
 export const ALL_METRICS = [
+  Metric.WEEKLY_CASES_PER_100K,
+  Metric.RATIO_BEDS_WITH_COVID,
+  Metric.ADMISSIONS_PER_100K,
   Metric.CASE_DENSITY,
   Metric.CASE_GROWTH_RATE,
   Metric.POSITIVE_TESTS,
   Metric.HOSPITAL_USAGE,
   Metric.VACCINATIONS,
-  Metric.RATIO_BEDS_WITH_COVID,
-  Metric.ADMISSIONS_PER_100K,
-  Metric.WEEKLY_CASES_PER_100K,
 ];
 
 const ALL_METRICS_LEVEL_INFO_MAP: { [metric in Metric]: LevelInfoMap } = {
