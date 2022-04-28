@@ -159,9 +159,6 @@ function getStateFipsParamValue(
   defaultValue: string,
 ): string {
   let value = String(get(params, 'stateFips', defaultValue));
-  assert(
-    regions.findByFipsCodeStrict(value),
-    `Parameter 'stateFips' has unexpected value: ${value}`,
-  );
+  regions.findByFipsCodeStrict(value); // Catch non-valid state FIPS values
   return value;
 }
