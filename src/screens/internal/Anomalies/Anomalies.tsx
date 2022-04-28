@@ -1,7 +1,7 @@
 import React from 'react';
 import { orderBy } from 'lodash';
 import { useState, useEffect } from 'react';
-import { Container, Grid, Typography, Link } from '@material-ui/core';
+import { Container, Grid, Typography, Link, Box } from '@material-ui/core';
 import { fetchCountyProjectionsForState } from 'common/utils/model';
 import { State, statesByFips } from 'common/regions';
 import {
@@ -76,9 +76,9 @@ const AnomaliesWrapper = React.memo(function AnomaliesWrapper({
 
       <Typography>
         Anomalies formatted below as:{' '}
-        <b>
-          <em>Date, Anomaly Type, Original Value</em>
-        </b>
+        <Box fontWeight="fontWeightMedium" fontStyle="italic">
+          Date, Anomaly Type, Original Value
+        </Box>
       </Typography>
       <Grid container>
         <Grid item xs={12}>
