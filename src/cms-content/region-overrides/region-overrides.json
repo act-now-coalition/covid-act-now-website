@@ -205,15 +205,6 @@
       "context": "https://trello.com/c/9yFJDbZo/1486-7-29-21-backlogged-antigen-probable-cases-added-to-ca-cases-on-july-8th"
     },
     {
-      "include": "region-and-subregions",
-      "metric": "metrics.testPositivityRatio",
-      "blocked": true,
-      "start_date": "2021-08-18",
-      "end_date": "2021-10-31",
-      "region": "WA",
-      "context": "WA stopped reporting negative tests from 09/01 - 10/31"
-    },
-    {
       "include": "region",
       "metric": "metrics.caseDensity",
       "blocked": true,
@@ -525,16 +516,6 @@
       "disclaimer": "On the week of January 14th, 2022, the Wisconsin Department of Health Services updated its data collection processes. As a result of the new process, COVID case data is expected to be temporarily elevated over the following days while this process occurs and back-logged cases are brought into the live system. [See the Department of Health Services' press release for more information.](https://www.dhs.wisconsin.gov/news/releases/011422.htm)"
     },
     {
-      "include": "region-and-subregions",
-      "metric": "metrics.testPositivityRatio",
-      "blocked": true,
-      "start_date": "",
-      "end_date": "",
-      "region": "WA",
-      "context": "WA testing reporting data",
-      "disclaimer": "The Washington State Department of Health has paused reporting on all testing data in order to increase the department's capacity. Data reporting is not expected to restart until approximately March 31, 2022. As a result, we do not have accurate test-positivity data at this time."
-    },
-    {
       "include": "region",
       "metric": "metrics.caseDensity",
       "blocked": true,
@@ -712,9 +693,9 @@
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2022-03-07",
-      "end_date": "",
+      "end_date": "2022-04-13",
       "region": "37191",
-      "context": "Blocking recent data due to suspected backlog of cases (not visible on https://covid19.ncdhhs.gov/dashboard/cases-and-deaths#covid-19-cases-and-deaths)",
+      "context": "Blocking unusually high data due to suspected backlog of cases (not visible on https://covid19.ncdhhs.gov/dashboard/cases-and-deaths#covid-19-cases-and-deaths)",
       "disclaimer": "We are unable to show data for Wayne County, NC at this time due to a recent increase in reported cases that are suspected to be backdated cases.  See https://covid19.ncdhhs.gov/dashboard/cases-and-deaths for latest data."
     },
     {
