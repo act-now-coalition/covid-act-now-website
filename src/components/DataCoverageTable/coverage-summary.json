@@ -129,19 +129,19 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 50,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 50
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 2563,
+      "regionsAvailable": 2586,
       "totalStates": 53,
-      "statesAvailable": 50
+      "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 345,
+      "regionsAvailable": 358,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -177,13 +177,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3111,
+      "regionsAvailable": 3112,
       "totalStates": 53,
       "statesAvailable": 53
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 381,
+      "regionsAvailable": 382,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -198,13 +198,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3111,
+      "regionsAvailable": 3112,
       "totalStates": 53,
       "statesAvailable": 53
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 381,
+      "regionsAvailable": 382,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -444,9 +444,9 @@
     "name": "actuals.positiveTests",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 53,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 53
     },
     "county": {
       "totalRegions": 3223,
@@ -465,9 +465,9 @@
     "name": "actuals.negativeTests",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 53,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 53
     },
     "county": {
       "totalRegions": 3223,
