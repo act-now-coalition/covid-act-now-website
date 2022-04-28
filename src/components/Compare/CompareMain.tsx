@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Modal } from '@material-ui/core';
+import { assert } from '@covid-projections/utils';
 import CompareTable from 'components/Compare/CompareTable';
 import ModalCompare from 'components/Compare/ModalCompare';
 import { DivForRef } from 'components/Compare/Compare.style';
@@ -37,7 +38,7 @@ import regions, {
   getStateCode,
   County,
 } from 'common/regions';
-import { assert } from 'common/utils';
+
 import {
   useLocationPageCompareSliderMap,
   useHomepageCompareSliderMap,

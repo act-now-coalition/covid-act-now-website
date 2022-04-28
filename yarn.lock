@@ -2354,6 +2354,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@covid-projections/utils@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.pkg.github.com/download/@covid-projections/utils/1.0.0/6bfb035ea8c60f2023dcaa3a24dddd85115e54a5247a4bb688f0fc6155479f80#24934f0edc1cd9f7924408998d3924827fedef02"
+  integrity sha512-sm9NFcbVFfpj0b0YMs8z7XCsEkh+EXXHgWTVzUsC/0OtxKPUB1riyHXjGOlRCO0cFkwTgSVadoWEE7XHM0CIYg==
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
