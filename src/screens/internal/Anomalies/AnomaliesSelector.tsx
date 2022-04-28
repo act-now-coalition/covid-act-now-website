@@ -159,7 +159,7 @@ function getStateFipsParamValue(
   defaultValue: string,
 ): string {
   let value = get(params, 'stateFips', defaultValue);
-  if (typeof value !== 'string' || regions.findByStateCode(value) === null) {
+  if (typeof value !== 'string' || regions.findByFipsCode(value) === null) {
     fail(`Parameter 'stateFips' has unexpected value: ${value}`);
   } else {
     return value;
