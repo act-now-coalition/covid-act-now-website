@@ -1,9 +1,11 @@
 import { Metric } from 'common/metricEnum';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { SummaryForCompare } from 'common/utils/compare';
-import { formatValue, getMetricNameForCompare } from 'common/metric';
-import { LEVEL_COLOR } from 'common/colors';
-import { Level } from 'common/level';
+import {
+  formatValue,
+  getMetricNameForCompare,
+  getLevelInfo,
+} from 'common/metric';
 import React from 'react';
 import {
   DataCellValue,
@@ -66,7 +68,8 @@ class MetricColumn implements ColumnDefinition {
     const metricInfo = row.metricsInfo.metrics[this.metric];
     const value = metricInfo?.value ?? null;
     const formattedValue = formatValue(this.metric, value, UNKNOWN_VALUE_TEXT);
-    const color = LEVEL_COLOR[metricInfo?.level ?? Level.UNKNOWN];
+    const { color } = getLevelInfo(this.metric, value);
+
     return (
       <>
         {this.renderDot && <FiberManualRecordIcon style={{ color }} />}

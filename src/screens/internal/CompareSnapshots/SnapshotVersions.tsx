@@ -28,7 +28,7 @@ export function SnapshotVersions({
   );
 }
 
-function VersionInfo({ version }: { version: SnapshotVersion | null }) {
+export function VersionInfo({ version }: { version: SnapshotVersion | null }) {
   return (
     version && (
       <div style={{ fontSize: 'small' }}>
@@ -47,12 +47,20 @@ export function useSnapshotVersion(
 ): SnapshotVersion | null {
   const [version, setVersion] = useState<SnapshotVersion | null>(null);
   useEffect(() => {
-    setVersion(null);
-    if (snapshot !== null) {
-      new Api(snapshotUrl(snapshot)).fetchVersionInfo().then(version => {
-        setVersion(version);
-      });
+    async function fetchVersion() {
+      setVersion(null);
+      if (snapshot !== null) {
+        try {
+          const version = await new Api(
+            snapshotUrl(snapshot),
+          ).fetchVersionInfo();
+          setVersion(version);
+        } catch (e) {
+          setVersion(null);
+        }
+      }
     }
+    fetchVersion();
   }, [snapshot]);
 
   return version;
