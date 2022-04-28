@@ -42,11 +42,3 @@ export interface AnnotationOptions {
   stateFips: string;
   annotationType: AnnotationType;
 }
-
-export interface AnnotationSelectorProps {
-  onNewOptions: (options: AnnotationOptions) => void;
-}
-
-export interface AnnotationSelectorInnerProps extends AnnotationSelectorProps {
-  mainSnapshot: number;
-}

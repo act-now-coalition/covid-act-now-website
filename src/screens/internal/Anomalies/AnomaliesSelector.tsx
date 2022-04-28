@@ -20,10 +20,17 @@ import {
   AnnotationType,
   ANNOTATION_TYPES,
   annotationTypeNames,
-  AnnotationSelectorProps,
-  AnnotationSelectorInnerProps,
+  AnnotationOptions,
 } from './utils';
 import regions from 'common/regions';
+
+interface AnnotationSelectorProps {
+  onNewOptions: (options: AnnotationOptions) => void;
+}
+
+interface AnnotationSelectorInnerProps extends AnnotationSelectorProps {
+  mainSnapshot: number;
+}
 
 export function AnnotationsSelector(props: AnnotationSelectorProps) {
   const mainSnapshot = useMainSnapshot();
@@ -49,7 +56,7 @@ function AnnotationsSelectorInner({
 
   const [snapshotText, setSnapshotText] = useState(snapshot.toString());
 
-  const [annotationType, setMetric] = useState(
+  const [annotationType, setAnnotationType] = useState(
     getNumericParamValue(params, 'annotationType', AnnotationType.NEW_CASES),
   );
 
@@ -92,9 +99,9 @@ function AnnotationsSelectorInner({
   };
 
   // TODO: Figure out correct type for event.
-  const changeMetric = (event: any) => {
+  const changeAnnotationType = (event: any) => {
     const annotationType = parseInt(event.target.value);
-    setMetric(annotationType);
+    setAnnotationType(annotationType);
     setQueryParams({ annotationType });
   };
 
@@ -125,7 +132,7 @@ function AnnotationsSelectorInner({
       </FormControl>
       <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
         <InputLabel focused={false}>Field:</InputLabel>
-        <Select value={annotationType} onChange={changeMetric}>
+        <Select value={annotationType} onChange={changeAnnotationType}>
           {ANNOTATION_TYPES.map(annotationType => (
             <MenuItem key={annotationType} value={annotationType}>
               {annotationTypeNames[annotationType]}
@@ -152,7 +159,7 @@ function getStateFipsParamValue(
   defaultValue: string,
 ): string {
   let value = get(params, 'stateFips', defaultValue);
-  if (typeof value !== 'string' || regions.findByStateCode(value)) {
+  if (typeof value !== 'string' || regions.findByStateCode(value) === null) {
     fail(`Parameter 'stateFips' has unexpected value: ${value}`);
   } else {
     return value;

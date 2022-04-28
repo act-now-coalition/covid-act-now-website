@@ -18,7 +18,7 @@ import {
   useSnapshotVersion,
 } from '../CompareSnapshots/SnapshotVersions';
 
-export function AnomaliesPage() {
+function AnomaliesPage() {
   const [options, setOptions] = useState<AnnotationOptions | null>(null);
   return (
     <Wrapper>
@@ -57,12 +57,11 @@ const AnomaliesWrapper = React.memo(function AnomaliesWrapper({
   projections = orderBy(
     projections,
     [
-      function (projection) {
-        return getAnomaliesForAnnotationType(
+      projection =>
+        getAnomaliesForAnnotationType(
           projection.primary.annotations,
           annotationType,
-        );
-      },
+        ),
     ],
     'desc',
   );
@@ -81,14 +80,12 @@ const AnomaliesWrapper = React.memo(function AnomaliesWrapper({
         </Box>
       </Typography>
       <Grid container>
-        <Grid item xs={12}>
-          {projections?.map(projection => (
-            <LocationAnomalies
-              annotationType={annotationType}
-              projection={projection}
-            />
-          ))}
-        </Grid>
+        {projections?.map(projection => (
+          <LocationAnomalies
+            annotationType={annotationType}
+            projection={projection}
+          />
+        ))}
       </Grid>
     </Container>
   );
@@ -105,15 +102,7 @@ const LocationAnomalies = ({
     projection.primary.annotations,
     annotationType,
   );
-  anomalies = orderBy(
-    anomalies,
-    [
-      function (anomaly) {
-        return anomaly.date;
-      },
-    ],
-    'desc',
-  );
+  anomalies = orderBy(anomalies, ['date'], 'desc');
   return (
     <Container>
       <Typography variant="h5">
