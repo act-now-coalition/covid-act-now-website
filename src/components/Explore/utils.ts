@@ -230,7 +230,7 @@ export const exploreMetricData: {
   [metric in ExploreMetric]: ExploreMetricDescription;
 } = {
   [ExploreMetric.CASES]: {
-    title: 'Cases',
+    title: 'Daily new cases',
     name: 'Cases',
     chartId: 'cases',
     dataMeasure: DataMeasure.INTEGER,
