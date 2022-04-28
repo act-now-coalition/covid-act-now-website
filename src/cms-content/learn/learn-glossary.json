@@ -113,7 +113,7 @@
     {
       "term": "Daily new cases",
       "termId": "daily-new-cases",
-      "definition": "Daily new cases, also known as [case incidence](#case-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “[daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)” per 100,000 people in states, metros, and counties. This metric answers the question: “How many new infections are in my area each day?”\n\nBecause we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases is a way to gauge new COVID cases without having to test an entire population.",
+      "definition": "Daily new cases, also known as [case incidence](#case-incidence) in epidemiology, is the number of new COVID cases per day per unit of population. Covid Act Now reports “[daily new cases](https://covidactnow.org/covid-community-level-metrics#daily-new-cases)” per 100,000 people in states, metros, and counties. This metric answers the question: “How many new infections are in my area each day?”\n\nBecause we can’t test our entire population, we don’t know how many total cases are in a given population. Measuring daily new cases is a way to gauge new COVID cases without having to test an entire population.",
       "category": "Metrics"
     },
     {
@@ -137,7 +137,7 @@
     {
       "term": "Disease prevalence",
       "termId": "disease-prevalence",
-      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as [case incidence](#case-incidence), which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community.\n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, data sets often look at case incidence, or [daily new cases](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases) per 100,000 people, to get an accurate estimation of COVID in a community.",
+      "definition": "Disease prevalence is a measure of the total number of cases in a community with a currently active COVID infection. It answers the question: “how many COVID infections are currently present in my area?” Disease prevalence is not the same as [case incidence](#case-incidence), which looks at the number of new cases in a specific time period. Disease prevalence is an indicator of the actual risk of encountering an infected individual in a community.\n\nTo know the true prevalence, you would need to test the entire population (or a widespread randomized sample) every day, using a highly-accurate test. Therefore, data sets often look at case incidence, or [daily new cases](https://covidactnow.org/covid-community-level-metrics#daily-new-cases) per 100,000 people, to get an accurate estimation of COVID in a community.",
       "category": "Metrics"
     },
     {
@@ -227,7 +227,7 @@
     {
       "term": "ICU capacity ",
       "termId": "icu-capacity",
-      "definition": "ICU capacity is used to measure an intensive care unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Staffed ICU beds, equipped with one or two dedicated nurses and special equipment, are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat other patients, such as people who have had a heart attack or suffered a life-threatening injury.\n\nCovid Act Now uses the metric “[ICU](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used) [capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used)” to measure the number of intensive care unit (ICU) beds that are currently in use.",
+      "definition": "ICU capacity is used to measure an intensive care unit’s (ICU) ability to handle a surge of patients in the case of a COVID [outbreak](#outbreak). The ICU is the part of a hospital reserved for people who are very sick. Staffed ICU beds, equipped with one or two dedicated nurses and special equipment, are important because they may be life-saving for some people infected by COVID. In addition, ICU beds are needed to treat other patients, such as people who have had a heart attack or suffered a life-threatening injury.\n\nCovid Act Now uses the metric “[ICU](https://covidactnow.org/covid-community-level-metrics#icu-capacity-used) [capacity used](https://covidactnow.org/covid-community-level-metrics#icu-capacity-used)” to measure the number of intensive care unit (ICU) beds that are currently in use.",
       "category": "Metrics"
     },
     {
@@ -503,7 +503,7 @@
     {
       "term": "Test positivity",
       "termId": "test-positivity",
-      "definition": "Test positivity, also known as the [positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate), is the percentage of all tests performed that come back positive.\n\nTest positivity can indicate whether or not there is widespread testing in a given community. As the number of tests increase, the test positivity rate is expected to decrease, because tests will not be restricted to highly symptomatic cases and will therefore capture more people with few or [no symptoms](https://covidactnow.org/glossary#asymptomatic).\n\nThroughout the COVID pandemic, experts from the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/hcp/testing-overview.html)  and the [World Health Organization (WHO)](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) have said a positive test rate of less than 5 percent may indicate that a community is conducting enough testing to find most cases.",
+      "definition": "Test positivity, also known as the [positive test rate](https://covidactnow.org/covid-community-level-metrics#positive-test-rate), is the percentage of all tests performed that come back positive.\n\nTest positivity can indicate whether or not there is widespread testing in a given community. As the number of tests increase, the test positivity rate is expected to decrease, because tests will not be restricted to highly symptomatic cases and will therefore capture more people with few or [no symptoms](https://covidactnow.org/glossary#asymptomatic).\n\nThroughout the COVID pandemic, experts from the [CDC](https://www.cdc.gov/coronavirus/2019-ncov/hcp/testing-overview.html)  and the [World Health Organization (WHO)](https://globalhealth.harvard.edu/evidence-roundup-why-positive-test-rates-need-to-fall-below-3/) have said a positive test rate of less than 5 percent may indicate that a community is conducting enough testing to find most cases.",
       "category": "Metrics"
     },
     {

@@ -862,7 +862,7 @@ collections:
           - name: url
             label: URL
             widget: string
-            hint: 'Ex: /covid-risk-levels-metrics#vulnerability'
+            hint: 'Ex: /covid-community-level-metrics#vulnerability'
           - name: ariaLabel
             label: Label for accessibility
             widget: string
