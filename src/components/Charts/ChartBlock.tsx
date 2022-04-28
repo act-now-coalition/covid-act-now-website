@@ -26,7 +26,8 @@ const ChartBlock: React.FC<{
   projections: Projections;
   group: ChartGroup;
   clickedStatMetric: Metric | null;
-}> = ({ projections, stats, group, region, clickedStatMetric }) => {
+  chartId?: string;
+}> = ({ projections, stats, group, region, clickedStatMetric, chartId }) => {
   const { metricList, groupHeader } = group;
 
   // TODO (chelsi) - revisit placement of these state/setState variables
@@ -57,6 +58,38 @@ const ChartBlock: React.FC<{
     projections,
   );
   const hasValue = Number.isFinite(unformattedValue);
+
+  // Used to make sure user can change tabs after landing on a page via a share link (and having a tab auto-selected)
+  const [hasSelectedSharedTab, setHasSelectedSharedTab] = useState<boolean>(
+    false,
+  );
+
+  // Checks if url is a chart-share-link (ie. it contains a chartId)
+  // If so - selects tab of respective metric's chart tab
+  useEffect(() => {
+    if (!chartId) {
+      return;
+    } else {
+      // Turn all metrics into strings so we check for equivalence against chartId
+      const metricsInMetricListAsString = metricList.map(item =>
+        item.metric.toString(),
+      );
+      if (
+        chartId &&
+        metricsInMetricListAsString.includes(chartId) &&
+        !hasSelectedSharedTab
+      ) {
+        const idx = findIndex(
+          metricsInMetricListAsString,
+          item => item === chartId,
+        );
+        if (idx >= 0) {
+          setActiveTabIndex(idx);
+          setHasSelectedSharedTab(true);
+        }
+      }
+    }
+  }, [activeTabIndex, chartId, metricList, hasSelectedSharedTab]);
 
   return (
     <>

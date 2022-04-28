@@ -6,17 +6,13 @@
 import React from 'react';
 import { SubLabel, SubLabelWrapper } from './SummaryStat.style';
 
-const MetricSubLabel: React.FC<{ text: string[]; splitText?: boolean }> = ({
+const MetricSubLabel: React.FC<{ text: string; splitText?: boolean }> = ({
   text,
   splitText,
 }) => {
   return (
     <SubLabelWrapper>
-      <SubLabel>
-        {text[0]}
-        {splitText ? <br /> : ' '}
-        {text[1]}
-      </SubLabel>
+      <SubLabel>{text}</SubLabel>
     </SubLabelWrapper>
   );
 };

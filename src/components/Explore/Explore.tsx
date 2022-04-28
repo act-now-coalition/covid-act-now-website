@@ -252,13 +252,17 @@ const Explore: React.FunctionComponent<{
       }
     }, [pathname, scrollToExplore]);
 
-    // if the pathname changes (ie. if navigating between location pages via compare or regionmap)-
-    // resets metric, time period, and locations
-    // (need to force the reset since the route doesnt change)
+    const defaultTimePeriod = isMobile ? Period.DAYS_180 : Period.ALL;
+
+    // Resets time period state variable when pathname changes (need to force the reset since the route doesn't change):
+    useEffect(() => {
+      setPeriod(defaultTimePeriod);
+    }, [pathname, defaultTimePeriod]);
+
+    // Resets locations+current metric state variables when pathname changes (need to force the reset since the route doesn't change):
     useEffect(() => {
       setSelectedLocations(initialLocations);
       setCurrentMetric(ExploreMetric.HOSPITALIZATIONS);
-      setPeriod(Period.ALL);
     }, [pathname, region, initialLocations, setCurrentMetric]);
 
     // checks for shared parameters (ie. if arriving from a share link)

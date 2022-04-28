@@ -17,7 +17,7 @@ export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   metricName: 'Weekly new reported cases',
   extendedMetricName: 'Weekly new reported cases per 100k',
   metricNameForCompare: `Weekly new cases per 100k`,
-  metricNameForSummaryStat: 'Weekly new reported cases',
+  metricNameForSummaryStat: 'Cases',
 };
 
 const LIMIT_LOW = 200;

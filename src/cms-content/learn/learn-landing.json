@@ -6,10 +6,10 @@
   "sections": [
     {
       "sectionTitle": "Community level & key metrics",
-      "sectionId": "covid-risk-levels-metrics",
+      "sectionId": "covid-community-level-metrics",
       "description": "Learn about the key metrics Covid Act Now uses to assess COVID across U.S. states, metros, and counties.",
       "buttonCta": "View community levels & key metrics",
-      "buttonRedirect": "/covid-risk-levels-metrics"
+      "buttonRedirect": "/covid-community-level-metrics"
     },
     {
       "sectionTitle": "FAQ",

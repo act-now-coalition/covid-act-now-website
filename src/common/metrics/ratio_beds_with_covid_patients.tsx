@@ -18,7 +18,7 @@ export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
   extendedMetricName:
     'Percent of staffed inpatient beds occupied by COVID patients',
   metricNameForCompare: `Patients w/ COVID (% of all beds)`,
-  metricNameForSummaryStat: 'Patients w/ COVID',
+  metricNameForSummaryStat: 'Patients',
 };
 
 const LIMIT_LOW = 0.1;
