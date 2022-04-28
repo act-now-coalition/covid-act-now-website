@@ -2,7 +2,6 @@ import get from 'lodash/get';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { assert } from 'common/utils';
 import * as QueryString from 'query-string';
 import { OptionsSelectorWrapper } from 'screens/internal/CompareSnapshots/OptionsSelector.style';
 import {
