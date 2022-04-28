@@ -1,7 +1,7 @@
 import React from 'react';
 import { orderBy } from 'lodash';
 import { useState, useEffect } from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, Typography, Link } from '@material-ui/core';
 import { fetchCountyProjectionsForState } from 'common/utils/model';
 import { State, statesByFips } from 'common/regions';
 import {
@@ -40,6 +40,17 @@ const AnomaliesWrapper = React.memo(function AnomaliesWrapper({
     statesByFips[stateFips],
     snapshotUrl(snapshot),
   );
+  const snapshotInfo = useSnapshotVersion(snapshot);
+
+  if (projections === undefined) {
+    return <Typography variant="h4">Loading data...</Typography>;
+  } else if (projections.length === 0) {
+    return (
+      <Typography variant="h4">
+        No data to display for snapshot {snapshot}.
+      </Typography>
+    );
+  }
   // Sort the counties by the number of anomalies in each.
   // TODO: I think it would be more helpful to sort locations by which
   // have the newest/most recent anomalies, but that was less straightforward.
@@ -56,14 +67,15 @@ const AnomaliesWrapper = React.memo(function AnomaliesWrapper({
     'desc',
   );
 
-  const snapshotInfo = useSnapshotVersion(snapshot);
   return (
     <Container>
-      <Typography>Snapshot {snapshot} Info:</Typography>
+      <Typography style={{ paddingTop: '20px' }}>
+        Snapshot {snapshot} Info:
+      </Typography>
       <VersionInfo version={snapshotInfo}></VersionInfo>
 
       <Typography>
-        Anomalies formatted below as{' '}
+        Anomalies formatted below as:{' '}
         <b>
           <em>Date, Anomaly Type, Original Value</em>
         </b>
@@ -105,7 +117,10 @@ const LocationAnomalies = ({
   return (
     <Container>
       <Typography variant="h5">
-        {projection.region.name}, FIPS: {projection.region.fipsCode}
+        <Link style={{ color: 'blue' }} href={projection.region.relativeUrl}>
+          {projection.region.name}
+        </Link>
+        , FIPS: {projection.region.fipsCode}
       </Typography>
       <Grid item xs={12}>
         {anomalies.map(anomaly => (
@@ -126,12 +141,20 @@ function useCountyProjectionsFromRegion(
 
   useEffect(() => {
     async function fetchData() {
-      if (region) {
-        const projections = await fetchCountyProjectionsForState(
-          region,
-          snapshot,
-        );
-        setProjections(projections);
+      if (region && snapshot) {
+        // Immediately clear page/data upon options update.
+        setProjections(undefined);
+        try {
+          const projections = await fetchCountyProjectionsForState(
+            region,
+            snapshot,
+          );
+          setProjections(projections);
+        } catch (e) {
+          // Hacky way to determine if the fetch has failed.
+          // Later, we display error text if projections.length === 0
+          setProjections([]);
+        }
       }
     }
 

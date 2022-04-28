@@ -54,7 +54,7 @@ function AnnotationsSelectorInner({
   );
 
   const [stateFips, setLocations] = useState<string>(
-    getLocationsParamValue(params, '01'),
+    getStateFipsParamValue(params, '01'),
   );
 
   useEffect(() => {
@@ -124,7 +124,7 @@ function AnnotationsSelectorInner({
         />
       </FormControl>
       <FormControl style={{ width: '12rem', marginLeft: '1rem' }}>
-        <InputLabel focused={false}>Annotation Type:</InputLabel>
+        <InputLabel focused={false}>Field:</InputLabel>
         <Select value={annotationType} onChange={changeMetric}>
           {ANNOTATION_TYPES.map(annotationType => (
             <MenuItem key={annotationType} value={annotationType}>
@@ -147,7 +147,7 @@ function AnnotationsSelectorInner({
   );
 }
 
-function getLocationsParamValue(
+function getStateFipsParamValue(
   params: QueryString.ParsedQuery,
   defaultValue: string,
 ): string {

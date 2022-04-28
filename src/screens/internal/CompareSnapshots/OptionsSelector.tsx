@@ -98,7 +98,7 @@ function OptionsSelectorInner({
     getNumericParamValue(params, 'sort', SortType.METRIC_DIFF),
   );
   const [metric, setMetric] = useState(
-    getNumericParamValue(params, 'metric', Metric.CASE_DENSITY),
+    getNumericParamValue(params, 'metric', Metric.WEEKLY_CASES_PER_100K),
   );
 
   const [locations, setLocations] = useState<string | number>(
