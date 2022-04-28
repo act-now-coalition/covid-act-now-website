@@ -28,7 +28,7 @@ export function SnapshotVersions({
   );
 }
 
-function VersionInfo({ version }: { version: SnapshotVersion | null }) {
+export function VersionInfo({ version }: { version: SnapshotVersion | null }) {
   return (
     version && (
       <div style={{ fontSize: 'small' }}>

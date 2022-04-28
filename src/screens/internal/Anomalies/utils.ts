@@ -1,26 +1,52 @@
 import { Annotations, Anomalies } from 'api/schema/RegionSummaryWithTimeseries';
-import { Metric } from 'common/metricEnum';
+import { assert } from 'common/utils';
 
-export function getAnomaliesForMetric(
+// Not including all possible values because many fields never or
+// rarely get anomalies. We should extend this enum and related code as needed.
+export enum AnnotationType {
+  NEW_DEATHS,
+  NEW_CASES,
+  HOSPITALIZATIONS,
+}
+
+export const ANNOTATION_TYPES = [
+  AnnotationType.NEW_CASES,
+  AnnotationType.NEW_DEATHS,
+  AnnotationType.HOSPITALIZATIONS,
+];
+
+export const annotationTypeNames: { [metric in AnnotationType]: string } = {
+  [AnnotationType.NEW_CASES]: 'New Cases',
+  [AnnotationType.NEW_DEATHS]: 'New Deaths',
+  [AnnotationType.HOSPITALIZATIONS]: 'Hospitalizations',
+};
+
+export function getAnomaliesForAnnotationType(
   annotations: Annotations,
-  metric: Metric,
-): Anomalies | undefined {
-  switch (metric) {
-    case Metric.CASE_DENSITY:
-      return annotations?.caseDensity?.anomalies;
-    case Metric.CASE_GROWTH_RATE:
-      return annotations?.infectionRate?.anomalies;
-    case Metric.POSITIVE_TESTS:
-      return annotations?.testPositivityRatio?.anomalies;
-    case Metric.HOSPITAL_USAGE:
-      return annotations?.icuCapacityRatio?.anomalies;
-    case Metric.VACCINATIONS:
-      // TODO(michael): Ideally the backend would be more consistent about where it sticks sources.
-      const provenance =
-        annotations?.vaccinationsInitiated ||
-        annotations?.vaccinationsInitiatedRatio ||
-        annotations?.vaccinationsCompleted ||
-        annotations?.vaccinationsCompletedRatio;
-      return provenance?.anomalies;
+  type: AnnotationType,
+  orderAnomalies?: string,
+): Anomalies {
+  assert(ANNOTATION_TYPES.includes(type));
+  switch (type) {
+    case AnnotationType.NEW_CASES:
+      return annotations?.newCases?.anomalies ?? [];
+    case AnnotationType.NEW_DEATHS:
+      return annotations?.newDeaths?.anomalies ?? [];
+    case AnnotationType.HOSPITALIZATIONS:
+      return annotations?.hospitalBeds?.anomalies ?? [];
   }
+}
+
+export interface AnnotationOptions {
+  snapshot: number;
+  stateFips: string;
+  annotationType: AnnotationType;
+}
+
+export interface AnnotationSelectorProps {
+  onNewOptions: (options: AnnotationOptions) => void;
+}
+
+export interface AnnotationSelectorInnerProps extends AnnotationSelectorProps {
+  mainSnapshot: number;
 }

@@ -1,103 +1,144 @@
 import React from 'react';
-import sortBy from 'lodash/sortBy';
-import {
-  RegionVaccinePhaseInfo,
-  RegionPhaseGroup,
-  stateVaccinationPhases,
-} from 'cms-content/vaccines/phases';
+import { orderBy } from 'lodash';
 import { useState, useEffect } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
-import ExternalLink from 'components/ExternalLink';
-import { MarkdownContent } from 'components/Markdown';
-import { Metric } from 'common/metricEnum';
 import { fetchCountyProjectionsForState } from 'common/utils/model';
+import { State, statesByFips } from 'common/regions';
 import {
-  Region,
-  State,
-  getStateName,
-  statesByFips,
-  getCountyRegionFromZipCode,
-} from 'common/regions';
-import { getAnomaliesForMetric } from 'screens/internal/Anomalies/utils';
-import {
-  Anomalies,
-  AnomalyAnnotation,
-  TagType,
-  Date,
-  OriginalObservation,
-} from 'api/schema/RegionSummaryWithTimeseries';
+  AnnotationType,
+  getAnomaliesForAnnotationType,
+} from 'screens/internal/Anomalies/utils';
 import { Projections } from 'common/models/Projections';
+import { Wrapper } from '../CompareSnapshots/CompareSnapshots.style';
+import { AnnotationsSelector } from './AnomaliesSelector';
+import { AnnotationOptions } from './utils';
+import { snapshotUrl } from 'common/utils/snapshots';
+import {
+  VersionInfo,
+  useSnapshotVersion,
+} from '../CompareSnapshots/SnapshotVersions';
 
-interface LocationAnomalies {
-  region: Region;
-  anomalies: Anomalies;
+export function AnomaliesPage() {
+  const [options, setOptions] = useState<AnnotationOptions | null>(null);
+  return (
+    <Wrapper>
+      <Typography variant="h3">County Data Anomaly Tracker</Typography>
+      <AnnotationsSelector onNewOptions={setOptions} />
+      {options && <AnomaliesWrapper options={options} />}
+    </Wrapper>
+  );
 }
 
-const AnnotationLocation = ({
-  anomalies,
+const AnomaliesWrapper = React.memo(function AnomaliesWrapper({
+  options,
 }: {
-  anomalies: AnomalyAnnotation[];
-}) => {
+  options: AnnotationOptions;
+}) {
+  const { stateFips, annotationType, snapshot } = options;
+
+  let projections = useCountyProjectionsFromRegion(
+    statesByFips[stateFips],
+    snapshotUrl(snapshot),
+  );
+  // Sort the counties by the number of anomalies in each.
+  // TODO: I think it would be more helpful to sort locations by which
+  // have the newest/most recent anomalies, but that was less straightforward.
+  projections = orderBy(
+    projections,
+    [
+      function (projection) {
+        return getAnomaliesForAnnotationType(
+          projection.primary.annotations,
+          annotationType,
+        );
+      },
+    ],
+    'desc',
+  );
+
+  const snapshotInfo = useSnapshotVersion(snapshot);
   return (
     <Container>
+      <Typography>Snapshot {snapshot} Info:</Typography>
+      <VersionInfo version={snapshotInfo}></VersionInfo>
+
+      <Typography>
+        Anomalies formatted below as{' '}
+        <b>
+          <em>Date, Anomaly Type, Original Value</em>
+        </b>
+      </Typography>
       <Grid container>
         <Grid item xs={12}>
-          {anomalies.map(anomaly => (
-            <Typography>
-              {anomaly.date} {anomaly.type} {anomaly.original_observation}
-            </Typography>
+          {projections?.map(projection => (
+            <LocationAnomalies
+              annotationType={annotationType}
+              projection={projection}
+            />
           ))}
         </Grid>
       </Grid>
     </Container>
   );
-};
+});
 
-const AnomaliesPage = () => {
-  const projections = useCountyProjectionsFromRegion(statesByFips['12']);
-  let casesAnnotationsRaw: LocationAnomalies[];
-  projections?.forEach(projection => {
-    if (projections) {
-      const val = getAnomaliesForMetric(
-        projection.primary.annotations,
-        Metric.CASE_DENSITY,
-      );
-      casesAnnotationsRaw.push();
-    }
-  });
-  const casesAnnotations = casesAnnotationsRaw.filter(
-    anomalies => anomalies !== undefined,
-  ) as Anomalies[];
-
+const LocationAnomalies = ({
+  projection,
+  annotationType,
+}: {
+  projection: Projections;
+  annotationType: AnnotationType;
+}) => {
+  let anomalies = getAnomaliesForAnnotationType(
+    projection.primary.annotations,
+    annotationType,
+  );
+  anomalies = orderBy(
+    anomalies,
+    [
+      function (anomaly) {
+        return anomaly.date;
+      },
+    ],
+    'desc',
+  );
   return (
-    <Container maxWidth="md">
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h2">Anomalies</Typography>
-          {casesAnnotations.map(anomalies => (
-            <AnnotationLocation anomalies={anomalies} />
-          ))}
-        </Grid>
+    <Container>
+      <Typography variant="h5">
+        {projection.region.name}, FIPS: {projection.region.fipsCode}
+      </Typography>
+      <Grid item xs={12}>
+        {anomalies.map(anomaly => (
+          <Typography>
+            {anomaly.date}, {anomaly.type}, {anomaly.original_observation}
+          </Typography>
+        ))}
       </Grid>
     </Container>
   );
 };
 
-export default AnomaliesPage;
-
-export function useCountyProjectionsFromRegion(region: State | null) {
+function useCountyProjectionsFromRegion(
+  region: State | null,
+  snapshot: string | null,
+) {
   const [projections, setProjections] = useState<Projections[]>();
 
   useEffect(() => {
     async function fetchData() {
       if (region) {
-        const projections = await fetchCountyProjectionsForState(region);
+        const projections = await fetchCountyProjectionsForState(
+          region,
+          snapshot,
+        );
         setProjections(projections);
       }
     }
 
     fetchData();
-  }, [region]);
+  }, [region, snapshot]);
 
   return projections;
 }
+
+export default AnomaliesPage;
