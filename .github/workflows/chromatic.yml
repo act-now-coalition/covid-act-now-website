@@ -4,6 +4,9 @@
 name: 'Chromatic'
 on: push
 
+# Skip Chromatic if the PR is from dependabot or a data snapshot
+if: ${{!contains(github.head_ref, 'dependabot') && !contains(github.head_ref, 'bump-snapshot-')}}
+
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
@@ -20,3 +23,4 @@ jobs:
           # https://github.com/covid-projections/covid-projections/settings/secrets/actions
           token: ${{ secrets.CAN_ROBOT_PERSONAL_ACCESS_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: ''
