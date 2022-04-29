@@ -565,10 +565,50 @@ export function getChartIdByMetric(metric: ExploreMetric) {
 }
 
 export function getMetricLabels(multiLocation: boolean): string[] {
+  const multiLocationLabelEnding: {
+    [metric in ExploreMetric]: string;
+  } = {
+    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
+    [ExploreMetric.RATIO_BEDS_WITH_COVID]: 'hi',
+    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
+    [ExploreMetric.WEEKLY_DEATHS]: 'hi',
+    [ExploreMetric.WEEKLY_CASES]: 'hi',
+    [ExploreMetric.CASES]: 'hi',
+    [ExploreMetric.DEATHS]: 'hi',
+    [ExploreMetric.HOSPITALIZATIONS]: 'hi',
+    [ExploreMetric.ICU_HOSPITALIZATIONS]: 'hi',
+    [ExploreMetric.VACCINATIONS_FIRST_DOSE]: 'hi',
+    [ExploreMetric.VACCINATIONS_COMPLETED]: 'hi',
+    [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: 'hi',
+    [ExploreMetric.ICU_USED]: 'hi',
+    [ExploreMetric.POSITIVITY_RATE]: 'hi',
+    [ExploreMetric.DAILY_CASES_PER_100K]: 'hi',
+  };
+  const singleLocationLabelEnding: {
+    [metric in ExploreMetric]: string;
+  } = {
+    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
+    [ExploreMetric.RATIO_BEDS_WITH_COVID]: 'hi',
+    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
+    [ExploreMetric.WEEKLY_DEATHS]: 'hi',
+    [ExploreMetric.WEEKLY_CASES]: 'hi',
+    [ExploreMetric.CASES]: 'hi',
+    [ExploreMetric.DEATHS]: 'hi',
+    [ExploreMetric.HOSPITALIZATIONS]: 'hi',
+    [ExploreMetric.ICU_HOSPITALIZATIONS]: 'hi',
+    [ExploreMetric.VACCINATIONS_FIRST_DOSE]: 'hi',
+    [ExploreMetric.VACCINATIONS_COMPLETED]: 'hi',
+    [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: 'hi',
+    [ExploreMetric.ICU_USED]: 'hi',
+    [ExploreMetric.POSITIVITY_RATE]: 'hi',
+    [ExploreMetric.DAILY_CASES_PER_100K]: 'hi',
+  };
+
   return EXPLORE_METRICS.map((metric: ExploreMetric) => {
     const title = getTitle(metric);
     if (multiLocation && ORIGINAL_EXPLORE_METRICS.includes(metric)) {
-      return title + ' per 100K';
+      // return title + ' per 100K';
+      return [title, multiLocationLabelEnding[metric]].join(' ');
     } else {
       return title;
     }
