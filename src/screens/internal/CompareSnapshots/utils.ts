@@ -270,7 +270,7 @@ async function fetchTopCountiesByDiff(
  * Outlier detection is applied to the raw data that is then used
  * to calculate the metrics, so the relevant anomalies for each metric
  * are the anomalies from the underlying data. E.g., for Weekly New Cases
- * Per 100k, we look at the anomalies in New Cases.
+ * Per 100k we look at the anomalies in New Cases.
  */
 export function getAnomaliesForMetric(
   projection: Projections,

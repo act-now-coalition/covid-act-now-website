@@ -29,7 +29,7 @@ export default function AnomalyModal({
         anyNewAnomalies={newAnomalies}
         disabled={noAnomalies}
       >
-        {rightAnomalies?.length ?? 0}{' '}
+        {rightAnomalies?.length ?? 'No'}{' '}
         {rightAnomalies?.length === 1 ? 'Anomaly' : 'Anomalies'}
       </AnomalyButton>
       <Modal open={open} onClose={handleClose}>
