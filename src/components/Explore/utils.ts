@@ -86,19 +86,19 @@ export function getDateRange(period: Period): Date[] {
 
 // We try to keep these alphabetized by metric name to make the trends metric list easier to navigate for users.
 export const EXPLORE_METRICS = [
+  ExploreMetric.ADMISSIONS_PER_100K,
   ExploreMetric.CASES,
+  ExploreMetric.WEEKLY_CASES,
   ExploreMetric.DEATHS,
+  ExploreMetric.WEEKLY_DEATHS,
   ExploreMetric.HOSPITALIZATIONS,
   ExploreMetric.ICU_USED,
   ExploreMetric.ICU_HOSPITALIZATIONS,
   ExploreMetric.RATIO_BEDS_WITH_COVID,
+  ExploreMetric.POSITIVITY_RATE,
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
   ExploreMetric.VACCINATIONS_COMPLETED,
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
-  ExploreMetric.POSITIVITY_RATE,
-  ExploreMetric.ADMISSIONS_PER_100K,
-  ExploreMetric.WEEKLY_DEATHS,
-  ExploreMetric.WEEKLY_CASES,
 ];
 
 // Note that these specifically are counts, not percentages, and can normalized
@@ -314,7 +314,7 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_FIRST_DOSE]: {
-    title: 'Percent vaccinated (1+ dose)',
+    title: '% Vaccinated (1+ dose)',
     name: 'Percent vaccinated (1+ dose)',
     chartId: 'vaccinations_first_dose',
     dataMeasure: DataMeasure.PERCENT,
@@ -330,7 +330,7 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: {
-    title: 'Percent vaccinated (booster shot)',
+    title: '% Vaccinated (booster shot)',
     name: 'Percent vaccinated (booster shot)',
     chartId: 'vaccinations_additional_dose',
     dataMeasure: DataMeasure.PERCENT,
@@ -346,7 +346,7 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_COMPLETED]: {
-    title: 'Percent vaccinated (2+ doses or J&J)',
+    title: '% Vaccinated (2+ doses or J&J)',
     name: 'Percent vaccinated (2+ doses or J&J)',
     chartId: 'vaccinations_completed',
     dataMeasure: DataMeasure.PERCENT,
@@ -393,7 +393,7 @@ export const exploreMetricData: {
   },
 
   [ExploreMetric.ADMISSIONS_PER_100K]: {
-    title: 'Weekly COVID admissions per 100k',
+    title: 'Admissions',
     name: 'Weekly COVID admissions per 100k',
     chartId: 'admissions_per_100k', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
@@ -423,7 +423,7 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.WEEKLY_CASES]: {
-    title: 'Weekly reported cases',
+    title: 'Cases',
     name: 'Weekly reported cases',
     chartId: 'weekly_new_cases', // TODO(8.2) (Chelsi) - what are these ids used for
     dataMeasure: DataMeasure.INTEGER,
@@ -438,7 +438,7 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.WEEKLY_DEATHS]: {
-    title: 'Weekly deaths',
+    title: 'Deaths',
     name: 'Weekly deaths',
     chartId: 'weekly_deaths',
     dataMeasure: DataMeasure.INTEGER,
@@ -564,55 +564,35 @@ export function getChartIdByMetric(metric: ExploreMetric) {
   return exploreMetricData[metric].chartId;
 }
 
-export function getMetricLabels(multiLocation: boolean): string[] {
-  const multiLocationLabelEnding: {
-    [metric in ExploreMetric]: string;
-  } = {
-    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
-    [ExploreMetric.RATIO_BEDS_WITH_COVID]: 'hi',
-    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
-    [ExploreMetric.WEEKLY_DEATHS]: 'hi',
-    [ExploreMetric.WEEKLY_CASES]: 'hi',
-    [ExploreMetric.CASES]: 'hi',
-    [ExploreMetric.DEATHS]: 'hi',
-    [ExploreMetric.HOSPITALIZATIONS]: 'hi',
-    [ExploreMetric.ICU_HOSPITALIZATIONS]: 'hi',
-    [ExploreMetric.VACCINATIONS_FIRST_DOSE]: 'hi',
-    [ExploreMetric.VACCINATIONS_COMPLETED]: 'hi',
-    [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: 'hi',
-    [ExploreMetric.ICU_USED]: 'hi',
-    [ExploreMetric.POSITIVITY_RATE]: 'hi',
-    [ExploreMetric.DAILY_CASES_PER_100K]: 'hi',
-  };
-  const singleLocationLabelEnding: {
-    [metric in ExploreMetric]: string;
-  } = {
-    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
-    [ExploreMetric.RATIO_BEDS_WITH_COVID]: 'hi',
-    [ExploreMetric.ADMISSIONS_PER_100K]: 'hi',
-    [ExploreMetric.WEEKLY_DEATHS]: 'hi',
-    [ExploreMetric.WEEKLY_CASES]: 'hi',
-    [ExploreMetric.CASES]: 'hi',
-    [ExploreMetric.DEATHS]: 'hi',
-    [ExploreMetric.HOSPITALIZATIONS]: 'hi',
-    [ExploreMetric.ICU_HOSPITALIZATIONS]: 'hi',
-    [ExploreMetric.VACCINATIONS_FIRST_DOSE]: 'hi',
-    [ExploreMetric.VACCINATIONS_COMPLETED]: 'hi',
-    [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: 'hi',
-    [ExploreMetric.ICU_USED]: 'hi',
-    [ExploreMetric.POSITIVITY_RATE]: 'hi',
-    [ExploreMetric.DAILY_CASES_PER_100K]: 'hi',
-  };
+function getLabelEnding(metric: ExploreMetric, multiLocation: boolean) {
+  switch (metric) {
+    case ExploreMetric.CASES:
+      return multiLocation
+        ? '(daily reported cases per 100k)'
+        : '(daily reported cases)';
+    case ExploreMetric.DEATHS:
+      return multiLocation ? '(daily per 100k)' : '(daily)';
+    case ExploreMetric.HOSPITALIZATIONS:
+      return multiLocation ? '(per 100k)' : '(w/ COVID)';
+    case ExploreMetric.ICU_HOSPITALIZATIONS:
+      return multiLocation ? '(per 100k)' : '(ICU patients w/ COVID)';
+    case ExploreMetric.ADMISSIONS_PER_100K:
+      return '(weekly COVID admissions per 100k)';
+    case ExploreMetric.WEEKLY_DEATHS:
+      return multiLocation ? '(weekly per 100k)' : '(weekly)';
+    case ExploreMetric.WEEKLY_CASES:
+      return multiLocation
+        ? '(weekly reported cases per 100k)'
+        : '(weekly reported cases)';
+    default:
+      return '';
+  }
+}
 
-  return EXPLORE_METRICS.map((metric: ExploreMetric) => {
-    const title = getTitle(metric);
-    if (multiLocation && ORIGINAL_EXPLORE_METRICS.includes(metric)) {
-      // return title + ' per 100K';
-      return [title, multiLocationLabelEnding[metric]].join(' ');
-    } else {
-      return title;
-    }
-  });
+export function getMetricLabels(multiLocation: boolean): string[] {
+  return EXPLORE_METRICS.map((metric: ExploreMetric) =>
+    [getTitle(metric), getLabelEnding(metric, multiLocation)].join(' '),
+  );
 }
 
 export function findPointByDate(data: Column[], date: Date): Column | null {
