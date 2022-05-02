@@ -5,6 +5,7 @@ import {
   RegionNameContainer,
   RegionNameText,
   UpdatedOnText,
+  UnstyledLink,
 } from './LocationName.style';
 import { useModelLastUpdatedDate } from 'common/utils/model';
 import { DateFormat, formatDateTime } from 'common/utils/time-utils';
@@ -36,7 +37,10 @@ function renderStyledRegionName(region: Region) {
       <>
         <strong>{countyName}</strong>
         {countySuffix && ` ${countySuffix}`}
-        {`, ${region.state.stateCode}`}
+        {', '}
+        <UnstyledLink to={region.state.relativeUrl}>
+          {region.state.stateCode}
+        </UnstyledLink>
       </>
     );
   } else if (region instanceof MetroArea) {
