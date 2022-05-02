@@ -279,13 +279,12 @@ export function getAnomaliesForMetric(
   assert(ALL_METRICS.includes(metric));
   const annotations = projection.primary.annotations;
   switch (metric) {
-    case Metric.WEEKLY_CASES_PER_100K ||
-      Metric.ADMISSIONS_PER_100K ||
-      Metric.CASE_GROWTH_RATE:
+    case Metric.WEEKLY_CASES_PER_100K:
+    case Metric.CASE_DENSITY:
+    case Metric.CASE_GROWTH_RATE:
       return annotations?.newCases?.anomalies;
-    case Metric.RATIO_BEDS_WITH_COVID ||
-      Metric.RATIO_BEDS_WITH_COVID ||
-      Metric.ADMISSIONS_PER_100K:
+    case Metric.RATIO_BEDS_WITH_COVID:
+    case Metric.ADMISSIONS_PER_100K:
       if (projection.isCounty) {
         return annotations?.hsaHospitalBeds?.anomalies;
       }
@@ -294,7 +293,10 @@ export function getAnomaliesForMetric(
       if (projection.isCounty) {
         return annotations?.hsaIcuBeds?.anomalies;
       }
-      return projection.primary.annotations?.icuBeds?.anomalies;
+      return annotations?.icuBeds?.anomalies;
+    case Metric.POSITIVE_TESTS:
+      const positiveTests = annotations.positiveTests?.anomalies ?? [];
+      return annotations.testPositivityRatio?.anomalies.concat(positiveTests);
     case Metric.VACCINATIONS:
       // This is clumsy as it doesn't signify which vaccination metric the anomalies
       // come from. But, I have never actually seen vaccination data create any anomalies.

@@ -4,8 +4,9 @@ import { Modal, Typography } from '@material-ui/core';
 import { ProjectionsPair } from 'common/models/ProjectionsPair';
 import { Metric } from 'common/metricEnum';
 import { getAnomaliesForMetric } from './utils';
+import { isEqual } from 'lodash';
 
-export default function AnomalyModal({
+export default function AnomaliesButton({
   pair,
   metric,
 }: {
@@ -18,7 +19,7 @@ export default function AnomalyModal({
 
   const leftAnomalies = getAnomaliesForMetric(pair.left, metric);
   const rightAnomalies = getAnomaliesForMetric(pair.right, metric);
-  const newAnomalies = leftAnomalies?.length !== rightAnomalies?.length;
+  const anomaliesEqual = isEqual(leftAnomalies, rightAnomalies);
   const noAnomalies =
     rightAnomalies?.length === 0 || rightAnomalies?.length === undefined;
 
@@ -26,10 +27,10 @@ export default function AnomalyModal({
     <>
       <AnomalyButton
         onClick={handleOpen}
-        anyNewAnomalies={newAnomalies}
+        anomaliesEqual={anomaliesEqual}
         disabled={noAnomalies}
       >
-        {rightAnomalies?.length ?? 'No'}{' '}
+        {rightAnomalies?.length ?? '0'}{' '}
         {rightAnomalies?.length === 1 ? 'Anomaly' : 'Anomalies'}
       </AnomalyButton>
       <Modal open={open} onClose={handleClose}>

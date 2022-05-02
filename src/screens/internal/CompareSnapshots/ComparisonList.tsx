@@ -8,7 +8,7 @@ import { Grid } from '@material-ui/core';
 import { Level } from 'common/level';
 import { MetricChart } from 'components/Charts';
 import { Projections } from 'common/models/Projections';
-import AnomalyModal from './AnomalyModal';
+import AnomaliesButton from './AnomaliesButton';
 
 export const ComparisonList = function ({
   metric,
@@ -72,7 +72,7 @@ const ProjectionsCompare = React.memo(
               {formatInteger(pair.population)} | fips {pair.fips} |{' '}
               <a href={pair.locationURL}>prod</a> <a href={localUrl}>local</a>
               <span> | </span>
-              <AnomalyModal pair={pair} metric={metric}></AnomalyModal>
+              <AnomaliesButton pair={pair} metric={metric}></AnomaliesButton>
             </small>
           </h2>
           <br />
