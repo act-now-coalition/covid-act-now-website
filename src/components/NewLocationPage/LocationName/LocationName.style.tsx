@@ -22,7 +22,7 @@ export const UpdatedOnText = styled.span`
   font-size: 0.9rem;
 `;
 
-export const UnstyledLink = styled(Link)`
+export const PlainLink = styled(Link)`
   color: inherit;
   text-underline-offset: 1px;
 `;
