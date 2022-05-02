@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, smallPhoneBreakpoint } from 'assets/theme/sizes';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 
@@ -57,8 +57,16 @@ export const Tab = styled(MuiTab).attrs(props => ({
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 80px;
   justify-content: space-between;
+
+  @media (min-width: ${smallPhoneBreakpoint}) {
+    width: 90px;
+  }
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    width: fit-content;
+  }
 `;
 
 export const TabContent = styled.div`
