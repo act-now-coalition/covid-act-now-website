@@ -23,7 +23,7 @@ export default function AnomalyModal({
     rightAnomalies?.length === 0 || rightAnomalies?.length === undefined;
 
   return (
-    <div>
+    <>
       <AnomalyButton
         onClick={handleOpen}
         anyNewAnomalies={newAnomalies}
@@ -49,6 +49,6 @@ export default function AnomalyModal({
           </ul>
         </AnomalyModalWrapper>
       </Modal>
-    </div>
+    </>
   );
 }

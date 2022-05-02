@@ -71,6 +71,7 @@ const ProjectionsCompare = React.memo(
               <ProjectionsGradeChange pair={pair} /> | population{' '}
               {formatInteger(pair.population)} | fips {pair.fips} |{' '}
               <a href={pair.locationURL}>prod</a> <a href={localUrl}>local</a>
+              <span> | </span>
               <AnomalyModal pair={pair} metric={metric}></AnomalyModal>
             </small>
           </h2>
