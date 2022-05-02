@@ -1,6 +1,7 @@
 import takeRight from 'lodash/takeRight';
 import { useEffect, useState } from 'react';
 import { Metric } from 'common/metricEnum';
+import { Anomalies } from 'api/schema/RegionSummary';
 import { ProjectionsPair, SortType } from 'common/models/ProjectionsPair';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import {
@@ -13,7 +14,8 @@ import { snapshotUrl } from 'common/utils/snapshots';
 import regions, { County, MetroArea, Region, State } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { fetchSummaries } from 'common/location_summaries';
-import { fail } from 'common/utils';
+import { fail, assert } from 'common/utils';
+import { ALL_METRICS } from 'common/metric';
 
 export const COUNTIES_LIMIT = 100;
 export const METROS_LIMIT = 100;
@@ -261,4 +263,44 @@ async function fetchTopCountiesByDiff(
     regionDiffs.filter(rd => rd.region instanceof County),
     COUNTIES_LIMIT,
   ).map(rd => rd.region);
+}
+
+/**
+ * Maps a metric to the anomalies of its underlying data source.
+ * Outlier detection is applied to the raw data that is then used
+ * to calculate the metrics, so the relevant anomalies for each metric
+ * are the anomalies from the underlying data. E.g., for Weekly New Cases
+ * Per 100k, we look at the anomalies in New Cases.
+ */
+export function getAnomaliesForMetric(
+  projection: Projections,
+  metric: Metric,
+): Anomalies | undefined {
+  assert(ALL_METRICS.includes(metric));
+  const annotations = projection.primary.annotations;
+  switch (metric) {
+    case Metric.WEEKLY_CASES_PER_100K ||
+      Metric.ADMISSIONS_PER_100K ||
+      Metric.CASE_GROWTH_RATE:
+      return annotations?.newCases?.anomalies;
+    case Metric.RATIO_BEDS_WITH_COVID ||
+      Metric.RATIO_BEDS_WITH_COVID ||
+      Metric.ADMISSIONS_PER_100K:
+      if (projection.isCounty) {
+        return annotations?.hsaHospitalBeds?.anomalies;
+      }
+      return projection.primary.annotations?.hospitalBeds?.anomalies;
+    case Metric.HOSPITAL_USAGE:
+      if (projection.isCounty) {
+        return annotations?.hsaIcuBeds?.anomalies;
+      }
+      return projection.primary.annotations?.icuBeds?.anomalies;
+    case Metric.VACCINATIONS:
+      // This is clumsy as it doesn't signify which vaccination metric the anomalies
+      // come from. But, I have never actually seen vaccination data create any anomalies.
+      const booster = annotations?.vaccinationsAdditionalDose?.anomalies ?? [];
+      const completed = annotations?.vaccinationsCompleted?.anomalies ?? [];
+      const initiated = annotations.vaccinationsInitiated?.anomalies ?? [];
+      return booster.concat(completed, initiated);
+  }
 }
