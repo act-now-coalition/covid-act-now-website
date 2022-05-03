@@ -28,17 +28,17 @@ export const thermometerSections: Section[] = [
   },
   {
     labelTo: '40%',
-    labelRange: '40 - 50%',
+    labelRange: '30 - 40%',
     color: COLOR_MAP.VACCINATIONS_BLUE[2],
   },
   {
     labelTo: '50%',
-    labelRange: '50 - 60%',
+    labelRange: '40 - 50%',
     color: COLOR_MAP.VACCINATIONS_BLUE[3],
   },
   {
     labelTo: '100%', // Does not render
-    labelRange: '> 60%',
+    labelRange: '> 50%',
     color: COLOR_MAP.VACCINATIONS_BLUE[4],
   },
 ];
