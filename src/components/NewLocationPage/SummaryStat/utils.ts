@@ -38,6 +38,7 @@ export const metricNameSubLabel: { [key in Metric]: string } = {
 export const summaryToStats = (summary: LocationSummary): MetricValues => {
   const stats = {} as MetricValues;
   for (const metric of ALL_METRICS) {
+    // The vaccination metric defaults to 1+ dose, we want to use booster doses for above the fold.
     if (metric === Metric.VACCINATIONS) {
       stats[metric] = summary.vb ?? null;
     } else {
