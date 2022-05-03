@@ -573,9 +573,9 @@ function getLabelEnding(metric: ExploreMetric, multiLocation: boolean) {
     case ExploreMetric.DEATHS:
       return multiLocation ? '(daily per 100k)' : '(daily)';
     case ExploreMetric.HOSPITALIZATIONS:
-      return multiLocation ? '(per 100k)' : '(w/ COVID)';
+      return multiLocation ? '(w/ COVID per 100k)' : '(w/ COVID)';
     case ExploreMetric.ICU_HOSPITALIZATIONS:
-      return multiLocation ? '(per 100k)' : '(ICU patients w/ COVID)';
+      return multiLocation ? '(w/ COVID per 100k)' : '(w/ COVID)';
     case ExploreMetric.ADMISSIONS_PER_100K:
       return '(weekly COVID admissions per 100k)';
     case ExploreMetric.WEEKLY_DEATHS:
