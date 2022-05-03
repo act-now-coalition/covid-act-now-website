@@ -15,8 +15,6 @@ import {
   getSparkLineProps,
 } from './utils';
 
-// TODO (chelsi) - update onClick scrolling functionality
-
 const SparkLineSet: React.FC<{
   projection: Projection;
   onClickSparkLine: (metric: SparkLineMetric) => void;
