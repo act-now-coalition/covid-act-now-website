@@ -15,7 +15,7 @@ export interface SummaryStatProps {
 
 export const metricSubLabelText: { [key in Metric]: string[] } = {
   [Metric.CASE_DENSITY]: ['per', '100k'],
-  [Metric.VACCINATIONS]: ['1+', 'dose'],
+  [Metric.VACCINATIONS]: ['Booster', 'shot'],
   [Metric.CASE_GROWTH_RATE]: [''], // figure out deleting these empties without typescript complaining
   [Metric.HOSPITAL_USAGE]: [''],
   [Metric.POSITIVE_TESTS]: [''],
@@ -26,7 +26,7 @@ export const metricSubLabelText: { [key in Metric]: string[] } = {
 
 export const metricNameSubLabel: { [key in Metric]: string } = {
   [Metric.CASE_DENSITY]: '',
-  [Metric.VACCINATIONS]: '1+ dose',
+  [Metric.VACCINATIONS]: 'Booster Shot',
   [Metric.CASE_GROWTH_RATE]: '',
   [Metric.HOSPITAL_USAGE]: '',
   [Metric.POSITIVE_TESTS]: '',
@@ -38,7 +38,11 @@ export const metricNameSubLabel: { [key in Metric]: string } = {
 export const summaryToStats = (summary: LocationSummary): MetricValues => {
   const stats = {} as MetricValues;
   for (const metric of ALL_METRICS) {
-    stats[metric] = summary.metrics[metric]?.value ?? null;
+    if (metric === Metric.VACCINATIONS) {
+      stats[metric] = summary.vb ?? null;
+    } else {
+      stats[metric] = summary.metrics[metric]?.value ?? null;
+    }
   }
   return stats;
 };

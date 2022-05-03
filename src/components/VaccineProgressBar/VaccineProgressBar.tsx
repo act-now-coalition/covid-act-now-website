@@ -60,18 +60,18 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
       </defs>
 
       <g>
-        {/* Vaccinations Completed section (solid) */}
+        {/* Vaccinations boosted section (solid) */}
         <rect
           fill={color}
           x={0}
           width={getOffsetPercentage(vaccinationsCompleted)}
           height={height}
         />
-        {/* Vaccinations Initiated section (hatched pattern) */}
+        {/* Vaccinations completed section (hatched pattern) */}
         <rect
           fill={
             oldVersion
-              ? VACCINATIONS_COLOR_MAP.INITIATED
+              ? VACCINATIONS_COLOR_MAP.COMPLETED
               : `url(#${hatchPatternId})`
           }
           x={getOffsetPercentage(vaccinationsCompleted)}

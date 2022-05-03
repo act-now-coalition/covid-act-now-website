@@ -175,7 +175,7 @@ export default function HomePage() {
               renderThermometer={() => (
                 <>
                   <VaccinationsThermometerHeading>
-                    Population with <b>1+ dose</b>
+                    Population with <b>a booster shot</b>
                   </VaccinationsThermometerHeading>
                   <VaccinationsThermometer />
                 </>
@@ -231,14 +231,17 @@ function getCommunityLevelUnderMapText() {
 }
 
 function getVaccinationProgressSubtitle() {
-  const { totalVaccinationsInitiated, totalPopulation } = SiteSummaryJSON.usa;
+  const {
+    totalVaccinationsAdditionalDose,
+    totalPopulation,
+  } = SiteSummaryJSON.usa;
   const percentVaccinated = formatPercent(
-    totalVaccinationsInitiated / totalPopulation,
+    totalVaccinationsAdditionalDose / totalPopulation,
   );
   return (
     <>
       <b>{percentVaccinated}</b> of the entire U.S. population has received{' '}
-      <b>1+ dose</b>.
+      <b>a booster shot</b>.
     </>
   );
 }

@@ -101,6 +101,8 @@ async function buildSiteSummaryData() {
 
     totalVaccinationsInitiated:
       usaProjection.vaccinationsInfo?.peopleInitiated ?? null,
+    totalVaccinationsAdditionalDose:
+      usaProjection.vaccinationsInfo?.peopleAdditionalDose ?? null,
     totalPopulation: usaProjection.totalPopulation,
   };
 
