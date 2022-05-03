@@ -6,7 +6,6 @@ import { ScreenshotReady } from 'components/Screenshot';
 import { findStateByFipsCodeStrict } from 'common/regions';
 import { TooltipMode } from './USMapTooltip';
 import { ActiveRegionStyle } from './utils';
-import { Metric } from 'common/metricEnum';
 import VaccineTooltip from './VaccineTooltip/VaccineTooltip';
 
 interface MapProps {
