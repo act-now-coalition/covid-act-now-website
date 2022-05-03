@@ -17,6 +17,8 @@ export interface LocationSummary {
   };
   /** vaccinationsCompleted */
   vc: number | null;
+  /**  booster doses (vaccinationsAdditionalDose) */
+  vb: number | null;
 }
 
 export type SummariesMap = { [fips: string]: LocationSummary };

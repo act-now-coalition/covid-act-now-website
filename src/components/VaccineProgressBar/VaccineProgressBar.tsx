@@ -42,10 +42,9 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
     >
       <title id={titleId}>
         Progress bar showing that in {locationName},{' '}
-        {formatPercent(vaccinationsInitiated)} of the population has received at
-        least 1 dose of a COVID vaccine, and{' '}
-        {formatPercent(vaccinationsCompleted)} of the population has been fully
-        vaccinated.
+        {formatPercent(vaccinationsInitiated)} of the population has been fully
+        vaccinated, and {formatPercent(vaccinationsCompleted)} of the population
+        has received a Covid booster shot.
       </title>
 
       <defs>

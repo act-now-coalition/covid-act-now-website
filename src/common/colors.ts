@@ -110,7 +110,7 @@ export function vaccineColorFromLocationSummary(
   summary: LocationSummary | null | undefined,
   defaultColor = COLOR_MAP.GRAY.LIGHT,
 ): string {
-  const val = summary?.metrics?.[Metric.VACCINATIONS]?.value ?? null;
+  const val = summary?.vb ?? null;
   if (val === null) {
     return defaultColor;
   } else {

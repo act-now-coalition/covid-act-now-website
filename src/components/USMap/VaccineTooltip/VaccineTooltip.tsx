@@ -62,11 +62,11 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
           )}
         </LocationName>
         <Row>
-          <Title>1+ dose</Title>
+          <Title>2+ doses or J&J</Title>
           <Value>{getRenderedValue(vaccinationsInitiated)}</Value>
         </Row>
         <Row>
-          <Title>2+ doses or J&J</Title>
+          <Title>Booster shot</Title>
           <Value>{getRenderedValue(vaccinationsCompleted)}</Value>
         </Row>
         {hasVaccineData(vaccinationsInitiated) &&

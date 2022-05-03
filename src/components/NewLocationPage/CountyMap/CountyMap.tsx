@@ -44,7 +44,7 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
         <VaccinationsThermLabel>
           Pop. with
           <br />
-          <strong>1+ dose</strong>
+          <strong>Booster shots</strong>
         </VaccinationsThermLabel>
         <VaccinationsThermometer />
       </Row>

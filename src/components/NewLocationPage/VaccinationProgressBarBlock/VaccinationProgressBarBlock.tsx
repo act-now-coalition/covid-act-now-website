@@ -7,8 +7,8 @@ const VaccinationProgressBarBlock: React.FC<{
   locationName: string;
   projection: Projection;
 }> = ({ locationName, projection }) => {
-  const percentInitiated = projection.vaccinationsInfo?.ratioInitiated;
-  const percentCompleted = projection.vaccinationsInfo?.ratioVaccinated;
+  const percentInitiated = projection.vaccinationsInfo?.ratioVaccinated;
+  const percentCompleted = projection.vaccinationsInfo?.ratioAdditionalDose;
 
   if (!percentInitiated || !percentCompleted) {
     return null;

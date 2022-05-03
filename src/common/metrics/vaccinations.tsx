@@ -19,7 +19,7 @@ export const VaccinationsMetric: MetricDefinition = {
   renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent Vaccinated',
-  metricNameForCompare: 'Vaccinated (1+ dose)',
+  metricNameForCompare: 'Vaccinated (Booster shot)',
   metricNameForSummaryStat: 'Vaccinated',
 };
 

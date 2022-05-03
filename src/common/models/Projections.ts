@@ -84,10 +84,13 @@ export class Projections {
 
     const vaccinationsCompleted =
       this.primary.vaccinationsInfo?.ratioVaccinated ?? null;
+    const vaccinationsAdditionalDose =
+      this.primary.vaccinationsInfo?.ratioAdditionalDose ?? null;
     return {
       level: this.getAlarmLevel(),
       metrics,
       vc: vaccinationsCompleted,
+      vb: vaccinationsAdditionalDose,
     };
   }
 
