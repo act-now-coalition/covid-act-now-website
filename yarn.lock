@@ -2355,9 +2355,9 @@
     minimist "^1.2.0"
 
 "@covid-projections/utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@covid-projections/utils/1.0.0/6bfb035ea8c60f2023dcaa3a24dddd85115e54a5247a4bb688f0fc6155479f80#24934f0edc1cd9f7924408998d3924827fedef02"
-  integrity sha512-sm9NFcbVFfpj0b0YMs8z7XCsEkh+EXXHgWTVzUsC/0OtxKPUB1riyHXjGOlRCO0cFkwTgSVadoWEE7XHM0CIYg==
+  version "1.0.2"
+  resolved "https://npm.pkg.github.com/download/@covid-projections/utils/1.0.2/f8c6239c30ddad1866d0b3d1d33fc7a4cb2d977ef94a0328a240d96dfed8ab97#221868bd0c952709315f6e5dff839f4f9786db5e"
+  integrity sha512-1kWGGVQwWNWpt2ww75ao6SuqKRhvj/8FDvaoiZY5WF772AFy4cav7I86ozqQ1z4nBjcff/qvuRKFooDQoJI3fw==
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
