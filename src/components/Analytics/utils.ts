@@ -3,6 +3,7 @@ import words from 'lodash/words';
 import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';
+import * as gtag from './gtag';
 
 export interface Tracker {
   trackingId: string;
@@ -115,6 +116,8 @@ export function trackEvent(
       nonInteraction,
       transport,
     });
+
+    gtag.event(action, category);
 
     const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
     const valueProp = Number.isFinite(value) ? { eventValue: value } : {};
