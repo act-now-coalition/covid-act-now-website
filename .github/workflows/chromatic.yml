@@ -4,6 +4,9 @@
 name: 'Chromatic'
 on: push
 
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
