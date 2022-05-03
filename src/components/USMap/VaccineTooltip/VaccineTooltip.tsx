@@ -22,8 +22,8 @@ import { COLOR_MAP } from 'common/colors';
 
 export interface VaccineTooltipProps {
   state: State;
-  vaccinationsInitiated: number;
   vaccinationsCompleted: number;
+  vaccinationsAdditionalDose: number;
   /**
    * Whether to include "More data" link at the bottom of tooltip.  This is
    * typically used when the USMap is using `TooltipMode.ACTIVATE_ON_CLICK`
@@ -43,8 +43,8 @@ function getRenderedValue(vaccineData: number): string {
 
 const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
   state,
-  vaccinationsInitiated,
   vaccinationsCompleted,
+  vaccinationsAdditionalDose,
   addMoreDataLink = false,
 }) => {
   const locationName = state.fullName;
@@ -63,19 +63,19 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
         </LocationName>
         <Row>
           <Title>2+ doses or J&J</Title>
-          <Value>{getRenderedValue(vaccinationsInitiated)}</Value>
+          <Value>{getRenderedValue(vaccinationsCompleted)}</Value>
         </Row>
         <Row>
           <Title>Booster shot</Title>
-          <Value>{getRenderedValue(vaccinationsCompleted)}</Value>
+          <Value>{getRenderedValue(vaccinationsAdditionalDose)}</Value>
         </Row>
-        {hasVaccineData(vaccinationsInitiated) &&
-        hasVaccineData(vaccinationsCompleted) ? (
+        {hasVaccineData(vaccinationsCompleted) &&
+        hasVaccineData(vaccinationsAdditionalDose) ? (
           <ProgressBarWrapper>
             <VaccineProgressBar
               locationName={locationName}
-              vaccinationsInitiated={vaccinationsInitiated}
               vaccinationsCompleted={vaccinationsCompleted}
+              vaccinationsAdditionalDose={vaccinationsAdditionalDose}
             />
           </ProgressBarWrapper>
         ) : (

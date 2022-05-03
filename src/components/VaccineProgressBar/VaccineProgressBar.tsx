@@ -9,8 +9,8 @@ export interface ProgressBarProps {
   // TODO(michael): Remove once we migrate the location page to the new version.
   oldVersion?: boolean;
   locationName: string;
-  vaccinationsInitiated: number;
   vaccinationsCompleted: number;
+  vaccinationsAdditionalDose: number;
   width?: number;
 }
 
@@ -20,15 +20,15 @@ function getOffsetPercentage(decimal: number) {
 
 const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
   oldVersion = false,
-  vaccinationsInitiated,
   vaccinationsCompleted,
+  vaccinationsAdditionalDose,
   locationName,
   width,
 }) => {
   const height = 18;
   const color = oldVersion
-    ? VACCINATIONS_COLOR_MAP.COMPLETED
-    : vaccineColor(vaccinationsInitiated);
+    ? VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE
+    : vaccineColor(vaccinationsAdditionalDose);
 
   const titleId = uuidv4();
   const hatchPatternId = uuidv4();
@@ -42,9 +42,9 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
     >
       <title id={titleId}>
         Progress bar showing that in {locationName},{' '}
-        {formatPercent(vaccinationsInitiated)} of the population has been fully
-        vaccinated, and {formatPercent(vaccinationsCompleted)} of the population
-        has received a Covid booster shot.
+        {formatPercent(vaccinationsCompleted)} of the population has been fully
+        vaccinated, and {formatPercent(vaccinationsAdditionalDose)} of the
+        population has received a Covid booster shot.
       </title>
 
       <defs>
@@ -60,31 +60,31 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
       </defs>
 
       <g>
-        {/* Vaccinations boosted section (solid) */}
+        {/* Vaccinations Boosted section (solid) */}
         <rect
           fill={color}
           x={0}
-          width={getOffsetPercentage(vaccinationsCompleted)}
+          width={getOffsetPercentage(vaccinationsAdditionalDose)}
           height={height}
         />
-        {/* Vaccinations completed section (hatched pattern) */}
+        {/* Vaccinations Completed section (hatched pattern) */}
         <rect
           fill={
             oldVersion
               ? VACCINATIONS_COLOR_MAP.COMPLETED
               : `url(#${hatchPatternId})`
           }
-          x={getOffsetPercentage(vaccinationsCompleted)}
+          x={getOffsetPercentage(vaccinationsAdditionalDose)}
           width={getOffsetPercentage(
-            vaccinationsInitiated - vaccinationsCompleted,
+            vaccinationsCompleted - vaccinationsAdditionalDose,
           )}
           height={height}
         />
         {oldVersion && (
           <rect
             fill={COLOR_MAP.GREY_2}
-            x={getOffsetPercentage(vaccinationsInitiated)}
-            width={getOffsetPercentage(1 - vaccinationsInitiated)}
+            x={getOffsetPercentage(vaccinationsCompleted)}
+            width={getOffsetPercentage(1 - vaccinationsCompleted)}
             height={height}
           />
         )}

@@ -30,14 +30,14 @@ function USVaccineMap({
     (stateFipsCode: string, tooltipMode: TooltipMode) => {
       const state = findStateByFipsCodeStrict(stateFipsCode);
       const summary = locationSummaries?.[stateFipsCode];
-      const vaccinationsInitiated = summary?.vc || 0;
-      const vaccinationsCompleted = summary?.vb || 0;
+      const vaccinationsCompleted = summary?.vc || 0;
+      const vaccinationsAdditionalDose = summary?.vb || 0;
       const addMoreDataLink = tooltipMode === TooltipMode.ACTIVATE_ON_CLICK;
       return (
         <VaccineTooltip
           state={state}
-          vaccinationsInitiated={vaccinationsInitiated}
           vaccinationsCompleted={vaccinationsCompleted}
+          vaccinationsAdditionalDose={vaccinationsAdditionalDose}
           addMoreDataLink={addMoreDataLink}
         />
       );

@@ -114,8 +114,8 @@ class VaccinationsColumn extends MetricColumn {
           </VaccinationsCellValue>
           <VaccinationsCellProgressBar>
             <VaccineProgressBar
-              vaccinationsCompleted={vaccinationsAdditionalDose}
-              vaccinationsInitiated={vaccinationsCompleted}
+              vaccinationsCompleted={vaccinationsCompleted}
+              vaccinationsAdditionalDose={vaccinationsAdditionalDose}
               locationName={locationName}
             />
           </VaccinationsCellProgressBar>

@@ -13,7 +13,7 @@ export const Example = () => {
   const props = {
     state: idaho,
     vaccinationsCompleted: 0.29,
-    vaccinationsInitiated: 0.35,
+    vaccinationsAdditionalDose: 0.15,
   };
 
   return <VaccineTooltip {...props} />;
@@ -23,7 +23,7 @@ export const MoreDataLink = () => {
   const props = {
     state: idaho,
     vaccinationsCompleted: 0.29,
-    vaccinationsInitiated: 0.35,
+    vaccinationsAdditionalDose: 0.15,
     addMoreDataLink: true,
   };
 

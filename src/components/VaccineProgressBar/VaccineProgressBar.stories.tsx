@@ -10,7 +10,7 @@ export const Example = () => {
   return (
     <VaccineProgressBar
       locationName="Idaho"
-      vaccinationsInitiated={0.45}
+      vaccinationsAdditionalDose={0.25}
       vaccinationsCompleted={0.35}
     />
   );
@@ -22,7 +22,7 @@ export const OldVersion = () => {
     <VaccineProgressBar
       oldVersion
       locationName="Idaho"
-      vaccinationsInitiated={0.45}
+      vaccinationsAdditionalDose={0.25}
       vaccinationsCompleted={0.35}
     />
   );
