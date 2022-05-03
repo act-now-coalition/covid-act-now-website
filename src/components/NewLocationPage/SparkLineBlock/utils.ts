@@ -4,6 +4,7 @@ import { ExploreMetric } from 'components/Explore';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Region } from 'common/regions';
+import { subtractTime, TimeUnit } from 'common/utils/time-utils';
 
 export const daysToChart = 30;
 
@@ -118,4 +119,37 @@ export async function getProjectionForRegion(
 ): Promise<Projection> {
   const projections = await fetchProjectionsRegion(region);
   return projections.primary;
+}
+
+// (Chelsi) - fix anys
+interface SparkLineProps {
+  rawData: any;
+  smoothedData: any;
+  dateFrom: any;
+  dateTo: any;
+}
+
+export function getSparkLineProps(
+  metric: SparkLineMetric,
+  projection: Projection,
+): SparkLineProps | null {
+  const dateTo = new Date();
+  const dateFrom = subtractTime(dateTo, daysToChart, TimeUnit.DAYS);
+
+  const { seriesList } = sparkLinesMetricData[metric];
+
+  const metricSeries = getSparkLineSeriesFromProjection(seriesList, projection);
+  const rawData = getDataFromSeries(metricSeries[0], dateFrom);
+  const smoothedData = getDataFromSeries(metricSeries[1], dateFrom);
+
+  if (!rawData.length || !smoothedData.length) {
+    return null;
+  }
+
+  return {
+    rawData,
+    smoothedData,
+    dateFrom,
+    dateTo,
+  };
 }
