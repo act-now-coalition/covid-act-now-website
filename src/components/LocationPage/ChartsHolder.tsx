@@ -208,18 +208,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 setShowModal={setShowCompareModal}
               />
             </LocationPageBlock>
-            {!projections ? (
-              <LoadingScreen />
-            ) : (
-              <LocationPageBlock>
-                <Recommendations
-                  region={region}
-                  alarmLevel={projections.getAlarmLevel()}
-                  recommendationsRef={recommendationsRef}
-                  isHomepage={false}
-                />
-              </LocationPageBlock>
-            )}
             {CHART_GROUPS.map((group: ChartGroup) => {
               const { groupHeader } = group;
               const groupRef = chartBlockRefs[groupHeader];
@@ -243,17 +231,29 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 </ErrorBoundary>
               );
             })}
-            <LocationPageBlock id="vulnerabilities">
-              <VulnerabilitiesBlock scores={ccviScores} region={region} />
-            </LocationPageBlock>
             <LocationPageBlock ref={exploreChartRef} id="explore-chart">
               <Explore
                 initialFipsList={initialFipsList}
-                title="Trends"
+                title="All metrics"
                 currentMetric={currentExploreMetric}
                 setCurrentMetric={setCurrentExploreMetric}
               />
             </LocationPageBlock>
+            <LocationPageBlock id="vulnerabilities">
+              <VulnerabilitiesBlock scores={ccviScores} region={region} />
+            </LocationPageBlock>
+            {!projections ? (
+              <LoadingScreen />
+            ) : (
+              <LocationPageBlock>
+                <Recommendations
+                  region={region}
+                  alarmLevel={projections.getAlarmLevel()}
+                  recommendationsRef={recommendationsRef}
+                  isHomepage={false}
+                />
+              </LocationPageBlock>
+            )}
             <LocationPageBlock ref={shareBlockRef}>
               <ShareModelBlock region={region} />
             </LocationPageBlock>
