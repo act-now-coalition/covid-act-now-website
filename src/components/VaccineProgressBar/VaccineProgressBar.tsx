@@ -8,6 +8,7 @@ import { formatPercent } from 'common/utils';
 export interface ProgressBarProps {
   // TODO(michael): Remove once we migrate the location page to the new version.
   oldVersion?: boolean;
+  includeCompleted?: boolean;
   locationName: string;
   vaccinationsCompleted: number;
   vaccinationsAdditionalDose: number;
@@ -20,6 +21,7 @@ function getOffsetPercentage(decimal: number) {
 
 const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
   oldVersion = false,
+  includeCompleted = true,
   vaccinationsCompleted,
   vaccinationsAdditionalDose,
   locationName,
@@ -68,18 +70,20 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
           height={height}
         />
         {/* Vaccinations Completed section (hatched pattern) */}
-        <rect
-          fill={
-            oldVersion
-              ? VACCINATIONS_COLOR_MAP.COMPLETED
-              : `url(#${hatchPatternId})`
-          }
-          x={getOffsetPercentage(vaccinationsAdditionalDose)}
-          width={getOffsetPercentage(
-            vaccinationsCompleted - vaccinationsAdditionalDose,
-          )}
-          height={height}
-        />
+        {includeCompleted && (
+          <rect
+            fill={
+              oldVersion
+                ? VACCINATIONS_COLOR_MAP.COMPLETED
+                : `url(#${hatchPatternId})`
+            }
+            x={getOffsetPercentage(vaccinationsAdditionalDose)}
+            width={getOffsetPercentage(
+              vaccinationsCompleted - vaccinationsAdditionalDose,
+            )}
+            height={height}
+          />
+        )}
         {oldVersion && (
           <rect
             fill={COLOR_MAP.GREY_2}

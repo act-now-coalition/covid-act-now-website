@@ -117,6 +117,7 @@ class VaccinationsColumn extends MetricColumn {
               vaccinationsCompleted={vaccinationsCompleted}
               vaccinationsAdditionalDose={vaccinationsAdditionalDose}
               locationName={locationName}
+              includeCompleted={false}
             />
           </VaccinationsCellProgressBar>
         </VaccinationsCell>
