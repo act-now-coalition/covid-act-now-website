@@ -17,14 +17,14 @@ export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   metricName: 'Weekly new reported cases',
   extendedMetricName: 'Weekly new reported cases per 100k',
   metricNameForCompare: `Weekly new cases per 100k`,
-  metricNameForSummaryStat: 'Weekly new reported cases',
+  metricNameForSummaryStat: 'Cases',
 };
 
 const LIMIT_LOW = 200;
 const LIMIT_HIGH = Infinity;
 
 // Weekly new cases doesn't have a medium level, only low and high. So we use the following variables for both medium and high:
-const colorHigh = COLOR_MAP.ORANGE_DARK.BASE;
+const colorHigh = COLOR_MAP.ORANGE.BASE;
 const nameHigh = 'Higher';
 
 export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
@@ -33,28 +33,24 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: 'Lower',
     color: COLOR_MAP.GREEN.BASE,
-    detail: () => 'COVID is being effectively contained',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_HIGH,
     name: nameHigh,
     color: colorHigh,
-    detail: () => 'COVID not contained, but at low levels',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_HIGH,
     name: nameHigh,
     color: colorHigh,
-    detail: () => 'Very large number of new cases',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => 'Insufficient data to assess',
   },
 
   // Not to be used:
@@ -63,14 +59,12 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_HIGH,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
-    detail: () => 'Dangerous number of new cases',
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: 'Extreme',
     color: COLOR_MAP.RED.DARK,
-    detail: () => 'Very dangerous number of new cases',
   },
 };
 

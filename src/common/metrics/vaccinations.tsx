@@ -20,11 +20,8 @@ export const VaccinationsMetric: MetricDefinition = {
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent Vaccinated',
   metricNameForCompare: 'Vaccinated (1+ dose)',
-  metricNameForSummaryStat: METRIC_NAME,
+  metricNameForSummaryStat: 'Vaccinated',
 };
-
-const SHORT_DESCRIPTION_LOW = 'Population given at least one dose';
-// const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
 
 const UNKNOWN = 'Unknown';
 
@@ -34,7 +31,6 @@ const dummyLevelInfo: LevelInfo = {
   upperLimit: 1,
   name: '',
   color: '',
-  detail: () => '',
 };
 
 export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
@@ -43,7 +39,6 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: '',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: dummyLevelInfo,
   [Level.HIGH]: dummyLevelInfo,
@@ -54,7 +49,6 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => '',
   },
 };
 

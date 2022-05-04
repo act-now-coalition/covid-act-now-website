@@ -16,7 +16,7 @@ import {
 } from 'components/Dialogs';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
 import ShareButtons from 'components/LocationPage/ShareButtons';
-import { getOverrideDisclaimer, DialogProps } from './utils';
+import { DialogProps } from './utils';
 import { Region } from 'common/regions';
 import type { MetricValues, Projections } from 'common/models/Projections';
 import { useDialog } from 'common/hooks';
@@ -27,6 +27,7 @@ import { EventCategory } from 'components/Analytics';
 import { makeChartShareQuote } from 'common/utils/makeChartShareQuote';
 import * as urls from 'common/urls';
 import { MarkdownContent } from 'components/Markdown';
+import { getRegionMetricDisclaimer } from 'cms-content/region-overrides';
 
 const ShareButtonBlock: React.FC<{
   region: Region;
@@ -70,7 +71,7 @@ const MetricModal: React.FC<DialogProps> = ({
     links: [
       {
         cta: 'Learn more',
-        url: modalContent.learnLink || '/covid-risk-levels-metrics',
+        url: modalContent.learnLink || '/covid-community-level-metrics',
         ariaLabel: `Learn more about ${modalHeader}`,
       },
     ],
@@ -98,7 +99,7 @@ const MetricChartFooter: React.FC<{
     projections.primary.annotations,
     metric,
   );
-  const overrideDisclaimer = getOverrideDisclaimer(region, metric, provenance);
+  const overrideDisclaimer = getRegionMetricDisclaimer(region, metric);
   const modalContent = getMetricModalContent(region, metric, provenance);
   const metricName = getMetricNameExtended(metric);
 

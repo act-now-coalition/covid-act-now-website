@@ -60,7 +60,7 @@ export const CHART_GROUPS: ChartGroup[] = [
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
           <ChartTab
-            metricName={getMetricNameForStat(Metric.WEEKLY_CASES_PER_100K)}
+            metricName={getMetricName(Metric.WEEKLY_CASES_PER_100K)}
             subLabel={metricSubLabelText[Metric.WEEKLY_CASES_PER_100K]}
             metricValueInfo={metricValue}
           />
@@ -77,7 +77,7 @@ export const CHART_GROUPS: ChartGroup[] = [
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
           <ChartTab
-            metricName={getMetricNameForStat(Metric.ADMISSIONS_PER_100K)}
+            metricName={getMetricName(Metric.ADMISSIONS_PER_100K)}
             subLabel={metricSubLabelText[Metric.ADMISSIONS_PER_100K]}
             metricValueInfo={metricValue}
           />
@@ -94,7 +94,7 @@ export const CHART_GROUPS: ChartGroup[] = [
         metricType: MetricType.KEY_METRIC,
         renderTabLabel: (metricValue, projections) => (
           <ChartTab
-            metricName={getMetricNameForStat(Metric.RATIO_BEDS_WITH_COVID)}
+            metricName={getMetricName(Metric.RATIO_BEDS_WITH_COVID)}
             subLabel={metricSubLabelText[Metric.RATIO_BEDS_WITH_COVID]}
             metricValueInfo={metricValue}
           />

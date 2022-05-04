@@ -225,9 +225,9 @@ export const learnPages: TocItem[] = [
   },
   {
     label: metricExplainersContent.pageHeader,
-    to: '/covid-risk-levels-metrics',
+    to: '/covid-community-level-metrics',
     items: metricExplainersContent.sections.map(section => ({
-      to: `/covid-risk-levels-metrics#${section.sectionId}`,
+      to: `/covid-community-level-metrics#${section.sectionId}`,
       label: section.sectionHeader,
     })),
   },

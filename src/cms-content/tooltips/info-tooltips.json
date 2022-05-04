@@ -3,48 +3,48 @@
     {
       "title": "Location page header",
       "id": "location-page-header",
-      "body": "Our COVID assessment is based on the CDC’s Community Level framework. This looks at three primary things: weekly new reported cases per 100K, weekly COVID admissions per 100K, and the percent of staffed inpatient beds occupied by COVID patients.\n\nEach metric is graded on a three-color scale. If weekly new reported cases per 100K population is below 200, depending on the levels of the other two indicators, community level can range from Low to Medium to High. If weekly new reported cases per 100K population is equal to or above 200, depending on the levels of the other two indicators, community level is either Medium or High.\n\n[Read more about our community level framework.](https://covidactnow.org/covid-risk-levels-metrics)\n\nNote that we updated our COVID scoring in April of 2022 to better reflect the rise in vaccinations and natural immunity. [](https://covidactnow.org/covid-risk-levels-metrics)",
-      "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-risk-levels-metrics)."
+      "body": "Our COVID assessment is based on the CDC’s Community Level framework. This looks at three primary things: weekly new reported cases per 100K, weekly COVID admissions per 100K, and the percent of staffed inpatient beds occupied by COVID patients.\n\nEach metric is graded on a three-color scale. If weekly new reported cases per 100K population is below 200, depending on the levels of the other two indicators, community level can range from Low to Medium to High. If weekly new reported cases per 100K population is equal to or above 200, depending on the levels of the other two indicators, community level is either Medium or High.\n\n[Read more about our community level framework.](https://covidactnow.org/covid-community-level-metrics)\n\nNote that we updated our COVID scoring in April of 2022 to better reflect the rise in vaccinations and natural immunity. [](https://covidactnow.org/covid-community-level-metrics)",
+      "cta": "[Learn more about COVID risk levels](https://covidactnow.org/covid-community-level-metrics)."
     },
     {
       "title": "Weekly new reported cases per 100k",
       "body": "Weekly new reported cases is the number of new COVID cases emerging each week in a location. This is measured by the number of reported positive test results, and it does not include at-home positive test results.",
       "id": "weekly-new-cases",
-      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-risk-levels-metrics#weekly-new-cases)."
+      "cta": "[Learn more about weekly new cases](https://covidactnow.org/covid-community-level-metrics#weekly-new-cases)."
     },
     {
       "title": "Weekly COVID admissions",
       "id": "weekly-admissions",
       "body": "Weekly COVID admissions is the number of new COVID hospital admissions per week per unit of population (we measure per 100K people).",
-      "cta": "[Read more about weekly admissions.](/covid-risk-levels-metrics#weekly-admissions)"
+      "cta": "[Read more about weekly admissions.](/covid-community-level-metrics#weekly-admissions)"
     },
     {
       "title": "Patients w/ COVID",
       "id": "patients-with-covid",
       "body": "Patients w/ COVID refers to the percentage of staffed inpatient beds occupied by COVID patients. In combination with weekly COVID admissions, it represents the potential for strain on the health system.",
-      "cta": "[Learn more about patients with COVID.](/covid-risk-levels-metrics#patients-with-covid)"
+      "cta": "[Learn more about patients with COVID.](/covid-community-level-metrics#patients-with-covid)"
     },
     {
       "title": "Infection rate",
       "id": "infection-rate",
       "body": "Infection rate represents how fast COVID is spreading in a given area right now by estimating the number of people that a newly infected person goes on to eventually infect.",
-      "cta": "[Learn more about infection rate](https://covidactnow.org/covid-risk-levels-metrics#infection-rate)."
+      "cta": "[Learn more about infection rate](https://covidactnow.org/covid-community-level-metrics#infection-rate)."
     },
     {
       "body": "Positive test rate is the percentage of COVID tests that come back positive. It measures both the severity of COVID and the limitations of testing. If a place has a high positive test rate, it is a sign of insufficient testing in that area. Positive test rate does *not* include at-home positive test data.\n\nTesting a larger number of at-risk populations (essential workers, people notified via contact tracing , etc.) is key to catching unknown infections before they can lead to an outbreak.",
       "title": "Positive test rate",
       "id": "positive-test-rate",
-      "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-risk-levels-metrics#positive-test-rate)."
+      "cta": "[Learn more about positive test rate](https://covidactnow.org/covid-community-level-metrics#positive-test-rate)."
     },
     {
       "body": "ICU capacity used is the percentage of staffed intensive care unit (ICU) beds in a location’s healthcare system that are currently in use by both COVID and non-COVID patients.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.",
-      "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-risk-levels-metrics#icu-capacity-used).",
+      "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-community-level-metrics#icu-capacity-used).",
       "title": "ICU capacity used",
       "id": "icu-capacity-used"
     },
     {
       "body": "Percent vaccinated is the percentage of the total population of a location (not just those eligible) that have started the vaccination process by receiving at least their first shot.",
-      "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-risk-levels-metrics#percent-vaccinated).",
+      "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-community-level-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
     },
@@ -52,7 +52,7 @@
       "title": "Daily new cases",
       "id": "daily-new-cases",
       "body": "Daily new cases, also known as incidence, is the number of new COVID cases emerging each day in a location. This is measured by the number of positive test results, and it does not include individuals who are infected but asymptomatic or never get tested.",
-      "cta": "[Learn more](https://covidactnow.org/covid-risk-levels-metrics#daily-new-cases)"
+      "cta": "[Learn more](https://covidactnow.org/covid-community-level-metrics#daily-new-cases)"
     }
   ]
 }

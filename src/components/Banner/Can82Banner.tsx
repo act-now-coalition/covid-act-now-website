@@ -4,8 +4,8 @@ import {
   CondensedBannerWrapperHomepage,
   CondensedBannerWrapperLocationPage,
 } from './Banner.style';
-import ExternalLink from 'components/ExternalLink';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
+import { Link } from 'react-router-dom';
 
 const trackClick = () => {
   trackEvent(
@@ -20,13 +20,13 @@ const Can82Banner: React.FC = () => (
     We've made some changes to align with the current state of COVID and CDC
     guidelines. All metrics that we've previously tracked will continue to be
     available.{' '}
-    <ExternalLink
-      href="https://mailchi.mp/actnowcoalition/site-updates"
+    <Link
+      to="/covid-community-level-metrics"
       id="banner-learn-more-link"
       onClick={trackClick}
     >
       Learn more
-    </ExternalLink>
+    </Link>
   </CondensedBanner>
 );
 

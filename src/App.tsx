@@ -43,6 +43,7 @@ const CompareSnapshots = lazy(() =>
   import('screens/internal/CompareSnapshots/CompareSnapshots'),
 );
 const AllStates = lazy(() => import('screens/internal/AllStates/AllStates'));
+const Anomalies = lazy(() => import('screens/internal/Anomalies/Anomalies'));
 const ExportImage = lazy(() =>
   import('screens/internal/ShareImage/ChartExportImage'),
 );
@@ -184,8 +185,27 @@ export default function App() {
                   <Redirect from="/updates" to="/covid-explained" />
                   {/* TODO(pablo): Route every article */}
                   <Route from="/deep-dives" component={DeepDivesRedirect} />
+                  {/*
+                    If path is /covid-risk-levels-metrics,
+                    redirect to /covid-community-level-metrics and
+                    scroll to appropriate section if path has a hash.
+
+                    More info on render prop: https://v5.reactrouter.com/web/api/Route/render-func
+                  */}
                   <Route
                     path="/covid-risk-levels-metrics"
+                    render={props => {
+                      return props.location.hash ? (
+                        <Redirect
+                          to={`covid-community-level-metrics${props.location.hash}`}
+                        />
+                      ) : (
+                        <Redirect to="/covid-community-level-metrics" />
+                      );
+                    }}
+                  />
+                  <Route
+                    path="/covid-community-level-metrics"
                     component={MetricExplainer}
                   />
                   <Route path="/about" component={About} />
@@ -268,6 +288,9 @@ export default function App() {
                     component={CompareSnapshots}
                   />
 
+                  {/** Internal endpoint for viewing data anomalies. */}
+                  <Route path="/internal/anomalies" component={Anomalies} />
+
                   {/** Internal endpoint for viewing all vaccination phase data **/}
                   <Route
                     exact
@@ -311,35 +334,23 @@ export default function App() {
                   />
                   <Redirect
                     from="/covid-infection-rate"
-                    to="/covid-risk-levels-metrics#icu-capacity-used"
-                  />
-                  <Redirect
-                    from="/what-is-covid-incidence"
-                    to="/covid-risk-levels-metrics#daily-new-cases"
-                  />
-                  <Redirect
-                    from="/new-daily-covid-cases"
-                    to="/covid-risk-levels-metrics#daily-new-cases"
+                    to="/covid-community-level-metrics#icu-capacity-used"
                   />
                   <Redirect
                     from="/old-hospitalization-projections"
-                    to="/covid-risk-levels-metrics#icu-capacity-used"
-                  />
-                  <Redirect
-                    from="/daily-new-cases-explained"
-                    to="/covid-risk-levels-metrics#daily-new-cases"
+                    to="/covid-community-level-metrics#icu-capacity-used"
                   />
                   <Redirect
                     from="/test-positivity-explained"
-                    to="/covid-risk-levels-metrics#positive-test-rate"
+                    to="/covid-community-level-metrics#positive-test-rate"
                   />
                   <Redirect
                     from="/icu-headroom-used-explained"
-                    to="/covid-risk-levels-metrics#icu-capacity-used"
+                    to="/covid-community-level-metrics#icu-capacity-used"
                   />
                   <Redirect
                     from="/infection-rate-explained-2"
-                    to="/covid-risk-levels-metrics#infection-rate"
+                    to="/covid-community-level-metrics#infection-rate"
                   />
                   <Redirect
                     from="/covid-native-american-counties"

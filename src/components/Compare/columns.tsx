@@ -1,9 +1,11 @@
 import { Metric } from 'common/metricEnum';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { SummaryForCompare } from 'common/utils/compare';
-import { formatValue, getMetricNameForCompare } from 'common/metric';
-import { LEVEL_COLOR } from 'common/colors';
-import { Level } from 'common/level';
+import {
+  formatValue,
+  getMetricNameForCompare,
+  getLevelInfo,
+} from 'common/metric';
 import React from 'react';
 import {
   DataCellValue,
@@ -46,7 +48,10 @@ export interface ColumnDefinition {
 
 /** Represents a compare table column backed by a Metric (e.g. case density). */
 class MetricColumn implements ColumnDefinition {
-  constructor(private readonly metric: Metric) {}
+  constructor(
+    private readonly metric: Metric,
+    private readonly renderDot: boolean = true,
+  ) {}
 
   columnId = this.metric;
 
@@ -63,10 +68,11 @@ class MetricColumn implements ColumnDefinition {
     const metricInfo = row.metricsInfo.metrics[this.metric];
     const value = metricInfo?.value ?? null;
     const formattedValue = formatValue(this.metric, value, UNKNOWN_VALUE_TEXT);
-    const color = LEVEL_COLOR[metricInfo?.level ?? Level.UNKNOWN];
+    const { color } = getLevelInfo(this.metric, value);
+
     return (
       <>
-        <FiberManualRecordIcon style={{ color }} />
+        {this.renderDot && <FiberManualRecordIcon style={{ color }} />}
         <DataCellValue
           $valueUnknown={!Number.isFinite(value)}
           $textAlign="right"
@@ -124,6 +130,10 @@ class VaccinationsColumn extends MetricColumn {
 const weeklyCasesPer100kColumn = new MetricColumn(Metric.WEEKLY_CASES_PER_100K);
 const admissionsPer100kColumn = new MetricColumn(Metric.ADMISSIONS_PER_100K);
 const ratioBedsWithCovidColumn = new MetricColumn(Metric.RATIO_BEDS_WITH_COVID);
+const infectionRateColumn = new MetricColumn(
+  Metric.CASE_GROWTH_RATE,
+  /*renderDot=*/ false,
+);
 const vaccinationsColumn = new VaccinationsColumn();
 
 /** Ordered array of columns. */
@@ -131,6 +141,7 @@ export const orderedColumns = [
   weeklyCasesPer100kColumn,
   admissionsPer100kColumn,
   ratioBedsWithCovidColumn,
+  infectionRateColumn,
   vaccinationsColumn,
 ];
 

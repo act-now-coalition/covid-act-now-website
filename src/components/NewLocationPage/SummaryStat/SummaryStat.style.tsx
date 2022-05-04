@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { materialSMBreakpoint } from 'assets/theme/sizes';
 import { GrayTitle, Chevron } from '../Shared/Shared.style';
+import Box from '@material-ui/core/Box';
 
 export const StatContent = styled.div`
   display: flex;
@@ -9,8 +10,6 @@ export const StatContent = styled.div`
 
   @media (min-width: ${materialSMBreakpoint}) {
     flex-direction: column;
-    height: 100%;
-    justify-content: flex-end;
     align-items: unset;
   }
 `;
@@ -29,26 +28,31 @@ export const Value = styled.span`
   }
 `;
 
-export const SubLabelWrapper = styled.div`
-  display: flex;
-  align-items: baseline;
+export const StatInfoText = styled(Box)`
+  display: grid;
+  margin-right: ${({ theme }) => theme.spacing(3)}px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin-left: 0.75rem;
+    gap: ${({ theme }) => theme.spacing(1.5)}px;
   }
+`;
+
+export const SubLabelWrapper = styled.div`
+  display: flex;
 `;
 
 export const SubLabel = styled(GrayTitle).attrs(props => ({
   as: 'span',
 }))`
   ${props => props.theme.fonts.regularBook};
-  line-height: 1;
+  line-height: 1.4;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   margin-top: ${({ theme }) => theme.spacing(0.5)}px;
+  text-transform: none;
+  letter-spacing: 0;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    line-height: 1.1;
     margin-top: 0;
   }
 `;

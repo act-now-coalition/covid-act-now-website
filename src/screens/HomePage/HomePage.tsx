@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
 import USVaccineMap from 'components/USMap/USVaccineMap';
 import { NavBarSearch } from 'components/NavBar';
@@ -25,6 +25,7 @@ import {
   HomePageBlock,
   ColumnCentered,
   VaccinationsThermometerHeading,
+  UnderMapText,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
@@ -113,6 +114,7 @@ export default function HomePage() {
       )}
     </>
   );
+
   return (
     <>
       <EnsureSharingIdInUrl />
@@ -151,7 +153,8 @@ export default function HomePage() {
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}
               renderThermometer={() => <CommunityLevelThermometer />}
-              infoLink="/covid-risk-levels-metrics"
+              infoLink="/covid-community-level-metrics"
+              underMapText={getCommunityLevelUnderMapText()}
             />
 
             <MapBlock
@@ -177,7 +180,7 @@ export default function HomePage() {
                   <VaccinationsThermometer />
                 </>
               )}
-              infoLink="/covid-risk-levels-metrics#percent-vaccinated"
+              infoLink="/covid-community-level-metrics#percent-vaccinated"
             />
 
             <HomePageBlock
@@ -215,6 +218,15 @@ export default function HomePage() {
         </div>
       </main>
     </>
+  );
+}
+
+function getCommunityLevelUnderMapText() {
+  return (
+    <UnderMapText>
+      Understand what your Community Level Color rating means{' '}
+      <Link to="/covid-community-level-metrics">here</Link>.
+    </UnderMapText>
   );
 }
 

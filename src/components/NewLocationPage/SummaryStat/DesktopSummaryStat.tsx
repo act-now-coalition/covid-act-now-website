@@ -6,8 +6,9 @@ import {
   Row,
   MetricLabel,
   CondensedChevron,
+  StatInfoText,
 } from './SummaryStat.style';
-import { metricSubLabelText, SummaryStatProps } from './utils';
+import { SummaryStatProps, metricNameSubLabel } from './utils';
 import { Metric } from 'common/metricEnum';
 
 const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
@@ -23,7 +24,7 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
         <MetricLabel>{metricName}</MetricLabel>
         <CondensedChevron />
       </Row>
-      <Row>
+      <StatInfoText>
         <MetricValue
           value={formattedValue}
           iconColor={levelInfo.color}
@@ -31,11 +32,11 @@ const DesktopSummaryStat: React.FC<SummaryStatProps> = ({
         />
         {hasSubLabel && (
           <MetricSubLabel
-            text={metricSubLabelText[metric]}
+            text={metricNameSubLabel[metric]}
             splitText={metric !== Metric.VACCINATIONS}
           />
         )}
-      </Row>
+      </StatInfoText>
     </StatContent>
   );
 };
