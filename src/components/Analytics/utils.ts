@@ -117,7 +117,7 @@ export function trackEvent(
       transport,
     });
 
-    gtag.event(action, category);
+    gtag.event(action, category, label, value);
 
     const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
     const valueProp = Number.isFinite(value) ? { eventValue: value } : {};
