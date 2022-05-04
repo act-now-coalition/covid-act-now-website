@@ -1,7 +1,4 @@
-import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
-import { Sources } from 'api/schema/RegionSummaryWithTimeseries';
-import { getRegionMetricOverride } from 'cms-content/region-overrides';
 import { ExploreMetric } from 'components/Explore';
 import {
   exploreMetricToFooterContentMap,
@@ -9,14 +6,6 @@ import {
 } from 'components/Dialogs';
 import { Projections } from 'common/models/Projections';
 import { formatDecimal } from 'common/utils';
-
-export function getOverrideDisclaimer(
-  region: Region,
-  metric: Metric,
-  provenance: Sources | undefined,
-): string | undefined {
-  return getRegionMetricOverride(region, metric)?.disclaimer;
-}
 
 export function getAddedMetricStatusText(
   metric: ExploreMetric,
