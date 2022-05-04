@@ -25,7 +25,6 @@ export interface LevelInfo {
   name: string;
   color: string;
   summary?: string;
-  detail(locationName?: string): string | React.ReactElement;
 }
 
 export interface LevelInfoMap {

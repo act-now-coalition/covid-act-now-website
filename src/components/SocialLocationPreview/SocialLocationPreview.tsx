@@ -43,7 +43,7 @@ const SocialLocationPreview = (props: {
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
       </PreviewHeader>
       <PreviewBody>
-        <SummaryStats stats={props.stats} condensed={true} />
+        <SummaryStats stats={props.stats} />
       </PreviewBody>
       <PreviewFooter>
         <FooterText>Last Updated {lastUpdatedDateString}</FooterText>
