@@ -45,7 +45,7 @@ export const GridContainer = styled.div`
   display: grid;
   max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
   row-gap: 1.25rem;
-  grid-template-areas: 'header' 'overview' 'spark' 'map' 'alerts';
+  grid-template-areas: 'header' 'overview' 'spark' 'map' 'masks' 'originalMetrics' 'alerts';
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
@@ -53,24 +53,26 @@ export const GridContainer = styled.div`
     grid-template-areas:
       'header header'
       'overview overview'
-      'spark map'
-      'alerts alerts';
-  }
-
-  @media (min-width: ${mobileBreakpoint}) {
-    grid-template-areas:
-      'header header'
-      'overview overview'
-      'spark map'
+      'masks map'
+      'originalMetrics map'
       'alerts map';
   }
 
+  // @media (min-width: ${mobileBreakpoint}) {
+  //   grid-template-areas:
+  //     'header header'
+  //     'overview overview'
+  //     'spark map'
+  //     'alerts map';
+  // }
+
   @media (min-width: ${countyMapToFixedBreakpoint}) {
-    grid-template-columns: 5fr 3fr;
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       'header header'
       'overview overview'
-      'spark alerts';
+      'masks masks'
+      'originalMetrics alerts';
     margin-right: 2rem;
   }
 `;
@@ -85,6 +87,10 @@ export const GridItemOverview = styled.div`
 
 export const GridItemSparkLines = styled.div`
   grid-area: spark;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    display: none;
+  }
 `;
 
 export const GridItemAlerts = styled.div`
@@ -111,4 +117,12 @@ export const MapOutsideGrid = styled.div`
   @media (min-width: ${countyMapToFixedBreakpoint}) {
     display: inherit;
   }
+`;
+
+export const GridItemMasks = styled.div`
+  grid-area: masks;
+`;
+
+export const GridItemOriginalMetrics = styled.div`
+  grid-area: originalMetrics;
 `;

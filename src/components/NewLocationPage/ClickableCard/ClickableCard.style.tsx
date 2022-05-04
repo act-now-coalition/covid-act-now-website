@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import MuiButton from '@material-ui/core/Button';
 import { GrayBodyCopy } from 'components/NewLocationPage/Shared/Shared.style';
-import { Chevron } from '../../Shared/Shared.style';
+import { Chevron } from '../Shared/Shared.style';
 
 export const Button = styled(MuiButton).attrs(props => ({
   disableRipple: true,
@@ -38,5 +38,5 @@ export const Subtext = styled(GrayBodyCopy)`
   text-transform: none;
   text-align: left;
   font-size: 1rem;
-  margin-top: 0.25rem;
+  margin-top: 0.75rem;
 `;

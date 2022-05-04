@@ -10,6 +10,8 @@ import {
   GridItemSparkLines,
   MapOutsideGrid,
   ContentContainer,
+  GridItemMasks,
+  GridItemOriginalMetrics,
 } from './AboveTheFold.style';
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
@@ -24,6 +26,8 @@ import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButto
 import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
 import { Can82BannerLocationPage } from 'components/Banner';
+
+import { MasksCard, OriginalMetricsCard } from '../ClickableCard';
 
 interface AboveTheFoldProps {
   region: Region;
@@ -73,6 +77,12 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                 onClickSparkLine={onClickSparkLine}
               />
             </GridItemSparkLines>
+            <GridItemMasks>
+              <MasksCard />
+            </GridItemMasks>
+            <GridItemOriginalMetrics>
+              <OriginalMetricsCard />
+            </GridItemOriginalMetrics>
             <GridItemAlerts>
               <GetAlertsBlock
                 region={region}

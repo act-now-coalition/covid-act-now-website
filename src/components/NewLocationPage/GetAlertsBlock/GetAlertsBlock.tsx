@@ -6,7 +6,7 @@ import {
   DesktopOnly,
 } from 'components/NewLocationPage/Shared/Shared.style';
 import EmailForm from './EmailForm';
-import AlertsButton from './AlertsButton';
+import { AlertsCard } from '../ClickableCard';
 
 const GetAlertsBlock: React.FC<{
   region: Region;
@@ -15,7 +15,7 @@ const GetAlertsBlock: React.FC<{
   return (
     <SectionContainer>
       <MobileOnly>
-        <AlertsButton onClick={onClickGetAlerts} />
+        <AlertsCard />
       </MobileOnly>
       <DesktopOnly>
         <EmailForm region={region} />
