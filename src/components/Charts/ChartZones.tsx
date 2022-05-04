@@ -29,6 +29,7 @@ import {
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getColumnDate, formatTooltipColumnDate } from './utils';
+import FrameworkOverlay from './FrameworkOverlay';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -149,6 +150,14 @@ const ChartZones = ({
                 curve={curveLinear}
               />
             </Style.SeriesLine>
+            <FrameworkOverlay
+              width={chartWidth}
+              height={chartHeight}
+              data={data}
+              getXCoord={getXCoord}
+              getYCoord={getYCoord}
+              xScale={xScale}
+            />
             <ZoneAnnotation
               color={region.color}
               name={region.name}

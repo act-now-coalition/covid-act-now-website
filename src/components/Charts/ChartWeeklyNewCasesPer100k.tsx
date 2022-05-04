@@ -28,6 +28,7 @@ import {
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getColumnDate, formatTooltipColumnDate } from './utils';
+import FrameworkOverlay from './FrameworkOverlay';
 
 // TODO(8.2) - confirm thresholds/chart/tooltip content
 
@@ -149,6 +150,14 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
           width={chartWidth}
           yScale={yScale}
           curve={curveMonotoneX}
+        />
+        <FrameworkOverlay
+          width={chartWidth}
+          height={chartHeight}
+          data={data}
+          getXCoord={getXCoord}
+          getYCoord={getYCoord}
+          xScale={xScale}
         />
         <Style.LineGrid>
           <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />
