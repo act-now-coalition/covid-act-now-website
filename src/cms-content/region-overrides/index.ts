@@ -45,7 +45,7 @@ export function getRegionMetricOverride(
 export function getRegionMetricDisclaimer(
   region: Region,
   metric: Metric,
-  onlyBlockDisclaimers: boolean = false,
+  onlyIncludeBlockedMetrics: boolean = false,
 ): string | undefined {
   // Get region overrides that are still in effect and have disclaimers.
   const overrideMetric = getOverrideMetricForMetric(metric);
@@ -54,7 +54,7 @@ export function getRegionMetricDisclaimer(
       o.metric === overrideMetric &&
       o.disclaimer &&
       !o.end_date &&
-      (!onlyBlockDisclaimers || o.blocked),
+      (!onlyIncludeBlockedMetrics || o.blocked),
   );
   // If there are multiple possible disclaimers, prefer ones for blocking metrics, and ones with no start date.
   const override =

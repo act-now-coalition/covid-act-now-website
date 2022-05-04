@@ -40,7 +40,7 @@ const MetricChart = React.memo(
       const blockedDisclaimer = getRegionMetricDisclaimer(
         projections.region,
         metric,
-        /*onlyBlockDisclaimers=*/ true,
+        /*onlyIncludeBlockedMetrics=*/ true,
       );
       return (
         <EmptyPanel $height={chartHeight}>
