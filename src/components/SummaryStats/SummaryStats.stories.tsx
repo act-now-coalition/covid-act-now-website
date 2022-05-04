@@ -16,5 +16,5 @@ export const California = () => {
     return null;
   }
 
-  return <SummaryStats stats={projections.getMetricValues()} condensed />;
+  return <SummaryStats stats={projections.getMetricValues()} />;
 };
