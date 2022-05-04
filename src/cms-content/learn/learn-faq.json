@@ -195,7 +195,7 @@
         {
           "question": "Where are the previous highlighted metrics like Daily New Cases, Infection Growth Rate, Hospitalizations, and Deaths?",
           "questionId": "where-are-previous-metrics",
-          "answer": "We remain committed to continuing to make all of our previous metrics available on our site and in our API. \n\nWe acknowledge that people who need extra caution may still want to make decisions using our older metrics, which now fall under the category of **Transmission levels**. Daily new cases, infection rate, and positive test rate can all still be found on location pages within the \"Transmission metrics\" component, as well as within the \"All metrics\", also knows as the \"Trends\" component. \n\nAdditional hospitalization metrics and deaths can also be found within the \"All metrics\", or \"Trends\" component."
+          "answer": "We remain committed to continuing to make all of our previous metrics available on our site and in our API. \n\nWe acknowledge that people who need extra caution may still want to make decisions using our older metrics, which now fall under the category of **Transmission levels**. Daily new cases, infection rate, and positive test rate can all still be found on location pages within the \"Transmission metrics\" component, as well as within \"All metrics,\" also knows as the \"Trends\" component. \n\nAdditional hospitalization metrics and deaths can also be found within \"All metrics,\" or the \"Trends\" component."
         },
         {
           "question": "What are health service areas?",
