@@ -1,5 +1,4 @@
 import React from 'react';
-import { Title } from './VaccinationProgressBarBlock.style';
 import { Projection } from 'common/models/Projection';
 import { VaccineProgressBar } from 'components/VaccineProgressBar/VaccineProgressBar';
 
@@ -16,7 +15,6 @@ const VaccinationProgressBarBlock: React.FC<{
 
   return (
     <>
-      <Title>Vaccination Progress</Title>
       <VaccineProgressBar
         oldVersion
         vaccinationsInitiated={percentInitiated}

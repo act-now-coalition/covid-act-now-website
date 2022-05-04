@@ -5,6 +5,7 @@ import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Region } from 'common/regions';
 import { subtractTime, TimeUnit } from 'common/utils/time-utils';
+import { Metric } from 'common/metricEnum';
 
 export const daysToChart = 30;
 
@@ -33,6 +34,20 @@ export const SparkLineToExploreMetric: {
   [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES,
   [SparkLineMetric.ADMISSIONS_PER_100K]: ExploreMetric.ADMISSIONS_PER_100K,
   [SparkLineMetric.RATIO_BEDS_WITH_COVID]: ExploreMetric.RATIO_BEDS_WITH_COVID,
+};
+
+// TODO (chelsi) - fix need for all metrics as keys
+export const MetricToSparkLine: {
+  [metric in Metric]: SparkLineMetric;
+} = {
+  [Metric.WEEKLY_CASES_PER_100K]: SparkLineMetric.WEEKLY_CASES_PER_100K,
+  [Metric.ADMISSIONS_PER_100K]: SparkLineMetric.ADMISSIONS_PER_100K,
+  [Metric.RATIO_BEDS_WITH_COVID]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
+  [Metric.CASE_DENSITY]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
+  [Metric.CASE_GROWTH_RATE]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
+  [Metric.HOSPITAL_USAGE]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
+  [Metric.POSITIVE_TESTS]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
+  [Metric.VACCINATIONS]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
 };
 
 export interface Series {

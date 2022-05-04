@@ -6,11 +6,13 @@ import { formatValue, getLevelInfo } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 import { useBreakpoint } from 'common/hooks';
 import { getMetricNameForStat, metricNameSubLabel } from './utils';
+import { Projection } from 'common/models/Projection';
 
-const SummaryStat: React.FC<{ metric: Metric; value: number | null }> = ({
-  metric,
-  value,
-}) => {
+const SummaryStat: React.FC<{
+  metric: Metric;
+  value: number | null;
+  projection?: Projection;
+}> = ({ metric, value, projection }) => {
   const levelInfo = getLevelInfo(metric, value);
   const formattedValue = formatValue(metric, value, /*nullValueCopy=*/ '-');
   const hasSubLabel = metric in metricNameSubLabel;
@@ -32,7 +34,7 @@ const SummaryStat: React.FC<{ metric: Metric; value: number | null }> = ({
         <MobileSummaryStat {...statProps} />
       </MobileOnly>
       <DesktopOnly>
-        <DesktopSummaryStat {...statProps} />
+        <DesktopSummaryStat {...statProps} projection={projection} />
       </DesktopOnly>
     </>
   );
