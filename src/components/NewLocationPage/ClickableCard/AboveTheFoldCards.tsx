@@ -4,10 +4,12 @@ import AlertsIcon from 'assets/images/AlertsIcon';
 import InfectionIcon from 'assets/images/InfectionIcon';
 import MasksIcon from 'assets/images/MasksIcon';
 import { SectionContainer } from 'components/NewLocationPage/Shared/Shared.style';
+import { HighlightedSectionContainer } from './ClickableCard.style';
 
+// Chelsi - onClicks
 export const MasksCard: React.FC = () => {
   return (
-    <SectionContainer>
+    <HighlightedSectionContainer>
       <ClickableCard
         onClick={() => {}}
         icon={<MasksIcon />}
@@ -19,7 +21,7 @@ export const MasksCard: React.FC = () => {
           </>
         }
       />
-    </SectionContainer>
+    </HighlightedSectionContainer>
   );
 };
 

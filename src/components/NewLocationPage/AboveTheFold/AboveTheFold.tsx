@@ -28,6 +28,7 @@ import { SparkLineMetric } from '../SparkLineBlock/utils';
 import { Can82BannerLocationPage } from 'components/Banner';
 
 import { MasksCard, OriginalMetricsCard } from '../ClickableCard';
+import { Level } from 'common/level';
 
 interface AboveTheFoldProps {
   region: Region;
@@ -77,9 +78,11 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                 onClickSparkLine={onClickSparkLine}
               />
             </GridItemSparkLines>
-            <GridItemMasks>
-              <MasksCard />
-            </GridItemMasks>
+            {locationSummary.level === Level.HIGH && (
+              <GridItemMasks>
+                <MasksCard />
+              </GridItemMasks>
+            )}
             <GridItemOriginalMetrics>
               <OriginalMetricsCard />
             </GridItemOriginalMetrics>

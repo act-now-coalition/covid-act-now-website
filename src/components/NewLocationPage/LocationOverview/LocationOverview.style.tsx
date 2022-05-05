@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { COLOR_MAP } from 'common/colors';
-import { materialSMBreakpoint } from 'assets/theme/sizes';
+import { materialSMBreakpoint, mobileBreakpoint } from 'assets/theme/sizes';
 import { SectionContainer } from '../Shared/Shared.style';
 import { Chevron } from '../Shared/Shared.style';
 
@@ -16,6 +16,10 @@ export const OverviewSectionContainer = styled(SectionContainer)`
   @media (min-width: ${materialSMBreakpoint}) {
     padding: 1.75rem;
   }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 2rem 2.5rem;
+  }
 `;
 
 export const GridContainer = styled.div`
@@ -25,17 +29,15 @@ export const GridContainer = styled.div`
   row-gap: 1.5rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
       'level level progress progress'
       'metric1 metric2 metric3 metricVax';
     column-gap: 2rem;
-    row-gap: 1.75rem;
+    row-gap: 2.25rem;
   }
 
-  // Note: 1.8fr instead of 2fr to manipulate wrapping of summary stat metric names
   @media (min-width: ${gridBreakpoint}) {
-    grid-template-columns: 1fr 1fr 1fr 1.8fr;
     grid-template-areas:
       'level level level progress'
       'metric1 metric2 metric3 metricVax';

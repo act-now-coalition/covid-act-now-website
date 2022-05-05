@@ -58,14 +58,6 @@ export const GridContainer = styled.div`
       'alerts map';
   }
 
-  // @media (min-width: ${mobileBreakpoint}) {
-  //   grid-template-areas:
-  //     'header header'
-  //     'overview overview'
-  //     'spark map'
-  //     'alerts map';
-  // }
-
   @media (min-width: ${countyMapToFixedBreakpoint}) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
