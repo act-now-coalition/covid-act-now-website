@@ -102,11 +102,11 @@ function generateAlertEmailContent(
 
 function changeText(oldLevel: Level, newLevel: Level) {
   if (oldLevel === Level.UNKNOWN) {
-    return 'new community level';
+    return 'new community risk level';
   } else if (oldLevel < newLevel) {
-    return 'community level increased';
+    return 'community risk level increased';
   } else {
-    return 'community level decreased';
+    return 'community risk level decreased';
   }
 }
 
@@ -116,7 +116,7 @@ export function generateAlertEmailData(
 ) {
   const { locationName } = locationAlert;
   const htmlContent = generateAlertEmailContent(emailAddress, locationAlert);
-  const subjectLine = `${locationName}'s Community Level Has Changed`;
+  const subjectLine = `${locationName}'s Community Risk Level Has Changed`;
 
   return {
     Subject: subjectLine,
