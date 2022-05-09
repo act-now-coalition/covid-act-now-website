@@ -1,6 +1,5 @@
 import { max as d3Max } from 'd3-array';
 import { cleanSeries } from 'components/Explore/utils';
-import { ExploreMetric } from 'components/Explore';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Region } from 'common/regions';
@@ -27,13 +26,13 @@ export const SPARK_LINE_METRICS = [
   SparkLineMetric.RATIO_BEDS_WITH_COVID,
 ];
 
-// Used to select explore tab when clicking corresponding metric's spark line:
-export const SparkLineToExploreMetric: {
-  [metric in SparkLineMetric]: ExploreMetric;
+// Used to select chart tab when clicking corresponding metric's spark line:
+export const SparkLineToMetric: {
+  [metric in SparkLineMetric]: Metric;
 } = {
-  [SparkLineMetric.WEEKLY_CASES_PER_100K]: ExploreMetric.WEEKLY_CASES,
-  [SparkLineMetric.ADMISSIONS_PER_100K]: ExploreMetric.ADMISSIONS_PER_100K,
-  [SparkLineMetric.RATIO_BEDS_WITH_COVID]: ExploreMetric.RATIO_BEDS_WITH_COVID,
+  [SparkLineMetric.WEEKLY_CASES_PER_100K]: Metric.WEEKLY_CASES_PER_100K,
+  [SparkLineMetric.ADMISSIONS_PER_100K]: Metric.ADMISSIONS_PER_100K,
+  [SparkLineMetric.RATIO_BEDS_WITH_COVID]: Metric.RATIO_BEDS_WITH_COVID,
 };
 
 // TODO (chelsi) - fix need for all metrics as keys
