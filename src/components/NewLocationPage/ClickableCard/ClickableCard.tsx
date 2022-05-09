@@ -2,13 +2,12 @@ import React from 'react';
 import LabelWithChevron from 'components/NewLocationPage/Shared/LabelWithChevron';
 import { Button, Subtext, Section } from './ClickableCard.style';
 
-// Chelsi - anys
 const ClickableCard: React.FC<{
   onClick?: () => void;
   href?: string;
   cardLabel: string;
-  cardBody: any;
-  icon: any;
+  cardBody: React.ReactElement;
+  icon: React.ReactElement;
 }> = ({ onClick = () => {}, cardLabel, cardBody, icon, href }) => {
   const buttonProp = href ? { href } : { onClick };
   return (

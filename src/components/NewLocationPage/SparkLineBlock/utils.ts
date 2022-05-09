@@ -43,6 +43,7 @@ export const MetricToSparkLine: {
   [Metric.WEEKLY_CASES_PER_100K]: SparkLineMetric.WEEKLY_CASES_PER_100K,
   [Metric.ADMISSIONS_PER_100K]: SparkLineMetric.ADMISSIONS_PER_100K,
   [Metric.RATIO_BEDS_WITH_COVID]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
+  // Not used, just included for the sake of typescript:
   [Metric.CASE_DENSITY]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
   [Metric.CASE_GROWTH_RATE]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
   [Metric.HOSPITAL_USAGE]: SparkLineMetric.RATIO_BEDS_WITH_COVID,
@@ -137,11 +138,11 @@ export async function getProjectionForRegion(
 }
 
 // (Chelsi) - fix anys
-interface SparkLineProps {
-  rawData: any;
-  smoothedData: any;
-  dateFrom: any;
-  dateTo: any;
+export interface SparkLineProps {
+  rawData: Column[];
+  smoothedData: Column[];
+  dateFrom: dateItem;
+  dateTo: dateItem;
 }
 
 export function getSparkLineProps(

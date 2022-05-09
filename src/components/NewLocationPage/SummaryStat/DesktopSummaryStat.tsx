@@ -30,7 +30,6 @@ const DesktopSummaryStat: React.FC<
         <CondensedChevron />
       </Row>
       <StatInfoText>
-        {/* Chelsi - add loading state so page doesn't jump */}
         {projection && <StatChart projection={projection} metric={metric} />}
         <MetricValue
           value={formattedValue}
