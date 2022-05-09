@@ -114,6 +114,6 @@ export const GridItemMasks = styled.div`
   grid-area: masks;
 `;
 
-export const GridItemOriginalMetrics = styled.div`
-  grid-area: originalMetrics;
+export const GridItemTransmissionMetrics = styled.div`
+  grid-area: transmissionMetrics;
 `;

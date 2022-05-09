@@ -8,11 +8,11 @@ export function getDesktopGridTemplateAreas(showMasksCard: boolean): string {
     return `'header header'
       'overview overview'
       'masks masks'
-      'originalMetrics alerts'`;
+      'transmissionMetrics alerts'`;
   } else {
     return `'header header'
       'overview overview'
-      'originalMetrics alerts'`;
+      'transmissionMetrics alerts'`;
   }
 }
 
@@ -21,20 +21,20 @@ export function getMidGridTemplateAreas(showMasksCard: boolean): string {
     return `'header header'
       'overview overview'
       'masks map'
-      'originalMetrics map'
+      'transmissionMetrics map'
       'alerts map';`;
   } else {
     return `'header header'
         'overview overview'
-        'originalMetrics map'
+        'transmissionMetrics map'
         'alerts map';`;
   }
 }
 
 export function getMobileGridTemplateAreas(showMasksCard: boolean): string {
   if (showMasksCard) {
-    return `'header' 'overview' 'spark' 'map' 'masks' 'originalMetrics' 'alerts'`;
+    return `'header' 'overview' 'spark' 'map' 'masks' 'transmissionMetrics' 'alerts'`;
   } else {
-    return `'header' 'overview' 'spark' 'map' 'originalMetrics' 'alerts'`;
+    return `'header' 'overview' 'spark' 'map' 'transmissionMetrics' 'alerts'`;
   }
 }

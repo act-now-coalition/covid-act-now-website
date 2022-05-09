@@ -7,11 +7,11 @@ import { SectionContainer } from 'components/NewLocationPage/Shared/Shared.style
 import { HighlightedSectionContainer } from './ClickableCard.style';
 
 // Chelsi - onClicks
-export const MasksCard: React.FC = () => {
+export const MasksCard: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <HighlightedSectionContainer>
       <ClickableCard
-        onClick={() => {}}
+        onClick={onClick}
         icon={<MasksIcon />}
         cardLabel="Masks recommended"
         cardBody={
@@ -25,11 +25,13 @@ export const MasksCard: React.FC = () => {
   );
 };
 
-export const OriginalMetricsCard: React.FC = () => {
+export const TransmissionMetricsCard: React.FC<{ onClick: () => void }> = ({
+  onClick,
+}) => {
   return (
     <SectionContainer>
       <ClickableCard
-        onClick={() => {}}
+        onClick={onClick}
         icon={<InfectionIcon />}
         cardLabel="Avoiding infection?"
         cardBody={

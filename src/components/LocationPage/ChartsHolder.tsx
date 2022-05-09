@@ -177,6 +177,20 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(exploreChartRef.current);
   }, []);
 
+  const onClickMasksCard = useCallback(() => {
+    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.CLICK, 'Masks card');
+    scrollTo(recommendationsRef.current);
+  }, []);
+
+  const onClickTransmissionMetricsCard = useCallback(() => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      'Transmission metrics card',
+    );
+    scrollTo(transmissionMetricsRef.current);
+  }, []);
+
   if (!locationSummary) {
     return null;
   }
@@ -195,6 +209,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           onClickAlertSignup={onClickAlertSignup}
           onClickShare={onClickShare}
           onClickSparkLine={onClickSparkLine}
+          onClickMasksCard={onClickMasksCard}
+          onClickTransmissionMetricsCard={onClickTransmissionMetricsCard}
         />
         <BelowTheFold>
           <WidthContainer>

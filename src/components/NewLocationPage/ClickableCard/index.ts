@@ -1,9 +1,9 @@
 import ClickableCard from './ClickableCard';
 import {
-  OriginalMetricsCard,
+  TransmissionMetricsCard,
   MasksCard,
   AlertsCard,
 } from './AboveTheFoldCards';
 
-export { OriginalMetricsCard, MasksCard, AlertsCard };
+export { TransmissionMetricsCard, MasksCard, AlertsCard };
 export default ClickableCard;

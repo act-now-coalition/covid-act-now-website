@@ -11,7 +11,7 @@ import {
   MapOutsideGrid,
   ContentContainer,
   GridItemMasks,
-  GridItemOriginalMetrics,
+  GridItemTransmissionMetrics,
 } from './AboveTheFold.style';
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
@@ -26,8 +26,7 @@ import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButto
 import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
 import { Can82BannerLocationPage } from 'components/Banner';
-
-import { MasksCard, OriginalMetricsCard } from '../ClickableCard';
+import { MasksCard, TransmissionMetricsCard } from '../ClickableCard';
 import { Level } from 'common/level';
 
 interface AboveTheFoldProps {
@@ -37,6 +36,8 @@ interface AboveTheFoldProps {
   onClickShare: () => void;
   onClickMetric?: (metric: Metric) => void;
   onClickSparkLine: (metric: SparkLineMetric) => void;
+  onClickMasksCard: () => void;
+  onClickTransmissionMetricsCard: () => void;
 }
 
 const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
@@ -47,6 +48,8 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     onClickAlertSignup,
     onClickShare,
     onClickSparkLine,
+    onClickMasksCard,
+    onClickTransmissionMetricsCard,
   }) => {
     const showMasksCard = locationSummary.level === Level.HIGH;
     return (
@@ -81,12 +84,14 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
             </GridItemSparkLines>
             {showMasksCard && (
               <GridItemMasks>
-                <MasksCard />
+                <MasksCard onClick={onClickTransmissionMetricsCard} />
               </GridItemMasks>
             )}
-            <GridItemOriginalMetrics>
-              <OriginalMetricsCard />
-            </GridItemOriginalMetrics>
+            <GridItemTransmissionMetrics>
+              <TransmissionMetricsCard
+                onClick={onClickTransmissionMetricsCard}
+              />
+            </GridItemTransmissionMetrics>
             <GridItemAlerts>
               <GetAlertsBlock
                 region={region}
