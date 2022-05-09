@@ -3,7 +3,7 @@ import words from 'lodash/words';
 import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';
-import * as gtag from './gtag';
+import { trackGA4Event } from './gtag';
 
 export interface Tracker {
   trackingId: string;
@@ -102,7 +102,7 @@ function toTitleCase(name: string) {
 export function trackEvent(
   category: EventCategory,
   action: EventAction,
-  label?: string,
+  label: string,
   value?: number,
   nonInteraction?: boolean,
   transport: 'beacon' | 'xhr' | 'image' = 'beacon',
@@ -117,7 +117,12 @@ export function trackEvent(
       transport,
     });
 
-    gtag.event(action, category, label, value);
+    trackGA4Event(
+      toTitleCase(action),
+      toTitleCase(category),
+      toTitleCase(label),
+      value,
+    );
 
     const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
     const valueProp = Number.isFinite(value) ? { eventValue: value } : {};
