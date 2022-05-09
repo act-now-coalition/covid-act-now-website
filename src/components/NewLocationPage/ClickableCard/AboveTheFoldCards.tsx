@@ -4,9 +4,11 @@ import AlertsIcon from 'assets/images/AlertsIcon';
 import InfectionIcon from 'assets/images/InfectionIcon';
 import MasksIcon from 'assets/images/MasksIcon';
 import { SectionContainer } from 'components/NewLocationPage/Shared/Shared.style';
-import { HighlightedSectionContainer } from './ClickableCard.style';
+import {
+  HighlightedSectionContainer,
+  UnderlinedSpan,
+} from './ClickableCard.style';
 
-// Chelsi - onClicks
 export const MasksCard: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <HighlightedSectionContainer>
@@ -37,8 +39,9 @@ export const TransmissionMetricsCard: React.FC<{ onClick: () => void }> = ({
         cardBody={
           <>
             People who need extra caution can still make decisions using{' '}
-            <strong>daily new cases</strong>, <strong>infection rate</strong>,
-            and <strong>positive test rate</strong>.
+            <UnderlinedSpan>daily new cases</UnderlinedSpan>,{' '}
+            <UnderlinedSpan>infection rate</UnderlinedSpan>, and{' '}
+            <UnderlinedSpan>positive test rate</UnderlinedSpan>.
           </>
         }
       />
@@ -46,10 +49,10 @@ export const TransmissionMetricsCard: React.FC<{ onClick: () => void }> = ({
   );
 };
 
-export const AlertsCard = () => {
+export const AlertsCard: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <ClickableCard
-      onClick={() => {}}
+      onClick={onClick}
       icon={<AlertsIcon />}
       cardLabel="Alerts"
       cardBody={

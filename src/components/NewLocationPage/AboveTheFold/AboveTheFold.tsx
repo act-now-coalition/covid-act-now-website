@@ -84,7 +84,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
             </GridItemSparkLines>
             {showMasksCard && (
               <GridItemMasks>
-                <MasksCard onClick={onClickTransmissionMetricsCard} />
+                <MasksCard onClick={onClickMasksCard} />
               </GridItemMasks>
             )}
             <GridItemTransmissionMetrics>

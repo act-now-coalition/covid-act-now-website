@@ -15,7 +15,7 @@ const GetAlertsBlock: React.FC<{
   return (
     <SectionContainer>
       <MobileOnly>
-        <AlertsCard />
+        <AlertsCard onClick={onClickGetAlerts} />
       </MobileOnly>
       <DesktopOnly>
         <EmailForm region={region} />

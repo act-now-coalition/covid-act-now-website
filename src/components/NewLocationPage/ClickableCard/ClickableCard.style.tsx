@@ -50,3 +50,7 @@ export const HighlightedSectionContainer = styled(SectionContainer)`
   border: 1.5px solid ${COLOR_MAP.ORANGE_DARK.BASE};
   background-color: ${COLOR_MAP.ORANGE_DARK.LIGHT};
 `;
+
+export const UnderlinedSpan = styled.span`
+  text-decoration: underline;
+`;
