@@ -16,7 +16,7 @@ const StatChart: React.FC<{ projection: Projection; metric: Metric }> = ({
     return (
       <VaccinationProgressBarBlock
         projection={projection}
-        locationName={'New York'}
+        locationName={projection.region.shortName}
       />
     );
   }

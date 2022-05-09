@@ -9,9 +9,9 @@ const ClickableCard: React.FC<{
   cardBody: React.ReactElement;
   icon: React.ReactElement;
 }> = ({ onClick = () => {}, cardLabel, cardBody, icon, href }) => {
-  const buttonProp = href ? { href } : { onClick };
+  const buttonProps = { href, onClick };
   return (
-    <Button {...buttonProp}>
+    <Button {...buttonProps}>
       <Section>{icon}</Section>
       <Section style={{ textAlign: 'left' }}>
         <LabelWithChevron text={cardLabel} />

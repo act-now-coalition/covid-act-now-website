@@ -1,6 +1,6 @@
 /**
  * Utils to return grid-template-areas for the above the fold GridContainer.
- * Conditional depending on weather or not we are showing the 'Masks recommended' card.
+ * Conditional depending on whether or not we are showing the 'Masks recommended' card.
  */
 
 export function getDesktopGridTemplateAreas(showMasksCard: boolean): string {
