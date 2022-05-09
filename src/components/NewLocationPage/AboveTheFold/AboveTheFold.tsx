@@ -48,11 +48,12 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     onClickShare,
     onClickSparkLine,
   }) => {
+    const showMasksCard = locationSummary.level === Level.HIGH;
     return (
       <MainWrapper>
         <Can82BannerLocationPage />
         <ContentContainer>
-          <GridContainer>
+          <GridContainer showMasksCard={showMasksCard}>
             <GridItemHeader>
               <HeaderContainer>
                 <LocationName region={region} />
@@ -78,7 +79,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                 onClickSparkLine={onClickSparkLine}
               />
             </GridItemSparkLines>
-            {locationSummary.level === Level.HIGH && (
+            {showMasksCard && (
               <GridItemMasks>
                 <MasksCard />
               </GridItemMasks>

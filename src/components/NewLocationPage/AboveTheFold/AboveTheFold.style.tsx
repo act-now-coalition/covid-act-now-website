@@ -5,6 +5,11 @@ import {
   mobileBreakpoint,
   countyMapToFixedBreakpoint,
 } from 'assets/theme/sizes';
+import {
+  getDesktopGridTemplateAreas,
+  getMidGridTemplateAreas,
+  getMobileGridTemplateAreas,
+} from './gridtemplateAreasUtils';
 
 export const MainWrapper = styled.div`
   padding: ${props => props.theme.spacingTheme.contentGutterMobile};
@@ -41,30 +46,24 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const GridContainer = styled.div`
+export const GridContainer = styled.div<{ showMasksCard: boolean }>`
   display: grid;
   max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
   row-gap: 1.25rem;
-  grid-template-areas: 'header' 'overview' 'spark' 'map' 'masks' 'originalMetrics' 'alerts';
+  grid-template-areas: ${({ showMasksCard }) =>
+    getMobileGridTemplateAreas(showMasksCard)};
 
   @media (min-width: ${materialSMBreakpoint}) {
     grid-template-columns: 2fr 1fr;
     grid-gap: 2rem;
-    grid-template-areas:
-      'header header'
-      'overview overview'
-      'masks map'
-      'originalMetrics map'
-      'alerts map';
+    grid-template-areas: ${({ showMasksCard }) =>
+      getMidGridTemplateAreas(showMasksCard)};
   }
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      'header header'
-      'overview overview'
-      'masks masks'
-      'originalMetrics alerts';
+    grid-template-areas: ${({ showMasksCard }) =>
+      getDesktopGridTemplateAreas(showMasksCard)};
     margin-right: 2rem;
   }
 `;
