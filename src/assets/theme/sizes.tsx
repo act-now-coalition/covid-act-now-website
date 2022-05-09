@@ -22,7 +22,7 @@ export interface Spacing {
 
 // TODO (chelsi) - use these content gutters throughout site
 export const spacingTheme: Spacing = {
-  contentGutterMobile: '1rem',
+  contentGutterMobile: '1.25rem 1rem',
   contentGutterDesktop: '2rem',
   locationPage: {
     mapWidthDesktop: '320px',

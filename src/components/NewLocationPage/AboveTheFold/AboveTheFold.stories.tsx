@@ -12,6 +12,8 @@ const onClickProps = {
   onClickAlertSignup: () => {},
   onClickShare: () => {},
   onClickSparkLine: () => {},
+  onClickTransmissionMetricsCard: () => {},
+  onClickMasksCard: () => {},
 };
 
 export const California = () => {

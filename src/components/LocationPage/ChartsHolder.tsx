@@ -41,9 +41,10 @@ import {
   getChartGroupFromMetric,
 } from 'components/Charts/Groupings';
 
-// TODO: 100 is rough accounting for the navbar;
+// 130 is rough accounting for the navbar + hiring banner;
+// TODO: revert to 100 when we remove the hiring banner.
 // could make these constants so we don't have to manually update
-const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
+const scrollTo = (div: null | HTMLDivElement, offset: number = 130) =>
   div &&
   window.scrollTo({
     left: 0,
@@ -177,6 +178,20 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(exploreChartRef.current);
   }, []);
 
+  const onClickMasksCard = useCallback(() => {
+    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.CLICK, 'Masks card');
+    scrollTo(recommendationsRef.current);
+  }, []);
+
+  const onClickTransmissionMetricsCard = useCallback(() => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      'Transmission metrics card',
+    );
+    scrollTo(transmissionMetricsRef.current);
+  }, []);
+
   if (!locationSummary) {
     return null;
   }
@@ -195,6 +210,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           onClickAlertSignup={onClickAlertSignup}
           onClickShare={onClickShare}
           onClickSparkLine={onClickSparkLine}
+          onClickMasksCard={onClickMasksCard}
+          onClickTransmissionMetricsCard={onClickTransmissionMetricsCard}
         />
         <BelowTheFold>
           <WidthContainer>

@@ -44,17 +44,22 @@ const LocationOverview: React.FC<{
           />
         </GridItemLevel>
         <GridItemProgress onClick={() => onClickMetric(Metric.VACCINATIONS)}>
-          {projections && projections.primary && (
-            <VaccinationProgressBarBlock
-              locationName={region.name}
-              projection={projections.primary}
-            />
-          )}
+          <MobileOnly>
+            <>
+              {projections?.primary && (
+                <VaccinationProgressBarBlock
+                  locationName={region.name}
+                  projection={projections.primary}
+                />
+              )}
+            </>
+          </MobileOnly>
         </GridItemProgress>
         <GridItemMetricVax onClick={() => onClickMetric(Metric.VACCINATIONS)}>
           <SummaryStat
             metric={Metric.VACCINATIONS}
             value={stats[Metric.VACCINATIONS]}
+            projection={projections?.primary}
           />
         </GridItemMetricVax>
         <GridItemMetric1
@@ -63,6 +68,7 @@ const LocationOverview: React.FC<{
           <SummaryStat
             metric={Metric.WEEKLY_CASES_PER_100K}
             value={stats[Metric.WEEKLY_CASES_PER_100K]}
+            projection={projections?.primary}
           />
         </GridItemMetric1>
         <GridItemMetric2
@@ -71,6 +77,7 @@ const LocationOverview: React.FC<{
           <SummaryStat
             metric={Metric.ADMISSIONS_PER_100K}
             value={stats[Metric.ADMISSIONS_PER_100K]}
+            projection={projections?.primary}
           />
         </GridItemMetric2>
         <GridItemMetric3
@@ -79,6 +86,7 @@ const LocationOverview: React.FC<{
           <SummaryStat
             metric={Metric.RATIO_BEDS_WITH_COVID}
             value={stats[Metric.RATIO_BEDS_WITH_COVID]}
+            projection={projections?.primary}
           />
         </GridItemMetric3>
       </GridContainer>
