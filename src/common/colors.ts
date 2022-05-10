@@ -29,6 +29,7 @@ export const COLOR_MAP = {
     DARK: '#933500',
   },
   ORANGE_DARK: {
+    LIGHT: '#FFF5E6',
     BASE: '#FF9600',
   },
   RED: {

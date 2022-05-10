@@ -10,6 +10,8 @@ import {
   GridItemSparkLines,
   MapOutsideGrid,
   ContentContainer,
+  GridItemMasks,
+  GridItemTransmissionMetrics,
 } from './AboveTheFold.style';
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
@@ -24,6 +26,8 @@ import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButto
 import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
 import { Can82BannerLocationPage } from 'components/Banner';
+import { MasksCard, TransmissionMetricsCard } from '../ClickableCard';
+import { Level } from 'common/level';
 
 interface AboveTheFoldProps {
   region: Region;
@@ -32,6 +36,8 @@ interface AboveTheFoldProps {
   onClickShare: () => void;
   onClickMetric?: (metric: Metric) => void;
   onClickSparkLine: (metric: SparkLineMetric) => void;
+  onClickMasksCard: () => void;
+  onClickTransmissionMetricsCard: () => void;
 }
 
 const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
@@ -42,12 +48,15 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     onClickAlertSignup,
     onClickShare,
     onClickSparkLine,
+    onClickMasksCard,
+    onClickTransmissionMetricsCard,
   }) => {
+    const showMasksCard = locationSummary.level === Level.HIGH;
     return (
       <MainWrapper>
         <Can82BannerLocationPage />
         <ContentContainer>
-          <GridContainer>
+          <GridContainer showMasksCard={showMasksCard}>
             <GridItemHeader>
               <HeaderContainer>
                 <LocationName region={region} />
@@ -73,6 +82,16 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                 onClickSparkLine={onClickSparkLine}
               />
             </GridItemSparkLines>
+            {showMasksCard && (
+              <GridItemMasks>
+                <MasksCard onClick={onClickMasksCard} />
+              </GridItemMasks>
+            )}
+            <GridItemTransmissionMetrics>
+              <TransmissionMetricsCard
+                onClick={onClickTransmissionMetricsCard}
+              />
+            </GridItemTransmissionMetrics>
             <GridItemAlerts>
               <GetAlertsBlock
                 region={region}
