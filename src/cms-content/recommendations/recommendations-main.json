@@ -1,7 +1,7 @@
 {
   "recommendations": [
     {
-      "body": "**Masks** are recommended if your community level is high, you have recently been exposed to or infected with COVID, or you’ve been told by a health professional to wear a mask based on your personal risk factors.",
+      "body": "**Masks** are recommended if your community risk level is high, you have recently been exposed to or infected with COVID, or you’ve been told by a health professional to wear a mask based on your personal risk factors.",
       "source": "FED",
       "category": "MASKS",
       "level": "ALL",

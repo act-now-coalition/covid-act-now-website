@@ -9,11 +9,11 @@ const HIGH_NAME = 'Very high';
 const SUPER_CRITICAL_NAME = 'Extremely high';
 const UNKNOWN = 'Unknown';
 
-const LEGEND_SUMMARY_LOW = 'Low COVID Community Level';
-const LEGEND_SUMMARY_MEDIUM = 'Medium COVID Community Level';
-const LEGEND_SUMMARY_HIGH = 'High COVID Community Level';
+const LEGEND_SUMMARY_LOW = 'Low COVID Community Risk Level';
+const LEGEND_SUMMARY_MEDIUM = 'Medium COVID Community Risk Level';
+const LEGEND_SUMMARY_HIGH = 'High COVID Community Risk Level';
 
-// TODO(8.2): Remove once community level changes are shipped.
+// TODO(8.2): Remove once community risk level changes are shipped.
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'Very high risk';
 const LEGEND_SUMMARY_SUPER_CRITICAL = 'Extremely high risk';
 

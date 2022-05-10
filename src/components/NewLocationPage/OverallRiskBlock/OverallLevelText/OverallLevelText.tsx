@@ -19,7 +19,7 @@ export function renderInfoTooltip(): React.ReactElement {
   return (
     <InfoTooltip
       title={renderTooltipContent(body)}
-      aria-label="Description of community levels"
+      aria-label="Description of community risk levels"
       trackOpenTooltip={() => trackOpenTooltip('Location page header')}
     />
   );
@@ -32,10 +32,10 @@ const OverallLevelText: React.FC<{ currentLevel: Level }> = ({
 
   return (
     <div>
-      <MobileTitle>Community level</MobileTitle>
+      <MobileTitle>Community risk level</MobileTitle>
       <Wrapper>
         <Row>
-          <DesktopTitle>Community level</DesktopTitle>
+          <DesktopTitle>Community risk level</DesktopTitle>
           {renderInfoTooltip()}
         </Row>
         <Row>

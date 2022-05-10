@@ -12,7 +12,7 @@ const BoosterButton: React.FC = () => {
       href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/covid-by-county.html"
       endIcon={<OpenInNewIcon />}
     >
-      Learn More About Community Levels
+      Learn More About Community Risk Levels
     </StyledBoosterButton>
   );
 };
