@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CompareLocationTabs from './CompareLocationTabs';
 
 export default {
-  title: 'Location page redesign/Compare Location Tabs',
+  title: 'Location Page/Compare Location Tabs',
   component: CompareLocationTabs,
 };
 

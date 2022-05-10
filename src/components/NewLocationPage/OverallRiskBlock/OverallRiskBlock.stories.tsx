@@ -3,7 +3,7 @@ import OverallRiskBlock from './OverallRiskBlock';
 import { Level } from 'common/level';
 
 export default {
-  title: 'Location page redesign/Overall risk block',
+  title: 'Location Page/Overall risk block',
   component: OverallRiskBlock,
 };
 

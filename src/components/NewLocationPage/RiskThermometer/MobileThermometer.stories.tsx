@@ -3,7 +3,7 @@ import MobileThermometer from './MobileThermometer';
 import { Level } from 'common/level';
 
 export default {
-  title: 'Location page redesign/Mobile thermometer',
+  title: 'Location Page/Mobile thermometer',
   component: MobileThermometer,
 };
 

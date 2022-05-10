@@ -3,7 +3,7 @@ import VaccineButton from './VaccineButton';
 import { useDynamicVaccineButton } from 'common/hooks';
 
 export default {
-  title: 'Location page redesign/Header Buttons',
+  title: 'Location Page/Header Buttons',
   component: VaccineButton,
 };
 

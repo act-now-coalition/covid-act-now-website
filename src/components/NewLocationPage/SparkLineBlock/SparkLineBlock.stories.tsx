@@ -5,7 +5,7 @@ import regions from 'common/regions';
 import { getProjectionForRegion } from './utils';
 
 export default {
-  title: 'Location page redesign/Spark lines',
+  title: 'Location Page/Spark lines',
   component: SparkLineBlock,
 };
 
