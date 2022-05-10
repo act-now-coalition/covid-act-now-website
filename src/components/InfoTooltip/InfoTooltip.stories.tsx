@@ -3,7 +3,7 @@ import InfoTooltip from './InfoTooltip';
 import { StyledMarkdown } from 'components/InfoTooltip/Tooltip.style';
 
 export default {
-  title: 'Shared Components/InfoTooltip',
+  title: 'Components/InfoTooltip',
   component: InfoTooltip,
 };
 

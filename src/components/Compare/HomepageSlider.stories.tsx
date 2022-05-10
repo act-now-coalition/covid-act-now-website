@@ -3,7 +3,7 @@ import HomepageSlider from './HomepageSlider';
 import { HomepageLocationScope } from 'common/utils/compare';
 
 export default {
-  title: 'Shared Components/HomepageSlider',
+  title: 'Components/HomepageSlider',
   component: HomepageSlider,
 };
 
