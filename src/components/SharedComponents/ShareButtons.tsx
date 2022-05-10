@@ -65,7 +65,9 @@ const ShareButtons: React.FC<{
           <SocialButtonBlock
             onShareOnFacebook={() => trackShare(eventCategory, 'facebook')}
             onShareOnTwitter={() => trackShare(eventCategory, 'twitter')}
-            onCopyLink={() => trackEvent(eventCategory, EventAction.COPY_LINK)}
+            onCopyLink={() =>
+              trackEvent(eventCategory, EventAction.COPY_LINK, 'Copy link')
+            }
             hideSocialButton={() => hideSocialButtons()}
             region={region}
             isHeader={isLocationPageHeader}
