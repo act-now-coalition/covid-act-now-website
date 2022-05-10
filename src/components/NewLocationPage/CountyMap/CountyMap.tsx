@@ -57,7 +57,7 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
     thermometer: <CommunityLevelThermometer />,
     colorMap: (locationSummary: LocationSummary) =>
       getAlertColor(locationSummary),
-    mapButtonLabel: 'Community level',
+    mapButtonLabel: 'Community risk level',
   },
 };
 

@@ -15,7 +15,7 @@ const MobileThermometer: React.FC<{
 }> = ({ currentLevel, locationName }) => {
   const levelUnknown = currentLevel === Level.UNKNOWN;
   const levelName = LOCATION_SUMMARY_LEVELS[currentLevel].name;
-  const imageDescription = `Thermometer image showing that ${locationName} community level is ${levelName}.`;
+  const imageDescription = `Thermometer image showing that ${locationName} community risk level is ${levelName}.`;
 
   return (
     <MobileThermometerContainer role="img" aria-label={imageDescription}>

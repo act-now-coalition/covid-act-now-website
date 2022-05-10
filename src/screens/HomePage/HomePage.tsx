@@ -147,7 +147,7 @@ export default function HomePage() {
             </ColumnCentered>
 
             <MapBlock
-              title="COVID community level"
+              title="COVID community risk level"
               subtitle=""
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
@@ -224,7 +224,7 @@ export default function HomePage() {
 function getCommunityLevelUnderMapText() {
   return (
     <UnderMapText>
-      Understand what your Community Level Color rating means{' '}
+      Understand what your Community Risk Level Color rating means{' '}
       <Link to="/covid-community-level-metrics">here</Link>.
     </UnderMapText>
   );

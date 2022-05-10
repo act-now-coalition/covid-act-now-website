@@ -5,10 +5,10 @@
   "metadataDescription": "Find recent and trusted information & resources about the novel Coronavirus (2019-nCoV). Learn about Symptoms, Tests, Risks, and more. Backed by medical experts. Make informed decisions to stop the disease for you and your community.",
   "sections": [
     {
-      "sectionTitle": "Community level & key metrics",
+      "sectionTitle": "Community risk level & key metrics",
       "sectionId": "covid-community-level-metrics",
       "description": "Learn about the key metrics Covid Act Now uses to assess COVID across U.S. states, metros, and counties.",
-      "buttonCta": "View community levels & key metrics",
+      "buttonCta": "View community risk levels & key metrics",
       "buttonRedirect": "/covid-community-level-metrics"
     },
     {
