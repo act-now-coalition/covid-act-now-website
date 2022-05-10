@@ -2,7 +2,6 @@ import React from 'react';
 import { curveMonotoneX } from '@vx/curve';
 import RectClipGroup from './RectClipGroup';
 import { LinePath } from '@vx/shape';
-import { formatDateTime, DateFormat } from 'common/utils/time-utils';
 import { ScaleTime } from 'd3-scale';
 
 type Point = {
@@ -41,9 +40,6 @@ const FrameworkOverlay: React.FC<{
         stroke="black"
         strokeDasharray="3 3"
       />
-      <text x={overlayWidth} y={10} dx={5} fontSize={12}>
-        {formatDateTime(dateFrameworkUpdate, DateFormat.MMM_D_YYYY)}
-      </text>
     </>
   );
 };
