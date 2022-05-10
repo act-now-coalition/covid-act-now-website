@@ -18,7 +18,7 @@ const FrameworkOverlay: React.FC<{
   getYCoord: (p: Point) => number;
   xScale: ScaleTime<number, number>;
 }> = ({ data, width, height, getXCoord, getYCoord, xScale }) => {
-  const dateFrameworkUpdate = new Date('2022-02-15');
+  const dateFrameworkUpdate = new Date('2022-04-12');
   const overlayWidth = xScale(dateFrameworkUpdate);
   return (
     <>
