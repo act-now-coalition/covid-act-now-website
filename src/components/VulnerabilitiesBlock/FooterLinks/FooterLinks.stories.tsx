@@ -3,7 +3,7 @@ import FooterLinks from './FooterLinks';
 import regions from 'common/regions';
 
 export default {
-  title: 'Shared Components/VulnerabilitiesFooterLinks',
+  title: 'Components/VulnerabilitiesFooterLinks',
   component: FooterLinks,
 };
 

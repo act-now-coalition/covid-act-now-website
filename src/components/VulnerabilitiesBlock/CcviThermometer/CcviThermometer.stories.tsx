@@ -2,7 +2,7 @@ import React from 'react';
 import CcviThermometer from './CcviThermometer';
 
 export default {
-  title: 'Shared Components/Vulnerabilities/CcviThermometer',
+  title: 'Components/Vulnerabilities/CcviThermometer',
   component: CcviThermometer,
 };
 

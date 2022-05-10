@@ -8,7 +8,7 @@ import {
 import countyToZipMap from 'common/data/county-zipcode.json';
 
 export default {
-  title: 'Shared Components/HomepageSearchAutocomplete',
+  title: 'Components/HomepageSearchAutocomplete',
   component: SearchAutocomplete,
 };
 

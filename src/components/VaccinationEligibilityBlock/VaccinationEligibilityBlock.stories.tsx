@@ -3,7 +3,7 @@ import VaccinationEligibilityBlock from './VaccinationEligibilityBlock';
 import regions from 'common/regions';
 
 export default {
-  title: 'Shared Components/VaccinationEligibilityBlock',
+  title: 'Components/VaccinationEligibilityBlock',
   component: VaccinationEligibilityBlock,
 };
 

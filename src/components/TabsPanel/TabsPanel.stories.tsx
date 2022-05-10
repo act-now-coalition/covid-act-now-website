@@ -3,7 +3,7 @@ import TabsPanel from './TabsPanel';
 import { ButtonBlock } from 'components/VaccinationEligibilityBlock';
 
 export default {
-  title: 'Shared Components/TabsPanel',
+  title: 'Components/TabsPanel',
   component: TabsPanel,
 };
 
