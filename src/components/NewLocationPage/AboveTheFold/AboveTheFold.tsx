@@ -25,7 +25,6 @@ import { DesktopOnly, MobileOnly } from '../Shared/Shared.style';
 import VaccineButton from 'components/NewLocationPage/HeaderButtons/VaccineButton';
 import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
-import { Can82BannerLocationPage } from 'components/Banner';
 import { MasksCard, TransmissionMetricsCard } from '../ClickableCard';
 import { Level } from 'common/level';
 
@@ -54,7 +53,6 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     const showMasksCard = locationSummary.level === Level.HIGH;
     return (
       <MainWrapper>
-        <Can82BannerLocationPage />
         <ContentContainer>
           <GridContainer showMasksCard={showMasksCard}>
             <GridItemHeader>

@@ -43,7 +43,6 @@ import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
-import { Can82BannerHomepage } from 'components/Banner';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 
 function getPageDescription() {
@@ -130,7 +129,6 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
-      <Can82BannerHomepage />
       <HomePageHeader />
       <main>
         <div className="App">
