@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonSystem from './ButtonSystem';
 
 export default {
-  title: 'Buttons/All',
+  title: 'Components/Buttons/All',
   component: ButtonSystem,
 };
 

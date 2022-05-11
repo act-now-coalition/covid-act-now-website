@@ -2,7 +2,7 @@ import React from 'react';
 import RegionItemSkeleton from './RegionItemSkeleton';
 
 export default {
-  title: 'Shared Components/HomepageRegionItemSkeleton',
+  title: 'Components/HomepageRegionItemSkeleton',
   component: RegionItemSkeleton,
 };
 

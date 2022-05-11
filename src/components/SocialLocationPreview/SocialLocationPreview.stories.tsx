@@ -4,7 +4,7 @@ import { useProjectionsFromRegion } from 'common/utils/model';
 import SocialLocationPreview from './SocialLocationPreview';
 
 export default {
-  title: 'Location page redesign/SocialLocationPreview',
+  title: 'Location Page/SocialLocationPreview',
   component: SocialLocationPreview,
 };
 

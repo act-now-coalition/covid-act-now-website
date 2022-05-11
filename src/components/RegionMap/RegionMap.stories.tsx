@@ -5,7 +5,7 @@ import { getAlertColor } from 'components/RegionMap/RegionMap.style';
 import { LocationSummary } from 'common/location_summaries';
 
 export default {
-  title: 'Shared Components/Region Map',
+  title: 'Components/Region Map',
   component: RegionMap,
 };
 

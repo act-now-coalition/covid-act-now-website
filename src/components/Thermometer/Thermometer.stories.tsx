@@ -5,7 +5,7 @@ import { getMetricDefinition } from 'common/metric';
 import { Metric } from 'common/metricEnum';
 
 export default {
-  title: 'Shared Components/Thermometer',
+  title: 'Components/Thermometer',
   component: Thermometer,
 };
 

@@ -3,7 +3,7 @@ import SummaryStat from './SummaryStat';
 import { Metric } from 'common/metricEnum';
 
 export default {
-  title: 'Location page redesign/Summary stats',
+  title: 'Location Page/Summary stats',
   component: SummaryStat,
 };
 

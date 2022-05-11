@@ -5,7 +5,7 @@ import { getProjectionForRegion } from '../SparkLineBlock/utils';
 import regions from 'common/regions';
 
 export default {
-  title: 'Location page redesign/Vaccinations progress bar block',
+  title: 'Location Page/Vaccinations progress bar block',
   component: VaccinationProgressBlock,
 };
 

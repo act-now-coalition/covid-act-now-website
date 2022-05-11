@@ -10,7 +10,7 @@ import { useDialog } from 'common/hooks';
 import { EventCategory } from 'components/Analytics';
 
 export default {
-  title: 'Below the fold/Metric info modal',
+  title: 'Location Page/Metric info modal',
   component: DialogMain,
 };
 

@@ -3,7 +3,7 @@ import GetAlertsBlock from './GetAlertsBlock';
 import regions from 'common/regions';
 
 export default {
-  title: 'Location page redesign/Get alerts block',
+  title: 'Location Page/Get alerts block',
   component: GetAlertsBlock,
 };
 
