@@ -4,7 +4,7 @@ import { useProjectionsFromRegion } from 'common/utils/model';
 import SummaryStats from './SummaryStats';
 
 export default {
-  title: 'Building Blocks/SummaryStats',
+  title: 'Components/SummaryStats',
   component: SummaryStats,
 };
 

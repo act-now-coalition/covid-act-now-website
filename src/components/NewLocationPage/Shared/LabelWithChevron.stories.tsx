@@ -2,7 +2,7 @@ import React from 'react';
 import LabelWithChevron from './LabelWithChevron';
 
 export default {
-  title: 'Location page redesign/Shared/Label with chevron',
+  title: 'Location Page/Shared/Label with chevron',
   component: LabelWithChevron,
 };
 

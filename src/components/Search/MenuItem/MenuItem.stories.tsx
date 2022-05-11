@@ -3,7 +3,7 @@ import MenuItem from './MenuItem';
 import regions from 'common/regions';
 
 export default {
-  title: 'Shared Components/MenuItem',
+  title: 'Components/MenuItem',
   component: MenuItem,
 };
 

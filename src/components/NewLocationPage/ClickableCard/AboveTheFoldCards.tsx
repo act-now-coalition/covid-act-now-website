@@ -19,7 +19,7 @@ export const MasksCard: React.FC<{ onClick: () => void }> = ({ onClick }) => {
         cardBody={
           <>
             CDC recommends masking indoors in this location due to high
-            community levels
+            community risk levels
           </>
         }
       />

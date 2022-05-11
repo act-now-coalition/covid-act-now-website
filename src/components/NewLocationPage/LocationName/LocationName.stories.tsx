@@ -3,7 +3,7 @@ import LocationName from './LocationName';
 import regions from 'common/regions';
 
 export default {
-  title: 'Location page redesign/Location Name',
+  title: 'Location Page/Location Name',
   component: LocationName,
 };
 

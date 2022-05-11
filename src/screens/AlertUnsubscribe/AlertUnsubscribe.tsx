@@ -55,7 +55,11 @@ const AlertUnsubscribe = () => {
   }, [email]);
 
   async function unsubscribeFromAll() {
-    trackEvent(EventCategory.ENGAGEMENT, EventAction.ALERTS_UNSUBSCRIBE);
+    trackEvent(
+      EventCategory.ENGAGEMENT,
+      EventAction.ALERTS_UNSUBSCRIBE,
+      'Unsubscribe',
+    );
     const subscriptions = await getAlertsSubscriptions();
     await subscriptions.doc(email).delete();
 

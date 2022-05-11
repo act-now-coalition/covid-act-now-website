@@ -2,7 +2,7 @@ import React from 'react';
 import { MarkdownContent } from './index';
 
 export default {
-  title: 'Building Blocks/Markdown',
+  title: 'Components/Markdown',
   component: MarkdownContent,
 };
 

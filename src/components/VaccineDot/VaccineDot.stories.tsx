@@ -2,7 +2,7 @@ import React from 'react';
 import VaccineDot, { DotStyle, VaccineDotProps } from './VaccineDot';
 
 export default {
-  title: 'Shared Components/VaccineDot',
+  title: 'Components/VaccineDot',
   component: VaccineDot,
 };
 

@@ -4,7 +4,7 @@ import { vulnerabilitiesModal } from 'cms-content/modals';
 import { MarkdownBody } from 'components/Markdown';
 
 export default {
-  title: 'Below the fold/Vulnerabilities Modal',
+  title: 'Location Page/Vulnerabilities Modal',
   component: DialogMain,
 };
 

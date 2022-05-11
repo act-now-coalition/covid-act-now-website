@@ -3,7 +3,7 @@ import RegionItem from './RegionItem';
 import regions from 'common/regions';
 
 export default {
-  title: 'Shared Components/HomepageRegionItem',
+  title: 'Components/HomepageRegionItem',
   component: RegionItem,
 };
 
