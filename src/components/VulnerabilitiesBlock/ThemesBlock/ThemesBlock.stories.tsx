@@ -3,7 +3,7 @@ import ThemesBlock from './ThemesBlock';
 import { useCcviForFips } from 'common/hooks';
 
 export default {
-  title: 'Components/Vulnerabilities/ThemesBlock',
+  title: 'Location Page/Vulnerabilities/ThemesBlock',
   component: ThemesBlock,
 };
 
