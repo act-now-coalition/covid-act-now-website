@@ -86,7 +86,10 @@ function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       {formatPercent(currentRatioBedsWithCovid)} of staffed inpatient beds in{' '}
       {projections.isCounty ? hsaCopy : locationName} are occupied by COVID
-      patients.
+      patients. Grading is not applied to patients with COVID prior to April 18,
+      2022, indicated by the dotted line. This date marks our change to measure
+      community risk levels, a framework that is only relevant for the current
+      phase of the pandemic.
     </Fragment>
   );
 }
