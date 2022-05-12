@@ -6,7 +6,7 @@ import { useCcviForFips } from 'common/hooks';
 import { EventCategory } from 'components/Analytics';
 
 export default {
-  title: 'Below the fold/Expandable container',
+  title: 'Location Page/Expandable container',
   component: ExpandableContainer,
 };
 

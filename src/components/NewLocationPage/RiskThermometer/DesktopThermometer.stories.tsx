@@ -3,7 +3,7 @@ import DesktopThermometer from './DesktopThermometer';
 import { Level } from 'common/level';
 
 export default {
-  title: 'Location page redesign/Desktop thermometer',
+  title: 'Location Page/Desktop thermometer',
   component: DesktopThermometer,
 };
 

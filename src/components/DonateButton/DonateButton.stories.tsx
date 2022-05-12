@@ -2,7 +2,7 @@ import React from 'react';
 import { DonateButton, DonateButtonHeart } from './DonateButton';
 
 export default {
-  title: 'Building Blocks/Buttons',
+  title: 'Components/Buttons',
   component: DonateButton,
 };
 

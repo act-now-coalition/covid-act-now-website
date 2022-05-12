@@ -3,7 +3,7 @@ import EmailAlertsFooter from './EmailAlertsFooter';
 import regions from 'common/regions';
 
 export default {
-  title: 'Shared Components/EmailAlertsFooter',
+  title: 'Components/EmailAlertsFooter',
   component: EmailAlertsFooter,
 };
 
