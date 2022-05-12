@@ -96,7 +96,10 @@ function renderStatus(projections: Projections): React.ReactElement {
       Over the last week, {locationName} had {newCasesPerWeekText} new reported
       cases (<b>{formatDecimal(currentWeeklyReportedCases, 1)}</b> for every
       100,000 residents). Reported cases do not include all at-home positive
-      tests.
+      tests. Grading is not applied to weekly new reported cases prior to April
+      18, 2022, indicated by the dotted line. This date marks our change to
+      measure community risk levels, a framework that is only relevant for the
+      current phase of the pandemic.
     </Fragment>
   );
 }
