@@ -28,7 +28,7 @@ import {
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getColumnDate, formatTooltipColumnDate } from './utils';
-import FrameworkOverlay from './FrameworkOverlay';
+import FrameworkOverlay, { CDC_FRAMEWORK_START_DATE } from './FrameworkOverlay';
 
 // TODO(8.2) - confirm thresholds/chart/tooltip content
 
@@ -118,12 +118,19 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
       </TooltipStyle.Body>
     </Tooltip>
   );
+
+  const getMarkerColor = (p: Point) => {
+    return getColumnDate(p) <= CDC_FRAMEWORK_START_DATE
+      ? '#000'
+      : getZoneByValue(getWeeklyNewCasesPer100k(p), zones).color;
+  };
+
   const renderMarker = (p: Point) => (
     <Style.CircleMarker
       cx={getXCoord(p)}
       cy={getYCoord(p)}
       r={6}
-      fill={getZoneByValue(getWeeklyNewCasesPer100k(p), zones).color}
+      fill={getMarkerColor(p)}
     />
   );
 

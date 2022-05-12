@@ -9,6 +9,8 @@ type Point = {
   y: any;
 };
 
+export const CDC_FRAMEWORK_START_DATE = new Date('2022-04-18');
+
 const FrameworkOverlay: React.FC<{
   data: Point[];
   width: number;
@@ -17,8 +19,7 @@ const FrameworkOverlay: React.FC<{
   getYCoord: (p: Point) => number;
   xScale: ScaleTime<number, number>;
 }> = ({ data, width, height, getXCoord, getYCoord, xScale }) => {
-  const dateFrameworkUpdate = new Date('2022-04-18');
-  const overlayWidth = xScale(dateFrameworkUpdate);
+  const overlayWidth = xScale(CDC_FRAMEWORK_START_DATE);
   return (
     <>
       <RectClipGroup width={overlayWidth} height={height} topPadding={5}>

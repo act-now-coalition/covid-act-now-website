@@ -29,7 +29,7 @@ import {
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getColumnDate, formatTooltipColumnDate } from './utils';
-import FrameworkOverlay from './FrameworkOverlay';
+import FrameworkOverlay, { CDC_FRAMEWORK_START_DATE } from './FrameworkOverlay';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -101,12 +101,18 @@ const ChartZones = ({
   const lastPointY = getY(lastPoint);
   const lastPointZone = getZoneByValue(lastPointY, zones);
 
+  const getMarkerColor = (p: Point) => {
+    return getColumnDate(p) <= CDC_FRAMEWORK_START_DATE
+      ? '#000'
+      : getZoneByValue(getY(p), zones).color;
+  };
+
   const renderMarker = (d: Point) => (
     <Style.CircleMarker
       cx={getXCoord(d)}
       cy={getYCoord(d)}
       r={6}
-      fill={getZoneByValue(getY(d), zones).color}
+      fill={getMarkerColor(d)}
     />
   );
 
