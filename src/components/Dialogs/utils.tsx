@@ -9,6 +9,7 @@ import { getMetricNameExtended } from 'common/metric';
 
 export interface MetricModalContent {
   howItsCalculated: string;
+  howItsGraded?: string;
   dataSource?: React.ReactElement;
   metricDefinition: string;
   learnLink?: string;
@@ -29,6 +30,15 @@ const metricToLearnLink: { [key in Metric]: string } = {
     '/covid-community-level-metrics#weekly-new-cases',
 };
 
+const howItsGradedMap: { [key: number]: string } = {
+  [Metric.ADMISSIONS_PER_100K]:
+    'Levels for weekly new admissions are based on the CDC’s Community Level framework. Less than 10 weekly new admissions is considered Low, between 10 and 19.9 is considered Medium, and greater than or equal to 20 is considered High. No color grading is applied prior to the April 18, 2022 change to a community risk level framework, which better reflects the more recent decreased risk of severe illness and death from COVID due to vaccines, therapeutics, and past COVID infections, and other developments.',
+  [Metric.RATIO_BEDS_WITH_COVID]:
+    'Levels for percentage of patients with COVID are generally based on the CDC’s Community Level framework. Less than 10% of all new beds is considered Low, between 10 and 14.9% is considered Medium, and greater than or equal to 15 is considered High. No color grading is applied prior to the April 18, 2022 change to a community risk level framework, which better reflects the more recent decreased risk of severe illness and death from COVID due to vaccines, therapeutics, and past COVID infections, and other developments.',
+  [Metric.WEEKLY_CASES_PER_100K]:
+    'Levels for weekly new cases are based on the CDC’s Community Level framework. Less than 200 cases is considered Lower, while greater than or equal to 200 cases is considered Higher. No color grading is applied prior to the April 18, 2022 change to a community risk level framework, which better reflects the more recent decreased risk of severe illness and death from COVID due to vaccines, therapeutics, and past COVID infections, and other developments.',
+};
+
 export function getMetricModalContent(
   region: Region,
   metric: Metric,
@@ -45,6 +55,7 @@ export function getMetricModalContent(
   const modalContent = {
     metricName: getMetricNameExtended(metric),
     howItsCalculated,
+    howItsGraded: howItsGradedMap[metric],
     dataSource,
     metricDefinition,
     learnLink,
