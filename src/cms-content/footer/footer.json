@@ -5,7 +5,7 @@
     {
       "cta": "Alerts",
       "url": "#share",
-      "description": "Receive emails when your community's COVID level changes.",
+      "description": "Receive emails when your community's COVID risk level changes.",
       "iconId": "ALERTS"
     },
     {
