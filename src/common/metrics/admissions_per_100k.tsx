@@ -117,7 +117,10 @@ function renderStatus(projections: Projections): React.ReactElement {
       Over the last week, {projections.isCounty ? hsaCopy : locationName} had{' '}
       {weeklyNewCovidAdmissionsText} new COVID hospital admissions (
       <b>{formatDecimal(weeklyCovidAdmissionsPer100k, 1)}</b> for every 100,000
-      residents).
+      residents). Grading is not applied to weekly COVID admissions prior to
+      April 18, 2022, indicated by the dotted line. This date marks our change
+      to measure community risk levels, a framework that is only relevant for
+      the current phase of the pandemic.
     </Fragment>
   );
 }
