@@ -29,6 +29,7 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from './utils';
+import FrameworkOverlay, { CDC_FRAMEWORK_START_DATE } from './FrameworkOverlay';
 
 type Point = {
   x: number;
@@ -111,12 +112,19 @@ const ChartAdmissionsPer100k: FunctionComponent<{
       </TooltipStyle.Body>
     </Tooltip>
   );
+
+  const getMarkerColor = (p: Point) => {
+    return getColumnDate(p) <= CDC_FRAMEWORK_START_DATE
+      ? '#000'
+      : getZoneByValue(getAdmissionsPer100k(p), zones).color;
+  };
+
   const renderMarker = (p: Point) => (
     <Style.CircleMarker
       cx={getXCoord(p)}
       cy={getYCoord(p)}
       r={6}
-      fill={getZoneByValue(getAdmissionsPer100k(p), zones).color}
+      fill={getMarkerColor(p)}
     />
   );
 
@@ -143,6 +151,14 @@ const ChartAdmissionsPer100k: FunctionComponent<{
           width={chartWidth}
           yScale={yScale}
           curve={curveMonotoneX}
+        />
+        <FrameworkOverlay
+          width={chartWidth}
+          height={chartHeight}
+          data={data}
+          getXCoord={getXCoord}
+          getYCoord={getYCoord}
+          xScale={xScale}
         />
         <Style.LineGrid>
           <GridRows width={chartWidth} scale={yScale} tickValues={yTicks} />

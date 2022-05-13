@@ -10,7 +10,12 @@ import { MetricModalContent } from './utils';
 const MetricInfoDialogInner: React.FC<{ modalContent: MetricModalContent }> = ({
   modalContent,
 }) => {
-  const { metricDefinition, dataSource, howItsCalculated } = modalContent;
+  const {
+    metricDefinition,
+    dataSource,
+    howItsCalculated,
+    howItsGraded,
+  } = modalContent;
 
   return (
     <>
@@ -27,6 +32,12 @@ const MetricInfoDialogInner: React.FC<{ modalContent: MetricModalContent }> = ({
         </MetricDialogSectionHeader>
         <MarkdownBody source={howItsCalculated} />
       </>
+      {howItsGraded && (
+        <>
+          <MetricDialogSectionHeader>How it's graded</MetricDialogSectionHeader>
+          <MarkdownBody source={howItsGraded} />
+        </>
+      )}
     </>
   );
 };
