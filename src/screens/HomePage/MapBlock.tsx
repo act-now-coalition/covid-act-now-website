@@ -62,7 +62,6 @@ export const MapBlock: React.FC<MapBlockProps> = ({
             <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
           <Row>
-            {/* <AboutLink to={infoLink}>About this data</AboutLink> */}
             {infoLink}
             <ShareButtons
               eventCategory={EventCategory.MAP}
