@@ -41,10 +41,9 @@ import {
   getChartGroupFromMetric,
 } from 'components/Charts/Groupings';
 
-// 130 is rough accounting for the navbar + hiring banner;
-// TODO: revert to 100 when we remove the hiring banner.
-// could make these constants so we don't have to manually update
-const scrollTo = (div: null | HTMLDivElement, offset: number = 130) =>
+// 100 is rough accounting for the navbar
+// TODO: could make these constants so we don't have to manually update
+const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   div &&
   window.scrollTo({
     left: 0,
