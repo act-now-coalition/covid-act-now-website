@@ -13,4 +13,3 @@ export { default as BoosterBanner } from './BoosterBanner/BoosterBanner';
 export * from './Can82Banner';
 export default Banner;
 export { FeedbackSurveyBanner, getFeedbackSurveyUrl };
-export { default as MiniStickyBanner } from './MiniStickyBanner';

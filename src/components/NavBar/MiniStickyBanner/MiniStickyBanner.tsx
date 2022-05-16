@@ -1,3 +1,5 @@
+/** Small sticky green banner that sits above navbar */
+
 import React from 'react';
 import styled from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
