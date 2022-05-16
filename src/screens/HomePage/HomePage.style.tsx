@@ -8,8 +8,6 @@ import {
   SkeletonWrapper as RegionItemSkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
 import { COLOR_MAP } from 'common/colors';
-import Typography from '@material-ui/core/Typography';
-import { anchorStyles } from 'components/Markdown';
 
 export const ColumnCentered = styled.div`
   display: flex;
@@ -148,20 +146,6 @@ export const Row = styled.div`
   margin-top: 1rem;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    margin-top: 1.25rem;
-  }
-`;
-
-export const UnderMapText = styled(Typography)`
-  ${anchorStyles};
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1rem;
-  max-width: 300px;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    max-width: unset;
     margin-top: 1.25rem;
   }
 `;
