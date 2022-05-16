@@ -188,3 +188,12 @@ export const TableWrapper = styled.div`
   margin-top: 1.5rem;
   width: 100%;
 `;
+
+export const SurveyBannerWrapper = styled.div`
+  max-width: 1000px;
+  margin: auto;
+
+  @media (min-width: ${mobileBreakpoint}) {
+    padding: 32px 32px 0;
+  }
+`;
