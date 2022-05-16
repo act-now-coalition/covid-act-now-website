@@ -7,7 +7,6 @@ import {
   HomePageBlockSubtitle,
   Row,
   MapSubitemsWrapper,
-  AboutLink,
   TableWrapper,
 } from './HomePage.style';
 import LocationToggle from './LocationToggle';
@@ -21,8 +20,7 @@ interface MapBlockProps {
   renderMap: (locationScope: MapView) => React.ReactElement;
   renderThermometer: () => React.ReactElement;
   renderTable?: (locationScope: MapView) => React.ReactElement;
-  infoLink: string;
-  underMapText?: React.ReactNode;
+  infoLink: React.ReactElement;
 }
 
 export const MapBlock: React.FC<MapBlockProps> = ({
@@ -32,7 +30,6 @@ export const MapBlock: React.FC<MapBlockProps> = ({
   renderTable,
   renderThermometer,
   infoLink,
-  underMapText,
 }) => {
   const [locationScope, setLocationScope] = useState(MapView.COUNTIES);
   const onToggle = (
@@ -65,14 +62,14 @@ export const MapBlock: React.FC<MapBlockProps> = ({
             <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
           <Row>
-            <AboutLink to={infoLink}>About this data</AboutLink>
+            {/* <AboutLink to={infoLink}>About this data</AboutLink> */}
+            {infoLink}
             <ShareButtons
               eventCategory={EventCategory.MAP}
               shareUrl={shareURL}
               shareQuote={shareQuote}
             />
           </Row>
-          {underMapText}
         </MapSubitemsWrapper>
       </ColumnCentered>
     </HomePageBlock>
