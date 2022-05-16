@@ -194,7 +194,6 @@ export const SurveyBannerWrapper = styled.div`
   margin: auto;
 
   @media (min-width: ${mobileBreakpoint}) {
-    padding: ${props => props.theme.spacing(4)}px
-      ${props => props.theme.spacing(4)}px 0;
+    padding: ${({ theme }) => theme.spacing(4, 4, 0)};
   }
 `;
