@@ -46,7 +46,7 @@ function locationPageTags(
   locationName: string,
 ): MetaTags {
   const title = `U.S. COVID Risk & Vaccine Tracker`;
-  const description = `Covid Act Now has real-time tracking of your community's COVID level. Explore how ${locationName} is doing.`;
+  const description = `Covid Act Now has real-time tracking of your community's COVID risk level. Explore how ${locationName} is doing.`;
   return {
     'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,
@@ -66,7 +66,7 @@ function chartPageTags(
   metricName: string,
 ): MetaTags {
   const title = `${locationName}: ${metricName}`;
-  const description = `Covid Act Now has real-time tracking of your community's COVID level. Explore how ${locationName} is doing.`;
+  const description = `Covid Act Now has real-time tracking of your community's COVID risk level. Explore how ${locationName} is doing.`;
   return {
     'og:url': canonicalUrl,
     'og:image:url': fullImageUrl,

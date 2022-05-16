@@ -47,7 +47,7 @@ import EmailAlertsFooter from 'components/EmailAlertsFooter';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Covid Act Now has real-time tracking of your community's COVID level. Explore how your community is doing.`;
+  return `${date} Covid Act Now has real-time tracking of your community's COVID risk level. Explore how your community is doing.`;
 }
 
 export default function HomePage() {
