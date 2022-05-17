@@ -25,6 +25,7 @@ import {
   HomePageBlock,
   ColumnCentered,
   VaccinationsThermometerHeading,
+  SurveyBannerWrapper,
   AboutLink,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
@@ -44,6 +45,7 @@ import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
+import FeedbackSurveyBanner from 'components/Banner/FeedbackSurveyBanner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -129,6 +131,9 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
+      <SurveyBannerWrapper>
+        <FeedbackSurveyBanner />
+      </SurveyBannerWrapper>
       <HomePageHeader />
       <main>
         <div className="App">
