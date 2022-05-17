@@ -63,48 +63,50 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
 
 /* The default aspect-ratio for the state and US maps is 800x600 */
 
-const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
-  const [mapType, setMapType] = useLocalStorage<MapType>(
-    StorageKeys.COUNTY_MAP_TYPE,
-    MapType.COMMUNITY_LEVEL,
-  );
+const CountyMap: React.FC<{ region: Region; offsetMap?: boolean }> = React.memo(
+  ({ region, offsetMap = false }) => {
+    const [mapType, setMapType] = useLocalStorage<MapType>(
+      StorageKeys.COUNTY_MAP_TYPE,
+      MapType.COMMUNITY_LEVEL,
+    );
 
-  const onClickToggle = (
-    event: React.MouseEvent<HTMLElement>,
-    newView: MapType | null,
-  ) => {
-    if (newView) {
-      setMapType(newView);
-      trackEvent(
-        EventCategory.MINI_MAP,
-        EventAction.SELECT,
-        `Select: ${mapType}`,
-      );
-    }
-  };
+    const onClickToggle = (
+      event: React.MouseEvent<HTMLElement>,
+      newView: MapType | null,
+    ) => {
+      if (newView) {
+        setMapType(newView);
+        trackEvent(
+          EventCategory.MINI_MAP,
+          EventAction.SELECT,
+          `Select: ${mapType}`,
+        );
+      }
+    };
 
-  const mapTypeInfo = MAP_TYPE_INFO[mapType];
+    const mapTypeInfo = MAP_TYPE_INFO[mapType];
 
-  return (
-    <MapContainer>
-      <FixedAspectRatio widthToHeight={800 / 600}>
-        <RegionMap region={region} colorMap={mapTypeInfo.colorMap} />
-      </FixedAspectRatio>
-      <ThermometerContainer>
-        <ToggleWrapper>
-          <ButtonGroup value={mapType} exclusive onChange={onClickToggle}>
-            <Button value={MapType.VACCINATIONS}>
-              {MAP_TYPE_INFO[MapType.VACCINATIONS].mapButtonLabel}
-            </Button>
-            <Button value={MapType.COMMUNITY_LEVEL}>
-              {MAP_TYPE_INFO[MapType.COMMUNITY_LEVEL].mapButtonLabel}
-            </Button>
-          </ButtonGroup>
-        </ToggleWrapper>
-        {mapTypeInfo.thermometer}
-      </ThermometerContainer>
-    </MapContainer>
-  );
-});
+    return (
+      <MapContainer offsetMap={offsetMap}>
+        <FixedAspectRatio widthToHeight={800 / 600}>
+          <RegionMap region={region} colorMap={mapTypeInfo.colorMap} />
+        </FixedAspectRatio>
+        <ThermometerContainer>
+          <ToggleWrapper>
+            <ButtonGroup value={mapType} exclusive onChange={onClickToggle}>
+              <Button value={MapType.VACCINATIONS}>
+                {MAP_TYPE_INFO[MapType.VACCINATIONS].mapButtonLabel}
+              </Button>
+              <Button value={MapType.COMMUNITY_LEVEL}>
+                {MAP_TYPE_INFO[MapType.COMMUNITY_LEVEL].mapButtonLabel}
+              </Button>
+            </ButtonGroup>
+          </ToggleWrapper>
+          {mapTypeInfo.thermometer}
+        </ThermometerContainer>
+      </MapContainer>
+    );
+  },
+);
 
 export default CountyMap;
