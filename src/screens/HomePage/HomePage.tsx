@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
 import USVaccineMap from 'components/USMap/USVaccineMap';
 import { NavBarSearch } from 'components/NavBar';
@@ -25,8 +25,8 @@ import {
   HomePageBlock,
   ColumnCentered,
   VaccinationsThermometerHeading,
-  UnderMapText,
   SurveyBannerWrapper,
+  AboutLink,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
@@ -49,7 +49,7 @@ import FeedbackSurveyBanner from 'components/Banner/FeedbackSurveyBanner';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Covid Act Now has real-time tracking of your community's COVID level. Explore how your community is doing.`;
+  return `${date} Covid Act Now has real-time tracking of your community's COVID risk level. Explore how your community is doing.`;
 }
 
 export default function HomePage() {
@@ -156,8 +156,11 @@ export default function HomePage() {
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}
               renderThermometer={() => <CommunityLevelThermometer />}
-              infoLink="/covid-community-level-metrics"
-              underMapText={getCommunityLevelUnderMapText()}
+              infoLink={
+                <AboutLink to="/covid-community-level-metrics">
+                  About community risk levels
+                </AboutLink>
+              }
             />
 
             <MapBlock
@@ -183,9 +186,12 @@ export default function HomePage() {
                   <VaccinationsThermometer />
                 </>
               )}
-              infoLink="/covid-community-level-metrics#percent-vaccinated"
+              infoLink={
+                <AboutLink to="/covid-community-level-metrics#percent-vaccinated">
+                  About this data
+                </AboutLink>
+              }
             />
-
             <HomePageBlock
               ref={exploreSectionRef}
               id="explore-hospitalizations"
@@ -221,15 +227,6 @@ export default function HomePage() {
         </div>
       </main>
     </>
-  );
-}
-
-function getCommunityLevelUnderMapText() {
-  return (
-    <UnderMapText>
-      Understand what your Community Risk Level Color rating means{' '}
-      <Link to="/covid-community-level-metrics">here</Link>.
-    </UnderMapText>
   );
 }
 
