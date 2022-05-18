@@ -181,3 +181,10 @@ export const SurveyBannerWrapper = styled.div`
     padding: ${({ theme }) => theme.spacing(4, 4, 0)};
   }
 `;
+
+export const MapDescriptionText = styled.span`
+  color: ${COLOR_MAP.GREY_4};
+  text-align: center;
+  max-width: 640px;
+  margin: ${({ theme }) => theme.spacing(4, 'auto', 1.5)};
+`;

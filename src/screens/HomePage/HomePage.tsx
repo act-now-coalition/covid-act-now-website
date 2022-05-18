@@ -27,6 +27,7 @@ import {
   VaccinationsThermometerHeading,
   SurveyBannerWrapper,
   AboutLink,
+  MapDescriptionText,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
@@ -46,6 +47,7 @@ import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import FeedbackSurveyBanner from 'components/Banner/FeedbackSurveyBanner';
+import { TextTooltip, trackOpenTooltip } from 'components/InfoTooltip';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -161,6 +163,7 @@ export default function HomePage() {
                   About community risk levels
                 </AboutLink>
               }
+              mapDescription={getRiskMapDescription()}
             />
 
             <MapBlock
@@ -240,5 +243,26 @@ function getVaccinationProgressSubtitle() {
       <b>{percentVaccinated}</b> of the entire U.S. population has received{' '}
       <b>1+ dose</b>.
     </>
+  );
+}
+
+function getRiskMapDescription() {
+  return (
+    <MapDescriptionText>
+      Our new framework reflects the decreased risk of severe illness and death
+      from COVID due to vaccines, therapeutics, and past COVID infections.
+      <br />
+      <br />
+      Note: People who need extra caution can still refer to our older{' '}
+      <TextTooltip
+        title="Daily new cases, infection rate, and positive test rate can be found after selecting a location."
+        mainCopy="Transmission metrics"
+        aria-label="Description of where to find transmission metrics data"
+        trackOpenTooltip={() =>
+          trackOpenTooltip('Homepage: transmission metrics')
+        }
+      />
+      {'.'}
+    </MapDescriptionText>
   );
 }
