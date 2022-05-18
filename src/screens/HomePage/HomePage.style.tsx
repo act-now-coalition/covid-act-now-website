@@ -182,7 +182,7 @@ export const SurveyBannerWrapper = styled.div`
   }
 `;
 
-export const MapDescriptionTest = styled.span`
+export const MapDescriptionText = styled.span`
   color: ${COLOR_MAP.GREY_4};
   text-align: center;
   max-width: 640px;

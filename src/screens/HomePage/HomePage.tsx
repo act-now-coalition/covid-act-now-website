@@ -27,7 +27,7 @@ import {
   VaccinationsThermometerHeading,
   SurveyBannerWrapper,
   AboutLink,
-  MapDescriptionTest,
+  MapDescriptionText,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
@@ -248,7 +248,7 @@ function getVaccinationProgressSubtitle() {
 
 function getRiskMapDescription() {
   return (
-    <MapDescriptionTest>
+    <MapDescriptionText>
       Our new framework reflects the decreased risk of severe illness and death
       from COVID due to vaccines, therapeutics, and past COVID infections.
       <br />
@@ -263,6 +263,6 @@ function getRiskMapDescription() {
         }
       />
       {'.'}
-    </MapDescriptionTest>
+    </MapDescriptionText>
   );
 }
