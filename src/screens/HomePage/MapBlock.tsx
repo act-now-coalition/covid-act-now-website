@@ -21,6 +21,7 @@ interface MapBlockProps {
   renderThermometer: () => React.ReactElement;
   renderTable?: (locationScope: MapView) => React.ReactElement;
   infoLink: React.ReactElement;
+  mapDescription?: React.ReactElement;
 }
 
 export const MapBlock: React.FC<MapBlockProps> = ({
@@ -30,6 +31,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
   renderTable,
   renderThermometer,
   infoLink,
+  mapDescription,
 }) => {
   const [locationScope, setLocationScope] = useState(MapView.COUNTIES);
   const onToggle = (
@@ -53,7 +55,8 @@ export const MapBlock: React.FC<MapBlockProps> = ({
     <HomePageBlock>
       <ColumnCentered>
         <HomePageBlockHeader>{title}</HomePageBlockHeader>
-        <HomePageBlockSubtitle>{subtitle}</HomePageBlockSubtitle>
+        {subtitle && <HomePageBlockSubtitle>{subtitle}</HomePageBlockSubtitle>}
+        {mapDescription}
         <LocationToggle locationScope={locationScope} onChange={onToggle} />
         {renderMap(locationScope)}
         <MapSubitemsWrapper>
