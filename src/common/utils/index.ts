@@ -1,14 +1,5 @@
+import { assert } from '@actnowcoalition/assert';
 import { DateFormat, formatDateTime } from 'common/utils/time-utils';
-
-export function assert(condition: any, msg?: string): asserts condition {
-  if (!condition) {
-    fail(msg);
-  }
-}
-
-export function fail(msg?: string): never {
-  throw new Error('INTERNAL ASSERTION FAILED: ' + msg);
-}
 
 export function nonNull<T>(value: T | null | undefined): T {
   assert(value != null, 'value was null.');
