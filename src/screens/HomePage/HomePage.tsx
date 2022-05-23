@@ -25,7 +25,6 @@ import {
   HomePageBlock,
   ColumnCentered,
   VaccinationsThermometerHeading,
-  SurveyBannerWrapper,
   AboutLink,
   MapDescriptionText,
 } from './HomePage.style';
@@ -46,7 +45,6 @@ import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
-import FeedbackSurveyBanner from 'components/Banner/FeedbackSurveyBanner';
 import { TextTooltip, trackOpenTooltip } from 'components/InfoTooltip';
 
 function getPageDescription() {
@@ -133,9 +131,6 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
-      <SurveyBannerWrapper>
-        <FeedbackSurveyBanner />
-      </SurveyBannerWrapper>
       <HomePageHeader />
       <main>
         <div className="App">
