@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import * as QueryString from 'query-string';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import {
   fetchMainSnapshotNumber,
   snapshotFromUrl,

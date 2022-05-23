@@ -9,7 +9,7 @@ import {
   metroAreasByFips,
   statesByStateCode,
 } from './preprocessed_regions_data';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 
 export class RegionDB {
   public states: State[];

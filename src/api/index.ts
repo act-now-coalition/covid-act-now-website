@@ -10,7 +10,7 @@ import {
 } from './schema/RegionSummaryWithTimeseries';
 import { AggregateRegionSummaryWithTimeseries } from './schema/AggregateRegionSummaryWithTimeseries';
 import { APIRegionSubPath } from '../common/utils/model';
-import { fail, assert } from 'common/utils';
+import { fail, assert } from '@actnowcoalition/assert';
 import fetch from 'node-fetch';
 import { County, MetroArea, Region, State, USA } from 'common/regions';
 import {

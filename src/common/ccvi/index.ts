@@ -1,5 +1,5 @@
 import { PURPLE_MAP } from 'common/colors';
-import { fail } from 'common/utils';
+import { fail } from '@actnowcoalition/assert';
 import { Region, State, County } from 'common/regions';
 
 export enum CcviLevel {

@@ -1,5 +1,6 @@
 import { Metric } from 'common/metricEnum';
-import { fail, formatDecimal, formatPercent } from 'common/utils';
+import { formatDecimal, formatPercent } from 'common/utils';
+import { fail } from '@actnowcoalition/assert';
 
 //TODO(chelsi): move this copy into individual metric files. remove need for hardcoded identifying numers
 export function makeChartShareQuote(

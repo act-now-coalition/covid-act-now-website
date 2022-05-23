@@ -7,7 +7,7 @@ import maxBy from 'lodash/maxBy';
 import { Metric } from 'common/metricEnum';
 import { Projection, Column } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';
-import { fail, assert } from 'common/utils';
+import { fail, assert } from '@actnowcoalition/assert';
 import { MetroArea } from 'common/regions';
 
 export enum SortType {

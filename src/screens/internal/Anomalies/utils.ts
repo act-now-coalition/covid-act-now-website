@@ -1,5 +1,5 @@
 import { Annotations, Anomalies } from 'api/schema/RegionSummaryWithTimeseries';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 
 // Not including all possible values because many fields never or
 // rarely get anomalies. We should extend this enum and related code as needed.

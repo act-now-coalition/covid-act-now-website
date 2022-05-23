@@ -9,7 +9,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import { BaseMuiButton } from './BaseButton.style';
 import { LinkButtonProps } from './propTypes';
 

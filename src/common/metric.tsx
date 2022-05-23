@@ -9,7 +9,7 @@ import * as AdmissionsPer100k from 'common/metrics/admissions_per_100k';
 import * as RatioBedsWithCovid from 'common/metrics/ratio_beds_with_covid_patients';
 import { Projections } from 'common/models/Projections';
 import { ALL_LEVELS, Level, LevelInfo, LevelInfoMap } from 'common/level';
-import { fail } from 'common/utils';
+import { fail } from '@actnowcoalition/assert';
 import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
