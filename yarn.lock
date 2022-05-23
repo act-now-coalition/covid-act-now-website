@@ -29,6 +29,11 @@
   dependencies:
     tunnel "0.0.6"
 
+"@actnowcoalition/assert@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@actnowcoalition/assert/-/assert-1.0.0.tgz#060686d3f81aefc5e2f23709c51d0236389104eb"
+  integrity sha512-LVu0iIEnl2tfCFWuynm7pXX6jtLiiD3o3vV5mJSdnKONOsGAWs7CW15tMj30SUrLHLP3zhHFFpu9Y/hXL/Flig==
+
 "@amplitude/types@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@amplitude/types/-/types-1.5.0.tgz#cf34d0f304558d8b0d847a6217d506e6226e653c"

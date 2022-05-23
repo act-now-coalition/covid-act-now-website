@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
 import { Api } from 'api';
-import { assert, fail } from '.';
+import { assert, fail } from '@actnowcoalition/assert';
 import { getSnapshotUrlOverride } from './snapshots';
 import regions, { Region, County, RegionType, State } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';

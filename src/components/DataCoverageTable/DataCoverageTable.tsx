@@ -12,7 +12,8 @@ import {
   MetricTableCellHeader,
 } from './DataCoverageTable.style';
 import coverageSummary from 'components/DataCoverageTable/coverage-summary.json';
-import { fail, formatPercent, pluralize } from 'common/utils';
+import { formatPercent, pluralize } from 'common/utils';
+import { fail } from '@actnowcoalition/assert';
 import { RegionType } from 'common/regions';
 import { TextTooltip } from 'components/InfoTooltip';
 

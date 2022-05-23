@@ -14,7 +14,7 @@ import { snapshotUrl } from 'common/utils/snapshots';
 import regions, { County, MetroArea, Region, State } from 'common/regions';
 import { Projections } from 'common/models/Projections';
 import { fetchSummaries } from 'common/location_summaries';
-import { fail, assert } from 'common/utils';
+import { fail, assert } from '@actnowcoalition/assert';
 import { ALL_METRICS } from 'common/metric';
 
 export const COUNTIES_LIMIT = 100;

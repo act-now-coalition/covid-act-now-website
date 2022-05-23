@@ -1,6 +1,6 @@
 import * as QueryString from 'query-string';
 import fetch from 'node-fetch';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import DataUrlJson from 'assets/data/data_url.json';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;

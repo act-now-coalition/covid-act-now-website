@@ -1,5 +1,5 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
 import { Region } from './regions';

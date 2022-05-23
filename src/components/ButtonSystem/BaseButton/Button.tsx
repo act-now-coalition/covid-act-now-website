@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import { BaseMuiButton } from './BaseButton.style';
 import { StyledButtonProps } from './propTypes';
 
