@@ -2,7 +2,7 @@ import pickBy from 'lodash/pickBy';
 import isEqual from 'lodash/isEqual';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { assert } from './utils';
+import { assert } from '@actnowcoalition/assert';
 import { getFirestore } from './firebase';
 
 const SHARED_COMPONENT_PARAMS_COLLECTION = 'shared-component-params';

@@ -57,7 +57,7 @@ import { getLocationLabel } from 'components/AutocompleteRegions';
 import { ShareBlock } from 'components/Footer/Footer.style';
 import { EmptyPanel } from 'components/Charts/Charts.style';
 import { useChartHeightForBreakpoint } from 'common/hooks';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;

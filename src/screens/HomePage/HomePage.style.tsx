@@ -173,15 +173,6 @@ export const TableWrapper = styled.div`
   width: 100%;
 `;
 
-export const SurveyBannerWrapper = styled.div`
-  max-width: 1000px;
-  margin: auto;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    padding: ${({ theme }) => theme.spacing(4, 4, 0)};
-  }
-`;
-
 export const MapDescriptionText = styled.span`
   color: ${COLOR_MAP.GREY_4};
   text-align: center;

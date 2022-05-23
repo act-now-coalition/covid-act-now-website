@@ -19,7 +19,7 @@ import regions, {
   getAutocompleteRegions,
   USA,
 } from 'common/regions';
-import { fail } from 'assert';
+import { fail } from '@actnowcoalition/assert';
 import { pluralize, formatPercent, formatDecimal } from 'common/utils';
 import {
   TimeUnit,

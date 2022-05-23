@@ -37,7 +37,7 @@ import regions, {
   getStateCode,
   County,
 } from 'common/regions';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import {
   useLocationPageCompareSliderMap,
   useHomepageCompareSliderMap,

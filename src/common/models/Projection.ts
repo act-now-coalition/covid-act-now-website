@@ -2,6 +2,7 @@ import first from 'lodash/first';
 import last from 'lodash/last';
 import findIndex from 'lodash/findIndex';
 import findLastIndex from 'lodash/findLastIndex';
+import { assert } from '@actnowcoalition/assert';
 import { ActualsTimeseries } from 'api';
 import {
   ActualsTimeseriesRow,
@@ -15,7 +16,7 @@ import {
   HospitalResourceUtilizationWithAdmissions,
 } from 'api/schema/RegionSummaryWithTimeseries';
 import { indexOfLastValue, lastValue } from './utils';
-import { assert, formatPercent, getPercentChange } from 'common/utils';
+import { formatPercent, getPercentChange } from 'common/utils';
 import { Metric } from 'common/metricEnum';
 import { Region } from 'common/regions';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';

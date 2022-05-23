@@ -4,7 +4,7 @@ import {
   LinkProps as RouterLinkProps,
 } from 'react-router-dom';
 import { HashLink, HashLinkProps } from 'react-router-hash-link';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import { BaseButton } from './LinkButton.style';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 
