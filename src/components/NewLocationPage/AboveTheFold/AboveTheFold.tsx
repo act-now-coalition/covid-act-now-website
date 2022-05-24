@@ -37,7 +37,6 @@ interface AboveTheFoldProps {
   onClickSparkLine: (metric: SparkLineMetric) => void;
   onClickMasksCard: () => void;
   onClickTransmissionMetricsCard: () => void;
-  yPosition?: number;
 }
 
 const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
@@ -50,10 +49,8 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     onClickSparkLine,
     onClickMasksCard,
     onClickTransmissionMetricsCard,
-    yPosition,
   }) => {
     const showMasksCard = locationSummary.level === Level.HIGH;
-    const offsetMap = yPosition ? yPosition > 5350 : false;
     return (
       <MainWrapper>
         <ContentContainer>
@@ -100,11 +97,11 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
               />
             </GridItemAlerts>
             <GridItemMap>
-              <CountyMap region={region} offsetMap={offsetMap} />
+              <CountyMap region={region} />
             </GridItemMap>
           </GridContainer>
           <MapOutsideGrid>
-            <CountyMap region={region} offsetMap={offsetMap} />
+            <CountyMap region={region} />
           </MapOutsideGrid>
         </ContentContainer>
       </MainWrapper>

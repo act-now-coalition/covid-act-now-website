@@ -17,8 +17,6 @@ function WithSearchInNav({ region }: LocationPageProps) {
   let { chartId } = useParams<{ chartId: string }>();
   const [menuOpen, setMenuOpen] = useState(false);
   const hasScrolled = useShowPastPosition(850);
-  const [yPosition, setYposition] = useState(0);
-  window.addEventListener('scroll', () => setYposition(window.scrollY));
 
   return (
     <>
@@ -35,7 +33,7 @@ function WithSearchInNav({ region }: LocationPageProps) {
         hasScrolled={hasScrolled}
         region={region}
       />
-      <ChartsHolder chartId={chartId} region={region} yPosition={yPosition} />
+      <ChartsHolder chartId={chartId} region={region} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RegionMap from 'components/RegionMap';
 import FixedAspectRatio from 'components/FixedAspectRatio/FixedAspectRatio';
 import {
@@ -61,10 +61,28 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
   },
 };
 
+function useMapTileOffset(): number {
+  const [yPosition, setYposition] = useState(0);
+  const pageHeight = document.documentElement.scrollHeight;
+  const footerHeight = document.getElementsByTagName('footer')[0]?.scrollHeight;
+  // Add an additional 500px to detect when the user is close enough to the bottom of the page.
+  const offsetPoint = pageHeight - footerHeight - 500;
+  // When the user goes beyond the offset point, vertically offset the map tile by the footer height + 100px.
+  const offsetAmount = yPosition > offsetPoint ? footerHeight + 100 : 0;
+  useEffect(() => {
+    const onScroll = () => {
+      setYposition(window.scrollY);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return offsetAmount;
+}
+
 /* The default aspect-ratio for the state and US maps is 800x600 */
 
 const CountyMap: React.FC<{ region: Region; offsetMap?: boolean }> = React.memo(
-  ({ region, offsetMap = false }) => {
+  ({ region }) => {
     const [mapType, setMapType] = useLocalStorage<MapType>(
       StorageKeys.COUNTY_MAP_TYPE,
       MapType.COMMUNITY_LEVEL,
@@ -86,8 +104,10 @@ const CountyMap: React.FC<{ region: Region; offsetMap?: boolean }> = React.memo(
 
     const mapTypeInfo = MAP_TYPE_INFO[mapType];
 
+    const offsetAmount = useMapTileOffset();
+
     return (
-      <MapContainer offsetMap={offsetMap}>
+      <MapContainer offsetAmount={offsetAmount}>
         <FixedAspectRatio widthToHeight={800 / 600}>
           <RegionMap region={region} colorMap={mapTypeInfo.colorMap} />
         </FixedAspectRatio>

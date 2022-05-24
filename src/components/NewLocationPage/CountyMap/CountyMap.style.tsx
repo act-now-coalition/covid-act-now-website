@@ -12,7 +12,7 @@ export const PinnedContainer = css`
   z-index: 901;
 `;
 
-export const MapContainer = styled.div<{ offsetMap: boolean }>`
+export const MapContainer = styled.div<{ offsetAmount: number }>`
   width: 100%;
   background: white;
   border-radius: 4px;
@@ -27,8 +27,8 @@ export const MapContainer = styled.div<{ offsetMap: boolean }>`
 
   @media (min-width: ${countyMapToFixedBreakpoint}) {
     ${PinnedContainer};
-    transform: ${({ offsetMap }) =>
-      offsetMap ? 'translateY(-200px)' : 'none'};
+    bottom: ${({ offsetAmount }) =>
+      offsetAmount > 0 ? `${offsetAmount}px` : 'none'};
   }
 `;
 
