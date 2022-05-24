@@ -223,8 +223,14 @@ export class Projection {
     this.region = region;
 
     // Set up our series data exposed via getDataset().
+    this.caseDensityByCases = metricsTimeseries.map(
+      row => row && row.caseDensity,
+    );
+
     this.rawDailyCases = actualTimeseries.map(row => row && row.newCases);
-    this.smoothedDailyCases = this.smoothWithRollingAverage(this.rawDailyCases);
+    this.smoothedDailyCases = this.denormalizeByPopulation(
+      this.caseDensityByCases,
+    );
 
     this.rawDailyDeaths = actualTimeseries.map(row => row && row.newDeaths);
     this.smoothedDailyDeaths = this.smoothWithRollingAverage(
@@ -290,10 +296,6 @@ export class Projection {
     this.vaccinationsAdditionalDose =
       this.vaccinationsInfo?.ratioAdditionalDoseSeries ||
       this.dates.map(date => null);
-
-    this.caseDensityByCases = metricsTimeseries.map(
-      row => row && row.caseDensity,
-    );
 
     this.caseDensityRange = this.calcCaseDensityRange();
 
@@ -929,6 +931,13 @@ export class Projection {
       }
     }
     return result;
+  }
+
+  private denormalizeByPopulation(
+    data: Array<number | null>,
+  ): Array<number | null> {
+    const populationFactor = this.totalPopulation / 100000;
+    return data.map(d => (d == null ? null : d * populationFactor));
   }
 
   disaggregateHsaValue(hsaValue: number | null) {
