@@ -2,7 +2,13 @@
 #
 # https://www.chromatic.com/docs/github-actions
 name: 'Chromatic'
-on: push
+on:
+  push:
+    # Workflows triggered by Dependabot don't have access to secrets, which
+    # will cause this workflow to fail. See
+    # https://github.blog/changelog/2021-02-19-github-actions-workflows-triggered-by-dependabot-prs-will-run-with-read-only-permissions/
+    branches-ignore:
+      - 'dependabot/**'
 
 jobs:
   chromatic-deployment:
