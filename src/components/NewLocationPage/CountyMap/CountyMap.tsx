@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RegionMap from 'components/RegionMap';
 import FixedAspectRatio from 'components/FixedAspectRatio/FixedAspectRatio';
 import {
@@ -61,6 +61,31 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
   },
 };
 
+/**
+ * This function ensures the map doesn't overlap the footer content
+ * when the user scrolls to the bottom of the page.
+ */
+function useMapContainerOffset(): number | null {
+  const [scrollY, setScrollY] = useState(0);
+  const pageHeight = document.documentElement.scrollHeight;
+  const footerHeight = document.getElementsByTagName('footer')[0]?.scrollHeight;
+  /**
+   * Once the user scrolls far enough that the footer is within 500px of the top of the screen,
+   * we want to freeze the map tile so that it can't overlap with the footer and obscure footer content.
+   * To do that we set its bottom to be 100px above the footer.
+   */
+  const offsetPoint = pageHeight - footerHeight - 500;
+  const bottomPosition = scrollY > offsetPoint ? footerHeight + 100 : null;
+  useEffect(() => {
+    const onScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return bottomPosition;
+}
+
 /* The default aspect-ratio for the state and US maps is 800x600 */
 
 const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
@@ -85,8 +110,10 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
 
   const mapTypeInfo = MAP_TYPE_INFO[mapType];
 
+  const bottomPosition = useMapContainerOffset();
+
   return (
-    <MapContainer>
+    <MapContainer bottomPosition={bottomPosition}>
       <FixedAspectRatio widthToHeight={800 / 600}>
         <RegionMap region={region} colorMap={mapTypeInfo.colorMap} />
       </FixedAspectRatio>
