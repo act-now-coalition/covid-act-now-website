@@ -1,6 +1,5 @@
 import capitalize from 'lodash/capitalize';
 import words from 'lodash/words';
-import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';
 import { trackGA4Event } from './gtag';
@@ -91,8 +90,14 @@ export enum EventAction {
   OPEN_TOOLTIP = 'open tooltip',
 }
 
+// Capitalize string (special characters are not kept)
 function toTitleCase(name: string) {
   return words(name).map(capitalize).join(' ');
+}
+
+// Capitalize string (special characters kept in place by not using "words" from lodash)
+function toTitleCaseWithSpecialCharacters(name: string) {
+  return name.split(' ').map(capitalize).join(' ');
 }
 
 /**
@@ -108,19 +113,10 @@ export function trackEvent(
   transport: 'beacon' | 'xhr' | 'image' = 'beacon',
 ) {
   if (category !== EventCategory.NONE) {
-    ReactGA.event({
-      category,
-      action,
-      label,
-      value,
-      nonInteraction,
-      transport,
-    });
-
     trackGA4Event(
       toTitleCase(action),
       toTitleCase(category),
-      toTitleCase(label),
+      toTitleCaseWithSpecialCharacters(label),
       value,
     );
 
