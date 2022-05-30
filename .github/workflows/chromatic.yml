@@ -9,13 +9,14 @@ on:
     # https://github.blog/changelog/2021-02-19-github-actions-workflows-triggered-by-dependabot-prs-will-run-with-read-only-permissions/
     branches-ignore:
       - 'dependabot/**'
+      - 'bump-snapshot-**'
 
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Install dependencies
