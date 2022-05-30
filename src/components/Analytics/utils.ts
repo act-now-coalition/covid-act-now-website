@@ -97,8 +97,7 @@ function toTitleCase(name: string) {
 
 // Capitalize string (special characters kept in place by not using "words" from lodash)
 function toTitleCaseWithSpecialCharacters(name: string) {
-  const words = name.split(' ');
-  return words.map(word => capitalize(word)).join(' ');
+  return name.split(' ').map(capitalize).join(' ');
 }
 
 /**
