@@ -23,7 +23,7 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from 'components/Charts/utils';
-import { TimeUnit } from 'common/utils/time-utils';
+import { TimeUnit } from '@actnowcoalition/time-utils';
 
 interface LabelInfo {
   x: number;

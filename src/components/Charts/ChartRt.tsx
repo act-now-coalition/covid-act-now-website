@@ -29,7 +29,7 @@ import Axes from 'components/Explore/Axes';
 import { scaleUtc } from '@vx/scale';
 import { getYFormat } from 'components/Explore/utils';
 import { DataMeasure } from 'components/Explore/interfaces';
-import { TimeUnit } from 'common/utils/time-utils';
+import { TimeUnit } from '@actnowcoalition/time-utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 

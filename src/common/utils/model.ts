@@ -5,7 +5,7 @@ import { assert, fail } from '@actnowcoalition/assert';
 import { getSnapshotUrlOverride } from './snapshots';
 import regions, { Region, County, RegionType, State } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
-import { parseDateString } from 'common/utils/time-utils';
+import { parseDateString } from '@actnowcoalition/time-utils';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',

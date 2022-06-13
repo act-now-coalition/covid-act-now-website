@@ -9,7 +9,11 @@ import { Recommendation, RecommendCategory } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { formatDecimal } from '.';
 import { getAbbreviatedCounty, Region } from 'common/regions';
-import { TimeUnit, getStartOf, subtractTime } from 'common/utils/time-utils';
+import {
+  TimeUnit,
+  getStartOf,
+  subtractTime,
+} from '@actnowcoalition/time-utils';
 
 export function trackRecommendationsEvent(action: EventAction, label: string) {
   trackEvent(EventCategory.RECOMMENDATIONS, action, label);

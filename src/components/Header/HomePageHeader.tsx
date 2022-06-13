@@ -6,7 +6,7 @@ import {
   trackOpenTooltip,
   getLastUpdatedTooltipCopy,
 } from 'components/InfoTooltip';
-import { formatDateTime, DateFormat } from 'common/utils/time-utils';
+import { formatDateTime, DateFormat } from '@actnowcoalition/time-utils';
 
 function renderInfoTooltip(updatedDate: Date): ReactElement {
   const tooltipCopy = getLastUpdatedTooltipCopy(updatedDate);

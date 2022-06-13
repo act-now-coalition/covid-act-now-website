@@ -9,7 +9,7 @@ import {
   subtractTime,
   getStartOf,
   getTimeDiff,
-} from 'common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 
 // Date object constructor takes a zero-indexed month number.
 
