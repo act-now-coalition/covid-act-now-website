@@ -26,8 +26,8 @@ import {
   DateFormat,
   formatDateTime,
   getTimeDiff,
-} from 'common/utils/time-utils';
-import { subtractTime } from 'common/utils/time-utils';
+  subtractTime,
+} from '@actnowcoalition/time-utils';
 
 export enum Period {
   DAYS_60,

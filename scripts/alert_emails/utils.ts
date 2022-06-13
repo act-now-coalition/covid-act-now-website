@@ -5,7 +5,7 @@ import { Alert } from './interfaces';
 import { Level } from '../../src/common/level';
 import { LOCATION_SUMMARY_LEVELS } from '../../src/common/metrics/location_summary';
 import { fetchMainSnapshotNumber } from '../../src/common/utils/snapshots';
-import { DateFormat, formatDateTime } from '../../src/common/utils/time-utils';
+import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 

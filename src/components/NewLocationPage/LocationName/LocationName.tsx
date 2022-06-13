@@ -8,7 +8,7 @@ import {
   PlainLink,
 } from './LocationName.style';
 import { useModelLastUpdatedDate } from 'common/utils/model';
-import { DateFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 import {
   TextTooltip,
   trackOpenTooltip,

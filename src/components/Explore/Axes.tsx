@@ -7,7 +7,7 @@ import {
   getXTickFormat,
   getTimeAxisTicks,
 } from 'components/Charts/utils';
-import { TimeUnit } from 'common/utils/time-utils';
+import { TimeUnit } from '@actnowcoalition/time-utils';
 
 const Axes: React.FC<{
   height: number;

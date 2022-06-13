@@ -20,7 +20,7 @@ import {
   DateFormat,
   parseDateString,
   formatDateTime,
-} from 'common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 
 const GlossaryTerm: React.FC<{ term: Term }> = ({ term }) => {
   return (

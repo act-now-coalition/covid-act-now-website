@@ -26,7 +26,7 @@ import {
   getTimeAxisTicks,
 } from './utils';
 import BoxedAnnotation from './BoxedAnnotation';
-import { getStartOf, addTime, TimeUnit } from 'common/utils/time-utils';
+import { getStartOf, addTime, TimeUnit } from '@actnowcoalition/time-utils';
 
 const getY = (d: Column) => d.y;
 
