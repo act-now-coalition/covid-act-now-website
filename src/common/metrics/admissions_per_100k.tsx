@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Projections } from 'common/models/Projections';
-import { formatDecimal, formatInteger } from 'common/utils';
+import { formatDecimal } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
