@@ -3,7 +3,7 @@ import { cleanSeries } from 'components/Explore/utils';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Region } from 'common/regions';
-import { subtractTime, TimeUnit } from 'common/utils/time-utils';
+import { subtractTime, TimeUnit } from '@actnowcoalition/time-utils';
 import { Metric } from 'common/metricEnum';
 
 export const daysToChart = 30;

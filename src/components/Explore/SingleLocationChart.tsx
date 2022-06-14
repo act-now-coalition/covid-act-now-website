@@ -20,7 +20,7 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from 'components/Charts/utils';
-import { TimeUnit, getTimeDiff } from 'common/utils/time-utils';
+import { TimeUnit, getTimeDiff } from '@actnowcoalition/time-utils';
 
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>

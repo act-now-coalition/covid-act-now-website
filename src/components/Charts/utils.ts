@@ -13,7 +13,7 @@ import {
   formatUTCDateTime,
   getStartOf,
   getTimeDiff,
-} from 'common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 import { Column } from 'common/models/Projection';
 
 export const last = (list: any[]) => list[list.length - 1];

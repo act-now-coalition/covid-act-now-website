@@ -2,7 +2,7 @@ import React from 'react';
 import { Series } from './interfaces';
 import SingleLocationChart from './SingleLocationChart';
 import MultipleLocationsChart from './MultipleLocationsChart';
-import { TimeUnit } from 'common/utils/time-utils';
+import { TimeUnit } from '@actnowcoalition/time-utils';
 
 const ExploreChart: React.FC<{
   hasMultipleLocations: boolean;

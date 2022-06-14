@@ -27,7 +27,7 @@ import {
   getMaxYFromDefinition,
 } from 'components/Explore/utils';
 import regions, { Region } from 'common/regions';
-import { TimeUnit } from 'common/utils/time-utils';
+import { TimeUnit } from '@actnowcoalition/time-utils';
 
 const ExploreChartExportImage = ({
   componentParams,

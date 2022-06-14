@@ -10,7 +10,7 @@ import { DarkScreenshotWrapper } from './ShareImage.style';
 import { ScreenshotReady, SCREENSHOT_CLASS } from 'components/Screenshot';
 import { useRegionFromParams } from 'common/regions';
 import { Region } from 'common/regions';
-import { DateFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 import { assert } from '@actnowcoalition/assert';
 
 /**

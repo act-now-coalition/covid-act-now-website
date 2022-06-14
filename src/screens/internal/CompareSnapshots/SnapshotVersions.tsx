@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import { Api, SnapshotVersion } from 'api';
 import { snapshotUrl } from 'common/utils/snapshots';
 import React, { useEffect, useState } from 'react';
-import { parseDateString } from 'common/utils/time-utils';
+import { parseDateString } from '@actnowcoalition/time-utils';
 
 export function SnapshotVersions({
   leftSnapshot,

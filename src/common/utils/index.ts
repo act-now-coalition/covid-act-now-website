@@ -1,5 +1,5 @@
 import { assert } from '@actnowcoalition/assert';
-import { DateFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
 export function nonNull<T>(value: T | null | undefined): T {
   assert(value != null, 'value was null.');

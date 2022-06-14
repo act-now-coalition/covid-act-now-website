@@ -4,7 +4,7 @@ import TextTooltip from './TextTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { StyledMarkdown, InfoIcon } from './Tooltip.style';
-import { DateFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
 export { InfoTooltip, TextTooltip, InfoIcon };
 
