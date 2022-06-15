@@ -1,5 +1,6 @@
 import { assert } from '@actnowcoalition/assert';
 import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 
 export function nonNull<T>(value: T | null | undefined): T {
   assert(value != null, 'value was null.');
@@ -27,19 +28,14 @@ export function formatMetatagDate(): string {
 }
 
 /**
- * Returns a language-sensitive representation of an integer. For US, it
- * adds commas for thousands, millions, etc.
- */
-export function formatInteger(num: number): string {
-  return Math.round(num).toLocaleString();
-}
-
-/**
  * Format a number using fixed point notation.
  *
  *   formatDecimal(1.2345)    // 1.23
  *   formatDecimal(1.2345, 3) // 1.234
  */
+
+// TODO: Replace with formatDecimal from @actnowcoalition package.
+// Currently whole numbers are formatted differently ("8.0" vs. "8").
 export const formatDecimal = (num: number, places = 2): string => {
   if (num === null) {
     return '-';
@@ -55,6 +51,7 @@ export const formatDecimal = (num: number, places = 2): string => {
     .replace('-0', '0');
 };
 
+// TODO: Replace with formatPercent from @actnowcoalition package after formatDecimal is replaced.
 /**
  * Returns a percentage representation of a number.
  *

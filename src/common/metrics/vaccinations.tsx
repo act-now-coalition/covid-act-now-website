@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfo, LevelInfoMap } from 'common/level';
-import { formatPercent, formatInteger } from 'common/utils';
+import { formatPercent } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
