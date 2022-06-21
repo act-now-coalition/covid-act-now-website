@@ -97,9 +97,10 @@ function renderStatus(projections: Projections): React.ReactElement {
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose,{ifNoAdditionalDoseAnd} {peopleVaccinated} (
       {percentVaccinated}) have received at least two doses or a single Johnson
-      & Johnson dose{additionalDoseText}. Anybody who is at least 5 years old is
-      eligible to be vaccinated. Fewer than 0.001% of people who have received a
-      dose experienced a severe adverse reaction. {cappedVaccinatedCopy}
+      & Johnson dose{additionalDoseText}. Anybody who is at least 6 months old
+      is eligible to be vaccinated. Fewer than 0.001% of people who have
+      received a dose experienced a severe adverse reaction.{' '}
+      {cappedVaccinatedCopy}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
     </Fragment>
   );
