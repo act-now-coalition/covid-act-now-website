@@ -154,7 +154,7 @@
         {
           "question": "Sources and methodology",
           "questionId": "percent-vaccinated-sources-methodology",
-          "answer": "Our vaccination metric tracks the percentage of the total population in each location that has initiated vaccination, not limited to those who are 5 and older. Someone has initiated vaccination if they have received the first shot of any of the currently available vaccines (Pfizer, Moderna, J&J). We also track the percentage of people who have completed 2+ doses of Pfizer or Moderna or the single dose J&J vaccine, and the percentage of people who have received a booster shot.\n\nOur primary source for state and county vaccination data is the [CDC COVID Data Tracker](https://covid.cdc.gov/covid-data-tracker/#vaccinations). For certain states and counties where CDC data coverage is low we source data from state and county public health dashboards."
+          "answer": "Our vaccination metric tracks the percentage of the total population in each location that has initiated vaccination. Someone has initiated vaccination if they have received the first shot of any of the currently available vaccines (Pfizer, Moderna, J&J). We also track the percentage of people who have completed 2+ doses of Pfizer or Moderna or the single dose J&J vaccine, and the percentage of people who have received a booster shot.\n\nOur primary source for state and county vaccination data is the [CDC COVID Data Tracker](https://covid.cdc.gov/covid-data-tracker/#vaccinations). For certain states and counties where CDC data coverage is low we source data from state and county public health dashboards."
         },
         {
           "question": "Limitations",
