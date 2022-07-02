@@ -53,7 +53,7 @@ export function getLevel(metric: Metric, value: number | null): Level {
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
   if (value === null) return Level.UNKNOWN;
   for (const level of ALL_LEVELS) {
-    if (value <= levelInfoMap[level].upperLimit) {
+    if (value < levelInfoMap[level].upperLimit) {
       return level;
     }
   }
