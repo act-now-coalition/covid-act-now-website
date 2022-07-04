@@ -51,6 +51,33 @@ export const EmbedWrapper = styled.div`
   }
 `;
 
+/*
+ seemingly random heights are estimates of
+ how tall the iFrame is at each screen size
+ */
+export const GiveMomentumEmbedWrapper = styled.div`
+  height: 700px;
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 600px) {
+    height: 700px;
+  }
+
+  @media (min-width: ${mobileBreakpoint}) {
+    height: 1000px;
+    flex-direction: row-reverse;
+    justify-content: center;
+    padding: 0;
+    max-width: 420px;
+    margin: 2rem;
+    margin-right: 2.5rem;
+  }
+`;
+
 export const ContentWrapper = styled(Grid)`
   margin: 0 1.5rem 1.5rem;
   max-width: 560px;

@@ -12,8 +12,8 @@ import {
   Header,
   IntroWrapper,
   BodyCopy,
-  EmbedWrapper,
   StyledIframe,
+  GiveMomentumEmbedWrapper,
 } from 'screens/Donate/Donate.style';
 import donateContent from 'cms-content/donate';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
@@ -54,18 +54,18 @@ const Donate: React.FC = () => {
       />
       <Container>
         {isMobile && <Intro />}
-        <EmbedWrapper>
+        <GiveMomentumEmbedWrapper>
           <StyledIframe
             src="https://covidactnow.givemomentum.com/?show-container=true"
             id="momentum-donation-form"
             width="100%"
             height="100%"
-          ></StyledIframe>
+          />
           <script
             src="https://donation-form-static.givemomentum.com/widget.js"
             type="text/javascript"
           ></script>
-        </EmbedWrapper>
+        </GiveMomentumEmbedWrapper>
         <ContentWrapper>
           {!isMobile && (
             <Fragment>
