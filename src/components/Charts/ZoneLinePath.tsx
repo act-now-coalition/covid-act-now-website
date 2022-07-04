@@ -1,7 +1,6 @@
 import React from 'react';
 import RectClipGroup from './RectClipGroup';
-import { curveNatural } from '@vx/curve';
-import { CurveFactory } from 'd3-shape';
+import { CurveFactory, curveMonotoneX } from 'd3-shape';
 import { LinePath } from '@vx/shape';
 import { Region } from './utils';
 
@@ -12,7 +11,7 @@ const ZoneLinePath = <T extends unknown>({
   width,
   region,
   yScale,
-  curve = curveNatural,
+  curve = curveMonotoneX,
 }: {
   data: T[];
   x: (d: T) => number;
