@@ -1,7 +1,7 @@
 import React from 'react';
 import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
-import { curveLinear } from '@vx/curve';
+import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
@@ -154,7 +154,7 @@ const ChartZones = ({
                 region={region}
                 width={chartWidth}
                 yScale={yScale}
-                curve={curveLinear}
+                curve={curveMonotoneX}
               />
             </Style.SeriesLine>
             <FrameworkOverlay
