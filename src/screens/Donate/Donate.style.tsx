@@ -113,3 +113,7 @@ export const SectionHeader = styled.h2`
   font-weight: bold;
   line-height: 1.4;
 `;
+
+export const StyledIframe = styled.iframe`
+  border: 0;
+`;

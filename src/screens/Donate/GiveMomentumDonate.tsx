@@ -12,8 +12,9 @@ import {
   Header,
   IntroWrapper,
   BodyCopy,
+  EmbedWrapper,
+  StyledIframe,
 } from 'screens/Donate/Donate.style';
-import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import donateContent from 'cms-content/donate';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { DesktopOnlyDonateButton } from 'components/DonateButton';
@@ -53,7 +54,18 @@ const Donate: React.FC = () => {
       />
       <Container>
         {isMobile && <Intro />}
-        <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/VT7Yvu" />
+        <EmbedWrapper>
+          <StyledIframe
+            src="https://covidactnow.givemomentum.com/?show-container=true"
+            id="momentum-donation-form"
+            width="100%"
+            height="100%"
+          ></StyledIframe>
+          <script
+            src="https://donation-form-static.givemomentum.com/widget.js"
+            type="text/javascript"
+          ></script>
+        </EmbedWrapper>
         <ContentWrapper>
           {!isMobile && (
             <Fragment>
