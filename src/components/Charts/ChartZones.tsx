@@ -154,7 +154,6 @@ const ChartZones = ({
                 region={region}
                 width={chartWidth}
                 yScale={yScale}
-                curve={curveMonotoneX}
               />
             </Style.SeriesLine>
             <FrameworkOverlay
