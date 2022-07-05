@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
-import { curveMonotoneX } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { scaleLinear } from '@vx/scale';
 import { ParentSize } from '@vx/responsive';
@@ -156,7 +155,6 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
           regions={regions}
           width={chartWidth}
           yScale={yScale}
-          curve={curveMonotoneX}
         />
         <FrameworkOverlay
           width={chartWidth}
