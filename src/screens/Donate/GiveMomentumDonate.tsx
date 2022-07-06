@@ -1,5 +1,5 @@
 import React from 'react';
-import Donate from './utils';
+import Donate from './Donate';
 import {
   StyledIframe,
   GiveMomentumEmbedWrapper,
@@ -10,8 +10,6 @@ const GiveMomentumEmbed: React.ReactNode = (
     <StyledIframe
       src="https://covidactnow.givemomentum.com/?show-container=true"
       id="momentum-donation-form"
-      width="100%"
-      height="100%"
     />
     <script
       src="https://donation-form-static.givemomentum.com/widget.js"

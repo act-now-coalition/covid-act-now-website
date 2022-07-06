@@ -1,6 +1,6 @@
 import React from 'react';
 import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
-import Donate from './utils';
+import Donate from './Donate';
 
 const GiveButterEmbedComponent: React.ReactNode = (
   <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/VT7Yvu" />
