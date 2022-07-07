@@ -35,7 +35,7 @@ const Alerts = lazy(() => import('screens/Learn/Alerts/Alerts'));
 const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
-const Donate = lazy(() => import('screens/Donate/GiveButterDonate'));
+const GiveButterDonate = lazy(() => import('screens/Donate/GiveButterDonate'));
 const GiveMomentumDonate = lazy(() =>
   import('screens/Donate/GiveMomentumDonate'),
 );
@@ -103,7 +103,7 @@ export default function App() {
                     path="/after_unsubscribe"
                     component={AfterUnsubscribe}
                   />
-                  <Route exact path="/donate" component={Donate} />
+                  <Route exact path="/donate" component={GiveButterDonate} />
                   <Route
                     exact
                     path="/give_momentum_donate"

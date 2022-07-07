@@ -46,7 +46,6 @@ export const EmbedWrapper = styled.div`
     flex-direction: row-reverse;
     justify-content: center;
     align-items: flex-start;
-    padding: 0;
     max-width: 420px;
     margin: 2rem;
     margin-right: 2.5rem;
@@ -124,10 +123,6 @@ export const StyledIframe = styled.iframe`
 
   @media (min-width: ${materialSMBreakpoint}) {
     max-width: 560px;
-    height: 700px;
-  }
-
-  @media (min-width: ${mobileBreakpoint}) {
-    height: 680px;
+    height: 720px;
   }
 `;
