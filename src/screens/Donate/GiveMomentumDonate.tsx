@@ -1,12 +1,9 @@
 import React from 'react';
 import Donate from './Donate';
-import {
-  StyledIframe,
-  GiveMomentumEmbedWrapper,
-} from 'screens/Donate/Donate.style';
+import { EmbedWrapper, StyledIframe } from 'screens/Donate/Donate.style';
 
 const GiveMomentumEmbed: React.ReactNode = (
-  <GiveMomentumEmbedWrapper>
+  <EmbedWrapper>
     <StyledIframe
       src="https://covidactnow.givemomentum.com/?show-container=true"
       id="momentum-donation-form"
@@ -15,7 +12,7 @@ const GiveMomentumEmbed: React.ReactNode = (
       src="https://donation-form-static.givemomentum.com/widget.js"
       type="text/javascript"
     ></script>
-  </GiveMomentumEmbedWrapper>
+  </EmbedWrapper>
 );
 
 const GiveMomentumDonate: React.FC = () => (

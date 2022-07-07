@@ -37,7 +37,7 @@ export const EmbedWrapper = styled.div`
   align-items: center;
   padding: 0 1.5rem;
 
-  @media (min-width: ${materialSMBreakpoint}) {
+  @media (min-width: 600px) {
     height: 840px;
   }
 
@@ -45,24 +45,11 @@ export const EmbedWrapper = styled.div`
     height: 1000px;
     flex-direction: row-reverse;
     justify-content: center;
+    align-items: flex-start;
+    padding: 0;
     max-width: 420px;
     margin: 2rem;
     margin-right: 2.5rem;
-  }
-`;
-
-/*
- seemingly random heights are estimates of
- how tall the iFrame is at each screen size
- */
-export const GiveMomentumEmbedWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 0 1.5rem;
-
-  @media (min-width: ${mobileBreakpoint}) {
-    padding: 1.5rem;
   }
 `;
 
@@ -130,21 +117,17 @@ export const SectionHeader = styled.h2`
 `;
 
 export const StyledIframe = styled.iframe`
-  height: 775px;
-  width: 100%;
-  max-width: 560px;
   border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
   border-radius: 8px;
+  width: 100%;
+  height: 780px;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    height: 725px;
+    max-width: 560px;
+    height: 700px;
   }
 
   @media (min-width: ${mobileBreakpoint}) {
-    height: 750px;
-  }
-
-  @media (min-width: 1200px) {
-    height: 700px;
+    height: 680px;
   }
 `;
