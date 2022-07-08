@@ -13,7 +13,6 @@ import {
   IntroWrapper,
   BodyCopy,
 } from 'screens/Donate/Donate.style';
-import GiveButterEmbed from 'screens/Donate/GiveButterEmbed';
 import donateContent from 'cms-content/donate';
 import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { DesktopOnlyDonateButton } from 'components/DonateButton';
@@ -36,7 +35,9 @@ const Intro: React.FC = () => {
   );
 };
 
-const Donate: React.FC = () => {
+const Donate: React.FC<{ embedComponent: React.ReactNode }> = ({
+  embedComponent,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down(800));
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,7 +54,7 @@ const Donate: React.FC = () => {
       />
       <Container>
         {isMobile && <Intro />}
-        <GiveButterEmbed embedUrl="https://givebutter.com/embed/c/VT7Yvu" />
+        {embedComponent}
         <ContentWrapper>
           {!isMobile && (
             <Fragment>

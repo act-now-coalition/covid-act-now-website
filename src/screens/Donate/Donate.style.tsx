@@ -3,6 +3,7 @@ import { COLOR_MAP } from 'common/colors';
 import { Grid } from '@material-ui/core';
 import { MarkdownBody } from 'components/Markdown';
 import theme from 'assets/theme';
+import { materialSMBreakpoint } from 'assets/theme/sizes';
 
 export const mobileBreakpoint = '800px';
 
@@ -44,7 +45,7 @@ export const EmbedWrapper = styled.div`
     height: 1000px;
     flex-direction: row-reverse;
     justify-content: center;
-    padding: 0;
+    align-items: flex-start;
     max-width: 420px;
     margin: 2rem;
     margin-right: 2.5rem;
@@ -112,4 +113,16 @@ export const SectionHeader = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 1.4;
+`;
+
+export const StyledIframe = styled.iframe`
+  border: 1px solid ${COLOR_MAP.GRAY.LIGHT};
+  border-radius: 8px;
+  width: 100%;
+  height: 780px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    max-width: 560px;
+    height: 720px;
+  }
 `;
