@@ -36,6 +36,7 @@ interface AlertTemplateData {
   unsubscribe_link: string;
   feedback_subject_line: string;
   disclaimer: Disclaimer | null;
+  giveButterDonor: boolean;
 }
 
 /* EXAMPLE of an alert disclaimer.
@@ -77,6 +78,13 @@ function generateAlertEmailContent(
     locationURL,
   } = locationAlert;
 
+  /**
+   * Split email recipients into two groups.
+   * Group with even email address length receives content linking to GiveButter donation page.
+   * Group with odd email address length receives content linking to GiveMomentum donation page.
+   */
+  const giveButterDonor = emailAddress.length % 2 == 0;
+
   const oldLevelText = LOCATION_SUMMARY_LEVELS[oldLevel].summary;
   const newLevelText = LOCATION_SUMMARY_LEVELS[newLevel].summary;
   const disclaimer = getDisclaimerText(locationAlert.fips);
@@ -95,6 +103,7 @@ function generateAlertEmailContent(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,
     ),
     disclaimer,
+    giveButterDonor,
   };
 
   return alertTemplate(data);
