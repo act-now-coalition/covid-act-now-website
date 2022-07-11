@@ -36,9 +36,9 @@ const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
 const GiveButterDonate = lazy(() => import('screens/Donate/GiveButterDonate'));
-// const GiveMomentumDonate = lazy(() =>
-//   import('screens/Donate/GiveMomentumDonate'),
-// );
+const GiveMomentumDonate = lazy(() =>
+  import('screens/Donate/GiveMomentumDonate'),
+);
 const DeepDivesRedirect = lazy(() =>
   import('screens/Learn/Articles/DeepDivesRouter'),
 );
@@ -104,12 +104,11 @@ export default function App() {
                     component={AfterUnsubscribe}
                   />
                   <Route exact path="/donate" component={GiveButterDonate} />
-                  {/* <Route
+                  <Route
                     exact
                     path="/give_momentum_donate"
                     component={GiveMomentumDonate}
-                  /> */}
-
+                  />
                   <Route exact path="/us/:stateId" component={LocationPage} />
                   <Route
                     exact
