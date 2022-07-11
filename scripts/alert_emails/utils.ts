@@ -73,12 +73,31 @@ interface DonationContent {
 }
 
 /**
+ * Generate a hash from an email address to aid in
+ * splitting email recipients into two groups of roughly equal size.
+ *
+ * Source: https://stackoverflow.com/a/7616484
+ */
+function getEmailAddressHash(emailAddress: string): number {
+  var hash = 0,
+    i,
+    chr;
+  if (emailAddress.length === 0) return hash;
+  for (i = 0; i < emailAddress.length; i++) {
+    chr = emailAddress.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+/**
  * Split email recipients into two groups.
- * Group with even email address length receives content linking to GiveButter donation page.
- * Group with odd email address length receives content linking to GiveMomentum donation page.
+ * Email addresses with even hash receive content linking to GiveButter donation page.
+ * Email addresses with odd hash receive content linking to GiveMomentum donation page.
  */
 function getDonationContent(emailAddress: string): DonationContent {
-  return emailAddress.length % 2 == 0
+  return getEmailAddressHash(emailAddress) % 2 === 0
     ? {
         donationUrl: 'https://covidactnow.org/donate',
         donationText: '',
