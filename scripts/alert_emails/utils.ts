@@ -36,7 +36,8 @@ interface AlertTemplateData {
   unsubscribe_link: string;
   feedback_subject_line: string;
   disclaimer: Disclaimer | null;
-  giveButterDonor: boolean;
+  donationUrl: string;
+  donationText: string;
 }
 
 /* EXAMPLE of an alert disclaimer.
@@ -66,6 +67,28 @@ function getDisclaimerText(fips: string): Disclaimer | null {
   return null;
 }
 
+interface DonationContent {
+  donationUrl: string;
+  donationText: string;
+}
+
+/**
+ * Split email recipients into two groups.
+ * Group with even email address length receives content linking to GiveButter donation page.
+ * Group with odd email address length receives content linking to GiveMomentum donation page.
+ */
+function getDonationContent(emailAddress: string): DonationContent {
+  return emailAddress.length % 2 == 0
+    ? {
+        donationUrl: 'https://covidactnow.org/donate',
+        donationText: 'hi',
+      }
+    : {
+        donationUrl: 'https://covidactnow.org/give_momentum_donate',
+        donationText: 'hello',
+      };
+}
+
 function generateAlertEmailContent(
   emailAddress: string,
   locationAlert: Alert,
@@ -78,16 +101,10 @@ function generateAlertEmailContent(
     locationURL,
   } = locationAlert;
 
-  /**
-   * Split email recipients into two groups.
-   * Group with even email address length receives content linking to GiveButter donation page.
-   * Group with odd email address length receives content linking to GiveMomentum donation page.
-   */
-  const giveButterDonor = emailAddress.length % 2 == 0;
-
   const oldLevelText = LOCATION_SUMMARY_LEVELS[oldLevel].summary;
   const newLevelText = LOCATION_SUMMARY_LEVELS[newLevel].summary;
   const disclaimer = getDisclaimerText(locationAlert.fips);
+  const donationContent = getDonationContent(emailAddress);
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
@@ -103,7 +120,8 @@ function generateAlertEmailContent(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,
     ),
     disclaimer,
-    giveButterDonor,
+    donationUrl: donationContent.donationUrl,
+    donationText: donationContent.donationText,
   };
 
   return alertTemplate(data);
