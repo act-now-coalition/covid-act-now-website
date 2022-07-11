@@ -81,11 +81,11 @@ function getDonationContent(emailAddress: string): DonationContent {
   return emailAddress.length % 2 == 0
     ? {
         donationUrl: 'https://covidactnow.org/donate',
-        donationText: 'hi',
+        donationText: '',
       }
     : {
         donationUrl: 'https://covidactnow.org/give_momentum_donate',
-        donationText: 'hello',
+        donationText: '',
       };
 }
 
