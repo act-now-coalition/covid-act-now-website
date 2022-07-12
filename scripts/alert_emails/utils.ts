@@ -36,6 +36,8 @@ interface AlertTemplateData {
   unsubscribe_link: string;
   feedback_subject_line: string;
   disclaimer: Disclaimer | null;
+  donationUrl: string;
+  donationText: string;
 }
 
 /* EXAMPLE of an alert disclaimer.
@@ -65,6 +67,47 @@ function getDisclaimerText(fips: string): Disclaimer | null {
   return null;
 }
 
+interface DonationContent {
+  donationUrl: string;
+  donationText: string;
+}
+
+/**
+ * Generate a hash from an email address to aid in
+ * splitting email recipients into two groups of roughly equal size.
+ *
+ * Source: https://stackoverflow.com/a/7616484
+ */
+function getEmailAddressHash(emailAddress: string): number {
+  var hash = 0,
+    i,
+    chr;
+  if (emailAddress.length === 0) return hash;
+  for (i = 0; i < emailAddress.length; i++) {
+    chr = emailAddress.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+/**
+ * Split email recipients into two groups.
+ * Email addresses with even hash receive content linking to GiveButter donation page.
+ * Email addresses with odd hash receive content linking to GiveMomentum donation page.
+ */
+function getDonationContent(emailAddress: string): DonationContent {
+  return getEmailAddressHash(emailAddress) % 2 === 0
+    ? {
+        donationUrl: 'https://covidactnow.org/donate',
+        donationText: '',
+      }
+    : {
+        donationUrl: 'https://covidactnow.org/give_momentum_donate',
+        donationText: '',
+      };
+}
+
 function generateAlertEmailContent(
   emailAddress: string,
   locationAlert: Alert,
@@ -80,6 +123,7 @@ function generateAlertEmailContent(
   const oldLevelText = LOCATION_SUMMARY_LEVELS[oldLevel].summary;
   const newLevelText = LOCATION_SUMMARY_LEVELS[newLevel].summary;
   const disclaimer = getDisclaimerText(locationAlert.fips);
+  const donationContent = getDonationContent(emailAddress);
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
@@ -95,6 +139,8 @@ function generateAlertEmailContent(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,
     ),
     disclaimer,
+    donationUrl: donationContent.donationUrl,
+    donationText: donationContent.donationText,
   };
 
   return alertTemplate(data);
