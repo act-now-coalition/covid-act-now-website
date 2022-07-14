@@ -100,11 +100,11 @@ function getDonationContent(emailAddress: string): DonationContent {
   return getEmailAddressHash(emailAddress) % 2 === 0
     ? {
         donationUrl: 'https://covidactnow.org/donate',
-        donationText: '',
+        donationText: 'Donate',
       }
     : {
         donationUrl: 'https://covidactnow.org/give_momentum_donate',
-        donationText: '',
+        donationText: 'Donate for every 1000 new COVID cases in the U.S.',
       };
 }
 
