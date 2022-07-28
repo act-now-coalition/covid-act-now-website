@@ -44,7 +44,9 @@ async function buildSummaries() {
   // (and avoid out-of-memory crashes).
   const fetchers: Array<() => Promise<Projections[]>> = [
     () => fetchAllStateProjections(/*snapshotUrl=*/ null, /*cache=*/ false),
-    () => fetchAllMetroProjections(/*snapshotUrl=*/ null, /*cache=*/ false),
+    ...regions.metroAreas.map(metro => async () => [
+      await fetchProjectionsRegion(metro, null, false),
+    ]),
     ...regions.states.map(state => () =>
       fetchCountyProjectionsForState(
         state,
