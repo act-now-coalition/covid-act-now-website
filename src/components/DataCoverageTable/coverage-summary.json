@@ -135,7 +135,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 2892,
+      "regionsAvailable": 2895,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -171,9 +171,9 @@
     "name": "metrics.caseDensity",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
@@ -192,9 +192,9 @@
     "name": "metrics.weeklyNewCasesPer100k",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
@@ -234,9 +234,9 @@
     "name": "metrics.infectionRate",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
@@ -255,9 +255,9 @@
     "name": "metrics.infectionRateCI90",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
