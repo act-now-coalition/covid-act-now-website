@@ -16,9 +16,9 @@ const trackClick = () => {
 const BannerInner: React.FC = () => {
   const { totalVaccinationsInitiated } = SiteSummaryJSON.usa;
   // HACK: millionVaccinations should never be null but TS complains.
-  const millionVaccinations = totalVaccinationsInitiated
-    ? Math.round(totalVaccinationsInitiated / 1000000)
-    : 0;
+  const millionVaccinations = Math.round(
+    totalVaccinationsInitiated ?? 0 / 1000000,
+  );
 
   const HospitalizationsAreRisingTooLink = (
     <HashLink
