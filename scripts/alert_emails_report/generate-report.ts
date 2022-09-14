@@ -80,6 +80,16 @@ async function updateSubscriptionsByLocation(subscriptions: Subscription[]) {
 }
 
 async function updateSubscriptionsByDate(subscriptions: Subscription[]) {
+  // Calculate the number of active unique email subscribers as a function of the date of their
+  // subscription. Then post that data in the analytics googlesheet tab.
+
+  // Notes:
+  // 1. An email subscribed to multiple locations counts as 1 subscription
+  // 2. These counts are fully recalculated each run. So if a user unsubscribes from all alerts,
+  // then they are purged from the historical record. So for a given calculation/run, this timeseries
+  // will always be monotonically increasing (or flat). This is an artifact of how subscriptions
+  // were stored, and not a deliberate requirement from the analytics team.
+
   const gsheets = new GoogleSheets(keyFile);
   const spreadsheetId = getSpreadsheetId();
 
