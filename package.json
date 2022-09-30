@@ -44,7 +44,7 @@
     "bottleneck": "^2.19.5",
     "csv-parse": "^4.8.8",
     "d3-array": "^2.4.0",
-    "d3-color": "^2.0.0",
+    "d3-color": "^3.1.0",
     "d3-scale-chromatic": "^2.0.0",
     "d3-time": "^1.1.0",
     "esm": "^3.2.25",
