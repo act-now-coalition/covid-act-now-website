@@ -31,7 +31,7 @@ import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
 import {
   SparkLineMetric,
-  SparkLineToExploreMetric,
+  SparkLineToMetric,
 } from 'components/NewLocationPage/SparkLineBlock/utils';
 import ChartBlock from 'components/Charts/ChartBlock';
 import {
@@ -41,8 +41,8 @@ import {
   getChartGroupFromMetric,
 } from 'components/Charts/Groupings';
 
-// TODO: 100 is rough accounting for the navbar;
-// could make these constants so we don't have to manually update
+// 100 is rough accounting for the navbar
+// TODO: could make these constants so we don't have to manually update
 const scrollTo = (div: null | HTMLDivElement, offset: number = 100) =>
   div &&
   window.scrollTo({
@@ -148,13 +148,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     null,
   );
 
-  const onClickMetric = useCallback(
+  const scrollToMetricChart = useCallback(
     (metric: Metric) => {
-      trackEvent(
-        EventCategory.METRICS,
-        EventAction.CLICK,
-        `Location Header Stats: ${Metric[metric]}`,
-      );
       setClickedStatMetric(metric);
       const groupWithMetric = getChartGroupFromMetric(metric);
       const chartBlockRef = groupWithMetric
@@ -167,14 +162,37 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     [chartBlockRefs],
   );
 
-  const onClickSparkLine = useCallback((metric: SparkLineMetric) => {
+  const onClickMetric = (metric: Metric) => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      `Location Header Stats: ${Metric[metric]}`,
+    );
+    scrollToMetricChart(metric);
+  };
+
+  const onClickSparkLine = (metric: SparkLineMetric) => {
     trackEvent(
       EventCategory.METRICS,
       EventAction.CLICK,
       `Spark line: ${SparkLineMetric[metric]}`,
     );
-    setCurrentExploreMetric(SparkLineToExploreMetric[metric]);
-    scrollTo(exploreChartRef.current);
+    const metricClicked = SparkLineToMetric[metric];
+    scrollToMetricChart(metricClicked);
+  };
+
+  const onClickMasksCard = useCallback(() => {
+    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.CLICK, 'Masks card');
+    scrollTo(recommendationsRef.current);
+  }, []);
+
+  const onClickTransmissionMetricsCard = useCallback(() => {
+    trackEvent(
+      EventCategory.METRICS,
+      EventAction.CLICK,
+      'Transmission metrics card',
+    );
+    scrollTo(transmissionMetricsRef.current);
   }, []);
 
   if (!locationSummary) {
@@ -195,6 +213,8 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           onClickAlertSignup={onClickAlertSignup}
           onClickShare={onClickShare}
           onClickSparkLine={onClickSparkLine}
+          onClickMasksCard={onClickMasksCard}
+          onClickTransmissionMetricsCard={onClickTransmissionMetricsCard}
         />
         <BelowTheFold>
           <WidthContainer>

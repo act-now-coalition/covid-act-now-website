@@ -41,7 +41,7 @@ export interface MetricChartInfo {
 }
 
 export enum GroupHeader {
-  COMMUNITY_LEVEL = 'Community level metrics',
+  COMMUNITY_LEVEL = 'Community risk level metrics',
   VACCINATED = '% Vaccinated',
   TRANSMISSION = 'Transmission metrics',
 }
@@ -246,7 +246,6 @@ function getMetricNameForTracking(metricItem: MetricChartInfo): string {
 }
 
 export function trackTabClick(metricItem: MetricChartInfo) {
-  console.log('tracking label', getMetricNameForTracking(metricItem));
   trackEvent(
     EventCategory.METRICS,
     EventAction.CLICK,

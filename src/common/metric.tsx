@@ -9,7 +9,7 @@ import * as AdmissionsPer100k from 'common/metrics/admissions_per_100k';
 import * as RatioBedsWithCovid from 'common/metrics/ratio_beds_with_covid_patients';
 import { Projections } from 'common/models/Projections';
 import { ALL_LEVELS, Level, LevelInfo, LevelInfoMap } from 'common/level';
-import { fail } from 'common/utils';
+import { fail } from '@actnowcoalition/assert';
 import { MetricDefinition } from './metrics/interfaces';
 import { formatDecimal, formatPercent } from 'common/utils';
 import { Metric } from 'common/metricEnum';
@@ -53,7 +53,7 @@ export function getLevel(metric: Metric, value: number | null): Level {
   const levelInfoMap = ALL_METRICS_LEVEL_INFO_MAP[metric];
   if (value === null) return Level.UNKNOWN;
   for (const level of ALL_LEVELS) {
-    if (value <= levelInfoMap[level].upperLimit) {
+    if (value < levelInfoMap[level].upperLimit) {
       return level;
     }
   }

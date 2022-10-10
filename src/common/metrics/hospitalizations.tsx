@@ -2,7 +2,9 @@ import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
 import { Metric } from 'common/metricEnum';
-import { formatPercent, formatInteger, assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
+import { formatPercent } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import Thermometer from 'components/Thermometer';
@@ -24,12 +26,6 @@ export const ICUCapacityUsed: MetricDefinition = {
 
 export const STATES_WITH_DATA_OVERRIDES = ['Nevada'];
 
-const SHORT_DESCRIPTION_LOW = 'Can likely handle a new wave of COVID';
-const SHORT_DESCRIPTION_MEDIUM = 'Can likely handle a new wave of COVID';
-const SHORT_DESCRIPTION_MEDIUM_HIGH = 'At risk to a new wave of COVID';
-const SHORT_DESCRIPTION_HIGH = 'High risk of hospital overload';
-const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
-
 const LIMIT_LOW = 0.7;
 const LIMIT_MEDIUM = 0.8;
 const LIMIT_MEDIUM_HIGH = 0.85;
@@ -47,28 +43,24 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => SHORT_DESCRIPTION_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_MEDIUM_HIGH,
     name: MEDIUM_HIGH_NAME,
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: () => SHORT_DESCRIPTION_HIGH,
   },
   // We don't have a SUPER_CRITICAL threshold, so upperLimit is same as CRITICAL to hide it.
   [Level.SUPER_CRITICAL]: {
@@ -76,14 +68,12 @@ export const HOSPITAL_USAGE_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: () => SHORT_DESCRIPTION_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => SHORT_DESCRIPTION_UNKNOWN,
   },
 };
 

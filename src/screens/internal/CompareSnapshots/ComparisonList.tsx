@@ -3,7 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Metric } from 'common/metricEnum';
 import { ProjectionsSet } from 'common/models/ProjectionsSet';
 import { ProjectionsPair } from 'common/models/ProjectionsPair';
-import { formatInteger } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import { Grid } from '@material-ui/core';
 import { Level } from 'common/level';
 import { MetricChart } from 'components/Charts';

@@ -2,7 +2,7 @@ import React from 'react';
 import USRiskMap from './USRiskMap';
 
 export default {
-  title: 'Shared Components/USRiskMap',
+  title: 'Components/USRiskMap',
   component: USRiskMap,
   argTypes: {
     onClick: () => {},

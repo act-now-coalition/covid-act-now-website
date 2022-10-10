@@ -3,7 +3,7 @@ import regions from 'common/regions';
 import EmailAlertsForm from './EmailAlertsForm';
 
 export default {
-  title: 'Shared Components/EmailAlertsForm',
+  title: 'Components/EmailAlertsForm',
   component: EmailAlertsForm,
 };
 

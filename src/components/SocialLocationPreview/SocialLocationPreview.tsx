@@ -38,12 +38,12 @@ const SocialLocationPreview = (props: {
           <SocialLocationPreviewHeader>
             {props.projections?.region.fullName}
           </SocialLocationPreviewHeader>
-          <HeaderSubhead>covid community level</HeaderSubhead>
+          <HeaderSubhead>covid community risk level</HeaderSubhead>
         </HeaderText>
         <AlarmLevel color={fillColor}>{levelInfo.name}</AlarmLevel>
       </PreviewHeader>
       <PreviewBody>
-        <SummaryStats stats={props.stats} condensed={true} />
+        <SummaryStats stats={props.stats} />
       </PreviewBody>
       <PreviewFooter>
         <FooterText>Last Updated {lastUpdatedDateString}</FooterText>

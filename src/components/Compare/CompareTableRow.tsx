@@ -15,7 +15,7 @@ import {
 import { RankedLocationSummary } from 'common/utils/compare';
 import { formatEstimate } from 'common/utils';
 import regions from 'common/regions';
-import { fail } from 'assert';
+import { fail } from '@actnowcoalition/assert';
 import { StyledRegionName } from 'components/SharedComponents';
 import { ColumnDefinition } from './columns';
 

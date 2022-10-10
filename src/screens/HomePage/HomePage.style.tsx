@@ -8,8 +8,6 @@ import {
   SkeletonWrapper as RegionItemSkeletonWrapper,
 } from 'components/RegionItem/RegionItem.style';
 import { COLOR_MAP } from 'common/colors';
-import Typography from '@material-ui/core/Typography';
-import { anchorStyles } from 'components/Markdown';
 
 export const ColumnCentered = styled.div`
   display: flex;
@@ -152,20 +150,6 @@ export const Row = styled.div`
   }
 `;
 
-export const UnderMapText = styled(Typography)`
-  ${anchorStyles};
-  color: ${COLOR_MAP.GRAY_BODY_COPY};
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1rem;
-  max-width: 300px;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    max-width: unset;
-    margin-top: 1.25rem;
-  }
-`;
-
 export const AboutLink = styled(Link)`
   ${props => props.theme.fonts.regularBook};
   font-size: 0.875rem;
@@ -187,4 +171,11 @@ export const AboutLink = styled(Link)`
 export const TableWrapper = styled.div`
   margin-top: 1.5rem;
   width: 100%;
+`;
+
+export const MapDescriptionText = styled.span`
+  color: ${COLOR_MAP.GREY_4};
+  text-align: center;
+  max-width: 640px;
+  margin: ${({ theme }) => theme.spacing(4, 'auto', 1.5)};
 `;

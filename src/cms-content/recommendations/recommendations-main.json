@@ -1,7 +1,7 @@
 {
   "recommendations": [
     {
-      "body": "**Masks** are recommended if your community level is high, you have recently been exposed to or infected with COVID, or you’ve been told by a health professional to wear a mask based on your personal risk factors.",
+      "body": "**Masks** are recommended if your community risk level is high, you have recently been exposed to or infected with COVID, or you’ve been told by a health professional to wear a mask based on your personal risk factors.",
       "source": "FED",
       "category": "MASKS",
       "level": "ALL",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "body": "**Vaccinations** for adults and children 5 and up can protect against infection, serious illness and death from COVID.",
+      "body": "**Vaccines** are now approved for children 6 months and older. Vaccinations can protect against infection, serious illness and death from COVID.",
       "source": "FED",
       "category": "VACCINATION",
       "level": "ALL",
@@ -33,15 +33,15 @@
       }
     },
     {
-      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. The Test to Treat initiative provides high-risk individuals who test positive with immediate access to antivirals at certified locations.",
+      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. The [Test to Treat](https://aspr.hhs.gov/TestToTreat/Pages/default.aspx) initiative provides high-risk individuals who test positive with immediate access to antivirals at certified locations.",
       "source": "FED",
       "category": "TESTING",
       "level": "ALL",
       "id": "TESTING_ALL",
       "cta": {
         "buttonType": "OUTLINE",
-        "text": "Find a Test to Treat location",
-        "url": "https://aspr.hhs.gov/TestToTreat/Pages/default.aspx"
+        "text": "Find a test",
+        "url": "https://www.covid.gov/tests"
       },
       "icon": {
         "altText": "Testing icon",

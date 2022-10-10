@@ -7,7 +7,7 @@ import maxBy from 'lodash/maxBy';
 import { Metric } from 'common/metricEnum';
 import { Projection, Column } from 'common/models/Projection';
 import { Projections } from 'common/models/Projections';
-import { fail, assert } from 'common/utils';
+import { fail, assert } from '@actnowcoalition/assert';
 import { MetroArea } from 'common/regions';
 
 export enum SortType {
@@ -118,6 +118,12 @@ function getDataset(projection: Projection, metric: Metric): Column[] {
       return projection.getDataset('icuUtilization');
     case Metric.VACCINATIONS:
       return projection.getDataset('vaccinations');
+    case Metric.WEEKLY_CASES_PER_100K:
+      return projection.getDataset('weeklyNewCasesPer100k');
+    case Metric.RATIO_BEDS_WITH_COVID:
+      return projection.getDataset('bedsWithCovidPatientsRatio');
+    case Metric.ADMISSIONS_PER_100K:
+      return projection.getDataset('weeklyCovidAdmissionsPer100k');
     default:
       fail('Unknown metric: ' + metric);
   }

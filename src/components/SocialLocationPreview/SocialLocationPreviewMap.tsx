@@ -69,7 +69,7 @@ const SocialLocationPreview = (props: {
 };
 
 const RiskMapLegend = ({ isEmbed = false }: { isEmbed?: boolean }) => (
-  <Legend condensed={!isEmbed} header="Community Level">
+  <Legend condensed={!isEmbed} header="Community Risk Level">
     {[Level.HIGH, Level.MEDIUM, Level.LOW].map(level => (
       <LegendItem
         key={`legend-${level}`}

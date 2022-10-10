@@ -19,8 +19,8 @@ export function isInvalidEmailError(error: any) {
   return error?.code === 'InvalidParameterValue';
 }
 
-// Our rate limit is 50/sec so we aim for 45/sec (22ms delay).
-const DEFAULT_DELAY_MS = 22;
+// Our rate limit is 100/sec so we aim for 91/sec (11ms delay).
+const DEFAULT_DELAY_MS = 11;
 
 class EmailService {
   private ses = new AWS.SES({

@@ -4,7 +4,7 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { EventCategory } from 'components/Analytics';
 
 export default {
-  title: 'Building Blocks/LinkButton',
+  title: 'Components/LinkButton',
   component: LinkButton,
   argTypes: {
     trackingCategory: EventCategory.NONE,

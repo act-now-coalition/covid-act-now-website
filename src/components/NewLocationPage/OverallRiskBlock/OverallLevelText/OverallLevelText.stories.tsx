@@ -3,7 +3,7 @@ import OverallLevelText from './OverallLevelText';
 import { Level } from 'common/level';
 
 export default {
-  title: 'Location page redesign/Overall risk block/Level label',
+  title: 'Location Page/Overall risk block/Level label',
   component: OverallLevelText,
 };
 

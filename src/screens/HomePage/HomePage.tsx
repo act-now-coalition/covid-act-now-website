@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
 import USVaccineMap from 'components/USMap/USVaccineMap';
 import { NavBarSearch } from 'components/NavBar';
@@ -25,7 +25,8 @@ import {
   HomePageBlock,
   ColumnCentered,
   VaccinationsThermometerHeading,
-  UnderMapText,
+  AboutLink,
+  MapDescriptionText,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import {
@@ -43,12 +44,12 @@ import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
-import { Can82BannerHomepage } from 'components/Banner';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
+import { TextTooltip, trackOpenTooltip } from 'components/InfoTooltip';
 
 function getPageDescription() {
   const date = formatMetatagDate();
-  return `${date} Covid Act Now has real-time tracking of your community's COVID level. Explore how your community is doing.`;
+  return `${date} Covid Act Now has real-time tracking of your community's COVID risk level. Explore how your community is doing.`;
 }
 
 export default function HomePage() {
@@ -130,7 +131,6 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
-      <Can82BannerHomepage />
       <HomePageHeader />
       <main>
         <div className="App">
@@ -147,18 +147,22 @@ export default function HomePage() {
             </ColumnCentered>
 
             <MapBlock
-              title="COVID community level"
+              title="COVID Community Risk Level"
               subtitle=""
               renderMap={locationScope => (
                 <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
               )}
               renderThermometer={() => <CommunityLevelThermometer />}
-              infoLink="/covid-community-level-metrics"
-              underMapText={getCommunityLevelUnderMapText()}
+              infoLink={
+                <AboutLink to="/covid-community-level-metrics">
+                  About community risk levels
+                </AboutLink>
+              }
+              mapDescription={getRiskMapDescription()}
             />
 
             <MapBlock
-              title="Vaccination progress"
+              title="Vaccination Progress"
               subtitle={getVaccinationProgressSubtitle()}
               renderMap={locationScope => (
                 <USVaccineMap
@@ -180,9 +184,12 @@ export default function HomePage() {
                   <VaccinationsThermometer />
                 </>
               )}
-              infoLink="/covid-community-level-metrics#percent-vaccinated"
+              infoLink={
+                <AboutLink to="/covid-community-level-metrics#percent-vaccinated">
+                  About this data
+                </AboutLink>
+              }
             />
-
             <HomePageBlock
               ref={exploreSectionRef}
               id="explore-hospitalizations"
@@ -221,15 +228,6 @@ export default function HomePage() {
   );
 }
 
-function getCommunityLevelUnderMapText() {
-  return (
-    <UnderMapText>
-      Understand what your Community Level Color rating means{' '}
-      <Link to="/covid-community-level-metrics">here</Link>.
-    </UnderMapText>
-  );
-}
-
 function getVaccinationProgressSubtitle() {
   const {
     totalVaccinationsAdditionalDose,
@@ -243,5 +241,26 @@ function getVaccinationProgressSubtitle() {
       <b>{percentVaccinated}</b> of the entire U.S. population has received{' '}
       <b>a booster shot</b>.
     </>
+  );
+}
+
+function getRiskMapDescription() {
+  return (
+    <MapDescriptionText>
+      Our new framework reflects the decreased risk of severe illness and death
+      from COVID due to vaccines, therapeutics, and past COVID infections.
+      <br />
+      <br />
+      Note: People who need extra caution can still refer to our older{' '}
+      <TextTooltip
+        title="Daily new cases, infection rate, and positive test rate can be found after selecting a location."
+        mainCopy="Transmission metrics"
+        aria-label="Description of where to find transmission metrics data"
+        trackOpenTooltip={() =>
+          trackOpenTooltip('Homepage: transmission metrics')
+        }
+      />
+      {'.'}
+    </MapDescriptionText>
   );
 }

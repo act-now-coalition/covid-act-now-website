@@ -11,7 +11,7 @@ import { AggregationLevel } from '../src/api/schema/RegionSummary';
 import { RegionType } from '../src/common/regions';
 import { fetchSummariesForRegionType } from '../src/common/utils/model';
 import _ from 'lodash';
-import { assert } from '../src/common/utils';
+import { assert } from '@actnowcoalition/assert';
 import { MetricCoverage } from '../src/components/DataCoverageTable/DataCoverageTable';
 
 interface SingleLevelMetricCoverage {

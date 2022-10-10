@@ -11,7 +11,7 @@ import regions, {
   MetroArea,
   getStateName,
 } from 'common/regions';
-import { fail } from 'assert';
+import { fail } from '@actnowcoalition/assert';
 import { importCountyAdjacency } from 'common/data';
 
 export function trackCompareEvent(

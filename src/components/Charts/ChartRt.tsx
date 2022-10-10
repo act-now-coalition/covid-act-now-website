@@ -1,7 +1,7 @@
 import React from 'react';
 import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
-import { curveNatural } from '@vx/curve';
+import { curveMonotoneX } from '@vx/curve';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear } from '@vx/scale';
@@ -29,7 +29,7 @@ import Axes from 'components/Explore/Axes';
 import { scaleUtc } from '@vx/scale';
 import { getYFormat } from 'components/Explore/utils';
 import { DataMeasure } from 'components/Explore/interfaces';
-import { TimeUnit } from 'common/utils/time-utils';
+import { TimeUnit } from '@actnowcoalition/time-utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -173,7 +173,7 @@ const ChartRt = ({
               x={getXCoord}
               y0={(d: PointRt) => yScale(getYAreaLow(d))}
               y1={(d: PointRt) => yScale(getYAreaHigh(d))}
-              curve={curveNatural}
+              curve={curveMonotoneX}
             />
           </Style.SeriesArea>
         </RectClipGroup>

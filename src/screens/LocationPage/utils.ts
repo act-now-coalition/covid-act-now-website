@@ -22,5 +22,5 @@ export function getPageTitle(region: Region): string {
 export function getPageDescription(region: Region): string {
   const date = formatMetatagDate();
   const location = locationName(region);
-  return `${date}: Covid Act Now has real-time tracking of your community's COVID level. Explore how ${location} is doing.`;
+  return `${date}: Covid Act Now has real-time tracking of your community's COVID risk level. Explore how ${location} is doing.`;
 }

@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import ImmunizationIcon from 'assets/images/ImmunizationIcon';
 
 export default {
-  title: 'Shared Components/AutocompleteRegions',
+  title: 'Components/AutocompleteRegions',
   component: AutocompleteRegions,
   argTypes: {
     onChangeRegions: { action: 'change' },

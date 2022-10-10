@@ -4,7 +4,8 @@ import isFinite from 'lodash/isFinite';
 import { Group } from '@vx/group';
 import { scaleUtc, scaleLinear } from '@vx/scale';
 import { useTooltip } from '@vx/tooltip';
-import { formatInteger, formatDecimal } from 'common/utils';
+import { formatDecimal } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import { Column } from 'common/models/Projection';
 import { Tooltip, RectClipGroup } from 'components/Charts';
 import { Series } from './interfaces';
@@ -20,7 +21,7 @@ import {
   getColumnDate,
   formatTooltipColumnDate,
 } from 'components/Charts/utils';
-import { TimeUnit, getTimeDiff } from 'common/utils/time-utils';
+import { TimeUnit, getTimeDiff } from '@actnowcoalition/time-utils';
 
 const getY = (d: Column) => d.y;
 const daysBetween = (dateFrom: Date, dateTo: Date) =>

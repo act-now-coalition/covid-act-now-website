@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Projections } from '../models/Projections';
 import { Api } from 'api';
-import { assert, fail } from '.';
+import { assert, fail } from '@actnowcoalition/assert';
 import { getSnapshotUrlOverride } from './snapshots';
 import regions, { Region, County, RegionType, State } from 'common/regions';
 import { RegionSummary } from 'api/schema/RegionSummary';
-import { parseDateString } from 'common/utils/time-utils';
+import { parseDateString } from '@actnowcoalition/time-utils';
 
 export enum APIRegionSubPath {
   COUNTIES = 'counties',
@@ -31,6 +31,7 @@ const cachedProjections: { [key: string]: Promise<Projections> } = {};
 export function fetchProjectionsRegion(
   region: Region,
   snapshotUrl: string | null = null,
+  cache: boolean = true,
 ) {
   snapshotUrl = snapshotUrl || getSnapshotUrlOverride();
   async function fetch() {
@@ -46,8 +47,11 @@ export function fetchProjectionsRegion(
   }
 
   const key = snapshotUrl + '-' + region.fipsCode;
-  cachedProjections[key] = cachedProjections[key] || fetch();
-  return cachedProjections[key];
+  const result = cachedProjections[key] || fetch();
+  if (cache) {
+    cachedProjections[key] = result;
+  }
+  return result;
 }
 
 /** Returns an array of `Projections` instances for all states. */

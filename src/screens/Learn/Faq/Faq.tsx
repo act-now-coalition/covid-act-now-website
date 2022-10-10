@@ -21,7 +21,7 @@ import {
   DateFormat,
   parseDateString,
   formatDateTime,
-} from 'common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 
 const Faq: React.FC = () => {
   const {

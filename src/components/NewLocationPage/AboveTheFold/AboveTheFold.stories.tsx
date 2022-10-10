@@ -4,7 +4,7 @@ import regions from 'common/regions';
 import { useLocationSummariesForFips } from 'common/hooks';
 
 export default {
-  title: 'Location page redesign/Above the fold',
+  title: 'Location Page/Above the fold',
   component: AboveTheFold,
 };
 
@@ -12,6 +12,8 @@ const onClickProps = {
   onClickAlertSignup: () => {},
   onClickShare: () => {},
   onClickSparkLine: () => {},
+  onClickTransmissionMetricsCard: () => {},
+  onClickMasksCard: () => {},
 };
 
 export const California = () => {

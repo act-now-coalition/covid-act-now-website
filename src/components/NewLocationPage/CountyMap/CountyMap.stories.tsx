@@ -3,7 +3,7 @@ import { CountyMap } from 'components/NewLocationPage/CountyMap';
 import regions from 'common/regions';
 
 export default {
-  title: 'Location page redesign/County Map',
+  title: 'Location Page/County Map',
   component: CountyMap,
 };
 

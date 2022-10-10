@@ -1,13 +1,13 @@
 import React from 'react';
 import isDate from 'lodash/isDate';
 import { min as d3min, max as d3max } from 'd3-array';
-import { curveLinear } from '@vx/curve';
 import { GridRows } from '@vx/grid';
 import { Group } from '@vx/group';
 import { ParentSize } from '@vx/responsive';
 import { scaleLinear } from '@vx/scale';
 import { Column } from 'common/models/Projection';
-import { assert, formatPercent } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
+import { formatPercent } from 'common/utils';
 import { LevelInfoMap } from 'common/level';
 import RectClipGroup from './RectClipGroup';
 import { AxisLeft } from './Axis';
@@ -29,6 +29,7 @@ import {
 } from './utils';
 import { AxisBottom } from 'components/Charts/Axis';
 import { getColumnDate, formatTooltipColumnDate } from './utils';
+import FrameworkOverlay, { CDC_FRAMEWORK_START_DATE } from './FrameworkOverlay';
 
 type Point = Omit<Column, 'y'> & {
   y: number;
@@ -100,12 +101,18 @@ const ChartZones = ({
   const lastPointY = getY(lastPoint);
   const lastPointZone = getZoneByValue(lastPointY, zones);
 
+  const getMarkerColor = (p: Point) => {
+    return getColumnDate(p) <= CDC_FRAMEWORK_START_DATE
+      ? '#000'
+      : getZoneByValue(getY(p), zones).color;
+  };
+
   const renderMarker = (d: Point) => (
     <Style.CircleMarker
       cx={getXCoord(d)}
       cy={getYCoord(d)}
       r={6}
-      fill={getZoneByValue(getY(d), zones).color}
+      fill={getMarkerColor(d)}
     />
   );
 
@@ -146,9 +153,16 @@ const ChartZones = ({
                 region={region}
                 width={chartWidth}
                 yScale={yScale}
-                curve={curveLinear}
               />
             </Style.SeriesLine>
+            <FrameworkOverlay
+              width={chartWidth}
+              height={chartHeight}
+              data={data}
+              getXCoord={getXCoord}
+              getYCoord={getYCoord}
+              xScale={xScale}
+            />
             <ZoneAnnotation
               color={region.color}
               name={region.name}

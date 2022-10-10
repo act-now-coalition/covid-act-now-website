@@ -22,7 +22,7 @@ import {
   subtractTime,
   DateFormat,
   formatDateTime,
-} from '../../src/common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 
 const summariesFolder = path.join(__dirname, 'summaries');
 const outputFile = path.join(__dirname, 'alerts.json');

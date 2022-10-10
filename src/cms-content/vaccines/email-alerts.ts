@@ -1,7 +1,7 @@
 import html from 'remark-html';
 import remark from 'remark';
 import regions from 'common/regions';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import { getVaccinationDataByRegion } from './index';
 import { getVaccineInfoByFips, RegionPhaseGroup } from './phases';
 

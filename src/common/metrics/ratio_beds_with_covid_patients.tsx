@@ -31,28 +31,24 @@ export const RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: 'Low',
     color: COLOR_MAP.GREEN.BASE,
-    detail: () => 'COVID is being effectively contained',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: 'Medium',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => 'COVID not contained, but at low levels',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_HIGH,
     name: 'High',
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: () => 'Very large number of new cases',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => 'Insufficient data to assess',
   },
 
   // Not to be used:
@@ -61,14 +57,12 @@ export const RATIO_BEDS_WITH_COVID_PATIENTS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_HIGH,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
-    detail: () => 'Dangerous number of new cases',
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: 'Extreme',
     color: COLOR_MAP.RED.DARK,
-    detail: () => 'Very dangerous number of new cases',
   },
 };
 
@@ -92,7 +86,10 @@ function renderStatus(projections: Projections): React.ReactElement {
     <Fragment>
       {formatPercent(currentRatioBedsWithCovid)} of staffed inpatient beds in{' '}
       {projections.isCounty ? hsaCopy : locationName} are occupied by COVID
-      patients.
+      patients. Grading is not applied to patients with COVID prior to April 18,
+      2022, indicated by the dotted line. This date marks our change to measure
+      community risk levels, a framework that is only relevant for the current
+      phase of the pandemic.
     </Fragment>
   );
 }

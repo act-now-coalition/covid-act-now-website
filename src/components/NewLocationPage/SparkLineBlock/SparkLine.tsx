@@ -6,16 +6,14 @@ import { curveMonotoneX } from '@vx/curve';
 import { SingleSparkLineContainer as Container } from './SparkLineBlock.style';
 import { Column } from 'common/models/Projection';
 import { COLOR_MAP } from 'common/colors';
-import { getMaxY, dateItem } from './utils';
+import { getMaxY, dateItem, SparkLineProps } from './utils';
 
-const SparkLineInner: React.FC<{
-  rawData: Column[];
-  smoothedData: Column[];
-  dateFrom: dateItem;
-  dateTo: dateItem;
-  width: number;
-  height: number;
-}> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
+const SparkLineInner: React.FC<
+  SparkLineProps & {
+    width: number;
+    height: number;
+  }
+> = ({ smoothedData, rawData, dateFrom, dateTo, width, height }) => {
   // in some cases, the rendered size is 0x0, so don't render.
   // it doesn't show, it adds a lot of invisible DOM nodes
   if (width === 0 || height === 0) {

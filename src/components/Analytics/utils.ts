@@ -1,8 +1,8 @@
 import capitalize from 'lodash/capitalize';
 import words from 'lodash/words';
-import ReactGA from 'react-ga';
 import { amplitudeLogEvent } from './amplitude';
 import { fullStoryTrackEvent } from 'common/fullstory';
+import { trackGA4Event } from './gtag';
 
 export interface Tracker {
   trackingId: string;
@@ -90,8 +90,14 @@ export enum EventAction {
   OPEN_TOOLTIP = 'open tooltip',
 }
 
+// Capitalize string (special characters are not kept)
 function toTitleCase(name: string) {
   return words(name).map(capitalize).join(' ');
+}
+
+// Capitalize string (special characters kept in place by not using "words" from lodash)
+function toTitleCaseWithSpecialCharacters(name: string) {
+  return name ? name.split(' ').map(capitalize).join(' ') : '';
 }
 
 /**
@@ -101,20 +107,18 @@ function toTitleCase(name: string) {
 export function trackEvent(
   category: EventCategory,
   action: EventAction,
-  label?: string,
+  label: string,
   value?: number,
   nonInteraction?: boolean,
   transport: 'beacon' | 'xhr' | 'image' = 'beacon',
 ) {
   if (category !== EventCategory.NONE) {
-    ReactGA.event({
-      category,
-      action,
-      label,
+    trackGA4Event(
+      toTitleCase(action),
+      toTitleCase(category),
+      toTitleCaseWithSpecialCharacters(label),
       value,
-      nonInteraction,
-      transport,
-    });
+    );
 
     const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
     const valueProp = Number.isFinite(value) ? { eventValue: value } : {};

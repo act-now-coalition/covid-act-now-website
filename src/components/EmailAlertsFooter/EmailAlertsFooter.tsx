@@ -23,7 +23,7 @@ const EmailAlertsFooter: React.FC<{ defaultRegions: Region[] }> = ({
           <Heading2>Get alerts</Heading2>
           <Paragraph>
             We'll email you when your selected locations see a change in
-            community level.
+            community risk level.
           </Paragraph>
         </Section>
         <Section key="email-form">

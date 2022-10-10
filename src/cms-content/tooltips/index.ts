@@ -4,7 +4,7 @@ import infoToolTipContent from './info-tooltips.json';
 import metricCaculationTooltipContent from './metric-calculation-tooltips.json';
 import ccviTooltipContent from './ccvi-tooltips.json';
 import { Metric } from 'common/metricEnum';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 
 /* Metric tooltips + location page header tooltip: */
 

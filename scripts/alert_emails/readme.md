@@ -3,12 +3,13 @@
 CAN sends email alerts to subscribed users notifying them when states/counties change risk levels. These are automated via a github workflow (see .github/workflows/send-alert-emails.yml).
 
 The workflow works by running the following 3 scripts:
-1. **generate_daily_alerts.ts** - Given a snapshot ID, it compares the alert
+
+1. **`generate_daily_alerts.ts`** - Given a snapshot ID, it compares the alert
    levels of states/counties against the last time alerts were sent and
    generates an alerts.json file with the changes.
-2. **create_lists_to_email.ts** - Writes documents to Firestore indicating
+2. **`create_lists_to_email.ts`** - Writes documents to Firestore indicating
    all of the users for each location that need to be sent an email alert.
-3. **send_emails.ts** - Sends the actual emails to users, updating their
+3. **`send_emails.ts`** - Sends the actual emails to users, updating their
    entry in Firestore after each one to indicate that it's complete.
 
 We use handlebars to generate the email from template.html and then send it
@@ -16,8 +17,8 @@ using AWS Simple Email Service.
 
 ## Sending the Alerts via Github Actions
 
-We typically send email alerts on Mondays and Thursdays, immediately after the daily snapshot has been released.
-Go to https://github.com/covid-projections/covid-projections/actions?query=workflow%3A%22Send+Alert+Emails.%22 and click "run workflow".
+We typically send email alerts on Tuesdays and Fridays, immediately after the daily snapshot has been released.
+Go to [GitHub Workflows - Send Risk Alert Emails](https://github.com/covid-projections/covid-projections/actions?query=workflow%3A%22Send+Alert+Emails.%22) and click "Run workflow".
 
 By default it will do a dry-run without sending any emails.  After it has completed, you can look at the logs to see how many emails would have been notified and go into [firestore](https://console.firebase.google.com/project/covidactnow-prod/firestore/data~2Fsnapshots) to check that the locations seem correct (make sure that locations have emails).
 
@@ -57,7 +58,9 @@ In order to test out the emails and see what they look like:
 3. Run: `yarn send-test-email <your-email>`
 
 ## Open / Click Rate tracking in Cloud Watch
+
 AWS automatically tracks opens / clicks, but we manually maintain a dashboard with this data. After sending alerts, you can include it in the dashboard via:
+
 1. Go to https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Email-Alerts (request access from Michael or Igor if you need it).
 2. Duplicate the latest widget (Click the menu button on the widget and choose Duplicate).
 3. Edit the duplicated widget (Click the menu button on the widget and choose Edit).

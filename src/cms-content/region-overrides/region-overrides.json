@@ -600,15 +600,6 @@
     },
     {
       "include": "region-and-subregions",
-      "metric": "metrics.icuCapacityRatio",
-      "blocked": true,
-      "start_date": "",
-      "end_date": "",
-      "region": "DE",
-      "context": "DE state spike to 100% ICU usage, Dover drop to < 50% usage"
-    },
-    {
-      "include": "region-and-subregions",
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2022-03-06",
@@ -736,15 +727,6 @@
       "context": "suspected backlogs in Santa Bara and Washtenaw counties."
     },
     {
-      "include": "region",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
-      "start_date": "2022-04-02",
-      "end_date": "",
-      "region": "53071",
-      "context": "Susupected backlog in Walla Walla County, WA"
-    },
-    {
       "include": "region-and-subregions",
       "metric": "metrics.caseDensity",
       "blocked": true,
@@ -772,33 +754,6 @@
       "context": "Suspected backlog in KY state case data"
     },
     {
-      "include": "region",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
-      "start_date": "2022-04-07",
-      "end_date": "",
-      "region": "31109",
-      "context": "Blocking zero-data due to outlier detection removal"
-    },
-    {
-      "include": "region",
-      "metric": "metrics.icuCapacityRatio",
-      "blocked": true,
-      "start_date": "",
-      "end_date": "",
-      "region": "DC, 24033, 24031, 24017, 24037",
-      "context": "Highly fluctuating historial Weekly Covid Admissions data"
-    },
-    {
-      "include": "region",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
-      "start_date": "2022-04-01",
-      "end_date": "",
-      "region": "29083,29011,29103,29117,29101,29123,29125,29109,29179,29145,29043,29005,29019,29081,29037,29067,29225,29093,29079,29163,29201,29209,29089,29221,29131,29165,29021,29051,29173,29003,29139,29153,29127,29177,29023,29105,29195,29071,29041,29223,29039,29017,29175,29097,29149,29059,29151,29073,29087,29055,29107,29186,29045,29227,29161,29085,29009,29167,29025,29111,29181,29219,29095,29207,29169,29075,29229,29007,29053,29047,29211,29213,29115,29135,29027,29099,29113,29215,29141,29035,29031,29133,29197,29091,29121,29061,29205,29203,29157,29057,29199,29171,29187,29049,29033,29217,29015,29065,29185,29129,29159,29063,29069,29137,29155,29510,29013,29143,29029",
-      "context": "MO no longer reporting cases for all but 6 counties (29119, 29077, 29147, 29001, 29183, 29189)"
-    },
-    {
       "include": "region-and-subregions",
       "metric": "metrics.testPositivityRatio",
       "blocked": true,
@@ -815,6 +770,151 @@
       "end_date": "2022-02-28",
       "context": "WA temporarily not reporting cumulative tests",
       "region": "WA"
+    },
+    {
+      "include": "subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-05-01",
+      "end_date": "2022-05-01",
+      "region": "WA",
+      "context": " Suspected County-level case backlog on 5/2/2022"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-05-08",
+      "end_date": "2022-05-08",
+      "region": "36061",
+      "context": "NY County, NY big assumed backlog on 5/9/2022"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "37127",
+      "context": "Nash county showing 0 new cases"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "context": "MO counties missing case data",
+      "region": "29007,29001,29037,29047,29095,29097,29129,29145,29149,29165,29179,29199,29203,29223,29155",
+      "disclaimer": "Some Missouri counties are no longer reporting cases at a county level."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "2022-06-07",
+      "end_date": "2022-06-07",
+      "region": "13003",
+      "context": "spike in cases after no reporting"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-06-27",
+      "end_date": "2022-06-27",
+      "region": "08031",
+      "context": "Denver, CO case suspected backlog 6/27/2022"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-04",
+      "end_date": "2022-07-04",
+      "region": "TX, KY",
+      "context": "No or reduced case rporting for July 4th"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-10",
+      "end_date": "2022-07-12",
+      "region": "08001",
+      "context": "Dropoff in cases on 7/11/2022"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-12",
+      "end_date": "2022-07-12",
+      "region": "UT",
+      "context": "Near 0 case reporting dragging Weekly New Cases down"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-17",
+      "end_date": "2022-07-17",
+      "region": "13021",
+      "context": "near-zero case reporting caused weekly new cases to drop towards zero"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "2022-07-19",
+      "end_date": "2022-07-19",
+      "region": "04027",
+      "context": "large spike in cases in Yuma County, AZ"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-13",
+      "end_date": "",
+      "region": "MP",
+      "context": "MP dropoff in cases"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-08-07",
+      "end_date": "2022-08-07",
+      "region": "GA",
+      "context": "GA near zero-reporting dragging down WNC"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-08-12",
+      "end_date": "2022-08-12",
+      "region": "41660",
+      "context": "San Angelo TX cases dropof"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.infectionRate",
+      "blocked": true,
+      "start_date": "2022-08-18",
+      "end_date": "2022-08-18",
+      "region": "06029",
+      "context": "Weekly admissions spike in Kern County, CA"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-08-24",
+      "end_date": "2022-08-24",
+      "region": "TN",
+      "context": "backlog on 8/24"
     }
   ]
 }

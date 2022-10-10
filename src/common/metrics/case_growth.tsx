@@ -22,12 +22,6 @@ export const CaseGrowthMetric: MetricDefinition = {
   metricNameForSummaryStat: METRIC_NAME,
 };
 
-const SHORT_DESCRIPTION_LOW = 'Active cases are decreasing';
-const SHORT_DESCRIPTION_MEDIUM = 'COVID is still spreading, but slowly';
-const SHORT_DESCRIPTION_MEDIUM_HIGH = 'Active cases are rapidly increasing';
-const SHORT_DESCRIPTION_HIGH = 'Active cases are exponentially increasing';
-const SHORT_DESCRIPTION_UNKNOWN = 'Insufficient data to assess';
-
 const LIMIT_LOW = 0.9;
 const LIMIT_MEDIUM = 1.1;
 const LIMIT_MEDIUM_HIGH = 1.4;
@@ -45,28 +39,24 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: LOW_NAME,
     color: COLOR_MAP.GREEN.BASE,
-    detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_MEDIUM,
     name: MEDIUM_NAME,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => SHORT_DESCRIPTION_MEDIUM,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_MEDIUM_HIGH,
     name: MEDIUM_HIGH_NAME,
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: () => SHORT_DESCRIPTION_MEDIUM_HIGH,
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: () => SHORT_DESCRIPTION_HIGH,
   },
   // We don't have a SUPER_CRITICAL threshold, so upperLimit is same as CRITICAL to hide it.
   [Level.SUPER_CRITICAL]: {
@@ -74,14 +64,12 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_HIGH,
     name: HIGH_NAME,
     color: COLOR_MAP.RED.BASE,
-    detail: () => SHORT_DESCRIPTION_HIGH,
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => SHORT_DESCRIPTION_UNKNOWN,
   },
 };
 

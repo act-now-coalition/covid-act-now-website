@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfo, LevelInfoMap } from 'common/level';
-import { formatPercent, formatInteger } from 'common/utils';
+import { formatPercent } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import { Projections } from 'common/models/Projections';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
@@ -23,8 +24,6 @@ export const VaccinationsMetric: MetricDefinition = {
   metricNameForSummaryStat: 'Vaccinated',
 };
 
-const SHORT_DESCRIPTION_LOW = 'Population given at least one dose';
-
 const UNKNOWN = 'Unknown';
 
 // HACK: There isn't a clean way to avoid having grading / zones right now.
@@ -33,7 +32,6 @@ const dummyLevelInfo: LevelInfo = {
   upperLimit: 1,
   name: '',
   color: '',
-  detail: () => '',
 };
 
 export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
@@ -42,7 +40,6 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: '',
     color: COLOR_MAP.ORANGE.BASE,
-    detail: () => SHORT_DESCRIPTION_LOW,
   },
   [Level.MEDIUM]: dummyLevelInfo,
   [Level.HIGH]: dummyLevelInfo,
@@ -53,7 +50,6 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: 1,
     name: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => '',
   },
 };
 
@@ -101,9 +97,10 @@ function renderStatus(projections: Projections): React.ReactElement {
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose,{ifNoAdditionalDoseAnd} {peopleVaccinated} (
       {percentVaccinated}) have received at least two doses or a single Johnson
-      & Johnson dose{additionalDoseText}. Anybody who is at least 5 years old is
-      eligible to be vaccinated. Fewer than 0.001% of people who have received a
-      dose experienced a severe adverse reaction. {cappedVaccinatedCopy}
+      & Johnson dose{additionalDoseText}. Anybody who is at least 6 months old
+      is eligible to be vaccinated. Fewer than 0.001% of people who have
+      received a dose experienced a severe adverse reaction.{' '}
+      {cappedVaccinatedCopy}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
     </Fragment>
   );

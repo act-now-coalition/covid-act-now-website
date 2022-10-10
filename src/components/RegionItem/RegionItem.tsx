@@ -22,7 +22,9 @@ const RegionItem: React.FC<{ region: Region }> = ({ region }) => {
   const iconColor = colorFromLocationSummary(regionSummary);
 
   const levelDescriptionCopy = regionSummary
-    ? `${LOCATION_SUMMARY_LEVELS[regionSummary.level].name} community level`
+    ? `${
+        LOCATION_SUMMARY_LEVELS[regionSummary.level].name
+      } community risk level`
     : '';
 
   return (

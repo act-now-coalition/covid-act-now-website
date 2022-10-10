@@ -161,8 +161,9 @@ const metricToSourceMap: RegionSourceMap = {
   [Metric.ADMISSIONS_PER_100K]: {
     state: [
       {
-        sourceName: 'CDC COVID Data Tracker',
-        url: 'https://covid.cdc.gov/covid-data-tracker/',
+        sourceName: 'The Department of Health and Human Services',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh/',
       },
     ],
     metro: [
@@ -191,8 +192,9 @@ const metricToSourceMap: RegionSourceMap = {
   [Metric.RATIO_BEDS_WITH_COVID]: {
     state: [
       {
-        sourceName: 'CDC COVID Data Tracker',
-        url: 'https://covid.cdc.gov/covid-data-tracker/',
+        sourceName: 'The Department of Health and Human Services',
+        url:
+          'https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh/',
       },
     ],
     metro: [

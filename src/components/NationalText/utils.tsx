@@ -6,7 +6,7 @@ import {
   parseDateUnix,
   DateFormat,
   formatUTCDateTime,
-} from 'common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 
 const getTotalCasesCopy = (summedRawCases: number): string => {
   const ONE_MILLION = 1000000;

@@ -1,5 +1,5 @@
 import { Region, County, State, MetroArea, getStateName } from 'common/regions';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import { getVaccineInfoByFips } from 'cms-content/vaccines/phases';
 import { getVaccinationDataByRegion } from 'cms-content/vaccines';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { VaccineProgressBar } from './VaccineProgressBar';
 
 export default {
-  title: 'Shared Components/VaccineProgressBar',
+  title: 'Components/VaccineProgressBar',
   component: VaccineProgressBar,
 };
 

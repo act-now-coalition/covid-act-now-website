@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Projections } from 'common/models/Projections';
-import { formatDecimal, formatInteger } from 'common/utils';
+import { formatDecimal } from 'common/utils';
+import { formatInteger } from '@actnowcoalition/number-format';
 import Thermometer from 'components/Thermometer';
 import { MetricDefinition } from './interfaces';
 import { Metric } from 'common/metricEnum';
@@ -33,28 +34,24 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_LOW,
     name: 'Lower',
     color: COLOR_MAP.GREEN.BASE,
-    detail: () => 'COVID is being effectively contained',
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
     upperLimit: LIMIT_HIGH,
     name: nameHigh,
     color: colorHigh,
-    detail: () => 'COVID not contained, but at low levels',
   },
   [Level.HIGH]: {
     level: Level.HIGH,
     upperLimit: LIMIT_HIGH,
     name: nameHigh,
     color: colorHigh,
-    detail: () => 'Very large number of new cases',
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
     upperLimit: 0,
     name: 'Unknown',
     color: COLOR_MAP.GRAY.BASE,
-    detail: () => 'Insufficient data to assess',
   },
 
   // Not to be used:
@@ -63,14 +60,12 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
     upperLimit: LIMIT_HIGH,
     name: 'Critical',
     color: COLOR_MAP.RED.BASE,
-    detail: () => 'Dangerous number of new cases',
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
     upperLimit: LIMIT_HIGH,
     name: 'Extreme',
     color: COLOR_MAP.RED.DARK,
-    detail: () => 'Very dangerous number of new cases',
   },
 };
 
@@ -102,7 +97,10 @@ function renderStatus(projections: Projections): React.ReactElement {
       Over the last week, {locationName} had {newCasesPerWeekText} new reported
       cases (<b>{formatDecimal(currentWeeklyReportedCases, 1)}</b> for every
       100,000 residents). Reported cases do not include all at-home positive
-      tests.
+      tests. Grading is not applied to weekly new reported cases prior to April
+      18, 2022, indicated by the dotted line. This date marks our change to
+      measure community risk levels, a framework that is only relevant for the
+      current phase of the pandemic.
     </Fragment>
   );
 }

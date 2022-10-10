@@ -1,9 +1,9 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
-import { assert } from 'common/utils';
+import { assert } from '@actnowcoalition/assert';
 import urlJoin from 'url-join';
 import * as QueryString from 'query-string';
 import { Region } from './regions';
-import { DateFormat, formatDateTime } from 'common/utils/time-utils';
+import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
 /**
  * We append a short unique string corresponding to the currently published

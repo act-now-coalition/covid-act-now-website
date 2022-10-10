@@ -13,7 +13,6 @@ import { trackNavigation, trackMobileMenuOpen } from 'components/NavBar/utils';
 import { useIsEmbed } from 'common/utils/hooks';
 import { useBreakpoint } from 'common/hooks';
 import { Region } from 'common/regions';
-import RecruitingBanner from '../MiniStickyBanner/RecruitingBanner';
 
 const NavLocationPage: React.FC<{
   renderSecondaryElement: () => React.ReactElement;
@@ -77,7 +76,6 @@ const NavLocationPage: React.FC<{
 
   return (
     <Style.AppBar position="sticky" color="transparent" elevation={0}>
-      <RecruitingBanner />
       <Style.Toolbar>
         <Style.GridContainer>
           <Style.GridItemBackLink>

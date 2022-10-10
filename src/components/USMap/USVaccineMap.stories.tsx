@@ -3,7 +3,7 @@ import { TooltipMode } from './USMapTooltip';
 import USVaccineMap from './USVaccineMap';
 
 export default {
-  title: 'Shared Components/USVaccineMap',
+  title: 'Components/USVaccineMap',
   component: USVaccineMap,
   argTypes: {
     onClick: () => {},

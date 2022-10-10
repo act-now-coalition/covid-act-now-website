@@ -3,7 +3,7 @@ import React from 'react';
 import VaccineTooltip from './VaccineTooltip';
 
 export default {
-  title: 'Shared Components/USVaccineMap/VaccineTooltip',
+  title: 'Components/USVaccineMap/VaccineTooltip',
   component: VaccineTooltip,
 };
 

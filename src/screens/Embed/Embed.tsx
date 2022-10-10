@@ -57,7 +57,6 @@ function LocationEmbed() {
         <EmbedBody>
           <SummaryStats
             stats={stats}
-            condensed={true}
             isEmbed={true}
             embedOnClickBaseURL={embedOnClickBaseURL}
           />

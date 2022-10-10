@@ -4,7 +4,7 @@ import { useProjectionsFromRegion } from 'common/utils/model';
 import SummaryStats from './SummaryStats';
 
 export default {
-  title: 'Building Blocks/SummaryStats',
+  title: 'Components/SummaryStats',
   component: SummaryStats,
 };
 
@@ -16,5 +16,5 @@ export const California = () => {
     return null;
   }
 
-  return <SummaryStats stats={projections.getMetricValues()} condensed />;
+  return <SummaryStats stats={projections.getMetricValues()} />;
 };

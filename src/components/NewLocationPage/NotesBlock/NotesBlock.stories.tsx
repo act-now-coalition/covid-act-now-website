@@ -3,7 +3,7 @@ import VulnerabilityNote from './VulnerabilityNote';
 import regions from 'common/regions';
 
 export default {
-  title: 'Location page redesign/Notes Block',
+  title: 'Location Page/Notes Block',
   component: VulnerabilityNote,
 };
 

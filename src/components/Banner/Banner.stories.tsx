@@ -12,7 +12,7 @@ import {
 } from './index';
 
 export default {
-  title: 'Shared Components/Banner',
+  title: 'Components/Banner',
   component: DonationBanner,
 };
 

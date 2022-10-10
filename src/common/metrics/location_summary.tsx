@@ -1,8 +1,5 @@
-import React from 'react';
 import { COLOR_MAP } from 'common/colors';
 import { Level, LevelInfoMap } from 'common/level';
-import { HashLink } from 'react-router-hash-link';
-import { scrollWithOffset } from 'components/TableOfContents';
 
 // Note: These names are used on SocialLocationPreview
 const LOW_NAME = 'Low';
@@ -12,23 +9,13 @@ const HIGH_NAME = 'Very high';
 const SUPER_CRITICAL_NAME = 'Extremely high';
 const UNKNOWN = 'Unknown';
 
-const LEGEND_SUMMARY_LOW = 'Low COVID Community Level';
-const LEGEND_SUMMARY_MEDIUM = 'Medium COVID Community Level';
-const LEGEND_SUMMARY_HIGH = 'High COVID Community Level';
+const LEGEND_SUMMARY_LOW = 'Low COVID Community Risk Level';
+const LEGEND_SUMMARY_MEDIUM = 'Medium COVID Community Risk Level';
+const LEGEND_SUMMARY_HIGH = 'High COVID Community Risk Level';
 
-// TODO(8.2): Remove once community level changes are shipped.
+// TODO(8.2): Remove once community risk level changes are shipped.
 const LEGEND_SUMMARY_MEDIUM_HIGH = 'Very high risk';
 const LEGEND_SUMMARY_SUPER_CRITICAL = 'Extremely high risk';
-
-const recommendationsLink = (
-  <HashLink
-    smooth
-    scroll={(element: HTMLElement) => scrollWithOffset(element, -200)}
-    to="#recommendations"
-  >
-    official recommended actions
-  </HashLink>
-);
 
 export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
   [Level.LOW]: {
@@ -37,7 +24,6 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: LOW_NAME,
     summary: LEGEND_SUMMARY_LOW,
     color: COLOR_MAP.GREEN.BASE,
-    detail: locationName => <>See {recommendationsLink}.</>,
   },
   [Level.MEDIUM]: {
     level: Level.MEDIUM,
@@ -45,7 +31,6 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: MEDIUM_NAME,
     summary: LEGEND_SUMMARY_MEDIUM,
     color: COLOR_MAP.ORANGE.BASE,
-    detail: locationName => <>See {recommendationsLink}.</>,
   },
   [Level.HIGH]: {
     level: Level.HIGH,
@@ -53,9 +38,6 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: MEDIUM_HIGH_NAME,
     summary: LEGEND_SUMMARY_MEDIUM_HIGH,
     color: COLOR_MAP.ORANGE_DARK.BASE,
-    detail: locationName => (
-      <>Take precautions to avoid exposure, including {recommendationsLink}.</>
-    ),
   },
   [Level.CRITICAL]: {
     level: Level.CRITICAL,
@@ -63,12 +45,6 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: HIGH_NAME,
     summary: LEGEND_SUMMARY_HIGH,
     color: COLOR_MAP.RED.BASE,
-    detail: locationName => (
-      <>
-        Take strong precautions to avoid exposure, including{' '}
-        {recommendationsLink}.
-      </>
-    ),
   },
   [Level.SUPER_CRITICAL]: {
     level: Level.SUPER_CRITICAL,
@@ -76,12 +52,6 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: SUPER_CRITICAL_NAME,
     summary: LEGEND_SUMMARY_SUPER_CRITICAL,
     color: COLOR_MAP.RED.DARK,
-    detail: locationName => (
-      <>
-        Take all possible precautions to avoid exposure, including{' '}
-        {recommendationsLink}.
-      </>
-    ),
   },
   [Level.UNKNOWN]: {
     level: Level.UNKNOWN,
@@ -89,6 +59,5 @@ export const LOCATION_SUMMARY_LEVELS: LevelInfoMap = {
     name: UNKNOWN,
     summary: UNKNOWN,
     color: COLOR_MAP.GRAY.BASE,
-    detail: locationName => 'We don’t have enough data to assess COVID risk.',
   },
 };

@@ -5,7 +5,7 @@ import {
   DateFormat,
   parseDateString,
   formatDateTime,
-} from 'common/utils/time-utils';
+} from '@actnowcoalition/time-utils';
 
 export interface ArticleMain {
   articleID: string;
