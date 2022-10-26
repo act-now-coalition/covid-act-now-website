@@ -82,6 +82,7 @@ export const BodyCopy = styled(MarkdownBody)`
   }
 
   // TODO: This customizes the style for the address, is there a cleaner way?
+  // HACK: This blockquote <p> tag is inheriting an undesired on hover color change. Adding an override.
   blockquote {
     background-color: white;
     padding: 0;
@@ -91,6 +92,9 @@ export const BodyCopy = styled(MarkdownBody)`
       color: ${COLOR_MAP.GRAY_BODY_COPY};
       font-size: 15px;
       font-weight: normal;
+      &:hover {
+        color: ${COLOR_MAP.GRAY_BODY_COPY};
+      }
     }
   }
 `;
