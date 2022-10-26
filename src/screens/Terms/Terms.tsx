@@ -55,7 +55,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Website Terms of Use
         </Typography>
         <Typography variant="h6" component="h1" align="center">
-          Last updated: October 9, 2020
+          Last updated: October 26, 2022
         </Typography>
         <Typography variant="h5" component="h1">
           Acceptance of the Terms of Use
@@ -801,8 +801,8 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Your Comments and Concerns
         </Typography>
         <Typography variant="body1" component="p">
-          This website is operated by CoVidActNow.org, 340 S Lemon Avenue #6683,
-          Walnut, California 91789.
+          This website is operated by CoVidActNow.org, 440 N Barranca Ave #6683,
+          Covina, California 91723.
         </Typography>
         <Typography variant="body1" component="p">
           All other feedback, comments, requests for technical support and other
