@@ -807,7 +807,10 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           All other feedback, comments, requests for technical support and other
           communications relating to the Website should be directed to:{' '}
-          <a href="mailto:info@CoVidActNow.org">info@CoVidActNow.org</a>.
+          <a href="mailto:contact@actnowcoalition.org">
+            contact@actnowcoalition
+          </a>
+          .
         </Typography>
       </Content>
     </Wrapper>

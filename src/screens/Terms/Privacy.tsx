@@ -90,7 +90,10 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
           without verification of parental consent, we will delete that
           information. If you believe we might have any information from or
           about a child under 13, please contact us at:{' '}
-          <a href="mailto:privacy@covidactnow.org">privacy@covidactnow.org</a>.
+          <a href="mailto:privacy@actnowcoalition.org">
+            privacy@actnowcoalition.org
+          </a>
+          .
         </Typography>
 
         <Typography variant="h5" component="h1">
@@ -426,7 +429,7 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
               on which we collect your data (the registration form). You can
               also always opt out by checking or unchecking the relevant boxes
               or by sending us an email stating your request to
-              privacy@covidactnow.org.
+              privacy@actnowcoalition.org.
             </li>
             <li>
               <b>Promotional Offers from the Company</b>. If you do not wish to
@@ -434,8 +437,8 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
               own or third parties' products or services, you can opt out by
               checking the relevant box located on the form on which we collect
               your data (the registration form) or at any other time by sending
-              us an email stating your request to privacy@covidactnow.org. If we
-              have sent you a promotional email, you may send us a return email
+              us an email stating your request to privacy@actnowcoalition.org.
+              If we have sent you a promotional email, you may send us a return
               asking to be omitted from future email distributions.
             </li>
             <li>
@@ -446,8 +449,8 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
               on the form on which we collect your data (the registration form)
               or at any other time by sending us an email stating your request
               to{' '}
-              <a href="mailto:privacy@covidactnow.org">
-                privacy@covidactnow.org
+              <a href="mailto:privacy@actnowcoalition.org">
+                privacy@actnowcoalition.org
               </a>
               .
             </li>
@@ -514,7 +517,10 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           To ask questions or comment about this privacy policy and our privacy
           practices, contact us at:{' '}
-          <a href="mailto:privacy@covidactnow.org">privacy@covidactnow.org</a>.
+          <a href="mailto:privacy@actnowcoalition.org">
+            privacy@actnowcoalition.org
+          </a>
+          .
         </Typography>
         <Typography variant="body1" component="p">
           To register a complaint or concern, please contact us at the email
