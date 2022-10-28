@@ -808,7 +808,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           All other feedback, comments, requests for technical support and other
           communications relating to the Website should be directed to:{' '}
           <a href="mailto:contact@actnowcoalition.org">
-            contact@actnowcoalition
+            contact@actnowcoalition.org
           </a>
           .
         </Typography>
