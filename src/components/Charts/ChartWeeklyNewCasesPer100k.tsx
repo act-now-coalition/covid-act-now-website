@@ -59,7 +59,7 @@ const ChartWeeklyNewCasesPer100k: FunctionComponent<{
   height,
   marginTop = 6,
   marginBottom = 40,
-  marginLeft = 30,
+  marginLeft = 32,
   marginRight = 5,
 }) => {
   const chartWidth = width - marginLeft - marginRight;
