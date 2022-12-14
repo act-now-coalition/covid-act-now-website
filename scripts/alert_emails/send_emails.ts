@@ -7,6 +7,14 @@ import { generateAlertEmailData, readAlerts, resolveSnapshot } from './utils';
 
 const BATCH_SIZE = 20;
 
+interface SnapshotStats {
+  sent: Date;
+  locationsWithAlerts: number;
+  totalEmailsSent: number;
+  uniqueEmailAddresses: number;
+  invalidEmailsRemoved: number;
+}
+
 async function setLastSnapshotNumber(
   firestore: FirebaseFirestore.Firestore,
   snapshot: string,
@@ -15,6 +23,26 @@ async function setLastSnapshotNumber(
     lastSnapshot: snapshot,
   });
   console.log(`Set lastsnapshot to be ${snapshot}`);
+}
+
+async function recordSnapshotStats(
+  firestore: FirebaseFirestore.Firestore,
+  snapshot: number,
+  stats: SnapshotStats,
+) {
+  await firestore.doc(`alert-stats/${snapshot}`).set(stats);
+
+  // Increment the global "totalEmailsSent" stat.  We don't have a global
+  // "locationsWithAlerts", "uniqueEmailAddresses", etc. since these can't be
+  // aggregated in a sane way.
+  await firestore.doc('info/alert-stats').set(
+    {
+      totalEmailsSent: admin.firestore.FieldValue.increment(
+        stats.totalEmailsSent,
+      ),
+    },
+    { merge: true },
+  );
 }
 
 /**
@@ -78,7 +106,7 @@ async function setLastSnapshotNumber(
     return db
       .collection(`snapshots/${currentSnapshot}/locations/${fips}/emails/`)
       .doc(email)
-      .set({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
+      .update({ sentAt: admin.firestore.FieldValue.serverTimestamp() });
   }
 
   async function sendAlertEmail(email: string, fips: string): Promise<void> {
@@ -119,17 +147,19 @@ async function setLastSnapshotNumber(
     );
   }
 
-  console.info(`Total emails to be sent: ${emailSent}.`);
-  console.info(
-    `Total locations with emails: ${Object.keys(locationsWithEmails).length}.`,
-  );
-  console.info(
-    `Unique Email addresses: ${Object.keys(uniqueEmailAddress).length}.`,
-  );
-  console.info(`Invalid emails removed: ${invalidEmailCount}.`);
+  const stats: SnapshotStats = {
+    sent: new Date(),
+    locationsWithAlerts: Object.keys(locationsWithEmails).length,
+    totalEmailsSent: emailSent,
+    uniqueEmailAddresses: Object.keys(uniqueEmailAddress).length,
+    invalidEmailsRemoved: invalidEmailCount,
+  };
+  console.info('Email sending stats:', stats);
 
   if (!dryRun) {
-    setLastSnapshotNumber(db, `${currentSnapshot}`);
+    await setLastSnapshotNumber(db, `${currentSnapshot}`);
+    await recordSnapshotStats(db, currentSnapshot, stats);
+
     // If we aren't in a dry run but there's clearly some non trivial errors exit with error
     if (emailSent < 1 || errorCount > 1) {
       console.log(
