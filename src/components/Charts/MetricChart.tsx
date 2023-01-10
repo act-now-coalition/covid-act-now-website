@@ -35,7 +35,7 @@ const MetricChart = React.memo(
     height?: number;
   }) => {
     const chartHeight = height ? height : useChartHeightForBreakpoint();
-    if (!projections.hasMetric(metric)) {
+    if (!projections.hasMetric(metric) && metric !== Metric.VACCINATIONS) {
       // See if the data has been blocked and there is a disclaimer.
       const blockedDisclaimer = getRegionMetricDisclaimer(
         projections.region,
