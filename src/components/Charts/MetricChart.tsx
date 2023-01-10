@@ -114,7 +114,6 @@ const MetricChart = React.memo(
 export default MetricChart;
 
 function getVaccinationSeries(projection: Projection): Series[] {
-  console.log(projection.getDataset('vaccinations'));
   return [
     {
       type: SeriesType.LINE,
@@ -153,8 +152,8 @@ function getVaccinationSeries(projection: Projection): Series[] {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinations')),
       label: 'vaccinationsFall2022BivalentBoosted',
-      shortLabel: 'Bivalent Boosted',
-      tooltipLabel: 'Bivalent Boosted',
+      shortLabel: 'Bivalent Shot',
+      tooltipLabel: 'Bivalent Shot',
       params: {
         stroke: VACCINATIONS_COLOR_MAP.BIVALENT_FALL_2022,
         fill: VACCINATIONS_COLOR_MAP.BIVALENT_FALL_2022,

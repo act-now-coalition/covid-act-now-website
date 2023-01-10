@@ -26,7 +26,7 @@ export const metricSubLabelText: { [key in Metric]: string[] } = {
 
 export const metricNameSubLabel: { [key in Metric]: string } = {
   [Metric.CASE_DENSITY]: '',
-  [Metric.VACCINATIONS]: 'Bivalent dose',
+  [Metric.VACCINATIONS]: 'Bivalent shot',
   [Metric.CASE_GROWTH_RATE]: '',
   [Metric.HOSPITAL_USAGE]: '',
   [Metric.POSITIVE_TESTS]: '',

@@ -367,16 +367,16 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022]: {
-    title: '% Vaccinated (bivalent dose)',
-    name: 'Percent vaccinated (bivalent dose)',
+    title: '% Vaccinated (bivalent booster shot)',
+    name: 'Percent vaccinated (bivalent booster shot)',
     chartId: 'vaccinations_bivalent_dose_fall_2022',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
     maxY: 1,
     seriesList: [
       {
-        label: 'Percent vaccinated (bivalent dose)',
-        tooltipLabel: 'Percent vaccinated (bivalent dose)',
+        label: 'Percent vaccinated (bivalent booster shot)',
+        tooltipLabel: 'Percent vaccinated (bivalent booster shot)',
         datasetId: 'vaccinations',
         type: SeriesType.LINE,
       },
