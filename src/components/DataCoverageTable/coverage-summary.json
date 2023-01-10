@@ -282,13 +282,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1364,
+      "regionsAvailable": 1383,
       "totalStates": 53,
       "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 231,
+      "regionsAvailable": 235,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -394,6 +394,27 @@
     "metro": {
       "totalRegions": 392,
       "regionsAvailable": 367,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.vaccinationsFall2022BivalentBoosterRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 49,
+      "totalStates": 53,
+      "statesAvailable": 49
+    },
+    "county": {
+      "totalRegions": 3223,
+      "regionsAvailable": 2788,
+      "totalStates": 53,
+      "statesAvailable": 43
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 307,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -709,6 +730,27 @@
     "metro": {
       "totalRegions": 392,
       "regionsAvailable": 371,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "actuals.vaccinationsFall2022BivalentBooster",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 49,
+      "totalStates": 53,
+      "statesAvailable": 49
+    },
+    "county": {
+      "totalRegions": 3223,
+      "regionsAvailable": 2788,
+      "totalStates": 53,
+      "statesAvailable": 43
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 307,
       "totalStates": 0,
       "statesAvailable": 0
     }
