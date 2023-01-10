@@ -20,8 +20,8 @@ export const VaccinationsMetric: MetricDefinition = {
   renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent Vaccinated',
-  metricNameForCompare: 'Updated Booster (Bivalent Shot)',
-  metricNameForSummaryStat: 'Updated Booster',
+  metricNameForCompare: 'Boosted (Bivalent)',
+  metricNameForSummaryStat: 'Boosted',
 };
 
 const UNKNOWN = 'Unknown';
@@ -81,7 +81,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   let ifNoAdditionalDoseAnd;
   if (peopleAdditionalDose != null && percentAdditionalDose != null) {
     additionalDoseText = ` ${peopleAdditionalDose} (${percentAdditionalDose})
-    have received a booster shot`;
+    have received a booster dose`;
     ifNoAdditionalDoseAnd = ``;
   } else {
     additionalDoseText = ``;
@@ -95,7 +95,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     percentBivalentFall2022Booster != null
   ) {
     bivalentFall2022BoosterText = `, and ${peopleBivalentFall2022Booster} (${percentBivalentFall2022Booster})
-    have received an updated bivalent booster shot`;
+    have received an updated bivalent booster dose`;
     ifNoBivalentFall2022BoosterAnd = ``;
   } else {
     bivalentFall2022BoosterText = ``;

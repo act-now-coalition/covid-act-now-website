@@ -335,16 +335,16 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: {
-    title: '% Vaccinated (booster shot)',
-    name: 'Percent vaccinated (booster shot)',
+    title: '% Vaccinated (booster dose)',
+    name: 'Percent vaccinated (booster dose)',
     chartId: 'vaccinations_additional_dose',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
     maxY: 1,
     seriesList: [
       {
-        label: 'Percent vaccinated (booster shot)',
-        tooltipLabel: 'Percent vaccinated (booster shot)',
+        label: 'Percent vaccinated (booster dose)',
+        tooltipLabel: 'Percent vaccinated (booster dose)',
         datasetId: 'vaccinationsAdditionalDose',
         type: SeriesType.LINE,
       },
@@ -367,16 +367,16 @@ export const exploreMetricData: {
     ],
   },
   [ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022]: {
-    title: '% Vaccinated (bivalent booster shot)',
-    name: 'Percent vaccinated (bivalent booster shot)',
+    title: '% Vaccinated (bivalent booster)',
+    name: 'Percent vaccinated (bivalent booster)',
     chartId: 'vaccinations_bivalent_dose_fall_2022',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
     maxY: 1,
     seriesList: [
       {
-        label: 'Percent vaccinated (bivalent booster shot)',
-        tooltipLabel: 'Percent vaccinated (bivalent booster shot)',
+        label: 'Percent vaccinated (bivalent booster)',
+        tooltipLabel: 'Percent vaccinated (bivalent booster)',
         datasetId: 'vaccinations',
         type: SeriesType.LINE,
       },
@@ -685,7 +685,7 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
     case ExploreMetric.VACCINATIONS_COMPLETED:
       return `Percent vaccinated (2+ doses or J&J) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE:
-      return `Percent vaccinated (booster shot) in ${locationName}, according to @CovidActNow. See the chart: `;
+      return `Percent vaccinated (booster dose) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_USED:
       return `ICU capacity used in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.POSITIVITY_RATE:
