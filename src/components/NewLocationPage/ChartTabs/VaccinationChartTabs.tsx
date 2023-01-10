@@ -27,6 +27,8 @@ const VaccinationChartTabs: React.FC<{
     projections?.primary.vaccinationsInfo?.ratioVaccinated;
   const percentAdditionalDose =
     projections?.primary.vaccinationsInfo?.ratioAdditionalDose;
+  const percentBivalentBoostedFall2022 =
+    projections?.primary.vaccinationsInfo?.ratioBivalentBoostedFall2022;
 
   const tabsContent = [
     {
@@ -49,6 +51,13 @@ const VaccinationChartTabs: React.FC<{
         ? formatPercent(percentAdditionalDose, 1)
         : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
+    },
+    {
+      metricName: 'Bivalent Shot',
+      value: percentBivalentBoostedFall2022
+        ? formatPercent(percentBivalentBoostedFall2022, 1)
+        : nullValueString,
+      iconColor: VACCINATIONS_COLOR_MAP.BIVALENT_FALL_2022,
     },
   ];
 

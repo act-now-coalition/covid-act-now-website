@@ -138,6 +138,6 @@ function getOverrideMetricForMetric(metric: Metric): string {
     case Metric.POSITIVE_TESTS:
       return 'metrics.testPositivityRatio';
     case Metric.VACCINATIONS:
-      return 'metrics.vaccinationsInitiatedRatio';
+      return 'metrics.VaccinationsFall2022BivalentBoosterRatio';
   }
 }
