@@ -156,7 +156,7 @@
       "start_date": "2021-07-07",
       "end_date": "2021-07-07",
       "region": "IA",
-      "context": "Large outliers not caught due to post-7/4 outlier exclusion. See https://github.com/covid-projections/covid-data-model/pull/1150"
+      "context": "Large outliers not caught due to post-7/4 outlier exclusion. See https://github.com/act-now-coalition/covid-data-model/pull/1150"
     },
     {
       "include": "region",

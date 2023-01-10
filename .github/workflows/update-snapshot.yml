@@ -30,7 +30,7 @@ jobs:
       - run: yarn install
 
       # Copy region-overrides.json file from backend repo.
-      - run: curl https://raw.githubusercontent.com/covid-projections/covid-data-model/main/data/region-overrides.json > src/cms-content/region-overrides/region-overrides.json
+      - run: curl https://raw.githubusercontent.com/act-now-coalition/covid-data-model/main/data/region-overrides.json > src/cms-content/region-overrides/region-overrides.json
 
       # Update snapshot URL and regenerate map colors.
       - run: 'echo "{ \"data_url\": \"https://data.covidactnow.org/snapshot/${{env.SNAPSHOT_ID}}/v2/\" }" | python -mjson.tool > src/assets/data/data_url.json'
@@ -94,7 +94,7 @@ jobs:
         with:
           args: |
             PR to update the website to snapshot ${{env.SNAPSHOT_ID}} (with updated map colors and share images) is available.
-            PR: https://github.com/covid-projections/covid-projections/pull/${{env.PULL_REQUEST_NUMBER}}
+            PR: https://github.com/act-now-coalition/covid-act-now-website/pull/${{env.PULL_REQUEST_NUMBER}}
             Preview: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}-covidactnow.now.sh/
             Compare: https://covid-projections-git-bump-snapshot-${{env.RUN_ID}}-covidactnow.now.sh/internal/compare/
             ${{steps.slack_summary.outputs.text}}
