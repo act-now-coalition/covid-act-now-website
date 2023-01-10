@@ -43,11 +43,11 @@ export type Infectionrateci90 = number | null;
  */
 export type Icucapacityratio = number | null;
 /**
- * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area.
+ * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area. For more on HSAs, see https://apidocs.covidactnow.org/data-definitions/#health-service-areas
  */
 export type Bedswithcovidpatientsratio = number | null;
 /**
- * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area.
+ * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area. For more on HSAs, see https://apidocs.covidactnow.org/data-definitions/#health-service-areas
  */
 export type Weeklycovidadmissionsper100K = number | null;
 /**
@@ -62,6 +62,10 @@ export type Vaccinationscompletedratio = number | null;
  * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
  */
 export type Vaccinationsadditionaldoseratio = number | null;
+/**
+ * Ratio of population that have received a bivalent vaccine dose.
+ */
+export type Vaccinationsfall2022Bivalentboosterratio = number | null;
 /**
  * Date of timeseries data point
  */
@@ -84,6 +88,7 @@ export interface MetricsTimeseriesRow {
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
+  vaccinationsFall2022BivalentBoosterRatio?: Vaccinationsfall2022Bivalentboosterratio;
   date: Date;
 }
 /**
