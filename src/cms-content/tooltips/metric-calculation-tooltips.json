@@ -37,7 +37,7 @@
       "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-community-level-metrics#icu-capacity-used)."
     },
     {
-      "body": "For “Shot 1” in a given location, we take the number of people who have received their first shot and divide it by that location’s total population, according to the U.S. Census Bureau.",
+      "body": "**1+ Dose:** Percent of the region's total population that has received at least one vaccine dose.\n\n**2+ Doses:** Percent of the region's total population that has completed a primary series (have second dose of a two-dose vaccine or one dose of a single-dose vaccine).\n\n**Booster Dose:** Percent of the region's total population that has completed a primary series and has received a non-bivalent booster dose.\n\n**Bivalent Dose:** Percent of the region's total population that has received a bivalent booster dose.",
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-community-level-metrics#percent-vaccinated).",
       "title": "Percent vaccinated",
       "id": "percent-vaccinated"
