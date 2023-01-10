@@ -2,7 +2,7 @@ import React from 'react';
 import { ParentSize } from '@vx/responsive';
 import { v4 as uuidv4 } from 'uuid';
 import { ProgressBarContainer, StyledSvg } from './VaccineProgressBar.style';
-import { COLOR_MAP, VACCINATIONS_COLOR_MAP, vaccineColor } from 'common/colors';
+import { VACCINATIONS_COLOR_MAP, vaccineColor } from 'common/colors';
 import { formatPercent } from 'common/utils';
 
 export interface ProgressBarProps {

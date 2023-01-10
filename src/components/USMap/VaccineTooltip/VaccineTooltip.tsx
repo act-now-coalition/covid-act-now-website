@@ -71,11 +71,10 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
         </Row>
         {hasVaccineData(vaccinationsInitiated) &&
         hasVaccineData(vaccinationsCompleted) ? (
-          // TODO: Remove this as we no longer use this tooltip
           <ProgressBarWrapper>
             <VaccineProgressBar
               locationName={locationName}
-              vaccinationsRatio={vaccinationsCompleted}
+              vaccinationsRatio={vaccinationsInitiated}
             />
           </ProgressBarWrapper>
         ) : (
