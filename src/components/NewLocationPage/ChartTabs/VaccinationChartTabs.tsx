@@ -39,21 +39,21 @@ const VaccinationChartTabs: React.FC<{
       iconColor: VACCINATIONS_COLOR_MAP.INITIATED,
     },
     {
-      metricName: '2+ doses or J&J',
+      metricName: '2+ Doses or J&J',
       value: percentCompleted
         ? formatPercent(percentCompleted, 1)
         : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.COMPLETED,
     },
     {
-      metricName: 'Booster shot',
+      metricName: 'Booster Dose',
       value: percentAdditionalDose
         ? formatPercent(percentAdditionalDose, 1)
         : nullValueString,
       iconColor: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
     },
     {
-      metricName: 'Bivalent Shot',
+      metricName: 'Bivalent Dose',
       value: percentBivalentBoostedFall2022
         ? formatPercent(percentBivalentBoostedFall2022, 1)
         : nullValueString,
