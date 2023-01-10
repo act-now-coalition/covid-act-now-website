@@ -42,7 +42,7 @@ export interface MetricChartInfo {
 
 export enum GroupHeader {
   COMMUNITY_LEVEL = 'Community risk level metrics',
-  VACCINATED = '% Updated Booster',
+  VACCINATED = '% Vaccinated',
   TRANSMISSION = 'Transmission metrics',
 }
 
