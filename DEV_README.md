@@ -20,7 +20,7 @@ nvm alias default v14
 
 Get the repo from github
 ```
-git clone https://github.com/covid-projections/covid-projections.git
+git clone https://github.com/act-now-coalition/covid-act-now-website.git
 ```
 
 Then install the correct dependencies locally via yarn.
