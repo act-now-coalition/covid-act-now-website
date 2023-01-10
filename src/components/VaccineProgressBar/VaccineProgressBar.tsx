@@ -29,7 +29,6 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
     : vaccineColor(vaccinationsRatio);
 
   const titleId = uuidv4();
-  const hatchPatternId = uuidv4();
 
   return (
     <StyledSvg
@@ -43,18 +42,6 @@ const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
         {formatPercent(vaccinationsRatio)} of the population has received a dose
         of the bivalent Covid-19 vaccine.
       </title>
-
-      <defs>
-        <pattern
-          id={hatchPatternId}
-          width="3"
-          height="1"
-          patternTransform="rotate(45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line x1="1" y1="0" x2="1" y2="1" stroke={color} strokeWidth={1.5} />
-        </pattern>
-      </defs>
 
       <g>
         <rect

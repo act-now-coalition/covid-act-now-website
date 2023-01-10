@@ -127,13 +127,13 @@ export function vaccineColor(val: number): string {
   val = Number(val.toFixed(2));
 
   const colors = COLOR_MAP.VACCINATIONS_BLUE;
-  if (val < 0.2) {
+  if (val < 0.1) {
     return colors[0];
-  } else if (val < 0.3) {
+  } else if (val < 0.2) {
     return colors[1];
-  } else if (val < 0.4) {
+  } else if (val < 0.3) {
     return colors[2];
-  } else if (val < 0.5) {
+  } else if (val < 0.4) {
     return colors[3];
   } else {
     return colors[4];
