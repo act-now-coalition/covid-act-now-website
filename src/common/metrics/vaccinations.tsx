@@ -20,8 +20,8 @@ export const VaccinationsMetric: MetricDefinition = {
   renderInfoTooltip,
   metricName: METRIC_NAME,
   extendedMetricName: 'Percent Vaccinated',
-  metricNameForCompare: 'Vaccinated (1+ dose)',
-  metricNameForSummaryStat: 'Vaccinated',
+  metricNameForCompare: 'Boosted (Bivalent)',
+  metricNameForSummaryStat: 'Boosted',
 };
 
 const UNKNOWN = 'Unknown';
@@ -70,16 +70,36 @@ function renderStatus(projections: Projections): React.ReactElement {
   const percentAdditionalDose = info.ratioAdditionalDose
     ? formatPercent(info.ratioAdditionalDose, 1)
     : null;
+  const peopleBivalentFall2022Booster = info.peopleBivalentBoostedFall2022
+    ? formatInteger(info.peopleBivalentBoostedFall2022)
+    : null;
+  const percentBivalentFall2022Booster = info.ratioBivalentBoostedFall2022
+    ? formatPercent(info.ratioBivalentBoostedFall2022, 1)
+    : null;
 
   let additionalDoseText;
   let ifNoAdditionalDoseAnd;
   if (peopleAdditionalDose != null && percentAdditionalDose != null) {
-    additionalDoseText = `, and ${peopleAdditionalDose} (${percentAdditionalDose})
-    have received a booster shot`;
+    additionalDoseText = ` ${peopleAdditionalDose} (${percentAdditionalDose})
+    have received a booster dose`;
     ifNoAdditionalDoseAnd = ``;
   } else {
     additionalDoseText = ``;
     ifNoAdditionalDoseAnd = ` and`;
+  }
+
+  let bivalentFall2022BoosterText;
+  let ifNoBivalentFall2022BoosterAnd;
+  if (
+    peopleBivalentFall2022Booster != null &&
+    percentBivalentFall2022Booster != null
+  ) {
+    bivalentFall2022BoosterText = `, and ${peopleBivalentFall2022Booster} (${percentBivalentFall2022Booster})
+    have received an updated bivalent booster dose`;
+    ifNoBivalentFall2022BoosterAnd = ``;
+  } else {
+    bivalentFall2022BoosterText = ``;
+    ifNoBivalentFall2022BoosterAnd = `and`;
   }
 
   const cappedVaccinatedCopy =
@@ -97,10 +117,11 @@ function renderStatus(projections: Projections): React.ReactElement {
       In {locationName}, {peopleInitiated} people ({percentInitiated}) have
       received at least one dose,{ifNoAdditionalDoseAnd} {peopleVaccinated} (
       {percentVaccinated}) have received at least two doses or a single Johnson
-      & Johnson dose{additionalDoseText}. Anybody who is at least 6 months old
-      is eligible to be vaccinated. Fewer than 0.001% of people who have
-      received a dose experienced a severe adverse reaction.{' '}
-      {cappedVaccinatedCopy}
+      & Johnson dose, {ifNoBivalentFall2022BoosterAnd}
+      {additionalDoseText}
+      {bivalentFall2022BoosterText}. Anybody who is at least 6 months old is
+      eligible to be vaccinated. Fewer than 0.001% of people who have received a
+      dose experienced a severe adverse reaction. {cappedVaccinatedCopy}
       <Link to="/faq#vaccines">See more vaccine resources and FAQs</Link>.
     </Fragment>
   );

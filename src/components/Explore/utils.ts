@@ -99,6 +99,7 @@ export const EXPLORE_METRICS = [
   ExploreMetric.VACCINATIONS_FIRST_DOSE,
   ExploreMetric.VACCINATIONS_COMPLETED,
   ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE,
+  ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022,
 ];
 
 // Note that these specifically are counts, not percentages, and can normalized
@@ -125,7 +126,7 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.HOSPITALIZATIONS;
     case 'icu-hospitalizations':
       return ExploreMetric.ICU_HOSPITALIZATIONS;
-    case 'vaccinations':
+    case 'vaccinationsInitiated':
       return ExploreMetric.VACCINATIONS_FIRST_DOSE;
     case 'vaccinationsCompleted':
       return ExploreMetric.VACCINATIONS_COMPLETED;
@@ -143,6 +144,8 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.WEEKLY_CASES;
     case 'caseDensityByCases':
       return ExploreMetric.DAILY_CASES_PER_100K;
+    case 'vaccinationsBivalentBoostedFall2022':
+      return ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022;
   }
 }
 
@@ -157,7 +160,7 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
     case ExploreMetric.ICU_HOSPITALIZATIONS:
       return 'smoothedICUHospitalizations';
     case ExploreMetric.VACCINATIONS_FIRST_DOSE:
-      return 'vaccinations';
+      return 'vaccinationsInitiated';
     case ExploreMetric.VACCINATIONS_COMPLETED:
       return 'vaccinationsCompleted';
     case ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE:
@@ -176,6 +179,8 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
       return 'weeklyDeaths';
     case ExploreMetric.DAILY_CASES_PER_100K:
       return 'caseDensityByCases';
+    case ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022:
+      return 'vaccinationsBivalentBoostedFall2022';
   }
 }
 
@@ -324,22 +329,22 @@ export const exploreMetricData: {
       {
         label: 'Percent Vaccinated (1+ dose)',
         tooltipLabel: 'Percent Vaccinated (1+ dose)',
-        datasetId: 'vaccinations',
+        datasetId: 'vaccinationsInitiated',
         type: SeriesType.LINE,
       },
     ],
   },
   [ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE]: {
-    title: '% Vaccinated (booster shot)',
-    name: 'Percent vaccinated (booster shot)',
+    title: '% Vaccinated (booster dose)',
+    name: 'Percent vaccinated (booster dose)',
     chartId: 'vaccinations_additional_dose',
     dataMeasure: DataMeasure.PERCENT,
     yAxisDecimalPlaces: 0,
     maxY: 1,
     seriesList: [
       {
-        label: 'Percent vaccinated (booster shot)',
-        tooltipLabel: 'Percent vaccinated (booster shot)',
+        label: 'Percent vaccinated (booster dose)',
+        tooltipLabel: 'Percent vaccinated (booster dose)',
         datasetId: 'vaccinationsAdditionalDose',
         type: SeriesType.LINE,
       },
@@ -357,6 +362,22 @@ export const exploreMetricData: {
         label: 'Percent Vaccinated (2+ doses or J&J)',
         tooltipLabel: 'Percent Vaccinated (2+ doses or J&J)',
         datasetId: 'vaccinationsCompleted',
+        type: SeriesType.LINE,
+      },
+    ],
+  },
+  [ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022]: {
+    title: '% Vaccinated (bivalent booster)',
+    name: 'Percent vaccinated (bivalent booster)',
+    chartId: 'vaccinations_bivalent_dose_fall_2022',
+    dataMeasure: DataMeasure.PERCENT,
+    yAxisDecimalPlaces: 0,
+    maxY: 1,
+    seriesList: [
+      {
+        label: 'Percent vaccinated (bivalent booster)',
+        tooltipLabel: 'Percent vaccinated (bivalent booster)',
+        datasetId: 'vaccinationsBivalentBoostedFall2022',
         type: SeriesType.LINE,
       },
     ],
@@ -664,7 +685,9 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
     case ExploreMetric.VACCINATIONS_COMPLETED:
       return `Percent vaccinated (2+ doses or J&J) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE:
-      return `Percent vaccinated (booster shot) in ${locationName}, according to @CovidActNow. See the chart: `;
+      return `Percent vaccinated (booster dose) in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022:
+      return `Percent vaccinated (bivalent dose) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_USED:
       return `ICU capacity used in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.POSITIVITY_RATE:

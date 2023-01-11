@@ -35,7 +35,9 @@ const MetricChart = React.memo(
     height?: number;
   }) => {
     const chartHeight = height ? height : useChartHeightForBreakpoint();
-    if (!projections.hasMetric(metric)) {
+    // For vaccinations, we still show the chart even if bivalent data is missing
+    // because we will still have 1+ dose / completed data to display.
+    if (!projections.hasMetric(metric) && metric !== Metric.VACCINATIONS) {
       // See if the data has been blocked and there is a disclaimer.
       const blockedDisclaimer = getRegionMetricDisclaimer(
         projections.region,
@@ -117,10 +119,10 @@ function getVaccinationSeries(projection: Projection): Series[] {
   return [
     {
       type: SeriesType.LINE,
-      data: filterNull(projection.getDataset('vaccinations')),
-      label: 'vaccinationsInitiated',
-      shortLabel: '1+ dose',
-      tooltipLabel: '1+ dose',
+      data: filterNull(projection.getDataset('vaccinationsInitiated')),
+      label: '1+ Dose',
+      shortLabel: '1+ Dose',
+      tooltipLabel: '1+ Dose',
       params: {
         stroke: VACCINATIONS_COLOR_MAP.INITIATED,
         fill: VACCINATIONS_COLOR_MAP.INITIATED,
@@ -129,9 +131,9 @@ function getVaccinationSeries(projection: Projection): Series[] {
     {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsCompleted')),
-      label: '2+ doses or J&J',
-      shortLabel: '2+ doses',
-      tooltipLabel: '2+ doses',
+      label: '2+ Doses or J&J',
+      shortLabel: '2+ Doses',
+      tooltipLabel: '2+ Doses',
       params: {
         stroke: VACCINATIONS_COLOR_MAP.COMPLETED,
         fill: VACCINATIONS_COLOR_MAP.COMPLETED,
@@ -140,12 +142,25 @@ function getVaccinationSeries(projection: Projection): Series[] {
     {
       type: SeriesType.LINE,
       data: filterNull(projection.getDataset('vaccinationsAdditionalDose')),
-      label: 'Booster shot',
-      shortLabel: 'Booster shot',
-      tooltipLabel: 'Booster shot',
+      label: 'Booster Dose',
+      shortLabel: 'Booster Dose',
+      tooltipLabel: 'Booster Dose',
       params: {
         stroke: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
         fill: VACCINATIONS_COLOR_MAP.ADDITIONAL_DOSE,
+      },
+    },
+    {
+      type: SeriesType.LINE,
+      data: filterNull(
+        projection.getDataset('vaccinationsBivalentBoostedFall2022'),
+      ),
+      label: 'Bivalent Dose',
+      shortLabel: 'Bivalent Dose',
+      tooltipLabel: 'Bivalent Dose',
+      params: {
+        stroke: VACCINATIONS_COLOR_MAP.BIVALENT_FALL_2022,
+        fill: VACCINATIONS_COLOR_MAP.BIVALENT_FALL_2022,
       },
     },
   ].filter(series => series.data.length > 0);
