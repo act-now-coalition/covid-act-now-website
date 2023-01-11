@@ -13,12 +13,7 @@ export type StyledTooltipProps = Omit<TooltipProps, 'children'> & {
   mainCopy?: string;
 };
 
-export function renderTooltipContent(
-  body: string | undefined,
-): React.ReactElement {
-  if (!body) {
-    return <></>;
-  }
+export function renderTooltipContent(body: string): React.ReactElement {
   return <StyledMarkdown source={body} />;
 }
 
