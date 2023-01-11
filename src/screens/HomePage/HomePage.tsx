@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
-import USVaccineMap from 'components/USMap/USVaccineMap';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
@@ -10,7 +9,7 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import PartnersSection from 'components/PartnersSection/PartnersSection';
 import CompareMain from 'components/Compare/CompareMain';
 import Explore, { ExploreMetric } from 'components/Explore';
-import { formatMetatagDate, formatPercent } from 'common/utils';
+import { formatMetatagDate } from 'common/utils';
 import { getFilterLimit } from 'components/Search';
 import HomepageStructuredData from 'screens/HomePage/HomepageStructuredData';
 import { filterGeolocatedRegions } from 'common/regions';
@@ -24,22 +23,16 @@ import {
   Content,
   HomePageBlock,
   ColumnCentered,
-  VaccinationsThermometerHeading,
-  AboutLink,
   MapDescriptionText,
+  AboutLink,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
-import {
-  CommunityLevelThermometer,
-  VaccinationsThermometer,
-} from 'components/HorizontalThermometer';
+import { CommunityLevelThermometer } from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
 import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
-import SiteSummaryJSON from 'assets/data/site-summary.json';
 import { MapBlock } from './MapBlock';
-import { TooltipMode } from 'components/USMap/USMapTooltip';
 import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
@@ -91,7 +84,6 @@ export default function HomePage() {
   const searchLocations = useFinalAutocompleteLocations();
 
   const isMobileNavBar = useBreakpoint(800);
-  const isMobile = useBreakpoint(600);
   const hasScrolled = useShowPastPosition(450);
   const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
   const renderNavBarSearch = () => (
@@ -160,36 +152,6 @@ export default function HomePage() {
               }
               mapDescription={getRiskMapDescription()}
             />
-
-            <MapBlock
-              title="Vaccination Progress"
-              subtitle={getVaccinationProgressSubtitle()}
-              renderMap={locationScope => (
-                <USVaccineMap
-                  showCounties={locationScope === MapView.COUNTIES}
-                  tooltipMode={
-                    // TODO(michael): There's some sort of bug / performance issue on iOS that makes
-                    // the mobile tooltip on the county view unusable.
-                    isMobile && locationScope === MapView.STATES
-                      ? TooltipMode.ACTIVATE_ON_CLICK
-                      : TooltipMode.ACTIVATE_ON_HOVER
-                  }
-                />
-              )}
-              renderThermometer={() => (
-                <>
-                  <VaccinationsThermometerHeading>
-                    Population with <b>1+ dose</b>
-                  </VaccinationsThermometerHeading>
-                  <VaccinationsThermometer />
-                </>
-              )}
-              infoLink={
-                <AboutLink to="/covid-community-level-metrics#percent-vaccinated">
-                  About this data
-                </AboutLink>
-              }
-            />
             <HomePageBlock
               ref={exploreSectionRef}
               id="explore-hospitalizations"
@@ -224,19 +186,6 @@ export default function HomePage() {
           </Content>
         </div>
       </main>
-    </>
-  );
-}
-
-function getVaccinationProgressSubtitle() {
-  const { totalVaccinationsInitiated, totalPopulation } = SiteSummaryJSON.usa;
-  const percentVaccinated = formatPercent(
-    totalVaccinationsInitiated / totalPopulation,
-  );
-  return (
-    <>
-      <b>{percentVaccinated}</b> of the entire U.S. population has received{' '}
-      <b>1+ dose</b>.
     </>
   );
 }

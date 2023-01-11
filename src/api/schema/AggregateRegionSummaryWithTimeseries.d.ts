@@ -21,11 +21,11 @@ export type State = string | null;
  */
 export type County = string | null;
 /**
- * 3 digit Health Service Area identification code. For CBSA, state, and country regions hsa is omitted. For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md
+ * 3 digit Health Service Area identification code. For CBSA, state, and country regions hsa is omitted. For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md
  */
 export type Hsa = string | null;
 /**
- * Name of Health Service Area. For CBSA, state, and country regions hsaName is omitted. For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md
+ * Name of Health Service Area. For CBSA, state, and country regions hsaName is omitted. For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md
  */
 export type Hsaname = string | null;
 /**
@@ -55,7 +55,7 @@ export type Long = number | null;
  */
 export type Population = number;
 /**
- * Total Population of county's corresponding Health Service Area. For CBSA, state, and country regions hsaPopulation is omitted. For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md
+ * Total Population of county's corresponding Health Service Area. For CBSA, state, and country regions hsaPopulation is omitted. For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md
  */
 export type Hsapopulation = number | null;
 /**
@@ -97,11 +97,11 @@ export type Infectionrateci90 = number | null;
  */
 export type Icucapacityratio = number | null;
 /**
- * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area.
+ * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area. For more on HSAs, see https://apidocs.covidactnow.org/data-definitions/#health-service-areas
  */
 export type Bedswithcovidpatientsratio = number | null;
 /**
- * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area.
+ * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area. For more on HSAs, see https://apidocs.covidactnow.org/data-definitions/#health-service-areas
  */
 export type Weeklycovidadmissionsper100K = number | null;
 /**
@@ -116,6 +116,10 @@ export type Vaccinationscompletedratio = number | null;
  * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
  */
 export type Vaccinationsadditionaldoseratio = number | null;
+/**
+ * Ratio of population that have received a bivalent vaccine dose.
+ */
+export type Vaccinationsfall2022Bivalentboosterratio = number | null;
 /**
  * Risk levels for region.
  */
@@ -192,7 +196,7 @@ export type Weeklycovidadmissions = number | null;
  *
  * Information about acute bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ * For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed acute bed capacity.
@@ -229,7 +233,7 @@ export type Currentusagecovid1 = number | null;
  *
  * Information about ICU bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ * For For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed ICU bed capacity.
@@ -301,6 +305,10 @@ export type Vaccinationscompleted = number | null;
  * Number of individuals who are fully vaccinated and have received a booster (or additional) dose.
  */
 export type Vaccinationsadditionaldose = number | null;
+/**
+ * Number of individuals who have received a bivalent vaccine dose.
+ */
+export type Vaccinationsfall2022Bivalentbooster = number | null;
 /**
  * Total number of vaccine doses administered.
  */
@@ -436,6 +444,10 @@ export type Vaccinationscompleted1 = FieldAnnotations;
  */
 export type Vaccinationsadditionaldose1 = FieldAnnotations;
 /**
+ * Annotations for vaccinationsFall2022BivalentBooster
+ */
+export type Vaccinationsfall2022Bivalentbooster1 = FieldAnnotations;
+/**
  * Annotations for vaccinesAdministered
  */
 export type Vaccinesadministered1 = FieldAnnotations;
@@ -484,9 +496,13 @@ export type Vaccinationsinitiatedratio1 = FieldAnnotations;
  */
 export type Vaccinationscompletedratio1 = FieldAnnotations;
 /**
- * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
+ * Annotations for vaccinationsAdditionalDoseRatio
  */
 export type Vaccinationsadditionaldoseratio1 = FieldAnnotations;
+/**
+ * Annotations for vaccinationsFall2022BivalentBoosterRatio.
+ */
+export type Vaccinationsfall2022Bivalentboosterratio1 = FieldAnnotations;
 /**
  * Date of latest data
  */
@@ -524,11 +540,11 @@ export type Infectionrateci902 = number | null;
  */
 export type Icucapacityratio2 = number | null;
 /**
- * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area.
+ * Ratio of staffed hospital beds that are currently in use by COVID patients. For counties, this is calculated using HSA-level data for the corresponding area. For more on HSAs, see https://apidocs.covidactnow.org/data-definitions/#health-service-areas
  */
 export type Bedswithcovidpatientsratio2 = number | null;
 /**
- * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area.
+ * Number of COVID patients per 100k population admitted in the past week. For counties, this is calculated using HSA-level data for the corresponding area. For more on HSAs, see https://apidocs.covidactnow.org/data-definitions/#health-service-areas
  */
 export type Weeklycovidadmissionsper100K2 = number | null;
 /**
@@ -543,6 +559,10 @@ export type Vaccinationscompletedratio2 = number | null;
  * Ratio of population that are fully vaccinated and have received a booster (or additional) dose.
  */
 export type Vaccinationsadditionaldoseratio2 = number | null;
+/**
+ * Ratio of population that have received a bivalent vaccine dose.
+ */
+export type Vaccinationsfall2022Bivalentboosterratio2 = number | null;
 /**
  * Date of timeseries data point
  */
@@ -584,7 +604,7 @@ export type Hospitalbeds2 = HospitalResourceUtilizationWithAdmissions;
  *
  * Information about acute bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ * For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed acute bed capacity.
@@ -609,7 +629,7 @@ export type Icubeds2 = HospitalResourceUtilization;
  *
  * Information about ICU bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ * For For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed ICU bed capacity.
@@ -681,6 +701,10 @@ export type Vaccinationscompleted2 = number | null;
  * Number of individuals who are fully vaccinated and have received a booster (or additional) dose.
  */
 export type Vaccinationsadditionaldose2 = number | null;
+/**
+ * Number of individuals who have received a bivalent vaccine dose.
+ */
+export type Vaccinationsfall2022Bivalentbooster2 = number | null;
 /**
  * Total number of vaccine doses administered.
  */
@@ -791,6 +815,7 @@ export interface Metrics {
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio;
+  vaccinationsFall2022BivalentBoosterRatio?: Vaccinationsfall2022Bivalentboosterratio;
 }
 /**
  * Details about how the test positivity ratio was calculated.
@@ -845,13 +870,15 @@ export interface CommunityLevels {
    *
    * See https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html
    * for details about how the Community Level is calculated and should be
-   * interpretted.
+   * interpreted.
    *
    * Note that we provide two versions of the Community Level. One is called
-   * canCommunityLevel which is calculated on a daily basis using CAN's data
-   * sources and is available for states, counties, and metros.  The other is
-   * called cdcCommunityLevel and is the raw Community Level published by the
-   * CDC. It is only available for counties, and updates on a weekly basis.
+   * canCommunityLevel which is calculated using CAN's data sources and is
+   * available for states, counties, and metros. It is updated daily though
+   * depends on hospital data which may only update weekly for counties. The
+   * other is called cdcCommunityLevel and is the raw Community Level published
+   * by the CDC. It is only available for counties and is updated on a weekly
+   * basis.
    *
    */
   cdcCommunityLevel: CommunityLevel;
@@ -867,13 +894,15 @@ export interface CommunityLevels {
    *
    * See https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html
    * for details about how the Community Level is calculated and should be
-   * interpretted.
+   * interpreted.
    *
    * Note that we provide two versions of the Community Level. One is called
-   * canCommunityLevel which is calculated on a daily basis using CAN's data
-   * sources and is available for states, counties, and metros.  The other is
-   * called cdcCommunityLevel and is the raw Community Level published by the
-   * CDC. It is only available for counties, and updates on a weekly basis.
+   * canCommunityLevel which is calculated using CAN's data sources and is
+   * available for states, counties, and metros. It is updated daily though
+   * depends on hospital data which may only update weekly for counties. The
+   * other is called cdcCommunityLevel and is the raw Community Level published
+   * by the CDC. It is only available for counties and is updated on a weekly
+   * basis.
    *
    */
   canCommunityLevel: CommunityLevel;
@@ -897,6 +926,7 @@ export interface Actuals {
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
   vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
+  vaccinationsFall2022BivalentBooster?: Vaccinationsfall2022Bivalentbooster;
   vaccinesAdministered?: Vaccinesadministered;
   vaccinesAdministeredDemographics?: Vaccinesadministereddemographics;
   vaccinationsInitiatedDemographics?: Vaccinationsinitiateddemographics;
@@ -952,6 +982,7 @@ export interface Annotations {
   vaccinationsInitiated?: Vaccinationsinitiated1;
   vaccinationsCompleted?: Vaccinationscompleted1;
   vaccinationsAdditionalDose?: Vaccinationsadditionaldose1;
+  vaccinationsFall2022BivalentBooster?: Vaccinationsfall2022Bivalentbooster1;
   vaccinesAdministered?: Vaccinesadministered1;
   testPositivityRatio?: Testpositivityratio1;
   caseDensity?: Casedensity1;
@@ -965,6 +996,7 @@ export interface Annotations {
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio1;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio1;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio1;
+  vaccinationsFall2022BivalentBoosterRatio?: Vaccinationsfall2022Bivalentboosterratio1;
 }
 /**
  * Annotations associated with one field.
@@ -1012,6 +1044,7 @@ export interface MetricsTimeseriesRow {
   vaccinationsInitiatedRatio?: Vaccinationsinitiatedratio2;
   vaccinationsCompletedRatio?: Vaccinationscompletedratio2;
   vaccinationsAdditionalDoseRatio?: Vaccinationsadditionaldoseratio2;
+  vaccinationsFall2022BivalentBoosterRatio?: Vaccinationsfall2022Bivalentboosterratio2;
   date: Date1;
 }
 /**
@@ -1033,6 +1066,7 @@ export interface ActualsTimeseriesRow {
   vaccinationsInitiated?: Vaccinationsinitiated2;
   vaccinationsCompleted?: Vaccinationscompleted2;
   vaccinationsAdditionalDose?: Vaccinationsadditionaldose2;
+  vaccinationsFall2022BivalentBooster?: Vaccinationsfall2022Bivalentbooster2;
   vaccinesAdministered?: Vaccinesadministered2;
   vaccinesAdministeredDemographics?: Vaccinesadministereddemographics1;
   vaccinationsInitiatedDemographics?: Vaccinationsinitiateddemographics1;
@@ -1043,7 +1077,7 @@ export interface ActualsTimeseriesRow {
  */
 export interface RiskLevelTimeseriesRow {
   /**
-   * Overall risk level for region .
+   * Overall risk level for region.
    */
   overall: RiskLevel;
   /**
@@ -1097,13 +1131,15 @@ export interface CommunityLevelsTimeseriesRow {
    *
    * See https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html
    * for details about how the Community Level is calculated and should be
-   * interpretted.
+   * interpreted.
    *
    * Note that we provide two versions of the Community Level. One is called
-   * canCommunityLevel which is calculated on a daily basis using CAN's data
-   * sources and is available for states, counties, and metros.  The other is
-   * called cdcCommunityLevel and is the raw Community Level published by the
-   * CDC. It is only available for counties, and updates on a weekly basis.
+   * canCommunityLevel which is calculated using CAN's data sources and is
+   * available for states, counties, and metros. It is updated daily though
+   * depends on hospital data which may only update weekly for counties. The
+   * other is called cdcCommunityLevel and is the raw Community Level published
+   * by the CDC. It is only available for counties and is updated on a weekly
+   * basis.
    *
    */
   cdcCommunityLevel: CommunityLevel;
@@ -1119,13 +1155,15 @@ export interface CommunityLevelsTimeseriesRow {
    *
    * See https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html
    * for details about how the Community Level is calculated and should be
-   * interpretted.
+   * interpreted.
    *
    * Note that we provide two versions of the Community Level. One is called
-   * canCommunityLevel which is calculated on a daily basis using CAN's data
-   * sources and is available for states, counties, and metros.  The other is
-   * called cdcCommunityLevel and is the raw Community Level published by the
-   * CDC. It is only available for counties, and updates on a weekly basis.
+   * canCommunityLevel which is calculated using CAN's data sources and is
+   * available for states, counties, and metros. It is updated daily though
+   * depends on hospital data which may only update weekly for counties. The
+   * other is called cdcCommunityLevel and is the raw Community Level published
+   * by the CDC. It is only available for counties and is updated on a weekly
+   * basis.
    *
    */
   canCommunityLevel: CommunityLevel;
