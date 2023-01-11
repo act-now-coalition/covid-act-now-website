@@ -6,7 +6,6 @@ import { vaccineColor } from 'common/colors';
 import { formatPercent } from 'common/utils';
 
 export interface ProgressBarProps {
-  // TODO(michael): Remove once we migrate the location page to the new version.
   locationName: string;
   vaccinationsRatio: number;
   width?: number;
