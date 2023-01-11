@@ -530,7 +530,7 @@ export class Projection {
     const ratioVaccinated = metrics.vaccinationsCompletedRatio;
     const ratioAdditionalDose = metrics.vaccinationsAdditionalDoseRatio;
     const ratioBivalentBoostedFall2022 =
-      metrics.vaccinationsFall2022BivalentBoosterRatio ?? null;
+      metrics.vaccinationsFall2022BivalentBoosterRatio;
 
     if (
       ratioInitiated === null ||
@@ -556,7 +556,7 @@ export class Projection {
       peopleBivalentBoostedFall2022 == null &&
       ratioBivalentBoostedFall2022 != null
     ) {
-      peopleAdditionalDose =
+      peopleBivalentBoostedFall2022 =
         ratioBivalentBoostedFall2022 * this.totalPopulation;
     }
 
@@ -614,7 +614,7 @@ export class Projection {
       dosesDistributed,
       ratioDosesAdministered,
       peopleBivalentBoostedFall2022,
-      ratioBivalentBoostedFall2022,
+      ratioBivalentBoostedFall2022: ratioBivalentBoostedFall2022 ?? null,
       ratioFall2022BivalentBoosterSeries,
     };
   }

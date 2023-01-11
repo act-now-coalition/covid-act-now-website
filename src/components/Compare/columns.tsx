@@ -95,10 +95,9 @@ class VaccinationsColumn extends MetricColumn {
   minWidthPx = 180;
 
   render(row: SummaryForCompare, locationName: string): React.ReactNode {
-    const vaccinationsInitiated =
-      row.metricsInfo.metrics[Metric.VACCINATIONS]?.value;
+    const vaccinations = row.metricsInfo.metrics[Metric.VACCINATIONS]?.value;
 
-    if (!vaccinationsInitiated) {
+    if (!vaccinations) {
       return (
         <DataCellValue $valueUnknown={true} $textAlign="right" $fontSize="16px">
           {UNKNOWN_VALUE_TEXT}
@@ -110,11 +109,11 @@ class VaccinationsColumn extends MetricColumn {
       <>
         <VaccinationsCell>
           <VaccinationsCellValue>
-            {formatPercent(vaccinationsInitiated)}
+            {formatPercent(vaccinations)}
           </VaccinationsCellValue>
           <VaccinationsCellProgressBar>
             <VaccineProgressBar
-              vaccinationsRatio={vaccinationsInitiated}
+              vaccinationsRatio={vaccinations}
               locationName={locationName}
             />
           </VaccinationsCellProgressBar>

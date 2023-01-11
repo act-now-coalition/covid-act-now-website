@@ -15,7 +15,6 @@ const VaccinationProgressBarBlock: React.FC<{
   return (
     <>
       <VaccineProgressBar
-        oldVersion
         vaccinationsRatio={vaccinated}
         locationName={locationName}
       />

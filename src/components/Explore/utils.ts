@@ -686,6 +686,8 @@ export function getSocialQuote(regions: Region[], metric: ExploreMetric) {
       return `Percent vaccinated (2+ doses or J&J) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.VACCINATIONS_ADDITIONAL_DOSE:
       return `Percent vaccinated (booster dose) in ${locationName}, according to @CovidActNow. See the chart: `;
+    case ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022:
+      return `Percent vaccinated (bivalent dose) in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.ICU_USED:
       return `ICU capacity used in ${locationName}, according to @CovidActNow. See the chart: `;
     case ExploreMetric.POSITIVITY_RATE:

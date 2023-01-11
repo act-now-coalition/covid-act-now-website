@@ -2,12 +2,11 @@ import React from 'react';
 import { ParentSize } from '@vx/responsive';
 import { v4 as uuidv4 } from 'uuid';
 import { ProgressBarContainer, StyledSvg } from './VaccineProgressBar.style';
-import { VACCINATIONS_COLOR_MAP, vaccineColor } from 'common/colors';
+import { vaccineColor } from 'common/colors';
 import { formatPercent } from 'common/utils';
 
 export interface ProgressBarProps {
   // TODO(michael): Remove once we migrate the location page to the new version.
-  oldVersion?: boolean;
   locationName: string;
   vaccinationsRatio: number;
   width?: number;
@@ -18,16 +17,12 @@ function getOffsetPercentage(decimal: number) {
 }
 
 const VaccineProgressBar: React.FC<ProgressBarProps & { width: number }> = ({
-  oldVersion = false,
   vaccinationsRatio,
   locationName,
   width,
 }) => {
   const height = 18;
-  const color = oldVersion
-    ? VACCINATIONS_COLOR_MAP.COMPLETED
-    : vaccineColor(vaccinationsRatio);
-
+  const color = vaccineColor(vaccinationsRatio);
   const titleId = uuidv4();
 
   return (

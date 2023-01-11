@@ -126,6 +126,8 @@ export function vaccineColor(val: number): string {
   // causes a circular dependency. :-(
   val = Number(val.toFixed(2));
 
+  // Colors chosen to get a reasonable distribution of regions within each color.
+  // These are somewhat arbitrary, and should be updated over time as vaccine uptake (hopefully) increases.
   const colors = COLOR_MAP.VACCINATIONS_BLUE;
   if (val < 0.1) {
     return colors[0];
