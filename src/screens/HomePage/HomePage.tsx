@@ -193,11 +193,11 @@ export default function HomePage() {
 function getRiskMapDescription() {
   return (
     <MapDescriptionText>
-      Our new framework reflects the decreased risk of severe illness and death
-      from COVID due to vaccines, therapeutics, and past COVID infections.
+      Our framework reflects the decreased risk of severe illness and death from
+      COVID due to vaccines, therapeutics, and past COVID infections.
       <br />
       <br />
-      Note: People who need extra caution can still refer to our older{' '}
+      Note: People who need extra caution can refer to our{' '}
       <TextTooltip
         title="Daily new cases, infection rate, and positive test rate can be found after selecting a location."
         mainCopy="Transmission metrics"
