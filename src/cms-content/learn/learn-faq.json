@@ -113,6 +113,11 @@
           "question": "Will a COVID vaccine change your DNA?",
           "questionId": "vaccine-DNA",
           "answer": "No, the vaccines do not interact with your DNA in any way, according to the [Mayo Clinic](https://www.mayoclinic.org/mrna-vaccines-immunity/vid-20507649). The vaccines deliver instructions to your cells to start building protection against the virus that causes COVID, but those instructions don’t become part of your DNA."
+        },
+        {
+          "question": "What is a bivalent COVID booster? ",
+          "questionId": "what-is-bivalent-booster",
+          "answer": "The bivalent booster is an updated COVID booster, developed using a component of the original virus strain and of more recent Omicron variant strains. By using both strains, the bivalent booster offers [additional protection](https://www.cdc.gov/mmwr/volumes/71/wr/mm7148e1.htm) to previous vaccines. Even those who are fully vaccinated and boosted with the original booster should consider getting the bivalent booster for maximized protection. [Stay up to date with resources from the CDC.](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/stay-up-to-date.html?s_cid=10505:find%20covid%20booster:sem.ga:p:RG:GM:gen:PTN:FY21)"
         }
       ]
     },
@@ -187,6 +192,11 @@
       "sectionTitle": "Metrics",
       "sectionId": "metrics",
       "questions": [
+        {
+          "question": "Why was bivalent booster data added to your site in January 2023?",
+          "questionId": "bivalent-booster-data-addition",
+          "answer": "The bivalent booster protects against both original COVID strains and newer Omicron variants. It provides important additional protection, and helps to address the waning effectiveness of the original vaccine over time.  \n\nIn our ongoing effort to provide the most relevant and up to date COVID data, we shifted our focus towards the CDC’s updated booster data and de-emphasized 1+ and 2+ vaccine dose data. By tracking and presenting the percentage of state, county, and metro residents who have received a dose of any of the bivalent COVID boosters, we aim to help our users understand how different communities across the country are continuing to protect themselves from COVID. \n\n[Read more to learn about what a “bivalent booster” is](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/How-Do-I-Get-a-COVID-19-Vaccine.html?s_cid=10505:find%20covid%20booster:sem.ga:p:RG:GM:gen:PTN:FY21) and why boosters are important for additional protection against COVID."
+        },
         {
           "question": "Why were changes made to your site in April 2022? ",
           "questionId": "why-site-changes-2022",
