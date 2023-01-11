@@ -41,7 +41,7 @@
       "cta": {
         "buttonType": "OUTLINE",
         "text": "Order free at-home tests",
-        "url": "https://special.usps.com/testkits"
+        "url": "https://www.covid.gov/tests"
       },
       "icon": {
         "altText": "Testing icon",
