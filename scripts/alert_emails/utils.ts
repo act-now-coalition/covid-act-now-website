@@ -91,23 +91,6 @@ function getEmailAddressHash(emailAddress: string): number {
   return hash;
 }
 
-/**
- * Split email recipients into two groups.
- * Email addresses with even hash receive content linking to GiveButter donation page.
- * Email addresses with odd hash receive content linking to GiveMomentum donation page.
- */
-function getDonationContent(emailAddress: string): DonationContent {
-  return getEmailAddressHash(emailAddress) % 2 === 0
-    ? {
-        donationUrl: 'https://covidactnow.org/donate',
-        donationText: 'Donate',
-      }
-    : {
-        donationUrl: 'https://covidactnow.org/give_momentum_donate',
-        donationText: 'Donate for every 1000 new COVID cases in the U.S.',
-      };
-}
-
 function generateAlertEmailContent(
   emailAddress: string,
   locationAlert: Alert,
@@ -123,7 +106,10 @@ function generateAlertEmailContent(
   const oldLevelText = LOCATION_SUMMARY_LEVELS[oldLevel].summary;
   const newLevelText = LOCATION_SUMMARY_LEVELS[newLevel].summary;
   const disclaimer = getDisclaimerText(locationAlert.fips);
-  const donationContent = getDonationContent(emailAddress);
+  const donationContent = {
+    donationUrl: 'https://givebutter.com/jr9gqP',
+    donationText: 'Donate',
+  };
   const data: AlertTemplateData = {
     change: changeText(oldLevel, newLevel),
     location_name: locationName,
