@@ -11,7 +11,7 @@ import { assert } from '@actnowcoalition/assert';
 export interface Tooltip {
   title: string;
   id: string;
-  body: Markdown;
+  body?: Markdown;
   cta: Markdown;
 }
 
