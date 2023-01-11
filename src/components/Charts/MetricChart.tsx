@@ -152,7 +152,9 @@ function getVaccinationSeries(projection: Projection): Series[] {
     },
     {
       type: SeriesType.LINE,
-      data: filterNull(projection.getDataset('vaccinations')),
+      data: filterNull(
+        projection.getDataset('vaccinationsBivalentBoostedFall2022'),
+      ),
       label: 'Bivalent Dose',
       shortLabel: 'Bivalent Dose',
       tooltipLabel: 'Bivalent Dose',

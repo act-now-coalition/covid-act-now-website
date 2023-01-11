@@ -144,7 +144,7 @@ export function getMetricByChartId(chartId: string): ExploreMetric | undefined {
       return ExploreMetric.WEEKLY_CASES;
     case 'caseDensityByCases':
       return ExploreMetric.DAILY_CASES_PER_100K;
-    case 'vaccinations':
+    case 'vaccinationsBivalentBoostedFall2022':
       return ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022;
   }
 }
@@ -180,7 +180,7 @@ function getDatasetIdByMetric(metric: ExploreMetric): DatasetId {
     case ExploreMetric.DAILY_CASES_PER_100K:
       return 'caseDensityByCases';
     case ExploreMetric.VACCINATIONS_BIVALENT_FALL_2022:
-      return 'vaccinations';
+      return 'vaccinationsBivalentBoostedFall2022';
   }
 }
 
@@ -377,7 +377,7 @@ export const exploreMetricData: {
       {
         label: 'Percent vaccinated (bivalent booster)',
         tooltipLabel: 'Percent vaccinated (bivalent booster)',
-        datasetId: 'vaccinations',
+        datasetId: 'vaccinationsBivalentBoostedFall2022',
         type: SeriesType.LINE,
       },
     ],

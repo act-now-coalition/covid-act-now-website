@@ -59,7 +59,7 @@ export type DatasetId =
   | 'rtRange'
   | 'icuUtilization'
   | 'testPositiveRate'
-  | 'vaccinations'
+  | 'vaccinationsBivalentBoostedFall2022'
   | 'vaccinationsCompleted'
   | 'vaccinationsAdditionalDose'
   | 'vaccinationsInitiated'
@@ -109,7 +109,7 @@ export interface VaccinationsInfo {
   ratioAdditionalDoseSeries: Array<number | null>;
   ratioCompletedSeries: Array<number | null>;
   ratioInitiatedSeries: Array<number | null>;
-  ratioFall2022BivalentBoosterSeries: Array<number | null>;
+  ratioBivalentBoosterFall2022Series: Array<number | null>;
 
   peopleInitiated: number;
   ratioInitiated: number;
@@ -183,7 +183,7 @@ export class Projection {
   private readonly icuUtilization: Array<number | null>;
   // Test Positive series as values between 0-1.
   private readonly testPositiveRate: Array<number | null>;
-  private readonly vaccinations: Array<number | null>;
+  private readonly vaccinationsBivalentBoostedFall2022: Array<number | null>;
   private readonly vaccinationsInitiated: Array<number | null>;
   private readonly vaccinationsCompleted: Array<number | null>;
   private readonly vaccinationsAdditionalDose: Array<number | null>;
@@ -293,8 +293,8 @@ export class Projection {
       metrics,
       metricsTimeseries,
     );
-    this.vaccinations =
-      this.vaccinationsInfo?.ratioFall2022BivalentBoosterSeries ||
+    this.vaccinationsBivalentBoostedFall2022 =
+      this.vaccinationsInfo?.ratioBivalentBoosterFall2022Series ||
       this.dates.map(date => null);
     this.vaccinationsCompleted =
       this.vaccinationsInfo?.ratioCompletedSeries ||
@@ -579,7 +579,7 @@ export class Projection {
       row => row?.vaccinationsInitiatedRatio || null,
     );
 
-    const ratioFall2022BivalentBoosterSeries = metricsTimeseries.map(
+    const ratioBivalentBoosterFall2022Series = metricsTimeseries.map(
       row => row?.vaccinationsFall2022BivalentBoosterRatio || null,
     );
 
@@ -615,7 +615,7 @@ export class Projection {
       ratioDosesAdministered,
       peopleBivalentBoostedFall2022,
       ratioBivalentBoostedFall2022: ratioBivalentBoostedFall2022 ?? null,
-      ratioFall2022BivalentBoosterSeries,
+      ratioBivalentBoosterFall2022Series,
     };
   }
 
