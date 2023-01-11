@@ -788,7 +788,7 @@ export class Projection {
   }
 
   // TODO: Due to
-  // https://github.com/covid-projections/covid-data-model/issues/315 there may
+  // https://github.com/act-now-coalition/covid-data-model/issues/315 there may
   // be an erroneous "zero" data point ~today. We detect these and just average
   // the adjacent numbers.
   private fixZeros(data: (number | null)[]) {

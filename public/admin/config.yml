@@ -3,7 +3,7 @@
 # Netlify CMS docs: https://www.netlifycms.org/docs/intro/
 backend:
   name: github
-  repo: covid-projections/covid-projections
+  repo: act-now-coalition/covid-act-now-website
   branch: cms-content-entry
   base_url: https://api.netlify.com
 

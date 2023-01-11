@@ -18,7 +18,7 @@ using AWS Simple Email Service.
 ## Sending the Alerts via Github Actions
 
 We typically send email alerts on Tuesdays and Fridays, immediately after the daily snapshot has been released.
-Go to [GitHub Workflows - Send Risk Alert Emails](https://github.com/covid-projections/covid-projections/actions?query=workflow%3A%22Send+Alert+Emails.%22) and click "Run workflow".
+Go to [GitHub Workflows - Send Risk Alert Emails](https://github.com/act-now-coalition/covid-act-now-website/actions?query=workflow%3A%22Send+Alert+Emails.%22) and click "Run workflow".
 
 By default it will do a dry-run without sending any emails.  After it has completed, you can look at the logs to see how many emails would have been notified and go into [firestore](https://console.firebase.google.com/project/covidactnow-prod/firestore/data~2Fsnapshots) to check that the locations seem correct (make sure that locations have emails).
 
