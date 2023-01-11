@@ -18,7 +18,7 @@ using AWS Simple Email Service.
 ## Sending the Alerts via Github Actions
 
 We typically send email alerts on Tuesdays and Fridays, immediately after the daily snapshot has been released.
-Go to [GitHub Workflows - Send Risk Alert Emails](https://github.com/covid-projections/covid-projections/actions?query=workflow%3A%22Send+Alert+Emails.%22) and click "Run workflow".
+Go to [GitHub Workflows - Send Risk Alert Emails](https://github.com/act-now-coalition/covid-act-now-website/actions?query=workflow%3A%22Send+Alert+Emails.%22) and click "Run workflow".
 
 By default it will do a dry-run without sending any emails.  After it has completed, you can look at the logs to see how many emails would have been notified and go into [firestore](https://console.firebase.google.com/project/covidactnow-prod/firestore/data~2Fsnapshots) to check that the locations seem correct (make sure that locations have emails).
 
@@ -42,12 +42,13 @@ The github action should complete in 20 minutes or so and list the number of ema
 ### To manually create the list of users to email
 
 1. Users sign up to the mailing list via the website and are stored in the alerts-subscriptions collection of firestore [dev](https://console.firebase.google.com/project/covidactnow-dev/database/firestore/data~2Falerts-subscriptions) with a field of locations that is an array of fips codes that the user has signed up to recieve alerts for.
-2. Run `yarn create-lists-to-email fipsToAlertFilename <snapshot>` which will write to firestore `snapshots/<snapshot>/locations/<fips>/emails` for all the users that need to recieve emails for each of the snapshots/fips.
+2. Run `yarn create-lists-to-email alerts.json <snapshot>` which will write to firestore `snapshots/<snapshot>/locations/<fips>/emails` for all the users that need to recieve emails for each of the snapshots/fips.
 
 ### Sending the email
 
-1. If you have run the above steps and have users signed up for emails in the following locations you can run `yarn send-emails alerts.json 497 true <youremail>` which will send the emails to those users on dev.
-2. You can also passin an extra param `yarn send-emails alerts.json 497 true <youremail>` which will send all the emails to one email address for testing.
+1. If you have run the above steps and have users signed up for emails in the following locations you can run `yarn send-emails alerts.json <snapshot> true` which will send the emails to those users on dev.
+
+NOTE: You can pass `false` instead of `true` to do a dry-run instead: `yarn send-emails alerts.json <snapshot> false`.
 
 ## Testing Email HTML
 

@@ -56,7 +56,7 @@ export type Weeklycovidadmissions = number | null;
  *
  * Information about acute bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ * For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed acute bed capacity.
@@ -93,7 +93,7 @@ export type Currentusagecovid1 = number | null;
  *
  * Information about ICU bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For For more on HSAs see: https://github.com/covid-projections/covid-data-model/blob/main/data/misc/README.md"
+ * For For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed ICU bed capacity.
@@ -166,6 +166,10 @@ export type Vaccinationscompleted = number | null;
  */
 export type Vaccinationsadditionaldose = number | null;
 /**
+ * Number of individuals who have received a bivalent vaccine dose.
+ */
+export type Vaccinationsfall2022Bivalentbooster = number | null;
+/**
  * Total number of vaccine doses administered.
  */
 export type Vaccinesadministered = number | null;
@@ -209,6 +213,7 @@ export interface Actuals {
   vaccinationsInitiated?: Vaccinationsinitiated;
   vaccinationsCompleted?: Vaccinationscompleted;
   vaccinationsAdditionalDose?: Vaccinationsadditionaldose;
+  vaccinationsFall2022BivalentBooster?: Vaccinationsfall2022Bivalentbooster;
   vaccinesAdministered?: Vaccinesadministered;
   vaccinesAdministeredDemographics?: Vaccinesadministereddemographics;
   vaccinationsInitiatedDemographics?: Vaccinationsinitiateddemographics;

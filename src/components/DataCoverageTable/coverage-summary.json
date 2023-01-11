@@ -135,13 +135,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 2837,
+      "regionsAvailable": 2814,
       "totalStates": 53,
       "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 376,
+      "regionsAvailable": 374,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -171,19 +171,19 @@
     "name": "metrics.caseDensity",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3205,
+      "regionsAvailable": 3200,
       "totalStates": 53,
       "statesAvailable": 53
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 387,
+      "regionsAvailable": 380,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -192,19 +192,19 @@
     "name": "metrics.weeklyNewCasesPer100k",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3205,
+      "regionsAvailable": 3200,
       "totalStates": 53,
       "statesAvailable": 53
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 387,
+      "regionsAvailable": 380,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -234,19 +234,19 @@
     "name": "metrics.infectionRate",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3058,
+      "regionsAvailable": 2984,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 381,
+      "regionsAvailable": 352,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -255,19 +255,19 @@
     "name": "metrics.infectionRateCI90",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3058,
+      "regionsAvailable": 2984,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 381,
+      "regionsAvailable": 352,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -276,19 +276,19 @@
     "name": "metrics.icuCapacityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 51,
+      "regionsAvailable": 52,
       "totalStates": 53,
-      "statesAvailable": 51
+      "statesAvailable": 52
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1397,
+      "regionsAvailable": 1383,
       "totalStates": 53,
-      "statesAvailable": 50
+      "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 233,
+      "regionsAvailable": 235,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -297,30 +297,9 @@
     "name": "metrics.bedsWithCovidPatientsRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 51,
-      "totalStates": 53,
-      "statesAvailable": 51
-    },
-    "county": {
-      "totalRegions": 3223,
-      "regionsAvailable": 3214,
+      "regionsAvailable": 52,
       "totalStates": 53,
       "statesAvailable": 52
-    },
-    "metro": {
-      "totalRegions": 392,
-      "regionsAvailable": 388,
-      "totalStates": 0,
-      "statesAvailable": 0
-    }
-  },
-  {
-    "name": "metrics.weeklyCovidAdmissionsPer100k",
-    "state": {
-      "totalRegions": 53,
-      "regionsAvailable": 51,
-      "totalStates": 53,
-      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
@@ -330,7 +309,28 @@
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 388,
+      "regionsAvailable": 392,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.weeklyCovidAdmissionsPer100k",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 52,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "county": {
+      "totalRegions": 3223,
+      "regionsAvailable": 3217,
+      "totalStates": 53,
+      "statesAvailable": 52
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 392,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -345,13 +345,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3160,
+      "regionsAvailable": 3176,
       "totalStates": 53,
       "statesAvailable": 48
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 379,
+      "regionsAvailable": 381,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -366,13 +366,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3160,
+      "regionsAvailable": 3176,
       "totalStates": 53,
       "statesAvailable": 48
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 379,
+      "regionsAvailable": 381,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -387,13 +387,34 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3027,
+      "regionsAvailable": 3012,
       "totalStates": 53,
-      "statesAvailable": 47
+      "statesAvailable": 46
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 369,
+      "regionsAvailable": 367,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
+    "name": "metrics.vaccinationsFall2022BivalentBoosterRatio",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 49,
+      "totalStates": 53,
+      "statesAvailable": 49
+    },
+    "county": {
+      "totalRegions": 3223,
+      "regionsAvailable": 2788,
+      "totalStates": 53,
+      "statesAvailable": 43
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 307,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -408,7 +429,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3207,
+      "regionsAvailable": 3216,
       "totalStates": 53,
       "statesAvailable": 53
     },
@@ -486,9 +507,9 @@
     "name": "actuals.contactTracers",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 53,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 53
     },
     "county": {
       "totalRegions": 3223,
@@ -597,7 +618,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3207,
+      "regionsAvailable": 3216,
       "totalStates": 53,
       "statesAvailable": 53
     },
@@ -639,13 +660,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 33,
+      "regionsAvailable": 0,
       "totalStates": 53,
-      "statesAvailable": 1
+      "statesAvailable": 0
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 4,
+      "regionsAvailable": 0,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -660,7 +681,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3198,
+      "regionsAvailable": 3195,
       "totalStates": 53,
       "statesAvailable": 50
     },
@@ -681,7 +702,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 3198,
+      "regionsAvailable": 3195,
       "totalStates": 53,
       "statesAvailable": 50
     },
@@ -714,6 +735,27 @@
     }
   },
   {
+    "name": "actuals.vaccinationsFall2022BivalentBooster",
+    "state": {
+      "totalRegions": 53,
+      "regionsAvailable": 49,
+      "totalStates": 53,
+      "statesAvailable": 49
+    },
+    "county": {
+      "totalRegions": 3223,
+      "regionsAvailable": 2788,
+      "totalStates": 53,
+      "statesAvailable": 43
+    },
+    "metro": {
+      "totalRegions": 392,
+      "regionsAvailable": 307,
+      "totalStates": 0,
+      "statesAvailable": 0
+    }
+  },
+  {
     "name": "actuals.vaccinesAdministered",
     "state": {
       "totalRegions": 53,
@@ -723,13 +765,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1299,
+      "regionsAvailable": 193,
       "totalStates": 53,
-      "statesAvailable": 18
+      "statesAvailable": 3
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 151,
+      "regionsAvailable": 36,
       "totalStates": 0,
       "statesAvailable": 0
     }

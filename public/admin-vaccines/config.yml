@@ -5,7 +5,7 @@
 # This is only for vaccine data
 backend:
   name: github
-  repo: covid-projections/covid-projections
+  repo: act-now-coalition/covid-act-now-website
   branch: cms-vaccine-info
   base_url: https://api.netlify.com
 

@@ -246,7 +246,6 @@ function getMetricNameForTracking(metricItem: MetricChartInfo): string {
 }
 
 export function trackTabClick(metricItem: MetricChartInfo) {
-  console.log('tracking label', getMetricNameForTracking(metricItem));
   trackEvent(
     EventCategory.METRICS,
     EventAction.CLICK,

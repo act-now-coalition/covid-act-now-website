@@ -49,7 +49,7 @@ export async function fetchSummaries(snapshotNumber: number) {
     return syncSummaries;
   } else {
     // Try to fetch from github.
-    const url = `https://raw.githubusercontent.com/covid-projections/covid-projections/develop/scripts/alert_emails/summaries/${snapshotNumber}.json`;
+    const url = `https://raw.githubusercontent.com/act-now-coalition/covid-act-now-website/develop/scripts/alert_emails/summaries/${snapshotNumber}.json`;
     const response = await fetch(url);
     const json = await response.json();
     return json as SummariesMap;

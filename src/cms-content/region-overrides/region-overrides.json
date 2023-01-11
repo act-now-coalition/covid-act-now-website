@@ -156,7 +156,7 @@
       "start_date": "2021-07-07",
       "end_date": "2021-07-07",
       "region": "IA",
-      "context": "Large outliers not caught due to post-7/4 outlier exclusion. See https://github.com/covid-projections/covid-data-model/pull/1150"
+      "context": "Large outliers not caught due to post-7/4 outlier exclusion. See https://github.com/act-now-coalition/covid-data-model/pull/1150"
     },
     {
       "include": "region",
@@ -215,16 +215,6 @@
     },
     {
       "include": "region-and-subregions",
-      "metric": "metrics.caseDensity",
-      "blocked": false,
-      "start_date": "",
-      "end_date": "",
-      "region": "LA",
-      "disclaimer": "In September, Louisiana was hit by Hurricane Ida which affected many aspects of daily life, including COVID testing. We expect it to take some time for testing to recover. In the meantime, our metrics and risk levels should be treated with caution.",
-      "context": "Disclaimer for Hurricane Ida"
-    },
-    {
-      "include": "region-and-subregions",
       "metric": "metrics.vaccinationsInitiatedRatio",
       "blocked": false,
       "start_date": "",
@@ -232,16 +222,6 @@
       "region": "PA",
       "context": "Disclaimer to note that county level data is prone to undercounting",
       "disclaimer": "Vaccination data for Pennsylvania counties are sourced from the Pennsylvania Department of Health. Note that county-level vaccine data may be under-reported for various reasons including doses being administered without recording county-of-residence information or doses being administered through federal programs that aren't tracked by the state. These limitations do not affect the state-level data, and as a result, there may be inconsistencies between the state-level and county-level metrics."
-    },
-    {
-      "include": "region-and-subregions",
-      "metric": "metrics.testPositivityRatio",
-      "blocked": false,
-      "start_date": "",
-      "end_date": "",
-      "region": "HI",
-      "disclaimer": "Vaccination data for Hawaii counties are sourced from the State of Hawaii Department of Health. Note that county-level vaccine data may be under-reported for various reasons including doses being administered without recording county-of-residence information or doses being administered through federal programs that aren't tracked by the state. These limitations do not affect the state-level data, and as a result, there may be inconsistencies between the state-level and county-level metrics.",
-      "context": "Disclaimer to note that county level data is prone to undercounting"
     },
     {
       "include": "region",
@@ -269,16 +249,6 @@
       "end_date": "",
       "region": "30013, 30063, 29077",
       "context": "cdc test positivity issue"
-    },
-    {
-      "include": "region",
-      "metric": "metrics.caseDensity",
-      "blocked": false,
-      "start_date": "",
-      "end_date": "",
-      "region": "MN",
-      "disclaimer": "On November 1st, 2021, Minnesota added a number of backlogged cases of people who have been infected with Covid multiple times.",
-      "context": "MN reporting backlog of reinfections"
     },
     {
       "include": "region-and-subregions",
@@ -478,16 +448,6 @@
       "context": "https://www.dropbox.com/scl/fi/9nxnpdtwlgn6lwe5cf4g9/CDC-Vaccine-Irregularities.paper?dl=0&rlkey=dxqax20k09p4el1pkivayq7h9"
     },
     {
-      "include": "region-and-subregions",
-      "metric": "metrics.caseDensity",
-      "blocked": false,
-      "start_date": "",
-      "end_date": "",
-      "region": "ID",
-      "disclaimer": "According to the [Idaho Division of Public Health](https://public.tableau.com/app/profile/idaho.division.of.public.health/viz/DPHIdahoCOVID-19Dashboard/Home) data for the most recent 2-week period are incomplete. Due to the recent surge in cases, approximately 29,800 outstanding positive laboratory results are pending local public health district review and follow up.",
-      "context": "https://apnews.com/article/coronavirus-pandemic-lifestyle-health-public-health-idaho-96b67c8d8c5c733aa68b1fe3fa8408e0"
-    },
-    {
       "include": "region",
       "metric": "metrics.icuCapacityRatio",
       "blocked": true,
@@ -504,16 +464,6 @@
       "end_date": "2022-01-16",
       "region": "WI",
       "context": "WI elevated case data due to backlog https://www.dhs.wisconsin.gov/news/releases/011422.htm"
-    },
-    {
-      "include": "region-and-subregions",
-      "metric": "metrics.caseDensity",
-      "blocked": false,
-      "start_date": "",
-      "end_date": "",
-      "context": "Disclaimer for WI backlog",
-      "region": "WI",
-      "disclaimer": "On the week of January 14th, 2022, the Wisconsin Department of Health Services updated its data collection processes. As a result of the new process, COVID case data is expected to be temporarily elevated over the following days while this process occurs and back-logged cases are brought into the live system. [See the Department of Health Services' press release for more information.](https://www.dhs.wisconsin.gov/news/releases/011422.htm)"
     },
     {
       "include": "region",
@@ -597,15 +547,6 @@
       "end_date": "",
       "region": "40220",
       "context": "No case reporting in March 2022"
-    },
-    {
-      "include": "region-and-subregions",
-      "metric": "metrics.icuCapacityRatio",
-      "blocked": true,
-      "start_date": "",
-      "end_date": "",
-      "region": "DE",
-      "context": "DE state spike to 100% ICU usage, Dover drop to < 50% usage"
     },
     {
       "include": "region-and-subregions",
@@ -763,15 +704,6 @@
       "context": "Suspected backlog in KY state case data"
     },
     {
-      "include": "region",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
-      "start_date": "2022-04-07",
-      "end_date": "",
-      "region": "31109",
-      "context": "Blocking zero-data due to outlier detection removal"
-    },
-    {
       "include": "region-and-subregions",
       "metric": "metrics.testPositivityRatio",
       "blocked": true,
@@ -818,16 +750,6 @@
     },
     {
       "include": "region",
-      "metric": "metrics.caseDensity",
-      "blocked": true,
-      "start_date": "",
-      "end_date": "",
-      "context": "MO counties missing case data",
-      "region": "29007,29001,29037,29047,29095,29097,29129,29145,29149,29165,29179,29199,29203,29223,29155",
-      "disclaimer": "Some Missouri counties are no longer reporting cases at a county level."
-    },
-    {
-      "include": "region",
       "metric": "metrics.testPositivityRatio",
       "blocked": true,
       "start_date": "2022-06-07",
@@ -870,6 +792,123 @@
       "end_date": "2022-07-12",
       "region": "UT",
       "context": "Near 0 case reporting dragging Weekly New Cases down"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-17",
+      "end_date": "2022-07-17",
+      "region": "13021",
+      "context": "near-zero case reporting caused weekly new cases to drop towards zero"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.testPositivityRatio",
+      "blocked": true,
+      "start_date": "2022-07-19",
+      "end_date": "2022-07-19",
+      "region": "04027",
+      "context": "large spike in cases in Yuma County, AZ"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-07-13",
+      "end_date": "",
+      "region": "MP",
+      "context": "MP dropoff in cases"
+    },
+    {
+      "include": "region-and-subregions",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-08-07",
+      "end_date": "2022-08-07",
+      "region": "GA",
+      "context": "GA near zero-reporting dragging down WNC"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-08-12",
+      "end_date": "2022-08-12",
+      "region": "41660",
+      "context": "San Angelo TX cases dropof"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.infectionRate",
+      "blocked": true,
+      "start_date": "2022-08-18",
+      "end_date": "2022-08-18",
+      "region": "06029",
+      "context": "Weekly admissions spike in Kern County, CA"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-08-24",
+      "end_date": "2022-08-24",
+      "region": "TN",
+      "context": "backlog on 8/24"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-10-19",
+      "end_date": "2022-10-19",
+      "region": "20045",
+      "context": "Spike in cases on 10/19/2022"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-10-23",
+      "end_date": "2022-10-23",
+      "region": "08101",
+      "context": "backlog of cases on 10/24/2022"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "",
+      "end_date": "",
+      "region": "29097,29037,29145,29047,29165,29095",
+      "context": "Jasper, Cass, Newton, Clay, Platte, Jackson County MO having anamalous data."
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-11-27",
+      "end_date": "2022-11-27",
+      "region": "26161",
+      "context": "cases backlog on 11/28"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-12-07",
+      "end_date": "2022-12-07",
+      "region": "06025",
+      "context": "Case spike on Dec 8"
+    },
+    {
+      "include": "region",
+      "metric": "metrics.caseDensity",
+      "blocked": true,
+      "start_date": "2022-12-22",
+      "end_date": "2023-01-09",
+      "context": "Outlier detection removed data following New Years for some NC counties",
+      "region": "37001,37019,37057,37135"
     }
   ]
 }

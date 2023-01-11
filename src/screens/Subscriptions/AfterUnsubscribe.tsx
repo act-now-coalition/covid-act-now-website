@@ -43,7 +43,10 @@ const AfterUnsubscribe = () => {
           button below. And if there are any issues, topics or current events
           that you think could benefit from the Covid Act Now approach please
           let us know at{' '}
-          <a href="mailto:info@covidactnow.org">info@covidactnow.org</a>.
+          <a href="mailto:contact@actnowcoalition.org">
+            contact@actnowcoalition.org
+          </a>
+          .
         </p>
       </BodyCopy>
       <LargeFilledButton

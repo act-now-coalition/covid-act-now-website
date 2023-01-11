@@ -54,11 +54,18 @@ async function updateSnapshotEmails(alertsFileName: string, snapshot: number) {
     try {
       await Promise.all(
         emailList.map(async (email: string) => {
+          // We are creating documents representing emails we need to send.  We
+          // don't want / need to keep these emails forever though. So to save
+          // on storage / backup costs, we set a deleteAt field 2 weeks in the
+          // future and we have a Firestore TTL policy configured to delete them.
+          const deleteAt = new Date();
+          deleteAt.setDate(deleteAt.getDate() + 14);
+
           try {
             await db
               .collection('snapshots')
               .doc(`${snapshot}/locations/${fips}/emails/${email}`)
-              .create({ sentAt: null });
+              .create({ sentAt: null, deleteAt });
           } catch (updateError) {
             // We don't want to overwrite existing emails for a location to avoid
             // double-sending alerts, in case this is a re-run of the send-alert-emails
