@@ -12,11 +12,5 @@ export const Example = () => {
 
 // TODO(michael): Remove this once we migrate everything to the new version.
 export const OldVersion = () => {
-  return (
-    <VaccineProgressBar
-      oldVersion
-      locationName="Idaho"
-      vaccinationsRatio={0.45}
-    />
-  );
+  return <VaccineProgressBar locationName="Idaho" vaccinationsRatio={0.45} />;
 };
