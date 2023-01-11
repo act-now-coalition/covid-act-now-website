@@ -746,7 +746,6 @@ collections:
                 widget: string
               - label: Body
                 name: body
-                required: false
                 widget: markdown
               - label: CTA
                 name: cta
