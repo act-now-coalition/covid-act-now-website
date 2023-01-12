@@ -37,7 +37,7 @@
       "cta": "[Learn more about ICU capacity used](https://covidactnow.org/covid-community-level-metrics#icu-capacity-used)."
     },
     {
-      "body": "\"1+ dose\" measures the percent of the region's total population that has received at least one vaccine dose. \"2+ dose\" measures the percent of the region's total population that has completed a primary series (second dose of a two-dose vaccine or one dose of J&J vaccine).\n\n“Booster dose” measures the percent of the region's total population that has completed a primary series and has received a non-bivalent booster dose. \"Bivalent booster dose” measures to the percent of the region's total population that has received the updated bivalent booster dose.",
+      "body": "\"1+ dose\" measures the percent of the region's total population that has received at least one vaccine dose. \"2+ dose\" measures the percent of the region's total population that has completed a primary series (second dose of a two-dose vaccine or one dose of J&J vaccine).\n\n“Booster dose” refers to the percent of the region's total population that has completed a primary series and has received a non-bivalent booster dose, and “Bivalent booster dose” refers to the percent of the region's total population that has received the updated bivalent booster dose.",
       "cta": "[Learn more about percent vaccinated](https://covidactnow.org/covid-community-level-metrics#percent-vaccinated).",
       "title": "Vaccination metrics",
       "id": "percent-vaccinated"

@@ -156,7 +156,7 @@
       "start_date": "2021-07-07",
       "end_date": "2021-07-07",
       "region": "IA",
-      "context": "Large outliers not caught due to post-7/4 outlier exclusion. See https://github.com/act-now-coalition/covid-data-model/pull/1150"
+      "context": "Large outliers not caught due to post-7/4 outlier exclusion. See https://github.com/covid-projections/covid-data-model/pull/1150"
     },
     {
       "include": "region",
@@ -906,7 +906,7 @@
       "metric": "metrics.caseDensity",
       "blocked": true,
       "start_date": "2022-12-22",
-      "end_date": "2023-01-09",
+      "end_date": "2023-01-18",
       "context": "Outlier detection removed data following New Years for some NC counties",
       "region": "37001,37019,37057,37135"
     }

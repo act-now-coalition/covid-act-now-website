@@ -6,7 +6,7 @@
 
 backend:
   name: github
-  repo: act-now-coalition/covid-act-now-website
+  repo: act-now-coalition/covid-data-model
   branch: main
   base_url: https://api.netlify.com
 

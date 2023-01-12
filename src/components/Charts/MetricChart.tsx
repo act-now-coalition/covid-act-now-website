@@ -35,9 +35,7 @@ const MetricChart = React.memo(
     height?: number;
   }) => {
     const chartHeight = height ? height : useChartHeightForBreakpoint();
-    // For vaccinations, we still show the chart even if bivalent data is missing
-    // because we will still have 1+ dose / completed data to display.
-    if (!projections.hasMetric(metric) && metric !== Metric.VACCINATIONS) {
+    if (!projections.hasMetric(metric)) {
       // See if the data has been blocked and there is a disclaimer.
       const blockedDisclaimer = getRegionMetricDisclaimer(
         projections.region,
