@@ -126,14 +126,16 @@ export function vaccineColor(val: number): string {
   // causes a circular dependency. :-(
   val = Number(val.toFixed(2));
 
+  // Colors chosen to get a reasonable distribution of regions within each color.
+  // These are somewhat arbitrary, and should be updated over time as vaccine uptake (hopefully) increases.
   const colors = COLOR_MAP.VACCINATIONS_BLUE;
-  if (val < 0.5) {
+  if (val < 0.1) {
     return colors[0];
-  } else if (val < 0.6) {
+  } else if (val < 0.2) {
     return colors[1];
-  } else if (val < 0.7) {
+  } else if (val < 0.3) {
     return colors[2];
-  } else if (val < 0.8) {
+  } else if (val < 0.4) {
     return colors[3];
   } else {
     return colors[4];
@@ -144,4 +146,5 @@ export const VACCINATIONS_COLOR_MAP = {
   INITIATED: COLOR_MAP.VACCINATIONS_BLUE[0],
   COMPLETED: COLOR_MAP.VACCINATIONS_BLUE[1],
   ADDITIONAL_DOSE: COLOR_MAP.VACCINATIONS_BLUE[3],
+  BIVALENT_FALL_2022: COLOR_MAP.VACCINATIONS_BLUE[4],
 };

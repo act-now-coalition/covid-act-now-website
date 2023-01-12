@@ -12,6 +12,7 @@ import { aboutOurAlertsContent } from 'cms-content/learn';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
 import { EventCategory } from 'components/Analytics';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import LearnDisclaimer from 'components/LearnDisclaimer/LearnDisclaimer';
 
 const Alerts: React.FC = () => {
   const {
@@ -36,6 +37,7 @@ const Alerts: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
+        <LearnDisclaimer />
         <MarkdownContent source={bodyText} />
         <ButtonWrapper>
           <LargeOutlinedButton

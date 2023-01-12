@@ -12,6 +12,7 @@ import {
 import { CardsContainer } from '../Learn.style';
 import LandingPageCard from '../SharedComponents/LandingPageCard';
 import { Article } from 'cms-content/articles';
+import LearnDisclaimer from 'components/LearnDisclaimer/LearnDisclaimer';
 
 const ArticlesLanding: React.FC<{
   title: string;
@@ -42,6 +43,7 @@ const ArticlesLanding: React.FC<{
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{title}</LearnHeading1>
+        <LearnDisclaimer />
         {sectionIntro && (
           <ArticlesLandingIntro>{sectionIntro}</ArticlesLandingIntro>
         )}

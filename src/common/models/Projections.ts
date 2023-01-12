@@ -92,6 +92,11 @@ export class Projections {
   }
 
   hasMetric(metric: Metric): boolean {
+    // HACK: Show the chart for vaccinations if any of the data is present, not just
+    // the bivalent data which is mapped to the "VACCINATIONS" metric.
+    if (metric === Metric.VACCINATIONS) {
+      return this.primary.vaccinationsInfo !== null;
+    }
     return this.getMetricValue(metric) !== null;
   }
 
