@@ -19,7 +19,7 @@ export const VaccinationsMetric: MetricDefinition = {
   renderThermometer,
   renderInfoTooltip,
   metricName: METRIC_NAME,
-  extendedMetricName: 'Percent Vaccinated',
+  extendedMetricName: 'Vaccination metrics',
   metricNameForCompare: 'Boosted (Bivalent)',
   metricNameForSummaryStat: 'Boosted',
 };
