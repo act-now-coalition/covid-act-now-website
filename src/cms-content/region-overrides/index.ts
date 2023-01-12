@@ -56,7 +56,6 @@ export function getRegionMetricDisclaimer(
       !o.end_date &&
       (!onlyIncludeBlockedMetrics || o.blocked),
   );
-  console.log('overrides', overrideMetric, metric);
   // If there are multiple possible disclaimers, prefer ones for blocking metrics, and ones with no start date.
   const override =
     find(overrides, o => o.blocked && !o.start_date) ??
