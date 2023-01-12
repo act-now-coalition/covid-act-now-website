@@ -56,6 +56,7 @@ export function getRegionMetricDisclaimer(
       !o.end_date &&
       (!onlyIncludeBlockedMetrics || o.blocked),
   );
+  console.log('overrides', overrideMetric, metric);
   // If there are multiple possible disclaimers, prefer ones for blocking metrics, and ones with no start date.
   const override =
     find(overrides, o => o.blocked && !o.start_date) ??
@@ -138,6 +139,6 @@ function getOverrideMetricForMetric(metric: Metric): string {
     case Metric.POSITIVE_TESTS:
       return 'metrics.testPositivityRatio';
     case Metric.VACCINATIONS:
-      return 'metrics.VaccinationsFall2022BivalentBoosterRatio';
+      return 'metrics.vaccinationsInitiatedRatio';
   }
 }
