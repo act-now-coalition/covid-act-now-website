@@ -68,12 +68,20 @@ const VaccinesTooltip: React.FC<{
   top: (d: Column) => number;
   subtext: string;
 }> = ({ seriesList, left, top, date }) => {
-  const [seriesInitiated, seriesCompleted, seriesAdditionalDose] = seriesList;
+  const [
+    seriesInitiated,
+    seriesCompleted,
+    seriesAdditionalDose,
+    seriesBivalentFall2022Boosted,
+  ] = seriesList;
   const pointCompleted =
     seriesCompleted && findPointByDate(seriesCompleted.data, date);
   const pointInitiated = findPointByDate(seriesInitiated.data, date);
   const pointAdditionalDose = seriesAdditionalDose
     ? findPointByDate(seriesAdditionalDose.data, date)
+    : null;
+  const pointBivalentFall2022Boosted = seriesBivalentFall2022Boosted
+    ? findPointByDate(seriesBivalentFall2022Boosted.data, date)
     : null;
   const isCapped = (pointInitiated?.y ?? 0) >= VACCINATION_PERCENTAGE_CAP;
 
@@ -115,6 +123,18 @@ const VaccinesTooltip: React.FC<{
           <Styles.TooltipValue>
             {isNumber(pointAdditionalDose.y)
               ? formatPercent(pointAdditionalDose.y, 1)
+              : '-'}
+          </Styles.TooltipValue>
+        </Styles.TooltipLine>
+      )}
+      {pointBivalentFall2022Boosted && pointBivalentFall2022Boosted && (
+        <Styles.TooltipLine>
+          <Styles.TooltipLabel>
+            {seriesBivalentFall2022Boosted.tooltipLabel}
+          </Styles.TooltipLabel>{' '}
+          <Styles.TooltipValue>
+            {isNumber(pointBivalentFall2022Boosted.y)
+              ? formatPercent(pointBivalentFall2022Boosted.y, 1)
               : '-'}
           </Styles.TooltipValue>
         </Styles.TooltipLine>

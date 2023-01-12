@@ -57,7 +57,16 @@ const ChartBlock: React.FC<{
     metricList[activeTabIndex],
     projections,
   );
-  const hasValue = Number.isFinite(unformattedValue);
+
+  // HACK: Vaccination metric returns bivalent booster data, but we only
+  // want to not show the footer if there is no 1+ dose data
+  const metric = metricList[activeTabIndex].metric;
+  const vaccinationsInitiated =
+    projections.primary.vaccinationsInfo?.peopleInitiated;
+  const hasValue =
+    metric === Metric.VACCINATIONS
+      ? Number.isFinite(vaccinationsInitiated)
+      : Number.isFinite(unformattedValue);
 
   // Used to make sure user can change tabs after landing on a page via a share link (and having a tab auto-selected)
   const [hasSelectedSharedTab, setHasSelectedSharedTab] = useState<boolean>(

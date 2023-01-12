@@ -21,6 +21,7 @@ import {
   parseDateString,
   formatDateTime,
 } from '@actnowcoalition/time-utils';
+import LearnDisclaimer from 'components/LearnDisclaimer/LearnDisclaimer';
 
 const GlossaryTerm: React.FC<{ term: Term }> = ({ term }) => {
   return (
@@ -61,6 +62,7 @@ const Glossary: React.FC = () => {
           <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
+        <LearnDisclaimer />
         {intro && <MarkdownContent source={intro} />}
         <LastUpdatedDate>
           Last updated{' '}

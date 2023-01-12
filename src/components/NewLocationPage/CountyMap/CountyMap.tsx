@@ -27,7 +27,7 @@ import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 // we need to keep "Risk levels" for COMMUNITY_LEVEL to prevent breaking the
 // state for users that had selected "Risk levels" in the past.
 enum MapType {
-  VACCINATIONS = '% Vaccinated',
+  VACCINATIONS = '% Boosted',
   COMMUNITY_LEVEL = 'Risk levels',
 }
 
@@ -44,14 +44,14 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
         <VaccinationsThermLabel>
           Pop. with
           <br />
-          <strong>1+ dose</strong>
+          <strong>bivalent dose</strong>
         </VaccinationsThermLabel>
         <VaccinationsThermometer />
       </Row>
     ),
     colorMap: (locationSummary: LocationSummary) =>
       vaccineColorFromLocationSummary(locationSummary),
-    mapButtonLabel: '% Vaccinated',
+    mapButtonLabel: '% Boosted',
   },
   [MapType.COMMUNITY_LEVEL]: {
     thermometer: <CommunityLevelThermometer />,

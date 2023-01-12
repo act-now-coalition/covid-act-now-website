@@ -16,6 +16,7 @@ import { Article } from 'cms-content/articles/utils';
 import SmallShareButtons from 'components/SmallShareButtons';
 import Footer from 'screens/Learn/Footer/Footer';
 import { getCovidExplainedFooter } from 'screens/Learn/Explained';
+import LearnDisclaimer from 'components/LearnDisclaimer/LearnDisclaimer';
 
 const ArticlePage: React.FC<{
   article: Article;
@@ -66,6 +67,7 @@ const ArticlePage: React.FC<{
           <Breadcrumbs item={parentItem} />
         </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
+        <LearnDisclaimer />
         <SmallSubtext source={smallSubtextCopy} />
         <HeaderShareButtonsWrapper>
           <SmallShareButtons {...shareButtonProps} />

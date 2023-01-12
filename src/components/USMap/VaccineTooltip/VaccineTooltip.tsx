@@ -74,8 +74,7 @@ const VaccineTooltip: React.FC<VaccineTooltipProps> = ({
           <ProgressBarWrapper>
             <VaccineProgressBar
               locationName={locationName}
-              vaccinationsInitiated={vaccinationsInitiated}
-              vaccinationsCompleted={vaccinationsCompleted}
+              vaccinationsRatio={vaccinationsInitiated}
             />
           </ProgressBarWrapper>
         ) : (
