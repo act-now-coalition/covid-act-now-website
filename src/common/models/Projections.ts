@@ -92,15 +92,10 @@ export class Projections {
   }
 
   hasMetric(metric: Metric): boolean {
-    // HACK: Show the chart for vaccinations if any of the data is present.
+    // HACK: Show the chart for vaccinations if any of the data is present, not just
+    // the bivalent data which is mapped to the "VACCINATIONS" metric.
     if (metric === Metric.VACCINATIONS) {
-      const vaccinationsInfo = this.primary.vaccinationsInfo;
-      const noPrimary = vaccinationsInfo?.ratioVaccinated === null;
-      const noCompleted = vaccinationsInfo?.ratioVaccinated === null;
-      const noBooster = vaccinationsInfo?.ratioAdditionalDoseSeries === null;
-      const noBivalentBoosterFall2022 =
-        vaccinationsInfo?.peopleBivalentBoostedFall2022 === null;
-      return noPrimary || noCompleted || noBooster || noBivalentBoosterFall2022;
+      return this.primary.vaccinationsInfo !== null;
     }
     return this.getMetricValue(metric) !== null;
   }
