@@ -139,6 +139,8 @@ function getOverrideMetricForMetric(metric: Metric): string {
     case Metric.POSITIVE_TESTS:
       return 'metrics.testPositivityRatio';
     case Metric.VACCINATIONS:
+      // TODO: This metric name is mapped to the overrides CMS, so we will need to
+      // update the CMS variable names to and update this if we want to update this metric name.
       return 'metrics.vaccinationsInitiatedRatio';
   }
 }
