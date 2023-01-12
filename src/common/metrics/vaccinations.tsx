@@ -9,6 +9,7 @@ import { Metric } from 'common/metricEnum';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import ExternalLink from 'components/ExternalLink';
 
 const METRIC_NAME = 'Vaccinated';
 const VACCINATION_PERCENTAGE_CAP = 0.95;
@@ -121,9 +122,9 @@ function renderStatus(projections: Projections): React.ReactElement {
       {bivalentFall2022BoosterText}. Anybody who is at least 6 months old is
       eligible to be vaccinated. Fewer than 0.001% of people who have received a
       dose experienced a severe adverse reaction. {cappedVaccinatedCopy}
-      <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/about-vaccines/index.html">
+      <ExternalLink href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/about-vaccines/index.html">
         See more vaccine resources and FAQs
-      </a>
+      </ExternalLink>
       .
     </Fragment>
   );
