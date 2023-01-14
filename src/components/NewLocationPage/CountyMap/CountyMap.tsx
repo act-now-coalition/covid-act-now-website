@@ -27,7 +27,7 @@ import { StorageKeys, useLocalStorage } from 'common/utils/storage';
 // we need to keep "Risk levels" for COMMUNITY_LEVEL to prevent breaking the
 // state for users that had selected "Risk levels" in the past.
 enum MapType {
-  VACCINATIONS = '% Boosted',
+  VACCINATIONS = '% Vaccinated',
   COMMUNITY_LEVEL = 'Risk levels',
 }
 
@@ -36,6 +36,13 @@ interface MapTypeInfo {
   colorMap: (locationSummary: LocationSummary) => string;
   mapButtonLabel: string;
 }
+
+const communityLevelMapInfo = {
+  thermometer: <CommunityLevelThermometer />,
+  colorMap: (locationSummary: LocationSummary) =>
+    getAlertColor(locationSummary),
+  mapButtonLabel: 'Community risk level',
+};
 
 const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
   [MapType.VACCINATIONS]: {
@@ -53,12 +60,7 @@ const MAP_TYPE_INFO: { [key in MapType]: MapTypeInfo } = {
       vaccineColorFromLocationSummary(locationSummary),
     mapButtonLabel: '% Boosted',
   },
-  [MapType.COMMUNITY_LEVEL]: {
-    thermometer: <CommunityLevelThermometer />,
-    colorMap: (locationSummary: LocationSummary) =>
-      getAlertColor(locationSummary),
-    mapButtonLabel: 'Community risk level',
-  },
+  [MapType.COMMUNITY_LEVEL]: communityLevelMapInfo,
 };
 
 /**
@@ -108,7 +110,8 @@ const CountyMap: React.FC<{ region: Region }> = React.memo(({ region }) => {
     }
   };
 
-  const mapTypeInfo = MAP_TYPE_INFO[mapType];
+  // If local storage is empty or not a valid map type, default to community level
+  const mapTypeInfo = MAP_TYPE_INFO[mapType] ?? communityLevelMapInfo;
 
   const bottomPosition = useMapContainerOffset();
 
