@@ -72,7 +72,7 @@ jobs:
             * Point at new share images URL.
 
       - name: Wait for Preview URL to be live
-        run: npx wait-on -t 120000 https://covid-act-now-website-git-bump-snapshot-${{env.RUN_ID}}-act-now-coalition.vercel.app/compare/ || echo 'Preview URL failed to load.'
+        run: npx wait-on -t 120000 https://covidactnow-git-bump-snapshot-${{env.RUN_ID}}-act-now-coalition.vercel.app/compare/ || echo 'Preview URL failed to load.'
 
       - name: Read slack-summary.txt
         id: slack_summary
@@ -95,6 +95,6 @@ jobs:
           args: |
             PR to update the website to snapshot ${{env.SNAPSHOT_ID}} (with updated map colors and share images) is available.
             PR: https://github.com/act-now-coalition/covid-act-now-website/pull/${{env.PULL_REQUEST_NUMBER}}
-            Preview: https://covid-act-now-website-git-bump-snapshot-${{env.RUN_ID}}-act-now-coalition.vercel.app/
-            Compare: https://covid-act-now-website-git-bump-snapshot-${{env.RUN_ID}}-act-now-coalition.vercel.app/internal/compare/
+            Preview: https://covidactnow-git-bump-snapshot-${{env.RUN_ID}}-act-now-coalition.vercel.app/
+            Compare: https://covidactnow-git-bump-snapshot-${{env.RUN_ID}}-act-now-coalition.vercel.app/internal/compare/
             ${{steps.slack_summary.outputs.text}}
