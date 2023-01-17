@@ -67,6 +67,12 @@ function OverridesOverview() {
       width: 600,
       renderCell: renderDataGridToolTip,
     },
+    {
+      field: 'disclaimer',
+      headerName: 'Site Disclaimer',
+      width: 600,
+      renderCell: renderDataGridToolTip,
+    },
   ];
 
   return (

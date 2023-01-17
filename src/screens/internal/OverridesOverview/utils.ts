@@ -10,7 +10,7 @@ import rawStates from '../../../common/data/states_by_fips.json';
 import rawMetros from '../../../common/data/metro_areas_by_fips.json';
 
 const counties = rawCounties as {
-  [fips: string]: { n: string; f: string; p: number; s: string };
+  [fips: string]: { n: string; p: number; s: string };
 };
 const states = rawStates as { [fips: string]: { s: string; p: number } };
 const metros = rawMetros as { [fips: string]: { n: string; p: number } };
@@ -23,6 +23,7 @@ interface RegionOverrideJson {
   context: string;
   start_date: string;
   end_date: string;
+  disclaimer?: string;
 }
 
 export interface RegionOverride {
@@ -33,7 +34,8 @@ export interface RegionOverride {
   context: string;
   startDate: Date | null;
   endDate: Date | null;
-  population: number | null;
+  population?: number;
+  disclaimer?: string;
 }
 
 /**
@@ -60,6 +62,7 @@ export function parseOverrides(
       endDate: override.end_date ? new Date(override.end_date) : null,
       region: regionData.name,
       population: regionData.population,
+      disclaimer: override.disclaimer,
     };
   });
 }
@@ -95,14 +98,12 @@ function explode(obj: Record<string, any>, key: string): Record<string, any> {
  * @param region Region to lookup
  * @returns Region name and population
  */
-function regionLookup(
-  region: string,
-): { name: string; population: number | null } {
+function regionLookup(region: string): { name: string; population?: number } {
   if (region.length === 2) {
     const state = find(states, { s: region });
     if (!state) {
       console.warn(`State ${region} not found in database.`);
-      return { name: region, population: null };
+      return { name: region, population: undefined };
     }
     return { name: state.s, population: state.p };
   }
@@ -117,7 +118,7 @@ function regionLookup(
   }
 
   console.warn(`Region ${region} not found in database.`);
-  return { name: region, population: null };
+  return { name: region, population: undefined };
 }
 
 // Comparator to send null/empty values to the bottom of the list when sorting.
