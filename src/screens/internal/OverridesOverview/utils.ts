@@ -1,3 +1,4 @@
+import find from 'lodash/find';
 import {
   gridStringOrNumberComparator,
   GridSortItem,
@@ -6,9 +7,13 @@ import {
 
 import rawCounties from '../../../common/data/counties_by_fips.json';
 import rawStates from '../../../common/data/states_by_fips.json';
+import rawMetros from '../../../common/data/metro_areas_by_fips.json';
 
-const counties = rawCounties as any;
-const states = rawStates as any;
+const counties = rawCounties as {
+  [fips: string]: { n: string; f: string; p: number; s: string };
+};
+const states = rawStates as { [fips: string]: { s: string; p: number } };
+const metros = rawMetros as { [fips: string]: { n: string; p: number } };
 
 interface RegionOverrideJson {
   include: string;
@@ -23,12 +28,12 @@ interface RegionOverrideJson {
 export interface RegionOverride {
   scope: string;
   metric: string;
-  blocked: boolean;
+  blocked: string;
   region: string;
   context: string;
   startDate: Date | null;
   endDate: Date | null;
-  population: number;
+  population: number | null;
 }
 
 /**
@@ -40,25 +45,19 @@ export interface RegionOverride {
 export function parseOverrides(
   jsonArray: RegionOverrideJson[],
 ): RegionOverride[] {
-  // TODO: should condense these into a single map
-  const overrides = jsonArray.map(override => ({
-    scope: override.include,
-    metric: override.metric,
-    blocked: override.blocked,
-    region: override.region.split(','),
-    context: override.context,
-    startDate: override.start_date ? new Date(override.start_date) : null,
-    endDate: override.end_date ? new Date(override.end_date) : null,
-  }));
-
-  const splitOverrides = overrides
+  const overrides = jsonArray
     .map(override => explode(override, /**key=*/ 'region'))
     .flat();
 
-  return splitOverrides.map(override => {
+  return overrides.map(override => {
     const regionData = regionLookup(override.region);
     return {
-      ...override,
+      scope: override.include,
+      metric: override.metric,
+      blocked: String(override.blocked),
+      context: override.context,
+      startDate: override.start_date ? new Date(override.start_date) : null,
+      endDate: override.end_date ? new Date(override.end_date) : null,
       region: regionData.name,
       population: regionData.population,
     };
@@ -66,7 +65,7 @@ export function parseOverrides(
 }
 
 /**
- * For an object with a key that is an array,
+ * For an object with a key that is an array or a comma-separated string,
  * explode the object into an array of objects with the key set to each value in the array.
  *
  * If the key is a string, return the object as is.
@@ -78,44 +77,52 @@ export function parseOverrides(
  * @param key key to explode on
  * @returns
  */
-function explode<T extends Record<string, any>>(obj: T, key: string) {
-  if (obj[key] === undefined) {
-    throw Error(`Key ${key} not found in object.`);
-  }
-  if (typeof obj[key] === 'string') {
+function explode(obj: Record<string, any>, key: string): Record<string, any> {
+  if (typeof obj[key] === 'string' && obj[key].split(',').length === 1) {
     return obj;
+  } else if (typeof obj[key] === 'string') {
+    obj[key] = obj[key].split(',').map((r: string) => r.trim());
+  } else if (!Array.isArray(obj[key])) {
+    throw Error(`Key ${key} is not a string or array.`);
   }
-  return obj[key].map((val: string) => ({ ...obj, [key]: val }));
+  return obj[key].map((value: string) => ({ ...obj, [key]: value }));
 }
 
 /**
- * Simple lookup function for region names. States are returned as-is, while county FIPS
- * codes are converted to county names.
+ * Simple lookup function for region names. States are returned as-is, while county/metro
+ *  FIPS codes are converted to their names.
  *
  * @param region Region to lookup
+ * @returns Region name and population
  */
-function regionLookup(region: string): { name: string; population: number } {
+function regionLookup(
+  region: string,
+): { name: string; population: number | null } {
   if (region.length === 2) {
-    const state = states[region];
+    const state = find(states, { s: region });
     if (!state) {
-      console.warn(`State ${region} not found.`);
-      return { name: region, population: -1 };
+      console.warn(`State ${region} not found in database.`);
+      return { name: region, population: null };
     }
     return { name: state.s, population: state.p };
   }
-  console.log(region, counties[region]);
+
   const county = counties[region];
-  if (!county) {
-    console.warn(`County ${region} not found.`);
-    return { name: region, population: -1 };
+  const metro = metros[region];
+  if (county) {
+    const state = states[county.s];
+    return { name: `${county.n}, ${state.s}`, population: county.p };
+  } else if (metro) {
+    return { name: `${metro.n} metro`, population: metro.p };
   }
-  const state = states[county.s];
-  return { name: `${county.n}, ${state.s}`, population: county.p };
+
+  console.warn(`Region ${region} not found in database.`);
+  return { name: region, population: null };
 }
 
 // Comparator to send null/empty values to the bottom of the list when sorting.
 // From https://stackoverflow.com/a/74360441/14034347.
-export function nullHandlingSortComparator<T = any>(
+export function nullHandlingSortComparator<T>(
   v1: T,
   v2: T,
   cellParams1: GridSortCellParams<T>,
