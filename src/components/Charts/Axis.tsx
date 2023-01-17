@@ -30,8 +30,11 @@ export const AxisBottom: React.FC<AxisBottomProps> = ({
     <Style.Axis>
       <VxAxisBottom
         top={innerHeight}
+        // @ts-ignore
         scale={scale}
+        // @ts-ignore
         tickValues={finalTickValues}
+        // @ts-ignore
         tickFormat={(d: Date) => getXTickFormat(d)}
       />
     </Style.Axis>

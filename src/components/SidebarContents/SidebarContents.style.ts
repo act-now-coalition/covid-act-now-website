@@ -48,7 +48,8 @@ export const TopLevelLink = styled(NavLink).attrs(props => ({
 
 export const InnerLevelLink = styled(NavHashLink).attrs(props => ({
   activeClassName: 'active',
-  scroll: elem => scrollWithOffset(elem, -(topBarHeight + theme.spacing(2))),
+  scroll: (elem: HTMLElement) =>
+    scrollWithOffset(elem, -(topBarHeight + theme.spacing(2))),
 }))`
   ${fontCss}
   text-decoration: none;
