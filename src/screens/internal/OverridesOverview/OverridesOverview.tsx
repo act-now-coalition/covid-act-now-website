@@ -34,13 +34,11 @@ function OverridesOverview() {
       field: 'startDate',
       headerName: 'Start Date',
       width: 150,
-      // sortComparator: nullHandlingSortComparator,
     },
     {
       field: 'endDate',
       headerName: 'End Date',
       width: 150,
-      // sortComparator: nullHandlingSortComparator,
     },
     {
       field: 'blocked',
@@ -57,7 +55,7 @@ function OverridesOverview() {
     {
       field: 'population',
       headerName: 'Population',
-      width: 100,
+      width: 150,
       renderCell: renderDataGridToolTip,
     },
     {
@@ -76,27 +74,27 @@ function OverridesOverview() {
 
   return (
     <>
-      {/* <Stack p={4} spacing={2}> */}
-      <Typography variant="h2">
-        <Tooltip title="Active overrides include overrides with no end date, or an end date in the future.">
-          <Typography variant="inherit">Active</Typography>
-        </Tooltip>{' '}
-        Region Overrides
-      </Typography>
-      <Typography variant="body1">
-        Update, add, or remove overrides via the{' '}
-        <a href="https://covidactnow-cms.netlify.app/admin-overrides/#/collections/regionOverrides/entries/regionOverrides">
-          Region Overrides CMS
-        </a>
-      </Typography>
-      <Box style={{ height: 600, width: '80%' }}>
-        <DataGrid
-          rows={activeOverrides}
-          columns={columns}
-          getRowId={() => Math.random()}
-        />
+      <Box p={4}>
+        <Typography variant="h2">
+          <Tooltip title="Active overrides include overrides with no end date, or an end date in the future.">
+            <Typography variant="inherit">Active</Typography>
+          </Tooltip>{' '}
+          Region Overrides
+        </Typography>
+        <Typography variant="body1">
+          Update, add, or remove overrides via the{' '}
+          <a href="https://covidactnow-cms.netlify.app/admin-overrides/#/collections/regionOverrides/entries/regionOverrides">
+            Region Overrides CMS
+          </a>
+        </Typography>
+        <Box style={{ height: 600, width: '90%' }}>
+          <DataGrid
+            rows={activeOverrides}
+            columns={columns}
+            getRowId={() => Math.random()}
+          />
+        </Box>
       </Box>
-      {/* </Stack> */}
     </>
   );
 }
