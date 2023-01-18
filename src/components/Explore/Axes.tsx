@@ -35,18 +35,11 @@ const Axes: React.FC<{
 
   return (
     <AxisStyle>
-      <AxisLeft
-        scale={yScale}
-        numTicks={yNumTicks}
-        // @ts-ignore
-        tickFormat={yTickFormat}
-      />
+      <AxisLeft scale={yScale} numTicks={yNumTicks} tickFormat={yTickFormat} />
       <AxisBottom
         top={height}
-        // @ts-ignore
         scale={dateScale}
         tickValues={finalTickValues}
-        // @ts-ignore
         tickFormat={(date: Date) => getXTickFormat(date, xTickTimeUnit)}
       />
     </AxisStyle>

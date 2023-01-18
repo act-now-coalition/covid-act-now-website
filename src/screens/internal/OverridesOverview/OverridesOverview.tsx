@@ -1,8 +1,7 @@
 import React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import jsonOverrides from '../../../cms-content/region-overrides/region-overrides.json';
-import { nullHandlingSortComparator, parseOverrides } from './utils';
-import { Stack } from '@mui/material';
+import { parseOverrides } from './utils';
 import { Box, Tooltip, Typography } from '@material-ui/core';
 
 const renderDataGridToolTip = (params: any) => (
@@ -35,13 +34,13 @@ function OverridesOverview() {
       field: 'startDate',
       headerName: 'Start Date',
       width: 150,
-      sortComparator: nullHandlingSortComparator,
+      // sortComparator: nullHandlingSortComparator,
     },
     {
       field: 'endDate',
       headerName: 'End Date',
       width: 150,
-      sortComparator: nullHandlingSortComparator,
+      // sortComparator: nullHandlingSortComparator,
     },
     {
       field: 'blocked',
@@ -77,32 +76,27 @@ function OverridesOverview() {
 
   return (
     <>
-      <Stack p={4} spacing={2}>
-        <Typography variant="h2">
-          <Tooltip title="Active overrides include overrides with no end date, or an end date in the future.">
-            <Typography variant="inherit">Active</Typography>
-          </Tooltip>{' '}
-          Region Overrides
-        </Typography>
-        <Typography variant="body1">
-          Update, add, or remove overrides via the{' '}
-          <a href="https://covidactnow-cms.netlify.app/admin-overrides/#/collections/regionOverrides/entries/regionOverrides">
-            Region Overrides CMS
-          </a>
-        </Typography>
-        <Box style={{ height: 600, width: '80%' }}>
-          <DataGrid
-            rows={activeOverrides}
-            columns={columns}
-            getRowId={() => Math.random()}
-            initialState={{
-              sorting: {
-                sortModel: [{ field: 'startDate', sort: 'desc' }],
-              },
-            }}
-          />
-        </Box>
-      </Stack>
+      {/* <Stack p={4} spacing={2}> */}
+      <Typography variant="h2">
+        <Tooltip title="Active overrides include overrides with no end date, or an end date in the future.">
+          <Typography variant="inherit">Active</Typography>
+        </Tooltip>{' '}
+        Region Overrides
+      </Typography>
+      <Typography variant="body1">
+        Update, add, or remove overrides via the{' '}
+        <a href="https://covidactnow-cms.netlify.app/admin-overrides/#/collections/regionOverrides/entries/regionOverrides">
+          Region Overrides CMS
+        </a>
+      </Typography>
+      <Box style={{ height: 600, width: '80%' }}>
+        <DataGrid
+          rows={activeOverrides}
+          columns={columns}
+          getRowId={() => Math.random()}
+        />
+      </Box>
+      {/* </Stack> */}
     </>
   );
 }

@@ -1,19 +1,5 @@
+import { states, counties, metros } from '@actnowcoalition/regions';
 import find from 'lodash/find';
-import {
-  gridStringOrNumberComparator,
-  GridSortItem,
-  GridSortCellParams,
-} from '@mui/x-data-grid';
-
-import rawCounties from '../../../common/data/counties_by_fips.json';
-import rawStates from '../../../common/data/states_by_fips.json';
-import rawMetros from '../../../common/data/metro_areas_by_fips.json';
-
-const counties = rawCounties as {
-  [fips: string]: { n: string; p: number; s: string };
-};
-const states = rawStates as { [fips: string]: { s: string; p: number } };
-const metros = rawMetros as { [fips: string]: { n: string; p: number } };
 
 interface RegionOverrideJson {
   include: string;
@@ -100,51 +86,21 @@ function explode(obj: Record<string, any>, key: string): Record<string, any> {
  */
 function regionLookup(region: string): { name: string; population?: number } {
   if (region.length === 2) {
-    const state = find(states, { s: region });
+    const state = find(states.all, { abbreviation: region });
     if (!state) {
-      console.warn(`State ${region} not found in database.`);
-      return { name: region, population: undefined };
+      console.warn(`State ${region} not found in regions package.`);
+      return { name: region };
     }
-    return { name: state.s, population: state.p };
+    return { name: state.fullName, population: state.population };
   }
 
-  const county = counties[region];
-  const metro = metros[region];
+  const county = counties.findByRegionId(region);
+  const metro = metros.findByRegionId(region);
   if (county) {
-    const state = states[county.s];
-    return { name: `${county.n}, ${state.s}`, population: county.p };
+    return { name: county.shortName, population: county.population };
   } else if (metro) {
-    return { name: `${metro.n} metro`, population: metro.p };
+    return { name: metro.shortName, population: metro.population };
   }
-
-  console.warn(`Region ${region} not found in database.`);
-  return { name: region, population: undefined };
-}
-
-// Comparator to send null/empty values to the bottom of the list when sorting.
-// From https://stackoverflow.com/a/74360441/14034347.
-export function nullHandlingSortComparator<T>(
-  v1: T,
-  v2: T,
-  cellParams1: GridSortCellParams<T>,
-  cellParams2: GridSortCellParams<T>,
-): number {
-  if (v1 === null || v2 === null) {
-    if (v1 === v2) return 0;
-    else {
-      const sortModel = cellParams1.api.getSortModel();
-      const sortColumn = sortModel.find(
-        (sm: GridSortItem) => sm.field === cellParams1.field,
-      );
-      if (sortColumn && sortColumn.sort === 'desc') {
-        if (v1 === null) return -1;
-        else return 1;
-      } else {
-        if (v1 === null) return 1;
-        else return -1;
-      }
-    }
-  } else {
-    return gridStringOrNumberComparator(v1, v2, cellParams1, cellParams2);
-  }
+  console.warn(`Location ${region} not found in regions package.`);
+  return { name: region };
 }
