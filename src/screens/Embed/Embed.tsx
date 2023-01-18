@@ -94,9 +94,7 @@ export default function Embed({
   isRiskMap?: boolean;
 }) {
   const navigateToCAN = () => {
-    if (window.top) {
-      window.top.location.href = 'https://covidactnow.org/';
-    }
+    window.top.location.href = 'https://covidactnow.org/';
     return false;
   };
 

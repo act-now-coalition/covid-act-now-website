@@ -240,7 +240,6 @@ const VaccinationLines: React.FC<{
             <AxisLeft
               scale={yScale}
               numTicks={5}
-              // @ts-expect-error
               tickFormat={(value: number) => formatPercent(value, 0)}
             />
             <AxisBottom
