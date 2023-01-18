@@ -62,9 +62,9 @@ export function parseOverrides(
  * Example:
  * `explode({ a: 1, b: [2, 3] }, 'b') => [{ a: 1, b: 2 }, { a: 1, b: 3 }]`
  *
- * @param obj object to explode
- * @param key key to explode on
- * @returns
+ * @param obj Object to explode
+ * @param key Key to explode on
+ * @returns New object with key exploded
  */
 function explode(obj: Record<string, any>, key: string): Record<string, any> {
   if (typeof obj[key] === 'string' && obj[key].split(',').length === 1) {

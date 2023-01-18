@@ -12,6 +12,7 @@ const renderDataGridToolTip = (params: any) => (
 
 function OverridesOverview() {
   const regionOverriedes = parseOverrides(jsonOverrides.overrides);
+  // Filter out overrides that block a timeframe in the past.
   const activeOverrides = regionOverriedes.filter(
     override =>
       override.endDate === null || new Date(override.endDate) > new Date(),
