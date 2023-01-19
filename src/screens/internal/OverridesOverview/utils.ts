@@ -105,6 +105,8 @@ function regionLookup(region: string): { name: string; population?: number } {
     return { name: region };
   }
   const isCounty = location instanceof County;
-  const suffix = isCounty ? `, ${location.state.abbreviation}` : ' Metro Area';
+  const suffix = isCounty
+    ? `, ${(location as County).state.abbreviation}`
+    : ' Metro Area';
   return { name: `${location.name}${suffix}`, population: location.population };
 }
