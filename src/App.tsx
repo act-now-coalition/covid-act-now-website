@@ -47,6 +47,10 @@ const CompareSnapshots = lazy(() =>
 );
 const AllStates = lazy(() => import('screens/internal/AllStates/AllStates'));
 const Anomalies = lazy(() => import('screens/internal/Anomalies/Anomalies'));
+const OverridesOverview = lazy(() =>
+  import('screens/internal/OverridesOverview/OverridesOverview'),
+);
+
 const ExportImage = lazy(() =>
   import('screens/internal/ShareImage/ChartExportImage'),
 );
@@ -297,6 +301,12 @@ export default function App() {
 
                   {/** Internal endpoint for viewing data anomalies. */}
                   <Route path="/internal/anomalies" component={Anomalies} />
+
+                  {/** Internal endpoint for viewing active region overrides. */}
+                  <Route
+                    path="/internal/overrides-overview"
+                    component={OverridesOverview}
+                  />
 
                   {/** Internal endpoint for viewing all vaccination phase data **/}
                   <Route
