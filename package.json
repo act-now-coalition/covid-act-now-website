@@ -13,6 +13,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.55",
+    "@mui/x-data-grid": "^4.0.0",
     "@sentry/react": "^5.24.2",
     "@typeform/embed": "^0.25.3",
     "@types/d3-array": "^2.0.0",
