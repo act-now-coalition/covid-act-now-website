@@ -29,11 +29,6 @@
   dependencies:
     tunnel "0.0.6"
 
-"@actnowcoalition/assert@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@actnowcoalition/assert/-/assert-0.1.2.tgz#87f8d5e6e18194340d0101a2406b2b80b7ad56eb"
-  integrity sha512-qseONebB+hBZbu4kgLh9Cv8p9DUQsIONChd9t2J6QdNS2NLjuItK1pXmjODTE31gKzsPIW42DL3KvUD7PS4YFw==
-
 "@actnowcoalition/assert@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@actnowcoalition/assert/-/assert-1.0.0.tgz#060686d3f81aefc5e2f23709c51d0236389104eb"
@@ -43,14 +38,6 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@actnowcoalition/number-format/-/number-format-1.0.0.tgz#5460e7d1da666701441dc05d785cf2e8cd81e8d5"
   integrity sha512-7rfsFQdWNNnp0yKHPGVtd4LAcQ8OJekWX1c0v+H5DkgSuJZPNws1Horq2IKW6BaiwFBk1rBBsLERU6rxklIIPQ==
-
-"@actnowcoalition/regions@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@actnowcoalition/regions/-/regions-0.1.3.tgz#542f6aa46790340f2cdc3d4223543ee22a73175b"
-  integrity sha512-ODQ1XCohrbEcQ9b+7ksivy9Tg+JEt/T/EIuuYfUlZBZRhNjGUkQs4IgAvYivMmRreN3CBXTBXHhCxr3Z+SCW1g==
-  dependencies:
-    "@actnowcoalition/assert" "^0.1.2"
-    lodash "^4.17.21"
 
 "@actnowcoalition/time-utils@^1.0.0":
   version "1.0.0"

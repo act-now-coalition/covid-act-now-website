@@ -6,7 +6,6 @@
     "@24hr/react-structured-data": "^1.0.0",
     "@actnowcoalition/assert": "^1.0.0",
     "@actnowcoalition/number-format": "^1.0.0",
-    "@actnowcoalition/regions": "^0.1.3",
     "@actnowcoalition/time-utils": "^1.0.0",
     "@fullstory/browser": "^1.4.6",
     "@iconify/icons-twemoji": "^1.0.11",

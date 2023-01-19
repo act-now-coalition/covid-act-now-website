@@ -4,7 +4,7 @@ import jsonOverrides from '../../../cms-content/region-overrides/region-override
 import { parseOverrides } from './utils';
 import { Box, Tooltip, Typography } from '@material-ui/core';
 
-const renderDataGridToolTip = (params: any) => (
+const renderCell = (params: any) => (
   <Tooltip title={params.value}>
     <span>{params.value}</span>
   </Tooltip>
@@ -13,63 +13,67 @@ const renderDataGridToolTip = (params: any) => (
 function OverridesOverview() {
   const regionOverriedes = parseOverrides(jsonOverrides.overrides);
   // Filter out overrides that block a timeframe in the past.
-  const activeOverrides = regionOverriedes.filter(
-    override =>
-      override.endDate === null || new Date(override.endDate) > new Date(),
-  );
+  const activeOverrides = regionOverriedes
+    .filter(
+      override =>
+        override.endDate === null || new Date(override.endDate) > new Date(),
+    )
+    .reverse();
 
   const columns: GridColDef[] = [
     {
       field: 'region',
       headerName: 'Region',
       width: 200,
-      renderCell: renderDataGridToolTip,
+      renderCell: renderCell,
     },
     {
       field: 'metric',
       headerName: 'Metric',
-      width: 150,
-      renderCell: renderDataGridToolTip,
+      width: 200,
+      renderCell: renderCell,
     },
     {
       field: 'startDate',
       headerName: 'Start Date',
       width: 150,
+      renderCell: renderCell,
     },
     {
       field: 'endDate',
       headerName: 'End Date',
       width: 150,
+      renderCell: renderCell,
     },
     {
       field: 'blocked',
       headerName: 'Blocking Data',
       width: 125,
-      renderCell: renderDataGridToolTip,
+      renderCell: renderCell,
     },
     {
       field: 'scope',
       headerName: 'Scope',
       width: 150,
-      renderCell: renderDataGridToolTip,
+      renderCell: renderCell,
     },
     {
       field: 'population',
       headerName: 'Population',
       width: 150,
-      renderCell: renderDataGridToolTip,
+      renderCell: renderCell,
     },
     {
       field: 'context',
       headerName: 'Context',
       width: 600,
-      renderCell: renderDataGridToolTip,
+      renderCell: renderCell,
     },
     {
       field: 'disclaimer',
       headerName: 'Site Disclaimer',
       width: 600,
-      renderCell: renderDataGridToolTip,
+      renderCell: renderCell,
     },
   ];
 
@@ -85,14 +89,14 @@ function OverridesOverview() {
         <Typography variant="body1">
           Update, add, or remove overrides via the{' '}
           <a href="https://covidactnow-cms.netlify.app/admin-overrides/#/collections/regionOverrides/entries/regionOverrides">
-            Region Overrides CMS
+            Region Overrides CMS.
           </a>
         </Typography>
         <Box style={{ height: 600, width: '90%' }}>
           <DataGrid
             rows={activeOverrides}
             columns={columns}
-            getRowId={() => Math.random()}
+            getRowId={row => row.id}
           />
         </Box>
       </Box>

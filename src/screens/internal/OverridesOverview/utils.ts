@@ -1,5 +1,4 @@
-import { states, counties, metros } from '@actnowcoalition/regions';
-import find from 'lodash/find';
+import regions, { County } from 'common/regions';
 
 interface RegionOverrideJson {
   include: string;
@@ -18,10 +17,11 @@ export interface RegionOverride {
   blocked: string;
   region: string;
   context: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
   population?: number;
   disclaimer?: string;
+  id: number;
 }
 
 /**
@@ -37,18 +37,23 @@ export function parseOverrides(
     .map(override => explode(override, /**key=*/ 'region'))
     .flat();
 
-  return overrides.map(override => {
+  return overrides.map((override, index) => {
     const regionData = regionLookup(override.region);
     return {
       scope: override.include,
-      metric: override.metric,
+      metric: override.metric.replace('metrics.', ''),
       blocked: String(override.blocked),
       context: override.context,
-      startDate: override.start_date ? new Date(override.start_date) : null,
-      endDate: override.end_date ? new Date(override.end_date) : null,
+      startDate: override.start_date
+        ? new Date(override.start_date).toLocaleDateString()
+        : null,
+      endDate: override.end_date
+        ? new Date(override.end_date).toLocaleDateString()
+        : null,
       region: regionData.name,
       population: regionData.population,
       disclaimer: override.disclaimer,
+      id: index,
     };
   });
 }
@@ -86,7 +91,7 @@ function explode(obj: Record<string, any>, key: string): Record<string, any> {
  */
 function regionLookup(region: string): { name: string; population?: number } {
   if (region.length === 2) {
-    const state = find(states.all, { abbreviation: region });
+    const state = regions.findByStateCode(region);
     if (!state) {
       console.warn(`State ${region} not found in regions package.`);
       return { name: region };
@@ -94,13 +99,12 @@ function regionLookup(region: string): { name: string; population?: number } {
     return { name: state.fullName, population: state.population };
   }
 
-  const county = counties.findByRegionId(region);
-  const metro = metros.findByRegionId(region);
-  if (county) {
-    return { name: county.shortName, population: county.population };
-  } else if (metro) {
-    return { name: metro.shortName, population: metro.population };
+  const location = regions.findByFipsCode(region);
+  if (!location) {
+    console.warn(`Region ${region} not found in regions package.`);
+    return { name: region };
   }
-  console.warn(`Location ${region} not found in regions package.`);
-  return { name: region };
+  const isCounty = location instanceof County;
+  const suffix = isCounty ? `, ${location.state.abbreviation}` : ' Metro Area';
+  return { name: `${location.name}${suffix}`, population: location.population };
 }
