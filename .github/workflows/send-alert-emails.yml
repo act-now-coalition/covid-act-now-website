@@ -1,4 +1,4 @@
-name: Send Risk Alert Emails.
+name: Send Risk Alert Emails
 
 on:
   workflow_dispatch:
