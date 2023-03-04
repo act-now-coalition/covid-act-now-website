@@ -8,7 +8,6 @@ export enum StorageType {
 // a single place to define all used localStorage keys, to avoid collisions or hardcoded strings
 export enum StorageKeys {
   COUNTY_MAP_TYPE = 'COUNTY_MAP_TYPE',
-  FULLSTORY_RECORD = 'FULLSTORY_RECORD',
 }
 
 const storageMemo: { [index: string]: boolean } = {};

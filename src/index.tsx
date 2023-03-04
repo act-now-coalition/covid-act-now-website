@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 import { trackWebVitals } from './components/Analytics';
 import * as Sentry from '@sentry/react';
-import { initFullStory } from 'common/fullstory';
 
 Sentry.init({
   // list of community compiled ignore errors + deny urls to help declutter sentry.
@@ -27,8 +26,6 @@ Sentry.init({
   // (https://trello.com/c/0LGQjmdw), should be able to remove this.
   sampleRate: 0.5,
 });
-
-initFullStory();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
