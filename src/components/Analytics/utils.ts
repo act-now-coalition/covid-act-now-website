@@ -1,7 +1,6 @@
 import capitalize from 'lodash/capitalize';
 import words from 'lodash/words';
 import { amplitudeLogEvent } from './amplitude';
-import { fullStoryTrackEvent } from 'common/fullstory';
 import { trackGA4Event } from './gtag';
 
 export interface Tracker {
@@ -131,7 +130,6 @@ export function trackEvent(
     };
 
     amplitudeLogEvent(category, eventProperties);
-    fullStoryTrackEvent(category, eventProperties);
   }
 }
 
