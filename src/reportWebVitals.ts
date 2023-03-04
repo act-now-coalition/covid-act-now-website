@@ -11,8 +11,12 @@ import {
   getLCP,
   getTTFB,
 } from 'web-vitals';
+import { StorageType, storageAvailable } from 'common/utils/storage';
 
-import { isRecordingEnabled } from 'common/fullstory';
+enum RecordSession {
+  TRUE = 'true',
+  FALSE = 'false',
+}
 
 // Percentage of overall users that we want to record
 const RECORD_PERCENT = 1 / 10;
@@ -32,5 +36,30 @@ const reportWebVitals = (onPerfEntry?: ReportHandler) => {
     getTTFB(onPerfEntry);
   }
 };
+
+export function isRecordingEnabled(recordKey: string, recordPercent: number) {
+  if (!storageAvailable(StorageType.LOCAL_STORAGE)) {
+    return false;
+  }
+  initStorage(recordKey, recordPercent);
+  return localStorage.getItem(recordKey) === RecordSession.TRUE;
+}
+
+function initStorage(recordKey: string, recordPercent: number) {
+  if (localStorage.getItem(recordKey)) {
+    return;
+  }
+  const enableRecording = Math.random() < recordPercent;
+  try {
+    localStorage.setItem(
+      recordKey,
+      enableRecording ? RecordSession.TRUE : RecordSession.FALSE,
+    );
+  } catch (err) {
+    // It doesn't matter if we can't write to localStorage, we only need this
+    // for 1% of the users.
+    console.warn(`Error writing to localStorage`, err);
+  }
+}
 
 export default reportWebVitals;
