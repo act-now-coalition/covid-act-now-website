@@ -144,17 +144,29 @@ const metricToSourceMap: RegionSourceMap = {
         sourceName: 'The New York Times',
         url: 'https://github.com/nytimes/covid-19-data',
       },
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
+      },
     ],
     metro: [
       {
         sourceName: 'The New York Times',
         url: 'https://github.com/nytimes/covid-19-data',
       },
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
+      },
     ],
     county: [
       {
         sourceName: 'The New York Times',
         url: 'https://github.com/nytimes/covid-19-data',
+      },
+      {
+        sourceName: 'CDC COVID Data Tracker',
+        url: 'https://covid.cdc.gov/covid-data-tracker/#county-view',
       },
     ],
   },
