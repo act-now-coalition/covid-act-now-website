@@ -171,9 +171,9 @@
     "name": "metrics.caseDensity",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
@@ -192,9 +192,9 @@
     "name": "metrics.weeklyNewCasesPer100k",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 53,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 53
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
