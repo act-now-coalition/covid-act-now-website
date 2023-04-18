@@ -34,6 +34,28 @@
       "profileUrl": "https://www.linkedin.com/in/berlinjohnson/"
     },
     {
+      "profileImgUrl": "/images_cms/1569874756447.jpeg",
+      "fullName": "Andrea Leonard",
+      "profileUrl": "https://www.linkedin.com/in/andrea-leonard-8556a92/"
+    },
+    {
+      "profileImgUrl": "/images_cms/copy-of-andrewschamp.jpeg",
+      "fullName": "Andrew Schamp",
+      "description": "Engineering",
+      "profileUrl": "https://www.linkedin.com/in/andrew-schamp/"
+    },
+    {
+      "profileImgUrl": "/images_cms/anna-maybach.jpeg",
+      "fullName": "Anna Maybach",
+      "profileUrl": "https://www.linkedin.com/in/anna-maybach-sullivan-946883180/"
+    },
+    {
+      "fullName": "Anya Lehr",
+      "description": "Social media and outreach",
+      "profileUrl": "https://www.linkedin.com/in/anyalehr/",
+      "profileImgUrl": "/images_cms/anya.jpeg"
+    },
+    {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Audra Grassia",
       "profileUrl": "https://www.linkedin.com/in/audragrassia/"
@@ -109,6 +131,11 @@
       "profileUrl": "https://www.linkedin.com/in/davidduran971/"
     },
     {
+      "profileImgUrl": "/images_cms/slack-headshot.jpg",
+      "fullName": "Dory Harris",
+      "profileUrl": "https://www.linkedin.com/in/dory-harris-a96ab716/"
+    },
+    {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Doug Pan",
       "profileUrl": "https://www.linkedin.com/in/dougspan/"
@@ -154,6 +181,11 @@
       "profileUrl": "https://www.linkedin.com/in/hannahthilee/"
     },
     {
+      "profileImgUrl": "/images_cms/ingrid.png",
+      "fullName": "Ingrid Xhafa",
+      "profileUrl": "https://www.linkedin.com/in/ingrid-xhafa-56a02853/"
+    },
+    {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Jacob Redding",
       "profileUrl": "https://www.linkedin.com/in/jacobredding/"
@@ -179,6 +211,12 @@
       "profileUrl": "https://covidactnow.org/about"
     },
     {
+      "profileImgUrl": "/images_cms/jessicachiligerian.jpeg",
+      "fullName": "Jessica Chilingerian",
+      "description": "Social media lead",
+      "profileUrl": "https://www.linkedin.com/in/jchilingerian/"
+    },
+    {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Joe Ensminger",
       "profileUrl": "https://www.linkedin.com/in/josephensminger/"
@@ -187,6 +225,12 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Kara Huang",
       "profileUrl": "https://www.linkedin.com/in/kara-huang/"
+    },
+    {
+      "fullName": "Karen Cheney",
+      "description": "Content lead",
+      "profileUrl": "https://www.linkedin.com/in/karen-cheney-writer/",
+      "profileImgUrl": "/images_cms/karencheney.jpeg"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
@@ -222,6 +266,11 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Lindsay Craig",
       "profileUrl": "https://www.linkedin.com/in/lindsay-craig-06b2ab12b/"
+    },
+    {
+      "profileImgUrl": "/images_cms/maliweitzman.jpeg",
+      "fullName": "Mali Weitzman",
+      "profileUrl": "https://www.linkedin.com/in/maliweitzman/"
     },
     {
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
