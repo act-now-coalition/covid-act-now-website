@@ -5,16 +5,8 @@ import advisors from './advisors.json';
 import productManagement from './product-management.json';
 import engineering from './engineering.json';
 import userExperience from './user-experience.json';
-import socialMedia from './social-media.json';
-import growth from './growth.json';
-import video from './video.json';
-import content from './content.json';
 import strategy from './strategy.json';
 import alumni from './alumni.json';
-import dataVisualization from './data-visualization.json';
-import enterprise from './enterprise.json';
-import graphicDesign from './graphic-design.json';
-import modeling from './modeling.json';
 import peopleOperations from './people-operations.json';
 import specialProjects from './special-projects.json';
 import legalCounsel from './legal-counsel.json';
@@ -51,20 +43,12 @@ const allTeams = [
   leadership,
   board,
   advisors,
-  content,
-  dataVisualization,
   engineering,
-  enterprise,
-  graphicDesign,
-  growth,
-  modeling,
   peopleOperations,
   productManagement,
-  socialMedia,
   specialProjects,
   strategy,
   userExperience,
-  video,
   alumni,
   legalCounsel,
 ];
@@ -92,10 +76,10 @@ const combinedTeamObj = {
 
 const groupedTeams = [
   leadership,
-  legalCounsel,
-  board,
-  advisors,
   combinedTeamObj,
+  board,
+  legalCounsel,
+  advisors,
   alumni,
 ];
 
