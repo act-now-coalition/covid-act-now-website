@@ -19,7 +19,10 @@ import { getMetricStatusText } from 'common/metric';
 import { ScreenshotReady } from 'components/Screenshot';
 import { MarkdownContent } from 'components/Markdown';
 import { useChartHeightForBreakpoint } from 'common/hooks';
-import { getRegionMetricDisclaimer } from 'cms-content/region-overrides';
+import {
+  getRegionMetricDisclaimer,
+  getRegionMetricOverride,
+} from 'cms-content/region-overrides';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -35,8 +38,10 @@ const MetricChart = React.memo(
     height?: number;
   }) => {
     const chartHeight = height ? height : useChartHeightForBreakpoint();
-    if (!projections.hasMetric(metric)) {
-      // See if the data has been blocked and there is a disclaimer.
+    const isBlocked = getRegionMetricOverride(projections.region, metric)
+      ?.blocked;
+    if (isBlocked) {
+      // See if the blocked data has a disclaimer.
       const blockedDisclaimer = getRegionMetricDisclaimer(
         projections.region,
         metric,

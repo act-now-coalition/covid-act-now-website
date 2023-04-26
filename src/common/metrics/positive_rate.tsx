@@ -82,7 +82,7 @@ function renderStatus(projections: Projections) {
   if (currentTestPositiveRate === null) {
     return (
       <Fragment>
-        Unable to generate{' '}
+        Unable to generate up-to-date{' '}
         {PositiveTestRateMetric.extendedMetricName.toLowerCase()}. This could be
         due to insufficient data.
       </Fragment>

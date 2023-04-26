@@ -99,7 +99,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   ) {
     return (
       <Fragment>
-        Unable to generate{' '}
+        Unable to generate up-to-date{' '}
         {AdmissionsPer100kMetric.extendedMetricName.toLowerCase()}. This could
         be due to insufficient data.
       </Fragment>

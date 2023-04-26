@@ -80,8 +80,9 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (rt === null) {
     return (
       <Fragment>
-        Unable to generate {CaseGrowthMetric.extendedMetricName.toLowerCase()}.
-        This could be due to insufficient data.
+        Unable to generate up-to-date{' '}
+        {CaseGrowthMetric.extendedMetricName.toLowerCase()}. This could be due
+        to insufficient data.
       </Fragment>
     );
   }

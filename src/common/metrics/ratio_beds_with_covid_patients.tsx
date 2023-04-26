@@ -74,7 +74,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (currentRatioBedsWithCovid === null) {
     return (
       <Fragment>
-        Unable to generate{' '}
+        Unable to generate up-to-date{' '}
         {RatioBedsWithCovidPatientsMetric.extendedMetricName.toLowerCase()}.
         This could be due to insufficient data.
       </Fragment>
