@@ -20,6 +20,7 @@ import { MetricValues } from 'common/models/Projections';
 import ChartFooter from 'components/NewLocationPage/ChartFooter/ChartFooter';
 import { Metric } from 'common/metricEnum';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset } from 'common/models/ProjectionsPair';
 
 const ChartBlock: React.FC<{
   isMobile: boolean;
@@ -60,8 +61,6 @@ const ChartBlock: React.FC<{
     projections,
   );
 
-  // HACK: Vaccination metric returns bivalent booster data, but we only
-  // want to not show the footer if there is no 1+ dose data
   const metric = metricList[activeTabIndex].metric;
   const isKeyMetric =
     metricList[activeTabIndex].metricType === MetricType.KEY_METRIC;

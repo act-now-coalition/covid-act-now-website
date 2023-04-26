@@ -133,7 +133,7 @@ const MetricChartFooter: React.FC<{
   };
 
   // If the metric is blocked or the timeseries is empty, don't render the footer
-  // because the chart will be blocked, and the disclaimer/footer will be displayed on the chart.
+  // because the chart will be blocked, and the disclaimer/footer will be displayed in its place.
   return isBlocked || timeseriesEmpty ? (
     <></>
   ) : (
