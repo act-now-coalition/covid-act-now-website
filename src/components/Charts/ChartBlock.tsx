@@ -20,7 +20,6 @@ import { MetricValues } from 'common/models/Projections';
 import ChartFooter from 'components/NewLocationPage/ChartFooter/ChartFooter';
 import { Metric } from 'common/metricEnum';
 import { getRegionMetricOverride } from 'cms-content/region-overrides';
-import { getDataset } from 'common/models/ProjectionsPair';
 
 const ChartBlock: React.FC<{
   isMobile: boolean;
