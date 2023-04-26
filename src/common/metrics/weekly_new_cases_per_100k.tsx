@@ -10,6 +10,8 @@ import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 export const WeeklyNewCasesPer100kMetric: MetricDefinition = {
   renderStatus,
@@ -70,11 +72,35 @@ export const WEEKLY_NEW_CASES_PER_100K_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const { totalPopulation, currentDailyAverageCases } = projections.primary;
+  const {
+    totalPopulation,
+    currentDailyAverageCases,
+    region,
+  } = projections.primary;
   const currentWeeklyReportedCases = projections.getMetricValue(
     Metric.WEEKLY_CASES_PER_100K,
   );
   const locationName = projections.locationName;
+  const isBlocked = getRegionMetricOverride(
+    region,
+    Metric.WEEKLY_CASES_PER_100K,
+  )?.blocked;
+  const timeseries = getDataset(
+    projections.primary,
+    Metric.WEEKLY_CASES_PER_100K,
+  );
+  const timeseriesEmpty = isEmpty(timeseries);
+
+  if (isBlocked || timeseriesEmpty) {
+    return (
+      <Fragment>
+        Unable to generate up-to-date{' '}
+        {WeeklyNewCasesPer100kMetric.extendedMetricName.toLowerCase()}. This
+        could be due to missing or unreliable data.{' '}
+      </Fragment>
+    );
+  }
+
   if (
     currentWeeklyReportedCases === null ||
     totalPopulation === null ||
@@ -82,9 +108,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   ) {
     return (
       <Fragment>
-        Unable to generate up-to-date{' '}
-        {WeeklyNewCasesPer100kMetric.extendedMetricName.toLowerCase()}. This
-        could be due to insufficient data.
+        Data for {WeeklyNewCasesPer100kMetric.extendedMetricName.toLowerCase()}{' '}
+        is out of date. We display timeseries data for for historical purposes,
+        but it should not be used for current guidance. Missing data may be
+        caused by lack of reporting from local sources.{' '}
       </Fragment>
     );
   }

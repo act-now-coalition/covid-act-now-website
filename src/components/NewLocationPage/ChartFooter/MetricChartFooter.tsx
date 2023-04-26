@@ -27,7 +27,11 @@ import { EventCategory } from 'components/Analytics';
 import { makeChartShareQuote } from 'common/utils/makeChartShareQuote';
 import * as urls from 'common/urls';
 import { MarkdownContent } from 'components/Markdown';
-import { getRegionMetricDisclaimer } from 'cms-content/region-overrides';
+import {
+  getRegionMetricDisclaimer,
+  getRegionMetricOverride,
+} from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 const ShareButtonBlock: React.FC<{
   region: Region;
@@ -102,6 +106,9 @@ const MetricChartFooter: React.FC<{
   const overrideDisclaimer = getRegionMetricDisclaimer(region, metric);
   const modalContent = getMetricModalContent(region, metric, provenance);
   const metricName = getMetricNameExtended(metric);
+  const isBlocked = getRegionMetricOverride(region, metric)?.blocked;
+  const timeseries = getDataset(projections.primary, metric);
+  const timeseriesEmpty = isEmpty(timeseries);
 
   const shareButtonProps = {
     chartIdentifier: metric,
@@ -125,7 +132,9 @@ const MetricChartFooter: React.FC<{
     modalHeader: metricName,
   };
 
-  return (
+  return isBlocked || timeseriesEmpty ? (
+    <></>
+  ) : (
     <Wrapper>
       <DesktopOnly>
         <Row>

@@ -10,6 +10,8 @@ import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 export const AdmissionsPer100kMetric: MetricDefinition = {
   renderStatus,
@@ -71,10 +73,29 @@ function renderStatus(projections: Projections): React.ReactElement {
     totalPopulation,
     currentWeeklyCovidAdmissions,
     hsaName,
+    region,
   } = projections.primary;
   const weeklyCovidAdmissionsPer100k = projections.getMetricValue(
     Metric.ADMISSIONS_PER_100K,
   );
+
+  const isBlocked = getRegionMetricOverride(region, Metric.ADMISSIONS_PER_100K)
+    ?.blocked;
+  const timeseries = getDataset(
+    projections.primary,
+    Metric.ADMISSIONS_PER_100K,
+  );
+  const timeseriesEmpty = isEmpty(timeseries);
+
+  if (isBlocked || timeseriesEmpty) {
+    return (
+      <Fragment>
+        Unable to generate up-to-date{' '}
+        {AdmissionsPer100kMetric.extendedMetricName.toLowerCase()}. This could
+        be due to missing or unreliable data.{' '}
+      </Fragment>
+    );
+  }
 
   // NOTE: We reverse engineer the actual weekly admissions number for counties because the HHS source
   // data does not match due to data suppression.
@@ -99,9 +120,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   ) {
     return (
       <Fragment>
-        Unable to generate up-to-date{' '}
-        {AdmissionsPer100kMetric.extendedMetricName.toLowerCase()}. This could
-        be due to insufficient data.
+        Data for {AdmissionsPer100kMetric.extendedMetricName.toLowerCase()} is
+        out of date. We display timeseries data for for historical purposes, but
+        it should not be used for current guidance. Missing data may be caused
+        by lack of reporting from local sources.{' '}
       </Fragment>
     );
   }
