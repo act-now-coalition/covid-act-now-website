@@ -104,6 +104,8 @@ export class ProjectionsPair {
   }
 }
 
+// TODO(sean): This is useful for getting the corresponding timeseries for a metric.
+// We should probably move this to a more central location.
 export function getDataset(projection: Projection, metric: Metric): Column[] {
   switch (metric) {
     case Metric.CASE_DENSITY:

@@ -23,7 +23,7 @@ import {
   getRegionMetricDisclaimer,
   getRegionMetricOverride,
 } from 'cms-content/region-overrides';
-import { getDataset } from 'common/models/ProjectionsPair';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 // TODO(michael): Rename to `Chart` once we get rid of existing (highcharts) Chart component.
 // TODO(michael): Update ChartsHolder to use this component instead of the individual chart components.
@@ -42,7 +42,7 @@ const MetricChart = React.memo(
     const isBlocked = getRegionMetricOverride(projections.region, metric)
       ?.blocked;
     const timeseries = getDataset(projections.primary, metric);
-    const timeseriesEmpty = timeseries.every(point => point.y === null);
+    const timeseriesEmpty = isEmpty(timeseries);
 
     if (isBlocked || timeseriesEmpty) {
       // See if the blocked or missing data has a disclaimer.
