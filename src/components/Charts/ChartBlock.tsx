@@ -12,12 +12,14 @@ import {
 import {
   ChartGroup,
   MetricChartInfo,
+  MetricType,
   getValueInfo,
   trackTabClick,
 } from 'components/Charts/Groupings';
 import { MetricValues } from 'common/models/Projections';
 import ChartFooter from 'components/NewLocationPage/ChartFooter/ChartFooter';
 import { Metric } from 'common/metricEnum';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
 
 const ChartBlock: React.FC<{
   isMobile: boolean;
@@ -52,21 +54,20 @@ const ChartBlock: React.FC<{
 
   const TabsWrapper = metricList.length === 1 ? InactiveTabWrapper : ChartTabs;
 
-  const { unformattedValue, formattedValue } = getValueInfo(
+  const { formattedValue } = getValueInfo(
     stats,
     metricList[activeTabIndex],
     projections,
   );
 
-  // HACK: Vaccination metric returns bivalent booster data, but we only
-  // want to not show the footer if there is no 1+ dose data
   const metric = metricList[activeTabIndex].metric;
-  const vaccinationsInitiated =
-    projections.primary.vaccinationsInfo?.peopleInitiated;
-  const hasValue =
-    metric === Metric.VACCINATIONS
-      ? Number.isFinite(vaccinationsInitiated)
-      : Number.isFinite(unformattedValue);
+  const isKeyMetric =
+    metricList[activeTabIndex].metricType === MetricType.KEY_METRIC;
+
+  // HACK: We don't have a blocking mechanism for the ExploreMetrics, so always assume they are not blocked.
+  const isBlocked = isKeyMetric
+    ? getRegionMetricOverride(region, metric as Metric)?.blocked
+    : false;
 
   // Used to make sure user can change tabs after landing on a page via a share link (and having a tab auto-selected)
   const [hasSelectedSharedTab, setHasSelectedSharedTab] = useState<boolean>(
@@ -117,7 +118,7 @@ const ChartBlock: React.FC<{
         })}
       </TabsWrapper>
       {metricList[activeTabIndex].renderChart(projections)}
-      {hasValue && (
+      {!isBlocked && (
         <ChartFooter
           metric={metricList[activeTabIndex].metric}
           projections={projections}

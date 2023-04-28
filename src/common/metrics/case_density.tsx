@@ -10,6 +10,8 @@ import { Metric } from 'common/metricEnum';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 export const CaseIncidenceMetric: MetricDefinition = {
   renderStatus,
@@ -61,9 +63,28 @@ export const CASE_DENSITY_LEVEL_INFO_MAP: LevelInfoMap = {
 };
 
 function renderStatus(projections: Projections): React.ReactElement {
-  const { totalPopulation, currentDailyAverageCases } = projections.primary;
+  const {
+    totalPopulation,
+    currentDailyAverageCases,
+    region,
+  } = projections.primary;
   const currentCaseDensity = projections.getMetricValue(Metric.CASE_DENSITY);
   const locationName = projections.locationName;
+  const isBlocked = getRegionMetricOverride(region, Metric.CASE_DENSITY)
+    ?.blocked;
+  const timeseries = getDataset(projections.primary, Metric.CASE_DENSITY);
+  const timeseriesEmpty = isEmpty(timeseries);
+
+  if (isBlocked || timeseriesEmpty) {
+    return (
+      <Fragment>
+        Unable to generate up-to-date{' '}
+        {CaseIncidenceMetric.extendedMetricName.toLowerCase()}. This could be
+        due to missing or unreliable data.{' '}
+      </Fragment>
+    );
+  }
+
   if (
     currentCaseDensity === null ||
     totalPopulation === null ||
@@ -71,9 +92,10 @@ function renderStatus(projections: Projections): React.ReactElement {
   ) {
     return (
       <Fragment>
-        Unable to generate{' '}
-        {CaseIncidenceMetric.extendedMetricName.toLowerCase()}. This could be
-        due to insufficient data.
+        Data for {CaseIncidenceMetric.extendedMetricName.toLowerCase()} is out
+        of date. We display timeseries data for for historical purposes, but it
+        should not be used for current guidance. Missing data may be caused by
+        lack of reporting from local sources.{' '}
       </Fragment>
     );
   }
