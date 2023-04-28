@@ -9,6 +9,8 @@ import Thermometer from 'components/Thermometer';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 const METRIC_NAME = 'Positive test rate';
 
@@ -78,13 +80,29 @@ function renderStatus(projections: Projections) {
   const currentTestPositiveRate = projections.getMetricValue(
     Metric.POSITIVE_TESTS,
   );
-  const locationName = projections.locationName;
+  const { locationName, region } = projections;
+  const isBlocked = getRegionMetricOverride(region, Metric.POSITIVE_TESTS)
+    ?.blocked;
+  const timeseries = getDataset(projections.primary, Metric.POSITIVE_TESTS);
+  const timeseriesEmpty = isEmpty(timeseries);
+
+  if (isBlocked || timeseriesEmpty) {
+    return (
+      <Fragment>
+        Unable to generate up-to-date{' '}
+        {PositiveTestRateMetric.extendedMetricName.toLowerCase()}. This could be
+        due to missing or unreliable data.{' '}
+      </Fragment>
+    );
+  }
+
   if (currentTestPositiveRate === null) {
     return (
       <Fragment>
-        Unable to generate{' '}
-        {PositiveTestRateMetric.extendedMetricName.toLowerCase()}. This could be
-        due to insufficient data.
+        Data for {PositiveTestRateMetric.extendedMetricName.toLowerCase()} is
+        out of date. We display timeseries data for for historical purposes, but
+        it should not be used for current guidance. Missing data may be caused
+        by lack of reporting from local sources.{' '}
       </Fragment>
     );
   }

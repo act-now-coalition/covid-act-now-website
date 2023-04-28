@@ -9,6 +9,8 @@ import Thermometer from 'components/Thermometer';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 const METRIC_NAME = 'Infection rate';
 
@@ -75,13 +77,29 @@ export const CASE_GROWTH_RATE_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const rt = projections.getMetricValue(Metric.CASE_GROWTH_RATE);
-  const locationName = projections.locationName;
+  const { locationName, region } = projections;
+  const isBlocked = getRegionMetricOverride(region, Metric.CASE_GROWTH_RATE)
+    ?.blocked;
+  const timeseries = getDataset(projections.primary, Metric.CASE_GROWTH_RATE);
+  const timeseriesEmpty = isEmpty(timeseries);
+
+  if (isBlocked || timeseriesEmpty) {
+    return (
+      <Fragment>
+        Unable to generate up-to-date{' '}
+        {CaseGrowthMetric.extendedMetricName.toLowerCase()}. This could be due
+        to missing or unreliable data.{' '}
+      </Fragment>
+    );
+  }
 
   if (rt === null) {
     return (
       <Fragment>
-        Unable to generate {CaseGrowthMetric.extendedMetricName.toLowerCase()}.
-        This could be due to insufficient data.
+        Data for {CaseGrowthMetric.extendedMetricName.toLowerCase()} is out of
+        date. We display timeseries data for for historical purposes, but it
+        should not be used for current guidance. Missing data may be caused by
+        lack of reporting from local sources.{' '}
       </Fragment>
     );
   }

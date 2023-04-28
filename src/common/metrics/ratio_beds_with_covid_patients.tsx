@@ -9,6 +9,8 @@ import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import { metricToTooltipMap } from 'cms-content/tooltips';
 import { trackOpenTooltip } from 'components/InfoTooltip';
 import { Level, LevelInfoMap } from 'common/level';
+import { getRegionMetricOverride } from 'cms-content/region-overrides';
+import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
 
 export const RatioBedsWithCovidPatientsMetric: MetricDefinition = {
   renderStatus,
@@ -70,13 +72,35 @@ function renderStatus(projections: Projections): React.ReactElement {
   const currentRatioBedsWithCovid = projections.getMetricValue(
     Metric.RATIO_BEDS_WITH_COVID,
   );
-  const locationName = projections.locationName;
+  const { locationName, region } = projections;
+  const isBlocked = getRegionMetricOverride(
+    region,
+    Metric.RATIO_BEDS_WITH_COVID,
+  )?.blocked;
+  const timeseries = getDataset(
+    projections.primary,
+    Metric.RATIO_BEDS_WITH_COVID,
+  );
+  const timeseriesEmpty = isEmpty(timeseries);
+
+  if (isBlocked || timeseriesEmpty) {
+    return (
+      <Fragment>
+        Unable to generate up-to-date{' '}
+        {RatioBedsWithCovidPatientsMetric.extendedMetricName.toLowerCase()}.
+        This could be due to missing or unreliable data.{' '}
+      </Fragment>
+    );
+  }
+
   if (currentRatioBedsWithCovid === null) {
     return (
       <Fragment>
-        Unable to generate{' '}
-        {RatioBedsWithCovidPatientsMetric.extendedMetricName.toLowerCase()}.
-        This could be due to insufficient data.
+        Data for{' '}
+        {RatioBedsWithCovidPatientsMetric.extendedMetricName.toLowerCase()} is
+        out of date. We display timeseries data for for historical purposes, but
+        it should not be used for current guidance. Missing data may be caused
+        by lack of reporting from local sources.{' '}
       </Fragment>
     );
   }
