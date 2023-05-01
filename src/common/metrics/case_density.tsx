@@ -93,7 +93,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     return (
       <Fragment>
         Data for {CaseIncidenceMetric.extendedMetricName.toLowerCase()} is out
-        of date. We display timeseries data for for historical purposes, but it
+        of date. We display timeseries data for historical purposes, but it
         should not be used for current guidance. Missing data may be caused by
         lack of reporting from local sources.{' '}
       </Fragment>
