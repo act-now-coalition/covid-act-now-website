@@ -93,7 +93,7 @@ export type Currentusagecovid1 = number | null;
  *
  * Information about ICU bed utilization details aggregated for the county's corresponding
  * Health Service Area (HSA). For CBSA, state, and country regions these fields are omitted.
- * For For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
+ * For more on HSAs see: https://github.com/act-now-coalition/covid-data-model/blob/main/data/misc/README.md"
  *
  * Fields:
  *  * capacity - Current staffed ICU bed capacity.
