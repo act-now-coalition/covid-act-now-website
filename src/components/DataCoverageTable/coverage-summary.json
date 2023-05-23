@@ -135,7 +135,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 2017,
+      "regionsAvailable": 2016,
       "totalStates": 53,
       "statesAvailable": 48
     },
@@ -171,19 +171,19 @@
     "name": "metrics.caseDensity",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 49,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 49
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 211,
+      "regionsAvailable": 89,
       "totalStates": 53,
-      "statesAvailable": 24
+      "statesAvailable": 7
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 23,
+      "regionsAvailable": 10,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -192,19 +192,19 @@
     "name": "metrics.weeklyNewCasesPer100k",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 49,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 49
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 211,
+      "regionsAvailable": 89,
       "totalStates": 53,
-      "statesAvailable": 24
+      "statesAvailable": 7
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 23,
+      "regionsAvailable": 10,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -282,7 +282,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1378,
+      "regionsAvailable": 1386,
       "totalStates": 53,
       "statesAvailable": 51
     },
