@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   DonationBanner,
-  SpringSurgeBanner,
-  VaccinationsBanner,
   Vaccinations100M,
   VoteBanner,
   FeatureBanner,
@@ -17,10 +15,6 @@ export default {
 };
 
 export const Donation = () => <DonationBanner />;
-
-export const SummerSurge = () => <SpringSurgeBanner />;
-
-export const Vaccinations = () => <VaccinationsBanner />;
 
 export const Vaccinations100 = () => <Vaccinations100M />;
 
