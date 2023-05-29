@@ -60,10 +60,11 @@ function renderStatus(projections: Projections): React.ReactElement {
   // missing that the data is out of date/we have no data. AFAICT there's no instance
   // where booster data exists but not initiated/fully-vaccinated data.
   if (
-    info?.peopleInitiated == null ||
-    info?.ratioInitiated == null ||
-    info?.peopleVaccinated == null ||
-    info?.ratioVaccinated == null
+    info?.peopleInitiated === null ||
+    info?.ratioInitiated === null ||
+    info?.peopleVaccinated === null ||
+    info?.ratioVaccinated === null ||
+    info === null
   ) {
     return (
       <Fragment>
