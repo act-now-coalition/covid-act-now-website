@@ -119,7 +119,7 @@ export function getDataset(projection: Projection, metric: Metric): Column[] {
     case Metric.HOSPITAL_USAGE:
       return projection.getDataset('icuUtilization');
     case Metric.VACCINATIONS:
-      return projection.getDataset('vaccinationsBivalentBoostedFall2022');
+      return projection.getDataset('vaccinationsCompleted');
     case Metric.WEEKLY_CASES_PER_100K:
       return projection.getDataset('weeklyNewCasesPer100k');
     case Metric.RATIO_BEDS_WITH_COVID:

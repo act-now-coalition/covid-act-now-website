@@ -111,11 +111,11 @@ export interface VaccinationsInfo {
   ratioInitiatedSeries: Array<number | null>;
   ratioBivalentBoosterFall2022Series: Array<number | null>;
 
-  peopleInitiated: number;
-  ratioInitiated: number;
+  peopleInitiated: number | null;
+  ratioInitiated: number | null;
 
-  peopleVaccinated: number;
-  ratioVaccinated: number;
+  peopleVaccinated: number | null;
+  ratioVaccinated: number | null;
 
   peopleAdditionalDose: number | null;
   ratioAdditionalDose: number | null;
@@ -526,19 +526,13 @@ export class Projection {
     metrics: Metrics,
     metricsTimeseries: Array<MetricsTimeseriesRow | null>,
   ): VaccinationsInfo | null {
-    const ratioInitiated = metrics.vaccinationsInitiatedRatio;
-    const ratioVaccinated = metrics.vaccinationsCompletedRatio;
+    const ratioInitiated = metrics.vaccinationsInitiatedRatio ?? null;
+    const ratioVaccinated = metrics.vaccinationsCompletedRatio ?? null;
     const ratioAdditionalDose = metrics.vaccinationsAdditionalDoseRatio;
     const ratioBivalentBoostedFall2022 =
       metrics.vaccinationsFall2022BivalentBoosterRatio;
 
-    if (
-      ratioInitiated === null ||
-      ratioInitiated === undefined ||
-      ratioVaccinated === null ||
-      ratioVaccinated === undefined ||
-      this.isMetricDisabled(Metric.VACCINATIONS)
-    ) {
+    if (this.isMetricDisabled(Metric.VACCINATIONS)) {
       return null;
     }
 
@@ -546,10 +540,8 @@ export class Projection {
     if (peopleAdditionalDose == null && ratioAdditionalDose != null) {
       peopleAdditionalDose = ratioAdditionalDose * this.totalPopulation;
     }
-    const peopleVaccinated =
-      actuals.vaccinationsCompleted ?? ratioVaccinated * this.totalPopulation;
-    const peopleInitiated =
-      actuals.vaccinationsInitiated ?? ratioInitiated * this.totalPopulation;
+    const peopleVaccinated = actuals.vaccinationsCompleted ?? null;
+    const peopleInitiated = actuals.vaccinationsInitiated ?? null;
     let peopleBivalentBoostedFall2022 =
       actuals.vaccinationsFall2022BivalentBooster ?? null;
     if (
@@ -560,13 +552,17 @@ export class Projection {
         ratioBivalentBoostedFall2022 * this.totalPopulation;
     }
 
-    if (ratioVaccinated > ratioInitiated) {
-      console.error(
-        `Suspicious vaccine data for ${this.fips}: % Vaccinated ${formatPercent(
-          ratioVaccinated,
-          2,
-        )} > % Initiated ${formatPercent(ratioInitiated, 2)}.`,
-      );
+    if (ratioVaccinated != null && ratioInitiated != null) {
+      if (ratioVaccinated > ratioInitiated) {
+        console.error(
+          `Suspicious vaccine data for ${
+            this.fips
+          }: % Vaccinated ${formatPercent(
+            ratioVaccinated ?? 0,
+            2,
+          )} > % Initiated ${formatPercent(ratioInitiated, 2)}.`,
+        );
+      }
     }
 
     const vaccinationsAdditionalDoseSeries = metricsTimeseries.map(
@@ -584,9 +580,10 @@ export class Projection {
     );
 
     let dosesDistributed = actuals.vaccinesDistributed ?? null;
-    let ratioDosesAdministered = dosesDistributed
-      ? (peopleInitiated + peopleVaccinated) / dosesDistributed
-      : null;
+    let ratioDosesAdministered =
+      dosesDistributed && peopleVaccinated && peopleInitiated
+        ? (peopleInitiated + peopleVaccinated) / dosesDistributed
+        : null;
 
     if (
       ratioDosesAdministered &&

@@ -55,8 +55,25 @@ export const VACCINATIONS_LEVEL_INFO_MAP: LevelInfoMap = {
 
 function renderStatus(projections: Projections): React.ReactElement {
   const info = projections.primary.vaccinationsInfo;
-  if (!info) {
-    return <Fragment>No vaccination data is available.</Fragment>;
+
+  // HACK (sean): Just assume if either of the initiated/fully-vaccinated ratios are
+  // missing that the data is out of date/we have no data. AFAICT there's no instance
+  // where booster data exists but not initiated/fully-vaccinated data.
+  if (
+    info?.peopleInitiated === null ||
+    info?.ratioInitiated === null ||
+    info?.peopleVaccinated === null ||
+    info?.ratioVaccinated === null ||
+    info === null
+  ) {
+    return (
+      <Fragment>
+        Vaccination data for {projections.locationName} is out of date. We
+        display timeseries data for historical purposes, but it should not be
+        used for current guidance. Missing data may be caused by lack of
+        reporting from local sources.{' '}
+      </Fragment>
+    );
   }
   const { locationName } = projections;
 
