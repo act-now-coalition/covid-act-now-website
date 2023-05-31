@@ -135,9 +135,9 @@ const vaccinationsColumn = new VaccinationsColumn();
 
 /** Ordered array of columns. */
 export const orderedColumns = [
-  weeklyCasesPer100kColumn,
   admissionsPer100kColumn,
   ratioBedsWithCovidColumn,
+  weeklyCasesPer100kColumn,
   infectionRateColumn,
   vaccinationsColumn,
 ];

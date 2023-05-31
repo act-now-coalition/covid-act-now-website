@@ -63,15 +63,6 @@ const LocationOverview: React.FC<{
           />
         </GridItemMetricVax>
         <GridItemMetric1
-          onClick={() => onClickMetric(Metric.WEEKLY_CASES_PER_100K)}
-        >
-          <SummaryStat
-            metric={Metric.WEEKLY_CASES_PER_100K}
-            value={stats[Metric.WEEKLY_CASES_PER_100K]}
-            projection={projections?.primary}
-          />
-        </GridItemMetric1>
-        <GridItemMetric2
           onClick={() => onClickMetric(Metric.ADMISSIONS_PER_100K)}
         >
           <SummaryStat
@@ -79,13 +70,22 @@ const LocationOverview: React.FC<{
             value={stats[Metric.ADMISSIONS_PER_100K]}
             projection={projections?.primary}
           />
-        </GridItemMetric2>
-        <GridItemMetric3
+        </GridItemMetric1>
+        <GridItemMetric2
           onClick={() => onClickMetric(Metric.RATIO_BEDS_WITH_COVID)}
         >
           <SummaryStat
             metric={Metric.RATIO_BEDS_WITH_COVID}
             value={stats[Metric.RATIO_BEDS_WITH_COVID]}
+            projection={projections?.primary}
+          />
+        </GridItemMetric2>
+        <GridItemMetric3
+          onClick={() => onClickMetric(Metric.WEEKLY_CASES_PER_100K)}
+        >
+          <SummaryStat
+            metric={Metric.WEEKLY_CASES_PER_100K}
+            value={stats[Metric.WEEKLY_CASES_PER_100K]}
             projection={projections?.primary}
           />
         </GridItemMetric3>
