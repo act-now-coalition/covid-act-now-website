@@ -129,9 +129,9 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 43,
+      "regionsAvailable": 42,
       "totalStates": 53,
-      "statesAvailable": 43
+      "statesAvailable": 42
     },
     "county": {
       "totalRegions": 3223,
@@ -282,7 +282,7 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1367,
+      "regionsAvailable": 1365,
       "totalStates": 53,
       "statesAvailable": 51
     },
@@ -324,13 +324,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1846,
+      "regionsAvailable": 1836,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 131,
+      "regionsAvailable": 130,
       "totalStates": 0,
       "statesAvailable": 0
     }
