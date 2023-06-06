@@ -57,8 +57,6 @@ export function getNationalText(): React.ReactElement {
       !isNull(twoWeekPercentChangeInDeaths)
         ? `Over the last 14 days, hospitalizations have ${getChangeDescriptorCopy(
             twoWeekPercentChangeInHospitalizations,
-          )} and weekly deaths have ${getChangeDescriptorCopy(
-            twoWeekPercentChangeInDeaths,
           )}.`
         : ''}
     </Fragment>
