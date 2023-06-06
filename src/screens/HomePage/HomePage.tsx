@@ -199,7 +199,7 @@ function getRiskMapDescription() {
       <br />
       Note: People who need extra caution can refer to our{' '}
       <TextTooltip
-        title="Daily new cases, infection rate, and positive test rate can be found after selecting a location."
+        title="Positive test rate can be found after selecting a location. Up-to-date Daily New Cases and Infection Rate are no longer available due to the end of the Public Health Emergency."
         mainCopy="Transmission metrics"
         aria-label="Description of where to find transmission metrics data"
         trackOpenTooltip={() =>
