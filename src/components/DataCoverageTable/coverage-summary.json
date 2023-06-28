@@ -129,13 +129,13 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 42,
+      "regionsAvailable": 41,
       "totalStates": 53,
-      "statesAvailable": 42
+      "statesAvailable": 41
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 59,
+      "regionsAvailable": 58,
       "totalStates": 53,
       "statesAvailable": 2
     },
@@ -276,19 +276,19 @@
     "name": "metrics.icuCapacityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1361,
+      "regionsAvailable": 1380,
       "totalStates": 53,
       "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 230,
+      "regionsAvailable": 232,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -297,19 +297,19 @@
     "name": "metrics.bedsWithCovidPatientsRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 2563,
+      "regionsAvailable": 2621,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 211,
+      "regionsAvailable": 218,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -318,19 +318,19 @@
     "name": "metrics.weeklyCovidAdmissionsPer100k",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1481,
+      "regionsAvailable": 1592,
       "totalStates": 53,
       "statesAvailable": 51
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 97,
+      "regionsAvailable": 112,
       "totalStates": 0,
       "statesAvailable": 0
     }
