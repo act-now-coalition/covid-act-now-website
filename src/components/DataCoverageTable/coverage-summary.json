@@ -129,9 +129,9 @@
     "name": "metrics.testPositivityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 40,
+      "regionsAvailable": 41,
       "totalStates": 53,
-      "statesAvailable": 40
+      "statesAvailable": 41
     },
     "county": {
       "totalRegions": 3223,
