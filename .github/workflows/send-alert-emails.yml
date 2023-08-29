@@ -33,12 +33,12 @@ jobs:
   send-alert-emails:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: act-now-coalition/covid-act-now-website
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 16
       - run: yarn install
 
       # Write appropriate service account file for FIREBASE_ENV.
