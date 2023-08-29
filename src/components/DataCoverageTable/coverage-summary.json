@@ -288,7 +288,7 @@
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 233,
+      "regionsAvailable": 235,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -297,19 +297,19 @@
     "name": "metrics.bedsWithCovidPatientsRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 52,
+      "regionsAvailable": 51,
       "totalStates": 53,
-      "statesAvailable": 52
+      "statesAvailable": 51
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 2735,
+      "regionsAvailable": 2821,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 220,
+      "regionsAvailable": 225,
       "totalStates": 0,
       "statesAvailable": 0
     }
@@ -324,13 +324,13 @@
     },
     "county": {
       "totalRegions": 3223,
-      "regionsAvailable": 1945,
+      "regionsAvailable": 2169,
       "totalStates": 53,
       "statesAvailable": 52
     },
     "metro": {
       "totalRegions": 392,
-      "regionsAvailable": 138,
+      "regionsAvailable": 157,
       "totalStates": 0,
       "statesAvailable": 0
     }
