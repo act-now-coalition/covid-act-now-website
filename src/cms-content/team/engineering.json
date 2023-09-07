@@ -3,33 +3,10 @@
   "teamID": "engineering",
   "teamMembers": [
     {
-      "profileImgUrl": "/images_cms/chelsi.jpeg",
-      "fullName": "Chelsi Asulin",
-      "description": "Front-end engineering",
-      "profileUrl": "https://www.linkedin.com/in/chelsi-asulin/"
-    },
-    {
-      "profileImgUrl": "/images_cms/faihegberg.jpeg",
-      "fullName": "Fai Hegberg",
-      "description": "Front-end engineering",
-      "profileUrl": "https://www.linkedin.com/in/faihegberg/"
-    },
-    {
       "profileImgUrl": "/images_cms/seanmcclure.jpeg",
       "fullName": "Sean McClure",
       "description": "Data engineering",
       "profileUrl": "https://www.linkedin.com/in/sean-mcclure-54b142191/"
-    },
-    {
-      "fullName": "Pablo Navarro",
-      "description": "Front-end engineering",
-      "profileUrl": "https://www.linkedin.com/in/pnavarrc/",
-      "profileImgUrl": "/images_cms/pablo.jpeg"
-    },
-    {
-      "profileImgUrl": "/images_cms/michaellehenbauer.jpeg",
-      "fullName": "Michael Lehenbauer",
-      "profileUrl": "https://www.linkedin.com/in/mikelehen/"
     }
   ]
 }

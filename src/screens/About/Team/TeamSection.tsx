@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { teams, teamsWithTitles } from 'cms-content/team';
+import { teams } from 'cms-content/team';
 import { AboutHeading3, TeamGroupContainer } from '../About.style';
 import sortBy from 'lodash/sortBy';
 import Grid from '@material-ui/core/Grid';
@@ -17,8 +17,10 @@ const TeamSection = () => {
         const teamMembers =
           team.teamName === 'Leadership' ? team.teamMembers : alphabetizedTeam;
         const isAlumni = team.teamName === 'Alumni';
-        const includeTitle = teamsWithTitles.includes(team.teamName);
-        return !isAlumni ? (
+        const isAdvisor = team.teamName === 'Advisors';
+        const isBoard = team.teamName === 'Board';
+        const includeTitle = false;
+        return !isAlumni && !isAdvisor && !isBoard ? (
           <Fragment key={team.teamName}>
             <AboutHeading3>{team.teamName}</AboutHeading3>
             <TeamGroupContainer>
