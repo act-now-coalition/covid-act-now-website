@@ -653,6 +653,51 @@
       "profileImgUrl": "/images_cms/bar_recommends_icon.svg",
       "fullName": "Rebecca Qui",
       "profileUrl": "https://www.linkedin.com/in/rebeccaqiu/"
+    },
+    {
+      "profileImgUrl": "/images_cms/erik-santoro.jpeg",
+      "fullName": "Erik Santoro",
+      "profileUrl": "https://www.linkedin.com/in/erik-santoro-8a387614/"
+    },
+    {
+      "fullName": "Pablo Navarro",
+      "profileUrl": "https://www.linkedin.com/in/pnavarrc/",
+      "profileImgUrl": "/images_cms/pablo.jpeg"
+    },
+    {
+      "profileImgUrl": "/images_cms/michaellehenbauer.jpeg",
+      "fullName": "Michael Lehenbauer",
+      "profileUrl": "https://www.linkedin.com/in/mikelehen/"
+    },
+    {
+      "profileImgUrl": "/images_cms/chelsi.jpeg",
+      "fullName": "Chelsi Asulin",
+      "profileUrl": "https://www.linkedin.com/in/chelsi-asulin/"
+    },
+    {
+      "profileImgUrl": "/images_cms/faihegberg.jpeg",
+      "fullName": "Fai Hegberg",
+      "profileUrl": "https://www.linkedin.com/in/faihegberg/"
+    },
+    {
+      "profileImgUrl": "/images_cms/nidhi-shah.jpeg",
+      "fullName": "Nidhi Shah",
+      "profileUrl": "https://www.linkedin.com/in/nidhi-shah-94022/"
+    },
+    {
+      "fullName": "Josh Ziman",
+      "profileUrl": "https://www.linkedin.com/in/josh-ziman/",
+      "profileImgUrl": "/images_cms/joshziman.jpeg"
+    },
+    {
+      "fullName": "Mikayla O'Bryan",
+      "profileUrl": "https://www.linkedin.com/in/mikayla-o-bryan-867087135/",
+      "profileImgUrl": "/images_cms/mikayla.jpg"
+    },
+    {
+      "fullName": "Igor Kofman",
+      "profileUrl": "https://www.linkedin.com/in/ikofman/",
+      "profileImgUrl": "/images_cms/igor.jpeg"
     }
   ]
 }
