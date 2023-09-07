@@ -3,12 +3,6 @@
   "teamID": "leadership",
   "teamMembers": [
     {
-      "fullName": "Igor Kofman",
-      "description": "Co-CEO",
-      "profileUrl": "https://www.linkedin.com/in/ikofman/",
-      "profileImgUrl": "/images_cms/igor.jpeg"
-    },
-    {
       "fullName": "Debbie Lai",
       "description": "Co-CEO",
       "profileUrl": "https://www.linkedin.com/in/iamdlai/",

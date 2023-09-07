@@ -4,11 +4,8 @@ import board from './board.json';
 import advisors from './advisors.json';
 import productManagement from './product-management.json';
 import engineering from './engineering.json';
-import userExperience from './user-experience.json';
 import strategy from './strategy.json';
 import alumni from './alumni.json';
-import peopleOperations from './people-operations.json';
-import specialProjects from './special-projects.json';
 import legalCounsel from './legal-counsel.json';
 
 export interface UserProfile {
@@ -44,11 +41,8 @@ const allTeams = [
   board,
   advisors,
   engineering,
-  peopleOperations,
   productManagement,
-  specialProjects,
   strategy,
-  userExperience,
   alumni,
   legalCounsel,
 ];
@@ -57,7 +51,6 @@ const allTeams = [
   We are now removing categories for all teams other than leadership, board, advisors, and alumni
 */
 const individuallyGroupedTeams = [
-  'Leadership',
   'Board',
   'Advisors',
   'Alumni',
@@ -69,28 +62,11 @@ const combinedTeamMembers = allTeams
   .reduce((acc: any[], curr: Team) => [...curr.teamMembers, ...acc], []);
 
 const combinedTeamObj = {
-  teamName: 'Team',
+  teamName: 'Current Maintainers',
   teamID: 'team',
   teamMembers: combinedTeamMembers,
 };
 
-const groupedTeams = [
-  leadership,
-  combinedTeamObj,
-  board,
-  legalCounsel,
-  advisors,
-  alumni,
-];
+const groupedTeams = [combinedTeamObj, legalCounsel, board, advisors, alumni];
 
 export const teams: Team[] = groupedTeams.map(sanitizeTeam);
-
-/*
-  Including titles only for these 4 team categories:
-*/
-export const teamsWithTitles = [
-  'Leadership',
-  'Board',
-  'Advisors',
-  'Legal Counsel',
-];
