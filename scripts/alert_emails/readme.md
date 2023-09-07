@@ -62,7 +62,7 @@ In order to test out the emails and see what they look like:
 
 AWS automatically tracks opens / clicks, but we manually maintain a dashboard with this data. After sending alerts, you can include it in the dashboard via:
 
-1. Go to https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Email-Alerts (request access from Michael or Igor if you need it).
+1. Go to https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=Email-Alerts (request access from Brett if you need it).
 2. Duplicate the latest widget (Click the menu button on the widget and choose Duplicate).
 3. Edit the duplicated widget (Click the menu button on the widget and choose Edit).
 4. Edit the source of the widget to reference the date of the alert send
