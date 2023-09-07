@@ -25,6 +25,17 @@
       "fullName": "Jonathan Kreiss-Tomkins",
       "profileUrl": "https://www.linkedin.com/in/jonathan-kreiss-tomkins-35915319a/",
       "description": "State Representative in Alaska House of Representatives"
+    },
+    {
+      "fullName": "Igor Kofman",
+      "profileUrl": "https://www.linkedin.com/in/ikofman/",
+      "profileImgUrl": "/images_cms/igor.jpeg"
+    },
+    {
+      "profileImgUrl": "/images_cms/ryan-panchadsaram.jpeg",
+      "fullName": "Ryan Panchadsaram",
+      "description": "Advisor at Kleiner Perkins, Former U.S. Deputy Chief Technology Officer",
+      "profileUrl": "https://www.linkedin.com/in/ryanpanchadsaram/"
     }
   ]
 }
