@@ -39,9 +39,8 @@ export const TransmissionMetricsCard: React.FC<{ onClick: () => void }> = ({
         cardBody={
           <>
             People who need extra caution can still make decisions using{' '}
-            <UnderlinedSpan>daily new cases</UnderlinedSpan>,{' '}
-            <UnderlinedSpan>infection rate</UnderlinedSpan>, and{' '}
-            <UnderlinedSpan>positive test rate</UnderlinedSpan>.
+            <UnderlinedSpan>transmission metrics</UnderlinedSpan> where
+            available.
           </>
         }
       />
