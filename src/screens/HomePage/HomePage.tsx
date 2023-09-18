@@ -38,7 +38,6 @@ import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
-import { TextTooltip, trackOpenTooltip } from 'components/InfoTooltip';
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -195,18 +194,6 @@ function getRiskMapDescription() {
     <MapDescriptionText>
       Our framework reflects the decreased risk of severe illness and death from
       COVID due to vaccines, therapeutics, and past COVID infections.
-      <br />
-      <br />
-      Note: People who need extra caution can refer to our{' '}
-      <TextTooltip
-        title="Positive test rate can be found after selecting a location. Up-to-date Daily New Cases and Infection Rate are no longer available due to the end of the Public Health Emergency."
-        mainCopy="Transmission metrics"
-        aria-label="Description of where to find transmission metrics data"
-        trackOpenTooltip={() =>
-          trackOpenTooltip('Homepage: transmission metrics')
-        }
-      />
-      {'.'}
     </MapDescriptionText>
   );
 }
