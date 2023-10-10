@@ -13,7 +13,7 @@ import BoosterButton from './BoosterButton';
 import { useBreakpoint } from 'common/hooks';
 
 const VaccineIcon = ({ height }: { height?: number }) => (
-  <Box mx="auto" mb={3}>
+  <Box mx="auto" mb={1.8}>
     <img src={vaccine_icon} height={height || 40} alt="Vaccine Icon" />
   </Box>
 );
@@ -29,12 +29,11 @@ const Buttons: React.FC = () => {
 
 const BoosterBanner: React.FC = () => {
   const isMobile = useBreakpoint(600);
-  const headerCopy =
-    'The CDC has released new guidance, which we will be incorporating throughout the site.';
+  const headerCopy = 'New boosters are available for Fall\u00A02023!';
   return (
     <Container>
       {isMobile ? (
-        <Box display="flex">
+        <Box display="flex" alignItems="center">
           <Header>{headerCopy}</Header>
           <VaccineIcon />
         </Box>
