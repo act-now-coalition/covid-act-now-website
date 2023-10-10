@@ -9,10 +9,10 @@ const BoosterButton: React.FC = () => {
       trackingCategory={EventCategory.HOMEPAGE_BANNER}
       trackingAction={EventAction.CLICK}
       trackingLabel="Home page banner: Find a booster"
-      href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/covid-by-county.html"
+      href="https://www.vaccines.gov/search/"
       endIcon={<OpenInNewIcon />}
     >
-      Learn More About Community Risk Levels
+      Find a Vaccine Near You
     </StyledBoosterButton>
   );
 };
