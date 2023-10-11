@@ -136,9 +136,10 @@ function renderStatus(projections: Projections): React.ReactElement {
       {percentVaccinated}) have received at least two doses or a single Johnson
       & Johnson dose, {ifNoBivalentFall2022BoosterAnd}
       {additionalDoseText}
-      {bivalentFall2022BoosterText}. Anybody who is at least 6 months old is
-      eligible to be vaccinated. Fewer than 0.001% of people who have received a
-      dose experienced a severe adverse reaction. {cappedVaccinatedCopy}
+      {bivalentFall2022BoosterText}. We do not yet have data available for the
+      2023/2024 updated boosters. <br /> <br /> Fewer than 0.001% of people who
+      have received a dose experienced a severe adverse reaction.{' '}
+      {cappedVaccinatedCopy}
       <ExternalLink href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/about-vaccines/index.html">
         See more vaccine resources and FAQs
       </ExternalLink>

@@ -37,6 +37,7 @@ import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
+import { BoosterBanner } from 'components/Banner';
 import EmailAlertsFooter from 'components/EmailAlertsFooter';
 
 function getPageDescription() {
@@ -122,6 +123,7 @@ export default function HomePage() {
         setMenuOpen={setMenuOpen}
       />
       <HomepageStructuredData />
+      <BoosterBanner />
       <HomePageHeader />
       <main>
         <div className="App">
