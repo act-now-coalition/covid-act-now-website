@@ -181,17 +181,18 @@ export const getXTickFormat = (
   if (timeUnit === TimeUnit.WEEKS) {
     return formatDateTime(date, DateFormat.MMM_D);
   } else {
-    // Shows the year if the tick is in January (0) or December (11)
-    const dateFormat =
-      date.getMonth() === 0 || date.getMonth() === 11
-        ? DateFormat.MMM_YY
-        : DateFormat.MMM;
+    // Shows the year if the tick is in the first 6 months
+    // (same as filter divisor in getFinalTicks))
+    const validMonths = [0, 1, 2, 3, 4, 5];
+    const dateFormat = validMonths.includes(date.getMonth())
+      ? DateFormat.MMM_YY
+      : DateFormat.MMM;
     return formatDateTime(date, dateFormat).replace(' ', "'");
   }
 };
 
 export function getFinalTicks(isMobile: boolean, ticks: Date[]): Date[] {
-  return ticks.filter((value: Date, i: number) => i % (isMobile ? 3 : 2) === 0);
+  return ticks.filter((value: Date, i: number) => i % (isMobile ? 6 : 6) === 0);
 }
 
 export function getTimeAxisTicks(
