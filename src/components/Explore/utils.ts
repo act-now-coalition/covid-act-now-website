@@ -54,7 +54,7 @@ export const periodMap: {
   [Period.DAYS_180]: {
     increment: 180,
     label: '180',
-    xTicktimeUnit: TimeUnit.MONTHS,
+    xTicktimeUnit: TimeUnit.WEEKS,
   },
   [Period.ALL]: {
     increment: -1,
