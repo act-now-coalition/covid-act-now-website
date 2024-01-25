@@ -297,9 +297,9 @@
     "name": "metrics.bedsWithCovidPatientsRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 50,
+      "regionsAvailable": 49,
       "totalStates": 53,
-      "statesAvailable": 50
+      "statesAvailable": 49
     },
     "county": {
       "totalRegions": 3223,
