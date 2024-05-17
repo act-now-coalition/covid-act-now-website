@@ -276,9 +276,9 @@
     "name": "metrics.icuCapacityRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 22,
+      "regionsAvailable": 21,
       "totalStates": 53,
-      "statesAvailable": 22
+      "statesAvailable": 21
     },
     "county": {
       "totalRegions": 3223,
@@ -297,9 +297,9 @@
     "name": "metrics.bedsWithCovidPatientsRatio",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 20,
+      "regionsAvailable": 19,
       "totalStates": 53,
-      "statesAvailable": 20
+      "statesAvailable": 19
     },
     "county": {
       "totalRegions": 3223,
@@ -318,9 +318,9 @@
     "name": "metrics.weeklyCovidAdmissionsPer100k",
     "state": {
       "totalRegions": 53,
-      "regionsAvailable": 22,
+      "regionsAvailable": 21,
       "totalStates": 53,
-      "statesAvailable": 22
+      "statesAvailable": 21
     },
     "county": {
       "totalRegions": 3223,
