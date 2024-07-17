@@ -4,7 +4,6 @@ import TextTooltip from './TextTooltip';
 import { TooltipProps } from '@material-ui/core/Tooltip';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { StyledMarkdown, InfoIcon } from './Tooltip.style';
-import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
 export { InfoTooltip, TextTooltip, InfoIcon };
 
@@ -31,7 +30,6 @@ export function trackOpenTooltip(label: string) {
 
 export function getLastUpdatedTooltipCopy(updatedDate: Date) {
   updatedDate.setUTCHours(17, 0, 0, 0);
-  const updatedTimeStr = formatDateTime(updatedDate, DateFormat.H_A_ZZZZ);
-  const tooltipCopy = `We aim to update our data by ${updatedTimeStr} daily. Occasionally, when additional review is required, an update can be delayed by several hours. Note that certain data sources that we use (e.g., ICU hospitalizations) are only updated once per week.`;
+  const tooltipCopy = `We've paused our weekly updates due to limited data. If new reporting standards are approved, we'll resume updates on October 1, 2024. For now, please check your local health district's website for the latest wastewater surveillance data in your area.`;
   return tooltipCopy;
 }
