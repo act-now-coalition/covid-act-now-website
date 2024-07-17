@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Wrapper, Content, Subcopy, Header } from './HomePageHeader.style';
-import { useModelLastUpdatedDate } from 'common/utils/model';
+import { parseDateString } from '@actnowcoalition/time-utils';
 import { InfoTooltip, renderTooltipContent } from 'components/InfoTooltip';
 import {
   trackOpenTooltip,
@@ -20,14 +20,16 @@ function renderInfoTooltip(updatedDate: Date): ReactElement {
 }
 
 const HomePageHeader: React.FC = () => {
-  const lastUpdatedDate = useModelLastUpdatedDate() || new Date();
+  const lastUpdatedDate = parseDateString('2024-05-16');
+  // Hardcoded date for now to stop the flicker on load
 
   return (
     <Wrapper>
       <Content>
         <Header>U.S. COVID Tracker</Header>
         <Subcopy>
-          Updated on {formatDateTime(lastUpdatedDate, DateFormat.MMMM_D)}{' '}
+          Last updated on{' '}
+          {formatDateTime(lastUpdatedDate, DateFormat.MMMM_D_YYYY)}{' '}
           {renderInfoTooltip(lastUpdatedDate)}
         </Subcopy>
       </Content>
