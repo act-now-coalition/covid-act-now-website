@@ -27,6 +27,7 @@ import { Metric } from 'common/metricEnum';
 import { SparkLineMetric } from '../SparkLineBlock/utils';
 import { MasksCard, TransmissionMetricsCard } from '../ClickableCard';
 import { Level } from 'common/level';
+import { HiatusBanner } from 'components/Banner/HiatusBanner';
 
 interface AboveTheFoldProps {
   region: Region;
@@ -53,6 +54,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     const showMasksCard = locationSummary.level === Level.HIGH;
     return (
       <MainWrapper>
+        <HiatusBanner type="location" />
         <ContentContainer>
           <GridContainer showMasksCard={showMasksCard}>
             <GridItemHeader>
