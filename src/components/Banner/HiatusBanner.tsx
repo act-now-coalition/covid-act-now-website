@@ -19,7 +19,7 @@ export const HiatusBanner = ({ type = 'homepage' }: HiatusBannerProps) => {
       <InnerContainer>
         <Body>
           <strong>
-            We are entering hibernation mode until at least November 15, 2024
+            We are entering hibernation mode until at least November 15, 2024,
             due to lack of available data.
           </strong>{' '}
           <span>
