@@ -18,21 +18,24 @@ export const HiatusBanner = ({ type = 'homepage' }: HiatusBannerProps) => {
     <Container>
       <InnerContainer>
         <Body>
-          <strong>We've entered hibernation mode</strong>{' '}
+          <strong>
+            We are entering hibernation mode until at least November 15, 2024
+            due to lack of available data.
+          </strong>{' '}
           <span>
-            due to a lack of up-to-date data. The data displayed should not be
-            considered for current, actionable decisions. Federal reporting may
-            resume in October, 2024, at which point we may resume data updates.
+            We are cautiously optimistic that the{' '}
+            <a href="https://www.cdc.gov/ncird/whats-new/updated-hospital-reporting-requirements-for-respiratory-viruses.html">
+              new federal hospital data reporting requirements
+            </a>{' '}
+            starting in November 2024 will enable us to provide timely,
+            actionable updates.
           </span>
           {/* This is ugly, but I want the span text style, not the <p> style */}
           <br /> <br />
           <span>
-            In the meantime, you can{' '}
-            <a href="https://www.house.gov/representatives/find-your-representative">
-              contact your representatives
-            </a>{' '}
-            to advocate for better data reporting and continue to follow your
-            local health department's guidance.
+            In the meantime, the site will remain available for historical
+            reference. For the latest information, we recommend checking your
+            local health department’s website for wastewater surveillance data.
           </span>
         </Body>
       </InnerContainer>
