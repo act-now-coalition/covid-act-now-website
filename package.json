@@ -48,7 +48,7 @@
     "d3-scale-chromatic": "^2.0.0",
     "d3-time": "^1.1.0",
     "esm": "^3.2.25",
-    "firebase": "^7.15.4",
+    "firebase": "^10.9.0",
     "geo-albers-usa-territories": "^0.0.2",
     "googleapis": "^57.0.0",
     "handlebars": "^4.7.6",
