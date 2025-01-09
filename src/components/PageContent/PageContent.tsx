@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
 import SidebarContents from 'components/SidebarContents';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { TocItem } from 'cms-content/utils';
 import {
   PageContainer,
@@ -31,10 +30,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
         setMenuOpen={setMenuOpen}
       />
       <PageContainer>
-        <MainContent>
-          {children}
-          <ShareModelBlock />
-        </MainContent>
+        <MainContent>{children}</MainContent>
         <DesktopOnly>
           <Sidebar>
             <Sticky>
