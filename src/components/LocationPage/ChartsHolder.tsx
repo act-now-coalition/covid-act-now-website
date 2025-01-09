@@ -22,7 +22,6 @@ import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
 import Recommendations from '../Recommend/Recommendations';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import VulnerabilitiesBlock from 'components/VulnerabilitiesBlock';
 import LocationPageBlock from './LocationPageBlock';
 import { WidthContainer } from './LocationPageBlock.style';
@@ -274,9 +273,9 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
                 />
               </LocationPageBlock>
             )}
-            <LocationPageBlock ref={shareBlockRef}>
+            {/* <LocationPageBlock ref={shareBlockRef}>
               <ShareModelBlock region={region} />
-            </LocationPageBlock>
+            </LocationPageBlock> */}
           </WidthContainer>
         </BelowTheFold>
       </LocationPageContentWrapper>

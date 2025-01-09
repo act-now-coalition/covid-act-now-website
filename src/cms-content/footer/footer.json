@@ -3,12 +3,6 @@
   "learn": "Find simple definitions of COVID-related terms, deep dives into COVID science and treatments, and concise answers to pressing COVID questions.",
   "featuredSections": [
     {
-      "cta": "Alerts",
-      "url": "#share",
-      "description": "Receive emails when your community's COVID risk level changes.",
-      "iconId": "ALERTS"
-    },
-    {
       "cta": "Data API",
       "url": "/data-api",
       "description": "Get real time, local data including daily new cases, % vaccinated, and more.",

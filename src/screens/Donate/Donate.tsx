@@ -14,9 +14,7 @@ import {
   BodyCopy,
 } from 'screens/Donate/Donate.style';
 import donateContent from 'cms-content/donate';
-import ShareModelBlock from 'components/ShareBlock/ShareModelBlock';
 import { DesktopOnlyDonateButton } from 'components/DonateButton';
-import { Box } from '@material-ui/core';
 
 const Intro: React.FC = () => {
   const { headerLines } = donateContent;
@@ -70,9 +68,6 @@ const Donate: React.FC<{ embedComponent: React.ReactNode }> = ({
           ))}
         </ContentWrapper>
       </Container>
-      <Box marginX={3}>
-        <ShareModelBlock />
-      </Box>
     </>
   );
 };
