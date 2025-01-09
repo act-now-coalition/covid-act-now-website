@@ -1,6 +1,6 @@
 {
-  "teamHeader": "Our team",
-  "contactUsHeader": "Contact us",
+  "teamHeader": "Our Team",
+  "contactUsHeader": "Contact Us",
   "whoWeServeContentA": "We've worked with more than 100 federal, state, and county officials to develop data-driven COVID responses.",
   "aboutContent": "Covid Act Now is the COVID-focused U.S initiative of [Act Now Coalition](https://www.actnowcoalition.org/). Launched in April 2020, our COVID data assessment includes every U.S. state, 380+ metros, 3,100+ counties, and two U.S. territories.\n\nWe have served tens of millions of users since the beginning of the pandemic, and keep more than 250k subscribers up to date on COVID news and alerts.\n\nIn addition to our consumer tools, we have supported hundreds of federal, state, and county officials as well as numerous multinational corporations and NGOs to develop data-driven COVID responses.",
   "whoWeServeContentB": "[See our case studies](https://covidactnow.org/case-studies) to learn how other leaders in government, business, public health, education, and local communities use our data and tools to act during this pandemic.",
@@ -130,10 +130,10 @@
   "impactHeader": "Act Now Coalition",
   "joinUsHeader": "Join us",
   "whoWeServeContent": "Hundreds of federal, state, and county governments use our data and tools:",
-  "partnersHeader": "Our partners",
-  "introHeader": "Our mission",
+  "partnersHeader": "Our Partners",
+  "introHeader": "Our Mission",
   "missionHeader": "Our guiding principles",
-  "aboutHeader": "About us",
+  "aboutHeader": "About Us",
   "commitmentsContent": [
     {
       "copy": "**Data:** We support data- and science-backed policies and decision-making",

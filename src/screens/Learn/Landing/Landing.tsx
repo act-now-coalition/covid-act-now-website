@@ -9,6 +9,7 @@ import { ButtonContainer } from '../Learn.style';
 import { LargeOutlinedButton } from 'components/ButtonSystem';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { EventCategory } from 'components/Analytics';
+import LearnDisclaimer from 'components/LearnDisclaimer/LearnDisclaimer';
 
 const Landing: React.FC = () => {
   const {
@@ -30,6 +31,7 @@ const Landing: React.FC = () => {
         pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent sidebarItems={learnPages}>
+        <LearnDisclaimer />
         <Heading1>{header}</Heading1>
         <MarkdownContent source={intro} />
         {sections.map((section: LandingSection) => (

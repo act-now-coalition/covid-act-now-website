@@ -21,7 +21,6 @@ export interface PartnersContent {
 interface AboutContent {
   aboutHeader: string;
   aboutContent: Markdown;
-  missionHeader: string;
   missionContent: Markdown;
   commitmentsContent: CommitmentsContent[];
   impactHeader: string;

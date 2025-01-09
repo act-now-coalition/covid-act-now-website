@@ -32,7 +32,7 @@ const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
 const Explained = lazy(() => import('screens/Learn/Explained'));
 const Alerts = lazy(() => import('screens/Learn/Alerts/Alerts'));
-const DataApi = lazy(() => import('screens/DataApi/DataApi'));
+// const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
 const DeepDivesRedirect = lazy(() =>
@@ -221,10 +221,10 @@ export default function App() {
                     to="/us/:stateId/county/:countyId"
                   />
 
-                  <Route path="/data-api" component={DataApi} />
+                  {/* <Route path="/data-api" component={DataApi} /> */}
                   {/* Keeping the /resources URL active in case linked elsewhere */}
-                  <Redirect from="/resources" to="/data-api" />
-                  <Redirect from="/tools" to="/data-api" />
+                  {/* <Redirect from="/resources" to="/data-api" /> */}
+                  {/* <Redirect from="/tools" to="/data-api" /> */}
                   <Redirect path="/contact" to="/about#contact-us" />
                   <Route path="/terms" component={Terms} />
                   <Route path="/privacy" component={Privacy} />
@@ -327,14 +327,14 @@ export default function App() {
                     to="/learn"
                   />
                   <Redirect from="/types-of-covid-tests" to="/learn" />
-                  <Redirect
+                  {/* <Redirect
                     from="/covid-act-now-api-intervention-model"
                     to="/data-api"
                   />
                   <Redirect
                     from="/export-covid-act-now-data-spreadsheet"
                     to="/data-api"
-                  />
+                  /> */}
                   <Redirect
                     from="/alerting-to-changes-in-covid-risk"
                     to="/subscribe"

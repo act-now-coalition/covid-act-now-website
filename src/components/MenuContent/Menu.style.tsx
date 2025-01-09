@@ -189,13 +189,13 @@ export const SocialButtonsRow = styled.div`
         }
     }
     a {
-      color: white;
+    color: ${props => props.theme.megaMenu.secondaryText};
         &:not(:last-of-type) {
             margin-right: 1rem;
         }
-        &:last-of-type {
-          align-self: center;
-      }
+      //   &:last-of-type {
+      //     align-self: center;
+      // }
     }
     }
 `;
