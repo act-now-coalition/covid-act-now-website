@@ -29,7 +29,7 @@ import {
 import SearchAutocomplete from 'components/Search';
 import { CommunityLevelThermometer } from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
-import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
+import { useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import { MapBlock } from './MapBlock';
@@ -83,9 +83,8 @@ export default function HomePage() {
 
   const searchLocations = useFinalAutocompleteLocations();
 
-  const isMobileNavBar = useBreakpoint(800);
   const hasScrolled = useShowPastPosition(450);
-  const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
+  const showDonateButton = false;
   const renderNavBarSearch = () => (
     <>
       {hasScrolled && (

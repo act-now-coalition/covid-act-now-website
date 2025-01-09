@@ -5,7 +5,6 @@ import EnsureSharingIdInUrl from 'components/EnsureSharingIdInUrl';
 import ChartsHolder from 'components/LocationPage/ChartsHolder';
 import { getPageTitle, getPageDescription } from './utils';
 import { Region } from 'common/regions';
-import { DonateButtonHeart } from 'components/DonateButton';
 import { useShowPastPosition } from 'common/hooks';
 import { NavLocationPage } from 'components/NavBar';
 
@@ -27,7 +26,7 @@ function WithSearchInNav({ region }: LocationPageProps) {
         pageDescription={getPageDescription(region)}
       />
       <NavLocationPage
-        renderSecondaryElement={() => <DonateButtonHeart />}
+        renderSecondaryElement={() => <></>}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
         hasScrolled={hasScrolled}

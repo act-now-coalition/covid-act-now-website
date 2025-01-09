@@ -50,7 +50,6 @@ export function getTopLevelPageItems(): SitemapItemLoose[] {
         },
       ],
     },
-    '/donate',
     '/about',
     '/data-api',
     '/contact',
