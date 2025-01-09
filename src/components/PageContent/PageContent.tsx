@@ -12,7 +12,6 @@ import {
   DesktopOnly,
 } from './PageContent.style';
 import { useScrollToElement } from 'common/hooks';
-import { DesktopOnlyDonateButton } from 'components/DonateButton';
 
 const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
   children,
@@ -27,7 +26,7 @@ const PageContent: React.FC<{ sidebarItems: TocItem[] }> = ({
         renderSearch={() => (
           <NavBarSearch menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         )}
-        renderSecondaryElement={() => <DesktopOnlyDonateButton />}
+        renderSecondaryElement={() => <></>}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
