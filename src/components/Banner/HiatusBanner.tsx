@@ -5,6 +5,7 @@ import {
   InnerContainer,
   Body,
 } from './HiatusBanner.style';
+import ExternalLink from 'components/ExternalLink';
 
 export interface HiatusBannerProps {
   type?: 'location' | 'homepage';
@@ -18,25 +19,14 @@ export const HiatusBanner = ({ type = 'homepage' }: HiatusBannerProps) => {
     <Container>
       <InnerContainer>
         <Body>
-          <strong>
-            We are entering hibernation mode until at least November 15, 2024,
-            due to lack of available data.
-          </strong>{' '}
-          <span>
-            We are cautiously optimistic that the{' '}
-            <a href="https://www.cdc.gov/ncird/whats-new/updated-hospital-reporting-requirements-for-respiratory-viruses.html">
-              new federal hospital data reporting requirements
-            </a>{' '}
-            starting in November 2024 will enable us to provide timely,
-            actionable updates.
-          </span>
-          {/* This is ugly, but I want the span text style, not the <p> style */}
-          <br /> <br />
-          <span>
-            In the meantime, the site will remain available for historical
-            reference. For the latest information, we recommend checking your
-            local health department’s website for wastewater surveillance data.
-          </span>
+          This page is no longer being updated due to a lack of reliable data.
+          While we continue to surface this content for archival purposes, we
+          recommend that you visit more regularly updated resources, such as
+          from the{' '}
+          <ExternalLink href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">
+            CDC
+          </ExternalLink>
+          .
         </Body>
       </InnerContainer>
     </Container>

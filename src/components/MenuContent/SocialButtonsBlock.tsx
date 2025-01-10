@@ -27,6 +27,7 @@ const SocialButtonsBlock: React.FC<{ showTerms: boolean }> = ({
         <TwitterIcon />
       </ExternalLink>
       {showTerms && <Link to="/terms">Terms</Link>}
+      {<Link to="/about">About Us</Link>}
     </SocialButtonsRow>
   );
 };
