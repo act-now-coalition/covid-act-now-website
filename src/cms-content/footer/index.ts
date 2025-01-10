@@ -17,9 +17,8 @@ export interface FeaturedItem {
 interface MenuContent {
   learn: Markdown;
   aboutUs: Markdown;
-  featuredSections: FeaturedItem[];
 }
 
-const { learn, aboutUs, featuredSections } = footer;
+const { learn, aboutUs } = footer;
 
-export const menuContent = { learn, aboutUs, featuredSections } as MenuContent;
+export const menuContent = { learn, aboutUs } as MenuContent;

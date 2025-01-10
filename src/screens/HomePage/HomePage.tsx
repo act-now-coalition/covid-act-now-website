@@ -29,7 +29,7 @@ import {
 import SearchAutocomplete from 'components/Search';
 import { CommunityLevelThermometer } from 'components/HorizontalThermometer';
 import HomepageItems from 'components/RegionItem/HomepageItems';
-import { useBreakpoint, useFinalAutocompleteLocations } from 'common/hooks';
+import { useFinalAutocompleteLocations } from 'common/hooks';
 import { largestMetroFipsForExplore, MapView } from 'screens/HomePage/utils';
 import { DonateButtonHeart } from 'components/DonateButton';
 import { MapBlock } from './MapBlock';
@@ -37,7 +37,6 @@ import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { Level } from 'common/level';
-import EmailAlertsFooter from 'components/EmailAlertsFooter';
 import { HiatusBanner } from 'components/Banner/HiatusBanner';
 
 function getPageDescription() {
@@ -83,9 +82,8 @@ export default function HomePage() {
 
   const searchLocations = useFinalAutocompleteLocations();
 
-  const isMobileNavBar = useBreakpoint(800);
   const hasScrolled = useShowPastPosition(450);
-  const showDonateButton = !isMobileNavBar || (isMobileNavBar && !hasScrolled);
+  const showDonateButton = false;
   const renderNavBarSearch = () => (
     <>
       {hasScrolled && (
@@ -179,9 +177,6 @@ export default function HomePage() {
                 region={USA.instance}
                 isHomepage={true}
               />
-            </HomePageBlock>
-            <HomePageBlock id="share">
-              <EmailAlertsFooter defaultRegions={[]} />
             </HomePageBlock>
             <PartnersSection />
           </Content>

@@ -4,10 +4,8 @@ import SocialButtonsBlock from './SocialButtonsBlock';
 import {
   Section,
   SectionHeader,
-  OutlinedButton,
   ParagraphCopy,
   LogoWrapper,
-  RowWithSpacing,
 } from './Menu.style';
 import { MarkdownContent } from 'components/Markdown';
 
@@ -34,17 +32,6 @@ const AboutUsSection: React.FC<{
       <ParagraphCopy>
         <MarkdownContent>{aboutUsCopy}</MarkdownContent>
       </ParagraphCopy>
-      <RowWithSpacing>
-        <OutlinedButton to="/about" onClick={() => onClick('About us')}>
-          Learn more about us
-        </OutlinedButton>
-        <OutlinedButton
-          to="/about#contact-us"
-          onClick={() => onClick('Contact us')}
-        >
-          Contact us
-        </OutlinedButton>
-      </RowWithSpacing>
       <SocialButtonsBlock showTerms={isFooter} />
     </Section>
   );

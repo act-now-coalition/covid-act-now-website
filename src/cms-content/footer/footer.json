@@ -1,18 +1,5 @@
 {
   "aboutUs": "[Act Now Coalition](https://www.actnowcoalition.org/) is an independent 501(c)(3) nonprofit founded by volunteers in March 2020. Covid Act Now is our COVID-focused initiative to help people make informed decisions by providing timely and accurate data about COVID in the U.S.",
   "learn": "Find simple definitions of COVID-related terms, deep dives into COVID science and treatments, and concise answers to pressing COVID questions.",
-  "featuredSections": [
-    {
-      "cta": "Alerts",
-      "url": "#share",
-      "description": "Receive emails when your community's COVID risk level changes.",
-      "iconId": "ALERTS"
-    },
-    {
-      "cta": "Data API",
-      "url": "/data-api",
-      "description": "Get real time, local data including daily new cases, % vaccinated, and more.",
-      "iconId": "API"
-    }
-  ]
+  "featuredSections": []
 }

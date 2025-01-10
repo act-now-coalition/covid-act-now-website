@@ -4,7 +4,6 @@ import {
   HeaderContainer,
   GridContainer,
   GridItemHeader,
-  GridItemAlerts,
   GridItemMap,
   GridItemOverview,
   GridItemSparkLines,
@@ -16,7 +15,6 @@ import {
 import SparkLineBlock from '../SparkLineBlock';
 import LocationName from '../LocationName';
 import LocationOverview from '../LocationOverview';
-import GetAlertsBlock from '../GetAlertsBlock';
 import { CountyMap } from '../CountyMap';
 import HeaderButtons from '../HeaderButtons';
 import { Region } from 'common/regions';
@@ -92,12 +90,6 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                 onClick={onClickTransmissionMetricsCard}
               />
             </GridItemTransmissionMetrics>
-            <GridItemAlerts>
-              <GetAlertsBlock
-                region={region}
-                onClickGetAlerts={onClickAlertSignup}
-              />
-            </GridItemAlerts>
             <GridItemMap>
               <CountyMap region={region} />
             </GridItemMap>

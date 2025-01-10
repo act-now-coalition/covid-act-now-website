@@ -11,20 +11,13 @@ import {
   AboutHeading2,
   AboutHeading3,
   ButtonContainer,
-  CommitmentBody,
-  CommitmentIcon,
-  CommitmentItem,
   HashWrapper,
   PartnersSectionWrapper,
   PartnersContainer,
   LogoWrapper,
   SectionContent,
 } from './About.style';
-import aboutContent, {
-  CommitmentsContent,
-  LogoItem,
-  PartnersContent,
-} from 'cms-content/about';
+import aboutContent, { LogoItem, PartnersContent } from 'cms-content/about';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { TocItem } from 'cms-content/utils';
@@ -38,14 +31,6 @@ export const sidebarItems: TocItem[] = [
       {
         to: '/about#about',
         label: aboutContent.aboutHeader,
-      },
-      {
-        to: '/about#mission',
-        label: aboutContent.missionHeader,
-      },
-      {
-        to: '/about#impact',
-        label: aboutContent.impactHeader,
       },
       {
         to: '/about#partners',
@@ -98,47 +83,6 @@ const About = () => {
         <HashWrapper id="about">
           <AboutHeading1>{aboutContent.aboutHeader}</AboutHeading1>
           <MarkdownContent source={aboutContent.aboutContent} />
-          <ButtonContainer>
-            <Button to="/about#team" cta="Meet our team" />
-            <Button to="/about#contact-us" cta="Contact us" />
-          </ButtonContainer>
-        </HashWrapper>
-        <HashWrapper id="mission">
-          <AboutHeading2>{aboutContent.missionHeader}</AboutHeading2>
-          <SectionContent>
-            <MarkdownContent source={aboutContent.missionContent} />
-            {aboutContent.commitmentsContent.map(
-              (commitment: CommitmentsContent, idx: number) => {
-                return (
-                  <CommitmentItem key={`commitment-section-${idx}`}>
-                    <CommitmentIcon
-                      src={commitment.icon}
-                      alt={commitment.altText}
-                    />
-                    <CommitmentBody>
-                      <MarkdownContent source={commitment.copy} />
-                    </CommitmentBody>
-                  </CommitmentItem>
-                );
-              },
-            )}
-            <ButtonContainer>
-              <Button to="/data-api#faq" cta="See our data sources" />
-              <Button
-                href="https://apidocs.covidactnow.org/#register"
-                cta="Download our data"
-              />
-            </ButtonContainer>
-          </SectionContent>
-        </HashWrapper>
-        <HashWrapper id="impact">
-          <AboutHeading2>{aboutContent.impactHeader}</AboutHeading2>
-          <SectionContent>
-            <MarkdownContent source={aboutContent.impactContent} />
-          </SectionContent>
-          <ButtonContainer>
-            <Button href="https://www.actnowcoalition.org" cta="Learn more" />
-          </ButtonContainer>
         </HashWrapper>
         <HashWrapper id="partners">
           <AboutHeading2>{aboutContent.partnersHeader}</AboutHeading2>
