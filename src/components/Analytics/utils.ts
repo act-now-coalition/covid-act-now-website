@@ -1,6 +1,5 @@
 import capitalize from 'lodash/capitalize';
 import words from 'lodash/words';
-import { amplitudeLogEvent } from './amplitude';
 import { trackGA4Event } from './gtag';
 
 export interface Tracker {
@@ -118,18 +117,6 @@ export function trackEvent(
       toTitleCaseWithSpecialCharacters(label),
       value,
     );
-
-    const labelProp = label ? { eventLabel: toTitleCase(label) } : {};
-    const valueProp = Number.isFinite(value) ? { eventValue: value } : {};
-
-    const eventProperties = {
-      eventCategory: toTitleCase(category),
-      eventAction: toTitleCase(action),
-      ...labelProp,
-      ...valueProp,
-    };
-
-    amplitudeLogEvent(category, eventProperties);
   }
 }
 

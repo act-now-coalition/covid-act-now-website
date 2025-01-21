@@ -15,11 +15,6 @@ import theme from 'assets/theme';
 import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
-import PageviewTracker, {
-  trackEvent,
-  EventAction,
-  EventCategory,
-} from 'components/Analytics';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 import HomePage from 'screens/HomePage/HomePage';
 
@@ -68,7 +63,6 @@ export default function App() {
         <StylesProvider injectFirst>
           <CssBaseline />
           <BrowserRouter>
-            <PageviewTracker />
             <ScrollToTop />
             <ErrorBoundary>
               <Suspense fallback={<SuspenseFallback />}>
@@ -231,10 +225,7 @@ export default function App() {
 
                   {/* Custom redirect to track clicks from the Daily download */}
                   <Route path="/exposure-notifications-redirect">
-                    <ExternalRedirect
-                      url={'https://g.co/ens'}
-                      onRedirect={trackExposureNotificationRedirect}
-                    />
+                    <ExternalRedirect url={'https://g.co/ens'} />
                   </Route>
 
                   {/* Embed routes */}
@@ -382,13 +373,5 @@ export default function App() {
         </StylesProvider>
       </ScThemeProvider>
     </MuiThemeProvider>
-  );
-}
-
-function trackExposureNotificationRedirect() {
-  trackEvent(
-    EventCategory.EXPOSURE_NOTIFICATIONS,
-    EventAction.REDIRECT,
-    'Redirect',
   );
 }
