@@ -7,8 +7,6 @@
 */
 
 import { singletonHook } from 'react-singleton-hook';
-import { useEffect, useState } from 'react';
-import { IP_API_KEY } from 'common/ip-api';
 
 // move this elsewhere
 export interface GeolocationInfo {
@@ -22,82 +20,15 @@ export interface UseGeolocationReturn {
   isLoading: boolean;
 }
 
+// Removing the external call to ip-api, and replacing it with a mock function
 const useGeolocation = singletonHook(
-  { geolocationData: undefined, isLoading: true },
+  { geolocationData: undefined, isLoading: false },
   (): UseGeolocationReturn => {
-    const [ipData, setIpData] = useState<GeolocationInfo | undefined>();
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-      const fetchIpData = () => {
-        setIsLoading(true);
-        fetchGeolocationData()
-          .then(data => {
-            setIpData({
-              zipCode: data.zip,
-              stateCode: data.region,
-              country: data.country,
-            });
-            setIsLoading(false);
-          })
-          .catch(e => {
-            console.error(e);
-            setIsLoading(false);
-          });
-      };
-      fetchIpData();
-    }, [setIpData, setIsLoading]);
-
-    const geolocationReturnObj: UseGeolocationReturn = {
-      geolocationData: ipData,
-      isLoading,
+    return {
+      geolocationData: undefined,
+      isLoading: false,
     };
-
-    return geolocationReturnObj;
   },
 );
 
-function fetchGeolocationData() {
-  return fetch(
-    `https://pro.ip-api.com/json/?key=${IP_API_KEY}`,
-  ).then(response => response.json());
-}
-
-// Use this mock to simulate fetchGeolocationData, other data can be obtained from
-// https://ip-api.com/#<IP_ADDRESS> (https://ip-api.com/#8.8.8.8)
-/*
-function mockGeolocationData() {
-  // how many seconds to wait before returning fake geolocation data
-  const GEO_WAIT_SECONDS = 30;
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        query: '8.8.8.8',
-        status: 'success',
-        continent: 'North America',
-        continentCode: 'NA',
-        country: 'United States',
-        countryCode: 'US',
-        region: 'VA',
-        regionName: 'Virginia',
-        city: 'Ashburn',
-        district: '',
-        zip: '20149',
-        lat: 39.03,
-        lon: -77.5,
-        timezone: 'America/New_York',
-        offset: -18000,
-        currency: 'USD',
-        isp: 'Google LLC',
-        org: 'Google Public DNS',
-        as: 'AS15169 Google LLC',
-        asname: 'GOOGLE',
-        mobile: false,
-        proxy: false,
-        hosting: true,
-     });
-    }, GEO_WAIT_SECONDS * 1000);
-  });
-}
-*/
 export default useGeolocation;
