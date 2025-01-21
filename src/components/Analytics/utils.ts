@@ -8,26 +8,6 @@ export interface Tracker {
 }
 
 /**
- * In the early days of CAN, we used what we now call the "legacy" tracker, but
- * it wasn't configured correctly, so we created a new 'property', which uses
- * the same GA account, but collects hits separately (having two trackers won't
- * duplicate events or page views).
- *
- * We are keeping the two trackers to be able to view high-level metrics since
- * the beginning if we need to, but for day-to-day usage, we should look at
- * the default tracker.
- */
-export const defaultTracker: Tracker = {
-  trackingId: 'UA-160622988-1',
-  name: 'default',
-};
-
-export const legacyTracker: Tracker = {
-  trackingId: 'G-HFCDC7K5G1',
-  name: 'legacy',
-};
-
-/**
  * Categories represent high-level groups of events in the application.
  */
 export enum EventCategory {
