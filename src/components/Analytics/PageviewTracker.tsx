@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { defaultTracker, legacyTracker } from './utils';
-import { initializeAmplitude, amplitudeLogEvent } from './amplitude';
 
 /**
  * Initialize Google Analytics
@@ -38,7 +37,6 @@ function usePageTracking() {
   useEffect(() => {
     if (!initialized) {
       initializeGA();
-      initializeAmplitude();
       setInitialized(true);
     }
   }, [initialized]);
@@ -51,7 +49,6 @@ function usePageTracking() {
       setTimeout(() => {
         const { title } = document;
         ReactGA.pageview(pathname, [legacyTracker.name], title);
-        amplitudeLogEvent('Pageview', { path: pathname, title });
       }, 10);
     }
   }, [initialized, pathname]);
