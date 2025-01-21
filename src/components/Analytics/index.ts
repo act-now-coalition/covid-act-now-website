@@ -1,4 +1,3 @@
-import PageviewTracker from './PageviewTracker';
 import {
   EventAction,
   EventCategory,
@@ -8,8 +7,6 @@ import {
   trackVoteClick,
   trackWebVitals,
 } from './utils';
-
-export default PageviewTracker;
 
 export {
   EventAction,
