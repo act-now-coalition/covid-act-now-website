@@ -240,7 +240,7 @@ const VaccinationLines: React.FC<{
             <AxisLeft
               scale={yScale}
               numTicks={5}
-              tickFormat={(value: number) => formatPercent(value, 0)}
+              tickFormat={(value: number | { valueOf(): number }) => formatPercent(typeof value === 'number' ? value : value.valueOf(), 0)}
             />
             <AxisBottom
               innerHeight={innerHeight}
