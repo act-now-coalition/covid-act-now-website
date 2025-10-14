@@ -19,7 +19,7 @@ const FrameworkOverlay: React.FC<{
   getYCoord: (p: Point) => number;
   xScale: ScaleTime<number, number>;
 }> = ({ data, width, height, getXCoord, getYCoord, xScale }) => {
-  const overlayWidth = xScale(CDC_FRAMEWORK_START_DATE);
+  const overlayWidth = xScale(CDC_FRAMEWORK_START_DATE) ?? 0;
   return (
     <>
       <RectClipGroup width={overlayWidth} height={height} topPadding={5}>

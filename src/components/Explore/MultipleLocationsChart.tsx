@@ -172,8 +172,14 @@ const MultipleLocationsChart: React.FC<{
     HoverPointInfo
   >();
 
-  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
-  const getYPosition = (d: Column) => yScale(getY(d));
+  const getXPosition = (d: Column): number => {
+    const result = dateScale(getColumnDate(d));
+    return result !== undefined ? result : 0;
+  };
+  const getYPosition = (d: Column): number => {
+    const result = yScale(getY(d));
+    return result !== undefined ? result : 0;
+  };
 
   const minTooltipDate = dateScale.invert(0);
 
@@ -227,7 +233,7 @@ const MultipleLocationsChart: React.FC<{
                 key={`series-chart-${label}`}
                 data={data}
                 x={getXPosition}
-                y={getYPosition}
+                y={getYPosition as (d: Column) => number}
                 type={type}
                 yMax={innerHeight}
                 barWidth={0}

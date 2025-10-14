@@ -179,7 +179,7 @@ export default function App() {
                   <Route path="/covid-explained" component={Explained} />
                   <Redirect from="/updates" to="/covid-explained" />
                   {/* TODO(pablo): Route every article */}
-                  <Route from="/deep-dives" component={DeepDivesRedirect} />
+                  <Route path="/deep-dives" component={DeepDivesRedirect} />
                   {/*
                     If path is /covid-risk-levels-metrics,
                     redirect to /covid-community-level-metrics and

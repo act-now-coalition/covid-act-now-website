@@ -91,8 +91,8 @@ const ChartZones = ({
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (d: Point) => xScale(getColumnDate(d));
-  const getYCoord = (d: Point) => yScale(Math.min(getY(d), capY));
+  const getXCoord = (d: Point) => xScale(getColumnDate(d)) ?? 0;
+  const getYCoord = (d: Point) => yScale(Math.min(getY(d), capY)) ?? 0;
 
   const regions = getChartRegions(yAxisMin, yMax, zones);
   const yTicks = computeTickPositions(yAxisMin, yMax, zones);
@@ -152,7 +152,7 @@ const ChartZones = ({
                 y={getYCoord}
                 region={region}
                 width={chartWidth}
-                yScale={yScale}
+                yScale={(num: number) => yScale(num) ?? 0}
               />
             </Style.SeriesLine>
             <FrameworkOverlay
@@ -170,7 +170,7 @@ const ChartZones = ({
                 lastPointZone.name === region.name && region.name !== ''
               }
               x={chartWidth - 10}
-              y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+              y={yScale(0.5 * (region.valueFrom + region.valueTo)) ?? 0}
             />
           </Group>
         ))}
