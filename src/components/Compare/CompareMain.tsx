@@ -242,7 +242,6 @@ const CompareMain = React.memo(
 
     const sharedProps = {
       stateName: props.stateName,
-      stateId,
       setShowModal,
       isHomepage,
       locations,

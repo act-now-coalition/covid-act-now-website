@@ -84,8 +84,8 @@ const ChartRt = ({
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (d: PointRt) => xScale(getColumnDate(d));
-  const getYCoord = (d: PointRt) => yScale(getRt(d));
+  const getXCoord = (d: PointRt) => xScale(getColumnDate(d)) ?? 0;
+  const getYCoord = (d: PointRt) => yScale(getRt(d)) ?? 0;
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
 
@@ -100,8 +100,8 @@ const ChartRt = ({
   );
   const truncationPoint = last(prevData);
   const truncationRt = getRt(truncationPoint);
-  const yTruncationRt = yScale(truncationRt);
-  const xTruncationRt = xScale(getColumnDate(truncationPoint));
+  const yTruncationRt = yScale(truncationRt) ?? 0;
+  const xTruncationRt = xScale(getColumnDate(truncationPoint)) ?? 0;
 
   const yTickFormat = getYFormat(DataMeasure.INTEGER, 1);
   const dateScale = scaleUtc({
@@ -171,8 +171,8 @@ const ChartRt = ({
             <Area
               data={data}
               x={getXCoord}
-              y0={(d: PointRt) => yScale(getYAreaLow(d))}
-              y1={(d: PointRt) => yScale(getYAreaHigh(d))}
+              y0={(d: PointRt) => yScale(getYAreaLow(d)) ?? 0}
+              y1={(d: PointRt) => yScale(getYAreaHigh(d)) ?? 0}
               curve={curveMonotoneX}
             />
           </Style.SeriesArea>
@@ -187,7 +187,7 @@ const ChartRt = ({
                   y={getYCoord}
                   region={region}
                   width={chartWidth}
-                  yScale={yScale}
+                  yScale={(num: number) => yScale(num) ?? 0}
                 />
               </Style.SeriesLine>
               <Style.SeriesDotted stroke="black">
@@ -197,7 +197,7 @@ const ChartRt = ({
                   y={getYCoord}
                   region={region}
                   width={chartWidth}
-                  yScale={yScale}
+                  yScale={(num: number) => yScale(num) ?? 0}
                 />
               </Style.SeriesDotted>
             </Group>

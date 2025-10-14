@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 import palette from './palette';
 import typography from './typography';
 import overrides from './overrides';
@@ -13,7 +13,7 @@ import {
 } from './searchbar';
 import { spacingTheme, Spacing } from './sizes';
 
-declare module '@material-ui/core/styles/createMuiTheme' {
+declare module '@material-ui/core/styles' {
   interface Theme {
     fonts: ThemeFonts;
     buttons: ButtonMap;
@@ -24,7 +24,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   interface ThemeOptions extends Theme {}
 }
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette,
   overrides,
   typography,

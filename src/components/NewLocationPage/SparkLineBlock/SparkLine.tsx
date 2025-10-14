@@ -35,8 +35,8 @@ const SparkLineInner: React.FC<
     range: [0, width],
   });
 
-  const getXCoord = (p: Column) => xScale(p.x);
-  const getYCoord = (p: Column) => yScale(p.y);
+  const getXCoord = (p: Column) => xScale(p.x) ?? 0;
+  const getYCoord = (p: Column) => yScale(p.y) ?? 0;
 
   const barWidth = 2;
 
@@ -51,8 +51,8 @@ const SparkLineInner: React.FC<
               <rect
                 key={`rect-${p.x}`}
                 fill={COLOR_MAP.GREY_1}
-                x={xScale(p.x) - barWidth / 2}
-                y={yScale(p.y)}
+                x={(xScale(p.x) ?? 0) - barWidth / 2}
+                y={yScale(p.y) ?? 0}
                 width={barWidth}
                 height={barHeight}
               />

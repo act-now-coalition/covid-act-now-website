@@ -220,8 +220,8 @@ const VaccinationLines: React.FC<{
     [showTooltip, dateScale, marginLeft],
   );
 
-  const getXPosition = (d: Column) => dateScale(getColumnDate(d)) || 0;
-  const getYPosition = (d: Column) => yScale(getY(d));
+  const getXPosition = (d: Column): number => dateScale(getColumnDate(d)) || 0;
+  const getYPosition = (d: Column): number => yScale(getY(d)) ?? 0;
   const dateTicks = getTimeAxisTicks(dateFrom, dateTo);
 
   const currentValueLabels = formatCurrentValueLabels(
@@ -240,7 +240,7 @@ const VaccinationLines: React.FC<{
             <AxisLeft
               scale={yScale}
               numTicks={5}
-              tickFormat={(value: number) => formatPercent(value, 0)}
+              tickFormat={(value: number | { valueOf(): number }) => formatPercent(typeof value === 'number' ? value : value.valueOf(), 0)}
             />
             <AxisBottom
               innerHeight={innerHeight}
@@ -256,8 +256,8 @@ const VaccinationLines: React.FC<{
                 <ChartSeries
                   key={`series-chart-${label}-uncapped`}
                   data={data.filter(d => d.y < VACCINATION_PERCENTAGE_CAP)}
-                  x={getXPosition}
-                  y={getYPosition}
+                  x={getXPosition as (d: Column) => number}
+                  y={getYPosition as (d: Column) => number}
                   type={type}
                   yMax={innerHeight}
                   barWidth={0}
@@ -267,8 +267,8 @@ const VaccinationLines: React.FC<{
                 <ChartSeries
                   key={`series-chart-${label}-capped`}
                   data={data.filter(d => d.y >= VACCINATION_PERCENTAGE_CAP)}
-                  x={getXPosition}
-                  y={getYPosition}
+                  x={getXPosition as (d: Column) => number}
+                  y={getYPosition as (d: Column) => number}
                   type={type}
                   yMax={innerHeight}
                   barWidth={0}

@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 import { trackWebVitals } from './components/Analytics';
 import * as Sentry from '@sentry/react';
+import posthog from 'posthog-js';
+import { PostHogProvider } from 'posthog-js/react';
 
 Sentry.init({
   // list of community compiled ignore errors + deny urls to help declutter sentry.
@@ -27,7 +29,23 @@ Sentry.init({
   sampleRate: 0.5,
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Initialize PostHog
+if (process.env.REACT_APP_PUBLIC_POSTHOG_KEY) {
+  posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    person_profiles: 'always', // Capture anonymous users
+    autocapture: true, // Enable autocapture (default: true)
+    capture_pageview: true, // Capture pageviews (default: true)
+    capture_pageleave: true, // Capture when users leave pages
+  });
+}
+
+ReactDOM.render(
+  <PostHogProvider client={posthog}>
+    <App />
+  </PostHogProvider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
