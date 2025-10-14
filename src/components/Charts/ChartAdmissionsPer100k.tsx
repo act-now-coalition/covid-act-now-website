@@ -87,9 +87,9 @@ const ChartAdmissionsPer100k: FunctionComponent<{
     range: [chartHeight, 0],
   });
 
-  const getXCoord = (p: Point) => xScale(getColumnDate(p));
+  const getXCoord = (p: Point) => xScale(getColumnDate(p)) ?? 0;
   const getYCoord = (p: Point) =>
-    yScale(Math.min(getAdmissionsPer100k(p), capY));
+    yScale(Math.min(getAdmissionsPer100k(p), capY)) ?? 0;
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
   const yTicks = computeTickPositions(
@@ -148,7 +148,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
           y={getYCoord}
           regions={regions}
           width={chartWidth}
-          yScale={yScale}
+          yScale={(num: number) => yScale(num) ?? 0}
         />
         <FrameworkOverlay
           width={chartWidth}
@@ -176,7 +176,7 @@ const ChartAdmissionsPer100k: FunctionComponent<{
           name={region.name}
           isActive={activeZone.name === region.name}
           x={chartWidth - 10}
-          y={yScale(0.5 * (region.valueFrom + region.valueTo))}
+          y={yScale(0.5 * (region.valueFrom + region.valueTo)) ?? 0}
         />
       ))}
       <AxisBottom

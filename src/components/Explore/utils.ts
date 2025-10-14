@@ -8,7 +8,8 @@ import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
-import { share_image_url } from 'assets/data/share_images_url.json';
+import shareImagesData from 'assets/data/share_images_url.json';
+const { share_image_url } = shareImagesData;
 import { SeriesType, Series, ExploreMetric, DataMeasure } from './interfaces';
 import regions, {
   County,

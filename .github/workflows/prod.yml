@@ -13,9 +13,12 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '20.x'
       - run: yarn install
       - run: yarn build:prod
+        env:
+          REACT_APP_PUBLIC_POSTHOG_KEY: ${{ secrets.REACT_APP_PUBLIC_POSTHOG_KEY }}
+          REACT_APP_PUBLIC_POSTHOG_HOST: ${{ secrets.REACT_APP_PUBLIC_POSTHOG_HOST }}
       - run: ./tools/deploy-s3.sh build/ s3://covidactnow.org/
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}

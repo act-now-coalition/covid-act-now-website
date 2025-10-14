@@ -12,10 +12,10 @@ A single page react app, created via `create-react-app`. Routing through `react-
 
 ### Set Up
 
-Make sure you have node installed. [nvm](https://github.com/nvm-sh/nvm) is recommended to manage your node installation so you can easily switch between versions.  node v16.x works well. Once nvm is installed:
+Make sure you have node installed. [nvm](https://github.com/nvm-sh/nvm) is recommended to manage your node installation so you can easily switch between versions. Node v22.x is recommended. Once nvm is installed:
 ```
-nvm install v16
-nvm alias default v16
+nvm install v22
+nvm alias default v22
 ```
 
 Get the repo from github
