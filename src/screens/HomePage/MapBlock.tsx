@@ -18,7 +18,7 @@ interface MapBlockProps {
   renderMap: (locationScope: MapView) => React.ReactElement;
   renderThermometer: () => React.ReactElement;
   renderTable?: (locationScope: MapView) => React.ReactElement;
-  infoLink: React.ReactElement;
+  infoLink?: React.ReactElement;
   mapDescription?: React.ReactElement;
 }
 
@@ -59,7 +59,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
           {renderTable && (
             <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
-          <Row>{infoLink}</Row>
+          {infoLink && <Row>{infoLink}</Row>}
         </MapSubitemsWrapper>
       </ColumnCentered>
     </HomePageBlock>

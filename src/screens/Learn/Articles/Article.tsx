@@ -1,15 +1,10 @@
 import React, { Fragment } from 'react';
 import { formatMetatagDate } from 'common/utils';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import Breadcrumbs from 'components/Breadcrumbs';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent from 'components/PageContent';
 import { learnPages } from 'cms-content/learn';
-import {
-  LearnHeading1,
-  BreadcrumbsContainer,
-  SmallSubtext,
-} from '../Learn.style';
+import { LearnHeading1, SmallSubtext } from '../Learn.style';
 import { Article } from 'cms-content/articles/utils';
 import Footer from 'screens/Learn/Footer/Footer';
 import { getCovidExplainedFooter } from 'screens/Learn/Explained';
@@ -40,9 +35,6 @@ const ArticlePage: React.FC<{
         pageDescription={`${metatagDate} ${summary}`}
       />
       <PageContent sidebarItems={learnPages}>
-        <BreadcrumbsContainer>
-          <Breadcrumbs item={parentItem} />
-        </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         <LearnDisclaimer />
         <SmallSubtext source={smallSubtextCopy} />

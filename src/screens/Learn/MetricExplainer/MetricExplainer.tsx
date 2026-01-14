@@ -9,8 +9,7 @@ import {
 } from 'cms-content/learn';
 import { MarkdownContent } from 'components/Markdown';
 import PageContent, { MobileOnly } from 'components/PageContent';
-import Breadcrumbs from 'components/Breadcrumbs';
-import { BreadcrumbsContainer, LearnHeading1, ItemName } from '../Learn.style';
+import { LearnHeading1, ItemName } from '../Learn.style';
 import TableOfContents, { Item } from 'components/TableOfContents';
 import { getMetricDefinition } from 'common/metric';
 import { Metric } from 'common/metricEnum';
@@ -49,14 +48,11 @@ const MetricExplainer = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/covid-community-level-metrics"
+        canonicalUrl="/"
         pageTitle={metadataTitle}
         pageDescription={metadataDescription}
       />
       <PageContent sidebarItems={learnPages}>
-        <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
-        </BreadcrumbsContainer>
         <LearnHeading1>{pageHeader}</LearnHeading1>
         {pageIntro && <MarkdownContent source={pageIntro} />}
         <MobileOnly>

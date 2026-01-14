@@ -39,13 +39,15 @@ const MetricModal: React.FC<DialogProps> = ({
     open,
     closeDialog,
     header: modalHeader,
-    links: [
-      {
-        cta: 'Learn more',
-        url: modalContent.learnLink || '/covid-community-level-metrics',
-        ariaLabel: `Learn more about ${modalHeader}`,
-      },
-    ],
+    links: modalContent.learnLink
+      ? [
+          {
+            cta: 'Learn more',
+            url: modalContent.learnLink,
+            ariaLabel: `Learn more about ${modalHeader}`,
+          },
+        ]
+      : undefined,
   };
 
   return (

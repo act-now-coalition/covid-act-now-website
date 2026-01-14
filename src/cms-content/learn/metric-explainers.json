@@ -9,7 +9,7 @@
       "sectionIntro": "A location’s community risk level takes into account three metrics: total new COVID cases per 100,000 population in the past 7 days, new COVID admissions per 100,000 population in the past 7 days, and the percent of staffed inpatient beds occupied by COVID patients.\n\n* [New COVID cases](/covid-risk-levels-metrics#weekly-new-cases) represent the current amount of COVID in a community and acts as an early warning indicator of potential increases in health system strain.\n* [COVID admissions](/covid-risk-levels-metrics#COVID-admissions) and [patients with COVID](/covid-risk-levels-metrics#patients-with-covid) represent the current potential for health system strain.\n\nTo calculate the community risk level, a color or level is assigned to each of the three metrics based on their values:\n\n* Weekly new cases: Less than 200 = Lower, and more than or equal to 200 = Higher\n* Weekly hospital admissions per 100k: Less than 10 = Low, between 10 and 19.9 = Medium, and more than or equal to 20 = High. \n* Staffed inpatient beds occupied by COVID patients: Less than 10% = Low, 10% to 14.9% = Medium, and more than or equal to 15% = High",
       "questions": [
         {
-          "answer": "Based on the CDC’s framework, we then combine the levels to get the community risk level as follows:\n\n* If CASES are LOWER, and both HOSPITAL metrics are LOW = Community risk level is LOW\n* If CASES are HIGHER, and (1) HOSPITAL metric is MEDIUM = Community risk level is HIGH\n* If CASES are LOWER, and HOSPITAL metrics are NOT LOW = Community risk level is the HIGHER of the two HOSPITAL metrics\n* If CASES are HIGHER = Community risk level is one level higher than the higher of the two HOSPITAL metrics. Examples below:\n\n  * If Springfield County has HIGHER CASES, but (2) LOW HOSPITAL metrics =  Community risk level is MEDIUM\n  * If Springfield County has HIGHER CASES, but (1) LOW HOSPITAL metric and (1) MEDIUM HOSPITAL metric  =  Community risk level is HIGH\n\n[Read more details on the CDC's methodology.](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html)\n\nWe remain committed to continuing to make all of our previous metrics available on our site and in our API. We acknowledge that these transmission metrics may remain useful to those who want to avoid infection. [Find detailed instructions on how to access those metrics here](/faq#where-are-previous-metrics).",
+          "answer": "Based on the CDC’s framework, we then combine the levels to get the community risk level as follows:\n\n* If CASES are LOWER, and both HOSPITAL metrics are LOW = Community risk level is LOW\n* If CASES are HIGHER, and (1) HOSPITAL metric is MEDIUM = Community risk level is HIGH\n* If CASES are LOWER, and HOSPITAL metrics are NOT LOW = Community risk level is the HIGHER of the two HOSPITAL metrics\n* If CASES are HIGHER = Community risk level is one level higher than the higher of the two HOSPITAL metrics. Examples below:\n\n  * If Springfield County has HIGHER CASES, but (2) LOW HOSPITAL metrics =  Community risk level is MEDIUM\n  * If Springfield County has HIGHER CASES, but (1) LOW HOSPITAL metric and (1) MEDIUM HOSPITAL metric  =  Community risk level is HIGH\n\n[Read more details on the CDC's methodology.](https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html)\n\nWe remain committed to continuing to make all of our previous metrics available on our site and in our API. We acknowledge that these transmission metrics may remain useful to those who want to avoid infection. Find detailed instructions on how to access those metrics here.",
           "questionId": "continued-community-level-explained"
         }
       ]
@@ -54,7 +54,7 @@
         {
           "question": "Limitations",
           "questionId": "limitations-admissions",
-          "answer": "1. County-level data is only reported once a week. \n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have admissions data, based on the admission rates of other hospitals within the health service area.\n3. This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies."
+          "answer": "1. County-level data is only reported once a week. \n2. For counties, the data is based on the health service area the county is a part of. A county with no hospitals can still have admissions data, based on the admission rates of other hospitals within the health service area.\n3. This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies."
         }
       ],
       "sectionId": "weekly-admissions"
@@ -78,7 +78,7 @@
         {
           "question": "Limitations",
           "questionId": "limitations-patients-with-covid",
-          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the [health service area](/faq#health-service-area) the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
+          "answer": "1. County-level data are only reported once a week.\n2. For counties, the data is based on the health service area the county is a part of. A county with no hospitals can still have data for this metric, based on the percent of beds with COVID-19 patients in other hospitals within the health service area."
         }
       ]
     },
@@ -101,7 +101,7 @@
         {
           "question": "More information on infection rate",
           "questionId": "more-info-infection-rate",
-          "answer": "[Why is infection rate important?](https://covidactnow.org/faq#infection-rate-important)\n\n[Video explainer](https://www.youtube.com/embed/dmp5iAXrkaY)"
+          "answer": "Why is infection rate important?\n\n[Video explainer](https://www.youtube.com/embed/dmp5iAXrkaY)"
         }
       ]
     },
@@ -119,12 +119,12 @@
         {
           "question": "Limitations",
           "questionId": "positive-test-rate-limitations",
-          "answer": "Federal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. However there are limitations due to some states reporting testing data differently.\n\n1. While we try to strictly use PCR tests, it’s possible that some states combine [PCR](https://covidactnow.org/glossary#pcr-test) and rapid testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters."
+          "answer": "Federal data sets such as the Department of Health and Human Services (HHS) and Centers for Disease Control and Prevention (CDC) attempt to standardize fragmented testing data by representing diagnostic specimens and excluding non-PCR tests. However there are limitations due to some states reporting testing data differently.\n\n1. While we try to strictly use PCR tests, it’s possible that some states combine PCR and rapid testing.\n2. Some states track positive tests while others track people who test positive. So someone who takes three tests and eventually tests positive may be counted in noticeably different ways depending on whether the state tracks tests, people, or encounters."
         },
         {
           "question": "More information on positive test rate",
           "questionId": "more-info-positive-test-rate\n",
-          "answer": "[What does positive test rate tell us?](https://covidactnow.org/faq#what-does-positive-test-rate-tell-us)\n\n[Video explainer](https://www.youtube.com/embed/RpqI-ZVGGoY)"
+          "answer": "What does positive test rate tell us?\n\n[Video explainer](https://www.youtube.com/embed/RpqI-ZVGGoY)"
         }
       ]
     },
@@ -137,12 +137,12 @@
         {
           "questionId": "icu-capacity-used-sources-methodology",
           "question": "Sources and methodology",
-          "answer": "We calculate ICU capacity by taking the number of staffed ICU beds that are occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the metric. This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15). For counties we aggregate the data for all counties in the [health service area](/faq#health-service-area).\n\nFor more details, see the Trends module."
+          "answer": "We calculate ICU capacity by taking the number of staffed ICU beds that are occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the metric. This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15). For counties we aggregate the data for all counties in the health service area.\n\nFor more details, see the Trends module."
         },
         {
           "question": "Limitations",
           "questionId": "icu-capacity-used-limitations",
-          "answer": "This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nThe biggest source of uncertainty in this metric is the ability for a hospital to quickly expand beyond its normal capacity to meet increased demand. This “[surge” capacity](https://covidactnow.org/glossary#surge-capacity) is difficult to predict in advance because it depends on both physical hospital resources like available beds and non-physical resources like healthy nurses and doctors to run them.\n\nHHS tries to control for this by requiring that hospitals report staffed ICU beds on a daily basis, but this doesn’t give a complete picture about theoretical surge capacity."
+          "answer": "This data is closely watched by HHS, but nevertheless, there may be missing or incorrect data. Data may be lost or distorted as it is reported from hospitals to local, state, and federal agencies, such as the HHS. \n\nThe biggest source of uncertainty in this metric is the ability for a hospital to quickly expand beyond its normal capacity to meet increased demand. This “surge” capacity is difficult to predict in advance because it depends on both physical hospital resources like available beds and non-physical resources like healthy nurses and doctors to run them.\n\nHHS tries to control for this by requiring that hospitals report staffed ICU beds on a daily basis, but this doesn’t give a complete picture about theoretical surge capacity."
         }
       ]
     },
@@ -176,7 +176,7 @@
         {
           "question": "Limitations\n",
           "questionId": "limitations-vulnerability ",
-          "answer": "Vulnerability is a complex issue, and it does not look the same in every community and through every lens. There are several limitations of the CCVI data to keep in mind: \n\n* The index is an estimate of vulnerability and does not account for every factor which may make an individual or community at higher risk of COVID disease or death. \n* For the most complete understanding of a community’s vulnerability, the index should be used in conjunction with COVID statistics and data on public response, such as test site locations, [nonpharmaceutical interventions (NPIs)](https://covidactnow.org/glossary#npi), and vaccine distribution. \n* The CCVI may not capture all at-risk essential worker groups represented in the “crowded living and working areas” special vulnerability."
+          "answer": "Vulnerability is a complex issue, and it does not look the same in every community and through every lens. There are several limitations of the CCVI data to keep in mind: \n\n* The index is an estimate of vulnerability and does not account for every factor which may make an individual or community at higher risk of COVID disease or death. \n* For the most complete understanding of a community’s vulnerability, the index should be used in conjunction with COVID statistics and data on public response, such as test site locations, nonpharmaceutical interventions (NPIs), and vaccine distribution. \n* The CCVI may not capture all at-risk essential worker groups represented in the “crowded living and working areas” special vulnerability."
         },
         {
           "question": "Still have more questions? ",
@@ -186,7 +186,7 @@
         {
           "question": "More information on vulnerability",
           "questionId": "more-info-vulnerability",
-          "answer": "[Why vulnerability data is important for all communities ](/covid-explained/covid-vulnerability-data)\n\n[Resources for vulnerable people](/covid-explained/federal-resources-covid-relief)"
+          "answer": "Why vulnerability data is important for all communities.\n\nResources for vulnerable people."
         }
       ]
     },

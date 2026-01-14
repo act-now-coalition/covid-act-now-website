@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 import { Subtitle1 } from 'components/Typography';
 import { mobileBreakpoint, materialSMBreakpoint } from 'assets/theme/sizes';
@@ -150,23 +149,6 @@ export const Row = styled.div`
   }
 `;
 
-export const AboutLink = styled(Link)`
-  ${props => props.theme.fonts.regularBook};
-  font-size: 0.875rem;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 3px;
-  color: ${COLOR_MAP.GREY_4};
-  margin-right: 1.5rem;
-
-  &:focus {
-    outline: none;
-  }
-
-  &:focus-visible {
-    outline: rgb(0, 95, 204) 1px auto;
-  }
-`;
 
 export const TableWrapper = styled.div`
   margin-top: 1.5rem;

@@ -1,14 +1,9 @@
 import React, { Fragment } from 'react';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
 import { useRouteMatch } from 'react-router-dom';
-import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent from 'components/PageContent';
 import { learnPages } from 'cms-content/learn';
-import {
-  BreadcrumbsContainer,
-  LearnHeading1,
-  ArticlesLandingIntro,
-} from '../Learn.style';
+import { LearnHeading1, ArticlesLandingIntro } from '../Learn.style';
 import { CardsContainer } from '../Learn.style';
 import LandingPageCard from '../SharedComponents/LandingPageCard';
 import { Article } from 'cms-content/articles';
@@ -39,9 +34,6 @@ const ArticlesLanding: React.FC<{
         pageDescription={pageDescription}
       />
       <PageContent sidebarItems={learnPages}>
-        <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
-        </BreadcrumbsContainer>
         <LearnHeading1>{title}</LearnHeading1>
         <LearnDisclaimer />
         {sectionIntro && (

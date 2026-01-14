@@ -27,7 +27,7 @@ const ButtonSystem = () => {
         </Grid>
         <Grid item>
           <TextButton
-            to="/glossary#antibodies"
+            to="/"
             endIcon={<ArrowForwardIcon />}
             {...trackingProps}
           >

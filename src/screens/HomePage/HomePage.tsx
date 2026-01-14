@@ -1,9 +1,8 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
@@ -27,7 +26,6 @@ import {
   HomePageBlock,
   ColumnCentered,
   MapDescriptionText,
-  AboutLink,
   ExploreDataPanel,
   ExploreDataHeader,
   ExploreDataInner,
@@ -59,7 +57,6 @@ function getPageDescription() {
 
 export default function HomePage() {
   const recommendationsRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -80,12 +77,6 @@ export default function HomePage() {
     exploreGeoLocations.push(regions.usa.fipsCode);
   }
   const initialFipsListForExplore = exploreGeoLocations;
-
-  useEffect(() => {
-    if (location.pathname.includes('alert_signup')) {
-      window.location.href = '#alert_signup';
-    }
-  }, [location.pathname]);
 
   const exploreSectionRef = useRef(null);
 
@@ -212,11 +203,6 @@ export default function HomePage() {
                           />
                         )}
                         renderThermometer={() => <CommunityLevelThermometer />}
-                        infoLink={
-                          <AboutLink to="/covid-community-level-metrics">
-                            About community risk levels
-                          </AboutLink>
-                        }
                         mapDescription={getRiskMapDescription()}
                       />
                       <HomePageBlock

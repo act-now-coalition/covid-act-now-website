@@ -19,19 +19,14 @@ const ExplainedRouter: React.FC = () => {
             <Article
               article={article}
               canonicalUrl={urlJoin('https://covidactnow.org/', relativeUrl)}
-              parentItem={{ to: '/covid-explained', label: 'COVID explained' }}
+              parentItem={{ to: '/', label: 'Home' }}
             />
           </Route>
         );
       })}
-      {/* This URL contained a typo that was corrected after launching/sharing the article a bit. Adding a redirect so the old URL doesn't break: */}
-      <Redirect
-        from="/covid-explained/combatting-vaccine-hesitancy"
-        to="/covid-explained/combating-vaccine-hesitancy"
-      />
       {/* Redirect bad URLs to the explained landing page */}
       <Route path="/*" key="bad-url">
-        <Redirect to="/covid-explained" />
+        <Redirect to="/" />
       </Route>
     </Switch>
   );
