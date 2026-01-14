@@ -1,118 +1,44 @@
 import React from 'react';
 import AboveTheFold from './AboveTheFold';
 import regions from 'common/regions';
-import { useLocationSummariesForFips } from 'common/hooks';
 
 export default {
   title: 'Location Page/Above the fold',
   component: AboveTheFold,
 };
 
-const onClickProps = {
-  onClickAlertSignup: () => {},
-  onClickSparkLine: () => {},
-  onClickTransmissionMetricsCard: () => {},
-  onClickMasksCard: () => {},
-};
-
 export const California = () => {
   const region = regions.findByFipsCodeStrict('06');
-  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-
-  return (
-    <AboveTheFold
-      region={region}
-      locationSummary={locationSummary}
-      {...onClickProps}
-    />
-  );
+  return <AboveTheFold region={region} />;
 };
 
 export const Missouri = () => {
   const region = regions.findByFipsCodeStrict('29');
-  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-
-  return (
-    <AboveTheFold
-      region={region}
-      locationSummary={locationSummary}
-      {...onClickProps}
-    />
-  );
+  return <AboveTheFold region={region} />;
 };
 
 export const MaricopaCounty = () => {
   const region = regions.findByFipsCodeStrict('04013');
-  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-
-  return (
-    <AboveTheFold
-      region={region}
-      locationSummary={locationSummary}
-      {...onClickProps}
-    />
-  );
+  return <AboveTheFold region={region} />;
 };
 
 export const EastBatonRougeParish = () => {
   const region = regions.findByFipsCodeStrict('22033');
-  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-
-  return (
-    <AboveTheFold
-      region={region}
-      locationSummary={locationSummary}
-      {...onClickProps}
-    />
-  );
+  return <AboveTheFold region={region} />;
 };
 
 export const AtlantaMetro = () => {
   const region = regions.findByFipsCodeStrict('12060');
-  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-
-  return (
-    <AboveTheFold
-      region={region}
-      locationSummary={locationSummary}
-      {...onClickProps}
-    />
-  );
+  return <AboveTheFold region={region} />;
 };
 
 export const BostonMetro = () => {
   const region = regions.findByFipsCodeStrict('14460');
-  const locationSummary = useLocationSummariesForFips(region.fipsCode);
 
-  if (!locationSummary) {
-    return null;
-  }
-
-  return (
-    <AboveTheFold
-      region={region}
-      locationSummary={locationSummary}
-      {...onClickProps}
-    />
-  );
+  return <AboveTheFold region={region} />;
 };

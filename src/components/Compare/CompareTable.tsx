@@ -26,6 +26,7 @@ import { Region, MetroArea, State } from 'common/regions';
 import { orderedColumns, orderedColumnsVaccineFirst } from './columns';
 import { EventCategory } from 'components/Analytics/utils';
 import ExpandableContainer from 'components/ExpandableContainer';
+import ArchivedDataCallout from 'components/ArchivedDataCallout';
 
 const CompareTable = (props: {
   stateName?: string;
@@ -227,9 +228,14 @@ const CompareTable = (props: {
     <Wrapper $isModal={props.isModal} $isHomepage={props.isHomepage}>
       {!props.isModal && (
         <HeaderContainer $isHomepage={props.isHomepage}>
-          <CompareHeader $isHomepage={props.isHomepage}>
-            {props.region ? 'Counties' : 'Compare'}
-          </CompareHeader>
+          <div>
+            <CompareHeader $isHomepage={props.isHomepage}>
+              {props.region ? 'Counties' : 'Compare'}
+            </CompareHeader>
+            {props.region && (
+              <ArchivedDataCallout trackingLabel="Counties table" />
+            )}
+          </div>
           {!disableFilters && (
             <Filters
               isHomepage={props.isHomepage}

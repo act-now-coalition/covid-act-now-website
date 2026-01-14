@@ -48,6 +48,7 @@ import { getLocationLabel } from 'components/AutocompleteRegions';
 import { EmptyPanel } from 'components/Charts/Charts.style';
 import { useChartHeightForBreakpoint } from 'common/hooks';
 import { assert } from '@actnowcoalition/assert';
+import ArchivedDataCallout from 'components/ArchivedDataCallout';
 
 const MARGIN_SINGLE_LOCATION = 20;
 const MARGIN_STATE_CODE = 60;
@@ -280,6 +281,7 @@ const Explore: React.FunctionComponent<{
     return (
       <div ref={exploreRef}>
         <SectionHeader $isHomepage={isHomepage}>{title}</SectionHeader>
+        {!isHomepage && <ArchivedDataCallout trackingLabel="Explore section" />}
         {nationalSummary && nationalSummary}
         <Styles.ChartControlsContainer $isHomepage={isHomepage}>
           <Dropdown

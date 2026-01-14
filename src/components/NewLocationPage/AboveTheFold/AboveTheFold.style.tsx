@@ -22,13 +22,8 @@ export const MainWrapper = styled.div`
 
 export const ContentContainer = styled.div`
   margin: auto;
-  display: flex;
-  width: fit-content;
-
-  @media (min-width: ${countyMapToFixedBreakpoint}) {
-    width: ${props =>
-      props.theme.spacingTheme.locationPage.widthContentWithStickyMap};
-  }
+  width: 100%;
+  max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
 `;
 
 export const HeaderContainer = styled.div`
