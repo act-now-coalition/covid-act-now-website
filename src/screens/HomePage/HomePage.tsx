@@ -29,10 +29,13 @@ import {
   MapDescriptionText,
   AboutLink,
   ExploreDataPanel,
+  ExploreDataHeader,
+  ExploreDataInner,
   ExploreDataToggle,
   ExploreDataToggleText,
   ExploreDataToggleTitle,
   ExploreDataToggleSubtitle,
+  ExploreDataToggleSubtitleEmphasis,
   ExploreDataPills,
   ExploreDataPill,
   ExploreDataContent,
@@ -149,76 +152,93 @@ export default function HomePage() {
               aria-label="Explore historical data"
             >
               <ExploreDataPanel>
-                <ExploreDataToggle
-                  type="button"
-                  aria-expanded={showExploreData}
-                  aria-controls="explore-data-content"
-                  onClick={() => setShowExploreData(prev => !prev)}
-                >
-                  <ExploreDataToggleText>
-                    <ExploreDataToggleTitle>
-                      Explore historical data
-                    </ExploreDataToggleTitle>
-                    <ExploreDataPills aria-hidden="true">
-                      <ExploreDataPill>Search</ExploreDataPill>
-                      <ExploreDataPill>Map</ExploreDataPill>
-                      <ExploreDataPill>Trends</ExploreDataPill>
-                      <ExploreDataPill>Compare</ExploreDataPill>
-                    </ExploreDataPills>
-                  </ExploreDataToggleText>
-                  {showExploreData ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </ExploreDataToggle>
+                <ExploreDataHeader $expanded={showExploreData}>
+                  <ExploreDataInner>
+                    <ExploreDataToggle
+                      type="button"
+                      aria-expanded={showExploreData}
+                      aria-controls="explore-data-content"
+                      onClick={() => setShowExploreData(prev => !prev)}
+                    >
+                      <ExploreDataToggleText>
+                        <ExploreDataToggleTitle>
+                          Explore historical data
+                        </ExploreDataToggleTitle>
+                        <ExploreDataToggleSubtitle>
+                          <ExploreDataToggleSubtitleEmphasis>
+                            State &amp; county
+                          </ExploreDataToggleSubtitleEmphasis>{' '}
+                          trends for cases, hospitalizations, deaths, ICU,
+                          positivity, and vaccinations.
+                        </ExploreDataToggleSubtitle>
+                        <ExploreDataPills aria-hidden="true">
+                          <ExploreDataPill>Search</ExploreDataPill>
+                          <ExploreDataPill>Map</ExploreDataPill>
+                          <ExploreDataPill>Trends</ExploreDataPill>
+                          <ExploreDataPill>Compare</ExploreDataPill>
+                        </ExploreDataPills>
+                      </ExploreDataToggleText>
+                      {showExploreData ? (
+                        <ExpandLessIcon />
+                      ) : (
+                        <ExpandMoreIcon />
+                      )}
+                    </ExploreDataToggle>
+                  </ExploreDataInner>
+                </ExploreDataHeader>
 
                 <Collapse in={showExploreData} timeout="auto" unmountOnExit>
                   <ExploreDataContent id="explore-data-content">
-                    <ColumnCentered id="search">
-                      <SearchAutocomplete
-                        locations={searchLocations}
-                        filterLimit={getFilterLimit()}
-                        menuOpen={menuOpen}
-                        placeholder="City, county, state, or zip"
-                        setMenuOpen={setMenuOpen}
-                      />
-                      <HomepageItems
-                        isLoading={isLoading}
-                        userRegions={userRegions}
-                      />
-                    </ColumnCentered>
-                    <MapBlock
-                      title="COVID Community Risk Level"
-                      subtitle=""
-                      renderMap={locationScope => (
-                        <USRiskMap
-                          showCounties={locationScope === MapView.COUNTIES}
+                    <ExploreDataInner>
+                      <ColumnCentered id="search">
+                        <SearchAutocomplete
+                          locations={searchLocations}
+                          filterLimit={getFilterLimit()}
+                          menuOpen={menuOpen}
+                          placeholder="City, county, state, or zip"
+                          setMenuOpen={setMenuOpen}
                         />
-                      )}
-                      renderThermometer={() => <CommunityLevelThermometer />}
-                      infoLink={
-                        <AboutLink to="/covid-community-level-metrics">
-                          About community risk levels
-                        </AboutLink>
-                      }
-                      mapDescription={getRiskMapDescription()}
-                    />
-                    <HomePageBlock
-                      ref={exploreSectionRef}
-                      id="explore-hospitalizations"
-                    >
-                      <Explore
-                        title="Trends"
-                        initialFipsList={initialFipsListForExplore}
-                        currentMetric={currentMetric}
-                        setCurrentMetric={setCurrentMetric}
-                        nationalSummary={<NationalText />}
+                        <HomepageItems
+                          isLoading={isLoading}
+                          userRegions={userRegions}
+                        />
+                      </ColumnCentered>
+                      <MapBlock
+                        title="COVID Community Risk Level"
+                        subtitle=""
+                        renderMap={locationScope => (
+                          <USRiskMap
+                            showCounties={locationScope === MapView.COUNTIES}
+                          />
+                        )}
+                        renderThermometer={() => <CommunityLevelThermometer />}
+                        infoLink={
+                          <AboutLink to="/covid-community-level-metrics">
+                            About community risk levels
+                          </AboutLink>
+                        }
+                        mapDescription={getRiskMapDescription()}
                       />
-                    </HomePageBlock>
-                    <HomePageBlock>
-                      <CompareMain
-                        locationsViewable={8}
-                        showModal={showCompareModal}
-                        setShowModal={setShowCompareModal}
-                      />
-                    </HomePageBlock>
+                      <HomePageBlock
+                        ref={exploreSectionRef}
+                        id="explore-hospitalizations"
+                      >
+                        <Explore
+                          title="Trends"
+                          initialFipsList={initialFipsListForExplore}
+                          currentMetric={currentMetric}
+                          setCurrentMetric={setCurrentMetric}
+                          nationalSummary={<NationalText />}
+                        />
+                      </HomePageBlock>
+                      <HomePageBlock>
+                        <CompareMain
+                          locationsViewable={8}
+                          showModal={showCompareModal}
+                          setShowModal={setShowCompareModal}
+                        />
+                      </HomePageBlock>
+                    </ExploreDataInner>
                   </ExploreDataContent>
                 </Collapse>
               </ExploreDataPanel>

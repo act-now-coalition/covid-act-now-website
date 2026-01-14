@@ -181,22 +181,44 @@ export const MapDescriptionText = styled.span`
 `;
 
 export const ExploreDataPanel = styled.div`
-  background: ${COLOR_MAP.GREY_0};
-  border: 1px solid ${COLOR_MAP.GREY_2};
+  background: transparent;
+  border: 1px solid rgba(0, 212, 116, 0.25);
   border-radius: 0;
-  padding: ${props => props.theme.spacing(2.5)}px;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  border-left: none;
-  border-right: none;
+  padding: 0;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
 
   @media (min-width: ${materialSMBreakpoint}) {
-    border-radius: 16px;
-    margin-left: 0;
-    margin-right: 0;
-    border-left: 1px solid ${COLOR_MAP.GREY_2};
-    border-right: 1px solid ${COLOR_MAP.GREY_2};
+    border-radius: 0;
   }
+`;
+
+export const ExploreDataInner = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 ${props => props.theme.spacing(2)}px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding: 0 ${props => props.theme.spacing(4)}px;
+  }
+`;
+
+export const ExploreDataHeader = styled.div<{ $expanded: boolean }>`
+  background: rgba(0, 212, 116, 0.04);
+  transition: background-color 120ms ease-out;
+
+  &:hover {
+    background: rgba(0, 212, 116, 0.12);
+  }
+
+  ${props =>
+    props.$expanded
+      ? `
+    border-bottom: 1px solid rgba(0, 212, 116, 0.25);
+  `
+      : ''}
 `;
 
 export const ExploreDataToggle = styled.button`
@@ -208,14 +230,23 @@ export const ExploreDataToggle = styled.button`
   background: transparent;
   border: none;
   border-radius: 12px;
-  padding: ${props => props.theme.spacing(1.5, 1.75)}px;
+  padding: ${props => props.theme.spacing(2)}px 0;
   color: ${COLOR_MAP.GREY_4};
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.03);
+    background: transparent;
+  }
+
+  /* Give the green header area more vertical real estate for discoverability. */
+  padding-top: ${props => props.theme.spacing(3)}px;
+  padding-bottom: ${props => props.theme.spacing(3)}px;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    padding-top: ${props => props.theme.spacing(4)}px;
+    padding-bottom: ${props => props.theme.spacing(4)}px;
   }
 
   &:focus {
@@ -245,6 +276,11 @@ export const ExploreDataToggleSubtitle = styled.span`
   color: ${COLOR_MAP.GRAY_BODY_COPY};
 `;
 
+export const ExploreDataToggleSubtitleEmphasis = styled.span`
+  font-weight: 500;
+  color: ${COLOR_MAP.GREEN.DARK};
+`;
+
 export const ExploreDataPills = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -266,7 +302,6 @@ export const ExploreDataPill = styled.span`
 `;
 
 export const ExploreDataContent = styled.div`
-  margin-top: ${props => props.theme.spacing(2)}px;
-  padding-top: ${props => props.theme.spacing(2)}px;
-  border-top: 1px solid ${COLOR_MAP.GREY_2};
+  background: #fff;
+  padding: ${props => props.theme.spacing(2.5)}px 0;
 `;
