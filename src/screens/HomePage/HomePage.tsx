@@ -36,7 +36,6 @@ import { MapBlock } from './MapBlock';
 import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
-import { Level } from 'common/level';
 import { HiatusBanner } from 'components/Banner/HiatusBanner';
 
 function getPageDescription() {
@@ -172,7 +171,6 @@ export default function HomePage() {
             </HomePageBlock>
             <HomePageBlock>
               <Recommendations
-                alarmLevel={Level.UNKNOWN}
                 recommendationsRef={recommendationsRef}
                 region={USA.instance}
                 isHomepage={true}

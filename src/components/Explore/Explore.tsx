@@ -12,7 +12,6 @@ import max from 'lodash/max';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ParentSize } from '@vx/responsive';
-import ShareButtonGroup from 'components/ShareButtons';
 import ExploreChart from './ExploreChart';
 import Legend from './Legend';
 import { ExploreMetric, Series } from './interfaces';
@@ -20,10 +19,6 @@ import LocationSelector from './LocationSelector';
 import {
   getMetricLabels,
   getMetricByChartId,
-  getImageFilename,
-  getExportImageUrl,
-  getChartUrl,
-  getSocialQuote,
   getLocationNames,
   getExploreAutocompleteLocations,
   getChartSeries,
@@ -44,17 +39,12 @@ import {
 } from './utils';
 import * as Styles from './Explore.style';
 import { SectionHeader } from 'components/SharedComponents/SharedComponents.style';
-import {
-  SharedComponent,
-  storeSharedComponentParams,
-  useSharedComponentParams,
-} from 'common/sharing';
+import { SharedComponent, useSharedComponentParams } from 'common/sharing';
 import { ScreenshotReady } from 'components/Screenshot';
 import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import regions, { Region, useRegionFromParams } from 'common/regions';
 import Dropdown from 'components/Explore/Dropdown/Dropdown';
 import { getLocationLabel } from 'components/AutocompleteRegions';
-import { ShareBlock } from 'components/Footer/Footer.style';
 import { EmptyPanel } from 'components/Charts/Charts.style';
 import { useChartHeightForBreakpoint } from 'common/hooks';
 import { assert } from '@actnowcoalition/assert';
@@ -65,10 +55,6 @@ const MARGIN_COUNTY = 120;
 
 function trackExploreEvent(action: EventAction, label: string, value?: number) {
   trackEvent(EventCategory.EXPLORE, action, label, value);
-}
-
-function trackShare(label: string, value?: number) {
-  trackExploreEvent(EventAction.SHARE, label, value);
 }
 
 function getNoDataCopy(metricName: string, locationNames: string) {
@@ -217,6 +203,7 @@ const Explore: React.FunctionComponent<{
 
     const hasData = some(chartSeries, ({ data }) => data.length > 0);
     const hasMultipleLocations = selectedLocations.length > 1;
+    const numLocations = selectedLocations.length;
 
     const { pathname } = useLocation();
 
@@ -224,15 +211,6 @@ const Explore: React.FunctionComponent<{
       () => getMarginRight(hasMultipleLocations, isMobileXs, chartSeries),
       [hasMultipleLocations, isMobileXs, chartSeries],
     );
-
-    const createSharedComponentId = async () => {
-      return storeSharedComponentParams(SharedComponent.Explore, {
-        currentMetric,
-        period,
-        normalizeData,
-        selectedFips: selectedLocations.map(location => location.fipsCode),
-      });
-    };
 
     const maxYFromDefinition = getMaxYFromDefinition(currentMetric);
 
@@ -286,11 +264,6 @@ const Explore: React.FunctionComponent<{
           ORIGINAL_EXPLORE_METRICS.includes(currentMetric),
       );
     }, [currentMetric, selectedLocations]);
-
-    const trackingLabel = hasMultipleLocations
-      ? `Multiple Locations`
-      : 'Single Location';
-    const numLocations = selectedLocations.length;
 
     const showLegend =
       ORIGINAL_EXPLORE_METRICS.includes(currentMetric) && numLocations === 1;
@@ -379,40 +352,6 @@ const Explore: React.FunctionComponent<{
         )}
         <Styles.FooterContainer>
           {showLegend && <Legend seriesList={chartSeries} />}
-          <ShareBlock>
-            <ShareButtonGroup
-              disabled={selectedLocations.length === 0 || !hasData}
-              imageUrl={() => createSharedComponentId().then(getExportImageUrl)}
-              imageFilename={getImageFilename(selectedLocations, currentMetric)}
-              url={() =>
-                createSharedComponentId().then(sharingId =>
-                  getChartUrl(sharingId, region),
-                )
-              }
-              quote={getSocialQuote(selectedLocations, currentMetric)}
-              region={region ? region : undefined}
-              onSaveImage={() => {
-                trackExploreEvent(
-                  EventAction.SAVE_IMAGE,
-                  trackingLabel,
-                  selectedLocations.length,
-                );
-              }}
-              onCopyLink={() => {
-                trackExploreEvent(
-                  EventAction.COPY_LINK,
-                  trackingLabel,
-                  selectedLocations.length,
-                );
-              }}
-              onShareOnFacebook={() =>
-                trackShare(`Facebook: ${trackingLabel}`, numLocations)
-              }
-              onShareOnTwitter={() =>
-                trackShare(`Twitter: ${trackingLabel}`, numLocations)
-              }
-            />
-          </ShareBlock>
         </Styles.FooterContainer>
       </div>
     );

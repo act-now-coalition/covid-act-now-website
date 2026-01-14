@@ -11,8 +11,6 @@ import {
 } from './HomePage.style';
 import LocationToggle from './LocationToggle';
 import { MapView } from './utils';
-import { getUrlAndShareQuote } from 'components/ShareBlock/ShareModelBlock';
-import ShareButtons from 'components/SharedComponents/ShareButtons';
 
 interface MapBlockProps {
   title: React.ReactNode;
@@ -48,9 +46,6 @@ export const MapBlock: React.FC<MapBlockProps> = ({
     }
   };
 
-  const { displayName, shareURL } = getUrlAndShareQuote();
-  const shareQuote = `I'm keeping track of ${displayName}'s vaccination progress and COVID risk level data with @CovidActNow. What does your community look like?`;
-
   return (
     <HomePageBlock>
       <ColumnCentered>
@@ -64,14 +59,7 @@ export const MapBlock: React.FC<MapBlockProps> = ({
           {renderTable && (
             <TableWrapper>{renderTable(MapView.STATES)}</TableWrapper>
           )}
-          <Row>
-            {infoLink}
-            <ShareButtons
-              eventCategory={EventCategory.MAP}
-              shareUrl={shareURL}
-              shareQuote={shareQuote}
-            />
-          </Row>
+          <Row>{infoLink}</Row>
         </MapSubitemsWrapper>
       </ColumnCentered>
     </HomePageBlock>

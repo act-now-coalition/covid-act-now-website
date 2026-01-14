@@ -1,8 +1,5 @@
 /** Helpers for compare, getting location arrays for each filter/pagetype **/
-import isNumber from 'lodash/isNumber';
 import { LocationSummary, getSummaryFromFips } from 'common/location_summaries';
-import { getMetricNameForCompare } from 'common/metric';
-import { Metric } from 'common/metricEnum';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import regions, {
   County,
@@ -168,79 +165,6 @@ export function getRegionNameForRow(region: Region, condensed?: boolean) {
     return splitRegionName(region.shortName);
   } else {
     fail('dont support other regions');
-  }
-}
-
-export function getShareQuote(
-  sorter: Metric,
-  sliderValue: GeoScopeFilter,
-  totalLocations: number,
-  sortDescending: boolean,
-  homepageScope: HomepageLocationScope,
-  currentLocation?: RankedLocationSummary,
-  sortByPopulation?: boolean,
-  stateName?: string,
-  region?: Region,
-): string {
-  const geoScopeShareCopy: any = {
-    [GeoScopeFilter.NEARBY]: 'nearby',
-    [GeoScopeFilter.STATE]: stateName,
-    [GeoScopeFilter.COUNTRY]: 'USA',
-  };
-
-  const homepageShareCopy = `Compare all USA ${
-    homepageScope === HomepageLocationScope.COUNTY
-      ? 'counties'
-      : `${homepageLabelMap[homepageScope].plural.toLowerCase()}`
-  } by their local COVID metrics with @CovidActNow.`;
-
-  const stateShareCopy = `Compare COVID metrics between counties in ${stateName} with @CovidActNow.`;
-
-  const hasValidRank =
-    currentLocation &&
-    currentLocation.rank !== 0 &&
-    isNumber(currentLocation.metricsInfo.metrics[sorter]?.value);
-
-  const ascendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
-    sorter,
-  )
-    ? 'least'
-    : 'lowest';
-  const descendingCopy = [Metric.HOSPITAL_USAGE, Metric.VACCINATIONS].includes(
-    sorter,
-  )
-    ? 'most'
-    : 'highest';
-
-  const countyShareCopy =
-    currentLocation &&
-    hasValidRank &&
-    `${currentLocation.region.shortName} ranks #${
-      currentLocation.rank
-    } out of ${totalLocations} total ${
-      geoScopeShareCopy[sliderValue]
-    } counties when sorted by ${
-      sortDescending ? descendingCopy : ascendingCopy
-    } ${
-      sortByPopulation
-        ? 'population'
-        : sorter === Metric.HOSPITAL_USAGE
-        ? getMetricNameForCompare(sorter)
-        : getMetricNameForCompare(sorter).toLowerCase()
-    }, according to @CovidActNow. See how your county compares.`;
-
-  if (!region) {
-    return homepageShareCopy;
-  } else {
-    if (region instanceof MetroArea) {
-      return `Compare COVID metrics between counties in ${region.name} with @CovidActNow.`;
-    } else if (!currentLocation && stateName) {
-      return stateShareCopy;
-    } else if (currentLocation) {
-      return countyShareCopy || stateShareCopy;
-    } else {
-      return stateShareCopy;
-    }
   }
 }
 

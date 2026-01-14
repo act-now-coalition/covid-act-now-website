@@ -41,19 +41,6 @@ Code should be automatically linted and formatted on commit, but to manually run
 yarn lint-fix
 ```
 
-If you see an error like `ESLint couldn't find the plugin "eslint-plugin-import"` it usually means your install is missing some ESLint plugins. Re-run:
-
-```bash
-yarn install
-```
-
-If the error persists, install the missing plugins and retry:
-
-```bash
-yarn add -D eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react-hooks eslint-plugin-jest eslint-plugin-testing-library
-yarn lint-fix
-```
-
 ### Testing
 
 Testing is run via jest.

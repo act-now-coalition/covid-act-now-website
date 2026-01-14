@@ -9,32 +9,17 @@ import {
   LearnHeading1,
   BreadcrumbsContainer,
   SmallSubtext,
-  HeaderShareButtonsWrapper,
-  FooterShareButtonsWrapper,
 } from '../Learn.style';
 import { Article } from 'cms-content/articles/utils';
-import SmallShareButtons from 'components/SmallShareButtons';
 import Footer from 'screens/Learn/Footer/Footer';
 import { getCovidExplainedFooter } from 'screens/Learn/Explained';
 import LearnDisclaimer from 'components/LearnDisclaimer/LearnDisclaimer';
 
 const ArticlePage: React.FC<{
   article: Article;
-  onCopyLink: () => void;
-  onShareOnFacebook: () => void;
-  onShareOnTwitter: () => void;
-  shareQuote: string;
   canonicalUrl: string;
   parentItem: { to: string; label: string };
-}> = ({
-  article,
-  canonicalUrl,
-  onCopyLink,
-  onShareOnFacebook,
-  onShareOnTwitter,
-  shareQuote,
-  parentItem,
-}) => {
+}> = ({ article, canonicalUrl, parentItem }) => {
   const metatagDate = formatMetatagDate();
   const { header, body, date, summary } = article;
 
@@ -45,14 +30,6 @@ const ArticlePage: React.FC<{
   const isCeArticle = article.author?.includes('COVID Explained');
   const footerProps = isCeArticle && {
     pageSpecificCopy: getCovidExplainedFooter(),
-  };
-
-  const shareButtonProps = {
-    shareUrl: canonicalUrl,
-    shareQuote,
-    onCopyLink,
-    onShareOnFacebook,
-    onShareOnTwitter,
   };
 
   return (
@@ -69,14 +46,8 @@ const ArticlePage: React.FC<{
         <LearnHeading1>{header}</LearnHeading1>
         <LearnDisclaimer />
         <SmallSubtext source={smallSubtextCopy} />
-        <HeaderShareButtonsWrapper>
-          <SmallShareButtons {...shareButtonProps} />
-        </HeaderShareButtonsWrapper>
         <MarkdownContent source={body} />
         <Footer {...footerProps} />
-        <FooterShareButtonsWrapper>
-          <SmallShareButtons {...shareButtonProps} />
-        </FooterShareButtonsWrapper>
       </PageContent>
     </Fragment>
   );

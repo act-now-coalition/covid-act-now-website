@@ -8,7 +8,7 @@ import { Level } from 'common/level';
 import { Recommendation, RecommendCategory } from 'cms-content/recommendations';
 import { EventAction, EventCategory, trackEvent } from 'components/Analytics';
 import { formatDecimal } from '.';
-import { getAbbreviatedCounty, Region } from 'common/regions';
+import { Region } from 'common/regions';
 import {
   TimeUnit,
   getStartOf,
@@ -119,14 +119,3 @@ export const summaryByLevel = {
   [Level.CRITICAL]: 'is at very high risk',
   [Level.SUPER_CRITICAL]: 'is at extremely high risk',
 };
-
-export function getShareQuote(locationName: string, alarmLevel: Level): string {
-  const locationNameWithAbbreviation = getAbbreviatedCounty(locationName);
-  // We also use Level.UNKNOWN when giving recommendations for the whole US
-  const unknownShareQuote = `These are the COVID guidelines set by the CDC:`;
-
-  if (alarmLevel === Level.UNKNOWN) {
-    return unknownShareQuote;
-  }
-  return `According to @CovidActNow, ${locationNameWithAbbreviation} ${summaryByLevel[alarmLevel]}. These are the COVID guidelines set by the CDC:`;
-}

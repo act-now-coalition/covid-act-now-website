@@ -139,10 +139,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(shareBlockRef.current);
   }, []);
 
-  const onClickShare = useCallback(() => {
-    scrollTo(shareBlockRef.current, -352);
-  }, []);
-
   const [clickedStatMetric, setClickedStatMetric] = useState<Metric | null>(
     null,
   );
@@ -210,7 +206,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
           locationSummary={locationSummary}
           onClickMetric={onClickMetric}
           onClickAlertSignup={onClickAlertSignup}
-          onClickShare={onClickShare}
           onClickSparkLine={onClickSparkLine}
           onClickMasksCard={onClickMasksCard}
           onClickTransmissionMetricsCard={onClickTransmissionMetricsCard}
@@ -267,7 +262,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
               <LocationPageBlock>
                 <Recommendations
                   region={region}
-                  alarmLevel={projections.getAlarmLevel()}
                   recommendationsRef={recommendationsRef}
                   isHomepage={false}
                 />

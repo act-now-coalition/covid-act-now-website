@@ -1,8 +1,6 @@
 import React from 'react';
-import urlJoin from 'url-join';
 import {
   Row,
-  ButtonContainer,
   FooterText,
   AboutText,
   ModalButton,
@@ -15,7 +13,6 @@ import {
   getMetricModalContent,
 } from 'components/Dialogs';
 import { MobileOnly, DesktopOnly } from '../Shared/Shared.style';
-import ShareButtons from 'components/LocationPage/ShareButtons';
 import { DialogProps } from './utils';
 import { Region } from 'common/regions';
 import type { MetricValues, Projections } from 'common/models/Projections';
@@ -24,42 +21,12 @@ import { Metric } from 'common/metricEnum';
 import { getSourcesForMetric } from 'common/utils/provenance';
 import { getMetricNameExtended, getMetricStatusText } from 'common/metric';
 import { EventCategory } from 'components/Analytics';
-import { makeChartShareQuote } from 'common/utils/makeChartShareQuote';
-import * as urls from 'common/urls';
 import { MarkdownContent } from 'components/Markdown';
 import {
   getRegionMetricDisclaimer,
   getRegionMetricOverride,
 } from 'cms-content/region-overrides';
 import { getDataset, isEmpty } from 'common/models/ProjectionsPair';
-
-const ShareButtonBlock: React.FC<{
-  region: Region;
-  stats: MetricValues;
-  chartIdentifier: number;
-}> = ({ region, chartIdentifier, stats }) => {
-  const shareBaseURL = region.canonicalUrl;
-  const shareUrl = urls.addSharingId(
-    urlJoin(shareBaseURL, `chart/${chartIdentifier}`),
-  );
-  const shareQuote = makeChartShareQuote(
-    region.fullName,
-    stats,
-    chartIdentifier,
-  );
-
-  const props = {
-    shareUrl,
-    shareQuote,
-    region,
-  };
-
-  return (
-    <ButtonContainer>
-      <ShareButtons {...props} />
-    </ButtonContainer>
-  );
-};
 
 const MetricModal: React.FC<DialogProps> = ({
   open,
@@ -110,12 +77,6 @@ const MetricChartFooter: React.FC<{
   const timeseries = getDataset(projections.primary, metric);
   const timeseriesEmpty = isEmpty(timeseries);
 
-  const shareButtonProps = {
-    chartIdentifier: metric,
-    region,
-    stats,
-  };
-
   const footerText = getMetricStatusText(metric, projections);
 
   const [isOpen, openDialog, closeDialog] = useDialog(
@@ -150,7 +111,6 @@ const MetricChartFooter: React.FC<{
               </OverrideDisclaimer>
             )}
           </FooterText>
-          <ShareButtonBlock {...shareButtonProps} />
         </Row>
       </DesktopOnly>
       <MobileOnly>
@@ -162,7 +122,6 @@ const MetricChartFooter: React.FC<{
         </FooterText>
         <Row>
           <MetricModal {...dialogProps} />
-          <ShareButtonBlock {...shareButtonProps} />
         </Row>
       </MobileOnly>
     </Wrapper>

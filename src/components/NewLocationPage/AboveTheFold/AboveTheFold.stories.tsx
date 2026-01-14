@@ -10,7 +10,6 @@ export default {
 
 const onClickProps = {
   onClickAlertSignup: () => {},
-  onClickShare: () => {},
   onClickSparkLine: () => {},
   onClickTransmissionMetricsCard: () => {},
   onClickMasksCard: () => {},

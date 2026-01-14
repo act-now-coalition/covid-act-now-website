@@ -6,7 +6,6 @@ import reverse from 'lodash/reverse';
 import isNumber from 'lodash/isNumber';
 import {
   Wrapper,
-  Footer,
   HeaderContainer,
   CompareHeader,
   NumberOfLocationsText,
@@ -17,25 +16,16 @@ import {
   SummaryForCompare,
   RankedLocationSummary,
   GeoScopeFilter,
-  getShareQuote,
   trackCompareEvent,
   HomepageLocationScope,
   homepageLabelMap,
-  sliderNumberToFilterMap,
 } from 'common/utils/compare';
 import { COLOR_MAP } from 'common/colors';
-import ShareButtonGroup from 'components/ShareButtons/ShareButtonGroup';
-import { getComparePageUrl, getCompareShareImageUrl } from 'common/urls';
 import { EventAction } from 'components/Analytics';
 import { Region, MetroArea, State } from 'common/regions';
 import { orderedColumns, orderedColumnsVaccineFirst } from './columns';
 import { EventCategory } from 'components/Analytics/utils';
 import ExpandableContainer from 'components/ExpandableContainer';
-import { ShareBlock } from 'components/Footer/Footer.style';
-
-function trackShare(label: string) {
-  trackCompareEvent(EventAction.SHARE, label);
-}
 
 const CompareTable = (props: {
   stateName?: string;
@@ -56,7 +46,6 @@ const CompareTable = (props: {
   sortByPopulation: boolean;
   setSortByPopulation: React.Dispatch<React.SetStateAction<boolean>>;
   sliderValue: GeoScopeFilter;
-  createCompareShareId: () => Promise<string>;
   homepageScope: HomepageLocationScope;
   setHomepageScope: React.Dispatch<React.SetStateAction<HomepageLocationScope>>;
   homepageSliderValue: HomepageLocationScope;
@@ -168,18 +157,6 @@ const CompareTable = (props: {
     ? { rank: currentCountyRank + 1, ...currentCounty }
     : null;
 
-  const shareQuote = getShareQuote(
-    sorter,
-    sliderNumberToFilterMap[sliderValue],
-    sortedLocationsArr.length,
-    sortDescending,
-    props.homepageScope,
-    currentLocation,
-    sortByPopulation,
-    props.stateName,
-    region,
-  );
-
   // Disabling filters for Northern Mariana Islands because they don't have
   // any data on metro vs non-metro islands.  There may be more elegant solutions
   // that better handle any region without metro/non-metro regions.
@@ -191,14 +168,6 @@ const CompareTable = (props: {
 
   // Only showing the view more text when all locations are not available.
   const showViewMore = amountDisplayed !== sortedLocationsArr.length;
-
-  const getShareUrl = () =>
-    props.createCompareShareId().then(id => `${getComparePageUrl(id, region)}`);
-  const getDownloadImageUrl = () =>
-    props.createCompareShareId().then(id => `${getCompareShareImageUrl(id)}`);
-
-  // TODO: What is the best way to label here?
-  const trackLabel = 'Compare';
 
   const onClickShowAll = () => {
     props.setShowModal(true);
@@ -283,27 +252,6 @@ const CompareTable = (props: {
         </ExpandableContainer>
       ) : (
         <LocationTable {...locationTableProps} />
-      )}
-      {!props.isModal && (
-        <Footer>
-          <ShareBlock>
-            <ShareButtonGroup
-              imageUrl={getDownloadImageUrl}
-              imageFilename="CovidActNow-compare.png"
-              url={getShareUrl}
-              quote={shareQuote}
-              region={region}
-              onCopyLink={() =>
-                trackCompareEvent(EventAction.COPY_LINK, trackLabel)
-              }
-              onSaveImage={() =>
-                trackCompareEvent(EventAction.SAVE_IMAGE, trackLabel)
-              }
-              onShareOnFacebook={() => trackShare(`Facebook: ${trackLabel}`)}
-              onShareOnTwitter={() => trackShare(`Twitter: ${trackLabel}`)}
-            />
-          </ShareBlock>
-        </Footer>
       )}
     </Wrapper>
   );

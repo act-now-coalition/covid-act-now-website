@@ -31,7 +31,6 @@ interface AboveTheFoldProps {
   region: Region;
   locationSummary: LocationSummary;
   onClickAlertSignup: () => void;
-  onClickShare: () => void;
   onClickMetric?: (metric: Metric) => void;
   onClickSparkLine: (metric: SparkLineMetric) => void;
   onClickMasksCard: () => void;
@@ -44,7 +43,6 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
     locationSummary,
     onClickMetric,
     onClickAlertSignup,
-    onClickShare,
     onClickSparkLine,
     onClickMasksCard,
     onClickTransmissionMetricsCard,
@@ -59,7 +57,7 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
               <HeaderContainer>
                 <LocationName region={region} />
                 <DesktopOnly>
-                  <HeaderButtons region={region} onClickShare={onClickShare} />
+                  <HeaderButtons />
                 </DesktopOnly>
                 <MobileOnly>
                   <VaccineButton />
@@ -71,7 +69,6 @@ const AboveTheFold: React.FC<AboveTheFoldProps> = React.memo(
                 region={region}
                 locationSummary={locationSummary}
                 onClickMetric={onClickMetric}
-                onClickShare={onClickShare}
               />
             </GridItemOverview>
             <GridItemSparkLines>
