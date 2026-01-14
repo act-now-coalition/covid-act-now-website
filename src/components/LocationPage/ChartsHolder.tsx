@@ -194,12 +194,12 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     scrollTo(transmissionMetricsRef.current);
   }, []);
 
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
   if (!locationSummary) {
     return null;
   }
   const stats = summaryToStats(locationSummary);
-
-  const [showCompareModal, setShowCompareModal] = useState(false);
 
   // TODO(pablo): Create separate refs for signup and share
   return (

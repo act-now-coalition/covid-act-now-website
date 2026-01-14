@@ -140,7 +140,7 @@ function renderStatus(projections: Projections): React.ReactElement {
       2023/2024 updated boosters. <br /> <br /> Fewer than 0.001% of people who
       have received a dose experienced a severe adverse reaction.{' '}
       {cappedVaccinatedCopy}
-      <ExternalLink href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/about-vaccines/index.html">
+      <ExternalLink href="https://www.aap.org/en/patient-care/covid-19/covid-19-vaccine-frequently-asked-questions/">
         See more vaccine resources and FAQs
       </ExternalLink>
       .

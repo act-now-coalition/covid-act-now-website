@@ -13,7 +13,7 @@ const VaccineButton: React.FC = () => {
         <StyledVaccineButton
           trackingCategory={EventCategory.VACCINATION}
           trackingLabel="Location page header: Find a vaccine"
-          href="https://vaccinefinder.org/search/"
+          href="https://vaccinefinder.org/en"
           endIcon={<OpenInNewIcon />}
         >
           Find a vaccine

@@ -13,11 +13,11 @@
       "cta": {
         "buttonType": "OUTLINE",
         "text": "Get tips on masking",
-        "url": "https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/about-face-coverings.html"
+        "url": "https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Respiratory-Viruses/When-and-Why-to-Wear-a-Mask.aspx"
       }
     },
     {
-      "body": "**Vaccines** are now approved for children 6 months and older. Vaccinations can protect against infection, serious illness and death from COVID.",
+      "body": "**Vaccines** can protect against infection, serious illness and death from COVID. Vaccines are approved for children 6 months and older.",
       "source": "FED",
       "category": "VACCINATION",
       "level": "ALL",
@@ -25,7 +25,7 @@
       "cta": {
         "buttonType": "OUTLINE",
         "text": "Find a vaccine",
-        "url": "https://www.vaccines.gov/"
+        "url": "https://vaccinefinder.org/"
       },
       "icon": {
         "iconImage": "/images_cms/vaccine_recommends_icon.svg",
@@ -33,7 +33,7 @@
       }
     },
     {
-      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. The [Test to Treat](https://aspr.hhs.gov/TestToTreat/Pages/default.aspx) initiative provides high-risk individuals who test positive with immediate access to antivirals at certified locations.",
+      "body": "**Testing** is important if you experience symptoms or have been recently exposed to COVID. If you test positive, follow isolation guidance and contact a healthcare provider about treatment options if needed.",
       "source": "FED",
       "category": "TESTING",
       "level": "ALL",
@@ -41,7 +41,7 @@
       "cta": {
         "buttonType": "OUTLINE",
         "text": "Order free at-home tests",
-        "url": "https://www.covid.gov/tests"
+        "url": "https://www.usa.gov/covid-tests-vaccinations"
       },
       "icon": {
         "altText": "Testing icon",
@@ -49,7 +49,7 @@
       }
     },
     {
-      "body": "**Booster shots** offer necessary protection against infection, serious illness and death from all COVID variants. The updated [2023/2024 booster](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/stay-up-to-date.html) provides additional protection.",
+      "body": "**Booster shots** offer protection against infection, serious illness and death from all COVID variants",
       "source": "FED",
       "category": "BOOSTER",
       "level": "ALL",
@@ -61,7 +61,7 @@
       "cta": {
         "buttonType": "OUTLINE",
         "text": "Find a booster",
-        "url": "https://www.vaccines.gov/"
+        "url": "https://vaccinefinder.org/"
       }
     }
   ],
