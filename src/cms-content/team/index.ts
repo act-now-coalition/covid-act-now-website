@@ -1,6 +1,5 @@
 import { sanitizeID } from '../utils';
 import leadership from './leadership.json';
-import board from './board.json';
 import advisors from './advisors.json';
 import productManagement from './product-management.json';
 import engineering from './engineering.json';
@@ -38,7 +37,6 @@ function sanitizeTeam(team: Team): Team {
 
 const allTeams = [
   leadership,
-  board,
   advisors,
   engineering,
   productManagement,
@@ -48,10 +46,9 @@ const allTeams = [
 ];
 
 /*
-  We are now removing categories for all teams other than leadership, board, advisors, and alumni
+  We are now removing categories for all teams other than leadership, advisors, and alumni
 */
 const individuallyGroupedTeams = [
-  'Board',
   'Advisors',
   'Alumni',
   'Legal Counsel',
@@ -67,6 +64,6 @@ const combinedTeamObj = {
   teamMembers: combinedTeamMembers,
 };
 
-const groupedTeams = [combinedTeamObj, legalCounsel, board, advisors, alumni];
+const groupedTeams = [combinedTeamObj, legalCounsel, advisors, alumni];
 
 export const teams: Team[] = groupedTeams.map(sanitizeTeam);

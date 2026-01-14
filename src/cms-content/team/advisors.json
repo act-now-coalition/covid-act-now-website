@@ -15,10 +15,10 @@
       "description": "Former Administrator at Centers for Medicare and Medicaid Services"
     },
     {
+      "profileImgUrl": "/images_cms/ellie-graeden.jpeg",
       "fullName": "Ellie Graeden, Ph.D.",
       "description": "CEO of Talus Analytics, Adjunct Professor at Georgetown University",
-      "profileUrl": "https://ghss.georgetown.edu/people/graeden",
-      "profileImgUrl": "/images_cms/ellie-graeden.jpeg"
+      "profileUrl": "https://ghss.georgetown.edu/people/graeden"
     },
     {
       "profileImgUrl": "/images_cms/shuhanhe.jpeg",
@@ -27,16 +27,51 @@
       "profileUrl": "https://www.linkedin.com/in/shuhan-he/"
     },
     {
+      "profileImgUrl": "/images_cms/maxhenderson.jpeg",
+      "fullName": "Max Henderson",
+      "description": "Affiliate of Center for Health Science and Security at Georgetown University; Formerly Google and McKesson",
+      "profileUrl": "https://www.linkedin.com/in/maxhenderson/"
+    },
+    {
       "profileImgUrl": "/images_cms/bob-inglis.png",
       "fullName": "Bob Inglis, J.D.",
       "description": "Executive Director of republicEN.org, Former Congressman (R)",
       "profileUrl": "https://www.linkedin.com/in/bob-inglis-21112b25/"
     },
     {
+      "profileImgUrl": "/images_cms/rebecca-katz.jpeg",
       "fullName": "Rebecca Katz, M.P.H., Ph.D.",
       "description": "Director of Center for Global Health Science and Security at Georgetown University",
-      "profileUrl": "https://ghss.georgetown.edu/people/katz",
-      "profileImgUrl": "/images_cms/rebecca-katz.jpeg"
+      "profileUrl": "https://ghss.georgetown.edu/people/katz"
+    },
+    {
+      "profileImgUrl": "/images_cms/igor.jpeg",
+      "fullName": "Igor Kofman",
+      "profileUrl": "https://www.linkedin.com/in/ikofman/"
+    },
+    {
+      "profileImgUrl": "/images_cms/jkt.jpeg",
+      "fullName": "Jonathan Kreiss-Tomkins",
+      "profileUrl": "https://www.linkedin.com/in/jonathan-kreiss-tomkins-35915319a/",
+      "description": "State Representative in Alaska House of Representatives"
+    },
+    {
+      "profileImgUrl": "/images_cms/jarone-lee-headshot.jpg",
+      "fullName": "Jarone Lee, M.P.H., M.D.",
+      "description": "Medical Director at Massachusetts General Hospital ICU, Associate Professor at Harvard Medical School",
+      "profileUrl": "https://www.massgeneral.org/doctors/19206/jarone-lee"
+    },
+    {
+      "profileImgUrl": "/images_cms/emily-oster-headshot.png",
+      "fullName": "Emily Oster, Ph.D.",
+      "description": "Professor of Economics at Brown University, Founder of COVID Explained",
+      "profileUrl": "https://watson.brown.edu/people/faculty/oster"
+    },
+    {
+      "profileImgUrl": "/images_cms/ryan-panchadsaram.jpeg",
+      "fullName": "Ryan Panchadsaram",
+      "description": "Advisor at Kleiner Perkins, Former U.S. Deputy Chief Technology Officer",
+      "profileUrl": "https://www.linkedin.com/in/ryanpanchadsaram/"
     },
     {
       "profileImgUrl": "/images_cms/tomás-pueyo.jpeg",
@@ -45,9 +80,15 @@
       "profileUrl": "https://www.linkedin.com/in/tomaspueyo/"
     },
     {
+      "profileImgUrl": "/images_cms/zack-rosen.jpeg",
+      "fullName": "Zack Rosen",
+      "profileUrl": "https://www.linkedin.com/in/zacharyrosen/",
+      "description": "CEO of Pantheon"
+    },
+    {
       "profileImgUrl": "/images_cms/roni-rosenfeld.png",
-      "description": "Head of Machine Learning Department at Carnegie Mellon University",
       "fullName": "Roni Rosenfeld, Ph.D.",
+      "description": "Head of Machine Learning Department at Carnegie Mellon University",
       "profileUrl": "http://www.cs.cmu.edu/~roni/"
     },
     {
@@ -61,6 +102,12 @@
       "fullName": "Nirav Shah, M.D., M.P.H.",
       "profileUrl": "https://www.linkedin.com/in/niravrshah/",
       "description": "Senior Scholar at Stanford Medical School, Former New York State Commissioner of Health"
+    },
+    {
+      "profileImgUrl": "/images_cms/jamestamplin.jpeg",
+      "fullName": "James Tamplin",
+      "description": "Founder/CEO of Google Firebase",
+      "profileUrl": "https://www.linkedin.com/in/jamest"
     },
     {
       "profileImgUrl": "/images_cms/ryan-tibshirani.png",
@@ -85,18 +132,6 @@
       "fullName": "Erez Yoeli, Ph.D.",
       "profileUrl": "http://ide.mit.edu/about-us/people/erez-yoeli",
       "description": "Founder of Applied Cooperation Team at MIT Sloan School of Management"
-    },
-    {
-      "profileImgUrl": "/images_cms/jarone-lee-headshot.jpg",
-      "fullName": "Jarone Lee, M.P.H., M.D.",
-      "description": "Medical Director at Massachusetts General Hospital ICU, Associate Professor at Harvard Medical School",
-      "profileUrl": "https://www.massgeneral.org/doctors/19206/jarone-lee"
-    },
-    {
-      "profileImgUrl": "/images_cms/emily-oster-headshot.png",
-      "fullName": "Emily Oster, Ph.D.",
-      "description": "Professor of Economics at Brown University, Founder of COVID Explained",
-      "profileUrl": "https://watson.brown.edu/people/faculty/oster"
     }
   ]
 }
