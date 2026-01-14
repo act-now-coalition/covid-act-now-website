@@ -23,8 +23,8 @@ jobs:
       - name: Verify snapshot provided
         if: ${{ !env.SNAPSHOT_ID }}
         run: 'echo "Missing client_payload parameter: snapshot_id" ; exit 1'
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
       - run: yarn install
@@ -56,7 +56,7 @@ jobs:
 
       # Generate Pull Request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v6
         with:
           branch: 'bump-snapshot-${{env.RUN_ID}}'
           commit-message: |
@@ -76,7 +76,7 @@ jobs:
 
       - name: Read slack-summary.txt
         id: slack_summary
-        run: echo ::set-output name=text::$(cat scripts/slack-summary.txt)
+        run: echo "text=$(cat scripts/slack-summary.txt)" >> "$GITHUB_OUTPUT"
       - name: Slack notification
         if: job.status != 'success'
         env:

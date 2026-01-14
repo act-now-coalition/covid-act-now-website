@@ -55,7 +55,6 @@ export enum EventAction {
   SELECT = 'select',
   OPEN_MODAL = 'open modal',
   SUBSCRIBE = 'subscribe',
-  ALERTS_UNSUBSCRIBE = 'alertsUnsubscribe',
   EXPAND = 'expand',
   REDIRECT = 'redirect',
   FOCUS = 'focus',

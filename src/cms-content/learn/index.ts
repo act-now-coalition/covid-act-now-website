@@ -8,7 +8,6 @@ import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
 import footer from './footer.json';
-import aboutAlerts from './about-our-alerts.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -194,20 +193,6 @@ interface Footer {
 }
 
 export const footerContent = footer as Footer;
-
-/*
-  About our alerts:
-*/
-
-export interface AboutAlertsContent {
-  pageHeader: string;
-  bodyText: Markdown;
-  bodyImages: Markdown;
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const aboutOurAlertsContent = aboutAlerts as AboutAlertsContent;
 
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
