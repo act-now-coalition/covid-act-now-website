@@ -1,5 +1,8 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { useLocation } from 'react-router-dom';
 import USRiskMap from 'components/USMap/USRiskMap';
 import { NavBarSearch } from 'components/NavBar';
@@ -25,6 +28,14 @@ import {
   ColumnCentered,
   MapDescriptionText,
   AboutLink,
+  ExploreDataPanel,
+  ExploreDataToggle,
+  ExploreDataToggleText,
+  ExploreDataToggleTitle,
+  ExploreDataToggleSubtitle,
+  ExploreDataPills,
+  ExploreDataPill,
+  ExploreDataContent,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import { CommunityLevelThermometer } from 'components/HorizontalThermometer';
@@ -78,6 +89,7 @@ export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const [showExploreData, setShowExploreData] = useState(false);
 
   const searchLocations = useFinalAutocompleteLocations();
 
@@ -125,56 +137,91 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <ColumnCentered id="search">
-              <SearchAutocomplete
-                locations={searchLocations}
-                filterLimit={getFilterLimit()}
-                menuOpen={menuOpen}
-                placeholder="City, county, state, or zip"
-                setMenuOpen={setMenuOpen}
-              />
-              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-            </ColumnCentered>
-
-            <MapBlock
-              title="COVID Community Risk Level"
-              subtitle=""
-              renderMap={locationScope => (
-                <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
-              )}
-              renderThermometer={() => <CommunityLevelThermometer />}
-              infoLink={
-                <AboutLink to="/covid-community-level-metrics">
-                  About community risk levels
-                </AboutLink>
-              }
-              mapDescription={getRiskMapDescription()}
-            />
-            <HomePageBlock
-              ref={exploreSectionRef}
-              id="explore-hospitalizations"
-            >
-              <Explore
-                title="Trends"
-                initialFipsList={initialFipsListForExplore}
-                currentMetric={currentMetric}
-                setCurrentMetric={setCurrentMetric}
-                nationalSummary={<NationalText />}
-              />
-            </HomePageBlock>
-            <HomePageBlock>
-              <CompareMain
-                locationsViewable={8}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
-              />
-            </HomePageBlock>
             <HomePageBlock>
               <Recommendations
                 recommendationsRef={recommendationsRef}
                 region={USA.instance}
                 isHomepage={true}
               />
+            </HomePageBlock>
+            <HomePageBlock
+              id="explore-data"
+              aria-label="Explore historical data"
+            >
+              <ExploreDataPanel>
+                <ExploreDataToggle
+                  type="button"
+                  aria-expanded={showExploreData}
+                  aria-controls="explore-data-content"
+                  onClick={() => setShowExploreData(prev => !prev)}
+                >
+                  <ExploreDataToggleText>
+                    <ExploreDataToggleTitle>
+                      Explore historical data
+                    </ExploreDataToggleTitle>
+                    <ExploreDataPills aria-hidden="true">
+                      <ExploreDataPill>Search</ExploreDataPill>
+                      <ExploreDataPill>Map</ExploreDataPill>
+                      <ExploreDataPill>Trends</ExploreDataPill>
+                      <ExploreDataPill>Compare</ExploreDataPill>
+                    </ExploreDataPills>
+                  </ExploreDataToggleText>
+                  {showExploreData ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </ExploreDataToggle>
+
+                <Collapse in={showExploreData} timeout="auto" unmountOnExit>
+                  <ExploreDataContent id="explore-data-content">
+                    <ColumnCentered id="search">
+                      <SearchAutocomplete
+                        locations={searchLocations}
+                        filterLimit={getFilterLimit()}
+                        menuOpen={menuOpen}
+                        placeholder="City, county, state, or zip"
+                        setMenuOpen={setMenuOpen}
+                      />
+                      <HomepageItems
+                        isLoading={isLoading}
+                        userRegions={userRegions}
+                      />
+                    </ColumnCentered>
+                    <MapBlock
+                      title="COVID Community Risk Level"
+                      subtitle=""
+                      renderMap={locationScope => (
+                        <USRiskMap
+                          showCounties={locationScope === MapView.COUNTIES}
+                        />
+                      )}
+                      renderThermometer={() => <CommunityLevelThermometer />}
+                      infoLink={
+                        <AboutLink to="/covid-community-level-metrics">
+                          About community risk levels
+                        </AboutLink>
+                      }
+                      mapDescription={getRiskMapDescription()}
+                    />
+                    <HomePageBlock
+                      ref={exploreSectionRef}
+                      id="explore-hospitalizations"
+                    >
+                      <Explore
+                        title="Trends"
+                        initialFipsList={initialFipsListForExplore}
+                        currentMetric={currentMetric}
+                        setCurrentMetric={setCurrentMetric}
+                        nationalSummary={<NationalText />}
+                      />
+                    </HomePageBlock>
+                    <HomePageBlock>
+                      <CompareMain
+                        locationsViewable={8}
+                        showModal={showCompareModal}
+                        setShowModal={setShowCompareModal}
+                      />
+                    </HomePageBlock>
+                  </ExploreDataContent>
+                </Collapse>
+              </ExploreDataPanel>
             </HomePageBlock>
             <PartnersSection />
           </Content>

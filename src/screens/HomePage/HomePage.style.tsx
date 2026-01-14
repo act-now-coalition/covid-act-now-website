@@ -179,3 +179,94 @@ export const MapDescriptionText = styled.span`
   max-width: 640px;
   margin: ${({ theme }) => theme.spacing(4, 'auto', 1.5)};
 `;
+
+export const ExploreDataPanel = styled.div`
+  background: ${COLOR_MAP.GREY_0};
+  border: 1px solid ${COLOR_MAP.GREY_2};
+  border-radius: 0;
+  padding: ${props => props.theme.spacing(2.5)}px;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border-left: none;
+  border-right: none;
+
+  @media (min-width: ${materialSMBreakpoint}) {
+    border-radius: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    border-left: 1px solid ${COLOR_MAP.GREY_2};
+    border-right: 1px solid ${COLOR_MAP.GREY_2};
+  }
+`;
+
+export const ExploreDataToggle = styled.button`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${props => props.theme.spacing(2)}px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  padding: ${props => props.theme.spacing(1.5, 1.75)}px;
+  color: ${COLOR_MAP.GREY_4};
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: rgb(0, 95, 204) 2px auto;
+    outline-offset: 2px;
+  }
+`;
+
+export const ExploreDataToggleText = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+`;
+
+export const ExploreDataToggleTitle = styled.span`
+  color: #000;
+`;
+
+export const ExploreDataToggleSubtitle = styled.span`
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+`;
+
+export const ExploreDataPills = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${props => props.theme.spacing(1)}px;
+  margin-top: ${props => props.theme.spacing(1.25)}px;
+`;
+
+export const ExploreDataPill = styled.span`
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 ${props => props.theme.spacing(1.25)}px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid ${COLOR_MAP.GREY_2};
+  color: ${COLOR_MAP.GREY_4};
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
+export const ExploreDataContent = styled.div`
+  margin-top: ${props => props.theme.spacing(2)}px;
+  padding-top: ${props => props.theme.spacing(2)}px;
+  border-top: 1px solid ${COLOR_MAP.GREY_2};
+`;
