@@ -99,20 +99,6 @@ Checklist:
 - [ ] Last-updated dates
 - [ ] Links and cross-references
 
-### Subscription lifecycle
-Routes:
-- `/alert_unsubscribe`, `/after_subscribe`, `/after_unsubscribe`
-
-Primary copy sources:
-- `src/screens/AlertUnsubscribe/AlertUnsubscribe.tsx`
-- `src/screens/Subscriptions/AfterSubscribe.tsx`
-- `src/screens/Subscriptions/AfterUnsubscribe.tsx`
-
-Checklist:
-- [ ] Confirmation messaging and CTAs
-- [ ] Error/edge-state copy
-- [ ] Any linked help text
-
 ### Embed pages
 Routes:
 - `/embed/us`, `/embed/risk/us`, `/embed/us/:stateId`,
@@ -161,7 +147,7 @@ Checklist:
 
 ### Redirect endpoints (served but not pages)
 Routes:
-- `/feedback-survey`, `/exposure-notifications-redirect`, plus legacy redirects
+- legacy redirects defined in `src/App.tsx`
 
 Primary copy sources:
 - `src/App.tsx` redirect definitions

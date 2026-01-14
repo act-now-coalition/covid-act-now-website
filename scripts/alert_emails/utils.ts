@@ -10,7 +10,7 @@ import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 export const ALERT_EMAIL_GROUP_PREFIX = 'alert-email';
 
 const thermometerBaseURL = 'https://covidactnow.org/images/email_alerts';
-const unsubscribeURL = 'https://covidactnow.org/alert_unsubscribe';
+const unsubscribeURL = 'https://covidactnow.org/';
 
 export function toISO8601(date: Date): string {
   return formatDateTime(date, DateFormat.YYYY_MM_DD);
@@ -117,10 +117,8 @@ function generateAlertEmailContent(
     img_url: `${thermometerBaseURL}/therm-${newLevel}-${oldLevel}.png`,
     last_updated: lastUpdated,
     location_url: `${locationURL}?utm_source=risk_alerts&utm_medium=email`,
-    subscribe_link: `https://covidactnow.org/alert_signup?utm_campaign=risk_alert_forward_subscribe&utm_source=risk_alerts&utm_medium=email`,
-    unsubscribe_link: `${unsubscribeURL}?email=${encodeURIComponent(
-      emailAddress,
-    )}`, // would be nice to know dev/staging/prod
+    subscribe_link: `https://covidactnow.org/?utm_campaign=risk_alert_forward_subscribe&utm_source=risk_alerts&utm_medium=email`,
+    unsubscribe_link: unsubscribeURL, // would be nice to know dev/staging/prod
     feedback_subject_line: encodeURIComponent(
       `[Alert Feedback] Alert for ${locationName} on ${lastUpdated}`,
     ),

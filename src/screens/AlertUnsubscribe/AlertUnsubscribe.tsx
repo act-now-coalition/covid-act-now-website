@@ -63,7 +63,7 @@ const AlertUnsubscribe = () => {
     const subscriptions = await getAlertsSubscriptions();
     await subscriptions.doc(email).delete();
 
-    history.push(`/after_unsubscribe?email=${encodeURIComponent(email)}`);
+    history.push('/');
   }
 
   function handleSelectChange(selectedLocation: any) {

@@ -12,7 +12,6 @@ import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPha
 import Footer from 'components/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
-import { getFeedbackSurveyUrl } from 'components/Banner';
 import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
@@ -42,15 +41,6 @@ const ExportImage = lazy(() =>
   import('screens/internal/ShareImage/ChartExportImage'),
 );
 const ShareImage = lazy(() => import('screens/internal/ShareImage/ShareImage'));
-const AlertUnsubscribe = lazy(() =>
-  import('screens/AlertUnsubscribe/AlertUnsubscribe'),
-);
-const AfterSubscribe = lazy(() =>
-  import('screens/Subscriptions/AfterSubscribe'),
-);
-const AfterUnsubscribe = lazy(() =>
-  import('screens/Subscriptions/AfterUnsubscribe'),
-);
 
 export default function App() {
   return (
@@ -76,21 +66,6 @@ export default function App() {
                     component={HomePage}
                   />
 
-                  <Route
-                    exact
-                    path="/alert_unsubscribe"
-                    component={AlertUnsubscribe}
-                  />
-                  <Route
-                    exact
-                    path="/after_subscribe"
-                    component={AfterSubscribe}
-                  />
-                  <Route
-                    exact
-                    path="/after_unsubscribe"
-                    component={AfterUnsubscribe}
-                  />
                   <Route exact path="/us/:stateId" component={LocationPage} />
                   <Route
                     exact
@@ -184,11 +159,6 @@ export default function App() {
                   <Route path="/terms" component={Terms} />
                   <Route path="/privacy" component={Privacy} />
 
-                  {/* Custom redirect to track clicks from the Daily download */}
-                  <Route path="/exposure-notifications-redirect">
-                    <ExternalRedirect url={'https://g.co/ens'} />
-                  </Route>
-
                   {/* Embed routes */}
                   <Route
                     exact
@@ -219,17 +189,6 @@ export default function App() {
                   />
                   {/* /model is deprecated. */}
                   <Redirect from="/model" to="/" />
-                  {/**
-                   * This endpoint is to share the feedback survey link in social
-                   * media. We redirec them to Typeform with URL parameters to
-                   * track users through the survey, as well as their source.
-                   */}
-                  <Route
-                    path="/feedback-survey"
-                    component={() => (
-                      <ExternalRedirect url={getFeedbackSurveyUrl('social')} />
-                    )}
-                  />
 
                   {/** Internal endpoint that shows all the state charts. */}
                   <Redirect from="/all" to="/internal/all" />
