@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-} from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
@@ -17,7 +11,6 @@ import { Metric } from 'common/metricEnum';
 import { Region, State, getStateName } from 'common/regions';
 import { useProjectionsFromRegion } from 'common/utils/model';
 import { LoadingScreen } from 'screens/LocationPage/LocationPage.style';
-import { EventCategory, EventAction, trackEvent } from 'components/Analytics';
 import CompareMain from 'components/Compare/CompareMain';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Explore, { ExploreMetric } from 'components/Explore';
@@ -28,16 +21,11 @@ import { WidthContainer } from './LocationPageBlock.style';
 import { LocationPageContentWrapper, BelowTheFold } from './ChartsHolder.style';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
-import {
-  SparkLineMetric,
-  SparkLineToMetric,
-} from 'components/NewLocationPage/SparkLineBlock/utils';
 import ChartBlock from 'components/Charts/ChartBlock';
 import {
   CHART_GROUPS,
   ChartGroup,
   GroupHeader,
-  getChartGroupFromMetric,
 } from 'components/Charts/Groupings';
 
 // 100 is rough accounting for the navbar
@@ -86,7 +74,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     }),
     [],
   );
-  const shareBlockRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
 
@@ -130,124 +117,62 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
 
   const ccviScores = useCcviForFips(region.fipsCode);
 
-  const onClickAlertSignup = useCallback(() => {
-    trackEvent(
-      EventCategory.ENGAGEMENT,
-      EventAction.CLICK,
-      `Location Header: Receive Alerts`,
-    );
-    scrollTo(shareBlockRef.current);
-  }, []);
-
-  const onClickShare = useCallback(() => {
-    scrollTo(shareBlockRef.current, -352);
-  }, []);
-
-  const [clickedStatMetric, setClickedStatMetric] = useState<Metric | null>(
-    null,
-  );
-
-  const scrollToMetricChart = useCallback(
-    (metric: Metric) => {
-      setClickedStatMetric(metric);
-      const groupWithMetric = getChartGroupFromMetric(metric);
-      const chartBlockRef = groupWithMetric
-        ? chartBlockRefs[groupWithMetric.groupHeader]
-        : null;
-      if (chartBlockRef?.current) {
-        scrollTo(chartBlockRef.current);
-      }
-    },
-    [chartBlockRefs],
-  );
-
-  const onClickMetric = (metric: Metric) => {
-    trackEvent(
-      EventCategory.METRICS,
-      EventAction.CLICK,
-      `Location Header Stats: ${Metric[metric]}`,
-    );
-    scrollToMetricChart(metric);
-  };
-
-  const onClickSparkLine = (metric: SparkLineMetric) => {
-    trackEvent(
-      EventCategory.METRICS,
-      EventAction.CLICK,
-      `Spark line: ${SparkLineMetric[metric]}`,
-    );
-    const metricClicked = SparkLineToMetric[metric];
-    scrollToMetricChart(metricClicked);
-  };
-
-  const onClickMasksCard = useCallback(() => {
-    trackEvent(EventCategory.RECOMMENDATIONS, EventAction.CLICK, 'Masks card');
-    scrollTo(recommendationsRef.current);
-  }, []);
-
-  const onClickTransmissionMetricsCard = useCallback(() => {
-    trackEvent(
-      EventCategory.METRICS,
-      EventAction.CLICK,
-      'Transmission metrics card',
-    );
-    scrollTo(transmissionMetricsRef.current);
-  }, []);
+  const [showCompareModal, setShowCompareModal] = useState(false);
 
   if (!locationSummary) {
     return null;
   }
   const stats = summaryToStats(locationSummary);
 
-  const [showCompareModal, setShowCompareModal] = useState(false);
-
   // TODO(pablo): Create separate refs for signup and share
   return (
     <>
       <LocationPageContentWrapper>
-        <AboveTheFold
-          region={region}
-          locationSummary={locationSummary}
-          onClickMetric={onClickMetric}
-          onClickAlertSignup={onClickAlertSignup}
-          onClickShare={onClickShare}
-          onClickSparkLine={onClickSparkLine}
-          onClickMasksCard={onClickMasksCard}
-          onClickTransmissionMetricsCard={onClickTransmissionMetricsCard}
-        />
+        <AboveTheFold region={region} />
         <BelowTheFold>
           <WidthContainer>
             <LocationPageBlock>
-              <CompareMain
-                stateName={getStateName(region) || region.name} // rename prop
-                locationsViewable={6}
-                stateId={(region as State).stateCode || undefined}
+              <Recommendations
                 region={region}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
+                recommendationsRef={recommendationsRef}
+                isHomepage={false}
               />
             </LocationPageBlock>
             {CHART_GROUPS.map((group: ChartGroup) => {
               const { groupHeader } = group;
               const groupRef = chartBlockRefs[groupHeader];
               return (
-                <ErrorBoundary key={groupHeader}>
-                  {!projections ? (
-                    <LoadingScreen />
-                  ) : (
-                    <LocationPageBlock ref={groupRef}>
-                      <ChartBlock
-                        projections={projections}
-                        isMobile={isMobile}
+                <React.Fragment key={groupHeader}>
+                  <ErrorBoundary>
+                    {!projections ? (
+                      <LoadingScreen />
+                    ) : (
+                      <LocationPageBlock ref={groupRef}>
+                        <ChartBlock
+                          projections={projections}
+                          isMobile={isMobile}
+                          region={region}
+                          stats={stats}
+                          group={group}
+                          clickedStatMetric={null}
+                          chartId={chartId}
+                        />
+                      </LocationPageBlock>
+                    )}
+                  </ErrorBoundary>
+                  {groupHeader === GroupHeader.COMMUNITY_LEVEL && (
+                    <LocationPageBlock>
+                      <CompareMain
+                        stateName={getStateName(region) || region.name} // rename prop
+                        locationsViewable={6}
+                        stateId={(region as State).stateCode || undefined}
                         region={region}
-                        stats={stats}
-                        group={group}
-                        clickedStatMetric={clickedStatMetric}
-                        chartId={chartId}
+                        showModal={showCompareModal}
+                        setShowModal={setShowCompareModal}
                       />
                     </LocationPageBlock>
                   )}
-                </ErrorBoundary>
+                </React.Fragment>
               );
             })}
             <LocationPageBlock ref={exploreChartRef} id="explore-chart">
@@ -261,21 +186,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
             <LocationPageBlock id="vulnerabilities">
               <VulnerabilitiesBlock scores={ccviScores} region={region} />
             </LocationPageBlock>
-            {!projections ? (
-              <LoadingScreen />
-            ) : (
-              <LocationPageBlock>
-                <Recommendations
-                  region={region}
-                  alarmLevel={projections.getAlarmLevel()}
-                  recommendationsRef={recommendationsRef}
-                  isHomepage={false}
-                />
-              </LocationPageBlock>
-            )}
-            {/* <LocationPageBlock ref={shareBlockRef}>
-              <ShareModelBlock region={region} />
-            </LocationPageBlock> */}
           </WidthContainer>
         </BelowTheFold>
       </LocationPageContentWrapper>

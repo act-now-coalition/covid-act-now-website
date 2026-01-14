@@ -32,7 +32,8 @@ Sentry.init({
 // Initialize PostHog
 if (process.env.REACT_APP_PUBLIC_POSTHOG_KEY) {
   posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    api_host:
+      process.env.REACT_APP_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
     person_profiles: 'always', // Capture anonymous users
     autocapture: true, // Enable autocapture (default: true)
     capture_pageview: true, // Capture pageviews (default: true)
@@ -44,7 +45,7 @@ ReactDOM.render(
   <PostHogProvider client={posthog}>
     <App />
   </PostHogProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

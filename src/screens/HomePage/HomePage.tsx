@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import Fade from '@material-ui/core/Fade';
-import { useLocation } from 'react-router-dom';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import USRiskMap from 'components/USMap/USRiskMap';
 import { NavBarSearch } from 'components/NavBar';
 import { NavAllOtherPages } from 'components/NavBar';
@@ -24,7 +26,17 @@ import {
   HomePageBlock,
   ColumnCentered,
   MapDescriptionText,
-  AboutLink,
+  ExploreDataPanel,
+  ExploreDataHeader,
+  ExploreDataInner,
+  ExploreDataToggle,
+  ExploreDataToggleText,
+  ExploreDataToggleTitle,
+  ExploreDataToggleSubtitle,
+  ExploreDataToggleSubtitleEmphasis,
+  ExploreDataPills,
+  ExploreDataPill,
+  ExploreDataContent,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import { CommunityLevelThermometer } from 'components/HorizontalThermometer';
@@ -36,7 +48,6 @@ import { MapBlock } from './MapBlock';
 import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
-import { Level } from 'common/level';
 import { HiatusBanner } from 'components/Banner/HiatusBanner';
 
 function getPageDescription() {
@@ -46,7 +57,6 @@ function getPageDescription() {
 
 export default function HomePage() {
   const recommendationsRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
 
   const { userRegions, isLoading } = useGeolocatedRegions();
 
@@ -68,17 +78,12 @@ export default function HomePage() {
   }
   const initialFipsListForExplore = exploreGeoLocations;
 
-  useEffect(() => {
-    if (location.pathname.includes('alert_signup')) {
-      window.location.href = '#alert_signup';
-    }
-  }, [location.pathname]);
-
   const exploreSectionRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [showCompareModal, setShowCompareModal] = useState(false);
+  const [showExploreData, setShowExploreData] = useState(false);
 
   const searchLocations = useFinalAutocompleteLocations();
 
@@ -126,57 +131,103 @@ export default function HomePage() {
       <main>
         <div className="App">
           <Content>
-            <ColumnCentered id="search">
-              <SearchAutocomplete
-                locations={searchLocations}
-                filterLimit={getFilterLimit()}
-                menuOpen={menuOpen}
-                placeholder="City, county, state, or zip"
-                setMenuOpen={setMenuOpen}
-              />
-              <HomepageItems isLoading={isLoading} userRegions={userRegions} />
-            </ColumnCentered>
-
-            <MapBlock
-              title="COVID Community Risk Level"
-              subtitle=""
-              renderMap={locationScope => (
-                <USRiskMap showCounties={locationScope === MapView.COUNTIES} />
-              )}
-              renderThermometer={() => <CommunityLevelThermometer />}
-              infoLink={
-                <AboutLink to="/covid-community-level-metrics">
-                  About community risk levels
-                </AboutLink>
-              }
-              mapDescription={getRiskMapDescription()}
-            />
-            <HomePageBlock
-              ref={exploreSectionRef}
-              id="explore-hospitalizations"
-            >
-              <Explore
-                title="Trends"
-                initialFipsList={initialFipsListForExplore}
-                currentMetric={currentMetric}
-                setCurrentMetric={setCurrentMetric}
-                nationalSummary={<NationalText />}
-              />
-            </HomePageBlock>
-            <HomePageBlock>
-              <CompareMain
-                locationsViewable={8}
-                showModal={showCompareModal}
-                setShowModal={setShowCompareModal}
-              />
-            </HomePageBlock>
             <HomePageBlock>
               <Recommendations
-                alarmLevel={Level.UNKNOWN}
                 recommendationsRef={recommendationsRef}
                 region={USA.instance}
                 isHomepage={true}
               />
+            </HomePageBlock>
+            <HomePageBlock
+              id="explore-data"
+              aria-label="Explore historical data"
+            >
+              <ExploreDataPanel>
+                <ExploreDataHeader $expanded={showExploreData}>
+                  <ExploreDataInner>
+                    <ExploreDataToggle
+                      type="button"
+                      aria-expanded={showExploreData}
+                      aria-controls="explore-data-content"
+                      onClick={() => setShowExploreData(prev => !prev)}
+                    >
+                      <ExploreDataToggleText>
+                        <ExploreDataToggleTitle>
+                          Explore historical data
+                        </ExploreDataToggleTitle>
+                        <ExploreDataToggleSubtitle>
+                          <ExploreDataToggleSubtitleEmphasis>
+                            State &amp; county
+                          </ExploreDataToggleSubtitleEmphasis>{' '}
+                          trends for cases, hospitalizations, deaths, ICU,
+                          positivity, and vaccinations.
+                        </ExploreDataToggleSubtitle>
+                        <ExploreDataPills aria-hidden="true">
+                          <ExploreDataPill>Search</ExploreDataPill>
+                          <ExploreDataPill>Map</ExploreDataPill>
+                          <ExploreDataPill>Trends</ExploreDataPill>
+                          <ExploreDataPill>Compare</ExploreDataPill>
+                        </ExploreDataPills>
+                      </ExploreDataToggleText>
+                      {showExploreData ? (
+                        <ExpandLessIcon />
+                      ) : (
+                        <ExpandMoreIcon />
+                      )}
+                    </ExploreDataToggle>
+                  </ExploreDataInner>
+                </ExploreDataHeader>
+
+                <Collapse in={showExploreData} timeout="auto" unmountOnExit>
+                  <ExploreDataContent id="explore-data-content">
+                    <ExploreDataInner>
+                      <ColumnCentered id="search">
+                        <SearchAutocomplete
+                          locations={searchLocations}
+                          filterLimit={getFilterLimit()}
+                          menuOpen={menuOpen}
+                          placeholder="City, county, state, or zip"
+                          setMenuOpen={setMenuOpen}
+                        />
+                        <HomepageItems
+                          isLoading={isLoading}
+                          userRegions={userRegions}
+                        />
+                      </ColumnCentered>
+                      <MapBlock
+                        title="COVID Community Risk Level"
+                        subtitle=""
+                        renderMap={locationScope => (
+                          <USRiskMap
+                            showCounties={locationScope === MapView.COUNTIES}
+                          />
+                        )}
+                        renderThermometer={() => <CommunityLevelThermometer />}
+                        mapDescription={getRiskMapDescription()}
+                      />
+                      <HomePageBlock
+                        ref={exploreSectionRef}
+                        id="explore-hospitalizations"
+                      >
+                        <Explore
+                          title="Trends"
+                          initialFipsList={initialFipsListForExplore}
+                          currentMetric={currentMetric}
+                          setCurrentMetric={setCurrentMetric}
+                          nationalSummary={<NationalText />}
+                        />
+                      </HomePageBlock>
+                      <HomePageBlock>
+                        <CompareMain
+                          locationsViewable={8}
+                          showModal={showCompareModal}
+                          setShowModal={setShowCompareModal}
+                        />
+                      </HomePageBlock>
+                    </ExploreDataInner>
+                  </ExploreDataContent>
+                </Collapse>
+              </ExploreDataPanel>
             </HomePageBlock>
             <PartnersSection />
           </Content>

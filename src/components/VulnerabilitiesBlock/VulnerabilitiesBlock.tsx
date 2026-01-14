@@ -2,10 +2,8 @@ import React from 'react';
 import { Region } from 'common/regions';
 import ExpandableContainer from 'components/ExpandableContainer';
 import VulnerabilitiesBlockInner from './VulnerabilitiesBlockInner';
-import { getShareQuote } from 'common/ccvi/getShareQuote';
 import { RegionCcviItem, getVulnPopulationPercentForFips } from 'common/data';
 import { EventCategory } from 'components/Analytics';
-import ShareButtons from '../SharedComponents/ShareButtons';
 import PageSectionFooter from 'components/SharedComponents/PageSectionFooter';
 import { DialogMain } from 'components/Dialogs';
 import { vulnerabilitiesModal } from 'cms-content/modals';
@@ -45,12 +43,6 @@ const VulnerabilitiesBlock: React.FC<{
   const percentPopulationVulnerable = getVulnPopulationPercentForFips(
     region.fipsCode,
   );
-  const shareUrl = `${region.canonicalUrl}#vulnerabilities`;
-  const shareQuote = getShareQuote(
-    scores.overall,
-    region,
-    percentPopulationVulnerable,
-  );
 
   return (
     <>
@@ -74,12 +66,6 @@ const VulnerabilitiesBlock: React.FC<{
         >
           <MarkdownBody source={body} />
         </DialogMain>
-        <ShareButtons
-          eventCategory={EventCategory.VULNERABILITIES}
-          shareUrl={shareUrl}
-          shareQuote={shareQuote}
-          region={region}
-        />
       </PageSectionFooter>
     </>
   );

@@ -10,6 +10,27 @@ module.exports = {
     'prettier/react',
     'plugin:prettier/recommended',
   ],
+  overrides: [
+    // Storybook stories commonly use anonymous default exports for metadata objects.
+    {
+      files: ['**/*.stories.{js,ts,tsx}'],
+      rules: {
+        'import/no-anonymous-default-export': 'off',
+      },
+    },
+    // Theme/config modules are typically exported as objects.
+    {
+      files: [
+        'src/assets/theme/overrides/**/*.{ts,tsx}',
+        'src/assets/theme/palette.{ts,tsx}',
+        'src/common/colors.{ts,tsx}',
+        'src/assets/images/**/*.{ts,tsx}',
+      ],
+      rules: {
+        'import/no-anonymous-default-export': 'off',
+      },
+    },
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',

@@ -47,13 +47,6 @@ export const Example = () => {
         open={isOpen}
         closeDialog={closeDialog}
         header="Daily new cases"
-        links={[
-          {
-            cta: 'Learn more',
-            url: '/covid-community-level-metrics#daily-new-cases',
-            ariaLabel: 'Learn more about daily new cases',
-          },
-        ]}
       >
         <MetricInfoDialogInner modalContent={modalContent} />
       </DialogMain>

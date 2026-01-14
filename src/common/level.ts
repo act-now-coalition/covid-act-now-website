@@ -1,6 +1,5 @@
 // Make sure to not change the level numbers (even if we delete CRITICAL and
-// SUPER_CRITICAL). The values are used to determine which image to show in
-// the alert emails.
+// SUPER_CRITICAL).
 export enum Level {
   LOW = 0,
   MEDIUM = 1,

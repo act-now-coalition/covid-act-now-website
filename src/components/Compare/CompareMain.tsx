@@ -26,11 +26,7 @@ import {
 import { Metric } from 'common/metricEnum';
 import { getSummaryFromFips } from 'common/location_summaries';
 import { ScreenshotReady } from 'components/Screenshot';
-import {
-  SharedComponent,
-  storeSharedComponentParams,
-  useSharedComponentParams,
-} from 'common/sharing';
+import { SharedComponent, useSharedComponentParams } from 'common/sharing';
 import regions, {
   Region,
   MetroArea,
@@ -172,7 +168,6 @@ const CompareMain = React.memo(
     }, [location.pathname, setShowModal]);
 
     // State needed to reconstruct the current sort / filters. Needs to be persisted
-    // when we generate sharing URLs, etc.
     const uiState = {
       sorter,
       sortDescending,
@@ -182,10 +177,6 @@ const CompareMain = React.memo(
       stateId,
       countyId: currentCounty?.region.fipsCode,
       regionFips: region?.fipsCode,
-    };
-
-    const createCompareShareId = async () => {
-      return storeSharedComponentParams(SharedComponent.Compare, uiState);
     };
 
     const [screenshotReady, setScreenshotReady] = useState(false);
@@ -252,7 +243,6 @@ const CompareMain = React.memo(
       setSortDescending,
       setSortByPopulation,
       sliderValue,
-      createCompareShareId,
       homepageScope,
       setHomepageScope,
       homepageSliderValue,

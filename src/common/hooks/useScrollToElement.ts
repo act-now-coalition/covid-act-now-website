@@ -1,5 +1,5 @@
-/* Scrolls to the specific element corresponding to the hash. 
-Example: covidactnow.org/glossary#npi will automatically scroll to the NPI section. */
+/* Scrolls to the specific element corresponding to the hash.
+Example: covidactnow.org/#some-section will automatically scroll to that section. */
 
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';

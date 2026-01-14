@@ -35,10 +35,12 @@ const Axes: React.FC<{
 
   return (
     <AxisStyle>
-      <AxisLeft 
-        scale={yScale} 
-        numTicks={yNumTicks} 
-        tickFormat={(val: number | { valueOf(): number }) => yTickFormat(typeof val === 'number' ? val : val.valueOf())} 
+      <AxisLeft
+        scale={yScale}
+        numTicks={yNumTicks}
+        tickFormat={(val: number | { valueOf(): number }) =>
+          yTickFormat(typeof val === 'number' ? val : val.valueOf())
+        }
       />
       <AxisBottom
         top={height}

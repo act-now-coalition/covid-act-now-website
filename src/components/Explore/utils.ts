@@ -9,7 +9,6 @@ import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
 import shareImagesData from 'assets/data/share_images_url.json';
-const { share_image_url } = shareImagesData;
 import { SeriesType, Series, ExploreMetric, DataMeasure } from './interfaces';
 import regions, {
   County,
@@ -29,6 +28,7 @@ import {
   getTimeDiff,
   subtractTime,
 } from '@actnowcoalition/time-utils';
+const { share_image_url } = shareImagesData;
 
 export enum Period {
   DAYS_60,

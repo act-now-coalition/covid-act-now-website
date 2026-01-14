@@ -15,4 +15,3 @@ if (!window.process.env) {
 
 // Export empty object to make this a module
 module.exports = {};
-

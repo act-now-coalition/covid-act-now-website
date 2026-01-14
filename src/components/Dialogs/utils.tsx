@@ -16,20 +16,6 @@ export interface MetricModalContent {
   metricName: string;
 }
 
-const metricToLearnLink: { [key in Metric]: string } = {
-  [Metric.CASE_DENSITY]: '/covid-community-level-metrics#daily-new-cases',
-  [Metric.CASE_GROWTH_RATE]: '/covid-community-level-metrics#infection-rate',
-  [Metric.HOSPITAL_USAGE]: '/covid-community-level-metrics#icu-capacity-used',
-  [Metric.POSITIVE_TESTS]: '/covid-community-level-metrics#positive-test-rate',
-  [Metric.VACCINATIONS]: '/covid-community-level-metrics#percent-vaccinated',
-  [Metric.ADMISSIONS_PER_100K]:
-    '/covid-community-level-metrics#weekly-admissions',
-  [Metric.RATIO_BEDS_WITH_COVID]:
-    '/covid-community-level-metrics#patients-with-covid',
-  [Metric.WEEKLY_CASES_PER_100K]:
-    '/covid-community-level-metrics#weekly-new-cases',
-};
-
 const howItsGradedMap: { [key: number]: string } = {
   [Metric.ADMISSIONS_PER_100K]:
     'Levels for weekly new admissions are based on the CDC’s Community Level framework. Less than 10 weekly new admissions is considered Low, between 10 and 19.9 is considered Medium, and greater than or equal to 20 is considered High. No color grading is applied prior to the April 18, 2022 change to a community risk level framework, which better reflects the more recent decreased risk of severe illness and death from COVID due to vaccines, therapeutics, and past COVID infections, and other developments.',
@@ -50,15 +36,12 @@ export function getMetricModalContent(
 
   const metricDefinition = metricToTooltipMap[metric].metricDefinition.body;
 
-  const learnLink = metricToLearnLink[metric];
-
   const modalContent = {
     metricName: getMetricNameExtended(metric),
     howItsCalculated,
     howItsGraded: howItsGradedMap[metric],
     dataSource,
     metricDefinition,
-    learnLink,
   };
 
   return modalContent;

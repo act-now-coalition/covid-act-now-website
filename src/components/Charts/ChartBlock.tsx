@@ -4,6 +4,7 @@ import isNull from 'lodash/isNull';
 import { Projections } from 'common/models/Projections';
 import { Region } from 'common/regions';
 import { SectionHeader } from 'components/SharedComponents';
+import ArchivedDataCallout from 'components/ArchivedDataCallout';
 import ChartTabs from 'components/NewLocationPage/ChartTabs/ChartTabs';
 import {
   Tab,
@@ -104,6 +105,7 @@ const ChartBlock: React.FC<{
   return (
     <>
       <SectionHeader>{groupHeader}</SectionHeader>
+      <ArchivedDataCallout trackingLabel={`Chart block: ${groupHeader}`} />
       <TabsWrapper activeTabIndex={activeTabIndex} onChangeTab={onChangeTab}>
         {metricList.map((metricItem: MetricChartInfo, i: number) => {
           const metricValueInfo = getValueInfo(stats, metricItem, projections);

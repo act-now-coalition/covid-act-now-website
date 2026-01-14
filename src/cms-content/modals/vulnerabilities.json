@@ -1,12 +1,6 @@
 {
-  "body": "Higher vulnerability areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.  \n\nAs of January 2023, people in the most vulnerable third of U.S. counties are 35 percent more likely to have died from COVID than people in the least vulnerable third of U.S. counties. \n\n[Why this data is important for all communities](/covid-explained/covid-vulnerability-data)\n\n**Data source**\n\nWe use data from Surgo Ventures’ COVID-19 Community Vulnerability Index (CCVI). Surgo Ventures is a nonprofit with expertise in behavioral and data science.\n\n**How it’s calculated**\n\nKnown as the COVID-19 Community Vulnerability Index (CCVI), this index compares states, counties, and metros across the U.S. and ranks their vulnerability relative to each other, for example with the least vulnerable county assigned a score of 0 percent, and the most vulnerable county in the U.S. with a score of 100 percent, meaning it is more vulnerable than 100 of counties in the U.S.",
+  "body": "Higher vulnerability areas are more likely to experience severe physical and economic suffering from COVID, and to face a harder, longer recovery.  \n\nAs of January 2023, people in the most vulnerable third of U.S. counties are 35 percent more likely to have died from COVID than people in the least vulnerable third of U.S. counties. \n\nWhy this data is important for all communities.\n\n**Data source**\n\nWe use data from Surgo Ventures’ COVID-19 Community Vulnerability Index (CCVI). Surgo Ventures is a nonprofit with expertise in behavioral and data science.\n\n**How it’s calculated**\n\nKnown as the COVID-19 Community Vulnerability Index (CCVI), this index compares states, counties, and metros across the U.S. and ranks their vulnerability relative to each other, for example with the least vulnerable county assigned a score of 0 percent, and the most vulnerable county in the U.S. with a score of 100 percent, meaning it is more vulnerable than 100 of counties in the U.S.",
   "header": "Vulnerabilities",
   "modalId": "vulnerabilities",
-  "links": [
-    {
-      "cta": "Learn more",
-      "url": "/covid-community-level-metrics#vulnerability",
-      "ariaLabel": "Learn more about the vulnerability score"
-    }
-  ]
+  "links": []
 }

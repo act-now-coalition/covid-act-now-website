@@ -543,6 +543,16 @@ export const CompareHeader = styled(SectionHeader)<{ $isHomepage?: boolean }>`
   }
 `;
 
+export const OutOfDateCallout = styled.div`
+  ${props => props.theme.fonts.regularBook};
+  font-size: 0.875rem;
+  color: ${COLOR_MAP.GRAY_BODY_COPY};
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+`;
+
 export const NumberOfLocationsText = styled.span`
   ${props => props.theme.fonts.regularBook};
   color: ${COLOR_MAP.GREY_4};

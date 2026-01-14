@@ -1,7 +1,6 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import { assert } from '@actnowcoalition/assert';
 import urlJoin from 'url-join';
-import * as QueryString from 'query-string';
 import { Region } from './regions';
 import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
@@ -22,10 +21,6 @@ const SHARING_ID_QUERYSTRING = `?${SHARING_ID_QUERY_PARAM}=${SHARING_ID}`;
  * - Does not include the sharing ID (?s=...)
  * - Uses window.origin to determine the base URL, so it should match localhost / staging / prod / etc.
  */
-function getPageBaseUrl(): string {
-  return window.location.origin;
-}
-
 function getShareImageBaseUrl(): string {
   return ShareImageUrlJSON.share_image_url;
 }
@@ -41,39 +36,6 @@ export function getMapImageUrl(): string {
 // TODO(michael): Move existing code over to use this method.
 export function getPageUrl(region: Region): string {
   return addSharingId(region.canonicalUrl);
-}
-
-/*
-  Generates URL for sharing CAN Recommends via
-  social/copy-link button in Recommends footer
-*/
-export function getRecommendationsShareUrl(region: Region): string {
-  return addSharingId(urlJoin(region.canonicalUrl, 'recommendations'));
-}
-
-export function getComparePageUrl(
-  compareShareId: string,
-  region?: Region,
-): string {
-  // Shared Compare URLs are of the form https://covidactnow.org/compare/<id>
-  // in order to have predictable IDs (so we can pre-generate index.html pages
-  // with meta tags). But this routes to the homepage instead of the appropriate
-  // location page, so we add on a ?redirectTo= query param to redirect to the
-  // right place.
-
-  let url = urlJoin(getPageBaseUrl(), 'share', compareShareId);
-  let params: { [key: string]: unknown } = {};
-  ensureSharingIdInQueryParams(params);
-  const pageParam = region ? region.relativeUrl : '/';
-  params['redirectTo'] = urlJoin(pageParam, 'compare', compareShareId);
-
-  // NOTE: Trailing '/' is significant so we hit the index.html page with correct meta tags and
-  // so we don't get redirected and lose the query params.
-  return url + '/?' + QueryString.stringify(params);
-}
-
-export function getCompareShareImageUrl(compareShareId: string): string {
-  return urlJoin(getShareImageBaseUrl(), 'share', `${compareShareId}.png`);
 }
 
 /**

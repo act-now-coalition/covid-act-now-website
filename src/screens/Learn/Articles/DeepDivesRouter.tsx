@@ -6,13 +6,9 @@ const DeepDivesRedirect: React.FC = () => {
   return (
     <Switch>
       {explainedArticles.map(({ articleID }) => (
-        <Redirect
-          exact
-          from={`/deep-dives/${articleID}`}
-          to={`/covid-explained/${articleID}`}
-        />
+        <Redirect exact from={`/deep-dives/${articleID}`} to="/" />
       ))}
-      <Redirect exact from="/deep-dives" to="/covid-explained" />
+      <Redirect exact from="/deep-dives" to="/" />
     </Switch>
   );
 };
