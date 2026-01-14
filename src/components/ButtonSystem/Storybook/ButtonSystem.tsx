@@ -26,11 +26,7 @@ const ButtonSystem = () => {
           </TextButton>
         </Grid>
         <Grid item>
-          <TextButton
-            to="/"
-            endIcon={<ArrowForwardIcon />}
-            {...trackingProps}
-          >
+          <TextButton to="/" endIcon={<ArrowForwardIcon />} {...trackingProps}>
             Text button
           </TextButton>
         </Grid>

@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-} from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   useCcviForFips,
@@ -27,16 +21,11 @@ import { WidthContainer } from './LocationPageBlock.style';
 import { LocationPageContentWrapper, BelowTheFold } from './ChartsHolder.style';
 import { summaryToStats } from 'components/NewLocationPage/SummaryStat/utils';
 import AboveTheFold from 'components/NewLocationPage/AboveTheFold/AboveTheFold';
-import {
-  SparkLineMetric,
-  SparkLineToMetric,
-} from 'components/NewLocationPage/SparkLineBlock/utils';
 import ChartBlock from 'components/Charts/ChartBlock';
 import {
   CHART_GROUPS,
   ChartGroup,
   GroupHeader,
-  getChartGroupFromMetric,
 } from 'components/Charts/Groupings';
 
 // 100 is rough accounting for the navbar
@@ -85,7 +74,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
     }),
     [],
   );
-  const shareBlockRef = useRef<HTMLDivElement>(null);
   const exploreChartRef = useRef<HTMLDivElement>(null);
   const recommendationsRef = useRef<HTMLDivElement>(null);
 
@@ -198,9 +186,6 @@ const ChartsHolder = React.memo(({ region, chartId }: ChartsHolderProps) => {
             <LocationPageBlock id="vulnerabilities">
               <VulnerabilitiesBlock scores={ccviScores} region={region} />
             </LocationPageBlock>
-            {/* <LocationPageBlock ref={shareBlockRef}>
-              <ShareModelBlock region={region} />
-            </LocationPageBlock> */}
           </WidthContainer>
         </BelowTheFold>
       </LocationPageContentWrapper>

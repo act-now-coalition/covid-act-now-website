@@ -12,19 +12,13 @@ import VaccinationPhases from 'screens/internal/VaccinationPhases/VaccinationPha
 import Footer from 'components/Footer';
 import ScrollToTop from 'components/ScrollToTop';
 import theme from 'assets/theme';
-import ExternalRedirect from 'components/ExternalRedirect';
 import HandleRedirectTo from 'components/HandleRedirectTo/HandleRedirectTo';
 import { SuspenseFallback, ErrorBoundary } from 'components/LazyLoading';
 import HomePage from 'screens/HomePage/HomePage';
 
 /* We dynamically import the following components on initial visit to their respective routes: */
 const About = lazy(() => import('screens/About/About'));
-const Landing = lazy(() => import('screens/Learn/Landing/Landing'));
-const MetricExplainer = lazy(() => import('screens/Learn/MetricExplainer'));
-const Faq = lazy(() => import('screens/Learn/Faq/Faq'));
-const Glossary = lazy(() => import('screens/Learn/Glossary/Glossary'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
-const Alerts = lazy(() => import('screens/Learn/Alerts/Alerts'));
 // const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));

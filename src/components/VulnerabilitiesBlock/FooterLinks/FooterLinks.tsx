@@ -15,9 +15,7 @@ const FooterLinks: React.FC<{ region: Region }> = ({ region }) => {
     <Wrapper>
       <ListHeader>Support vulnerable communities:</ListHeader>
       <LinkList>
-        <li>
-          Get vaccinated and continue to mask and social distance.
-        </li>
+        <li>Get vaccinated and continue to mask and social distance.</li>
         {surgoUrl && (
           <li>
             Learn about&nbsp;
@@ -29,9 +27,7 @@ const FooterLinks: React.FC<{ region: Region }> = ({ region }) => {
             </ExternalLink>
           </li>
         )}
-        <li>
-          Share resources for vulnerable individuals.
-        </li>
+        <li>Share resources for vulnerable individuals.</li>
         <li>
           Learn about why vulnerability data is important for all communities.
         </li>

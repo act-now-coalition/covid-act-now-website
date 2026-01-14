@@ -48,11 +48,7 @@ const allTeams = [
 /*
   We are now removing categories for all teams other than leadership, advisors, and alumni
 */
-const individuallyGroupedTeams = [
-  'Advisors',
-  'Alumni',
-  'Legal Counsel',
-];
+const individuallyGroupedTeams = ['Advisors', 'Alumni', 'Legal Counsel'];
 
 const combinedTeamMembers = allTeams
   .filter(team => !individuallyGroupedTeams.includes(team.teamName))

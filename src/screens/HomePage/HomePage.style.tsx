@@ -149,7 +149,6 @@ export const Row = styled.div`
   }
 `;
 
-
 export const TableWrapper = styled.div`
   margin-top: 1.5rem;
   width: 100%;
