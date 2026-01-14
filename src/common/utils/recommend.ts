@@ -26,9 +26,9 @@ export function getRecommendations(
   recommendations: Recommendation[],
 ): any[] {
   const recommendationCategoryOrdering = [
+    RecommendCategory.VACCINATION,
     RecommendCategory.MASKS,
     RecommendCategory.TESTING,
-    RecommendCategory.VACCINATION,
     RecommendCategory.BOOSTER,
   ];
 
