@@ -111,7 +111,7 @@ export function useProjectionsSet(
           // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
           setProjectionsSet(
             ProjectionsSet.fromLoadingText(
-              'Loading (slow due to no pre-generated summary file in https://github.com/act-now-coalition/covid-act-now-website/tree/develop/scripts/alert_emails/summaries)...',
+              'Loading (slow due to no pre-generated summary file available)...',
             ),
           );
           setProjectionsSet(
@@ -135,7 +135,7 @@ export function useProjectionsSet(
           // Couldn't load summary files. Just fetch all county projections and take the top diffs (slow).
           setProjectionsSet(
             ProjectionsSet.fromLoadingText(
-              `Can't load "States & Interesting Regions" since there's no pre-generated summary file in https://github.com/act-now-coalition/covid-act-now-website/tree/develop/scripts/alert_emails/summaries...`,
+              `Can't load "States & Interesting Regions" since there's no pre-generated summary file available...`,
             ),
           );
         } else {

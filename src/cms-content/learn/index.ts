@@ -8,7 +8,6 @@ import faq from './learn-faq.json';
 import caseStudies from './learn-case-studies.json';
 import metricExplainers from './metric-explainers.json';
 import footer from './footer.json';
-import aboutAlerts from './about-our-alerts.json';
 import { sanitizeID, Markdown, TocItem } from '../utils';
 
 /*
@@ -195,51 +194,8 @@ interface Footer {
 
 export const footerContent = footer as Footer;
 
-/*
-  About our alerts:
-*/
-
-export interface AboutAlertsContent {
-  pageHeader: string;
-  bodyText: Markdown;
-  bodyImages: Markdown;
-  metadataTitle: string;
-  metadataDescription: string;
-}
-
-export const aboutOurAlertsContent = aboutAlerts as AboutAlertsContent;
-
 // TODO (pablo): Should we have a short heading for categories?
 export const learnPages: TocItem[] = [
-  {
-    label: faqContent.header,
-    to: '/faq',
-    items: faqContent.sections.map(section => ({
-      to: `/faq#${section.sectionId}`,
-      label: section.sectionTitle,
-    })),
-  },
-  {
-    label: aboutAlerts.pageHeader,
-    to: '/research-rundown-archive',
-  },
-  {
-    label: metricExplainersContent.pageHeader,
-    to: '/covid-community-level-metrics',
-    items: metricExplainersContent.sections.map(section => ({
-      to: `/covid-community-level-metrics#${section.sectionId}`,
-      label: section.sectionHeader,
-    })),
-  },
-  {
-    // TODO(pablo): Hardcoding the title to avoid importing the glossary content
-    label: 'Glossary',
-    to: '/glossary',
-  },
-  {
-    label: 'COVID explained',
-    to: '/covid-explained',
-  },
   {
     label: caseStudiesContent.header,
     to: '/case-studies',

@@ -38,7 +38,8 @@ const MetricChart = React.memo(
     projections: Projections;
     height?: number;
   }) => {
-    const chartHeight = height ? height : useChartHeightForBreakpoint();
+    const responsiveChartHeight = useChartHeightForBreakpoint();
+    const chartHeight = height ?? responsiveChartHeight;
     const isBlocked = getRegionMetricOverride(projections.region, metric)
       ?.blocked;
     const timeseries = getDataset(projections.primary, metric);

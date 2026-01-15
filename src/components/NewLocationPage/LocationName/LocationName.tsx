@@ -22,7 +22,7 @@ const UpdatedDate: React.FC = () => {
       {'Updated on '}
       <TextTooltip
         title={getLastUpdatedTooltipCopy(updatedDate)}
-        mainCopy={formatDateTime(updatedDate, DateFormat.MMMM_D)}
+        mainCopy={formatDateTime(updatedDate, DateFormat.MMMM_D_YYYY)}
         aria-label="Description of when data is updated"
         trackOpenTooltip={() => trackOpenTooltip(`Updated date`)}
       />

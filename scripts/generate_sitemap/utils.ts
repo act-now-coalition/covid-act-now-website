@@ -12,26 +12,16 @@ export function getLocationPageItems(): SitemapItemLoose[] {
 
 export function getLearnPageItems(): SitemapItemLoose[] {
   const topLevelRelativeUrls = [
-    '/learn',
-    '/glossary',
-    '/faq',
     '/case-studies',
-    '/covid-explained',
-    '/covid-community-level-metrics',
   ];
 
   const caseStudyUrls = allCaseStudies.map(caseStudy =>
     urlJoin('/case-studies', caseStudy.caseStudyId),
   );
 
-  const covidExplainedUrls = articles.map(article =>
-    urlJoin('/covid-explained', article.articleID),
-  );
-
   const allLearnUrls = concat(
     topLevelRelativeUrls,
     caseStudyUrls,
-    covidExplainedUrls,
   );
 
   return allLearnUrls.map(createSitemapItem);

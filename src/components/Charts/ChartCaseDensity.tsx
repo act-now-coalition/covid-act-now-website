@@ -90,7 +90,8 @@ const ChartCaseDensity: FunctionComponent<{
   });
 
   const getXCoord = (p: Point) => xScale(getColumnDate(p)) ?? 0;
-  const getYCoord = (p: Point) => yScale(Math.min(getYCaseDensity(p), capY)) ?? 0;
+  const getYCoord = (p: Point) =>
+    yScale(Math.min(getYCaseDensity(p), capY)) ?? 0;
 
   const regions = getChartRegions(yAxisMin, yAxisMax, zones);
   const yTicks = computeTickPositions(yAxisMin, yAxisMax, zones);

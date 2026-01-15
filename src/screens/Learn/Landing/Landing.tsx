@@ -26,7 +26,7 @@ const Landing: React.FC = () => {
   return (
     <Fragment>
       <AppMetaTags
-        canonicalUrl="/learn"
+        canonicalUrl="/"
         pageTitle={metadataTitle}
         pageDescription={`${date} ${metadataDescription}`}
       />

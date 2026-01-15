@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import fetch from 'node-fetch';
 import { Level } from 'common/level';
 import { Metric } from 'common/metricEnum';
 import LocationSummariesJSON from 'assets/data/summaries.json';
@@ -47,13 +46,8 @@ export async function fetchSummaries(snapshotNumber: number) {
   const syncSummaries = getSummariesSyncIfPossible(snapshotNumber);
   if (syncSummaries) {
     return syncSummaries;
-  } else {
-    // Try to fetch from github.
-    const url = `https://raw.githubusercontent.com/act-now-coalition/covid-act-now-website/develop/scripts/alert_emails/summaries/${snapshotNumber}.json`;
-    const response = await fetch(url);
-    const json = await response.json();
-    return json as SummariesMap;
   }
+  throw new Error('Historical summaries are no longer available.');
 }
 
 export function useSummaries(): SummariesMap | null {

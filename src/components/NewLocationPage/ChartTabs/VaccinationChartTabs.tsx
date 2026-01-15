@@ -12,7 +12,7 @@ import { VACCINATIONS_COLOR_MAP } from 'common/colors';
 import { formatPercent } from 'common/utils';
 import { nullValueString } from 'components/Charts/Groupings';
 
-interface TabContent {
+interface VaccinationTabContent {
   metricName: string;
   value: string;
   iconColor: string;
@@ -63,7 +63,7 @@ const VaccinationChartTabs: React.FC<{
 
   return (
     <VaccinationsTabsWrapper>
-      {tabsContent.map((tab: TabContent) => (
+      {tabsContent.map((tab: VaccinationTabContent) => (
         <TabContainer key={tab.metricName}>
           <TabTitle>{tab.metricName}</TabTitle>
           <TabContent>

@@ -16,7 +16,7 @@ const LearnSection: React.FC<{
       <SectionHeader>Educational Resources</SectionHeader>
       <ParagraphCopy>{learnCopy}</ParagraphCopy>
       <RowWithSpacing>
-        <OutlinedButton to="/learn" onClick={() => onClick('Learn')}>
+        <OutlinedButton to="/" onClick={() => onClick('Learn')}>
           Learn more
         </OutlinedButton>
       </RowWithSpacing>

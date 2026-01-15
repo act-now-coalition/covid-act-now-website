@@ -4,7 +4,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AppMetaTags from 'components/AppMetaTags/AppMetaTags';
-import Breadcrumbs from 'components/Breadcrumbs';
 import PageContent, { MobileOnly } from 'components/PageContent';
 import { MarkdownContent, Heading2 } from 'components/Markdown';
 import { formatMetatagDate } from 'common/utils';
@@ -15,7 +14,7 @@ import {
   categoriesWithStudies,
 } from 'cms-content/learn';
 import CaseStudyCard from './CaseStudyCard';
-import { BreadcrumbsContainer, LearnHeading1 } from '../Learn.style';
+import { LearnHeading1 } from '../Learn.style';
 import { CardsContainer } from './CaseStudy.style';
 import TableOfContents, { Item } from 'components/TableOfContents';
 
@@ -50,9 +49,6 @@ const Landing: React.FC = () => {
         pageDescription={`${date} ${metadataDescription}`}
       />
       <PageContent sidebarItems={learnPages}>
-        <BreadcrumbsContainer>
-          <Breadcrumbs item={{ to: '/learn', label: 'Learn' }} />
-        </BreadcrumbsContainer>
         <LearnHeading1>{header}</LearnHeading1>
         {intro && <MarkdownContent source={intro} />}
         <MobileOnly>

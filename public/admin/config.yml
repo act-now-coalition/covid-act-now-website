@@ -706,25 +706,6 @@ collections:
           - label: Metadata description
             name: metadataDescription
             widget: text
-      - name: Learn-Alerts
-        label: 'About our Alerts'
-        file: src/cms-content/learn/about-our-alerts.json
-        fields:
-          - label: Page Header
-            name: pageHeader
-            widget: string
-          - label: Body Text
-            name: bodyText
-            widget: markdown
-          - label: Body Image(s)
-            name: bodyImages
-            widget: markdown
-          - label: Metadata title
-            name: metadataTitle
-            widget: text
-          - label: Metadata description
-            name: metadataDescription
-            widget: text
   - label: Tooltips
     name: tooltips
     description: Content for location page tooltips (short metric explainers, location page header info, chart disclaimers)
@@ -862,7 +843,7 @@ collections:
           - name: url
             label: URL
             widget: string
-            hint: 'Ex: /covid-community-level-metrics#vulnerability'
+            hint: 'Ex: /case-studies'
           - name: ariaLabel
             label: Label for accessibility
             widget: string

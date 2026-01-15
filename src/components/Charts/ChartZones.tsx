@@ -196,7 +196,9 @@ const ChartZones = ({
         hideAxisLine
         hideTicks
         hideZero
-        tickFormat={(num: number | { valueOf(): number }) => formatPercent(typeof num === 'number' ? num : num.valueOf(), 0)}
+        tickFormat={(num: number | { valueOf(): number }) =>
+          formatPercent(typeof num === 'number' ? num : num.valueOf(), 0)
+        }
       />
     </ChartContainer>
   );

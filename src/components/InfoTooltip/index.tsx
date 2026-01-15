@@ -30,6 +30,6 @@ export function trackOpenTooltip(label: string) {
 
 export function getLastUpdatedTooltipCopy(updatedDate: Date) {
   updatedDate.setUTCHours(17, 0, 0, 0);
-  const tooltipCopy = `We've paused our weekly updates due to limited data. If new reporting standards are approved, we'll resume updates on October 1, 2024. For now, please check your local health district's website for the latest wastewater surveillance data in your area.`;
+  const tooltipCopy = `We've paused our weekly updates due to limited data. For now, please check your local health district's website for the latest wastewater surveillance data in your area.`;
   return tooltipCopy;
 }
