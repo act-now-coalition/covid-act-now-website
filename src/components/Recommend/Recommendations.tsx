@@ -32,13 +32,15 @@ const Recommendations = ({
 
   // TODO (Fai): Rework component so we can specify undefined for collapsedHeightDesktop.
   const containerProps = {
-    collapsedHeightMobile: '350px',
+    collapsedHeightMobile: 'fit-content',
     collapsedHeightDesktop: '165px',
     tabTextCollapsed: <>More</>,
     tabTextExpanded: <>Less</>,
     trackingLabel: 'Recommendations module',
     trackingCategory: EventCategory.RECOMMENDATIONS,
   };
+
+  const collapsedRecommendations = recommendationsMainContent.slice(0, 2);
 
   const trackSourceClick = (source: string) => {
     trackEvent(EventCategory.RECOMMENDATIONS, EventAction.REDIRECT, source);
@@ -54,9 +56,18 @@ const Recommendations = ({
         Recommendations
       </SectionHeader>
       {isMobile ? (
-        <ExpandableContainer {...containerProps}>
-          <Recommend recommendations={recommendationsMainContent} />
-        </ExpandableContainer>
+        <ExpandableContainer
+          {...containerProps}
+          renderContent={collapsed => (
+            <Recommend
+              recommendations={
+                collapsed
+                  ? collapsedRecommendations
+                  : recommendationsMainContent
+              }
+            />
+          )}
+        />
       ) : (
         <Recommend recommendations={recommendationsMainContent} />
       )}

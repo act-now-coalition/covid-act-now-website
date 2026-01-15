@@ -37,6 +37,7 @@ import {
   ExploreDataPills,
   ExploreDataPill,
   ExploreDataContent,
+  SectionWrapper,
 } from './HomePage.style';
 import SearchAutocomplete from 'components/Search';
 import { CommunityLevelThermometer } from 'components/HorizontalThermometer';
@@ -49,6 +50,7 @@ import NationalText from 'components/NationalText';
 import Recommendations from 'components/Recommend/Recommendations';
 import regions, { USA } from 'common/regions';
 import { HiatusBanner } from 'components/Banner/HiatusBanner';
+
 
 function getPageDescription() {
   const date = formatMetatagDate();
@@ -138,10 +140,6 @@ export default function HomePage() {
                 isHomepage={true}
               />
             </HomePageBlock>
-            <HomePageBlock
-              id="explore-data"
-              aria-label="Explore historical data"
-            >
               <ExploreDataPanel>
                 <ExploreDataHeader $expanded={showExploreData}>
                   <ExploreDataInner>
@@ -228,7 +226,6 @@ export default function HomePage() {
                   </ExploreDataContent>
                 </Collapse>
               </ExploreDataPanel>
-            </HomePageBlock>
             <PartnersSection />
           </Content>
         </div>

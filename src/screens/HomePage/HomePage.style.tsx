@@ -166,9 +166,8 @@ export const ExploreDataPanel = styled.div`
   border: 1px solid rgba(0, 212, 116, 0.25);
   border-radius: 0;
   padding: 0;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
+  margin: 0;
   overflow: hidden;
 
   @media (min-width: ${materialSMBreakpoint}) {
