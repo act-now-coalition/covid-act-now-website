@@ -138,97 +138,88 @@ export default function HomePage() {
                 isHomepage={true}
               />
             </HomePageBlock>
-            <HomePageBlock
-              id="explore-data"
-              aria-label="Explore historical data"
-            >
-              <ExploreDataPanel>
-                <ExploreDataHeader $expanded={showExploreData}>
-                  <ExploreDataInner>
-                    <ExploreDataToggle
-                      type="button"
-                      aria-expanded={showExploreData}
-                      aria-controls="explore-data-content"
-                      onClick={() => setShowExploreData(prev => !prev)}
-                    >
-                      <ExploreDataToggleText>
-                        <ExploreDataToggleTitle>
-                          Explore historical data
-                        </ExploreDataToggleTitle>
-                        <ExploreDataToggleSubtitle>
-                          <ExploreDataToggleSubtitleEmphasis>
-                            State &amp; county
-                          </ExploreDataToggleSubtitleEmphasis>{' '}
-                          trends for cases, hospitalizations, deaths, ICU,
-                          positivity, and vaccinations.
-                        </ExploreDataToggleSubtitle>
-                        <ExploreDataPills aria-hidden="true">
-                          <ExploreDataPill>Search</ExploreDataPill>
-                          <ExploreDataPill>Map</ExploreDataPill>
-                          <ExploreDataPill>Trends</ExploreDataPill>
-                          <ExploreDataPill>Compare</ExploreDataPill>
-                        </ExploreDataPills>
-                      </ExploreDataToggleText>
-                      {showExploreData ? (
-                        <ExpandLessIcon />
-                      ) : (
-                        <ExpandMoreIcon />
-                      )}
-                    </ExploreDataToggle>
-                  </ExploreDataInner>
-                </ExploreDataHeader>
+            <ExploreDataPanel>
+              <ExploreDataHeader $expanded={showExploreData}>
+                <ExploreDataInner>
+                  <ExploreDataToggle
+                    type="button"
+                    aria-expanded={showExploreData}
+                    aria-controls="explore-data-content"
+                    onClick={() => setShowExploreData(prev => !prev)}
+                  >
+                    <ExploreDataToggleText>
+                      <ExploreDataToggleTitle>
+                        Explore historical data
+                      </ExploreDataToggleTitle>
+                      <ExploreDataToggleSubtitle>
+                        <ExploreDataToggleSubtitleEmphasis>
+                          State &amp; county
+                        </ExploreDataToggleSubtitleEmphasis>{' '}
+                        trends for cases, hospitalizations, deaths, ICU,
+                        positivity, and vaccinations.
+                      </ExploreDataToggleSubtitle>
+                      <ExploreDataPills aria-hidden="true">
+                        <ExploreDataPill>Search</ExploreDataPill>
+                        <ExploreDataPill>Map</ExploreDataPill>
+                        <ExploreDataPill>Trends</ExploreDataPill>
+                        <ExploreDataPill>Compare</ExploreDataPill>
+                      </ExploreDataPills>
+                    </ExploreDataToggleText>
+                    {showExploreData ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </ExploreDataToggle>
+                </ExploreDataInner>
+              </ExploreDataHeader>
 
-                <Collapse in={showExploreData} timeout="auto" unmountOnExit>
-                  <ExploreDataContent id="explore-data-content">
-                    <ExploreDataInner>
-                      <ColumnCentered id="search">
-                        <SearchAutocomplete
-                          locations={searchLocations}
-                          filterLimit={getFilterLimit()}
-                          menuOpen={menuOpen}
-                          placeholder="City, county, state, or zip"
-                          setMenuOpen={setMenuOpen}
-                        />
-                        <HomepageItems
-                          isLoading={isLoading}
-                          userRegions={userRegions}
-                        />
-                      </ColumnCentered>
-                      <MapBlock
-                        title="COVID Community Risk Level"
-                        subtitle=""
-                        renderMap={locationScope => (
-                          <USRiskMap
-                            showCounties={locationScope === MapView.COUNTIES}
-                          />
-                        )}
-                        renderThermometer={() => <CommunityLevelThermometer />}
-                        mapDescription={getRiskMapDescription()}
+              <Collapse in={showExploreData} timeout="auto" unmountOnExit>
+                <ExploreDataContent id="explore-data-content">
+                  <ExploreDataInner>
+                    <ColumnCentered id="search">
+                      <SearchAutocomplete
+                        locations={searchLocations}
+                        filterLimit={getFilterLimit()}
+                        menuOpen={menuOpen}
+                        placeholder="City, county, state, or zip"
+                        setMenuOpen={setMenuOpen}
                       />
-                      <HomePageBlock
-                        ref={exploreSectionRef}
-                        id="explore-hospitalizations"
-                      >
-                        <Explore
-                          title="Trends"
-                          initialFipsList={initialFipsListForExplore}
-                          currentMetric={currentMetric}
-                          setCurrentMetric={setCurrentMetric}
-                          nationalSummary={<NationalText />}
+                      <HomepageItems
+                        isLoading={isLoading}
+                        userRegions={userRegions}
+                      />
+                    </ColumnCentered>
+                    <MapBlock
+                      title="COVID Community Risk Level"
+                      subtitle=""
+                      renderMap={locationScope => (
+                        <USRiskMap
+                          showCounties={locationScope === MapView.COUNTIES}
                         />
-                      </HomePageBlock>
-                      <HomePageBlock>
-                        <CompareMain
-                          locationsViewable={8}
-                          showModal={showCompareModal}
-                          setShowModal={setShowCompareModal}
-                        />
-                      </HomePageBlock>
-                    </ExploreDataInner>
-                  </ExploreDataContent>
-                </Collapse>
-              </ExploreDataPanel>
-            </HomePageBlock>
+                      )}
+                      renderThermometer={() => <CommunityLevelThermometer />}
+                      mapDescription={getRiskMapDescription()}
+                    />
+                    <HomePageBlock
+                      ref={exploreSectionRef}
+                      id="explore-hospitalizations"
+                    >
+                      <Explore
+                        title="Trends"
+                        initialFipsList={initialFipsListForExplore}
+                        currentMetric={currentMetric}
+                        setCurrentMetric={setCurrentMetric}
+                        nationalSummary={<NationalText />}
+                      />
+                    </HomePageBlock>
+                    <HomePageBlock>
+                      <CompareMain
+                        locationsViewable={8}
+                        showModal={showCompareModal}
+                        setShowModal={setShowCompareModal}
+                      />
+                    </HomePageBlock>
+                  </ExploreDataInner>
+                </ExploreDataContent>
+              </Collapse>
+            </ExploreDataPanel>
             <PartnersSection />
           </Content>
         </div>

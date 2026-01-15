@@ -19,6 +19,7 @@ export interface ExpandableContainerProps {
   trackingCategory: EventCategory;
   disableArrowChange?: boolean;
   secondaryOnClick?: () => void;
+  renderContent?: (collapsed: boolean) => React.ReactNode;
 }
 
 const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
@@ -30,6 +31,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
   trackingCategory,
   disableArrowChange,
   secondaryOnClick,
+  renderContent,
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -50,7 +52,7 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> = ({
         }
         $collapsed={collapsed}
       >
-        {children}
+        {renderContent ? renderContent(collapsed) : children}
       </InnerContent>
       <ExpandButton
         onClick={() => {
