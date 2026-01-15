@@ -5,11 +5,6 @@ import {
   mobileBreakpoint,
   countyMapToFixedBreakpoint,
 } from 'assets/theme/sizes';
-import {
-  getDesktopGridTemplateAreas,
-  getMidGridTemplateAreas,
-  getMobileGridTemplateAreas,
-} from './gridtemplateAreasUtils';
 
 export const MainWrapper = styled.div`
   padding: ${props => props.theme.spacingTheme.contentGutterMobile};
@@ -39,76 +34,4 @@ export const HeaderContainer = styled.div`
   @media (min-width: ${countyMapToFixedBreakpoint}) {
     align-items: start;
   }
-`;
-
-export const GridContainer = styled.div<{ showMasksCard: boolean }>`
-  display: grid;
-  max-width: ${props => props.theme.spacingTheme.locationPage.maxWidthContent};
-  row-gap: 1.25rem;
-  grid-template-areas: ${({ showMasksCard }) =>
-    getMobileGridTemplateAreas(showMasksCard)};
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 2rem;
-    grid-template-areas: ${({ showMasksCard }) =>
-      getMidGridTemplateAreas(showMasksCard)};
-  }
-
-  @media (min-width: ${countyMapToFixedBreakpoint}) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: ${({ showMasksCard }) =>
-      getDesktopGridTemplateAreas(showMasksCard)};
-    margin-right: 2rem;
-  }
-`;
-
-export const GridItemHeader = styled.div`
-  grid-area: header;
-`;
-
-export const GridItemOverview = styled.div`
-  grid-area: overview;
-`;
-
-export const GridItemSparkLines = styled.div`
-  grid-area: spark;
-
-  @media (min-width: ${materialSMBreakpoint}) {
-    display: none;
-  }
-`;
-
-export const GridItemAlerts = styled.div`
-  grid-area: alerts;
-`;
-
-export const GridItemMap = styled.div`
-  grid-area: map;
-  align-self: start;
-
-  @media (min-width: ${countyMapToFixedBreakpoint}) {
-    display: none;
-  }
-`;
-
-export const GridItemNote = styled.div`
-  grid-area: note;
-`;
-
-// Need to remove the map from the grid container when it becomes position:fixed
-// so there is no extra grid-gap for an empty grid item:
-export const MapOutsideGrid = styled.div`
-  display: none;
-  @media (min-width: ${countyMapToFixedBreakpoint}) {
-    display: inherit;
-  }
-`;
-
-export const GridItemMasks = styled.div`
-  grid-area: masks;
-`;
-
-export const GridItemTransmissionMetrics = styled.div`
-  grid-area: transmissionMetrics;
 `;
