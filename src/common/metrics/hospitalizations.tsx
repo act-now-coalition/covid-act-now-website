@@ -91,7 +91,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     );
   }
 
-  const hsaCopy = `The ${projections.primary.hsaName} Health Service Area`;
+  const hsaCopy = `the ${projections.primary.hsaName} Health Service Area`;
   const totalICUBeds = formatInteger(icu.totalBeds);
   const totalICUPatients = formatInteger(icu.totalPatients);
   if (icu.metricValue === null) {
