@@ -102,9 +102,9 @@ function renderStatus(projections: Projections): React.ReactElement {
 
     return (
       <Fragment>
-        {isCounty ? hsaCopy : locationName} has reported having {totalICUBeds}{' '}
-        staffed adult ICU beds and {totalICUPatients} are currently filled. Due
-        to the low number of beds, we do not report{' '}
+        As of May 2024, {isCounty ? hsaCopy : locationName} had {totalICUBeds}{' '}
+        staffed adult ICU beds and {totalICUPatients} were filled. Due to the
+        low number of beds, we do not report{' '}
         {ICUCapacityUsed.extendedMetricName} data.
       </Fragment>
     );
@@ -118,14 +118,14 @@ function renderStatus(projections: Projections): React.ReactElement {
   if (icu.covidPatients !== null && icu.nonCovidPatients !== null) {
     const nonCovidICUPatients = formatInteger(icu.nonCovidPatients);
     const covidICUPatients = formatInteger(icu.covidPatients);
-    patientBreakdown = `${nonCovidICUPatients} are filled by non-COVID patients and ${covidICUPatients} are filled by COVID patients.`;
+    patientBreakdown = `${nonCovidICUPatients} were filled by non-COVID patients and ${covidICUPatients} were filled by COVID patients.`;
   }
 
   return (
     <Fragment>
-      {isCounty ? hsaCopy : locationName} has reported having {totalICUBeds}{' '}
+      As of May 2024, {isCounty ? hsaCopy : locationName} had {totalICUBeds}{' '}
       staffed adult ICU beds. {patientBreakdown} Overall, {totalICUPatients} out
-      of {totalICUBeds} ({icuCapacityUsed}) are filled.
+      of {totalICUBeds} ({icuCapacityUsed}) were filled.
     </Fragment>
   );
 }

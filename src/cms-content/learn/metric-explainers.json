@@ -132,12 +132,12 @@
       "sectionHeader": " ICU capacity used",
       "sectionSubheader": "",
       "sectionId": "icu-capacity-used",
-      "sectionIntro": "**ICU capacity used measures the number of intensive care unit (ICU) beds that are currently in use.**",
+      "sectionIntro": "**ICU capacity used measured the number of intensive care unit (ICU) beds that were in use.**",
       "questions": [
         {
           "questionId": "icu-capacity-used-sources-methodology",
           "question": "Sources and methodology",
-          "answer": "We calculate ICU capacity by taking the number of staffed ICU beds that are occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We use data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the metric. This data is provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15). For counties we aggregate the data for all counties in the health service area.\n\nFor more details, see the Trends module."
+          "answer": "We calculated ICU capacity by taking the number of staffed ICU beds that were occupied (by both COVID and Non-COVID patients) and dividing it by the total number of staffed ICU beds. We used data from the [Department of Health and Human Services (HHS)](https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh) to calculate the metric. This data was provided to the HHS via three sources: (1) HHS TeleTracking, (2) reporting provided directly to HHS Protect by state/territorial health departments on behalf of their healthcare facilities and (3) National Healthcare Safety Network (before July 15). For counties we aggregated the data for all counties in the health service area.\n\nFor more details, see the Trends module."
         },
         {
           "question": "Limitations",

@@ -98,7 +98,7 @@ function renderStatus(projections: Projections): React.ReactElement {
   let ifNoAdditionalDoseAnd;
   if (peopleAdditionalDose != null && percentAdditionalDose != null) {
     additionalDoseText = ` ${peopleAdditionalDose} (${percentAdditionalDose})
-    have received a booster dose`;
+    had received a booster dose`;
     ifNoAdditionalDoseAnd = ``;
   } else {
     additionalDoseText = ``;
@@ -112,7 +112,7 @@ function renderStatus(projections: Projections): React.ReactElement {
     percentBivalentFall2022Booster != null
   ) {
     bivalentFall2022BoosterText = `, and ${peopleBivalentFall2022Booster} (${percentBivalentFall2022Booster})
-    have received an updated bivalent booster dose`;
+    had received an updated bivalent booster dose`;
     ifNoBivalentFall2022BoosterAnd = ``;
   } else {
     bivalentFall2022BoosterText = ``;
@@ -131,14 +131,14 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      In {locationName}, {peopleInitiated} people ({percentInitiated}) have
-      received at least one dose,{ifNoAdditionalDoseAnd} {peopleVaccinated} (
-      {percentVaccinated}) have received at least two doses or a single Johnson
-      & Johnson dose, {ifNoBivalentFall2022BoosterAnd}
+      As of May 2024, {peopleInitiated} people in {locationName} (
+      {percentInitiated}) had received at least one dose,{ifNoAdditionalDoseAnd}{' '}
+      {peopleVaccinated} ({percentVaccinated}) had received at least two doses
+      or a single Johnson & Johnson dose, {ifNoBivalentFall2022BoosterAnd}
       {additionalDoseText}
-      {bivalentFall2022BoosterText}. We do not yet have data available for the
+      {bivalentFall2022BoosterText}. We do not have data available for the
       2023/2024 updated boosters. <br /> <br /> Fewer than 0.001% of people who
-      have received a dose experienced a severe adverse reaction.{' '}
+      received a dose experienced a severe adverse reaction.{' '}
       {cappedVaccinatedCopy}
       <ExternalLink href="https://www.aap.org/en/patient-care/covid-19/covid-19-vaccine-frequently-asked-questions/">
         See more vaccine resources and FAQs

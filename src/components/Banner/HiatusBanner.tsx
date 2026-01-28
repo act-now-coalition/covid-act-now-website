@@ -19,7 +19,7 @@ export const HiatusBanner = ({ type = 'homepage' }: HiatusBannerProps) => {
     <Container>
       <InnerContainer>
         <Body>
-          This page is no longer being updated due to a lack of reliable data.
+          This page is no longer being updated due to limited data availability.
           While we continue to surface this content for archival purposes, we
           recommend that you visit more regularly updated resources, such as
           from the{' '}
