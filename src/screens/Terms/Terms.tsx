@@ -502,17 +502,18 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           This Website includes content provided by third parties, including but
           not limited to materials provided by the Centers for Disease Control
-          and Prevention (CDC), Johns Hopkins University, World Health Organization, Kaiser
-          Family Foundation, Corona Data Scraper, Covid Tracking Project,
-          American Hospital Association, Wikipedia, and other users, third-party
-          licensors, syndicators, aggregators and/or reporting services. All
-          statements and/or opinions expressed in these materials, and all
-          articles and responses to questions and other content, other than the
-          content provided by the Company, are solely the opinions and the
-          responsibility of the person or entity providing those materials.
-          These materials do not necessarily reflect the opinion of the Company.
-          We are not responsible, or liable to you or any third party, for the
-          content or accuracy of any materials provided by any third parties.
+          and Prevention (CDC), Johns Hopkins University, World Health
+          Organization, Kaiser Family Foundation, Corona Data Scraper, Covid
+          Tracking Project, American Hospital Association, Wikipedia, and other
+          users, third-party licensors, syndicators, aggregators and/or
+          reporting services. All statements and/or opinions expressed in these
+          materials, and all articles and responses to questions and other
+          content, other than the content provided by the Company, are solely
+          the opinions and the responsibility of the person or entity providing
+          those materials. These materials do not necessarily reflect the
+          opinion of the Company. We are not responsible, or liable to you or
+          any third party, for the content or accuracy of any materials provided
+          by any third parties.
         </Typography>
         <Typography variant="body1" component="p">
           The information provided on this Website is subject to various
@@ -780,10 +781,10 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Waiver and Severability
         </Typography>
         <Typography variant="body1" component="p">
-          No waiver by the Company of any term or condition set forth in
-          these Terms of Use shall be deemed a further or continuing waiver of
-          such term or condition or a waiver of any other term or condition, and
-          any failure of the Company to assert a right or provision under these
+          No waiver by the Company of any term or condition set forth in these
+          Terms of Use shall be deemed a further or continuing waiver of such
+          term or condition or a waiver of any other term or condition, and any
+          failure of the Company to assert a right or provision under these
           Terms of Use shall not constitute a waiver of such right or provision.
         </Typography>
         <Typography variant="body1" component="p">
