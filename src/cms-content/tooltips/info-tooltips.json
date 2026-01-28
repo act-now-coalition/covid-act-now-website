@@ -3,7 +3,7 @@
     {
       "title": "Location page header",
       "id": "location-page-header",
-      "body": "Our COVID assessment is based on the CDC’s Community Level framework. This looks at three primary things: weekly new reported cases per 100K, weekly COVID admissions per 100K, and the percent of staffed inpatient beds occupied by COVID patients.\n\nEach metric is graded on a three-color scale. If weekly new reported cases per 100K population is below 200, depending on the levels of the other two indicators, community risk level can range from Low to Medium to High. If weekly new reported cases per 100K population is equal to or above 200, depending on the levels of the other two indicators, community risk level is either Medium or High.\n\nRead more about our community risk level framework.\n\nNote that we updated our COVID scoring in April of 2022 to better reflect the rise in vaccinations and natural immunity.",
+      "body": "Our COVID assessment is based on the CDC's Community Level framework. This looks at three primary things: weekly new reported cases per 100K, weekly COVID admissions per 100K, and the percent of staffed inpatient beds occupied by COVID patients.\n\nEach metric is graded on a three-color scale. If weekly new reported cases per 100K population is below 200, depending on the levels of the other two indicators, community risk level can range from Low to Medium to High. If weekly new reported cases per 100K population is equal to or above 200, depending on the levels of the other two indicators, community risk level is either Medium or High.\n\nRead more about our community risk level framework.\n\nNote that we updated our COVID scoring in April of 2022 to better reflect the rise in vaccinations and natural immunity.",
       "cta": "Learn more about COVID risk levels."
     },
     {
@@ -27,7 +27,7 @@
     {
       "title": "Infection rate",
       "id": "infection-rate",
-      "body": "Infection rate represents how fast COVID is spreading in a given area right now by estimating the number of people that a newly infected person goes on to eventually infect.",
+      "body": "Infection rate represented how fast COVID was spreading in a given area by estimating the number of people that a newly infected person would go on to infect.",
       "cta": "Learn more about infection rate."
     },
     {
@@ -37,7 +37,7 @@
       "cta": "Learn more about positive test rate."
     },
     {
-      "body": "ICU capacity used is the percentage of staffed intensive care unit (ICU) beds in a location’s healthcare system that are currently in use by both COVID and non-COVID patients.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.",
+      "body": "ICU capacity used was the percentage of staffed intensive care unit (ICU) beds in a location's healthcare system that were in use by both COVID and non-COVID patients.\n\nExperts indicate that during pre-pandemic years, average ICU occupancy in U.S. hospitals ranged from 57% to 82%.",
       "cta": "Learn more about ICU capacity used.",
       "title": "ICU capacity used",
       "id": "icu-capacity-used"
