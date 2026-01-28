@@ -69,7 +69,7 @@ export const exploreMetricToFooterContentMap: {
     metricName: 'ICU hospitalizations',
     howItsCalculated: 'Our ICU hospitalizations number is a seven-day average.',
     metricDefinition:
-      'This is the number of patients currently hospitalized in the ICU with COVID.',
+      'This was the number of patients hospitalized in the ICU with COVID.',
     source: 'Department of Health and Human Services',
     statusTextMeasure: 'COVID patients hospitalized in ICUs',
   },
@@ -78,7 +78,7 @@ export const exploreMetricToFooterContentMap: {
     howItsCalculated:
       'Our hospitalizations number is a seven-day average. For counties, it is calculated for the health service area that contains the county, and then county-level data is estimated by disaggregating the data by population.',
     metricDefinition:
-      'This is the number of patients currently hospitalized with COVID.',
+      'This was the number of patients hospitalized with COVID.',
     source: 'Department of Health and Human Services',
     statusTextMeasure: 'COVID patients in hospitals',
   },

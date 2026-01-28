@@ -106,9 +106,9 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      On average, each person in {locationName} with COVID is infecting{' '}
-      {formatDecimal(rt)} other people. If this number is over 1.0, it means
-      that the total number of COVID cases is growing.
+      As of May 2024, each person in {locationName} with COVID was infecting{' '}
+      {formatDecimal(rt)} other people on average. A number over 1.0 meant that
+      the total number of COVID cases was growing.
     </Fragment>
   );
 }

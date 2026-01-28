@@ -11,6 +11,14 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Summary of Terms of Use
         </Typography>
         <Typography variant="body1" component="p">
+          <b>
+            Please note that this website is now maintained for historical and
+            archival purposes only. The data and information presented reflect
+            the COVID-19 pandemic as it was tracked during the period when the
+            site was actively updated.
+          </b>
+        </Typography>
+        <Typography variant="body1" component="p">
           For quick and easy reference, we’ve provided a summary below of our
           Terms of Use. We hope it’s helpful and saves you some time. That being
           said, we’re required to tell you that the full “Website Terms of Use”
@@ -32,14 +40,6 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
               modeling approach, or other reasons.
             </li>
             <li>
-              There are known (and unknown) limitations of the model (known
-              limitations available{' '}
-              <a href="https://docs.google.com/document/d/1ETeXAfYOvArfLvlxExE0_xrO5M4ITC0_Am38CRusCko/preview#">
-                here
-              </a>
-              , as updated and amended from time to time). Please read them.
-            </li>
-            <li>
               Our website is intended to promote dissemination of information
               and data presently available and to enable public leaders and
               health officials to make fast decisions. Please use it for that
@@ -55,7 +55,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Website Terms of Use
         </Typography>
         <Typography variant="h6" component="h1" align="center">
-          Last updated: October 26, 2022
+          Last updated: January 27, 2026
         </Typography>
         <Typography variant="h5" component="h1">
           Acceptance of the Terms of Use
@@ -88,6 +88,11 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           are of legal age to form a binding contract with the Company and meet
           all of the foregoing eligibility requirements. If you do not meet all
           of these requirements, you must not access or use the Website.
+        </Typography>
+        <Typography variant="body1" component="p">
+          These Terms of Use apply only to your use of the covidactnow.org
+          website, and not to other websites managed by the Act Now Coalition,
+          such as actnowcoalition.org.
         </Typography>
 
         <Typography variant="h5" component="h1">
@@ -209,7 +214,7 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Under a non-commercial license, you may use our data without
           requesting permission, provided that you give proper attribution.
           However, if your use case falls within the list of "Prohibited Uses”,
-          please cease all use of our product and trademarks.
+          you must cease all use of our product and trademarks.
         </Typography>
 
         <Typography variant="h5" component="h1">
@@ -298,11 +303,11 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           User Contributions
         </Typography>
         <Typography variant="body1" component="p">
-          The Website may contain message boards, chat rooms, personal web pages
-          or profiles, forums, bulletin boards, and other interactive features
-          (collectively, "<b>Interactive Services</b>") that allow users to
-          post, submit, publish, display or transmit to other users or other
-          persons (hereinafter, "<b>post</b>") content or materials
+          The Website may have previously contained message boards, personal web
+          pages or profiles, forums, bulletin boards, and other interactive
+          features (collectively, "<b>Interactive Services</b>") that allowed
+          users to post, submit, publish, display or transmit to other users or
+          other persons (hereinafter, "<b>post</b>") content or materials
           (collectively, "<b>User Contributions</b>") on or through the Website.
         </Typography>
         <Typography variant="body1" component="p">
@@ -496,18 +501,19 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
         </Typography>
         <Typography variant="body1" component="p">
           This Website includes content provided by third parties, including but
-          not limited to materials provided by US Center for Disease Control
-          (CDC), Johns Hopkins University, World Health Organization, Kaiser
-          Family Foundation, Corona Data Scraper, Covid Tracking Project,
-          American Hospital Association, Wikipedia, and other users, third-party
-          licensors, syndicators, aggregators and/or reporting services. All
-          statements and/or opinions expressed in these materials, and all
-          articles and responses to questions and other content, other than the
-          content provided by the Company, are solely the opinions and the
-          responsibility of the person or entity providing those materials.
-          These materials do not necessarily reflect the opinion of the Company.
-          We are not responsible, or liable to you or any third party, for the
-          content or accuracy of any materials provided by any third parties.
+          not limited to materials provided by the Centers for Disease Control
+          and Prevention (CDC), Johns Hopkins University, World Health
+          Organization, Kaiser Family Foundation, Corona Data Scraper, Covid
+          Tracking Project, American Hospital Association, Wikipedia, and other
+          users, third-party licensors, syndicators, aggregators and/or
+          reporting services. All statements and/or opinions expressed in these
+          materials, and all articles and responses to questions and other
+          content, other than the content provided by the Company, are solely
+          the opinions and the responsibility of the person or entity providing
+          those materials. These materials do not necessarily reflect the
+          opinion of the Company. We are not responsible, or liable to you or
+          any third party, for the content or accuracy of any materials provided
+          by any third parties.
         </Typography>
         <Typography variant="body1" component="p">
           The information provided on this Website is subject to various
@@ -523,10 +529,13 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Changes to the Website
         </Typography>
         <Typography variant="body1" component="p">
-          We may update the content on this Website from time to time, but its
-          content is not necessarily complete or up-to-date. Any of the material
-          on the Website may be out of date at any given time, and we are under
-          no obligation to update such material.
+          This website is now maintained for historical and archival purposes
+          only. The data and information presented reflect the COVID-19 pandemic
+          as it was tracked during the period when the site was actively
+          updated. We may update the content on this Website from time to time,
+          but its content is not necessarily complete or up-to-date. Any of the
+          material on the Website may be out of date at any given time, and we
+          are under no obligation to update such material.
         </Typography>
 
         <Typography variant="h5" component="h1">
@@ -772,10 +781,10 @@ const Terms = ({ children }: { children: React.ReactNode }) => {
           Waiver and Severability
         </Typography>
         <Typography variant="body1" component="p">
-          No waiver of by the Company of any term or condition set forth in
-          these Terms of Use shall be deemed a further or continuing waiver of
-          such term or condition or a waiver of any other term or condition, and
-          any failure of the Company to assert a right or provision under these
+          No waiver by the Company of any term or condition set forth in these
+          Terms of Use shall be deemed a further or continuing waiver of such
+          term or condition or a waiver of any other term or condition, and any
+          failure of the Company to assert a right or provision under these
           Terms of Use shall not constitute a waiver of such right or provision.
         </Typography>
         <Typography variant="body1" component="p">

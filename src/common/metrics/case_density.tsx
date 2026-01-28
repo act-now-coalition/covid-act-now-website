@@ -109,9 +109,9 @@ function renderStatus(projections: Projections): React.ReactElement {
 
   return (
     <Fragment>
-      Over the last week, {locationName} has averaged {newCasesPerDayText} new
-      confirmed cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for
-      every 100,000 residents).
+      As of May 2024, {locationName} averaged {newCasesPerDayText} new confirmed
+      cases per day (<b>{formatDecimal(currentCaseDensity, 1)}</b> for every
+      100,000 residents).
     </Fragment>
   );
 }

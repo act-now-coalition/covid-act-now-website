@@ -11,7 +11,7 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
           Website Privacy Policy
         </Typography>
         <Typography variant="h6" component="h1" align="center">
-          Last updated: March 28, 2020
+          Last updated: January 27, 2026
         </Typography>
         <Typography variant="h5" component="h1">
           Introduction
@@ -26,6 +26,11 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
           or that you may provide when you visit the website CoVidActNow.org
           (our "<b>Website</b>") and our practices for collecting, using,
           maintaining, protecting, and disclosing that information.
+        </Typography>
+        <Typography variant="body1" component="p">
+          This Privacy Policy applies only to your use of the covidactnow.org
+          website, and not to other websites managed by the Act Now Coalition,
+          such as actnowcoalition.org.
         </Typography>
         <Typography variant="body1" component="p">
           This policy applies to information we collect:
@@ -200,7 +205,8 @@ const Privacy = ({ children }: { children: React.ReactNode }) => {
         <Typography variant="body1" component="p">
           We also may use these technologies to collect information about your
           online activities over time and across third-party websites or other
-          online services (behavioral tracking). Click here for information on
+          online services (behavioral tracking). See the "Choices About How We
+          Use and Disclose Your Information" section below for information on
           how you can opt out of behavioral tracking on this website and how we
           respond to web browser signals and other mechanisms that enable
           consumers to exercise choice about behavioral tracking.
