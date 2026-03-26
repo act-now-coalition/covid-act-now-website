@@ -55,7 +55,7 @@
     "firebase": "^7.15.4",
     "geo-albers-usa-territories": "^0.0.2",
     "googleapis": "^57.0.0",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.9",
     "js-yaml": "^4.0.0",
     "loader-utils": "^3.3.1",
     "lodash": "^4.17.21",
