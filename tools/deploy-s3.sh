@@ -57,6 +57,15 @@ execute () {
   ${CP_CMD} --exclude "*" --include "*.html" \
       --cache-control "max-age=300"
 
+  # Refuse to prune from an incomplete build: the sync below deletes every page
+  # that isn't in ${BUILD_DIR}.
+  local pages
+  pages=$(find "${BUILD_DIR}" -name index.html | wc -l)
+  if [[ ! -f "${BUILD_DIR}/index.html" || ! -f "${BUILD_DIR}/sitemap-index.xml.gz" || ${pages} -lt 3000 ]]; then
+    echo "Error: ${BUILD_DIR} looks incomplete (${pages} index.html pages); not pruning."
+    exit 1
+  fi
+
   # Remove pages and files from earlier builds so only the current site is
   # served (old URLs fall back to the app). /data holds the co-hosted snapshot
   # and static/ keeps old hashed chunks for HTML cached in browsers.

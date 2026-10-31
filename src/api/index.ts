@@ -135,6 +135,11 @@ export class Api {
     if ((!response.ok && response.status === 404) || response.status === 403) {
       return null;
     }
+    // A missing file under covidactnow.org/data falls back to the site's HTML
+    // shell (200), so anything that isn't JSON means the file doesn't exist.
+    if (!response.headers.get('content-type')?.includes('json')) {
+      return null;
+    }
     return (await response.json()) as T;
   }
 }

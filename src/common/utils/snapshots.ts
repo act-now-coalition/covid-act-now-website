@@ -1,17 +1,7 @@
-import * as QueryString from 'query-string';
-import fetch from 'node-fetch';
 import { assert } from '@actnowcoalition/assert';
 import DataUrlJson from 'assets/data/data_url.json';
 
 export const SNAPSHOT_URL = DataUrlJson.data_url;
-
-export async function fetchMainSnapshotNumber(): Promise<number> {
-  const response = await fetch(
-    'https://raw.githubusercontent.com/act-now-coalition/covid-act-now-website/main/src/assets/data/data_url.json',
-  );
-  const json = await response.json();
-  return snapshotFromUrl(json['data_url']);
-}
 
 export function snapshotFromUrl(url: string): number {
   assert(url, 'Empty URL provided');
@@ -28,18 +18,11 @@ export function currentSnapshot(): number {
   return snapshotFromUrl(SNAPSHOT_URL);
 }
 
-/** Checks for ?snapshot=xyz in the querystring and returns it as a number. */
+/**
+ * The ?snapshot=xyz override is retired: only the final snapshot is hosted
+ * (at covidactnow.org/data), so there is nothing else to switch to.
+ */
 export function getSnapshotOverride(): number | null {
-  if (typeof window !== 'undefined') {
-    const search = window?.location?.search;
-    if (search !== undefined) {
-      const params = QueryString.parse(search, { parseNumbers: true });
-      const snapshot = params['snapshot'];
-      if (typeof snapshot === 'number' && snapshot > 0) {
-        return snapshot;
-      }
-    }
-  }
   return null;
 }
 
