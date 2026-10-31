@@ -20,9 +20,6 @@ jobs:
           node-version: '20.x'
       - run: yarn install
       - run: yarn build:prod
-        env:
-          REACT_APP_PUBLIC_POSTHOG_KEY: ${{ secrets.REACT_APP_PUBLIC_POSTHOG_KEY }}
-          REACT_APP_PUBLIC_POSTHOG_HOST: ${{ secrets.REACT_APP_PUBLIC_POSTHOG_HOST }}
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::769020224865:role/can-site-deploy
