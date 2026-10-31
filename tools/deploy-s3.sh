@@ -19,8 +19,8 @@ prepare () {
     S3_PATH=$2
   fi
 
-  if [[ -z ${AWS_ACCESS_KEY_ID:-} || -z ${AWS_SECRET_ACCESS_KEY:-} ]]; then
-    echo "Error: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set to valid S3 credentials."
+  if ! aws sts get-caller-identity > /dev/null; then
+    echo "Error: no valid AWS credentials (CI assumes the can-site-deploy role via OIDC)."
     exit 1
   fi
 }
@@ -35,7 +35,8 @@ execute () {
   # default of 10, and I couldn't get consistent improvement experimenting with nearby values.
   aws configure set default.s3.max_concurrent_requests 30
 
-  DEFAULT_OPTIONS="--acl public-read --no-progress"
+  # No --acl: the bucket is private and served only through CloudFront.
+  DEFAULT_OPTIONS="--no-progress"
   CP_CMD="aws s3 cp --recursive ${DEFAULT_OPTIONS} ${BUILD_DIR} ${S3_PATH}"
 
   # static/ files are immutable, so cache for a year.
