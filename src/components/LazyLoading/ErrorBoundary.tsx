@@ -1,6 +1,6 @@
 import React from 'react';
-import * as Sentry from '@sentry/react';
 import { Link } from 'react-router-dom';
+import { FallbackErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
 import { Container, Message } from './LazyLoading.style';
 
 const Fallback: React.FC = () => {
@@ -13,7 +13,7 @@ const Fallback: React.FC = () => {
 };
 
 const ErrorBoundary: React.FC = ({ children }) => (
-  <Sentry.ErrorBoundary fallback={Fallback}>{children}</Sentry.ErrorBoundary>
+  <FallbackErrorBoundary fallback={Fallback}>{children}</FallbackErrorBoundary>
 );
 
 export default ErrorBoundary;

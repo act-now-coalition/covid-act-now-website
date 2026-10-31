@@ -57,6 +57,12 @@ execute () {
   ${CP_CMD} --exclude "*" --include "*.html" \
       --cache-control "max-age=300"
 
+  # Remove pages and files from earlier builds so only the current site is
+  # served (old URLs fall back to the app). /data holds the co-hosted snapshot
+  # and static/ keeps old hashed chunks for HTML cached in browsers.
+  aws s3 sync ${BUILD_DIR} ${S3_PATH} --delete --size-only --no-progress \
+      --exclude "data/*" --exclude "static/*"
+
   echo "Done."
   exit 0
 }

@@ -1,8 +1,0 @@
-{
-  "projects": {
-    "default": "covidactnow-dev",
-    "dev": "covidactnow-dev",
-    "staging": "covidactnow-staging",
-    "prod": "covidactnow-prod"
-  }
-}
