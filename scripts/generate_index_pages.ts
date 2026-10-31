@@ -11,7 +11,6 @@ import path from 'path';
 import process from 'process';
 import _ from 'lodash';
 import urlJoin from 'url-join';
-import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import regions, { Region } from '../src/common/regions';
 import * as urls from '../src/common/urls';
 
@@ -28,6 +27,9 @@ function hasLocationSummary(region: Region) {
 // sufficient unless we get more than 2000 shares/day.
 
 type MetaTags = { [name: string]: string };
+
+// Every page shares the site's default social card (also set in public/index.html).
+const SOCIAL_IMAGE_URL = 'https://covidactnow.org/covidactnow.png';
 
 function homePageTags(imageUrl: string): MetaTags {
   // Most of the tags are set correctly in public/index.html so we don't need to
@@ -80,17 +82,15 @@ function chartPageTags(
 async function buildLocationPages(
   builder: IndexPageBuilder,
   relativeSiteUrl: string,
-  relativeImageUrl: string,
   locationName: string,
 ) {
   const canonicalUrlBase = urlJoin('https://covidactnow.org/', relativeSiteUrl);
 
   const canonicalUrl = urls.addSharingId(canonicalUrlBase);
-  const imageUrl = builder.fullImageUrl(`${relativeImageUrl}.png`);
   const page = path.join(relativeSiteUrl, 'index.html');
   await builder.writeTemplatedPage(
     page,
-    locationPageTags(imageUrl, canonicalUrl, locationName),
+    locationPageTags(SOCIAL_IMAGE_URL, canonicalUrl, locationName),
   );
 
   for (const metric of ALL_METRICS) {
@@ -98,13 +98,10 @@ async function buildLocationPages(
     const chartCanonicalUrl = urls.addSharingId(
       urlJoin(canonicalUrlBase, `/chart/${metric}`),
     );
-    const chartImageUrl = builder.fullImageUrl(
-      urlJoin(relativeImageUrl, `/chart/${metric}.png`),
-    );
     await builder.writeTemplatedPage(
       chartPage,
       chartPageTags(
-        chartImageUrl,
+        SOCIAL_IMAGE_URL,
         chartCanonicalUrl,
         locationName,
         getMetricName(metric),
@@ -119,41 +116,23 @@ async function main() {
   const builder = await IndexPageBuilder.initialize();
   await builder.writeTemplatedPage(
     '/index.html',
-    homePageTags(builder.fullImageUrl('home.png')),
+    homePageTags(SOCIAL_IMAGE_URL),
   );
 
   for (const state of regions.states) {
-    const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;
-    await buildLocationPages(
-      builder,
-      state.relativeUrl,
-      relativeImageUrl,
-      state.fullName,
-    );
+    await buildLocationPages(builder, state.relativeUrl, state.fullName);
   }
 
   const counties = regions.counties.filter(hasLocationSummary);
 
   for (const county of counties) {
-    const relativeImageUrl = `counties/${county.fipsCode}`;
-    await buildLocationPages(
-      builder,
-      county.relativeUrl,
-      relativeImageUrl,
-      county.fullName,
-    );
+    await buildLocationPages(builder, county.relativeUrl, county.fullName);
   }
 
   const metros = regions.metroAreas.filter(hasLocationSummary);
 
   for (const metro of metros) {
-    const relativeImageUrl = `metros/${metro.fipsCode}`;
-    await buildLocationPages(
-      builder,
-      metro.relativeUrl,
-      relativeImageUrl,
-      metro.fullName,
-    );
+    await buildLocationPages(builder, metro.relativeUrl, metro.fullName);
   }
 }
 
@@ -168,20 +147,17 @@ class IndexPageBuilder {
 
   constructor(
     private readonly buildDir: string,
-    private readonly imagesBaseUrl: string,
     private readonly indexHtmlTemplate: string,
   ) {}
 
   static async initialize(): Promise<IndexPageBuilder> {
-    const imagesBaseUrl = ShareImageUrlJSON.share_image_url;
-
     const buildDir = path.join(__dirname, '../build');
 
     const indexHtmlTemplate = (
       await fs.readFile(path.join(buildDir, 'index.html'))
     ).toString();
 
-    return new IndexPageBuilder(buildDir, imagesBaseUrl, indexHtmlTemplate);
+    return new IndexPageBuilder(buildDir, indexHtmlTemplate);
   }
 
   async writeTemplatedPage(
@@ -194,10 +170,6 @@ class IndexPageBuilder {
 
     const html = this.templatedHtml(tags, relHtmlUrl);
     await fs.writeFile(pageFile, html);
-  }
-
-  fullImageUrl(relImageUrl: string): string {
-    return urlJoin(this.imagesBaseUrl, relImageUrl);
   }
 
   private templatedHtml(
