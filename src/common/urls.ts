@@ -1,4 +1,3 @@
-import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import { assert } from '@actnowcoalition/assert';
 import { Region } from './regions';
 
@@ -9,16 +8,10 @@ import { Region } from './regions';
  * and the up-to-date sharing image.
  */
 const SHARING_ID_QUERY_PARAM = 's';
-const SHARING_ID = sharingId();
+// Frozen with the final data snapshot (5008, share images 3753).
+const SHARING_ID = '50083753';
 const SHARING_ID_QUERYSTRING = `?${SHARING_ID_QUERY_PARAM}=${SHARING_ID}`;
 
-/**
- * Generates the URL for the homepage or a (state / county) location page.
- *
- * Notes:
- * - Does not include the sharing ID (?s=...)
- * - Uses window.origin to determine the base URL, so it should match localhost / staging / prod / etc.
- */
 /** The site's default social card, used for every page. */
 export function getMapImageUrl(): string {
   return 'https://covidactnow.org/covidactnow.png';
@@ -54,15 +47,4 @@ export function ensureSharingIdInQueryParams(params: {
     return true;
   }
   return false;
-}
-
-/**
- * Extracts the numeric part of the share images URL and removes the dash.
- * E.g.: https://content.covidactnow.org/share/373-27/  ==>  37327
- */
-function sharingId() {
-  const url = ShareImageUrlJSON.share_image_url;
-  const match = /\/([\d-]+)\/?$/.exec(url);
-  assert(match, `${url} did not match share images URL regex.`);
-  return match[1].replace('-', '');
 }
