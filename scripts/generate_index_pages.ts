@@ -14,7 +14,6 @@ import urlJoin from 'url-join';
 import ShareImageUrlJSON from '../src/assets/data/share_images_url.json';
 import regions, { Region } from '../src/common/regions';
 import * as urls from '../src/common/urls';
-import { getNextSharedComponentId } from '../src/common/sharing';
 
 // We don't care about the values here, but this is a cheap way to determine all
 // of the counties we have any data for and are therefore share-able.
@@ -27,7 +26,6 @@ function hasLocationSummary(region: Region) {
 
 // We pre-generate the next 2000 IDs each time we do a deploy which should be
 // sufficient unless we get more than 2000 shares/day.
-const SHARED_COMPONENT_IDS_TO_GENERATE = 2000;
 
 type MetaTags = { [name: string]: string };
 
@@ -123,26 +121,6 @@ async function main() {
     '/index.html',
     homePageTags(builder.fullImageUrl('home.png')),
   );
-
-  // Make sure we have at least SHARED_COMPONENT_IDS_TO_GENERATE index.html
-  // pages pre-generated for future-shared URLs. Note that since we don't wipe
-  // our hosted files between deploys, we will have overlap between deploys and
-  // likely won't end up with any gaps.
-  const nextId = await getNextSharedComponentId();
-  for (let i = nextId; i < nextId + SHARED_COMPONENT_IDS_TO_GENERATE; i++) {
-    // NOTE: This isn't a working URL (there's no /share/ route), but it doesn't
-    // matter. Only the Facebook Crawler will end up following this URL.
-    const url = urls.addSharingId(`https://covidactnow.org/share/${i}/`);
-
-    const imageUrl = builder.fullImageUrl(`/share/${i}.png`);
-
-    // Minor hack: Just use the location page tags, but insert "your community"
-    // for the locationName since we don't know what it will be.
-    await builder.writeTemplatedPage(
-      `/share/${i}/index.html`,
-      locationPageTags(imageUrl, url, 'your community'),
-    );
-  }
 
   for (const state of regions.states) {
     const relativeImageUrl = `/states/${state.stateCode.toLowerCase()}`;

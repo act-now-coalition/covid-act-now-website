@@ -1,11 +1,27 @@
 import React from 'react';
-import * as Sentry from '@sentry/react';
 import FallbackAlert from './FallbackAlert';
 
+/** Renders `fallback` in place of a child subtree that throws while rendering. */
+export class FallbackErrorBoundary extends React.Component<
+  { fallback: React.ComponentType },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    const Fallback = this.props.fallback;
+    return this.state.hasError ? <Fallback /> : this.props.children;
+  }
+}
+
 const ErrorBoundary: React.FC = ({ children }) => (
-  <Sentry.ErrorBoundary fallback={FallbackAlert}>
+  <FallbackErrorBoundary fallback={FallbackAlert}>
     {children}
-  </Sentry.ErrorBoundary>
+  </FallbackErrorBoundary>
 );
 
 export default ErrorBoundary;

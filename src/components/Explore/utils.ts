@@ -8,7 +8,6 @@ import { color } from 'd3-color';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { fetchProjectionsRegion } from 'common/utils/model';
 import { Column, DatasetId, Projection } from 'common/models/Projection';
-import shareImagesData from 'assets/data/share_images_url.json';
 import { SeriesType, Series, ExploreMetric, DataMeasure } from './interfaces';
 import regions, {
   County,
@@ -28,7 +27,6 @@ import {
   getTimeDiff,
   subtractTime,
 } from '@actnowcoalition/time-utils';
-const { share_image_url } = shareImagesData;
 
 export enum Period {
   DAYS_60,
@@ -647,15 +645,6 @@ export function getImageFilename(locations: Region[], metric: ExploreMetric) {
     default:
       return `multiple-locations-${fileNameSuffix}.png`;
   }
-}
-
-/**
- * Generates the URL of the export images for the given fips code and chart.
- * It needs to be consistent with the share image routing in
- * src/screens/internal/ShareImage/ShareImage.tsx.
- */
-export function getExportImageUrl(sharedComponentId: string) {
-  return urlJoin(share_image_url, `share/${sharedComponentId}/export.png`);
 }
 
 export function getChartUrl(sharedComponentId: string, region: Region | null) {
