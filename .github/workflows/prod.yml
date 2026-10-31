@@ -1,9 +1,13 @@
-name: Upload to http://covidactnow.org.s3-website-us-west-1.amazonaws.com
+name: Deploy to covidactnow.org
 
 on:
   push:
     branches:
     - main
+
+permissions:
+  contents: read
+  id-token: write # GitHub OIDC -> AWS role can-site-deploy (no stored AWS keys)
 
 jobs:
   build-deploy:
@@ -19,14 +23,10 @@ jobs:
         env:
           REACT_APP_PUBLIC_POSTHOG_KEY: ${{ secrets.REACT_APP_PUBLIC_POSTHOG_KEY }}
           REACT_APP_PUBLIC_POSTHOG_HOST: ${{ secrets.REACT_APP_PUBLIC_POSTHOG_HOST }}
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::769020224865:role/can-site-deploy
+          aws-region: us-west-1
       - run: ./tools/deploy-s3.sh build/ s3://covidactnow.org/
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-west-1
       - name: Invalidate CDN files.
         run: aws cloudfront create-invalidation --distribution-id EMVJ85Q1TRRQ3 --paths "/*"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-west-1

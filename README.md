@@ -47,18 +47,3 @@ Testing is run via jest.
 ```
 yarn jest
 ```
-
-### Updating the Data Snapshot, Map Colors, etc.
-The website renders data that's read from an API data snapshot (e.g.
-https://data.covidactnow.org/snapshot/123/v2/). Every day we update the website
-to point at the newest data snapshot. As part of this we also must update our
-map colors to reflect the new status of states / counties, etc.
-
-This is all automated (to do the updates and generate a Pull Request). To kick off the process you must get a
-[personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line),
-and run:
-
-```bash
-export GITHUB_TOKEN=<YOUR PERSONAL GITHUB TOKEN>
-./tools/update-snapshot.sh <snapshot>
-```
