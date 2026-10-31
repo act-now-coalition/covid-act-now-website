@@ -1,8 +1,6 @@
 import ShareImageUrlJSON from 'assets/data/share_images_url.json';
 import { assert } from '@actnowcoalition/assert';
-import urlJoin from 'url-join';
 import { Region } from './regions';
-import { DateFormat, formatDateTime } from '@actnowcoalition/time-utils';
 
 /**
  * We append a short unique string corresponding to the currently published
@@ -21,16 +19,9 @@ const SHARING_ID_QUERYSTRING = `?${SHARING_ID_QUERY_PARAM}=${SHARING_ID}`;
  * - Does not include the sharing ID (?s=...)
  * - Uses window.origin to determine the base URL, so it should match localhost / staging / prod / etc.
  */
-function getShareImageBaseUrl(): string {
-  return ShareImageUrlJSON.share_image_url;
-}
-
+/** The site's default social card, used for every page. */
 export function getMapImageUrl(): string {
-  const date = formatDateTime(new Date(), DateFormat.YYYY_MM_DD);
-  return urlJoin(
-    getShareImageBaseUrl(),
-    `${date}-image-covid-us-map-cases.png`,
-  );
+  return 'https://covidactnow.org/covidactnow.png';
 }
 
 // TODO(michael): Move existing code over to use this method.
