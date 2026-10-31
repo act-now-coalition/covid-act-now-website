@@ -21,7 +21,7 @@ export function snapshotFromUrl(url: string): number {
 }
 
 export function snapshotUrl(snapshotNum: string | number) {
-  return `https://data.covidactnow.org/snapshot/${snapshotNum}/v2`;
+  return `https://covidactnow.org/data/snapshot/${snapshotNum}/v2`;
 }
 
 export function currentSnapshot(): number {
