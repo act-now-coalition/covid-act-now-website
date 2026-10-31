@@ -26,7 +26,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::769020224865:role/can-site-deploy
-          aws-region: us-west-1
-      - run: ./tools/deploy-s3.sh build/ s3://covidactnow.org/
+          aws-region: us-east-1
+      - run: ./tools/deploy-s3.sh build/ s3://covidactnow-site-769020224865/
       - name: Invalidate CDN files.
         run: aws cloudfront create-invalidation --distribution-id EMVJ85Q1TRRQ3 --paths "/*"
