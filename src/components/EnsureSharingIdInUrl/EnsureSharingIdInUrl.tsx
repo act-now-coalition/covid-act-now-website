@@ -1,5 +1,4 @@
 import { useLocation, useHistory } from 'react-router-dom';
-import * as QueryString from 'query-string';
 import { ensureSharingIdInQueryParams } from 'common/urls';
 
 /**
@@ -11,11 +10,14 @@ import { ensureSharingIdInQueryParams } from 'common/urls';
 export default function EnsureSharingIdInUrl() {
   const location = useLocation();
   const history = useHistory();
-  const params = QueryString.parse(location.search);
+  const params: { [key: string]: string } = {};
+  new URLSearchParams(location.search).forEach((value, key) => {
+    params[key] = value;
+  });
   if (ensureSharingIdInQueryParams(params)) {
     history.replace({
       ...location,
-      search: QueryString.stringify(params),
+      search: new URLSearchParams(params).toString(),
     });
   }
 
