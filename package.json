@@ -23,7 +23,6 @@
     "@types/react-copy-to-clipboard": "^5.0.0",
     "@types/react-router-hash-link": "^1.2.1",
     "@types/react-scrollspy": "^3.3.3",
-    "@types/sharp": "^0.29.4",
     "@types/topojson-client": "^3.0.0",
     "@types/typeform__embed": "^0.22.2",
     "@types/uuid": "^8.3.0",
@@ -39,7 +38,6 @@
     "@vx/tooltip": "^0.0.196",
     "@vx/voronoi": "^0.0.196",
     "buffer": "^6.0.3",
-    "csv-parse": "^4.8.8",
     "d3-array": "^2.4.0",
     "d3-color": "^3.1.0",
     "d3-scale-chromatic": "^2.0.0",
@@ -67,7 +65,6 @@
     "react-singleton-hook": "^3.0.142",
     "react-tooltip": "^4.1.2",
     "react-twitter-embed": "^3.0.3",
-    "sharp": "^0.30.5",
     "sitemap": "^6.3.3",
     "source-map-explorer": "^2.5.1",
     "styled-components": "^5.0.1",
@@ -97,16 +94,12 @@
     "update-data-coverage-summary": "ts-node-script -r tsconfig-paths/register scripts/update_data_coverage_summary.ts",
     "generate-index-pages": "ts-node-script -r tsconfig-paths/register scripts/generate_index_pages.ts",
     "generate-county-history-data": "ts-node-script -r tsconfig-paths/register scripts/county_history_data/generate.ts",
-    "generate-metro-areas": "ts-node-script -r tsconfig-paths/register scripts/cbsa/parse-metro-areas.ts",
     "generate-sitemap": "ts-node-script -r tsconfig-paths/register scripts/generate_sitemap/index.ts",
-    "optimize-images": "ts-node-script -r tsconfig-paths/register scripts/optimize_images/optimize-images.ts",
     "covid-explained-internal-links": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-internal-links.ts",
     "covid-explained-images": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/report-images.ts",
     "covid-explained-migrate": "ts-node-script -r tsconfig-paths/register scripts/covid-explained/migrate-articles.ts",
     "prepare-regions-data": "ts-node-script -r tsconfig-paths/register scripts/prepare_regions_data/prepare-regions-data.ts",
-    "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js",
-    "generate-ccvi": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_ccvi.ts",
-    "generate-surgo-percent-population-vulnerable": "ts-node-script -r tsconfig-paths/register scripts/ccvi/parse_surgo_percent_population_vulnerable.ts"
+    "analyze": "cross-env REACT_APP_ENVIRONMENT=prod yarn build && source-map-explorer build/static/js/*.js"
   },
   "lint-staged": {
     "{src,scripts,firebase/functions/src,}/**/*.{css,scss,js,ts,tsx}": [
