@@ -132,8 +132,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.10.0",
+    "@testing-library/jest-dom": "~6.9.1",
     "@types/d3-fetch": "^1.1.5",
     "@types/d3-scale": "^2.2.0",
     "@types/fs-extra": "^8.1.0",
