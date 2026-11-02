@@ -11,13 +11,6 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   overrides: [
-    // Storybook stories commonly use anonymous default exports for metadata objects.
-    {
-      files: ['**/*.stories.{js,ts,tsx}'],
-      rules: {
-        'import/no-anonymous-default-export': 'off',
-      },
-    },
     // Theme/config modules are typically exported as objects.
     {
       files: [
