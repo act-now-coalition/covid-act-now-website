@@ -1,5 +1,4 @@
 import { Redirect, useLocation } from 'react-router-dom';
-import * as QueryString from 'query-string';
 import React from 'react';
 
 /**
@@ -9,8 +8,7 @@ import React from 'react';
  */
 export default function HandleRedirectTo() {
   const location = useLocation();
-  const params = QueryString.parse(location.search);
-  const redirectTo = params['redirectTo'] as string;
+  const redirectTo = new URLSearchParams(location.search).get('redirectTo');
   if (redirectTo) {
     return <Redirect to={redirectTo} />;
   }

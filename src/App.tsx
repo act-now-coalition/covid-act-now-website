@@ -18,7 +18,6 @@ import HomePage from 'screens/HomePage/HomePage';
 /* We dynamically import the following components on initial visit to their respective routes: */
 const About = lazy(() => import('screens/About/About'));
 const CaseStudies = lazy(() => import('screens/Learn/CaseStudies/CaseStudies'));
-// const DataApi = lazy(() => import('screens/DataApi/DataApi'));
 const Terms = lazy(() => import('screens/Terms/Terms'));
 const Privacy = lazy(() => import('screens/Terms/Privacy'));
 
@@ -131,7 +130,6 @@ export default function App() {
                     to="/us/:stateId/county/:countyId"
                   />
 
-                  {/* <Route path="/data-api" component={DataApi} /> */}
                   {/* Keeping the /resources URL active in case linked elsewhere */}
                   {/* <Redirect from="/resources" to="/data-api" /> */}
                   {/* <Redirect from="/tools" to="/data-api" /> */}
